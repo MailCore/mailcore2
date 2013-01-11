@@ -1,0 +1,123 @@
+#!/bin/sh
+
+versionfolder='50.1.1'
+version='50_1_1'
+url="http://download.icu-project.org/files/icu4c/$versionfolder/icu4c-$version-src.tgz"
+package_filename="icu4c-$version-src.tgz"
+arch="x86_64"
+sysrootpath="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk"
+
+arch_flags=""
+for current_arch in $arch ; do
+	arch_flags="$arch_flags -arch $current_arch"
+done
+
+builddir="$HOME/MailCore-Builds/dependencies"
+BUILD_TIMESTAMP=`date +'%Y%m%d%H%M%S'`
+tempbuilddir="$builddir/workdir/$BUILD_TIMESTAMP"
+mkdir -p "$tempbuilddir"
+srcdir="$tempbuilddir/src"
+logdir="$tempbuilddir/log"
+resultdir="$builddir/builds"
+tmpdir="$tempbuilddir/tmp"
+
+if test -f "$resultdir/icu4c-$version.zip" ; then
+	echo install from cache
+	rm -rf ../Externals/icu4c
+	mkdir -p ../Externals/tmp
+	unzip -q "$resultdir/icu4c-$version.zip" -d ../Externals/tmp
+	mv "../Externals/tmp/icu4c-$version/icu4c" ../Externals
+	rm -rf ../Externals/tmp
+	exit 0
+fi
+
+mkdir -p "$resultdir"
+mkdir -p "$logdir"
+mkdir -p "$tmpdir"
+mkdir -p "$srcdir"
+
+pushd . >/dev/null
+
+echo get icu4c
+cd "$srcdir"
+if test -f "$builddir/downloads/$package_filename" ; then
+	cp "$builddir/downloads/$package_filename" .
+else
+	curl -O "$url"
+	if test x$? != x0 ; then
+		echo fetch of icu4c failed
+		exit 1
+	fi
+	mkdir -p "$builddir/downloads"
+	cp "$package_filename" "$builddir/downloads"
+fi
+
+tar xf "$package_filename"
+
+echo building icu4c
+cd "$srcdir/icu/source"
+for cur_arch in $arch ; do
+	cur_arch_flags="-arch $cur_arch"
+	echo building icu4c for $cur_arch
+	export CFLAGS="$cur_arch_flags -isysroot $sysrootpath -mfix-and-continue -mmacosx-version-min=10.7"
+	export CXXFLAGS="$cur_arch_flags -isysroot $sysrootpath -mfix-and-continue -mmacosx-version-min=10.7"
+	export LDLAGS="$cur_arch_flags -isysroot $sysrootpath -mfix-and-continue -mmacosx-version-min=10.7"
+	mkdir -p "$tmpdir/bin/icu4c-$cur_arch"
+	cd "$tmpdir/bin/icu4c-$cur_arch"
+	if test "x$cur_arch" = xx86_64 ; then
+		"$srcdir/icu/source/configure" --enable-static --disable-shared --with-data-packaging=archive >> "$logdir/icu4c-build.log"
+	else
+		"$srcdir/icu/source/configure" --host=$cur_arch-apple-darwin10.6.0 --enable-static --disable-shared --with-data-packaging=archive --with-cross-build=$tmpdir/crossbuild/icu4c-x86_64 >> "$logdir/icu4c-build.log"
+	fi
+	make >> "$logdir/icu4c-build.log"
+	make install "prefix=$tmpdir/bin/icu4c-$cur_arch" >> "$logdir/icu4c-build.log"
+	if test "x$cur_arch" = xx86_64 ; then
+		make install "prefix=$tmpdir/crossbuild/icu4c-$cur_arch" >> "$logdir/icu4c-build.log"
+	fi
+	if test x$? != x0 ; then
+		echo build of icu4c failed
+		exit 1
+	fi
+	#make distclean
+done
+
+mkdir -p "$tmpdir/bin/icu4c"
+cp -R "$tmpdir/bin/icu4c-x86_64/include" "$tmpdir/bin/icu4c"
+mkdir -p "$tmpdir/bin/icu4c/share/icu"
+cp "$tmpdir/bin/icu4c-x86_64/share/icu/$versionfolder/icudt50l.dat" "$tmpdir/bin/icu4c/share/icu"
+mkdir -p "$tmpdir/bin/icu4c/lib"
+cd "$tmpdir/bin"
+
+icui18n_paths=""
+icudata_paths=""
+icuuc_paths=""
+for cur_arch in $arch ; do
+	icui18n_paths="$icui18n_paths icu4c-$cur_arch/lib/libicui18n.a"
+	icudata_paths="$icudata_paths icu4c-$cur_arch/lib/libicudata.a"
+	icuuc_paths="$icuuc_paths icu4c-$cur_arch/lib/libicuuc.a"
+done
+lipo -create $icui18n_paths -output icu4c/lib/libicui18n.a
+lipo -create $icudata_paths -output icu4c/lib/libicudata.a
+lipo -create $icuuc_paths -output icu4c/lib/libicuuc.a
+
+cd "$tmpdir/bin"
+mkdir -p "icu4c-$version"
+mv icu4c "icu4c-$version"
+zip -qry "$resultdir/icu4c-$version.zip" "icu4c-$version"
+rm -f "$resultdir/icu4c-latest.zip"
+cd "$resultdir"
+ln -s "icu4c-$version.zip" "icu4c-latest.zip"
+
+echo build of icu4c-$version done
+
+popd
+
+rm -rf ../Externals/icu4c
+mkdir -p ../Externals/tmp
+unzip -q "$resultdir/icu4c-$version.zip" -d ../Externals/tmp
+mv "../Externals/tmp/icu4c-$version/icu4c" ../Externals
+rm -rf ../Externals/tmp
+
+echo cleaning
+rm -rf "$tempbuilddir"
+echo "$tempbuilddir"

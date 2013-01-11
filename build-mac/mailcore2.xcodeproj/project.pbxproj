@@ -1,0 +1,872 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C64EA6F4169E847800778456 /* MCAbstractMessage.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA694169E847800778456 /* MCAbstractMessage.cc */; };
+		C64EA6F6169E847800778456 /* MCAbstractMessagePart.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA696169E847800778456 /* MCAbstractMessagePart.cc */; };
+		C64EA6F8169E847800778456 /* MCAbstractMultipart.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA698169E847800778456 /* MCAbstractMultipart.cc */; };
+		C64EA6FA169E847800778456 /* MCAbstractPart.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA69A169E847800778456 /* MCAbstractPart.cc */; };
+		C64EA6FC169E847800778456 /* MCAddress.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA69C169E847800778456 /* MCAddress.cc */; };
+		C64EA6FF169E847800778456 /* MCMessageHeader.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA69F169E847800778456 /* MCMessageHeader.cc */; };
+		C64EA701169E847800778456 /* MCAutoreleasePool.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6A2169E847800778456 /* MCAutoreleasePool.cc */; };
+		C64EA704169E847800778456 /* MCArray.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6A5169E847800778456 /* MCArray.cc */; };
+		C64EA706169E847800778456 /* MCAssert.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6A7169E847800778456 /* MCAssert.cc */; };
+		C64EA708169E847800778456 /* MCData.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6A9169E847800778456 /* MCData.cc */; };
+		C64EA70A169E847800778456 /* MCHash.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6AB169E847800778456 /* MCHash.cc */; };
+		C64EA70C169E847800778456 /* MCHashMap.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6AD169E847800778456 /* MCHashMap.cc */; };
+		C64EA70E169E847800778456 /* MCLog.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6AF169E847800778456 /* MCLog.cc */; };
+		C64EA710169E847800778456 /* MCObject.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6B1169E847800778456 /* MCObject.cc */; };
+		C64EA712169E847800778456 /* MCRange.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6B3169E847800778456 /* MCRange.cc */; };
+		C64EA714169E847800778456 /* MCSet.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6B5169E847800778456 /* MCSet.cc */; };
+		C64EA716169E847800778456 /* MCString.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6B7169E847800778456 /* MCString.cc */; };
+		C64EA719169E847800778456 /* MCValue.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6BA169E847800778456 /* MCValue.cc */; };
+		C64EA71C169E847800778456 /* MCMainThread.mm in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6BD169E847800778456 /* MCMainThread.mm */; };
+		C64EA71D169E847800778456 /* MCOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6BE169E847800778456 /* MCOperation.cc */; };
+		C64EA720169E847800778456 /* MCOperationQueue.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6C1169E847800778456 /* MCOperationQueue.cc */; };
+		C64EA723169E847800778456 /* MCIMAPFolder.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6C5169E847800778456 /* MCIMAPFolder.cc */; };
+		C64EA725169E847800778456 /* MCIMAPMessage.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6C7169E847800778456 /* MCIMAPMessage.cc */; };
+		C64EA727169E847800778456 /* MCIMAPMessagePart.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6C9169E847800778456 /* MCIMAPMessagePart.cc */; };
+		C64EA729169E847800778456 /* MCIMAPMultipart.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6CB169E847800778456 /* MCIMAPMultipart.cc */; };
+		C64EA72B169E847800778456 /* MCIMAPNamespace.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6CD169E847800778456 /* MCIMAPNamespace.cc */; };
+		C64EA72D169E847800778456 /* MCIMAPNamespaceItem.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6CF169E847800778456 /* MCIMAPNamespaceItem.cc */; };
+		C64EA72F169E847800778456 /* MCIMAPPart.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6D1169E847800778456 /* MCIMAPPart.cc */; };
+		C64EA732169E847800778456 /* MCIMAPSearchExpression.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6D4169E847800778456 /* MCIMAPSearchExpression.cc */; };
+		C64EA734169E847800778456 /* MCIMAPSession.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6D6169E847800778456 /* MCIMAPSession.cc */; };
+		C64EA737169E847800778456 /* MCPOPMessageInfo.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6DA169E847800778456 /* MCPOPMessageInfo.cc */; };
+		C64EA73A169E847800778456 /* MCPOPSession.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6DD169E847800778456 /* MCPOPSession.cc */; };
+		C64EA73C169E847800778456 /* MCAttachment.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6E0169E847800778456 /* MCAttachment.cc */; };
+		C64EA73E169E847800778456 /* MCMessageBuilder.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6E2169E847800778456 /* MCMessageBuilder.cc */; };
+		C64EA740169E847800778456 /* MCMessageParser.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6E4169E847800778456 /* MCMessageParser.cc */; };
+		C64EA742169E847800778456 /* MCMessagePart.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6E6169E847800778456 /* MCMessagePart.cc */; };
+		C64EA744169E847800778456 /* MCMultipart.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6E8169E847800778456 /* MCMultipart.cc */; };
+		C64EA74C169E859600778456 /* IMAPAsyncSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA68C169E847800778456 /* IMAPAsyncSession.h */; };
+		C64EA74D169E859600778456 /* MCSMTPAsyncSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA690169E847800778456 /* MCSMTPAsyncSession.h */; };
+		C64EA74E169E859600778456 /* MCAbstract.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA693169E847800778456 /* MCAbstract.h */; };
+		C64EA74F169E859600778456 /* MCAbstractMessage.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA695169E847800778456 /* MCAbstractMessage.h */; };
+		C64EA750169E859600778456 /* MCAbstractMessagePart.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA697169E847800778456 /* MCAbstractMessagePart.h */; };
+		C64EA751169E859600778456 /* MCAbstractMultipart.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA699169E847800778456 /* MCAbstractMultipart.h */; };
+		C64EA752169E859600778456 /* MCAbstractPart.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA69B169E847800778456 /* MCAbstractPart.h */; };
+		C64EA753169E859600778456 /* MCAddress.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA69D169E847800778456 /* MCAddress.h */; };
+		C64EA754169E859600778456 /* MCMessageConstants.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA69E169E847800778456 /* MCMessageConstants.h */; };
+		C64EA755169E859600778456 /* MCMessageHeader.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6A0169E847800778456 /* MCMessageHeader.h */; };
+		C64EA756169E859600778456 /* MCAutoreleasePool.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6A3169E847800778456 /* MCAutoreleasePool.h */; };
+		C64EA757169E859600778456 /* MCBaseTypes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6A4169E847800778456 /* MCBaseTypes.h */; };
+		C64EA758169E859600778456 /* MCArray.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6A6169E847800778456 /* MCArray.h */; };
+		C64EA759169E859600778456 /* MCAssert.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6A8169E847800778456 /* MCAssert.h */; };
+		C64EA75A169E859600778456 /* MCData.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6AA169E847800778456 /* MCData.h */; };
+		C64EA75B169E859600778456 /* MCHash.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6AC169E847800778456 /* MCHash.h */; };
+		C64EA75C169E859600778456 /* MCHashMap.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6AE169E847800778456 /* MCHashMap.h */; };
+		C64EA75D169E859600778456 /* MCLog.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6B0169E847800778456 /* MCLog.h */; };
+		C64EA75E169E859600778456 /* MCObject.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6B2169E847800778456 /* MCObject.h */; };
+		C64EA75F169E859600778456 /* MCRange.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6B4169E847800778456 /* MCRange.h */; };
+		C64EA760169E859600778456 /* MCSet.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6B6169E847800778456 /* MCSet.h */; };
+		C64EA761169E859600778456 /* MCString.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6B8169E847800778456 /* MCString.h */; };
+		C64EA762169E859600778456 /* MCUtils.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6B9169E847800778456 /* MCUtils.h */; };
+		C64EA763169E859600778456 /* MCValue.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6BB169E847800778456 /* MCValue.h */; };
+		C64EA764169E859600778456 /* MCMainThread.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6BC169E847800778456 /* MCMainThread.h */; };
+		C64EA765169E859600778456 /* MCOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6BF169E847800778456 /* MCOperation.h */; };
+		C64EA766169E859600778456 /* MCOperationCallback.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6C0169E847800778456 /* MCOperationCallback.h */; };
+		C64EA767169E859600778456 /* MCOperationQueue.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6C2169E847800778456 /* MCOperationQueue.h */; };
+		C64EA768169E859600778456 /* MCIMAP.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6C4169E847800778456 /* MCIMAP.h */; };
+		C64EA769169E859600778456 /* MCIMAPFolder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6C6169E847800778456 /* MCIMAPFolder.h */; };
+		C64EA76A169E859600778456 /* MCIMAPMessage.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6C8169E847800778456 /* MCIMAPMessage.h */; };
+		C64EA76B169E859600778456 /* MCIMAPMessagePart.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6CA169E847800778456 /* MCIMAPMessagePart.h */; };
+		C64EA76C169E859600778456 /* MCIMAPMultipart.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6CC169E847800778456 /* MCIMAPMultipart.h */; };
+		C64EA76D169E859600778456 /* MCIMAPNamespace.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6CE169E847800778456 /* MCIMAPNamespace.h */; };
+		C64EA76E169E859600778456 /* MCIMAPNamespaceItem.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6D0169E847800778456 /* MCIMAPNamespaceItem.h */; };
+		C64EA76F169E859600778456 /* MCIMAPPart.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6D2169E847800778456 /* MCIMAPPart.h */; };
+		C64EA770169E859600778456 /* MCIMAPProgressCallback.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6D3169E847800778456 /* MCIMAPProgressCallback.h */; };
+		C64EA771169E859600778456 /* MCIMAPSearchExpression.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6D5169E847800778456 /* MCIMAPSearchExpression.h */; };
+		C64EA772169E859600778456 /* MCIMAPSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6D7169E847800778456 /* MCIMAPSession.h */; };
+		C64EA773169E859600778456 /* MCPOP.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6D9169E847800778456 /* MCPOP.h */; };
+		C64EA774169E859600778456 /* MCPOPMessageInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6DB169E847800778456 /* MCPOPMessageInfo.h */; };
+		C64EA775169E859600778456 /* MCPOPProgressCallback.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6DC169E847800778456 /* MCPOPProgressCallback.h */; };
+		C64EA776169E859600778456 /* MCPOPSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6DE169E847800778456 /* MCPOPSession.h */; };
+		C64EA777169E859600778456 /* MCAttachment.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6E1169E847800778456 /* MCAttachment.h */; };
+		C64EA778169E859600778456 /* MCMessageBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6E3169E847800778456 /* MCMessageBuilder.h */; };
+		C64EA779169E859600778456 /* MCMessageParser.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6E5169E847800778456 /* MCMessageParser.h */; };
+		C64EA77A169E859600778456 /* MCMessagePart.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6E7169E847800778456 /* MCMessagePart.h */; };
+		C64EA77B169E859600778456 /* MCMultipart.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6E9169E847800778456 /* MCMultipart.h */; };
+		C64EA77C169E859600778456 /* MCRFC822.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6EA169E847800778456 /* MCRFC822.h */; };
+		C64EA77D169E859600778456 /* MCSMTP.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6EC169E847800778456 /* MCSMTP.h */; };
+		C64EA77E169E859600778456 /* MCSMTPProgressCallback.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6ED169E847800778456 /* MCSMTPProgressCallback.h */; };
+		C64EA77F169E859600778456 /* MCSMTPSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA6EF169E847800778456 /* MCSMTPSession.h */; };
+		C64EA781169E89F600778456 /* MCSMTPSession.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6EE169E847800778456 /* MCSMTPSession.cc */; };
+		C64EA783169F241300778456 /* MCCore.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA782169F23AB00778456 /* MCCore.h */; };
+		C64EA784169F24E400778456 /* MCSMTPAsyncSession.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA68F169E847800778456 /* MCSMTPAsyncSession.cc */; };
+		C64EA787169F252C00778456 /* MCSMTPSendWithRecipientOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA785169F252C00778456 /* MCSMTPSendWithRecipientOperation.cc */; };
+		C64EA790169F259200778456 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64EA78F169F259200778456 /* Foundation.framework */; };
+		C64EA79B169F259F00778456 /* libmailcore2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C64EA537169E772200778456 /* libmailcore2.a */; };
+		C64EA79E169F29A700778456 /* MCSMTPSendWithDataOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA79C169F29A700778456 /* MCSMTPSendWithDataOperation.cc */; };
+		C64EA7A1169F29D900778456 /* MCSMTPSendWithBuilderOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA79F169F29D900778456 /* MCSMTPSendWithBuilderOperation.cc */; };
+		C64EA7A5169F2A6100778456 /* mailcore.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA7A4169F2A3E00778456 /* mailcore.h */; };
+		C64EA7AB16A00AF600778456 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = C64EA7AA16A00AF600778456 /* main.mm */; };
+		C64EA7B116A00BBB00778456 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64EA7B016A00BBB00778456 /* CoreServices.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C64EA7A2169F2A1D00778456 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C64EA52E169E772200778456 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C64EA536169E772200778456;
+			remoteInfo = mailcore2;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C64EA74B169E854B00778456 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = include/mailcore;
+			dstSubfolderSpec = 16;
+			files = (
+				C64EA74C169E859600778456 /* IMAPAsyncSession.h in CopyFiles */,
+				C64EA74D169E859600778456 /* MCSMTPAsyncSession.h in CopyFiles */,
+				C64EA74E169E859600778456 /* MCAbstract.h in CopyFiles */,
+				C64EA74F169E859600778456 /* MCAbstractMessage.h in CopyFiles */,
+				C64EA750169E859600778456 /* MCAbstractMessagePart.h in CopyFiles */,
+				C64EA751169E859600778456 /* MCAbstractMultipart.h in CopyFiles */,
+				C64EA752169E859600778456 /* MCAbstractPart.h in CopyFiles */,
+				C64EA7A5169F2A6100778456 /* mailcore.h in CopyFiles */,
+				C64EA753169E859600778456 /* MCAddress.h in CopyFiles */,
+				C64EA754169E859600778456 /* MCMessageConstants.h in CopyFiles */,
+				C64EA755169E859600778456 /* MCMessageHeader.h in CopyFiles */,
+				C64EA756169E859600778456 /* MCAutoreleasePool.h in CopyFiles */,
+				C64EA757169E859600778456 /* MCBaseTypes.h in CopyFiles */,
+				C64EA758169E859600778456 /* MCArray.h in CopyFiles */,
+				C64EA759169E859600778456 /* MCAssert.h in CopyFiles */,
+				C64EA75A169E859600778456 /* MCData.h in CopyFiles */,
+				C64EA75B169E859600778456 /* MCHash.h in CopyFiles */,
+				C64EA75C169E859600778456 /* MCHashMap.h in CopyFiles */,
+				C64EA75D169E859600778456 /* MCLog.h in CopyFiles */,
+				C64EA75E169E859600778456 /* MCObject.h in CopyFiles */,
+				C64EA75F169E859600778456 /* MCRange.h in CopyFiles */,
+				C64EA760169E859600778456 /* MCSet.h in CopyFiles */,
+				C64EA761169E859600778456 /* MCString.h in CopyFiles */,
+				C64EA762169E859600778456 /* MCUtils.h in CopyFiles */,
+				C64EA763169E859600778456 /* MCValue.h in CopyFiles */,
+				C64EA783169F241300778456 /* MCCore.h in CopyFiles */,
+				C64EA764169E859600778456 /* MCMainThread.h in CopyFiles */,
+				C64EA765169E859600778456 /* MCOperation.h in CopyFiles */,
+				C64EA766169E859600778456 /* MCOperationCallback.h in CopyFiles */,
+				C64EA767169E859600778456 /* MCOperationQueue.h in CopyFiles */,
+				C64EA768169E859600778456 /* MCIMAP.h in CopyFiles */,
+				C64EA769169E859600778456 /* MCIMAPFolder.h in CopyFiles */,
+				C64EA76A169E859600778456 /* MCIMAPMessage.h in CopyFiles */,
+				C64EA76B169E859600778456 /* MCIMAPMessagePart.h in CopyFiles */,
+				C64EA76C169E859600778456 /* MCIMAPMultipart.h in CopyFiles */,
+				C64EA76D169E859600778456 /* MCIMAPNamespace.h in CopyFiles */,
+				C64EA76E169E859600778456 /* MCIMAPNamespaceItem.h in CopyFiles */,
+				C64EA76F169E859600778456 /* MCIMAPPart.h in CopyFiles */,
+				C64EA770169E859600778456 /* MCIMAPProgressCallback.h in CopyFiles */,
+				C64EA771169E859600778456 /* MCIMAPSearchExpression.h in CopyFiles */,
+				C64EA772169E859600778456 /* MCIMAPSession.h in CopyFiles */,
+				C64EA773169E859600778456 /* MCPOP.h in CopyFiles */,
+				C64EA774169E859600778456 /* MCPOPMessageInfo.h in CopyFiles */,
+				C64EA775169E859600778456 /* MCPOPProgressCallback.h in CopyFiles */,
+				C64EA776169E859600778456 /* MCPOPSession.h in CopyFiles */,
+				C64EA777169E859600778456 /* MCAttachment.h in CopyFiles */,
+				C64EA778169E859600778456 /* MCMessageBuilder.h in CopyFiles */,
+				C64EA779169E859600778456 /* MCMessageParser.h in CopyFiles */,
+				C64EA77A169E859600778456 /* MCMessagePart.h in CopyFiles */,
+				C64EA77B169E859600778456 /* MCMultipart.h in CopyFiles */,
+				C64EA77C169E859600778456 /* MCRFC822.h in CopyFiles */,
+				C64EA77D169E859600778456 /* MCSMTP.h in CopyFiles */,
+				C64EA77E169E859600778456 /* MCSMTPProgressCallback.h in CopyFiles */,
+				C64EA77F169E859600778456 /* MCSMTPSession.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C64EA78A169F259200778456 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		C64EA537169E772200778456 /* libmailcore2.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmailcore2.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C64EA68C169E847800778456 /* IMAPAsyncSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMAPAsyncSession.h; sourceTree = "<group>"; };
+		C64EA68F169E847800778456 /* MCSMTPAsyncSession.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCSMTPAsyncSession.cc; sourceTree = "<group>"; };
+		C64EA690169E847800778456 /* MCSMTPAsyncSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSMTPAsyncSession.h; sourceTree = "<group>"; };
+		C64EA693169E847800778456 /* MCAbstract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAbstract.h; sourceTree = "<group>"; };
+		C64EA694169E847800778456 /* MCAbstractMessage.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = MCAbstractMessage.cc; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		C64EA695169E847800778456 /* MCAbstractMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCAbstractMessage.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		C64EA696169E847800778456 /* MCAbstractMessagePart.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = MCAbstractMessagePart.cc; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		C64EA697169E847800778456 /* MCAbstractMessagePart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAbstractMessagePart.h; sourceTree = "<group>"; };
+		C64EA698169E847800778456 /* MCAbstractMultipart.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCAbstractMultipart.cc; sourceTree = "<group>"; };
+		C64EA699169E847800778456 /* MCAbstractMultipart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAbstractMultipart.h; sourceTree = "<group>"; };
+		C64EA69A169E847800778456 /* MCAbstractPart.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCAbstractPart.cc; sourceTree = "<group>"; };
+		C64EA69B169E847800778456 /* MCAbstractPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAbstractPart.h; sourceTree = "<group>"; };
+		C64EA69C169E847800778456 /* MCAddress.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCAddress.cc; sourceTree = "<group>"; };
+		C64EA69D169E847800778456 /* MCAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAddress.h; sourceTree = "<group>"; };
+		C64EA69E169E847800778456 /* MCMessageConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMessageConstants.h; sourceTree = "<group>"; };
+		C64EA69F169E847800778456 /* MCMessageHeader.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCMessageHeader.cc; sourceTree = "<group>"; };
+		C64EA6A0169E847800778456 /* MCMessageHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMessageHeader.h; sourceTree = "<group>"; };
+		C64EA6A2169E847800778456 /* MCAutoreleasePool.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCAutoreleasePool.cc; sourceTree = "<group>"; };
+		C64EA6A3169E847800778456 /* MCAutoreleasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAutoreleasePool.h; sourceTree = "<group>"; };
+		C64EA6A4169E847800778456 /* MCBaseTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBaseTypes.h; sourceTree = "<group>"; };
+		C64EA6A5169E847800778456 /* MCArray.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCArray.cc; sourceTree = "<group>"; };
+		C64EA6A6169E847800778456 /* MCArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCArray.h; sourceTree = "<group>"; };
+		C64EA6A7169E847800778456 /* MCAssert.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCAssert.cc; sourceTree = "<group>"; };
+		C64EA6A8169E847800778456 /* MCAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAssert.h; sourceTree = "<group>"; };
+		C64EA6A9169E847800778456 /* MCData.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCData.cc; sourceTree = "<group>"; };
+		C64EA6AA169E847800778456 /* MCData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCData.h; sourceTree = "<group>"; };
+		C64EA6AB169E847800778456 /* MCHash.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCHash.cc; sourceTree = "<group>"; };
+		C64EA6AC169E847800778456 /* MCHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCHash.h; sourceTree = "<group>"; };
+		C64EA6AD169E847800778456 /* MCHashMap.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCHashMap.cc; sourceTree = "<group>"; };
+		C64EA6AE169E847800778456 /* MCHashMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCHashMap.h; sourceTree = "<group>"; };
+		C64EA6AF169E847800778456 /* MCLog.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCLog.cc; sourceTree = "<group>"; };
+		C64EA6B0169E847800778456 /* MCLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCLog.h; sourceTree = "<group>"; };
+		C64EA6B1169E847800778456 /* MCObject.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCObject.cc; sourceTree = "<group>"; };
+		C64EA6B2169E847800778456 /* MCObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCObject.h; sourceTree = "<group>"; };
+		C64EA6B3169E847800778456 /* MCRange.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCRange.cc; sourceTree = "<group>"; };
+		C64EA6B4169E847800778456 /* MCRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRange.h; sourceTree = "<group>"; };
+		C64EA6B5169E847800778456 /* MCSet.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCSet.cc; sourceTree = "<group>"; };
+		C64EA6B6169E847800778456 /* MCSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSet.h; sourceTree = "<group>"; };
+		C64EA6B7169E847800778456 /* MCString.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCString.cc; sourceTree = "<group>"; };
+		C64EA6B8169E847800778456 /* MCString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCString.h; sourceTree = "<group>"; };
+		C64EA6B9169E847800778456 /* MCUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCUtils.h; sourceTree = "<group>"; };
+		C64EA6BA169E847800778456 /* MCValue.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCValue.cc; sourceTree = "<group>"; };
+		C64EA6BB169E847800778456 /* MCValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCValue.h; sourceTree = "<group>"; };
+		C64EA6BC169E847800778456 /* MCMainThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMainThread.h; sourceTree = "<group>"; };
+		C64EA6BD169E847800778456 /* MCMainThread.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCMainThread.mm; sourceTree = "<group>"; };
+		C64EA6BE169E847800778456 /* MCOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCOperation.cc; sourceTree = "<group>"; };
+		C64EA6BF169E847800778456 /* MCOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOperation.h; sourceTree = "<group>"; };
+		C64EA6C0169E847800778456 /* MCOperationCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOperationCallback.h; sourceTree = "<group>"; };
+		C64EA6C1169E847800778456 /* MCOperationQueue.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCOperationQueue.cc; sourceTree = "<group>"; };
+		C64EA6C2169E847800778456 /* MCOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOperationQueue.h; sourceTree = "<group>"; };
+		C64EA6C4169E847800778456 /* MCIMAP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAP.h; sourceTree = "<group>"; };
+		C64EA6C5169E847800778456 /* MCIMAPFolder.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPFolder.cc; sourceTree = "<group>"; };
+		C64EA6C6169E847800778456 /* MCIMAPFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPFolder.h; sourceTree = "<group>"; };
+		C64EA6C7169E847800778456 /* MCIMAPMessage.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPMessage.cc; sourceTree = "<group>"; };
+		C64EA6C8169E847800778456 /* MCIMAPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPMessage.h; sourceTree = "<group>"; };
+		C64EA6C9169E847800778456 /* MCIMAPMessagePart.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPMessagePart.cc; sourceTree = "<group>"; };
+		C64EA6CA169E847800778456 /* MCIMAPMessagePart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPMessagePart.h; sourceTree = "<group>"; };
+		C64EA6CB169E847800778456 /* MCIMAPMultipart.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPMultipart.cc; sourceTree = "<group>"; };
+		C64EA6CC169E847800778456 /* MCIMAPMultipart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPMultipart.h; sourceTree = "<group>"; };
+		C64EA6CD169E847800778456 /* MCIMAPNamespace.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPNamespace.cc; sourceTree = "<group>"; };
+		C64EA6CE169E847800778456 /* MCIMAPNamespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPNamespace.h; sourceTree = "<group>"; };
+		C64EA6CF169E847800778456 /* MCIMAPNamespaceItem.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPNamespaceItem.cc; sourceTree = "<group>"; };
+		C64EA6D0169E847800778456 /* MCIMAPNamespaceItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPNamespaceItem.h; sourceTree = "<group>"; };
+		C64EA6D1169E847800778456 /* MCIMAPPart.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPPart.cc; sourceTree = "<group>"; };
+		C64EA6D2169E847800778456 /* MCIMAPPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPPart.h; sourceTree = "<group>"; };
+		C64EA6D3169E847800778456 /* MCIMAPProgressCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPProgressCallback.h; sourceTree = "<group>"; };
+		C64EA6D4169E847800778456 /* MCIMAPSearchExpression.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPSearchExpression.cc; sourceTree = "<group>"; };
+		C64EA6D5169E847800778456 /* MCIMAPSearchExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPSearchExpression.h; sourceTree = "<group>"; };
+		C64EA6D6169E847800778456 /* MCIMAPSession.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPSession.cc; sourceTree = "<group>"; };
+		C64EA6D7169E847800778456 /* MCIMAPSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPSession.h; sourceTree = "<group>"; };
+		C64EA6D9169E847800778456 /* MCPOP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPOP.h; sourceTree = "<group>"; };
+		C64EA6DA169E847800778456 /* MCPOPMessageInfo.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCPOPMessageInfo.cc; sourceTree = "<group>"; };
+		C64EA6DB169E847800778456 /* MCPOPMessageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPOPMessageInfo.h; sourceTree = "<group>"; };
+		C64EA6DC169E847800778456 /* MCPOPProgressCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPOPProgressCallback.h; sourceTree = "<group>"; };
+		C64EA6DD169E847800778456 /* MCPOPSession.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCPOPSession.cc; sourceTree = "<group>"; };
+		C64EA6DE169E847800778456 /* MCPOPSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPOPSession.h; sourceTree = "<group>"; };
+		C64EA6E0169E847800778456 /* MCAttachment.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCAttachment.cc; sourceTree = "<group>"; };
+		C64EA6E1169E847800778456 /* MCAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAttachment.h; sourceTree = "<group>"; };
+		C64EA6E2169E847800778456 /* MCMessageBuilder.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCMessageBuilder.cc; sourceTree = "<group>"; };
+		C64EA6E3169E847800778456 /* MCMessageBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMessageBuilder.h; sourceTree = "<group>"; };
+		C64EA6E4169E847800778456 /* MCMessageParser.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCMessageParser.cc; sourceTree = "<group>"; };
+		C64EA6E5169E847800778456 /* MCMessageParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMessageParser.h; sourceTree = "<group>"; };
+		C64EA6E6169E847800778456 /* MCMessagePart.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCMessagePart.cc; sourceTree = "<group>"; };
+		C64EA6E7169E847800778456 /* MCMessagePart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMessagePart.h; sourceTree = "<group>"; };
+		C64EA6E8169E847800778456 /* MCMultipart.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCMultipart.cc; sourceTree = "<group>"; };
+		C64EA6E9169E847800778456 /* MCMultipart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMultipart.h; sourceTree = "<group>"; };
+		C64EA6EA169E847800778456 /* MCRFC822.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRFC822.h; sourceTree = "<group>"; };
+		C64EA6EC169E847800778456 /* MCSMTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSMTP.h; sourceTree = "<group>"; };
+		C64EA6ED169E847800778456 /* MCSMTPProgressCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSMTPProgressCallback.h; sourceTree = "<group>"; };
+		C64EA6EE169E847800778456 /* MCSMTPSession.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCSMTPSession.cc; sourceTree = "<group>"; };
+		C64EA6EF169E847800778456 /* MCSMTPSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSMTPSession.h; sourceTree = "<group>"; };
+		C64EA782169F23AB00778456 /* MCCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCore.h; sourceTree = "<group>"; };
+		C64EA785169F252C00778456 /* MCSMTPSendWithRecipientOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCSMTPSendWithRecipientOperation.cc; sourceTree = "<group>"; };
+		C64EA786169F252C00778456 /* MCSMTPSendWithRecipientOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSMTPSendWithRecipientOperation.h; sourceTree = "<group>"; };
+		C64EA78C169F259200778456 /* tests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tests; sourceTree = BUILT_PRODUCTS_DIR; };
+		C64EA78F169F259200778456 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C64EA79C169F29A700778456 /* MCSMTPSendWithDataOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCSMTPSendWithDataOperation.cc; sourceTree = "<group>"; };
+		C64EA79D169F29A700778456 /* MCSMTPSendWithDataOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSMTPSendWithDataOperation.h; sourceTree = "<group>"; };
+		C64EA79F169F29D900778456 /* MCSMTPSendWithBuilderOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCSMTPSendWithBuilderOperation.cc; sourceTree = "<group>"; };
+		C64EA7A0169F29D900778456 /* MCSMTPSendWithBuilderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSMTPSendWithBuilderOperation.h; sourceTree = "<group>"; };
+		C64EA7A4169F2A3E00778456 /* mailcore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mailcore.h; sourceTree = "<group>"; };
+		C64EA7AA16A00AF600778456 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		C64EA7B016A00BBB00778456 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C64EA534169E772200778456 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C64EA789169F259200778456 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C64EA7B116A00BBB00778456 /* CoreServices.framework in Frameworks */,
+				C64EA790169F259200778456 /* Foundation.framework in Frameworks */,
+				C64EA79B169F259F00778456 /* libmailcore2.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C64EA52C169E772200778456 = {
+			isa = PBXGroup;
+			children = (
+				C64EA7B016A00BBB00778456 /* CoreServices.framework */,
+				C64EA545169E78B100778456 /* src */,
+				C64EA7A916A00AF400778456 /* tests */,
+				C64EA78E169F259200778456 /* Frameworks */,
+				C64EA538169E772200778456 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C64EA538169E772200778456 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C64EA537169E772200778456 /* libmailcore2.a */,
+				C64EA78C169F259200778456 /* tests */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C64EA545169E78B100778456 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				C64EA68A169E847800778456 /* async */,
+				C64EA691169E847800778456 /* core */,
+				C64EA7A4169F2A3E00778456 /* mailcore.h */,
+			);
+			name = src;
+			path = ../src;
+			sourceTree = "<group>";
+		};
+		C64EA68A169E847800778456 /* async */ = {
+			isa = PBXGroup;
+			children = (
+				C64EA68B169E847800778456 /* imap */,
+				C64EA68D169E847800778456 /* pop */,
+				C64EA68E169E847800778456 /* smtp */,
+			);
+			path = async;
+			sourceTree = "<group>";
+		};
+		C64EA68B169E847800778456 /* imap */ = {
+			isa = PBXGroup;
+			children = (
+				C64EA68C169E847800778456 /* IMAPAsyncSession.h */,
+			);
+			path = imap;
+			sourceTree = "<group>";
+		};
+		C64EA68D169E847800778456 /* pop */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = pop;
+			sourceTree = "<group>";
+		};
+		C64EA68E169E847800778456 /* smtp */ = {
+			isa = PBXGroup;
+			children = (
+				C64EA68F169E847800778456 /* MCSMTPAsyncSession.cc */,
+				C64EA690169E847800778456 /* MCSMTPAsyncSession.h */,
+				C64EA785169F252C00778456 /* MCSMTPSendWithRecipientOperation.cc */,
+				C64EA786169F252C00778456 /* MCSMTPSendWithRecipientOperation.h */,
+				C64EA79C169F29A700778456 /* MCSMTPSendWithDataOperation.cc */,
+				C64EA79D169F29A700778456 /* MCSMTPSendWithDataOperation.h */,
+				C64EA79F169F29D900778456 /* MCSMTPSendWithBuilderOperation.cc */,
+				C64EA7A0169F29D900778456 /* MCSMTPSendWithBuilderOperation.h */,
+			);
+			path = smtp;
+			sourceTree = "<group>";
+		};
+		C64EA691169E847800778456 /* core */ = {
+			isa = PBXGroup;
+			children = (
+				C64EA692169E847800778456 /* abstract */,
+				C64EA6A1169E847800778456 /* basetypes */,
+				C64EA6C3169E847800778456 /* imap */,
+				C64EA6D8169E847800778456 /* pop */,
+				C64EA6DF169E847800778456 /* rfc822 */,
+				C64EA6EB169E847800778456 /* smtp */,
+				C64EA782169F23AB00778456 /* MCCore.h */,
+			);
+			path = core;
+			sourceTree = "<group>";
+		};
+		C64EA692169E847800778456 /* abstract */ = {
+			isa = PBXGroup;
+			children = (
+				C64EA693169E847800778456 /* MCAbstract.h */,
+				C64EA694169E847800778456 /* MCAbstractMessage.cc */,
+				C64EA695169E847800778456 /* MCAbstractMessage.h */,
+				C64EA696169E847800778456 /* MCAbstractMessagePart.cc */,
+				C64EA697169E847800778456 /* MCAbstractMessagePart.h */,
+				C64EA698169E847800778456 /* MCAbstractMultipart.cc */,
+				C64EA699169E847800778456 /* MCAbstractMultipart.h */,
+				C64EA69A169E847800778456 /* MCAbstractPart.cc */,
+				C64EA69B169E847800778456 /* MCAbstractPart.h */,
+				C64EA69C169E847800778456 /* MCAddress.cc */,
+				C64EA69D169E847800778456 /* MCAddress.h */,
+				C64EA69E169E847800778456 /* MCMessageConstants.h */,
+				C64EA69F169E847800778456 /* MCMessageHeader.cc */,
+				C64EA6A0169E847800778456 /* MCMessageHeader.h */,
+			);
+			path = abstract;
+			sourceTree = "<group>";
+		};
+		C64EA6A1169E847800778456 /* basetypes */ = {
+			isa = PBXGroup;
+			children = (
+				C64EA6A2169E847800778456 /* MCAutoreleasePool.cc */,
+				C64EA6A3169E847800778456 /* MCAutoreleasePool.h */,
+				C64EA6A4169E847800778456 /* MCBaseTypes.h */,
+				C64EA6A5169E847800778456 /* MCArray.cc */,
+				C64EA6A6169E847800778456 /* MCArray.h */,
+				C64EA6A7169E847800778456 /* MCAssert.cc */,
+				C64EA6A8169E847800778456 /* MCAssert.h */,
+				C64EA6A9169E847800778456 /* MCData.cc */,
+				C64EA6AA169E847800778456 /* MCData.h */,
+				C64EA6AB169E847800778456 /* MCHash.cc */,
+				C64EA6AC169E847800778456 /* MCHash.h */,
+				C64EA6AD169E847800778456 /* MCHashMap.cc */,
+				C64EA6AE169E847800778456 /* MCHashMap.h */,
+				C64EA6AF169E847800778456 /* MCLog.cc */,
+				C64EA6B0169E847800778456 /* MCLog.h */,
+				C64EA6B1169E847800778456 /* MCObject.cc */,
+				C64EA6B2169E847800778456 /* MCObject.h */,
+				C64EA6B3169E847800778456 /* MCRange.cc */,
+				C64EA6B4169E847800778456 /* MCRange.h */,
+				C64EA6B5169E847800778456 /* MCSet.cc */,
+				C64EA6B6169E847800778456 /* MCSet.h */,
+				C64EA6B7169E847800778456 /* MCString.cc */,
+				C64EA6B8169E847800778456 /* MCString.h */,
+				C64EA6B9169E847800778456 /* MCUtils.h */,
+				C64EA6BA169E847800778456 /* MCValue.cc */,
+				C64EA6BB169E847800778456 /* MCValue.h */,
+				C64EA6BC169E847800778456 /* MCMainThread.h */,
+				C64EA6BD169E847800778456 /* MCMainThread.mm */,
+				C64EA6BE169E847800778456 /* MCOperation.cc */,
+				C64EA6BF169E847800778456 /* MCOperation.h */,
+				C64EA6C0169E847800778456 /* MCOperationCallback.h */,
+				C64EA6C1169E847800778456 /* MCOperationQueue.cc */,
+				C64EA6C2169E847800778456 /* MCOperationQueue.h */,
+			);
+			path = basetypes;
+			sourceTree = "<group>";
+		};
+		C64EA6C3169E847800778456 /* imap */ = {
+			isa = PBXGroup;
+			children = (
+				C64EA6C4169E847800778456 /* MCIMAP.h */,
+				C64EA6C5169E847800778456 /* MCIMAPFolder.cc */,
+				C64EA6C6169E847800778456 /* MCIMAPFolder.h */,
+				C64EA6C7169E847800778456 /* MCIMAPMessage.cc */,
+				C64EA6C8169E847800778456 /* MCIMAPMessage.h */,
+				C64EA6C9169E847800778456 /* MCIMAPMessagePart.cc */,
+				C64EA6CA169E847800778456 /* MCIMAPMessagePart.h */,
+				C64EA6CB169E847800778456 /* MCIMAPMultipart.cc */,
+				C64EA6CC169E847800778456 /* MCIMAPMultipart.h */,
+				C64EA6CD169E847800778456 /* MCIMAPNamespace.cc */,
+				C64EA6CE169E847800778456 /* MCIMAPNamespace.h */,
+				C64EA6CF169E847800778456 /* MCIMAPNamespaceItem.cc */,
+				C64EA6D0169E847800778456 /* MCIMAPNamespaceItem.h */,
+				C64EA6D1169E847800778456 /* MCIMAPPart.cc */,
+				C64EA6D2169E847800778456 /* MCIMAPPart.h */,
+				C64EA6D3169E847800778456 /* MCIMAPProgressCallback.h */,
+				C64EA6D4169E847800778456 /* MCIMAPSearchExpression.cc */,
+				C64EA6D5169E847800778456 /* MCIMAPSearchExpression.h */,
+				C64EA6D6169E847800778456 /* MCIMAPSession.cc */,
+				C64EA6D7169E847800778456 /* MCIMAPSession.h */,
+			);
+			path = imap;
+			sourceTree = "<group>";
+		};
+		C64EA6D8169E847800778456 /* pop */ = {
+			isa = PBXGroup;
+			children = (
+				C64EA6D9169E847800778456 /* MCPOP.h */,
+				C64EA6DA169E847800778456 /* MCPOPMessageInfo.cc */,
+				C64EA6DB169E847800778456 /* MCPOPMessageInfo.h */,
+				C64EA6DC169E847800778456 /* MCPOPProgressCallback.h */,
+				C64EA6DD169E847800778456 /* MCPOPSession.cc */,
+				C64EA6DE169E847800778456 /* MCPOPSession.h */,
+			);
+			path = pop;
+			sourceTree = "<group>";
+		};
+		C64EA6DF169E847800778456 /* rfc822 */ = {
+			isa = PBXGroup;
+			children = (
+				C64EA6E0169E847800778456 /* MCAttachment.cc */,
+				C64EA6E1169E847800778456 /* MCAttachment.h */,
+				C64EA6E2169E847800778456 /* MCMessageBuilder.cc */,
+				C64EA6E3169E847800778456 /* MCMessageBuilder.h */,
+				C64EA6E4169E847800778456 /* MCMessageParser.cc */,
+				C64EA6E5169E847800778456 /* MCMessageParser.h */,
+				C64EA6E6169E847800778456 /* MCMessagePart.cc */,
+				C64EA6E7169E847800778456 /* MCMessagePart.h */,
+				C64EA6E8169E847800778456 /* MCMultipart.cc */,
+				C64EA6E9169E847800778456 /* MCMultipart.h */,
+				C64EA6EA169E847800778456 /* MCRFC822.h */,
+			);
+			path = rfc822;
+			sourceTree = "<group>";
+		};
+		C64EA6EB169E847800778456 /* smtp */ = {
+			isa = PBXGroup;
+			children = (
+				C64EA6EC169E847800778456 /* MCSMTP.h */,
+				C64EA6ED169E847800778456 /* MCSMTPProgressCallback.h */,
+				C64EA6EE169E847800778456 /* MCSMTPSession.cc */,
+				C64EA6EF169E847800778456 /* MCSMTPSession.h */,
+			);
+			path = smtp;
+			sourceTree = "<group>";
+		};
+		C64EA78E169F259200778456 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C64EA78F169F259200778456 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C64EA7A916A00AF400778456 /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				C64EA7AA16A00AF600778456 /* main.mm */,
+			);
+			name = tests;
+			path = ../tests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C64EA536169E772200778456 /* mailcore2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C64EA53B169E772200778456 /* Build configuration list for PBXNativeTarget "mailcore2" */;
+			buildPhases = (
+				C64EA780169E867600778456 /* ShellScript */,
+				C64EA74B169E854B00778456 /* CopyFiles */,
+				C64EA533169E772200778456 /* Sources */,
+				C64EA534169E772200778456 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = mailcore2;
+			productName = mailcore;
+			productReference = C64EA537169E772200778456 /* libmailcore2.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		C64EA78B169F259200778456 /* tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C64EA798169F259300778456 /* Build configuration list for PBXNativeTarget "tests" */;
+			buildPhases = (
+				C64EA788169F259200778456 /* Sources */,
+				C64EA789169F259200778456 /* Frameworks */,
+				C64EA78A169F259200778456 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C64EA7A3169F2A1D00778456 /* PBXTargetDependency */,
+			);
+			name = tests;
+			productName = tests;
+			productReference = C64EA78C169F259200778456 /* tests */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C64EA52E169E772200778456 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = MailCore;
+			};
+			buildConfigurationList = C64EA531169E772200778456 /* Build configuration list for PBXProject "mailcore2" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C64EA52C169E772200778456;
+			productRefGroup = C64EA538169E772200778456 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C64EA536169E772200778456 /* mailcore2 */,
+				C64EA78B169F259200778456 /* tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C64EA780169E867600778456 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C64EA533169E772200778456 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C64EA6F4169E847800778456 /* MCAbstractMessage.cc in Sources */,
+				C64EA6F6169E847800778456 /* MCAbstractMessagePart.cc in Sources */,
+				C64EA6F8169E847800778456 /* MCAbstractMultipart.cc in Sources */,
+				C64EA6FA169E847800778456 /* MCAbstractPart.cc in Sources */,
+				C64EA6FC169E847800778456 /* MCAddress.cc in Sources */,
+				C64EA6FF169E847800778456 /* MCMessageHeader.cc in Sources */,
+				C64EA701169E847800778456 /* MCAutoreleasePool.cc in Sources */,
+				C64EA704169E847800778456 /* MCArray.cc in Sources */,
+				C64EA706169E847800778456 /* MCAssert.cc in Sources */,
+				C64EA708169E847800778456 /* MCData.cc in Sources */,
+				C64EA70A169E847800778456 /* MCHash.cc in Sources */,
+				C64EA70C169E847800778456 /* MCHashMap.cc in Sources */,
+				C64EA70E169E847800778456 /* MCLog.cc in Sources */,
+				C64EA710169E847800778456 /* MCObject.cc in Sources */,
+				C64EA712169E847800778456 /* MCRange.cc in Sources */,
+				C64EA714169E847800778456 /* MCSet.cc in Sources */,
+				C64EA716169E847800778456 /* MCString.cc in Sources */,
+				C64EA719169E847800778456 /* MCValue.cc in Sources */,
+				C64EA71C169E847800778456 /* MCMainThread.mm in Sources */,
+				C64EA71D169E847800778456 /* MCOperation.cc in Sources */,
+				C64EA720169E847800778456 /* MCOperationQueue.cc in Sources */,
+				C64EA723169E847800778456 /* MCIMAPFolder.cc in Sources */,
+				C64EA725169E847800778456 /* MCIMAPMessage.cc in Sources */,
+				C64EA727169E847800778456 /* MCIMAPMessagePart.cc in Sources */,
+				C64EA729169E847800778456 /* MCIMAPMultipart.cc in Sources */,
+				C64EA72B169E847800778456 /* MCIMAPNamespace.cc in Sources */,
+				C64EA72D169E847800778456 /* MCIMAPNamespaceItem.cc in Sources */,
+				C64EA72F169E847800778456 /* MCIMAPPart.cc in Sources */,
+				C64EA732169E847800778456 /* MCIMAPSearchExpression.cc in Sources */,
+				C64EA734169E847800778456 /* MCIMAPSession.cc in Sources */,
+				C64EA737169E847800778456 /* MCPOPMessageInfo.cc in Sources */,
+				C64EA73A169E847800778456 /* MCPOPSession.cc in Sources */,
+				C64EA73C169E847800778456 /* MCAttachment.cc in Sources */,
+				C64EA73E169E847800778456 /* MCMessageBuilder.cc in Sources */,
+				C64EA740169E847800778456 /* MCMessageParser.cc in Sources */,
+				C64EA742169E847800778456 /* MCMessagePart.cc in Sources */,
+				C64EA744169E847800778456 /* MCMultipart.cc in Sources */,
+				C64EA781169E89F600778456 /* MCSMTPSession.cc in Sources */,
+				C64EA784169F24E400778456 /* MCSMTPAsyncSession.cc in Sources */,
+				C64EA787169F252C00778456 /* MCSMTPSendWithRecipientOperation.cc in Sources */,
+				C64EA79E169F29A700778456 /* MCSMTPSendWithDataOperation.cc in Sources */,
+				C64EA7A1169F29D900778456 /* MCSMTPSendWithBuilderOperation.cc in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C64EA788169F259200778456 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C64EA7AB16A00AF600778456 /* main.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C64EA7A3169F2A1D00778456 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C64EA536169E772200778456 /* mailcore2 */;
+			targetProxy = C64EA7A2169F2A1D00778456 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		C64EA539169E772200778456 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../Externals/libetpan/include",
+					"$(SRCROOT)/../Externals/icu4c/include",
+					/usr/include/libxml2,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/../Externals/libetpan/lib",
+					"$(SRCROOT)/../Externals/icu4c/lib",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		C64EA53A169E772200778456 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../Externals/libetpan/include",
+					"$(SRCROOT)/../Externals/icu4c/include",
+					/usr/include/libxml2,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/../Externals/libetpan/lib",
+					"$(SRCROOT)/../Externals/icu4c/lib",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		C64EA53C169E772200778456 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../src/core/basetypes\"",
+					"\"$(SRCROOT)/../src/core/abstract\"",
+				);
+				PRODUCT_NAME = mailcore2;
+			};
+			name = Debug;
+		};
+		C64EA53D169E772200778456 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../src/core/basetypes\"",
+					"\"$(SRCROOT)/../src/core/abstract\"",
+				);
+				PRODUCT_NAME = mailcore2;
+			};
+			name = Release;
+		};
+		C64EA799169F259300778456 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = (
+					"-letpan",
+					"-licudata",
+					"-licui18n",
+					"-licuuc",
+					"-lxml2",
+					"-lssl",
+					"-lcrypto",
+					"-lsasl2",
+					"-liconv",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C64EA79A169F259300778456 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = (
+					"-letpan",
+					"-licudata",
+					"-licui18n",
+					"-licuuc",
+					"-lxml2",
+					"-lssl",
+					"-lcrypto",
+					"-lsasl2",
+					"-liconv",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C64EA531169E772200778456 /* Build configuration list for PBXProject "mailcore2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C64EA539169E772200778456 /* Debug */,
+				C64EA53A169E772200778456 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C64EA53B169E772200778456 /* Build configuration list for PBXNativeTarget "mailcore2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C64EA53C169E772200778456 /* Debug */,
+				C64EA53D169E772200778456 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C64EA798169F259300778456 /* Build configuration list for PBXNativeTarget "tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C64EA799169F259300778456 /* Debug */,
+				C64EA79A169F259300778456 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C64EA52E169E772200778456 /* Project object */;
+}
