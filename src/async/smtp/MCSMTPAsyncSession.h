@@ -64,7 +64,7 @@ namespace mailcore {
 		virtual SMTPOperation * sendMessageOperationWithFromAndRecipient(Address * from, Array * recipients, Data * messageData);
 		virtual SMTPOperation * sendMessageOperation(Data * messageData);
 		virtual SMTPOperation * sendMessageOperation(MessageBuilder * msg);
-        
+        virtual SMTPOperation * checkAccountOperation(Address * from);
         
         // private
         virtual void runOperation(SMTPOperation * operation);

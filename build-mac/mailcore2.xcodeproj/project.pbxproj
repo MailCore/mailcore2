@@ -107,11 +107,12 @@
 		C64EA7A5169F2A6100778456 /* mailcore.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA7A4169F2A3E00778456 /* mailcore.h */; };
 		C64EA7AB16A00AF600778456 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = C64EA7AA16A00AF600778456 /* main.mm */; };
 		C64EA7B116A00BBB00778456 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64EA7B016A00BBB00778456 /* CoreServices.framework */; };
-		C64EA7DA16A1386600778456 /* MCSMTPOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA7D816A1386500778456 /* MCSMTPOperation.cpp */; };
+		C64EA7DA16A1386600778456 /* MCSMTPOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA7D816A1386500778456 /* MCSMTPOperation.cc */; };
 		C64EA7DC16A13A4C00778456 /* MCSMTPOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA7D916A1386600778456 /* MCSMTPOperation.h */; };
 		C64EA7E516A14A5400778456 /* MCAsync.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA7E416A14A4500778456 /* MCAsync.h */; };
 		C64EA7E616A14A6A00778456 /* MCAsyncSMTP.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA7E316A149EF00778456 /* MCAsyncSMTP.h */; };
 		C64EA7E716A14A7400778456 /* MCSMTPOperationCallback.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA7E116A1425400778456 /* MCSMTPOperationCallback.h */; };
+		C64EA7EA16A154B300778456 /* MCSMTPCheckAccountOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA7E816A154B000778456 /* MCSMTPCheckAccountOperation.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -308,11 +309,13 @@
 		C64EA7A4169F2A3E00778456 /* mailcore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mailcore.h; sourceTree = "<group>"; };
 		C64EA7AA16A00AF600778456 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		C64EA7B016A00BBB00778456 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
-		C64EA7D816A1386500778456 /* MCSMTPOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCSMTPOperation.cpp; sourceTree = "<group>"; };
+		C64EA7D816A1386500778456 /* MCSMTPOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCSMTPOperation.cc; sourceTree = "<group>"; };
 		C64EA7D916A1386600778456 /* MCSMTPOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSMTPOperation.h; sourceTree = "<group>"; };
 		C64EA7E116A1425400778456 /* MCSMTPOperationCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSMTPOperationCallback.h; sourceTree = "<group>"; };
 		C64EA7E316A149EF00778456 /* MCAsyncSMTP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCAsyncSMTP.h; sourceTree = "<group>"; };
 		C64EA7E416A14A4500778456 /* MCAsync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCAsync.h; sourceTree = "<group>"; };
+		C64EA7E816A154B000778456 /* MCSMTPCheckAccountOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCSMTPCheckAccountOperation.cc; sourceTree = "<group>"; };
+		C64EA7E916A154B200778456 /* MCSMTPCheckAccountOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSMTPCheckAccountOperation.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -404,10 +407,12 @@
 				C64EA79D169F29A700778456 /* MCSMTPSendWithDataOperation.h */,
 				C64EA79F169F29D900778456 /* MCSMTPSendWithBuilderOperation.cc */,
 				C64EA7A0169F29D900778456 /* MCSMTPSendWithBuilderOperation.h */,
-				C64EA7D816A1386500778456 /* MCSMTPOperation.cpp */,
+				C64EA7D816A1386500778456 /* MCSMTPOperation.cc */,
 				C64EA7D916A1386600778456 /* MCSMTPOperation.h */,
 				C64EA7E116A1425400778456 /* MCSMTPOperationCallback.h */,
 				C64EA7E316A149EF00778456 /* MCAsyncSMTP.h */,
+				C64EA7E816A154B000778456 /* MCSMTPCheckAccountOperation.cc */,
+				C64EA7E916A154B200778456 /* MCSMTPCheckAccountOperation.h */,
 			);
 			path = smtp;
 			sourceTree = "<group>";
@@ -702,7 +707,8 @@
 				C64EA787169F252C00778456 /* MCSMTPSendWithRecipientOperation.cc in Sources */,
 				C64EA79E169F29A700778456 /* MCSMTPSendWithDataOperation.cc in Sources */,
 				C64EA7A1169F29D900778456 /* MCSMTPSendWithBuilderOperation.cc in Sources */,
-				C64EA7DA16A1386600778456 /* MCSMTPOperation.cpp in Sources */,
+				C64EA7DA16A1386600778456 /* MCSMTPOperation.cc in Sources */,
+				C64EA7EA16A154B300778456 /* MCSMTPCheckAccountOperation.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

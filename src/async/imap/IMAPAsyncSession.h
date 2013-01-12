@@ -103,8 +103,8 @@ namespace mailcore {
 		virtual IMAPOperation * storeFlags(String * folder, Array * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags);
 		virtual IMAPOperation * storeLabels(String * folder, Array * uids, IMAPStoreFlagsRequestKind kind, Array * labels);
 		
-		virtual Array * search(String * folder, IMAPSearchKind kind, String * searchString);
-		virtual Array * search(String * folder, IMAPSearchExpression * expression);
+		virtual IMAPSearchOperation * search(String * folder, IMAPSearchKind kind, String * searchString);
+		virtual IMAPSearchOperation * search(String * folder, IMAPSearchExpression * expression);
 		
 		virtual IMAPIdleOperation * idle(String * folder, uint32_t lastKnownUID);
 		

@@ -79,6 +79,8 @@ namespace mailcore {
 		
 		virtual void login(ErrorCode * pError);
 		
+        virtual void checkAccount(Address * from, ErrorCode * pError);
+        
 		virtual void sendMessage(Address * from, Array * recipients, Data * messageData,
 			SMTPProgressCallback * callback, ErrorCode * pError);
 		virtual void sendMessage(Data * messageData, SMTPProgressCallback * callback, ErrorCode * pError);

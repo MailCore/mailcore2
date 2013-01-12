@@ -182,6 +182,7 @@ static void testAsyncSMTP(mailcore::Data * data)
     
     mailcore::SMTPOperation * op = smtp->sendMessageOperation(data);
     op->setSmtpCallback(callback);
+    op->setCallback(callback);
     op->start();
     
     [[NSRunLoop currentRunLoop] run];

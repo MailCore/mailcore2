@@ -4,6 +4,7 @@
 #include "MCSMTPSendWithRecipientOperation.h"
 #include "MCSMTPSendWithDataOperation.h"
 #include "MCSMTPSendWithBuilderOperation.h"
+#include "MCSMTPCheckAccountOperation.h"
 #include "MCSMTPOperation.h"
 
 using namespace mailcore;
@@ -116,6 +117,7 @@ bool SMTPAsyncSession::useHeloIPEnabled()
 
 void SMTPAsyncSession::runOperation(SMTPOperation * operation)
 {
+    // TODO: disconnect after delay
     mQueue->addOperation(operation);
 }
 
@@ -144,11 +146,17 @@ SMTPOperation * SMTPAsyncSession::sendMessageOperation(Data * messageData)
 
 SMTPOperation * SMTPAsyncSession::sendMessageOperation(MessageBuilder * msg)
 {
-#if 0
     SMTPSendWithBuilderOperation * op = new SMTPSendWithBuilderOperation();
     op->setSession(this);
     op->setBuilder(msg);
     return (SMTPOperation *) op->autorelease();
-#endif
-    return NULL;
 }
+
+SMTPOperation * SMTPAsyncSession::checkAccountOperation(Address * from)
+{
+    SMTPCheckAccountOperation * op = new SMTPCheckAccountOperation();
+    op->setFrom(from);
+    op->setSession(this);
+    return (SMTPOperation *) op->autorelease();
+}
+

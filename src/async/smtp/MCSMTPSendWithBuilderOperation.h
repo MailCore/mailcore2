@@ -28,7 +28,7 @@ namespace mailcore {
         virtual void setBuilder(MessageBuilder * builder);
         virtual MessageBuilder * builder();
         
-        void main();
+        virtual void main();
     };
     
 }

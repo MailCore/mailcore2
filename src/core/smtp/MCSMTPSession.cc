@@ -482,6 +482,37 @@ void SMTPSession::login(ErrorCode * pError)
     * pError = ErrorNone;
 }
 
+void SMTPSession::checkAccount(Address * from, ErrorCode * pError)
+{
+    int r;
+    
+    loginIfNeeded(pError);
+    if (* pError != ErrorNone) {
+        return;
+    }
+    r = mailsmtp_mail(mSmtp, MCUTF8(from->mailbox()));
+    if (r == MAILSMTP_ERROR_STREAM) {
+        * pError = ErrorConnection;
+        return;
+    }
+    else if (r != MAILSMTP_NO_ERROR) {
+        * pError = ErrorInvalidAccount;
+        return;
+    }
+    
+    r = mailsmtp_rcpt(mSmtp, "email@invalid");
+    if (r == MAILSMTP_ERROR_STREAM) {
+        * pError = ErrorConnection;
+        return;
+    }
+    else if (r != MAILSMTP_NO_ERROR) {
+        * pError = ErrorInvalidAccount;
+        return;
+    }
+    
+    * pError = ErrorNone;
+}
+
 void SMTPSession::sendMessage(Address * from, Array * recipients, Data * messageData,
     SMTPProgressCallback * callback, ErrorCode * pError)
 {
