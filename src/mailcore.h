@@ -10,5 +10,6 @@
 #define mailcore2_mailcore_h
 
 #include <mailcore/MCCore.h>
+#include <mailcore/MCAsync.h>
 
 #endif

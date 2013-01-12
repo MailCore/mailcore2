@@ -4,6 +4,7 @@
 #include "MCSMTPSendWithRecipientOperation.h"
 #include "MCSMTPSendWithDataOperation.h"
 #include "MCSMTPSendWithBuilderOperation.h"
+#include "MCSMTPOperation.h"
 
 using namespace mailcore;
 
@@ -15,13 +16,12 @@ SMTPAsyncSession::SMTPAsyncSession()
 
 SMTPAsyncSession::~SMTPAsyncSession()
 {
-    mQueue->release();
-    mSession->release();
-}
-
-String * SMTPAsyncSession::className()
-{
-    return MCSTR("SMTPAsyncSession");
+    MC_SAFE_RELEASE(mHostname);
+    MC_SAFE_RELEASE(mUsername);
+    MC_SAFE_RELEASE(mPassword);
+    
+    MC_SAFE_RELEASE(mQueue);
+    MC_SAFE_RELEASE(mSession);
 }
 
 void SMTPAsyncSession::setHostname(String * hostname)
@@ -114,32 +114,39 @@ bool SMTPAsyncSession::useHeloIPEnabled()
     return mSession->useHeloIPEnabled();
 }
 
-SMTPOperation * sendMessage(Address * from, Array * recipients, Data * messageData)
+void SMTPAsyncSession::runOperation(SMTPOperation * operation)
 {
-#if 0
+    mQueue->addOperation(operation);
+}
+
+SMTPSession * SMTPAsyncSession::SMTPAsyncSession::session()
+{
+    return mSession;
+}
+
+SMTPOperation * SMTPAsyncSession::sendMessageOperationWithFromAndRecipient(Address * from, Array * recipients, Data * messageData)
+{
     SMTPSendWithRecipientOperation * op = new SMTPSendWithRecipientOperation();
+    op->setSession(this);
     op->setFrom(from);
     op->setRecipients(recipients);
-    op->messageData(messageData);
+    op->setMessageData(messageData);
     return (SMTPOperation *) op->autorelease();
-#endif
-    return NULL;
 }
 
-SMTPOperation * sendMessage(Data * messageData)
+SMTPOperation * SMTPAsyncSession::sendMessageOperation(Data * messageData)
 {
-#if 0
     SMTPSendWithDataOperation * op = new SMTPSendWithDataOperation();
-    op->setData(messageData);
+    op->setSession(this);
+    op->setMessageData(messageData);
     return (SMTPOperation *) op->autorelease();
-#endif
-    return NULL;
 }
 
-SMTPOperation * sendMessage(MessageBuilder * msg)
+SMTPOperation * SMTPAsyncSession::sendMessageOperation(MessageBuilder * msg)
 {
 #if 0
     SMTPSendWithBuilderOperation * op = new SMTPSendWithBuilderOperation();
+    op->setSession(this);
     op->setBuilder(msg);
     return (SMTPOperation *) op->autorelease();
 #endif

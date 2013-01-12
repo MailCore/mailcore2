@@ -34,8 +34,6 @@ namespace mailcore {
 		SMTPAsyncSession();
 		virtual ~SMTPAsyncSession();
 		
-		virtual String * className();
-		
 		virtual void setHostname(String * hostname);
 		virtual String * hostname();
 
@@ -63,9 +61,14 @@ namespace mailcore {
 		virtual void setUseHeloIPEnabled(bool enabled);
 		virtual bool useHeloIPEnabled();
 		
-		virtual SMTPOperation * sendMessage(Address * from, Array * recipients, Data * messageData);
-		virtual SMTPOperation * sendMessage(Data * messageData);
-		virtual SMTPOperation * sendMessage(MessageBuilder * msg);
+		virtual SMTPOperation * sendMessageOperationWithFromAndRecipient(Address * from, Array * recipients, Data * messageData);
+		virtual SMTPOperation * sendMessageOperation(Data * messageData);
+		virtual SMTPOperation * sendMessageOperation(MessageBuilder * msg);
+        
+        
+        // private
+        virtual void runOperation(SMTPOperation * operation);
+        virtual SMTPSession * session();
 	};
 	
 }

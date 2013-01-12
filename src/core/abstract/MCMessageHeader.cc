@@ -769,7 +769,7 @@ struct mailimf_fields * MessageHeader::createIMFFieldsAndFilterBcc(bool filterBc
 	
 	imfDate = NULL;
 	if (date() != (time_t) -1) {
-		MCLog("%lu", date());
+		//MCLog("%lu", date());
 		imfDate = get_date_from_timestamp(date());
 	}
 	imfFrom = NULL;

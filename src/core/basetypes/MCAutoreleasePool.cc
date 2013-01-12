@@ -54,6 +54,9 @@ void AutoreleasePool::destroyAutoreleasePoolStack(void *)
 {
     init();
     carray * stack = (carray *) pthread_getspecific(autoreleasePoolStackKey);
+    if (stack == NULL)
+        return;
+    
     if (carray_count(stack) != 0) {
         MCLog("some autoreleasepool have not been released\n");
     }

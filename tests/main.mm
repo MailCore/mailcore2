@@ -137,25 +137,13 @@ static void testPOP()
     session->release();
 }
 
-void testAll()
+static void testOperationQueue()
 {
-    u_setDataDirectory("/usr/local/share/icu");
-    
-    mailcore::AutoreleasePool * pool = new mailcore::AutoreleasePool();
-    
-    mailstream_debug = 1;
-    
-    mailcore::Data * data = testMessageBuilder();
-    testMessageParser(data);
-    testSMTP(data);
-    testIMAP();
-    testPOP();
-    
     mailcore::OperationQueue * queue = new mailcore::OperationQueue();
     
 	TestCallback * callback = new TestCallback();
 	
-    for(unsigned int i = 0 ; i < 1 ; i ++) {
+    for(unsigned int i = 0 ; i < 100 ; i ++) {
         mailcore::Operation * op = new TestOperation();
 		op->setCallback(callback);
         queue->addOperation(op);
@@ -165,6 +153,56 @@ void testAll()
     [[NSRunLoop currentRunLoop] run];
     
     queue->release();
+}
+
+class TestSMTPCallback : public mailcore::Object, public mailcore::OperationCallback, public mailcore::SMTPOperationCallback {
+	virtual void operationFinished(mailcore::Operation * op)
+	{
+		MCLog("callback %s %s", MCUTF8DESC(op), MCUTF8DESC(this));
+	}
+    
+    virtual void bodyProgress(mailcore::SMTPOperation * op, unsigned int current, unsigned int maximum)
+    {
+		MCLog("progress %s %s %i/%i", MCUTF8DESC(op), MCUTF8DESC(this), current, maximum);
+    }
+};
+
+static void testAsyncSMTP(mailcore::Data * data)
+{
+    mailcore::SMTPAsyncSession * smtp;
+    TestSMTPCallback * callback = new TestSMTPCallback();
+    
+    smtp = new mailcore::SMTPAsyncSession();
+    
+    smtp->setHostname(MCSTR("smtp.gmail.com"));
+    smtp->setPort(25);
+    smtp->setUsername(email);
+    smtp->setPassword(password);
+    smtp->setConnectionType(mailcore::ConnectionTypeStartTLS);
+    
+    mailcore::SMTPOperation * op = smtp->sendMessageOperation(data);
+    op->setSmtpCallback(callback);
+    op->start();
+    
+    [[NSRunLoop currentRunLoop] run];
+    
+    //smtp->release();
+}
+
+void testAll()
+{
+    u_setDataDirectory("/usr/local/share/icu");
+    
+    mailcore::AutoreleasePool * pool = new mailcore::AutoreleasePool();
+    
+    mailstream_debug = 1;
+    
+    mailcore::Data * data = testMessageBuilder();
+    //testMessageParser(data);
+    //testSMTP(data);
+    //testIMAP();
+    //testPOP();
+    testAsyncSMTP(data);
     
     MCLog("pool release");
     pool->release();
