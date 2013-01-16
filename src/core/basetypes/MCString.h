@@ -34,7 +34,6 @@ namespace mailcore {
 		String(const char * bytes, unsigned int length, const char * charset = NULL);
 		virtual ~String();
 		
-		//virtual String * className();
 		virtual String * description();
 		virtual Object * copy();
 		virtual bool isEqual(Object * otherObject);

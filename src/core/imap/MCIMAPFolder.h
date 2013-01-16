@@ -18,7 +18,6 @@ namespace mailcore {
 		IMAPFolder(IMAPFolder * other);
 		virtual ~IMAPFolder();
 		
-		//virtual String * className();
 		virtual Object * copy();
 		
 		virtual void setPath(String * path);

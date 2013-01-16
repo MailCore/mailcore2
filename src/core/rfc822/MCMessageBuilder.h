@@ -25,7 +25,6 @@ namespace mailcore {
 		virtual ~MessageBuilder();
 		
 		virtual String * description();
-		//virtual String * className();
 		virtual Object * copy();
 		
 		virtual void setHTMLBody(String * htmlBody);

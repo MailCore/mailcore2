@@ -13,7 +13,6 @@ namespace mailcore {
 		Multipart(Multipart * other);
 		virtual ~Multipart();
 		
-		//virtual String * className();
 		virtual Object * copy();
 	};
 }

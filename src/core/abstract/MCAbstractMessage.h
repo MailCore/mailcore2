@@ -18,7 +18,6 @@ namespace mailcore {
 		virtual ~AbstractMessage();
 
 		virtual String * description();
-		//virtual String * className();
 		virtual Object * copy();
 
 		virtual MessageHeader * header();

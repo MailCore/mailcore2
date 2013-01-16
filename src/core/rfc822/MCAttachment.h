@@ -33,7 +33,6 @@ namespace mailcore {
 		virtual ~Attachment();
 		
 		virtual String * description();
-		//virtual String * className();
 		virtual Object * copy();
 		
 		virtual void setData(Data * data);

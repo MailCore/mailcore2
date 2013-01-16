@@ -1197,7 +1197,7 @@ void IMAPSession::copyMessages(String * folder, Array * uidSet, String * destFol
             mailimap_set_free(dest_uid);
         }
     }
-    * pDestUIDs = (Array *) uidSetResult->retain()->autorelease();
+    * pDestUIDs = (Array *) uidSetResult->autorelease();
     * pError = ErrorNone;
 
     release:
@@ -1929,8 +1929,7 @@ Data * IMAPSession::fetchMessageByUID(String * folder, uint32_t uid,
 }
 
 Data * IMAPSession::fetchMessageAttachmentByUID(String * folder, uint32_t uid, String * partID,
-    Encoding encoding, unsigned int expectedSize,
-	IMAPProgressCallback * progressCallback, ErrorCode * pError)
+    Encoding encoding, IMAPProgressCallback * progressCallback, ErrorCode * pError)
 {
 	struct mailimap_fetch_type * fetch_type;
     struct mailimap_fetch_att * fetch_att;
@@ -1949,7 +1948,7 @@ Data * IMAPSession::fetchMessageAttachmentByUID(String * folder, uint32_t uid, S
 	
     mProgressItemsCount = 0;
     mProgressCallback = progressCallback;
-    bodyProgress(0, expectedSize);
+    bodyProgress(0, 0);
     
     partIDArray = partID->componentsSeparatedByString(MCSTR("."));
 	sec_list = clist_new();
@@ -1970,7 +1969,6 @@ Data * IMAPSession::fetchMessageAttachmentByUID(String * folder, uint32_t uid, S
 	r = fetch_imap(mImap, uid, fetch_type, &text, &text_length);
 	mailimap_fetch_type_free(fetch_type);
 	
-    bodyProgress(expectedSize, expectedSize);
     mProgressCallback = NULL;
     
     MCLog("had error : %i", r);
@@ -2299,8 +2297,9 @@ void IMAPSession::bodyProgress(unsigned int current, unsigned int maximum)
 
 void IMAPSession::itemsProgress(unsigned int current, unsigned int maximum)
 {
+    mProgressItemsCount ++;
     if (mProgressCallback != NULL) {
-        mProgressCallback->itemsProgress(this, current, maximum);
+        mProgressCallback->itemsProgress(this, mProgressItemsCount, maximum);
     }
 }
 

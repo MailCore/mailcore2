@@ -14,7 +14,6 @@ namespace mailcore {
 		IMAPMessagePart(IMAPMessagePart * other);
 		virtual ~IMAPMessagePart();
 		
-		//virtual String * className();
 		virtual Object * copy();
 	};
 }

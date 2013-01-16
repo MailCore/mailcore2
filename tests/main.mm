@@ -190,6 +190,50 @@ static void testAsyncSMTP(mailcore::Data * data)
     //smtp->release();
 }
 
+class TestIMAPCallback : public mailcore::Object, public mailcore::OperationCallback, public mailcore::IMAPOperationCallback {
+	virtual void operationFinished(mailcore::Operation * op)
+	{
+        mailcore::IMAPFetchMessagesOperation * fetchOp = (mailcore::IMAPFetchMessagesOperation *) op;
+		//MCLog("callback %s %s %s", MCUTF8DESC(op), MCUTF8DESC(fetchOp->messages()), MCUTF8DESC(this));
+	}
+    
+    virtual void bodyProgress(mailcore::IMAPOperation * op, unsigned int current, unsigned int maximum)
+    {
+		MCLog("progress %s %s %i/%i", MCUTF8DESC(op), MCUTF8DESC(this), current, maximum);
+    }
+    
+    virtual void itemProgress(mailcore::IMAPOperation * op, unsigned int current, unsigned int maximum)
+    {
+		MCLog("item progress %s %s %i/%i", MCUTF8DESC(op), MCUTF8DESC(this), current, maximum);
+    }
+};
+
+static void testAsyncIMAP()
+{
+    mailcore::IMAPAsyncSession * session;
+    TestIMAPCallback * callback = new TestIMAPCallback();
+    
+    session = new mailcore::IMAPAsyncSession();
+    session->setHostname(MCSTR("imap.gmail.com"));
+    session->setPort(993);
+    session->setUsername(email);
+    session->setPassword(password);
+    session->setConnectionType(mailcore::ConnectionTypeTLS);
+    
+    mailcore::IMAPMessagesRequestKind requestKind = (mailcore::IMAPMessagesRequestKind)
+    (mailcore::IMAPMessagesRequestKindHeaders | mailcore::IMAPMessagesRequestKindStructure |
+     mailcore::IMAPMessagesRequestKindInternalDate | mailcore::IMAPMessagesRequestKindHeaderSubject |
+     mailcore::IMAPMessagesRequestKindFlags);
+    mailcore::IMAPFetchMessagesOperation * op = session->fetchMessagesByUIDOperation(MCSTR("INBOX"), requestKind, 1, 0);
+    op->setCallback(callback);
+    op->setImapCallback(callback);
+    op->start();
+    //MCLog("%s", MCUTF8DESC(messages));
+    [[NSRunLoop currentRunLoop] run];
+    
+    //session->release();
+}
+
 void testAll()
 {
     u_setDataDirectory("/usr/local/share/icu");
@@ -203,7 +247,8 @@ void testAll()
     //testSMTP(data);
     //testIMAP();
     //testPOP();
-    testAsyncSMTP(data);
+    //testAsyncSMTP(data);
+    testAsyncIMAP();
     
     MCLog("pool release");
     pool->release();

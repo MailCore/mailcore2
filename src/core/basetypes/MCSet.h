@@ -22,7 +22,6 @@ namespace mailcore {
 		static Set * set();
 		static Set * setWithArray(Array * objects);
 
-		//virtual String * className();
 		virtual String * description();
 		virtual Object * copy();
 		

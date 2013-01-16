@@ -22,7 +22,6 @@ namespace mailcore {
 		IMAPMessage(IMAPMessage * other);
 		~IMAPMessage();
 		
-		//virtual String * className();
 		virtual Object * copy();
 		virtual String * description();
 

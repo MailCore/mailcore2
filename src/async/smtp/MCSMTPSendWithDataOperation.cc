@@ -36,7 +36,6 @@ Data * SMTPSendWithDataOperation::messageData()
 void SMTPSendWithDataOperation::main()
 {
     ErrorCode error;
-    
     session()->session()->sendMessage(mMessageData, this, &error);
     setError(error);
 }

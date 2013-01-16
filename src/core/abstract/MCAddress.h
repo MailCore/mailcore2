@@ -24,7 +24,6 @@ namespace mailcore {
 		static Address * addressWithNonEncodedRFC822String(String * nonEncodedRFC822String);
 
 		virtual String * description();
-		//virtual String * className();
 
 		virtual bool isEqual(Object * otherObject);
 		virtual unsigned int hash();

@@ -16,7 +16,6 @@ namespace mailcore {
 		IMAPNamespaceItem(IMAPNamespaceItem * other);
 		virtual ~IMAPNamespaceItem();
 		
-		//virtual String * className();
 		virtual String * description();
 		virtual Object * copy();
 		

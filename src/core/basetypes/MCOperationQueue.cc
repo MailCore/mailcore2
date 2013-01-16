@@ -6,6 +6,7 @@
 #include "MCUtils.h"
 #include "MCArray.h"
 #include "MCLog.h"
+#include "MCAutoreleasePool.h"
 #include <libetpan/libetpan.h>
 
 using namespace mailcore;
@@ -65,6 +66,8 @@ void OperationQueue::runOperations()
         Operation * op = NULL;
         bool needsCheckRunning = false;
 
+        AutoreleasePool * pool = new AutoreleasePool();
+        
         //int value = 0;
         //int r;
         
@@ -84,6 +87,7 @@ void OperationQueue::runOperations()
         if (op == NULL) {
             //sem_post(&mStopSem);
             mailsem_up(mStopSem);
+            pool->release();
             break;
         }
 
@@ -108,6 +112,8 @@ void OperationQueue::runOperations()
             retain(); // (1)
             performMethodOnMainThread((Object::Method) &OperationQueue::checkRunningOnMainThread, this);
         }
+        
+        pool->release();
     }
     MCLog("cleanup thread");
 }

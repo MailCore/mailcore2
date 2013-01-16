@@ -19,7 +19,6 @@ namespace mailcore {
 		POPMessageInfo(POPMessageInfo * other);
 		virtual ~POPMessageInfo();
 		
-		//virtual String * className();
 		virtual String * description();
 		virtual Object * copy();
 		

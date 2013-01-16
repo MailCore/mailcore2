@@ -42,8 +42,6 @@ namespace mailcore {
 		POPSession();
 		virtual ~POPSession();
 		
-		//virtual String * className();
-		
 		virtual void setHostname(String * hostname);
 		virtual String * hostname();
 

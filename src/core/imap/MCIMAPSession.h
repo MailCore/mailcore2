@@ -66,8 +66,6 @@ namespace mailcore {
 		IMAPSession();
 		virtual ~IMAPSession();
 		
-		//virtual String * className();
-		
 		virtual void setHostname(String * hostname);
 		virtual String * hostname();
 
@@ -95,9 +93,11 @@ namespace mailcore {
 		virtual void setVoIPEnabled(bool enabled);
 		virtual bool isVoIPEnabled();
 
+        // Needed for fetchSubscribedFolders() and fetchAllFolders().
 		virtual void setDelimiter(char delimiter);
 		virtual char delimiter();
 
+        // Needed for fetchSubscribedFolders() and fetchAllFolders().
 		virtual void setDefaultNamespace(IMAPNamespace * ns);
 		virtual IMAPNamespace * defaultNamespace();
 
@@ -126,14 +126,13 @@ namespace mailcore {
 		virtual Array * fetchMessagesByNumber(String * folder, IMAPMessagesRequestKind requestKind,
 			uint32_t firstNumber, uint32_t lastNumber, IMAPProgressCallback * progressCallback, ErrorCode * pError);
 		virtual Array * fetchMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
-			Array * numbers, IMAPProgressCallback * progressCallback, ErrorCode * pError);
+			Array * uids, IMAPProgressCallback * progressCallback, ErrorCode * pError);
 		virtual Array * fetchMessagesByNumber(String * folder, IMAPMessagesRequestKind requestKind,
 			Array * numbers, IMAPProgressCallback * progressCallback, ErrorCode * pError);
 		virtual Data * fetchMessageByUID(String * folder, uint32_t uid,
 			IMAPProgressCallback * progressCallback, ErrorCode * pError);
 		virtual Data * fetchMessageAttachmentByUID(String * folder, uint32_t uid, String * partID,
-		    Encoding encoding, unsigned int expectedSize,
-			IMAPProgressCallback * progressCallback, ErrorCode * pError);
+		    Encoding encoding, IMAPProgressCallback * progressCallback, ErrorCode * pError);
 		virtual HashMap * fetchMessageNumberUIDMapping(String * folder, uint32_t fromUID, uint32_t toUID,
 			ErrorCode * pError);
 		

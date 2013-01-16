@@ -38,7 +38,6 @@ namespace mailcore {
 		virtual ~Value();
 
 		virtual String * description();
-		//virtual String * className();
 		
 		virtual bool isEqual(Object * otherObject);
 		virtual unsigned int hash();

@@ -19,7 +19,6 @@ namespace mailcore {
 		virtual ~AbstractMultipart();
 		
 		virtual String * description();
-		//virtual String * className();
 		virtual Object * copy();
 		
 		virtual Array * parts();

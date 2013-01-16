@@ -7,7 +7,7 @@
 
 namespace mailcore {
 
-	class IMAPSearchExpression : Object {
+	class IMAPSearchExpression : public Object {
 	private:
 		IMAPSearchKind mKind;
 		String * mHeader;
@@ -22,7 +22,6 @@ namespace mailcore {
 		virtual ~IMAPSearchExpression();
 		
 		virtual String * description();
-		//virtual String * className();
 		virtual Object * copy();
 		
 		virtual IMAPSearchKind kind();

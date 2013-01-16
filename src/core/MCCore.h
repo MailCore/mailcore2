@@ -15,5 +15,6 @@
 #include <mailcore/MCPOP.h>
 #include <mailcore/MCRFC822.h>
 #include <mailcore/MCSMTP.h>
+#include <mailcore/MCAsyncIMAP.h>
 
 #endif

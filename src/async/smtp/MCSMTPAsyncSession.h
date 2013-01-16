@@ -15,16 +15,6 @@ namespace mailcore {
 
 	class SMTPAsyncSession : public Object {
 	private:
-		String * mHostname;
-		unsigned int mPort;
-		String * mUsername;
-		String * mPassword;
-		AuthType mAuthType;
-		ConnectionType mConnectionType;
-		time_t mTimeout;
-		bool mCheckCertificateEnabled;
-		bool mUseHeloIPEnabled;
-		
 		SMTPSession * mSession;
 		OperationQueue * mQueue;
 		
@@ -61,9 +51,7 @@ namespace mailcore {
 		virtual void setUseHeloIPEnabled(bool enabled);
 		virtual bool useHeloIPEnabled();
 		
-		virtual SMTPOperation * sendMessageOperationWithFromAndRecipient(Address * from, Array * recipients, Data * messageData);
 		virtual SMTPOperation * sendMessageOperation(Data * messageData);
-		virtual SMTPOperation * sendMessageOperation(MessageBuilder * msg);
         virtual SMTPOperation * checkAccountOperation(Address * from);
         
         // private

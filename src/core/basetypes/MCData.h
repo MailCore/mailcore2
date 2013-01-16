@@ -26,7 +26,6 @@ namespace mailcore {
 		Data(const char * bytes, unsigned int length);
 		virtual ~Data();
 		
-		//virtual String * className();
 		virtual String * description();
 		virtual Object * copy();
 		virtual bool isEqual(Object * otherObject);

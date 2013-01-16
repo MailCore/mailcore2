@@ -27,7 +27,6 @@ namespace mailcore {
 		
 		static HashMap * hashMap();
 
-		//virtual String * className();
 		virtual String * description();
 		virtual Object * copy();
 		

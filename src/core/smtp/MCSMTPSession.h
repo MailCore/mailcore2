@@ -41,11 +41,13 @@ namespace mailcore {
 		void loginIfNeeded(ErrorCode * pError);
 		bool checkCertificate();
 		
+		void sendMessage(Address * from, Array * recipients, Data * messageData,
+                         SMTPProgressCallback * callback, ErrorCode * pError);
+		void sendMessage(MessageBuilder * msg, SMTPProgressCallback * callback, ErrorCode * pError);
+        
 	public:
 		SMTPSession();
 		virtual ~SMTPSession();
-		
-		//virtual String * className();
 		
 		virtual void setHostname(String * hostname);
 		virtual String * hostname();
@@ -81,10 +83,7 @@ namespace mailcore {
 		
         virtual void checkAccount(Address * from, ErrorCode * pError);
         
-		virtual void sendMessage(Address * from, Array * recipients, Data * messageData,
-			SMTPProgressCallback * callback, ErrorCode * pError);
 		virtual void sendMessage(Data * messageData, SMTPProgressCallback * callback, ErrorCode * pError);
-		virtual void sendMessage(MessageBuilder * msg, SMTPProgressCallback * callback, ErrorCode * pError);
 	};
 	
 }

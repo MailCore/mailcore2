@@ -14,7 +14,6 @@ namespace mailcore {
 		IMAPMultipart(IMAPMultipart * other);
 		virtual ~IMAPMultipart();
 		
-		//virtual String * className();
 		virtual Object * copy();
 	};
 }

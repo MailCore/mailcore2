@@ -1,9 +1,9 @@
 #include "MCSMTPAsyncSession.h"
 
 #include "MCSMTPSession.h"
-#include "MCSMTPSendWithRecipientOperation.h"
+//#include "MCSMTPSendWithRecipientOperation.h"
 #include "MCSMTPSendWithDataOperation.h"
-#include "MCSMTPSendWithBuilderOperation.h"
+//#include "MCSMTPSendWithBuilderOperation.h"
 #include "MCSMTPCheckAccountOperation.h"
 #include "MCSMTPOperation.h"
 
@@ -17,10 +17,6 @@ SMTPAsyncSession::SMTPAsyncSession()
 
 SMTPAsyncSession::~SMTPAsyncSession()
 {
-    MC_SAFE_RELEASE(mHostname);
-    MC_SAFE_RELEASE(mUsername);
-    MC_SAFE_RELEASE(mPassword);
-    
     MC_SAFE_RELEASE(mQueue);
     MC_SAFE_RELEASE(mSession);
 }
@@ -121,11 +117,12 @@ void SMTPAsyncSession::runOperation(SMTPOperation * operation)
     mQueue->addOperation(operation);
 }
 
-SMTPSession * SMTPAsyncSession::SMTPAsyncSession::session()
+SMTPSession * SMTPAsyncSession::session()
 {
     return mSession;
 }
 
+#if 0
 SMTPOperation * SMTPAsyncSession::sendMessageOperationWithFromAndRecipient(Address * from, Array * recipients, Data * messageData)
 {
     SMTPSendWithRecipientOperation * op = new SMTPSendWithRecipientOperation();
@@ -135,6 +132,7 @@ SMTPOperation * SMTPAsyncSession::sendMessageOperationWithFromAndRecipient(Addre
     op->setMessageData(messageData);
     return (SMTPOperation *) op->autorelease();
 }
+#endif
 
 SMTPOperation * SMTPAsyncSession::sendMessageOperation(Data * messageData)
 {
@@ -144,6 +142,7 @@ SMTPOperation * SMTPAsyncSession::sendMessageOperation(Data * messageData)
     return (SMTPOperation *) op->autorelease();
 }
 
+#if 0
 SMTPOperation * SMTPAsyncSession::sendMessageOperation(MessageBuilder * msg)
 {
     SMTPSendWithBuilderOperation * op = new SMTPSendWithBuilderOperation();
@@ -151,6 +150,7 @@ SMTPOperation * SMTPAsyncSession::sendMessageOperation(MessageBuilder * msg)
     op->setBuilder(msg);
     return (SMTPOperation *) op->autorelease();
 }
+#endif
 
 SMTPOperation * SMTPAsyncSession::checkAccountOperation(Address * from)
 {

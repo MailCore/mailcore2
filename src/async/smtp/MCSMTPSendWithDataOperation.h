@@ -16,8 +16,8 @@
 namespace mailcore {
 
     class SMTPSendWithDataOperation : public SMTPOperation {
-        Data * mMessageData;
     private:
+        Data * mMessageData;
         
     public:
         SMTPSendWithDataOperation();

@@ -32,7 +32,6 @@ namespace mailcore {
 		virtual ~MessageHeader();
 		
 		virtual String * description();
-		//virtual String * className();
 		virtual Object * copy();
 		
 		virtual void setMessageID(String * messageID);

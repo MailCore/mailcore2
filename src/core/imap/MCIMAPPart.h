@@ -34,7 +34,6 @@ namespace mailcore {
 		IMAPPart(IMAPPart * other);
 		virtual ~IMAPPart();
 
-		//virtual String * className();
 		virtual Object * copy();
 		
 		virtual void setPartID(String * partID);
