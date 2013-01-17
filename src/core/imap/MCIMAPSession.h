@@ -30,6 +30,7 @@ namespace mailcore {
 		char mDelimiter;
 		IMAPNamespace * mDefaultNamespace;
 		
+        bool mBodyProgressEnabled;
 		bool mIdleEnabled;
 		bool mXListEnabled;
 		String * mWelcomeString;
@@ -72,7 +73,7 @@ namespace mailcore {
 		virtual void setPort(unsigned int port);
 		virtual unsigned int port();
 
-		virtual void setUsername(String * login);
+		virtual void setUsername(String * username);
 		virtual String * username();
 
 		virtual void setPassword(String * password);

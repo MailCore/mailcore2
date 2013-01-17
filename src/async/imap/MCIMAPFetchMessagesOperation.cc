@@ -110,28 +110,22 @@ Array * IMAPFetchMessagesOperation::messages()
 void IMAPFetchMessagesOperation::main()
 {
     ErrorCode error;
-    MCLog("1");
     if (mFetchByUidEnabled) {
-        MCLog("2");
         if (mUids != NULL) {
-            MCLog("3");
             mMessages = session()->session()->fetchMessagesByUID(mFolder, mKind, mUids, this, &error);
         }
         else {
-            MCLog("4");
             mMessages = session()->session()->fetchMessagesByUID(mFolder, mKind, mFirst, mLast, this, &error);
         }
     }
     else {
-        MCLog("5");
         if (mNumbers != NULL) {
-            MCLog("6");
             mMessages = session()->session()->fetchMessagesByNumber(mFolder, mKind, mNumbers, this, &error);
         }
         else {
-            MCLog("7");
             mMessages = session()->session()->fetchMessagesByNumber(mFolder, mKind, mFirst, mLast, this, &error);
         }
     }
+    MC_SAFE_RETAIN(mMessages);
     setError(error);
 }

@@ -20,6 +20,7 @@ IMAPSearchOperation::IMAPSearchOperation()
     mKind = IMAPSearchKindNone;
     mSearchString = NULL;
     mExpression = NULL;
+    mUids = NULL;
 }
 
 IMAPSearchOperation::~IMAPSearchOperation()
@@ -27,6 +28,7 @@ IMAPSearchOperation::~IMAPSearchOperation()
     MC_SAFE_RELEASE(mFolder);
     MC_SAFE_RELEASE(mSearchString);
     MC_SAFE_RELEASE(mExpression);
+    MC_SAFE_RELEASE(mUids);
 }
 
 void IMAPSearchOperation::setFolder(String * folder)
@@ -69,15 +71,21 @@ IMAPSearchExpression * IMAPSearchOperation::searchExpression()
     return mExpression;
 }
 
+Array * IMAPSearchOperation::uids()
+{
+    return mUids;
+}
+
 void IMAPSearchOperation::main()
 {
     ErrorCode error;
     if (mExpression != NULL) {
-        session()->session()->search(mFolder, mExpression, &error);
+        mUids = session()->session()->search(mFolder, mExpression, &error);
     }
     else {
-        session()->session()->search(mFolder, mKind, mSearchString, &error);
+        mUids = session()->session()->search(mFolder, mKind, mSearchString, &error);
     }
+    MC_SAFE_RETAIN(mUids);
     setError(error);
 }
 

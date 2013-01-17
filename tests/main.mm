@@ -234,6 +234,42 @@ static void testAsyncIMAP()
     //session->release();
 }
 
+class TestPOPCallback : public mailcore::Object, public mailcore::OperationCallback, public mailcore::POPOperationCallback {
+	virtual void operationFinished(mailcore::Operation * op)
+	{
+        mailcore::POPFetchMessagesOperation * fetchOp = (mailcore::POPFetchMessagesOperation *) op;
+		MCLog("callback %s %s", MCUTF8DESC(fetchOp->messages()), MCUTF8DESC(this));
+	}
+    
+    virtual void bodyProgress(mailcore::IMAPOperation * op, unsigned int current, unsigned int maximum)
+    {
+		MCLog("progress %s %s %i/%i", MCUTF8DESC(op), MCUTF8DESC(this), current, maximum);
+    }
+};
+
+static void testAsyncPOP()
+{
+    mailcore::POPAsyncSession * session;
+    TestPOPCallback * callback = new TestPOPCallback();
+    
+    session = new mailcore::POPAsyncSession();
+    session->setHostname(MCSTR("pop.gmail.com"));
+    session->setPort(995);
+    session->setUsername(email);
+    session->setPassword(password);
+    session->setConnectionType(mailcore::ConnectionTypeTLS);
+    
+    mailcore::POPFetchMessagesOperation * op = session->fetchMessagesOperation();
+    op->setCallback(callback);
+    op->setPopCallback(callback);
+    op->start();
+    
+    //mailcore::Array * messages = session->fetchMessages(&error);
+    //MCLog("%s", MCUTF8DESC(messages));
+    
+    [[NSRunLoop currentRunLoop] run];
+}
+
 void testAll()
 {
     u_setDataDirectory("/usr/local/share/icu");
@@ -242,13 +278,14 @@ void testAll()
     
     mailstream_debug = 1;
     
-    mailcore::Data * data = testMessageBuilder();
+    //mailcore::Data * data = testMessageBuilder();
     //testMessageParser(data);
     //testSMTP(data);
     //testIMAP();
     //testPOP();
     //testAsyncSMTP(data);
-    testAsyncIMAP();
+    //testAsyncIMAP();
+    testAsyncPOP();
     
     MCLog("pool release");
     pool->release();

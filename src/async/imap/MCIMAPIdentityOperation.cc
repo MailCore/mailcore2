@@ -68,6 +68,7 @@ void IMAPIdentityOperation::main()
 {
     ErrorCode error;
     mServerIdentity = session()->session()->identity(mVendor, mName, mVersion, &error);
+    MC_SAFE_RETAIN(mServerIdentity);
     setError(error);
 }
 

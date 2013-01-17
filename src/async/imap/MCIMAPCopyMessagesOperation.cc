@@ -68,8 +68,6 @@ void IMAPCopyMessagesOperation::main()
 {
     ErrorCode error;
     session()->session()->copyMessages(mFolder, mUids, mDestFolder, &mDestUids, &error);
-    if (mDestUids != NULL) {
-        mDestUids->retain();
-    }
+    MC_SAFE_RETAIN(mDestUids);
     setError(error);
 }

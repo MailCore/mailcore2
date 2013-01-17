@@ -55,6 +55,7 @@ void IMAPFolderInfoOperation::main()
 {
     ErrorCode error;
     session()->session()->select(mFolder, &error);
+#warning set results
     setError(error);
 }
 

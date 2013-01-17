@@ -281,6 +281,7 @@ void IMAPSession::init()
     mVoIPEnabled = true;
 	mDelimiter = 0;
 	
+    mBodyProgressEnabled = true;
     mIdleEnabled = false;
 	mXListEnabled = false;
     mWelcomeString = NULL;
@@ -1718,11 +1719,15 @@ Array * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequestKind requ
     
     mailimap_set_msg_att_handler(mImap, msg_att_handler, &msg_att_data);
     
+    mBodyProgressEnabled = false;
+    
     if (fetchByUID) {
         r = mailimap_uid_fetch(mImap, imapset, fetch_type, &fetch_result);
     } else {
         r = mailimap_fetch(mImap, imapset, fetch_type, &fetch_result);    
     }
+    
+    mBodyProgressEnabled = true;
     
     mProgressCallback = NULL;
     
@@ -2290,6 +2295,9 @@ HashMap * IMAPSession::identity(String * vendor, String * name, String * version
 
 void IMAPSession::bodyProgress(unsigned int current, unsigned int maximum)
 {
+    if (!mBodyProgressEnabled)
+        return;
+    
     if (mProgressCallback != NULL) {
         mProgressCallback->bodyProgress(this, current, maximum);
     }
