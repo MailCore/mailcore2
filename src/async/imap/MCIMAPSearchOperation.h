@@ -18,7 +18,6 @@ namespace mailcore {
     
     class IMAPSearchOperation : public IMAPOperation {
     private:
-        String * mFolder;
         IMAPSearchKind mKind;
         String * mSearchString;
         IMAPSearchExpression * mExpression;
@@ -27,9 +26,6 @@ namespace mailcore {
     public:
         IMAPSearchOperation();
         virtual ~IMAPSearchOperation();
-        
-        virtual void setFolder(String * folder);
-        virtual String * folder();
         
         virtual void setSearchKind(IMAPSearchKind kind);
         virtual IMAPSearchKind searchKind();

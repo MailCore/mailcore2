@@ -15,15 +15,11 @@ namespace mailcore {
     
     class IMAPSubscribeFolderOperation : public IMAPOperation {
     private:
-        String * mFolder;
         bool mUnsubscribeEnabled;
         
     public:
         IMAPSubscribeFolderOperation();
         virtual ~IMAPSubscribeFolderOperation();
-        
-        virtual void setFolder(String * folder);
-        virtual String * folder();
         
         virtual void setUnsubscribeEnabled(bool enabled);
         virtual bool isUnsubscribeEnabled();

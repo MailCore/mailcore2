@@ -15,7 +15,6 @@ namespace mailcore {
     
     class IMAPFetchMessagesOperation : public IMAPOperation {
     private:
-        String * mFolder;
         bool mFetchByUidEnabled;
         uint32_t mFirst;
         uint32_t mLast;
@@ -27,9 +26,6 @@ namespace mailcore {
     public:
         IMAPFetchMessagesOperation();
         virtual ~IMAPFetchMessagesOperation();
-        
-        virtual void setFolder(String * folder);
-        virtual String * folder();
         
         virtual void setFetchByUidEnabled(bool enabled);
         virtual bool isFetchByUidEnabled();

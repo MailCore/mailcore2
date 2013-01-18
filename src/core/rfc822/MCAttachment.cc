@@ -12,7 +12,7 @@ using namespace mailcore;
 
 String * Attachment::mimeTypeForFilename(String * filename)
 {
-    // TODO: read from a file
+#warning read from a file
     String * ext;
     
     ext = filename->pathExtension()->lowercaseString();

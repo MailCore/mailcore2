@@ -15,15 +15,11 @@ namespace mailcore {
     
     class IMAPRenameFolderOperation : public IMAPOperation {
     private:
-        String * mFolder;
         String * mOtherName;
         
     public:
         IMAPRenameFolderOperation();
         ~IMAPRenameFolderOperation();
-        
-        virtual void setFolder(String * folder);
-        virtual String * folder();
         
         virtual void setOtherName(String * otherName);
         virtual String * otherName();

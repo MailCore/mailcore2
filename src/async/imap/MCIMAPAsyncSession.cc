@@ -323,7 +323,7 @@ IMAPFetchContentOperation * IMAPAsyncSession::fetchMessageByUIDOperation(String 
 }
 
 IMAPFetchContentOperation * IMAPAsyncSession::fetchMessageAttachmentByUIDOperation(String * folder, uint32_t uid, String * partID,
-                                                                                   Encoding encoding, unsigned int expectedSize)
+                                                                                   Encoding encoding)
 {
     IMAPFetchContentOperation * op = new IMAPFetchContentOperation();
     op->setSession(this);
@@ -422,8 +422,24 @@ IMAPSession * IMAPAsyncSession::session()
     return mSession;
 }
 
+unsigned int IMAPAsyncSession::operationsCount()
+{
+    return mQueue->count();
+}
+
 void IMAPAsyncSession::runOperation(IMAPOperation * operation)
 {
-    // TODO: disconnect after delay
+#warning disconnect after delay
     mQueue->addOperation(operation);
 }
+
+void IMAPAsyncSession::setLastFolder(String * folder)
+{
+    MC_SAFE_REPLACE_COPY(String, mLastFolder, folder);
+}
+
+String * IMAPAsyncSession::lastFolder()
+{
+    return mLastFolder;
+}
+

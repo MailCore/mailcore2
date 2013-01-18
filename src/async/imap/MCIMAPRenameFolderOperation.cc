@@ -15,24 +15,12 @@ using namespace mailcore;
 
 IMAPRenameFolderOperation::IMAPRenameFolderOperation()
 {
-    mFolder = NULL;
     mOtherName = NULL;
 }
 
 IMAPRenameFolderOperation::~IMAPRenameFolderOperation()
 {
-    MC_SAFE_RELEASE(mFolder);
     MC_SAFE_RELEASE(mOtherName);
-}
-
-void IMAPRenameFolderOperation::setFolder(String * folder)
-{
-    MC_SAFE_REPLACE_COPY(String, mFolder, folder);
-}
-
-String * IMAPRenameFolderOperation::folder()
-{
-    return mFolder;
 }
 
 void IMAPRenameFolderOperation::setOtherName(String * otherName)
@@ -48,7 +36,7 @@ String * IMAPRenameFolderOperation::otherName()
 void IMAPRenameFolderOperation::main()
 {
     ErrorCode error;
-    session()->session()->renameFolder(mFolder, mOtherName, &error);
+    session()->session()->renameFolder(folder(), mOtherName, &error);
     setError(error);
 }
 

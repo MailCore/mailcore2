@@ -140,7 +140,7 @@ bool SMTPSession::isCheckCertificateEnabled()
 
 bool SMTPSession::checkCertificate()
 {
-    // XXX
+#warning check certificate
     return true;
 }
 

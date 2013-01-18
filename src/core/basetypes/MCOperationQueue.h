@@ -37,6 +37,8 @@ namespace mailcore {
 		
 		virtual void addOperation(Operation * op);
 		
+        virtual unsigned int count();
+        
 		//virtual void waitUntilAllOperationsAreFinished();
 	};
 	

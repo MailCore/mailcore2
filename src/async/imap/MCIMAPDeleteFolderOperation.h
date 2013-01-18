@@ -15,14 +15,10 @@ namespace mailcore {
     
     class IMAPDeleteFolderOperation : public IMAPOperation {
     private:
-        String * mFolder;
         
     public:
         IMAPDeleteFolderOperation();
         virtual ~IMAPDeleteFolderOperation();
-        
-        virtual void setFolder(String * folder);
-        virtual String * folder();
         
         virtual void main();
     };

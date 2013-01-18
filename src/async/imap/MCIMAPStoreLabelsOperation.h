@@ -15,7 +15,6 @@ namespace mailcore {
     
     class IMAPStoreLabelsOperation : public IMAPOperation {
     private:
-        String * mFolder;
         Array * mUids;
         IMAPStoreFlagsRequestKind mKind;
         Array * mLabels;
@@ -23,9 +22,6 @@ namespace mailcore {
     public:
         IMAPStoreLabelsOperation();
         virtual ~IMAPStoreLabelsOperation();
-        
-        virtual void setFolder(String * folder);
-        virtual String * folder();
         
         virtual void setUids(Array * uids);
         virtual Array * uids();

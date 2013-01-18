@@ -15,7 +15,6 @@ using namespace mailcore;
 
 IMAPFolderInfoOperation::IMAPFolderInfoOperation()
 {
-    mFolder = NULL;
     mUidNext = 0;
     mUidValidity = 0;
     mMessageCount = 0;
@@ -23,17 +22,6 @@ IMAPFolderInfoOperation::IMAPFolderInfoOperation()
 
 IMAPFolderInfoOperation::~IMAPFolderInfoOperation()
 {
-    MC_SAFE_RELEASE(mFolder);
-}
-
-void IMAPFolderInfoOperation::setFolder(String * folder)
-{
-    MC_SAFE_REPLACE_COPY(String, mFolder, folder);
-}
-
-String * IMAPFolderInfoOperation::folder()
-{
-    return mFolder;
 }
 
 uint32_t IMAPFolderInfoOperation::uidNext()
@@ -54,8 +42,10 @@ int IMAPFolderInfoOperation::messageCount()
 void IMAPFolderInfoOperation::main()
 {
     ErrorCode error;
-    session()->session()->select(mFolder, &error);
-#warning set results
+    session()->session()->select(folder(), &error);
+    mUidNext = session()->session()->uidNext();
+    mUidValidity = session()->session()->uidValidity();
+    mMessageCount = session()->session()->lastFolderMessageCount();
     setError(error);
 }
 

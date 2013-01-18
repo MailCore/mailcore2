@@ -150,6 +150,6 @@ POPSession * POPAsyncSession::session()
 
 void POPAsyncSession::runOperation(POPOperation * operation)
 {
-    // TODO: disconnect after delay
+#warning disconnect after delay
     mQueue->addOperation(operation);
 }

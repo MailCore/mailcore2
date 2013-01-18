@@ -15,7 +15,6 @@ using namespace mailcore;
 
 IMAPStoreFlagsOperation::IMAPStoreFlagsOperation()
 {
-    mFolder = NULL;
     mUids = NULL;
     mKind = IMAPStoreFlagsRequestKindAdd;
     mFlags = MessageFlagNone;
@@ -23,18 +22,7 @@ IMAPStoreFlagsOperation::IMAPStoreFlagsOperation()
 
 IMAPStoreFlagsOperation::~IMAPStoreFlagsOperation()
 {
-    MC_SAFE_RELEASE(mFolder);
     MC_SAFE_RELEASE(mUids);
-}
-
-void IMAPStoreFlagsOperation::setFolder(String * folder)
-{
-    MC_SAFE_REPLACE_COPY(String, mFolder, folder);
-}
-
-String * IMAPStoreFlagsOperation::folder()
-{
-    return mFolder;
 }
 
 void IMAPStoreFlagsOperation::setUids(Array * uids)
@@ -70,6 +58,6 @@ MessageFlag IMAPStoreFlagsOperation::flags()
 void IMAPStoreFlagsOperation::main()
 {
     ErrorCode error;
-    session()->session()->storeFlags(mFolder, mUids, mKind, mFlags, &error);
+    session()->session()->storeFlags(folder(), mUids, mKind, mFlags, &error);
     setError(error);
 }

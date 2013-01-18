@@ -15,7 +15,6 @@ namespace mailcore {
     
     class IMAPIdleOperation : public IMAPOperation {
     private:
-        String * mFolder;
         uint32_t mLastKnownUid;
         void prepare();
         void unprepare();
@@ -23,9 +22,6 @@ namespace mailcore {
     public:
         IMAPIdleOperation();
         virtual ~IMAPIdleOperation();
-        
-        virtual void setFolder(String * folder);
-        virtual String * folder();
         
         virtual void setLastKnownUID(uint32_t uid);
         virtual uint32_t lastKnownUID();

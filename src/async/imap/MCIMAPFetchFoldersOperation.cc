@@ -17,24 +17,13 @@ using namespace mailcore;
 
 IMAPFetchFoldersOperation::IMAPFetchFoldersOperation()
 {
-    mFolder = NULL;
     mFetchSubscribedEnabled = false;
     mFolders = NULL;
 }
 
 IMAPFetchFoldersOperation::~IMAPFetchFoldersOperation()
 {
-    MC_SAFE_RELEASE(mFolder);
-}
-
-void IMAPFetchFoldersOperation::setFolder(String * folder)
-{
-    MC_SAFE_REPLACE_COPY(String, mFolder, folder);
-}
-
-String * IMAPFetchFoldersOperation::folder()
-{
-    return mFolder;
+    MC_SAFE_RELEASE(mFolders);
 }
 
 void IMAPFetchFoldersOperation::setFetchSubscribedEnabled(bool enabled)

@@ -15,7 +15,6 @@ namespace mailcore {
     
     class IMAPCopyMessagesOperation : public IMAPOperation {
     private:
-        String * mFolder;
         Array * mUids;
         String * mDestFolder;
         Array * mDestUids;
@@ -23,9 +22,6 @@ namespace mailcore {
     public:
         IMAPCopyMessagesOperation();
         virtual ~IMAPCopyMessagesOperation();
-        
-        virtual void setFolder(String * folder);
-        virtual String * folder();
         
         virtual void setDestFolder(String * destFolder);
         virtual String * destFolder();

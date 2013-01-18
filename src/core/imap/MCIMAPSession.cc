@@ -432,7 +432,7 @@ static bool hasError(int errorCode)
 
 bool IMAPSession::checkCertificate()
 {
-    // XXX
+#warning check certificate
     return true;
 }
 
@@ -2563,4 +2563,19 @@ void IMAPSession::storeLabels(String * folder, Array * uids, IMAPStoreFlagsReque
     mailimap_msg_att_xgmlabels_free(xgmlabels);
     mailimap_set_free(imap_set);
     * pError = ErrorNone;
+}
+
+uint32_t IMAPSession::uidValidity()
+{
+    return mUIDValidity;
+}
+
+uint32_t IMAPSession::uidNext()
+{
+    return mUIDNext;
+}
+
+unsigned int IMAPSession::lastFolderMessageCount()
+{
+    return mFolderMsgCount;
 }

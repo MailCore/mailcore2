@@ -15,27 +15,15 @@ using namespace mailcore;
 
 IMAPDeleteFolderOperation::IMAPDeleteFolderOperation()
 {
-    mFolder = NULL;
 }
 
 IMAPDeleteFolderOperation::~IMAPDeleteFolderOperation()
 {
-    MC_SAFE_RELEASE(mFolder);
-}
-
-void IMAPDeleteFolderOperation::setFolder(String * folder)
-{
-    MC_SAFE_REPLACE_COPY(String, mFolder, folder);
-}
-
-String * IMAPDeleteFolderOperation::folder()
-{
-    return mFolder;
 }
 
 void IMAPDeleteFolderOperation::main()
 {
     ErrorCode error;
-    session()->session()->deleteFolder(mFolder, &error);
+    session()->session()->deleteFolder(folder(), &error);
     setError(error);
 }

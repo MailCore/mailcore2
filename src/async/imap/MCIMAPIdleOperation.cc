@@ -15,23 +15,11 @@ using namespace mailcore;
 
 IMAPIdleOperation::IMAPIdleOperation()
 {
-    mFolder = NULL;
     mLastKnownUid = 0;
 }
 
 IMAPIdleOperation::~IMAPIdleOperation()
 {
-    MC_SAFE_RELEASE(mFolder);
-}
-
-void IMAPIdleOperation::setFolder(String * folder)
-{
-    MC_SAFE_REPLACE_COPY(String, mFolder, folder);
-}
-
-String * IMAPIdleOperation::folder()
-{
-    return mFolder;
 }
 
 void IMAPIdleOperation::setLastKnownUID(uint32_t uid)
@@ -59,7 +47,7 @@ void IMAPIdleOperation::main()
     performMethodOnMainThread((Object::Method) &IMAPIdleOperation::prepare, NULL);
     
     ErrorCode error;
-    session()->session()->idle(mFolder, mLastKnownUid, &error);
+    session()->session()->idle(folder(), mLastKnownUid, &error);
     setError(error);
     
     performMethodOnMainThread((Object::Method) &IMAPIdleOperation::unprepare, NULL);

@@ -16,7 +16,6 @@ using namespace mailcore;
 
 IMAPSearchOperation::IMAPSearchOperation()
 {
-    mFolder = NULL;
     mKind = IMAPSearchKindNone;
     mSearchString = NULL;
     mExpression = NULL;
@@ -25,20 +24,9 @@ IMAPSearchOperation::IMAPSearchOperation()
 
 IMAPSearchOperation::~IMAPSearchOperation()
 {
-    MC_SAFE_RELEASE(mFolder);
     MC_SAFE_RELEASE(mSearchString);
     MC_SAFE_RELEASE(mExpression);
     MC_SAFE_RELEASE(mUids);
-}
-
-void IMAPSearchOperation::setFolder(String * folder)
-{
-    MC_SAFE_REPLACE_COPY(String, mFolder, folder);
-}
-
-String * IMAPSearchOperation::folder()
-{
-    return mFolder;
 }
 
 void IMAPSearchOperation::setSearchKind(IMAPSearchKind kind)
@@ -80,10 +68,10 @@ void IMAPSearchOperation::main()
 {
     ErrorCode error;
     if (mExpression != NULL) {
-        mUids = session()->session()->search(mFolder, mExpression, &error);
+        mUids = session()->session()->search(folder(), mExpression, &error);
     }
     else {
-        mUids = session()->session()->search(mFolder, mKind, mSearchString, &error);
+        mUids = session()->session()->search(folder(), mKind, mSearchString, &error);
     }
     MC_SAFE_RETAIN(mUids);
     setError(error);

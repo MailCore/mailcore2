@@ -15,14 +15,10 @@ namespace mailcore {
     
     class IMAPCreateFolderOperation : public IMAPOperation {
     private:
-        String * mFolder;
         
     public:
         IMAPCreateFolderOperation();
         virtual ~IMAPCreateFolderOperation();
-        
-        virtual void setFolder(String * folder);
-        virtual String * folder();
         
         virtual void main();
     };

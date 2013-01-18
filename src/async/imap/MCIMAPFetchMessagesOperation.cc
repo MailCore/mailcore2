@@ -15,7 +15,6 @@ using namespace mailcore;
 
 IMAPFetchMessagesOperation::IMAPFetchMessagesOperation()
 {
-    mFolder = NULL;
     mFetchByUidEnabled = false;
     mFirst = 0;
     mLast = 0;
@@ -26,20 +25,9 @@ IMAPFetchMessagesOperation::IMAPFetchMessagesOperation()
 
 IMAPFetchMessagesOperation::~IMAPFetchMessagesOperation()
 {
-    MC_SAFE_RELEASE(mFolder);
     MC_SAFE_RELEASE(mNumbers);
     MC_SAFE_RELEASE(mUids);
     MC_SAFE_RELEASE(mMessages);
-}
-
-void IMAPFetchMessagesOperation::setFolder(String * folder)
-{
-    MC_SAFE_REPLACE_COPY(String, mFolder, folder);
-}
-
-String * IMAPFetchMessagesOperation::folder()
-{
-    return mFolder;
 }
 
 void IMAPFetchMessagesOperation::setFetchByUidEnabled(bool enabled)
@@ -112,18 +100,18 @@ void IMAPFetchMessagesOperation::main()
     ErrorCode error;
     if (mFetchByUidEnabled) {
         if (mUids != NULL) {
-            mMessages = session()->session()->fetchMessagesByUID(mFolder, mKind, mUids, this, &error);
+            mMessages = session()->session()->fetchMessagesByUID(folder(), mKind, mUids, this, &error);
         }
         else {
-            mMessages = session()->session()->fetchMessagesByUID(mFolder, mKind, mFirst, mLast, this, &error);
+            mMessages = session()->session()->fetchMessagesByUID(folder(), mKind, mFirst, mLast, this, &error);
         }
     }
     else {
         if (mNumbers != NULL) {
-            mMessages = session()->session()->fetchMessagesByNumber(mFolder, mKind, mNumbers, this, &error);
+            mMessages = session()->session()->fetchMessagesByNumber(folder(), mKind, mNumbers, this, &error);
         }
         else {
-            mMessages = session()->session()->fetchMessagesByNumber(mFolder, mKind, mFirst, mLast, this, &error);
+            mMessages = session()->session()->fetchMessagesByNumber(folder(), mKind, mFirst, mLast, this, &error);
         }
     }
     MC_SAFE_RETAIN(mMessages);

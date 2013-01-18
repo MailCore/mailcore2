@@ -25,9 +25,6 @@ namespace mailcore {
         IMAPFetchFoldersOperation();
         virtual ~IMAPFetchFoldersOperation();
         
-        virtual void setFolder(String * folder);
-        virtual String * folder();
-        
         virtual void setFetchSubscribedEnabled(bool enabled);
         virtual bool isFetchSubscribedEnabled();
         

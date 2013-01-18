@@ -15,7 +15,6 @@ namespace mailcore {
     
     class IMAPFetchContentOperation : public IMAPOperation {
     private:
-        String * mFolder;
         uint32_t mUid;
         String * mPartID;
         Encoding mEncoding;
@@ -24,9 +23,6 @@ namespace mailcore {
     public:
         IMAPFetchContentOperation();
         virtual ~IMAPFetchContentOperation();
-        
-        virtual void setFolder(String * folder);
-        virtual String * folder();
         
         virtual void setUid(uint32_t uid);
         virtual uint32_t uid();

@@ -15,7 +15,6 @@ namespace mailcore {
     
     class IMAPFolderInfoOperation : public IMAPOperation {
     private:
-        String * mFolder;
         uint32_t mUidNext;
         uint32_t mUidValidity;
         int mMessageCount;
@@ -23,9 +22,6 @@ namespace mailcore {
     public:
         IMAPFolderInfoOperation();
         virtual ~IMAPFolderInfoOperation();
-        
-        virtual void setFolder(String * folder);
-        virtual String * folder();
         
         virtual uint32_t uidNext();
         virtual uint32_t uidValidity();

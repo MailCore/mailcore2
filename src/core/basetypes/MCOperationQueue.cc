@@ -93,20 +93,21 @@ void OperationQueue::runOperations()
 
         op->main();
         
-        if (op->callback() != NULL) {
-            performMethodOnMainThread((Object::Method) &OperationQueue::callbackOnMainThread, op, true);
-        }
+        op->retain()->autorelease();
         
         pthread_mutex_lock(&mLock);
         mOperations->removeObjectAtIndex(0);
         if (mOperations->count() == 0) {
             if (mWaiting) {
-                //sem_post(&mWaitingFinishedSem);
                 mailsem_up(mWaitingFinishedSem);
             }
             needsCheckRunning = true;
         }
         pthread_mutex_unlock(&mLock);
+        
+        if (op->callback() != NULL) {
+            performMethodOnMainThread((Object::Method) &OperationQueue::callbackOnMainThread, op, true);
+        }
         
         if (needsCheckRunning) {
             retain(); // (1)
@@ -163,6 +164,17 @@ void OperationQueue::startThread()
     pthread_create(&mThreadID, NULL, (void * (*)(void *)) OperationQueue::runOperationsOnThread, this);
     //sem_wait(&mStartSem);
     mailsem_down(mStartSem);
+}
+
+unsigned int OperationQueue::count()
+{
+    unsigned int count;
+    
+    pthread_mutex_lock(&mLock);
+    count = mOperations->count();
+    pthread_mutex_unlock(&mLock);
+    
+    return count;
 }
 
 #if 0

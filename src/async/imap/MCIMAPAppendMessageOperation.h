@@ -16,7 +16,6 @@ namespace mailcore {
     
     class IMAPAppendMessageOperation : public IMAPOperation {
     private:
-        String * mFolder;
         Data * mMessageData;
         MessageFlag mFlags;
         uint32_t mCreatedUID;
@@ -24,9 +23,6 @@ namespace mailcore {
     public:
         IMAPAppendMessageOperation();
         virtual ~IMAPAppendMessageOperation();
-        
-        virtual void setFolder(String * folder);
-        virtual String * folder();
         
         virtual void setMessageData(Data * messageData);
         virtual Data * messageData();

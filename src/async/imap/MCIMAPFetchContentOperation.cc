@@ -15,7 +15,6 @@ using namespace mailcore;
 
 IMAPFetchContentOperation::IMAPFetchContentOperation()
 {
-    mFolder = NULL;
     mUid = 0;
     mPartID = NULL;
     mEncoding = Encoding7Bit;
@@ -24,19 +23,8 @@ IMAPFetchContentOperation::IMAPFetchContentOperation()
 
 IMAPFetchContentOperation::~IMAPFetchContentOperation()
 {
-    MC_SAFE_RELEASE(mFolder);
     MC_SAFE_RELEASE(mPartID);
     MC_SAFE_RELEASE(mData);
-}
-
-void IMAPFetchContentOperation::setFolder(String * folder)
-{
-    MC_SAFE_REPLACE_COPY(String, mFolder, folder);
-}
-
-String * IMAPFetchContentOperation::folder()
-{
-    return mFolder;
 }
 
 void IMAPFetchContentOperation::setUid(uint32_t uid)
@@ -78,10 +66,10 @@ void IMAPFetchContentOperation::main()
 {
     ErrorCode error;
     if (mPartID != NULL) {
-        mData = session()->session()->fetchMessageAttachmentByUID(mFolder, mUid, mPartID, mEncoding, this, &error);
+        mData = session()->session()->fetchMessageAttachmentByUID(folder(), mUid, mPartID, mEncoding, this, &error);
     }
     else {
-        mData = session()->session()->fetchMessageByUID(mFolder, mUid, this, &error);
+        mData = session()->session()->fetchMessageByUID(folder(), mUid, this, &error);
     }
     MC_SAFE_RETAIN(mData);
     setError(error);

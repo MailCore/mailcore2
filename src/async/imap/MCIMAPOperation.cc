@@ -21,10 +21,12 @@ IMAPOperation::IMAPOperation()
     mSession = NULL;
     mImapCallback = NULL;
     mError = ErrorNone;
+    mFolder = NULL;
 }
 
 IMAPOperation::~IMAPOperation()
 {
+    MC_SAFE_RELEASE(mFolder);
     MC_SAFE_RELEASE(mSession);
 }
 
@@ -36,6 +38,16 @@ void IMAPOperation::setSession(IMAPAsyncSession * session)
 IMAPAsyncSession * IMAPOperation::session()
 {
     return mSession;
+}
+
+void IMAPOperation::setFolder(String * folder)
+{
+    MC_SAFE_REPLACE_COPY(String, mFolder, folder);
+}
+
+String * IMAPOperation::folder()
+{
+    return mFolder;
 }
 
 void IMAPOperation::setImapCallback(IMAPOperationCallback * callback)

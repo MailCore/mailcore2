@@ -15,7 +15,6 @@ namespace mailcore {
     
     class IMAPStoreFlagsOperation : public IMAPOperation {
     private:
-        String * mFolder;
         Array * mUids;
         IMAPStoreFlagsRequestKind mKind;
         MessageFlag mFlags;
@@ -23,9 +22,6 @@ namespace mailcore {
     public:
         IMAPStoreFlagsOperation();
         virtual ~IMAPStoreFlagsOperation();
-        
-        virtual void setFolder(String * folder);
-        virtual String * folder();
         
         virtual void setUids(Array * uids);
         virtual Array * uids();

@@ -15,7 +15,6 @@ using namespace mailcore;
 
 IMAPAppendMessageOperation::IMAPAppendMessageOperation()
 {
-    mFolder = NULL;
     mMessageData = NULL;
     mFlags = MessageFlagNone;
     mCreatedUID = 0;
@@ -23,18 +22,7 @@ IMAPAppendMessageOperation::IMAPAppendMessageOperation()
 
 IMAPAppendMessageOperation::~IMAPAppendMessageOperation()
 {
-    MC_SAFE_RELEASE(mFolder);
     MC_SAFE_RELEASE(mMessageData);
-}
-
-void IMAPAppendMessageOperation::setFolder(String * folder)
-{
-    MC_SAFE_REPLACE_COPY(String, mFolder, folder);
-}
-
-String * IMAPAppendMessageOperation::folder()
-{
-    return mFolder;
 }
 
 void IMAPAppendMessageOperation::setMessageData(Data * messageData)
@@ -65,7 +53,7 @@ uint32_t IMAPAppendMessageOperation::createdUID()
 void IMAPAppendMessageOperation::main()
 {
     ErrorCode error;
-    session()->session()->appendMessage(mFolder, mMessageData, mFlags, this, &mCreatedUID, &error);
+    session()->session()->appendMessage(folder(), mMessageData, mFlags, this, &mCreatedUID, &error);
     setError(error);
 }
 

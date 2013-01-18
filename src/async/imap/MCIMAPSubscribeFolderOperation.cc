@@ -15,23 +15,11 @@ using namespace mailcore;
 
 IMAPSubscribeFolderOperation::IMAPSubscribeFolderOperation()
 {
-    mFolder = NULL;
     mUnsubscribeEnabled = false;
 }
 
 IMAPSubscribeFolderOperation::~IMAPSubscribeFolderOperation()
 {
-    MC_SAFE_RELEASE(mFolder);
-}
-
-void IMAPSubscribeFolderOperation::setFolder(String * folder)
-{
-    MC_SAFE_REPLACE_COPY(String, mFolder, folder);
-}
-
-String * IMAPSubscribeFolderOperation::folder()
-{
-    return mFolder;
 }
 
 void IMAPSubscribeFolderOperation::setUnsubscribeEnabled(bool enabled)
@@ -48,10 +36,10 @@ void IMAPSubscribeFolderOperation::main()
 {
     ErrorCode error;
     if (mUnsubscribeEnabled) {
-        session()->session()->unsubscribeFolder(mFolder, &error);
+        session()->session()->unsubscribeFolder(folder(), &error);
     }
     else {
-        session()->session()->subscribeFolder(mFolder, &error);
+        session()->session()->subscribeFolder(folder(), &error);
     }
     setError(error);
 }

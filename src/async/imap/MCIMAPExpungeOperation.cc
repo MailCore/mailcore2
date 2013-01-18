@@ -15,27 +15,15 @@ using namespace mailcore;
 
 IMAPExpungeOperation::IMAPExpungeOperation()
 {
-    mFolder = NULL;
 }
 
 IMAPExpungeOperation::~IMAPExpungeOperation()
 {
-    MC_SAFE_RELEASE(mFolder);
-}
-
-void IMAPExpungeOperation::setFolder(String * folder)
-{
-    MC_SAFE_REPLACE_COPY(String, mFolder, folder);
-}
-
-String * IMAPExpungeOperation::folder()
-{
-    return mFolder;
 }
 
 void IMAPExpungeOperation::main()
 {
     ErrorCode error;
-    session()->session()->expunge(mFolder, &error);
+    session()->session()->expunge(folder(), &error);
     setError(error);
 }

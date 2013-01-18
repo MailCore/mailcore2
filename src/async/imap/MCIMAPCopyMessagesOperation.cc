@@ -15,7 +15,6 @@ using namespace mailcore;
 
 IMAPCopyMessagesOperation::IMAPCopyMessagesOperation()
 {
-    mFolder = NULL;
     mUids = NULL;
     mDestFolder = NULL;
     mDestUids = NULL;
@@ -24,19 +23,8 @@ IMAPCopyMessagesOperation::IMAPCopyMessagesOperation()
 IMAPCopyMessagesOperation::~IMAPCopyMessagesOperation()
 {
     MC_SAFE_RELEASE(mDestUids);
-    MC_SAFE_RELEASE(mFolder);
     MC_SAFE_RELEASE(mUids);
     MC_SAFE_RELEASE(mDestFolder);
-}
-
-void IMAPCopyMessagesOperation::setFolder(String * folder)
-{
-    MC_SAFE_REPLACE_COPY(String, mFolder, folder);
-}
-
-String * IMAPCopyMessagesOperation::folder()
-{
-    return mFolder;
 }
 
 void IMAPCopyMessagesOperation::setUids(Array * uids)
@@ -67,7 +55,7 @@ String * IMAPCopyMessagesOperation::destFolder()
 void IMAPCopyMessagesOperation::main()
 {
     ErrorCode error;
-    session()->session()->copyMessages(mFolder, mUids, mDestFolder, &mDestUids, &error);
+    session()->session()->copyMessages(folder(), mUids, mDestFolder, &mDestUids, &error);
     MC_SAFE_RETAIN(mDestUids);
     setError(error);
 }

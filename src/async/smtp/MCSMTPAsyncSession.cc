@@ -113,7 +113,7 @@ bool SMTPAsyncSession::useHeloIPEnabled()
 
 void SMTPAsyncSession::runOperation(SMTPOperation * operation)
 {
-    // TODO: disconnect after delay
+#warning disconnect after delay
     mQueue->addOperation(operation);
 }
 

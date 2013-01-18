@@ -15,14 +15,10 @@ namespace mailcore {
     
     class IMAPExpungeOperation : public IMAPOperation {
     private:
-        String * mFolder;
         
     public:
         IMAPExpungeOperation();
         virtual ~IMAPExpungeOperation();
-        
-        virtual void setFolder(String * folder);
-        virtual String * folder();
         
         virtual void main();
     };

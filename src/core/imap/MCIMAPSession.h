@@ -29,13 +29,13 @@ namespace mailcore {
 		bool mVoIPEnabled;
 		char mDelimiter;
 		IMAPNamespace * mDefaultNamespace;
+		time_t mTimeout;
 		
         bool mBodyProgressEnabled;
 		bool mIdleEnabled;
 		bool mXListEnabled;
 		String * mWelcomeString;
 		bool mNeedsMboxMailWorkaround;
-		time_t mTimeout;
 		uint32_t mUIDValidity;
 		uint32_t mUIDNext;
 		unsigned int mFolderMsgCount;
@@ -156,6 +156,10 @@ namespace mailcore {
 		virtual void login(ErrorCode * pError);
 		
 		virtual HashMap * identity(String * vendor, String * name, String * version, ErrorCode * pError);
+        
+		virtual uint32_t uidValidity();
+		virtual uint32_t uidNext();
+		virtual unsigned int lastFolderMessageCount();
 	};
 }
 

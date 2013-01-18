@@ -15,27 +15,15 @@ using namespace mailcore;
 
 IMAPCreateFolderOperation::IMAPCreateFolderOperation()
 {
-    mFolder = NULL;
 }
 
 IMAPCreateFolderOperation::~IMAPCreateFolderOperation()
 {
-    MC_SAFE_RELEASE(mFolder);
-}
-
-void IMAPCreateFolderOperation::setFolder(String * folder)
-{
-    MC_SAFE_REPLACE_COPY(String, mFolder, folder);
-}
-
-String * IMAPCreateFolderOperation::folder()
-{
-    return mFolder;
 }
 
 void IMAPCreateFolderOperation::main()
 {
     ErrorCode error;
-    session()->session()->createFolder(mFolder, &error);
+    session()->session()->createFolder(folder(), &error);
     setError(error);
 }
