@@ -4,18 +4,102 @@
 #include "MCMessagePart.h"
 #include "MCMessageHeader.h"
 #include "MCMessageConstants.h"
+#include "MCLog.h"
 
 #include <stdlib.h>
 #include <string.h>
 
 using namespace mailcore;
 
+static char * findBlank(const char * str)
+{
+    char * p = (char *) str;
+    while (!((* p == ' ') || (* p == '\t'))) {
+        if (* p == 0)
+            return NULL;
+        p ++;
+    }
+    return p;
+}
+
+HashMap * Attachment::readMimeTypesFile(String * filename)
+{
+    HashMap * result = HashMap::hashMap();
+    
+    char line[512];
+    FILE * f = fopen(filename->fileSystemRepresentation(), "r");
+    if (f == NULL) {
+        return result;
+    }
+    
+    while (fgets(line, sizeof(line), f)) {
+        char * p;
+        String * mimeType;
+        
+        if (line[0] == '#') {
+            continue;
+        }
+        
+        while ((p = strchr(line, '\r')) != NULL) {
+            * p = 0;
+        }
+        while ((p = strchr(line, '\n')) != NULL) {
+            * p = 0;
+        }
+        
+        p = findBlank(line);
+        if (p == NULL) {
+            continue;
+        }
+        
+        * p = 0;
+        p ++;
+        mimeType = String::stringWithUTF8Characters(line);
+        
+        while (1) {
+            while ((* p == ' ') || (* p == '\t')) {
+                p ++;
+            }
+            
+            char * ext_end = findBlank(p);
+            if (ext_end == NULL) {
+                String * ext = String::stringWithUTF8Characters(p);
+                result->setObjectForKey(ext, mimeType);
+                break;
+            }
+            else {
+                * ext_end = 0;
+                String * ext = String::stringWithUTF8Characters(p);
+                result->setObjectForKey(ext, mimeType);
+                p = ext_end + 1;
+            }
+        }
+    }
+    
+    fclose(f);
+    
+    return result;
+}
+
 String * Attachment::mimeTypeForFilename(String * filename)
 {
-#warning read from a file
+    static HashMap * mimeTypes = NULL;
+    static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+    pthread_mutex_lock(&lock);
+    if (mimeTypes == NULL) {
+        mimeTypes = readMimeTypesFile(MCSTR("/etc/apache2/mime.types"));
+        mimeTypes->retain();
+    }
+    pthread_mutex_unlock(&lock);
+    
     String * ext;
+    String * result;
     
     ext = filename->pathExtension()->lowercaseString();
+    result = (String *) mimeTypes->objectForKey(ext);
+    if (result != NULL)
+        return result;
+    
 	if (ext->isEqual(MCSTR("jpg"))) {
 		return MCSTR("image/jpeg");
 	}

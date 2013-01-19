@@ -47,5 +47,6 @@ void POPDeleteMessagesOperation::main()
             return;
         }
     }
+    session()->session()->disconnect();
 }
 

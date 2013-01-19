@@ -284,7 +284,7 @@ void testAll()
     //testIMAP();
     //testPOP();
     //testAsyncSMTP(data);
-    testAsyncIMAP();
+    //testAsyncIMAP();
     //testAsyncPOP();
     
     MCLog("pool release");

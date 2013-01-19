@@ -155,6 +155,7 @@ void POPSession::body_progress(size_t current, size_t maximum, void * context)
 void POPSession::setup()
 {
 	mPop = mailpop3_new(0, NULL);
+    mailpop3_set_progress_callback(mPop, POPSession::body_progress, this);
 }
 
 void POPSession::unsetup()
