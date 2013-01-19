@@ -8,7 +8,7 @@
 
 #include "MCIMAPAccount.h"
 
-#include "MCIMAPAsyncSession.h"
+#include "MCIMAPAsyncConnection.h"
 #include "MCIMAPNamespace.h"
 
 #define DEFAULT_MAX_CONNECTIONS 3
@@ -158,9 +158,9 @@ unsigned int IMAPAccount::maximumConnections()
     return mMaximumConnections;
 }
 
-IMAPAsyncSession * IMAPAccount::session()
+IMAPAsyncConnection * IMAPAccount::session()
 {
-    IMAPAsyncSession * session = new IMAPAsyncSession();
+    IMAPAsyncConnection * session = new IMAPAsyncConnection();
     session->autorelease();
     
     session->setHostname(mHostname);
@@ -178,13 +178,13 @@ IMAPAsyncSession * IMAPAccount::session()
     return session;
 }
 
-IMAPAsyncSession * IMAPAccount::sessionForFolder(String * folder, bool urgent)
+IMAPAsyncConnection * IMAPAccount::sessionForFolder(String * folder, bool urgent)
 {
     if (folder == NULL) {
         return availableSession();
     }
     else {
-        IMAPAsyncSession * s = NULL;
+        IMAPAsyncConnection * s = NULL;
         if (urgent && mAllowsFolderConcurrentAccessEnabled) {
             s = availableSession();
             if (s->operationsCount() == 0) {
@@ -199,23 +199,23 @@ IMAPAsyncSession * IMAPAccount::sessionForFolder(String * folder, bool urgent)
     }
 }
 
-IMAPAsyncSession * IMAPAccount::availableSession()
+IMAPAsyncConnection * IMAPAccount::availableSession()
 {
     if (mMaximumConnections == 0) {
         for(unsigned int i = 0 ; i < mSessions->count() ; i ++) {
-            IMAPAsyncSession * s = (IMAPAsyncSession *) mSessions->objectAtIndex(i);
+            IMAPAsyncConnection * s = (IMAPAsyncConnection *) mSessions->objectAtIndex(i);
             if (s->operationsCount() == 0)
                 return s;
         }
-        IMAPAsyncSession * chosenSession = session();
+        IMAPAsyncConnection * chosenSession = session();
         mSessions->addObject(chosenSession);
         return chosenSession;
     }
     else {
-        IMAPAsyncSession * chosenSession = NULL;
+        IMAPAsyncConnection * chosenSession = NULL;
         unsigned int minOperationsCount = 0;
         for(unsigned int i = 0 ; i < mSessions->count() ; i ++) {
-            IMAPAsyncSession * s = (IMAPAsyncSession *) mSessions->objectAtIndex(i);
+            IMAPAsyncConnection * s = (IMAPAsyncConnection *) mSessions->objectAtIndex(i);
             if (chosenSession == NULL) {
                 chosenSession = s;
                 minOperationsCount = s->operationsCount();
@@ -239,10 +239,10 @@ IMAPAsyncSession * IMAPAccount::availableSession()
     }
 }
 
-IMAPAsyncSession * IMAPAccount::matchingSessionForFolder(String * folder)
+IMAPAsyncConnection * IMAPAccount::matchingSessionForFolder(String * folder)
 {
     for(unsigned int i = 0 ; i < mSessions->count() ; i ++) {
-        IMAPAsyncSession * currentSession = (IMAPAsyncSession *) mSessions->objectAtIndex(i);
+        IMAPAsyncConnection * currentSession = (IMAPAsyncConnection *) mSessions->objectAtIndex(i);
         if (currentSession->lastFolder() != NULL) {
             if (currentSession->lastFolder()->compare(folder)) {
                 return currentSession;
@@ -257,155 +257,155 @@ IMAPAsyncSession * IMAPAccount::matchingSessionForFolder(String * folder)
 
 IMAPFolderInfoOperation * IMAPAccount::folderInfoOperation(String * folder)
 {
-    IMAPAsyncSession * session = sessionForFolder(folder);
+    IMAPAsyncConnection * session = sessionForFolder(folder);
     return session->folderInfoOperation(folder);
 }
 
 IMAPFetchFoldersOperation * IMAPAccount::fetchSubscribedFoldersOperation()
 {
-    IMAPAsyncSession * session = sessionForFolder(MCSTR("INBOX"));
+    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
     return session->fetchSubscribedFoldersOperation();
 }
 
 IMAPFetchFoldersOperation * IMAPAccount::fetchAllFoldersOperation()
 {
-    IMAPAsyncSession * session = sessionForFolder(MCSTR("INBOX"));
+    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
     return session->fetchAllFoldersOperation();
 }
 
 IMAPOperation * IMAPAccount::renameFolderOperation(String * folder, String * otherName)
 {
-    IMAPAsyncSession * session = sessionForFolder(MCSTR("INBOX"));
+    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
     return session->renameFolderOperation(folder, otherName);
 }
 
 IMAPOperation * IMAPAccount::deleteFolderOperation(String * folder)
 {
-    IMAPAsyncSession * session = sessionForFolder(MCSTR("INBOX"));
+    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
     return session->deleteFolderOperation(folder);
 }
 
 IMAPOperation * IMAPAccount::createFolderOperation(String * folder)
 {
-    IMAPAsyncSession * session = sessionForFolder(MCSTR("INBOX"));
+    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
     return session->createFolderOperation(folder);
 }
 
 IMAPOperation * IMAPAccount::subscribeFolderOperation(String * folder)
 {
-    IMAPAsyncSession * session = sessionForFolder(MCSTR("INBOX"));
+    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
     return session->subscribeFolderOperation(folder);
 }
 
 IMAPOperation * IMAPAccount::unsubscribeFolderOperation(String * folder)
 {
-    IMAPAsyncSession * session = sessionForFolder(MCSTR("INBOX"));
+    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
     return session->unsubscribeFolderOperation(folder);
 }
 
 IMAPAppendMessageOperation * IMAPAccount::appendMessageOperation(String * folder, Data * messageData, MessageFlag flags)
 {
-    IMAPAsyncSession * session = sessionForFolder(folder);
+    IMAPAsyncConnection * session = sessionForFolder(folder);
     return session->appendMessageOperation(folder, messageData, flags);
 }
 
 IMAPCopyMessagesOperation * IMAPAccount::copyMessagesOperation(String * folder, Array * uids, String * destFolder)
 {
-    IMAPAsyncSession * session = sessionForFolder(folder);
+    IMAPAsyncConnection * session = sessionForFolder(folder);
     return session->copyMessagesOperation(folder, uids, destFolder);
 }
 
 IMAPOperation * IMAPAccount::expungeOperation(String * folder)
 {
-    IMAPAsyncSession * session = sessionForFolder(folder);
+    IMAPAsyncConnection * session = sessionForFolder(folder);
     return session->expungeOperation(folder);
 }
 
 IMAPFetchMessagesOperation * IMAPAccount::fetchMessagesByUIDOperation(String * folder, IMAPMessagesRequestKind requestKind,
                                                                       uint32_t firstUID, uint32_t lastUID)
 {
-    IMAPAsyncSession * session = sessionForFolder(folder);
+    IMAPAsyncConnection * session = sessionForFolder(folder);
     return session->fetchMessagesByUIDOperation(folder, requestKind, firstUID, lastUID);
 }
 
 IMAPFetchMessagesOperation * IMAPAccount::fetchMessagesByNumberOperation(String * folder, IMAPMessagesRequestKind requestKind,
                                                                          uint32_t firstNumber, uint32_t lastNumber)
 {
-    IMAPAsyncSession * session = sessionForFolder(folder);
+    IMAPAsyncConnection * session = sessionForFolder(folder);
     return session->fetchMessagesByNumberOperation(folder, requestKind, firstNumber, lastNumber);
 }
 
 IMAPFetchMessagesOperation * IMAPAccount::fetchMessagesByUIDOperation(String * folder, IMAPMessagesRequestKind requestKind,
                                                                       Array * uids)
 {
-    IMAPAsyncSession * session = sessionForFolder(folder);
+    IMAPAsyncConnection * session = sessionForFolder(folder);
     return session->fetchMessagesByUIDOperation(folder, requestKind, uids);
 }
 
 IMAPFetchMessagesOperation * IMAPAccount::fetchMessagesByNumberOperation(String * folder, IMAPMessagesRequestKind requestKind,
                                                                          Array * numbers)
 {
-    IMAPAsyncSession * session = sessionForFolder(folder);
+    IMAPAsyncConnection * session = sessionForFolder(folder);
     return session->fetchMessagesByNumberOperation(folder, requestKind, numbers);
 }
 
 IMAPFetchContentOperation * IMAPAccount::fetchMessageByUIDOperation(String * folder, uint32_t uid, bool urgent)
 {
-    IMAPAsyncSession * session = sessionForFolder(folder, urgent);
+    IMAPAsyncConnection * session = sessionForFolder(folder, urgent);
     return session->fetchMessageByUIDOperation(folder, uid);
 }
 
 IMAPFetchContentOperation * IMAPAccount::fetchMessageAttachmentByUIDOperation(String * folder, uint32_t uid, String * partID,
                                                                          Encoding encoding, bool urgent)
 {
-    IMAPAsyncSession * session = sessionForFolder(folder, urgent);
+    IMAPAsyncConnection * session = sessionForFolder(folder, urgent);
     return session->fetchMessageAttachmentByUIDOperation(folder, uid, partID, encoding);
 }
 
 IMAPOperation * IMAPAccount::storeFlagsOperation(String * folder, Array * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags)
 {
-    IMAPAsyncSession * session = sessionForFolder(folder);
+    IMAPAsyncConnection * session = sessionForFolder(folder);
     return session->storeFlagsOperation(folder, uids, kind, flags);
 }
 
 IMAPOperation * IMAPAccount::storeLabelsOperation(String * folder, Array * uids, IMAPStoreFlagsRequestKind kind, Array * labels)
 {
-    IMAPAsyncSession * session = sessionForFolder(folder);
+    IMAPAsyncConnection * session = sessionForFolder(folder);
     return session->storeLabelsOperation(folder, uids, kind, labels);
 }
 
 IMAPSearchOperation * IMAPAccount::searchOperation(String * folder, IMAPSearchKind kind, String * searchString)
 {
-    IMAPAsyncSession * session = sessionForFolder(folder);
+    IMAPAsyncConnection * session = sessionForFolder(folder);
     return session->searchOperation(folder, kind, searchString);
 }
 
 IMAPSearchOperation * IMAPAccount::searchOperation(String * folder, IMAPSearchExpression * expression)
 {
-    IMAPAsyncSession * session = sessionForFolder(folder);
+    IMAPAsyncConnection * session = sessionForFolder(folder);
     return session->searchOperation(folder, expression);
 }
 
 IMAPIdleOperation * IMAPAccount::idleOperation(String * folder, uint32_t lastKnownUID)
 {
-    IMAPAsyncSession * session = sessionForFolder(folder);
+    IMAPAsyncConnection * session = sessionForFolder(folder);
     return session->idleOperation(folder, lastKnownUID);
 }
 
 IMAPFetchNamespaceOperation * IMAPAccount::fetchNamespaceOperation()
 {
-    IMAPAsyncSession * session = sessionForFolder(MCSTR("INBOX"));
+    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
     return session->fetchNamespaceOperation();
 }
 
 IMAPIdentityOperation * IMAPAccount::identityOperation(String * vendor, String * name, String * version)
 {
-    IMAPAsyncSession * session = sessionForFolder(MCSTR("INBOX"));
+    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
     return session->identityOperation(vendor, name, version);
 }
 
 IMAPOperation * IMAPAccount::checkAccountOperation()
 {
-    IMAPAsyncSession * session = sessionForFolder(MCSTR("INBOX"));
+    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
     return session->checkAccountOperation();
 }

@@ -11,7 +11,7 @@
 #include <stdlib.h>
 
 #include "MCIMAPSession.h"
-#include "MCIMAPAsyncSession.h"
+#include "MCIMAPAsyncConnection.h"
 
 using namespace mailcore;
 

@@ -27,7 +27,7 @@ namespace mailcore {
     class IMAPSearchExpression;
     class IMAPFetchNamespaceOperation;
     class IMAPIdentityOperation;
-    class IMAPAsyncSession;
+    class IMAPAsyncConnection;
     
 	class IMAPAccount : public Object {
 	private:
@@ -47,10 +47,10 @@ namespace mailcore {
         bool mAllowsFolderConcurrentAccessEnabled;
 		unsigned int mMaximumConnections;
         
-        IMAPAsyncSession * sessionForFolder(String * folder, bool urgent = false);
-        IMAPAsyncSession * session();
-        IMAPAsyncSession * matchingSessionForFolder(String * folder);
-        IMAPAsyncSession * availableSession();
+        IMAPAsyncConnection * sessionForFolder(String * folder, bool urgent = false);
+        IMAPAsyncConnection * session();
+        IMAPAsyncConnection * matchingSessionForFolder(String * folder);
+        IMAPAsyncConnection * availableSession();
         
 	public:
 		IMAPAccount();

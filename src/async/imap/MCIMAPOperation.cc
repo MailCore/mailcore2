@@ -11,7 +11,7 @@
 #include <stdlib.h>
 
 #include "MCIMAPSession.h"
-#include "MCIMAPAsyncSession.h"
+#include "MCIMAPAsyncConnection.h"
 #include "MCIMAPOperationCallback.h"
 
 using namespace mailcore;
@@ -30,12 +30,12 @@ IMAPOperation::~IMAPOperation()
     MC_SAFE_RELEASE(mSession);
 }
 
-void IMAPOperation::setSession(IMAPAsyncSession * session)
+void IMAPOperation::setSession(IMAPAsyncConnection * session)
 {
-    MC_SAFE_REPLACE_RETAIN(IMAPAsyncSession, mSession, session);
+    MC_SAFE_REPLACE_RETAIN(IMAPAsyncConnection, mSession, session);
 }
 
-IMAPAsyncSession * IMAPOperation::session()
+IMAPAsyncConnection * IMAPOperation::session()
 {
     return mSession;
 }

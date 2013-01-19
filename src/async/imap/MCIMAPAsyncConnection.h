@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCIMAPASYNCSESSION_H
+#ifndef __MAILCORE_MCIMAPASYNCCONNECTION_H
 
-#define __MAILCORE_MCIMAPASYNCSESSION_H
+#define __MAILCORE_MCIMAPASYNCCONNECTION_H
 
 #include <mailcore/MCBaseTypes.h>
 #include <mailcore/MCMessageConstants.h>
@@ -22,7 +22,7 @@ namespace mailcore {
     class IMAPFetchNamespaceOperation;
     class IMAPIdentityOperation;
 
-	class IMAPAsyncSession : public Object {
+	class IMAPAsyncConnection : public Object {
 	private:
 		IMAPSession * mSession;
 		OperationQueue * mQueue;
@@ -33,8 +33,8 @@ namespace mailcore {
 		void queue(IMAPOperation * op);
 		
 	public:
-		IMAPAsyncSession();
-		virtual ~IMAPAsyncSession();
+		IMAPAsyncConnection();
+		virtual ~IMAPAsyncConnection();
 		
 		virtual void setHostname(String * hostname);
 		virtual String * hostname();

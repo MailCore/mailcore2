@@ -9,7 +9,7 @@
 #include "MCIMAPSearchOperation.h"
 
 #include "MCIMAPSession.h"
-#include "MCIMAPAsyncSession.h"
+#include "MCIMAPAsyncConnection.h"
 #include "MCIMAPSearchExpression.h"
 
 using namespace mailcore;

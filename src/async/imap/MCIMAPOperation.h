@@ -14,11 +14,11 @@
 
 namespace mailcore {
     
-    class IMAPAsyncSession;
+    class IMAPAsyncConnection;
     class IMAPOperationCallback;
     
     class IMAPOperation : public Operation, public IMAPProgressCallback {
-        IMAPAsyncSession * mSession;
+        IMAPAsyncConnection * mSession;
         String * mFolder;
         IMAPOperationCallback * mImapCallback;
         ErrorCode mError;
@@ -32,8 +32,8 @@ namespace mailcore {
         IMAPOperation();
         virtual ~IMAPOperation();
         
-        virtual void setSession(IMAPAsyncSession * session);
-        virtual IMAPAsyncSession * session();
+        virtual void setSession(IMAPAsyncConnection * session);
+        virtual IMAPAsyncConnection * session();
         
         virtual void setFolder(String * folder);
         virtual String * folder();

@@ -8,7 +8,7 @@
 
 #include "MCIMAPCheckAccountOperation.h"
 
-#include "MCIMAPAsyncSession.h"
+#include "MCIMAPAsyncConnection.h"
 #include "MCIMAPSession.h"
 
 using namespace mailcore;
