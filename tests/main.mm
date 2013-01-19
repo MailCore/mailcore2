@@ -210,10 +210,10 @@ class TestIMAPCallback : public mailcore::Object, public mailcore::OperationCall
 
 static void testAsyncIMAP()
 {
-    mailcore::IMAPAccount * session;
+    mailcore::IMAPAsyncSession * session;
     TestIMAPCallback * callback = new TestIMAPCallback();
     
-    session = new mailcore::IMAPAccount();
+    session = new mailcore::IMAPAsyncSession();
     session->setHostname(MCSTR("imap.gmail.com"));
     session->setPort(993);
     session->setUsername(email);

@@ -9,7 +9,6 @@
 #ifndef mailcore2_MCAsyncIMAP_h
 #define mailcore2_MCAsyncIMAP_h
 
-#include <mailcore/MCIMAPAccount.h>
 #include <mailcore/MCIMAPAsyncSession.h>
 #include <mailcore/MCIMAPOperation.h>
 #include <mailcore/MCIMAPFetchFoldersOperation.h>

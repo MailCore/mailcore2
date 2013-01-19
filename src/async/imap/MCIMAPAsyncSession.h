@@ -29,7 +29,7 @@ namespace mailcore {
     class IMAPIdentityOperation;
     class IMAPAsyncConnection;
     
-	class IMAPAccount : public Object {
+	class IMAPAsyncSession : public Object {
 	private:
         Array * mSessions;
         
@@ -53,8 +53,8 @@ namespace mailcore {
         IMAPAsyncConnection * availableSession();
         
 	public:
-		IMAPAccount();
-		virtual ~IMAPAccount();
+		IMAPAsyncSession();
+		virtual ~IMAPAsyncSession();
 		
 		virtual void setHostname(String * hostname);
 		virtual String * hostname();
