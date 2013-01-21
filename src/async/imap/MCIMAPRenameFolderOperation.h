@@ -11,12 +11,11 @@
 
 #include <mailcore/MCIMAPOperation.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class IMAPRenameFolderOperation : public IMAPOperation {
-    private:
-        String * mOtherName;
-        
     public:
         IMAPRenameFolderOperation();
         ~IMAPRenameFolderOperation();
@@ -24,8 +23,15 @@ namespace mailcore {
         virtual void setOtherName(String * otherName);
         virtual String * otherName();
         
+    public: // subclass behavior
         virtual void main();
+        
+    private:
+        String * mOtherName;
+        
     };
 }
+
+#endif
 
 #endif /* defined(__mailcore2__MCIMAPRenameFolderOperation__) */

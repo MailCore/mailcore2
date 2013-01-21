@@ -5,27 +5,16 @@
 #include <mailcore/MCBaseTypes.h>
 #include <mailcore/MCAbstractMessage.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 	
 	class Attachment;
 	
 	class MessageBuilder : public AbstractMessage {
-	private:
-		String * mHTMLBody;
-		String * mTextBody;
-		Array * mAttachments;
-		Array * mRelatedAttachments;
-		String * mBoundaryPrefix;
-		void init();
-		Data * dataAndFilterBcc(bool filterBcc);
-		
 	public:
 		MessageBuilder();
-		MessageBuilder(MessageBuilder * other);
 		virtual ~MessageBuilder();
-		
-		virtual String * description();
-		virtual Object * copy();
 		
 		virtual void setHTMLBody(String * htmlBody);
 		virtual String * htmlBody();
@@ -47,8 +36,24 @@ namespace mailcore {
 		virtual String * boundaryPrefix();
 		
 		virtual Data * data();
+        
+    public: // subclass behavior
+		MessageBuilder(MessageBuilder * other);
+		virtual String * description();
+		virtual Object * copy();
+        
+	private:
+		String * mHTMLBody;
+		String * mTextBody;
+		Array * mAttachments;
+		Array * mRelatedAttachments;
+		String * mBoundaryPrefix;
+		void init();
+		Data * dataAndFilterBcc(bool filterBcc);
 	};
 	
 };
+
+#endif
 
 #endif

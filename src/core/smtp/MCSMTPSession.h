@@ -6,6 +6,8 @@
 #include <mailcore/MCMessageConstants.h>
 #include <libetpan/libetpan.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 	
 	class Address;
@@ -13,38 +15,6 @@ namespace mailcore {
 	class MessageBuilder;
 
 	class SMTPSession : public Object {
-	private:
-		String * mHostname;
-		unsigned int mPort;
-		String * mUsername;
-		String * mPassword;
-		AuthType mAuthType;
-		ConnectionType mConnectionType;
-		time_t mTimeout;
-		bool mCheckCertificateEnabled;
-		bool mUseHeloIPEnabled;
-		
-		mailsmtp * mSmtp;
-		SMTPProgressCallback * mProgressCallback;
-		int mState;
-		String * mLastSMTPResponse;
-        int mLastLibetpanError;
-        int mLastSMTPResponseCode;
-		
-		void init();
-		Data * dataWithFilteredBcc(Data * data);
-		static void body_progress(size_t current, size_t maximum, void * context);
-		void bodyProgress(unsigned int current, unsigned int maximum);
-		void setup();
-		void unsetup();
-		void connectIfNeeded(ErrorCode * pError);
-		void loginIfNeeded(ErrorCode * pError);
-		bool checkCertificate();
-		
-		void sendMessage(Address * from, Array * recipients, Data * messageData,
-                         SMTPProgressCallback * callback, ErrorCode * pError);
-		void sendMessage(MessageBuilder * msg, SMTPProgressCallback * callback, ErrorCode * pError);
-        
 	public:
 		SMTPSession();
 		virtual ~SMTPSession();
@@ -84,8 +54,42 @@ namespace mailcore {
         virtual void checkAccount(Address * from, ErrorCode * pError);
         
 		virtual void sendMessage(Data * messageData, SMTPProgressCallback * callback, ErrorCode * pError);
+        
+	private:
+		String * mHostname;
+		unsigned int mPort;
+		String * mUsername;
+		String * mPassword;
+		AuthType mAuthType;
+		ConnectionType mConnectionType;
+		time_t mTimeout;
+		bool mCheckCertificateEnabled;
+		bool mUseHeloIPEnabled;
+		
+		mailsmtp * mSmtp;
+		SMTPProgressCallback * mProgressCallback;
+		int mState;
+		String * mLastSMTPResponse;
+        int mLastLibetpanError;
+        int mLastSMTPResponseCode;
+		
+		void init();
+		Data * dataWithFilteredBcc(Data * data);
+		static void body_progress(size_t current, size_t maximum, void * context);
+		void bodyProgress(unsigned int current, unsigned int maximum);
+		void setup();
+		void unsetup();
+		void connectIfNeeded(ErrorCode * pError);
+		void loginIfNeeded(ErrorCode * pError);
+		bool checkCertificate();
+		
+		void sendMessage(Address * from, Array * recipients, Data * messageData,
+                         SMTPProgressCallback * callback, ErrorCode * pError);
+		void sendMessage(MessageBuilder * msg, SMTPProgressCallback * callback, ErrorCode * pError);
 	};
 	
 }
+
+#endif
 
 #endif

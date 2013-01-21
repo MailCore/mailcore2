@@ -11,14 +11,16 @@
 
 #include <mailcore/MCIMAPOperation.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class IMAPCheckAccountOperation : public IMAPOperation {
-    private:
-        
-    public:
+    public: // subclass behavior
         virtual void main();
     };
 }
+
+#endif
 
 #endif /* defined(__mailcore2__MCIMAPCheckAccountOperation__) */

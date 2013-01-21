@@ -9,6 +9,8 @@
 #ifndef __mailcore2__MCSMTPOperationCallback__
 #define __mailcore2__MCSMTPOperationCallback__
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
 	class SMTPOperation;
@@ -18,5 +20,7 @@ namespace mailcore {
 		virtual void bodyProgress(SMTPOperation * session, unsigned int current, unsigned int maximum) {};
 	};
 }
+
+#endif
 
 #endif /* defined(__mailcore2__MCSMTPOperationCallback__) */

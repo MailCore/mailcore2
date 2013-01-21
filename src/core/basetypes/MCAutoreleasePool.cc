@@ -99,11 +99,6 @@ void AutoreleasePool::autorelease(Object * obj)
     pool->add(obj);
 }
 
-String * AutoreleasePool::className()
-{
-    return MCSTR("AutoreleasePool");
-}
-
 String * AutoreleasePool::description()
 {
     String * result = String::string();

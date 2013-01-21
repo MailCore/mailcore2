@@ -5,17 +5,13 @@
 #include <libetpan/libetpan.h>
 #include <mailcore/MCBaseTypes.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 
 	class Address : public Object {
-	private:
-		String * mDisplayName;
-		String * mMailbox;
-		void init();
-
 	public:
 		Address();
-		Address(Address * other);
 		virtual ~Address();
 
 		static Address * addressWithDisplayName(String * displayName, String * mailbox);
@@ -23,13 +19,6 @@ namespace mailcore {
 		static Address * addressWithRFC822String(String * RFC822String);
 		static Address * addressWithNonEncodedRFC822String(String * nonEncodedRFC822String);
 
-		virtual String * description();
-
-		virtual bool isEqual(Object * otherObject);
-		virtual unsigned int hash();
-
-		virtual Object * copy();
-		
 		virtual void setDisplayName(String * displayName);
 		virtual String * displayName();
 
@@ -47,8 +36,22 @@ namespace mailcore {
 		// Must be released
 		virtual struct mailimf_address * createIMFAddress();
 		virtual struct mailimf_mailbox * createIMFMailbox();
+        
+    public: // subclass behavior.
+		Address(Address * other);
+		virtual String * description();
+		virtual bool isEqual(Object * otherObject);
+		virtual unsigned int hash();
+		virtual Object * copy();
+        
+	private:
+		String * mDisplayName;
+		String * mMailbox;
+		void init();
 	};
 
 }
+
+#endif
 
 #endif

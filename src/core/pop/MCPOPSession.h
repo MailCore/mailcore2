@@ -6,6 +6,8 @@
 #include <mailcore/MCMessageConstants.h>
 #include <libetpan/libetpan.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 	
 	class POPMessageInfo;
@@ -84,5 +86,7 @@ namespace mailcore {
 	};
 
 }
+
+#endif
 
 #endif

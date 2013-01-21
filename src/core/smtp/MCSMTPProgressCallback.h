@@ -2,6 +2,8 @@
 
 #define __MAILCORE_MCSMTPPROGRESSCALLBACK_H_
 
+#ifdef __cplusplus
+
 namespace mailcore {
 
 	class SMTPSession;
@@ -11,5 +13,7 @@ namespace mailcore {
 		virtual void bodyProgress(SMTPSession * session, unsigned int current, unsigned int maximum) {};
 	};
 }
+
+#endif
 
 #endif

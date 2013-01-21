@@ -12,12 +12,11 @@
 #include <mailcore/MCSMTPOperation.h>
 #include <mailcore/MCAbstract.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class SMTPCheckAccountOperation : public SMTPOperation {
-    private:
-        Address * mFrom;
-        
     public:
         SMTPCheckAccountOperation();
         virtual ~SMTPCheckAccountOperation();
@@ -25,9 +24,16 @@ namespace mailcore {
         virtual void setFrom(Address * from);
         virtual Address * from();
         
+    public: // subclass behavior
         virtual void main();
+        
+    private:
+        Address * mFrom;
+        
     };
 
 }
+
+#endif
 
 #endif /* defined(__mailcore2__MCSMTPCheckAccountOperation__) */

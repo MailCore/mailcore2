@@ -5,24 +5,14 @@
 #include <mailcore/MCBaseTypes.h>
 #include <mailcore/MCMessageConstants.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 
 	class IMAPSearchExpression : public Object {
-	private:
-		IMAPSearchKind mKind;
-		String * mHeader;
-		String * mValue;
-		IMAPSearchExpression * mLeftExpression;
-		IMAPSearchExpression * mRightExpression;
-		void init();
-		
 	public:
 		IMAPSearchExpression();
-		IMAPSearchExpression(IMAPSearchExpression * other);
 		virtual ~IMAPSearchExpression();
-		
-		virtual String * description();
-		virtual Object * copy();
 		
 		virtual IMAPSearchKind kind();
 		virtual String * header();
@@ -37,8 +27,23 @@ namespace mailcore {
 		static IMAPSearchExpression * searchHeader(String * header, String * value);
 		static IMAPSearchExpression * searchAnd(IMAPSearchExpression * left, IMAPSearchExpression * right);
 		static IMAPSearchExpression * searchOr(IMAPSearchExpression * left, IMAPSearchExpression * right);
+        
+    public: // subclass behavior
+		IMAPSearchExpression(IMAPSearchExpression * other);
+		virtual String * description();
+		virtual Object * copy();
+        
+	private:
+		IMAPSearchKind mKind;
+		String * mHeader;
+		String * mValue;
+		IMAPSearchExpression * mLeftExpression;
+		IMAPSearchExpression * mRightExpression;
+		void init();
 	};
 	
 }
+
+#endif
 
 #endif

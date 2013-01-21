@@ -5,6 +5,8 @@
 #include <mailcore/MCBaseTypes.h>
 #include <mailcore/MCMessageConstants.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 	
 	class IMAPOperation;
@@ -23,15 +25,6 @@ namespace mailcore {
     class IMAPIdentityOperation;
 
 	class IMAPAsyncConnection : public Object {
-	private:
-		IMAPSession * mSession;
-		OperationQueue * mQueue;
-        char mDelimiter;
-        IMAPNamespace * mDefaultNamespace;
-        String * mLastFolder;
-		
-		void queue(IMAPOperation * op);
-		
 	public:
 		IMAPAsyncConnection();
 		virtual ~IMAPAsyncConnection();
@@ -113,7 +106,16 @@ namespace mailcore {
         
         virtual IMAPOperation * checkAccountOperation();
         
-        // private
+    private:
+		IMAPSession * mSession;
+		OperationQueue * mQueue;
+        char mDelimiter;
+        IMAPNamespace * mDefaultNamespace;
+        String * mLastFolder;
+		
+		void queue(IMAPOperation * op);
+		
+    public: // private
         virtual void runOperation(IMAPOperation * operation);
         virtual IMAPSession * session();
         
@@ -121,7 +123,9 @@ namespace mailcore {
         
 		virtual void setLastFolder(String * folder);
 		virtual String * lastFolder();
-	};
+    };
 }
+
+#endif
 
 #endif

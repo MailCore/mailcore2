@@ -11,18 +11,24 @@
 
 #include <mailcore/MCIMAPOperation.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class IMAPFetchNamespaceOperation : public IMAPOperation {
-        HashMap * mNamespaces;
-    private:
-        
     public:
         IMAPFetchNamespaceOperation();
         virtual ~IMAPFetchNamespaceOperation();
         
+    public: // subclass behavior
         virtual void main();
+        
+    private:
+        HashMap * mNamespaces;
+        
     };
 }
+
+#endif
 
 #endif /* defined(__mailcore2__IMAPFetchNamespaceOperation__) */

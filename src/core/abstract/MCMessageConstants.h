@@ -1,6 +1,8 @@
 #ifndef __MAILCORE_MCMESSAGECONSTANTS_H_
 #define __MAILCORE_MCMESSAGECONSTANTS_H_
 
+#ifdef __cplusplus
+
 namespace mailcore {
 	
 	enum ConnectionType {
@@ -205,5 +207,7 @@ namespace mailcore {
 		PartTypeMultipartAlternative,
 	};
 }
+
+#endif
 
 #endif

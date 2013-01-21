@@ -11,15 +11,11 @@
 
 #include <mailcore/MCIMAPOperation.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class IMAPFetchContentOperation : public IMAPOperation {
-    private:
-        uint32_t mUid;
-        String * mPartID;
-        Encoding mEncoding;
-        Data * mData;
-        
     public:
         IMAPFetchContentOperation();
         virtual ~IMAPFetchContentOperation();
@@ -35,8 +31,18 @@ namespace mailcore {
         
         virtual Data * data();
         
+    public: // subclass behavior
         virtual void main();
+        
+    private:
+        uint32_t mUid;
+        String * mPartID;
+        Encoding mEncoding;
+        Data * mData;
+        
     };
 }
+
+#endif
 
 #endif /* defined(__mailcore2__IMAPFetchContentOperation__) */

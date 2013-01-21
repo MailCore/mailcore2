@@ -8,36 +8,21 @@
 #include <stdarg.h>
 #include <unicode/utypes.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 	
 	class Data;
 	class Array;
 
 	class String : public Object {
-	private:
-		UChar * mUnicodeChars;
-		unsigned int mLength;
-		unsigned int mAllocated;
-		void allocate(unsigned int length);
-		void appendCharactersLength(const UChar * unicodeCharacters, unsigned int length);
-		void reset();
-		int compareWithCaseSensitive(String * otherString, bool caseSensitive);
-		void appendBytes(const char * bytes, unsigned int length, const char * charset);
-		void appendUTF8CharactersLength(const char * UTF8Characters, unsigned int length);
-		
 	public:
 		String(const UChar * unicodeChars = NULL);
 		String(const UChar * unicodeChars, unsigned int length);
 		String(const char * UTF8Characters);
-		String(String * otherString);
 		String(Data * data, const char * charset);
 		String(const char * bytes, unsigned int length, const char * charset = NULL);
 		virtual ~String();
-		
-		virtual String * description();
-		virtual Object * copy();
-		virtual bool isEqual(Object * otherObject);
-		virtual unsigned int hash();
 		
 		static String * string();
 		static String * stringWithUTF8Format(const char * format, ...);
@@ -115,8 +100,28 @@ namespace mailcore {
 		virtual String * mUTF7DecodedString();
 		
 		static String * uniquedStringWithUTF8Characters(const char * UTF8Characters);
+        
+    public: // subclass behavior
+		String(String * otherString);
+		virtual String * description();
+		virtual Object * copy();
+		virtual bool isEqual(Object * otherObject);
+		virtual unsigned int hash();
+        
+	private:
+		UChar * mUnicodeChars;
+		unsigned int mLength;
+		unsigned int mAllocated;
+		void allocate(unsigned int length);
+		void appendCharactersLength(const UChar * unicodeCharacters, unsigned int length);
+		void reset();
+		int compareWithCaseSensitive(String * otherString, bool caseSensitive);
+		void appendBytes(const char * bytes, unsigned int length, const char * charset);
+		void appendUTF8CharactersLength(const char * UTF8Characters, unsigned int length);
 	};
 
 }
+
+#endif
 
 #endif

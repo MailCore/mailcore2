@@ -11,15 +11,13 @@
 
 #include <mailcore/MCPOPOperation.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class MessageHeader;
     
     class POPFetchHeaderOperation : public POPOperation {
-    private:
-        unsigned int mMessageIndex;
-        MessageHeader * mHeader;
-        
     public:
         POPFetchHeaderOperation();
         virtual ~POPFetchHeaderOperation();
@@ -29,8 +27,16 @@ namespace mailcore {
         
         virtual MessageHeader * header();
         
+    public: // subclass behavior
         virtual void main();
+        
+    private:
+        unsigned int mMessageIndex;
+        MessageHeader * mHeader;
+        
     };
 }
+
+#endif
 
 #endif /* defined(__mailcore2__MCPOPFetchHeaderOperation__) */

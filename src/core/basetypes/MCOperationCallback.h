@@ -2,6 +2,8 @@
 
 #define __MAILCORE_MCOPERATIONCALLBACK_H_
 
+#ifdef __cplusplus
+
 namespace mailcore {
 	
 	class Operation;
@@ -12,5 +14,7 @@ namespace mailcore {
 	};
 	
 }
+
+#endif
 
 #endif

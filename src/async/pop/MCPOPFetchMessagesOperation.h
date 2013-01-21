@@ -11,17 +11,24 @@
 
 #include <mailcore/MCPOPOperation.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     class POPFetchMessagesOperation : public POPOperation {
-        Array * mMessages;
     public:
         POPFetchMessagesOperation();
         virtual ~POPFetchMessagesOperation();
         
         virtual Array * messages();
         
+    public: // subclass behavior
         virtual void main();
+        
+    private:
+        Array * mMessages;
     };
 }
+
+#endif
 
 #endif /* defined(__mailcore2__MCPOPFetchMessagesOperation__) */

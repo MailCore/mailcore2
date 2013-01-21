@@ -9,6 +9,8 @@
 #ifndef mailcore2_MCPOPOperationCallback_h
 #define mailcore2_MCPOPOperationCallback_h
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class POPOperation;
@@ -19,5 +21,7 @@ namespace mailcore {
     };
     
 }
+
+#endif
 
 #endif

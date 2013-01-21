@@ -9,6 +9,8 @@
 #ifndef __mailcore2__MCIMAPOperationCallback__
 #define __mailcore2__MCIMAPOperationCallback__
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class IMAPOperation;
@@ -20,5 +22,7 @@ namespace mailcore {
     };
     
 }
+
+#endif
 
 #endif /* defined(__mailcore2__MCIMAPOperationCallback__) */

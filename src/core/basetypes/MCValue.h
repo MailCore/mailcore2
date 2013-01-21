@@ -4,46 +4,16 @@
 
 #include <mailcore/MCObject.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 
 	class String;
 
 	class Value : public Object {
-	private:
-		int mType;
-		union {
-			bool boolValue;
-			char charValue;
-			unsigned char unsignedCharValue;
-			short shortValue;
-			unsigned short unsignedShortValue;
-			int intValue;
-			unsigned int unsignedIntValue;
-			long longValue;
-			unsigned long unsignedLongValue;
-			long long longLongValue;
-			unsigned long long unsignedLongLongValue;
-			float floatValue;
-			double doubleValue;
-			void * pointerValue;
-			struct {
-				char * data;
-				int length;
-			} dataValue;
-		} mValue;
-		Value();
-		
 	public:
-		Value(Value * other);
 		virtual ~Value();
 
-		virtual String * description();
-		
-		virtual bool isEqual(Object * otherObject);
-		virtual unsigned int hash();
-		
-		Object * copy();
-		
 		static Value * valueWithBoolValue(bool value);
 		static Value * valueWithCharValue(char value);
 		static Value * valueWithUnsignedCharValue(unsigned char value);
@@ -73,8 +43,42 @@ namespace mailcore {
 		virtual double doubleValue();
 		virtual void * pointerValue();
 		virtual void dataValue(const char ** p_value, int * p_length);
+        
+    public: // subclass behavior
+		Value(Value * other);
+		virtual String * description();
+		virtual bool isEqual(Object * otherObject);
+		virtual unsigned int hash();
+		Object * copy();
+        
+	private:
+		int mType;
+		union {
+			bool boolValue;
+			char charValue;
+			unsigned char unsignedCharValue;
+			short shortValue;
+			unsigned short unsignedShortValue;
+			int intValue;
+			unsigned int unsignedIntValue;
+			long longValue;
+			unsigned long unsignedLongValue;
+			long long longLongValue;
+			unsigned long long unsignedLongLongValue;
+			float floatValue;
+			double doubleValue;
+			void * pointerValue;
+			struct {
+				char * data;
+				int length;
+			} dataValue;
+		} mValue;
+		Value();
+		
 	};
 
 }
+
+#endif
 
 #endif

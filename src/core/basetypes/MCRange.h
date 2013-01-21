@@ -2,6 +2,8 @@
 
 #define __MAILCORE_MCRANGE_H_
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     struct Range {
@@ -11,5 +13,7 @@ namespace mailcore {
     
     Range RangeMake(unsigned int index, unsigned int length);
 }
+
+#endif
 
 #endif

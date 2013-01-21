@@ -12,14 +12,11 @@
 #include <mailcore/MCIMAPOperation.h>
 #include <mailcore/MCMessageConstants.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class IMAPAppendMessageOperation : public IMAPOperation {
-    private:
-        Data * mMessageData;
-        MessageFlag mFlags;
-        uint32_t mCreatedUID;
-        
     public:
         IMAPAppendMessageOperation();
         virtual ~IMAPAppendMessageOperation();
@@ -32,8 +29,17 @@ namespace mailcore {
         
         virtual uint32_t createdUID();
         
+    public: // subclass behavior
         virtual void main();
+
+    private:
+        Data * mMessageData;
+        MessageFlag mFlags;
+        uint32_t mCreatedUID;
+        
     };
 }
+
+#endif
 
 #endif /* defined(__mailcore2__MCIMAPAppendMessageOperation__) */

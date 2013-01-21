@@ -11,17 +11,20 @@
 
 #include <mailcore/MCIMAPOperation.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class IMAPCreateFolderOperation : public IMAPOperation {
-    private:
-        
     public:
         IMAPCreateFolderOperation();
         virtual ~IMAPCreateFolderOperation();
         
+    public: // subclass behavior
         virtual void main();
     };
 }
+
+#endif
 
 #endif /* defined(__mailcore2__MCIMAPCreateFolderOperation__) */

@@ -6,6 +6,8 @@
 #include <mailcore/MCMessageConstants.h>
 #include <libetpan/libetpan.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 
 	extern String * IMAPNamespacePersonal;
@@ -18,51 +20,6 @@ namespace mailcore {
 	class IMAPProgressCallback;
 	
 	class IMAPSession : public Object {
-	private:
-		String * mHostname;
-		unsigned int mPort;
-		String * mUsername;
-		String * mPassword;
-		AuthType mAuthType;
-		ConnectionType mConnectionType;
-		bool mCheckCertificateEnabled;
-		bool mVoIPEnabled;
-		char mDelimiter;
-		IMAPNamespace * mDefaultNamespace;
-		time_t mTimeout;
-		
-        bool mBodyProgressEnabled;
-		bool mIdleEnabled;
-		bool mXListEnabled;
-		String * mWelcomeString;
-		bool mNeedsMboxMailWorkaround;
-		uint32_t mUIDValidity;
-		uint32_t mUIDNext;
-		unsigned int mFolderMsgCount;
-		unsigned int mLastFetchedSequenceNumber;
-		String * mCurrentFolder;
-		pthread_mutex_t mIdleLock;
-		int mState;
-		mailimap * mImap;
-		IMAPProgressCallback * mProgressCallback;
-		unsigned int mProgressItemsCount;
-		
-		void init();
-		void bodyProgress(unsigned int current, unsigned int maximum);
-		void itemsProgress(unsigned int current, unsigned int maximum);
-		bool checkCertificate();
-		static void body_progress(size_t current, size_t maximum, void * context);
-		static void items_progress(size_t current, size_t maximum, void * context);
-		void setup();
-		void unsetup();
-		void connectIfNeeded(ErrorCode * pError);
-		void loginIfNeeded(ErrorCode * pError);
-		void selectIfNeeded(String * folder, ErrorCode * pError);
-		char fetchDelimiterIfNeeded(char defaultDelimiter, ErrorCode * pError);
-		Array * fetchMessages(String * folder, IMAPMessagesRequestKind requestKind, bool fetchByUID,
-			struct mailimap_set * imapset, HashMap * mapping, uint32_t startUid,
-			IMAPProgressCallback * progressCallback, ErrorCode * pError);
-		
 	public:
 		IMAPSession();
 		virtual ~IMAPSession();
@@ -160,7 +117,55 @@ namespace mailcore {
 		virtual uint32_t uidValidity();
 		virtual uint32_t uidNext();
 		virtual unsigned int lastFolderMessageCount();
+        
+	private:
+		String * mHostname;
+		unsigned int mPort;
+		String * mUsername;
+		String * mPassword;
+		AuthType mAuthType;
+		ConnectionType mConnectionType;
+		bool mCheckCertificateEnabled;
+		bool mVoIPEnabled;
+		char mDelimiter;
+		IMAPNamespace * mDefaultNamespace;
+		time_t mTimeout;
+		
+        bool mBodyProgressEnabled;
+		bool mIdleEnabled;
+		bool mXListEnabled;
+		String * mWelcomeString;
+		bool mNeedsMboxMailWorkaround;
+		uint32_t mUIDValidity;
+		uint32_t mUIDNext;
+		unsigned int mFolderMsgCount;
+		unsigned int mLastFetchedSequenceNumber;
+		String * mCurrentFolder;
+		pthread_mutex_t mIdleLock;
+		int mState;
+		mailimap * mImap;
+		IMAPProgressCallback * mProgressCallback;
+		unsigned int mProgressItemsCount;
+		
+		void init();
+		void bodyProgress(unsigned int current, unsigned int maximum);
+		void itemsProgress(unsigned int current, unsigned int maximum);
+		bool checkCertificate();
+		static void body_progress(size_t current, size_t maximum, void * context);
+		static void items_progress(size_t current, size_t maximum, void * context);
+		void setup();
+		void unsetup();
+		void connectIfNeeded(ErrorCode * pError);
+		void loginIfNeeded(ErrorCode * pError);
+		void selectIfNeeded(String * folder, ErrorCode * pError);
+		char fetchDelimiterIfNeeded(char defaultDelimiter, ErrorCode * pError);
+		Array * fetchMessages(String * folder, IMAPMessagesRequestKind requestKind, bool fetchByUID,
+                              struct mailimap_set * imapset, HashMap * mapping, uint32_t startUid,
+                              IMAPProgressCallback * progressCallback, ErrorCode * pError);
+		
 	};
 }
+
+#endif
 
 #endif

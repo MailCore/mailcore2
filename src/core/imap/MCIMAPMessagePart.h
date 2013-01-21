@@ -4,19 +4,21 @@
 
 #include <mailcore/MCAbstractMessagePart.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 	
 	class IMAPMessagePart : public AbstractMessagePart {
-	private:
-		
 	public:
 		IMAPMessagePart();
-		IMAPMessagePart(IMAPMessagePart * other);
 		virtual ~IMAPMessagePart();
-		
+        
+    public: // subclass behavior
+		IMAPMessagePart(IMAPMessagePart * other);
 		virtual Object * copy();
 	};
 }
 
+#endif
 
 #endif

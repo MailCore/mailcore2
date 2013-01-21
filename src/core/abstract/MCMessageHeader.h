@@ -5,34 +5,16 @@
 #include <mailcore/MCBaseTypes.h>
 #include <time.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 	
 	class Address;
 	
 	class MessageHeader : public Object {
-	private:
-		String * mMessageID;
-		Array * /* String */ mReferences;
-		Array * /* String */ mInReplyTo;
-	    Address * mSender;
-		Address * mFrom;
-		Array * /* Address */ mTo;
-		Array * /* Address */ mCc;
-		Array * /* Address */ mBcc;
-		Array * /* Address */ mReplyTo;
-		String * mSubject;
-	    time_t mDate;
-		time_t mReceivedDate;
-		String * mUserAgent;
-		void init(bool generateDate, bool generateMessageID);
-		
 	public:
 		MessageHeader();
-		MessageHeader(MessageHeader * other);
 		virtual ~MessageHeader();
-		
-		virtual String * description();
-		virtual Object * copy();
 		
 		virtual void setMessageID(String * messageID);
 		virtual String * messageID();
@@ -82,8 +64,31 @@ namespace mailcore {
 		
 		virtual struct mailimf_fields * createIMFFieldsAndFilterBcc(bool filterBcc);
 		virtual void importIMFFields(struct mailimf_fields * fields);
+        
+    public: // subclass behavior
+		MessageHeader(MessageHeader * other);
+		virtual String * description();
+		virtual Object * copy();
+        
+	private:
+		String * mMessageID;
+		Array * /* String */ mReferences;
+		Array * /* String */ mInReplyTo;
+	    Address * mSender;
+		Address * mFrom;
+		Array * /* Address */ mTo;
+		Array * /* Address */ mCc;
+		Array * /* Address */ mBcc;
+		Array * /* Address */ mReplyTo;
+		String * mSubject;
+	    time_t mDate;
+		time_t mReceivedDate;
+		String * mUserAgent;
+		void init(bool generateDate, bool generateMessageID);
 	};
 	
 }
+
+#endif
 
 #endif

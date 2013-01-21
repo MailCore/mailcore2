@@ -4,20 +4,14 @@
 
 #include <mailcore/MCBaseTypes.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 
 	class IMAPNamespaceItem : public Object {
-	private:
-	    char mDelimiter;
-	    String * mPrefix;
-		void init();
 	public:
 		IMAPNamespaceItem();
-		IMAPNamespaceItem(IMAPNamespaceItem * other);
 		virtual ~IMAPNamespaceItem();
-		
-		virtual String * description();
-		virtual Object * copy();
 		
 		virtual void setPrefix(String * prefix);
 		virtual String * prefix();
@@ -31,8 +25,20 @@ namespace mailcore {
 		virtual bool containsFolder(String * folder);
 
 		virtual void importIMAPNamespaceInfo(struct mailimap_namespace_info * info);
+        
+    public: // subclass behavior
+		IMAPNamespaceItem(IMAPNamespaceItem * other);
+		virtual String * description();
+		virtual Object * copy();
+        
+	private:
+	    char mDelimiter;
+	    String * mPrefix;
+		void init();
 	};
 
 }
+
+#endif
 
 #endif

@@ -4,23 +4,14 @@
 
 #include <mailcore/MCBaseTypes.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 
 	class POPMessageInfo : public Object {
-	private:
-		unsigned int mIndex;
-		unsigned int mSize;
-		String * mUid;
-		
-		void init();
-		
 	public:
 		POPMessageInfo();
-		POPMessageInfo(POPMessageInfo * other);
 		virtual ~POPMessageInfo();
-		
-		virtual String * description();
-		virtual Object * copy();
 		
 		virtual void setIndex(unsigned int index);
 		virtual unsigned int index();
@@ -30,8 +21,22 @@ namespace mailcore {
 		
 		virtual void setUid(String * uid);
 		virtual String * uid();
+        
+    public: // subclass behavior
+		POPMessageInfo(POPMessageInfo * other);
+		virtual String * description();
+		virtual Object * copy();
+        
+	private:
+		unsigned int mIndex;
+		unsigned int mSize;
+		String * mUid;
+		
+		void init();
 	};
 
 }
+
+#endif
 
 #endif

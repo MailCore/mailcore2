@@ -5,16 +5,21 @@
 #include <mailcore/MCBaseTypes.h>
 #include <mailcore/MCAbstractMultipart.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 	
 	class Multipart : public AbstractMultipart {
 	public:
 		Multipart();
-		Multipart(Multipart * other);
 		virtual ~Multipart();
 		
+    public: // subclass behavior
+		Multipart(Multipart * other);
 		virtual Object * copy();
 	};
 }
+
+#endif
 
 #endif

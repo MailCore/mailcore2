@@ -11,6 +11,8 @@
 
 #include <mailcore/MCBaseTypes.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class POPOperation;
@@ -21,10 +23,6 @@ namespace mailcore {
     class POPFetchMessagesOperation;
 	
 	class POPAsyncSession : public Object {
-	private:
-        POPSession * mSession;
-        OperationQueue * mQueue;
-		
 	public:
 		POPAsyncSession();
 		virtual ~POPAsyncSession();
@@ -62,10 +60,17 @@ namespace mailcore {
         // Will disconnect.
         virtual POPOperation * deleteMessages(Array * indexes);
         
-        // private
+	private:
+        POPSession * mSession;
+        OperationQueue * mQueue;
+		
+    public: // private
         virtual void runOperation(POPOperation * operation);
         virtual POPSession * session();
+        
     };
 }
+
+#endif
 
 #endif /* defined(__mailcore2__MCPopAsyncSession__) */

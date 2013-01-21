@@ -11,14 +11,11 @@
 
 #include <mailcore/MCIMAPOperation.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class IMAPStoreLabelsOperation : public IMAPOperation {
-    private:
-        Array * mUids;
-        IMAPStoreFlagsRequestKind mKind;
-        Array * mLabels;
-        
     public:
         IMAPStoreLabelsOperation();
         virtual ~IMAPStoreLabelsOperation();
@@ -32,8 +29,17 @@ namespace mailcore {
         virtual void setLabels(Array * labels);
         virtual Array * labels();
         
+    public: // subclass behavior
         virtual void main();
+        
+    private:
+        Array * mUids;
+        IMAPStoreFlagsRequestKind mKind;
+        Array * mLabels;
+        
     };
 }
+
+#endif
 
 #endif /* defined(__mailcore2__MCIMAPStoreLabelsOperation__) */

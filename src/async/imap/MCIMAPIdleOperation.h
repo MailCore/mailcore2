@@ -11,14 +11,11 @@
 
 #include <mailcore/MCIMAPOperation.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class IMAPIdleOperation : public IMAPOperation {
-    private:
-        uint32_t mLastKnownUid;
-        void prepare();
-        void unprepare();
-        
     public:
         IMAPIdleOperation();
         virtual ~IMAPIdleOperation();
@@ -28,8 +25,17 @@ namespace mailcore {
         
         virtual void cancel();
         
+    public: // subclass behavior
         virtual void main();
+        
+    private:
+        uint32_t mLastKnownUid;
+        void prepare();
+        void unprepare();
+        
     };
 }
+
+#endif
 
 #endif /* defined(__mailcore2__IMAPIdleOperation__) */

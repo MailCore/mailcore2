@@ -11,15 +11,11 @@
 
 #include <mailcore/MCIMAPOperation.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class IMAPIdentityOperation : public IMAPOperation {
-    private:
-        String * mVendor;
-        String * mName;
-        String * mVersion;
-        HashMap * mServerIdentity;
-        
     public:
         IMAPIdentityOperation();
         virtual ~IMAPIdentityOperation();
@@ -35,8 +31,18 @@ namespace mailcore {
         
         virtual HashMap * serverIdentity();
         
+    public: // subclass behavior
         virtual void main();
+        
+    private:
+        String * mVendor;
+        String * mName;
+        String * mVersion;
+        HashMap * mServerIdentity;
+        
     };
 }
+
+#endif
 
 #endif /* defined(__mailcore2__IMAPIdentityOperation__) */

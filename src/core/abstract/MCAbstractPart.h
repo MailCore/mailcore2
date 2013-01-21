@@ -5,29 +5,16 @@
 #include <mailcore/MCBaseTypes.h>
 #include <mailcore/MCMessageConstants.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 
 	class AbstractMessage;
 
 	class AbstractPart : public Object {
-	private:
-		String * mFilename;
-		String * mMimeType;
-		String * mCharset;
-		String * mContentID;
-		String * mContentLocation;
-		bool mInlineAttachment;
-		PartType mPartType;
-		AbstractMessage * mMessage; // weak
-		void init();
-		
 	public:
 		AbstractPart();
-		AbstractPart(AbstractPart * other);
 		virtual ~AbstractPart();
-		
-		virtual String * description();
-		virtual Object * copy();
 		
 		virtual PartType partType();
 		virtual void setPartType(PartType type);
@@ -55,8 +42,26 @@ namespace mailcore {
 		
 		virtual void importIMAPFields(struct mailimap_body_fields * fields,
 			struct mailimap_body_ext_1part * extension);
+        
+    public: // subclass behavior
+		AbstractPart(AbstractPart * other);
+		virtual String * description();
+		virtual Object * copy();
+        
+	private:
+		String * mFilename;
+		String * mMimeType;
+		String * mCharset;
+		String * mContentID;
+		String * mContentLocation;
+		bool mInlineAttachment;
+		PartType mPartType;
+		AbstractMessage * mMessage; // weak
+		void init();
 	};
 	
 }
+
+#endif
 
 #endif

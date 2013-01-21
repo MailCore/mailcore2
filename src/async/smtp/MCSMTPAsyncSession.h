@@ -6,6 +6,8 @@
 #include <mailcore/MCMessageConstants.h>
 #include <libetpan/libetpan.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 	
 	class MessageBuilder;
@@ -14,12 +16,6 @@ namespace mailcore {
     class Address;
 
 	class SMTPAsyncSession : public Object {
-	private:
-		SMTPSession * mSession;
-		OperationQueue * mQueue;
-		
-		void queue(SMTPOperation * op);
-		
 	public:
 		SMTPAsyncSession();
 		virtual ~SMTPAsyncSession();
@@ -54,11 +50,20 @@ namespace mailcore {
 		virtual SMTPOperation * sendMessageOperation(Data * messageData);
         virtual SMTPOperation * checkAccountOperation(Address * from);
         
-        // private
+    public: // private
         virtual void runOperation(SMTPOperation * operation);
         virtual SMTPSession * session();
+        
+	private:
+		SMTPSession * mSession;
+		OperationQueue * mQueue;
+		
+		void queue(SMTPOperation * op);
+		
 	};
 	
 }
+
+#endif
 
 #endif

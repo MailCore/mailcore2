@@ -11,17 +11,20 @@
 
 #include <mailcore/MCIMAPOperation.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class IMAPDeleteFolderOperation : public IMAPOperation {
-    private:
-        
     public:
         IMAPDeleteFolderOperation();
         virtual ~IMAPDeleteFolderOperation();
         
+    public: // subclass behavior
         virtual void main();
     };
 }
+
+#endif
 
 #endif /* defined(__mailcore2__MCIMAPDeleteFolderOperation__) */

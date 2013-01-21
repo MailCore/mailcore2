@@ -11,12 +11,11 @@
 
 #include <mailcore/MCPOPOperation.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class POPDeleteMessagesOperation : public POPOperation {
-    private:
-        Array * mMessageIndexes;
-        
     public:
         POPDeleteMessagesOperation();
         virtual ~POPDeleteMessagesOperation();
@@ -24,10 +23,16 @@ namespace mailcore {
         virtual void setMessageIndexes(Array * indexes);
         virtual Array * messageIndexes();
         
+    public: // subclass behavior
         virtual void main();
+        
+    private:
+        Array * mMessageIndexes;
+        
     };
     
 }
 
+#endif
 
 #endif /* defined(__mailcore2__MCPOPDeleteMessagesOperation__) */

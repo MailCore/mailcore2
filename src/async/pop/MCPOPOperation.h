@@ -12,19 +12,14 @@
 #include <mailcore/MCBaseTypes.h>
 #include <mailcore/MCPOPProgressCallback.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class POPAsyncSession;
     class POPOperationCallback;
     
     class POPOperation : public Operation, public POPProgressCallback {
-        POPAsyncSession * mSession;
-        POPOperationCallback * mPopCallback;
-        ErrorCode mError;
-    private:
-		virtual void bodyProgress(POPSession * session, unsigned int current, unsigned int maximum);
-        virtual void bodyProgressOnMainThread(void * context);
-        
     public:
         POPOperation();
         virtual ~POPOperation();
@@ -39,8 +34,19 @@ namespace mailcore {
         virtual ErrorCode error();
         
         virtual void start();
+        
+    private:
+        POPAsyncSession * mSession;
+        POPOperationCallback * mPopCallback;
+        ErrorCode mError;
+    private:
+		virtual void bodyProgress(POPSession * session, unsigned int current, unsigned int maximum);
+        virtual void bodyProgressOnMainThread(void * context);
+        
     };
     
 }
+
+#endif
 
 #endif /* defined(__mailcore2__MCPOPOperation__) */

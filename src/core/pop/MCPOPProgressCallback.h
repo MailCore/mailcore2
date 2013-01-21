@@ -2,6 +2,8 @@
 
 #define __MAILCORE_MCPOPPROGRESSCALLBACK_H_
 
+#ifdef __cplusplus
+
 namespace mailcore {
 
 	class POPSession;
@@ -11,5 +13,7 @@ namespace mailcore {
 		virtual void bodyProgress(POPSession * session, unsigned int current, unsigned int maximum) {};
 	};
 }
+
+#endif
 
 #endif

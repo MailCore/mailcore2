@@ -5,31 +5,18 @@
 #include <mailcore/MCObject.h>
 #include <mailcore/MCMessageConstants.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 
 	class String;
 
 	class Data : public Object {
-	private:
-		char * mBytes;
-		unsigned int mLength;
-		unsigned int mAllocated;
-		void allocate(unsigned int length);
-		void reset();
-		static String * normalizeCharset(String * charset);
-		String * charsetWithFilteredHTMLWithoutHint(bool filterHTML);
-		
 	public:
 		Data();
 		Data(int capacity);
-		Data(Data * otherData);
 		Data(const char * bytes, unsigned int length);
 		virtual ~Data();
-		
-		virtual String * description();
-		virtual Object * copy();
-		virtual bool isEqual(Object * otherObject);
-		virtual unsigned int hash();
 		
 		static Data * data();
 		static Data * dataWithCapacity(int capacity);
@@ -50,8 +37,27 @@ namespace mailcore {
 		virtual String * stringWithCharset(const char * charset);
 		virtual String * charsetWithFilteredHTML(bool filterHTML, String * hintCharset = NULL);
 		virtual Data * decodedDataUsingEncoding(Encoding encoding);
+        
+    public: // subclass behavior
+		Data(Data * otherData);
+		virtual String * description();
+		virtual Object * copy();
+		virtual bool isEqual(Object * otherObject);
+		virtual unsigned int hash();
+        
+	private:
+		char * mBytes;
+		unsigned int mLength;
+		unsigned int mAllocated;
+		void allocate(unsigned int length);
+		void reset();
+		static String * normalizeCharset(String * charset);
+		String * charsetWithFilteredHTMLWithoutHint(bool filterHTML);
+		
 	};
 
 }
+
+#endif
 
 #endif

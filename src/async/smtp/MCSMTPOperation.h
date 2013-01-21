@@ -12,19 +12,14 @@
 #include <mailcore/MCBaseTypes.h>
 #include <mailcore/MCSMTPProgressCallback.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 
     class SMTPAsyncSession;
     class SMTPOperationCallback;
     
     class SMTPOperation : public Operation, public SMTPProgressCallback {
-        SMTPAsyncSession * mSession;
-        SMTPOperationCallback * mSmtpCallback;
-        ErrorCode mError;
-    private:
-		virtual void bodyProgress(SMTPSession * session, unsigned int current, unsigned int maximum);
-        virtual void bodyProgressOnMainThread(void * context);
-        
     public:
         SMTPOperation();
         virtual ~SMTPOperation();
@@ -39,8 +34,18 @@ namespace mailcore {
         virtual ErrorCode error();
         
         virtual void start();
+        
+    private:
+        SMTPAsyncSession * mSession;
+        SMTPOperationCallback * mSmtpCallback;
+        ErrorCode mError;
+    private:
+		virtual void bodyProgress(SMTPSession * session, unsigned int current, unsigned int maximum);
+        virtual void bodyProgressOnMainThread(void * context);
     };
     
 }
+
+#endif
 
 #endif /* defined(__mailcore2__MCSMTPOperation__) */

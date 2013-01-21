@@ -11,17 +11,20 @@
 
 #include <mailcore/MCIMAPOperation.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class IMAPExpungeOperation : public IMAPOperation {
-    private:
-        
     public:
         IMAPExpungeOperation();
         virtual ~IMAPExpungeOperation();
         
+    public: // subclass behavior
         virtual void main();
     };
 }
+
+#endif
 
 #endif /* defined(__mailcore2__MCIMAPExpungeOperation__) */

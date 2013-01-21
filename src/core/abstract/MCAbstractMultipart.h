@@ -5,27 +5,32 @@
 #include <mailcore/MCBaseTypes.h>
 #include <mailcore/MCAbstractPart.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 	
 	class AbstractMultipart : public AbstractPart {
-	private:
-		Array * mParts;
-		void init();
-		void applyMessage();
-		
 	public:
 		AbstractMultipart();
-		AbstractMultipart(AbstractMultipart * other);
 		virtual ~AbstractMultipart();
-		
-		virtual String * description();
-		virtual Object * copy();
 		
 		virtual Array * parts();
 		virtual void setParts(Array * parts);
 		
 		virtual void setMessage(AbstractMessage * message);
+        
+    public: //subclass behavior
+		AbstractMultipart(AbstractMultipart * other);
+		virtual String * description();
+		virtual Object * copy();
+		
+	private:
+		Array * mParts;
+		void init();
+		void applyMessage();
 	};
 }
+
+#endif
 
 #endif

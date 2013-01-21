@@ -6,9 +6,20 @@
 #include <libetpan/libetpan.h>
 #include <pthread.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 
 	class AutoreleasePool : public Object {
+	public:
+		AutoreleasePool();
+		virtual ~AutoreleasePool();
+		
+		static void autorelease(Object * obj);
+        
+    public: // subclass behavior
+		virtual String * description();
+        
 	private:
 		static void init();
 		static pthread_key_t autoreleasePoolStackKey;
@@ -18,17 +29,10 @@ namespace mailcore {
 		static void initAutoreleasePoolStackKey();
 		static AutoreleasePool * currentAutoreleasePool();
 		virtual void add(Object * obj);
-
-	public:
-		AutoreleasePool();
-		virtual ~AutoreleasePool();
-		
-		virtual String * className();
-		virtual String * description();
-		
-		static void autorelease(Object * obj);
 	};
 
 }
+
+#endif
 
 #endif

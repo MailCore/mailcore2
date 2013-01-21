@@ -11,14 +11,11 @@
 
 #include <mailcore/MCIMAPOperation.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class IMAPCopyMessagesOperation : public IMAPOperation {
-    private:
-        Array * mUids;
-        String * mDestFolder;
-        Array * mDestUids;
-        
     public:
         IMAPCopyMessagesOperation();
         virtual ~IMAPCopyMessagesOperation();
@@ -31,8 +28,16 @@ namespace mailcore {
         
         virtual Array * destUids();
         
+    public: // subclass behavior
         virtual void main();
+        
+    private:
+        Array * mUids;
+        String * mDestFolder;
+        Array * mDestUids;
     };
 }
+
+#endif
 
 #endif /* defined(__mailcore2__MCIMAPCopyMessagesOperation__) */

@@ -5,16 +5,13 @@
 #include <pthread.h>
 #include <mailcore/MCObject.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 
 	class OperationCallback;
 
 	class Operation : public Object {
-	private:
-		OperationCallback * mCallback;
-		bool mCancelled;
-		pthread_mutex_t mLock;
-		
 	public:
 		Operation();
 		virtual ~Operation();
@@ -26,8 +23,16 @@ namespace mailcore {
 		virtual bool isCancelled();
 		
 		virtual void main();
+        
+	private:
+		OperationCallback * mCallback;
+		bool mCancelled;
+		pthread_mutex_t mLock;
+		
 	};
 	
 }
+
+#endif
 
 #endif

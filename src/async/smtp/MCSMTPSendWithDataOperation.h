@@ -13,12 +13,11 @@
 #include <mailcore/MCAbstract.h>
 #include <mailcore/MCSMTPOperation.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 
     class SMTPSendWithDataOperation : public SMTPOperation {
-    private:
-        Data * mMessageData;
-        
     public:
         SMTPSendWithDataOperation();
         virtual ~SMTPSendWithDataOperation();
@@ -26,8 +25,15 @@ namespace mailcore {
         virtual void setMessageData(Data * data);
         virtual Data * messageData();
         
+    public: // subclass behavior
         virtual void main();
+        
+    private:
+        Data * mMessageData;
+        
     };
 }
+
+#endif
 
 #endif /* defined(__mailcore2__SMTPSendWithDataOperation__) */

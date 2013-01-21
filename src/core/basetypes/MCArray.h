@@ -6,25 +6,20 @@
 
 #include <libetpan/libetpan.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 
 	class String;
 
 	class Array : public Object {
-	private:
-		carray * mArray;
-		void init();
 	public:
 		Array();
-		Array(Array * o);
 		virtual ~Array();
 		
 		static Array * array();
 		static Array * arrayWithObject(Object * obj);
 
-		virtual String * description();
-		virtual Object * copy();
-		
 		virtual unsigned int count();
 		virtual void addObject(Object * obj);
 		virtual void removeObjectAtIndex(unsigned int idx);
@@ -41,8 +36,19 @@ namespace mailcore {
 		
 		virtual Array * sortedArray(int (* compare)(void *, void *, void *), void * context);
 		virtual String * componentsJoinedByString(String * delimiter);
+        
+    public: // subclass behavior
+		Array(Array * o);
+		virtual String * description();
+		virtual Object * copy();
+        
+	private:
+		carray * mArray;
+		void init();
 	};
 
 }
+
+#endif
 
 #endif

@@ -2,6 +2,8 @@
 
 #define __MAILCORE_MCIMAPPROGRESSCALLBACK_H_
 
+#ifdef __cplusplus
+
 namespace mailcore {
 
 	class IMAPSession;
@@ -12,5 +14,7 @@ namespace mailcore {
 		virtual void itemsProgress(IMAPSession * session, unsigned int current, unsigned int maximum) {};
 	};
 }
+
+#endif
 
 #endif

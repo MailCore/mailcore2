@@ -12,22 +12,14 @@
 #include <mailcore/MCBaseTypes.h>
 #include <mailcore/MCIMAPProgressCallback.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class IMAPAsyncConnection;
     class IMAPOperationCallback;
     
     class IMAPOperation : public Operation, public IMAPProgressCallback {
-        IMAPAsyncConnection * mSession;
-        String * mFolder;
-        IMAPOperationCallback * mImapCallback;
-        ErrorCode mError;
-    private:
-		virtual void bodyProgress(IMAPSession * session, unsigned int current, unsigned int maximum);
-        virtual void bodyProgressOnMainThread(void * context);
-        virtual void itemsProgress(IMAPSession * session, unsigned int current, unsigned int maximum);
-        virtual void itemsProgressOnMainThread(void * context);
-        
     public:
         IMAPOperation();
         virtual ~IMAPOperation();
@@ -45,8 +37,23 @@ namespace mailcore {
         virtual ErrorCode error();
         
         virtual void start();
+        
+    private:
+        IMAPAsyncConnection * mSession;
+        String * mFolder;
+        IMAPOperationCallback * mImapCallback;
+        ErrorCode mError;
+        
+    private:
+		virtual void bodyProgress(IMAPSession * session, unsigned int current, unsigned int maximum);
+        virtual void bodyProgressOnMainThread(void * context);
+        virtual void itemsProgress(IMAPSession * session, unsigned int current, unsigned int maximum);
+        virtual void itemsProgressOnMainThread(void * context);
+        
     };
     
 }
+
+#endif
 
 #endif /* defined(__mailcore2__MCIMAPOperation__) */

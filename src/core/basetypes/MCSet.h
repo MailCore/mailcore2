@@ -4,6 +4,8 @@
 
 #include <mailcore/MCObject.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 
 	class String;
@@ -11,20 +13,13 @@ namespace mailcore {
 	class HashMap;
 
 	class Set : public Object {
-	private:
-		HashMap * mHash;
-		void init();
 	public:
 		Set();
 		Set(Set * o);
-		virtual ~Set();
 		
 		static Set * set();
 		static Set * setWithArray(Array * objects);
 
-		virtual String * description();
-		virtual Object * copy();
-		
 		virtual unsigned int count();
 		virtual void addObject(Object * obj);
 		virtual void removeObject(Object * obj);
@@ -34,8 +29,19 @@ namespace mailcore {
 		virtual Array * allObjects();
 		virtual void removeAllObjects();
 		virtual void addObjectsFromArray(Array * objects);
+        
+    public: // subclass behavior
+		virtual ~Set();
+		virtual String * description();
+		virtual Object * copy();
+        
+	private:
+		HashMap * mHash;
+		void init();
 	};
 
 }
+
+#endif
 
 #endif

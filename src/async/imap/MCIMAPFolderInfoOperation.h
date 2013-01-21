@@ -11,14 +11,11 @@
 
 #include <mailcore/MCIMAPOperation.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class IMAPFolderInfoOperation : public IMAPOperation {
-    private:
-        uint32_t mUidNext;
-        uint32_t mUidValidity;
-        int mMessageCount;
-        
     public:
         IMAPFolderInfoOperation();
         virtual ~IMAPFolderInfoOperation();
@@ -27,9 +24,18 @@ namespace mailcore {
         virtual uint32_t uidValidity();
         virtual int messageCount();
         
+    public: // subclass behavior
         virtual void main();
+        
+    private:
+        uint32_t mUidNext;
+        uint32_t mUidValidity;
+        int mMessageCount;
+        
     };
 
 }
+
+#endif
 
 #endif /* defined(__mailcore2__MCIMAPFolderInfoOperation__) */

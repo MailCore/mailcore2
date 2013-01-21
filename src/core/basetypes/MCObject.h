@@ -4,15 +4,13 @@
 
 #include <pthread.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 
 	class String;
 
 	class Object {
-	private:
-		pthread_mutex_t mLock;
-		int mCounter;
-		void init();
 	public:
 		Object();
 		virtual ~Object();
@@ -34,8 +32,15 @@ namespace mailcore {
 		virtual void performMethod(Method method, void * context);
 		virtual void performMethodOnMainThread(Method method, void * context, bool waitUntilDone = false);
 		virtual void performMethodAfterDelay(Method method, void * context, double delay);
+        
+	private:
+		pthread_mutex_t mLock;
+		int mCounter;
+		void init();
 	};
 
 }
+
+#endif
 
 #endif

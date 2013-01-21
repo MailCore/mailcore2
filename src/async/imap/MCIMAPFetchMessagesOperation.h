@@ -11,18 +11,11 @@
 
 #include <mailcore/MCIMAPOperation.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class IMAPFetchMessagesOperation : public IMAPOperation {
-    private:
-        bool mFetchByUidEnabled;
-        uint32_t mFirst;
-        uint32_t mLast;
-        Array * mUids;
-        Array * mNumbers;
-        IMAPMessagesRequestKind mKind;
-        Array * mMessages;
-        
     public:
         IMAPFetchMessagesOperation();
         virtual ~IMAPFetchMessagesOperation();
@@ -47,8 +40,21 @@ namespace mailcore {
         
         virtual Array * messages();
         
+    public: // subclass behavior
         virtual void main();
+        
+    private:
+        bool mFetchByUidEnabled;
+        uint32_t mFirst;
+        uint32_t mLast;
+        Array * mUids;
+        Array * mNumbers;
+        IMAPMessagesRequestKind mKind;
+        Array * mMessages;
+        
     };
 }
+
+#endif
 
 #endif /* defined(__mailcore2__IMAPFetchMessagesOperation__) */

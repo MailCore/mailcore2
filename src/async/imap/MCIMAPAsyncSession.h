@@ -12,6 +12,8 @@
 #include <mailcore/MCBaseTypes.h>
 #include <mailcore/MCMessageConstants.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 	
 	class IMAPOperation;
@@ -30,28 +32,6 @@ namespace mailcore {
     class IMAPAsyncConnection;
     
 	class IMAPAsyncSession : public Object {
-	private:
-        Array * mSessions;
-        
-		String * mHostname;
-		unsigned int mPort;
-		String * mUsername;
-		String * mPassword;
-		AuthType mAuthType;
-		ConnectionType mConnectionType;
-		bool mCheckCertificateEnabled;
-		bool mVoIPEnabled;
-		char mDelimiter;
-		IMAPNamespace * mDefaultNamespace;
-		time_t mTimeout;
-        bool mAllowsFolderConcurrentAccessEnabled;
-		unsigned int mMaximumConnections;
-        
-        IMAPAsyncConnection * sessionForFolder(String * folder, bool urgent = false);
-        IMAPAsyncConnection * session();
-        IMAPAsyncConnection * matchingSessionForFolder(String * folder);
-        IMAPAsyncConnection * availableSession();
-        
 	public:
 		IMAPAsyncSession();
 		virtual ~IMAPAsyncSession();
@@ -140,7 +120,32 @@ namespace mailcore {
 		virtual IMAPIdentityOperation * identityOperation(String * vendor, String * name, String * version);
         
         virtual IMAPOperation * checkAccountOperation();
+        
+	private:
+        Array * mSessions;
+        
+		String * mHostname;
+		unsigned int mPort;
+		String * mUsername;
+		String * mPassword;
+		AuthType mAuthType;
+		ConnectionType mConnectionType;
+		bool mCheckCertificateEnabled;
+		bool mVoIPEnabled;
+		char mDelimiter;
+		IMAPNamespace * mDefaultNamespace;
+		time_t mTimeout;
+        bool mAllowsFolderConcurrentAccessEnabled;
+		unsigned int mMaximumConnections;
+        
+        IMAPAsyncConnection * sessionForFolder(String * folder, bool urgent = false);
+        IMAPAsyncConnection * session();
+        IMAPAsyncConnection * matchingSessionForFolder(String * folder);
+        IMAPAsyncConnection * availableSession();
+        
 	};
 }
+
+#endif
 
 #endif /* defined(__mailcore2__MCIMAPAccount__) */

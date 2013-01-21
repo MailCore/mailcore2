@@ -11,12 +11,11 @@
 
 #include <mailcore/MCIMAPOperation.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class IMAPSubscribeFolderOperation : public IMAPOperation {
-    private:
-        bool mUnsubscribeEnabled;
-        
     public:
         IMAPSubscribeFolderOperation();
         virtual ~IMAPSubscribeFolderOperation();
@@ -24,8 +23,15 @@ namespace mailcore {
         virtual void setUnsubscribeEnabled(bool enabled);
         virtual bool isUnsubscribeEnabled();
         
+    public: // subclass behavior
         virtual void main();
+        
+    private:
+        bool mUnsubscribeEnabled;
+        
     };
 }
+
+#endif
 
 #endif /* defined(__mailcore2__MCIMAPSubscribeFolderOperation__) */

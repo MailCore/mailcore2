@@ -5,20 +5,14 @@
 #include <mailcore/MCBaseTypes.h>
 #include <mailcore/MCMessageConstants.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 	
 	class IMAPFolder : public Object {
-	private:
-		String * mPath;
-		char mDelimiter;
-		IMAPFolderFlag mFlags;
-		void init();
 	public:
 		IMAPFolder();
-		IMAPFolder(IMAPFolder * other);
 		virtual ~IMAPFolder();
-		
-		virtual Object * copy();
 		
 		virtual void setPath(String * path);
 		virtual String * path();
@@ -28,8 +22,20 @@ namespace mailcore {
 		
 		virtual void setFlags(IMAPFolderFlag flags);
 		virtual IMAPFolderFlag flags();
+        
+    public: // subclass behavior
+		IMAPFolder(IMAPFolder * other);
+		virtual Object * copy();
+        
+	private:
+		String * mPath;
+		char mDelimiter;
+		IMAPFolderFlag mFlags;
+		void init();
 	};
 	
 }
+
+#endif
 
 #endif

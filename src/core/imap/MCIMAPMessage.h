@@ -7,24 +7,15 @@
 #include <mailcore/MCMessageConstants.h>
 #include <mailcore/MCAbstractPart.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 
 	class IMAPMessage : public AbstractMessage {
-	private:
-		uint32_t mUid;
-		MessageFlag mFlags;
-		MessageFlag mOriginalFlags;
-		AbstractPart * mMainPart;
-		Array * mLabels;
-		void init();
 	public:
 		IMAPMessage();
-		IMAPMessage(IMAPMessage * other);
 		~IMAPMessage();
 		
-		virtual Object * copy();
-		virtual String * description();
-
 		virtual uint32_t uid();
 		virtual void setUid(uint32_t uid);
 		
@@ -39,8 +30,23 @@ namespace mailcore {
 		
 		virtual void setGmailLabels(Array * labels);
 		virtual Array * gmailLabels();
+        
+    public: // subclass behavior
+		IMAPMessage(IMAPMessage * other);
+		virtual Object * copy();
+		virtual String * description();
+        
+	private:
+		uint32_t mUid;
+		MessageFlag mFlags;
+		MessageFlag mOriginalFlags;
+		AbstractPart * mMainPart;
+		Array * mLabels;
+		void init();
 	};
 
 }
+
+#endif
 
 #endif

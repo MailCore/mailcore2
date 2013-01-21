@@ -2,6 +2,8 @@
 
 #define __MAILCORE_MCUTILS_H
 
+#ifdef __cplusplus
+
 #define MC_SAFE_RETAIN(o) ((o) != NULL ? (o)->retain() : NULL)
 #define MC_SAFE_COPY(o) ((o) != NULL ? (o)->copy() : NULL)
 
@@ -30,5 +32,7 @@
 #define MCUTF8(str) ((str) != NULL ? (str)->UTF8Characters() : NULL )
 #define MMCUTF8(str) MCUTF8(str)
 #define MCUTF8DESC(obj) ((obj) != NULL ? (obj)->description()->UTF8Characters() : NULL )
+
+#endif
 
 #endif

@@ -7,12 +7,22 @@
 #include <mailcore/MCObject.h>
 #include <libetpan/libetpan.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 	
 	class Operation;
 	class Array;
     
 	class OperationQueue : public Object {
+	public:
+		OperationQueue();
+		virtual ~OperationQueue();
+		
+		virtual void addOperation(Operation * op);
+		
+        virtual unsigned int count();
+        
 	private:
 		Array * mOperations;
 		pthread_t mThreadID;
@@ -31,17 +41,10 @@ namespace mailcore {
 		void checkRunningOnMainThread(void * context);
 		void checkRunningAfterDelay(void * context);
 		
-	public:
-		OperationQueue();
-		virtual ~OperationQueue();
-		
-		virtual void addOperation(Operation * op);
-		
-        virtual unsigned int count();
-        
-		//virtual void waitUntilAllOperationsAreFinished();
 	};
 	
 }
+
+#endif
 
 #endif

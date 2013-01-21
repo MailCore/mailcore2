@@ -4,18 +4,21 @@
 
 #include <mailcore/MCAbstractMultipart.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 	
 	class IMAPMultipart : public AbstractMultipart {
-	private:
-		
 	public:
 		IMAPMultipart();
-		IMAPMultipart(IMAPMultipart * other);
 		virtual ~IMAPMultipart();
 		
+    public: // subclass behavior
+		IMAPMultipart(IMAPMultipart * other);
 		virtual Object * copy();
 	};
 }
+
+#endif
 
 #endif

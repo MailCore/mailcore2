@@ -12,15 +12,11 @@
 #include <mailcore/MCBaseTypes.h>
 #include <mailcore/MCIMAPOperation.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class IMAPFetchFoldersOperation : public IMAPOperation {
-    private:
-        String * mFolder;
-        bool mFetchSubscribedEnabled;
-        Array * mFolders;
-        void setDelimiterDataOnMainThread(char * delimiterData);
-        
     public:
         IMAPFetchFoldersOperation();
         virtual ~IMAPFetchFoldersOperation();
@@ -30,8 +26,18 @@ namespace mailcore {
         
         virtual Array * folders();
         
+    public: // subclass behavior
         virtual void main();
+        
+    private:
+        String * mFolder;
+        bool mFetchSubscribedEnabled;
+        Array * mFolders;
+        void setDelimiterDataOnMainThread(char * delimiterData);
+        
     };
 }
+
+#endif
 
 #endif /* defined(__mailcore2__MCIMAPFetchFoldersOperation__) */

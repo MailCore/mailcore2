@@ -12,17 +12,13 @@
 #include <mailcore/MCIMAPOperation.h>
 #include <mailcore/MCMessageConstants.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class IMAPSearchExpression;
     
     class IMAPSearchOperation : public IMAPOperation {
-    private:
-        IMAPSearchKind mKind;
-        String * mSearchString;
-        IMAPSearchExpression * mExpression;
-        Array * mUids;
-        
     public:
         IMAPSearchOperation();
         virtual ~IMAPSearchOperation();
@@ -38,8 +34,18 @@ namespace mailcore {
         
         virtual Array * uids();
         
+    public: // subclass behavior
         virtual void main();
+        
+    private:
+        IMAPSearchKind mKind;
+        String * mSearchString;
+        IMAPSearchExpression * mExpression;
+        Array * mUids;
+        
     };
 }
+
+#endif
 
 #endif /* defined(__mailcore2__IMAPSearchOperation__) */

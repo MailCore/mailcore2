@@ -5,17 +5,21 @@
 #include <mailcore/MCBaseTypes.h>
 #include <mailcore/MCAbstractMessagePart.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 	
 	class MessagePart : public AbstractMessagePart {
 	public:
 		MessagePart();
-		MessagePart(MessagePart * other);
 		virtual ~MessagePart();
-		
+        
+    public: // subclass behavior
+		MessagePart(MessagePart * other);
 		virtual Object * copy();
 	};
 }
 
+#endif
 
 #endif
