@@ -20,6 +20,18 @@ IMAPAsyncSession::IMAPAsyncSession()
     mSessions = new Array();
     mMaximumConnections = DEFAULT_MAX_CONNECTIONS;
     mAllowsFolderConcurrentAccessEnabled = true;
+    
+    mHostname = NULL;
+    mPort = 0;
+    mUsername = NULL;
+    mPassword = NULL;
+    mAuthType = AuthTypeSASLNone;
+    mConnectionType = ConnectionTypeClear;
+    mCheckCertificateEnabled = true;
+    mVoIPEnabled = true;
+    mDelimiter = 0;
+    mDefaultNamespace = NULL;
+    mTimeout = 30.;
 }
 
 IMAPAsyncSession::~IMAPAsyncSession()

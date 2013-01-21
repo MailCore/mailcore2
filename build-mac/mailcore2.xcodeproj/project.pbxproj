@@ -475,7 +475,6 @@
 		C64EA52C169E772200778456 = {
 			isa = PBXGroup;
 			children = (
-				C64EA7B016A00BBB00778456 /* CoreServices.framework */,
 				C64EA545169E78B100778456 /* src */,
 				C64EA7A916A00AF400778456 /* tests */,
 				C64EA78E169F259200778456 /* Frameworks */,
@@ -751,6 +750,7 @@
 		C64EA78E169F259200778456 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C64EA7B016A00BBB00778456 /* CoreServices.framework */,
 				C64EA78F169F259200778456 /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -1016,11 +1016,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../src/core/basetypes\"",
-					"\"$(SRCROOT)/../src/core/abstract\"",
-				);
 				PRODUCT_NAME = mailcore2;
 			};
 			name = Debug;
@@ -1029,11 +1024,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../src/core/basetypes\"",
-					"\"$(SRCROOT)/../src/core/abstract\"",
-				);
 				PRODUCT_NAME = mailcore2;
 			};
 			name = Release;
