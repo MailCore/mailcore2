@@ -35,10 +35,14 @@ IMAPAsyncConnection::IMAPAsyncConnection()
 {
     mSession = new IMAPSession();
     mQueue = new OperationQueue();
+    mDefaultNamespace = NULL;
+    mDelimiter = 0;
+    mLastFolder = NULL;
 }
 
 IMAPAsyncConnection::~IMAPAsyncConnection()
 {
+    MC_SAFE_RELEASE(mLastFolder);
     MC_SAFE_RELEASE(mDefaultNamespace);
     MC_SAFE_RELEASE(mQueue);
     MC_SAFE_RELEASE(mSession);

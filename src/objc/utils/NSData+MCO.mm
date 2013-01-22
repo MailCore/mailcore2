@@ -12,6 +12,9 @@
 
 + (NSData *) mco_dataWithMCData:(mailcore::Data *)cppData
 {
+    if (cppData == NULL)
+        return nil;
+    
     return [NSData dataWithBytes:cppData->bytes() length:cppData->length()];
 }
 

@@ -160,6 +160,8 @@
 		C64EA82C16A2A08B00778456 /* MCIMAPFetchNamespaceOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA82A16A29FAA00778456 /* MCIMAPFetchNamespaceOperation.cc */; };
 		C6D42C1D16AE03D6002BB4F9 /* NSData+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6D42C1A16AE03D6002BB4F9 /* NSData+MCO.mm */; };
 		C6D42C1E16AE03D6002BB4F9 /* NSString+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6D42C1C16AE03D6002BB4F9 /* NSString+MCO.mm */; };
+		C6D42C2A16AE0507002BB4F9 /* NSData+MCO.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6D42C1916AE03D6002BB4F9 /* NSData+MCO.h */; };
+		C6D42C2C16AE0509002BB4F9 /* NSString+MCO.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6D42C1B16AE03D6002BB4F9 /* NSString+MCO.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -181,7 +183,9 @@
 			files = (
 				C62C6EE016A696AB00737497 /* MCAsyncIMAP.h in CopyFiles */,
 				C64EA74E169E859600778456 /* MCAbstract.h in CopyFiles */,
+				C6D42C2A16AE0507002BB4F9 /* NSData+MCO.h in CopyFiles */,
 				C62C6F0016A7E32800737497 /* MCPOPFetchHeaderOperation.h in CopyFiles */,
+				C6D42C2C16AE0509002BB4F9 /* NSString+MCO.h in CopyFiles */,
 				C62C6EE216A696B400737497 /* MCIMAPFetchFoldersOperation.h in CopyFiles */,
 				C64EA74F169E859600778456 /* MCAbstractMessage.h in CopyFiles */,
 				C64EA7E516A14A5400778456 /* MCAsync.h in CopyFiles */,
