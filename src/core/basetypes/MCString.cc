@@ -756,6 +756,14 @@ String * String::string()
     return stringWithCharacters(NULL);
 }
 
+String * String::stringWithData(Data * data, const char * charset)
+{
+    String * result = NULL;
+    result = new String(data->bytes(), data->length(), charset);
+    result->autorelease();
+    return result;
+}
+
 String * String::stringWithUTF8Format(const char * format, ...)
 {
 	va_list argp;
@@ -964,6 +972,9 @@ Object * String::copy()
 
 bool String::isEqual(Object * otherObject)
 {
+    if (otherObject == NULL)
+        return false;
+    
     String * otherString = (String *) otherObject;
     if (length() != otherString->length())
         return false;
@@ -1195,6 +1206,7 @@ unsigned int String::replaceOccurrencesOfString(String * occurrence, String * re
     int delta = replacement->length() - occurrence->length();
     int modifiedLength = mLength + delta * count + 1;
     unicodeChars = (UChar *) malloc(modifiedLength * sizeof(* unicodeChars));
+    unicodeChars[modifiedLength] = 0;
     UChar * dest_p = unicodeChars;
     p = mUnicodeChars;
     while (1) {
@@ -1208,12 +1220,16 @@ unsigned int String::replaceOccurrencesOfString(String * occurrence, String * re
         u_memcpy(dest_p, p, count);
         dest_p += count;
         p += count;
-        u_memcpy(dest_p, p, replacement->length());
+        u_memcpy(dest_p, replacement->unicodeCharacters(), replacement->length());
         p += occurrence->length();
         dest_p += replacement->length();
     }
     // copy remaining
     u_strcpy(dest_p, p);
+    
+    free(mUnicodeChars);
+    mUnicodeChars = unicodeChars;
+    mLength = modifiedLength - 1;
     
     return count;
 }
@@ -1842,13 +1858,19 @@ Array * String::componentsSeparatedByString(String * separator)
             break;
         }
         
-        unsigned int length = (unsigned int) (p - location);
+        unsigned int length = (unsigned int) (location - p);
+        MCLog("XXX %p %p %i %i", location, p, location - p, length);
         String * value = new String(p, length);
         result->addObject(value);
         value->release();
         
         p = location + separator->length();
     }
+    unsigned int length = (unsigned int) (mLength - (p - mUnicodeChars));
+    String * value = new String(p, length);
+    result->addObject(value);
+    value->release();
+    MCLog("XXX %s", MCUTF8DESC(result));
     
     return result;
 }
@@ -1955,4 +1977,47 @@ String * String::uniquedStringWithUTF8Characters(const char * UTF8Characters)
         chash_set(uniquedStringHash, &key, &value, NULL);
         return (String *) value.data;
     }
+}
+
+String * String::htmlEncodedString()
+{
+    String * htmlStr;
+    htmlStr = String::string();
+#define kBufSz 2000
+    
+    const char * inStr = UTF8Characters();
+    const uint32_t kInStrSz = (const uint32_t) strlen(inStr);
+    int nInStrConsumed = 0;
+    
+    static char buf[kBufSz];
+    
+    int outVal = -1;
+    int nBufConsumed;
+    int inStrSz;
+    do {
+        nBufConsumed = kBufSz-1;
+        inStrSz = kInStrSz - nInStrConsumed;
+        outVal = htmlEncodeEntities( (unsigned char*)buf,
+                                    &nBufConsumed,
+                                    (const unsigned char*)inStr+nInStrConsumed,
+                                    &inStrSz,
+                                    0 );
+        if (-2 == outVal || -1 == outVal) {
+            MCLog("Unable to encode html entities of %s", MCUTF8DESC(this));
+            break;
+        }
+        buf[nBufConsumed] = '\0';
+        htmlStr->appendUTF8Characters(buf);
+        nInStrConsumed += inStrSz;
+    } while (nInStrConsumed != kInStrSz);
+    
+    htmlStr->replaceOccurrencesOfString(MCSTR("\n"), MCSTR("<br/>"));
+    
+    return htmlStr;
+}
+
+String * String::cleanedHTMLString()
+{
+#warning implement HTML cleaning with tidy
+    return (String *) copy()->autorelease();
 }

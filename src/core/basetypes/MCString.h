@@ -30,7 +30,8 @@ namespace mailcore {
 		static String * stringWithUTF8Characters(const char * UTF8Characters);
 		static String * stringWithCharacters(const UChar * characters);
 		static String * stringWithCharacters(const UChar * characters, unsigned int length);
-		
+		static String * stringWithData(Data * data, const char * charset = NULL);
+        
 		virtual const UChar * unicodeCharacters();
 		virtual const char * UTF8Characters();
 		virtual unsigned int length();
@@ -98,7 +99,11 @@ namespace mailcore {
 		static String * stringWithMUTF7Data(Data * data);
 		virtual String * mUTF7EncodedString();
 		virtual String * mUTF7DecodedString();
-		
+        
+        virtual String * htmlEncodedString();
+		virtual String * cleanedHTMLString();
+        
+    public: // private
 		static String * uniquedStringWithUTF8Characters(const char * UTF8Characters);
         
     public: // subclass behavior

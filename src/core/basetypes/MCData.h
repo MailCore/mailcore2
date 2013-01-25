@@ -33,10 +33,12 @@ namespace mailcore {
 		
 		// Helpers
 		virtual String * stringWithDetectedCharset();
-		virtual String * emailStringWithCharset(String * charset);
+		virtual String * stringWithDetectedCharset(String * charset, bool isHTML);
 		virtual String * stringWithCharset(const char * charset);
-		virtual String * charsetWithFilteredHTML(bool filterHTML, String * hintCharset = NULL);
 		virtual Data * decodedDataUsingEncoding(Encoding encoding);
+        
+    public: // private
+		virtual String * charsetWithFilteredHTML(bool filterHTML, String * hintCharset = NULL);
         
     public: // subclass behavior
 		Data(Data * otherData);

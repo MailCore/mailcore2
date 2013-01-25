@@ -144,17 +144,8 @@ unsigned int Data::hash()
 
 String * Data::stringWithDetectedCharset()
 {
-    String * charset;
     String * result;
-    
-    charset = charsetWithFilteredHTML(false);
-    if (charset == NULL) {
-        charset = MCSTR(DEFAULT_CHARSET);
-    }
-    result = emailStringWithCharset(charset);
-    if (result == NULL) {
-        result = stringWithCharset("utf-8");
-    }
+    result = stringWithDetectedCharset(NULL, false);
     return result;
 }
 
@@ -182,15 +173,32 @@ String * Data::normalizeCharset(String * charset)
 String * Data::stringWithCharset(const char * charset)
 {
     String * result = new String(this, charset);
+    if ((length() != 0) && (result->length() == 0)) {
+        result->release();
+        return NULL;
+    }
     return (String *) result->autorelease();
 }
 
-String * Data::emailStringWithCharset(String * charset)
+String * Data::stringWithDetectedCharset(String * hintCharset, bool isHTML)
 {
 	String * result;
+    String * charset;
+    
+    if (hintCharset == NULL) {
+        charset = charsetWithFilteredHTML(isHTML);
+    }
+    else {
+        charset = charsetWithFilteredHTML(isHTML, hintCharset);
+    }
+    
+    if (charset == NULL) {
+        charset = MCSTR(DEFAULT_CHARSET);
+    }
     
     charset = normalizeCharset(charset);
     
+    /*
     if (charset->isEqual(MCSTR("iso-2022-jp-2"))) {
         const char * theBytes;
         Data * data;
@@ -218,8 +226,22 @@ String * Data::emailStringWithCharset(String * charset)
         
         return result;
     }
+     */
     
     result = stringWithCharset(charset->UTF8Characters());
+    if (result == NULL) {
+        result = stringWithCharset("iso-8859-1");
+    }
+    if (result == NULL) {
+        result = stringWithCharset("windows-1252");
+    }
+    if (result == NULL) {
+        result = stringWithCharset("utf-8");
+    }
+    if (result == NULL) {
+        result = MCSTR("");
+    }
+    
 	return result;
 }
 
