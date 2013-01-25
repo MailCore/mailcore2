@@ -8,6 +8,13 @@
 #include <pthread.h>
 #include <unistd.h>
 
+static pid_t sPid = -1;
+
+__attribute__((constructor))
+static void initialize() {
+    sPid = getpid();
+}
+
 static void logInternalv(FILE * file,
     const char * user, const char * filename, unsigned int line,
     int dumpStack, const char * format, va_list argp);
@@ -48,14 +55,16 @@ static void logInternalv(FILE * file,
 	fprintf(file, "%04u-%02u-%02u %02u:%02u:%02u.%03u ", tm_value.tm_year + 1900, tm_value.tm_mon + 1, tm_value.tm_mday, tm_value.tm_hour, tm_value.tm_min, tm_value.tm_sec, tv.tv_usec / 1000);
     
     if (pthread_main_np()) {
-        fprintf(file, "[%i:main] %s:%i: ", getpid(), filename, line);
+        fprintf(file, "[%i:main] %s:%i: ", sPid, filename, line);
     }
     else {
+        unsigned long threadValue;
 #ifdef _MACH_PORT_T
-        fprintf(file, "[%i:%x] %s:%i: ", getpid(), pthread_mach_thread_np(thread_id), filename, line);
+        threadValue = pthread_mach_thread_np(thread_id);
 #else
-        fprintf(file, "[%i:%p] %s:%i: ", getpid(), (void *) thread_id, filename, line);
+        threadValue = (unsigned long) thread_id;
 #endif
+        fprintf(file, "[%i:%lx] %s:%i: ", sPid, threadValue, filename, line);
     }
     vfprintf(file, format, argp);
     fprintf(file, "\n");
