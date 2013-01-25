@@ -55,7 +55,7 @@ cd "$srcdir/libetpan"
 cd "$srcdir/libetpan/build-mac"
 ./update.sh
 
-xcodebuild -target "static libetpan" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj"
+xcodebuild -project libetpan.xcodeproj -target "static libetpan" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj"
 echo finished
 
 cd "$tmpdir/bin"
