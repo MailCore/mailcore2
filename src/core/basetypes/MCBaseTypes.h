@@ -9,6 +9,7 @@
 #include <mailcore/MCData.h>
 #include <mailcore/MCArray.h>
 #include <mailcore/MCHashMap.h>
+#include <mailcore/MCSet.h>
 #include <mailcore/MCHash.h>
 #include <mailcore/MCLog.h>
 #include <mailcore/MCAssert.h>
