@@ -166,6 +166,7 @@ IMAPMessagePart * IMAPPart::attachmentWithIMAPBody1PartMessage(struct mailimap_b
 
     subAttachment = attachmentWithIMAPBodyInternal(message->bd_body, nextPartID);
     attachment->setMainPart(subAttachment);
+    attachment->setMimeType(MCSTR("message/rfc822"));
 
     return (IMAPMessagePart *) attachment->autorelease();
 }
@@ -277,6 +278,7 @@ IMAPMultipart * IMAPPart::attachmentWithIMAPBodyMultipart(struct mailimap_body_t
     else if (strcasecmp(body_mpart->bd_media_subtype, "related") == 0) {
         attachment->setPartType(PartTypeMultipartRelated);
     }
+    attachment->setMimeType(String::stringWithUTF8Format("multipart/%s", body_mpart->bd_media_subtype));
     attachment->setParts(attachments);
 
     attachments->release();
