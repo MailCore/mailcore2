@@ -33,7 +33,8 @@ namespace mailcore {
 		pthread_mutex_t mLock;
 		bool mWaiting;
 		struct mailsem * mWaitingFinishedSem;
-		
+		bool mQuitting;
+        
 		void startThread();
 		static void runOperationsOnThread(OperationQueue * queue);
 		void runOperations();

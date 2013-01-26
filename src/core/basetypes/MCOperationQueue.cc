@@ -55,7 +55,8 @@ void OperationQueue::runOperations()
     while (true) {
         Operation * op = NULL;
         bool needsCheckRunning = false;
-
+        bool quitting;
+        
         AutoreleasePool * pool = new AutoreleasePool();
         
         mailsem_down(mOperationSem);
@@ -64,9 +65,11 @@ void OperationQueue::runOperations()
         if (mOperations->count() > 0) {
             op = (Operation *) mOperations->objectAtIndex(0);
         }
+        quitting = mQuitting;
         pthread_mutex_unlock(&mLock);
 
-        if (op == NULL) {
+        MCLog("quitting %i %p", mQuitting, op);
+        if ((op == NULL) && quitting) {
             MCLog("stopping %p", this);
             mailsem_up(mStopSem);
             pool->release();
@@ -118,15 +121,14 @@ void OperationQueue::checkRunningAfterDelay(void * context)
 {
     bool quitting = false;
     
-    //MCLog("started %i", mStarted);
-    if (!mStarted)
-        return;
-    
     pthread_mutex_lock(&mLock);
-    if (mOperations->count() == 0) {
-        MCLog("trying to quit %p", this);
-        mailsem_up(mOperationSem);
-        quitting = true;
+    if (!mQuitting) {
+        if (mOperations->count() == 0) {
+            MCLog("trying to quit %p", this);
+            mailsem_up(mOperationSem);
+            mQuitting = true;
+            quitting = true;
+        }
     }
     pthread_mutex_unlock(&mLock);
     
@@ -146,6 +148,7 @@ void OperationQueue::startThread()
     if (mStarted)
         return;
     
+    mQuitting = false;
     mStarted = true;
     pthread_create(&mThreadID, NULL, (void * (*)(void *)) OperationQueue::runOperationsOnThread, this);
     mailsem_down(mStartSem);
