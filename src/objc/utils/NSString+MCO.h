@@ -17,6 +17,8 @@
 #ifdef __cplusplus
 + (NSString *) mco_stringWithMCString:(mailcore::String *)cppString;
 + (NSString *) mco_stringWithMCObject:(mailcore::Object *)object;
+
+- (mailcore::String *) mco_mcString;
 #endif
 
 @end

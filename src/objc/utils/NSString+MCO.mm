@@ -26,4 +26,10 @@
     return [NSString mco_stringWithMCString:object->description()];
 }
 
+- (mailcore::String *) mco_mcString
+{
+    const UChar * characters = (const UChar *) [self cStringUsingEncoding:NSUTF16StringEncoding];
+    return mailcore::String::stringWithCharacters(characters, (unsigned int) [self length]);
+}
+
 @end
