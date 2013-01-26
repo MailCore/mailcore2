@@ -98,7 +98,10 @@ void Array::removeObjectAtIndex(unsigned int idx)
 
 void Array::removeObject(Object * obj)
 {
-    unsigned int idx = indexOfObject(obj);
+    int idx = indexOfObject(obj);
+    if (idx == -1)
+        return;
+    
     removeObjectAtIndex(idx);
 }
 
