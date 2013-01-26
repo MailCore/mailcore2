@@ -1859,7 +1859,6 @@ Array * String::componentsSeparatedByString(String * separator)
         }
         
         unsigned int length = (unsigned int) (location - p);
-        MCLog("XXX %p %p %i %i", location, p, location - p, length);
         String * value = new String(p, length);
         result->addObject(value);
         value->release();
@@ -1870,7 +1869,6 @@ Array * String::componentsSeparatedByString(String * separator)
     String * value = new String(p, length);
     result->addObject(value);
     value->release();
-    MCLog("XXX %s", MCUTF8DESC(result));
     
     return result;
 }
