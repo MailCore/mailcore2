@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#include <mailcore/mailcore.h>
+#include <mailcore/MCData.h>
 
 #ifdef __OBJC__
 
@@ -16,6 +16,8 @@
 
 #ifdef __cplusplus
 + (NSData *) mco_dataWithMCData:(mailcore::Data *)cppData;
+
+- (mailcore::Data *) mco_mcData;
 #endif
 
 @end

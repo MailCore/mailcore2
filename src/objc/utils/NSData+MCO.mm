@@ -18,4 +18,9 @@
     return [NSData dataWithBytes:cppData->bytes() length:cppData->length()];
 }
 
+- (mailcore::Data *) mco_mcData
+{
+    return mailcore::Data::dataWithBytes((const char *) [self bytes], (unsigned int) [self length]);
+}
+
 @end
