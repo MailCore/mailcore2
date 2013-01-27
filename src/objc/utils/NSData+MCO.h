@@ -10,8 +10,6 @@
 
 #include <mailcore/MCData.h>
 
-#ifdef __OBJC__
-
 @interface NSData (MCO)
 
 #ifdef __cplusplus
@@ -21,5 +19,3 @@
 #endif
 
 @end
-
-#endif

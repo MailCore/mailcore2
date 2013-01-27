@@ -158,10 +158,13 @@
 		C64EA82616A29EE500778456 /* MCIMAPSearchOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA82416A29EE000778456 /* MCIMAPSearchOperation.cc */; };
 		C64EA82916A29F2200778456 /* MCIMAPIdleOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA82716A29EF400778456 /* MCIMAPIdleOperation.cc */; };
 		C64EA82C16A2A08B00778456 /* MCIMAPFetchNamespaceOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA82A16A29FAA00778456 /* MCIMAPFetchNamespaceOperation.cc */; };
+		C64FF39116B3C13000F8C162 /* MCOObjectWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = C64FF39016B3C13000F8C162 /* MCOObjectWrapper.mm */; };
+		C64FF39316B3C25200F8C162 /* MCOObjectWrapper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64FF38F16B3C13000F8C162 /* MCOObjectWrapper.h */; };
 		C6D42C1D16AE03D6002BB4F9 /* NSData+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6D42C1A16AE03D6002BB4F9 /* NSData+MCO.mm */; };
 		C6D42C1E16AE03D6002BB4F9 /* NSString+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6D42C1C16AE03D6002BB4F9 /* NSString+MCO.mm */; };
 		C6D42C2A16AE0507002BB4F9 /* NSData+MCO.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6D42C1916AE03D6002BB4F9 /* NSData+MCO.h */; };
 		C6D42C2C16AE0509002BB4F9 /* NSString+MCO.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6D42C1B16AE03D6002BB4F9 /* NSString+MCO.h */; };
+		C6EB30DE16B5B8050091F4F1 /* MCObjC.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6EB30DC16B5B7770091F4F1 /* MCObjC.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,6 +185,8 @@
 			dstSubfolderSpec = 16;
 			files = (
 				C62C6EE016A696AB00737497 /* MCAsyncIMAP.h in CopyFiles */,
+				C6EB30DE16B5B8050091F4F1 /* MCObjC.h in CopyFiles */,
+				C64FF39316B3C25200F8C162 /* MCOObjectWrapper.h in CopyFiles */,
 				C64EA74E169E859600778456 /* MCAbstract.h in CopyFiles */,
 				C6D42C2A16AE0507002BB4F9 /* NSData+MCO.h in CopyFiles */,
 				C62C6F0016A7E32800737497 /* MCPOPFetchHeaderOperation.h in CopyFiles */,
@@ -440,10 +445,13 @@
 		C64EA82816A29F0300778456 /* MCIMAPIdleOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPIdleOperation.h; sourceTree = "<group>"; };
 		C64EA82A16A29FAA00778456 /* MCIMAPFetchNamespaceOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPFetchNamespaceOperation.cc; sourceTree = "<group>"; };
 		C64EA82B16A2A01400778456 /* MCIMAPFetchNamespaceOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPFetchNamespaceOperation.h; sourceTree = "<group>"; };
+		C64FF38F16B3C13000F8C162 /* MCOObjectWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOObjectWrapper.h; sourceTree = "<group>"; };
+		C64FF39016B3C13000F8C162 /* MCOObjectWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOObjectWrapper.mm; sourceTree = "<group>"; };
 		C6D42C1916AE03D6002BB4F9 /* NSData+MCO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MCO.h"; sourceTree = "<group>"; };
 		C6D42C1A16AE03D6002BB4F9 /* NSData+MCO.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSData+MCO.mm"; sourceTree = "<group>"; };
 		C6D42C1B16AE03D6002BB4F9 /* NSString+MCO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MCO.h"; sourceTree = "<group>"; };
 		C6D42C1C16AE03D6002BB4F9 /* NSString+MCO.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSString+MCO.mm"; sourceTree = "<group>"; };
+		C6EB30DC16B5B7770091F4F1 /* MCObjC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCObjC.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -764,6 +772,7 @@
 			isa = PBXGroup;
 			children = (
 				C6D42C1816AE03D6002BB4F9 /* utils */,
+				C6EB30DC16B5B7770091F4F1 /* MCObjC.h */,
 			);
 			path = objc;
 			sourceTree = "<group>";
@@ -775,6 +784,8 @@
 				C6D42C1A16AE03D6002BB4F9 /* NSData+MCO.mm */,
 				C6D42C1B16AE03D6002BB4F9 /* NSString+MCO.h */,
 				C6D42C1C16AE03D6002BB4F9 /* NSString+MCO.mm */,
+				C64FF38F16B3C13000F8C162 /* MCOObjectWrapper.h */,
+				C64FF39016B3C13000F8C162 /* MCOObjectWrapper.mm */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -937,6 +948,7 @@
 				C62C6F0A16A8F58000737497 /* MCIMAPAsyncSession.cpp in Sources */,
 				C6D42C1D16AE03D6002BB4F9 /* NSData+MCO.mm in Sources */,
 				C6D42C1E16AE03D6002BB4F9 /* NSString+MCO.mm in Sources */,
+				C64FF39116B3C13000F8C162 /* MCOObjectWrapper.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,9 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#include <mailcore/mailcore.h>
-
-#ifdef __OBJC__
+#include <mailcore/MCString.h>
 
 @interface NSString (MCO)
 
@@ -22,5 +20,3 @@
 #endif
 
 @end
-
-#endif
