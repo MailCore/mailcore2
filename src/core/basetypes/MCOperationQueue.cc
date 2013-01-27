@@ -90,8 +90,10 @@ void OperationQueue::runOperations()
         }
         pthread_mutex_unlock(&mLock);
         
-        if (op->callback() != NULL) {
-            performMethodOnMainThread((Object::Method) &OperationQueue::callbackOnMainThread, op, true);
+        if (!op->isCancelled()) {
+            if (op->callback() != NULL) {
+                performMethodOnMainThread((Object::Method) &OperationQueue::callbackOnMainThread, op, true);
+            }
         }
         
         if (needsCheckRunning) {
