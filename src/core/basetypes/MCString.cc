@@ -1206,7 +1206,7 @@ unsigned int String::replaceOccurrencesOfString(String * occurrence, String * re
     int delta = replacement->length() - occurrence->length();
     int modifiedLength = mLength + delta * count + 1;
     unicodeChars = (UChar *) malloc(modifiedLength * sizeof(* unicodeChars));
-    unicodeChars[modifiedLength] = 0;
+    unicodeChars[modifiedLength - 1] = 0;
     UChar * dest_p = unicodeChars;
     p = mUnicodeChars;
     while (1) {
@@ -1979,8 +1979,7 @@ String * String::uniquedStringWithUTF8Characters(const char * UTF8Characters)
 
 String * String::htmlEncodedString()
 {
-    String * htmlStr;
-    htmlStr = String::string();
+    String * htmlStr = String::string();
 #define kBufSz 2000
     
     const char * inStr = UTF8Characters();
