@@ -43,3 +43,8 @@ bool Operation::isCancelled()
 void Operation::main()
 {
 }
+
+void Operation::start()
+{
+}
+

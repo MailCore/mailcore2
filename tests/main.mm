@@ -270,6 +270,24 @@ static void testAsyncPOP()
     [[NSRunLoop currentRunLoop] run];
 }
 
+void testObjc()
+{
+    MCOIMAPSession *session = [[MCOIMAPSession alloc] init];
+    session.username = @"username";
+    session.password = @"password";
+    session.hostname = @"imap.gmail.com";
+    session.port = 993;
+    session.connectionType = MCOConnectionTypeTLS;
+
+    [session checkAccount:^(NSError *err, MCOOperation *op, id result) {
+       NSLog(@"CONNECTED? %@", err);
+    }];
+
+    [[NSRunLoop currentRunLoop] run];
+    [session release];
+}
+
+
 void testAll()
 {
     u_setDataDirectory("/usr/local/share/icu");
@@ -286,7 +304,9 @@ void testAll()
     //testAsyncSMTP(data);
     //testAsyncIMAP();
     //testAsyncPOP();
-    
+
+    testObjc();
+
     MCLog("pool release");
     pool->release();
 }

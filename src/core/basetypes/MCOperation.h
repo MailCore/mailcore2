@@ -23,6 +23,8 @@ namespace mailcore {
 		virtual bool isCancelled();
 		
 		virtual void main();
+
+        virtual void start();
         
 	private:
 		OperationCallback * mCallback;
