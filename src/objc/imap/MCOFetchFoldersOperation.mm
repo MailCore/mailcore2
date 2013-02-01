@@ -16,7 +16,17 @@
 
 using namespace mailcore;
 
+@interface MCOFetchFoldersOperation ()
+@property (nonatomic, copy) void (^completionBlock)(NSError *error, NSArray *folder);
+@end
+
 @implementation MCOFetchFoldersOperation
+
+- (void)start:(void (^)(NSError *error, NSArray *folder))completionBlock {
+    self.completionBlock = completionBlock;
+    [self start];
+}
+
 - (void)operationCompleted {
     IMAPFetchFoldersOperation *op = dynamic_cast<IMAPFetchFoldersOperation *>(self.operation);
     if (op->error() == ErrorNone) {
@@ -27,9 +37,9 @@ using namespace mailcore;
             [nsfolders addObject:folder];
         }
         
-        self.completionBlock(nil, self, nsfolders);
+        self.completionBlock(nil, nsfolders);
     } else {
-        self.completionBlock([NSError mco_errorWithErrorCode:op->error()], self, nil);
+        self.completionBlock([NSError mco_errorWithErrorCode:op->error()], nil);
     }
 }
 @end

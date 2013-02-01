@@ -9,4 +9,5 @@
 #import <mailcore/MCOOperation.h>
 
 @interface MCOCheckAccountOperation : MCOOperation
+- (void)start:(void (^)(NSError *error))completionBlock;
 @end

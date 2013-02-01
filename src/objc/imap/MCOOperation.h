@@ -8,14 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@class MCOOperation;
-
-typedef void (^MCOCompletionBlock)(NSError *error, MCOOperation *op, id response);
-
 @interface MCOOperation : NSObject
-@property (copy) MCOCompletionBlock completionBlock;
 @property (readonly) BOOL isCancelled;
 
 - (void)cancel;
-- (void)start;
 @end

@@ -26,6 +26,6 @@
 @property (nonatomic, assign) BOOL VoIPEnabled;
 @property (nonatomic, strong) NSString *delimiter;
 
-- (MCOCheckAccountOperation *)checkAccount:(MCOCompletionBlock)completionBlock;
-- (MCOFetchFoldersOperation *)fetchAllFolders:(MCOCompletionBlock)completionBlock;
+- (MCOCheckAccountOperation *)checkAccountOperation;
+- (MCOFetchFoldersOperation *)fetchAllFoldersOperation;
 @end

@@ -14,12 +14,21 @@
 
 using namespace mailcore;
 
+@interface MCOCheckAccountOperation ()
+@property (nonatomic, copy) void (^completionBlock)(NSError *error);
+@end
+
 @implementation MCOCheckAccountOperation
+
+- (void)start:(void (^)(NSError *error))completionBlock {
+    self.completionBlock = completionBlock;
+    [self start];
+}
 
 - (void)operationCompleted {
     IMAPOperation *op = dynamic_cast<IMAPOperation *>(self.operation);
     NSError *error = [NSError mco_errorWithErrorCode:op->error()];
-    self.completionBlock(error, self, nil); // No data to return
+    self.completionBlock(error);
 }
 
 @end

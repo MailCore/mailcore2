@@ -120,20 +120,16 @@ using namespace mailcore;
 
 #pragma mark - Operations
 
-- (MCOCheckAccountOperation *)checkAccount:(MCOCompletionBlock)completionBlock {
+- (MCOCheckAccountOperation *)checkAccountOperation {
     IMAPOperation *coreOp = self.session->checkAccountOperation();
     MCOCheckAccountOperation *op = [[MCOCheckAccountOperation alloc] initWithOperation:coreOp];
-    op.completionBlock = completionBlock;
-    [op start];
     return [op autorelease];
 
 }
 
-- (MCOFetchFoldersOperation *)fetchAllFolders:(MCOCompletionBlock)completionBlock {
+- (MCOFetchFoldersOperation *)fetchAllFoldersOperation {
     IMAPOperation *coreOp = self.session->fetchAllFoldersOperation();
     MCOFetchFoldersOperation *op = [[MCOFetchFoldersOperation alloc] initWithOperation:coreOp];
-    op.completionBlock = completionBlock;
-    [op start];
     return [op autorelease];
     
 }

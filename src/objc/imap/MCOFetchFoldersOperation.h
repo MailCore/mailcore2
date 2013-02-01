@@ -9,5 +9,5 @@
 #import <mailcore/MCOOperation.h>
 
 @interface MCOFetchFoldersOperation : MCOOperation
-
+- (void)start:(void (^)(NSError *error, NSArray *folder))completionBlock;
 @end

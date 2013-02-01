@@ -12,6 +12,7 @@
 #include <unicode/uclean.h>
 #include <unicode/ucnv.h>
 #include <mailcore/mailcore.h>
+#import "MCOFetchFoldersOperation.h"
 
 extern "C" {
     extern int mailstream_debug;
@@ -279,24 +280,26 @@ void testObjc()
     session.port = 993;
     session.connectionType = MCOConnectionTypeTLS;
 
-    [session checkAccount:^(NSError *err, MCOOperation *op, id response) {
+    MCOCheckAccountOperation *checkOp = [session checkAccountOperation];
+    [checkOp start:^(NSError *err) {
         if (err) {
             NSLog(@"Oh crap, an error %@", err);
         } else {
             NSLog(@"CONNECTED");
         }
     }];
-    
-    [session fetchAllFolders:^(NSError *err, MCOOperation *op, id response) {
+
+    MCOFetchFoldersOperation *foldersOp = [session fetchAllFoldersOperation];
+    [foldersOp start:^(NSError *err, NSArray *folders) {
         if (err) {
             NSLog(@"Oh crap, an error %@", err);
         } else {
-            NSLog(@"Folder %@", response);
+            NSLog(@"Folder %@", folders);
         }
     }];
 
     [[NSRunLoop currentRunLoop] run];
-    [session release];
+    [session autorelease];
 }
 
 

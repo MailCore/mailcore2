@@ -14,4 +14,5 @@
 @interface MCOOperation ()
 - (id)initWithOperation:(mailcore::Operation *)op;
 - (mailcore::Operation *)operation;
+- (void)start;
 @end
