@@ -963,8 +963,10 @@ Array * /* IMAPFolder */ IMAPSession::fetchAllFolders(ErrorCode * pError)
     
     setDelimiter(delimiter);
     
-    String * prefix;
-    prefix = defaultNamespace()->mainPrefix();
+    String * prefix = NULL;
+    if (defaultNamespace()) {
+        prefix = defaultNamespace()->mainPrefix();
+    }
     if (prefix == NULL) {
         prefix = MCSTR("");
     }

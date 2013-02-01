@@ -273,14 +273,26 @@ static void testAsyncPOP()
 void testObjc()
 {
     MCOIMAPSession *session = [[MCOIMAPSession alloc] init];
-    session.username = @"username";
-    session.password = @"password";
+    session.username = @"monkeybreadr@gmail.com";
+    session.password = @"";
     session.hostname = @"imap.gmail.com";
     session.port = 993;
     session.connectionType = MCOConnectionTypeTLS;
 
-    [session checkAccount:^(NSError *err, MCOOperation *op, id result) {
-       NSLog(@"CONNECTED? %@", err);
+    [session checkAccount:^(NSError *err, MCOOperation *op, id response) {
+        if (err) {
+            NSLog(@"Oh crap, an error %@", err);
+        } else {
+            NSLog(@"CONNECTED");
+        }
+    }];
+    
+    [session fetchAllFolders:^(NSError *err, MCOOperation *op, id response) {
+        if (err) {
+            NSLog(@"Oh crap, an error %@", err);
+        } else {
+            NSLog(@"Folder %@", response);
+        }
     }];
 
     [[NSRunLoop currentRunLoop] run];

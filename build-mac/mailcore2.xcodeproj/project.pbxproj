@@ -174,6 +174,7 @@
 		C6D42C2A16AE0507002BB4F9 /* NSData+MCO.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6D42C1916AE03D6002BB4F9 /* NSData+MCO.h */; };
 		C6D42C2C16AE0509002BB4F9 /* NSString+MCO.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6D42C1B16AE03D6002BB4F9 /* NSString+MCO.h */; };
 		C6EB30DE16B5B8050091F4F1 /* MCObjC.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6EB30DC16B5B7770091F4F1 /* MCObjC.h */; };
+		F87F190C16BB62B00012652F /* MCOFetchFoldersOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = F87F190B16BB62B00012652F /* MCOFetchFoldersOperation.mm */; };
 		F8EA941716BB1C9D0011AC6F /* MCOIMAPSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F8EA941416BAED6E0011AC6F /* MCOIMAPSession.h */; };
 /* End PBXBuildFile section */
 
@@ -477,6 +478,8 @@
 		C6D42C1B16AE03D6002BB4F9 /* NSString+MCO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MCO.h"; sourceTree = "<group>"; };
 		C6D42C1C16AE03D6002BB4F9 /* NSString+MCO.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSString+MCO.mm"; sourceTree = "<group>"; };
 		C6EB30DC16B5B7770091F4F1 /* MCObjC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCObjC.h; sourceTree = "<group>"; };
+		F87F190816BB62690012652F /* MCOFetchFoldersOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOFetchFoldersOperation.h; sourceTree = "<group>"; };
+		F87F190B16BB62B00012652F /* MCOFetchFoldersOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOFetchFoldersOperation.mm; sourceTree = "<group>"; };
 		F8EA941416BAED6E0011AC6F /* MCOIMAPSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPSession.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -830,6 +833,8 @@
 				C07AD358A724B6DDD869929C /* MCOOperation+Internals.h */,
 				C07AD98150338A79BF83CCEF /* MCOCheckAccountOperation.h */,
 				C07AD721E48D521D6E3F4943 /* MCOCheckAccountOperation.mm */,
+				F87F190816BB62690012652F /* MCOFetchFoldersOperation.h */,
+				F87F190B16BB62B00012652F /* MCOFetchFoldersOperation.mm */,
 			);
 			path = imap;
 			sourceTree = "<group>";
@@ -997,6 +1002,7 @@
 				C07ADABEC4F5BD428DD5D169 /* MCOOperation.mm in Sources */,
 				C07ADA0FE807DC9D166BBF37 /* MCOCheckAccountOperation.mm in Sources */,
 				C07AD99B2E2054C684DB8FF6 /* NSError+MCO.mm in Sources */,
+				F87F190C16BB62B00012652F /* MCOFetchFoldersOperation.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

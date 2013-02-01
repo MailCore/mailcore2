@@ -10,6 +10,7 @@
 #import "MCOOperation+Internals.h"
 #import "MCOObjectWrapper.h"
 #import "MCOCheckAccountOperation.h"
+#import "MCOFetchFoldersOperation.h"
 
 #import "NSString+MCO.h"
 
@@ -126,5 +127,14 @@ using namespace mailcore;
     [op start];
     return [op autorelease];
 
+}
+
+- (MCOFetchFoldersOperation *)fetchAllFolders:(MCOCompletionBlock)completionBlock {
+    IMAPOperation *coreOp = self.session->fetchAllFoldersOperation();
+    MCOFetchFoldersOperation *op = [[MCOFetchFoldersOperation alloc] initWithOperation:coreOp];
+    op.completionBlock = completionBlock;
+    [op start];
+    return [op autorelease];
+    
 }
 @end

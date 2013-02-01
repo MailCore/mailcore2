@@ -11,6 +11,7 @@
 #import <mailcore/MCOOperation.h>
 
 @class MCOCheckAccountOperation;
+@class MCOFetchFoldersOperation;
 
 @interface MCOIMAPSession : NSObject
 @property (nonatomic, strong) NSString *hostname;
@@ -26,5 +27,5 @@
 @property (nonatomic, strong) NSString *delimiter;
 
 - (MCOCheckAccountOperation *)checkAccount:(MCOCompletionBlock)completionBlock;
-
+- (MCOFetchFoldersOperation *)fetchAllFolders:(MCOCompletionBlock)completionBlock;
 @end
