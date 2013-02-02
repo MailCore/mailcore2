@@ -8,7 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-#include <mailcore/MCString.h>
+#ifdef __cplusplus
+namespace mailcore {
+    class String;
+    class Object;
+}
+#endif
 
 @interface NSString (MCO)
 

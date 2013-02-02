@@ -1,8 +1,8 @@
 //
-//  NSData+MCO.h
+//  NSObject+MCO.h
 //  mailcore2
 //
-//  Created by DINH Viêt Hoà on 1/21/13.
+//  Created by DINH Viêt Hoà on 1/29/13.
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
@@ -10,16 +10,14 @@
 
 #ifdef __cplusplus
 namespace mailcore {
-    class Data;
+    class Object;
 }
 #endif
 
-@interface NSData (MCO)
+@interface NSObject (MCO)
 
 #ifdef __cplusplus
-+ (NSData *) mco_dataWithMCData:(mailcore::Data *)cppData;
-
-- (mailcore::Data *) mco_mcData;
+- (mailcore::Object *) mco_mcObject;
 #endif
 
 @end
