@@ -230,6 +230,7 @@ IMAPPart * IMAPPart::attachmentWithIMAPBody1PartText(struct mailimap_body_type_t
 	IMAPPart * attachment;
 	
 	attachment = new IMAPPart();
+	attachment->setUniqueID(mailcore::String::uuidString());
     attachment->importIMAPFields(text->bd_fields, extension);
 	attachment->setMimeType(String::stringWithUTF8Format("text/%s", text->bd_media_text));
 	
