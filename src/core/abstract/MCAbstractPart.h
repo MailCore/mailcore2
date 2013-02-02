@@ -28,6 +28,9 @@ namespace mailcore {
 		virtual String * charset();
 		virtual void setCharset(String * charset);
 		
+		virtual String * uniqueID();
+		virtual void setUniqueID(String * uniqueID);
+        
 		virtual String * contentID();
 		virtual void setContentID(String * contentID);
 		
@@ -49,6 +52,7 @@ namespace mailcore {
 		virtual Object * copy();
         
 	private:
+		String * mUniqueID;
 		String * mFilename;
 		String * mMimeType;
 		String * mCharset;

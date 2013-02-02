@@ -231,13 +231,6 @@ String * Attachment::description()
     return result;
 }
 
-#if 0
-String * Attachment::className()
-{
-    return MCSTR("Attachment");
-}
-#endif
-
 Object * Attachment::copy()
 {
     return new Attachment(this);
@@ -464,6 +457,8 @@ Attachment * Attachment::attachmentWithSingleMIME(struct mailmime * mime)
 	MCAssert(mime->mm_type == MAILMIME_SINGLE);
 	
     result = new Attachment();
+	result->setUniqueID(mailcore::String::uuidString());
+    
 	data = mime->mm_data.mm_single;
 	bytes = data->dt_data.dt_text.dt_data;
 	length = data->dt_data.dt_text.dt_length;

@@ -14,13 +14,6 @@ IMAPMessagePart::~IMAPMessagePart()
 {
 }
 
-#if 0
-String * IMAPMessagePart::className()
-{
-    return MCSTR("IMAPMessagePart");
-}
-#endif
-
 Object * IMAPMessagePart::copy()
 {
     return new IMAPMessagePart(this);

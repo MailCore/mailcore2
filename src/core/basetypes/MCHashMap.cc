@@ -93,13 +93,6 @@ HashMap * HashMap::hashMap()
     return (HashMap *) result->autorelease();
 }
 
-#if 0
-String * HashMap::className()
-{
-    return MCSTR("HashMap");
-}
-#endif
-
 String * HashMap::description()
 {
     String * result = String::string();

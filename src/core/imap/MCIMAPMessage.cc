@@ -34,13 +34,6 @@ IMAPMessage::~IMAPMessage()
     MC_SAFE_RELEASE(mLabels);
 }
 
-#if 0
-String * IMAPMessage::className()
-{
-    return MCSTR("IMAPMessage");
-}
-#endif
-
 Object * IMAPMessage::copy()
 {
     return new IMAPMessage(this);

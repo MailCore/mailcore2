@@ -953,13 +953,6 @@ void String::setCharacters(const UChar * unicodeCharacters)
     appendCharacters(unicodeCharacters);
 }
 
-#if 0
-String * String::className()
-{
-    return MCSTR("String");
-}
-#endif
-
 String * String::description()
 {
     return this;

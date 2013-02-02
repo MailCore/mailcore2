@@ -33,13 +33,6 @@ IMAPPart::~IMAPPart()
     MC_SAFE_RELEASE(mPartID);
 }
 
-#if 0
-String * IMAPPart::className()
-{
-    return MCSTR("IMAPPart");
-}
-#endif
-
 Object * IMAPPart::copy()
 {
     return new IMAPPart(this);
@@ -203,7 +196,8 @@ IMAPPart * IMAPPart::attachmentWithIMAPBody1PartBasic(struct mailimap_body_type_
 	
 	attachment = new IMAPPart();
     attachment->importIMAPFields(basic->bd_fields, extension);
-	
+	attachment->setUniqueID(mailcore::String::uuidString());
+    
     mimeType = NULL;
 	switch (basic->bd_media_basic->med_type) {
 		case MAILIMAP_MEDIA_BASIC_APPLICATION:

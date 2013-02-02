@@ -64,13 +64,6 @@ String * IMAPSearchExpression::description()
     }
 }
 
-#if 0
-String * IMAPSearchExpression::className()
-{
-    return MCSTR("IMAPSearchExpression");
-}
-#endif
-
 Object * IMAPSearchExpression::copy()
 {
     return new IMAPSearchExpression(this);

@@ -8,6 +8,8 @@
 
 namespace mailcore {
 
+    extern bool zombieEnabled;
+    
 	class String;
 
 	class Object {

@@ -27,13 +27,6 @@ POPMessageInfo::~POPMessageInfo()
     MC_SAFE_RELEASE(mUid);
 }
 
-#if 0
-String * POPMessageInfo::className()
-{
-    return MCSTR("POPMessageInfo");
-}
-#endif
-
 String * POPMessageInfo::description()
 {
     return String::stringWithUTF8Format("<%s:%p %u %s %u>",

@@ -48,13 +48,6 @@ Array * Array::arrayWithObject(Object * obj)
     return (Array *) result->autorelease();
 }
 
-#if 0
-String * Array::className()
-{
-    return MCSTR("Array");
-}
-#endif
-
 String * Array::description()
 {
     String * result = String::string();

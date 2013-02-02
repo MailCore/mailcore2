@@ -14,13 +14,6 @@ MessagePart::~MessagePart()
 {
 }
 
-#if 0
-String * MessagePart::className()
-{
-    return MCSTR("MessagePart");
-}
-#endif
-
 Object * MessagePart::copy()
 {
     return new MessagePart(this);

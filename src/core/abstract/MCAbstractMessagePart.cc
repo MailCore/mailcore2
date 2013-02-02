@@ -37,13 +37,6 @@ String * AbstractMessagePart::description()
     return result;
 }
 
-#if 0
-String * AbstractMessagePart::className()
-{
-    return MCSTR("AbstractMessagePart");
-}
-#endif
-
 Object * AbstractMessagePart::copy()
 {
     return new AbstractMessagePart(this);

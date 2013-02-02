@@ -154,13 +154,6 @@ String * MessageHeader::description()
     return result;
 }
 
-#if 0
-String * MessageHeader::className()
-{
-    return MCSTR("MessageHeader");
-}
-#endif
-
 Object * MessageHeader::copy()
 {
     return new MessageHeader(this);

@@ -69,13 +69,6 @@ String * MessageParser::description()
     return result;
 }
 
-#if 0
-String * MessageParser::className()
-{
-    return MCSTR("MessageParser");
-}
-#endif
-
 Object * MessageParser::copy()
 {
     return new MessageParser(this);

@@ -110,13 +110,6 @@ void Data::setData(Data * otherData)
     appendData(otherData);
 }
 
-#if 0
-String * Data::className()
-{
-    return MCSTR("Data");
-}
-#endif
-
 String * Data::description()
 {
     return String::stringWithUTF8Format("<%s:%p %i bytes>", MCUTF8(className()), this, length());

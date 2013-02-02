@@ -42,13 +42,6 @@ Set * Set::setWithArray(Array * objects)
     return (Set *) result->autorelease();
 }
 
-#if 0
-String * Set::className()
-{
-    return MCSTR("Set");
-}
-#endif
-
 String * Set::description()
 {
     String * result = String::string();

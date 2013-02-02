@@ -94,13 +94,6 @@ String * Value::description()
     }
 }
 
-#if 0
-String * Value::className()
-{
-    return MCSTR("Value");
-}
-#endif
-
 bool Value::isEqual(Object * otherObject)
 {
     Value * otherValue = (Value *) otherObject;

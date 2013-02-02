@@ -65,13 +65,6 @@ String * AbstractMultipart::description()
     return result;
 }
 
-#if 0
-String * AbstractMultipart::className()
-{
-    return MCSTR("AbstractMultipart");
-}
-#endif
-
 Object * AbstractMultipart::copy()
 {
     return new AbstractMultipart(this);

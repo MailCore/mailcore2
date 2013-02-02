@@ -39,13 +39,6 @@ String * AbstractMessage::description()
     }
 }
 
-#if 0
-String * AbstractMessage::className()
-{
-    return MCSTR("MessageHeader");
-}
-#endif
-
 Object * AbstractMessage::copy()
 {
     return new AbstractMessage(this);

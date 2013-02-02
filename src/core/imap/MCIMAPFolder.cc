@@ -27,13 +27,6 @@ IMAPFolder::~IMAPFolder()
     MC_SAFE_RELEASE(mPath);
 }
 
-#if 0
-String * IMAPFolder::className()
-{
-    return MCSTR("IMAPFolder");
-}
-#endif
-
 Object * IMAPFolder::copy()
 {
     return new IMAPFolder(this);

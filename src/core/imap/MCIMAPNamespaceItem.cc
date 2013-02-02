@@ -28,13 +28,6 @@ IMAPNamespaceItem::~IMAPNamespaceItem()
     MC_SAFE_RELEASE(mPrefix);
 }
 
-#if 0
-String * IMAPNamespaceItem::className()
-{
-    return MCSTR("IMAPNamespaceItem");
-}
-#endif
-
 String * IMAPNamespaceItem::description()
 {
     return String::stringWithUTF8Format("<%s:%p %s %c>",

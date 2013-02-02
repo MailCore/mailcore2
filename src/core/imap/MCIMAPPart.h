@@ -24,10 +24,10 @@ namespace mailcore {
 		virtual void setSize(unsigned int size);
 		virtual unsigned int size();
 		
+        virtual unsigned int decodedSize();
+        
 		virtual void setEncoding(Encoding encoding);
 		virtual Encoding encoding();
-		
-		unsigned int decodedSize();
 		
 		static AbstractPart * attachmentWithIMAPBody(struct mailimap_body * body);
 		
