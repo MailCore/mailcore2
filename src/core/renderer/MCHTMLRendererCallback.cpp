@@ -221,7 +221,7 @@ mailcore::String * HTMLRendererTemplateCallback::templateForAttachment()
     return MCSTR("{{#HASSIZE}}\
                  <div>- {{FILENAME}}, {{SIZE}}</div>\
                  {{/HASSIZE}}\
-                 {{#HASSIZE}}\
+                 {{#NOSIZE}}\
                  <div>- {{FILENAME}}</div>\
                  {{/NOSIZE}}\
                  ");
