@@ -177,13 +177,6 @@ String * Address::description()
     return result;
 }
 
-#if 0
-String * Address::className()
-{
-    return MCSTR("Address");
-}
-#endif
-
 bool Address::isEqual(Object * otherObject)
 {
     Address * otherAddress = (Address *) otherObject;

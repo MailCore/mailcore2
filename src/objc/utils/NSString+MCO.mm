@@ -8,6 +8,8 @@
 
 #import "NSString+MCO.h"
 
+#include "MCString.h"
+
 @implementation NSString (MCO)
 
 + (NSString *) mco_stringWithMCString:(mailcore::String *)cppString

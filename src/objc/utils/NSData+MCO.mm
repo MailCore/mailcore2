@@ -8,6 +8,8 @@
 
 #import "NSData+MCO.h"
 
+#include "MCData.h"
+
 @implementation NSData (MCO)
 
 + (NSData *) mco_dataWithMCData:(mailcore::Data *)cppData

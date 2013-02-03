@@ -8,7 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-#include <mailcore/MCObject.h>
+#ifdef __cplusplus
+namespace mailcore {
+    class Object;
+}
+#endif
 
 @interface MCOObjectWrapper : NSObject
 

@@ -11,8 +11,11 @@
 #include "MCUtils.h"
 #include "MCAssert.h"
 #include "MCMainThread.h"
+#include "MCLog.h"
 
 using namespace mailcore;
+
+bool mailcore::zombieEnabled = 0;
 
 Object::Object()
 {
@@ -55,9 +58,13 @@ void Object::release()
     if (mCounter == 0) {
         shouldRelease = true;
     }
+    if (mCounter < 0) {
+        MCLog("release too much %p %s", this, MCUTF8(className()));
+        MCAssert(0);
+    }
     pthread_mutex_unlock(&mLock);
     
-    if (shouldRelease) {
+    if (shouldRelease && !zombieEnabled) {
         //MCLog("dealloc %s", className()->description()->UTF8Characters());
         delete this;
     }
@@ -73,16 +80,8 @@ String * Object::className()
 {
     int status;
     char * unmangled = abi::__cxa_demangle(typeid(* this).name(), NULL, NULL, &status);
-	//return mailcore::String::uniquedStringWithUTF8Characters(typeid(* this).name());
 	return mailcore::String::uniquedStringWithUTF8Characters(unmangled);
 }
-
-/*
-String * Object::className()
-{
-    return MCSTR("Object");
-}
-*/
 
 String * Object::description()
 {

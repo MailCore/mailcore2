@@ -33,13 +33,6 @@ IMAPPart::~IMAPPart()
     MC_SAFE_RELEASE(mPartID);
 }
 
-#if 0
-String * IMAPPart::className()
-{
-    return MCSTR("IMAPPart");
-}
-#endif
-
 Object * IMAPPart::copy()
 {
     return new IMAPPart(this);
@@ -161,6 +154,7 @@ IMAPMessagePart * IMAPPart::attachmentWithIMAPBody1PartMessage(struct mailimap_b
     }
 	
     attachment = new IMAPMessagePart();
+    attachment->setPartID(partID);
     attachment->header()->importIMAPEnvelope(message->bd_envelope);
     attachment->importIMAPFields(message->bd_fields, extension);
 
@@ -203,7 +197,8 @@ IMAPPart * IMAPPart::attachmentWithIMAPBody1PartBasic(struct mailimap_body_type_
 	
 	attachment = new IMAPPart();
     attachment->importIMAPFields(basic->bd_fields, extension);
-	
+	attachment->setUniqueID(mailcore::String::uuidString());
+    
     mimeType = NULL;
 	switch (basic->bd_media_basic->med_type) {
 		case MAILIMAP_MEDIA_BASIC_APPLICATION:
@@ -236,6 +231,7 @@ IMAPPart * IMAPPart::attachmentWithIMAPBody1PartText(struct mailimap_body_type_t
 	IMAPPart * attachment;
 	
 	attachment = new IMAPPart();
+	attachment->setUniqueID(mailcore::String::uuidString());
     attachment->importIMAPFields(text->bd_fields, extension);
 	attachment->setMimeType(String::stringWithUTF8Format("text/%s", text->bd_media_text));
 	
@@ -272,6 +268,7 @@ IMAPMultipart * IMAPPart::attachmentWithIMAPBodyMultipart(struct mailimap_body_t
     }
 
     attachment = new IMAPMultipart();
+    attachment->setPartID(partID);
     if (strcasecmp(body_mpart->bd_media_subtype, "alternative") == 0) {
         attachment->setPartType(PartTypeMultipartAlternative);
     }

@@ -39,13 +39,6 @@ String * AbstractMessage::description()
     }
 }
 
-#if 0
-String * AbstractMessage::className()
-{
-    return MCSTR("MessageHeader");
-}
-#endif
-
 Object * AbstractMessage::copy()
 {
     return new AbstractMessage(this);
@@ -62,4 +55,16 @@ MessageHeader * AbstractMessage::header()
 void AbstractMessage::setHeader(MessageHeader * header)
 {
     MC_SAFE_REPLACE_RETAIN(MessageHeader, mHeader, header);
+}
+
+AbstractPart * AbstractMessage::partForContentID(String * contentID)
+{
+    MCAssert(0);
+    return NULL;
+}
+
+AbstractPart * AbstractMessage::partForUniqueID(String * uniqueID)
+{
+    MCAssert(0);
+    return NULL;
 }

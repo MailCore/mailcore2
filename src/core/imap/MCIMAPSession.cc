@@ -316,13 +316,6 @@ IMAPSession::~IMAPSession()
     pthread_mutex_destroy(&mIdleLock);
 }
 
-#if 0
-String * IMAPSession::className()
-{
-    return MCSTR("IMAPSession");
-}
-#endif
-
 void IMAPSession::setHostname(String * hostname)
 {
     MC_SAFE_REPLACE_COPY(String, mHostname, hostname);

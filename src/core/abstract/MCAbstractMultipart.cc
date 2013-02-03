@@ -65,13 +65,6 @@ String * AbstractMultipart::description()
     return result;
 }
 
-#if 0
-String * AbstractMultipart::className()
-{
-    return MCSTR("AbstractMultipart");
-}
-#endif
-
 Object * AbstractMultipart::copy()
 {
     return new AbstractMultipart(this);
@@ -93,3 +86,27 @@ void AbstractMultipart::setMessage(AbstractMessage * message)
     AbstractPart::setMessage(message);
     applyMessage();
 }
+
+AbstractPart * AbstractMultipart::partForContentID(String * contentID)
+{
+    for(unsigned int i = 0 ; i < parts()->count() ; i ++) {
+        mailcore::AbstractPart * subpart = (mailcore::AbstractPart *) parts()->objectAtIndex(i);
+        mailcore::AbstractPart * result = subpart->partForContentID(contentID);
+        if (result != NULL)
+            return result;
+    }
+    return NULL;
+}
+
+
+AbstractPart * AbstractMultipart::partForUniqueID(String * uniqueID)
+{
+    for(unsigned int i = 0 ; i < parts()->count() ; i ++) {
+        mailcore::AbstractPart * subpart = (mailcore::AbstractPart *) parts()->objectAtIndex(i);
+        mailcore::AbstractPart * result = subpart->partForUniqueID(uniqueID);
+        if (result != NULL)
+            return result;
+    }
+    return NULL;
+}
+

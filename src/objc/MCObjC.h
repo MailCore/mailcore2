@@ -14,11 +14,16 @@
 #import <mailcore/MCOObjectWrapper.h>
 #import <mailcore/NSData+MCO.h>
 #import <mailcore/NSString+MCO.h>
+#import <mailcore/NSDictionary+MCO.h>
+#import <mailcore/NSArray+MCO.h>
+#import <mailcore/NSObject+MCO.h>
+#import <mailcore/MCOObjectWrapper.h>
 #import <mailcore/NSError+MCO.h>
 #import <mailcore/MCOIMAPSession.h>
 #import <mailcore/MCOOperation.h>
 #import <mailcore/MCOCheckAccountOperation.h>
-
+#import <mailcore/MCOFetchFoldersOperation.h>
+#import <mailcore/MCOConstants.h>
 
 #endif
 

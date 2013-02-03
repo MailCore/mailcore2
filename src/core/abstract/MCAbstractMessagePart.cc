@@ -37,13 +37,6 @@ String * AbstractMessagePart::description()
     return result;
 }
 
-#if 0
-String * AbstractMessagePart::className()
-{
-    return MCSTR("AbstractMessagePart");
-}
-#endif
-
 Object * AbstractMessagePart::copy()
 {
     return new AbstractMessagePart(this);
@@ -85,4 +78,14 @@ void AbstractMessagePart::setMessage(AbstractMessage * message)
 {
     AbstractPart::setMessage(message);
     applyMessage();
+}
+
+AbstractPart * AbstractMessagePart::partForContentID(String * contentID)
+{
+    return mainPart()->partForContentID(contentID);
+}
+
+AbstractPart * AbstractMessagePart::partForUniqueID(String * contentID)
+{
+    return mainPart()->partForContentID(contentID);
 }

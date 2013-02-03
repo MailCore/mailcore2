@@ -51,13 +51,6 @@ SMTPSession::~SMTPSession()
     MCLog("dealloc4");
 }
 
-#if 0
-String * SMTPSession::className()
-{
-    return MCSTR("SMTPSession");
-}
-#endif
-
 void SMTPSession::setHostname(String * hostname)
 {
     MC_SAFE_REPLACE_COPY(String, mHostname, hostname);

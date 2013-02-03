@@ -12,7 +12,6 @@
 #include <unicode/uclean.h>
 #include <unicode/ucnv.h>
 #include <mailcore/mailcore.h>
-#import "MCOFetchFoldersOperation.h"
 
 extern "C" {
     extern int mailstream_debug;
@@ -76,7 +75,9 @@ static mailcore::Data * testMessageBuilder()
 static void testMessageParser(mailcore::Data * data)
 {
     mailcore::MessageParser * parser = mailcore::MessageParser::messageParserWithData(data);
-    MCLog("%s", MCUTF8(parser->description()));
+    MCLog("%s", MCUTF8DESC(parser));
+    MCLog("HTML rendering");
+    MCLog("%s", MCUTF8(parser->htmlRendering()));
 }
 
 static void testIMAP()
@@ -271,7 +272,7 @@ static void testAsyncPOP()
     [[NSRunLoop currentRunLoop] run];
 }
 
-void testObjc()
+void testObjC()
 {
     MCOIMAPSession *session = [[MCOIMAPSession alloc] init];
     session.username = @"monkeybreadr@gmail.com";
@@ -320,7 +321,7 @@ void testAll()
     //testAsyncIMAP();
     //testAsyncPOP();
 
-    testObjc();
+    testObjC();
 
     MCLog("pool release");
     pool->release();

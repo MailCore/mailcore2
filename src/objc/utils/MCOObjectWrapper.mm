@@ -9,6 +9,7 @@
 #import "MCOObjectWrapper.h"
 
 #include "MCUtils.h"
+#include "MCObject.h"
 
 @implementation MCOObjectWrapper {
     mailcore::Object * mObject;

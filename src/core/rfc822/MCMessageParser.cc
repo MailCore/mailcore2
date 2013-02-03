@@ -2,6 +2,7 @@
 
 #include "MCAttachment.h"
 #include "MCMessageHeader.h"
+#include "MCHTMLRenderer.h"
 
 using namespace mailcore;
 
@@ -69,14 +70,23 @@ String * MessageParser::description()
     return result;
 }
 
-#if 0
-String * MessageParser::className()
-{
-    return MCSTR("MessageParser");
-}
-#endif
-
 Object * MessageParser::copy()
 {
     return new MessageParser(this);
 }
+
+AbstractPart * MessageParser::partForContentID(String * contentID)
+{
+    return mainPart()->partForContentID(contentID);
+}
+
+AbstractPart * MessageParser::partForUniqueID(String * uniqueID)
+{
+    return mainPart()->partForUniqueID(uniqueID);
+}
+
+String * MessageParser::htmlRendering(HTMLRendererTemplateCallback * htmlCallback)
+{
+    return HTMLRenderer::htmlForRFC822Message(this, htmlCallback);
+}
+

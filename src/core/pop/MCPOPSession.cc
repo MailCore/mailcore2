@@ -44,13 +44,6 @@ POPSession::~POPSession()
     MC_SAFE_RELEASE(mPassword);
 }
 
-#if 0
-String * POPSession::className()
-{
-    return MCSTR("POPSession");
-}
-#endif
-
 void POPSession::setHostname(String * hostname)
 {
     MC_SAFE_REPLACE_COPY(String, mHostname, hostname);

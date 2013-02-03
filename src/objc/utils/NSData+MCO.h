@@ -8,7 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-#include <mailcore/MCData.h>
+#ifdef __cplusplus
+namespace mailcore {
+    class Data;
+}
+#endif
 
 @interface NSData (MCO)
 

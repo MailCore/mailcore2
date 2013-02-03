@@ -61,6 +61,8 @@ namespace mailcore {
 		
 		virtual Array * componentsSeparatedByString(String * separator);
 		
+		virtual bool isEqualCaseInsensitive(String * otherString);
+        
 		// Additions
 		static String * stringByDecodingMIMEHeaderValue(const char * phrase);
 		virtual Data * encodedAddressDisplayNameValue();

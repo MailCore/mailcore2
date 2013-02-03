@@ -953,13 +953,6 @@ void String::setCharacters(const UChar * unicodeCharacters)
     appendCharacters(unicodeCharacters);
 }
 
-#if 0
-String * String::className()
-{
-    return MCSTR("String");
-}
-#endif
-
 String * String::description()
 {
     return this;
@@ -1206,7 +1199,7 @@ unsigned int String::replaceOccurrencesOfString(String * occurrence, String * re
     int delta = replacement->length() - occurrence->length();
     int modifiedLength = mLength + delta * count + 1;
     unicodeChars = (UChar *) malloc(modifiedLength * sizeof(* unicodeChars));
-    unicodeChars[modifiedLength] = 0;
+    unicodeChars[modifiedLength - 1] = 0;
     UChar * dest_p = unicodeChars;
     p = mUnicodeChars;
     while (1) {
@@ -1729,7 +1722,9 @@ String * String::flattenHTMLAndShowBlockquoteAndLink(bool showBlockquote, bool s
     state.linkStack = new Array();
 	state.paragraphSpacingStack = new Array();
     
-	htmlSAXParseDoc((xmlChar*) UTF8Characters(), "utf-8", &handler, &state);
+    const char * characters = cleanedHTMLString()->UTF8Characters();
+    
+	htmlSAXParseDoc((xmlChar*) characters, "utf-8", &handler, &state);
     
 	if (mem_base != xmlMemBlocks()) {
 		MCLog("Leak of %d blocks found in htmlSAXParseDoc",
@@ -1979,8 +1974,7 @@ String * String::uniquedStringWithUTF8Characters(const char * UTF8Characters)
 
 String * String::htmlEncodedString()
 {
-    String * htmlStr;
-    htmlStr = String::string();
+    String * htmlStr = String::string();
 #define kBufSz 2000
     
     const char * inStr = UTF8Characters();
@@ -2019,3 +2013,9 @@ String * String::cleanedHTMLString()
 #warning implement HTML cleaning with tidy
     return (String *) copy()->autorelease();
 }
+
+bool String::isEqualCaseInsensitive(String * otherString)
+{
+    return caseInsensitiveCompare(otherString) == 0;
+}
+

@@ -33,6 +33,8 @@
 #define MMCUTF8(str) MCUTF8(str)
 #define MCUTF8DESC(obj) ((obj) != NULL ? (obj)->description()->UTF8Characters() : NULL )
 
+#define MCLOCALIZEDSTRING(key) key
+
 #endif
 
 #endif

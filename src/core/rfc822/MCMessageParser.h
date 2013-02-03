@@ -10,6 +10,8 @@
 
 namespace mailcore {
 	
+    class HTMLRendererTemplateCallback;
+    
 	class MessageParser : public AbstractMessage {
 	public:
 		static MessageParser * messageParserWithData(Data * data);
@@ -19,6 +21,11 @@ namespace mailcore {
 		
 		virtual AbstractPart * mainPart();
 		virtual Data * data();
+        
+        virtual AbstractPart * partForContentID(String * contentID);
+        virtual AbstractPart * partForUniqueID(String * uniqueID);
+        
+        virtual String * htmlRendering(HTMLRendererTemplateCallback * htmlCallback = NULL);
         
     public: // subclass behavior
 		MessageParser(MessageParser * other);

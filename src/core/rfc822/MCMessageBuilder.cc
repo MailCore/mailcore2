@@ -524,13 +524,6 @@ String * MessageBuilder::description()
     return result;
 }
 
-#if 0
-String * MessageBuilder::className()
-{
-    return MCSTR("MessageBuilder");
-}
-#endif
-
 Object * MessageBuilder::copy()
 {
     return new MessageBuilder(this);

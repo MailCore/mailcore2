@@ -1,3 +1,7 @@
+#ifndef __MAILCORE_MCOCONSTANTS_H_
+
+#define __MAILCORE_MCOCONSTANTS_H_
+
 typedef enum {
     MCOConnectionTypeClear             = 1 << 0,
     MCOConnectionTypeStartTLS          = 1 << 1,
@@ -15,3 +19,5 @@ typedef enum {
     MCOAuthTypeSASLNTLM          = 1 << 6,
     MCOAuthTypeSASLKerberosV4    = 1 << 7,
 } MCOAuthType;
+
+#endif

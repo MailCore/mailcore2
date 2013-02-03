@@ -26,13 +26,6 @@ IMAPNamespace::~IMAPNamespace()
     MC_SAFE_RELEASE(mItems);
 }
 
-#if 0
-String * IMAPNamespace::className()
-{
-    return MCSTR("IMAPNamespace");
-}
-#endif
-
 String * IMAPNamespace::description()
 {
     String * result = String::string();

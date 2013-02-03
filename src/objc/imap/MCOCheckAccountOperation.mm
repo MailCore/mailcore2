@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 __MyCompanyName__. All rights reserved.
 //
 
-#import <mailcore/MCCore.h>
+#import <mailcore/MCAsync.h>
 
 #import "MCOOperation+Internals.h"
 #import "MCOCheckAccountOperation.h"

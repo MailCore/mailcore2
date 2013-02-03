@@ -11,6 +11,10 @@
 
 namespace mailcore {
 
+    class IMAPPart;
+    class HTMLRendererIMAPCallback;
+    class HTMLRendererTemplateCallback;
+    
 	class IMAPMessage : public AbstractMessage {
 	public:
 		IMAPMessage();
@@ -30,6 +34,15 @@ namespace mailcore {
 		
 		virtual void setGmailLabels(Array * labels);
 		virtual Array * gmailLabels();
+        
+        virtual AbstractPart * partForPartID(String * partID);
+        
+        virtual AbstractPart * partForContentID(String * contentID);
+        virtual AbstractPart * partForUniqueID(String * uniqueID);
+        
+        virtual String * htmlRendering(String * folder,
+                                       HTMLRendererIMAPCallback * dataCallback,
+                                       HTMLRendererTemplateCallback * htmlCallback = NULL);
         
     public: // subclass behavior
 		IMAPMessage(IMAPMessage * other);

@@ -19,6 +19,9 @@ namespace mailcore {
 		
 		virtual void setMessage(AbstractMessage * message);
         
+        virtual AbstractPart * partForContentID(String * contentID);
+        virtual AbstractPart * partForUniqueID(String * uniqueID);
+        
     public: //subclass behavior
 		AbstractMultipart(AbstractMultipart * other);
 		virtual String * description();

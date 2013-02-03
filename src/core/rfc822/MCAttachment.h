@@ -27,12 +27,13 @@ namespace mailcore {
 		virtual void setData(Data * data);
 		virtual Data * data();
 		
-		static AbstractPart * attachmentsWithMIME(struct mailmime * mime);
-        
     public: // subclass behavior
 		Attachment(Attachment * other);
 		virtual String * description();
 		virtual Object * copy();
+        
+    public: // private
+		static AbstractPart * attachmentsWithMIME(struct mailmime * mime);
         
 	private:
 		Data * mData;

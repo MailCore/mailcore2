@@ -13,6 +13,7 @@ AbstractPart::AbstractPart()
 AbstractPart::AbstractPart(AbstractPart * other)
 {
     init();
+    setUniqueID(other->mUniqueID);
     setFilename(other->mFilename);
     setMimeType(other->mMimeType);
     setCharset(other->mCharset);
@@ -24,6 +25,7 @@ AbstractPart::AbstractPart(AbstractPart * other)
 
 void AbstractPart::init()
 {
+    mUniqueID = NULL;
     mFilename = NULL;
     mMimeType = NULL;
     mCharset = NULL;
@@ -35,6 +37,7 @@ void AbstractPart::init()
 
 AbstractPart::~AbstractPart()
 {
+    MC_SAFE_RELEASE(mUniqueID);
     MC_SAFE_RELEASE(mFilename);
     MC_SAFE_RELEASE(mMimeType);
     MC_SAFE_RELEASE(mCharset);
@@ -67,13 +70,6 @@ String * AbstractPart::description()
     return result;
 }
 
-#if 0
-String * AbstractPart::className()
-{
-    return MCSTR("AbstractPart");
-}
-#endif
-
 Object * AbstractPart::copy()
 {
     return new AbstractPart(this);
@@ -87,6 +83,16 @@ PartType AbstractPart::partType()
 void AbstractPart::setPartType(PartType type)
 {
     mPartType = type;
+}
+
+String * AbstractPart::uniqueID()
+{
+    return mUniqueID;
+}
+
+void AbstractPart::setUniqueID(String * uniqueID)
+{
+    MC_SAFE_REPLACE_COPY(String, mUniqueID, uniqueID);
 }
 
 String * AbstractPart::filename()
@@ -221,3 +227,24 @@ void AbstractPart::importIMAPFields(struct mailimap_body_fields * fields,
         }
     }
 }
+
+AbstractPart * AbstractPart::partForContentID(String * contentID)
+{
+    if (contentID->isEqual(mContentID)) {
+        return this;
+    }
+    else {
+        return NULL;
+    }
+}
+
+AbstractPart * AbstractPart::partForUniqueID(String * uniqueID)
+{
+    if (uniqueID->isEqual(mUniqueID)) {
+        return this;
+    }
+    else {
+        return NULL;
+    }
+}
+

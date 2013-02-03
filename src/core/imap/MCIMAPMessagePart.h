@@ -13,9 +13,16 @@ namespace mailcore {
 		IMAPMessagePart();
 		virtual ~IMAPMessagePart();
         
+		virtual void setPartID(String * partID);
+		virtual String * partID();
+        
     public: // subclass behavior
 		IMAPMessagePart(IMAPMessagePart * other);
 		virtual Object * copy();
+        
+    private:
+		String * mPartID;
+		void init();
 	};
 }
 
