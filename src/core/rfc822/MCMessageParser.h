@@ -25,7 +25,7 @@ namespace mailcore {
         virtual AbstractPart * partForContentID(String * contentID);
         virtual AbstractPart * partForUniqueID(String * uniqueID);
         
-        virtual String * htmlRendering(HTMLRendererTemplateCallback * htmlCallback);
+        virtual String * htmlRendering(HTMLRendererTemplateCallback * htmlCallback = NULL);
         
     public: // subclass behavior
 		MessageParser(MessageParser * other);

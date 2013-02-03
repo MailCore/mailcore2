@@ -42,7 +42,7 @@ namespace mailcore {
         
         virtual String * htmlRendering(String * folder,
                                        HTMLRendererIMAPCallback * dataCallback,
-                                       HTMLRendererTemplateCallback * htmlCallback);
+                                       HTMLRendererTemplateCallback * htmlCallback = NULL);
         
     public: // subclass behavior
 		IMAPMessage(IMAPMessage * other);
