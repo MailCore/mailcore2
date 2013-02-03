@@ -38,6 +38,6 @@ String * SizeFormatter::stringWithSize(unsigned int size)
         return String::stringWithUTF8Format("%.0f %s", size / divider, unit->UTF8Characters());
     }
     else {
-        return String::stringWithUTF8Format("%.1f %@", size / divider, unit->UTF8Characters());
+        return String::stringWithUTF8Format("%.1f %s", size / divider, unit->UTF8Characters());
     }
 }
