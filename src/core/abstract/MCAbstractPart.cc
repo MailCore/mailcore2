@@ -227,3 +227,24 @@ void AbstractPart::importIMAPFields(struct mailimap_body_fields * fields,
         }
     }
 }
+
+AbstractPart * AbstractPart::partForContentID(String * contentID)
+{
+    if (contentID->isEqual(mContentID)) {
+        return this;
+    }
+    else {
+        return NULL;
+    }
+}
+
+AbstractPart * AbstractPart::partForUniqueID(String * uniqueID)
+{
+    if (uniqueID->isEqual(mUniqueID)) {
+        return this;
+    }
+    else {
+        return NULL;
+    }
+}
+

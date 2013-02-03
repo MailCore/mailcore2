@@ -1722,7 +1722,9 @@ String * String::flattenHTMLAndShowBlockquoteAndLink(bool showBlockquote, bool s
     state.linkStack = new Array();
 	state.paragraphSpacingStack = new Array();
     
-	htmlSAXParseDoc((xmlChar*) UTF8Characters(), "utf-8", &handler, &state);
+    const char * characters = cleanedHTMLString()->UTF8Characters();
+    
+	htmlSAXParseDoc((xmlChar*) characters, "utf-8", &handler, &state);
     
 	if (mem_base != xmlMemBlocks()) {
 		MCLog("Leak of %d blocks found in htmlSAXParseDoc",
@@ -2011,3 +2013,9 @@ String * String::cleanedHTMLString()
 #warning implement HTML cleaning with tidy
     return (String *) copy()->autorelease();
 }
+
+bool String::isEqualCaseInsensitive(String * otherString)
+{
+    return caseInsensitiveCompare(otherString) == 0;
+}
+

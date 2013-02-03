@@ -29,14 +29,15 @@ namespace mailcore {
 		virtual void setEncoding(Encoding encoding);
 		virtual Encoding encoding();
 		
-		static AbstractPart * attachmentWithIMAPBody(struct mailimap_body * body);
-		
-		virtual void importIMAPFields(struct mailimap_body_fields * fields,
-			struct mailimap_body_ext_1part * extension);
-        
     public: // subclass behavior
 		IMAPPart(IMAPPart * other);
 		virtual Object * copy();
+        
+    public: // private
+		static AbstractPart * attachmentWithIMAPBody(struct mailimap_body * body);
+		
+		virtual void importIMAPFields(struct mailimap_body_fields * fields,
+                                      struct mailimap_body_ext_1part * extension);
         
 	private:
 		String * mPartID;

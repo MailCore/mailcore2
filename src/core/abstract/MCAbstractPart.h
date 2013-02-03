@@ -43,13 +43,18 @@ namespace mailcore {
 		virtual AbstractMessage * message();
 		virtual void setMessage(AbstractMessage * message);
 		
-		virtual void importIMAPFields(struct mailimap_body_fields * fields,
-			struct mailimap_body_ext_1part * extension);
+        virtual AbstractPart * partForContentID(String * contentID);
+        virtual AbstractPart * partForUniqueID(String * uniqueID);
         
     public: // subclass behavior
 		AbstractPart(AbstractPart * other);
 		virtual String * description();
 		virtual Object * copy();
+        
+    public: // private
+		virtual void importIMAPFields(struct mailimap_body_fields * fields,
+                                      struct mailimap_body_ext_1part * extension);
+        
         
 	private:
 		String * mUniqueID;

@@ -7,6 +7,7 @@
 
 namespace mailcore {
 
+    class AbstractPart;
 	class MessageHeader;
 
 	class AbstractMessage : public Object {
@@ -16,6 +17,9 @@ namespace mailcore {
 
 		virtual MessageHeader * header();
 		virtual void setHeader(MessageHeader * header);
+        
+        virtual AbstractPart * partForContentID(String * contentID);
+        virtual AbstractPart * partForUniqueID(String * uniqueID);
         
     public: //subclass behavior
 		AbstractMessage(AbstractMessage * other);

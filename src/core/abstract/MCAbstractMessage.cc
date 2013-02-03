@@ -56,3 +56,15 @@ void AbstractMessage::setHeader(MessageHeader * header)
 {
     MC_SAFE_REPLACE_RETAIN(MessageHeader, mHeader, header);
 }
+
+AbstractPart * AbstractMessage::partForContentID(String * contentID)
+{
+    MCAssert(0);
+    return NULL;
+}
+
+AbstractPart * AbstractMessage::partForUniqueID(String * uniqueID)
+{
+    MCAssert(0);
+    return NULL;
+}

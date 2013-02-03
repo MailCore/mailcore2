@@ -154,6 +154,7 @@ IMAPMessagePart * IMAPPart::attachmentWithIMAPBody1PartMessage(struct mailimap_b
     }
 	
     attachment = new IMAPMessagePart();
+    attachment->setPartID(partID);
     attachment->header()->importIMAPEnvelope(message->bd_envelope);
     attachment->importIMAPFields(message->bd_fields, extension);
 
@@ -267,6 +268,7 @@ IMAPMultipart * IMAPPart::attachmentWithIMAPBodyMultipart(struct mailimap_body_t
     }
 
     attachment = new IMAPMultipart();
+    attachment->setPartID(partID);
     if (strcasecmp(body_mpart->bd_media_subtype, "alternative") == 0) {
         attachment->setPartType(PartTypeMultipartAlternative);
     }

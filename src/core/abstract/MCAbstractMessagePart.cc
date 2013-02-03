@@ -79,3 +79,13 @@ void AbstractMessagePart::setMessage(AbstractMessage * message)
     AbstractPart::setMessage(message);
     applyMessage();
 }
+
+AbstractPart * AbstractMessagePart::partForContentID(String * contentID)
+{
+    return mainPart()->partForContentID(contentID);
+}
+
+AbstractPart * AbstractMessagePart::partForUniqueID(String * contentID)
+{
+    return mainPart()->partForContentID(contentID);
+}
