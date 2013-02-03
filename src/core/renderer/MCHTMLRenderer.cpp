@@ -424,6 +424,8 @@ String * renderTemplate(String * templateContent, HashMap * values)
     fillTemplateDictionaryFromMCHashMap(&dict, values);
     data = templateContent->dataUsingEncoding("utf-8");
     ctemplate::Template * tpl = ctemplate::Template::StringToTemplate(data->bytes(), data->length(), ctemplate::DO_NOT_STRIP);
+    if (tpl == NULL)
+        return NULL;
     if (!tpl->Expand(&output, &dict))
         return NULL;
     delete tpl;
