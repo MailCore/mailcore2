@@ -22,6 +22,8 @@
 #import <mailcore/MCOIMAPSession.h>
 #import <mailcore/MCOOperation.h>
 #import <mailcore/MCOCheckAccountOperation.h>
+#import <mailcore/MCOFetchFoldersOperation.h>
+#import <mailcore/MCOConstants.h>
 
 #endif
 

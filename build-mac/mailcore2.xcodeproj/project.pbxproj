@@ -58,6 +58,7 @@
 		C63CD68B16BE1BC600DB18F1 /* MCHTMLRenderer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD67C16BDCDD400DB18F1 /* MCHTMLRenderer.h */; };
 		C63CD68C16BE1BC800DB18F1 /* MCHTMLRendererCallback.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD68516BE148B00DB18F1 /* MCHTMLRendererCallback.h */; };
 		C63CD68D16BE1BCA00DB18F1 /* MCRenderer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD68716BE1AB600DB18F1 /* MCRenderer.h */; };
+		C63CD68E16BE324100DB18F1 /* MCOFetchFoldersOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F87F190816BB62690012652F /* MCOFetchFoldersOperation.h */; };
 		C64EA6F4169E847800778456 /* MCAbstractMessage.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA694169E847800778456 /* MCAbstractMessage.cc */; };
 		C64EA6F6169E847800778456 /* MCAbstractMessagePart.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA696169E847800778456 /* MCAbstractMessagePart.cc */; };
 		C64EA6F8169E847800778456 /* MCAbstractMultipart.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA698169E847800778456 /* MCAbstractMultipart.cc */; };
@@ -212,6 +213,7 @@
 			dstPath = include/mailcore;
 			dstSubfolderSpec = 16;
 			files = (
+				C63CD68E16BE324100DB18F1 /* MCOFetchFoldersOperation.h in CopyFiles */,
 				C63CD68C16BE1BC800DB18F1 /* MCHTMLRendererCallback.h in CopyFiles */,
 				C63CD68816BE1BBF00DB18F1 /* MCAddressDisplay.h in CopyFiles */,
 				C63CD68D16BE1BCA00DB18F1 /* MCRenderer.h in CopyFiles */,
