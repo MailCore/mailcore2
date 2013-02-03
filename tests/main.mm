@@ -271,7 +271,7 @@ static void testAsyncPOP()
     [[NSRunLoop currentRunLoop] run];
 }
 
-void testObjc()
+void testObjC()
 {
     MCOIMAPSession *session = [[MCOIMAPSession alloc] init];
     session.username = @"monkeybreadr@gmail.com";
@@ -320,7 +320,7 @@ void testAll()
     //testAsyncIMAP();
     //testAsyncPOP();
 
-    testObjc();
+    testObjC();
 
     MCLog("pool release");
     pool->release();
