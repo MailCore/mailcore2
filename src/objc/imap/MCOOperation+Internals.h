@@ -13,6 +13,8 @@
 
 @interface MCOOperation ()
 - (id)initWithOperation:(mailcore::Operation *)op;
+#ifdef __cplusplus
 - (mailcore::Operation *)operation;
+#endif
 - (void)start;
 @end
