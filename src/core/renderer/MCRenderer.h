@@ -9,10 +9,6 @@
 #ifndef mailcore2_MCRenderer_h
 #define mailcore2_MCRenderer_h
 
-#include <mailcore/MCAddressDisplay.h>
-#include <mailcore/MCDateFormatter.h>
-#include <mailcore/MCSizeFormatter.h>
-#include <mailcore/MCHTMLRenderer.h>
 #include <mailcore/MCHTMLRendererCallback.h>
 
 #endif
