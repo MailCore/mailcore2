@@ -23,7 +23,7 @@
 
 @property (nonatomic, assign) NSTimeInterval timeout;
 @property (nonatomic, assign) BOOL checkCertificateEnabled;
-@property (nonatomic, assign) BOOL VoIPEnabled;
+@property (nonatomic, assign, getter=isVoIPEnabled) BOOL VoIPEnabled;
 @property (nonatomic, strong) NSString *delimiter;
 
 - (MCOCheckAccountOperation *)checkAccountOperation;

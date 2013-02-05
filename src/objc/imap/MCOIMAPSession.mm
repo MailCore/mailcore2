@@ -108,7 +108,7 @@ using namespace mailcore;
     self.session->setVoIPEnabled(VoIPEnabled);
 }
 
-- (BOOL)VoIPEnabled {
+- (BOOL)isVoIPEnabled {
     return (BOOL)self.session->isVoIPEnabled();
 }
 
