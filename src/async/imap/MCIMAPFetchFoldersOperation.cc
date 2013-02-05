@@ -57,10 +57,10 @@ void IMAPFetchFoldersOperation::main()
     * delimiterData = session()->session()->delimiter();
     session()->performMethodOnMainThread((Object::Method) &IMAPFetchFoldersOperation::setDelimiterDataOnMainThread,
                                          delimiterData);
-    free(delimiterData);
 }
 
 void IMAPFetchFoldersOperation::setDelimiterDataOnMainThread(char * delimiterData)
 {
     session()->setDelimiter(* delimiterData);
+    free(delimiterData);
 }
