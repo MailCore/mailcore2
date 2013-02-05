@@ -282,7 +282,7 @@ void testObjC()
     session.connectionType = MCOConnectionTypeTLS;
 
     NSLog(@"check account");
-    MCOCheckAccountOperation *checkOp = [[session checkAccountOperation] retain];
+    MCOCheckAccountOperation *checkOp = [session checkAccountOperation];
     [checkOp start:^(NSError *err) {
         NSLog(@"check account done");
         if (err) {
@@ -290,7 +290,7 @@ void testObjC()
         } else {
             NSLog(@"CONNECTED");
             NSLog(@"fetch all folders");
-            MCOFetchFoldersOperation *foldersOp = [[session fetchAllFoldersOperation] retain];
+            MCOFetchFoldersOperation *foldersOp = [session fetchAllFoldersOperation];
             [foldersOp start:^(NSError *err, NSArray *folders) {
                 NSLog(@"fetch all folders done");
                 if (err) {
