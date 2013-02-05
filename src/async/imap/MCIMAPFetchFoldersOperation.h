@@ -24,7 +24,8 @@ namespace mailcore {
         virtual void setFetchSubscribedEnabled(bool enabled);
         virtual bool isFetchSubscribedEnabled();
         
-        virtual Array * folders();
+        // Result.
+        virtual Array * /* IMAPFolder */ folders();
         
     public: // subclass behavior
         virtual void main();

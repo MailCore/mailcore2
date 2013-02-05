@@ -20,6 +20,9 @@ namespace mailcore {
         IMAPFetchNamespaceOperation();
         virtual ~IMAPFetchNamespaceOperation();
         
+        // Result.
+        virtual HashMap * namespaces();
+        
     public: // subclass behavior
         virtual void main();
         

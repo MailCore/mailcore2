@@ -29,6 +29,7 @@ namespace mailcore {
         virtual void setVersion(String * version);
         virtual String * version();
         
+        // Result.
         virtual HashMap * serverIdentity();
         
     public: // subclass behavior

@@ -38,7 +38,8 @@ namespace mailcore {
         virtual void setKind(IMAPMessagesRequestKind kind);
         virtual IMAPMessagesRequestKind kind();
         
-        virtual Array * messages();
+        // Result.
+        virtual Array * /* IMAPMessage */ messages();
         
     public: // subclass behavior
         virtual void main();

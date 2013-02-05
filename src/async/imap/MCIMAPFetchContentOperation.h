@@ -29,6 +29,7 @@ namespace mailcore {
         virtual void setEncoding(Encoding encoding);
         virtual Encoding encoding();
         
+        // Result.
         virtual Data * data();
         
     public: // subclass behavior

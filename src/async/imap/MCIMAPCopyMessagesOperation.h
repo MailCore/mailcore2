@@ -26,6 +26,7 @@ namespace mailcore {
         virtual void setUids(Array * uids);
         virtual Array * uids();
         
+        // Result.
         virtual Array * destUids();
         
     public: // subclass behavior

@@ -31,3 +31,8 @@ void IMAPFetchNamespaceOperation::main()
     MC_SAFE_RETAIN(mNamespaces);
 }
 
+HashMap * IMAPFetchNamespaceOperation::namespaces()
+{
+    return mNamespaces;
+}
+

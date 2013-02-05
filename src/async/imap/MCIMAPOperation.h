@@ -33,10 +33,11 @@ namespace mailcore {
         virtual void setImapCallback(IMAPOperationCallback * callback);
         virtual IMAPOperationCallback * imapCallback();
         
+        virtual void start();
+        
+        // Result.
         virtual void setError(ErrorCode error);
         virtual ErrorCode error();
-        
-        virtual void start();
         
     private:
         IMAPAsyncConnection * mSession;

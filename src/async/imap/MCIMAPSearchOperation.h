@@ -32,6 +32,7 @@ namespace mailcore {
         virtual void setSearchExpression(IMAPSearchExpression * expression);
         virtual IMAPSearchExpression * searchExpression();
         
+        // Result.
         virtual Array * uids();
         
     public: // subclass behavior
