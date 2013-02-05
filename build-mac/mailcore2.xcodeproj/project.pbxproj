@@ -59,6 +59,7 @@
 		C63CD68C16BE1BC800DB18F1 /* MCHTMLRendererCallback.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD68516BE148B00DB18F1 /* MCHTMLRendererCallback.h */; };
 		C63CD68D16BE1BCA00DB18F1 /* MCRenderer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD68716BE1AB600DB18F1 /* MCRenderer.h */; };
 		C63CD68E16BE324100DB18F1 /* MCOFetchFoldersOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F87F190816BB62690012652F /* MCOFetchFoldersOperation.h */; };
+		C63CD69116BE566E00DB18F1 /* MCHTMLCleaner.cc in Sources */ = {isa = PBXBuildFile; fileRef = C63CD68F16BE566D00DB18F1 /* MCHTMLCleaner.cc */; };
 		C64EA6F4169E847800778456 /* MCAbstractMessage.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA694169E847800778456 /* MCAbstractMessage.cc */; };
 		C64EA6F6169E847800778456 /* MCAbstractMessagePart.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA696169E847800778456 /* MCAbstractMessagePart.cc */; };
 		C64EA6F8169E847800778456 /* MCAbstractMultipart.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA698169E847800778456 /* MCAbstractMultipart.cc */; };
@@ -366,6 +367,8 @@
 		C63CD68416BE148B00DB18F1 /* MCHTMLRendererCallback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCHTMLRendererCallback.cpp; sourceTree = "<group>"; };
 		C63CD68516BE148B00DB18F1 /* MCHTMLRendererCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCHTMLRendererCallback.h; sourceTree = "<group>"; };
 		C63CD68716BE1AB600DB18F1 /* MCRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRenderer.h; sourceTree = "<group>"; };
+		C63CD68F16BE566D00DB18F1 /* MCHTMLCleaner.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCHTMLCleaner.cc; sourceTree = "<group>"; };
+		C63CD69016BE566E00DB18F1 /* MCHTMLCleaner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCHTMLCleaner.h; sourceTree = "<group>"; };
 		C64EA537169E772200778456 /* libmailcore2.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmailcore2.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C64EA68C169E847800778456 /* MCIMAPAsyncConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPAsyncConnection.h; sourceTree = "<group>"; };
 		C64EA68F169E847800778456 /* MCSMTPAsyncSession.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCSMTPAsyncSession.cc; sourceTree = "<group>"; };
@@ -770,6 +773,8 @@
 				C64EA6C0169E847800778456 /* MCOperationCallback.h */,
 				C64EA6C1169E847800778456 /* MCOperationQueue.cc */,
 				C64EA6C2169E847800778456 /* MCOperationQueue.h */,
+				C63CD68F16BE566D00DB18F1 /* MCHTMLCleaner.cc */,
+				C63CD69016BE566E00DB18F1 /* MCHTMLCleaner.h */,
 			);
 			path = basetypes;
 			sourceTree = "<group>";
@@ -1081,6 +1086,7 @@
 				C63CD68116BDCDD400DB18F1 /* MCHTMLRenderer.cpp in Sources */,
 				C63CD68216BDCDD400DB18F1 /* MCSizeFormatter.cpp in Sources */,
 				C63CD68616BE148B00DB18F1 /* MCHTMLRendererCallback.cpp in Sources */,
+				C63CD69116BE566E00DB18F1 /* MCHTMLCleaner.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1131,6 +1137,7 @@
 					"$(SRCROOT)/../Externals/libetpan/include",
 					"$(SRCROOT)/../Externals/icu4c/include",
 					"$(SRCROOT)/../Externals/ctemplate/include",
+					/usr/include/tidy,
 					/usr/include/libxml2,
 				);
 				LIBRARY_SEARCH_PATHS = (
@@ -1166,6 +1173,7 @@
 					"$(SRCROOT)/../Externals/libetpan/include",
 					"$(SRCROOT)/../Externals/icu4c/include",
 					"$(SRCROOT)/../Externals/ctemplate/include",
+					/usr/include/tidy,
 					/usr/include/libxml2,
 				);
 				LIBRARY_SEARCH_PATHS = (
@@ -1212,6 +1220,7 @@
 					"-lsasl2",
 					"-liconv",
 					"-all_load",
+					"-ltidy",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1233,6 +1242,7 @@
 					"-lsasl2",
 					"-liconv",
 					"-all_load",
+					"-ltidy",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

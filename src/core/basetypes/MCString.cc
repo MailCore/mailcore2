@@ -20,6 +20,7 @@
 #include "MCHashMap.h"
 #include "MCAutoreleasePool.h"
 #include "MCValue.h"
+#include "MCHTMLCleaner.h"
 
 using namespace mailcore;
 
@@ -1510,17 +1511,19 @@ static void elementStarted(void * ctx, const xmlChar * name, const xmlChar ** at
         pool = new AutoreleasePool();
         attributes = dictionaryFromAttributes(atts);
         style = (String *) attributes->objectForKey(MCSTR("style"));
-        if (style->locationOfString(MCSTR("margin: 0.0px 0.0px 0.0px 0.0px;")) != -1) {
-            hasSpacing = false;
-        }
-        else if (style->locationOfString(MCSTR("margin: 0px 0px 0px 0px;")) != -1) {
-            hasSpacing = false;
-        }
-        else if (style->locationOfString(MCSTR("margin: 0.0px;")) != -1) {
-            hasSpacing = false;
-        }
-        else if (style->locationOfString(MCSTR("margin: 0px;")) != -1) {
-            hasSpacing = false;
+        if (style != NULL) {
+            if (style->locationOfString(MCSTR("margin: 0.0px 0.0px 0.0px 0.0px;")) != -1) {
+                hasSpacing = false;
+            }
+            else if (style->locationOfString(MCSTR("margin: 0px 0px 0px 0px;")) != -1) {
+                hasSpacing = false;
+            }
+            else if (style->locationOfString(MCSTR("margin: 0.0px;")) != -1) {
+                hasSpacing = false;
+            }
+            else if (style->locationOfString(MCSTR("margin: 0px;")) != -1) {
+                hasSpacing = false;
+            }
         }
         pool->release();
         
@@ -2010,8 +2013,7 @@ String * String::htmlEncodedString()
 
 String * String::cleanedHTMLString()
 {
-#warning implement HTML cleaning with tidy
-    return (String *) copy()->autorelease();
+    return HTMLCleaner::cleanHTML(this);
 }
 
 bool String::isEqualCaseInsensitive(String * otherString)
