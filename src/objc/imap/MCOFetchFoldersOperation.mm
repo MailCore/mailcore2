@@ -32,7 +32,7 @@ using namespace mailcore;
     if (op->error() == ErrorNone) {
         NSMutableArray *nsfolders = [NSMutableArray array];
         Array *folders = op->folders();
-        for (int i = 0 ; i < folders->count(); folders++) {
+        for (int i = 0 ; i < folders->count(); i++) {
             NSString *folder = [NSString mco_stringWithMCObject:folders->objectAtIndex(i)];
             [nsfolders addObject:folder];
         }
