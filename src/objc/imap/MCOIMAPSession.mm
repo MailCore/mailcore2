@@ -20,19 +20,24 @@
 using namespace mailcore;
 
 @implementation MCOIMAPSession {
-    MCOObjectWrapper *_wrapper;
+    IMAPAsyncSession * _session;
 }
 
 - (id)init {
     self = [super init];
     if (self) {
-        _wrapper = [MCOObjectWrapper objectWrapperWithObject:new IMAPAsyncSession()];
+        _session = new IMAPAsyncSession();
     }
     return self;
 }
 
+- (void)dealloc {
+    _session->release();
+    [super dealloc];
+}
+
 - (IMAPAsyncSession *)session {
-    return dynamic_cast<IMAPAsyncSession *>([_wrapper object]);
+    return _session;
 }
 
 - (NSString *)hostname {
@@ -114,7 +119,7 @@ using namespace mailcore;
 
 - (void)setDelimiter:(NSString *)delimiter {
     NSAssert(delimiter.length == 1, @"Delimiter has to be a single char");
-    char delim = [delimiter UTF8String][0];
+    char delim = [delimiter characterAtIndex:0];
     self.session->setDelimiter(delim);
 }
 
