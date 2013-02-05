@@ -6,7 +6,6 @@
 #include <semaphore.h>
 #include <mailcore/MCObject.h>
 #include <libetpan/libetpan.h>
-#include <mutex>
 
 #ifdef __cplusplus
 
@@ -31,12 +30,13 @@ namespace mailcore {
 		struct mailsem * mOperationSem;
 		struct mailsem * mStartSem;
 		struct mailsem * mStopSem;
-		std::mutex mLock;
+		pthread_mutex_t mLock;
 		bool mWaiting;
 		struct mailsem * mWaitingFinishedSem;
 		bool mQuitting;
         
 		void startThread();
+		static void runOperationsOnThread(OperationQueue * queue);
 		void runOperations();
 		void callbackOnMainThread(Operation * op);
 		void checkRunningOnMainThread(void * context);

@@ -8,7 +8,6 @@
 #include "MCLog.h"
 #include "MCAutoreleasePool.h"
 #include <libetpan/libetpan.h>
-#include <thread>
 
 using namespace mailcore;
 
@@ -16,6 +15,7 @@ OperationQueue::OperationQueue()
 {
 	mOperations = new Array();
 	mStarted = false;
+    pthread_mutex_init(&mLock, NULL);
     mWaiting = false;
     mOperationSem = mailsem_new();
     mStartSem = mailsem_new();
@@ -26,6 +26,7 @@ OperationQueue::OperationQueue()
 OperationQueue::~OperationQueue()
 {
     MC_SAFE_RELEASE(mOperations);
+    pthread_mutex_destroy(&mLock);
     mailsem_free(mOperationSem);
     mailsem_free(mStartSem);
     mailsem_free(mStopSem);
@@ -34,11 +35,16 @@ OperationQueue::~OperationQueue()
 
 void OperationQueue::addOperation(Operation * op)
 {
-	mLock.lock();
+    pthread_mutex_lock(&mLock);
     mOperations->addObject(op);
-	mLock.unlock();
+    pthread_mutex_unlock(&mLock);
     mailsem_up(mOperationSem);
     startThread();
+}
+
+void OperationQueue::runOperationsOnThread(OperationQueue * queue)
+{
+    queue->runOperations();
 }
 
 void OperationQueue::runOperations()
@@ -55,12 +61,12 @@ void OperationQueue::runOperations()
         
         mailsem_down(mOperationSem);
         
-		mLock.lock();
+        pthread_mutex_lock(&mLock);
         if (mOperations->count() > 0) {
             op = (Operation *) mOperations->objectAtIndex(0);
         }
         quitting = mQuitting;
-		mLock.unlock();
+        pthread_mutex_unlock(&mLock);
 
         MCLog("quitting %i %p", mQuitting, op);
         if ((op == NULL) && quitting) {
@@ -74,7 +80,7 @@ void OperationQueue::runOperations()
         
         op->retain()->autorelease();
         
-		mLock.lock();
+        pthread_mutex_lock(&mLock);
         mOperations->removeObjectAtIndex(0);
         if (mOperations->count() == 0) {
             if (mWaiting) {
@@ -82,7 +88,7 @@ void OperationQueue::runOperations()
             }
             needsCheckRunning = true;
         }
-		mLock.unlock();
+        pthread_mutex_unlock(&mLock);
         
         if (!op->isCancelled()) {
             if (op->callback() != NULL) {
@@ -117,7 +123,7 @@ void OperationQueue::checkRunningAfterDelay(void * context)
 {
     bool quitting = false;
     
-	mLock.lock();
+    pthread_mutex_lock(&mLock);
     if (!mQuitting) {
         if (mOperations->count() == 0) {
             MCLog("trying to quit %p", this);
@@ -126,7 +132,7 @@ void OperationQueue::checkRunningAfterDelay(void * context)
             quitting = true;
         }
     }
-	mLock.unlock();
+    pthread_mutex_unlock(&mLock);
     
     // Number of operations can't be changed because it runs on main thread.
     // And addOperation() should also be called from main thread.
@@ -146,11 +152,7 @@ void OperationQueue::startThread()
     
     mQuitting = false;
     mStarted = true;
-	std::thread t([=]()
-	{
-		runOperations();
-	});
-	t.detach();
+    pthread_create(&mThreadID, NULL, (void * (*)(void *)) OperationQueue::runOperationsOnThread, this);
     mailsem_down(mStartSem);
 }
 
@@ -158,9 +160,9 @@ unsigned int OperationQueue::count()
 {
     unsigned int count;
     
-	mLock.lock();
+    pthread_mutex_lock(&mLock);
     count = mOperations->count();
-	mLock.unlock();
+    pthread_mutex_unlock(&mLock);
     
     return count;
 }
@@ -170,12 +172,12 @@ void OperationQueue::waitUntilAllOperationsAreFinished()
 {
     bool waiting = false;
     
-	mLock.lock();
+    pthread_mutex_lock(&mLock);
     if (mOperations->count() > 0) {
         mWaiting = true;
         waiting = true;
     }
-	mLock.unlock();
+    pthread_mutex_unlock(&mLock);
     
     if (waiting) {
         sem_wait(&mWaitingFinishedSem);
