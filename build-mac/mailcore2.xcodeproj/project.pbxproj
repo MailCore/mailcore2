@@ -1205,7 +1205,6 @@
 		C64EA799169F259300778456 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LIBRARY = "libc++";
 				OTHER_LDFLAGS = (
 					"-lctemplate",
 					"-letpan",
@@ -1227,7 +1226,6 @@
 		C64EA79A169F259300778456 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LIBRARY = "libc++";
 				OTHER_LDFLAGS = (
 					"-lctemplate",
 					"-letpan",
