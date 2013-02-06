@@ -1114,7 +1114,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1156,7 +1156,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1189,7 +1189,6 @@
 		C64EA53C169E772200778456 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LIBRARY = "libstdc++";
 				EXECUTABLE_PREFIX = lib;
 				PRODUCT_NAME = mailcore2;
 			};
@@ -1198,7 +1197,6 @@
 		C64EA53D169E772200778456 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LIBRARY = "libstdc++";
 				EXECUTABLE_PREFIX = lib;
 				PRODUCT_NAME = mailcore2;
 			};
@@ -1207,7 +1205,7 @@
 		C64EA799169F259300778456 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_CXX_LIBRARY = "libc++";
 				OTHER_LDFLAGS = (
 					"-lctemplate",
 					"-letpan",
@@ -1229,7 +1227,7 @@
 		C64EA79A169F259300778456 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_CXX_LIBRARY = "libc++";
 				OTHER_LDFLAGS = (
 					"-lctemplate",
 					"-letpan",

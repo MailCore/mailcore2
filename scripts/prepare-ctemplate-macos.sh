@@ -1,11 +1,9 @@
 #!/bin/sh
 
-version='2.2'
-url="http://ctemplate.googlecode.com/files/ctemplate-$version.tar.gz"
-package_filename="ctemplate-$version.tar.gz"
+url="https://github.com/dinhviethoa/ctemplate"
 
 arch="i386 x86_64"
-sysrootpath="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk"
+#sysrootpath="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk"
 
 arch_flags=""
 for current_arch in $arch ; do
@@ -21,8 +19,25 @@ logdir="$tempbuilddir/log"
 resultdir="$builddir/builds"
 tmpdir="$tempbuilddir/tmp"
 
+mkdir -p "$resultdir"
+mkdir -p "$logdir"
+mkdir -p "$tmpdir"
+mkdir -p "$srcdir"
+
+pushd . >/dev/null
+cd "$builddir/downloads"
+if test -d ctemplate ; then
+	cd ctemplate
+	git pull --rebase
+else
+	git clone $url
+	cd ctemplate
+fi
+version=`git rev-parse HEAD | cut -c1-10`
+
 if test -f "$resultdir/ctemplate-$version.zip" ; then
 	echo install from cache
+	popd >/dev/null
 	rm -rf ../Externals/ctemplate
 	mkdir -p ../Externals/tmp
 	unzip -q "$resultdir/ctemplate-$version.zip" -d ../Externals/tmp
@@ -30,38 +45,24 @@ if test -f "$resultdir/ctemplate-$version.zip" ; then
 	rm -rf ../Externals/tmp
 	exit 0
 fi
-
-mkdir -p "$resultdir"
-mkdir -p "$logdir"
-mkdir -p "$tmpdir"
-mkdir -p "$srcdir"
+popd >/dev/null
 
 pushd . >/dev/null
 
-echo get CTemplate
-cd "$srcdir"
-if test -f "$builddir/downloads/$package_filename" ; then
-	cp "$builddir/downloads/$package_filename" .
-else
-	curl -O "$url"
-	if test x$? != x0 ; then
-		echo fetch of ctemplate failed
-		exit 1
-	fi
-	mkdir -p "$builddir/downloads"
-	cp "$package_filename" "$builddir/downloads"
-fi
+cp -R "$builddir/downloads/ctemplate" "$srcdir/ctemplate"
+echo building ctemplate
+cd "$srcdir/ctemplate"
 
-tar xf "$package_filename"
-
-echo building CTemplate
-cd "$srcdir/ctemplate-$version"
-export CFLAGS="$arch_flags -isysroot $sysrootpath -mfix-and-continue -mmacosx-version-min=10.7"
-export CXXFLAGS="$arch_flags -isysroot $sysrootpath -mfix-and-continue -mmacosx-version-min=10.7"
-export LDLAGS="$arch_flags -isysroot $sysrootpath -mfix-and-continue -mmacosx-version-min=10.7"
+export CC=clang
+export CXX=clang++
+export CFLAGS="$arch_flags"
+export CXXFLAGS="-std=c++11 -stdlib=libc++ $arch_flags"
+export LDLAGS="-lc++ $arch_flags -isysroot $sysrootpath"
 ./configure --disable-shared --disable-dependency-tracking >> "$logdir/ctemplate-build.log"
-make libctemplate.la >> "$logdir/ctemplate-build.log"
-make libctemplate_nothreads.la >> "$logdir/ctemplate-build.log"
+#make libctemplate.la >> "$logdir/ctemplate-build.log"
+#make libctemplate_nothreads.la >> "$logdir/ctemplate-build.log"
+#make install-libLTLIBRARIES "prefix=$tmpdir/bin/ctemplate" >> "$logdir/ctemplate-build.log"
+make >> "$logdir/ctemplate-build.log"
 make install-libLTLIBRARIES "prefix=$tmpdir/bin/ctemplate" >> "$logdir/ctemplate-build.log"
 if test x$? != x0 ; then
 	echo build of ctemplate failed
@@ -74,6 +75,9 @@ if test x$? != x0 ; then
 	exit 1
 fi
 
+echo finished
+
+#mkdir -p "$tmpdir/bin"
 cd "$tmpdir/bin"
 mkdir -p "ctemplate-$version"
 mv ctemplate "ctemplate-$version"
@@ -85,7 +89,7 @@ ln -s "ctemplate-$version.zip" "ctemplate-latest.zip"
 
 echo build of ctemplate-$version done
 
-popd
+popd >/dev/null
 
 rm -rf ../Externals/ctemplate
 mkdir -p ../Externals/tmp
@@ -95,3 +99,4 @@ rm -rf ../Externals/tmp
 
 echo cleaning
 rm -rf "$tempbuilddir"
+echo "$tempbuilddir"
