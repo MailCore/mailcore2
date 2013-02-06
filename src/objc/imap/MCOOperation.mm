@@ -16,7 +16,7 @@
 using namespace mailcore;
 
 @interface MCOOperation ()
-- (void)operationCompleted;
+- (void)_operationCompleted;
 @end
 
 class CompletionCallback : public Object, public OperationCallback {
@@ -27,7 +27,7 @@ public:
 
     virtual void operationFinished(Operation * op)
     {
-        [mOperation operationCompleted];
+        [mOperation _operationCompleted];
     }
 
     private:
@@ -35,43 +35,66 @@ public:
 };
 
 @implementation MCOOperation {
-    MCOObjectWrapper *_wrapper; // Operation
-    MCOObjectWrapper *_completionWrapper; // CompletionCallback
+    Operation * _operation;
+    CompletionCallback * _callback;
+    BOOL _started;
 }
 
 - (id)initWithOperation:(Operation *)op
 {
     self = [super init];
-    if (self) {
-        _wrapper = [MCOObjectWrapper objectWrapperWithObject:op];
-        
-        CompletionCallback *callback = new CompletionCallback(self);
-        _completionWrapper = [MCOObjectWrapper objectWrapperWithObject:callback];
-        self.operation->setCallback(callback);
-    }
+    
+    _operation = op;
+    _operation->retain();
+    
+    _callback = new CompletionCallback(self);
+    _operation->setCallback(_callback);
+    
     return self;
+}
+
+- (void)dealloc
+{
+    _operation->release();
+    _callback->release();
+    [super dealloc];
 }
 
 - (BOOL)isCancelled
 {
-    return self.operation->isCancelled();
+    return _operation->isCancelled();
 }
 
 - (void)cancel
 {
-    self.operation->cancel();
+    if (_started) {
+        _started = NO;
+        [self release];
+    }
+    _operation->cancel();
 }
 
 - (void)start
 {
-    self.operation->start();
+    _started = YES;
+    [self retain];
+    _operation->start();
 }
 
-- (Operation *)operation {
-    return dynamic_cast<Operation *>([_wrapper object]);
+- (mailcore::Operation *)operation
+{
+    return _operation;
 }
 
-- (void)operationCompleted {
+- (void)_operationCompleted
+{
+    _started = NO;
+    [self operationCompleted];
+    [self release];
+}
+
+- (void)operationCompleted
+{
 }
 
 @end
