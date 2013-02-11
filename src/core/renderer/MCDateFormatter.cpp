@@ -7,6 +7,7 @@
 //
 
 #include "MCDateFormatter.h"
+#include <stdlib.h>
 
 using namespace mailcore;
 
