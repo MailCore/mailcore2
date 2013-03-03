@@ -50,12 +50,13 @@ pushd . >/dev/null
 
 cp -R "$builddir/downloads/libetpan" "$srcdir/libetpan"
 echo building libetpan
-cd "$srcdir/libetpan"
-./autogen.sh
-cd "$srcdir/libetpan/build-mac"
-./update.sh
 
+cd "$srcdir/libetpan/build-mac"
 xcodebuild -project libetpan.xcodeproj -target "static libetpan" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj"
+if test x$? != x0 ; then
+  echo failed
+  exit 1
+fi
 echo finished
 
 cd "$tmpdir/bin"
