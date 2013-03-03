@@ -483,7 +483,7 @@ static struct mailimf_date_time * get_date_from_timestamp(time_t timeval)
 	gmtime_r(&timeval, &gmt);
 	localtime_r(&timeval, &lt);
 	
-	off = (mkgmtime(&lt) - mkgmtime(&gmt)) / 60;
+	off = (int) ((mkgmtime(&lt) - mkgmtime(&gmt)) / 60);
     if (off < 0) {
         sign = -1;
     }
