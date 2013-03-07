@@ -28,6 +28,7 @@
 #include "MCIMAPFetchNamespaceOperation.h"
 #include "MCIMAPIdleOperation.h"
 #include "MCIMAPIdentityOperation.h"
+#include "MCIMAPCapabilityOperation.h"
 
 using namespace mailcore;
 
@@ -316,6 +317,35 @@ IMAPFetchMessagesOperation * IMAPAsyncConnection::fetchMessagesByNumberOperation
     return op;
 }
 
+IMAPFetchMessagesOperation * IMAPAsyncConnection::syncMessagesByUIDForModSeqOperation(String * folder, IMAPMessagesRequestKind requestKind,
+                                                                                      uint32_t firstUID, uint32_t lastUID, uint64_t modSeq)
+{
+    IMAPFetchMessagesOperation * op = new IMAPFetchMessagesOperation();
+    op->setSession(this);
+    op->setFolder(folder);
+    op->setKind(requestKind);
+    op->setFetchByUidEnabled(true);
+    op->setFirst(firstUID);
+    op->setLast(lastUID);
+    op->setModSequenceValue(modSeq);
+    op->autorelease();
+    return op;
+}
+
+IMAPFetchMessagesOperation * IMAPAsyncConnection::syncMessagesByUIDForModSeqOperation(String * folder, IMAPMessagesRequestKind requestKind,
+                                                                                      Array * uids, uint64_t modSeq)
+{
+    IMAPFetchMessagesOperation * op = new IMAPFetchMessagesOperation();
+    op->setSession(this);
+    op->setFolder(folder);
+    op->setKind(requestKind);
+    op->setFetchByUidEnabled(true);
+    op->setUids(uids);
+    op->setModSequenceValue(modSeq);
+    op->autorelease();
+    return op;
+}
+
 IMAPFetchContentOperation * IMAPAsyncConnection::fetchMessageByUIDOperation(String * folder, uint32_t uid)
 {
     IMAPFetchContentOperation * op = new IMAPFetchContentOperation();
@@ -416,6 +446,14 @@ IMAPIdentityOperation * IMAPAsyncConnection::identityOperation(String * vendor, 
 IMAPOperation * IMAPAsyncConnection::checkAccountOperation()
 {
     IMAPCheckAccountOperation * op = new IMAPCheckAccountOperation();
+    op->setSession(this);
+    op->autorelease();
+    return op;
+}
+
+IMAPCapabilityOperation * IMAPAsyncConnection::capabilityOperation()
+{
+    IMAPCapabilityOperation * op = new IMAPCapabilityOperation();
     op->setSession(this);
     op->autorelease();
     return op;

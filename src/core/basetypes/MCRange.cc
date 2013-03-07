@@ -2,10 +2,10 @@
 
 using namespace mailcore;
 
-Range mailcore::RangeMake(unsigned int index, unsigned int length)
+Range mailcore::RangeMake(uint64_t location, uint64_t length)
 {
     Range range;
-    range.index = index;
+    range.location = location;
     range.length = length;
     return range;
 }

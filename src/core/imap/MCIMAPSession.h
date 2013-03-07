@@ -18,6 +18,7 @@ namespace mailcore {
 	class IMAPSearchExpression;
 	class IMAPFolder;
 	class IMAPProgressCallback;
+    class IMAPSyncResult;
 	
 	class IMAPSession : public Object {
 	public:
@@ -79,21 +80,30 @@ namespace mailcore {
 		
 		virtual void expunge(String * folder, ErrorCode * pError);
 		
-		virtual Array * fetchMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
+		virtual Array * /* IMAPMessage */ fetchMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
 			uint32_t firstUID, uint32_t lastUID, IMAPProgressCallback * progressCallback, ErrorCode * pError);
-		virtual Array * fetchMessagesByNumber(String * folder, IMAPMessagesRequestKind requestKind,
+		virtual Array * /* IMAPMessage */ fetchMessagesByNumber(String * folder, IMAPMessagesRequestKind requestKind,
 			uint32_t firstNumber, uint32_t lastNumber, IMAPProgressCallback * progressCallback, ErrorCode * pError);
-		virtual Array * fetchMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
-			Array * uids, IMAPProgressCallback * progressCallback, ErrorCode * pError);
-		virtual Array * fetchMessagesByNumber(String * folder, IMAPMessagesRequestKind requestKind,
-			Array * numbers, IMAPProgressCallback * progressCallback, ErrorCode * pError);
+		virtual Array * /* IMAPMessage */ fetchMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
+			Array * /* Value */ uids, IMAPProgressCallback * progressCallback, ErrorCode * pError);
+		virtual Array * /* IMAPMessage */ fetchMessagesByNumber(String * folder, IMAPMessagesRequestKind requestKind,
+			Array * /* Value */ numbers, IMAPProgressCallback * progressCallback, ErrorCode * pError);
 		virtual Data * fetchMessageByUID(String * folder, uint32_t uid,
 			IMAPProgressCallback * progressCallback, ErrorCode * pError);
 		virtual Data * fetchMessageAttachmentByUID(String * folder, uint32_t uid, String * partID,
 		    Encoding encoding, IMAPProgressCallback * progressCallback, ErrorCode * pError);
 		virtual HashMap * fetchMessageNumberUIDMapping(String * folder, uint32_t fromUID, uint32_t toUID,
 			ErrorCode * pError);
-		
+        
+        /* When CONDSTORE or QRESYNC is available */
+        virtual IMAPSyncResult * syncMessagesByUIDForModSeq(String * folder, IMAPMessagesRequestKind requestKind,
+                                                            uint32_t firstUID, uint32_t lastUID,
+                                                            uint64_t modseq,
+                                                            IMAPProgressCallback * progressCallback, ErrorCode * pError);
+        virtual IMAPSyncResult * syncMessagesByUIDForModSeq(String * folder, IMAPMessagesRequestKind requestKind,
+                                                            Array * uids, uint64_t modseq,
+                                                            IMAPProgressCallback * progressCallback, ErrorCode * pError);
+        
 		virtual void storeFlags(String * folder, Array * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, ErrorCode * pError);
 		virtual void storeLabels(String * folder, Array * uids, IMAPStoreFlagsRequestKind kind, Array * labels, ErrorCode * pError);
 		
@@ -114,9 +124,18 @@ namespace mailcore {
 		
 		virtual HashMap * identity(String * vendor, String * name, String * version, ErrorCode * pError);
         
+        virtual IndexSet * capability(ErrorCode * pError);
+        
 		virtual uint32_t uidValidity();
 		virtual uint32_t uidNext();
+        virtual uint64_t modSequenceValue();
 		virtual unsigned int lastFolderMessageCount();
+        
+        virtual bool isIdleEnabled();
+        virtual bool isXListEnabled();
+        virtual bool isCondstoreEnabled();
+        virtual bool isQResyncEnabled();
+        virtual bool isIdentityEnabled();
         
 	private:
 		String * mHostname;
@@ -134,10 +153,14 @@ namespace mailcore {
         bool mBodyProgressEnabled;
 		bool mIdleEnabled;
 		bool mXListEnabled;
+        bool mCondstoreEnabled;
+        bool mQResyncEnabled;
+        bool mIdentityEnabled;
 		String * mWelcomeString;
 		bool mNeedsMboxMailWorkaround;
 		uint32_t mUIDValidity;
 		uint32_t mUIDNext;
+        uint64_t mModSequenceValue;
 		unsigned int mFolderMsgCount;
 		unsigned int mLastFetchedSequenceNumber;
 		String * mCurrentFolder;
@@ -159,9 +182,9 @@ namespace mailcore {
 		void loginIfNeeded(ErrorCode * pError);
 		void selectIfNeeded(String * folder, ErrorCode * pError);
 		char fetchDelimiterIfNeeded(char defaultDelimiter, ErrorCode * pError);
-		Array * fetchMessages(String * folder, IMAPMessagesRequestKind requestKind, bool fetchByUID,
-                              struct mailimap_set * imapset, HashMap * mapping, uint32_t startUid,
-                              IMAPProgressCallback * progressCallback, ErrorCode * pError);
+		IMAPSyncResult * fetchMessages(String * folder, IMAPMessagesRequestKind requestKind, bool fetchByUID,
+                                       struct mailimap_set * imapset, uint64_t modseq, HashMap * mapping, uint32_t startUid,
+                                       IMAPProgressCallback * progressCallback, ErrorCode * pError);
 		
 	};
 }

@@ -24,6 +24,7 @@
 #include <mailcore/MCIMAPSearchExpression.h>
 #include <mailcore/MCIMAPFetchNamespaceOperation.h>
 #include <mailcore/MCIMAPIdentityOperation.h>
+#include <mailcore/MCIMAPCapabilityOperation.h>
 #include <mailcore/MCIMAPOperationCallback.h>
 
 #endif

@@ -11,6 +11,7 @@
 #include "MCAbstractPart.h"
 #include "MCIMAPProgressCallback.h"
 #include "MCIMAPNamespace.h"
+#include "MCIMAPSyncResult.h"
 
 using namespace mailcore;
 
@@ -284,12 +285,16 @@ void IMAPSession::init()
     mBodyProgressEnabled = true;
     mIdleEnabled = false;
 	mXListEnabled = false;
+    mQResyncEnabled = false;
+    mCondstoreEnabled = false;
+    mIdentityEnabled = false;
     mWelcomeString = NULL;
 	mNeedsMboxMailWorkaround = false;
 	mDefaultNamespace = NULL;
 	mTimeout = 30;
 	mUIDValidity = 0;
 	mUIDNext = 0;
+    mModSequenceValue = 0;
 	mFolderMsgCount = 0;
 	mLastFetchedSequenceNumber = 0;
 	mCurrentFolder = NULL;
@@ -724,6 +729,38 @@ void IMAPSession::selectIfNeeded(String * folder, ErrorCode * pError)
     }
 }
 
+static uint64_t get_mod_sequence_value(mailimap * session)
+{
+    uint64_t mod_sequence_value;
+    clistiter * cur;
+    
+    mod_sequence_value = 0;
+    for(cur = clist_begin(session->imap_response_info->rsp_extension_list) ; cur != NULL ; cur = clist_next(cur)) {
+        struct mailimap_extension_data * ext_data;
+        struct mailimap_condstore_resptextcode * resptextcode;
+        
+        ext_data = (struct mailimap_extension_data *) clist_content(cur);
+        if (ext_data->ext_extension->ext_id != MAILIMAP_EXTENSION_CONDSTORE) {
+            continue;
+        }
+        if (ext_data->ext_type != MAILIMAP_CONDSTORE_TYPE_RESP_TEXT_CODE) {
+            continue;
+        }
+        
+        resptextcode = (struct mailimap_condstore_resptextcode *) ext_data->ext_data;
+        switch (resptextcode->cs_type) {
+            case MAILIMAP_CONDSTORE_RESPTEXTCODE_HIGHESTMODSEQ:
+                mod_sequence_value = resptextcode->cs_data.cs_modseq_value;
+                break;
+            case MAILIMAP_CONDSTORE_RESPTEXTCODE_NOMODSEQ:
+                mod_sequence_value = 0;
+                break;
+        }
+    }
+    
+    return mod_sequence_value;
+}
+
 void IMAPSession::select(String * folder, ErrorCode * pError)
 {
     int r;
@@ -758,6 +795,8 @@ void IMAPSession::select(String * folder, ErrorCode * pError)
         } else {
             mFolderMsgCount = -1;
         }
+        
+        mModSequenceValue = get_mod_sequence_value(mImap);
     }
 
     mState = STATE_SELECTED;
@@ -1572,19 +1611,21 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
     msg_att_context->mLastFetchedSequenceNumber = mLastFetchedSequenceNumber;
 }
 
-Array * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequestKind requestKind, bool fetchByUID,
-	struct mailimap_set * imapset, HashMap * mapping, uint32_t startUid,
-	IMAPProgressCallback * progressCallback, ErrorCode * pError)
+IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequestKind requestKind, bool fetchByUID,
+                                            struct mailimap_set * imapset, uint64_t modseq, HashMap * mapping, uint32_t startUid,
+                                            IMAPProgressCallback * progressCallback, ErrorCode * pError)
 {
     struct mailimap_fetch_type * fetch_type;
     clist * fetch_result;
-    Array * result;
+    struct mailimap_qresync_vanished * vanished;
     struct mailimap_fetch_att * fetch_att;
     int r;
     bool needsHeader;
     bool needsBody;
     bool needsFlags;
     bool needsGmailLabels;
+    Array * messages;
+    Array * vanishedMessages;
     
     selectIfNeeded(folder, pError);
 	if (* pError != ErrorNone)
@@ -1600,7 +1641,7 @@ Array * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequestKind requ
         mProgressCallback = progressCallback;
     }
     
-    result = Array::array();
+    messages = Array::array();
     
     needsHeader = false;
     needsBody = false;
@@ -1701,7 +1742,7 @@ Array * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequestKind requ
     memset(&msg_att_data, 0, sizeof(msg_att_data));
     msg_att_data.self = this;
     msg_att_data.fetchByUID = fetchByUID;
-    msg_att_data.result = result;
+    msg_att_data.result = messages;
     msg_att_data.folder = folder;
     msg_att_data.requestKind = requestKind;
     msg_att_data.mLastFetchedSequenceNumber = mLastFetchedSequenceNumber;
@@ -1715,11 +1756,41 @@ Array * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequestKind requ
     mailimap_set_msg_att_handler(mImap, msg_att_handler, &msg_att_data);
     
     mBodyProgressEnabled = false;
+    vanished = NULL;
     
     if (fetchByUID) {
-        r = mailimap_uid_fetch(mImap, imapset, fetch_type, &fetch_result);
+        if ((modseq != 0) && (mCondstoreEnabled || mQResyncEnabled)) {
+            if (mQResyncEnabled) {
+                r = mailimap_uid_fetch_qresync(mImap, imapset, fetch_type, modseq,
+                                               &fetch_result,  &vanished);
+            }
+            else { /* condstore */
+                r = mailimap_uid_fetch_changedsince(mImap, imapset, fetch_type, modseq,
+                                                    &fetch_result);
+            }
+        }
+        else {
+            r = mailimap_uid_fetch(mImap, imapset, fetch_type, &fetch_result);
+        }
     } else {
-        r = mailimap_fetch(mImap, imapset, fetch_type, &fetch_result);    
+        if ((modseq != 0) && (mCondstoreEnabled || mQResyncEnabled)) {
+            if (mQResyncEnabled) {
+                r = mailimap_fetch_qresync(mImap, imapset, fetch_type, modseq,
+                                           &fetch_result,  &vanished);
+            }
+            else { /* condstore */
+                r = mailimap_fetch_changedsince(mImap, imapset, fetch_type, modseq,
+                                                &fetch_result);
+            }
+        }
+        else {
+            r = mailimap_fetch(mImap, imapset, fetch_type, &fetch_result);
+        }
+    }
+    
+    vanishedMessages = NULL;
+    if (vanished != NULL) {
+        vanishedMessages = arrayFromSet(vanished->qr_known_uids);
     }
     
     mBodyProgressEnabled = true;
@@ -1748,8 +1819,14 @@ Array * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequestKind requ
         return NULL;
 	}
     
+    IMAPSyncResult * result;
+    result = new IMAPSyncResult();
+    result->setModifiedOrAddedMessages(messages);
+    result->setVanishedMessages(vanishedMessages);
+    result->autorelease();
+    
     if ((requestKind & IMAPMessagesRequestKindHeaders) != 0) {
-        if (result->count() == 0) {
+        if (messages->count() == 0) {
             unsigned int count;
             
             count = clist_count(fetch_result);
@@ -1758,9 +1835,13 @@ Array * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequestKind requ
                 requestKind = (IMAPMessagesRequestKind) (requestKind | IMAPMessagesRequestKindFullHeaders);
 
                 result = fetchMessages(folder, requestKind, fetchByUID,
-                    imapset, NULL, startUid, progressCallback, pError);
-                if (result->count() > 0) {
-                    mNeedsMboxMailWorkaround = true;
+                    imapset, modseq, NULL, startUid, progressCallback, pError);
+                if (result != NULL) {
+                    if (result->modifiedOrAddedMessages() != NULL) {
+                        if (result->modifiedOrAddedMessages()->count() > 0) {
+                            mNeedsMboxMailWorkaround = true;
+                        }
+                    }
                 }
             }
         }
@@ -1769,15 +1850,19 @@ Array * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequestKind requ
     mailimap_fetch_list_free(fetch_result);
     * pError = ErrorNone;
     
-    return result;    
+    return result;
 }
 
 Array * IMAPSession::fetchMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
 	uint32_t firstUID, uint32_t lastUID, IMAPProgressCallback * progressCallback, ErrorCode * pError)
 {
     struct mailimap_set * imapset = mailimap_set_new_interval(firstUID, lastUID);
-    Array * result = fetchMessages(folder, requestKind, true, imapset, NULL, firstUID,
-        progressCallback, pError);
+    IMAPSyncResult * syncResult = fetchMessages(folder, requestKind, true, imapset, 0, NULL, firstUID,
+                                                progressCallback, pError);
+    if (syncResult == NULL)
+        return NULL;
+    Array * result = syncResult->modifiedOrAddedMessages();
+    result->retain()->autorelease();
     mailimap_set_free(imapset);
     return result;
 }
@@ -1786,9 +1871,13 @@ Array * IMAPSession::fetchMessagesByUID(String * folder, IMAPMessagesRequestKind
 	Array * uids, IMAPProgressCallback * progressCallback, ErrorCode * pError)
 {
     struct mailimap_set * imapset = setFromArray(uids);
-    Array * result = fetchMessages(folder, requestKind, true, imapset, NULL,
-        (uint32_t) ((Value *) uids->objectAtIndex(0))->unsignedLongValue(),
-        progressCallback, pError);
+    IMAPSyncResult * syncResult = fetchMessages(folder, requestKind, true, imapset, 0, NULL,
+                                                (uint32_t) ((Value *) uids->objectAtIndex(0))->unsignedLongValue(),
+                                                progressCallback, pError);
+    if (syncResult == NULL)
+        return NULL;
+    Array * result = syncResult->modifiedOrAddedMessages();
+    result->retain()->autorelease();
     mailimap_set_free(imapset);
     return result;
 }
@@ -1797,8 +1886,12 @@ Array * IMAPSession::fetchMessagesByNumber(String * folder, IMAPMessagesRequestK
 	uint32_t firstNumber, uint32_t lastNumber, IMAPProgressCallback * progressCallback, ErrorCode * pError)
 {
     struct mailimap_set * imapset = mailimap_set_new_interval(firstNumber, lastNumber);
-    Array * result = fetchMessages(folder, requestKind, false, imapset, NULL, 0,
-        progressCallback, pError);
+    IMAPSyncResult * syncResult = fetchMessages(folder, requestKind, false, imapset, 0, NULL, 0,
+                                                progressCallback, pError);
+    if (syncResult == NULL)
+        return NULL;
+    Array * result = syncResult->modifiedOrAddedMessages();
+    result->retain()->autorelease();
     mailimap_set_free(imapset);
     return result;
 }
@@ -1807,8 +1900,12 @@ Array * IMAPSession::fetchMessagesByNumber(String * folder, IMAPMessagesRequestK
 	Array * numbers, IMAPProgressCallback * progressCallback, ErrorCode * pError)
 {
     struct mailimap_set * imapset = setFromArray(numbers);
-    Array * result = fetchMessages(folder, requestKind, false, imapset, NULL, 0,
-        progressCallback, pError);
+    IMAPSyncResult * syncResult = fetchMessages(folder, requestKind, false, imapset, 0, NULL, 0,
+                                                progressCallback, pError);
+    if (syncResult == NULL)
+        return NULL;
+    Array * result = syncResult->modifiedOrAddedMessages();
+    result->retain()->autorelease();
     mailimap_set_free(imapset);
     return result;
 }
@@ -2570,7 +2667,114 @@ uint32_t IMAPSession::uidNext()
     return mUIDNext;
 }
 
+uint64_t IMAPSession::modSequenceValue()
+{
+    return mModSequenceValue;
+}
+
 unsigned int IMAPSession::lastFolderMessageCount()
 {
     return mFolderMsgCount;
 }
+
+IMAPSyncResult * IMAPSession::syncMessagesByUIDForModSeq(String * folder, IMAPMessagesRequestKind requestKind,
+                                                         uint32_t firstUID, uint32_t lastUID,
+                                                         uint64_t modseq,
+                                                         IMAPProgressCallback * progressCallback, ErrorCode * pError)
+{
+    struct mailimap_set * imapset = mailimap_set_new_interval(firstUID, lastUID);
+    IMAPSyncResult * result = fetchMessages(folder, requestKind, true, imapset, modseq, NULL, firstUID,
+                                            progressCallback, pError);
+    mailimap_set_free(imapset);
+    return result;
+}
+
+IMAPSyncResult * IMAPSession::syncMessagesByUIDForModSeq(String * folder, IMAPMessagesRequestKind requestKind,
+                                                         Array * uids, uint64_t modseq,
+                                                         IMAPProgressCallback * progressCallback, ErrorCode * pError)
+{
+    struct mailimap_set * imapset = setFromArray(uids);
+    IMAPSyncResult * result = fetchMessages(folder, requestKind, true, imapset, modseq, NULL,
+                                            (uint32_t) ((Value *) uids->objectAtIndex(0))->unsignedLongValue(),
+                                            progressCallback, pError);
+    mailimap_set_free(imapset);
+    return result;
+}
+
+IndexSet * IMAPSession::capability(ErrorCode * pError)
+{
+    int r;
+    struct mailimap_capability_data * cap;
+    
+    loginIfNeeded(pError);
+    if (* pError != ErrorNone)
+        return NULL;
+    
+    r = mailimap_capability(mImap, &cap);
+	if (r == MAILIMAP_ERROR_STREAM) {
+        * pError = ErrorConnection;
+        return NULL;
+    }
+    else if (r == MAILIMAP_ERROR_PARSE) {
+        * pError = ErrorParse;
+        return NULL;
+    }
+    else if (hasError(r)) {
+        * pError = ErrorCapability;
+        return NULL;
+	}
+    
+    mailimap_capability_data_free(cap);
+    
+    IndexSet * result = new IndexSet();
+    if (mailimap_has_id(mImap)) {
+        result->addIndex(IMAPCapabilityId);
+        mIdentityEnabled = true;
+    }
+    if (mailimap_has_xlist(mImap)) {
+        result->addIndex(IMAPCapabilityXList);
+        mXListEnabled = true;
+    }
+    if (mailimap_has_idle(mImap)) {
+        result->addIndex(IMAPCapabilityIdle);
+        mIdleEnabled = true;
+    }
+    if (mailimap_has_condstore(mImap)) {
+        result->addIndex(IMAPCapabilityCondstore);
+        mCondstoreEnabled = true;
+    }
+    if (mailimap_has_condstore(mImap)) {
+        result->addIndex(IMAPCapabilityQResync);
+        mQResyncEnabled = true;
+    }
+    
+    * pError = ErrorNone;
+    result->autorelease();
+    return result;
+}
+
+bool IMAPSession::isIdleEnabled()
+{
+    return mIdleEnabled;
+}
+
+bool IMAPSession::isXListEnabled()
+{
+    return mXListEnabled;
+}
+
+bool IMAPSession::isCondstoreEnabled()
+{
+    return mCondstoreEnabled;
+}
+
+bool IMAPSession::isQResyncEnabled()
+{
+    return mQResyncEnabled;
+}
+
+bool IMAPSession::isIdentityEnabled()
+{
+    return mIdentityEnabled;
+}
+

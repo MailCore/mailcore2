@@ -1235,15 +1235,15 @@ UChar String::characterAtIndex(unsigned int index)
 
 void String::deleteCharactersInRange(Range range)
 {
-    if (range.index > mLength)
+    if (range.location > mLength)
         return;
     
-    if (range.index + range.length > mLength) {
-        range.length = mLength - range.index;
+    if (range.location + range.length > mLength) {
+        range.length = mLength - range.location;
     }
     
-    int32_t count = mLength - (range.index + range.length);
-    u_memmove(&mUnicodeChars[range.index], &mUnicodeChars[range.index + range.length], count);
+    int32_t count = mLength - (int32_t) (range.location + range.length);
+    u_memmove(&mUnicodeChars[range.location], &mUnicodeChars[range.location + range.length], count);
 }
 
 int String::locationOfString(String * occurrence)
@@ -1935,15 +1935,15 @@ String * String::substringToIndex(unsigned int idx)
 
 String * String::substringWithRange(Range range)
 {
-    if (range.index > length()) {
+    if (range.location > length()) {
         return MCSTR("");
     }
     
-    if (range.index + range.length > length()) {
-        range.length = length() - range.index;
+    if (range.location + range.length > length()) {
+        range.length = length() - range.location;
     }
     
-    return stringWithCharacters(unicodeCharacters() + range.index, range.length);
+    return stringWithCharacters(unicodeCharacters() + range.location, range.length);
 }
 
 static chash * uniquedStringHash = NULL;

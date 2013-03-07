@@ -35,11 +35,15 @@ namespace mailcore {
         virtual void setNumbers(Array * numbers);
         virtual Array * numbers();
         
+        virtual void setModSequenceValue(uint64_t modseq);
+        virtual uint64_t modSequenceValue();
+        
         virtual void setKind(IMAPMessagesRequestKind kind);
         virtual IMAPMessagesRequestKind kind();
         
         // Result.
         virtual Array * /* IMAPMessage */ messages();
+        virtual Array * /* Value */ vanishedMessages();
         
     public: // subclass behavior
         virtual void main();
@@ -52,6 +56,8 @@ namespace mailcore {
         Array * mNumbers;
         IMAPMessagesRequestKind mKind;
         Array * mMessages;
+        Array * mVanishedMessages;
+        uint64_t mModSequenceValue;
         
     };
 }

@@ -15,6 +15,7 @@
 #include <mailcore/MCAssert.h>
 #include <mailcore/MCUtils.h>
 #include <mailcore/MCRange.h>
+#include <mailcore/MCIndexSet.h>
 #include <mailcore/MCOperation.h>
 #include <mailcore/MCOperationQueue.h>
 #include <mailcore/MCOperationCallback.h>

@@ -60,6 +60,11 @@
 		C63CD68D16BE1BCA00DB18F1 /* MCRenderer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD68716BE1AB600DB18F1 /* MCRenderer.h */; };
 		C63CD68E16BE324100DB18F1 /* MCOFetchFoldersOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F87F190816BB62690012652F /* MCOFetchFoldersOperation.h */; };
 		C63CD69116BE566E00DB18F1 /* MCHTMLCleaner.cc in Sources */ = {isa = PBXBuildFile; fileRef = C63CD68F16BE566D00DB18F1 /* MCHTMLCleaner.cc */; };
+		C64BB22116E34DCB000DB34C /* MCIMAPSyncResult.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64BB21F16E34DCA000DB34C /* MCIMAPSyncResult.cpp */; };
+		C64BB22B16E5C0A4000DB34C /* MCIMAPCapabilityOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64BB22916E5C0A3000DB34C /* MCIMAPCapabilityOperation.cpp */; };
+		C64BB22E16E5C1EE000DB34C /* MCIndexSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64BB22C16E5C1EE000DB34C /* MCIndexSet.cpp */; };
+		C64BB22F16E885C3000DB34C /* MCIndexSet.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB22D16E5C1EE000DB34C /* MCIndexSet.h */; };
+		C64BB23016E8876F000DB34C /* MCIMAPCapabilityOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB22A16E5C0A3000DB34C /* MCIMAPCapabilityOperation.h */; };
 		C64EA6F4169E847800778456 /* MCAbstractMessage.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA694169E847800778456 /* MCAbstractMessage.cc */; };
 		C64EA6F6169E847800778456 /* MCAbstractMessagePart.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA696169E847800778456 /* MCAbstractMessagePart.cc */; };
 		C64EA6F8169E847800778456 /* MCAbstractMultipart.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA698169E847800778456 /* MCAbstractMultipart.cc */; };
@@ -218,6 +223,8 @@
 				C63CD68C16BE1BC800DB18F1 /* MCHTMLRendererCallback.h in CopyFiles */,
 				C63CD68816BE1BBF00DB18F1 /* MCAddressDisplay.h in CopyFiles */,
 				C63CD68D16BE1BCA00DB18F1 /* MCRenderer.h in CopyFiles */,
+				C64BB22F16E885C3000DB34C /* MCIndexSet.h in CopyFiles */,
+				C64BB23016E8876F000DB34C /* MCIMAPCapabilityOperation.h in CopyFiles */,
 				C62C6EE016A696AB00737497 /* MCAsyncIMAP.h in CopyFiles */,
 				C63CD68B16BE1BC600DB18F1 /* MCHTMLRenderer.h in CopyFiles */,
 				C63CD68A16BE1BC400DB18F1 /* MCSizeFormatter.h in CopyFiles */,
@@ -369,6 +376,12 @@
 		C63CD68716BE1AB600DB18F1 /* MCRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRenderer.h; sourceTree = "<group>"; };
 		C63CD68F16BE566D00DB18F1 /* MCHTMLCleaner.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCHTMLCleaner.cc; sourceTree = "<group>"; };
 		C63CD69016BE566E00DB18F1 /* MCHTMLCleaner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCHTMLCleaner.h; sourceTree = "<group>"; };
+		C64BB21F16E34DCA000DB34C /* MCIMAPSyncResult.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPSyncResult.cpp; sourceTree = "<group>"; };
+		C64BB22016E34DCB000DB34C /* MCIMAPSyncResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPSyncResult.h; sourceTree = "<group>"; };
+		C64BB22916E5C0A3000DB34C /* MCIMAPCapabilityOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPCapabilityOperation.cpp; sourceTree = "<group>"; };
+		C64BB22A16E5C0A3000DB34C /* MCIMAPCapabilityOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPCapabilityOperation.h; sourceTree = "<group>"; };
+		C64BB22C16E5C1EE000DB34C /* MCIndexSet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIndexSet.cpp; sourceTree = "<group>"; };
+		C64BB22D16E5C1EE000DB34C /* MCIndexSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIndexSet.h; sourceTree = "<group>"; };
 		C64EA537169E772200778456 /* libmailcore2.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmailcore2.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C64EA68C169E847800778456 /* MCIMAPAsyncConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPAsyncConnection.h; sourceTree = "<group>"; };
 		C64EA68F169E847800778456 /* MCSMTPAsyncSession.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCSMTPAsyncSession.cc; sourceTree = "<group>"; };
@@ -659,6 +672,8 @@
 				C62C6ED316A2A0E600737497 /* MCIMAPIdentityOperation.h */,
 				C62C6ED616A398FA00737497 /* MCIMAPFolderInfoOperation.cc */,
 				C62C6ED716A398FA00737497 /* MCIMAPFolderInfoOperation.h */,
+				C64BB22916E5C0A3000DB34C /* MCIMAPCapabilityOperation.cpp */,
+				C64BB22A16E5C0A3000DB34C /* MCIMAPCapabilityOperation.h */,
 			);
 			path = imap;
 			sourceTree = "<group>";
@@ -775,6 +790,8 @@
 				C64EA6C2169E847800778456 /* MCOperationQueue.h */,
 				C63CD68F16BE566D00DB18F1 /* MCHTMLCleaner.cc */,
 				C63CD69016BE566E00DB18F1 /* MCHTMLCleaner.h */,
+				C64BB22C16E5C1EE000DB34C /* MCIndexSet.cpp */,
+				C64BB22D16E5C1EE000DB34C /* MCIndexSet.h */,
 			);
 			path = basetypes;
 			sourceTree = "<group>";
@@ -802,6 +819,8 @@
 				C64EA6D5169E847800778456 /* MCIMAPSearchExpression.h */,
 				C64EA6D6169E847800778456 /* MCIMAPSession.cc */,
 				C64EA6D7169E847800778456 /* MCIMAPSession.h */,
+				C64BB21F16E34DCA000DB34C /* MCIMAPSyncResult.cpp */,
+				C64BB22016E34DCB000DB34C /* MCIMAPSyncResult.h */,
 			);
 			path = imap;
 			sourceTree = "<group>";
@@ -1087,6 +1106,9 @@
 				C63CD68216BDCDD400DB18F1 /* MCSizeFormatter.cpp in Sources */,
 				C63CD68616BE148B00DB18F1 /* MCHTMLRendererCallback.cpp in Sources */,
 				C63CD69116BE566E00DB18F1 /* MCHTMLCleaner.cc in Sources */,
+				C64BB22116E34DCB000DB34C /* MCIMAPSyncResult.cpp in Sources */,
+				C64BB22B16E5C0A4000DB34C /* MCIMAPCapabilityOperation.cpp in Sources */,
+				C64BB22E16E5C1EE000DB34C /* MCIndexSet.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

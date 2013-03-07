@@ -18,6 +18,7 @@ IMAPFolderInfoOperation::IMAPFolderInfoOperation()
     mUidNext = 0;
     mUidValidity = 0;
     mMessageCount = 0;
+    mModSequenceValue = 0;
 }
 
 IMAPFolderInfoOperation::~IMAPFolderInfoOperation()
@@ -34,6 +35,11 @@ uint32_t IMAPFolderInfoOperation::uidValidity()
     return mUidValidity;
 }
 
+uint64_t IMAPFolderInfoOperation::modSequenceValue()
+{
+    return mModSequenceValue;
+}
+
 int IMAPFolderInfoOperation::messageCount()
 {
     return mMessageCount;
@@ -45,6 +51,7 @@ void IMAPFolderInfoOperation::main()
     session()->session()->select(folder(), &error);
     mUidNext = session()->session()->uidNext();
     mUidValidity = session()->session()->uidValidity();
+    mModSequenceValue = session()->session()->modSequenceValue();
     mMessageCount = session()->session()->lastFolderMessageCount();
     setError(error);
 }

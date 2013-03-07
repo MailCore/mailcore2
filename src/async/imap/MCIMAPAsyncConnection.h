@@ -23,6 +23,7 @@ namespace mailcore {
     class IMAPSearchExpression;
     class IMAPFetchNamespaceOperation;
     class IMAPIdentityOperation;
+    class IMAPCapabilityOperation;
 
 	class IMAPAsyncConnection : public Object {
 	public:
@@ -88,6 +89,10 @@ namespace mailcore {
 			Array * uids);
 		virtual IMAPFetchMessagesOperation * fetchMessagesByNumberOperation(String * folder, IMAPMessagesRequestKind requestKind,
 			Array * numbers);
+        virtual IMAPFetchMessagesOperation * syncMessagesByUIDForModSeqOperation(String * folder, IMAPMessagesRequestKind requestKind,
+                                                                                 uint32_t firstUID, uint32_t lastUID, uint64_t modSeq);
+        virtual IMAPFetchMessagesOperation * syncMessagesByUIDForModSeqOperation(String * folder, IMAPMessagesRequestKind requestKind,
+                                                                                 Array * uids, uint64_t modSeq);
 		virtual IMAPFetchContentOperation * fetchMessageByUIDOperation(String * folder, uint32_t uid);
 		virtual IMAPFetchContentOperation * fetchMessageAttachmentByUIDOperation(String * folder, uint32_t uid, String * partID,
 		    Encoding encoding);
@@ -105,6 +110,8 @@ namespace mailcore {
 		virtual IMAPIdentityOperation * identityOperation(String * vendor, String * name, String * version);
         
         virtual IMAPOperation * checkAccountOperation();
+        
+        virtual IMAPCapabilityOperation * capabilityOperation();
         
     private:
 		IMAPSession * mSession;

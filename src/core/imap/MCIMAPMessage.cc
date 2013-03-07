@@ -14,11 +14,12 @@ static AbstractPart * partForPartIDInMessagePart(AbstractMessagePart * part, Str
 
 void IMAPMessage::init()
 {
-    mUid = NULL;
+    mUid = 0;
     mFlags = MessageFlagNone;
     mOriginalFlags = MessageFlagNone;
 	mMainPart = NULL;
 	mLabels = NULL;
+    mModSeqValue = 0;
 }
 
 IMAPMessage::IMAPMessage()
@@ -88,6 +89,16 @@ void IMAPMessage::setOriginalFlags(MessageFlag flags)
 MessageFlag IMAPMessage::originalFlags()
 {
     return mOriginalFlags;
+}
+
+void IMAPMessage::setModSeqValue(uint64_t uid)
+{
+    mModSeqValue = uid;
+}
+
+uint64_t IMAPMessage::modSeqValue()
+{
+    return mModSeqValue;
 }
 
 void IMAPMessage::setMainPart(AbstractPart * mainPart)

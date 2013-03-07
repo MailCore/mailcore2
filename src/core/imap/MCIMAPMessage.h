@@ -29,6 +29,9 @@ namespace mailcore {
 		virtual void setOriginalFlags(MessageFlag flags);
 		virtual MessageFlag originalFlags();
 		
+		virtual uint64_t modSeqValue();
+		virtual void setModSeqValue(uint64_t uid);
+        
 		virtual void setMainPart(AbstractPart * mainPart);
 		virtual AbstractPart * mainPart();
 		
@@ -50,6 +53,7 @@ namespace mailcore {
 		virtual String * description();
         
 	private:
+        uint64_t mModSeqValue;
 		uint32_t mUid;
 		MessageFlag mFlags;
 		MessageFlag mOriginalFlags;

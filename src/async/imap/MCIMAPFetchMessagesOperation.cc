@@ -10,6 +10,7 @@
 
 #include "MCIMAPSession.h"
 #include "MCIMAPAsyncConnection.h"
+#include "MCIMAPSyncResult.h"
 
 using namespace mailcore;
 
@@ -21,6 +22,8 @@ IMAPFetchMessagesOperation::IMAPFetchMessagesOperation()
     mUids = NULL;
     mNumbers = NULL;
     mMessages = NULL;
+    mVanishedMessages = NULL;
+    mModSequenceValue = 0;
 }
 
 IMAPFetchMessagesOperation::~IMAPFetchMessagesOperation()
@@ -28,6 +31,7 @@ IMAPFetchMessagesOperation::~IMAPFetchMessagesOperation()
     MC_SAFE_RELEASE(mNumbers);
     MC_SAFE_RELEASE(mUids);
     MC_SAFE_RELEASE(mMessages);
+    MC_SAFE_RELEASE(mVanishedMessages);
 }
 
 void IMAPFetchMessagesOperation::setFetchByUidEnabled(bool enabled)
@@ -80,6 +84,16 @@ Array * IMAPFetchMessagesOperation::numbers()
     return mNumbers;
 }
 
+void IMAPFetchMessagesOperation::setModSequenceValue(uint64_t modseq)
+{
+    mModSequenceValue = modseq;
+}
+
+uint64_t IMAPFetchMessagesOperation::modSequenceValue()
+{
+    return mModSequenceValue;
+}
+
 void IMAPFetchMessagesOperation::setKind(IMAPMessagesRequestKind kind)
 {
     mKind = kind;
@@ -95,15 +109,42 @@ Array * IMAPFetchMessagesOperation::messages()
     return mMessages;
 }
 
+Array * /* Value */ IMAPFetchMessagesOperation::vanishedMessages()
+{
+    return mVanishedMessages;
+}
+
 void IMAPFetchMessagesOperation::main()
 {
     ErrorCode error;
     if (mFetchByUidEnabled) {
-        if (mUids != NULL) {
-            mMessages = session()->session()->fetchMessagesByUID(folder(), mKind, mUids, this, &error);
+        if (mModSequenceValue != 0) {
+            if (mUids != NULL) {
+                IMAPSyncResult * syncResult;
+                
+                syncResult = session()->session()->syncMessagesByUIDForModSeq(folder(), mKind, mUids, mModSequenceValue, this, &error);
+                if (syncResult != NULL) {
+                    mMessages = syncResult->modifiedOrAddedMessages();
+                    mVanishedMessages = syncResult->modifiedOrAddedMessages();
+                }
+            }
+            else {
+                IMAPSyncResult * syncResult;
+                
+                syncResult = session()->session()->syncMessagesByUIDForModSeq(folder(), mKind, mFirst, mLast, mModSequenceValue, this, &error);
+                if (syncResult != NULL) {
+                    mMessages = syncResult->modifiedOrAddedMessages();
+                    mVanishedMessages = syncResult->modifiedOrAddedMessages();
+                }
+            }
         }
         else {
-            mMessages = session()->session()->fetchMessagesByUID(folder(), mKind, mFirst, mLast, this, &error);
+            if (mUids != NULL) {
+                mMessages = session()->session()->fetchMessagesByUID(folder(), mKind, mUids, this, &error);
+            }
+            else {
+                mMessages = session()->session()->fetchMessagesByUID(folder(), mKind, mFirst, mLast, this, &error);
+            }
         }
     }
     else {
@@ -115,5 +156,6 @@ void IMAPFetchMessagesOperation::main()
         }
     }
     MC_SAFE_RETAIN(mMessages);
+    MC_SAFE_RETAIN(mVanishedMessages);
     setError(error);
 }

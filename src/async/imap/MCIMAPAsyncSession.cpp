@@ -361,6 +361,20 @@ IMAPFetchMessagesOperation * IMAPAsyncSession::fetchMessagesByNumberOperation(St
     return session->fetchMessagesByNumberOperation(folder, requestKind, numbers);
 }
 
+IMAPFetchMessagesOperation * IMAPAsyncSession::syncMessagesByUIDForModSeqOperation(String * folder, IMAPMessagesRequestKind requestKind,
+                                                                                   uint32_t firstUID, uint32_t lastUID, uint64_t modSeq)
+{
+    IMAPAsyncConnection * session = sessionForFolder(folder);
+    return session->syncMessagesByUIDForModSeqOperation(folder, requestKind, firstUID, lastUID, modSeq);
+}
+
+IMAPFetchMessagesOperation * IMAPAsyncSession::syncMessagesByUIDForModSeqOperation(String * folder, IMAPMessagesRequestKind requestKind,
+                                                                                   Array * uids, uint64_t modSeq)
+{
+    IMAPAsyncConnection * session = sessionForFolder(folder);
+    return session->syncMessagesByUIDForModSeqOperation(folder, requestKind, uids, modSeq);
+}
+
 IMAPFetchContentOperation * IMAPAsyncSession::fetchMessageByUIDOperation(String * folder, uint32_t uid, bool urgent)
 {
     IMAPAsyncConnection * session = sessionForFolder(folder, urgent);
@@ -421,3 +435,10 @@ IMAPOperation * IMAPAsyncSession::checkAccountOperation()
     IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
     return session->checkAccountOperation();
 }
+
+IMAPCapabilityOperation * IMAPAsyncSession::capabilityOperation()
+{
+    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
+    return session->capabilityOperation();
+}
+

@@ -4,14 +4,16 @@
 
 #ifdef __cplusplus
 
+#include <inttypes.h>
+
 namespace mailcore {
     
     struct Range {
-        unsigned int index;
-        unsigned int length;
+        uint64_t location;
+        uint64_t length;
     };
     
-    Range RangeMake(unsigned int index, unsigned int length);
+    Range RangeMake(uint64_t location, uint64_t length);
 }
 
 #endif
