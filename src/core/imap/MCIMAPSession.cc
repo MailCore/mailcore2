@@ -270,6 +270,23 @@ static clist * splitSet(struct mailimap_set * set, unsigned int splitCount)
     return result;
 }
 
+static struct mailimap_set * setFromIndexSet(IndexSet * indexSet)
+{
+    struct mailimap_set * imap_set;
+    
+    imap_set = mailimap_set_new_empty();
+    for(unsigned int i = 0 ; i < indexSet->rangesCount() ; i ++) {
+        uint64_t left = RangeLeftBound(indexSet->allRanges()[i]);
+        uint64_t right = RangeRightBound(indexSet->allRanges()[i]);
+        if (right == UINT64_MAX) {
+            right = 0;
+        }
+        mailimap_set_add_interval(imap_set, (uint32_t) left, (uint32_t) right);
+    }
+    
+    return imap_set;
+}
+
 void IMAPSession::init()
 {
     mHostname = NULL;
@@ -1853,6 +1870,7 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
     return result;
 }
 
+#if 0
 Array * IMAPSession::fetchMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
 	uint32_t firstUID, uint32_t lastUID, IMAPProgressCallback * progressCallback, ErrorCode * pError)
 {
@@ -1900,6 +1918,35 @@ Array * IMAPSession::fetchMessagesByNumber(String * folder, IMAPMessagesRequestK
 	Array * numbers, IMAPProgressCallback * progressCallback, ErrorCode * pError)
 {
     struct mailimap_set * imapset = setFromArray(numbers);
+    IMAPSyncResult * syncResult = fetchMessages(folder, requestKind, false, imapset, 0, NULL, 0,
+                                                progressCallback, pError);
+    if (syncResult == NULL)
+        return NULL;
+    Array * result = syncResult->modifiedOrAddedMessages();
+    result->retain()->autorelease();
+    mailimap_set_free(imapset);
+    return result;
+}
+#endif
+
+Array * IMAPSession::fetchMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
+                                        IndexSet * uids, IMAPProgressCallback * progressCallback, ErrorCode * pError)
+{
+    struct mailimap_set * imapset = setFromIndexSet(uids);
+    IMAPSyncResult * syncResult = fetchMessages(folder, requestKind, true, imapset, 0, NULL, 0,
+                                                progressCallback, pError);
+    if (syncResult == NULL)
+        return NULL;
+    Array * result = syncResult->modifiedOrAddedMessages();
+    result->retain()->autorelease();
+    mailimap_set_free(imapset);
+    return result;
+}
+
+Array * IMAPSession::fetchMessagesByNumber(String * folder, IMAPMessagesRequestKind requestKind,
+                                           IndexSet * numbers, IMAPProgressCallback * progressCallback, ErrorCode * pError)
+{
+    struct mailimap_set * imapset = setFromIndexSet(numbers);
     IMAPSyncResult * syncResult = fetchMessages(folder, requestKind, false, imapset, 0, NULL, 0,
                                                 progressCallback, pError);
     if (syncResult == NULL)
@@ -2227,8 +2274,12 @@ void IMAPSession::idle(String * folder, uint32_t lastKnownUID, ErrorCode * pErro
     if (lastKnownUID != 0) {
         Array * msgs;
         
+#if 0
         msgs = fetchMessagesByUID(folder, IMAPMessagesRequestKindUid, lastKnownUID, 0,
             NULL, pError);
+#endif
+        msgs = fetchMessagesByUID(folder, IMAPMessagesRequestKindUid, IndexSet::indexSetWithRange(RangeMake(lastKnownUID, UINT64_MAX)),
+                                  NULL, pError);
         if (* pError != ErrorNone)
             return;
         if (msgs->count() > 0) {
@@ -2677,10 +2728,11 @@ unsigned int IMAPSession::lastFolderMessageCount()
     return mFolderMsgCount;
 }
 
-IMAPSyncResult * IMAPSession::syncMessagesByUIDForModSeq(String * folder, IMAPMessagesRequestKind requestKind,
-                                                         uint32_t firstUID, uint32_t lastUID,
-                                                         uint64_t modseq,
-                                                         IMAPProgressCallback * progressCallback, ErrorCode * pError)
+#if 0
+IMAPSyncResult * IMAPSession::syncMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
+                                                uint32_t firstUID, uint32_t lastUID,
+                                                uint64_t modseq,
+                                                IMAPProgressCallback * progressCallback, ErrorCode * pError)
 {
     struct mailimap_set * imapset = mailimap_set_new_interval(firstUID, lastUID);
     IMAPSyncResult * result = fetchMessages(folder, requestKind, true, imapset, modseq, NULL, firstUID,
@@ -2689,13 +2741,27 @@ IMAPSyncResult * IMAPSession::syncMessagesByUIDForModSeq(String * folder, IMAPMe
     return result;
 }
 
-IMAPSyncResult * IMAPSession::syncMessagesByUIDForModSeq(String * folder, IMAPMessagesRequestKind requestKind,
-                                                         Array * uids, uint64_t modseq,
-                                                         IMAPProgressCallback * progressCallback, ErrorCode * pError)
+IMAPSyncResult * IMAPSession::syncMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
+                                                Array * uids, uint64_t modseq,
+                                                IMAPProgressCallback * progressCallback, ErrorCode * pError)
 {
     struct mailimap_set * imapset = setFromArray(uids);
     IMAPSyncResult * result = fetchMessages(folder, requestKind, true, imapset, modseq, NULL,
                                             (uint32_t) ((Value *) uids->objectAtIndex(0))->unsignedLongValue(),
+                                            progressCallback, pError);
+    mailimap_set_free(imapset);
+    return result;
+}
+#endif
+
+IMAPSyncResult * IMAPSession::syncMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
+                                                IndexSet * uids, uint64_t modseq,
+                                                IMAPProgressCallback * progressCallback, ErrorCode * pError)
+{
+    MCAssert(uids->rangesCount() > 0);
+    struct mailimap_set * imapset = setFromIndexSet(uids);
+    IMAPSyncResult * result = fetchMessages(folder, requestKind, true, imapset, modseq, NULL,
+                                            (uint32_t) uids->allRanges()[0].location,
                                             progressCallback, pError);
     mailimap_set_free(imapset);
     return result;

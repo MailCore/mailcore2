@@ -81,6 +81,7 @@ namespace mailcore {
 		
 		virtual IMAPOperation * expungeOperation(String * folder);
 		
+#if 0
 		virtual IMAPFetchMessagesOperation * fetchMessagesByUIDOperation(String * folder, IMAPMessagesRequestKind requestKind,
 			uint32_t firstUID, uint32_t lastUID);
 		virtual IMAPFetchMessagesOperation * fetchMessagesByNumberOperation(String * folder, IMAPMessagesRequestKind requestKind,
@@ -93,6 +94,14 @@ namespace mailcore {
                                                                                  uint32_t firstUID, uint32_t lastUID, uint64_t modSeq);
         virtual IMAPFetchMessagesOperation * syncMessagesByUIDForModSeqOperation(String * folder, IMAPMessagesRequestKind requestKind,
                                                                                  Array * uids, uint64_t modSeq);
+#endif
+		virtual IMAPFetchMessagesOperation * fetchMessagesByUIDOperation(String * folder, IMAPMessagesRequestKind requestKind,
+                                                                         IndexSet * indexes);
+		virtual IMAPFetchMessagesOperation * fetchMessagesByNumberOperation(String * folder, IMAPMessagesRequestKind requestKind,
+                                                                            IndexSet * indexes);
+        virtual IMAPFetchMessagesOperation * syncMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
+                                                               IndexSet * indexes, uint64_t modSeq);
+        
 		virtual IMAPFetchContentOperation * fetchMessageByUIDOperation(String * folder, uint32_t uid);
 		virtual IMAPFetchContentOperation * fetchMessageAttachmentByUIDOperation(String * folder, uint32_t uid, String * partID,
 		    Encoding encoding);

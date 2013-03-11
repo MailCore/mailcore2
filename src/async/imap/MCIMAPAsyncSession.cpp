@@ -333,6 +333,7 @@ IMAPOperation * IMAPAsyncSession::expungeOperation(String * folder)
     return session->expungeOperation(folder);
 }
 
+#if 0
 IMAPFetchMessagesOperation * IMAPAsyncSession::fetchMessagesByUIDOperation(String * folder, IMAPMessagesRequestKind requestKind,
                                                                       uint32_t firstUID, uint32_t lastUID)
 {
@@ -373,6 +374,28 @@ IMAPFetchMessagesOperation * IMAPAsyncSession::syncMessagesByUIDForModSeqOperati
 {
     IMAPAsyncConnection * session = sessionForFolder(folder);
     return session->syncMessagesByUIDForModSeqOperation(folder, requestKind, uids, modSeq);
+}
+#endif
+
+IMAPFetchMessagesOperation * IMAPAsyncSession::fetchMessagesByUIDOperation(String * folder, IMAPMessagesRequestKind requestKind,
+                                                                           IndexSet * indexes)
+{
+    IMAPAsyncConnection * session = sessionForFolder(folder);
+    return session->fetchMessagesByUIDOperation(folder, requestKind, indexes);
+}
+
+IMAPFetchMessagesOperation * IMAPAsyncSession::fetchMessagesByNumberOperation(String * folder, IMAPMessagesRequestKind requestKind,
+                                                                              IndexSet * indexes)
+{
+    IMAPAsyncConnection * session = sessionForFolder(folder);
+    return session->fetchMessagesByNumberOperation(folder, requestKind, indexes);
+}
+
+IMAPFetchMessagesOperation * IMAPAsyncSession::syncMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
+                                                                 IndexSet * indexes, uint64_t modSeq)
+{
+    IMAPAsyncConnection * session = sessionForFolder(folder);
+    return session->syncMessagesByUID(folder, requestKind, indexes, modSeq);
 }
 
 IMAPFetchContentOperation * IMAPAsyncSession::fetchMessageByUIDOperation(String * folder, uint32_t uid, bool urgent)

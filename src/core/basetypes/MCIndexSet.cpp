@@ -9,6 +9,9 @@
 #include "MCIndexSet.h"
 
 #include "MCString.h"
+#include "MCAssert.h"
+#include "MCRange.h"
+#include "MCLog.h"
 
 using namespace mailcore;
 
@@ -47,6 +50,22 @@ IndexSet * IndexSet::indexSet()
     return result;
 }
 
+IndexSet * IndexSet::indexSetWithRange(Range range)
+{
+    IndexSet * result = new IndexSet();
+    result->autorelease();
+    result->addRange(range);
+    return result;
+}
+
+IndexSet * IndexSet::indexSetWithIndex(uint64_t idx)
+{
+    IndexSet * result = new IndexSet();
+    result->autorelease();
+    result->addIndex(idx);
+    return result;
+}
+
 unsigned int IndexSet::count()
 {
     unsigned int total = 0;
@@ -63,13 +82,13 @@ int IndexSet::rangeIndexForIndexWithBounds(uint64_t idx, unsigned int left, unsi
     Range middleRange = mRanges[middle];
     
     if (left == right) {
-        if ((idx >= middleRange.location) && (idx <= middleRange.location + middleRange.length)) {
+        if ((idx >= RangeLeftBound(middleRange)) && (idx <= RangeRightBound(middleRange))) {
             return left;
         }
         return -1;
     }
 
-    if ((idx >= middleRange.location) && (idx <= middleRange.location + middleRange.length)) {
+    if ((idx >= RangeLeftBound(middleRange)) && (idx <= RangeRightBound(middleRange))) {
         return middle;
     }
     if (idx < middleRange.location) {
@@ -119,6 +138,37 @@ int IndexSet::rightRangeIndexForIndex(uint64_t idx)
     return rightRangeIndexForIndexWithBounds(idx, 0, mCount - 1);
 }
 
+int IndexSet::leftRangeIndexForIndexWithBounds(uint64_t idx, unsigned int left, unsigned int right)
+{
+    unsigned int middle = (left + right) / 2;
+    
+    Range middleRange = mRanges[middle];
+    
+    if (left == right) {
+        if (idx <= middleRange.location) {
+            return left;
+        }
+        else {
+            return left + 1;
+        }
+    }
+    
+    if (idx <= middleRange.location) {
+        return leftRangeIndexForIndexWithBounds(idx, left, middle);
+    }
+    else {
+        return leftRangeIndexForIndexWithBounds(idx, middle + 1, right);
+    }
+}
+
+int IndexSet::leftRangeIndexForIndex(uint64_t idx)
+{
+    if (mCount == 0)
+        return 0;
+    
+    return leftRangeIndexForIndexWithBounds(idx, 0, mCount - 1);
+}
+
 void IndexSet::addRangeIndex(unsigned int rangeIndex)
 {
     if (mAllocated < mCount + 1) {
@@ -136,94 +186,136 @@ void IndexSet::addRangeIndex(unsigned int rangeIndex)
         for(unsigned int i = rangeIndex ; i < mCount ; i ++) {
             rangesReplacement[i + 1] = mRanges[i];
         }
+        mCount ++;
         rangesReplacement[rangeIndex].location = 0;
         rangesReplacement[rangeIndex].length = 0;
         delete [] mRanges;
         mRanges = rangesReplacement;
     }
     else {
-        for(unsigned int i = mCount - 1 ; i >= rangeIndex ; i --) {
-            mRanges[i + 1] = mRanges[i];
+        if (mCount > 0) {
+            for(int i = mCount - 1 ; i >= (int) rangeIndex ; i --) {
+                mRanges[i + 1] = mRanges[i];
+            }
         }
+        mCount ++;
         mRanges[rangeIndex].location = 0;
         mRanges[rangeIndex].length = 0;
     }
 }
 
-void IndexSet::addIndex(uint64_t idx)
+void IndexSet::addRange(Range range)
 {
-    int leftRangeIndex;
-    int rightRangeIndex;
+    int rangeIndex = leftRangeIndexForIndex(range.location);
+    addRangeIndex(rangeIndex);
+    mRanges[rangeIndex] = range;
     
-    if (rangeIndexForIndex(idx) != -1)
-        return;
-    
-    leftRangeIndex = rangeIndexForIndex(idx - 1);
-    rightRangeIndex = rangeIndexForIndex(idx + 1);
-    
-    if ((leftRangeIndex == -1) && (rightRangeIndex == -1)) {
-        rightRangeIndex = rightRangeIndexForIndex(idx);
-        addRangeIndex(rightRangeIndex);
-        mRanges[rightRangeIndex].location = idx;
-        mRanges[rightRangeIndex].length = 0;
+    mergeRanges(rangeIndex);
+    if (rangeIndex > 0) {
+        tryToMergeAdjacentRanges(rangeIndex - 1);
     }
-    else if ((leftRangeIndex != -1) && (rightRangeIndex == -1)) {
-        if (mRanges[leftRangeIndex].location + mRanges[leftRangeIndex].length + 1 == idx) {
-            mRanges[leftRangeIndex].length ++;
-        }
-    }
-    else if ((leftRangeIndex == -1) && (rightRangeIndex != -1)) {
-        if (mRanges[rightRangeIndex].location - 1 == idx) {
-            mRanges[rightRangeIndex].location --;
-            mRanges[rightRangeIndex].length ++;
-        }
-    }
+    tryToMergeAdjacentRanges(rangeIndex);
 }
 
-void IndexSet::removeRangeIndex(unsigned int rangeIndex)
+void IndexSet::tryToMergeAdjacentRanges(unsigned int rangeIndex)
 {
-    for(unsigned int i = rangeIndex + 1 ; i < mCount ; i --) {
-        mRanges[i - 1] = mRanges[i];
+    if (RangeRightBound(mRanges[rangeIndex]) == UINT64_MAX)
+        return;
+    
+    if (RangeRightBound(mRanges[rangeIndex]) + 1 != mRanges[rangeIndex + 1].location) {
+        return;
     }
-    mCount --;
+    
+    uint64_t right = RangeRightBound(mRanges[rangeIndex + 1]);
+    removeRangeIndex(rangeIndex + 1, 1);
+    mRanges[rangeIndex].length = right - mRanges[rangeIndex].location;
+}
+
+void IndexSet::mergeRanges(unsigned int rangeIndex)
+{
+    int right = rangeIndex;
+    
+    for(int i = rangeIndex ; i < mCount ; i ++) {
+        if (RangeHasIntersection(mRanges[rangeIndex], mRanges[i])) {
+            right = i;
+        }
+        else {
+            break;
+        }
+    }
+    
+    if (right == rangeIndex)
+        return;
+    
+    IndexSet * indexSet = RangeUnion(mRanges[rangeIndex], mRanges[right]);
+    MCAssert(indexSet->rangesCount() > 0);
+    Range range = indexSet->allRanges()[0];
+    removeRangeIndex(rangeIndex + 1, right - rangeIndex);
+    mRanges[rangeIndex] = range;
+}
+
+void IndexSet::addIndex(uint64_t idx)
+{
+    addRange(RangeMake(idx, 0));
+}
+
+void IndexSet::removeRangeIndex(unsigned int rangeIndex, unsigned int count)
+{
+    for(unsigned int i = rangeIndex + count ; i < mCount ; i ++) {
+        mRanges[i - count] = mRanges[i];
+    }
+    mCount -= count;
+}
+
+void IndexSet::removeRange(Range range)
+{
+    int left = -1;
+    int right = -1;
+    int leftRangeIndex = leftRangeIndexForIndex(range.location);
+    for(int i = leftRangeIndex ; i < mCount ; i ++) {
+        if (RangeHasIntersection(mRanges[i], range)) {
+            IndexSet * indexSet = RangeRemoveRange(mRanges[i], range);
+            if (indexSet->rangesCount() == 0) {
+                if (left == -1) {
+                    left = i;
+                }
+                right = i;
+                mRanges[i] = RangeEmpty;
+            }
+            else if (indexSet->rangesCount() == 1) {
+                mRanges[i] = indexSet->allRanges()[0];
+            }
+            else {
+                MCAssert(indexSet->rangesCount() == 2);
+                addRangeIndex(i);
+                mRanges[i] = indexSet->allRanges()[0];
+                mRanges[i + 1] = indexSet->allRanges()[1];
+            }
+        }
+        else {
+            break;
+        }
+    }
+    
+    if (left != -1) {
+        removeRangeIndex(left, right - left + 1);
+    }
 }
 
 void IndexSet::removeIndex(uint64_t idx)
 {
-    int rangeIndex = rangeIndexForIndex(idx);
-    if (rangeIndex == -1)
-        return;
-    if (idx == mRanges[rangeIndex].location) {
-        mRanges[rangeIndex].location ++;
-        mRanges[rangeIndex].length --;
-        if (mRanges[rangeIndex].length == 0) {
-            // remove range.
-            removeRangeIndex(rangeIndex);
-        }
-    }
-    else if (idx == mRanges[rangeIndex].location + mRanges[rangeIndex].length) {
-        mRanges[rangeIndex].length --;
-        if (mRanges[rangeIndex].length == 0) {
-            // remove range.
-            removeRangeIndex(rangeIndex);
-        }
-    }
-    else {
-        // split range.
-        addRangeIndex(rangeIndex);
-        mRanges[rangeIndex] = mRanges[rangeIndex + 1];
-        uint64_t right = mRanges[rangeIndex].location + mRanges[rangeIndex].length;
-        mRanges[rangeIndex].location = mRanges[rangeIndex + 1].location;
-        mRanges[rangeIndex].length = idx - mRanges[rangeIndex].location;
-        mRanges[rangeIndex + 1].location = idx + 1;
-        mRanges[rangeIndex + 1].length = right - mRanges[rangeIndex + 1].location;
-    }
+    removeRange(RangeMake(idx, 0));
 }
 
 bool IndexSet::containsIndex(uint64_t idx)
 {
     int rangeIndex = rangeIndexForIndex(idx);
     return rangeIndex != -1;
+}
+
+unsigned int IndexSet::rangesCount()
+{
+    return mCount;
 }
 
 Range * IndexSet::allRanges()
@@ -248,9 +340,15 @@ String * IndexSet::description()
         if (i != 0) {
             result->appendUTF8Format(",");
         }
-        result->appendUTF8Format("%llu-%llu",
-                                 (unsigned long long) mRanges[i].location,
-                                 (unsigned long long) (mRanges[i].location + mRanges[i].length));
+        if (mRanges[i].length == 0) {
+            result->appendUTF8Format("%llu",
+                                     (unsigned long long) mRanges[i].location);
+        }
+        else {
+            result->appendUTF8Format("%llu-%llu",
+                                     (unsigned long long) mRanges[i].location,
+                                     (unsigned long long) (mRanges[i].location + mRanges[i].length));
+        }
     }
     return result;
 }
@@ -259,3 +357,16 @@ Object * IndexSet::copy()
 {
     return new IndexSet(this);
 }
+
+void IndexSet::intersectsRange(Range range)
+{
+    uint64_t right = RangeRightBound(range);
+    if (right == UINT64_MAX) {
+        removeRange(RangeMake(0, range.location - 1));
+    }
+    else {
+        removeRange(RangeMake(0, range.location - 1));
+        removeRange(RangeMake(right, UINT64_MAX));
+    }
+}
+

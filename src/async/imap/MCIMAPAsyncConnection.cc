@@ -265,6 +265,7 @@ IMAPOperation * IMAPAsyncConnection::expungeOperation(String * folder)
     return op;
 }
 
+#if 0
 IMAPFetchMessagesOperation * IMAPAsyncConnection::fetchMessagesByUIDOperation(String * folder, IMAPMessagesRequestKind requestKind,
                                                                            uint32_t firstUID, uint32_t lastUID)
 {
@@ -341,6 +342,46 @@ IMAPFetchMessagesOperation * IMAPAsyncConnection::syncMessagesByUIDForModSeqOper
     op->setKind(requestKind);
     op->setFetchByUidEnabled(true);
     op->setUids(uids);
+    op->setModSequenceValue(modSeq);
+    op->autorelease();
+    return op;
+}
+#endif
+
+IMAPFetchMessagesOperation * IMAPAsyncConnection::fetchMessagesByUIDOperation(String * folder, IMAPMessagesRequestKind requestKind,
+                                                                              IndexSet * indexes)
+{
+    IMAPFetchMessagesOperation * op = new IMAPFetchMessagesOperation();
+    op->setSession(this);
+    op->setFolder(folder);
+    op->setKind(requestKind);
+    op->setFetchByUidEnabled(true);
+    op->setIndexes(indexes);
+    op->autorelease();
+    return op;
+}
+
+IMAPFetchMessagesOperation * IMAPAsyncConnection::fetchMessagesByNumberOperation(String * folder, IMAPMessagesRequestKind requestKind,
+                                                                                 IndexSet * indexes)
+{
+    IMAPFetchMessagesOperation * op = new IMAPFetchMessagesOperation();
+    op->setSession(this);
+    op->setFolder(folder);
+    op->setKind(requestKind);
+    op->setIndexes(indexes);
+    op->autorelease();
+    return op;
+}
+
+IMAPFetchMessagesOperation * IMAPAsyncConnection::syncMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
+                                                                    IndexSet * indexes, uint64_t modSeq)
+{
+    IMAPFetchMessagesOperation * op = new IMAPFetchMessagesOperation();
+    op->setSession(this);
+    op->setFolder(folder);
+    op->setKind(requestKind);
+    op->setFetchByUidEnabled(true);
+    op->setIndexes(indexes);
     op->setModSequenceValue(modSeq);
     op->autorelease();
     return op;

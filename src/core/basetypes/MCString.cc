@@ -1943,7 +1943,7 @@ String * String::substringWithRange(Range range)
         range.length = length() - range.location;
     }
     
-    return stringWithCharacters(unicodeCharacters() + range.location, range.length);
+    return stringWithCharacters(unicodeCharacters() + range.location, (unsigned int) range.length);
 }
 
 static chash * uniquedStringHash = NULL;
