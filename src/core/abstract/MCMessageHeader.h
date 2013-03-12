@@ -58,17 +58,19 @@ namespace mailcore {
 		virtual String * extractedSubject();
 		virtual String * partialExtractedSubject();
 		virtual void importHeadersData(Data * data);
+        
+    public: // subclass behavior
+		MessageHeader(MessageHeader * other);
+		virtual String * description();
+		virtual Object * copy();
+        
+    public: // private
 		virtual void importIMAPEnvelope(struct mailimap_envelope * env);
 		virtual void importIMAPReferences(Data * data);
 		virtual void importIMAPInternalDate(struct mailimap_date_time * date);
 		
 		virtual struct mailimf_fields * createIMFFieldsAndFilterBcc(bool filterBcc);
 		virtual void importIMFFields(struct mailimf_fields * fields);
-        
-    public: // subclass behavior
-		MessageHeader(MessageHeader * other);
-		virtual String * description();
-		virtual Object * copy();
         
 	private:
 		String * mMessageID;

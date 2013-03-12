@@ -28,15 +28,6 @@ namespace mailcore {
 		virtual String * RFC822String();
 		virtual String * nonEncodedRFC822String();
 		
-		// Additions
-		static Address * addressWithIMFMailbox(struct mailimf_mailbox * mb);
-		static Address * addressWithNonEncodedIMFMailbox(struct mailimf_mailbox * mb);
-		static Address * addressWithIMAPAddress(struct mailimap_address * imap_addr);
-		
-		// Must be released
-		virtual struct mailimf_address * createIMFAddress();
-		virtual struct mailimf_mailbox * createIMFMailbox();
-        
     public: // subclass behavior.
 		Address(Address * other);
 		virtual String * description();
@@ -44,6 +35,16 @@ namespace mailcore {
 		virtual unsigned int hash();
 		virtual Object * copy();
         
+    public: // private
+		// Must be released
+		virtual struct mailimf_address * createIMFAddress();
+		virtual struct mailimf_mailbox * createIMFMailbox();
+        
+		// Additions
+		static Address * addressWithIMFMailbox(struct mailimf_mailbox * mb);
+		static Address * addressWithNonEncodedIMFMailbox(struct mailimf_mailbox * mb);
+		static Address * addressWithIMAPAddress(struct mailimap_address * imap_addr);
+		
 	private:
 		String * mDisplayName;
 		String * mMailbox;

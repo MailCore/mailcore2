@@ -41,6 +41,8 @@ MessageHeader::MessageHeader(MessageHeader * other)
     setBcc(other->mBcc);
     setReplyTo(other->mReplyTo);
     setSubject(other->mSubject);
+    setDate(other->date());
+    setReceivedDate(other->receivedDate());
     setUserAgent(other->mUserAgent);
 }
 
