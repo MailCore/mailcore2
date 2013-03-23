@@ -1,15 +1,15 @@
 //
-//  MCOFetchFoldersOperation.m
+//  MCOIMAPFetchFoldersOperation.m
 //  mailcore2
 //
 //  Created by Matt Ronge on 1/31/13.
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import "MCOFetchFoldersOperation.h"
+#import "MCOIMAPFetchFoldersOperation.h"
 #import "NSError+MCO.h"
 #import "NSString+MCO.h"
-#import "MCOOperation+Internals.h"
+#import "MCOOperation+Private.h"
 
 #import <Foundation/Foundation.h>
 #import <mailcore/MCAsync.h>
@@ -28,7 +28,7 @@ using namespace mailcore;
 }
 
 - (void)operationCompleted {
-    IMAPFetchFoldersOperation *op = dynamic_cast<IMAPFetchFoldersOperation *>(self.operation);
+    IMAPFetchFoldersOperation *op = (IMAPFetchFoldersOperation *) [self mcOperation];
     if (op->error() == ErrorNone) {
         NSMutableArray *nsfolders = [NSMutableArray array];
         Array *folders = op->folders();

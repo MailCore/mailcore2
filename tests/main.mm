@@ -97,7 +97,7 @@ static void testIMAP()
      mailcore::IMAPMessagesRequestKindInternalDate | mailcore::IMAPMessagesRequestKindHeaderSubject |
      mailcore::IMAPMessagesRequestKindFlags);
     mailcore::Array * messages = session->fetchMessagesByUID(MCSTR("INBOX"),
-                                                              requestKind, 1, 0, NULL, &error);
+                                                             requestKind, mailcore::IndexSet::indexSetWithRange(mailcore::RangeMake(1, UINT64_MAX)), NULL, &error);
     MCLog("%s", MCUTF8DESC(messages));
     
     session->release();
@@ -226,7 +226,7 @@ static void testAsyncIMAP()
     (mailcore::IMAPMessagesRequestKindHeaders | mailcore::IMAPMessagesRequestKindStructure |
      mailcore::IMAPMessagesRequestKindInternalDate | mailcore::IMAPMessagesRequestKindHeaderSubject |
      mailcore::IMAPMessagesRequestKindFlags);
-    mailcore::IMAPFetchMessagesOperation * op = session->fetchMessagesByUIDOperation(MCSTR("INBOX"), requestKind, 1, 0);
+    mailcore::IMAPFetchMessagesOperation * op = session->fetchMessagesByUIDOperation(MCSTR("INBOX"), requestKind, mailcore::IndexSet::indexSetWithRange(mailcore::RangeMake(1, UINT64_MAX)));
     op->setCallback(callback);
     op->setImapCallback(callback);
     op->start();

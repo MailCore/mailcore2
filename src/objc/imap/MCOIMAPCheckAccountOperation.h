@@ -1,5 +1,5 @@
 //
-//  MCOCheckAccountOperation.h
+//  MCOIMAPCheckAccountOperation.h
 //  mailcore2
 //
 //  Created by Matt Ronge on 01/31/13.

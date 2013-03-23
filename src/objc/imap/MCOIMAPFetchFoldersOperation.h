@@ -1,5 +1,5 @@
 //
-//  MCOFetchFoldersOperation.h
+//  MCOIMAPFetchFoldersOperation.h
 //  mailcore2
 //
 //  Created by Matt Ronge on 1/31/13.

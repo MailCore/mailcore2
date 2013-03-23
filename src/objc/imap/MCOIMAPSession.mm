@@ -7,10 +7,10 @@
 //
 
 #import "MCOIMAPSession.h"
-#import "MCOOperation+Internals.h"
+#import "MCOOperation+Private.h"
 #import "MCOObjectWrapper.h"
-#import "MCOCheckAccountOperation.h"
-#import "MCOFetchFoldersOperation.h"
+#import "MCOIMAPCheckAccountOperation.h"
+#import "MCOIMAPFetchFoldersOperation.h"
 
 #import "NSString+MCO.h"
 
@@ -127,14 +127,14 @@ using namespace mailcore;
 
 - (MCOCheckAccountOperation *)checkAccountOperation {
     IMAPOperation *coreOp = self.session->checkAccountOperation();
-    MCOCheckAccountOperation *op = [[MCOCheckAccountOperation alloc] initWithOperation:coreOp];
+    MCOCheckAccountOperation *op = [[MCOCheckAccountOperation alloc] initWithMCOperation:coreOp];
     return [op autorelease];
 
 }
 
 - (MCOFetchFoldersOperation *)fetchAllFoldersOperation {
     IMAPOperation *coreOp = self.session->fetchAllFoldersOperation();
-    MCOFetchFoldersOperation *op = [[MCOFetchFoldersOperation alloc] initWithOperation:coreOp];
+    MCOFetchFoldersOperation *op = [[MCOFetchFoldersOperation alloc] initWithMCOperation:coreOp];
     return [op autorelease];
     
 }

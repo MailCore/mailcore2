@@ -1,15 +1,17 @@
 //
-//  MCOCheckAccountOperation.m
+//  MCOIMAPCheckAccountOperation.m
 //  mailcore2
 //
 //  Created by Matt Ronge on 01/31/13.
 //  Copyright (c) 2013 __MyCompanyName__. All rights reserved.
 //
 
-#import <mailcore/MCAsync.h>
+#import "MCOIMAPCheckAccountOperation.h"
 
-#import "MCOOperation+Internals.h"
-#import "MCOCheckAccountOperation.h"
+#import "MCAsync.h"
+
+#import "MCOOperation+Private.h"
+#import "MCOIMAPCheckAccountOperation.h"
 #import "NSError+MCO.h"
 
 using namespace mailcore;
@@ -26,7 +28,7 @@ using namespace mailcore;
 }
 
 - (void)operationCompleted {
-    IMAPOperation *op = dynamic_cast<IMAPOperation *>(self.operation);
+    IMAPOperation *op = (IMAPOperation *) [self mcOperation];
     NSError *error = [NSError mco_errorWithErrorCode:op->error()];
     self.completionBlock(error);
 }

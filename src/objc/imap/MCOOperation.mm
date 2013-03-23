@@ -7,6 +7,8 @@
 //
 
 #import "MCOOperation.h"
+#import "MCOOperation+Private.h"
+
 #import "MCOperation.h"
 #import "MCOperationCallback.h"
 #import "MCOObjectWrapper.h"
@@ -40,7 +42,7 @@ public:
     BOOL _started;
 }
 
-- (id)initWithOperation:(Operation *)op
+- (id)initWithMCOperation:(Operation *)op
 {
     self = [super init];
     
@@ -81,7 +83,7 @@ public:
     _operation->start();
 }
 
-- (mailcore::Operation *)operation
+- (mailcore::Operation *)mcOperation
 {
     return _operation;
 }
