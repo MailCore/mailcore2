@@ -1282,16 +1282,16 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../Externals/libetpan/include",
-					"$(SRCROOT)/../Externals/icu4c/include",
-					"$(SRCROOT)/../Externals/ctemplate/include",
+					"\"$(SRCROOT)/../Externals/libetpan/include\"",
+					"\"$(SRCROOT)/../Externals/icu4c/include\"",
+					"\"$(SRCROOT)/../Externals/ctemplate/include\"",
 					/usr/include/tidy,
 					/usr/include/libxml2,
 				);
 				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/../Externals/libetpan/lib",
-					"$(SRCROOT)/../Externals/icu4c/lib",
-					"$(SRCROOT)/../Externals/ctemplate/lib",
+					"\"$(SRCROOT)/../Externals/libetpan/lib\"",
+					"\"$(SRCROOT)/../Externals/icu4c/lib\"",
+					"\"$(SRCROOT)/../Externals/ctemplate/lib\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1318,16 +1318,16 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../Externals/libetpan/include",
-					"$(SRCROOT)/../Externals/icu4c/include",
-					"$(SRCROOT)/../Externals/ctemplate/include",
+					"\"$(SRCROOT)/../Externals/libetpan/include\"",
+					"\"$(SRCROOT)/../Externals/icu4c/include\"",
+					"\"$(SRCROOT)/../Externals/ctemplate/include\"",
 					/usr/include/tidy,
 					/usr/include/libxml2,
 				);
 				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/../Externals/libetpan/lib",
-					"$(SRCROOT)/../Externals/icu4c/lib",
-					"$(SRCROOT)/../Externals/ctemplate/lib",
+					"\"$(SRCROOT)/../Externals/libetpan/lib\"",
+					"\"$(SRCROOT)/../Externals/icu4c/lib\"",
+					"\"$(SRCROOT)/../Externals/ctemplate/lib\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SDKROOT = macosx;
