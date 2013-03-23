@@ -31,6 +31,8 @@ static void init(void)
 
 void MCORegisterClass(Class aClass, const std::type_info * info)
 {
+    init();
+    
     chashdatum key;
     chashdatum value;
     key.data = &info;
@@ -42,6 +44,8 @@ void MCORegisterClass(Class aClass, const std::type_info * info)
 
 static Class classWithTypeInfo(const std::type_info * info)
 {
+    init();
+    
     int r;
     chashdatum key;
     chashdatum value;

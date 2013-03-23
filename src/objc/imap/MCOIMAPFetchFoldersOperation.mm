@@ -30,7 +30,7 @@ using namespace mailcore;
 
 #define nativeType mailcore::IMAPFetchFoldersOperation
 
-+ (void) initialize
++ (void) load
 {
     MCORegisterClass(self, &typeid(nativeType));
 }

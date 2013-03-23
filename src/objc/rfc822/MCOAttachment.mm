@@ -21,7 +21,7 @@
 
 #define nativeType mailcore::Attachment
 
-+ (void) initialize
++ (void) load
 {
     MCORegisterClass(self, &typeid(nativeType));
 }

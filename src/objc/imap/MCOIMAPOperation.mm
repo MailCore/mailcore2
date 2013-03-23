@@ -25,17 +25,6 @@
 
 #define nativeType mailcore::IMAPOperation
 
-+ (void) initialize
-{
-    MCORegisterClass(self, &typeid(nativeType));
-}
-
-+ (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object
-{
-    mailcore::IMAPOperation * op = (mailcore::IMAPOperation *) object;
-    return [[[self alloc] initWithMCOperation:op] autorelease];
-}
-
 - (void)start:(void (^)(NSError *error))completionBlock {
     self.completionBlock = completionBlock;
     [self start];

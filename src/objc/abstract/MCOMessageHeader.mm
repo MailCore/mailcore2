@@ -26,7 +26,7 @@
 
 #define nativeType mailcore::MessageHeader
 
-+ (void) initialize
++ (void) load
 {
     MCORegisterClass(self, &typeid(nativeType));
 }

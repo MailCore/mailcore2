@@ -137,7 +137,7 @@ private:
 
 #define nativeType mailcore::MessageParser
 
-+ (void) initialize
++ (void) load
 {
     MCORegisterClass(self, &typeid(nativeType));
 }

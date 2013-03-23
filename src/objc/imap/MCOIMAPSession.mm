@@ -9,6 +9,7 @@
 #import "MCOIMAPSession.h"
 
 #import "MCOOperation.h"
+#import "MCOOperation+Private.h"
 #import "MCOObjectWrapper.h"
 #import "MCOIMAPOperation.h"
 #import "MCOIMAPFetchFoldersOperation.h"
@@ -59,13 +60,12 @@ MCO_OBJC_SYNTHESIZE_SCALAR(char, char, setDelimiter, delimiter)
 
 - (MCOIMAPOperation *)checkAccountOperation {
     IMAPOperation *coreOp = MCO_NATIVE_INSTANCE->checkAccountOperation();
-    return MCO_TO_OBJC(coreOp);
-
+    return [[[MCOIMAPOperation alloc] initWithMCOperation:coreOp] autorelease];
 }
 
 - (MCOIMAPFetchFoldersOperation *)fetchAllFoldersOperation {
     IMAPOperation *coreOp = MCO_NATIVE_INSTANCE->fetchAllFoldersOperation();
-    return MCO_TO_OBJC(coreOp);
-    
+    return [[[MCOIMAPFetchFoldersOperation alloc] initWithMCOperation:coreOp] autorelease];
 }
+
 @end

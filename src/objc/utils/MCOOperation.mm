@@ -45,7 +45,7 @@ public:
 
 #define nativeType mailcore::Operation
 
-+ (void) initialize
++ (void) load
 {
     MCORegisterClass(self, &typeid(nativeType));
 }

@@ -17,7 +17,7 @@
 
 #define nativeType mailcore::MessageBuilder
 
-+ (void) initialize
++ (void) load
 {
     MCORegisterClass(self, &typeid(nativeType));
 }

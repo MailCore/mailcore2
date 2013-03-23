@@ -17,7 +17,7 @@
 
 #define nativeType mailcore::Multipart
 
-+ (void) initialize
++ (void) load
 {
     MCORegisterClass(self, &typeid(nativeType));
 }
