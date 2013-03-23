@@ -1338,6 +1338,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../Externals/libetpan/include\"",
+					"\"$(SRCROOT)/../Externals/icu4c/include\"",
+					"\"$(SRCROOT)/../Externals/ctemplate/include\"",
+					/usr/include/tidy,
+					/usr/include/libxml2,
+				);
 				PRODUCT_NAME = mailcore2;
 			};
 			name = Debug;
@@ -1346,6 +1353,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../Externals/libetpan/include\"",
+					"\"$(SRCROOT)/../Externals/icu4c/include\"",
+					"\"$(SRCROOT)/../Externals/ctemplate/include\"",
+					/usr/include/tidy,
+					/usr/include/libxml2,
+				);
 				PRODUCT_NAME = mailcore2;
 			};
 			name = Release;
