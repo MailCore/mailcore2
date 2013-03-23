@@ -40,7 +40,10 @@ namespace mailcore {
         virtual String * templateForEmbeddedMessageHeader();
         virtual String * templateForAttachmentSeparator();
         
+        // Can be used to filter some HTML tags.
         virtual String * filterHTMLForPart(String * html);
+        
+        // Can be used to hide quoted text.
         virtual String * filterHTMLForMessage(String * html);
     };
 

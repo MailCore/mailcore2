@@ -12,11 +12,11 @@
 
 #import <mailcore/MCOAbstractMessage.h>
 
-@protocol MCOMessageParserDelegate;
+@protocol MCOHTMLRendererDelegate;
 
 @interface MCOMessageParser : MCOAbstractMessage
 
-@property (nonatomic, assign) id <MCOMessageParserDelegate> delegate;
+@property (nonatomic, assign) id <MCOHTMLRendererDelegate> rendererDelegate;
 
 + (MCOMessageParser *) messageParserWithData:(NSData *)data;
 
@@ -27,24 +27,6 @@
 - (NSData *) data;
 
 - (NSString *) htmlRendering;
-
-@end
-
-@protocol MCOMessageParserDelegate
-
-- (BOOL) MCOMessageParser:(MCOMessageParser *)parser canPreviewPart:(MCOAbstractPart *)part;
-- (NSDictionary *) MCOMessageParser:(MCOMessageParser *)parser templateValuesForHeader:(MCOMessageHeader *)part;
-- (NSDictionary *) MCOMessageParser:(MCOMessageParser *)parser templateValuesForPart:(MCOAbstractPart *)part;
-- (NSString *) MCOMessageParser_templateForMainHeader:(MCOMessageParser *)parser;
-- (NSString *) MCOMessageParser_templateForImage:(MCOMessageParser *)parser;
-- (NSString *) MCOMessageParser_templateForAttachment:(MCOMessageParser *)parser;
-- (NSString *) MCOMessageParser_templateForMessage:(MCOMessageParser *)parser;
-- (NSString *) MCOMessageParser_templateForEmbeddedMessage:(MCOMessageParser *)parser;
-- (NSString *) MCOMessageParser_templateForEmbeddedMessageHeader:(MCOMessageParser *)parser;
-- (NSString *) MCOMessageParser_templateForAttachmentSeparator:(MCOMessageParser *)parser;
-
-- (NSString *) MCOMessageParser_filterHTMLForPart:(NSString *)html;
-- (NSString *) MCOMessageParser_filterHTMLForMessage:(NSString *)html;
 
 @end
 
