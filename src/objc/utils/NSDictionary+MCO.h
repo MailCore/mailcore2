@@ -17,6 +17,8 @@ namespace mailcore {
 @interface NSDictionary (MCO)
 
 #ifdef __cplusplus
++ (NSDictionary *) mco_dictionaryWithMCHashMap:(mailcore::HashMap *)hashmap;
+
 - (mailcore::HashMap *) mco_mcHashMap;
 #endif
 

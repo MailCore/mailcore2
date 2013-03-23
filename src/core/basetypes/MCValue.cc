@@ -1,4 +1,5 @@
 #include "MCValue.h"
+#include "MCValuePrivate.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -8,25 +9,6 @@
 #include "MCUtils.h"
 
 using namespace mailcore;
-
-enum {
-    VALUE_TYPE_NONE,
-    VALUE_TYPE_BOOL_VALUE,
-    VALUE_TYPE_CHAR_VALUE,
-    VALUE_TYPE_UNSIGNED_CHAR_VALUE,
-    VALUE_TYPE_SHORT_VALUE,
-    VALUE_TYPE_UNSIGNED_SHORT_VALUE,
-    VALUE_TYPE_INT_VALUE,
-    VALUE_TYPE_UNSIGNED_INT_VALUE,
-    VALUE_TYPE_LONG_VALUE,
-    VALUE_TYPE_UNSIGNED_LONG_VALUE,
-    VALUE_TYPE_LONG_LONG_VALUE,
-    VALUE_TYPE_UNSIGNED_LONG_LONG_VALUE,
-    VALUE_TYPE_FLOAT_VALUE,
-    VALUE_TYPE_DOUBLE_VALUE,
-    VALUE_TYPE_POINTER_VALUE,
-    VALUE_TYPE_DATA_VALUE,
-};
 
 Value::Value()
 {
@@ -304,4 +286,9 @@ void Value::dataValue(const char ** p_value, int * p_length)
 {
     * p_value = mValue.dataValue.data;
     * p_length = mValue.dataValue.length;
+}
+
+int Value::type()
+{
+    return mType;
 }

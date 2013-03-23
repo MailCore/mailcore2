@@ -9,11 +9,25 @@
 #import "MCOAddress.h"
 #import "MCOAddress+Private.h"
 
+#include <typeinfo>
+
 #include "MCAddress.h"
 #include "NSString+MCO.h"
+#include "NSObject+MCO.h"
 
 @implementation MCOAddress {
     mailcore::Address * _nativeAddress;
+}
+
++ (void) initialize
+{
+    MCORegisterClass(self, &typeid(mailcore::Address));
+}
+
++ (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object
+{
+    mailcore::Address * address = (mailcore::Address *) object;
+    return [[[self alloc] initWithMCAddress:address] autorelease];
 }
 
 + (MCOAddress *) addressWithDisplayName:(NSString *)displayName

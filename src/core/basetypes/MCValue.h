@@ -74,6 +74,9 @@ namespace mailcore {
 			} dataValue;
 		} mValue;
 		Value();
+        
+    public: // private
+        virtual int type();
 		
 	};
 

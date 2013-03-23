@@ -17,15 +17,14 @@ namespace mailcore {
 		virtual Array * parts();
 		virtual void setParts(Array * parts);
 		
-		virtual void setMessage(AbstractMessage * message);
-        
-        virtual AbstractPart * partForContentID(String * contentID);
-        virtual AbstractPart * partForUniqueID(String * uniqueID);
-        
     public: //subclass behavior
 		AbstractMultipart(AbstractMultipart * other);
 		virtual String * description();
 		virtual Object * copy();
+        
+		virtual void setMessage(AbstractMessage * message);
+        virtual AbstractPart * partForContentID(String * contentID);
+        virtual AbstractPart * partForUniqueID(String * uniqueID);
 		
 	private:
 		Array * mParts;

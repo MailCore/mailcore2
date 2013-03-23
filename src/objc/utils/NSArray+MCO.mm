@@ -14,6 +14,15 @@
 
 @implementation NSArray (MCO)
 
++ (NSArray *) mco_arrayWithMCArray:(mailcore::Array *)array
+{
+    NSMutableArray * result = [NSMutableArray array];
+    for(unsigned int i = 0 ; i < array->count() ; i ++) {
+        [result addObject:[NSObject mco_objectWithMCObject:array->objectAtIndex(i)]];
+    }
+    return result;
+}
+
 - (mailcore::Array *) mco_mcArray
 {
     mailcore::Array * result = mailcore::Array::array();

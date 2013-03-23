@@ -17,6 +17,8 @@ namespace mailcore {
 @interface NSArray (MCO)
 
 #ifdef __cplusplus
++ (NSArray *) mco_arrayWithMCArray:(mailcore::Array *)array;
+
 - (mailcore::Array *) mco_mcArray;
 #endif
 

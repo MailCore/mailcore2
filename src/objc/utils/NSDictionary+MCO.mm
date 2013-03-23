@@ -14,6 +14,20 @@
 
 @implementation NSDictionary (MCO)
 
++ (NSDictionary *) mco_dictionaryWithMCHashMap:(mailcore::HashMap *)hashmap
+{
+    NSMutableDictionary * result = [NSMutableDictionary dictionary];
+    mailcore::Array * keys = hashmap->allKeys();
+    for(unsigned int i = 0 ; i < keys->count() ; i ++) {
+        mailcore::Object * mcKey = keys->objectAtIndex(i);
+        mailcore::Object * mcValue = hashmap->objectForKey(mcKey);
+        id key = [NSObject mco_objectWithMCObject:mcKey];
+        id value = [NSObject mco_objectWithMCObject:mcValue];
+        [result setObject:value forKey:key];
+    }
+    return result;
+}
+
 - (mailcore::HashMap *) mco_mcHashMap
 {
     mailcore::HashMap * result = mailcore::HashMap::hashMap();

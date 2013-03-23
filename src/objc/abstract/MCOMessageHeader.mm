@@ -9,6 +9,8 @@
 #import "MCOMessageHeader.h"
 #import "MCOMessageHeader+Private.h"
 
+#include <typeinfo>
+
 #include "MCMessageHeader.h"
 #include "NSString+MCO.h"
 #include "NSArray+MCO.h"
@@ -19,6 +21,17 @@
 
 @implementation MCOMessageHeader {
     mailcore::MessageHeader * _nativeHeader;
+}
+
++ (void) initialize
+{
+    MCORegisterClass(self, &typeid(mailcore::MessageHeader));
+}
+
++ (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object
+{
+    mailcore::MessageHeader * header = (mailcore::MessageHeader *) object;
+    return [[[self alloc] initWithMCMessageHeader:header] autorelease];
 }
 
 - (id) init

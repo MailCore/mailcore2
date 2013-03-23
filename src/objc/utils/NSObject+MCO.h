@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 
 #ifdef __cplusplus
+#include <typeinfo>
+#endif
+
+#ifdef __cplusplus
 namespace mailcore {
     class Object;
 }
@@ -17,7 +21,14 @@ namespace mailcore {
 @interface NSObject (MCO)
 
 #ifdef __cplusplus
++ (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object;
+
 - (mailcore::Object *) mco_mcObject;
 #endif
 
 @end
+
+#ifdef __cplusplus
+extern void MCORegisterClass(Class aClass, const std::type_info * info);
+#endif
+
