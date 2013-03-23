@@ -19,8 +19,8 @@
 @property (nonatomic, copy) NSString * messageID;
 @property (nonatomic, copy) NSArray * references;
 @property (nonatomic, copy) NSArray * inReplyTo;
-@property (nonatomic, retain) NSDate * date;
-@property (nonatomic, retain) NSDate * receivedDate;
+@property (nonatomic, strong) NSDate * date;
+@property (nonatomic, strong) NSDate * receivedDate;
 @property (nonatomic, copy) MCOAddress * sender;
 @property (nonatomic, copy) MCOAddress * from;
 @property (nonatomic, copy) NSArray * to;

@@ -58,6 +58,9 @@ static Class classWithTypeInfo(const std::type_info * info)
 
 + (id) mco_objectWithMCObject:(mailcore::Object *)object
 {
+    if (object == NULL)
+        return nil;
+    
     if (&typeid(object) == &typeid(mailcore::Value *)) {
         return [NSValue mco_valueWithMCValue:(mailcore::Value *) object];
     }

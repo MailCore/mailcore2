@@ -32,7 +32,7 @@ typedef enum {
 @property (nonatomic, copy) NSString * contentID;
 @property (nonatomic, copy) NSString * contentLocation;
 @property (nonatomic, assign, getter=isInlineAttachment) BOOL inlineAttachment;
-@property (nonatomic, assign) MCOAbstractMessage * message;
+@property (nonatomic, weak) MCOAbstractMessage * message;
 
 - (MCOAbstractPart *) partForContentID:(NSString *)contentID;
 - (MCOAbstractPart *) partForUniqueID:(NSString *)uniqueID;

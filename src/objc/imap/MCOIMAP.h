@@ -11,7 +11,7 @@
 #define __MAILCORE_MCOIMAP_H_
 
 #import <mailcore/MCOIMAPSession.h>
-#import <mailcore/MCOIMAPCheckAccountOperation.h>
+#import <mailcore/MCOIMAPOperation.h>
 #import <mailcore/MCOIMAPFetchFoldersOperation.h>
 
 #endif

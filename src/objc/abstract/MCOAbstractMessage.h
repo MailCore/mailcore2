@@ -17,7 +17,7 @@
 
 @interface MCOAbstractMessage : NSObject
 
-@property (nonatomic, retain) MCOMessageHeader * header;
+@property (nonatomic, strong) MCOMessageHeader * header;
 
 - (MCOAbstractPart *) partForContentID:(NSString *)contentID;
 - (MCOAbstractPart *) partForUniqueID:(NSString *)uniqueID;

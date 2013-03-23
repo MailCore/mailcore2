@@ -20,7 +20,7 @@
 + (MCOAttachment *) attachmentWithRFC822Message:(NSData *)messageData;
 + (MCOAttachment *) attachmentWithText:(NSString *)text;
 
-@property (nonatomic, retain) NSData * data;
+@property (nonatomic, strong) NSData * data;
  
 @end
 

@@ -7,9 +7,11 @@
 //
 
 #import "MCOIMAPFetchFoldersOperation.h"
+
 #import "NSError+MCO.h"
-#import "NSString+MCO.h"
 #import "MCOOperation+Private.h"
+
+#import "MCOUtils.h"
 
 #import <Foundation/Foundation.h>
 #import <mailcore/MCAsync.h>
@@ -20,7 +22,24 @@ using namespace mailcore;
 @property (nonatomic, copy) void (^completionBlock)(NSError *error, NSArray *folder);
 @end
 
-@implementation MCOIMAPFetchFoldersOperation
+@implementation MCOIMAPFetchFoldersOperation {
+    void (^_completionBlock)(NSError *error, NSArray *folder);
+}
+
+@synthesize completionBlock = _completionBlock;
+
+#define nativeType mailcore::IMAPFetchFoldersOperation
+
++ (void) initialize
+{
+    MCORegisterClass(self, &typeid(nativeType));
+}
+
++ (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object
+{
+    mailcore::IMAPOperation * op = (mailcore::IMAPOperation *) object;
+    return [[[self alloc] initWithMCOperation:op] autorelease];
+}
 
 - (void)start:(void (^)(NSError *error, NSArray *folder))completionBlock {
     self.completionBlock = completionBlock;
@@ -28,18 +47,12 @@ using namespace mailcore;
 }
 
 - (void)operationCompleted {
-    IMAPFetchFoldersOperation *op = (IMAPFetchFoldersOperation *) [self mcOperation];
+    IMAPFetchFoldersOperation *op = MCO_NATIVE_INSTANCE;
     if (op->error() == ErrorNone) {
-        NSMutableArray *nsfolders = [NSMutableArray array];
-        Array *folders = op->folders();
-        for (int i = 0 ; i < folders->count(); i++) {
-            NSString *folder = [NSString mco_stringWithMCObject:folders->objectAtIndex(i)];
-            [nsfolders addObject:folder];
-        }
-        
-        self.completionBlock(nil, nsfolders);
+        self.completionBlock(nil, MCO_TO_OBJC(op->folders()));
     } else {
         self.completionBlock([NSError mco_errorWithErrorCode:op->error()], nil);
     }
 }
+
 @end

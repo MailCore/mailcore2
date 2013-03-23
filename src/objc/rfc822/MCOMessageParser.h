@@ -16,7 +16,7 @@
 
 @interface MCOMessageParser : MCOAbstractMessage
 
-@property (nonatomic, assign) id <MCOHTMLRendererDelegate> rendererDelegate;
+@property (nonatomic, weak) id <MCOHTMLRendererDelegate> rendererDelegate;
 
 + (MCOMessageParser *) messageParserWithData:(NSData *)data;
 

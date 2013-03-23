@@ -12,6 +12,7 @@
 #import "MCOperation.h"
 #import "MCOperationCallback.h"
 #import "MCOObjectWrapper.h"
+#import "MCOUtils.h"
 
 #import <Foundation/Foundation.h>
 
@@ -42,6 +43,24 @@ public:
     BOOL _started;
 }
 
+#define nativeType mailcore::Operation
+
++ (void) initialize
+{
+    MCORegisterClass(self, &typeid(nativeType));
+}
+
++ (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object
+{
+    mailcore::Operation * op = (mailcore::Operation *) object;
+    return [[[self alloc] initWithMCOperation:op] autorelease];
+}
+
+- (mailcore::Object *) mco_mcObject
+{
+    return _operation;
+}
+
 - (id)initWithMCOperation:(Operation *)op
 {
     self = [super init];
@@ -64,7 +83,7 @@ public:
 
 - (BOOL)isCancelled
 {
-    return _operation->isCancelled();
+    return MCO_NATIVE_INSTANCE->isCancelled();
 }
 
 - (void)cancel
@@ -81,11 +100,6 @@ public:
     _started = YES;
     [self retain];
     _operation->start();
-}
-
-- (mailcore::Operation *)mcOperation
-{
-    return _operation;
 }
 
 - (void)_operationCompleted

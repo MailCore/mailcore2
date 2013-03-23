@@ -21,7 +21,6 @@ namespace mailcore {
 @interface MCOOperation (Private)
 #ifdef __cplusplus
 - (id)initWithMCOperation:(mailcore::Operation *)op;
-- (mailcore::Operation *)mcOperation;
 #endif
 - (void)start;
 @end

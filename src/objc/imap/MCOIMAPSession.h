@@ -12,10 +12,9 @@
 
 #import <Foundation/Foundation.h>
 #import <mailcore/MCOConstants.h>
-#import <mailcore/MCOOperation.h>
 
-@class MCOIMAPCheckAccountOperation;
 @class MCOIMAPFetchFoldersOperation;
+@class MCOIMAPOperation;
 
 @interface MCOIMAPSession : NSObject
 @property (nonatomic, strong) NSString *hostname;
@@ -28,9 +27,9 @@
 @property (nonatomic, assign) NSTimeInterval timeout;
 @property (nonatomic, assign) BOOL checkCertificateEnabled;
 @property (nonatomic, assign, getter=isVoIPEnabled) BOOL VoIPEnabled;
-@property (nonatomic, strong) NSString *delimiter;
+@property (nonatomic, assign) char delimiter;
 
-- (MCOIMAPCheckAccountOperation *)checkAccountOperation;
+- (MCOIMAPOperation *)checkAccountOperation;
 - (MCOIMAPFetchFoldersOperation *)fetchAllFoldersOperation;
 @end
 

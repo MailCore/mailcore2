@@ -26,6 +26,14 @@
     MCORegisterClass(self, &typeid(nativeType));
 }
 
+- (id) copyWithZone:(NSZone *)zone
+{
+    nativeType * nativeObject = (nativeType *) [self mco_mcObject]->copy();
+    id result = [[self class] mco_objectWithMCObject:nativeObject];
+    MC_SAFE_RELEASE(nativeObject);
+    return [result retain];
+}
+
 + (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object
 {
     mailcore::Address * address = (mailcore::Address *) object;
@@ -105,14 +113,6 @@
 {
     MC_SAFE_RELEASE(_nativeAddress);
     [super dealloc];
-}
-
-- (id) copyWithZone:(NSZone *)zone
-{
-    mailcore::Address * address = (mailcore::Address *) _nativeAddress->copy();
-    MCOAddress * result = [[MCOAddress alloc] initWithMCAddress:address];
-    MC_SAFE_RELEASE(address);
-    return result;
 }
 
 - (NSString *) description

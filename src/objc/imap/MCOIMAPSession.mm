@@ -7,12 +7,13 @@
 //
 
 #import "MCOIMAPSession.h"
-#import "MCOOperation+Private.h"
+
+#import "MCOOperation.h"
 #import "MCOObjectWrapper.h"
-#import "MCOIMAPCheckAccountOperation.h"
+#import "MCOIMAPOperation.h"
 #import "MCOIMAPFetchFoldersOperation.h"
 
-#import "NSString+MCO.h"
+#import "MCOUtils.h"
 
 #import <mailcore/MCAsync.h>
 
@@ -21,6 +22,13 @@ using namespace mailcore;
 
 @implementation MCOIMAPSession {
     IMAPAsyncSession * _session;
+}
+
+#define nativeType mailcore::IMAPAsyncSession
+
+- (mailcore::Object *) mco_mcObject
+{
+    return _session;
 }
 
 - (id)init {
@@ -36,106 +44,28 @@ using namespace mailcore;
     [super dealloc];
 }
 
-- (IMAPAsyncSession *)session {
-    return _session;
-}
-
-- (NSString *)hostname {
-    return [NSString mco_stringWithMCString:self.session->hostname()];
-}
-
-- (void)setHostname:(NSString *)hostname {
-    self.session->setHostname([hostname mco_mcString]);
-}
-
-- (unsigned int)port {
-    return self.session->port();
-}
-
-- (void)setPort:(unsigned int)port {
-    self.session->setPort(port);
-}
-
-- (NSString *)username {
-    return [NSString mco_stringWithMCString:self.session->username()];
-}
-
-- (void)setUsername:(NSString *)username {
-    self.session->setUsername([username mco_mcString]);
-}
-
-- (NSString *)password {
-    return [NSString mco_stringWithMCString:self.session->password()];
-}
-
-- (void)setPassword:(NSString *)password {
-    self.session->setPassword([password mco_mcString]);
-}
-
-- (void)setAuthType:(MCOAuthType)authType {
-    self.session->setAuthType((AuthType)authType);
-}
-
-- (MCOAuthType)authType {
-    return (MCOAuthType)self.session->authType();
-}
-
-- (void)setConnectionType:(MCOConnectionType)connectionType {
-    self.session->setConnectionType((ConnectionType)connectionType);
-}
-
-- (MCOConnectionType)connectionType{
-    return (MCOConnectionType)self.session->connectionType();
-}
-
-- (void)setTimeout:(NSTimeInterval)timeout {
-    self.session->setTimeout((time_t)timeout);
-}
-
-- (NSTimeInterval)timeout {
-    return (NSTimeInterval)self.session->timeout();
-}
-
-- (void)setCheckCertificateEnabled:(BOOL)checkCertificateEnabled {
-    self.session->setCheckCertificateEnabled(checkCertificateEnabled);
-}
-
-- (BOOL)checkCertificateEnabled {
-    return (BOOL)self.session->isCheckCertificateEnabled();
-}
-
-- (void)setVoIPEnabled:(BOOL)VoIPEnabled {
-    self.session->setVoIPEnabled(VoIPEnabled);
-}
-
-- (BOOL)isVoIPEnabled {
-    return (BOOL)self.session->isVoIPEnabled();
-}
-
-- (NSString *)delimiter {
-    char delim = self.session->delimiter();
-    return [NSString stringWithFormat:@"%c", delim];
-}
-
-- (void)setDelimiter:(NSString *)delimiter {
-    NSAssert(delimiter.length == 1, @"Delimiter has to be a single char");
-    char delim = [delimiter characterAtIndex:0];
-    self.session->setDelimiter(delim);
-}
+MCO_OBJC_SYNTHESIZE_STRING(setHostname, hostname)
+MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setPort, port)
+MCO_OBJC_SYNTHESIZE_STRING(setUsername, username)
+MCO_OBJC_SYNTHESIZE_STRING(setPassword, password)
+MCO_OBJC_SYNTHESIZE_SCALAR(MCOAuthType, mailcore::AuthType, setAuthType, authType)
+MCO_OBJC_SYNTHESIZE_SCALAR(MCOConnectionType, mailcore::ConnectionType, setConnectionType, connectionType)
+MCO_OBJC_SYNTHESIZE_SCALAR(NSTimeInterval, time_t, setTimeout, timeout)
+MCO_OBJC_SYNTHESIZE_BOOL(setCheckCertificateEnabled, isCheckCertificateEnabled)
+MCO_OBJC_SYNTHESIZE_BOOL(setVoIPEnabled, isVoIPEnabled)
+MCO_OBJC_SYNTHESIZE_SCALAR(char, char, setDelimiter, delimiter)
 
 #pragma mark - Operations
 
-- (MCOIMAPCheckAccountOperation *)checkAccountOperation {
-    IMAPOperation *coreOp = self.session->checkAccountOperation();
-    MCOIMAPCheckAccountOperation *op = [[MCOIMAPCheckAccountOperation alloc] initWithMCOperation:coreOp];
-    return [op autorelease];
+- (MCOIMAPOperation *)checkAccountOperation {
+    IMAPOperation *coreOp = MCO_NATIVE_INSTANCE->checkAccountOperation();
+    return MCO_TO_OBJC(coreOp);
 
 }
 
 - (MCOIMAPFetchFoldersOperation *)fetchAllFoldersOperation {
-    IMAPOperation *coreOp = self.session->fetchAllFoldersOperation();
-    MCOIMAPFetchFoldersOperation *op = [[MCOIMAPFetchFoldersOperation alloc] initWithMCOperation:coreOp];
-    return [op autorelease];
+    IMAPOperation *coreOp = MCO_NATIVE_INSTANCE->fetchAllFoldersOperation();
+    return MCO_TO_OBJC(coreOp);
     
 }
 @end

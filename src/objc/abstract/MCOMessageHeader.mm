@@ -31,6 +31,14 @@
     MCORegisterClass(self, &typeid(nativeType));
 }
 
+- (id) copyWithZone:(NSZone *)zone
+{
+    nativeType * nativeObject = (nativeType *) [self mco_mcObject]->copy();
+    id result = [[self class] mco_objectWithMCObject:nativeObject];
+    MC_SAFE_RELEASE(nativeObject);
+    return [result retain];
+}
+
 + (id) mco_objectWithMCObject:(mailcore::Object *)object
 {
     mailcore::MessageHeader * header = (mailcore::MessageHeader *) object;
@@ -67,14 +75,6 @@
         return nil;
     
     return [[[self alloc] initWithMCMessageHeader:header] autorelease];
-}
-
-- (id) copyWithZone:(NSZone *)zone
-{
-    mailcore::MessageHeader * header = (mailcore::MessageHeader *) _nativeHeader->copy();
-    MCOMessageHeader * result = [[MCOMessageHeader alloc] initWithMCMessageHeader:header];
-    MC_SAFE_RELEASE(header);
-    return result;
 }
 
 - (NSString *) description

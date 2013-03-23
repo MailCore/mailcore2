@@ -17,8 +17,8 @@
 
 @interface MCOAbstractMessagePart : MCOAbstractPart
 
-@property (nonatomic, retain) MCOMessageHeader * header;
-@property (nonatomic, retain) MCOAbstractPart * mainPart;
+@property (nonatomic, strong) MCOMessageHeader * header;
+@property (nonatomic, strong) MCOAbstractPart * mainPart;
 
 @end
 
