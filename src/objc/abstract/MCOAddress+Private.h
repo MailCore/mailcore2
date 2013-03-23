@@ -6,6 +6,10 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
+#ifndef __MAILCORE_MCOADDRESS_PRIVATE_H_
+
+#define __MAILCORE_MCOADDRESS_PRIVATE_H_
+
 #ifdef __cplusplus
 namespace mailcore {
     class Address;
@@ -17,4 +21,6 @@ namespace mailcore {
 + (MCOAddress *) addressWithMCAddress:(mailcore::Address *)address;
 
 @end
+#endif
+
 #endif

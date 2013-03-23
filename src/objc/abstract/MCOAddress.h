@@ -6,6 +6,10 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
+#ifndef __MAILCORE_MCOADDRESS_H_
+
+#define __MAILCORE_MCOADDRESS_H_
+
 #import <Foundation/Foundation.h>
 
 @interface MCOAddress : NSObject <NSCopying>
@@ -26,3 +30,5 @@
 - (NSString *) nonEncodedRFC822String;
 
 @end
+
+#endif

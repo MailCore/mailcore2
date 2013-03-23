@@ -6,6 +6,10 @@
 //  Copyright (c) 2013 __MyCompanyName__. All rights reserved.
 //
 
+#ifndef __MAILCORE_MCOOPERATION_H_
+
+#define __MAILCORE_MCOOPERATION_H_
+
 #import <Foundation/Foundation.h>
 
 @interface MCOOperation : NSObject
@@ -13,3 +17,5 @@
 
 - (void)cancel;
 @end
+
+#endif

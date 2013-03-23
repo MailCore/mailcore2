@@ -206,7 +206,7 @@ mailcore::String * HTMLRendererTemplateCallback::templateForMainHeader()
                  </div>");
 }
 
-mailcore::String * HTMLRendererTemplateCallback::templateForHeader()
+mailcore::String * HTMLRendererTemplateCallback::templateForEmbeddedMessageHeader()
 {
     return templateForMainHeader();
 }

@@ -6,6 +6,10 @@
 
 #ifdef __cplusplus
 
+#define MC_PROPERTY(mcType, setter, getter) \
+    virtual void setter(mcType * getter); \
+    virtual mcType * getter();
+
 namespace mailcore {
 
     extern bool zombieEnabled;
@@ -23,7 +27,7 @@ namespace mailcore {
 		virtual Object * autorelease();
 		virtual String * description();
 		virtual String * className();
-		
+        
 		virtual bool isEqual(Object * otherObject);
 		virtual unsigned int hash();
 		

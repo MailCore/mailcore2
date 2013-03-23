@@ -90,6 +90,7 @@ namespace mailcore {
 		IMAPCapabilityCondstore,
 		IMAPCapabilityEnable,
 		IMAPCapabilityIdle,
+		IMAPCapabilityId,
 		IMAPCapabilityLiteralPlus,
 		IMAPCapabilityMultiAppend,
 		IMAPCapabilityNamespace,
@@ -196,7 +197,8 @@ namespace mailcore {
 		ErrorAuthenticationRequired,
 		ErrorFetchMessageList,
 		ErrorDeleteMessage,
-        ErrorInvalidAccount,
+    ErrorInvalidAccount,
+    ErrorCapability,
 	};
 	
 	enum PartType {

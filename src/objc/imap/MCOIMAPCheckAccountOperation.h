@@ -6,8 +6,14 @@
 //  Copyright (c) 2013 __MyCompanyName__. All rights reserved.
 //
 
+#ifndef __MAILCORE_MCOIMAPCHECKACCOUNTOPERATION_H_
+
+#define __MAILCORE_MCOIMAPCHECKACCOUNTOPERATION_H_
+
 #import <mailcore/MCOOperation.h>
 
-@interface MCOCheckAccountOperation : MCOOperation
+@interface MCOIMAPCheckAccountOperation : MCOOperation
 - (void)start:(void (^)(NSError *error))completionBlock;
 @end
+
+#endif

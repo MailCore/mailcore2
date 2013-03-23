@@ -6,8 +6,14 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
+#ifndef __MAILCORE_MCOIMAPFETCHFOLDERSOPERATION_H_
+
+#define __MAILCORE_MCOIMAPFETCHFOLDERSOPERATION_H_
+
 #import <mailcore/MCOOperation.h>
 
-@interface MCOFetchFoldersOperation : MCOOperation
+@interface MCOIMAPFetchFoldersOperation : MCOOperation
 - (void)start:(void (^)(NSError *error, NSArray *folder))completionBlock;
 @end
+
+#endif

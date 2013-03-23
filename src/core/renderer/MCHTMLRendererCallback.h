@@ -33,11 +33,11 @@ namespace mailcore {
         virtual HashMap * templateValuesForPart(AbstractPart * part);
         
         virtual String * templateForMainHeader();
-        virtual String * templateForHeader();
         virtual String * templateForImage();
         virtual String * templateForAttachment();
         virtual String * templateForMessage();
         virtual String * templateForEmbeddedMessage();
+        virtual String * templateForEmbeddedMessageHeader();
         virtual String * templateForAttachmentSeparator();
         
         virtual String * filterHTMLForPart(String * html);

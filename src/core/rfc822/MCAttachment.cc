@@ -121,7 +121,7 @@ String * Attachment::mimeTypeForFilename(String * filename)
 	return NULL;
 }
 
-Attachment * Attachment::attachmentWithContentOfFile(String * filename)
+Attachment * Attachment::attachmentWithContentsOfFile(String * filename)
 {
     Attachment * attachment;
 	String * mimeType;

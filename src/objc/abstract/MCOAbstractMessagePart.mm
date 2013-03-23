@@ -16,24 +16,9 @@
 
 @implementation MCOAbstractMessagePart
 
-- (void) setHeader:(MCOMessageHeader *)header
-{
-    ((mailcore::AbstractMessagePart *) [self mco_mcObject])->setHeader((mailcore::MessageHeader *) [header mco_mcObject]);
-}
+#define nativeType mailcore::AbstractMessagePart
 
-- (MCOMessageHeader *) header
-{
-    return (MCOMessageHeader *) [NSObject mco_objectWithMCObject:((mailcore::AbstractMessagePart *) [self mco_mcObject])->header()];
-}
-
-- (void) setMainPart:(MCOAbstractPart *)part
-{
-    ((mailcore::AbstractMessagePart *) [self mco_mcObject])->setMainPart((mailcore::AbstractPart *) [part mco_mcObject]);
-}
-
-- (MCOAbstractPart *) mainPart
-{
-    return (MCOAbstractPart *) [NSObject mco_objectWithMCObject:((mailcore::AbstractMessagePart *) [self mco_mcObject])->mainPart()];
-}
+MCO_OBJC_SYNTHESIZE(MessageHeader, setHeader, header)
+MCO_OBJC_SYNTHESIZE(AbstractMessagePart, setMainPart, mainPart)
 
 @end

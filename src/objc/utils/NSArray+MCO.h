@@ -6,6 +6,10 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
+#ifndef __MAILCORE_NSARRAY_MCO_H_
+
+#define __MAILCORE_NSARRAY_MCO_H_
+
 #import <Foundation/Foundation.h>
 
 #ifdef __cplusplus
@@ -23,3 +27,5 @@ namespace mailcore {
 #endif
 
 @end
+
+#endif

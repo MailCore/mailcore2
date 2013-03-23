@@ -21,7 +21,14 @@
     mailcore::AbstractMessage * _message;
 }
 
-- (id) initWithPart:(mailcore::AbstractMessage *)message
+#define nativeType mailcore::AbstractMessage
+
+- (mailcore::Object *) mco_mcObject
+{
+    return _message;
+}
+
+- (id) initWithMCMessage:(mailcore::AbstractMessage *)message
 {
     self = [super init];
     
@@ -37,29 +44,16 @@
     [super dealloc];
 }
 
-- (MCOMessageHeader *) header
-{
-    return (MCOMessageHeader *) [NSObject mco_objectWithMCObject:((mailcore::AbstractMessage *) [self mco_mcObject])->header()];
-}
-
-- (void) setHeader:(MCOMessageHeader *)header
-{
-    ((mailcore::AbstractMessage *) [self mco_mcObject])->setHeader((mailcore::MessageHeader *) [header mco_mcObject]);
-}
+MCO_OBJC_SYNTHESIZE(MessageHeader, setHeader, header)
 
 - (MCOAbstractPart *) partForContentID:(NSString *)contentID
 {
-    return (MCOAbstractPart *) [NSObject mco_objectWithMCObject:((mailcore::AbstractMessage *) [self mco_mcObject])->partForContentID([contentID mco_mcString])];
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->partForContentID([contentID mco_mcString]));
 }
 
 - (MCOAbstractPart *) partForUniqueID:(NSString *)uniqueID
 {
-    return (MCOAbstractPart *) [NSObject mco_objectWithMCObject:((mailcore::AbstractMessage *) [self mco_mcObject])->partForUniqueID([uniqueID mco_mcString])];
-}
-
-- (mailcore::Object *) mco_mcObject
-{
-    return _message;
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->partForUniqueID([uniqueID mco_mcString]));
 }
 
 @end

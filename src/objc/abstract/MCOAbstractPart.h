@@ -6,6 +6,10 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
+#ifndef __MAILCORE_MCOABSTRACTPART_H_
+
+#define __MAILCORE_MCOABSTRACTPART_H_
+
 #import <Foundation/Foundation.h>
 
 @class MCOAbstractMessage;
@@ -34,3 +38,5 @@ typedef enum {
 - (MCOAbstractPart *) partForUniqueID:(NSString *)uniqueID;
 
 @end
+
+#endif

@@ -6,6 +6,12 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
+#ifndef __MAILCORE_MCOIMAP_H_
+
+#define __MAILCORE_MCOIMAP_H_
+
 #import <mailcore/MCOIMAPSession.h>
-#import <mailcore/MCOCheckAccountOperation.h>
-#import <mailcore/MCOFetchFoldersOperation.h>
+#import <mailcore/MCOIMAPCheckAccountOperation.h>
+#import <mailcore/MCOIMAPFetchFoldersOperation.h>
+
+#endif

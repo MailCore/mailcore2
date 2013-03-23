@@ -6,6 +6,10 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
+#ifndef __MAILCORE_MCOABSTRACTMULTIPART_H_
+
+#define __MAILCORE_MCOABSTRACTMULTIPART_H_
+
 #import <Foundation/Foundation.h>
 #import <mailcore/MCOAbstractPart.h>
 
@@ -14,3 +18,5 @@
 @property (nonatomic, copy) NSArray * parts;
 
 @end
+
+#endif

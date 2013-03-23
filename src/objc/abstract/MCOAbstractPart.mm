@@ -18,7 +18,14 @@
     mailcore::AbstractPart * _part;
 }
 
-- (id) initWithPart:(mailcore::AbstractPart *)part
+#define nativeType mailcore::AbstractPart
+
+- (mailcore::Object *) mco_mcObject
+{
+    return _part;
+}
+
+- (id) initWithMCPart:(mailcore::AbstractPart *)part
 {
     self = [super init];
     
@@ -34,109 +41,25 @@
     [super dealloc];
 }
 
-- (MCOPartType) partType
-{
-    return (MCOPartType) _part->partType();
-}
+MCO_OBJC_SYNTHESIZE_SCALAR(MCOPartType, mailcore::PartType, setPartType, partType)
 
-- (void) setPartType:(MCOPartType)partType
-{
-    _part->setPartType((mailcore::PartType) partType);
-}
-
-- (NSString *) filename
-{
-    return [NSString mco_stringWithMCString:_part->filename()];
-}
-
-- (void) setFilename:(NSString *)filename
-{
-    _part->setFilename([filename mco_mcString]);
-}
-
-- (NSString *) mimeType
-{
-    return [NSString mco_stringWithMCString:_part->mimeType()];
-}
-
-- (void) setMimeType:(NSString *)mimeType
-{
-    _part->setMimeType([mimeType mco_mcString]);
-}
-
-- (NSString *) charset
-{
-    return [NSString mco_stringWithMCString:_part->charset()];
-}
-
-- (void) setCharset:(NSString *)charset
-{
-    _part->setCharset([charset mco_mcString]);
-}
-
-- (NSString *) uniqueID
-{
-    return [NSString mco_stringWithMCString:_part->uniqueID()];
-}
-
-- (void) setUniqueID:(NSString *)uniqueID
-{
-    _part->setUniqueID([uniqueID mco_mcString]);
-}
-
-- (NSString *) contentID
-{
-    return [NSString mco_stringWithMCString:_part->contentID()];
-}
-
-- (void) setContentID:(NSString *)contentID
-{
-    _part->setContentID([contentID mco_mcString]);
-}
-
-- (NSString *) contentLocation
-{
-    return [NSString mco_stringWithMCString:_part->contentLocation()];
-}
-
-- (void) setContentLocation:(NSString *)contentLocation
-{
-    _part->setContentLocation([contentLocation mco_mcString]);
-}
-
-- (BOOL) isInlineAttachment
-{
-    return _part->isInlineAttachment();
-}
-
-- (void) setInlineAttachment:(BOOL)inlineAttachment
-{
-    _part->setInlineAttachment(inlineAttachment);
-}
-
-- (MCOAbstractMessage *) message
-{
-    return (MCOAbstractMessage *) [NSObject mco_objectWithMCObject:_part->message()];
-}
-
-- (void) setMessage:(MCOAbstractMessage *)message
-{
-    _part->setMessage((mailcore::AbstractMessage *) [message mco_mcObject]);
-}
+MCO_OBJC_SYNTHESIZE_STRING(setFilename, filename)
+MCO_OBJC_SYNTHESIZE_STRING(setMimeType, mimeType)
+MCO_OBJC_SYNTHESIZE_STRING(setCharset, charset)
+MCO_OBJC_SYNTHESIZE_STRING(setUniqueID, uniqueID)
+MCO_OBJC_SYNTHESIZE_STRING(setContentID, contentID)
+MCO_OBJC_SYNTHESIZE_STRING(setContentLocation, contentLocation)
+MCO_OBJC_SYNTHESIZE_BOOL(setInlineAttachment, isInlineAttachment)
+MCO_OBJC_SYNTHESIZE(AbstractMessage, setMessage, message)
 
 - (MCOAbstractPart *) partForContentID:(NSString *)contentID
 {
-    return (MCOAbstractPart *) [NSObject mco_objectWithMCObject:_part->partForContentID([contentID mco_mcString])];
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->partForContentID([contentID mco_mcString]));
 }
 
 - (MCOAbstractPart *) partForUniqueID:(NSString *)uniqueID
 {
-    return (MCOAbstractPart *) [NSObject mco_objectWithMCObject:_part->partForUniqueID([uniqueID mco_mcString])];
-}
-
-- (mailcore::Object *) mco_mcObject
-{
-    return _part;
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->partForUniqueID([uniqueID mco_mcString]));
 }
 
 @end

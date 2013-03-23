@@ -6,6 +6,10 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
+#ifndef __MAILCORE_MCOMESSAGEHEADER_H_
+
+#define __MAILCORE_MCOMESSAGEHEADER_H_
+
 #import <Foundation/Foundation.h>
 
 @class MCOAddress;
@@ -26,9 +30,11 @@
 @property (nonatomic, copy) NSString * subject;
 @property (nonatomic, copy) NSString * userAgent;
 
-- (NSString *) extractedSuject;
-- (NSString *) partialExtractedSuject;
+- (NSString *) extractedSubject;
+- (NSString *) partialExtractedSubject;
 
 - (void) importHeadersData:(NSData *)data;
 
 @end
+
+#endif

@@ -16,11 +16,11 @@
 
 using namespace mailcore;
 
-@interface MCOCheckAccountOperation ()
+@interface MCOIMAPCheckAccountOperation ()
 @property (nonatomic, copy) void (^completionBlock)(NSError *error);
 @end
 
-@implementation MCOCheckAccountOperation
+@implementation MCOIMAPCheckAccountOperation
 
 - (void)start:(void (^)(NSError *error))completionBlock {
     self.completionBlock = completionBlock;

@@ -14,14 +14,8 @@
 
 @implementation MCOAbstractMultipart
 
-- (NSArray *) parts
-{
-    return (NSArray *) [NSObject mco_objectWithMCObject:((mailcore::AbstractMultipart *) [self mco_mcObject])->parts()];
-}
+#define nativeType mailcore::AbstractMultipart
 
-- (void) setParts:(NSArray *)parts
-{
-    ((mailcore::AbstractMultipart *) [self mco_mcObject])->setParts((mailcore::Array *) [parts mco_mcObject]);
-}
+MCO_OBJC_SYNTHESIZE_ARRAY(setParts, parts)
 
 @end

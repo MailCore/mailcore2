@@ -16,11 +16,11 @@
 
 using namespace mailcore;
 
-@interface MCOFetchFoldersOperation ()
+@interface MCOIMAPFetchFoldersOperation ()
 @property (nonatomic, copy) void (^completionBlock)(NSError *error, NSArray *folder);
 @end
 
-@implementation MCOFetchFoldersOperation
+@implementation MCOIMAPFetchFoldersOperation
 
 - (void)start:(void (^)(NSError *error, NSArray *folder))completionBlock {
     self.completionBlock = completionBlock;

@@ -22,15 +22,15 @@ namespace mailcore {
 		virtual AbstractPart * mainPart();
 		virtual Data * data();
         
-        virtual AbstractPart * partForContentID(String * contentID);
-        virtual AbstractPart * partForUniqueID(String * uniqueID);
-        
         virtual String * htmlRendering(HTMLRendererTemplateCallback * htmlCallback = NULL);
         
     public: // subclass behavior
 		MessageParser(MessageParser * other);
 		virtual String * description();
 		virtual Object * copy();
+        
+        virtual AbstractPart * partForContentID(String * contentID);
+        virtual AbstractPart * partForUniqueID(String * uniqueID);
         
 	private:
 		Data * mData;

@@ -6,6 +6,10 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
+#ifndef __MAILCORE_MCOABSTRACTMESSAGE_H_
+
+#define __MAILCORE_MCOABSTRACTMESSAGE_H_
+
 #import <Foundation/Foundation.h>
 
 @class MCOMessageHeader;
@@ -19,3 +23,5 @@
 - (MCOAbstractPart *) partForUniqueID:(NSString *)uniqueID;
 
 @end
+
+#endif

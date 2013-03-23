@@ -19,15 +19,22 @@
     mailcore::Address * _nativeAddress;
 }
 
+#define nativeType mailcore::Address
+
 + (void) initialize
 {
-    MCORegisterClass(self, &typeid(mailcore::Address));
+    MCORegisterClass(self, &typeid(nativeType));
 }
 
 + (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object
 {
     mailcore::Address * address = (mailcore::Address *) object;
     return [[[self alloc] initWithMCAddress:address] autorelease];
+}
+
+- (mailcore::Object *) mco_mcObject
+{
+    return _nativeAddress;
 }
 
 + (MCOAddress *) addressWithDisplayName:(NSString *)displayName
@@ -110,42 +117,20 @@
 
 - (NSString *) description
 {
-    return [NSString mco_stringWithMCObject:_nativeAddress];
+    return MCO_OBJC_BRIDGE_GET(description);
 }
 
-- (NSString *) displayName
-{
-    return [NSString mco_stringWithMCString:_nativeAddress->displayName()];
-}
-
-- (void) setDisplayName:(NSString *)displayName
-{
-    _nativeAddress->setDisplayName([displayName mco_mcString]);
-}
-
-- (NSString *) mailbox
-{
-    return [NSString mco_stringWithMCString:_nativeAddress->mailbox()];
-}
-
-- (void) setMailbox:(NSString *)mailbox
-{
-    _nativeAddress->setMailbox([mailbox mco_mcString]);
-}
+MCO_OBJC_SYNTHESIZE_STRING(setDisplayName, displayName)
+MCO_OBJC_SYNTHESIZE_STRING(setMailbox, mailbox)
 
 - (NSString *) RFC822String
 {
-    return [NSString mco_stringWithMCString:_nativeAddress->RFC822String()];
+    return MCO_OBJC_BRIDGE_GET(RFC822String);
 }
 
 - (NSString *) nonEncodedRFC822String
 {
-    return [NSString mco_stringWithMCString:_nativeAddress->nonEncodedRFC822String()];
-}
-
-- (mailcore::Object *) mco_mcObject
-{
-    return _nativeAddress;
+    return MCO_OBJC_BRIDGE_GET(nonEncodedRFC822String);
 }
 
 @end

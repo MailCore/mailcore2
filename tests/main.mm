@@ -57,9 +57,9 @@ static mailcore::Data * testMessageBuilder()
     bcc->release();
     msg->header()->setSubject(MCSTR("Mon projet d'été"));
     msg->setHTMLBody(MCSTR("<div>Hello <img src=\"cid:1234\"></div>"));
-    msg->addAttachment(mailcore::Attachment::attachmentWithContentOfFile(MCSTR("first-filename")));
-    msg->addAttachment(mailcore::Attachment::attachmentWithContentOfFile(MCSTR("second-filename")));
-    mailcore::Attachment * attachment = mailcore::Attachment::attachmentWithContentOfFile(MCSTR("third-image-attachment"));
+    msg->addAttachment(mailcore::Attachment::attachmentWithContentsOfFile(MCSTR("first-filename")));
+    msg->addAttachment(mailcore::Attachment::attachmentWithContentsOfFile(MCSTR("second-filename")));
+    mailcore::Attachment * attachment = mailcore::Attachment::attachmentWithContentsOfFile(MCSTR("third-image-attachment"));
     attachment->setContentID(MCSTR("1234"));
     msg->addRelatedAttachment(attachment);
     

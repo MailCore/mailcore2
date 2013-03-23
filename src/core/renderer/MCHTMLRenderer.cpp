@@ -333,7 +333,7 @@ String * htmlForAbstractMessagePart(AbstractMessagePart * part, htmlRendererCont
     
     String * result = String::string();
     HashMap * values = context->htmlCallback->templateValuesForHeader(part->header());
-    String * headerString = renderTemplate(context->htmlCallback->templateForMainHeader(), values);
+    String * headerString = renderTemplate(context->htmlCallback->templateForEmbeddedMessageHeader(), values);
     result->appendString(headerString);
     result->appendString(substring);
     return result;

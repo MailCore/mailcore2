@@ -6,6 +6,10 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
+#ifndef __MAILCORE_MCOMESSAGEHEADER_PRIVATE_H_
+
+#define __MAILCORE_MCOMESSAGEHEADER_PRIVATE_H_
+
 #ifdef __cplusplus
 namespace mailcore {
     class MessageHeader;
@@ -17,4 +21,6 @@ namespace mailcore {
 + (MCOAddress *) addressWithMCMessageHeader:(mailcore::MessageHeader *)header;
 
 @end
+#endif
+
 #endif

@@ -56,7 +56,7 @@ static Class classWithTypeInfo(const std::type_info * info)
 
 @implementation NSObject (MCO)
 
-+ (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object
++ (id) mco_objectWithMCObject:(mailcore::Object *)object
 {
     if (&typeid(object) == &typeid(mailcore::Value *)) {
         return [NSValue mco_valueWithMCValue:(mailcore::Value *) object];
@@ -76,7 +76,7 @@ static Class classWithTypeInfo(const std::type_info * info)
     else {
         Class aClass = classWithTypeInfo(&typeid(* object));
         MCAssert(aClass != nil);
-        return (NSObject *) [aClass mco_objectWithMCObject:object];
+        return [aClass mco_objectWithMCObject:object];
     }
 }
 
