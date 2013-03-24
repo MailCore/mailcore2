@@ -8,8 +8,6 @@
 
 #import "NSObject+MCO.h"
 
-#include <typeinfo>
-
 #import "NSData+MCO.h"
 #import "NSString+MCO.h"
 #import "NSDictionary+MCO.h"
@@ -109,12 +107,8 @@ static Class classWithTypeInfo(const std::type_info * info)
         return [(NSDictionary *) self mco_mcHashMap];
     }
     else {
-        if (![self respondsToSelector:@selector(mco_mcObject)]) {
-            MCAssert(0);
-        }
-        return [self mco_mcObject];
+        MCAssert(0);
     }
-    
 }
 
 @end
