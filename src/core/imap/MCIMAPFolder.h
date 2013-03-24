@@ -26,6 +26,7 @@ namespace mailcore {
     public: // subclass behavior
 		IMAPFolder(IMAPFolder * other);
 		virtual Object * copy();
+		virtual String * description();
         
 	private:
 		String * mPath;

@@ -62,3 +62,9 @@ IMAPFolderFlag IMAPFolder::flags()
     return mFlags;
 }
 
+String * IMAPFolder::description()
+{
+    String * result = String::string();
+    result->appendUTF8Format("<%s:%p %s>", className()->UTF8Characters(), this, MCUTF8(mPath));
+    return result;
+}

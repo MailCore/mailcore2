@@ -62,6 +62,16 @@
     [super dealloc];
 }
 
+- (mailcore::Object *) mco_mcObject
+{
+    return _nativeFolder;
+}
+
+- (NSString *) description
+{
+    return MCO_OBJC_BRIDGE_GET(description);
+}
+
 MCO_OBJC_SYNTHESIZE_STRING(setPath, path)
 MCO_OBJC_SYNTHESIZE_SCALAR(char, char, setDelimiter, delimiter)
 MCO_OBJC_SYNTHESIZE_SCALAR(MCOIMAPFolderFlag, mailcore::IMAPFolderFlag, setFlags, flags)
