@@ -20,7 +20,7 @@ typedef enum {
     MCOAuthTypeSASLKerberosV4    = 1 << 7,
 } MCOAuthType;
 
-typedef num {
+typedef enum {
     MCOIMAPFolderFlagNone        = 0,
     MCOIMAPFolderFlagMarked      = 1 << 0,
     MCOIMAPFolderFlagUnmarked    = 1 << 1,
