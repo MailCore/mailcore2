@@ -14,7 +14,7 @@
 
 @protocol MCOHTMLRendererDelegate;
 
-@interface MCOMessageParser : MCOAbstractMessage
+@interface MCOMessageParser : MCOAbstractMessage <NSCopying>
 
 @property (nonatomic, weak) id <MCOHTMLRendererDelegate> rendererDelegate;
 

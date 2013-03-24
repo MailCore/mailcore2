@@ -20,4 +20,21 @@ typedef enum {
     MCOAuthTypeSASLKerberosV4    = 1 << 7,
 } MCOAuthType;
 
+typedef num {
+    MCOIMAPFolderFlagNone        = 0,
+    MCOIMAPFolderFlagMarked      = 1 << 0,
+    MCOIMAPFolderFlagUnmarked    = 1 << 1,
+    MCOIMAPFolderFlagNoSelect    = 1 << 2,
+    MCOIMAPFolderFlagNoInferiors = 1 << 3,
+    MCOIMAPFolderFlagInbox       = 1 << 4,
+    MCOIMAPFolderFlagSentMail    = 1 << 5,
+    MCOIMAPFolderFlagStarred     = 1 << 6,
+    MCOIMAPFolderFlagAllMail     = 1 << 7,
+    MCOIMAPFolderFlagTrash       = 1 << 8,
+    MCOIMAPFolderFlagDrafts      = 1 << 9,
+    MCOIMAPFolderFlagSpam        = 1 << 10,
+    MCOIMAPFolderFlagImportant   = 1 << 11,
+    MCOIMAPFolderFlagArchive     = 1 << 12,
+} MCOIMAPFolderFlag;
+
 #endif

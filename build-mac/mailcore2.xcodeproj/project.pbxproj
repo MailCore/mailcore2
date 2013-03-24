@@ -17,6 +17,7 @@
 		C623C58C16FE54C9001BBEFC /* MCOHTMLRendererDelegate.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C623C58B16FE52C0001BBEFC /* MCOHTMLRendererDelegate.h */; };
 		C623C58F16FE6B45001BBEFC /* MCOIMAPOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = C623C58E16FE6B45001BBEFC /* MCOIMAPOperation.mm */; };
 		C623C59016FE71B2001BBEFC /* MCOIMAPOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C623C58D16FE6B45001BBEFC /* MCOIMAPOperation.h */; };
+		C623C59316FE750E001BBEFC /* MCOIMAPFolder.mm in Sources */ = {isa = PBXBuildFile; fileRef = C623C59216FE750E001BBEFC /* MCOIMAPFolder.mm */; };
 		C62C6ED416A2A0E600737497 /* MCIMAPIdentityOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C62C6ED216A2A0E600737497 /* MCIMAPIdentityOperation.cc */; };
 		C62C6ED816A398FA00737497 /* MCIMAPFolderInfoOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C62C6ED616A398FA00737497 /* MCIMAPFolderInfoOperation.cc */; };
 		C62C6EDA16A3D60700737497 /* MCIMAPAsyncConnection.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA7FD16A295B500778456 /* MCIMAPAsyncConnection.cc */; };
@@ -375,6 +376,8 @@
 		C623C58B16FE52C0001BBEFC /* MCOHTMLRendererDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCOHTMLRendererDelegate.h; sourceTree = "<group>"; };
 		C623C58D16FE6B45001BBEFC /* MCOIMAPOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPOperation.h; sourceTree = "<group>"; };
 		C623C58E16FE6B45001BBEFC /* MCOIMAPOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOIMAPOperation.mm; sourceTree = "<group>"; };
+		C623C59116FE750D001BBEFC /* MCOIMAPFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPFolder.h; sourceTree = "<group>"; };
+		C623C59216FE750E001BBEFC /* MCOIMAPFolder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOIMAPFolder.mm; sourceTree = "<group>"; };
 		C62C6ED216A2A0E600737497 /* MCIMAPIdentityOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPIdentityOperation.cc; sourceTree = "<group>"; };
 		C62C6ED316A2A0E600737497 /* MCIMAPIdentityOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPIdentityOperation.h; sourceTree = "<group>"; };
 		C62C6ED616A398FA00737497 /* MCIMAPFolderInfoOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPFolderInfoOperation.cc; sourceTree = "<group>"; };
@@ -1047,6 +1050,8 @@
 				F87F190B16BB62B00012652F /* MCOIMAPFetchFoldersOperation.mm */,
 				C623C58D16FE6B45001BBEFC /* MCOIMAPOperation.h */,
 				C623C58E16FE6B45001BBEFC /* MCOIMAPOperation.mm */,
+				C623C59116FE750D001BBEFC /* MCOIMAPFolder.h */,
+				C623C59216FE750E001BBEFC /* MCOIMAPFolder.mm */,
 			);
 			path = imap;
 			sourceTree = "<group>";
@@ -1239,6 +1244,7 @@
 				C64BB26716FD43E2000DB34C /* MCOMessagePart.mm in Sources */,
 				C64BB26A16FD44C2000DB34C /* MCOMultipart.mm in Sources */,
 				C623C58F16FE6B45001BBEFC /* MCOIMAPOperation.mm in Sources */,
+				C623C59316FE750E001BBEFC /* MCOIMAPFolder.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

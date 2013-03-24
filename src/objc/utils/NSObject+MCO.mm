@@ -33,10 +33,11 @@ void MCORegisterClass(Class aClass, const std::type_info * info)
 {
     init();
     
+    size_t hash_value = info->hash_code();
     chashdatum key;
     chashdatum value;
-    key.data = &info;
-    key.len = sizeof(info);
+    key.data = &hash_value;
+    key.len = sizeof(hash_value);
     value.data = aClass;
     value.len = 0;
     chash_set(classHash, &key, &value, NULL);
@@ -46,11 +47,12 @@ static Class classWithTypeInfo(const std::type_info * info)
 {
     init();
     
+    size_t hash_value = info->hash_code();
     int r;
     chashdatum key;
     chashdatum value;
-    key.data = &info;
-    key.len = sizeof(info);
+    key.data = &hash_value;
+    key.len = sizeof(hash_value);
     r = chash_get(classHash, &key, &value);
     if (r < 0)
         return nil;
@@ -65,19 +67,21 @@ static Class classWithTypeInfo(const std::type_info * info)
     if (object == NULL)
         return nil;
     
-    if (&typeid(object) == &typeid(mailcore::Value *)) {
+    //fprintf(stderr, "typeid: %i %i\n", typeid(* object).hash_code(), typeid(mailcore::Array).hash_code());
+    size_t objectType = typeid(* object).hash_code();
+    if (objectType == typeid(mailcore::Value).hash_code()) {
         return [NSValue mco_valueWithMCValue:(mailcore::Value *) object];
     }
-    else if (&typeid(object) == &typeid(mailcore::Data *)) {
+    else if (objectType == typeid(mailcore::Data).hash_code()) {
         return [NSData mco_dataWithMCData:(mailcore::Data *) object];
     }
-    else if (&typeid(object) == &typeid(mailcore::String *)) {
+    else if (objectType == typeid(mailcore::String).hash_code()) {
         return [NSString mco_stringWithMCString:(mailcore::String *) object];
     }
-    else if (&typeid(object) == &typeid(mailcore::HashMap *)) {
+    else if (objectType == typeid(mailcore::HashMap).hash_code()) {
         return [NSDictionary mco_dictionaryWithMCHashMap:(mailcore::HashMap *) object];
     }
-    else if (&typeid(object) == &typeid(mailcore::Array *)) {
+    else if (objectType == typeid(mailcore::Array).hash_code()) {
         return [NSArray mco_arrayWithMCArray:(mailcore::Array *) object];
     }
     else {

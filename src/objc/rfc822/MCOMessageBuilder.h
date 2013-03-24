@@ -14,7 +14,7 @@
 
 @class MCOAttachment;
 
-@interface MCOMessageBuilder : MCOAbstractMessage
+@interface MCOMessageBuilder : MCOAbstractMessage <NSCopying>
 
 @property (nonatomic, copy, setter=setHTMLBody:) NSString * htmlBody;
 @property (nonatomic, copy) NSString * textBody;

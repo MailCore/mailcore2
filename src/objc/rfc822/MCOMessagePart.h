@@ -12,7 +12,7 @@
 
 #import <mailcore/MCOAbstractMessagePart.h>
 
-@interface MCOMessagePart : MCOAbstractMessagePart
+@interface MCOMessagePart : MCOAbstractMessagePart <NSCopying>
 
 @end
 

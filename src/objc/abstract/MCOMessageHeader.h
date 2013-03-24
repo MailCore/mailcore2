@@ -14,7 +14,7 @@
 
 @class MCOAddress;
 
-@interface MCOMessageHeader : NSObject
+@interface MCOMessageHeader : NSObject <NSCopying>
 
 @property (nonatomic, copy) NSString * messageID;
 @property (nonatomic, copy) NSArray * references;

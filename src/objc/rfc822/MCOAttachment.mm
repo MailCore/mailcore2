@@ -43,7 +43,7 @@
 - (id) init
 {
     mailcore::Attachment * attachment = new mailcore::Attachment();
-    self = [super initWithMCPart:attachment];
+    self = [self initWithMCPart:attachment];
     attachment->release();
     
     return self;

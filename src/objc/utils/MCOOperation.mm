@@ -45,11 +45,6 @@ public:
 
 #define nativeType mailcore::Operation
 
-+ (void) load
-{
-    MCORegisterClass(self, &typeid(nativeType));
-}
-
 + (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object
 {
     mailcore::Operation * op = (mailcore::Operation *) object;

@@ -12,7 +12,7 @@
 
 #import <mailcore/MCOAbstractPart.h>
 
-@interface MCOAttachment : MCOAbstractPart
+@interface MCOAttachment : MCOAbstractPart <NSCopying>
 
 + (NSString *) mimeTypeForFilename:(NSString *)filename;
 + (MCOAttachment *) attachmentWithContentsOfFile:(NSString *)filename;
