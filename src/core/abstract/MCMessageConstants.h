@@ -197,8 +197,8 @@ namespace mailcore {
 		ErrorAuthenticationRequired,
 		ErrorFetchMessageList,
 		ErrorDeleteMessage,
-    ErrorInvalidAccount,
-    ErrorCapability,
+        ErrorInvalidAccount,
+        ErrorCapability,
 	};
 	
 	enum PartType {

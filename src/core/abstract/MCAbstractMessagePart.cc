@@ -12,10 +12,12 @@ void AbstractMessagePart::init()
 
 AbstractMessagePart::AbstractMessagePart()
 {
+    init();
 }
 
 AbstractMessagePart::AbstractMessagePart(AbstractMessagePart * other)
 {
+    init();
     if (other->mainPart() != NULL) {
         setMainPart((AbstractPart *) other->mainPart()->copy()->autorelease());
     }
