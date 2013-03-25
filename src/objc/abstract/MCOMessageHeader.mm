@@ -12,13 +12,11 @@
 #include <typeinfo>
 
 #include "MCMessageHeader.h"
-#include "NSString+MCO.h"
-#include "NSArray+MCO.h"
-#include "NSObject+MCO.h"
-#include "NSData+MCO.h"
-#include "MCOAddress.h"
-#include "MCOAddress+Private.h"
 #include "MCAddress.h"
+
+#import "MCOUtils.h"
+#import "MCOAddress.h"
+#import "MCOAddress+Private.h"
 
 @implementation MCOMessageHeader {
     mailcore::MessageHeader * _nativeHeader;
@@ -109,6 +107,21 @@ MCO_OBJC_SYNTHESIZE_STRING(setUserAgent, userAgent)
 - (void) importHeadersData:(NSData *)data
 {
     _nativeHeader->importHeadersData([data mco_mcData]);
+}
+
+- (MCOMessageHeader *) replyHeaderWithExcludedRecipients:(NSArray *)excludedRecipients
+{
+    return MCO_TO_OBJC(_nativeHeader->replyHeader(false, MCO_FROM_OBJC(mailcore::Array, excludedRecipients)));
+}
+
+- (MCOMessageHeader *) replyAllHeaderWithExcludedRecipients:(NSArray *)excludedRecipients
+{
+    return MCO_TO_OBJC(_nativeHeader->replyHeader(true, MCO_FROM_OBJC(mailcore::Array, excludedRecipients)));
+}
+
+- (MCOMessageHeader *) forwardHeader
+{
+    return MCO_TO_OBJC(_nativeHeader->forwardHeader());
 }
 
 @end

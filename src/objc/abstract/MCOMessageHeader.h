@@ -35,6 +35,10 @@
 
 - (void) importHeadersData:(NSData *)data;
 
+- (MCOMessageHeader *) replyHeaderWithExcludedRecipients:(NSArray *)excludedRecipients;
+- (MCOMessageHeader *) replyAllHeaderWithExcludedRecipients:(NSArray *)excludedRecipients;
+- (MCOMessageHeader *) forwardHeader;
+
 @end
 
 #endif

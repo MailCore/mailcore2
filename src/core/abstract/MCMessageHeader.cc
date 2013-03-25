@@ -1047,3 +1047,195 @@ void MessageHeader::importIMAPInternalDate(struct mailimap_date_time * date)
     setReceivedDate(timestamp_from_imap_date(date));
 }
 
+Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool includeCc, Array * senderEmails)
+{
+    Set * senderEmailsSet;
+	senderEmailsSet = Set::setWithArray(senderEmails);
+    
+	bool hasCc;
+    bool hasTo;
+    Set * addedAddresses;
+    Array * toField;
+    Array * ccField;
+    
+    toField = NULL;
+    ccField = NULL;
+    
+    hasTo = false;
+    hasCc = false;
+    addedAddresses = new Set();
+    
+    if (senderEmails->containsObject(from()->mailbox()->lowercaseString()) ||
+        senderEmails->containsObject(sender()->mailbox()->lowercaseString())) {
+        Array * recipient;
+        
+        recipient = new Array();
+        for(unsigned int i = 0 ; i < to()->count() ; i ++) {
+            Address * address = (Address *) to()->objectAtIndex(i);
+            if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
+                continue;
+            }
+            if (address->mailbox()->isEqualCaseInsensitive(from()->mailbox())) {
+                recipient->addObjectsFromArray(replyTo());
+                for(unsigned int j = 0 ; j < to()->count() ; j ++) {
+                    Address * address = (Address *) replyTo()->objectAtIndex(j);
+                    if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
+                        continue;
+                    }
+                    if (address->mailbox() == NULL)
+                        continue;
+                    addedAddresses->addObject(address->mailbox()->lowercaseString());
+                }
+            }
+            else {
+                if (address->mailbox() != NULL) {
+                    recipient->addObject(address);
+                    addedAddresses->addObject(address->mailbox()->lowercaseString());
+                }
+            }
+            hasTo = true;
+        }
+        toField = recipient;
+        toField->retain()->autorelease();
+        recipient->release();
+        
+        if (replyAll) {
+            recipient = new Array();
+            for(unsigned int i = 0 ; i < cc()->count() ; i ++) {
+                Address * address = (Address *) cc()->objectAtIndex(i);
+                if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
+                    continue;
+                }
+                if (address->mailbox() == NULL)
+                    continue;
+                recipient->addObject(address);
+                addedAddresses->addObject(address->mailbox()->lowercaseString());
+                hasCc = true;
+            }
+            ccField = recipient;
+            ccField->retain()->autorelease();
+            recipient->release();
+        }
+        
+        if (!hasTo && !hasCc) {
+            hasTo = true;
+            toField = Array::arrayWithObject(from());
+        }
+    }
+    else {
+        addedAddresses->addObjectsFromArray(senderEmails);
+        
+        if (replyTo()->count() > 0) {
+            hasTo = true;
+            toField = replyTo();
+            for(unsigned int i = 0 ; i < replyTo()->count() ; i ++) {
+                Address * address = (Address *) replyTo()->objectAtIndex(i);
+                if (address->mailbox() == NULL)
+                    continue;
+                addedAddresses->addObject(address->mailbox()->lowercaseString());
+            }
+        }
+        else {
+            if (from()->mailbox() != NULL) {
+                hasTo = true;
+                toField = Array::arrayWithObject(from());
+                addedAddresses->addObject(from()->mailbox()->lowercaseString());
+            }
+        }
+        
+        if (replyAll) {
+            Array * recipient;
+            
+            recipient = new Array();
+            for(unsigned int i = 0 ; i < to()->count() ; i ++) {
+                Address * address = (Address *) to()->objectAtIndex(i);
+                if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
+                    continue;
+                }
+                if (address->mailbox() == NULL)
+                    continue;
+                recipient->addObject(address);
+                addedAddresses->addObject(address->mailbox()->lowercaseString());
+            }
+            for(unsigned int i = 0 ; i < cc()->count() ; i ++) {
+                Address * address = (Address *) cc()->objectAtIndex(i);
+                if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
+                    continue;
+                }
+                if (address->mailbox() == NULL)
+                    continue;
+                recipient->addObject(address);
+                addedAddresses->addObject(address->mailbox()->lowercaseString());
+            }
+            if (recipient->count() > 0) {
+                hasCc = true;
+            }
+            ccField = recipient;
+            ccField->retain()->autorelease();
+            recipient->release();
+        }
+    }
+    
+    addedAddresses->release();
+    
+    Array * result;
+    result = Array::array();
+    if (hasTo && includeTo)
+        result->addObjectsFromArray(toField);
+    if (hasCc && includeCc)
+        result->addObjectsFromArray(ccField);
+    
+    return result;
+}
+
+MessageHeader * MessageHeader::replyHeader(bool replyAll, Array * addressesExcludedFromRecipient)
+{
+    MessageHeader * result;
+    String * subjectValue;
+    Array * referencesValue;
+    Array * inReplyTo;
+    Array * toValue;
+    Array * ccValue;
+    
+    result = new MessageHeader();
+    subjectValue = MCSTR("Re: ")->stringByAppendingString(subject());
+    referencesValue = (Array *) (references()->copy());
+    referencesValue->autorelease();
+    referencesValue->addObject(messageID());
+    inReplyTo = Array::array();
+    inReplyTo->addObject(messageID());
+    toValue = recipientWithReplyAll(replyAll, true, false, addressesExcludedFromRecipient);
+    ccValue = recipientWithReplyAll(replyAll, false, true, addressesExcludedFromRecipient);;
+    
+    result->setSubject(subjectValue);
+    result->setReferences(referencesValue);
+    result->setInReplyTo(inReplyTo);
+    result->setTo(toValue);
+    result->setCc(ccValue);
+    
+    result->autorelease();
+    return result;
+}
+
+MessageHeader * MessageHeader::forwardHeader()
+{
+    MessageHeader * result;
+    String * subjectValue;
+    Array * referencesValue;
+    Array * inReplyTo;
+    
+    result = new MessageHeader();
+    subjectValue = MCSTR("Fw: ")->stringByAppendingString(subject());
+    referencesValue = (Array *) (references()->copy());
+    referencesValue->autorelease();
+    referencesValue->addObject(messageID());
+    inReplyTo = Array::array();
+    inReplyTo->addObject(messageID());
+    result->setSubject(subjectValue);
+    result->setReferences(referencesValue);
+    result->setInReplyTo(inReplyTo);
+    
+    result->autorelease();
+    return result;
+}
+

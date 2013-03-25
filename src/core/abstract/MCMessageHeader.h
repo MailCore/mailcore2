@@ -59,6 +59,9 @@ namespace mailcore {
 		virtual String * partialExtractedSubject();
 		virtual void importHeadersData(Data * data);
         
+        virtual MessageHeader * replyHeader(bool replyAll, Array * addressesExcludedFromRecipient);
+        virtual MessageHeader * forwardHeader();
+        
     public: // subclass behavior
 		MessageHeader(MessageHeader * other);
 		virtual String * description();
@@ -87,6 +90,7 @@ namespace mailcore {
 		time_t mReceivedDate;
 		String * mUserAgent;
 		void init(bool generateDate, bool generateMessageID);
+        Array * recipientWithReplyAll(bool replyAll, bool includeTo, bool includeCc, Array * senderEmails);
 	};
 	
 }
