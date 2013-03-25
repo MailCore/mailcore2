@@ -16,6 +16,6 @@
 @property (nonatomic, nonatomic) unsigned int size;
 @property (nonatomic, nonatomic) MCOEncoding encoding;
 
-- (unsigned int) decodeSize;
+- (unsigned int) decodedSize;
 
 @end
