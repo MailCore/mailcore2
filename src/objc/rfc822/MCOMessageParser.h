@@ -16,8 +16,6 @@
 
 @interface MCOMessageParser : MCOAbstractMessage <NSCopying>
 
-@property (nonatomic, weak) id <MCOHTMLRendererDelegate> rendererDelegate;
-
 + (MCOMessageParser *) messageParserWithData:(NSData *)data;
 
 - (id) initWithData:(NSData *)data;
@@ -26,7 +24,7 @@
 - (MCOAbstractPart *) mainPart;
 - (NSData *) data;
 
-- (NSString *) htmlRendering;
+- (NSString *) htmlRenderingWithDelegate:(id <MCOHTMLRendererDelegate>)delegate;
 
 @end
 

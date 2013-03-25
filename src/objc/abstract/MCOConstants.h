@@ -37,4 +37,28 @@ typedef enum {
     MCOIMAPFolderFlagArchive     = 1 << 12,
 } MCOIMAPFolderFlag;
 
+typedef enum {
+    MCOMessageFlagNone          = 0,
+    MCOMessageFlagSeen          = 1 << 0,
+    MCOMessageFlagAnswered      = 1 << 1,
+    MCOMessageFlagFlagged       = 1 << 2,
+    MCOMessageFlagDeleted       = 1 << 3,
+    MCOMessageFlagDraft         = 1 << 4,
+    MCOMessageFlagMDNSent       = 1 << 5,
+    MCOMessageFlagForwarded     = 1 << 6,
+    MCOMessageFlagSubmitPending = 1 << 7,
+    MCOMessageFlagSubmitted     = 1 << 8,
+} MCOMessageFlag;
+
+typedef enum {
+    Encoding7Bit = 0,            // should match MAILIMAP_BODY_FLD_ENC_7BIT
+    Encoding8Bit = 1,            // should match MAILIMAP_BODY_FLD_ENC_8BIT
+    EncodingBinary = 2,          // should match MAILIMAP_BODY_FLD_ENC_BINARY
+    EncodingBase64 = 3,          // should match MAILIMAP_BODY_FLD_ENC_BASE64
+    EncodingQuotedPrintable = 4, // should match MAILIMAP_BODY_FLD_ENC_QUOTED_PRINTABLE
+    EncodingOther = 5,           // should match MAILIMAP_BODY_FLD_ENC_OTHER
+    // negative values should be used for other encoding
+    EncodingUUEncode = -1
+} MCOEncoding;
+
 #endif

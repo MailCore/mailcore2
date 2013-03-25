@@ -16,5 +16,6 @@
 #import <mailcore/MCOAddress.h>
 #import <mailcore/MCOMessageHeader.h>
 #import <mailcore/MCOHTMLRendererDelegate.h>
+#import <mailcore/MCOHTMLRendererIMAPDelegate.h>
 
 #endif

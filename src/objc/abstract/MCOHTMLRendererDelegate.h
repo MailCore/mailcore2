@@ -9,6 +9,12 @@
 #ifndef mailcore2_MCOHTMLRendererDelegate_h
 #define mailcore2_MCOHTMLRendererDelegate_h
 
+#import <Foundation/Foundation.h>
+
+@class MCOAbstractPart;
+@class MCOAbstractMessage;
+@class MCOMessageHeader;
+
 @protocol MCOHTMLRendererDelegate <NSObject>
 
 - (BOOL) MCOAbstractMessage:(MCOAbstractMessage *)msg canPreviewPart:(MCOAbstractPart *)part;

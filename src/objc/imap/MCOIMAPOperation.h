@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import "MCOOperation.h"
+#import <mailcore/MCOOperation.h>
 
 @interface MCOIMAPOperation : MCOOperation
 

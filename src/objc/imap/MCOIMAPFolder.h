@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <mailcore/MCOConstants.h>
 
-@interface MCOIMAPFolder : NSObject
+@interface MCOIMAPFolder : NSObject <NSCopying>
 
 @property (nonatomic, copy) NSString * path;
 @property (nonatomic, assign) char delimiter;

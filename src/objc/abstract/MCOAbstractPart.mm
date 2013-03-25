@@ -7,6 +7,7 @@
 //
 
 #import "MCOAbstractPart.h"
+#import "MCOAbstractPart+Private.h"
 
 #include "MCAbstractPart.h"
 #include "MCAbstractMessage.h"
@@ -39,6 +40,11 @@
 {
     _part->release();
     [super dealloc];
+}
+
+- (NSString *) description
+{
+    return MCO_OBJC_BRIDGE_GET(description);
 }
 
 MCO_OBJC_SYNTHESIZE_SCALAR(MCOPartType, mailcore::PartType, setPartType, partType)

@@ -23,8 +23,6 @@ namespace mailcore {
 		virtual Array * componentsForPath(String * path);
 
 		virtual bool containsFolder(String * folder);
-
-		virtual void importIMAPNamespaceInfo(struct mailimap_namespace_info * info);
         
     public: // subclass behavior
 		IMAPNamespaceItem(IMAPNamespaceItem * other);
@@ -35,6 +33,10 @@ namespace mailcore {
 	    char mDelimiter;
 	    String * mPrefix;
 		void init();
+        
+    public: // private
+		virtual void importIMAPNamespaceInfo(struct mailimap_namespace_info * info);
+    
 	};
 
 }

@@ -44,6 +44,11 @@
     [super dealloc];
 }
 
+- (NSString *) description
+{
+    return MCO_OBJC_BRIDGE_GET(description);
+}
+
 MCO_OBJC_SYNTHESIZE(MessageHeader, setHeader, header)
 
 - (MCOAbstractPart *) partForContentID:(NSString *)contentID

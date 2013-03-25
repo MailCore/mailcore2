@@ -108,6 +108,7 @@ static Class classWithTypeInfo(const std::type_info * info)
     }
     else {
         MCAssert(0);
+        return nil;
     }
 }
 
