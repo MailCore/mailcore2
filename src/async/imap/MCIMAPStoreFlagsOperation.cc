@@ -25,12 +25,12 @@ IMAPStoreFlagsOperation::~IMAPStoreFlagsOperation()
     MC_SAFE_RELEASE(mUids);
 }
 
-void IMAPStoreFlagsOperation::setUids(Array * uids)
+void IMAPStoreFlagsOperation::setUids(IndexSet * uids)
 {
-    MC_SAFE_REPLACE_RETAIN(Array, mUids, uids);
+    MC_SAFE_REPLACE_RETAIN(IndexSet, mUids, uids);
 }
 
-Array * IMAPStoreFlagsOperation::uids()
+IndexSet * IMAPStoreFlagsOperation::uids()
 {
     return mUids;
 }

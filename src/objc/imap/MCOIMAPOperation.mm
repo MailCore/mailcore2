@@ -13,26 +13,28 @@
 
 #import "MCOUtils.h"
 
-@interface MCOIMAPOperation ()
-@property (nonatomic, copy) void (^completionBlock)(NSError *error);
-@end
+typedef void (^completionType)(NSError *error);
 
 @implementation MCOIMAPOperation {
-    void (^_completionBlock)(NSError *error);
+    completionType _completionBlock;
 }
-
-@synthesize completionBlock = _completionBlock;
 
 #define nativeType mailcore::IMAPOperation
 
+- (void) dealloc
+{
+    [_completionBlock release];
+    [super dealloc];
+}
+
 - (void)start:(void (^)(NSError *error))completionBlock {
-    self.completionBlock = completionBlock;
+    _completionBlock = [completionBlock copy];
     [self start];
 }
 
 - (void)operationCompleted {
     NSError * error = [NSError mco_errorWithErrorCode:MCO_NATIVE_INSTANCE->error()];
-    self.completionBlock(error);
+    _completionBlock(error);
 }
 
 @end

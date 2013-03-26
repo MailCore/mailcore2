@@ -20,8 +20,8 @@ namespace mailcore {
         IMAPStoreLabelsOperation();
         virtual ~IMAPStoreLabelsOperation();
         
-        virtual void setUids(Array * uids);
-        virtual Array * uids();
+        virtual void setUids(IndexSet * uids);
+        virtual IndexSet * uids();
         
         virtual void setKind(IMAPStoreFlagsRequestKind kind);
         virtual IMAPStoreFlagsRequestKind kind();
@@ -33,7 +33,7 @@ namespace mailcore {
         virtual void main();
         
     private:
-        Array * mUids;
+        IndexSet * mUids;
         IMAPStoreFlagsRequestKind mKind;
         Array * mLabels;
         

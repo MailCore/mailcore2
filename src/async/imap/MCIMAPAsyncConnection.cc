@@ -245,7 +245,7 @@ IMAPAppendMessageOperation * IMAPAsyncConnection::appendMessageOperation(String 
     return op;
 }
 
-IMAPCopyMessagesOperation * IMAPAsyncConnection::copyMessagesOperation(String * folder, Array * uids, String * destFolder)
+IMAPCopyMessagesOperation * IMAPAsyncConnection::copyMessagesOperation(String * folder, IndexSet * uids, String * destFolder)
 {
     IMAPCopyMessagesOperation * op = new IMAPCopyMessagesOperation();
     op->setSession(this);
@@ -265,123 +265,40 @@ IMAPOperation * IMAPAsyncConnection::expungeOperation(String * folder)
     return op;
 }
 
-#if 0
 IMAPFetchMessagesOperation * IMAPAsyncConnection::fetchMessagesByUIDOperation(String * folder, IMAPMessagesRequestKind requestKind,
-                                                                           uint32_t firstUID, uint32_t lastUID)
+                                                                              IndexSet * uids)
 {
     IMAPFetchMessagesOperation * op = new IMAPFetchMessagesOperation();
     op->setSession(this);
     op->setFolder(folder);
     op->setKind(requestKind);
     op->setFetchByUidEnabled(true);
-    op->setFirst(firstUID);
-    op->setLast(lastUID);
+    op->setIndexes(uids);
     op->autorelease();
     return op;
 }
 
 IMAPFetchMessagesOperation * IMAPAsyncConnection::fetchMessagesByNumberOperation(String * folder, IMAPMessagesRequestKind requestKind,
-                                                                    uint32_t firstNumber, uint32_t lastNumber)
+                                                                                 IndexSet * numbers)
 {
     IMAPFetchMessagesOperation * op = new IMAPFetchMessagesOperation();
     op->setSession(this);
     op->setFolder(folder);
     op->setKind(requestKind);
-    op->setFirst(firstNumber);
-    op->setLast(lastNumber);
-    op->autorelease();
-    return op;
-}
-
-IMAPFetchMessagesOperation * IMAPAsyncConnection::fetchMessagesByUIDOperation(String * folder, IMAPMessagesRequestKind requestKind,
-                                                                           Array * uids)
-{
-    IMAPFetchMessagesOperation * op = new IMAPFetchMessagesOperation();
-    op->setSession(this);
-    op->setFolder(folder);
-    op->setKind(requestKind);
-    op->setFetchByUidEnabled(true);
-    op->setUids(uids);
-    op->autorelease();
-    return op;
-}
-
-IMAPFetchMessagesOperation * IMAPAsyncConnection::fetchMessagesByNumberOperation(String * folder, IMAPMessagesRequestKind requestKind,
-                                                                              Array * numbers)
-{
-    IMAPFetchMessagesOperation * op = new IMAPFetchMessagesOperation();
-    op->setSession(this);
-    op->setFolder(folder);
-    op->setKind(requestKind);
-    op->setNumbers(numbers);
-    op->autorelease();
-    return op;
-}
-
-IMAPFetchMessagesOperation * IMAPAsyncConnection::syncMessagesByUIDForModSeqOperation(String * folder, IMAPMessagesRequestKind requestKind,
-                                                                                      uint32_t firstUID, uint32_t lastUID, uint64_t modSeq)
-{
-    IMAPFetchMessagesOperation * op = new IMAPFetchMessagesOperation();
-    op->setSession(this);
-    op->setFolder(folder);
-    op->setKind(requestKind);
-    op->setFetchByUidEnabled(true);
-    op->setFirst(firstUID);
-    op->setLast(lastUID);
-    op->setModSequenceValue(modSeq);
-    op->autorelease();
-    return op;
-}
-
-IMAPFetchMessagesOperation * IMAPAsyncConnection::syncMessagesByUIDForModSeqOperation(String * folder, IMAPMessagesRequestKind requestKind,
-                                                                                      Array * uids, uint64_t modSeq)
-{
-    IMAPFetchMessagesOperation * op = new IMAPFetchMessagesOperation();
-    op->setSession(this);
-    op->setFolder(folder);
-    op->setKind(requestKind);
-    op->setFetchByUidEnabled(true);
-    op->setUids(uids);
-    op->setModSequenceValue(modSeq);
-    op->autorelease();
-    return op;
-}
-#endif
-
-IMAPFetchMessagesOperation * IMAPAsyncConnection::fetchMessagesByUIDOperation(String * folder, IMAPMessagesRequestKind requestKind,
-                                                                              IndexSet * indexes)
-{
-    IMAPFetchMessagesOperation * op = new IMAPFetchMessagesOperation();
-    op->setSession(this);
-    op->setFolder(folder);
-    op->setKind(requestKind);
-    op->setFetchByUidEnabled(true);
-    op->setIndexes(indexes);
-    op->autorelease();
-    return op;
-}
-
-IMAPFetchMessagesOperation * IMAPAsyncConnection::fetchMessagesByNumberOperation(String * folder, IMAPMessagesRequestKind requestKind,
-                                                                                 IndexSet * indexes)
-{
-    IMAPFetchMessagesOperation * op = new IMAPFetchMessagesOperation();
-    op->setSession(this);
-    op->setFolder(folder);
-    op->setKind(requestKind);
-    op->setIndexes(indexes);
+    op->setIndexes(numbers);
     op->autorelease();
     return op;
 }
 
 IMAPFetchMessagesOperation * IMAPAsyncConnection::syncMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
-                                                                    IndexSet * indexes, uint64_t modSeq)
+                                                                    IndexSet * uids, uint64_t modSeq)
 {
     IMAPFetchMessagesOperation * op = new IMAPFetchMessagesOperation();
     op->setSession(this);
     op->setFolder(folder);
     op->setKind(requestKind);
     op->setFetchByUidEnabled(true);
-    op->setIndexes(indexes);
+    op->setIndexes(uids);
     op->setModSequenceValue(modSeq);
     op->autorelease();
     return op;
@@ -410,7 +327,7 @@ IMAPFetchContentOperation * IMAPAsyncConnection::fetchMessageAttachmentByUIDOper
     return op;
 }
 
-IMAPOperation * IMAPAsyncConnection::storeFlagsOperation(String * folder, Array * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags)
+IMAPOperation * IMAPAsyncConnection::storeFlagsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags)
 {
     IMAPStoreFlagsOperation * op = new IMAPStoreFlagsOperation();
     op->setSession(this);
@@ -422,7 +339,7 @@ IMAPOperation * IMAPAsyncConnection::storeFlagsOperation(String * folder, Array 
     return op;
 }
 
-IMAPOperation * IMAPAsyncConnection::storeLabelsOperation(String * folder, Array * uids, IMAPStoreFlagsRequestKind kind, Array * labels)
+IMAPOperation * IMAPAsyncConnection::storeLabelsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, Array * labels)
 {
     IMAPStoreLabelsOperation * op = new IMAPStoreLabelsOperation();
     op->setSession(this);

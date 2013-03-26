@@ -51,14 +51,53 @@ typedef enum {
 } MCOMessageFlag;
 
 typedef enum {
-    Encoding7Bit = 0,            // should match MAILIMAP_BODY_FLD_ENC_7BIT
-    Encoding8Bit = 1,            // should match MAILIMAP_BODY_FLD_ENC_8BIT
-    EncodingBinary = 2,          // should match MAILIMAP_BODY_FLD_ENC_BINARY
-    EncodingBase64 = 3,          // should match MAILIMAP_BODY_FLD_ENC_BASE64
-    EncodingQuotedPrintable = 4, // should match MAILIMAP_BODY_FLD_ENC_QUOTED_PRINTABLE
-    EncodingOther = 5,           // should match MAILIMAP_BODY_FLD_ENC_OTHER
+    MCOEncoding7Bit = 0,            // should match MAILIMAP_BODY_FLD_ENC_7BIT
+    MCOEncoding8Bit = 1,            // should match MAILIMAP_BODY_FLD_ENC_8BIT
+    MCOEncodingBinary = 2,          // should match MAILIMAP_BODY_FLD_ENC_BINARY
+    MCOEncodingBase64 = 3,          // should match MAILIMAP_BODY_FLD_ENC_BASE64
+    MCOEncodingQuotedPrintable = 4, // should match MAILIMAP_BODY_FLD_ENC_QUOTED_PRINTABLE
+    MCOEncodingOther = 5,           // should match MAILIMAP_BODY_FLD_ENC_OTHER
     // negative values should be used for other encoding
-    EncodingUUEncode = -1
+    MCOEncodingUUEncode = -1
 } MCOEncoding;
+
+typedef enum {
+    MCOIMAPMessagesRequestKindUid           = 0, // This is the default and it's always fetched
+    MCOIMAPMessagesRequestKindFlags         = 1 << 0,
+    MCOIMAPMessagesRequestKindHeaders       = 1 << 1,
+    MCOIMAPMessagesRequestKindStructure     = 1 << 2,
+    MCOIMAPMessagesRequestKindInternalDate  = 1 << 3,
+    MCOIMAPMessagesRequestKindFullHeaders   = 1 << 4,
+    MCOIMAPMessagesRequestKindHeaderSubject = 1 << 5,
+    MCOIMAPMessagesRequestKindGmailLabels   = 1 << 6,
+} MCOIMAPMessagesRequestKind;
+
+typedef enum {
+    MCOIMAPStoreFlagsRequestKindAdd,
+    MCOIMAPStoreFlagsRequestKindRemove,
+    MCOIMAPStoreFlagsRequestKindSet,
+} MCOIMAPStoreFlagsRequestKind;
+
+typedef enum {
+    MCOIMAPSearchKindNone,
+    MCOIMAPSearchKindFrom,
+    MCOIMAPSearchKindRecipient,
+    MCOIMAPSearchKindSubject,
+    MCOIMAPSearchKindContent,
+    MCOIMAPSearchKindHeader,
+    MCOIMAPSearchKindOr,
+    MCOIMAPSearchKindAnd,
+} MCOIMAPSearchKind;
+
+typedef enum {
+    MCOIMAPSearchKindNone,
+    MCOIMAPSearchKindFrom,
+    MCOIMAPSearchKindRecipient,
+    MCOIMAPSearchKindSubject,
+    MCOIMAPSearchKindContent,
+    MCOIMAPSearchKindHeader,
+    MCOIMAPSearchKindOr,
+    MCOIMAPSearchKindAnd,
+} MCOIMAPSearchKind;
 
 #endif

@@ -23,12 +23,12 @@ namespace mailcore {
         virtual void setModifiedOrAddedMessages(Array * /* IMAPMessage */ messages);
         virtual Array * /* IMAPMessage */ modifiedOrAddedMessages();
         
-        virtual void setVanishedMessages(Array * /* IMAPMessage */ messages);
-        virtual Array * /* Value */ vanishedMessages();
+        virtual void setVanishedMessages(IndexSet * vanishedMessages);
+        virtual IndexSet * vanishedMessages();
         
     private:
         Array * /* IMAPMessage */ mModifiedOrAddedMessages;
-        Array * /* Value */ mVanishedMessages;
+        IndexSet * mVanishedMessages;
     };
     
 }

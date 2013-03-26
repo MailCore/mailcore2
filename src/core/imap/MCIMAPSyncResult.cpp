@@ -34,12 +34,12 @@ Array * /* IMAPMessage */ IMAPSyncResult::modifiedOrAddedMessages()
     return mModifiedOrAddedMessages;
 }
 
-void IMAPSyncResult::setVanishedMessages(Array * /* IMAPMessage */ messages)
+void IMAPSyncResult::setVanishedMessages(IndexSet * messages)
 {
-    MC_SAFE_REPLACE_RETAIN(Array, mVanishedMessages, messages);
+    MC_SAFE_REPLACE_RETAIN(IndexSet, mVanishedMessages, messages);
 }
 
-Array * /* Value */ IMAPSyncResult::vanishedMessages()
+IndexSet * IMAPSyncResult::vanishedMessages()
 {
     return mVanishedMessages;
 }

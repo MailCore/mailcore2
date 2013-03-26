@@ -53,7 +53,7 @@ void IMAPIdleOperation::main()
     performMethodOnMainThread((Object::Method) &IMAPIdleOperation::unprepare, NULL);
 }
 
-void IMAPIdleOperation::cancel()
+void IMAPIdleOperation::interruptIdle()
 {
     session()->session()->interruptIdle();
 }

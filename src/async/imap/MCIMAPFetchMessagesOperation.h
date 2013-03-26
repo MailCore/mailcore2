@@ -23,19 +23,6 @@ namespace mailcore {
         virtual void setFetchByUidEnabled(bool enabled);
         virtual bool isFetchByUidEnabled();
         
-#if 0
-        virtual void setFirst(uint32_t first);
-        virtual uint32_t first();
-        
-        virtual void setLast(uint32_t last);
-        virtual uint32_t last();
-        
-        virtual void setUids(Array * uids);
-        virtual Array * uids();
-        
-        virtual void setNumbers(Array * numbers);
-        virtual Array * numbers();
-#endif
         virtual void setIndexes(IndexSet * indexes);
         virtual IndexSet * indexes();
         
@@ -47,23 +34,17 @@ namespace mailcore {
         
         // Result.
         virtual Array * /* IMAPMessage */ messages();
-        virtual Array * /* Value */ vanishedMessages();
+        virtual IndexSet * vanishedMessages();
         
     public: // subclass behavior
         virtual void main();
         
     private:
         bool mFetchByUidEnabled;
-#if 0
-        uint32_t mFirst;
-        uint32_t mLast;
-        Array * mUids;
-        Array * mNumbers;
-#endif
         IndexSet * mIndexes;
         IMAPMessagesRequestKind mKind;
         Array * mMessages;
-        Array * mVanishedMessages;
+        IndexSet * mVanishedMessages;
         uint64_t mModSequenceValue;
         
     };

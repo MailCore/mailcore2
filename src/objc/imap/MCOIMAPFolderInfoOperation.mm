@@ -1,0 +1,62 @@
+//
+//  MCOIMAPFolderInfoOperation.m
+//  mailcore2
+//
+//  Created by DINH Viêt Hoà on 3/25/13.
+//  Copyright (c) 2013 MailCore. All rights reserved.
+//
+
+#import "MCOIMAPFolderInfoOperation.h"
+
+#include "MCAsyncIMAP.h"
+
+#import "MCOOperation+Private.h"
+#import "MCOIMAPFolderInfo.h"
+#import "MCOUtils.h"
+#import "MCOIMAPFolderInfo.h"
+
+typedef void (^completionType)(NSError *error, MCOIMAPFolderInfo *info);
+
+@implementation MCOIMAPFolderInfoOperation {
+    completionType _completionBlock;
+}
+
+#define nativeType mailcore::IMAPFolderInfoOperation
+
++ (void) load
+{
+    MCORegisterClass(self, &typeid(nativeType));
+}
+
++ (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object
+{
+    nativeType * op = (nativeType *) object;
+    return [[[self alloc] initWithMCOperation:op] autorelease];
+}
+
+- (void) dealloc
+{
+    [_completionBlock release];
+    [super dealloc];
+}
+
+- (void)start:(void (^)(NSError *error, MCOIMAPFolderInfo *info))completionBlock {
+    _completionBlock = [completionBlock copy];
+    [self start];
+}
+
+- (void)operationCompleted {
+    nativeType *op = MCO_NATIVE_INSTANCE;
+    if (op->error() == mailcore::ErrorNone) {
+        MCOIMAPFolderInfo * info = [MCOIMAPFolderInfo info];
+        [info setUidNext:MCO_NATIVE_INSTANCE->uidNext()];
+        [info setUidValidity:MCO_NATIVE_INSTANCE->uidValidity()];
+        [info setModSequenceValue:MCO_NATIVE_INSTANCE->modSequenceValue()];
+        [info setMessageCount:MCO_NATIVE_INSTANCE->messageCount()];
+        _completionBlock(nil, info);
+    } else {
+        _completionBlock([NSError mco_errorWithErrorCode:op->error()], nil);
+    }
+}
+
+@end

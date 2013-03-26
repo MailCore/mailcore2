@@ -33,7 +33,7 @@ namespace mailcore {
         virtual IMAPSearchExpression * searchExpression();
         
         // Result.
-        virtual Array * uids();
+        virtual IndexSet * uids();
         
     public: // subclass behavior
         virtual void main();
@@ -42,7 +42,7 @@ namespace mailcore {
         IMAPSearchKind mKind;
         String * mSearchString;
         IMAPSearchExpression * mExpression;
-        Array * mUids;
+        IndexSet * mUids;
         
     };
 }

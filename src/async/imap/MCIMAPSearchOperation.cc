@@ -59,7 +59,7 @@ IMAPSearchExpression * IMAPSearchOperation::searchExpression()
     return mExpression;
 }
 
-Array * IMAPSearchOperation::uids()
+IndexSet * IMAPSearchOperation::uids()
 {
     return mUids;
 }

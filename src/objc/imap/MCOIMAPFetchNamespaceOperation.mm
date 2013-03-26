@@ -1,30 +1,25 @@
 //
-//  MCOIMAPFetchFoldersOperation.m
+//  MCOIMAPFetchNamespaceOperation.m
 //  mailcore2
 //
-//  Created by Matt Ronge on 1/31/13.
+//  Created by DINH Viêt Hoà on 3/25/13.
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import "MCOIMAPFetchFoldersOperation.h"
+#import "MCOIMAPFetchNamespaceOperation.h"
 
-#import "NSError+MCO.h"
+#include "MCAsyncIMAP.h"
+
 #import "MCOOperation+Private.h"
-
 #import "MCOUtils.h"
 
-#import <Foundation/Foundation.h>
-#import <mailcore/MCAsync.h>
+typedef void (^completionType)(NSError *error, NSDictionary * namespaces);
 
-using namespace mailcore;
-
-typedef void (^completionType)(NSError *error, NSArray *folder);
-
-@implementation MCOIMAPFetchFoldersOperation {
+@implementation MCOIMAPFetchNamespaceOperation {
     completionType _completionBlock;
 }
 
-#define nativeType mailcore::IMAPFetchFoldersOperation
+#define nativeType mailcore::IMAPFetchNamespaceOperation
 
 + (void) load
 {
@@ -43,15 +38,15 @@ typedef void (^completionType)(NSError *error, NSArray *folder);
     [super dealloc];
 }
 
-- (void)start:(void (^)(NSError *error, NSArray *folder))completionBlock {
+- (void)start:(void (^)(NSError *error, NSDictionary * namespaces))completionBlock {
     _completionBlock = [completionBlock copy];
     [self start];
 }
 
 - (void)operationCompleted {
     nativeType *op = MCO_NATIVE_INSTANCE;
-    if (op->error() == ErrorNone) {
-        _completionBlock(nil, MCO_TO_OBJC(op->folders()));
+    if (op->error() == mailcore::ErrorNone) {
+        _completionBlock(nil, MCO_TO_OBJC(op->namespaces()));
     } else {
         _completionBlock([NSError mco_errorWithErrorCode:op->error()], nil);
     }

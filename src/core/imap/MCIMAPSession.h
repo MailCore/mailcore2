@@ -75,21 +75,11 @@ namespace mailcore {
 		virtual void appendMessage(String * folder, Data * messageData, MessageFlag flags,
 			IMAPProgressCallback * progressCallback, uint32_t * createdUID, ErrorCode * pError);
 		
-		virtual void copyMessages(String * folder, Array * uidSet, String * destFolder,
-			 Array ** pDestUIDs, ErrorCode * pError);
+		virtual void copyMessages(String * folder, IndexSet * uidSet, String * destFolder,
+			 IndexSet ** pDestUIDs, ErrorCode * pError);
 		
 		virtual void expunge(String * folder, ErrorCode * pError);
 		
-#if 0
-		virtual Array * /* IMAPMessage */ fetchMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
-			uint32_t firstUID, uint32_t lastUID, IMAPProgressCallback * progressCallback, ErrorCode * pError);
-		virtual Array * /* IMAPMessage */ fetchMessagesByNumber(String * folder, IMAPMessagesRequestKind requestKind,
-			uint32_t firstNumber, uint32_t lastNumber, IMAPProgressCallback * progressCallback, ErrorCode * pError);
-		virtual Array * /* IMAPMessage */ fetchMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
-			Array * /* Value */ uids, IMAPProgressCallback * progressCallback, ErrorCode * pError);
-		virtual Array * /* IMAPMessage */ fetchMessagesByNumber(String * folder, IMAPMessagesRequestKind requestKind,
-			Array * /* Value */ numbers, IMAPProgressCallback * progressCallback, ErrorCode * pError);
-#endif
 		virtual Array * /* IMAPMessage */ fetchMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
                                                              IndexSet * uids, IMAPProgressCallback * progressCallback, ErrorCode * pError);
 		virtual Array * /* IMAPMessage */ fetchMessagesByNumber(String * folder, IMAPMessagesRequestKind requestKind,
@@ -103,24 +93,15 @@ namespace mailcore {
 			ErrorCode * pError);
         
         /* When CONDSTORE or QRESYNC is available */
-#if 0
-        virtual IMAPSyncResult * syncMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
-                                                   uint32_t firstUID, uint32_t lastUID,
-                                                   uint64_t modseq,
-                                                   IMAPProgressCallback * progressCallback, ErrorCode * pError);
-        virtual IMAPSyncResult * syncMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
-                                                   Array * uids, uint64_t modseq,
-                                                   IMAPProgressCallback * progressCallback, ErrorCode * pError);
-#endif
         virtual IMAPSyncResult * syncMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
                                                    IndexSet * uids, uint64_t modseq,
                                                    IMAPProgressCallback * progressCallback, ErrorCode * pError);
         
-		virtual void storeFlags(String * folder, Array * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, ErrorCode * pError);
-		virtual void storeLabels(String * folder, Array * uids, IMAPStoreFlagsRequestKind kind, Array * labels, ErrorCode * pError);
+		virtual void storeFlags(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, ErrorCode * pError);
+		virtual void storeLabels(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, Array * labels, ErrorCode * pError);
 		
-		virtual Array * search(String * folder, IMAPSearchKind kind, String * searchString, ErrorCode * pError);
-		virtual Array * search(String * folder, IMAPSearchExpression * expression, ErrorCode * pError);
+		virtual IndexSet * search(String * folder, IMAPSearchKind kind, String * searchString, ErrorCode * pError);
+		virtual IndexSet * search(String * folder, IMAPSearchExpression * expression, ErrorCode * pError);
 		
 		virtual void setupIdle();
 		virtual void idle(String * folder, uint32_t lastKnownUID, ErrorCode * pError);

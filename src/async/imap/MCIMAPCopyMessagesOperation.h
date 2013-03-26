@@ -23,19 +23,19 @@ namespace mailcore {
         virtual void setDestFolder(String * destFolder);
         virtual String * destFolder();
         
-        virtual void setUids(Array * uids);
-        virtual Array * uids();
+        virtual void setUids(IndexSet * uids);
+        virtual IndexSet * uids();
         
         // Result.
-        virtual Array * destUids();
+        virtual IndexSet * destUids();
         
     public: // subclass behavior
         virtual void main();
         
     private:
-        Array * mUids;
+        IndexSet * mUids;
         String * mDestFolder;
-        Array * mDestUids;
+        IndexSet * mDestUids;
     };
 }
 

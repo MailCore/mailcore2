@@ -90,7 +90,7 @@ namespace mailcore {
         
 		virtual IMAPAppendMessageOperation * appendMessageOperation(String * folder, Data * messageData, MessageFlag flags);
 		
-		virtual IMAPCopyMessagesOperation * copyMessagesOperation(String * folder, Array * uids, String * destFolder);
+		virtual IMAPCopyMessagesOperation * copyMessagesOperation(String * folder, IndexSet * uids, String * destFolder);
 		
 		virtual IMAPOperation * expungeOperation(String * folder);
 		
@@ -106,8 +106,8 @@ namespace mailcore {
                                                                                  Encoding encoding,
                                                                                  bool urgent = false);
 		
-		virtual IMAPOperation * storeFlagsOperation(String * folder, Array * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags);
-		virtual IMAPOperation * storeLabelsOperation(String * folder, Array * uids, IMAPStoreFlagsRequestKind kind, Array * labels);
+		virtual IMAPOperation * storeFlagsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags);
+		virtual IMAPOperation * storeLabelsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, Array * labels);
 		
 		virtual IMAPSearchOperation * searchOperation(String * folder, IMAPSearchKind kind, String * searchString);
 		virtual IMAPSearchOperation * searchOperation(String * folder, IMAPSearchExpression * expression);

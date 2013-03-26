@@ -127,7 +127,7 @@ Array * IMAPFetchMessagesOperation::messages()
     return mMessages;
 }
 
-Array * /* Value */ IMAPFetchMessagesOperation::vanishedMessages()
+IndexSet * IMAPFetchMessagesOperation::vanishedMessages()
 {
     return mVanishedMessages;
 }
@@ -137,55 +137,19 @@ void IMAPFetchMessagesOperation::main()
     ErrorCode error;
     if (mFetchByUidEnabled) {
         if (mModSequenceValue != 0) {
-#if 0
-            if (mUids != NULL) {
-                IMAPSyncResult * syncResult;
-                
-                syncResult = session()->session()->syncMessagesByUID(folder(), mKind, mUids, mModSequenceValue, this, &error);
-                if (syncResult != NULL) {
-                    mMessages = syncResult->modifiedOrAddedMessages();
-                    mVanishedMessages = syncResult->modifiedOrAddedMessages();
-                }
-            }
-            else {
-                IMAPSyncResult * syncResult;
-                
-                syncResult = session()->session()->syncMessagesByUID(folder(), mKind, mFirst, mLast, mModSequenceValue, this, &error);
-                if (syncResult != NULL) {
-                    mMessages = syncResult->modifiedOrAddedMessages();
-                    mVanishedMessages = syncResult->modifiedOrAddedMessages();
-                }
-            }
-#endif
             IMAPSyncResult * syncResult;
             
             syncResult = session()->session()->syncMessagesByUID(folder(), mKind, mIndexes, mModSequenceValue, this, &error);
             if (syncResult != NULL) {
                 mMessages = syncResult->modifiedOrAddedMessages();
-                mVanishedMessages = syncResult->modifiedOrAddedMessages();
+                mVanishedMessages = syncResult->vanishedMessages();
             }
         }
         else {
-#if 0
-            if (mUids != NULL) {
-                mMessages = session()->session()->fetchMessagesByUID(folder(), mKind, mUids, this, &error);
-            }
-            else {
-                mMessages = session()->session()->fetchMessagesByUID(folder(), mKind, mFirst, mLast, this, &error);
-            }
-#endif
             mMessages = session()->session()->fetchMessagesByUID(folder(), mKind, mIndexes, this, &error);
         }
     }
     else {
-#if 0
-        if (mNumbers != NULL) {
-            mMessages = session()->session()->fetchMessagesByNumber(folder(), mKind, mNumbers, this, &error);
-        }
-        else {
-            mMessages = session()->session()->fetchMessagesByNumber(folder(), mKind, mFirst, mLast, this, &error);
-        }
-#endif
         mMessages = session()->session()->fetchMessagesByNumber(folder(), mKind, mIndexes, this, &error);
     }
     MC_SAFE_RETAIN(mMessages);

@@ -27,17 +27,17 @@ IMAPCopyMessagesOperation::~IMAPCopyMessagesOperation()
     MC_SAFE_RELEASE(mDestFolder);
 }
 
-void IMAPCopyMessagesOperation::setUids(Array * uids)
+void IMAPCopyMessagesOperation::setUids(IndexSet * uids)
 {
-    MC_SAFE_REPLACE_RETAIN(Array, mUids, uids);
+    MC_SAFE_REPLACE_RETAIN(IndexSet, mUids, uids);
 }
 
-Array * IMAPCopyMessagesOperation::uids()
+IndexSet * IMAPCopyMessagesOperation::uids()
 {
     return mUids;
 }
 
-Array * IMAPCopyMessagesOperation::destUids()
+IndexSet * IMAPCopyMessagesOperation::destUids()
 {
     return mDestUids;
 }

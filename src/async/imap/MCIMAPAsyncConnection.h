@@ -77,37 +77,23 @@ namespace mailcore {
 
 		virtual IMAPAppendMessageOperation * appendMessageOperation(String * folder, Data * messageData, MessageFlag flags);
 		
-		virtual IMAPCopyMessagesOperation * copyMessagesOperation(String * folder, Array * uids, String * destFolder);
+		virtual IMAPCopyMessagesOperation * copyMessagesOperation(String * folder, IndexSet * uids, String * destFolder);
 		
 		virtual IMAPOperation * expungeOperation(String * folder);
 		
-#if 0
 		virtual IMAPFetchMessagesOperation * fetchMessagesByUIDOperation(String * folder, IMAPMessagesRequestKind requestKind,
-			uint32_t firstUID, uint32_t lastUID);
+                                                                         IndexSet * uids);
 		virtual IMAPFetchMessagesOperation * fetchMessagesByNumberOperation(String * folder, IMAPMessagesRequestKind requestKind,
-			uint32_t firstNumber, uint32_t lastNumber);
-		virtual IMAPFetchMessagesOperation * fetchMessagesByUIDOperation(String * folder, IMAPMessagesRequestKind requestKind,
-			Array * uids);
-		virtual IMAPFetchMessagesOperation * fetchMessagesByNumberOperation(String * folder, IMAPMessagesRequestKind requestKind,
-			Array * numbers);
-        virtual IMAPFetchMessagesOperation * syncMessagesByUIDForModSeqOperation(String * folder, IMAPMessagesRequestKind requestKind,
-                                                                                 uint32_t firstUID, uint32_t lastUID, uint64_t modSeq);
-        virtual IMAPFetchMessagesOperation * syncMessagesByUIDForModSeqOperation(String * folder, IMAPMessagesRequestKind requestKind,
-                                                                                 Array * uids, uint64_t modSeq);
-#endif
-		virtual IMAPFetchMessagesOperation * fetchMessagesByUIDOperation(String * folder, IMAPMessagesRequestKind requestKind,
-                                                                         IndexSet * indexes);
-		virtual IMAPFetchMessagesOperation * fetchMessagesByNumberOperation(String * folder, IMAPMessagesRequestKind requestKind,
-                                                                            IndexSet * indexes);
+                                                                            IndexSet * numbers);
         virtual IMAPFetchMessagesOperation * syncMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
-                                                               IndexSet * indexes, uint64_t modSeq);
+                                                               IndexSet * uids, uint64_t modSeq);
         
 		virtual IMAPFetchContentOperation * fetchMessageByUIDOperation(String * folder, uint32_t uid);
 		virtual IMAPFetchContentOperation * fetchMessageAttachmentByUIDOperation(String * folder, uint32_t uid, String * partID,
 		    Encoding encoding);
 		
-		virtual IMAPOperation * storeFlagsOperation(String * folder, Array * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags);
-		virtual IMAPOperation * storeLabelsOperation(String * folder, Array * uids, IMAPStoreFlagsRequestKind kind, Array * labels);
+		virtual IMAPOperation * storeFlagsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags);
+		virtual IMAPOperation * storeLabelsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, Array * labels);
 		
 		virtual IMAPSearchOperation * searchOperation(String * folder, IMAPSearchKind kind, String * searchString);
 		virtual IMAPSearchOperation * searchOperation(String * folder, IMAPSearchExpression * expression);
