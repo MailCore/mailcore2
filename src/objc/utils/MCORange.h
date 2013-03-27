@@ -15,6 +15,10 @@
 #include <mailcore/MCBaseTypes.h>
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 @class MCOIndexSet;
 
 typedef struct {
@@ -35,5 +39,9 @@ MCORange MCORangeIntersection(MCORange range1, MCORange range2);
 BOOL MCORangeHasIntersection(MCORange range1, MCORange range2);
 uint64_t MCORangeLeftBound(MCORange range);
 uint64_t MCORangeRightBound(MCORange range);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
