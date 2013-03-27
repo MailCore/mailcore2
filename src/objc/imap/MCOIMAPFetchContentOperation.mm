@@ -58,7 +58,9 @@ typedef void (^completionType)(NSError *error, NSData * data);
 
 - (void) bodyProgress:(unsigned int)current maximum:(unsigned int)maximum
 {
-    _progress(current, maximum);
+    if (_progress != NULL) {
+        _progress(current, maximum);
+    }
 }
 
 @end

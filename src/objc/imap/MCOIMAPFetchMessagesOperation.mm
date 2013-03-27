@@ -54,7 +54,9 @@ typedef void (^completionType)(NSError *error, NSArray * messages, MCOIndexSet *
 
 - (void) itemProgress:(unsigned int)current maximum:(unsigned int)maximum
 {
-    _progress(current);
+    if (_progress != NULL) {
+        _progress(current);
+    }
 }
 
 @end
