@@ -6,12 +6,18 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import <mailcore/MCOOperation.h>
+#import <mailcore/MCOIMAPBaseOperation.h>
+
+#ifndef __MAILCORE_MCOIMAPCAPABILITYOPERATION_H_
+
+#define __MAILCORE_MCOIMAPCAPBILITYOPERATION_H_
 
 @class MCOIndexSet;
 
-@interface MCOIMAPCapabilityOperation : MCOOperation
+@interface MCOIMAPCapabilityOperation : MCOIMAPBaseOperation
 
 - (void)start:(void (^)(NSError *error, MCOIndexSet * capabilities))completionBlock;
 
 @end
+
+#endif

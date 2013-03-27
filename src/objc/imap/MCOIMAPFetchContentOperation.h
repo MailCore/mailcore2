@@ -6,17 +6,19 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import <mailcore/MCOOperation.h>
+#import <mailcore/MCOIMAPBaseOperation.h>
 #import <mailcore/MCOConstants.h>
 
-@interface MCOIMAPFetchContentOperation : MCOOperation
+#ifndef __MAILCORE_MCOIMAPFETCHCONTENTOPERATION_H_
 
-/*
-@property (nonatomic, assign) uint32_t uid;
-@property (nonatomic, copy) NSString * partID;
-@property (nonatomic, assign) MCOEncoding encoding;
-*/
+#define __MAILCORE_MCOIMAPFETCHCONTENTOPERATION_H_
+
+@interface MCOIMAPFetchContentOperation : MCOIMAPBaseOperation
+
+@property (nonatomic, copy) MCOIMAPBaseOperationProgressBlock progress;
 
 - (void)start:(void (^)(NSError *error, NSData * data))completionBlock;
 
 @end
+
+#endif

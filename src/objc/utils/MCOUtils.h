@@ -20,5 +20,7 @@
 #import <mailcore/NSValue+MCO.h>
 #import <mailcore/MCOOperation.h>
 #import <mailcore/MCOConstants.h>
+#import <mailcore/MCOIndexSet.h>
+#import <mailcore/MCORange.h>
 
 #endif

@@ -30,98 +30,143 @@ bool MCOAbstractMessageRendererCallback::canPreviewPart(mailcore::AbstractPart *
 
 mailcore::HashMap * MCOAbstractMessageRendererCallback::templateValuesForHeader(mailcore::MessageHeader * header)
 {
+    mailcore::HashMap * result = NULL;
     if ([mRendererDelegate respondsToSelector:@selector(MCOAbstractMessage:templateValuesForHeader:)]) {
-        return MCO_FROM_OBJC(mailcore::HashMap, [mRendererDelegate MCOAbstractMessage:mMessage templateValuesForHeader:MCO_TO_OBJC(header)]);
+        result = MCO_FROM_OBJC(mailcore::HashMap, [mRendererDelegate MCOAbstractMessage:mMessage templateValuesForHeader:MCO_TO_OBJC(header)]);
     }
-    return mailcore::HTMLRendererTemplateCallback::templateValuesForHeader(header);
+    if (result == NULL) {
+        result = mailcore::HTMLRendererTemplateCallback::templateValuesForHeader(header);
+    }
+    return result;
 }
 
 mailcore::HashMap * MCOAbstractMessageRendererCallback::templateValuesForPart(mailcore::AbstractPart * part)
 {
+    mailcore::HashMap * result = NULL;
     if ([mRendererDelegate respondsToSelector:@selector(MCOAbstractMessage:templateValuesForPart:)]) {
-        return MCO_FROM_OBJC(mailcore::HashMap, [mRendererDelegate MCOAbstractMessage:mMessage templateValuesForPart:MCO_TO_OBJC(part)]);
+        result = MCO_FROM_OBJC(mailcore::HashMap, [mRendererDelegate MCOAbstractMessage:mMessage templateValuesForPart:MCO_TO_OBJC(part)]);
     }
-    return mailcore::HTMLRendererTemplateCallback::templateValuesForPart(part);
+    if (result == NULL) {
+        result = mailcore::HTMLRendererTemplateCallback::templateValuesForPart(part);
+    }
+    return result;
 }
 
 mailcore::String * MCOAbstractMessageRendererCallback::templateForMainHeader()
 {
+    mailcore::String * result = NULL;
     if ([mRendererDelegate respondsToSelector:@selector(MCOAbstractMessage_templateForMainHeader:)]) {
-        return MCO_FROM_OBJC(mailcore::String, [mRendererDelegate MCOAbstractMessage_templateForMainHeader:mMessage]);
+        result = MCO_FROM_OBJC(mailcore::String, [mRendererDelegate MCOAbstractMessage_templateForMainHeader:mMessage]);
     }
-    return mailcore::HTMLRendererTemplateCallback::templateForMainHeader();
+    if (result == NULL) {
+        result = mailcore::HTMLRendererTemplateCallback::templateForMainHeader();
+    }
+    return result;
 }
 
 mailcore::String * MCOAbstractMessageRendererCallback::templateForImage()
 {
+    mailcore::String * result = NULL;
     if ([mRendererDelegate respondsToSelector:@selector(MCOAbstractMessage_templateForImage:)]) {
-        return MCO_FROM_OBJC(mailcore::String, [mRendererDelegate MCOAbstractMessage_templateForImage:mMessage]);
+        result = MCO_FROM_OBJC(mailcore::String, [mRendererDelegate MCOAbstractMessage_templateForImage:mMessage]);
     }
-    return mailcore::HTMLRendererTemplateCallback::templateForImage();
+    if (result == NULL) {
+        result = mailcore::HTMLRendererTemplateCallback::templateForImage();
+    }
+    return result;
 }
 
 mailcore::String * MCOAbstractMessageRendererCallback::templateForAttachment()
 {
+    mailcore::String * result = NULL;
     if ([mRendererDelegate respondsToSelector:@selector(MCOAbstractMessage_templateForAttachment:)]) {
-        return MCO_FROM_OBJC(mailcore::String, [mRendererDelegate MCOAbstractMessage_templateForAttachment:mMessage]);
+        result = MCO_FROM_OBJC(mailcore::String, [mRendererDelegate MCOAbstractMessage_templateForAttachment:mMessage]);
     }
-    return mailcore::HTMLRendererTemplateCallback::templateForAttachment();
+    if (result == NULL) {
+        result = mailcore::HTMLRendererTemplateCallback::templateForAttachment();
+    }
+    return result;
 }
 
 mailcore::String * MCOAbstractMessageRendererCallback::templateForMessage()
 {
+    mailcore::String * result = NULL;
     if ([mRendererDelegate respondsToSelector:@selector(MCOAbstractMessage_templateForMessage:)]) {
-        return MCO_FROM_OBJC(mailcore::String, [mRendererDelegate MCOAbstractMessage_templateForMessage:mMessage]);
+        result = MCO_FROM_OBJC(mailcore::String, [mRendererDelegate MCOAbstractMessage_templateForMessage:mMessage]);
     }
-    return mailcore::HTMLRendererTemplateCallback::templateForMessage();
+    if (result == NULL) {
+        result = mailcore::HTMLRendererTemplateCallback::templateForMessage();
+    }
+    return result;
 }
 
 mailcore::String * MCOAbstractMessageRendererCallback::templateForEmbeddedMessage()
 {
+    mailcore::String * result = NULL;
     if ([mRendererDelegate respondsToSelector:@selector(MCOAbstractMessage_templateForEmbeddedMessage:)]) {
         return MCO_FROM_OBJC(mailcore::String, [mRendererDelegate MCOAbstractMessage_templateForEmbeddedMessage:mMessage]);
     }
-    return mailcore::HTMLRendererTemplateCallback::templateForEmbeddedMessage();
+    if (result == NULL) {
+        result = mailcore::HTMLRendererTemplateCallback::templateForEmbeddedMessage();
+    }
+    return result;
 }
 
 mailcore::String * MCOAbstractMessageRendererCallback::templateForEmbeddedMessageHeader()
 {
+    mailcore::String * result = NULL;
     if ([mRendererDelegate respondsToSelector:@selector(MCOAbstractMessage_templateForEmbeddedMessageHeader:)]) {
         return MCO_FROM_OBJC(mailcore::String, [mRendererDelegate MCOAbstractMessage_templateForEmbeddedMessageHeader:mMessage]);
     }
-    return mailcore::HTMLRendererTemplateCallback::templateForEmbeddedMessageHeader();
+    if (result == NULL) {
+        result = mailcore::HTMLRendererTemplateCallback::templateForEmbeddedMessageHeader();
+    }
+    return result;
 }
 
 mailcore::String * MCOAbstractMessageRendererCallback::templateForAttachmentSeparator()
 {
+    mailcore::String * result = NULL;
     if ([mRendererDelegate respondsToSelector:@selector(MCOAbstractMessage_templateForAttachmentSeparator:)]) {
-        return MCO_FROM_OBJC(mailcore::String, [mRendererDelegate MCOAbstractMessage_templateForAttachmentSeparator:mMessage]);
+        result = MCO_FROM_OBJC(mailcore::String, [mRendererDelegate MCOAbstractMessage_templateForAttachmentSeparator:mMessage]);
     }
-    return mailcore::HTMLRendererTemplateCallback::templateForAttachmentSeparator();
+    if (result == NULL) {
+        result = mailcore::HTMLRendererTemplateCallback::templateForAttachmentSeparator();
+    }
+    return result;
 }
 
 mailcore::String * MCOAbstractMessageRendererCallback::filterHTMLForPart(mailcore::String * html)
 {
+    mailcore::String * result = NULL;
     if ([mRendererDelegate respondsToSelector:@selector(MCOAbstractMessage:filterHTMLForPart:)]) {
-        return MCO_FROM_OBJC(mailcore::String, [mRendererDelegate MCOAbstractMessage:mMessage filterHTMLForPart:MCO_TO_OBJC(html)]);
+        result = MCO_FROM_OBJC(mailcore::String, [mRendererDelegate MCOAbstractMessage:mMessage filterHTMLForPart:MCO_TO_OBJC(html)]);
     }
-    return mailcore::HTMLRendererTemplateCallback::filterHTMLForPart(html);
+    if (result == NULL) {
+        result = mailcore::HTMLRendererTemplateCallback::filterHTMLForPart(html);
+    }
+    return result;
 }
 
 mailcore::String * MCOAbstractMessageRendererCallback::filterHTMLForMessage(mailcore::String * html)
 {
+    mailcore::String * result = NULL;
     if ([mRendererDelegate respondsToSelector:@selector(MCOAbstractMessage:filterHTMLForMessage:)]) {
-        return MCO_FROM_OBJC(mailcore::String, [mRendererDelegate MCOAbstractMessage:mMessage filterHTMLForMessage:MCO_TO_OBJC(html)]);
+        result = MCO_FROM_OBJC(mailcore::String, [mRendererDelegate MCOAbstractMessage:mMessage filterHTMLForMessage:MCO_TO_OBJC(html)]);
     }
-    return mailcore::HTMLRendererTemplateCallback::filterHTMLForMessage(html);
+    if (result == NULL) {
+        result = mailcore::HTMLRendererTemplateCallback::filterHTMLForMessage(html);
+    }
+    return result;
 }
 
 mailcore::Data * MCOAbstractMessageRendererCallback::dataForIMAPPart(mailcore::String * folder, mailcore::IMAPPart * part)
 {
+    mailcore::Data * result = NULL;
     if ([mIMAPDelegate respondsToSelector:@selector(MCOAbstractMessage:dataForIMAPPart:folder:)]) {
-        return [[mIMAPDelegate MCOAbstractMessage:mMessage dataForIMAPPart:MCO_TO_OBJC(part) folder:MCO_TO_OBJC(folder)] mco_mcData];
+        result = [[mIMAPDelegate MCOAbstractMessage:mMessage dataForIMAPPart:MCO_TO_OBJC(part) folder:MCO_TO_OBJC(folder)] mco_mcData];
     }
-    return nil;
+    return result;
 }
 
 void MCOAbstractMessageRendererCallback::prefetchAttachmentIMAPPart(mailcore::String * folder, mailcore::IMAPPart * part)

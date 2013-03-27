@@ -10,6 +10,7 @@
 namespace mailcore {
 	
 	class Attachment;
+    class HTMLRendererTemplateCallback;
 	
 	class MessageBuilder : public AbstractMessage {
 	public:
@@ -36,6 +37,8 @@ namespace mailcore {
 		virtual String * boundaryPrefix();
 		
 		virtual Data * data();
+        
+        virtual String * htmlRendering(HTMLRendererTemplateCallback * htmlCallback = NULL);
         
     public: // subclass behavior
 		MessageBuilder(MessageBuilder * other);

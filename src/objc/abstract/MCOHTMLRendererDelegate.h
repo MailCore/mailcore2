@@ -18,7 +18,7 @@
 @protocol MCOHTMLRendererDelegate <NSObject>
 
 - (BOOL) MCOAbstractMessage:(MCOAbstractMessage *)msg canPreviewPart:(MCOAbstractPart *)part;
-- (NSDictionary *) MCOAbstractMessage:(MCOAbstractMessage *)msg templateValuesForHeader:(MCOMessageHeader *)part;
+- (NSDictionary *) MCOAbstractMessage:(MCOAbstractMessage *)msg templateValuesForHeader:(MCOMessageHeader *)header;
 - (NSDictionary *) MCOAbstractMessage:(MCOAbstractMessage *)msg templateValuesForPart:(MCOAbstractPart *)part;
 - (NSString *) MCOAbstractMessage_templateForMainHeader:(MCOAbstractMessage *)msg;
 - (NSString *) MCOAbstractMessage_templateForImage:(MCOAbstractMessage *)msg;

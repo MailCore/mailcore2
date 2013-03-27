@@ -12,6 +12,7 @@
 
 #import "MCOUtils.h"
 #import "MCOAbstractMessage+Private.h"
+#import "MCOAbstractMessageRendererCallback.h"
 
 @implementation MCOMessageBuilder
 
@@ -55,6 +56,15 @@ MCO_OBJC_SYNTHESIZE_STRING(setBoundaryPrefix, boundaryPrefix)
 - (NSData *) data
 {
     return MCO_OBJC_BRIDGE_GET(data);
+}
+
+- (NSString *) htmlRenderingWithDelegate:(id <MCOHTMLRendererDelegate>)delegate
+{
+    MCOAbstractMessageRendererCallback * htmlRenderCallback = new MCOAbstractMessageRendererCallback(self, delegate, NULL);
+    NSString * result = MCO_TO_OBJC(MCO_NATIVE_INSTANCE->htmlRendering(htmlRenderCallback));
+    htmlRenderCallback->release();
+    
+    return result;
 }
 
 @end

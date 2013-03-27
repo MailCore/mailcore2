@@ -9,6 +9,10 @@
 #import <mailcore/MCOAbstractMessage.h>
 #import <mailcore/MCOConstants.h>
 
+#ifndef __MAILCORE_MCOIMAPMESSAGE_H_
+
+#define __MAILCORE_MCOIMAPMESSAGE_H_
+
 @protocol MCOHTMLRendererIMAPDelegate;
 
 @interface MCOIMAPMessage : MCOAbstractMessage <NSCopying>
@@ -28,3 +32,5 @@
                               delegate:(id <MCOHTMLRendererIMAPDelegate>)delegate;
 
 @end
+
+#endif

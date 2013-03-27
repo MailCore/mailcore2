@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <mailcore/MCOConstants.h>
 
+#ifndef __MAILCORE_MCOIMAPFOLDER_H_
+
+#define __MAILCORE_MCOIMAPFOLDER_H_
+
 @interface MCOIMAPFolder : NSObject <NSCopying>
 
 @property (nonatomic, copy) NSString * path;
@@ -16,3 +20,5 @@
 @property (nonatomic, assign) MCOIMAPFolderFlag flags;
 
 @end
+
+#endif

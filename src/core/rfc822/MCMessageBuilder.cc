@@ -2,6 +2,7 @@
 
 #include "MCMessageHeader.h"
 #include "MCAttachment.h"
+#include "MCMessageParser.h"
 
 #include <stdlib.h>
 #include <unistd.h>
@@ -696,4 +697,10 @@ Data * MessageBuilder::dataAndFilterBcc(bool filterBcc)
 Data * MessageBuilder::data()
 {
     return dataAndFilterBcc(false);
+}
+
+String * MessageBuilder::htmlRendering(HTMLRendererTemplateCallback * htmlCallback)
+{
+    MessageParser * message = MessageParser::messageParserWithData(data());
+    return message->htmlRendering(htmlCallback);
 }

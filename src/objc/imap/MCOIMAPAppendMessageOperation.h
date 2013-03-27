@@ -6,17 +6,19 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import <mailcore/MCOOperation.h>
+#import <mailcore/MCOIMAPBaseOperation.h>
 #import <mailcore/MCOConstants.h>
 
-@interface MCOIMAPAppendMessageOperation : MCOOperation
+#ifndef __MAILCORE_MCOIMAPAPPENDMESSAGEOPERATION_H_
 
-/*
-@property (nonatomic, copy) NSString * folder;
-@property (nonatomic, strong) NSData * messageData;
-@property (nonatomic, assign) MCOMessageFlag flags;
-*/
+#define __MAILCORE_MCOIMAPAPPENDMESSAGEOPERATION_H_
+
+@interface MCOIMAPAppendMessageOperation : MCOIMAPBaseOperation
+
+@property (nonatomic, copy) MCOIMAPBaseOperationProgressBlock progress;
 
 - (void)start:(void (^)(NSError *error, uint32_t createdUID))completionBlock;
 
 @end
+
+#endif

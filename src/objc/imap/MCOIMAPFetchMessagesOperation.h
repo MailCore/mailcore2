@@ -6,20 +6,21 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import <mailcore/MCOOperation.h>
+#import <mailcore/MCOIMAPBaseOperation.h>
 #import <mailcore/MCOConstants.h>
+
+#ifndef __MAILCORE_MCOIMAPFETCHMESSAGESOPERATION_H_
+
+#define __MAILCORE_MCOIMAPFETCHMESSAGESOPERATION_H_
 
 @class MCOIndexSet;
 
-@interface MCOIMAPFetchMessagesOperation : MCOOperation
+@interface MCOIMAPFetchMessagesOperation : MCOIMAPBaseOperation
 
-/*
-@property (nonatomic, assign, getter=isFetchByUidEnabled) BOOL fetchByUidEnabled;
-@property (nonatomic, strong) MCOIndexSet * indexes;
-@property (nonatomic, assign) uint64_t modSequenceValue;
-@property (nonatomic, assign) MCOIMAPMessagesRequestKind kind;
-*/
+@property (nonatomic, copy) MCOIMAPBaseOperationItemProgressBlock progress;
 
 - (void)start:(void (^)(NSError *error, NSArray * messages, MCOIndexSet * vanishedMessages))completionBlock;
 
 @end
+
+#endif

@@ -8,8 +8,14 @@
 
 #import <mailcore/MCOOperation.h>
 
+#ifndef __MAILCORE_MCOIMAPOPERATION_H_
+
+#define __MAILCORE_MCOIMAPOPERATION_H_
+
 @interface MCOIMAPOperation : MCOOperation
 
 - (void)start:(void (^)(NSError *error))completionBlock;
 
 @end
+
+#endif

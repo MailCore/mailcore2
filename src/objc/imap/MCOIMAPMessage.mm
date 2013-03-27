@@ -60,7 +60,7 @@ MCO_OBJC_SYNTHESIZE_ARRAY(setGmailLabels, gmailLabels)
 
 - (MCOAbstractPart *) partForUniqueID:(NSString *)uniqueID
 {
-    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->partForContentID([uniqueID mco_mcString]));
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->partForUniqueID([uniqueID mco_mcString]));
 }
 
 - (NSString *) htmlRenderingWithFolder:(NSString *)folder

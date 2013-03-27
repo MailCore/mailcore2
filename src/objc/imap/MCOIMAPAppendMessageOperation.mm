@@ -17,7 +17,10 @@ typedef void (^completionType)(NSError *error, uint32_t createdUID);
 
 @implementation MCOIMAPAppendMessageOperation {
     completionType _completionBlock;
+    MCOIMAPBaseOperationProgressBlock _progress;
 }
+
+@synthesize progress = _progress;
 
 #define nativeType mailcore::IMAPAppendMessageOperation
 
@@ -34,6 +37,7 @@ typedef void (^completionType)(NSError *error, uint32_t createdUID);
 
 - (void) dealloc
 {
+    [_progress release];
     [_completionBlock release];
     [super dealloc];
 }
@@ -50,6 +54,11 @@ typedef void (^completionType)(NSError *error, uint32_t createdUID);
     } else {
         _completionBlock([NSError mco_errorWithErrorCode:op->error()], 0);
     }
+}
+
+- (void) bodyProgress:(unsigned int)current maximum:(unsigned int)maximum
+{
+    _progress(current, maximum);
 }
 
 @end

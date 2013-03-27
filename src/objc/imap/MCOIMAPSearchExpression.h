@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <mailcore/MCOConstants.h>
 
+#ifndef __MAILCORE_MCOIMAPSEARCHEXPRESSION_H_
+
+#define __MAILCORE_MCOIMAPSEARCHEXPRESSION_H_
+
 @interface MCOIMAPSearchExpression : NSObject
 
 + (MCOIMAPSearchExpression *) searchFrom:(NSString *)value;
@@ -20,3 +24,5 @@
 + (MCOIMAPSearchExpression *) searchOr:(MCOIMAPSearchExpression *)expression other:(MCOIMAPSearchExpression *)other;
 
 @end
+
+#endif

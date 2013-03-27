@@ -14,6 +14,7 @@
 #import <mailcore/MCOUtils.h>
 #import <mailcore/MCOAbstract.h>
 #import <mailcore/MCOIMAP.h>
+#import <mailcore/MCORFC822.h>
 
 #endif
 

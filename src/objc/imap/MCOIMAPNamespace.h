@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+#ifndef __MAILCORE_MCOIMAPNAMESPACE_H_
+
+#define __MAILCORE_MCOIMAPNAMESPACE_H_
+
 @class MCOIMAPNamespace;
 
 @interface MCOIMAPNamespace : NSObject <NSCopying>
@@ -23,3 +27,5 @@
 - (BOOL) containsFolderPath:(NSString *)path;
 
 @end
+
+#endif

@@ -13,6 +13,7 @@
 #import <mailcore/MCOAbstractMessage.h>
 
 @class MCOAttachment;
+@protocol MCOHTMLRendererDelegate;
 
 @interface MCOMessageBuilder : MCOAbstractMessage <NSCopying>
 
@@ -26,6 +27,8 @@
 - (void) addRelatedAttachment:(MCOAttachment *)attachment;
 
 - (NSData *) data;
+
+- (NSString *) htmlRenderingWithDelegate:(id <MCOHTMLRendererDelegate>)delegate;
 
 @end
 

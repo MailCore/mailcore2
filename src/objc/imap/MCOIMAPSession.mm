@@ -136,6 +136,9 @@ MCO_OBJC_SYNTHESIZE_SCALAR(char, char, setDelimiter, delimiter)
                                                               requestKind:(MCOIMAPMessagesRequestKind)requestKind
                                                                      uids:(MCOIndexSet *)uids
 {
+    NSLog(@"1:%p", MCO_NATIVE_INSTANCE);
+    NSLog(@"2:%p", [folder mco_mcString]);
+    NSLog(@"3:%p", MCO_FROM_OBJC(IndexSet, uids));
     IMAPFetchMessagesOperation * coreOp = MCO_NATIVE_INSTANCE->fetchMessagesByUIDOperation([folder mco_mcString],
                                                                                            (IMAPMessagesRequestKind) requestKind,
                                                                                            MCO_FROM_OBJC(IndexSet, uids));

@@ -13,7 +13,6 @@
 #import "MCOOperation+Private.h"
 #import "MCOIMAPFolderInfo.h"
 #import "MCOUtils.h"
-#import "MCOIMAPFolderInfo.h"
 
 typedef void (^completionType)(NSError *error, MCOIMAPFolderInfo *info);
 

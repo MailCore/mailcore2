@@ -37,6 +37,11 @@
     return [[[self alloc] initWithMCIndexSet:part] autorelease];
 }
 
+- (mailcore::Object *) mco_mcObject
+{
+    return _indexSet;
+}
+
 - (id) init
 {
     mailcore::IndexSet * indexSet = new mailcore::IndexSet();

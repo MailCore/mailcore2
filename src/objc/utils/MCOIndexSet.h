@@ -10,6 +10,10 @@
 
 #import <mailcore/MCORange.h>
 
+#ifndef __MAILCORE_MCOINDEXSET_H_
+
+#define __MAILCORE_MCOINDEXSET_H_
+
 // similar to NSMutableIndexSet but supports int64_t
 
 @interface MCOIndexSet : NSObject <NSCopying>
@@ -31,3 +35,5 @@
 - (unsigned int) rangesCount;
 
 @end
+
+#endif

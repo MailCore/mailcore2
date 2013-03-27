@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+#ifndef __MAILCORE_MCOIMAPFOLDERINFO_H_
+
+#define __MAILCORE_MCOIMAPFOLDERINFO_H_
+
 @interface MCOIMAPFolderInfo : NSObject
 
 + (MCOIMAPFolderInfo *) info;
@@ -18,3 +22,5 @@
 @property (nonatomic, assign) int messageCount;
 
 @end
+
+#endif

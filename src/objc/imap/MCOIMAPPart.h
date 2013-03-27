@@ -10,6 +10,10 @@
 
 #import <mailcore/MCOConstants.h>
 
+#ifndef __MAILCORE_MCOIMAPABSTRACTPART_H_
+
+#define __MAILCORE_MCOIMAPABSTRACTPART_H_
+
 @interface MCOIMAPPart : MCOAbstractPart <NSCopying>
 
 @property (nonatomic, copy) NSString * partID;
@@ -19,3 +23,5 @@
 - (unsigned int) decodedSize;
 
 @end
+
+#endif

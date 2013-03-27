@@ -12,6 +12,7 @@
 
 #import "MCOOperation+Private.h"
 #import "MCOUtils.h"
+#import "MCOIndexSet.h"
 
 typedef void (^completionType)(NSError *error, MCOIndexSet * destUids);
 

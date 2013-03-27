@@ -6,18 +6,18 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import <mailcore/MCOOperation.h>
+#import <mailcore/MCOIMAPBaseOperation.h>
+
+#ifndef __MAILCORE_MCOCOPYMESSAGESOPERATION_H_
+
+#define __MAILCORE_MCOCOPYMESSAGESOPERATION_H_
 
 @class MCOIndexSet;
 
-@interface MCOIMAPCopyMessagesOperation : MCOOperation
-
-/*
-@property (nonatomic, copy) NSString * folder;
-@property (nonatomic, strong) MCOIndexSet * uids;
-@property (nonatomic, copy) NSString * destFolder;
-*/
+@interface MCOIMAPCopyMessagesOperation : MCOIMAPBaseOperation
 
 - (void)start:(void (^)(NSError *error, MCOIndexSet * destUids))completionBlock;
 
 @end
+
+#endif

@@ -6,10 +6,16 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import <mailcore/MCOOperation.h>
+#import <mailcore/MCOIMAPBaseOperation.h>
 
-@interface MCOIMAPFetchNamespaceOperation : MCOOperation
+#ifndef __MAILCORE_MCOIMAPFETCHNAMESPACEOPERATION_H_
+
+#define __MAILCORE_MCOIMAPFETCHNAMESPACEOPERATION_H_
+
+@interface MCOIMAPFetchNamespaceOperation : MCOIMAPBaseOperation
 
 - (void)start:(void (^)(NSError *error, NSDictionary * namespaces))completionBlock;
 
 @end
+
+#endif

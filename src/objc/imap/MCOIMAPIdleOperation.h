@@ -6,12 +6,18 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import <mailcore/MCOOperation.h>
+#import <mailcore/MCOIMAPBaseOperation.h>
 
-@interface MCOIMAPIdleOperation : MCOOperation
+#ifndef __MAILCORE_MCOIMAPIDLEOPERATION_H_
+
+#define __MAILCORE_MCOIMAPIDLEOPERATION_H_
+
+@interface MCOIMAPIdleOperation : MCOIMAPBaseOperation
 
 - (void) interruptIdle;
 
 - (void)start:(void (^)(NSError *error))completionBlock;
 
 @end
+
+#endif

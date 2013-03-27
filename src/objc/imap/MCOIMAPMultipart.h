@@ -8,8 +8,14 @@
 
 #import <mailcore/MCOAbstractMultipart.h>
 
+#ifndef __MAILCORE_MCOIMAPMULTIPART_H_
+
+#define __MAILCORE_MCOIMAPMULTIPART_H_
+
 @interface MCOIMAPMultipart : MCOAbstractMultipart <NSCopying>
 
 @property (nonatomic, copy) NSString * partID;
 
 @end
+
+#endif

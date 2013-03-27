@@ -22,9 +22,9 @@ using namespace mailcore;
 - (void)_operationCompleted;
 @end
 
-class CompletionCallback : public Object, public OperationCallback {
+class MCOOperationCompletionCallback : public Object, public OperationCallback {
 public:
-    CompletionCallback(MCOOperation *op) {
+    MCOOperationCompletionCallback(MCOOperation *op) {
         mOperation = op;
     }
 
@@ -39,7 +39,7 @@ public:
 
 @implementation MCOOperation {
     Operation * _operation;
-    CompletionCallback * _callback;
+    MCOOperationCompletionCallback * _callback;
     BOOL _started;
 }
 
@@ -63,7 +63,7 @@ public:
     _operation = op;
     _operation->retain();
     
-    _callback = new CompletionCallback(self);
+    _callback = new MCOOperationCompletionCallback(self);
     _operation->setCallback(_callback);
     
     return self;

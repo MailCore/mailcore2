@@ -6,11 +6,17 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import <mailcore/MCOOperation.h>
+#import <mailcore/MCOIMAPBaseOperation.h>
 #import <mailcore/MCOIMAPOperation.h>
+
+#ifndef __MAILCORE_MCOIMAPFOLDERINFOOPERATION_H_
+
+#define __MAILCORE_MCOIMAPFOLDERINFOOPERATION_H_
 
 @class MCOIMAPFolderInfo;
 
-@interface MCOIMAPFolderInfoOperation : MCOIMAPOperation
+@interface MCOIMAPFolderInfoOperation : MCOIMAPBaseOperation
 - (void)start:(void (^)(NSError *error, MCOIMAPFolderInfo *info))completionBlock;
 @end
+
+#endif
