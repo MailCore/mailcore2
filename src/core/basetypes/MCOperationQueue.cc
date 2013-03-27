@@ -109,6 +109,9 @@ void OperationQueue::runOperations()
 
 void OperationQueue::callbackOnMainThread(Operation * op)
 {
+    if (op->isCancelled())
+        return;
+    
     if (op->callback() != NULL) {
         op->callback()->operationFinished(op);
     }

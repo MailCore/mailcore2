@@ -50,48 +50,6 @@ bool IMAPFetchMessagesOperation::isFetchByUidEnabled()
     return mFetchByUidEnabled;
 }
 
-#if 0
-void IMAPFetchMessagesOperation::setFirst(uint32_t first)
-{
-    mFirst = first;
-}
-
-uint32_t IMAPFetchMessagesOperation::first()
-{
-    return mFirst;
-}
-
-void IMAPFetchMessagesOperation::setLast(uint32_t last)
-{
-    mLast = last;
-}
-
-uint32_t IMAPFetchMessagesOperation::last()
-{
-    return mLast;
-}
-
-void IMAPFetchMessagesOperation::setUids(Array * uids)
-{
-    MC_SAFE_REPLACE_RETAIN(Array, mUids, uids);
-}
-
-Array * IMAPFetchMessagesOperation::uids()
-{
-    return mUids;
-}
-
-void IMAPFetchMessagesOperation::setNumbers(Array * numbers)
-{
-    MC_SAFE_REPLACE_RETAIN(Array, mNumbers, numbers);
-}
-
-Array * IMAPFetchMessagesOperation::numbers()
-{
-    return mNumbers;
-}
-#endif
-
 void IMAPFetchMessagesOperation::setIndexes(IndexSet * indexes)
 {
     MC_SAFE_REPLACE_RETAIN(IndexSet, mIndexes, indexes);

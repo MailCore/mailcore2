@@ -82,34 +82,54 @@ struct progressContext {
 
 void IMAPOperation::bodyProgress(IMAPSession * session, unsigned int current, unsigned int maximum)
 {
+    if (isCancelled())
+        return;
+    
     struct progressContext * context = (struct progressContext *) calloc(sizeof(* context), 1);
     context->current = current;
     context->maximum = maximum;
+    retain();
     performMethodOnMainThread((Object::Method) &IMAPOperation::bodyProgressOnMainThread, context);
 }
 
 void IMAPOperation::bodyProgressOnMainThread(void * ctx)
 {
+    if (isCancelled())
+        return;
+    
     struct progressContext * context = (struct progressContext *) ctx;
     if (mImapCallback != NULL) {
         mImapCallback->bodyProgress(this, context->current, context->maximum);
     }
     free(context);
+    release();
 }
 
 void IMAPOperation::itemsProgress(IMAPSession * session, unsigned int current, unsigned int maximum)
 {
+    if (isCancelled()) {
+        release();
+        return;
+    }
+    
     struct progressContext * context = (struct progressContext *) calloc(sizeof(* context), 1);
     context->current = current;
     context->maximum = maximum;
+    retain();
     performMethodOnMainThread((Object::Method) &IMAPOperation::itemsProgressOnMainThread, context);
 }
 
 void IMAPOperation::itemsProgressOnMainThread(void * ctx)
 {
+    if (isCancelled()) {
+        release();
+        return;
+    }
+    
     struct progressContext * context = (struct progressContext *) ctx;
     if (mImapCallback != NULL) {
         mImapCallback->itemProgress(this, context->current, context->maximum);
     }
     free(context);
+    release();
 }
