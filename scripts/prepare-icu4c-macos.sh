@@ -96,8 +96,7 @@ iculx_paths=""
 icutest_paths=""
 icutu_paths=""
 icuuc_paths="" #
-archs="armv7 i386"
-for cur_arch in $archs ; do
+for cur_arch in $arch ; do
 	icudata_paths="$icudata_paths icu4c-$cur_arch/lib/libicudata.a"
 	icui18n_paths="$icui18n_paths icu4c-$cur_arch/lib/libicui18n.a"
 	icuio_paths="$icuio_paths icu4c-$cur_arch/lib/libicuio.a"
