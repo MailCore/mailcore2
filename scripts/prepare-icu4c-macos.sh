@@ -1,7 +1,7 @@
 #!/bin/sh
 
-versionfolder='50.1.1'
-version='50_1_1'
+versionfolder='51.1'
+version='51_1'
 url="http://download.icu-project.org/files/icu4c/$versionfolder/icu4c-$version-src.tgz"
 package_filename="icu4c-$version-src.tgz"
 arch="x86_64"
@@ -62,8 +62,8 @@ for cur_arch in $arch ; do
 	export CFLAGS="$cur_arch_flags -isysroot $sysrootpath -mfix-and-continue -mmacosx-version-min=10.7"
 	export CXXFLAGS="$cur_arch_flags -isysroot $sysrootpath -mfix-and-continue -mmacosx-version-min=10.7"
 	export LDLAGS="$cur_arch_flags -isysroot $sysrootpath -mfix-and-continue -mmacosx-version-min=10.7"
-	mkdir -p "$tmpdir/bin/icu4c-$cur_arch"
-	cd "$tmpdir/bin/icu4c-$cur_arch"
+	mkdir -p "$tmpdir/build/icu4c-$cur_arch"
+	cd "$tmpdir/build/icu4c-$cur_arch"
 	if test "x$cur_arch" = xx86_64 ; then
 		"$srcdir/icu/source/configure" --enable-static --disable-shared --with-data-packaging=archive >> "$logdir/icu4c-build.log"
 	else
@@ -88,16 +88,32 @@ cp "$tmpdir/bin/icu4c-x86_64/share/icu/$versionfolder/icudt50l.dat" "$tmpdir/bin
 mkdir -p "$tmpdir/bin/icu4c/lib"
 cd "$tmpdir/bin"
 
-icui18n_paths=""
-icudata_paths=""
-icuuc_paths=""
-for cur_arch in $arch ; do
-	icui18n_paths="$icui18n_paths icu4c-$cur_arch/lib/libicui18n.a"
+icudata_paths="" #
+icui18n_paths="" #
+icuio_paths=""
+icule_paths=""
+iculx_paths=""
+icutest_paths=""
+icutu_paths=""
+icuuc_paths="" #
+archs="armv7 i386"
+for cur_arch in $archs ; do
 	icudata_paths="$icudata_paths icu4c-$cur_arch/lib/libicudata.a"
+	icui18n_paths="$icui18n_paths icu4c-$cur_arch/lib/libicui18n.a"
+	icuio_paths="$icuio_paths icu4c-$cur_arch/lib/libicuio.a"
+	icule_paths="$icule_paths icu4c-$cur_arch/lib/libicule.a"
+	iculx_paths="$iculx_paths icu4c-$cur_arch/lib/libiculx.a"
+	icutest_paths="$icutest_paths icu4c-$cur_arch/lib/libicutest.a"
+	icutu_paths="$icutu_paths icu4c-$cur_arch/lib/libicutu.a"
 	icuuc_paths="$icuuc_paths icu4c-$cur_arch/lib/libicuuc.a"
 done
-lipo -create $icui18n_paths -output icu4c/lib/libicui18n.a
 lipo -create $icudata_paths -output icu4c/lib/libicudata.a
+lipo -create $icui18n_paths -output icu4c/lib/libicui18n.a
+lipo -create $icuio_paths -output icu4c/lib/libicuio.a
+lipo -create $icule_paths -output icu4c/lib/libicule.a
+lipo -create $iculx_paths -output icu4c/lib/libiculx.a
+lipo -create $icutest_paths -output icu4c/lib/libicutest.a
+lipo -create $icutu_paths -output icu4c/lib/libicutu.a
 lipo -create $icuuc_paths -output icu4c/lib/libicuuc.a
 
 cd "$tmpdir/bin"

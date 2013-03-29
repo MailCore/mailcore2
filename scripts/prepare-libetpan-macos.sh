@@ -1,13 +1,6 @@
 #!/bin/sh
 
-arch="x86_64"
-sysrootpath="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk"
 url="https://github.com/dinhviethoa/libetpan.git"
-
-arch_flags=""
-for current_arch in $arch ; do
-	arch_flags="$arch_flags -arch $current_arch"
-done
 
 builddir="$HOME/MailCore-Builds/dependencies"
 BUILD_TIMESTAMP=`date +'%Y%m%d%H%M%S'`
