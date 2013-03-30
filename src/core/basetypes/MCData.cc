@@ -353,9 +353,9 @@ Data * Data::dataWithContentsOfFile(String * filename)
         return NULL;
     }
     
-    buf = (char *) malloc(stat_buf.st_size);
+    buf = (char *) malloc((size_t) stat_buf.st_size);
     
-    read_items = fread(buf, 1, stat_buf.st_size, f);
+    read_items = fread(buf, 1, (size_t)  stat_buf.st_size, f);
     if ((off_t) read_items != stat_buf.st_size) {
         free(buf);
         fclose(f);

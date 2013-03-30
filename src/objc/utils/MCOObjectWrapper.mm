@@ -8,11 +8,24 @@
 
 #import "MCOObjectWrapper.h"
 
+#include <typeinfo>
+
 #include "MCUtils.h"
-#include "MCObject.h"
+#include "MCBaseTypes.h"
+
+#import "NSObject+MCO.h"
 
 @implementation MCOObjectWrapper {
     mailcore::Object * mObject;
+}
+
++ (void) load
+{
+    MCORegisterClass([NSValue class], &typeid(mailcore::Value));
+    MCORegisterClass([NSData class], &typeid(mailcore::Data));
+    MCORegisterClass([NSString class], &typeid(mailcore::String));
+    MCORegisterClass([NSDictionary class], &typeid(mailcore::HashMap));
+    MCORegisterClass([NSArray class], &typeid(mailcore::Array));
 }
 
 - (void) dealloc

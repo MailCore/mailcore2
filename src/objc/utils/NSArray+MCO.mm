@@ -14,6 +14,11 @@
 
 @implementation NSArray (MCO)
 
++ (id) mco_objectWithMCObject:(mailcore::Object *)object
+{
+    return [self mco_arrayWithMCArray:(mailcore::Array *) object];
+}
+
 + (NSArray *) mco_arrayWithMCArray:(mailcore::Array *)array
 {
     NSMutableArray * result = [NSMutableArray array];

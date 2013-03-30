@@ -14,6 +14,11 @@
 
 @implementation NSValue (MCO)
 
++ (id) mco_objectWithMCObject:(mailcore::Object *)object
+{
+    return [self mco_valueWithMCValue:(mailcore::Value *) object];
+}
+
 + (NSNumber *) mco_valueWithMCValue:(mailcore::Value *)value
 {
     switch (value->type()) {

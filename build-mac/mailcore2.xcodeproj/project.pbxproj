@@ -211,6 +211,15 @@
 		C64EA82C16A2A08B00778456 /* MCIMAPFetchNamespaceOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA82A16A29FAA00778456 /* MCIMAPFetchNamespaceOperation.cc */; };
 		C64FF39116B3C13000F8C162 /* MCOObjectWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = C64FF39016B3C13000F8C162 /* MCOObjectWrapper.mm */; };
 		C64FF39316B3C25200F8C162 /* MCOObjectWrapper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64FF38F16B3C13000F8C162 /* MCOObjectWrapper.h */; };
+		C6A81B931706840C00882C15 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A81B921706840C00882C15 /* UIKit.framework */; };
+		C6A81B941706840C00882C15 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64EA78F169F259200778456 /* Foundation.framework */; };
+		C6A81B961706840C00882C15 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A81B951706840C00882C15 /* CoreGraphics.framework */; };
+		C6A81BAE1706847900882C15 /* test-all.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6A81BAC1706847900882C15 /* test-all.mm */; };
+		C6A81BAF170684D300882C15 /* test-all.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6A81BAC1706847900882C15 /* test-all.mm */; };
+		C6A81BB2170685A700882C15 /* libmailcore2-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6BA2C191705F4E6003F0E9E /* libmailcore2-ios.a */; };
+		C6A81BB41706891B00882C15 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A81BB31706891B00882C15 /* CFNetwork.framework */; };
+		C6A81BBA17068C0600882C15 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6A81BB717068C0600882C15 /* AppDelegate.mm */; };
+		C6A81BBB17068C0600882C15 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C6A81BB817068C0600882C15 /* main.m */; };
 		C6BA2B0C1705F4E6003F0E9E /* MCHTMLRendererCallback.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD68516BE148B00DB18F1 /* MCHTMLRendererCallback.h */; };
 		C6BA2B0D1705F4E6003F0E9E /* MCOMultipart.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB26816FD44C2000DB34C /* MCOMultipart.h */; };
 		C6BA2B0E1705F4E6003F0E9E /* MCOMessageBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB25F16FD438F000DB34C /* MCOMessageBuilder.h */; };
@@ -548,6 +557,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = C64EA536169E772200778456;
 			remoteInfo = mailcore2;
+		};
+		C6A81BB01706852200882C15 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C64EA52E169E772200778456 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C6BA2B091705F4E6003F0E9E;
+			remoteInfo = "mailcore2 ios";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1092,6 +1108,16 @@
 		C64EA82B16A2A01400778456 /* MCIMAPFetchNamespaceOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPFetchNamespaceOperation.h; sourceTree = "<group>"; };
 		C64FF38F16B3C13000F8C162 /* MCOObjectWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOObjectWrapper.h; sourceTree = "<group>"; };
 		C64FF39016B3C13000F8C162 /* MCOObjectWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOObjectWrapper.mm; sourceTree = "<group>"; };
+		C6A81B911706840C00882C15 /* test-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "test-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6A81B921706840C00882C15 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		C6A81B951706840C00882C15 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		C6A81BAC1706847900882C15 /* test-all.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "test-all.mm"; sourceTree = "<group>"; };
+		C6A81BAD1706847900882C15 /* test-all.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "test-all.h"; sourceTree = "<group>"; };
+		C6A81BB31706891B00882C15 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
+		C6A81BB617068C0600882C15 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		C6A81BB717068C0600882C15 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		C6A81BB817068C0600882C15 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C6A81BB917068C0600882C15 /* tests-ios-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "tests-ios-Info.plist"; sourceTree = "<group>"; };
 		C6BA2C191705F4E6003F0E9E /* libmailcore2-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmailcore2-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6CCC5C616FFE5190077A5FC /* MCORange.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCORange.mm; sourceTree = "<group>"; };
 		C6CCC5C816FFE54F0077A5FC /* MCORange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCORange.h; sourceTree = "<group>"; };
@@ -1173,6 +1199,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C6A81B8E1706840C00882C15 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6A81BB41706891B00882C15 /* CFNetwork.framework in Frameworks */,
+				C6A81BB2170685A700882C15 /* libmailcore2-ios.a in Frameworks */,
+				C6A81B931706840C00882C15 /* UIKit.framework in Frameworks */,
+				C6A81B941706840C00882C15 /* Foundation.framework in Frameworks */,
+				C6A81B961706840C00882C15 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C6BA2C151705F4E6003F0E9E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1251,8 +1289,10 @@
 		C64EA52C169E772200778456 = {
 			isa = PBXGroup;
 			children = (
+				C6A81BB31706891B00882C15 /* CFNetwork.framework */,
 				C64EA545169E78B100778456 /* src */,
 				C64EA7A916A00AF400778456 /* tests */,
+				C6A81BB517068C0600882C15 /* tests-ios */,
 				C64EA78E169F259200778456 /* Frameworks */,
 				C64EA538169E772200778456 /* Products */,
 			);
@@ -1264,6 +1304,7 @@
 				C64EA537169E772200778456 /* libmailcore2.a */,
 				C64EA78C169F259200778456 /* tests */,
 				C6BA2C191705F4E6003F0E9E /* libmailcore2-ios.a */,
+				C6A81B911706840C00882C15 /* test-ios.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1539,6 +1580,8 @@
 			children = (
 				C64EA7B016A00BBB00778456 /* CoreServices.framework */,
 				C64EA78F169F259200778456 /* Foundation.framework */,
+				C6A81B921706840C00882C15 /* UIKit.framework */,
+				C6A81B951706840C00882C15 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1547,9 +1590,23 @@
 			isa = PBXGroup;
 			children = (
 				C64EA7AA16A00AF600778456 /* main.mm */,
+				C6A81BAC1706847900882C15 /* test-all.mm */,
+				C6A81BAD1706847900882C15 /* test-all.h */,
 			);
 			name = tests;
 			path = ../tests;
+			sourceTree = "<group>";
+		};
+		C6A81BB517068C0600882C15 /* tests-ios */ = {
+			isa = PBXGroup;
+			children = (
+				C6A81BB617068C0600882C15 /* AppDelegate.h */,
+				C6A81BB717068C0600882C15 /* AppDelegate.mm */,
+				C6A81BB817068C0600882C15 /* main.m */,
+				C6A81BB917068C0600882C15 /* tests-ios-Info.plist */,
+			);
+			name = "tests-ios";
+			path = "../tests-ios";
 			sourceTree = "<group>";
 		};
 		C6D42C0016ADF5AF002BB4F9 /* objc */ = {
@@ -1705,6 +1762,24 @@
 			productReference = C64EA78C169F259200778456 /* tests */;
 			productType = "com.apple.product-type.tool";
 		};
+		C6A81B901706840C00882C15 /* test-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C6A81BA91706840C00882C15 /* Build configuration list for PBXNativeTarget "test-ios" */;
+			buildPhases = (
+				C6A81B8D1706840C00882C15 /* Sources */,
+				C6A81B8E1706840C00882C15 /* Frameworks */,
+				C6A81B8F1706840C00882C15 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C6A81BB11706852200882C15 /* PBXTargetDependency */,
+			);
+			name = "test-ios";
+			productName = "test ios";
+			productReference = C6A81B911706840C00882C15 /* test-ios.app */;
+			productType = "com.apple.product-type.application";
+		};
 		C6BA2B091705F4E6003F0E9E /* mailcore2 ios */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C6BA2C161705F4E6003F0E9E /* Build configuration list for PBXNativeTarget "mailcore2 ios" */;
@@ -1747,9 +1822,20 @@
 				C64EA536169E772200778456 /* mailcore2 */,
 				C6BA2B091705F4E6003F0E9E /* mailcore2 ios */,
 				C64EA78B169F259200778456 /* tests */,
+				C6A81B901706840C00882C15 /* test-ios */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C6A81B8F1706840C00882C15 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		C64EA780169E867600778456 /* ShellScript */ = {
@@ -1917,6 +2003,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				C64EA7AB16A00AF600778456 /* main.mm in Sources */,
+				C6A81BAF170684D300882C15 /* test-all.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C6A81B8D1706840C00882C15 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6A81BAE1706847900882C15 /* test-all.mm in Sources */,
+				C6A81BBA17068C0600882C15 /* AppDelegate.mm in Sources */,
+				C6A81BBB17068C0600882C15 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2059,6 +2156,11 @@
 			target = C64EA536169E772200778456 /* mailcore2 */;
 			targetProxy = C64EA7A2169F2A1D00778456 /* PBXContainerItemProxy */;
 		};
+		C6A81BB11706852200882C15 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C6BA2B091705F4E6003F0E9E /* mailcore2 ios */;
+			targetProxy = C6A81BB01706852200882C15 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -2119,6 +2221,25 @@
 					"\"$(SRCROOT)/../Externals/icu4c/lib\"",
 					"\"$(SRCROOT)/../Externals/ctemplate/lib\"",
 				);
+				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = (
+					"\"$(SRCROOT)/../Externals/libetpan-ios/lib\"",
+					"\"$(SRCROOT)/../Externals/icu4c-ios/lib\"",
+					"\"$(SRCROOT)/../Externals/ctemplate-ios/lib\"",
+					"\"$(SRCROOT)/../Externals/libsasl-ios/lib\"",
+					"\"$(SRCROOT)/../Externals/tidy-html5/lib\"",
+				);
+				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"\"$(SRCROOT)/../Externals/libetpan-ios/lib\"",
+					"\"$(SRCROOT)/../Externals/icu4c-ios/lib\"",
+					"\"$(SRCROOT)/../Externals/ctemplate-ios/lib\"",
+					"\"$(SRCROOT)/../Externals/libsasl-ios/lib\"",
+					"\"$(SRCROOT)/../Externals/tidy-html5/lib\"",
+				);
+				"LIBRARY_SEARCH_PATHS[sdk=macosx*]" = (
+					"\"$(SRCROOT)/../Externals/libetpan-ios/lib\"",
+					"\"$(SRCROOT)/../Externals/icu4c-ios/lib\"",
+					"\"$(SRCROOT)/../Externals/ctemplate-ios/lib\"",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -2175,6 +2296,25 @@
 					"\"$(SRCROOT)/../Externals/libetpan/lib\"",
 					"\"$(SRCROOT)/../Externals/icu4c/lib\"",
 					"\"$(SRCROOT)/../Externals/ctemplate/lib\"",
+				);
+				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = (
+					"\"$(SRCROOT)/../Externals/libetpan-ios/lib\"",
+					"\"$(SRCROOT)/../Externals/icu4c-ios/lib\"",
+					"\"$(SRCROOT)/../Externals/ctemplate-ios/lib\"",
+					"\"$(SRCROOT)/../Externals/libsasl-ios/lib\"",
+					"\"$(SRCROOT)/../Externals/tidy-html5/lib\"",
+				);
+				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"\"$(SRCROOT)/../Externals/libetpan-ios/lib\"",
+					"\"$(SRCROOT)/../Externals/icu4c-ios/lib\"",
+					"\"$(SRCROOT)/../Externals/ctemplate-ios/lib\"",
+					"\"$(SRCROOT)/../Externals/libsasl-ios/lib\"",
+					"\"$(SRCROOT)/../Externals/tidy-html5/lib\"",
+				);
+				"LIBRARY_SEARCH_PATHS[sdk=macosx*]" = (
+					"\"$(SRCROOT)/../Externals/libetpan-ios/lib\"",
+					"\"$(SRCROOT)/../Externals/icu4c-ios/lib\"",
+					"\"$(SRCROOT)/../Externals/ctemplate-ios/lib\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SDKROOT = macosx;
@@ -2239,6 +2379,75 @@
 			};
 			name = Release;
 		};
+		C6A81BAA1706840C00882C15 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				INFOPLIST_FILE = "../tests-ios/tests-ios-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_LDFLAGS = (
+					"-lctemplate-ios",
+					"-letpan-ios",
+					"-licudata",
+					"-licui18n",
+					"-licuuc",
+					"-lxml2",
+					"-lsasl2",
+					"-liconv",
+					"-all_load",
+					"-ltidy",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C6A81BAB1706840C00882C15 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				INFOPLIST_FILE = "../tests-ios/tests-ios-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = (
+					"-lctemplate-ios",
+					"-letpan-ios",
+					"-licudata",
+					"-licui18n",
+					"-licuuc",
+					"-lxml2",
+					"-lsasl2",
+					"-liconv",
+					"-all_load",
+					"-ltidy",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		C6BA2C171705F4E6003F0E9E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2292,6 +2501,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		C6A81BA91706840C00882C15 /* Build configuration list for PBXNativeTarget "test-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C6A81BAA1706840C00882C15 /* Debug */,
+				C6A81BAB1706840C00882C15 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		C6BA2C161705F4E6003F0E9E /* Build configuration list for PBXNativeTarget "mailcore2 ios" */ = {
 			isa = XCConfigurationList;

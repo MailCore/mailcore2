@@ -14,6 +14,11 @@
 
 @implementation NSDictionary (MCO)
 
++ (id) mco_objectWithMCObject:(mailcore::Object *)object
+{
+    return [self mco_dictionaryWithMCHashMap:(mailcore::HashMap *) object];
+}
+
 + (NSDictionary *) mco_dictionaryWithMCHashMap:(mailcore::HashMap *)hashmap
 {
     NSMutableDictionary * result = [NSMutableDictionary dictionary];

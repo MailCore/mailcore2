@@ -12,6 +12,11 @@
 
 @implementation NSString (MCO)
 
++ (id) mco_objectWithMCObject:(mailcore::Object *)object
+{
+    return [self mco_stringWithMCString:(mailcore::String *) object];
+}
+
 + (NSString *) mco_stringWithMCString:(mailcore::String *)cppString
 {
     if (cppString == NULL)

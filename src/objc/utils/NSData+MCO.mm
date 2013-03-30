@@ -12,6 +12,11 @@
 
 @implementation NSData (MCO)
 
++ (id) mco_objectWithMCObject:(mailcore::Object *)object
+{
+    return [self mco_dataWithMCData:(mailcore::Data *) object];
+}
+
 + (NSData *) mco_dataWithMCData:(mailcore::Data *)cppData
 {
     if (cppData == NULL)

@@ -31,11 +31,16 @@ void MCORegisterClass(Class aClass, const std::type_info * info)
 {
     init();
     
-    size_t hash_value = info->hash_code();
     chashdatum key;
     chashdatum value;
+#ifdef __LIBCPP_TYPEINFO
+    size_t hash_value = info->hash_code();
     key.data = &hash_value;
     key.len = sizeof(hash_value);
+#else
+    key.data = (void *) info->name();
+    key.len = strlen(info->name());
+#endif
     value.data = aClass;
     value.len = 0;
     chash_set(classHash, &key, &value, NULL);
@@ -45,12 +50,17 @@ static Class classWithTypeInfo(const std::type_info * info)
 {
     init();
     
-    size_t hash_value = info->hash_code();
     int r;
     chashdatum key;
     chashdatum value;
+#ifdef __LIBCPP_TYPEINFO
+    size_t hash_value = info->hash_code();
     key.data = &hash_value;
     key.len = sizeof(hash_value);
+#else
+    key.data = (void *) info->name();
+    key.len = strlen(info->name());
+#endif
     r = chash_get(classHash, &key, &value);
     if (r < 0)
         return nil;
@@ -66,6 +76,7 @@ static Class classWithTypeInfo(const std::type_info * info)
         return nil;
     
     //fprintf(stderr, "typeid: %i %i\n", typeid(* object).hash_code(), typeid(mailcore::Array).hash_code());
+#ifdef __LIBCPP_TYPEINFO
     size_t objectType = typeid(* object).hash_code();
     if (objectType == typeid(mailcore::Value).hash_code()) {
         return [NSValue mco_valueWithMCValue:(mailcore::Value *) object];
@@ -87,6 +98,11 @@ static Class classWithTypeInfo(const std::type_info * info)
         MCAssert(aClass != nil);
         return [aClass mco_objectWithMCObject:object];
     }
+#else
+    Class aClass = classWithTypeInfo(&typeid(* object));
+    MCAssert(aClass != nil);
+    return [aClass mco_objectWithMCObject:object];
+#endif
 }
 
 - (mailcore::Object *) mco_mcObject
