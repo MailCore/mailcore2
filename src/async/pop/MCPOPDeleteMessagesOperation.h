@@ -20,14 +20,14 @@ namespace mailcore {
         POPDeleteMessagesOperation();
         virtual ~POPDeleteMessagesOperation();
         
-        virtual void setMessageIndexes(Array * indexes);
-        virtual Array * messageIndexes();
+        virtual void setMessageIndexes(IndexSet * indexes);
+        virtual IndexSet * messageIndexes();
         
     public: // subclass behavior
         virtual void main();
         
     private:
-        Array * mMessageIndexes;
+        IndexSet * mMessageIndexes;
         
     };
     

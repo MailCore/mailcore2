@@ -1,25 +1,25 @@
 //
-//  MCOIMAPOperation.m
+//  MCODeleteMessagesOperation.m
 //  mailcore2
 //
-//  Created by DINH Viêt Hoà on 3/23/13.
+//  Created by DINH Viêt Hoà on 3/29/13.
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import "MCOIMAPOperation.h"
+#import "MCOPOPOperation.h"
 
-#include "MCIMAPOperation.h"
-#import "MCOOperation+Private.h"
+#include "MCAsyncPOP.h"
 
 #import "MCOUtils.h"
+#import "MCOOperation+Private.h"
 
 typedef void (^CompletionType)(NSError *error);
 
-@implementation MCOIMAPOperation {
+@implementation MCOPOPOperation {
     CompletionType _completionBlock;
 }
 
-#define nativeType mailcore::IMAPOperation
+#define nativeType mailcore::POPOperation
 
 - (void) dealloc
 {
@@ -36,5 +36,6 @@ typedef void (^CompletionType)(NSError *error);
     NSError * error = [NSError mco_errorWithErrorCode:MCO_NATIVE_INSTANCE->error()];
     _completionBlock(error);
 }
+
 
 @end

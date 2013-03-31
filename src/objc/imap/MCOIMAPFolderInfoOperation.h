@@ -7,7 +7,6 @@
 //
 
 #import <mailcore/MCOIMAPBaseOperation.h>
-#import <mailcore/MCOIMAPOperation.h>
 
 #ifndef __MAILCORE_MCOIMAPFOLDERINFOOPERATION_H_
 

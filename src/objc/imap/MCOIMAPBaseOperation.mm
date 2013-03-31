@@ -12,10 +12,6 @@
 
 #import "MCAsyncIMAP.h"
 
-@interface MCOIMAPBaseOperation ()
-
-@end
-
 class MCOIMAPBaseOperationIMAPCallback : public mailcore::IMAPOperationCallback {
 public:
     MCOIMAPBaseOperationIMAPCallback(MCOIMAPBaseOperation * op)

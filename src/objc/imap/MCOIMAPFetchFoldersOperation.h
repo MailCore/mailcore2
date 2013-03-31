@@ -10,9 +10,9 @@
 
 #define __MAILCORE_MCOIMAPFETCHFOLDERSOPERATION_H_
 
-#import <mailcore/MCOOperation.h>
+#import <mailcore/MCOIMAPBaseOperation.h>
 
-@interface MCOIMAPFetchFoldersOperation : MCOOperation
+@interface MCOIMAPFetchFoldersOperation : MCOIMAPBaseOperation
 - (void)start:(void (^)(NSError *error, NSArray *folder))completionBlock;
 @end
 

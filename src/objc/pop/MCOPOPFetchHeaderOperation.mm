@@ -1,28 +1,25 @@
 //
-//  MCOIMAPFetchContentOperation.m
+//  MCOFetchHeaderOperation.m
 //  mailcore2
 //
-//  Created by DINH Viêt Hoà on 3/25/13.
+//  Created by DINH Viêt Hoà on 3/29/13.
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import "MCOIMAPFetchContentOperation.h"
+#import "MCOPOPFetchHeaderOperation.h"
 
-#include "MCAsyncIMAP.h"
+#include "MCAsyncPOP.h"
 
-#import "MCOOperation+Private.h"
 #import "MCOUtils.h"
+#import "MCOOperation+Private.h"
 
-typedef void (^CompletionType)(NSError *error, NSData * data);
+typedef void (^CompletionType)(NSError *error, MCOMessageHeader * header);
 
-@implementation MCOIMAPFetchContentOperation {
+@implementation MCOPOPFetchHeaderOperation {
     CompletionType _completionBlock;
-    MCOIMAPBaseOperationProgressBlock _progress;
 }
 
-@synthesize progress = _progress;
-
-#define nativeType mailcore::IMAPFetchContentOperation
+#define nativeType mailcore::POPFetchHeaderOperation
 
 + (void) load
 {
@@ -37,12 +34,12 @@ typedef void (^CompletionType)(NSError *error, NSData * data);
 
 - (void) dealloc
 {
-    [_progress release];
     [_completionBlock release];
     [super dealloc];
 }
 
-- (void)start:(void (^)(NSError *error, NSData * data))completionBlock {
+- (void)start:(void (^)(NSError *error, MCOMessageHeader * header))completionBlock
+{
     _completionBlock = [completionBlock copy];
     [self start];
 }
@@ -50,16 +47,9 @@ typedef void (^CompletionType)(NSError *error, NSData * data);
 - (void)operationCompleted {
     nativeType *op = MCO_NATIVE_INSTANCE;
     if (op->error() == mailcore::ErrorNone) {
-        _completionBlock(nil, MCO_TO_OBJC(op->data()));
+        _completionBlock(nil, MCO_TO_OBJC(op->header()));
     } else {
         _completionBlock([NSError mco_errorWithErrorCode:op->error()], nil);
-    }
-}
-
-- (void) bodyProgress:(unsigned int)current maximum:(unsigned int)maximum
-{
-    if (_progress != NULL) {
-        _progress(current, maximum);
     }
 }
 

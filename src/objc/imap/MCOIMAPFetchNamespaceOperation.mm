@@ -13,10 +13,10 @@
 #import "MCOOperation+Private.h"
 #import "MCOUtils.h"
 
-typedef void (^completionType)(NSError *error, NSDictionary * namespaces);
+typedef void (^CompletionType)(NSError *error, NSDictionary * namespaces);
 
 @implementation MCOIMAPFetchNamespaceOperation {
-    completionType _completionBlock;
+    CompletionType _completionBlock;
 }
 
 #define nativeType mailcore::IMAPFetchNamespaceOperation

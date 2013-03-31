@@ -23,12 +23,12 @@ POPDeleteMessagesOperation::~POPDeleteMessagesOperation()
     MC_SAFE_RELEASE(mMessageIndexes);
 }
 
-void POPDeleteMessagesOperation::setMessageIndexes(Array * indexes)
+void POPDeleteMessagesOperation::setMessageIndexes(IndexSet * indexes)
 {
-    MC_SAFE_REPLACE_RETAIN(Array, mMessageIndexes, indexes);
+    MC_SAFE_REPLACE_RETAIN(IndexSet, mMessageIndexes, indexes);
 }
 
-Array * POPDeleteMessagesOperation::messageIndexes()
+IndexSet * POPDeleteMessagesOperation::messageIndexes()
 {
     return mMessageIndexes;
 }
@@ -39,12 +39,14 @@ void POPDeleteMessagesOperation::main()
         return;
     
     ErrorCode error;
-    for(unsigned int i = 0 ; i < mMessageIndexes->count() ; i ++) {
-        Value * value = (Value *) mMessageIndexes->objectAtIndex(i);
-        session()->session()->deleteMessage(value->unsignedIntValue(), &error);
-        if (error != ErrorNone) {
-            setError(error);
-            return;
+    for(unsigned int i = 0 ; i < mMessageIndexes->rangesCount() ; i ++) {
+        Range range = mMessageIndexes->allRanges()[i];
+        for(unsigned int k = 0 ; k <= range.length ; k ++) {
+            session()->session()->deleteMessage((unsigned int) (range.location + k), &error);
+            if (error != ErrorNone) {
+                setError(error);
+                return;
+            }
         }
     }
     session()->session()->disconnect();

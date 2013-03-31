@@ -14,10 +14,10 @@
 #import "MCOUtils.h"
 #import "MCOIndexSet.h"
 
-typedef void (^completionType)(NSError *error, MCOIndexSet * searchResult);
+typedef void (^CompletionType)(NSError *error, MCOIndexSet * searchResult);
 
 @implementation MCOIMAPSearchOperation {
-    completionType _completionBlock;
+    CompletionType _completionBlock;
 }
 
 #define nativeType mailcore::IMAPSearchOperation

@@ -14,10 +14,10 @@
 #import "MCOUtils.h"
 #import "MCOIndexSet.h"
 
-typedef void (^completionType)(NSError *error, MCOIndexSet * destUids);
+typedef void (^CompletionType)(NSError *error, MCOIndexSet * destUids);
 
 @implementation MCOIMAPCopyMessagesOperation {
-    completionType _completionBlock;
+    CompletionType _completionBlock;
 }
 
 #define nativeType mailcore::IMAPCopyMessagesOperation

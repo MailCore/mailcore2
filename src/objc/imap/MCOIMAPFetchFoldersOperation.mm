@@ -18,10 +18,10 @@
 
 using namespace mailcore;
 
-typedef void (^completionType)(NSError *error, NSArray *folder);
+typedef void (^CompletionType)(NSError *error, NSArray *folder);
 
 @implementation MCOIMAPFetchFoldersOperation {
-    completionType _completionBlock;
+    CompletionType _completionBlock;
 }
 
 #define nativeType mailcore::IMAPFetchFoldersOperation

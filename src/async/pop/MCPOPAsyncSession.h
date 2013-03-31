@@ -55,10 +55,10 @@ namespace mailcore {
         
         virtual POPFetchHeaderOperation * fetchHeaderOperation(unsigned int index);
         
-		virtual POPFetchMessageOperation * fetchMessage(unsigned int index);
+		virtual POPFetchMessageOperation * fetchMessageOperation(unsigned int index);
         
         // Will disconnect.
-        virtual POPOperation * deleteMessages(Array * indexes);
+        virtual POPOperation * deleteMessagesOperation(IndexSet * indexes);
         
 	private:
         POPSession * mSession;

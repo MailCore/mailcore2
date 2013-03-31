@@ -13,10 +13,10 @@
 #import "MCOOperation+Private.h"
 #import "MCOUtils.h"
 
-typedef void (^completionType)(NSError *error);
+typedef void (^CompletionType)(NSError *error);
 
 @implementation MCOIMAPIdleOperation {
-    completionType _completionBlock;
+    CompletionType _completionBlock;
 }
 
 #define nativeType mailcore::IMAPIdleOperation

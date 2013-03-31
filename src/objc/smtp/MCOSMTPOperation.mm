@@ -1,25 +1,25 @@
 //
-//  MCOIMAPOperation.m
+//  MCOSMTPCheckAccountOperation.m
 //  mailcore2
 //
-//  Created by DINH Viêt Hoà on 3/23/13.
+//  Created by DINH Viêt Hoà on 3/29/13.
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import "MCOIMAPOperation.h"
+#import "MCOSMTPOperation.h"
 
-#include "MCIMAPOperation.h"
-#import "MCOOperation+Private.h"
+#include "MCAsyncSMTP.h"
 
 #import "MCOUtils.h"
+#import "MCOOperation+Private.h"
 
 typedef void (^CompletionType)(NSError *error);
 
-@implementation MCOIMAPOperation {
+@implementation MCOSMTPOperation {
     CompletionType _completionBlock;
 }
 
-#define nativeType mailcore::IMAPOperation
+#define nativeType mailcore::SMTPOperation
 
 - (void) dealloc
 {

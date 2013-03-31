@@ -13,10 +13,10 @@
 #import "MCOOperation+Private.h"
 #import "MCOUtils.h"
 
-typedef void (^completionType)(NSError *error, NSArray * messages, MCOIndexSet * vanishedMessages);
+typedef void (^CompletionType)(NSError *error, NSArray * messages, MCOIndexSet * vanishedMessages);
 
 @implementation MCOIMAPFetchMessagesOperation {
-    completionType _completionBlock;
+    CompletionType _completionBlock;
 }
 
 #define nativeType mailcore::IMAPFetchMessagesOperation

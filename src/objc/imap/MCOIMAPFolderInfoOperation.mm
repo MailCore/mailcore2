@@ -14,10 +14,10 @@
 #import "MCOIMAPFolderInfo.h"
 #import "MCOUtils.h"
 
-typedef void (^completionType)(NSError *error, MCOIMAPFolderInfo *info);
+typedef void (^CompletionType)(NSError *error, MCOIMAPFolderInfo *info);
 
 @implementation MCOIMAPFolderInfoOperation {
-    completionType _completionBlock;
+    CompletionType _completionBlock;
 }
 
 #define nativeType mailcore::IMAPFolderInfoOperation

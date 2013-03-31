@@ -13,10 +13,10 @@
 #import "MCOOperation+Private.h"
 #import "MCOUtils.h"
 
-typedef void (^completionType)(NSError *error, uint32_t createdUID);
+typedef void (^CompletionType)(NSError *error, uint32_t createdUID);
 
 @implementation MCOIMAPAppendMessageOperation {
-    completionType _completionBlock;
+    CompletionType _completionBlock;
     MCOIMAPBaseOperationProgressBlock _progress;
 }
 

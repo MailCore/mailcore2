@@ -19,7 +19,7 @@ namespace mailcore {
         POPFetchMessagesOperation();
         virtual ~POPFetchMessagesOperation();
         
-        virtual Array * messages();
+        virtual Array * /* POPMessageInfo */ messages();
         
     public: // subclass behavior
         virtual void main();

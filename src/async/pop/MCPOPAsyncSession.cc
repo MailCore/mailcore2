@@ -125,7 +125,7 @@ POPFetchHeaderOperation * POPAsyncSession::fetchHeaderOperation(unsigned int ind
     return op;
 }
 
-POPFetchMessageOperation * POPAsyncSession::fetchMessage(unsigned int index)
+POPFetchMessageOperation * POPAsyncSession::fetchMessageOperation(unsigned int index)
 {
     POPFetchMessageOperation * op = new POPFetchMessageOperation();
     op->setSession(this);
@@ -134,7 +134,7 @@ POPFetchMessageOperation * POPAsyncSession::fetchMessage(unsigned int index)
     return op;
 }
 
-POPOperation * POPAsyncSession::deleteMessages(Array * indexes)
+POPOperation * POPAsyncSession::deleteMessagesOperation(IndexSet * indexes)
 {
     POPDeleteMessagesOperation * op = new POPDeleteMessagesOperation();
     op->setSession(this);
