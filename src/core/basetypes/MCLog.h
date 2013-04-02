@@ -10,6 +10,10 @@
 
 namespace mailcore {
     
+#ifndef __printflike
+#define __printflike(a,b)
+#endif
+
     void logInternal(const char * user,
                      const char * filename,
                      unsigned int line,

@@ -1171,7 +1171,11 @@ String * String::extractedSubjectAndKeepBracket(bool keepBracket)
 String * String::uuidString()
 {
     uuid_t uuid;
+#ifdef __MACH__
     uuid_string_t uuidString;
+#else
+    char uuidString[37];
+#endif
     
     uuid_generate(uuid);
     uuid_unparse_lower(uuid, uuidString);

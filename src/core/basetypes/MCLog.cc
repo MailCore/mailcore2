@@ -52,9 +52,13 @@ static void logInternalv(FILE * file,
     
 	gettimeofday(&tv, NULL);
 	localtime_r(&tv.tv_sec, &tm_value);
-	fprintf(file, "%04u-%02u-%02u %02u:%02u:%02u.%03u ", tm_value.tm_year + 1900, tm_value.tm_mon + 1, tm_value.tm_mday, tm_value.tm_hour, tm_value.tm_min, tm_value.tm_sec, tv.tv_usec / 1000);
-    
+	fprintf(file, "%04u-%02u-%02u %02u:%02u:%02u.%03u ", tm_value.tm_year + 1900, tm_value.tm_mon + 1, tm_value.tm_mday, tm_value.tm_hour, tm_value.tm_min, tm_value.tm_sec, (int) (tv.tv_usec / 1000));
+
+#ifdef __MACH__   
     if (pthread_main_np()) {
+#else
+    if (0) {
+#endif
         fprintf(file, "[%i:main] %s:%i: ", sPid, filename, line);
     }
     else {
