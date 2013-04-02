@@ -45,6 +45,9 @@ typedef void (^CompletionType)(NSError *error, MCOIMAPFolderInfo *info);
 }
 
 - (void)operationCompleted {
+    if (_completionBlock == NULL)
+        return;
+    
     nativeType *op = MCO_NATIVE_INSTANCE;
     if (op->error() == mailcore::ErrorNone) {
         MCOIMAPFolderInfo * info = [MCOIMAPFolderInfo info];

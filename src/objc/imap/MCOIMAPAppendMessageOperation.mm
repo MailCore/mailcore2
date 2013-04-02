@@ -48,6 +48,9 @@ typedef void (^CompletionType)(NSError *error, uint32_t createdUID);
 }
 
 - (void)operationCompleted {
+    if (_completionBlock == NULL)
+        return;
+    
     nativeType *op = MCO_NATIVE_INSTANCE;
     if (op->error() == mailcore::ErrorNone) {
         _completionBlock(nil, op->createdUID());

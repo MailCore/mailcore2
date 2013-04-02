@@ -33,6 +33,9 @@ typedef void (^CompletionType)(NSError *error);
 }
 
 - (void)operationCompleted {
+    if (_completionBlock == NULL)
+        return;
+    
     NSError * error = [NSError mco_errorWithErrorCode:MCO_NATIVE_INSTANCE->error()];
     _completionBlock(error);
 }

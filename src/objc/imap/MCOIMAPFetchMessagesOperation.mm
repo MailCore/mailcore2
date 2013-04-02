@@ -44,6 +44,9 @@ typedef void (^CompletionType)(NSError *error, NSArray * messages, MCOIndexSet *
 }
 
 - (void)operationCompleted {
+    if (_completionBlock == NULL)
+        return;
+    
     nativeType *op = MCO_NATIVE_INSTANCE;
     if (op->error() == mailcore::ErrorNone) {
         _completionBlock(nil, MCO_TO_OBJC(op->messages()), MCO_TO_OBJC(op->vanishedMessages()));

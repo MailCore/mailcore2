@@ -81,6 +81,9 @@ private:
 }
 
 - (void)operationCompleted {
+    if (_completionBlock == NULL)
+        return;
+    
     nativeType *op = MCO_NATIVE_INSTANCE;
     if (op->error() == mailcore::ErrorNone) {
         _completionBlock(nil, MCO_TO_OBJC(op->data()));
