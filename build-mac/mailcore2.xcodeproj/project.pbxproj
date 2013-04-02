@@ -260,6 +260,8 @@
 		C6A81C011707CEE600882C15 /* MCOPOPMessageInfo.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6A81BFF1707CEE500882C15 /* MCOPOPMessageInfo.mm */; };
 		C6A81C021707D96200882C15 /* MCOPOPMessageInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6A81BFE1707CEE400882C15 /* MCOPOPMessageInfo.h */; };
 		C6A81C031707D96500882C15 /* MCOPOPMessageInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6A81BFE1707CEE400882C15 /* MCOPOPMessageInfo.h */; };
+		C6A81C04170A82F300882C15 /* MCIMAPSyncResult.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB22016E34DCB000DB34C /* MCIMAPSyncResult.h */; };
+		C6A81C05170A82F600882C15 /* MCIMAPSyncResult.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB22016E34DCB000DB34C /* MCIMAPSyncResult.h */; };
 		C6BA2B0C1705F4E6003F0E9E /* MCHTMLRendererCallback.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD68516BE148B00DB18F1 /* MCHTMLRendererCallback.h */; };
 		C6BA2B0D1705F4E6003F0E9E /* MCOMultipart.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB26816FD44C2000DB34C /* MCOMultipart.h */; };
 		C6BA2B0E1705F4E6003F0E9E /* MCOMessageBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB25F16FD438F000DB34C /* MCOMessageBuilder.h */; };
@@ -621,6 +623,7 @@
 				C6A81BE91707805B00882C15 /* MCOPOPSession.h in CopyFiles */,
 				C6F61FB1170288690073032E /* MCOMultipart.h in CopyFiles */,
 				C6A81BFA1707811D00882C15 /* MCOSMTP.h in CopyFiles */,
+				C6A81C05170A82F600882C15 /* MCIMAPSyncResult.h in CopyFiles */,
 				C6A81BEE1707806500882C15 /* MCOSMTPSession.h in CopyFiles */,
 				C6A81BF01707806800882C15 /* MCOSMTPOperation.h in CopyFiles */,
 				C6A81BED1707806100882C15 /* MCOPOPFetchMessagesOperation.h in CopyFiles */,
@@ -787,6 +790,7 @@
 				C6BA2B0D1705F4E6003F0E9E /* MCOMultipart.h in CopyFiles */,
 				C6BA2B0E1705F4E6003F0E9E /* MCOMessageBuilder.h in CopyFiles */,
 				C6A81BF1170780EC00882C15 /* MCOPOPSession.h in CopyFiles */,
+				C6A81C04170A82F300882C15 /* MCIMAPSyncResult.h in CopyFiles */,
 				C6BA2B0F1705F4E6003F0E9E /* MCOIMAPBaseOperation.h in CopyFiles */,
 				C6A81BF2170780F900882C15 /* MCOPOPOperation.h in CopyFiles */,
 				C6A81BF51707810C00882C15 /* MCOPOPFetchMessagesOperation.h in CopyFiles */,
