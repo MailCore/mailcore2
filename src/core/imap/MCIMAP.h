@@ -12,5 +12,6 @@
 #include <mailcore/MCIMAPProgressCallback.h>
 #include <mailcore/MCIMAPSearchExpression.h>
 #include <mailcore/MCIMAPSession.h>
+#include <mailcore/MCIMAPSyncResult.h>
 
 #endif
