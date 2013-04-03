@@ -41,7 +41,7 @@
     [_message release];
     _message = [message retain];
     
-    if (0) {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"FetchFullMessageEnabled"]) {
         [_messageView setDelegate:self];
         [_messageView setFolder:_folder];
         [_messageView setMessage:message];

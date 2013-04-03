@@ -10,6 +10,7 @@
 		C64FF38416AF97F400F8C162 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = C64FF38316AF97F400F8C162 /* main.mm */; };
 		C6BD2873170BC5C500A91AC1 /* MCOCIDURLProtocol.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6BD2870170BC5C500A91AC1 /* MCOCIDURLProtocol.mm */; };
 		C6BD2874170BC5C500A91AC1 /* MCOMessageView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6BD2872170BC5C500A91AC1 /* MCOMessageView.mm */; };
+		C6BD28B4170BDFE500A91AC1 /* MailCore2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6BD28B3170BDFE500A91AC1 /* MailCore2.framework */; };
 		C6D42BB616ABB39A002BB4F9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6D42BB516ABB39A002BB4F9 /* Cocoa.framework */; };
 		C6D42BC916ABB39A002BB4F9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D42BC816ABB39A002BB4F9 /* AppDelegate.m */; };
 		C6D42BCC16ABB39A002BB4F9 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D42BCA16ABB39A002BB4F9 /* MainMenu.xib */; };
@@ -54,6 +55,13 @@
 			remoteGlobalIDString = C64EA536169E772200778456;
 			remoteInfo = mailcore2;
 		};
+		C6BD28B2170BDFE500A91AC1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6BD2877170BC8ED00A91AC1 /* mailcore2.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C6BD288D170BD71100A91AC1;
+			remoteInfo = "mailcore osx";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6BD28B4170BDFE500A91AC1 /* MailCore2.framework in Frameworks */,
 				C6D42BE516ABB511002BB4F9 /* WebKit.framework in Frameworks */,
 				C6D42BB616ABB39A002BB4F9 /* Cocoa.framework in Frameworks */,
 			);
@@ -135,6 +144,7 @@
 				C6BD2881170BC8ED00A91AC1 /* libmailcore2-ios.a */,
 				C6BD2883170BC8ED00A91AC1 /* tests */,
 				C6BD2885170BC8ED00A91AC1 /* test-ios.app */,
+				C6BD28B3170BDFE500A91AC1 /* MailCore2.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -284,6 +294,13 @@
 			remoteRef = C6BD2884170BC8ED00A91AC1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		C6BD28B3170BDFE500A91AC1 /* MailCore2.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MailCore2.framework;
+			remoteRef = C6BD28B2170BDFE500A91AC1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -402,21 +419,6 @@
 					"$(SRCROOT)/../../../Externals/icu4c/lib",
 					"$(SRCROOT)/../../../Externals/ctemplate/lib",
 				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-letpan",
-					"-licudata",
-					"-licui18n",
-					"-licuuc",
-					"-lxml2",
-					"-lssl",
-					"-lcrypto",
-					"-lsasl2",
-					"-liconv",
-					"-lctemplate",
-					"-ltidy",
-					"-lmailcore2",
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -439,21 +441,6 @@
 					"$(SRCROOT)/../../../Externals/libetpan/lib",
 					"$(SRCROOT)/../../../Externals/icu4c/lib",
 					"$(SRCROOT)/../../../Externals/ctemplate/lib",
-				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-letpan",
-					"-licudata",
-					"-licui18n",
-					"-licuuc",
-					"-lxml2",
-					"-lssl",
-					"-lcrypto",
-					"-lsasl2",
-					"-liconv",
-					"-lctemplate",
-					"-ltidy",
-					"-lmailcore2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

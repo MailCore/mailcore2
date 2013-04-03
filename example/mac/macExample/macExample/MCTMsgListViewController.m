@@ -8,12 +8,11 @@
 
 #import "MCTMsgListViewController.h"
 
-#include <mailcore/mailcore.h>
+#include <MailCore/MailCore.h>
 
 #import "MCTMsgViewController.h"
 
 #define FOLDER @"INBOX"
-//#define FOLDER @"[Gmail]/All Mail"
 
 @interface MCTMsgListViewController () <NSTableViewDelegate, NSTableViewDataSource>
 
@@ -23,10 +22,17 @@
 
 - (void) awakeFromNib
 {
+    [self connect];
+}
+
+- (void) connect
+{
     [_msgViewController setFolder:FOLDER];
     
     NSString * login = [[NSUserDefaults standardUserDefaults] stringForKey:@"Login"];
     NSString * password = [[NSUserDefaults standardUserDefaults] stringForKey:@"Password"];
+    if (([login length] == 0) || ([password length] == 0))
+        return;
     
     _session = [[MCOIMAPSession alloc] init];
     [_session setHostname:@"imap.gmail.com"];

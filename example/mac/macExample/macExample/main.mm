@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#include <mailcore/mailcore.h>
+#include <MailCore/MailCore.h>
 #include <unicode/putil.h>
 
 int main(int argc, char *argv[])

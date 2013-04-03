@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#include <mailcore/mailcore.h>
+#include <MailCore/MailCore.h>
 
 @class MCTMsgViewController;
 
@@ -18,5 +18,7 @@
     MCOIMAPFetchMessagesOperation * _op;
     NSArray * _messages;
 }
+
+- (void) connect;
 
 @end

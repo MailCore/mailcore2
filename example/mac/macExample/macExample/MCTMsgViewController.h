@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-#include <mailcore/mailcore.h>
+#include <MailCore/MailCore.h>
 
 @class MCOMessageView;
 @class MCOIMAPAsyncSession;
