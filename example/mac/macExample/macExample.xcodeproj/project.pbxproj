@@ -10,7 +10,8 @@
 		C64FF38416AF97F400F8C162 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = C64FF38316AF97F400F8C162 /* main.mm */; };
 		C6BD2873170BC5C500A91AC1 /* MCOCIDURLProtocol.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6BD2870170BC5C500A91AC1 /* MCOCIDURLProtocol.mm */; };
 		C6BD2874170BC5C500A91AC1 /* MCOMessageView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6BD2872170BC5C500A91AC1 /* MCOMessageView.mm */; };
-		C6BD28B4170BDFE500A91AC1 /* MailCore2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6BD28B3170BDFE500A91AC1 /* MailCore2.framework */; };
+		C6BD28B4170BDFE500A91AC1 /* MailCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6BD28B3170BDFE500A91AC1 /* MailCore.framework */; };
+		C6BD28BA170C14C300A91AC1 /* MCTApplication.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6BD28B9170C14C300A91AC1 /* MCTApplication.mm */; };
 		C6D42BB616ABB39A002BB4F9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6D42BB516ABB39A002BB4F9 /* Cocoa.framework */; };
 		C6D42BC916ABB39A002BB4F9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D42BC816ABB39A002BB4F9 /* AppDelegate.m */; };
 		C6D42BCC16ABB39A002BB4F9 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D42BCA16ABB39A002BB4F9 /* MainMenu.xib */; };
@@ -71,6 +72,8 @@
 		C6BD2871170BC5C500A91AC1 /* MCOMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOMessageView.h; sourceTree = "<group>"; };
 		C6BD2872170BC5C500A91AC1 /* MCOMessageView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOMessageView.mm; sourceTree = "<group>"; };
 		C6BD2877170BC8ED00A91AC1 /* mailcore2.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = mailcore2.xcodeproj; path = "../../../build-mac/mailcore2.xcodeproj"; sourceTree = "<group>"; };
+		C6BD28B8170C14C300A91AC1 /* MCTApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTApplication.h; sourceTree = "<group>"; };
+		C6BD28B9170C14C300A91AC1 /* MCTApplication.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCTApplication.mm; sourceTree = "<group>"; };
 		C6D42BB116ABB39A002BB4F9 /* macExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6D42BB516ABB39A002BB4F9 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		C6D42BB816ABB39A002BB4F9 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -92,7 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6BD28B4170BDFE500A91AC1 /* MailCore2.framework in Frameworks */,
+				C6BD28B4170BDFE500A91AC1 /* MailCore.framework in Frameworks */,
 				C6D42BE516ABB511002BB4F9 /* WebKit.framework in Frameworks */,
 				C6D42BB616ABB39A002BB4F9 /* Cocoa.framework in Frameworks */,
 			);
@@ -140,11 +143,11 @@
 		C6BD2878170BC8ED00A91AC1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C6BD287F170BC8ED00A91AC1 /* libmailcore2.a */,
-				C6BD2881170BC8ED00A91AC1 /* libmailcore2-ios.a */,
+				C6BD287F170BC8ED00A91AC1 /* libMailCore.a */,
+				C6BD2881170BC8ED00A91AC1 /* libMailCore-ios.a */,
 				C6BD2883170BC8ED00A91AC1 /* tests */,
 				C6BD2885170BC8ED00A91AC1 /* test-ios.app */,
-				C6BD28B3170BDFE500A91AC1 /* MailCore2.framework */,
+				C6BD28B3170BDFE500A91AC1 /* MailCore.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -199,6 +202,8 @@
 				C6D42BE816ACF711002BB4F9 /* MCTMsgListViewController.m */,
 				C6D42BEA16ACFE3F002BB4F9 /* MCTMsgViewController.h */,
 				C6D42BEB16ACFE3F002BB4F9 /* MCTMsgViewController.m */,
+				C6BD28B8170C14C300A91AC1 /* MCTApplication.h */,
+				C6BD28B9170C14C300A91AC1 /* MCTApplication.mm */,
 			);
 			path = macExample;
 			sourceTree = "<group>";
@@ -266,17 +271,17 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		C6BD287F170BC8ED00A91AC1 /* libmailcore2.a */ = {
+		C6BD287F170BC8ED00A91AC1 /* libMailCore.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libmailcore2.a;
+			path = libMailCore.a;
 			remoteRef = C6BD287E170BC8ED00A91AC1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C6BD2881170BC8ED00A91AC1 /* libmailcore2-ios.a */ = {
+		C6BD2881170BC8ED00A91AC1 /* libMailCore-ios.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libmailcore2-ios.a";
+			path = "libMailCore-ios.a";
 			remoteRef = C6BD2880170BC8ED00A91AC1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -294,10 +299,10 @@
 			remoteRef = C6BD2884170BC8ED00A91AC1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C6BD28B3170BDFE500A91AC1 /* MailCore2.framework */ = {
+		C6BD28B3170BDFE500A91AC1 /* MailCore.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = MailCore2.framework;
+			path = MailCore.framework;
 			remoteRef = C6BD28B2170BDFE500A91AC1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -325,6 +330,7 @@
 				C64FF38416AF97F400F8C162 /* main.mm in Sources */,
 				C6BD2873170BC5C500A91AC1 /* MCOCIDURLProtocol.mm in Sources */,
 				C6BD2874170BC5C500A91AC1 /* MCOMessageView.mm in Sources */,
+				C6BD28BA170C14C300A91AC1 /* MCTApplication.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
