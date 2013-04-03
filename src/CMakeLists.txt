@@ -98,7 +98,7 @@ core/rfc822/MCRFC822.h
 core/smtp/MCSMTP.h
 core/smtp/MCSMTPProgressCallback.h
 core/smtp/MCSMTPSession.h
-mailcore.h
+MailCore.h
 
 objc/abstract/MCOAbstract.h
 objc/abstract/MCOAbstractMessage+Private.h
@@ -170,7 +170,7 @@ objc/utils/NSString+MCO.h
 objc/utils/NSValue+MCO.h
 
 DESTINATION
-${CMAKE_CURRENT_BINARY_DIR}/include/mailcore
+${CMAKE_CURRENT_BINARY_DIR}/include/MailCore
 )
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/include
@@ -200,7 +200,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/../Externals/libetpan/include
 /usr/include/libxml2/
 )
 
-add_library (mailcore
+add_library (MailCore
 
 core/MCCore.h
 
