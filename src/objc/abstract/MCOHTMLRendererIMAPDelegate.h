@@ -9,7 +9,7 @@
 #ifndef mailcore2_MCOHTMLRendererIMAPDelegate_h
 #define mailcore2_MCOHTMLRendererIMAPDelegate_h
 
-#import "MCOHTMLRendererIMAPDelegate.h"
+#import <mailcore/MCOHTMLRendererDelegate.h>
 
 @class MCOIMAPPart;
 
