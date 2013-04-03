@@ -8,7 +8,7 @@
 
 #import "MCOIndexSet.h"
 
-#include <mailcore/MCBaseTypes.h>
+#include <MailCore/MCBaseTypes.h>
 
 #import "NSObject+MCO.h"
 

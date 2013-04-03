@@ -2,7 +2,7 @@
 
 #define __MAILCORE_MCIMAPNAMESPACEITEM_H
 
-#include <mailcore/MCBaseTypes.h>
+#include <MailCore/MCBaseTypes.h>
 
 #ifdef __cplusplus
 

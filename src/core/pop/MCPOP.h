@@ -2,8 +2,8 @@
 
 #define __MAILCORE_MCPOP_H
 
-#include <mailcore/MCPOPMessageInfo.h>
-#include <mailcore/MCPOPProgressCallback.h>
-#include <mailcore/MCPOPSession.h>
+#include <MailCore/MCPOPMessageInfo.h>
+#include <MailCore/MCPOPProgressCallback.h>
+#include <MailCore/MCPOPSession.h>
 
 #endif

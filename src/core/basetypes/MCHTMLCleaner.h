@@ -9,7 +9,7 @@
 #ifndef __mailcore2__HTMLCleaner__
 #define __mailcore2__HTMLCleaner__
 
-#include <mailcore/MCString.h>
+#include <MailCore/MCString.h>
 
 namespace mailcore {
     

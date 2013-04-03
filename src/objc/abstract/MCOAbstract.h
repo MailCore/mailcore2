@@ -9,13 +9,13 @@
 #ifndef mailcore2_MCOAbstract_h
 #define mailcore2_MCOAbstract_h
 
-#import <mailcore/MCOAbstractMessage.h>
-#import <mailcore/MCOAbstractMessagePart.h>
-#import <mailcore/MCOAbstractMultipart.h>
-#import <mailcore/MCOAbstractPart.h>
-#import <mailcore/MCOAddress.h>
-#import <mailcore/MCOMessageHeader.h>
-#import <mailcore/MCOHTMLRendererDelegate.h>
-#import <mailcore/MCOHTMLRendererIMAPDelegate.h>
+#import <MailCore/MCOAbstractMessage.h>
+#import <MailCore/MCOAbstractMessagePart.h>
+#import <MailCore/MCOAbstractMultipart.h>
+#import <MailCore/MCOAbstractPart.h>
+#import <MailCore/MCOAddress.h>
+#import <MailCore/MCOMessageHeader.h>
+#import <MailCore/MCOHTMLRendererDelegate.h>
+#import <MailCore/MCOHTMLRendererIMAPDelegate.h>
 
 #endif

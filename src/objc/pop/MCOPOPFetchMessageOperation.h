@@ -11,7 +11,7 @@
 #define __MAILCORE_MCOPOPFETCHMESSAGEOPERATION_H_
 
 #import <Foundation/Foundation.h>
-#import <mailcore/MCOPOPOperation.h>
+#import <MailCore/MCOPOPOperation.h>
 
 typedef void (^MCOPOPOperationProgressBlock)(unsigned int current, unsigned int maximum);
 

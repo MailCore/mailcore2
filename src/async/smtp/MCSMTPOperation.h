@@ -9,8 +9,8 @@
 #ifndef __mailcore2__MCSMTPOperation__
 #define __mailcore2__MCSMTPOperation__
 
-#include <mailcore/MCBaseTypes.h>
-#include <mailcore/MCSMTPProgressCallback.h>
+#include <MailCore/MCBaseTypes.h>
+#include <MailCore/MCSMTPProgressCallback.h>
 
 #ifdef __cplusplus
 

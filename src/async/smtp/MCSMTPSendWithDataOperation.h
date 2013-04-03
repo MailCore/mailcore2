@@ -9,9 +9,9 @@
 #ifndef __mailcore2__MCSMTPSendWithDataOperation__
 #define __mailcore2__MCSMTPSendWithDataOperation__
 
-#include <mailcore/MCBaseTypes.h>
-#include <mailcore/MCAbstract.h>
-#include <mailcore/MCSMTPOperation.h>
+#include <MailCore/MCBaseTypes.h>
+#include <MailCore/MCAbstract.h>
+#include <MailCore/MCSMTPOperation.h>
 
 #ifdef __cplusplus
 

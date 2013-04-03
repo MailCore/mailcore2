@@ -2,10 +2,10 @@
 
 #define __MAILCORE_IMAP_MESSAGE_H_
 
-#include <mailcore/MCBaseTypes.h>
-#include <mailcore/MCAbstractMessage.h>
-#include <mailcore/MCMessageConstants.h>
-#include <mailcore/MCAbstractPart.h>
+#include <MailCore/MCBaseTypes.h>
+#include <MailCore/MCAbstractMessage.h>
+#include <MailCore/MCMessageConstants.h>
+#include <MailCore/MCAbstractPart.h>
 
 #ifdef __cplusplus
 

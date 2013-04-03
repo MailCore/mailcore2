@@ -9,7 +9,7 @@
 #ifndef __testUI__MCDateFormatter__
 #define __testUI__MCDateFormatter__
 
-#include <mailcore/MCBaseTypes.h>
+#include <MailCore/MCBaseTypes.h>
 #include <unicode/udat.h>
 
 #ifdef __cplusplus

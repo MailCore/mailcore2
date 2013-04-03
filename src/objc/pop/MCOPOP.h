@@ -9,11 +9,11 @@
 #ifndef mailcore2_MCOPOP_h
 #define mailcore2_MCOPOP_h
 
-#import <mailcore/MCOPOPSession.h>
-#import <mailcore/MCOPOPOperation.h>
-#import <mailcore/MCOPOPFetchHeaderOperation.h>
-#import <mailcore/MCOPOPFetchMessageOperation.h>
-#import <mailcore/MCOPOPFetchMessagesOperation.h>
-#import <mailcore/MCOPOPMessageInfo.h>
+#import <MailCore/MCOPOPSession.h>
+#import <MailCore/MCOPOPOperation.h>
+#import <MailCore/MCOPOPFetchHeaderOperation.h>
+#import <MailCore/MCOPOPFetchMessageOperation.h>
+#import <MailCore/MCOPOPFetchMessagesOperation.h>
+#import <MailCore/MCOPOPMessageInfo.h>
 
 #endif

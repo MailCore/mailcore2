@@ -12,7 +12,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <mailcore/MCOConstants.h>
+#import <MailCore/MCOConstants.h>
 
 @class MCOSMTPSendOperation;
 @class MCOSMTPOperation;

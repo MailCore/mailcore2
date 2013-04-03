@@ -9,8 +9,8 @@
 #ifndef __mailcore2__MCIndexSet__
 #define __mailcore2__MCIndexSet__
 
-#include <mailcore/MCObject.h>
-#include <mailcore/MCRange.h>
+#include <MailCore/MCObject.h>
+#include <MailCore/MCRange.h>
 #include <inttypes.h>
 
 #ifdef __cplusplus

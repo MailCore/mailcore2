@@ -9,8 +9,8 @@
 #ifndef mailcore2_MCAsync_h
 #define mailcore2_MCAsync_h
 
-#include <mailcore/MCAsyncSMTP.h>
-#include <mailcore/MCAsyncIMAP.h>
-#include <mailcore/MCAsyncPOP.h>
+#include <MailCore/MCAsyncSMTP.h>
+#include <MailCore/MCAsyncIMAP.h>
+#include <MailCore/MCAsyncPOP.h>
 
 #endif

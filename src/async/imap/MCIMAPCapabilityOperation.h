@@ -9,7 +9,7 @@
 #ifndef __mailcore2__MCIMAPCapabilityOperation__
 #define __mailcore2__MCIMAPCapabilityOperation__
 
-#include <mailcore/MCIMAPOperation.h>
+#include <MailCore/MCIMAPOperation.h>
 
 #ifdef __cplusplus
 

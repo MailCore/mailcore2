@@ -2,7 +2,7 @@
 
 #define __MAILCORE_MCARRAY_H_
 
-#include <mailcore/MCObject.h>
+#include <MailCore/MCObject.h>
 
 #include <libetpan/libetpan.h>
 

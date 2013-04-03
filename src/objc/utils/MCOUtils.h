@@ -9,18 +9,18 @@
 #ifndef mailcore2_MCOUtils_h
 #define mailcore2_MCOUtils_h
 
-#import <mailcore/MCOObjectWrapper.h>
-#import <mailcore/NSData+MCO.h>
-#import <mailcore/NSString+MCO.h>
-#import <mailcore/NSDictionary+MCO.h>
-#import <mailcore/NSArray+MCO.h>
-#import <mailcore/NSObject+MCO.h>
-#import <mailcore/MCOObjectWrapper.h>
-#import <mailcore/NSError+MCO.h>
-#import <mailcore/NSValue+MCO.h>
-#import <mailcore/MCOOperation.h>
-#import <mailcore/MCOConstants.h>
-#import <mailcore/MCOIndexSet.h>
-#import <mailcore/MCORange.h>
+#import <MailCore/MCOObjectWrapper.h>
+#import <MailCore/NSData+MCO.h>
+#import <MailCore/NSString+MCO.h>
+#import <MailCore/NSDictionary+MCO.h>
+#import <MailCore/NSArray+MCO.h>
+#import <MailCore/NSObject+MCO.h>
+#import <MailCore/MCOObjectWrapper.h>
+#import <MailCore/NSError+MCO.h>
+#import <MailCore/NSValue+MCO.h>
+#import <MailCore/MCOOperation.h>
+#import <MailCore/MCOConstants.h>
+#import <MailCore/MCOIndexSet.h>
+#import <MailCore/MCORange.h>
 
 #endif

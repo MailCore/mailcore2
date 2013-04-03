@@ -9,7 +9,7 @@
 #ifndef __testUI__MCSizeFormatter__
 #define __testUI__MCSizeFormatter__
 
-#include <mailcore/MCBaseTypes.h>
+#include <MailCore/MCBaseTypes.h>
 
 #ifdef __cplusplus
 

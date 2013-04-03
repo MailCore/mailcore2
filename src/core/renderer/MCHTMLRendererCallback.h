@@ -9,8 +9,8 @@
 #ifndef __mailcore2__MCHTMLRendererCallback__
 #define __mailcore2__MCHTMLRendererCallback__
 
-#include <mailcore/MCAbstract.h>
-#include <mailcore/MCIMAP.h>
+#include <MailCore/MCAbstract.h>
+#include <MailCore/MCIMAP.h>
 
 #ifdef __cplusplus
 

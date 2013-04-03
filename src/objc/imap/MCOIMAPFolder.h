@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <mailcore/MCOConstants.h>
+#import <MailCore/MCOConstants.h>
 
 #ifndef __MAILCORE_MCOIMAPFOLDER_H_
 

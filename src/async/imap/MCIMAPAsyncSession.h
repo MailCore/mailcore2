@@ -9,8 +9,8 @@
 #ifndef __mailcore2__MCIMAPAccount__
 #define __mailcore2__MCIMAPAccount__
 
-#include <mailcore/MCBaseTypes.h>
-#include <mailcore/MCMessageConstants.h>
+#include <MailCore/MCBaseTypes.h>
+#include <MailCore/MCMessageConstants.h>
 
 #ifdef __cplusplus
 

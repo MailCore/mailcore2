@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#include <mailcore/mailcore.h>
+#include <MailCore/MailCore.h>
 
 @interface MCOCIDURLProtocol : NSURLProtocol
 

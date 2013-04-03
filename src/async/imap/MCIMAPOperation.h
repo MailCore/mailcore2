@@ -9,8 +9,8 @@
 #ifndef __mailcore2__MCIMAPOperation__
 #define __mailcore2__MCIMAPOperation__
 
-#include <mailcore/MCBaseTypes.h>
-#include <mailcore/MCIMAPProgressCallback.h>
+#include <MailCore/MCBaseTypes.h>
+#include <MailCore/MCIMAPProgressCallback.h>
 
 #ifdef __cplusplus
 

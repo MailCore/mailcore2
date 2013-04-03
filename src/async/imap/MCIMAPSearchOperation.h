@@ -9,8 +9,8 @@
 #ifndef __mailcore2__IMAPSearchOperation__
 #define __mailcore2__IMAPSearchOperation__
 
-#include <mailcore/MCIMAPOperation.h>
-#include <mailcore/MCMessageConstants.h>
+#include <MailCore/MCIMAPOperation.h>
+#include <MailCore/MCMessageConstants.h>
 
 #ifdef __cplusplus
 

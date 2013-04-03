@@ -2,12 +2,12 @@
 
 #define __MAILCORE_MCABSTRACT_H
 
-#include <mailcore/MCAbstractMessage.h>
-#include <mailcore/MCAbstractMessagePart.h>
-#include <mailcore/MCAbstractMultipart.h>
-#include <mailcore/MCAbstractPart.h>
-#include <mailcore/MCAddress.h>
-#include <mailcore/MCMessageConstants.h>
-#include <mailcore/MCMessageHeader.h>
+#include <MailCore/MCAbstractMessage.h>
+#include <MailCore/MCAbstractMessagePart.h>
+#include <MailCore/MCAbstractMultipart.h>
+#include <MailCore/MCAbstractPart.h>
+#include <MailCore/MCAddress.h>
+#include <MailCore/MCMessageConstants.h>
+#include <MailCore/MCMessageHeader.h>
 
 #endif

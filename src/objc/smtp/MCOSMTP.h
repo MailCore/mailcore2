@@ -9,8 +9,8 @@
 #ifndef mailcore2_MCOSMTP_h
 #define mailcore2_MCOSMTP_h
 
-#import <mailcore/MCOSMTPSession.h>
-#import <mailcore/MCOSMTPSendOperation.h>
-#import <mailcore/MCOSMTPOperation.h>
+#import <MailCore/MCOSMTPSession.h>
+#import <MailCore/MCOSMTPSendOperation.h>
+#import <MailCore/MCOSMTPOperation.h>
 
 #endif

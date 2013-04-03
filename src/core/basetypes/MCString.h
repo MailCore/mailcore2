@@ -2,8 +2,8 @@
 
 #define __MAILCORE_MCSTR_H_
 
-#include <mailcore/MCObject.h>
-#include <mailcore/MCRange.h>
+#include <MailCore/MCObject.h>
+#include <MailCore/MCRange.h>
 
 #include <stdarg.h>
 #include <unicode/utypes.h>

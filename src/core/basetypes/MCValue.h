@@ -2,7 +2,7 @@
 
 #define __MAILCORE_MCVALUE_H_
 
-#include <mailcore/MCObject.h>
+#include <MailCore/MCObject.h>
 
 #ifdef __cplusplus
 

@@ -10,7 +10,7 @@
 
 #define __MAILCORE_MCOSMTPOPERATION_H_
 
-#import <mailcore/MCOOperation.h>
+#import <MailCore/MCOOperation.h>
 
 @interface MCOSMTPOperation : MCOOperation
 - (void)start:(void (^)(NSError *error))completionBlock;

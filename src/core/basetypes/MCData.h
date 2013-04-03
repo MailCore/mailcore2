@@ -2,8 +2,8 @@
 
 #define __MAILCORE_MCDATA_H_
 
-#include <mailcore/MCObject.h>
-#include <mailcore/MCMessageConstants.h>
+#include <MailCore/MCObject.h>
+#include <MailCore/MCMessageConstants.h>
 
 #ifdef __cplusplus
 

@@ -2,8 +2,8 @@
 
 #define __MAILCORE_MCIMAPSEARCHEXPRESSION_H_
 
-#include <mailcore/MCBaseTypes.h>
-#include <mailcore/MCMessageConstants.h>
+#include <MailCore/MCBaseTypes.h>
+#include <MailCore/MCMessageConstants.h>
 
 #ifdef __cplusplus
 

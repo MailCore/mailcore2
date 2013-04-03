@@ -9,12 +9,12 @@
 #ifndef __MAILCORE_MCCORE_H_
 #define __MAILCORE_MCCORE_H_
 
-#include <mailcore/MCAbstract.h>
-#include <mailcore/MCBaseTypes.h>
-#include <mailcore/MCIMAP.h>
-#include <mailcore/MCPOP.h>
-#include <mailcore/MCRFC822.h>
-#include <mailcore/MCSMTP.h>
-#include <mailcore/MCRenderer.h>
+#include <MailCore/MCAbstract.h>
+#include <MailCore/MCBaseTypes.h>
+#include <MailCore/MCIMAP.h>
+#include <MailCore/MCPOP.h>
+#include <MailCore/MCRFC822.h>
+#include <MailCore/MCSMTP.h>
+#include <MailCore/MCRenderer.h>
 
 #endif

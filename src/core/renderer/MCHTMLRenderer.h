@@ -9,9 +9,9 @@
 #ifndef __testUI__MCHTMLRenderer__
 #define __testUI__MCHTMLRenderer__
 
-#include <mailcore/MCAbstract.h>
-#include <mailcore/MCIMAP.h>
-#include <mailcore/MCRFC822.h>
+#include <MailCore/MCAbstract.h>
+#include <MailCore/MCIMAP.h>
+#include <MailCore/MCRFC822.h>
 
 #ifdef __cplusplus
 

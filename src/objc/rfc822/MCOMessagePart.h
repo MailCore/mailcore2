@@ -10,7 +10,7 @@
 
 #define __MAILCORE_MCOMESSAGEPART_H_
 
-#import <mailcore/MCOAbstractMessagePart.h>
+#import <MailCore/MCOAbstractMessagePart.h>
 
 @interface MCOMessagePart : MCOAbstractMessagePart <NSCopying>
 

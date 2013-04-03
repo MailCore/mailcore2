@@ -10,7 +10,7 @@
 
 #define __MAILCORE_MCOMULTIPART_H_
 
-#import <mailcore/MCOAbstractMultipart.h>
+#import <MailCore/MCOAbstractMultipart.h>
 
 @interface MCOMultipart : MCOAbstractMultipart <NSCopying>
 

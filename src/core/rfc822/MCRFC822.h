@@ -2,10 +2,10 @@
 
 #define __MAILCORE_MCRFC822_H
 
-#include <mailcore/MCAttachment.h>
-#include <mailcore/MCMessageBuilder.h>
-#include <mailcore/MCMessageParser.h>
-#include <mailcore/MCMessagePart.h>
-#include <mailcore/MCMultipart.h>
+#include <MailCore/MCAttachment.h>
+#include <MailCore/MCMessageBuilder.h>
+#include <MailCore/MCMessageParser.h>
+#include <MailCore/MCMessagePart.h>
+#include <MailCore/MCMultipart.h>
 
 #endif

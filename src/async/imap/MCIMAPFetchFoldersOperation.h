@@ -9,8 +9,8 @@
 #ifndef __mailcore2__MCIMAPFetchFoldersOperation__
 #define __mailcore2__MCIMAPFetchFoldersOperation__
 
-#include <mailcore/MCBaseTypes.h>
-#include <mailcore/MCIMAPOperation.h>
+#include <MailCore/MCBaseTypes.h>
+#include <MailCore/MCIMAPOperation.h>
 
 #ifdef __cplusplus
 

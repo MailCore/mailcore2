@@ -2,22 +2,22 @@
 
 #define __MAILCORE_MCBASETYPES_H_
 
-#include <mailcore/MCAutoreleasePool.h>
-#include <mailcore/MCObject.h>
-#include <mailcore/MCValue.h>
-#include <mailcore/MCString.h>
-#include <mailcore/MCData.h>
-#include <mailcore/MCArray.h>
-#include <mailcore/MCHashMap.h>
-#include <mailcore/MCSet.h>
-#include <mailcore/MCHash.h>
-#include <mailcore/MCLog.h>
-#include <mailcore/MCAssert.h>
-#include <mailcore/MCUtils.h>
-#include <mailcore/MCRange.h>
-#include <mailcore/MCIndexSet.h>
-#include <mailcore/MCOperation.h>
-#include <mailcore/MCOperationQueue.h>
-#include <mailcore/MCOperationCallback.h>
+#include <MailCore/MCAutoreleasePool.h>
+#include <MailCore/MCObject.h>
+#include <MailCore/MCValue.h>
+#include <MailCore/MCString.h>
+#include <MailCore/MCData.h>
+#include <MailCore/MCArray.h>
+#include <MailCore/MCHashMap.h>
+#include <MailCore/MCSet.h>
+#include <MailCore/MCHash.h>
+#include <MailCore/MCLog.h>
+#include <MailCore/MCAssert.h>
+#include <MailCore/MCUtils.h>
+#include <MailCore/MCRange.h>
+#include <MailCore/MCIndexSet.h>
+#include <MailCore/MCOperation.h>
+#include <MailCore/MCOperationQueue.h>
+#include <MailCore/MCOperationCallback.h>
 
 #endif

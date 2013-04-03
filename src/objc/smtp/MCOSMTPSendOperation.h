@@ -10,7 +10,7 @@
 
 #define __MAILCORE_MCOSMTPSENDOPERATION_H_
 
-#import <mailcore/MCOSMTPOperation.h>
+#import <MailCore/MCOSMTPOperation.h>
 
 typedef void (^MCOSMTPOperationProgressBlock)(unsigned int current, unsigned int maximum);
 

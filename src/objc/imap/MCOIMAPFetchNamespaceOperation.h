@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import <mailcore/MCOIMAPBaseOperation.h>
+#import <MailCore/MCOIMAPBaseOperation.h>
 
 #ifndef __MAILCORE_MCOIMAPFETCHNAMESPACEOPERATION_H_
 

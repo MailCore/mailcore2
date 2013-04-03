@@ -11,7 +11,7 @@
 #define __MAILCORE_MCOPOPFETCHMESSAGESOPERATION_H_
 
 #import <Foundation/Foundation.h>
-#import <mailcore/MCOPOPOperation.h>
+#import <MailCore/MCOPOPOperation.h>
 
 @interface MCOPOPFetchMessagesOperation : MCOPOPOperation
 

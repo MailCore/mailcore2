@@ -10,7 +10,7 @@
 
 #define __MAILCORE_MCOATTACHMENT_H_
 
-#import <mailcore/MCOAbstractPart.h>
+#import <MailCore/MCOAbstractPart.h>
 
 @interface MCOAttachment : MCOAbstractPart <NSCopying>
 

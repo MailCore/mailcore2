@@ -9,22 +9,22 @@
 #ifndef mailcore2_MCAsyncIMAP_h
 #define mailcore2_MCAsyncIMAP_h
 
-#include <mailcore/MCIMAPAsyncSession.h>
-#include <mailcore/MCIMAPOperation.h>
-#include <mailcore/MCIMAPFetchFoldersOperation.h>
-#include <mailcore/MCIMAPAppendMessageOperation.h>
-#include <mailcore/MCIMAPCopyMessagesOperation.h>
-#include <mailcore/MCIMAPFetchMessagesOperation.h>
-#include <mailcore/MCIMAPFetchContentOperation.h>
-#include <mailcore/MCIMAPIdleOperation.h>
-#include <mailcore/MCIMAPFolderInfoOperation.h>
-#include <mailcore/MCIMAPSession.h>
-#include <mailcore/MCIMAPNamespace.h>
-#include <mailcore/MCIMAPSearchOperation.h>
-#include <mailcore/MCIMAPSearchExpression.h>
-#include <mailcore/MCIMAPFetchNamespaceOperation.h>
-#include <mailcore/MCIMAPIdentityOperation.h>
-#include <mailcore/MCIMAPCapabilityOperation.h>
-#include <mailcore/MCIMAPOperationCallback.h>
+#include <MailCore/MCIMAPAsyncSession.h>
+#include <MailCore/MCIMAPOperation.h>
+#include <MailCore/MCIMAPFetchFoldersOperation.h>
+#include <MailCore/MCIMAPAppendMessageOperation.h>
+#include <MailCore/MCIMAPCopyMessagesOperation.h>
+#include <MailCore/MCIMAPFetchMessagesOperation.h>
+#include <MailCore/MCIMAPFetchContentOperation.h>
+#include <MailCore/MCIMAPIdleOperation.h>
+#include <MailCore/MCIMAPFolderInfoOperation.h>
+#include <MailCore/MCIMAPSession.h>
+#include <MailCore/MCIMAPNamespace.h>
+#include <MailCore/MCIMAPSearchOperation.h>
+#include <MailCore/MCIMAPSearchExpression.h>
+#include <MailCore/MCIMAPFetchNamespaceOperation.h>
+#include <MailCore/MCIMAPIdentityOperation.h>
+#include <MailCore/MCIMAPCapabilityOperation.h>
+#include <MailCore/MCIMAPOperationCallback.h>
 
 #endif

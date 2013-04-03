@@ -2,7 +2,7 @@
 
 #define __MAILCORE_MCPOPMESSAGEINFO_H_
 
-#include <mailcore/MCBaseTypes.h>
+#include <MailCore/MCBaseTypes.h>
 
 #ifdef __cplusplus
 

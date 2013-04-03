@@ -9,8 +9,8 @@
 #ifndef mailcore2_MCAsyncSMTP_h
 #define mailcore2_MCAsyncSMTP_h
 
-#include <mailcore/MCSMTPAsyncSession.h>
-#include <mailcore/MCSMTPOperation.h>
-#include <mailcore/MCSMTPOperationCallback.h>
+#include <MailCore/MCSMTPAsyncSession.h>
+#include <MailCore/MCSMTPOperation.h>
+#include <MailCore/MCSMTPOperationCallback.h>
 
 #endif

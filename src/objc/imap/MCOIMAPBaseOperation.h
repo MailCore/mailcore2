@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import <mailcore/MCOOperation.h>
+#import <MailCore/MCOOperation.h>
 
 #ifndef __MAILCORE_MCOIMAPBASEOPERATION_H_
 

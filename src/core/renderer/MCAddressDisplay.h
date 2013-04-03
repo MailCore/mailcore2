@@ -9,7 +9,7 @@
 #ifndef __MCAddressDisplay__
 #define __MCAddressDisplay__
 
-#include <mailcore/MCAbstract.h>
+#include <MailCore/MCAbstract.h>
 
 #ifdef __cplusplus
 

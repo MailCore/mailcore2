@@ -11,7 +11,7 @@
 #define __MAILCORE_MCOPOPOPERATION_H_
 
 #import <Foundation/Foundation.h>
-#import <mailcore/MCOOperation.h>
+#import <MailCore/MCOOperation.h>
 
 @interface MCOPOPOperation : MCOOperation
 - (void)start:(void (^)(NSError *error))completionBlock;

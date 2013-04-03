@@ -9,7 +9,7 @@
 #ifndef __mailcore2__MCPopAsyncSession__
 #define __mailcore2__MCPopAsyncSession__
 
-#include <mailcore/MCBaseTypes.h>
+#include <MailCore/MCBaseTypes.h>
 
 #ifdef __cplusplus
 

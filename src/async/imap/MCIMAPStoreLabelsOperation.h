@@ -9,7 +9,7 @@
 #ifndef __mailcore2__MCIMAPStoreLabelsOperation__
 #define __mailcore2__MCIMAPStoreLabelsOperation__
 
-#include <mailcore/MCIMAPOperation.h>
+#include <MailCore/MCIMAPOperation.h>
 
 #ifdef __cplusplus
 

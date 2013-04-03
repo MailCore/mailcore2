@@ -2,7 +2,7 @@
 
 #define __MAILCORE_MCSMTP_H
 
-#include <mailcore/MCSMTPProgressCallback.h>
-#include <mailcore/MCSMTPSession.h>
+#include <MailCore/MCSMTPProgressCallback.h>
+#include <MailCore/MCSMTPSession.h>
 
 #endif

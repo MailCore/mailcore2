@@ -4,7 +4,7 @@
 
 #include <pthread.h>
 #include <semaphore.h>
-#include <mailcore/MCObject.h>
+#include <MailCore/MCObject.h>
 #include <libetpan/libetpan.h>
 
 #ifdef __cplusplus

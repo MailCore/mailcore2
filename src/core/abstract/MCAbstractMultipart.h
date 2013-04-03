@@ -2,8 +2,8 @@
 
 #define __MAILCORE_MCABSTRACTMULTIPART_H
 
-#include <mailcore/MCBaseTypes.h>
-#include <mailcore/MCAbstractPart.h>
+#include <MailCore/MCBaseTypes.h>
+#include <MailCore/MCAbstractPart.h>
 
 #ifdef __cplusplus
 

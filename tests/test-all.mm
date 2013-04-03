@@ -11,7 +11,7 @@
 #include <unicode/putil.h>
 #include <unicode/uclean.h>
 #include <unicode/ucnv.h>
-#include <mailcore/mailcore.h>
+#include <MailCore/MailCore.h>
 
 extern "C" {
     extern int mailstream_debug;

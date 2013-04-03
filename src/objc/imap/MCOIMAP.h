@@ -10,30 +10,30 @@
 
 #define __MAILCORE_MCOIMAP_H_
 
-#import <mailcore/MCOIMAPSession.h>
-#import <mailcore/MCOIMAPOperation.h>
-#import <mailcore/MCOIMAPFetchFoldersOperation.h>
-#import <mailcore/MCOIMAPFolder.h>
-#import <mailcore/MCOIMAPMessage.h>
-#import <mailcore/MCOIMAPMessagePart.h>
-#import <mailcore/MCOIMAPMultipart.h>
-#import <mailcore/MCOIMAPNamespace.h>
-#import <mailcore/MCOIMAPNamespaceItem.h>
-#import <mailcore/MCOIMAPPart.h>
-#import <mailcore/MCOIMAPFolderInfoOperation.h>
-#import <mailcore/MCOIMAPFolderInfo.h>
-#import <mailcore/MCOIMAPAppendMessageOperation.h>
-#import <mailcore/MCOIMAPCopyMessagesOperation.h>
-#import <mailcore/MCOIMAPFetchMessagesOperation.h>
-#import <mailcore/MCOIMAPFetchContentOperation.h>
-#import <mailcore/MCOIMAPSearchOperation.h>
-#import <mailcore/MCOIMAPIdleOperation.h>
-#import <mailcore/MCOIMAPFetchNamespaceOperation.h>
-#import <mailcore/MCOIMAPSearchOperation.h>
-#import <mailcore/MCOIMAPIdleOperation.h>
-#import <mailcore/MCOIMAPFetchNamespaceOperation.h>
-#import <mailcore/MCOIMAPIdentityOperation.h>
-#import <mailcore/MCOIMAPCapabilityOperation.h>
-#import <mailcore/MCOIMAPSearchExpression.h>
+#import <MailCore/MCOIMAPSession.h>
+#import <MailCore/MCOIMAPOperation.h>
+#import <MailCore/MCOIMAPFetchFoldersOperation.h>
+#import <MailCore/MCOIMAPFolder.h>
+#import <MailCore/MCOIMAPMessage.h>
+#import <MailCore/MCOIMAPMessagePart.h>
+#import <MailCore/MCOIMAPMultipart.h>
+#import <MailCore/MCOIMAPNamespace.h>
+#import <MailCore/MCOIMAPNamespaceItem.h>
+#import <MailCore/MCOIMAPPart.h>
+#import <MailCore/MCOIMAPFolderInfoOperation.h>
+#import <MailCore/MCOIMAPFolderInfo.h>
+#import <MailCore/MCOIMAPAppendMessageOperation.h>
+#import <MailCore/MCOIMAPCopyMessagesOperation.h>
+#import <MailCore/MCOIMAPFetchMessagesOperation.h>
+#import <MailCore/MCOIMAPFetchContentOperation.h>
+#import <MailCore/MCOIMAPSearchOperation.h>
+#import <MailCore/MCOIMAPIdleOperation.h>
+#import <MailCore/MCOIMAPFetchNamespaceOperation.h>
+#import <MailCore/MCOIMAPSearchOperation.h>
+#import <MailCore/MCOIMAPIdleOperation.h>
+#import <MailCore/MCOIMAPFetchNamespaceOperation.h>
+#import <MailCore/MCOIMAPIdentityOperation.h>
+#import <MailCore/MCOIMAPCapabilityOperation.h>
+#import <MailCore/MCOIMAPSearchExpression.h>
 
 #endif

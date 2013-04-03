@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import <mailcore/MCOAbstractPart.h>
+#import <MailCore/MCOAbstractPart.h>
 
-#import <mailcore/MCOConstants.h>
+#import <MailCore/MCOConstants.h>
 
 #ifndef __MAILCORE_MCOIMAPABSTRACTPART_H_
 

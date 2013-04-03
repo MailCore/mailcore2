@@ -9,8 +9,8 @@
 #ifndef __mailcore2__MCSMTPCheckAccountOperation__
 #define __mailcore2__MCSMTPCheckAccountOperation__
 
-#include <mailcore/MCSMTPOperation.h>
-#include <mailcore/MCAbstract.h>
+#include <MailCore/MCSMTPOperation.h>
+#include <MailCore/MCAbstract.h>
 
 #ifdef __cplusplus
 

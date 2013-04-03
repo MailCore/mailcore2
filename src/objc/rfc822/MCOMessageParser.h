@@ -10,7 +10,7 @@
 
 #define __MAILCORE_MCOMESSAGEPARSER_H_
 
-#import <mailcore/MCOAbstractMessage.h>
+#import <MailCore/MCOAbstractMessage.h>
 
 @protocol MCOHTMLRendererDelegate;
 

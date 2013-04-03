@@ -12,7 +12,7 @@
 #import <Foundation/Foundation.h>
 
 #ifdef __cplusplus
-#include <mailcore/MCBaseTypes.h>
+#include <MailCore/MCBaseTypes.h>
 #endif
 
 #ifdef __cplusplus

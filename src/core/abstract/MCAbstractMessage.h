@@ -1,7 +1,7 @@
 #ifndef __MAILCORE_MCABSTRACTMESSAGE_H_
 #define __MAILCORE_MCABSTRACTMESSAGE_H_
 
-#include <mailcore/MCBaseTypes.h>
+#include <MailCore/MCBaseTypes.h>
 
 #ifdef __cplusplus
 

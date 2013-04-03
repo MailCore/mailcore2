@@ -10,7 +10,7 @@
 
 #define __MAILCORE_MCOMESSAGEBUILDER_H_
 
-#import <mailcore/MCOAbstractMessage.h>
+#import <MailCore/MCOAbstractMessage.h>
 
 @class MCOAttachment;
 @protocol MCOHTMLRendererDelegate;

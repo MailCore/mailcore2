@@ -9,8 +9,8 @@
 #ifndef mailcore2_mailcore_h
 #define mailcore2_mailcore_h
 
-#include <mailcore/MCCore.h>
-#include <mailcore/MCAsync.h>
-#include <mailcore/MCObjC.h>
+#include <MailCore/MCCore.h>
+#include <MailCore/MCAsync.h>
+#include <MailCore/MCObjC.h>
 
 #endif

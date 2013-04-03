@@ -9,7 +9,7 @@
 #ifndef __mailcore2__MCPOPFetchMessagesOperation__
 #define __mailcore2__MCPOPFetchMessagesOperation__
 
-#include <mailcore/MCPOPOperation.h>
+#include <MailCore/MCPOPOperation.h>
 
 #ifdef __cplusplus
 

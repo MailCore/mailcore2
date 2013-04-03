@@ -10,7 +10,7 @@
 
 #define __MAILCORE_MCOABSTRACTPART_PRIVATE_H_
 
-#include <mailcore/MCOAbstractPart.h>
+#include <MailCore/MCOAbstractPart.h>
 
 #ifdef __cplusplus
 

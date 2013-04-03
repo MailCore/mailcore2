@@ -9,6 +9,6 @@
 #ifndef mailcore2_MCRenderer_h
 #define mailcore2_MCRenderer_h
 
-#include <mailcore/MCHTMLRendererCallback.h>
+#include <MailCore/MCHTMLRendererCallback.h>
 
 #endif

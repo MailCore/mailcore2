@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <mailcore/MCORange.h>
+#import <MailCore/MCORange.h>
 
 #ifndef __MAILCORE_MCOINDEXSET_H_
 
