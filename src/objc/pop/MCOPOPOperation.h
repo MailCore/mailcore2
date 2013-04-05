@@ -13,6 +13,9 @@
 #import <Foundation/Foundation.h>
 #import <MailCore/MCOOperation.h>
 
+// This is an asynchronous POP3 operation.
+// See MCOPOPSession for more info.
+
 @interface MCOPOPOperation : MCOOperation
 - (void)start:(void (^)(NSError *error))completionBlock;
 @end

@@ -13,6 +13,9 @@
 #import <Foundation/Foundation.h>
 #import <MailCore/MCOPOPOperation.h>
 
+// This is an asynchronous operation that will fetch the header of a message.
+// See MCOPOPSession for more info.
+
 @class MCOMessageHeader;
 
 @interface MCOPOPFetchHeaderOperation : MCOPOPOperation

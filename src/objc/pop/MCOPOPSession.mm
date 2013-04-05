@@ -74,7 +74,7 @@ MCO_OBJC_SYNTHESIZE_BOOL(setCheckCertificateEnabled, isCheckCertificateEnabled)
 }
 
 // Will disconnect.
-- (MCOPOPOperation *) deleteMessagesWithIndexes:(MCOIndexSet *)indexes
+- (MCOPOPOperation *) deleteMessagesOperationWithIndexes:(MCOIndexSet *)indexes
 {
     mailcore::POPOperation * coreOp = MCO_NATIVE_INSTANCE->deleteMessagesOperation(MCO_FROM_OBJC(mailcore::IndexSet, indexes));
      return [[[MCOPOPOperation alloc] initWithMCOperation:coreOp] autorelease];

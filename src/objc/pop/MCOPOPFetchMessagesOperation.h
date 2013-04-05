@@ -13,6 +13,8 @@
 #import <Foundation/Foundation.h>
 #import <MailCore/MCOPOPOperation.h>
 
+// This is an asynchronous operation that will fetch the list of a messages on the account.
+
 @interface MCOPOPFetchMessagesOperation : MCOPOPOperation
 
 - (void)start:(void (^)(NSError *error, NSArray * messages))completionBlock;
