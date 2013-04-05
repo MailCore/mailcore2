@@ -6,12 +6,12 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <MailCore/MCOConstants.h>
-
 #ifndef __MAILCORE_MCOIMAPSEARCHEXPRESSION_H_
 
 #define __MAILCORE_MCOIMAPSEARCHEXPRESSION_H_
+
+#import <Foundation/Foundation.h>
+#import <MailCore/MCOConstants.h>
 
 @interface MCOIMAPSearchExpression : NSObject
 

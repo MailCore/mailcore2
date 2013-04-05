@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef mailcore2_MCOSMTP_h
-#define mailcore2_MCOSMTP_h
+#ifndef __MAILCORE_MCOSMTP_H_
+
+#define __MAILCORE_MCOSMTP_H_
 
 #import <MailCore/MCOSMTPSession.h>
 #import <MailCore/MCOSMTPSendOperation.h>

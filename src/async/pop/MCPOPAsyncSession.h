@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __mailcore2__MCPopAsyncSession__
-#define __mailcore2__MCPopAsyncSession__
+#ifndef __MAILCORE_MCPOPASYNCSESSION_H_
+
+#define __MAILCORE_MCPOPASYNCSESSION_H_
 
 #include <MailCore/MCBaseTypes.h>
 
@@ -73,4 +74,4 @@ namespace mailcore {
 
 #endif
 
-#endif /* defined(__mailcore2__MCPopAsyncSession__) */
+#endif

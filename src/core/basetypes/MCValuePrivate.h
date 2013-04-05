@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef mailcore2_MCValuePrivate_h
-#define mailcore2_MCValuePrivate_h
+#ifndef __MAILCORE_MCVALUEPRIVATE_H_
+
+#define __MAILCORE_MCVALUEPRIVATE_H_
 
 enum {
     VALUE_TYPE_NONE,

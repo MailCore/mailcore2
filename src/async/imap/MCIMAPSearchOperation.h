@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __mailcore2__IMAPSearchOperation__
-#define __mailcore2__IMAPSearchOperation__
+#ifndef __MAILCORE_MCIMAPSEARCHOPERATION_H_
+
+#define __MAILCORE_MCIMAPSEARCHOPERATION_H_
 
 #include <MailCore/MCIMAPOperation.h>
 #include <MailCore/MCMessageConstants.h>
@@ -49,4 +50,4 @@ namespace mailcore {
 
 #endif
 
-#endif /* defined(__mailcore2__IMAPSearchOperation__) */
+#endif

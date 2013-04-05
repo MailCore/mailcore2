@@ -6,12 +6,12 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import <MailCore/MCOIMAPBaseOperation.h>
-#import <MailCore/MCOConstants.h>
-
 #ifndef __MAILCORE_MCOIMAPFETCHMESSAGESOPERATION_H_
 
 #define __MAILCORE_MCOIMAPFETCHMESSAGESOPERATION_H_
+
+#import <MailCore/MCOIMAPBaseOperation.h>
+#import <MailCore/MCOConstants.h>
 
 @class MCOIndexSet;
 

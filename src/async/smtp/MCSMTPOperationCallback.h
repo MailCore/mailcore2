@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __mailcore2__MCSMTPOperationCallback__
-#define __mailcore2__MCSMTPOperationCallback__
+#ifndef __MAILCORE_MCSMTPOPERATIONCALLBACK_H_
+
+#define __MAILCORE_MCSMTPOPERATIONCALLBACK_H_
 
 #ifdef __cplusplus
 
@@ -23,4 +24,4 @@ namespace mailcore {
 
 #endif
 
-#endif /* defined(__mailcore2__MCSMTPOperationCallback__) */
+#endif

@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __mailcore2__MCIMAPAccount__
-#define __mailcore2__MCIMAPAccount__
+#ifndef __MAILCORE_MCIMAPACCOUNT_H_
+
+#define __MAILCORE_MCIMAPACCOUNT_H_
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCMessageConstants.h>
@@ -149,4 +150,4 @@ namespace mailcore {
 
 #endif
 
-#endif /* defined(__mailcore2__MCIMAPAccount__) */
+#endif

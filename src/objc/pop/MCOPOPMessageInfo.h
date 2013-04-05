@@ -6,6 +6,10 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
+#ifndef __MAILCORE_MCOPOPMESSAGEINFO_H_
+
+#define __MAILCORE_MCOPOPMESSAGEINFO_H_
+
 #import <Foundation/Foundation.h>
 
 // This is information of a message fetched by MCOPOPFetchMessagesOperation.
@@ -23,3 +27,5 @@
 @property (nonatomic, copy) NSString * uid;
 
 @end
+
+#endif

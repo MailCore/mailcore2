@@ -6,12 +6,12 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import <MailCore/MCOAbstractMessage.h>
-#import <MailCore/MCOConstants.h>
-
 #ifndef __MAILCORE_MCOIMAPMESSAGE_H_
 
 #define __MAILCORE_MCOIMAPMESSAGE_H_
+
+#import <MailCore/MCOAbstractMessage.h>
+#import <MailCore/MCOConstants.h>
 
 @protocol MCOHTMLRendererIMAPDelegate;
 

@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #ifndef __MAILCORE_MCOIMAPNAMESPACE_H_
 
 #define __MAILCORE_MCOIMAPNAMESPACE_H_
+
+#import <Foundation/Foundation.h>
 
 @class MCOIMAPNamespace;
 

@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import <MailCore/MCOIMAPBaseOperation.h>
-
 #ifndef __MAILCORE_MCOIMAPFETCHNAMESPACEOPERATION_H_
 
 #define __MAILCORE_MCOIMAPFETCHNAMESPACEOPERATION_H_
+
+#import <MailCore/MCOIMAPBaseOperation.h>
 
 @interface MCOIMAPFetchNamespaceOperation : MCOIMAPBaseOperation
 

@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef mailcore2_MCOAbstract_h
-#define mailcore2_MCOAbstract_h
+#ifndef __MAILCORE_MCOABSTRACT_H_
+
+#define __MAILCORE_MCOABSTRACT_H_
 
 #import <MailCore/MCOAbstractMessage.h>
 #import <MailCore/MCOAbstractMessagePart.h>

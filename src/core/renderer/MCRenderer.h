@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef mailcore2_MCRenderer_h
-#define mailcore2_MCRenderer_h
+#ifndef __MAILCORE_MCRENDERER_H_
+
+#define __MAILCORE_MCRENDERER_H_
 
 #include <MailCore/MCHTMLRendererCallback.h>
 

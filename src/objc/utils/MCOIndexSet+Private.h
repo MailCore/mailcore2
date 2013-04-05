@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef mailcore2_MCOIndexSet_Private_h
-#define mailcore2_MCOIndexSet_Private_h
+#ifndef __MAILCORE_MCOINDEXSET_PRIVATE_H_
+
+#define __MAILCORE_MCOINDEXSET_PRIVATE_H_
 
 #ifdef __cplusplus
 @interface MCOIndexSet (Private)

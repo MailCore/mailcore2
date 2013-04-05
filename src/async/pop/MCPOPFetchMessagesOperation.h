@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __mailcore2__MCPOPFetchMessagesOperation__
-#define __mailcore2__MCPOPFetchMessagesOperation__
+#ifndef __MAILCORE_MCPOPFETCHMESSAGESOPERATION_H_
+
+#define __MAILCORE_MCPOPFETCHMESSAGESOPERATION_H_
 
 #include <MailCore/MCPOPOperation.h>
 
@@ -31,4 +32,4 @@ namespace mailcore {
 
 #endif
 
-#endif /* defined(__mailcore2__MCPOPFetchMessagesOperation__) */
+#endif

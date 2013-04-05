@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __mailcore2__MCSMTPOperation__
-#define __mailcore2__MCSMTPOperation__
+#ifndef __MAILCORE_MCSMTPOPERATION_H_
+
+#define __MAILCORE_MCSMTPOPERATION_H_
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCSMTPProgressCallback.h>
@@ -48,4 +49,4 @@ namespace mailcore {
 
 #endif
 
-#endif /* defined(__mailcore2__MCSMTPOperation__) */
+#endif

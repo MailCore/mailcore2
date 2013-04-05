@@ -14,6 +14,8 @@
 
 #import <MailCore/MCOConstants.h>
 
+// This class implements asynchronous SMTP protocol.
+
 @class MCOSMTPSendOperation;
 @class MCOSMTPOperation;
 @class MCOAddress;

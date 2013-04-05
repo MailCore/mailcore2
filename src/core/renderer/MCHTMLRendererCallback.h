@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __mailcore2__MCHTMLRendererCallback__
-#define __mailcore2__MCHTMLRendererCallback__
+#ifndef __MAILCORE_MCHTMLRENDERERCALLBACK_H_
+
+#define __MAILCORE_MCHTMLRENDERERCALLBACK_H_
 
 #include <MailCore/MCAbstract.h>
 #include <MailCore/MCIMAP.h>
@@ -51,4 +52,4 @@ namespace mailcore {
 
 #endif
 
-#endif /* defined(__mailcore2__MCHTMLRendererCallback__) */
+#endif

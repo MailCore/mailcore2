@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import <MailCore/MCOOperation.h>
-
 #ifndef __MAILCORE_MCOIMAPOPERATION_H_
 
 #define __MAILCORE_MCOIMAPOPERATION_H_
+
+#import <MailCore/MCOOperation.h>
 
 @interface MCOIMAPOperation : MCOOperation
 

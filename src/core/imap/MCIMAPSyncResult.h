@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __mailcore2__MCIMAPSyncResult__
-#define __mailcore2__MCIMAPSyncResult__
+#ifndef __MAILCORE_MCIMAPSYNCRESULT_H_
+
+#define __MAILCORE_MCIMAPSYNCRESULT_H_
 
 #include <MailCore/MCBaseTypes.h>
 
@@ -35,4 +36,4 @@ namespace mailcore {
 
 #endif
 
-#endif /* defined(__mailcore2__MCIMAPSyncResult__) */
+#endif

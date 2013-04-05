@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __mailcore2__IMAPFetchMessagesOperation__
-#define __mailcore2__IMAPFetchMessagesOperation__
+#ifndef __MAILCORE_MCIMAPFETCHMESSAGESOPERATION_H_
+
+#define __MAILCORE_MCIMAPFETCHMESSAGESOPERATION_H_
 
 #include <MailCore/MCIMAPOperation.h>
 
@@ -52,4 +53,4 @@ namespace mailcore {
 
 #endif
 
-#endif /* defined(__mailcore2__IMAPFetchMessagesOperation__) */
+#endif

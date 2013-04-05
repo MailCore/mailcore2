@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __mailcore2__MCIMAPOperation__
-#define __mailcore2__MCIMAPOperation__
+#ifndef __MAILCORE_MCIMAPOPERATION_H_
+
+#define __MAILCORE_MCIMAPOPERATION_H_
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCIMAPProgressCallback.h>
@@ -57,4 +58,4 @@ namespace mailcore {
 
 #endif
 
-#endif /* defined(__mailcore2__MCIMAPOperation__) */
+#endif

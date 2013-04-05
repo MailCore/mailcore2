@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __mailcore2__MCSMTPCheckAccountOperation__
-#define __mailcore2__MCSMTPCheckAccountOperation__
+#ifndef __MAILCORE_MCSMTPCHECKACCOUNTOPERATION_H_
+
+#define __MAILCORE_MCSMTPCHECKACCOUNTOPERATION_H_
 
 #include <MailCore/MCSMTPOperation.h>
 #include <MailCore/MCAbstract.h>
@@ -36,4 +37,4 @@ namespace mailcore {
 
 #endif
 
-#endif /* defined(__mailcore2__MCSMTPCheckAccountOperation__) */
+#endif

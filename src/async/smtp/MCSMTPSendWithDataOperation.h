@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __mailcore2__MCSMTPSendWithDataOperation__
-#define __mailcore2__MCSMTPSendWithDataOperation__
+#ifndef __MAILCORE_MCSMTPSENDWITHDATAOPERATION_H_
+
+#define __MAILCORE_MCSMTPSENDWITHDATAOPERATION_H_
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCAbstract.h>
@@ -36,4 +37,4 @@ namespace mailcore {
 
 #endif
 
-#endif /* defined(__mailcore2__SMTPSendWithDataOperation__) */
+#endif

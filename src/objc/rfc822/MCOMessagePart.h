@@ -12,6 +12,8 @@
 
 #import <MailCore/MCOAbstractMessagePart.h>
 
+// Message part parsed from RFC 822 message data.
+
 @interface MCOMessagePart : MCOAbstractMessagePart <NSCopying>
 
 @end

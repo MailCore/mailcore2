@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import <MailCore/MCOAbstractMessagePart.h>
-
 #ifndef __MAILCORE_MCOIMAPMESSAGEPART_H_
 
 #define __MAILCORE_MCOIMAPMESSAGEPART_H_
+
+#import <MailCore/MCOAbstractMessagePart.h>
 
 @interface MCOIMAPMessagePart : MCOAbstractMessagePart <NSCopying>
 

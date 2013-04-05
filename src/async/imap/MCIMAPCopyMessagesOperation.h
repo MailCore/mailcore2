@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __mailcore2__MCIMAPCopyMessagesOperation__
-#define __mailcore2__MCIMAPCopyMessagesOperation__
+#ifndef __MAILCORE_MCIMAPCOPYMESSAGESOPERATION_H_
+
+#define __MAILCORE_MCIMAPCOPYMESSAGESOPERATION_H_
 
 #include <MailCore/MCIMAPOperation.h>
 
@@ -41,4 +42,4 @@ namespace mailcore {
 
 #endif
 
-#endif /* defined(__mailcore2__MCIMAPCopyMessagesOperation__) */
+#endif

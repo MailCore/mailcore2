@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __mailcore2__MCIndexSet__
-#define __mailcore2__MCIndexSet__
+#ifndef __MAILCORE_MCINDEXSET_H_
+
+#define __MAILCORE_MCINDEXSET_H_
 
 #include <MailCore/MCObject.h>
 #include <MailCore/MCRange.h>
@@ -65,4 +66,4 @@ namespace mailcore {
 
 #endif
 
-#endif /* defined(__mailcore2__MCIndexSet__) */
+#endif

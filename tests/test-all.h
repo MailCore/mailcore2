@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __mailcore2__test_all__
-#define __mailcore2__test_all__
+#ifndef __MAILCORE_TEST_ALL_H_
+#define __MAILCORE_TEST_ALL_H_
 
 #include <MailCore/MailCore.h>
 
 extern void testAll();
 
-#endif /* defined(__mailcore2__test_all__) */
+#endif

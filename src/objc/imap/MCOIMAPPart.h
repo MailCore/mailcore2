@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import <MailCore/MCOAbstractPart.h>
-
-#import <MailCore/MCOConstants.h>
-
 #ifndef __MAILCORE_MCOIMAPABSTRACTPART_H_
 
 #define __MAILCORE_MCOIMAPABSTRACTPART_H_
+
+#import <MailCore/MCOAbstractPart.h>
+
+#import <MailCore/MCOConstants.h>
 
 @interface MCOIMAPPart : MCOAbstractPart <NSCopying>
 

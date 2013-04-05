@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __mailcore2__MCPOPDeleteMessagesOperation__
-#define __mailcore2__MCPOPDeleteMessagesOperation__
+#ifndef __MAILCORE_MCPOPDELETEMESSAGESOPERATION_H_
+
+#define __MAILCORE_MCPOPDELETEMESSAGESOPERATION_H_
 
 #include <MailCore/MCPOPOperation.h>
 
@@ -35,4 +36,4 @@ namespace mailcore {
 
 #endif
 
-#endif /* defined(__mailcore2__MCPOPDeleteMessagesOperation__) */
+#endif

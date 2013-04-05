@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __mailcore2__MCIMAPOperationCallback__
-#define __mailcore2__MCIMAPOperationCallback__
+#ifndef __MAILCORE_MCIMAPOPERATIONCALLBACK_H_
+
+#define __MAILCORE_MCIMAPOPERATIONCALLBACK_H_
 
 #ifdef __cplusplus
 
@@ -25,4 +26,4 @@ namespace mailcore {
 
 #endif
 
-#endif /* defined(__mailcore2__MCIMAPOperationCallback__) */
+#endif

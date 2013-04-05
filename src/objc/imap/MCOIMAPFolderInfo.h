@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #ifndef __MAILCORE_MCOIMAPFOLDERINFO_H_
 
 #define __MAILCORE_MCOIMAPFOLDERINFO_H_
+
+#import <Foundation/Foundation.h>
 
 @interface MCOIMAPFolderInfo : NSObject
 

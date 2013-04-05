@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __mailcore2__HTMLCleaner__
-#define __mailcore2__HTMLCleaner__
+#ifndef __MAILCORE_HTMLCLEANER_H_
+
+#define __MAILCORE_HTMLCLEANER_H_
 
 #include <MailCore/MCString.h>
 
@@ -20,4 +21,4 @@ namespace mailcore {
     
 }
 
-#endif /* defined(__mailcore2__HTMLCleaner__) */
+#endif

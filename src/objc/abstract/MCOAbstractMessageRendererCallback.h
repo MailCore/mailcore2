@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __mailcore2__MCOAbstractMessageRendererCallback__
-#define __mailcore2__MCOAbstractMessageRendererCallback__
+#ifndef __MAILCORE_MCOABSTRACTMESSAGERENDERECALLBACK_H_
+
+#define __MAILCORE_MCOABSTRACTMESSAGERENDERECALLBACK_H_
 
 #include "MCIMAP.h"
 #include "MCRenderer.h"
@@ -45,4 +46,4 @@ private:
 };
 #endif
 
-#endif /* defined(__mailcore2__MCOAbstractMessageRendererCallback__) */
+#endif

@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __mailcore2__MCIMAPFolderInfoOperation__
-#define __mailcore2__MCIMAPFolderInfoOperation__
+#ifndef __MAILCORE_MCIMAPFOLDERINFOOPERATION_H_
+
+#define __MAILCORE_MCIMAPFOLDERINFOOPERATION_H_
 
 #include <MailCore/MCIMAPOperation.h>
 
@@ -40,4 +41,4 @@ namespace mailcore {
 
 #endif
 
-#endif /* defined(__mailcore2__MCIMAPFolderInfoOperation__) */
+#endif

@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __mailcore2__MCIMAPAppendMessageOperation__
-#define __mailcore2__MCIMAPAppendMessageOperation__
+#ifndef __MAILCORE_MCIMAPAPPENDMESSAGEOPERATION_H_
+
+#define __MAILCORE_MCIMAPAPPENDMESSAGEOPERATION_H_
 
 #include <MailCore/MCIMAPOperation.h>
 #include <MailCore/MCMessageConstants.h>
@@ -42,4 +43,4 @@ namespace mailcore {
 
 #endif
 
-#endif /* defined(__mailcore2__MCIMAPAppendMessageOperation__) */
+#endif

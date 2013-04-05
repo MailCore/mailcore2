@@ -13,9 +13,16 @@
 #import <Foundation/Foundation.h>
 
 @interface MCOOperation : NSObject
+
 @property (readonly) BOOL isCancelled;
 
+// This methods is called on the main thread when the asynchronous operation is finished.
+// Needs to be overriden by subclasses.
+- (void)operationCompleted;
+
+// Cancel the operation.
 - (void)cancel;
+
 @end
 
 #endif

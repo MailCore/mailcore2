@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __mailcore2__MCPOPFetchHeaderOperation__
-#define __mailcore2__MCPOPFetchHeaderOperation__
+#ifndef __MAILCORE_MCPOPFETCHHEADEROPERATION_H_
+
+#define __MAILCORE_MCPOPFETCHHEADEROPERATION_H_
 
 #include <MailCore/MCPOPOperation.h>
 
@@ -39,4 +40,4 @@ namespace mailcore {
 
 #endif
 
-#endif /* defined(__mailcore2__MCPOPFetchHeaderOperation__) */
+#endif

@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import <MailCore/MCOOperation.h>
-
 #ifndef __MAILCORE_MCOIMAPBASEOPERATION_H_
 
 #define __MAILCORE_MCOIMAPBASEOPERATION_H_
+
+#import <MailCore/MCOOperation.h>
 
 typedef void (^MCOIMAPBaseOperationProgressBlock)(unsigned int current, unsigned int maximum);
 typedef void (^MCOIMAPBaseOperationItemProgressBlock)(unsigned int current);

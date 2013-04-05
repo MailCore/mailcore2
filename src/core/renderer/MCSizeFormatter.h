@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __testUI__MCSizeFormatter__
-#define __testUI__MCSizeFormatter__
+#ifndef __MAILCORE_MCSIZEFORMATTER_H_
+#define __MAILCORE_MCSIZEFORMATTER_H_
 
 #include <MailCore/MCBaseTypes.h>
 
@@ -25,4 +25,4 @@ namespace mailcore {
 
 #endif
 
-#endif /* defined(__testUI__MCSizeFormatter__) */
+#endif

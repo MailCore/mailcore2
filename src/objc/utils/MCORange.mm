@@ -13,6 +13,8 @@
 
 #include <string.h>
 
+MCORange MCORangeEmpty = {UINT64_MAX, 0};
+
 MCORange MCORangeMake(uint64_t location, uint64_t length)
 {
     MCORange result;
