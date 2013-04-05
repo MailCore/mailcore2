@@ -12,6 +12,8 @@
 
 #import <MailCore/MCOOperation.h>
 
+// This is an asynchronous SMTP operation.
+
 @interface MCOSMTPOperation : MCOOperation
 - (void)start:(void (^)(NSError *error))completionBlock;
 @end
