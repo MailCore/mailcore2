@@ -15,10 +15,24 @@
 @class MCOAbstractMessage;
 
 typedef enum {
+    // Used for a single part.
+    // The part will be a MCOAbstractPart.
     MCOPartTypeSingle,
+    
+    // Used for a message part (MIME type: message/rfc822).
+    // The part will be a MCOAbstractMessagePart.
     MCOPartTypeMessage,
+    
+    // Used for a multipart, multipart/mixed.
+    // The part will be a MCOAbstractMultipart.
     MCOPartTypeMultipartMixed,
+    
+    // Used for a multipart, multipart/related.
+    // The part will be a MCOAbstractMultipart.
     MCOPartTypeMultipartRelated,
+    
+    // Used for a multipart, multipart/alternative.
+    // The part will be a MCOAbstractMultipart.
     MCOPartTypeMultipartAlternative,
 } MCOPartType;
 

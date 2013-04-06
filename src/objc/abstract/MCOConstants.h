@@ -166,6 +166,85 @@ typedef enum {
     MCOIMAPSearchKindAnd,
 } MCOIMAPSearchKind;
 
+// Keys for the namespace dictionary.
+#define MCOIMAPNamespacePersonal @"IMAPNamespacePersonal";
+#define MCOIMAPNamespaceOther @"IMAPNamespaceOther";
+#define MCOIMAPNamespaceShared @"IMAPNamespaceShared";
+
+// This is the constants for the IMAP capabilities.
+// See corresponding RFC for more information.
+typedef enum {
+    // ACL Capability.
+    MCOIMAPCapabilityACL,
+    // BINARY Capability.
+    MCOIMAPCapabilityBinary,
+    // CATENATE Capability.
+    MCOIMAPCapabilityCatenate,
+    // CHILDREN Capability.
+    MCOIMAPCapabilityChildren,
+    // COMPRESS Capability.
+    MCOIMAPCapabilityCompressDeflate,
+    // CONDSTORE Capability.
+    MCOIMAPCapabilityCondstore,
+    // ENABLE Capability.
+    MCOIMAPCapabilityEnable,
+    // IDLE Capability.
+    MCOIMAPCapabilityIdle,
+    // ID Capability.
+    MCOIMAPCapabilityId,
+    // LITERAL+ Capability.
+    MCOIMAPCapabilityLiteralPlus,
+    // MULTIAPPEND Capability.
+    MCOIMAPCapabilityMultiAppend,
+    // NAMESPACE Capability.
+    MCOIMAPCapabilityNamespace,
+    // QRESYNC Capability.
+    MCOIMAPCapabilityQResync,
+    // QUOTE Capability.
+    MCOIMAPCapabilityQuota,
+    // SORT Capability.
+    MCOIMAPCapabilitySort,
+    // STARTTLS Capability.
+    MCOIMAPCapabilityStartTLS,
+    // THREAD=ORDEREDSUBJECT Capability.
+    MCOIMAPCapabilityThreadOrderedSubject,
+    // THREAD=REFERENCES Capability.
+    MCOIMAPCapabilityThreadReferences,
+    // UIDPLUS Capability.
+    MCOIMAPCapabilityUIDPlus,
+    // UNSELECT Capability.
+    MCOIMAPCapabilityUnselect,
+    // XLIST Capability.
+    MCOIMAPCapabilityXList,
+    // AUTH=ANONYMOUS Capability.
+    MCOIMAPCapabilityAuthAnonymous,
+    // AUTH=CRAM-MD5 Capability.
+    MCOIMAPCapabilityAuthCRAMMD5,
+    // AUTH=DIGEST-MD5 Capability.
+    MCOIMAPCapabilityAuthDigestMD5,
+    // AUTH=EXTERNAL Capability.
+    MCOIMAPCapabilityAuthExternal,
+    // AUTH=GSSAPI Capability.
+    MCOIMAPCapabilityAuthGSSAPI,
+    // AUTH=KERBEROSV4 Capability.
+    MCOIMAPCapabilityAuthKerberosV4,
+    // AUTH=LOGIN Capability.
+    MCOIMAPCapabilityAuthLogin,
+    // AUTH=NTML Capability.
+    MCOIMAPCapabilityAuthNTLM,
+    // AUTH=OTP Capability.
+    MCOIMAPCapabilityAuthOTP,
+    // AUTH=PLAIN Capability.
+    MCOIMAPCapabilityAuthPlain,
+    // AUTH=SKEY Capability.
+    MCOIMAPCapabilityAuthSKey,
+    // AUTH=SRP Capability.
+    MCOIMAPCapabilityAuthSRP,
+} MCOIMAPCapability;
+
+// Error domain for mailcore.
+#define MCOErrorDomain @"MCOErrorDomain"
+
 // Here's the list of errors.
 typedef enum {
     // No error occurred.

@@ -1236,7 +1236,7 @@ void IMAPSession::copyMessages(String * folder, IndexSet * uidSet, String * dest
     }
 
     setList = splitSet(set, 10);
-    uidSetResult = IndexSet::indexSet();
+    uidSetResult = NULL;
 
     for(clistiter * iter = clist_begin(setList) ; iter != NULL ; iter = clist_next(iter)) {
         struct mailimap_set * current_set;
@@ -1267,7 +1267,7 @@ void IMAPSession::copyMessages(String * folder, IndexSet * uidSet, String * dest
             mailimap_set_free(dest_uid);
         }
     }
-    * pDestUIDs = (IndexSet *) uidSetResult->autorelease();
+    * pDestUIDs = uidSetResult;
     * pError = ErrorNone;
 
     release:

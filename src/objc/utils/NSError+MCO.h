@@ -12,7 +12,7 @@
 
 @interface NSError (MCO)
 #ifdef __cplusplus
-+ (NSError *)mco_errorWithErrorCode:(mailcore::ErrorCode)code;
++ (NSError *) mco_errorWithErrorCode:(mailcore::ErrorCode)code;
 #endif
 @end
 

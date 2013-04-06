@@ -108,7 +108,7 @@ namespace mailcore {
 		IMAPCapabilityXList,
 		IMAPCapabilityAuthAnonymous,
 		IMAPCapabilityAuthCRAMMD5,
-		MAPCapabilityAuthDigestMD5,
+		IMAPCapabilityAuthDigestMD5,
 		IMAPCapabilityAuthExternal,
 		IMAPCapabilityAuthGSSAPI,
 		IMAPCapabilityAuthKerberosV4,

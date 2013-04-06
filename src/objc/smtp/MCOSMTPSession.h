@@ -55,6 +55,7 @@
 @property (nonatomic, assign, getter=isUseHeloIPEnabled) BOOL useHeloIPEnabled;
 
 // Returns an operation that will send the given message through SMTP.
+// The operation needs to be started.
 // It will use the recipient set in the message data (To, Cc and Bcc).
 // It will also filter out Bcc from the content of the message.
 //
@@ -69,6 +70,7 @@
 - (MCOSMTPSendOperation *) sendOperationWithData:(NSData *)messageData;
 
 // Returns an operation that will check whether the SMTP account is valid.
+// The operation needs to be started.
 //
 // {
 //   ...

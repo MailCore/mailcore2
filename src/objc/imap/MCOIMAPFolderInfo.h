@@ -12,13 +12,23 @@
 
 #import <Foundation/Foundation.h>
 
+// This class is a cluster for some folder information.
+
 @interface MCOIMAPFolderInfo : NSObject
 
+// Returns a new allocated folder info.
 + (MCOIMAPFolderInfo *) info;
 
+// UIDNEXT value.
 @property (nonatomic, assign) uint32_t uidNext;
+
+// UIDVALIDITY value.
 @property (nonatomic, assign) uint32_t uidValidity;
+
+// MODSEQ value.
 @property (nonatomic, assign) uint64_t modSequenceValue;
+
+// number of messages.
 @property (nonatomic, assign) int messageCount;
 
 @end

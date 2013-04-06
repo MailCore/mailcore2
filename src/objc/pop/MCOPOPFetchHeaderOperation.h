@@ -19,7 +19,13 @@
 @class MCOMessageHeader;
 
 @interface MCOPOPFetchHeaderOperation : MCOPOPOperation
-- (void)start:(void (^)(NSError *error, MCOMessageHeader * header))completionBlock;
+
+// Starts the asynchronous operation.
+// On success, the completion block will be called with nil as error and the content of the fetched header.
+// On failure, error will be set with MCOErrorDomain as domain and an error code available in MCOConstants.h.
+// header will be nil.
+- (void) start:(void (^)(NSError * error, MCOMessageHeader * header))completionBlock;
+
 @end
 
 #endif

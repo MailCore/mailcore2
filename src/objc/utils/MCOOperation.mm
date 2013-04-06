@@ -56,7 +56,7 @@ public:
     return _operation;
 }
 
-- (id)initWithMCOperation:(Operation *)op
+- (id) initWithMCOperation:(Operation *)op
 {
     self = [super init];
     
@@ -69,19 +69,19 @@ public:
     return self;
 }
 
-- (void)dealloc
+- (void) dealloc
 {
     _operation->release();
     _callback->release();
     [super dealloc];
 }
 
-- (BOOL)isCancelled
+- (BOOL) isCancelled
 {
     return MCO_NATIVE_INSTANCE->isCancelled();
 }
 
-- (void)cancel
+- (void) cancel
 {
     if (_started) {
         _started = NO;
@@ -90,21 +90,21 @@ public:
     _operation->cancel();
 }
 
-- (void)start
+- (void) start
 {
     _started = YES;
     [self retain];
     _operation->start();
 }
 
-- (void)_operationCompleted
+- (void) _operationCompleted
 {
     _started = NO;
     [self operationCompleted];
     [self release];
 }
 
-- (void)operationCompleted
+- (void) operationCompleted
 {
 }
 

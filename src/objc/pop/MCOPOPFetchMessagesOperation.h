@@ -17,7 +17,12 @@
 
 @interface MCOPOPFetchMessagesOperation : MCOPOPOperation
 
-- (void)start:(void (^)(NSError *error, NSArray * messages))completionBlock;
+// Starts the asynchronous operation.
+// On success, the completion block will be called with nil as error and the fetched messages list.
+// Messages will be an array of MCOPOPMessageInfo.
+// On failure, error will be set with MCOErrorDomain as domain and an error code available in MCOConstants.h.
+// messageData will be nil.
+- (void) start:(void (^)(NSError * error, NSArray * /* MCOPOPMessageInfo */ messages))completionBlock;
 
 @end
 

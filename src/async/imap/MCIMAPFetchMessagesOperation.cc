@@ -17,12 +17,6 @@ using namespace mailcore;
 IMAPFetchMessagesOperation::IMAPFetchMessagesOperation()
 {
     mFetchByUidEnabled = false;
-#if 0
-    mFirst = 0;
-    mLast = 0;
-    mUids = NULL;
-    mNumbers = NULL;
-#endif
     mIndexes = NULL;
     mMessages = NULL;
     mVanishedMessages = NULL;
@@ -31,10 +25,6 @@ IMAPFetchMessagesOperation::IMAPFetchMessagesOperation()
 
 IMAPFetchMessagesOperation::~IMAPFetchMessagesOperation()
 {
-#if 0
-    MC_SAFE_RELEASE(mNumbers);
-    MC_SAFE_RELEASE(mUids);
-#endif
     MC_SAFE_RELEASE(mIndexes);
     MC_SAFE_RELEASE(mMessages);
     MC_SAFE_RELEASE(mVanishedMessages);

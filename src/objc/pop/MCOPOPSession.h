@@ -53,6 +53,7 @@
 @property (nonatomic, assign, getter=isCheckCertificateEnabled) BOOL checkCertificateEnabled;
 
 // Returns an operation that will fetch the list of messages.
+// The operation needs to be started.
 //
 // {
 //   ...
@@ -65,6 +66,7 @@
 - (MCOPOPFetchMessagesOperation *) fetchMessagesOperation;
 
 // Returns an operation that will fetch the header of the given message.
+// The operation needs to be started.
 //
 // {
 //   ...
@@ -76,6 +78,7 @@
 - (MCOPOPFetchHeaderOperation *) fetchHeaderOperationWithIndex:(unsigned int)index;
 
 // Returns an operation that will fetch the content of the given message.
+// The operation needs to be started.
 //
 // {
 //   ...
@@ -88,6 +91,7 @@
 
 // Returns an operation that will delete the given messages.
 // Will disconnect when finished.
+// The operation needs to be started.
 //
 // {
 //   ...

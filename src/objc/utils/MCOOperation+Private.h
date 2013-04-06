@@ -20,9 +20,9 @@ namespace mailcore {
 
 @interface MCOOperation (Private)
 #ifdef __cplusplus
-- (id)initWithMCOperation:(mailcore::Operation *)op;
+- (id) initWithMCOperation:(mailcore::Operation *)op;
 #endif
-- (void)start;
+- (void) start;
 @end
 
 #endif

@@ -10,13 +10,19 @@
 
 #define __MAILCORE_MCOIMAPIDLEOPERATION_H_
 
+// This class implements an idle operation.
+
 #import <MailCore/MCOIMAPBaseOperation.h>
 
 @interface MCOIMAPIdleOperation : MCOIMAPBaseOperation
 
+// Interrupts the IDLE operation.
 - (void) interruptIdle;
 
-- (void)start:(void (^)(NSError *error))completionBlock;
+// Starts the asynchronous operation.
+// On success, the completion block will be called with nil as error.
+// On failure, error will be set with MCOErrorDomain as domain and an error code available in MCOConstants.h.
+- (void) start:(void (^)(NSError * error))completionBlock;
 
 @end
 

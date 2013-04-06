@@ -19,11 +19,15 @@ typedef void (^MCOPOPOperationProgressBlock)(unsigned int current, unsigned int 
 
 @interface MCOPOPFetchMessageOperation : MCOPOPOperation
 
-// This block will be called during the progression of the download of the message
+// This block will be called during the progression while downloading the message
 // when some bytes have been downloaded from the network.
 @property (nonatomic, copy) MCOPOPOperationProgressBlock progress;
 
-- (void)start:(void (^)(NSError *error, NSData * messageData))completionBlock;
+// Starts the asynchronous operation.
+// On success, the completion block will be called with nil as error and the fetched message data.
+// On failure, error will be set with MCOErrorDomain as domain and an error code available in MCOConstants.h.
+// messageData will be nil.
+- (void) start:(void (^)(NSError * error, NSData * messageData))completionBlock;
 
 @end
 

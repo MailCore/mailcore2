@@ -53,16 +53,6 @@ MCO_OBJC_SYNTHESIZE_ARRAY(setGmailLabels, gmailLabels)
     return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->partForPartID([partID mco_mcString]));
 }
 
-- (MCOAbstractPart *) partForContentID:(NSString *)contentID
-{
-    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->partForContentID([contentID mco_mcString]));
-}
-
-- (MCOAbstractPart *) partForUniqueID:(NSString *)uniqueID
-{
-    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->partForUniqueID([uniqueID mco_mcString]));
-}
-
 - (NSString *) htmlRenderingWithFolder:(NSString *)folder
                               delegate:(id <MCOHTMLRendererIMAPDelegate>)delegate
 {

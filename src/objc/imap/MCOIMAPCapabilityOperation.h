@@ -10,13 +10,20 @@
 
 #define __MAILCORE_MCOIMAPCAPBILITYOPERATION_H_
 
+// This class implements an operation to query capabilities.
+
 #import <MailCore/MCOIMAPBaseOperation.h>
 
 @class MCOIndexSet;
 
 @interface MCOIMAPCapabilityOperation : MCOIMAPBaseOperation
 
-- (void)start:(void (^)(NSError *error, MCOIndexSet * capabilities))completionBlock;
+// Starts the asynchronous operation.
+// On success, the completion block will be called with nil as error. capabilities is a set of IMAP capabilities.
+// See MCOConstants.h / MCOIMAPCapability.
+// On failure, error will be set with MCOErrorDomain as domain and an error code available in MCOConstants.h.
+// info will be nil.
+- (void) start:(void (^)(NSError * error, MCOIndexSet * capabilities))completionBlock;
 
 @end
 
