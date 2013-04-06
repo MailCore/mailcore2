@@ -851,6 +851,9 @@ static struct {
     {"Important", IMAPFolderFlagImportant},
     {"Drafts",    IMAPFolderFlagDrafts},
     {"Archive",   IMAPFolderFlagArchive},
+    {"All",       IMAPFolderFlagAll},
+    {"Junk",      IMAPFolderFlagJunk},
+    {"Flagged",   IMAPFolderFlagFlagged},
 };
 
 static int imap_mailbox_flags_to_flags(struct mailimap_mbx_list_flags * imap_flags)

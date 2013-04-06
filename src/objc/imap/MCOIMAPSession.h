@@ -30,6 +30,7 @@
 @class MCOIMAPCapabilityOperation;
 
 @interface MCOIMAPSession : NSObject
+
 @property (nonatomic, strong) NSString *hostname;
 @property (nonatomic, assign) unsigned int port;
 @property (nonatomic, strong) NSString *username;

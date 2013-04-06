@@ -17,7 +17,11 @@
 
 @interface MCOAbstractMessagePart : MCOAbstractPart
 
+// Returns the header of the embedded message.
 @property (nonatomic, strong) MCOMessageHeader * header;
+
+// Returns the main part of the embedded message. It can be MCOAbstractPart, MCOAbstractMultipart
+// or a MCOAbstractMessagePart.
 @property (nonatomic, strong) MCOAbstractPart * mainPart;
 
 @end

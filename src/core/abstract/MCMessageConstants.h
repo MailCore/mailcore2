@@ -38,6 +38,9 @@ namespace mailcore {
 		IMAPFolderFlagSpam        = 1 << 10,
 		IMAPFolderFlagImportant   = 1 << 11,
 		IMAPFolderFlagArchive     = 1 << 12,
+        IMAPFolderFlagAll = IMAPFolderFlagAllMail,
+        IMAPFolderFlagJunk = IMAPFolderFlagSpam,
+        IMAPFolderFlagFlagged = IMAPFolderFlagStarred,
 	};
 
 	enum MessageFlag {
@@ -166,7 +169,6 @@ namespace mailcore {
 		ErrorNone,
 		ErrorConnection,
 		ErrorTLSNotAvailable,
-		ErrorTLSCertificate,
 		ErrorParse,
 		ErrorCertificate,
 		ErrorAuthentication,
@@ -188,6 +190,7 @@ namespace mailcore {
 		ErrorIdentity,
 		ErrorNamespace,
 		ErrorStore,
+        ErrorCapability,
 		ErrorStartTLSNotAvailable,
 		ErrorSendMessageIllegalAttachment,
 		ErrorStorageLimit,
@@ -198,7 +201,6 @@ namespace mailcore {
 		ErrorFetchMessageList,
 		ErrorDeleteMessage,
         ErrorInvalidAccount,
-        ErrorCapability,
 	};
 	
 	enum PartType {

@@ -17,9 +17,13 @@
 
 @interface MCOAbstractMessage : NSObject
 
+// Header of the message.
 @property (nonatomic, strong) MCOMessageHeader * header;
 
+// Returns the part with the given Content-ID.
 - (MCOAbstractPart *) partForContentID:(NSString *)contentID;
+
+// Returns the part with the given unique identifier.
 - (MCOAbstractPart *) partForUniqueID:(NSString *)uniqueID;
 
 @end

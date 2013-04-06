@@ -62,6 +62,7 @@
 - (NSData *) data;
 
 // HTML rendering of the message to be displayed in a web view.
+// The delegate can be nil.
 - (NSString *) htmlRenderingWithDelegate:(id <MCOHTMLRendererDelegate>)delegate;
 
 @end
