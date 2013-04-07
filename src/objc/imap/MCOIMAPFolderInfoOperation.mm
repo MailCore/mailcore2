@@ -39,7 +39,7 @@ typedef void (^CompletionType)(NSError *error, MCOIMAPFolderInfo *info);
     [super dealloc];
 }
 
-- (void)start:(void (^)(NSError *error, MCOIMAPFolderInfo *info))completionBlock {
+- (void)start:(void (^)(NSError * error, MCOIMAPFolderInfo * info))completionBlock {
     _completionBlock = [completionBlock copy];
     [self start];
 }

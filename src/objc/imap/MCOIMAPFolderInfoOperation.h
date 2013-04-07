@@ -23,7 +23,7 @@
 // On success, the completion block will be called with nil as error. info contains the folder information.
 // On failure, error will be set with MCOErrorDomain as domain and an error code available in MCOConstants.h.
 // info will be nil.
-- (void) start:(void (^)(NSError * error, MCOIMAPFolderInfo *info))completionBlock;
+- (void) start:(void (^)(NSError * error, MCOIMAPFolderInfo * info))completionBlock;
 
 @end
 

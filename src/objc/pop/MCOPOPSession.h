@@ -57,11 +57,11 @@
 //
 // {
 //   ...
-//   MCOPOPFetchMessagesOperation * op [session fetchMessagesOperation];
-//   [op start:^(NSError *error, NSArray * messages) {
+//   MCOPOPFetchMessagesOperation * op = [session fetchMessagesOperation];
+//   [op start:^(NSError * error, NSArray * messages) {
 //      // messages is an array of MCOPOPMessageInfo
 //      // [info index] can be used as reference for a given message in the other operations.
-//   }]];
+//   }];
 //
 - (MCOPOPFetchMessagesOperation *) fetchMessagesOperation;
 
@@ -70,10 +70,10 @@
 //
 // {
 //   ...
-//   MCOPOPFetchHeaderOperation * op [session fetchHeaderOperationWithIndex:idx];
-//   [op start:^(NSError *error, MCOMessageHeader * header) {
+//   MCOPOPFetchHeaderOperation * op = [session fetchHeaderOperationWithIndex:idx];
+//   [op start:^(NSError * error, MCOMessageHeader * header) {
 //        // header is the parsed header of the message.
-//   }]];
+//   }];
 //
 - (MCOPOPFetchHeaderOperation *) fetchHeaderOperationWithIndex:(unsigned int)index;
 
@@ -82,10 +82,10 @@
 //
 // {
 //   ...
-//   MCOPOPFetchMessageOperation * op [session fetchMessageOperationWithIndex:idx];
-//   [op start:^(NSError *error, NSData * messageData) {
+//   MCOPOPFetchMessageOperation * op = [session fetchMessageOperationWithIndex:idx];
+//   [op start:^(NSError * error, NSData * messageData) {
 //        // messageData is the RFC 822 formatted message data.
-//   }]];
+//   }];
 //
 - (MCOPOPFetchMessageOperation *) fetchMessageOperationWithIndex:(unsigned int)index;
 
@@ -99,10 +99,10 @@
 //   [indexes addIndex:1];
 //   [indexes addIndex:2];
 //   [indexes addIndex:3];
-//   MCOPOPOperation * op [session deleteMessagesOperationWithIndexes:indexes];
-//   [op start:^(NSError *error) {
+//   MCOPOPOperation * op = [session deleteMessagesOperationWithIndexes:indexes];
+//   [op start:^(NSError * error) {
 //        ...
-//   }]];
+//   }];
 //
 - (MCOPOPOperation *) deleteMessagesOperationWithIndexes:(MCOIndexSet *)indexes;
 

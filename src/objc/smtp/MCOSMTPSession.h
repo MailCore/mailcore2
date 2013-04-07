@@ -62,10 +62,10 @@
 // {
 //   ...
 //   // Generate RFC 822 data using MCOMessageBuilder
-//   MCOPOPOperation * op [session sendOperationWithData:rfc822Data];
-//   [op start:^(NSError *error) {
+//   MCOPOPOperation * op = [session sendOperationWithData:rfc822Data];
+//   [op start:^(NSError * error) {
 //        ...
-//   }]];
+//   }];
 //
 - (MCOSMTPSendOperation *) sendOperationWithData:(NSData *)messageData;
 
@@ -74,10 +74,10 @@
 //
 // {
 //   ...
-//   MCOPOPOperation * op [session checkAccountOperationWithFrom:[MCOAddress addressWithMailbox:@"hoa@etpan.org"]];
-//   [op start:^(NSError *error) {
+//   MCOPOPOperation * op = [session checkAccountOperationWithFrom:[MCOAddress addressWithMailbox:@"hoa@etpan.org"]];
+//   [op start:^(NSError * error) {
 //        ...
-//   }]];
+//   }];
 //
 - (MCOSMTPOperation *) checkAccountOperationWithFrom:(MCOAddress *)from;
 

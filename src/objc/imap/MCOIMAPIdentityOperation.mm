@@ -38,7 +38,7 @@ typedef void (^CompletionType)(NSError *error, NSDictionary * serverIdentity);
     [super dealloc];
 }
 
-- (void)start:(void (^)(NSError *error, NSDictionary * namespaces))completionBlock {
+- (void)start:(void (^)(NSError *error, NSDictionary * serverIdentity))completionBlock {
     _completionBlock = [completionBlock copy];
     [self start];
 }
