@@ -13,6 +13,7 @@
 #include "MCPOPFetchMessageOperation.h"
 #include "MCPOPDeleteMessagesOperation.h"
 #include "MCPOPFetchMessagesOperation.h"
+#include "MCPOPCheckAccountOperation.h"
 
 using namespace mailcore;
 
@@ -139,6 +140,14 @@ POPOperation * POPAsyncSession::deleteMessagesOperation(IndexSet * indexes)
     POPDeleteMessagesOperation * op = new POPDeleteMessagesOperation();
     op->setSession(this);
     op->setMessageIndexes(indexes);
+    op->autorelease();
+    return op;
+}
+
+POPOperation * POPAsyncSession::checkAccountOperation()
+{
+    POPCheckAccountOperation * op = new POPCheckAccountOperation();
+    op->setSession(this);
     op->autorelease();
     return op;
 }

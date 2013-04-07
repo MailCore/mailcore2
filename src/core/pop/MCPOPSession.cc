@@ -537,3 +537,9 @@ void POPSession::deleteMessage(POPMessageInfo * msg, ErrorCode * pError)
 {
     deleteMessage(msg->index(), pError);
 }
+
+void POPSession::checkAccount(ErrorCode * pError)
+{
+    loginIfNeeded(pError);
+}
+

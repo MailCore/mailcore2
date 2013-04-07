@@ -106,6 +106,18 @@
 //
 - (MCOPOPOperation *) deleteMessagesOperationWithIndexes:(MCOIndexSet *)indexes;
 
+// Returns an operation that will check whether the POP account is valid.
+// The operation needs to be started.
+//
+// {
+//   ...
+//   MCOPOPOperation * op = [session checkAccountOperation];
+//   [op start:^(NSError * error) {
+//        ...
+//   }];
+//
+- (MCOPOPOperation *) checkAccountOperation;
+
 @end
 
 #endif

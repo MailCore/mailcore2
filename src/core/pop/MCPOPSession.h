@@ -73,6 +73,8 @@ namespace mailcore {
 		
 		virtual void login(ErrorCode * pError);
 		
+        virtual void checkAccount(ErrorCode * pError);
+        
 		Array * /* POPMessageInfo */ fetchMessages(ErrorCode * pError);
 		
 		MessageHeader * fetchHeader(unsigned int index, ErrorCode * pError);

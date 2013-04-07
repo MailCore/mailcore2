@@ -260,6 +260,8 @@
 		C6A81C031707D96500882C15 /* MCOPOPMessageInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6A81BFE1707CEE400882C15 /* MCOPOPMessageInfo.h */; };
 		C6A81C04170A82F300882C15 /* MCIMAPSyncResult.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB22016E34DCB000DB34C /* MCIMAPSyncResult.h */; };
 		C6A81C05170A82F600882C15 /* MCIMAPSyncResult.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB22016E34DCB000DB34C /* MCIMAPSyncResult.h */; };
+		C6AC110017114DAF00B715B7 /* MCPOPCheckAccountOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6AC10FE17114DAF00B715B7 /* MCPOPCheckAccountOperation.cpp */; };
+		C6AC110117114DAF00B715B7 /* MCPOPCheckAccountOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6AC10FE17114DAF00B715B7 /* MCPOPCheckAccountOperation.cpp */; };
 		C6BA2B0C1705F4E6003F0E9E /* MCHTMLRendererCallback.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD68516BE148B00DB18F1 /* MCHTMLRendererCallback.h */; };
 		C6BA2B0D1705F4E6003F0E9E /* MCOMultipart.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB26816FD44C2000DB34C /* MCOMultipart.h */; };
 		C6BA2B0E1705F4E6003F0E9E /* MCOMessageBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB25F16FD438F000DB34C /* MCOMessageBuilder.h */; };
@@ -1212,6 +1214,8 @@
 		C6A81BFB170781BC00882C15 /* MCOPOP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOPOP.h; sourceTree = "<group>"; };
 		C6A81BFE1707CEE400882C15 /* MCOPOPMessageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOPOPMessageInfo.h; sourceTree = "<group>"; };
 		C6A81BFF1707CEE500882C15 /* MCOPOPMessageInfo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOPOPMessageInfo.mm; sourceTree = "<group>"; };
+		C6AC10FE17114DAF00B715B7 /* MCPOPCheckAccountOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCPOPCheckAccountOperation.cpp; sourceTree = "<group>"; };
+		C6AC10FF17114DAF00B715B7 /* MCPOPCheckAccountOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPOPCheckAccountOperation.h; sourceTree = "<group>"; };
 		C6BA2C191705F4E6003F0E9E /* libMailCore-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMailCore-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6BD288D170BD71100A91AC1 /* MailCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MailCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6BD288E170BD71100A91AC1 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -1511,6 +1515,8 @@
 				C62C6EF716A7C6F500737497 /* MCPOPDeleteMessagesOperation.h */,
 				C62C6F0416A7E54200737497 /* MCPOPFetchMessagesOperation.cc */,
 				C62C6F0516A7E54400737497 /* MCPOPFetchMessagesOperation.h */,
+				C6AC10FE17114DAF00B715B7 /* MCPOPCheckAccountOperation.cpp */,
+				C6AC10FF17114DAF00B715B7 /* MCPOPCheckAccountOperation.h */,
 				C62C6EF916A7C93F00737497 /* MCPOPOperation.cc */,
 				C62C6EFA16A7C94000737497 /* MCPOPOperation.h */,
 				C62C6EFC16A7CA1500737497 /* MCPOPOperationCallback.h */,
@@ -2212,6 +2218,7 @@
 				C6A81BE21706905600882C15 /* MCOPOPOperation.mm in Sources */,
 				C6A81BE61706906D00882C15 /* MCOPOPFetchMessagesOperation.mm in Sources */,
 				C6A81C001707CEE600882C15 /* MCOPOPMessageInfo.mm in Sources */,
+				C6AC110017114DAF00B715B7 /* MCPOPCheckAccountOperation.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2371,6 +2378,7 @@
 				C6A81BE31706905600882C15 /* MCOPOPOperation.mm in Sources */,
 				C6A81BE71706906D00882C15 /* MCOPOPFetchMessagesOperation.mm in Sources */,
 				C6A81C011707CEE600882C15 /* MCOPOPMessageInfo.mm in Sources */,
+				C6AC110117114DAF00B715B7 /* MCPOPCheckAccountOperation.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

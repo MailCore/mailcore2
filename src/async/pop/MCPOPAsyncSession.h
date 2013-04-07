@@ -61,6 +61,8 @@ namespace mailcore {
         // Will disconnect.
         virtual POPOperation * deleteMessagesOperation(IndexSet * indexes);
         
+        virtual POPOperation * checkAccountOperation();
+        
 	private:
         POPSession * mSession;
         OperationQueue * mQueue;
