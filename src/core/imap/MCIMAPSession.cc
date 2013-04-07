@@ -2730,6 +2730,11 @@ IndexSet * IMAPSession::capability(ErrorCode * pError)
         result->addIndex(IMAPCapabilityXList);
         mXListEnabled = true;
     }
+    if (mailimap_has_extension(mImap, (char *) "X-GM-EXT-1")) {
+        // Disable use of XLIST if this is the Gmail IMAP server because it implements
+        // RFC 6154.
+        mXListEnabled = false;
+    }
     if (mailimap_has_idle(mImap)) {
         result->addIndex(IMAPCapabilityIdle);
         mIdleEnabled = true;
