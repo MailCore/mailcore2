@@ -7,7 +7,12 @@ url="http://download.icu-project.org/files/icu4c/$versionfolder/icu4c-$version-s
 package_filename="icu4c-$version-src.tgz"
 sysrootpath="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk"
 
-builddir="$HOME/MailCore-Builds/dependencies"
+pushd `dirname $0` > /dev/null
+scriptpath=`pwd`
+popd > /dev/null
+builddir="$scriptpath/../Externals/builds"
+
+#builddir="$HOME/MailCore-Builds/dependencies"
 BUILD_TIMESTAMP=`date +'%Y%m%d%H%M%S'`
 tempbuilddir="$builddir/workdir/$BUILD_TIMESTAMP"
 mkdir -p "$tempbuilddir"
@@ -59,7 +64,7 @@ make >> "$logdir/icu4c-build.log"
 make install "prefix=$tmpdir/crossbuild/icu4c-$MARCH" >> "$logdir/icu4c-build.log"
 
 ARCH=arm
-MARCHS="armv7"
+MARCHS="armv7 armv7s"
 
 iphonesdk="iphoneos$sdkversion"
 sysroot="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$sdkversion.sdk"
@@ -121,7 +126,7 @@ iculx_paths=""
 icutest_paths=""
 icutu_paths=""
 icuuc_paths=""
-archs="armv7 i386"
+archs="armv7 armv7s i386"
 for cur_arch in $archs ; do
 	icudata_paths="$icudata_paths icu4c-$cur_arch/lib/libicudata.a"
 	icui18n_paths="$icui18n_paths icu4c-$cur_arch/lib/libicui18n.a"

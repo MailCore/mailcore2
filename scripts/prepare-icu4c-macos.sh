@@ -12,7 +12,12 @@ for current_arch in $arch ; do
 	arch_flags="$arch_flags -arch $current_arch"
 done
 
-builddir="$HOME/MailCore-Builds/dependencies"
+pushd `dirname $0` > /dev/null
+scriptpath=`pwd`
+popd > /dev/null
+builddir="$scriptpath/../Externals/builds"
+
+#builddir="$HOME/MailCore-Builds/dependencies"
 BUILD_TIMESTAMP=`date +'%Y%m%d%H%M%S'`
 tempbuilddir="$builddir/workdir/$BUILD_TIMESTAMP"
 mkdir -p "$tempbuilddir"

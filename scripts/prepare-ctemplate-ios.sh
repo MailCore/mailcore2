@@ -4,12 +4,12 @@ url="https://github.com/dinhviethoa/ctemplate"
 
 sdkversion="6.1"
 
-arch_flags=""
-for current_arch in $arch ; do
-	arch_flags="$arch_flags -arch $current_arch"
-done
+pushd `dirname $0` > /dev/null
+scriptpath=`pwd`
+popd > /dev/null
+builddir="$scriptpath/../Externals/builds"
 
-builddir="$HOME/MailCore-Builds/dependencies"
+#builddir="$HOME/MailCore-Builds/dependencies"
 BUILD_TIMESTAMP=`date +'%Y%m%d%H%M%S'`
 tempbuilddir="$builddir/workdir/$BUILD_TIMESTAMP"
 mkdir -p "$tempbuilddir"
@@ -54,19 +54,19 @@ cd "$srcdir/ctemplate"
 
 export CC=clang
 export CXX=clang++
-export LDLAGS="-lc++ $arch_flags -isysroot $sysrootpath"
+export LDLAGS="-lc++ -isysroot $sysrootpath"
 
 sdk="iphoneos$sdkversion"
 sysroot="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$sdkversion.sdk"
 
 ARCH=arm
-MARCHS="armv7"
+MARCHS="armv7 armv7s"
 for MARCH in $MARCHS; do
   export CFLAGS="-arch ${MARCH} -isysroot $sysroot"
   export CXXFLAGS=$CFLAGS
   ./configure --host=${ARCH} --disable-shared --disable-dependency-tracking >> "$logdir/ctemplate-build.log"
   make >> "$logdir/ctemplate-build.log"
-  make install-libLTLIBRARIES "prefix=$tmpdir/bin/ctemplate-ios/$sdk" >> "$logdir/ctemplate-build.log"
+  make install-libLTLIBRARIES "prefix=$tmpdir/bin/ctemplate-ios/$sdk/$MARCH" >> "$logdir/ctemplate-build.log"
   if test x$? != x0 ; then
     echo build of ctemplate failed
     exit 1
@@ -92,7 +92,7 @@ for MARCH in $MARCHS; do
   export CXXFLAGS=$CFLAGS
   ./configure --host=${ARCH} --disable-shared --disable-dependency-tracking >> "$logdir/ctemplate-build.log"
   make >> "$logdir/ctemplate-build.log"
-  make install-libLTLIBRARIES "prefix=$tmpdir/bin/ctemplate-ios/$sdk" >> "$logdir/ctemplate-build.log"
+  make install-libLTLIBRARIES "prefix=$tmpdir/bin/ctemplate-ios/$sdk/$MARCH" >> "$logdir/ctemplate-build.log"
   if test x$? != x0 ; then
     echo build of ctemplate failed
     exit 1
@@ -112,8 +112,9 @@ echo finished
 cd "$tmpdir/bin"
 mkdir -p "ctemplate-ios-$version/ctemplate-ios/lib"
 mv ctemplate-ios/include "ctemplate-ios-$version/ctemplate-ios"
-lipo -create ctemplate-ios/iphonesimulator$sdkversion/lib/libctemplate.a \
-  ctemplate-ios/iphoneos$sdkversion/lib/libctemplate.a \
+lipo -create ctemplate-ios/iphonesimulator$sdkversion/i386/lib/libctemplate.a \
+  ctemplate-ios/iphoneos$sdkversion/armv7/lib/libctemplate.a \
+  ctemplate-ios/iphoneos$sdkversion/armv7s/lib/libctemplate.a \
   -output "ctemplate-ios-$version/ctemplate-ios/lib/libctemplate-ios.a"
 rm -f "$resultdir/ctemplate-ios-$version.zip"
 zip -qry "$resultdir/ctemplate-ios-$version.zip" "ctemplate-ios-$version"

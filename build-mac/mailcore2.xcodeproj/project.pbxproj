@@ -2438,14 +2438,14 @@
 					"\"$(SRCROOT)/../Externals/libetpan-ios/include\"",
 					"\"$(SRCROOT)/../Externals/icu4c-ios/include\"",
 					"\"$(SRCROOT)/../Externals/ctemplate-ios/include\"",
-					"\"$(SRCROOT)/../Externals/tidy-html5/include/tidy\"",
+					"\"$(SRCROOT)/../Externals/tidy-html5-ios/include/tidy\"",
 					/usr/include/libxml2,
 				);
 				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = (
 					"\"$(SRCROOT)/../Externals/libetpan-ios/include\"",
 					"\"$(SRCROOT)/../Externals/icu4c-ios/include\"",
 					"\"$(SRCROOT)/../Externals/ctemplate-ios/include\"",
-					"\"$(SRCROOT)/../Externals/tidy-html5/include/tidy\"",
+					"\"$(SRCROOT)/../Externals/tidy-html5-ios/include/tidy\"",
 					/usr/include/libxml2,
 				);
 				"HEADER_SEARCH_PATHS[sdk=macosx*]" = (
@@ -2465,14 +2465,14 @@
 					"\"$(SRCROOT)/../Externals/icu4c-ios/lib\"",
 					"\"$(SRCROOT)/../Externals/ctemplate-ios/lib\"",
 					"\"$(SRCROOT)/../Externals/libsasl-ios/lib\"",
-					"\"$(SRCROOT)/../Externals/tidy-html5/lib\"",
+					"\"$(SRCROOT)/../Externals/tidy-html5-ios/lib\"",
 				);
 				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = (
 					"\"$(SRCROOT)/../Externals/libetpan-ios/lib\"",
 					"\"$(SRCROOT)/../Externals/icu4c-ios/lib\"",
 					"\"$(SRCROOT)/../Externals/ctemplate-ios/lib\"",
 					"\"$(SRCROOT)/../Externals/libsasl-ios/lib\"",
-					"\"$(SRCROOT)/../Externals/tidy-html5/lib\"",
+					"\"$(SRCROOT)/../Externals/tidy-html5-ios/lib\"",
 				);
 				"LIBRARY_SEARCH_PATHS[sdk=macosx*]" = (
 					"\"$(SRCROOT)/../Externals/libetpan/lib\"",
@@ -2510,18 +2510,18 @@
 					/usr/include/tidy,
 					/usr/include/libxml2,
 				);
-				"HEADER_SEARCH_PATHS[arch=*]" = (
+				"HEADER_SEARCH_PATHS[sdk=iphoneos*]" = (
 					"\"$(SRCROOT)/../Externals/libetpan-ios/include\"",
 					"\"$(SRCROOT)/../Externals/icu4c-ios/include\"",
 					"\"$(SRCROOT)/../Externals/ctemplate-ios/include\"",
-					"\"$(SRCROOT)/../Externals/tidy-html5/include/tidy\"",
+					"\"$(SRCROOT)/../Externals/tidy-html5-ios/include/tidy\"",
 					/usr/include/libxml2,
 				);
 				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = (
 					"\"$(SRCROOT)/../Externals/libetpan-ios/include\"",
 					"\"$(SRCROOT)/../Externals/icu4c-ios/include\"",
 					"\"$(SRCROOT)/../Externals/ctemplate-ios/include\"",
-					"\"$(SRCROOT)/../Externals/tidy-html5/include/tidy\"",
+					"\"$(SRCROOT)/../Externals/tidy-html5-ios/include/tidy\"",
 					/usr/include/libxml2,
 				);
 				"HEADER_SEARCH_PATHS[sdk=macosx*]" = (
@@ -2541,14 +2541,14 @@
 					"\"$(SRCROOT)/../Externals/icu4c-ios/lib\"",
 					"\"$(SRCROOT)/../Externals/ctemplate-ios/lib\"",
 					"\"$(SRCROOT)/../Externals/libsasl-ios/lib\"",
-					"\"$(SRCROOT)/../Externals/tidy-html5/lib\"",
+					"\"$(SRCROOT)/../Externals/tidy-html5-ios/lib\"",
 				);
 				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = (
 					"\"$(SRCROOT)/../Externals/libetpan-ios/lib\"",
 					"\"$(SRCROOT)/../Externals/icu4c-ios/lib\"",
 					"\"$(SRCROOT)/../Externals/ctemplate-ios/lib\"",
 					"\"$(SRCROOT)/../Externals/libsasl-ios/lib\"",
-					"\"$(SRCROOT)/../Externals/tidy-html5/lib\"",
+					"\"$(SRCROOT)/../Externals/tidy-html5-ios/lib\"",
 				);
 				"LIBRARY_SEARCH_PATHS[sdk=macosx*]" = (
 					"\"$(SRCROOT)/../Externals/libetpan/lib\"",

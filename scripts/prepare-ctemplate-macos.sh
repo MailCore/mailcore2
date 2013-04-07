@@ -2,7 +2,7 @@
 
 url="https://github.com/dinhviethoa/ctemplate"
 
-arch="i386 x86_64"
+arch="x86_64"
 #sysrootpath="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk"
 
 arch_flags=""
@@ -10,7 +10,12 @@ for current_arch in $arch ; do
 	arch_flags="$arch_flags -arch $current_arch"
 done
 
-builddir="$HOME/MailCore-Builds/dependencies"
+pushd `dirname $0` > /dev/null
+scriptpath=`pwd`
+popd > /dev/null
+builddir="$scriptpath/../Externals/builds"
+
+#builddir="$HOME/MailCore-Builds/dependencies"
 BUILD_TIMESTAMP=`date +'%Y%m%d%H%M%S'`
 tempbuilddir="$builddir/workdir/$BUILD_TIMESTAMP"
 mkdir -p "$tempbuilddir"

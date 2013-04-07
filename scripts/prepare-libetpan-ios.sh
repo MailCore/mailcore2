@@ -3,7 +3,12 @@
 sdkversion=6.1
 url="https://github.com/dinhviethoa/libetpan.git"
 
-builddir="$HOME/MailCore-Builds/dependencies"
+pushd `dirname $0` > /dev/null
+scriptpath=`pwd`
+popd > /dev/null
+builddir="$scriptpath/../Externals/builds"
+
+#builddir="$HOME/MailCore-Builds/dependencies"
 BUILD_TIMESTAMP=`date +'%Y%m%d%H%M%S'`
 tempbuilddir="$builddir/workdir/$BUILD_TIMESTAMP"
 mkdir -p "$tempbuilddir"
@@ -50,7 +55,7 @@ echo building libetpan
 
 cd "$srcdir/libetpan/build-mac"
 sdk="iphoneos$sdkversion"
-archs="armv7"
+archs="armv7 armv7s"
 echo building $sdk
 xcodebuild -project libetpan.xcodeproj -sdk $sdk -target "libetpan ios" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$archs"
 if test x$? != x0 ; then
