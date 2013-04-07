@@ -54,6 +54,9 @@
 // Returns the number of ranges in this index set.
 - (unsigned int) rangesCount;
 
+// Enumerates all the indexes of the index set.
+- (void) enumerateIndexes:(void (^)(uint64_t idx))block;
+
 @end
 
 #endif

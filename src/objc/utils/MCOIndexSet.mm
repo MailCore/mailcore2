@@ -127,24 +127,22 @@
 
 - (MCORange *) allRanges
 {
-#if 0
-    NSMutableData * result = [[[NSMutableData alloc] init] autorelease];
-    unsigned int count = _indexSet->rangesCount();
-    mailcore::Range * mcRanges = _indexSet->allRanges();
-    [result setLength:count * sizeof(mailcore::Range)];
-    MCORange * ranges = (MCORange *) [result mutableBytes];
-    for(unsigned int i = 0 ; i < count ; i ++) {
-        ranges[i] = MCORangeWithMCRange(mcRanges[i]);
-    }
-    return ranges;
-#else
     return (MCORange *) _indexSet->allRanges();
-#endif
 }
 
 - (unsigned int) rangesCount
 {
     return _indexSet->rangesCount();
+}
+
+- (void) enumerateIndexes:(void (^)(uint64_t idx))block
+{
+    MCORange * ranges = [self allRanges];
+    for(unsigned int i = 0 ; i < [self rangesCount] ; i ++) {
+        for(uint64_t k = 0 ; k <= ranges[i].length ; k ++) {
+            block(ranges[i].location + k);
+        }
+    }
 }
 
 @end
