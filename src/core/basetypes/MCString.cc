@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <unicode/ustring.h>
 #include <unicode/ucnv.h>
+#include <unicode/utypes.h>
 #include <uuid/uuid.h>
 #include <pthread.h>
 #include <libetpan/libetpan.h>

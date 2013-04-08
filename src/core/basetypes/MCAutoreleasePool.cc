@@ -1,5 +1,7 @@
 #include "MCAutoreleasePool.h"
 
+#include <libetpan/libetpan.h>
+
 #include "MCString.h"
 #include "MCLog.h"
 #include "MCUtils.h"

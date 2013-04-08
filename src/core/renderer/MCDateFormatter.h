@@ -10,7 +10,10 @@
 #define __testUI__MCDateFormatter__
 
 #include <MailCore/MCBaseTypes.h>
-#include <unicode/udat.h>
+
+// predeclare UDateFormat
+// copied from <unicode/udat.h>
+typedef void * UDateFormat;
 
 #ifdef __cplusplus
 
@@ -18,12 +21,13 @@ namespace mailcore {
     
     class String;
     
+    // Uses same values as UDateFormatStyle
     enum DateFormatStyle {
-        DateFormatStyleFull = UDAT_FULL,
-        DateFormatStyleLong = UDAT_LONG,
-        DateFormatStyleMedium = UDAT_MEDIUM,
-        DateFormatStyleShort = UDAT_SHORT,
-        DateFormatStyleNone = UDAT_NONE,
+        DateFormatStyleFull = 0 /* UDAT_FULL*/,
+        DateFormatStyleLong = 1 /* UDAT_LONG */,
+        DateFormatStyleMedium = 2 /* UDAT_MEDIUM */,
+        DateFormatStyleShort = 3 /* UDAT_SHORT */,
+        DateFormatStyleNone = -1 /* UDAT_NONE */,
     };
     
     class DateFormatter : public Object {

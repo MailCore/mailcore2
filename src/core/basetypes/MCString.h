@@ -6,9 +6,14 @@
 #include <MailCore/MCRange.h>
 
 #include <stdarg.h>
-#include <unicode/utypes.h>
 
 #ifdef __cplusplus
+
+#if defined(__CHAR16_TYPE__)
+typedef __CHAR16_TYPE__ UChar;
+#else
+typedef uint16_t UChar;
+#endif
 
 namespace mailcore {
 	

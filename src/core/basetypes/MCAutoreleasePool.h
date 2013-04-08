@@ -3,10 +3,11 @@
 #define __MAILCORE_MCAUTORELEASEPOOL_H_
 
 #include <MailCore/MCObject.h>
-#include <libetpan/libetpan.h>
 #include <pthread.h>
 
 #ifdef __cplusplus
+
+typedef struct carray_s carray;
 
 namespace mailcore {
 

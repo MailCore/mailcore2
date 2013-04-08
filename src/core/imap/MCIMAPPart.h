@@ -3,7 +3,6 @@
 #define __MAILCORE_MCIMAPPART_H_
 
 #include <MailCore/MCBaseTypes.h>
-#include <libetpan/libetpan.h>
 #include <MailCore/MCAbstractPart.h>
 
 #ifdef __cplusplus

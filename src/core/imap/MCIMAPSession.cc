@@ -1,5 +1,6 @@
 #include "MCIMAPSession.h"
 
+#include <libetpan/libetpan.h>
 #include <string.h>
 #include <stdlib.h>
 

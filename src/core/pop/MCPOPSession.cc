@@ -1,6 +1,7 @@
 #include "MCPOPSession.h"
 
 #include <string.h>
+#include <libetpan/libetpan.h>
 
 #include "MCPOPMessageInfo.h"
 #include "MCPOPProgressCallback.h"

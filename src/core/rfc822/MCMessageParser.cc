@@ -1,5 +1,7 @@
 #include "MCMessageParser.h"
 
+#include <libetpan/libetpan.h>
+
 #include "MCAttachment.h"
 #include "MCMessageHeader.h"
 #include "MCHTMLRenderer.h"

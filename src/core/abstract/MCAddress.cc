@@ -1,5 +1,6 @@
 #include "MCAddress.h"
 
+#include <libetpan/libetpan.h>
 #include <string.h>
 
 using namespace mailcore;

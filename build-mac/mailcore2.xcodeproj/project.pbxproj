@@ -262,6 +262,8 @@
 		C6A81C05170A82F600882C15 /* MCIMAPSyncResult.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB22016E34DCB000DB34C /* MCIMAPSyncResult.h */; };
 		C6AC110017114DAF00B715B7 /* MCPOPCheckAccountOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6AC10FE17114DAF00B715B7 /* MCPOPCheckAccountOperation.cpp */; };
 		C6AC110117114DAF00B715B7 /* MCPOPCheckAccountOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6AC10FE17114DAF00B715B7 /* MCPOPCheckAccountOperation.cpp */; };
+		C6AC113417124D0600B715B7 /* MCLibetpanTypes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6AC1131171249DF00B715B7 /* MCLibetpanTypes.h */; };
+		C6AC113517124D0A00B715B7 /* MCLibetpanTypes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6AC1131171249DF00B715B7 /* MCLibetpanTypes.h */; };
 		C6BA2B0C1705F4E6003F0E9E /* MCHTMLRendererCallback.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD68516BE148B00DB18F1 /* MCHTMLRendererCallback.h */; };
 		C6BA2B0D1705F4E6003F0E9E /* MCOMultipart.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB26816FD44C2000DB34C /* MCOMultipart.h */; };
 		C6BA2B0E1705F4E6003F0E9E /* MCOMessageBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB25F16FD438F000DB34C /* MCOMessageBuilder.h */; };
@@ -625,9 +627,10 @@
 		C64EA74B169E854B00778456 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = include/mailcore;
+			dstPath = include/MailCore;
 			dstSubfolderSpec = 16;
 			files = (
+				C6AC113417124D0600B715B7 /* MCLibetpanTypes.h in CopyFiles */,
 				C63CD68C16BE1BC800DB18F1 /* MCHTMLRendererCallback.h in CopyFiles */,
 				C6A81BFC1707821F00882C15 /* MCOPOP.h in CopyFiles */,
 				C6A81BEB1707805E00882C15 /* MCOPOPFetchMessageOperation.h in CopyFiles */,
@@ -794,9 +797,10 @@
 		C6BA2B0B1705F4E6003F0E9E /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = include/mailcore;
+			dstPath = include/MailCore;
 			dstSubfolderSpec = 16;
 			files = (
+				C6AC113517124D0A00B715B7 /* MCLibetpanTypes.h in CopyFiles */,
 				C6BA2B0C1705F4E6003F0E9E /* MCHTMLRendererCallback.h in CopyFiles */,
 				C6BA2B0D1705F4E6003F0E9E /* MCOMultipart.h in CopyFiles */,
 				C6BA2B0E1705F4E6003F0E9E /* MCOMessageBuilder.h in CopyFiles */,
@@ -1216,6 +1220,7 @@
 		C6A81BFF1707CEE500882C15 /* MCOPOPMessageInfo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOPOPMessageInfo.mm; sourceTree = "<group>"; };
 		C6AC10FE17114DAF00B715B7 /* MCPOPCheckAccountOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCPOPCheckAccountOperation.cpp; sourceTree = "<group>"; };
 		C6AC10FF17114DAF00B715B7 /* MCPOPCheckAccountOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPOPCheckAccountOperation.h; sourceTree = "<group>"; };
+		C6AC1131171249DF00B715B7 /* MCLibetpanTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCLibetpanTypes.h; sourceTree = "<group>"; };
 		C6BA2C191705F4E6003F0E9E /* libMailCore-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMailCore-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6BD288D170BD71100A91AC1 /* MailCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MailCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6BD288E170BD71100A91AC1 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -1618,6 +1623,7 @@
 				C63CD69016BE566E00DB18F1 /* MCHTMLCleaner.h */,
 				C64BB22C16E5C1EE000DB34C /* MCIndexSet.cpp */,
 				C64BB22D16E5C1EE000DB34C /* MCIndexSet.h */,
+				C6AC1131171249DF00B715B7 /* MCLibetpanTypes.h */,
 			);
 			path = basetypes;
 			sourceTree = "<group>";

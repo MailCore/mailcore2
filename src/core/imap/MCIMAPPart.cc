@@ -1,6 +1,7 @@
 #include "MCIMAPPart.h"
 
 #include <string.h>
+#include <libetpan/libetpan.h>
 
 #include "MCIMAPMessagePart.h"
 #include "MCIMAPMultipart.h"

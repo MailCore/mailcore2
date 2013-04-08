@@ -2,6 +2,8 @@
 
 #include "MCIMAPNamespaceItem.h"
 
+#include <libetpan/libetpan.h>
+
 using namespace mailcore;
 
 void IMAPNamespace::init()

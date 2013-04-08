@@ -8,6 +8,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <libetpan/libetpan.h>
 
 using namespace mailcore;
 

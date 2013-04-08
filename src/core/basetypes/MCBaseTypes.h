@@ -19,5 +19,6 @@
 #include <MailCore/MCOperation.h>
 #include <MailCore/MCOperationQueue.h>
 #include <MailCore/MCOperationCallback.h>
+#include <MailCore/MCLibetpanTypes.h>
 
 #endif

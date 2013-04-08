@@ -2,7 +2,6 @@
 
 #define __MAILCORE_MCADDRESS_H_
 
-#include <libetpan/libetpan.h>
 #include <MailCore/MCBaseTypes.h>
 
 #ifdef __cplusplus

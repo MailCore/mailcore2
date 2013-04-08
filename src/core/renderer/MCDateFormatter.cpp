@@ -8,6 +8,7 @@
 
 #include "MCDateFormatter.h"
 #include <stdlib.h>
+#include <unicode/udat.h>
 
 using namespace mailcore;
 

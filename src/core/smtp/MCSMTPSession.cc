@@ -1,6 +1,7 @@
 #include "MCSMTPSession.h"
 
 #include <string.h>
+#include <libetpan/libetpan.h>
 
 #include "MCAddress.h"
 #include "MCMessageBuilder.h"

@@ -4,7 +4,6 @@
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCMessageConstants.h>
-#include <libetpan/libetpan.h>
 
 #ifdef __cplusplus
 
@@ -15,30 +14,6 @@ namespace mailcore {
 	class MessageHeader;
 
 	class POPSession : public Object {
-	private:
-		String * mHostname;
-		unsigned int mPort;
-		String * mUsername;
-		String * mPassword;
-		AuthType mAuthType;
-		ConnectionType mConnectionType;
-		bool mCheckCertificateEnabled;
-		time_t mTimeout;
-		
-		mailpop3 * mPop;
-		POPCapability mCapabilities;
-		POPProgressCallback * mProgressCallback;
-		int mState;
-		
-		void init();
-		void bodyProgress(unsigned int current, unsigned int maximum);
-		bool checkCertificate();
-		static void body_progress(size_t current, size_t maximum, void * context);
-		void setup();
-		void unsetup();
-		void connectIfNeeded(ErrorCode * pError);
-		void loginIfNeeded(ErrorCode * pError);
-		void listIfNeeded(ErrorCode * pError);
 		
 	public:
 		POPSession();
@@ -85,6 +60,31 @@ namespace mailcore {
 		
 		void deleteMessage(unsigned int index, ErrorCode * pError);
 		void deleteMessage(POPMessageInfo * msg, ErrorCode * pError);
+        
+	private:
+		String * mHostname;
+		unsigned int mPort;
+		String * mUsername;
+		String * mPassword;
+		AuthType mAuthType;
+		ConnectionType mConnectionType;
+		bool mCheckCertificateEnabled;
+		time_t mTimeout;
+		
+		mailpop3 * mPop;
+		POPCapability mCapabilities;
+		POPProgressCallback * mProgressCallback;
+		int mState;
+		
+		void init();
+		void bodyProgress(unsigned int current, unsigned int maximum);
+		bool checkCertificate();
+		static void body_progress(size_t current, size_t maximum, void * context);
+		void setup();
+		void unsetup();
+		void connectIfNeeded(ErrorCode * pError);
+		void loginIfNeeded(ErrorCode * pError);
+		void listIfNeeded(ErrorCode * pError);
 	};
 
 }

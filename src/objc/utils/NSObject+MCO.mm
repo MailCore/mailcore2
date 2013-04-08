@@ -8,6 +8,8 @@
 
 #import "NSObject+MCO.h"
 
+#include <libetpan/libetpan.h>
+
 #import "NSData+MCO.h"
 #import "NSString+MCO.h"
 #import "NSDictionary+MCO.h"

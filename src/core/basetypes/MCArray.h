@@ -4,9 +4,9 @@
 
 #include <MailCore/MCObject.h>
 
-#include <libetpan/libetpan.h>
-
 #ifdef __cplusplus
+
+typedef struct carray_s carray;
 
 namespace mailcore {
 

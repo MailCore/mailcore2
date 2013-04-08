@@ -1,5 +1,7 @@
 #include "MCIMAPNamespaceItem.h"
 
+#include <libetpan/libetpan.h>
+
 using namespace mailcore;
 
 static Array * encodedComponents(Array * components);

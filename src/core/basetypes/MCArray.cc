@@ -2,6 +2,7 @@
 
 #include <string.h>
 #include <stdlib.h>
+#include <libetpan/libetpan.h>
 
 #include "MCAssert.h"
 #include "MCString.h"

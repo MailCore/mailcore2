@@ -4,7 +4,6 @@
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCMessageConstants.h>
-#include <libetpan/libetpan.h>
 
 #ifdef __cplusplus
 

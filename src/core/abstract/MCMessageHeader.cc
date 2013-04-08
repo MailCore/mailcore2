@@ -4,6 +4,7 @@
 
 #include <string.h>
 #include <unistd.h>
+#include <libetpan/libetpan.h>
 
 using namespace mailcore;
 
