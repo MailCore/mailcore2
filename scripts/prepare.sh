@@ -1,3 +1,3 @@
 #!/bin/sh
-./prepare-mac.h
-./prepare-ios.h
+./prepare-mac.sh
+./prepare-ios.sh
