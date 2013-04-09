@@ -2,6 +2,8 @@
 
 #import <Foundation/Foundation.h>
 
+#include "MCAutoreleasePool.h"
+
 using namespace mailcore;
 
 @interface LEPPPMainThreadCaller : NSObject {
@@ -23,7 +25,9 @@ using namespace mailcore;
 
 - (void) call
 {
+    AutoreleasePool * pool = new AutoreleasePool();
 	_function(_context);
+    pool->release();
 }
 
 @end
