@@ -16,6 +16,7 @@
 }
 @property (nonatomic, strong) MCOIMAPOperation *imapCheckOp;
 @property (nonatomic, strong) MCOIMAPSession *imapSession;
+@property (nonatomic, strong) MCOIMAPFetchMessagesOperation *imapMessagesFetchOp;
 @end
 
 @implementation MasterViewController
@@ -33,6 +34,37 @@
 	self.imapSession.username = username;
 	self.imapSession.password = password;
 	self.imapSession.connectionType = MCOConnectionTypeTLS;
+	
+	NSLog(@"checking account");
+	__weak MasterViewController *weakSelf = self;
+	self.imapCheckOp = [self.imapSession checkAccountOperation];
+	[self.imapCheckOp start:^(NSError *error) {
+		MasterViewController *strongSelf = weakSelf;
+		NSLog(@"finished checking account.");
+		if (error == nil) {
+			[strongSelf loadEmails];
+		} else {
+			NSLog(@"error loading account: %@", error);
+		}
+		
+		strongSelf.imapCheckOp = nil;
+	}];
+}
+
+- (void)loadEmails {
+	MCOIMAPMessagesRequestKind requestKind = (MCOIMAPMessagesRequestKind)
+    (MCOIMAPMessagesRequestKindHeaders | MCOIMAPMessagesRequestKindStructure |
+     MCOIMAPMessagesRequestKindInternalDate | MCOIMAPMessagesRequestKindHeaderSubject |
+     MCOIMAPMessagesRequestKindFlags);
+	self.imapMessagesFetchOp = [self.imapSession fetchMessagesByUIDOperationWithFolder:@"INBOX"
+																		   requestKind:requestKind
+																				  uids:[MCOIndexSet indexSetWithRange:MCORangeMake(1, UINT64_MAX)]];
+	[self.imapMessagesFetchOp setProgress:^(unsigned int progress) {
+		NSLog(@"progress: %u", progress);
+	}];
+	[self.imapMessagesFetchOp start:^(NSError *error, NSArray *messages, MCOIndexSet *vanishedMessages) {
+		NSLog(@"DONE");
+	}];
 }
 
 - (void)didReceiveMemoryWarning {

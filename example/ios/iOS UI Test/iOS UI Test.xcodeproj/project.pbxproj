@@ -10,6 +10,7 @@
 		AB665BCD17134336007F2151 /* FXKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = AB665BCB17134336007F2151 /* FXKeychain.m */; };
 		AB7BA446171389CC00104953 /* libMailCore-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB7BA43D1713898B00104953 /* libMailCore-ios.a */; };
 		AB7BA4481713913F00104953 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB7BA4471713913F00104953 /* CFNetwork.framework */; };
+		AB7BA4511713CE3300104953 /* Application.m in Sources */ = {isa = PBXBuildFile; fileRef = AB7BA4501713CE3300104953 /* Application.m */; };
 		AB9EAE06170368F000D750C7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB9EAE05170368F000D750C7 /* UIKit.framework */; };
 		AB9EAE08170368F000D750C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB9EAE07170368F000D750C7 /* Foundation.framework */; };
 		AB9EAE0A170368F000D750C7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB9EAE09170368F000D750C7 /* CoreGraphics.framework */; };
@@ -78,6 +79,8 @@
 		AB665BCC17134336007F2151 /* FXKeychain_LICENCE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FXKeychain_LICENCE.md; sourceTree = "<group>"; };
 		AB7BA4321713898B00104953 /* mailcore2.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = mailcore2.xcodeproj; path = "../../../../build-mac/mailcore2.xcodeproj"; sourceTree = "<group>"; };
 		AB7BA4471713913F00104953 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		AB7BA44F1713CE3300104953 /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
+		AB7BA4501713CE3300104953 /* Application.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Application.m; sourceTree = "<group>"; };
 		AB9EAE02170368F000D750C7 /* iOS UI Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS UI Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB9EAE05170368F000D750C7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AB9EAE07170368F000D750C7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -145,7 +148,6 @@
 		AB9EADF9170368F000D750C7 = {
 			isa = PBXGroup;
 			children = (
-				AB7BA4471713913F00104953 /* CFNetwork.framework */,
 				AB9EAE0B170368F000D750C7 /* iOS UI Test */,
 				AB9EAE04170368F000D750C7 /* Frameworks */,
 				AB9EAE03170368F000D750C7 /* Products */,
@@ -163,6 +165,7 @@
 		AB9EAE04170368F000D750C7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AB7BA4471713913F00104953 /* CFNetwork.framework */,
 				AB9EAE3F170374D900D750C7 /* Security.framework */,
 				AB9EAE05170368F000D750C7 /* UIKit.framework */,
 				AB9EAE07170368F000D750C7 /* Foundation.framework */,
@@ -175,6 +178,9 @@
 			isa = PBXGroup;
 			children = (
 				AB7BA4321713898B00104953 /* mailcore2.xcodeproj */,
+				AB9EAE11170368F000D750C7 /* main.m */,
+				AB7BA44F1713CE3300104953 /* Application.h */,
+				AB7BA4501713CE3300104953 /* Application.m */,
 				AB9EAE14170368F000D750C7 /* AppDelegate.h */,
 				AB9EAE15170368F000D750C7 /* AppDelegate.m */,
 				AB9EAE1D170368F000D750C7 /* MainStoryboard.storyboard */,
@@ -196,7 +202,6 @@
 			children = (
 				AB9EAE0D170368F000D750C7 /* iOS UI Test-Info.plist */,
 				AB9EAE0E170368F000D750C7 /* InfoPlist.strings */,
-				AB9EAE11170368F000D750C7 /* main.m */,
 				AB9EAE13170368F000D750C7 /* iOS UI Test-Prefix.pch */,
 				AB9EAE17170368F000D750C7 /* Default.png */,
 				AB9EAE19170368F000D750C7 /* Default@2x.png */,
@@ -323,6 +328,7 @@
 				AB9EAE25170368F000D750C7 /* DetailViewController.m in Sources */,
 				AB9EAE3617036FD700D750C7 /* SettingsViewController.m in Sources */,
 				AB665BCD17134336007F2151 /* FXKeychain.m in Sources */,
+				AB7BA4511713CE3300104953 /* Application.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,6 +424,7 @@
 				CLANG_CXX_LIBRARY = "libstdc++";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOS UI Test/iOS UI Test-Prefix.pch";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "iOS UI Test/iOS UI Test-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../Externals/libetpan-ios/lib\"",
@@ -450,6 +457,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOS UI Test/iOS UI Test-Prefix.pch";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "iOS UI Test/iOS UI Test-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../Externals/libetpan-ios/lib\"",
