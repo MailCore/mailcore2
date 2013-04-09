@@ -13,6 +13,7 @@
 #import <MailCore/MailCore.h>
 
 int main(int argc, char *argv[]) {
+	mailcore::logEnabled = false;
 	mailcore::AutoreleasePool *pool = new mailcore::AutoreleasePool();
 	return UIApplicationMain(argc, argv, NSStringFromClass([Application class]), NSStringFromClass([AppDelegate class]));
 	pool->release();

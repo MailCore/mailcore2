@@ -57,7 +57,7 @@
                             <outlet property="delegate" destination="12" id="15"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Master" id="36">
+                    <navigationItem key="navigationItem" title="Inbox" id="36">
                         <barButtonItem key="rightBarButtonItem" title="Settings" id="91f-3m-Uww">
                             <connections>
                                 <action selector="showSettingsViewController:" destination="12" id="i9b-HB-ul1"/>
@@ -91,7 +91,7 @@
                             <constraint firstAttribute="trailing" secondItem="27" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="pRe-qY-58T"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Detail" id="26"/>
+                    <navigationItem key="navigationItem" title="Message" id="26"/>
                     <connections>
                         <outlet property="detailDescriptionLabel" destination="27" id="28"/>
                     </connections>

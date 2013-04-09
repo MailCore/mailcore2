@@ -29,7 +29,7 @@ NSString * const PasswordKey = @"password";
 
 - (void)done:(id)sender {
 	[[NSUserDefaults standardUserDefaults] setObject:self.emailTextField.text forKey:UsernameKey];
-	[FXKeychain defaultKeychain][PasswordKey] = self.passwordTextField.text;
+	[[FXKeychain defaultKeychain] setObject:self.passwordTextField.text ?: @"" forKey:PasswordKey];
 	
 	[self.delegate settingsViewControllerFinished:self];
 }
@@ -39,7 +39,7 @@ NSString * const PasswordKey = @"password";
 	
 	self.view.backgroundColor = [UIColor underPageBackgroundColor];
 	self.emailTextField.text = [[NSUserDefaults standardUserDefaults] stringForKey:UsernameKey];
-	self.passwordTextField.text = [FXKeychain defaultKeychain][PasswordKey];
+	self.passwordTextField.text = [[FXKeychain defaultKeychain] objectForKey:PasswordKey];
 }
 
 - (void)didReceiveMemoryWarning
