@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AB665BC817134319007F2151 /* libMailCore-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB665BBD171342C1007F2151 /* libMailCore-ios.a */; };
 		AB665BCD17134336007F2151 /* FXKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = AB665BCB17134336007F2151 /* FXKeychain.m */; };
+		AB7BA446171389CC00104953 /* libMailCore-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB7BA43D1713898B00104953 /* libMailCore-ios.a */; };
+		AB7BA4481713913F00104953 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB7BA4471713913F00104953 /* CFNetwork.framework */; };
 		AB9EAE06170368F000D750C7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB9EAE05170368F000D750C7 /* UIKit.framework */; };
 		AB9EAE08170368F000D750C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB9EAE07170368F000D750C7 /* Foundation.framework */; };
 		AB9EAE0A170368F000D750C7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB9EAE09170368F000D750C7 /* CoreGraphics.framework */; };
@@ -27,44 +28,44 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		AB665BBA171342C1007F2151 /* PBXContainerItemProxy */ = {
+		AB7BA43A1713898B00104953 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = AB665BB2171342C0007F2151 /* mailcore2.xcodeproj */;
+			containerPortal = AB7BA4321713898B00104953 /* mailcore2.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = C64EA537169E772200778456;
 			remoteInfo = "static mailcore2 osx";
 		};
-		AB665BBC171342C1007F2151 /* PBXContainerItemProxy */ = {
+		AB7BA43C1713898B00104953 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = AB665BB2171342C0007F2151 /* mailcore2.xcodeproj */;
+			containerPortal = AB7BA4321713898B00104953 /* mailcore2.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = C6BA2C191705F4E6003F0E9E;
 			remoteInfo = "static mailcore2 ios";
 		};
-		AB665BBE171342C1007F2151 /* PBXContainerItemProxy */ = {
+		AB7BA43E1713898B00104953 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = AB665BB2171342C0007F2151 /* mailcore2.xcodeproj */;
+			containerPortal = AB7BA4321713898B00104953 /* mailcore2.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = C64EA78C169F259200778456;
 			remoteInfo = tests;
 		};
-		AB665BC0171342C1007F2151 /* PBXContainerItemProxy */ = {
+		AB7BA4401713898B00104953 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = AB665BB2171342C0007F2151 /* mailcore2.xcodeproj */;
+			containerPortal = AB7BA4321713898B00104953 /* mailcore2.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = C6A81B911706840C00882C15;
 			remoteInfo = "test-ios";
 		};
-		AB665BC2171342C1007F2151 /* PBXContainerItemProxy */ = {
+		AB7BA4421713898B00104953 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = AB665BB2171342C0007F2151 /* mailcore2.xcodeproj */;
+			containerPortal = AB7BA4321713898B00104953 /* mailcore2.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = C6BD288D170BD71100A91AC1;
 			remoteInfo = "mailcore osx";
 		};
-		AB665BC6171342FF007F2151 /* PBXContainerItemProxy */ = {
+		AB7BA444171389C200104953 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = AB665BB2171342C0007F2151 /* mailcore2.xcodeproj */;
+			containerPortal = AB7BA4321713898B00104953 /* mailcore2.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = C6BA2B091705F4E6003F0E9E;
 			remoteInfo = "static mailcore2 ios";
@@ -72,10 +73,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AB665BB2171342C0007F2151 /* mailcore2.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = mailcore2.xcodeproj; path = "../../../../build-mac/mailcore2.xcodeproj"; sourceTree = "<group>"; };
 		AB665BCA17134336007F2151 /* FXKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXKeychain.h; sourceTree = "<group>"; };
 		AB665BCB17134336007F2151 /* FXKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXKeychain.m; sourceTree = "<group>"; };
 		AB665BCC17134336007F2151 /* FXKeychain_LICENCE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FXKeychain_LICENCE.md; sourceTree = "<group>"; };
+		AB7BA4321713898B00104953 /* mailcore2.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = mailcore2.xcodeproj; path = "../../../../build-mac/mailcore2.xcodeproj"; sourceTree = "<group>"; };
+		AB7BA4471713913F00104953 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		AB9EAE02170368F000D750C7 /* iOS UI Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS UI Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB9EAE05170368F000D750C7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AB9EAE07170368F000D750C7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -105,29 +107,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB665BC817134319007F2151 /* libMailCore-ios.a in Frameworks */,
+				AB7BA446171389CC00104953 /* libMailCore-ios.a in Frameworks */,
 				AB9EAE40170374D900D750C7 /* Security.framework in Frameworks */,
 				AB9EAE06170368F000D750C7 /* UIKit.framework in Frameworks */,
 				AB9EAE08170368F000D750C7 /* Foundation.framework in Frameworks */,
 				AB9EAE0A170368F000D750C7 /* CoreGraphics.framework in Frameworks */,
+				AB7BA4481713913F00104953 /* CFNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AB665BB3171342C0007F2151 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				AB665BBB171342C1007F2151 /* libMailCore.a */,
-				AB665BBD171342C1007F2151 /* libMailCore-ios.a */,
-				AB665BBF171342C1007F2151 /* tests */,
-				AB665BC1171342C1007F2151 /* test-ios.app */,
-				AB665BC3171342C1007F2151 /* MailCore.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		AB665BC917134336007F2151 /* common */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,9 +130,22 @@
 			path = ../../../common;
 			sourceTree = "<group>";
 		};
+		AB7BA4331713898B00104953 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AB7BA43B1713898B00104953 /* libMailCore.a */,
+				AB7BA43D1713898B00104953 /* libMailCore-ios.a */,
+				AB7BA43F1713898B00104953 /* tests */,
+				AB7BA4411713898B00104953 /* test-ios.app */,
+				AB7BA4431713898B00104953 /* MailCore.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		AB9EADF9170368F000D750C7 = {
 			isa = PBXGroup;
 			children = (
+				AB7BA4471713913F00104953 /* CFNetwork.framework */,
 				AB9EAE0B170368F000D750C7 /* iOS UI Test */,
 				AB9EAE04170368F000D750C7 /* Frameworks */,
 				AB9EAE03170368F000D750C7 /* Products */,
@@ -170,7 +174,7 @@
 		AB9EAE0B170368F000D750C7 /* iOS UI Test */ = {
 			isa = PBXGroup;
 			children = (
-				AB665BB2171342C0007F2151 /* mailcore2.xcodeproj */,
+				AB7BA4321713898B00104953 /* mailcore2.xcodeproj */,
 				AB9EAE14170368F000D750C7 /* AppDelegate.h */,
 				AB9EAE15170368F000D750C7 /* AppDelegate.m */,
 				AB9EAE1D170368F000D750C7 /* MainStoryboard.storyboard */,
@@ -215,7 +219,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				AB665BC7171342FF007F2151 /* PBXTargetDependency */,
+				AB7BA445171389C200104953 /* PBXTargetDependency */,
 			);
 			name = "iOS UI Test";
 			productName = "iOS UI Test";
@@ -243,8 +247,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = AB665BB3171342C0007F2151 /* Products */;
-					ProjectRef = AB665BB2171342C0007F2151 /* mailcore2.xcodeproj */;
+					ProductGroup = AB7BA4331713898B00104953 /* Products */;
+					ProjectRef = AB7BA4321713898B00104953 /* mailcore2.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -255,39 +259,39 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		AB665BBB171342C1007F2151 /* libMailCore.a */ = {
+		AB7BA43B1713898B00104953 /* libMailCore.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libMailCore.a;
-			remoteRef = AB665BBA171342C1007F2151 /* PBXContainerItemProxy */;
+			remoteRef = AB7BA43A1713898B00104953 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		AB665BBD171342C1007F2151 /* libMailCore-ios.a */ = {
+		AB7BA43D1713898B00104953 /* libMailCore-ios.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libMailCore-ios.a";
-			remoteRef = AB665BBC171342C1007F2151 /* PBXContainerItemProxy */;
+			remoteRef = AB7BA43C1713898B00104953 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		AB665BBF171342C1007F2151 /* tests */ = {
+		AB7BA43F1713898B00104953 /* tests */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
 			path = tests;
-			remoteRef = AB665BBE171342C1007F2151 /* PBXContainerItemProxy */;
+			remoteRef = AB7BA43E1713898B00104953 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		AB665BC1171342C1007F2151 /* test-ios.app */ = {
+		AB7BA4411713898B00104953 /* test-ios.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
 			path = "test-ios.app";
-			remoteRef = AB665BC0171342C1007F2151 /* PBXContainerItemProxy */;
+			remoteRef = AB7BA4401713898B00104953 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		AB665BC3171342C1007F2151 /* MailCore.framework */ = {
+		AB7BA4431713898B00104953 /* MailCore.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = MailCore.framework;
-			remoteRef = AB665BC2171342C1007F2151 /* PBXContainerItemProxy */;
+			remoteRef = AB7BA4421713898B00104953 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -325,10 +329,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		AB665BC7171342FF007F2151 /* PBXTargetDependency */ = {
+		AB7BA445171389C200104953 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "static mailcore2 ios";
-			targetProxy = AB665BC6171342FF007F2151 /* PBXContainerItemProxy */;
+			targetProxy = AB7BA444171389C200104953 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -411,16 +415,39 @@
 		AB9EAE29170368F000D750C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LIBRARY = "libstdc++";
+				FRAMEWORK_SEARCH_PATHS = "\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOS UI Test/iOS UI Test-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../Externals/libetpan/include",
-					"$(SRCROOT)/../../Externals/icu4c/include",
-					"$(SRCROOT)/../../Externals/ctemplate/include",
-					"$(SRCROOT)/../../src",
+					"\"$(SRCROOT)/../../../Externals/libetpan-ios/include\"",
+					"\"$(SRCROOT)/../../../Externals/icu4c-ios/include\"",
+					"\"$(SRCROOT)/../../../Externals/ctemplate-ios/include\"",
+					"\"$(SRCROOT)/../../../Externals/tidy-html5-ios/include/tidy\"",
+					/usr/include/tidy,
+					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = "iOS UI Test/iOS UI Test-Info.plist";
-				OTHER_LDFLAGS = "-Objc";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../Externals/libetpan-ios/lib\"",
+					"\"$(SRCROOT)/../../../Externals/icu4c-ios/lib\"",
+					"\"$(SRCROOT)/../../../Externals/ctemplate-ios/lib\"",
+					"\"$(SRCROOT)/../../../Externals/libsasl-ios/lib\"",
+					"\"$(SRCROOT)/../../../Externals/tidy-html5-ios/lib\"",
+					"\"$(SRCROOT)/../../../Externals/libsasl-ios/lib/sasl2\"",
+				);
+				OTHER_LDFLAGS = (
+					"-lctemplate-ios",
+					"-letpan-ios",
+					"-licudata",
+					"-licui18n",
+					"-licuuc",
+					"-lxml2",
+					"-lsasl2",
+					"-liconv",
+					"-all_load",
+					"-ltidy",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -429,16 +456,38 @@
 		AB9EAE2A170368F000D750C7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOS UI Test/iOS UI Test-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../Externals/libetpan/include",
-					"$(SRCROOT)/../../Externals/icu4c/include",
-					"$(SRCROOT)/../../Externals/ctemplate/include",
-					"$(SRCROOT)/../../src",
+					"\"$(SRCROOT)/../../../Externals/libetpan-ios/include\"",
+					"\"$(SRCROOT)/../../../Externals/icu4c-ios/include\"",
+					"\"$(SRCROOT)/../../../Externals/ctemplate-ios/include\"",
+					"\"$(SRCROOT)/../../../Externals/tidy-html5-ios/include/tidy\"",
+					/usr/include/tidy,
+					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = "iOS UI Test/iOS UI Test-Info.plist";
-				OTHER_LDFLAGS = "-Objc";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../Externals/libetpan-ios/lib\"",
+					"\"$(SRCROOT)/../../../Externals/icu4c-ios/lib\"",
+					"\"$(SRCROOT)/../../../Externals/ctemplate-ios/lib\"",
+					"\"$(SRCROOT)/../../../Externals/libsasl-ios/lib\"",
+					"\"$(SRCROOT)/../../../Externals/tidy-html5-ios/lib\"",
+					"\"$(SRCROOT)/../../../Externals/libsasl-ios/lib/sasl2\"",
+				);
+				OTHER_LDFLAGS = (
+					"-lctemplate-ios",
+					"-letpan-ios",
+					"-licudata",
+					"-licui18n",
+					"-licuuc",
+					"-lxml2",
+					"-lsasl2",
+					"-liconv",
+					"-all_load",
+					"-ltidy",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
