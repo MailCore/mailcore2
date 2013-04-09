@@ -416,17 +416,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LIBRARY = "libstdc++";
-				FRAMEWORK_SEARCH_PATHS = "\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOS UI Test/iOS UI Test-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../../../Externals/libetpan-ios/include\"",
-					"\"$(SRCROOT)/../../../Externals/icu4c-ios/include\"",
-					"\"$(SRCROOT)/../../../Externals/ctemplate-ios/include\"",
-					"\"$(SRCROOT)/../../../Externals/tidy-html5-ios/include/tidy\"",
-					/usr/include/tidy,
-					/usr/include/libxml2,
-				);
 				INFOPLIST_FILE = "iOS UI Test/iOS UI Test-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../Externals/libetpan-ios/lib\"",
@@ -447,6 +438,7 @@
 					"-liconv",
 					"-all_load",
 					"-ltidy",
+					"-lstdc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -456,17 +448,8 @@
 		AB9EAE2A170368F000D750C7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOS UI Test/iOS UI Test-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../../../Externals/libetpan-ios/include\"",
-					"\"$(SRCROOT)/../../../Externals/icu4c-ios/include\"",
-					"\"$(SRCROOT)/../../../Externals/ctemplate-ios/include\"",
-					"\"$(SRCROOT)/../../../Externals/tidy-html5-ios/include/tidy\"",
-					/usr/include/tidy,
-					/usr/include/libxml2,
-				);
 				INFOPLIST_FILE = "iOS UI Test/iOS UI Test-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../Externals/libetpan-ios/lib\"",
@@ -487,6 +470,7 @@
 					"-liconv",
 					"-all_load",
 					"-ltidy",
+					"-lstdc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
