@@ -10,6 +10,8 @@
 
 namespace mailcore {
     
+    extern bool logEnabled;
+    
 #ifndef __printflike
 #define __printflike(a,b)
 #endif
