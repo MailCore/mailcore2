@@ -249,19 +249,19 @@ static struct mailmime * mime_from_attachment(Attachment * att)
             return NULL;
     }
     else if (att->isInlineAttachment() && att->mimeType()->lowercaseString()->isEqual(MCSTR("text/plain"))) {
-        mime = get_plain_text_part(MMCUTF8(att->mimeType()), MMCUTF8(att->charset()),
-            MMCUTF8(att->contentID()),
+        mime = get_plain_text_part(MCUTF8(att->mimeType()), MCUTF8(att->charset()),
+            MCUTF8(att->contentID()),
             data->bytes(), data->length());
     }
     else if (att->isInlineAttachment() && att->mimeType()->lowercaseString()->hasPrefix(MCSTR("text/"))) {
-        mime = get_other_text_part(MMCUTF8(att->mimeType()), MMCUTF8(att->charset()),
-            MMCUTF8(att->contentID()),
+        mime = get_other_text_part(MCUTF8(att->mimeType()), MCUTF8(att->charset()),
+            MCUTF8(att->contentID()),
             data->bytes(), data->length());
     }
     else {
         mime = get_file_part(att->filename()->encodedMIMEHeaderValue()->bytes(),
-            MMCUTF8(att->mimeType()), att->isInlineAttachment(),
-            MMCUTF8(att->contentID()),
+            MCUTF8(att->mimeType()), att->isInlineAttachment(),
+            MCUTF8(att->contentID()),
             data->bytes(), data->length());
     }
     return mime;
@@ -632,7 +632,7 @@ Data * MessageBuilder::dataAndFilterBcc(bool filterBcc)
 
         htmlAttachment = Attachment::attachmentWithHTMLString(htmlBody());
         htmlPart = multipart_related_from_attachments(htmlAttachment, mRelatedAttachments,
-            MMCUTF8(mBoundaryPrefix));
+            MCUTF8(mBoundaryPrefix));
     }
 
     if (textBody() != NULL) {
@@ -649,7 +649,7 @@ Data * MessageBuilder::dataAndFilterBcc(bool filterBcc)
     }
 
     if ((textPart != NULL) && (htmlPart != NULL)) {
-        altPart = get_multipart_alternative(MMCUTF8(mBoundaryPrefix));
+        altPart = get_multipart_alternative(MCUTF8(mBoundaryPrefix));
         mailmime_smart_add_part(altPart, textPart);
         mailmime_smart_add_part(altPart, htmlPart);
         mainPart = altPart;
@@ -671,7 +671,7 @@ Data * MessageBuilder::dataAndFilterBcc(bool filterBcc)
     mailmime_set_imf_fields(mime, fields);
 
     if (mainPart != NULL) {
-        add_attachment(mime, mainPart, MMCUTF8(mBoundaryPrefix));
+        add_attachment(mime, mainPart, MCUTF8(mBoundaryPrefix));
     }
 
     if (attachments() != NULL) {
@@ -681,7 +681,7 @@ Data * MessageBuilder::dataAndFilterBcc(bool filterBcc)
 
             attachment = (Attachment *) attachments()->objectAtIndex(i);
             submime = mime_from_attachment(attachment);
-            add_attachment(mime, submime, MMCUTF8(mBoundaryPrefix));
+            add_attachment(mime, submime, MCUTF8(mBoundaryPrefix));
         }
     }
     

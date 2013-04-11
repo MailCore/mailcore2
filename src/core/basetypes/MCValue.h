@@ -10,6 +10,25 @@ namespace mailcore {
 
 	class String;
 
+    enum {
+        ValueTypeNone,
+        ValueTypeBool,
+        ValueTypeChar,
+        ValueTypeUnsignedChar,
+        ValueTypeShort,
+        ValueTypeUnsignedShort,
+        ValueTypeInt,
+        ValueTypeUnsignedInt,
+        ValueTypeLong,
+        ValueTypeUnsignedLong,
+        ValueTypeLongLong,
+        ValueTypeUnsignedLongLong,
+        ValueTypeFloat,
+        ValueTypeDouble,
+        ValueTypePointer,
+        ValueTypeData,
+    };
+    
 	class Value : public Object {
 	public:
 		virtual ~Value();

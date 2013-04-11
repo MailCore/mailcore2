@@ -30,7 +30,6 @@
 #define MCSTR(str) mailcore::String::uniquedStringWithUTF8Characters("" str "")
 
 #define MCUTF8(str) ((str) != NULL ? (str)->UTF8Characters() : NULL )
-#define MMCUTF8(str) MCUTF8(str)
 #define MCUTF8DESC(obj) ((obj) != NULL ? (obj)->description()->UTF8Characters() : NULL )
 
 #define MCLOCALIZEDSTRING(key) key
