@@ -23,6 +23,7 @@ mkdir -p "$tmpdir"
 mkdir -p "$srcdir"
 
 pushd . >/dev/null
+mkdir -p "$builddir/downloads"
 cd "$builddir/downloads"
 if test -d libetpan ; then
 	cd libetpan
