@@ -1,4 +1,6 @@
 #!/bin/sh
+./get-prebuilt.sh
+
 if test ! -d ../Externals/tidy-html5-ios ; then
   ./prepare-tidy-ios.sh
 fi

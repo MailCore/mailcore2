@@ -1,4 +1,6 @@
 #!/bin/sh
+./get-prebuilt.sh
+
 if test ! -d ../Externals/icu4c ; then
   ./prepare-icu4c-macos.sh
 fi

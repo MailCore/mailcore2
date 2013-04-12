@@ -2056,7 +2056,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "";
+			shellScript = "cd \"$SRCROOT/../scripts\"\n./prepare-mac.sh\n";
 		};
 		C6BA2B0A1705F4E6003F0E9E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2069,7 +2069,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "";
+			shellScript = "cd \"$SRCROOT/../scripts\"\n./prepare-ios.sh\n";
 		};
 		C6BD28A6170BD87600A91AC1 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
