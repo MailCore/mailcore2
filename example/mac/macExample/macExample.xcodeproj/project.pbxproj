@@ -21,6 +21,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		C6AC12781717C54D00B715B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6BD2877170BC8ED00A91AC1 /* mailcore2.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C6BD288C170BD71100A91AC1;
+			remoteInfo = "mailcore osx";
+		};
 		C6BD287E170BC8ED00A91AC1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C6BD2877170BC8ED00A91AC1 /* mailcore2.xcodeproj */;
@@ -48,13 +55,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = C6A81B911706840C00882C15;
 			remoteInfo = "test-ios";
-		};
-		C6BD2886170BC9CE00A91AC1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C6BD2877170BC8ED00A91AC1 /* mailcore2.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = C64EA536169E772200778456;
-			remoteInfo = mailcore2;
 		};
 		C6BD28B2170BDFE500A91AC1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -231,7 +231,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				C6BD2887170BC9CE00A91AC1 /* PBXTargetDependency */,
+				C6AC12791717C54D00B715B7 /* PBXTargetDependency */,
 			);
 			name = macExample;
 			productName = testUI;
@@ -337,10 +337,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C6BD2887170BC9CE00A91AC1 /* PBXTargetDependency */ = {
+		C6AC12791717C54D00B715B7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = mailcore2;
-			targetProxy = C6BD2886170BC9CE00A91AC1 /* PBXContainerItemProxy */;
+			name = "mailcore osx";
+			targetProxy = C6AC12781717C54D00B715B7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
