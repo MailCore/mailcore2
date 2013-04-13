@@ -93,6 +93,9 @@ void Set::removeAllObjects()
 
 void Set::addObjectsFromArray(Array * objects)
 {
+    if (objects == NULL)
+        return;
+    
     for(unsigned int i= 0 ; i < objects->count() ; i ++) {
         addObject(objects->objectAtIndex(i));
     }
