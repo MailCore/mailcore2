@@ -294,11 +294,15 @@ String * MessageHeader::userAgent()
 
 String * MessageHeader::extractedSubject()
 {
+    if (subject() == NULL)
+        return NULL;
     return subject()->extractedSubject();
 }
 
 String * MessageHeader::partialExtractedSubject()
 {
+    if (subject() == NULL)
+        return NULL;
     return subject()->extractedSubjectAndKeepBracket(true);
 }
 
