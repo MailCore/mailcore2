@@ -1847,6 +1847,20 @@ String * String::stringWithFileSystemRepresentation(const char * filename)
     return stringWithUTF8Characters(filename);
 }
 
+String * String::stringByAppendingPathComponent(String * component)
+{
+    String * result = (String *) this->copy()->autorelease();
+    if (result->length() > 0) {
+        UChar lastChar = result->unicodeCharacters()[result->length() - 1];
+        if (lastChar != '/') {
+            result->appendUTF8Characters("/");
+        }
+    }
+    result->appendString(component);
+    return result;
+}
+
+
 Array * String::componentsSeparatedByString(String * separator)
 {
     UChar * p;

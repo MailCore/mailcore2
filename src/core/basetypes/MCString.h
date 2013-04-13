@@ -53,6 +53,7 @@ namespace mailcore {
 		virtual String * stringByAppendingUTF8Format(const char * format, ...);
 		virtual String * stringByAppendingUTF8Characters(const char * UTF8Characters);
 		virtual String * stringByAppendingCharacters(const UChar * unicodeCharacters);
+		virtual String * stringByAppendingPathComponent(String * component);
 		
 		virtual int compare(String * otherString);
 		virtual int caseInsensitiveCompare(String * otherString);
