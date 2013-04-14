@@ -8,8 +8,20 @@
 #include "MCString.h"
 #include "MCLog.h"
 #include "MCUtils.h"
+#include "MCEnumerator.h"
 
 using namespace mailcore;
+
+class ArrayEnumerator : public Enumerator {
+public:
+	ArrayEnumerator(Array * array);
+	Array * allObjects();
+	Object * nextObject();
+private:
+	ArrayEnumerator() {};
+	Array * mArray;
+	int mIdx;
+};
 
 Array::Array()
 {
@@ -234,4 +246,31 @@ String * Array::componentsJoinedByString(String * delimiter)
         result->appendString(obj->description());
     }
     return result;
+}
+
+ArrayEnumerator::ArrayEnumerator(Array * array)
+{
+	mArray = array;
+	mIdx = -1;
+}
+
+Object * ArrayEnumerator::nextObject()
+{
+	mIdx++;
+	if (mArray->count() >= mIdx) {
+		return NULL;
+	}
+	return mArray->objectAtIndex(mIdx);
+}
+
+Array * ArrayEnumerator::allObjects()
+{
+	return mArray;
+}
+
+Enumerator * Array::objectEnumerator()
+{
+	ArrayEnumerator * enumerator = new ArrayEnumerator(this);
+	
+	return enumerator;
 }
