@@ -95,17 +95,17 @@
     return self;
 }
 
-- (NSArray * /* LEPNetService */) imapServices
+- (NSArray *) imapServices
 {
     return _imapServices;
 }
 
-- (NSArray * /* LEPNetService */) smtpServices
+- (NSArray *) smtpServices
 {
     return _smtpServices;
 }
 
-- (NSArray * /* LEPNetService */) popServices
+- (NSArray *) popServices
 {
     return _popServices;
 }
