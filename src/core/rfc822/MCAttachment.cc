@@ -482,7 +482,6 @@ Attachment * Attachment::attachmentWithSingleMIME(struct mailmime * mime)
     content_id = single_fields.fld_id;
 	loc = single_fields.fld_location;
     
-    MCLog("filename %s", filename);
 	if (filename != NULL) {
 		result->setFilename(String::stringByDecodingMIMEHeaderValue(filename));
 	}

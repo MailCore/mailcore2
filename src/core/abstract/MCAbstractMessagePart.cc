@@ -8,6 +8,7 @@ void AbstractMessagePart::init()
 {
     mMainPart = NULL;
     mHeader = NULL;
+    setPartType(PartTypeMessage);
 }
 
 AbstractMessagePart::AbstractMessagePart()
@@ -35,7 +36,7 @@ AbstractMessagePart::~AbstractMessagePart()
 String * AbstractMessagePart::description()
 {
     String * result = String::string();
-    result->appendUTF8Format("<%s:%p %s>", className(), this, mMainPart->description());
+    result->appendUTF8Format("<%s:%p %s>", className()->UTF8Characters(), this, mMainPart->description()->UTF8Characters());
     return result;
 }
 

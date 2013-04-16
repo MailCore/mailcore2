@@ -11,5 +11,7 @@
 #define __MAILCORE_MCRENDERER_H_
 
 #include <MailCore/MCHTMLRendererCallback.h>
+#include <MailCore/MCDateFormatter.h>
+#include <MailCore/MCAddressDisplay.h>
 
 #endif

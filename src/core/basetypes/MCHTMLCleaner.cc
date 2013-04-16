@@ -37,29 +37,33 @@ String * HTMLCleaner::cleanHTML(String * input)
     tidyOptSetBool(tdoc, TidyXhtmlOut, yes);
     tidySetCharEncoding(tdoc, "utf8");
     tidyOptSetBool(tdoc, TidyForceOutput, yes);
+    //tidyOptSetValue(tdoc, TidyErrFile, "/dev/null");
+    //tidyOptSetValue(tdoc, TidyOutFile, "/dev/null");
+    tidyOptSetBool(tdoc, TidyShowWarnings, no);
+    tidyOptSetInt(tdoc, TidyShowErrors, 0);
     rc = tidySetErrorBuffer(tdoc, &errbuf);
     if ((rc > 1) || (rc < 0)) {
-        fprintf(stderr, "error tidySetErrorBuffer: %i\n", rc);
-        fprintf(stderr, "1:%s", errbuf.bp);
+        //fprintf(stderr, "error tidySetErrorBuffer: %i\n", rc);
+        //fprintf(stderr, "1:%s", errbuf.bp);
         //return NULL;
     }
     rc = tidyParseBuffer(tdoc, &docbuf);
     //MCLog("%s", MCUTF8(input));
     if ((rc > 1) || (rc < 0)) {
-        fprintf(stderr, "error tidyParseBuffer: %i\n", rc);
-        fprintf(stderr, "1:%s", errbuf.bp);
+        //fprintf(stderr, "error tidyParseBuffer: %i\n", rc);
+        //fprintf(stderr, "1:%s", errbuf.bp);
         //return NULL;
     }
     rc = tidyCleanAndRepair(tdoc);
     if ((rc > 1) || (rc < 0)) {
-        fprintf(stderr, "error tidyCleanAndRepair: %i\n", rc);
-        fprintf(stderr, "1:%s", errbuf.bp);
+        //fprintf(stderr, "error tidyCleanAndRepair: %i\n", rc);
+        //fprintf(stderr, "1:%s", errbuf.bp);
         //return NULL;
     }
     rc = tidySaveBuffer(tdoc, &output);
     if ((rc > 1) || (rc < 0)) {
-        fprintf(stderr, "error tidySaveBuffer: %i\n", rc);
-        fprintf(stderr, "1:%s", errbuf.bp);
+        //fprintf(stderr, "error tidySaveBuffer: %i\n", rc);
+        //fprintf(stderr, "1:%s", errbuf.bp);
     }
     
     String * result = String::stringWithUTF8Characters((const char *) output.bp);

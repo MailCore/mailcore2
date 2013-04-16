@@ -15,6 +15,7 @@ namespace mailcore {
 	class MessageParser : public AbstractMessage {
 	public:
 		static MessageParser * messageParserWithData(Data * data);
+		static MessageParser * messageParserWithContentsOfFile(String * filename);
 		
 		MessageParser(Data * data);
 		virtual ~MessageParser();

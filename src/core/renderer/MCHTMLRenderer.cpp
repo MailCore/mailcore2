@@ -219,7 +219,10 @@ String * htmlForAbstractPart(AbstractPart * part, htmlRendererContext * context)
 
 String * htmlForAbstractSinglePart(AbstractPart * part, htmlRendererContext * context)
 {
-    String * mimeType = part->mimeType()->lowercaseString();
+    String * mimeType = NULL;
+    if (part->mimeType() != NULL) {
+        mimeType = part->mimeType()->lowercaseString();
+    }
     MCAssert(mimeType != NULL);
     
     if (isTextPart(part, context)) {

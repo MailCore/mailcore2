@@ -1197,7 +1197,7 @@ unsigned int String::replaceOccurrencesOfString(String * occurrence, String * re
         location = u_strstr(p, occurrence->unicodeCharacters());
         if (location == NULL)
             break;
-        p = location + 1;
+        p = location + occurrence->length();
         count ++;
     }
     
@@ -1248,7 +1248,7 @@ void String::deleteCharactersInRange(Range range)
     }
     
     int32_t count = mLength - (int32_t) (range.location + range.length);
-    u_memmove(&mUnicodeChars[range.location], &mUnicodeChars[range.location + range.length], count);
+    u_memmove(&mUnicodeChars[range.location], &mUnicodeChars[range.location + range.length], count + 1);
 }
 
 int String::locationOfString(String * occurrence)
@@ -1301,7 +1301,6 @@ static void charactersParsed(void * context,
 	}
 	String * modifiedString;
     modifiedString = new String((const char *) ch, len);
-    //modifiedString->replaceOccurrencesOfString(MCSTR("\r\n"), MCSTR(" "));
     modifiedString->replaceOccurrencesOfString(MCSTR("\n"), MCSTR(" "));
     modifiedString->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
     modifiedString->replaceOccurrencesOfString(MCSTR("\t"), MCSTR(" "));
@@ -1488,12 +1487,14 @@ static void elementStarted(void * ctx, const xmlChar * name, const xmlChar ** at
     }
     else if (strcasecmp((const char *) name, "a") == 0) {
         AutoreleasePool * pool;
-        String * link;
+        String * link = NULL;
         HashMap * attributes;
         
         pool = new AutoreleasePool();
         attributes = dictionaryFromAttributes(atts);
-        link = (String *) attributes->objectForKey(MCSTR("href"));
+        if (attributes != NULL) {
+            link = (String *) attributes->objectForKey(MCSTR("href"));
+        }
         if (link == NULL)
             link = MCSTR("");
         
@@ -1515,19 +1516,21 @@ static void elementStarted(void * ctx, const xmlChar * name, const xmlChar ** at
         
         pool = new AutoreleasePool();
         attributes = dictionaryFromAttributes(atts);
-        style = (String *) attributes->objectForKey(MCSTR("style"));
-        if (style != NULL) {
-            if (style->locationOfString(MCSTR("margin: 0.0px 0.0px 0.0px 0.0px;")) != -1) {
-                hasSpacing = false;
-            }
-            else if (style->locationOfString(MCSTR("margin: 0px 0px 0px 0px;")) != -1) {
-                hasSpacing = false;
-            }
-            else if (style->locationOfString(MCSTR("margin: 0.0px;")) != -1) {
-                hasSpacing = false;
-            }
-            else if (style->locationOfString(MCSTR("margin: 0px;")) != -1) {
-                hasSpacing = false;
+        if (attributes != NULL) {
+            style = (String *) attributes->objectForKey(MCSTR("style"));
+            if (style != NULL) {
+                if (style->locationOfString(MCSTR("margin: 0.0px 0.0px 0.0px 0.0px;")) != -1) {
+                    hasSpacing = false;
+                }
+                else if (style->locationOfString(MCSTR("margin: 0px 0px 0px 0px;")) != -1) {
+                    hasSpacing = false;
+                }
+                else if (style->locationOfString(MCSTR("margin: 0.0px;")) != -1) {
+                    hasSpacing = false;
+                }
+                else if (style->locationOfString(MCSTR("margin: 0px;")) != -1) {
+                    hasSpacing = false;
+                }
             }
         }
         pool->release();
@@ -1569,9 +1572,13 @@ static void elementStarted(void * ctx, const xmlChar * name, const xmlChar ** at
                 cite = false;
                 pool = new AutoreleasePool();
                 attributes = dictionaryFromAttributes(atts);
-                type = (String *) attributes->objectForKey(MCSTR("type"));
-                if (type->caseInsensitiveCompare(MCSTR("cite")) == 0) {
-                    cite = true;
+                if (attributes != NULL) {
+                    type = (String *) attributes->objectForKey(MCSTR("type"));
+                    if (type != NULL) {
+                        if (type->caseInsensitiveCompare(MCSTR("cite")) == 0) {
+                            cite = true;
+                        }
+                    }
                 }
                 pool->release();
                 

@@ -14,6 +14,12 @@ MessageParser * MessageParser::messageParserWithData(Data * data)
     return (MessageParser *) parser->autorelease();
 }
 
+MessageParser * MessageParser::messageParserWithContentsOfFile(String * filename)
+{
+    Data * data = Data::dataWithContentsOfFile(filename);
+    return messageParserWithData(data);
+}
+
 void MessageParser::init()
 {
     mData = NULL;
@@ -31,8 +37,6 @@ MessageParser::MessageParser(Data * data)
 	msg = data_message_init(data->bytes(), data->length());
 	mailmessage_get_bodystructure(msg, &mime);
     mMainPart = (AbstractPart *) Attachment::attachmentsWithMIME(msg->msg_mime)->retain();
-    MCLog("%s:%p ", MCUTF8(mMainPart->className()), mMainPart);
-    MCLog("%s:%p ", MCUTF8(mMainPart->description()), mMainPart);
     mMainPart->setMessage(this);
     header()->importIMFFields(msg->msg_fields);
 	mailmessage_free(msg);
