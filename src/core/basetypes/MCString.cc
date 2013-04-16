@@ -1248,7 +1248,9 @@ void String::deleteCharactersInRange(Range range)
     }
     
     int32_t count = mLength - (int32_t) (range.location + range.length);
-    u_memmove(&mUnicodeChars[range.location], &mUnicodeChars[range.location + range.length], count + 1);
+    u_memmove(&mUnicodeChars[range.location], &mUnicodeChars[range.location + range.length], count);
+    mLength -= range.length;
+    mUnicodeChars[mLength] = 0;
 }
 
 int String::locationOfString(String * occurrence)
