@@ -8,6 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MCONetService : NSObject
+#include "MCMessageConstants.h"
+
+@interface MCONetService : NSObject <NSCopying> 
+
+@property (nonatomic, copy) NSString * hostname;
+@property (nonatomic, assign) unsigned int port;
+@property (nonatomic, assign) mailcore::ConnectionType authType;
+
++ (MCONetService *) netServiceWithInfo:(NSDictionary *)info;
+
+- (id) initWithInfo:(NSDictionary *)info;
+- (NSDictionary *) info;
 
 @end

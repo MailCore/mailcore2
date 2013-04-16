@@ -3,7 +3,6 @@
 #define __MAILCORE_MCARRAY_H_
 
 #include <MailCore/MCObject.h>
-#include <MailCore/MCEnumerator.h>
 
 #ifdef __cplusplus
 
@@ -38,7 +37,6 @@ namespace mailcore {
 		virtual Array * sortedArray(int (* compare)(void *, void *, void *), void * context);
 		virtual String * componentsJoinedByString(String * delimiter);
         
-		virtual Enumerator * objectEnumerator();
     public: // subclass behavior
 		Array(Array * o);
 		virtual String * description();

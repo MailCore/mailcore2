@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@class LEPNetService;
-
 @interface MCOMailProvider : NSObject 
 
 @property (nonatomic, copy) NSString * identifier;
