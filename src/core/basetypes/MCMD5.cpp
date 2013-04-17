@@ -216,7 +216,7 @@ Data * mailcore::md5Data(Data * data)
     MD5Update(&ctx, (unsigned char const *) data->bytes(), data->length());
     MD5Final(digest, &ctx);
     
-    memcpy(result->bytes(), digest, sizeof(digest));
+    result->appendBytes((const char *) digest, sizeof(digest));
     
     return result;
 }
