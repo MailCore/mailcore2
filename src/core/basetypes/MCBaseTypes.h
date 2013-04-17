@@ -9,6 +9,9 @@
 #include <MailCore/MCData.h>
 #include <MailCore/MCArray.h>
 #include <MailCore/MCHashMap.h>
+#include <MailCore/MCJSON.h>
+#include <MailCore/MCMD5.h>
+#include <MailCore/MCNull.h>
 #include <MailCore/MCSet.h>
 #include <MailCore/MCHash.h>
 #include <MailCore/MCLog.h>
