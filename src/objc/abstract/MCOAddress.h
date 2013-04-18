@@ -47,4 +47,24 @@
 
 @end
 
+@interface MCOAddress (LEPNSArray)
+
+/**
+ Returns an NSArray of LEPAddress objects that contain the parsed forms of the RFC822 encoded NSString passed to it.
+ 
+ @param string An RFC822 encoded NSString object containing multiple addresses.
+ @return An array of LEPAddress objects
+ */
++ (NSArray *) addressesWithRFC822String:(NSString *)string;
+
+/**
+ Returns an NSArray of LEPAddress objects that contain the parsed forms of the RFC822 non-encoded NSString passed to it.
+ 
+ @param string An RFC822 non-encoded NSString object containing multiple addresses.
+ @return An array of LEPAddress objects
+ */
++ (NSArray *) addressesWithNonEncodedRFC822String:(NSString *)string;
+
+@end
+
 #endif

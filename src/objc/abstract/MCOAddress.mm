@@ -14,6 +14,7 @@
 #include "MCAddress.h"
 #include "NSString+MCO.h"
 #include "NSObject+MCO.h"
+#include "NSArray+MCO.h"
 
 @implementation MCOAddress {
     mailcore::Address * _nativeAddress;
@@ -131,6 +132,20 @@ MCO_OBJC_SYNTHESIZE_STRING(setMailbox, mailbox)
 - (NSString *) nonEncodedRFC822String
 {
     return MCO_OBJC_BRIDGE_GET(nonEncodedRFC822String);
+}
+
+@end
+
+@implementation MCOAddress (LEPNSArray)
+
++ (NSArray *) addressesWithRFC822String:(NSString *)string
+{
+	return [NSArray mco_arrayWithMCArray:mailcore::Address::addressesWithRFC822String(string.mco_mcString)];
+}
+
++ (NSArray *) addressesWithNonEncodedRFC822String:(NSString *)string
+{	
+	return [NSArray mco_arrayWithMCArray:mailcore::Address::addressesWithNonEncodedRFC822String(string.mco_mcString)];
 }
 
 @end
