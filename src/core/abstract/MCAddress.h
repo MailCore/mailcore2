@@ -17,7 +17,10 @@ namespace mailcore {
 		static Address * addressWithMailbox(String * mailbox);
 		static Address * addressWithRFC822String(String * RFC822String);
 		static Address * addressWithNonEncodedRFC822String(String * nonEncodedRFC822String);
-
+		
+		static Array * addressesWithRFC822String(String * string);
+		static Array * addressesWithNonEncodedRFC822String(String * string);
+		
 		virtual void setDisplayName(String * displayName);
 		virtual String * displayName();
 
