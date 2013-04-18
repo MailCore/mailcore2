@@ -12,9 +12,13 @@
 #include <MailCore/MCData.h>
 #include <MailCore/MCString.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     Data * md5Data(Data * data);
     String * md5String(Data * data);
 }
+
+#endif
 
 #endif

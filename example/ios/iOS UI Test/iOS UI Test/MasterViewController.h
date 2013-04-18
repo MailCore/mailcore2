@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "SettingsViewController.h"
-//#import <mailcore/mailcore.h>
-
 
 @interface MasterViewController : UITableViewController <SettingsViewControllerDelegate>
 

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <mailcore/mailcore.h>
 
 extern NSString * const UsernameKey;
 extern NSString * const PasswordKey;

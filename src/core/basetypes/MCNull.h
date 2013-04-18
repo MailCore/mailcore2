@@ -11,6 +11,8 @@
 
 #include <MailCore/MCObject.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class Null : public Object {
@@ -19,5 +21,7 @@ namespace mailcore {
     };
     
 }
+
+#endif
 
 #endif

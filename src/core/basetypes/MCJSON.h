@@ -16,6 +16,8 @@
 #include <MailCore/MCString.h>
 #include <MailCore/MCData.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
 
     class Null;
@@ -46,5 +48,7 @@ namespace mailcore {
     };
     
 }
+
+#endif
 
 #endif /* defined(__hermes__MCJSON__) */
