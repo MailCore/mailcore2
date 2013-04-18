@@ -136,7 +136,7 @@ MCO_OBJC_SYNTHESIZE_STRING(setMailbox, mailbox)
 
 @end
 
-@implementation MCOAddress (LEPNSArray)
+@implementation MCOAddress (MCONSArray)
 
 + (NSArray *) addressesWithRFC822String:(NSString *)string
 {
