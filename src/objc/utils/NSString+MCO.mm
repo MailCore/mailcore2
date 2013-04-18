@@ -39,4 +39,31 @@
     return mailcore::String::stringWithCharacters(characters, (unsigned int) [self length]);
 }
 
+- (NSString *) mco_flattenHTML
+{
+	return [NSString mco_stringWithMCString:[self mco_mcString]->flattenHTML()];
+}
+
+- (NSString *) mco_flattenHTMLAndShowBlockquote:(BOOL)showBlockquote
+{
+	return [NSString mco_stringWithMCString:[self mco_mcString]->flattenHTMLAndShowBlockquote(showBlockquote)];
+}
+
+- (NSString *) mco_flattenHTMLAndShowBlockquote:(BOOL)showBlockquote showLink:(BOOL)showLink
+{
+	return [NSString mco_stringWithMCString:[self mco_mcString]->flattenHTMLAndShowBlockquoteAndLink(showBlockquote, showLink)];
+}
+
+
+- (NSString *) mco_htmlEncodedString
+{
+	return [NSString mco_stringWithMCString:[self mco_mcString]->htmlEncodedString()];
+}
+
+- (NSString *) mco_cleanedHTMLString
+{
+	return [NSString mco_stringWithMCString:[self mco_mcString]->cleanedHTMLString()];
+}
+
+
 @end

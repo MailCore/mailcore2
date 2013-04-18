@@ -28,6 +28,13 @@ namespace mailcore {
 - (mailcore::String *) mco_mcString;
 #endif
 
+- (NSString *) mco_flattenHTML;
+- (NSString *) mco_flattenHTMLAndShowBlockquote:(BOOL)showBlockquote;
+- (NSString *) mco_flattenHTMLAndShowBlockquote:(BOOL)showBlockquote showLink:(BOOL)showLink;
+
+- (NSString *) mco_htmlEncodedString;
+- (NSString *) mco_cleanedHTMLString;
+
 @end
 
 #endif
