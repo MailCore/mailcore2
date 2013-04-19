@@ -14,6 +14,8 @@
 #include <MailCore/MCAutoreleasePool.h>
 #include <string.h>
 
+#ifdef __cplusplus
+
 #define mc_foreacharray(type, __variable, __array) \
 type * __variable; \
 mailcore::ArrayIterator __variable##__iterator = mailcore::ArrayIteratorInit(__array); \
@@ -120,5 +122,7 @@ namespace mailcore {
     }
 
 };
+
+#endif
 
 #endif
