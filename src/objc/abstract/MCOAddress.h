@@ -31,6 +31,17 @@
 // Example: [MCOAddress addressWithRFC822String:@"DINH Viêt Hoà <hoa@etpan.org>"]
 + (MCOAddress *) addressWithNonEncodedRFC822String:(NSString *)nonEncodedRFC822String;
 
+// Returns an NSArray of MCOAddress objects that contain the parsed
+// forms of the RFC822 encoded addresses.
+// For example: @[ @"DINH Vi=C3=AAt Ho=C3=A0 <hoa@etpan.org>" ]
++ (NSArray *) addressesWithRFC822String:(NSString *)string;
+
+// Returns an NSArray of MCOAddress objects that contain the parsed
+// forms of non-encoded RFC822 addresses.
+// For example: @[ "DINH Viêt Hoà <hoa@etpan.org>" ]
++ (NSArray *) addressesWithNonEncodedRFC822String:(NSString *)string;
+
+
 // Returns the display name of the address.
 @property (nonatomic, copy) NSString * displayName;
 
@@ -47,17 +58,13 @@
 
 @end
 
-@interface MCOAddress (MCONSArray)
+@interface NSArray (MCONSArray)
 
-// Returns an NSArray of MCOAddress objects that contain the parsed
-// forms of the RFC822 encoded addresses.
-// For example: @[ @"DINH Vi=C3=AAt Ho=C3=A0 <hoa@etpan.org>" ]
-+ (NSArray *) addressesWithRFC822String:(NSString *)string;
+// Returns the RFC822 encoding of the addresses.
+- (NSString *) mco_RFC822StringForAddresses;
 
-// Returns an NSArray of MCOAddress objects that contain the parsed
-// forms of non-encoded RFC822 addresses.
-// For example: @[ "DINH Viêt Hoà <hoa@etpan.org>" ]
-+ (NSArray *) addressesWithNonEncodedRFC822String:(NSString *)string;
+// Returns the non-MIME-encoded RFC822 of the addresses.
+- (NSString *) mco_nonEncodedRFC822StringForAddresses;
 
 @end
 
