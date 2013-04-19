@@ -83,6 +83,17 @@
     return result;
 }
 
++ (NSArray *) addressesWithRFC822String:(NSString *)string
+{
+	return [NSArray mco_arrayWithMCArray:mailcore::Address::addressesWithRFC822String(string.mco_mcString)];
+}
+
++ (NSArray *) addressesWithNonEncodedRFC822String:(NSString *)string
+{
+	return [NSArray mco_arrayWithMCArray:mailcore::Address::addressesWithNonEncodedRFC822String(string.mco_mcString)];
+}
+
+
 - (id) init
 {
     self = [super init];
@@ -136,28 +147,14 @@ MCO_OBJC_SYNTHESIZE_STRING(setMailbox, mailbox)
 
 @end
 
-@implementation MCOAddress (MCONSArray)
-
-+ (NSArray *) addressesWithRFC822String:(NSString *)string
-{
-	return [NSArray mco_arrayWithMCArray:mailcore::Address::addressesWithRFC822String(string.mco_mcString)];
-}
-
-+ (NSArray *) addressesWithNonEncodedRFC822String:(NSString *)string
-{	
-	return [NSArray mco_arrayWithMCArray:mailcore::Address::addressesWithNonEncodedRFC822String(string.mco_mcString)];
-}
-
-@end
-
 @implementation NSArray (MCONSArray)
 
-- (NSString *) RFC822String
+- (NSString *) mco_RFC822StringForAddresses
 {
 	return [NSString mco_stringWithMCString:mailcore::Address::RFC822StringForAddresses([self mco_mcArray])];
 }
 
-- (NSString *) nonEncodedRFC822String
+- (NSString *) mco_nonEncodedRFC822StringForAddresses
 {
 	return [NSString mco_stringWithMCString:mailcore::Address::nonEncodedRFC822StringForAddresses([self mco_mcArray ])];
 }
