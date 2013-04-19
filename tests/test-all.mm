@@ -272,6 +272,19 @@ static void testAsyncPOP()
     [[NSRunLoop currentRunLoop] run];
 }
 
+static void testAddresses()
+{
+	mailcore::Address *addr = mailcore::Address::addressWithNonEncodedRFC822String(MCSTR("DINH Viêt Hoà <hoa@etpan.org>"));
+    MCLog("%s %s", MCUTF8DESC(addr->nonEncodedRFC822String()), MCUTF8DESC(addr->RFC822String()));
+	
+	mailcore::Array *addresses = mailcore::Address::addressesWithNonEncodedRFC822String(MCSTR("My Email1 <email1@gmail.com>, DINH Viêt Hoà <hoa@etpan.org>,\"Email3, My\" <my.email@gmail.com>"));
+    MCLog("%s", MCUTF8DESC(addresses));
+	mailcore::String *str = mailcore::Address::nonEncodedRFC822StringForAddresses(addresses);
+    MCLog("%s", MCUTF8DESC(str));
+	str = mailcore::Address::RFC822StringForAddresses(addresses);
+    MCLog("%s", MCUTF8DESC(str));
+}
+
 void testObjC()
 {
     MCOIMAPSession *session = [[MCOIMAPSession alloc] init];
@@ -317,7 +330,7 @@ void testAll()
     displayName = MCSTR("My Email");
     
     mailcore::AutoreleasePool * pool = new mailcore::AutoreleasePool();
-    
+    mailcore::logEnabled = true;
     mailstream_debug = 1;
     
     //mailcore::Data * data = testMessageBuilder();
@@ -328,8 +341,8 @@ void testAll()
     //testAsyncSMTP(data);
     //testAsyncIMAP();
     //testAsyncPOP();
-    
-    testObjC();
+    testAddresses();
+    //testObjC();
     
     MCLog("pool release");
     pool->release();
