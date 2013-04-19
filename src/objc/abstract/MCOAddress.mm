@@ -149,3 +149,17 @@ MCO_OBJC_SYNTHESIZE_STRING(setMailbox, mailbox)
 }
 
 @end
+
+@implementation NSArray (MCONSArray)
+
+- (NSString *) RFC822String
+{
+	return [NSString mco_stringWithMCString:mailcore::Address::RFC822StringForAddresses([self mco_mcArray])];
+}
+
+- (NSString *) nonEncodedRFC822String
+{
+	return [NSString mco_stringWithMCString:mailcore::Address::nonEncodedRFC822StringForAddresses([self mco_mcArray ])];
+}
+
+@end

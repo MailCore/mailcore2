@@ -61,4 +61,19 @@
 
 @end
 
+@interface NSArray (MCONSArray)
+
+// The receiver is an NSArray of MCOAddress.
+// Returns an NSArray of NSString objects separated by commas that contain the
+// RFC822 encoding of the addresses.
+// For example: @[ @"DINH Vi=C3=AAt Ho=C3=A0 <hoa@etpan.org>" ]
+- (NSString *) RFC822String;
+
+// Returns an NSArray of NSString objects separated by commas that contain the
+// non-MIME-encoded RFC822 form of the addresses.
+// For example: @[ "DINH Viêt Hoà <hoa@etpan.org>" ]
+- (NSString *) nonEncodedRFC822String;
+
+@end
+
 #endif
