@@ -4,16 +4,11 @@
 
 #include <MailCore/MCObject.h>
 #include <MailCore/MCRange.h>
+#include <MailCore/MCICUTypes.h>
 
 #include <stdarg.h>
 
 #ifdef __cplusplus
-
-#if defined(__CHAR16_TYPE__)
-typedef __CHAR16_TYPE__ UChar;
-#else
-typedef uint16_t UChar;
-#endif
 
 namespace mailcore {
 	
@@ -44,6 +39,7 @@ namespace mailcore {
 		virtual void appendString(String * otherString);
 		virtual void appendUTF8Format(const char * format, ...);
 		virtual void appendCharacters(const UChar * unicodeCharacters);
+		virtual void appendCharactersLength(const UChar * unicodeCharacters, unsigned int length);
 		virtual void appendUTF8Characters(const char * UTF8Characters);
 		virtual void setString(String * otherString);
 		virtual void setUTF8Characters(const char * UTF8Characters);
@@ -126,7 +122,6 @@ namespace mailcore {
 		unsigned int mLength;
 		unsigned int mAllocated;
 		void allocate(unsigned int length);
-		void appendCharactersLength(const UChar * unicodeCharacters, unsigned int length);
 		void reset();
 		int compareWithCaseSensitive(String * otherString, bool caseSensitive);
 		void appendBytes(const char * bytes, unsigned int length, const char * charset);

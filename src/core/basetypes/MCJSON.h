@@ -24,27 +24,10 @@ namespace mailcore {
     
     class JSON {
     public:
-        static String * objectToJSONString(Object * object, bool pretty = false);
-        static Data * objectToJSONData(Object * object, bool pretty = false);
+        static String * objectToJSONString(Object * object);
+        static Data * objectToJSONData(Object * object);
         static Object * objectFromJSONString(String * json);
         static Object * objectFromJSONData(Data * json);
-        
-    private:
-        static void * hashMapToJSON(HashMap * hashmap);
-        static void * arrayToJSON(Array * array);
-        static void * stringToJSON(String * string);
-        static void * doubleToJSON(Value * value);
-        static void * boolToJSON(Value * value);
-        static void * nullToJSON(Null * value);
-        static void * objectToJSON(Object * object);
-        
-        static HashMap * hashMapFromJSON(void * json);
-        static Array * arrayFromJSON(void * json);
-        static String * stringFromJSON(void * json);
-        static Value * doubleFromJSON(void * json);
-        static Value * boolFromJSON(void * json);
-        static Null * nullFromJSON(void * json);
-        static Object * objectFromJSON(void * json);
     };
     
 }
