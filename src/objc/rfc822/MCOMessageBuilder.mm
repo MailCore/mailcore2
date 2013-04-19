@@ -23,6 +23,14 @@
     MCORegisterClass(self, &typeid(nativeType));
 }
 
+- (id)init
+{
+    mailcore::MessageBuilder * message = new mailcore::MessageBuilder();
+    self = [super initWithMCMessage:message];
+    MC_SAFE_RELEASE(message);
+    return self;
+}
+
 - (id) copyWithZone:(NSZone *)zone
 {
     nativeType * nativeObject = (nativeType *) [self mco_mcObject]->copy();
