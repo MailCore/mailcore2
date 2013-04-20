@@ -34,6 +34,9 @@
 
 // Decoded data of the part.
 @property (nonatomic, strong) NSData * data;
+
+// Returns string representation according to charset
+- (NSString *) decodedString;
  
 @end
 

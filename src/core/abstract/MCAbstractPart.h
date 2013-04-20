@@ -46,6 +46,8 @@ namespace mailcore {
         virtual AbstractPart * partForContentID(String * contentID);
         virtual AbstractPart * partForUniqueID(String * uniqueID);
         
+		virtual String * decodedStringForData(Data * data);
+		
     public: // subclass behavior
 		AbstractPart(AbstractPart * other);
 		virtual String * description();
