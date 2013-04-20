@@ -285,6 +285,14 @@ static void testAddresses()
     MCLog("%s", MCUTF8DESC(str));
 }
 
+static void testAttachments()
+{
+	mailcore::Attachment *attachment = mailcore::Attachment::attachmentWithText(MCSTR("Hello World"));
+	attachment->setCharset(NULL);
+	mailcore::String * str = attachment->decodedString();
+	MCLog("%s", MCUTF8DESC(str));
+}
+
 void testObjC()
 {
     MCOIMAPSession *session = [[MCOIMAPSession alloc] init];
@@ -341,8 +349,9 @@ void testAll()
     //testAsyncSMTP(data);
     //testAsyncIMAP();
     //testAsyncPOP();
-    testAddresses();
-    //testObjC();
+    //testAddresses();
+	//testAttachments();
+    testObjC();
     
     MCLog("pool release");
     pool->release();

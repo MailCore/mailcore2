@@ -74,6 +74,9 @@ typedef enum {
 // Returns the part with the given unique identifier among this part and its subparts.
 - (MCOAbstractPart *) partForUniqueID:(NSString *)uniqueID;
 
+// Returns a string representation of the data according to charset.
+- (NSString *) decodedStringForData:(NSData *)data;
+
 @end
 
 #endif
