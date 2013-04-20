@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <libetpan/libetpan.h>
+#include "MCData.h"
 
 using namespace mailcore;
 
@@ -249,3 +250,12 @@ AbstractPart * AbstractPart::partForUniqueID(String * uniqueID)
     }
 }
 
+String * AbstractPart::decodedStringForData(Data * data)
+{
+	if (mMimeType && mMimeType->hasPrefix(MCSTR("text/"))) {
+		return data->stringWithDetectedCharset(mCharset, false);
+	}
+	else {
+		return NULL;
+	}
+}

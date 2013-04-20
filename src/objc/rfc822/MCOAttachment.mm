@@ -86,4 +86,10 @@
 
 MCO_OBJC_SYNTHESIZE_DATA(setData, data)
 
+- (NSString *) decodedString
+{
+	mailcore::String *result = MCO_NATIVE_INSTANCE->decodedString();
+	return [NSString mco_stringWithMCString:result];
+}
+
 @end

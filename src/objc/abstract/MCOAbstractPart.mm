@@ -14,6 +14,7 @@
 
 #import "NSString+MCO.h"
 #import "NSObject+MCO.h"
+#import "NSData+MCO.h"
 
 @implementation MCOAbstractPart {
     mailcore::AbstractPart * _part;
@@ -68,4 +69,8 @@ MCO_OBJC_SYNTHESIZE(AbstractMessage, setMessage, message)
     return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->partForUniqueID([uniqueID mco_mcString]));
 }
 
+- (NSString *) decodedStringForData:(NSData *)data
+{
+	return [NSString mco_stringWithMCString:MCO_NATIVE_INSTANCE->decodedStringForData([data mco_mcData])];
+}
 @end
