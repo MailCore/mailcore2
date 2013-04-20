@@ -32,7 +32,7 @@
 {
     mailcore::Array * result = mailcore::Array::array();
     for(NSObject * value in self) {
-        [value mco_mcObject];
+		result->addObject([value mco_mcObject]);
     }
     return result;
 }
