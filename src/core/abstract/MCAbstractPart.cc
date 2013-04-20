@@ -252,8 +252,11 @@ AbstractPart * AbstractPart::partForUniqueID(String * uniqueID)
 
 String * AbstractPart::decodedStringForData(Data * data)
 {
-	if (mMimeType && mMimeType->hasPrefix(MCSTR("text/"))) {
-		return data->stringWithDetectedCharset(mCharset, false);
+	String *lowerMimeType = mMimeType ? mMimeType->lowercaseString() : NULL;
+	
+	if (lowerMimeType && lowerMimeType->hasPrefix(MCSTR("text/"))) {
+		bool isHTML = lowerMimeType->isEqual(MCSTR("text/html"));
+		return data->stringWithDetectedCharset(mCharset, isHTML);
 	}
 	else {
 		return NULL;
