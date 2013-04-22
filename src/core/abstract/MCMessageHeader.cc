@@ -1070,8 +1070,9 @@ Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool
     hasCc = false;
     addedAddresses = new Set();
     
-    if (senderEmails->containsObject(from()->mailbox()->lowercaseString()) ||
-        senderEmails->containsObject(sender()->mailbox()->lowercaseString())) {
+    if (senderEmails != NULL &&
+		(senderEmails->containsObject(from()->mailbox()->lowercaseString()) ||
+        senderEmails->containsObject(sender()->mailbox()->lowercaseString()))) {
         Array * recipient;
         
         recipient = new Array();
@@ -1130,7 +1131,7 @@ Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool
     else {
         addedAddresses->addObjectsFromArray(senderEmails);
         
-        if (replyTo()->count() > 0) {
+        if (replyTo() != NULL && replyTo()->count() > 0) {
             hasTo = true;
             toField = replyTo();
             for(unsigned int i = 0 ; i < replyTo()->count() ; i ++) {
@@ -1141,7 +1142,7 @@ Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool
             }
         }
         else {
-            if (from()->mailbox() != NULL) {
+            if (from() != NULL && from()->mailbox() != NULL) {
                 hasTo = true;
                 toField = Array::arrayWithObject(from());
                 addedAddresses->addObject(from()->mailbox()->lowercaseString());
@@ -1201,14 +1202,23 @@ MessageHeader * MessageHeader::replyHeader(bool replyAll, Array * addressesExclu
     Array * inReplyTo;
     Array * toValue;
     Array * ccValue;
-    
+	
+	referencesValue = NULL;
+	inReplyTo = NULL;
+	
     result = new MessageHeader();
     subjectValue = MCSTR("Re: ")->stringByAppendingString(subject());
-    referencesValue = (Array *) (references()->copy());
-    referencesValue->autorelease();
-    referencesValue->addObject(messageID());
-    inReplyTo = Array::array();
-    inReplyTo->addObject(messageID());
+	if (references() != NULL) {
+		referencesValue = (Array *) (references()->copy());
+		referencesValue->autorelease();
+		if (messageID() != NULL ) {
+			referencesValue->addObject(messageID());
+		}
+	}
+	if (messageID()) {
+		inReplyTo = Array::array();
+		inReplyTo->addObject(messageID());
+	}
     toValue = recipientWithReplyAll(replyAll, true, false, addressesExcludedFromRecipient);
     ccValue = recipientWithReplyAll(replyAll, false, true, addressesExcludedFromRecipient);;
     
@@ -1229,13 +1239,22 @@ MessageHeader * MessageHeader::forwardHeader()
     Array * referencesValue;
     Array * inReplyTo;
     
+	referencesValue = NULL;
+	inReplyTo = NULL;
+
     result = new MessageHeader();
     subjectValue = MCSTR("Fw: ")->stringByAppendingString(subject());
-    referencesValue = (Array *) (references()->copy());
-    referencesValue->autorelease();
-    referencesValue->addObject(messageID());
-    inReplyTo = Array::array();
-    inReplyTo->addObject(messageID());
+	if (references() != NULL) {
+		referencesValue = (Array *) (references()->copy());
+		referencesValue->autorelease();
+		if (messageID() != NULL ) {
+			referencesValue->addObject(messageID());
+		}
+	}
+	if (messageID()) {
+		inReplyTo = Array::array();
+		inReplyTo->addObject(messageID());
+	}
     result->setSubject(subjectValue);
     result->setReferences(referencesValue);
     result->setInReplyTo(inReplyTo);
