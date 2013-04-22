@@ -104,7 +104,7 @@ mailcore::String * MCOAbstractMessageRendererCallback::templateForEmbeddedMessag
 {
     mailcore::String * result = NULL;
     if ([mRendererDelegate respondsToSelector:@selector(MCOAbstractMessage_templateForEmbeddedMessage:)]) {
-        return MCO_FROM_OBJC(mailcore::String, [mRendererDelegate MCOAbstractMessage_templateForEmbeddedMessage:mMessage]);
+        result = MCO_FROM_OBJC(mailcore::String, [mRendererDelegate MCOAbstractMessage_templateForEmbeddedMessage:mMessage]);
     }
     if (result == NULL) {
         result = mailcore::HTMLRendererTemplateCallback::templateForEmbeddedMessage();
@@ -116,7 +116,7 @@ mailcore::String * MCOAbstractMessageRendererCallback::templateForEmbeddedMessag
 {
     mailcore::String * result = NULL;
     if ([mRendererDelegate respondsToSelector:@selector(MCOAbstractMessage_templateForEmbeddedMessageHeader:)]) {
-        return MCO_FROM_OBJC(mailcore::String, [mRendererDelegate MCOAbstractMessage_templateForEmbeddedMessageHeader:mMessage]);
+        result = MCO_FROM_OBJC(mailcore::String, [mRendererDelegate MCOAbstractMessage_templateForEmbeddedMessageHeader:mMessage]);
     }
     if (result == NULL) {
         result = mailcore::HTMLRendererTemplateCallback::templateForEmbeddedMessageHeader();

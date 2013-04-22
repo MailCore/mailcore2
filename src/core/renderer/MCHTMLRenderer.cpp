@@ -328,17 +328,21 @@ String * htmlForAbstractSinglePart(AbstractPart * part, htmlRendererContext * co
 
 String * htmlForAbstractMessagePart(AbstractMessagePart * part, htmlRendererContext * context)
 {
-    String * substring = htmlForAbstractPart(part->mainPart(), context);
     if (context->pass == 0) {
         return NULL;
     }
+    String * substring = htmlForAbstractPart(part->mainPart(), context);
     MCAssert(substring != NULL);
     
-    String * result = String::string();
     HashMap * values = context->htmlCallback->templateValuesForHeader(part->header());
     String * headerString = renderTemplate(context->htmlCallback->templateForEmbeddedMessageHeader(), values);
-    result->appendString(headerString);
-    result->appendString(substring);
+	
+	HashMap * msgValues = new HashMap();
+    msgValues->setObjectForKey(MCSTR("HEADER"), headerString);
+    msgValues->setObjectForKey(MCSTR("BODY"), substring);
+    String * result = renderTemplate(context->htmlCallback->templateForEmbeddedMessage(), msgValues);
+    msgValues->release();
+
     return result;
 }
 
