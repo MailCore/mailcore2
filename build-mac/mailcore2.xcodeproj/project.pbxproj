@@ -7,6 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		843EE40B172DD5B900C882AA /* MCOMailProvidersManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 843EE40A172DD5B900C882AA /* MCOMailProvidersManager.mm */; };
+		843EE40C172DD5B900C882AA /* MCOMailProvidersManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 843EE40A172DD5B900C882AA /* MCOMailProvidersManager.mm */; };
+		843EE40F172DD71300C882AA /* MCMailProvidersManager.cc in Sources */ = {isa = PBXBuildFile; fileRef = 843EE40D172DD71200C882AA /* MCMailProvidersManager.cc */; };
+		843EE410172DD71300C882AA /* MCMailProvidersManager.cc in Sources */ = {isa = PBXBuildFile; fileRef = 843EE40D172DD71200C882AA /* MCMailProvidersManager.cc */; };
+		843EE411172DDF5100C882AA /* MCProvider.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84AF9E73172DAD0200E60AA3 /* MCProvider.h */; };
+		843EE412172DDF5100C882AA /* MCMailProvidersManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 843EE40E172DD71200C882AA /* MCMailProvidersManager.h */; };
+		843EE413172DDF5100C882AA /* MCMailProvider.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84AF9E75172DAD3300E60AA3 /* MCMailProvider.h */; };
+		843EE414172DDF5100C882AA /* MCNetService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84AF9E79172DAD7500E60AA3 /* MCNetService.h */; };
+		843EE415172DDF5F00C882AA /* MCProvider.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84AF9E73172DAD0200E60AA3 /* MCProvider.h */; };
+		843EE416172DDF5F00C882AA /* MCMailProvidersManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 843EE40E172DD71200C882AA /* MCMailProvidersManager.h */; };
+		843EE417172DDF5F00C882AA /* MCMailProvider.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84AF9E75172DAD3300E60AA3 /* MCMailProvider.h */; };
+		843EE418172DDF5F00C882AA /* MCNetService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84AF9E79172DAD7500E60AA3 /* MCNetService.h */; };
+		84AF9E76172DAD3300E60AA3 /* MCMailProvider.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84AF9E74172DAD3300E60AA3 /* MCMailProvider.cc */; };
+		84AF9E77172DAD3300E60AA3 /* MCMailProvider.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84AF9E74172DAD3300E60AA3 /* MCMailProvider.cc */; };
+		84AF9E7A172DAD7500E60AA3 /* MCNetService.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84AF9E78172DAD7500E60AA3 /* MCNetService.cc */; };
+		84AF9E7B172DAD7500E60AA3 /* MCNetService.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84AF9E78172DAD7500E60AA3 /* MCNetService.cc */; };
+		84AF9E7E172DBAF600E60AA3 /* providers.json in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E7D172DBAF600E60AA3 /* providers.json */; };
+		84AF9E80172DBB0300E60AA3 /* providers.json in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E7D172DBAF600E60AA3 /* providers.json */; };
+		84AF9E82172DBB0B00E60AA3 /* providers.json in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E7D172DBAF600E60AA3 /* providers.json */; };
+		84AF9E88172DBC4700E60AA3 /* MCOMailProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84AF9E87172DBC4700E60AA3 /* MCOMailProvider.mm */; };
+		84AF9E89172DBC4700E60AA3 /* MCOMailProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84AF9E87172DBC4700E60AA3 /* MCOMailProvider.mm */; };
+		84AF9E8C172DBE4100E60AA3 /* MCONetService.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84AF9E8B172DBE4000E60AA3 /* MCONetService.mm */; };
+		84AF9E8D172DBE4100E60AA3 /* MCONetService.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84AF9E8B172DBE4000E60AA3 /* MCONetService.mm */; };
 		C07AD5D7FD82F8ACAB576231 /* NSError+MCO.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C07AD44B013BB42A240B4F04 /* NSError+MCO.h */; };
 		C07AD99B2E2054C684DB8FF6 /* NSError+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = C07ADFE43E22B38EFF23ADB5 /* NSError+MCO.mm */; };
 		C07ADC28B83E7959BF114D46 /* MCOIMAPSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = C07AD057D3C8FBDC7AC95733 /* MCOIMAPSession.mm */; };
@@ -648,6 +671,10 @@
 			dstPath = include/MailCore;
 			dstSubfolderSpec = 16;
 			files = (
+				843EE411172DDF5100C882AA /* MCProvider.h in CopyFiles */,
+				843EE412172DDF5100C882AA /* MCMailProvidersManager.h in CopyFiles */,
+				843EE413172DDF5100C882AA /* MCMailProvider.h in CopyFiles */,
+				843EE414172DDF5100C882AA /* MCNetService.h in CopyFiles */,
 				C6AC113417124D0600B715B7 /* MCLibetpanTypes.h in CopyFiles */,
 				C63CD68C16BE1BC800DB18F1 /* MCHTMLRendererCallback.h in CopyFiles */,
 				C6A81BFC1707821F00882C15 /* MCOPOP.h in CopyFiles */,
@@ -823,6 +850,10 @@
 			dstPath = include/MailCore;
 			dstSubfolderSpec = 16;
 			files = (
+				843EE415172DDF5F00C882AA /* MCProvider.h in CopyFiles */,
+				843EE416172DDF5F00C882AA /* MCMailProvidersManager.h in CopyFiles */,
+				843EE417172DDF5F00C882AA /* MCMailProvider.h in CopyFiles */,
+				843EE418172DDF5F00C882AA /* MCNetService.h in CopyFiles */,
 				C6AC113517124D0A00B715B7 /* MCLibetpanTypes.h in CopyFiles */,
 				C6BA2B0C1705F4E6003F0E9E /* MCHTMLRendererCallback.h in CopyFiles */,
 				C6BA2B0D1705F4E6003F0E9E /* MCOMultipart.h in CopyFiles */,
@@ -986,6 +1017,20 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		843EE409172DD5B900C882AA /* MCOMailProvidersManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCOMailProvidersManager.h; path = provider/MCOMailProvidersManager.h; sourceTree = "<group>"; };
+		843EE40A172DD5B900C882AA /* MCOMailProvidersManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MCOMailProvidersManager.mm; path = provider/MCOMailProvidersManager.mm; sourceTree = "<group>"; };
+		843EE40D172DD71200C882AA /* MCMailProvidersManager.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MCMailProvidersManager.cc; path = ../provider/MCMailProvidersManager.cc; sourceTree = "<group>"; };
+		843EE40E172DD71200C882AA /* MCMailProvidersManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCMailProvidersManager.h; path = ../provider/MCMailProvidersManager.h; sourceTree = "<group>"; };
+		84AF9E73172DAD0200E60AA3 /* MCProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCProvider.h; path = ../provider/MCProvider.h; sourceTree = "<group>"; };
+		84AF9E74172DAD3300E60AA3 /* MCMailProvider.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MCMailProvider.cc; path = ../provider/MCMailProvider.cc; sourceTree = "<group>"; };
+		84AF9E75172DAD3300E60AA3 /* MCMailProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCMailProvider.h; path = ../provider/MCMailProvider.h; sourceTree = "<group>"; };
+		84AF9E78172DAD7500E60AA3 /* MCNetService.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MCNetService.cc; path = ../provider/MCNetService.cc; sourceTree = "<group>"; };
+		84AF9E79172DAD7500E60AA3 /* MCNetService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCNetService.h; path = ../provider/MCNetService.h; sourceTree = "<group>"; };
+		84AF9E7D172DBAF600E60AA3 /* providers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = providers.json; path = ../resources/providers.json; sourceTree = "<group>"; };
+		84AF9E86172DBC4700E60AA3 /* MCOMailProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCOMailProvider.h; path = provider/MCOMailProvider.h; sourceTree = "<group>"; };
+		84AF9E87172DBC4700E60AA3 /* MCOMailProvider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MCOMailProvider.mm; path = provider/MCOMailProvider.mm; sourceTree = "<group>"; };
+		84AF9E8A172DBE4000E60AA3 /* MCONetService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCONetService.h; path = provider/MCONetService.h; sourceTree = "<group>"; };
+		84AF9E8B172DBE4000E60AA3 /* MCONetService.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MCONetService.mm; path = provider/MCONetService.mm; sourceTree = "<group>"; };
 		C07AD057D3C8FBDC7AC95733 /* MCOIMAPSession.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOIMAPSession.mm; sourceTree = "<group>"; };
 		C07AD44B013BB42A240B4F04 /* NSError+MCO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+MCO.h"; sourceTree = "<group>"; };
 		C07ADFE43E22B38EFF23ADB5 /* NSError+MCO.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSError+MCO.mm"; sourceTree = "<group>"; };
@@ -1379,6 +1424,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84AF9E72172DACC900E60AA3 /* provider */ = {
+			isa = PBXGroup;
+			children = (
+				84AF9E73172DAD0200E60AA3 /* MCProvider.h */,
+				843EE40D172DD71200C882AA /* MCMailProvidersManager.cc */,
+				843EE40E172DD71200C882AA /* MCMailProvidersManager.h */,
+				84AF9E74172DAD3300E60AA3 /* MCMailProvider.cc */,
+				84AF9E75172DAD3300E60AA3 /* MCMailProvider.h */,
+				84AF9E78172DAD7500E60AA3 /* MCNetService.cc */,
+				84AF9E79172DAD7500E60AA3 /* MCNetService.h */,
+			);
+			name = provider;
+			path = smtp;
+			sourceTree = "<group>";
+		};
+		84AF9E84172DBC1000E60AA3 /* provider */ = {
+			isa = PBXGroup;
+			children = (
+				84AF9E86172DBC4700E60AA3 /* MCOMailProvider.h */,
+				84AF9E87172DBC4700E60AA3 /* MCOMailProvider.mm */,
+				84AF9E8A172DBE4000E60AA3 /* MCONetService.h */,
+				84AF9E8B172DBE4000E60AA3 /* MCONetService.mm */,
+				843EE409172DD5B900C882AA /* MCOMailProvidersManager.h */,
+				843EE40A172DD5B900C882AA /* MCOMailProvidersManager.mm */,
+			);
+			name = provider;
+			sourceTree = "<group>";
+		};
 		C63CD67616BDCDD300DB18F1 /* renderer */ = {
 			isa = PBXGroup;
 			children = (
@@ -1594,6 +1667,7 @@
 				C63CD67616BDCDD300DB18F1 /* renderer */,
 				C64EA6DF169E847800778456 /* rfc822 */,
 				C64EA6EB169E847800778456 /* smtp */,
+				84AF9E72172DACC900E60AA3 /* provider */,
 				C64EA782169F23AB00778456 /* MCCore.h */,
 			);
 			path = core;
@@ -1797,6 +1871,7 @@
 		C6BD28A1170BD78E00A91AC1 /* mailcore-framework */ = {
 			isa = PBXGroup;
 			children = (
+				84AF9E7D172DBAF600E60AA3 /* providers.json */,
 				C6BD28A2170BD79D00A91AC1 /* framework-Info.plist */,
 				C6BD28A8170BDB6B00A91AC1 /* MCOFramework.h */,
 				C6BD28A9170BDB6B00A91AC1 /* MCOFramework.mm */,
@@ -1813,6 +1888,7 @@
 				F8EA941316BAED500011AC6F /* imap */,
 				C64BB25B16FD3E98000DB34C /* rfc822 */,
 				C6D42C1816AE03D6002BB4F9 /* utils */,
+				84AF9E84172DBC1000E60AA3 /* provider */,
 				C6EB30DC16B5B7770091F4F1 /* MCObjC.h */,
 			);
 			path = objc;
@@ -1961,6 +2037,7 @@
 				C64EA74B169E854B00778456 /* CopyFiles */,
 				C64EA533169E772200778456 /* Sources */,
 				C64EA534169E772200778456 /* Frameworks */,
+				84AF9E7F172DBB0000E60AA3 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -2015,6 +2092,7 @@
 				C6BA2B0B1705F4E6003F0E9E /* CopyFiles */,
 				C6BA2B981705F4E6003F0E9E /* Sources */,
 				C6BA2C151705F4E6003F0E9E /* Frameworks */,
+				84AF9E81172DBB0900E60AA3 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -2076,6 +2154,22 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		84AF9E7F172DBB0000E60AA3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84AF9E80172DBB0300E60AA3 /* providers.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84AF9E81172DBB0900E60AA3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84AF9E82172DBB0B00E60AA3 /* providers.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C6A81B8F1706840C00882C15 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2087,6 +2181,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84AF9E7E172DBAF600E60AA3 /* providers.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2277,6 +2372,12 @@
 				C6D6F954171E5CB8006F5B28 /* MCMD5.cpp in Sources */,
 				C6D6F956171E5CB8006F5B28 /* MCNull.cpp in Sources */,
 				C6D6F967171FCF9F006F5B28 /* MCJSONParser.cpp in Sources */,
+				84AF9E76172DAD3300E60AA3 /* MCMailProvider.cc in Sources */,
+				84AF9E7A172DAD7500E60AA3 /* MCNetService.cc in Sources */,
+				84AF9E88172DBC4700E60AA3 /* MCOMailProvider.mm in Sources */,
+				84AF9E8C172DBE4100E60AA3 /* MCONetService.mm in Sources */,
+				843EE40B172DD5B900C882AA /* MCOMailProvidersManager.mm in Sources */,
+				843EE40F172DD71300C882AA /* MCMailProvidersManager.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2441,6 +2542,12 @@
 				C6D6F955171E5CB8006F5B28 /* MCMD5.cpp in Sources */,
 				C6D6F957171E5CB8006F5B28 /* MCNull.cpp in Sources */,
 				C6D6F968171FCF9F006F5B28 /* MCJSONParser.cpp in Sources */,
+				84AF9E77172DAD3300E60AA3 /* MCMailProvider.cc in Sources */,
+				84AF9E7B172DAD7500E60AA3 /* MCNetService.cc in Sources */,
+				84AF9E89172DBC4700E60AA3 /* MCOMailProvider.mm in Sources */,
+				84AF9E8D172DBE4100E60AA3 /* MCONetService.mm in Sources */,
+				843EE40C172DD5B900C882AA /* MCOMailProvidersManager.mm in Sources */,
+				843EE410172DD71300C882AA /* MCMailProvidersManager.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
