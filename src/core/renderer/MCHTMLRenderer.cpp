@@ -28,6 +28,8 @@ struct htmlRendererContext {
     int firstRendered;
     String * folder;
     int state;
+    // pass == 0 -> render only text parts,
+    // pass == 1 -> render only attachments.
     int pass;
     bool hasMixedTextAndAttachments;
     bool firstAttachment;
