@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __testUI__MCDateFormatter__
-#define __testUI__MCDateFormatter__
+#ifndef __MAILCORE_MCDATEFORMATTER_H_
+#define __MAILCORE_MCDATEFORMATTER_H_
 
 #include <MailCore/MCBaseTypes.h>
 
@@ -62,6 +62,7 @@ namespace mailcore {
         String * mDateFormat;
         String * mTimezone;
         String * mLocale;
+        void * mAppleDateFormatter;
         
         void prepare();
     };

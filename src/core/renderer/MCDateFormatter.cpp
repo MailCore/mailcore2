@@ -10,6 +10,14 @@
 #include <stdlib.h>
 #include <unicode/udat.h>
 
+#if defined(__APPLE__)
+#define USE_COREFOUNDATION 1
+#endif
+
+#if USE_COREFOUNDATION
+#include <CoreFoundation/CoreFoundation.h>
+#endif
+
 using namespace mailcore;
 
 DateFormatter::DateFormatter()
@@ -20,10 +28,16 @@ DateFormatter::DateFormatter()
     mDateFormat = NULL;
     mTimezone = NULL;
     mLocale = NULL;
+    mAppleDateFormatter = NULL;
 }
 
 DateFormatter::~DateFormatter()
 {
+#if USE_COREFOUNDATION
+    if (mAppleDateFormatter != NULL) {
+        CFRelease(mAppleDateFormatter);
+    }
+#endif
     if (mDateFormatter != NULL) {
         udat_close(mDateFormatter);
     }
@@ -93,6 +107,21 @@ String * DateFormatter::dateFormat()
 String * DateFormatter::stringFromDate(time_t date)
 {
     prepare();
+#if USE_COREFOUNDATION
+    if (mAppleDateFormatter == NULL)
+        return NULL;
+    
+    CFDateRef dateRef = CFDateCreate(NULL, (CFAbsoluteTime) date - kCFAbsoluteTimeIntervalSince1970);
+    CFStringRef string = CFDateFormatterCreateStringWithDate(NULL, (CFDateFormatterRef) mAppleDateFormatter, dateRef);
+    CFIndex len = CFStringGetLength(string);
+    UniChar * buffer = (UniChar *) malloc(sizeof(* buffer) * len);
+    CFStringGetCharacters(string, CFRangeMake(0, len), buffer);
+    String * result = String::stringWithCharacters(buffer, (unsigned int) len);
+    free(buffer);
+    CFRelease(string);
+    CFRelease(dateRef);
+    return result;
+#else
     if (mDateFormatter == NULL)
         return NULL;
     
@@ -112,11 +141,31 @@ String * DateFormatter::stringFromDate(time_t date)
     
     result->autorelease();
     return result;
+#endif
 }
 
 time_t DateFormatter::dateFromString(String * dateString)
 {
     prepare();
+#if USE_COREFOUNDATION
+    if (mAppleDateFormatter == NULL)
+        return (time_t) -1;
+    
+    CFAbsoluteTime absoluteTime;
+    bool r;
+    time_t result;
+    CFStringRef dateCFString = CFStringCreateWithCharacters(NULL, (const UniChar *) dateString->unicodeCharacters(),
+                                                            dateString->length());
+    r = CFDateFormatterGetAbsoluteTimeFromString((CFDateFormatterRef) mAppleDateFormatter, dateCFString,
+                                                 NULL, &absoluteTime);
+    result = (time_t) -1;
+    if (r) {
+        result = (time_t) absoluteTime + kCFAbsoluteTimeIntervalSince1970;
+    }
+    CFRelease(dateCFString);
+    
+    return result;
+#else
     if (mDateFormatter == NULL)
         return (time_t) -1;
     
@@ -128,7 +177,27 @@ time_t DateFormatter::dateFromString(String * dateString)
     }
     
     return date / 1000.;
+#endif
 }
+
+#if USE_COREFOUNDATION
+static CFDateFormatterStyle toAppleStyle(DateFormatStyle style)
+{
+    switch (style) {
+        case DateFormatStyleFull:
+            return kCFDateFormatterFullStyle;
+        case DateFormatStyleLong:
+            return kCFDateFormatterLongStyle;
+        case DateFormatStyleMedium:
+            return kCFDateFormatterMediumStyle;
+        case DateFormatStyleShort:
+            return kCFDateFormatterShortStyle;
+        case DateFormatStyleNone:
+            return kCFDateFormatterNoStyle;
+    }
+    return kCFDateFormatterMediumStyle;
+}
+#endif
 
 void DateFormatter::prepare()
 {
@@ -154,9 +223,29 @@ void DateFormatter::prepare()
         locale = mLocale->UTF8Characters();
     }
     
+#if USE_COREFOUNDATION
+    CFStringRef localeIdentifier = NULL;
+    CFLocaleRef localeRef = NULL;
+    if (mLocale != NULL) {
+        localeIdentifier = CFStringCreateWithCharacters(NULL, (const UniChar *) mLocale->unicodeCharacters(),
+                                                        mLocale->length());
+        localeRef = CFLocaleCreate(NULL, localeIdentifier);
+    }
+    if (localeRef == NULL) {
+        localeRef = CFLocaleCopyCurrent();
+    }
+    mAppleDateFormatter = CFDateFormatterCreate(NULL, localeRef, toAppleStyle(mDateStyle), toAppleStyle(mTimeStyle));
+    if (localeIdentifier != NULL) {
+        CFRelease(localeIdentifier);
+    }
+    if (locale != NULL) {
+        CFRelease(locale);
+    }
+#else
     mDateFormatter = udat_open((UDateFormatStyle) mTimeStyle, (UDateFormatStyle) mDateStyle,
                                locale,
                                tzID, tzIDLength,
                                pattern, patternLength,
                                &err);
+#endif
 }
