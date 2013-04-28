@@ -13,6 +13,11 @@
 #include "MCSizeFormatter.h"
 #include "MCAttachment.h"
 
+#ifdef __OBJC__
+#include <Foundation/Foundation.h>
+#import "NSString+MCO.h"
+#endif
+
 using namespace mailcore;
 
 mailcore::HashMap * HTMLRendererTemplateCallback::templateValuesForHeader(mailcore::MessageHeader * header)
@@ -93,7 +98,51 @@ mailcore::HashMap * HTMLRendererTemplateCallback::templateValuesForHeader(mailco
     else {
         result->setObjectForKey(MCSTR("NOSUBJECT"), mailcore::HashMap::hashMap());
     }
-    
+
+#ifdef __OBJC__
+	NSString * dateString;
+	NSDate *date = [NSDate dateWithTimeIntervalSince1970:header->date()];
+	static NSDateFormatter * fullFormatter = NULL;
+	if (fullFormatter == NULL) {
+		fullFormatter = [[NSDateFormatter alloc] init];
+		[fullFormatter setDateStyle:NSDateFormatterFullStyle];
+		[fullFormatter setTimeStyle:NSDateFormatterFullStyle];
+	}
+    dateString = [fullFormatter stringFromDate:date];
+    if (dateString != NULL) {
+        result->setObjectForKey(MCSTR("FULLDATE"), [dateString mco_mcString]->htmlEncodedString());
+    }
+    static NSDateFormatter * longFormatter = NULL;
+    if (longFormatter == NULL) {
+        longFormatter = [[NSDateFormatter alloc] init];
+		[longFormatter setDateStyle:NSDateFormatterLongStyle];
+		[longFormatter setTimeStyle:NSDateFormatterLongStyle];
+    }
+    dateString = [longFormatter stringFromDate:date];
+    if (dateString != NULL) {
+        result->setObjectForKey(MCSTR("LONGDATE"), [dateString mco_mcString]->htmlEncodedString());
+    }
+    static NSDateFormatter * mediumFormatter = NULL;
+    if (mediumFormatter == NULL) {
+        mediumFormatter = [[NSDateFormatter alloc] init];
+		[mediumFormatter setDateStyle:NSDateFormatterMediumStyle];
+		[mediumFormatter setTimeStyle:NSDateFormatterMediumStyle];
+    }
+    dateString = [mediumFormatter stringFromDate:date];
+    if (dateString != NULL) {
+        result->setObjectForKey(MCSTR("MEDIUMDATE"), [dateString mco_mcString]->htmlEncodedString());
+    }
+    static NSDateFormatter * shortFormatter = NULL;
+    if (shortFormatter == NULL) {
+        shortFormatter = [[NSDateFormatter alloc] init];
+		[shortFormatter setDateStyle:NSDateFormatterShortStyle];
+		[shortFormatter setTimeStyle:NSDateFormatterShortStyle];
+    }
+    dateString = [shortFormatter stringFromDate:date];
+    if (dateString != NULL) {
+        result->setObjectForKey(MCSTR("SHORTDATE"), [dateString mco_mcString]->htmlEncodedString());
+    }
+#else
     mailcore::String * dateString;
     static mailcore::DateFormatter * fullFormatter = NULL;
     if (fullFormatter == NULL) {
@@ -135,7 +184,7 @@ mailcore::HashMap * HTMLRendererTemplateCallback::templateValuesForHeader(mailco
     if (dateString != NULL) {
         result->setObjectForKey(MCSTR("SHORTDATE"), dateString->htmlEncodedString());
     }
-    
+#endif
     return result;
 }
 
