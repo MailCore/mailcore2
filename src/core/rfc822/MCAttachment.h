@@ -26,6 +26,7 @@ namespace mailcore {
 		
 		virtual void setData(Data * data);
 		virtual Data * data();
+		virtual String * decodedString();
 		
     public: // subclass behavior
 		Attachment(Attachment * other);

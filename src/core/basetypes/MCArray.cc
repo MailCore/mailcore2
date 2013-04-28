@@ -204,7 +204,7 @@ static int sortCompare(Object ** pa, Object ** pb, struct sortData * data)
   return data->compare(a, b, data->context);
 }
 
-Array * Array::sortedArray(int (* compare)(void *, void *, void *), void * context)
+Array * Array::sortedArray(int (* compare)(void * a, void * b, void * context), void * context)
 {
     struct sortData data;
     Array * result = (Array *) this->copy()->autorelease();
@@ -212,13 +212,13 @@ Array * Array::sortedArray(int (* compare)(void *, void *, void *), void * conte
     data.context = context;
 #ifdef __MACH__
     qsort_r(carray_data(result->mArray), carray_count(result->mArray),
-        sizeof(* carray_data(result->mArray)), this,
+        sizeof(* carray_data(result->mArray)), &data,
         (int (*)(void *, const void *, const void *)) sortCompare);
 #else
     qsort_r(carray_data(result->mArray), carray_count(result->mArray),
         sizeof(* carray_data(result->mArray)),
         (int (*)(const void *, const void *, void *)) sortCompare,
-        this);
+        &data);
 #endif
     return result;
 }

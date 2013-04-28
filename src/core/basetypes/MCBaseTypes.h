@@ -23,5 +23,7 @@
 #include <MailCore/MCOperationQueue.h>
 #include <MailCore/MCOperationCallback.h>
 #include <MailCore/MCLibetpanTypes.h>
+#include <MailCore/MCICUTypes.h>
+#include <MailCore/MCIterator.h>
 
 #endif

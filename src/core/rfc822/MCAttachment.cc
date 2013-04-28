@@ -247,6 +247,17 @@ Data * Attachment::data()
     return mData;
 }
 
+String * Attachment::decodedString()
+{
+	if (mData) {
+		return decodedStringForData(mData);
+	}
+	else {
+		return NULL;
+	}
+}
+
+
 AbstractPart * Attachment::attachmentsWithMIME(struct mailmime * mime)
 {
     return attachmentsWithMIMEWithMain(mime, true);

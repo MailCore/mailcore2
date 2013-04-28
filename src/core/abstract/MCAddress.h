@@ -21,6 +21,9 @@ namespace mailcore {
 		static Array * addressesWithRFC822String(String * string);
 		static Array * addressesWithNonEncodedRFC822String(String * string);
 		
+		static String * RFC822StringForAddresses(Array * addresses);
+		static String * nonEncodedRFC822StringForAddresses(Array * addresses);
+		
 		virtual void setDisplayName(String * displayName);
 		virtual String * displayName();
 
