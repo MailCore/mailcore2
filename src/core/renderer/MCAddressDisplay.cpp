@@ -1,5 +1,5 @@
 //
-//  MCAddressUI.cpp
+//  MCAddressDisplay.cpp
 //  testUI
 //
 //  Created by DINH Viêt Hoà on 1/27/13.

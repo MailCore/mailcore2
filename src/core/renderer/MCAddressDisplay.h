@@ -1,13 +1,13 @@
 //
-//  MCAddressUI.h
+//  MCAddressDisplay.h
 //  testUI
 //
 //  Created by DINH Viêt Hoà on 1/27/13.
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MCAddressDisplay__
-#define __MCAddressDisplay__
+#ifndef __MAILCORE_MCADDRESSDISPLAY_H_
+#define __MAILCORE_MCADDRESSDISPLAY_H_
 
 #include <MailCore/MCAbstract.h>
 
@@ -31,4 +31,4 @@ namespace mailcore {
 
 #endif
 
-#endif /* defined(__MCAddressDisplay__) */
+#endif
