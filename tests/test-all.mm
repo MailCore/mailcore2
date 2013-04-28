@@ -285,6 +285,13 @@ static void testAddresses()
     MCLog("%s", MCUTF8DESC(str));
 }
 
+static void testProviders() {
+	NSString *filename =  [[NSBundle bundleForClass:[MCOMessageBuilder class]] pathForResource:@"providers" ofType:@"json"];
+	mailcore::MailProvidersManager::sharedManager()->registerProvidersFilename(filename.mco_mcString);
+	
+	NSLog(@"Providers: %s", MCUTF8DESC(mailcore::MailProvidersManager::sharedManager()->providerForEmail(MCSTR("email1@gmail.com"))));
+}
+
 static void testAttachments()
 {
 	mailcore::Attachment *attachment = mailcore::Attachment::attachmentWithText(MCSTR("Hello World"));
@@ -351,6 +358,7 @@ void testAll()
     //testAsyncPOP();
     //testAddresses();
 	//testAttachments();
+	testProviders();
     testObjC();
     
     MCLog("pool release");

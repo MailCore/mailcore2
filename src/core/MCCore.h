@@ -16,5 +16,6 @@
 #include <MailCore/MCRFC822.h>
 #include <MailCore/MCSMTP.h>
 #include <MailCore/MCRenderer.h>
+#include <MailCore/MCProvider.h>
 
 #endif
