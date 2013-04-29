@@ -28,22 +28,22 @@ for (unsigned int __index = 0; NULL != (__variable = mailcore::ArrayIteratorNext
 
 #define mc_foreachdictionaryKey(keyType, __key, __dictionary) \
 keyType * __key; \
-DictionaryIterator __key##__iterator = DictionaryIteratorInit(__dictionary, true, false); \
-while (DictionaryIteratorRun(&__key##__iterator)) \
-while (DictionaryIteratorNext(&__key##__iterator, &__key, NULL))
+HashMapIterator __key##__iterator = HashMapIteratorInit(__dictionary, true, false); \
+while (HashMapIteratorRun(&__key##__iterator)) \
+while (HashMapIteratorNext(&__key##__iterator, &__key, NULL))
 
 #define mc_foreachdictionaryValue(valueType, __value, __dictionary) \
 valueType * __value; \
-DictionaryIterator __value##__iterator = DictionaryIteratorInit(__dictionary, false, true); \
-while (DictionaryIteratorRun(&__value##__iterator)) \
-while (DictionaryIteratorNext(&__value##__iterator, NULL, &__value))
+HashMapIterator __value##__iterator = HashMapIteratorInit(__dictionary, false, true); \
+while (HashMapIteratorRun(&__value##__iterator)) \
+while (HashMapIteratorNext(&__value##__iterator, NULL, (Object **) &__value))
 
-#define mc_foreachdictionaryKeyAndValue(__key, __value, __dictionary) \
+#define mc_foreachdictionaryKeyAndValue(keyType, __key, valueType, __value, __dictionary) \
 keyType * __key; \
 valueType * __value; \
-DictionaryIterator __key##__value##__iterator = DictionaryIteratorInit(__dictionary, true, true); \
-while (DictionaryIteratorRun(&__key##__value##__iterator)) \
-while (DictionaryIteratorNext(&__key##__value##__iterator, &__key, &__value))
+HashMapIterator __key##__value##__iterator = HashMapIteratorInit(__dictionary, true, true); \
+while (HashMapIteratorRun(&__key##__value##__iterator)) \
+while (HashMapIteratorNext(&__key##__value##__iterator, (Object **) &__key, (Object **) &__value))
 
 namespace mailcore {
     
@@ -55,7 +55,7 @@ namespace mailcore {
     
     static inline ArrayIterator ArrayIteratorInit(Array * array)
     {
-        ArrayIterator iterator = { 0, array->count(), array };
+        ArrayIterator iterator = { 0, array != NULL ? array->count() : 0, array };
         return iterator;
     }
     
@@ -79,14 +79,18 @@ namespace mailcore {
         Array * values;
     };
     
-    static inline HashMapIterator FastDictionaryIteratorInit(HashMap * hashmap, bool useKeys, bool useValues)
+    static inline HashMapIterator HashMapIteratorInit(HashMap * hashmap, bool useKeys, bool useValues)
     {
         AutoreleasePool * pool = new AutoreleasePool();
-        Array * keys =  useKeys ? hashmap->allKeys() : NULL;
-        Array * values = useValues ? hashmap->allValues() : NULL;
-        keys->retain();
-        values->retain();
-        HashMapIterator iterator = { false, 0, hashmap->count(), keys, values };
+        Array * keys =  useKeys ? (hashmap != NULL ? hashmap->allKeys() : NULL) : NULL;
+        Array * values = useValues ? (hashmap != NULL ? hashmap->allValues() : NULL) : NULL;
+        if (keys != NULL) {
+            keys->retain();
+        }
+        if (values != NULL) {
+            values->retain();
+        }
+        HashMapIterator iterator = { false, 0, hashmap != NULL ? hashmap->count() : 0, keys, values };
         pool->release();
         
         return iterator;
@@ -109,18 +113,18 @@ namespace mailcore {
     }
     
     
-    static inline bool DictionaryIteratorRun(HashMapIterator * iterator)
+    static inline bool HashMapIteratorRun(HashMapIterator * iterator)
     {
-        if (iterator->cleanup) {
+        if (!iterator->cleanup) {
             iterator->cleanup = true;
             return true;
         } else {
-            iterator->keys->release();
-            iterator->values->release();
+            MC_SAFE_RELEASE(iterator->keys);
+            MC_SAFE_RELEASE(iterator->values);
             return false;
         }
     }
-
+    
 };
 
 #endif
