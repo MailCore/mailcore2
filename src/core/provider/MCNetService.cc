@@ -17,13 +17,19 @@ void NetService::init() {
 NetService::NetService(HashMap * info) {
 	init();
 	
-	bool ssl;
-    bool starttls;
+	bool ssl = false;
+    bool starttls = false;
 	
 	this->setHostname((String *) info->objectForKey(MCSTR("hostname")));
-    this->setPort(((Value *) info->objectForKey(MCSTR("port")))->intValue());
-	ssl = ((Value *) info->objectForKey(MCSTR("ssl")))->boolValue();
-	starttls = ((Value *) info->objectForKey(MCSTR("starttls")))->boolValue();
+    if (info->objectForKey(MCSTR("port")) != NULL) {
+        this->setPort(((Value *) info->objectForKey(MCSTR("port")))->intValue());
+    }
+    if (info->objectForKey(MCSTR("ssl")) != NULL) {
+        ssl = ((Value *) info->objectForKey(MCSTR("ssl")))->boolValue();
+    }
+    if (info->objectForKey(MCSTR("starttls")) != NULL) {
+        starttls = ((Value *) info->objectForKey(MCSTR("starttls")))->boolValue();
+    }
     if (ssl) {
         mConnectionType = ConnectionTypeTLS;
     }
@@ -84,17 +90,19 @@ HashMap * NetService::info() {
     
     result = new HashMap();
     if (mHostname != NULL) {
-		result->setObjectForKey(mHostname, MCSTR("hostname"));
+		result->setObjectForKey(MCSTR("hostname"), mHostname);
     }
     if (mPort != 0) {
-		result->setObjectForKey(Value::valueWithIntValue(mPort), MCSTR("port"));
+		result->setObjectForKey(MCSTR("port"), Value::valueWithIntValue(mPort));
     }
-    switch (mConnectionType & ConnectionTypeMask) {
+    switch (mConnectionType) {
         case ConnectionTypeTLS:
-			result->setObjectForKey(Value::valueWithBoolValue(true), MCSTR("ssl"));
+			result->setObjectForKey(MCSTR("ssl"), Value::valueWithBoolValue(true));
             break;
         case ConnectionTypeStartTLS:
-			result->setObjectForKey(Value::valueWithBoolValue(true), MCSTR("starttls"));
+			result->setObjectForKey(MCSTR("starttls"), Value::valueWithBoolValue(true));
+            break;
+        default:
             break;
     }
     

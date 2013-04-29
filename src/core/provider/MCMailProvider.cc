@@ -32,9 +32,15 @@ void MailProvider::initWihInfo(HashMap * info)
     Array * popInfos;
     HashMap * serverInfo;
     Array * mxs;
-    	
-	mDomainMatch = (Array *) info->objectForKey(MCSTR("domain-match"))->retain();
-    mMailboxPaths = (HashMap *) info->objectForKey(MCSTR("mailboxes"))->retain();
+
+    mDomainMatch = NULL;
+    if (info->objectForKey(MCSTR("domain-match")) != NULL) {
+        mDomainMatch = (Array *) info->objectForKey(MCSTR("domain-match"))->retain();
+    }
+    mMailboxPaths = NULL;
+    if (info->objectForKey(MCSTR("mailboxes")) != NULL) {
+        mMailboxPaths = (HashMap *) info->objectForKey(MCSTR("mailboxes"))->retain();
+    }
     mxs = (Array *) info->objectForKey(MCSTR("mx"));
 	mc_foreacharray(String, mx, mxs) {
 		mMxSet->addObject(mx->lowercaseString());
@@ -189,14 +195,14 @@ String * MailProvider::importantFolderPath()
 
 bool MailProvider::isMainFolder(String * folderPath, String * prefix)
 {
-	mc_foreachdictionaryValue(Object, path, mMailboxPaths) {
+	mc_foreachdictionaryValue(String, path, mMailboxPaths) {
 		String * fullPath;
         
         if (prefix != NULL) {
             fullPath = prefix->stringByAppendingString((String *) path);
         }
         else {
-            fullPath = (String *) path;
+            fullPath = path;
         }
         
         if (fullPath->isEqual(folderPath))

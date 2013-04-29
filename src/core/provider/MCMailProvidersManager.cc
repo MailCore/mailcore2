@@ -19,10 +19,7 @@ void MailProvidersManager::init()
 
 MailProvider * MailProvidersManager::providerForEmail(String * email)
 {
-	mc_foreachdictionaryValue(Object, identifier, mProviders) {
-		MailProvider * provider;
-                
-        provider = (MailProvider *) mProviders->objectForKey(identifier);
+	mc_foreachdictionaryValue(MailProvider, provider, mProviders) {
         if (provider->matchEmail(email))
             return provider;
 	}
@@ -32,10 +29,7 @@ MailProvider * MailProvidersManager::providerForEmail(String * email)
 
 MailProvider * MailProvidersManager::providerForMX(String * hostname)
 {
-	mc_foreachdictionaryValue(Object, identifier, mProviders) {
-		MailProvider * provider;
-		
-        provider = (MailProvider *) mProviders->objectForKey(identifier);
+	mc_foreachdictionaryValue(MailProvider, provider, mProviders) {
         if (provider->matchMX(hostname))
             return provider;
 	}
@@ -50,12 +44,11 @@ MailProvider * MailProvidersManager::providerForIdentifier(String * identifier)
 
 void MailProvidersManager::registerProviders(HashMap * providers)
 {
-	mc_foreachdictionaryValue(Object, identifier, providers) {
-		MailProvider * provider;
-        
-        provider = new MailProvider((HashMap *) providers->objectForKey(identifier));
-        provider->setIdentifier((String *) identifier);
-        mProviders->setObjectForKey(provider, identifier);
+	mc_foreachdictionaryKeyAndValue(String, identifier, HashMap, providerInfo, providers) {
+        MailProvider * provider = new MailProvider(providerInfo);
+        provider->setIdentifier(identifier);
+        MCLog("register %s", MCUTF8DESC(identifier));
+        mProviders->setObjectForKey(identifier, provider);
         provider->release();
 	}
 }
