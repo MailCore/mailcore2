@@ -201,6 +201,28 @@ static CFDateFormatterStyle toAppleStyle(DateFormatStyle style)
 
 void DateFormatter::prepare()
 {
+#if USE_COREFOUNDATION
+    if (mAppleDateFormatter != NULL)
+        return;
+
+    CFStringRef localeIdentifier = NULL;
+    CFLocaleRef localeRef = NULL;
+    if (mLocale != NULL) {
+        localeIdentifier = CFStringCreateWithCharacters(NULL, (const UniChar *) mLocale->unicodeCharacters(),
+                                                        mLocale->length());
+        localeRef = CFLocaleCreate(NULL, localeIdentifier);
+    }
+    if (localeRef == NULL) {
+        localeRef = CFLocaleCopyCurrent();
+    }
+    mAppleDateFormatter = CFDateFormatterCreate(NULL, localeRef, toAppleStyle(mDateStyle), toAppleStyle(mTimeStyle));
+    if (localeIdentifier != NULL) {
+        CFRelease(localeIdentifier);
+    }
+    if (localeRef != NULL) {
+        CFRelease(localeRef);
+    }
+#else
     if (mDateFormatter != NULL)
         return;
     
@@ -223,25 +245,6 @@ void DateFormatter::prepare()
         locale = mLocale->UTF8Characters();
     }
     
-#if USE_COREFOUNDATION
-    CFStringRef localeIdentifier = NULL;
-    CFLocaleRef localeRef = NULL;
-    if (mLocale != NULL) {
-        localeIdentifier = CFStringCreateWithCharacters(NULL, (const UniChar *) mLocale->unicodeCharacters(),
-                                                        mLocale->length());
-        localeRef = CFLocaleCreate(NULL, localeIdentifier);
-    }
-    if (localeRef == NULL) {
-        localeRef = CFLocaleCopyCurrent();
-    }
-    mAppleDateFormatter = CFDateFormatterCreate(NULL, localeRef, toAppleStyle(mDateStyle), toAppleStyle(mTimeStyle));
-    if (localeIdentifier != NULL) {
-        CFRelease(localeIdentifier);
-    }
-    if (locale != NULL) {
-        CFRelease(locale);
-    }
-#else
     mDateFormatter = udat_open((UDateFormatStyle) mTimeStyle, (UDateFormatStyle) mDateStyle,
                                locale,
                                tzID, tzIDLength,
