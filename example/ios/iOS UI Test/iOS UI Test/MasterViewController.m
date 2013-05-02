@@ -7,9 +7,9 @@
 //
 
 #import "MasterViewController.h"
-#import "DetailViewController.h"
 #import <MailCore/MailCore.h>
 #import "FXKeychain.h"
+#import "MCTMsgViewController.h"
 
 @interface MasterViewController ()
 @property (nonatomic, strong) NSArray *messages;
@@ -123,12 +123,12 @@
 	}
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = self.messages[indexPath.row];
-        [[segue destinationViewController] setDetailItem:object];
-    }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    MCOIMAPMessage *msg = self.messages[indexPath.row];
+    MCTMsgViewController *vc = [[MCTMsgViewController alloc] init];
+    vc.message = msg;
+    vc.session = self.imapSession;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
