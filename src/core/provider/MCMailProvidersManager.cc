@@ -17,6 +17,10 @@ void MailProvidersManager::init()
 	mProviders = new HashMap();
 }
 
+MailProvidersManager::MailProvidersManager() {
+	init();
+}
+
 MailProvider * MailProvidersManager::providerForEmail(String * email)
 {
 	mc_foreachdictionaryValue(MailProvider, provider, mProviders) {

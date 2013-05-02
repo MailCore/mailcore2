@@ -34,7 +34,7 @@ namespace mailcore {
 		void registerProvidersFilename(String * filename);
 		
 	private:
-		MailProvidersManager() {};
+		MailProvidersManager();
 		MailProvidersManager(MailProvidersManager const&);
 		void operator=(MailProvidersManager const&);
 		

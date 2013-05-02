@@ -358,7 +358,7 @@ void testAll()
     //testAsyncPOP();
     //testAddresses();
 	//testAttachments();
-	testProviders();
+	//testProviders();
     testObjC();
     
     MCLog("pool release");
