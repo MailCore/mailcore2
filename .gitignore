@@ -4,3 +4,5 @@ xcuserdata
 .DS_Store
 .idea
 project.xcworkspace
+
+example/ios/iOS UI Test/DerivedData
