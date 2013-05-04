@@ -38,6 +38,7 @@ MessageParser::MessageParser(Data * data)
 	mailmessage_get_bodystructure(msg, &mime);
     mMainPart = (AbstractPart *) Attachment::attachmentsWithMIME(msg->msg_mime)->retain();
     mMainPart->setMessage(this);
+    mMainPart->applyUniquePartID();
     header()->importIMFFields(msg->msg_fields);
 	mailmessage_free(msg);
 }

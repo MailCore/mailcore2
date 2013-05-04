@@ -83,12 +83,16 @@ unsigned int IMAPPart::decodedSize()
 AbstractPart * IMAPPart::attachmentWithIMAPBody(struct mailimap_body * body)
 {
     String * partID;
+    AbstractPart * result;
     
     partID = NULL;
 	if (body->bd_type == MAILIMAP_BODY_1PART) {
         partID = MCSTR("1");
     }
-    return attachmentWithIMAPBodyInternal(body, partID);
+    result = attachmentWithIMAPBodyInternal(body, partID);
+    result->applyUniquePartID();
+    
+    return result;
 }
 
 AbstractPart * IMAPPart::attachmentWithIMAPBodyInternal(struct mailimap_body * body, String * partID)
@@ -198,7 +202,6 @@ IMAPPart * IMAPPart::attachmentWithIMAPBody1PartBasic(struct mailimap_body_type_
 	
 	attachment = new IMAPPart();
     attachment->importIMAPFields(basic->bd_fields, extension);
-	attachment->setUniqueID(mailcore::String::uuidString());
     
     mimeType = NULL;
 	switch (basic->bd_media_basic->med_type) {
@@ -232,7 +235,6 @@ IMAPPart * IMAPPart::attachmentWithIMAPBody1PartText(struct mailimap_body_type_t
 	IMAPPart * attachment;
 	
 	attachment = new IMAPPart();
-	attachment->setUniqueID(mailcore::String::uuidString());
     attachment->importIMAPFields(text->bd_fields, extension);
 	attachment->setMimeType(String::stringWithUTF8Format("text/%s", text->bd_media_text));
 	

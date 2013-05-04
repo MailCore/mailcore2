@@ -4,6 +4,9 @@
 #include <stdlib.h>
 #include <libetpan/libetpan.h>
 #include "MCData.h"
+#include "MCAbstractMessagePart.h"
+#include "MCAbstractMultipart.h"
+#include "MCArray.h"
 
 using namespace mailcore;
 
@@ -261,4 +264,31 @@ String * AbstractPart::decodedStringForData(Data * data)
 	else {
 		return NULL;
 	}
+}
+
+void AbstractPart::applyUniquePartID()
+{
+    Array * queue = new Array();
+    queue->addObject(this);
+    unsigned int queueIndex = 0;
+    unsigned int identifier = 0;
+    while (queueIndex < queue->count()) {
+        AbstractPart * part = (AbstractPart *) queue->objectAtIndex(queueIndex);
+        switch (part->partType()) {
+            case PartTypeSingle:
+                part->setUniqueID(String::stringWithUTF8Format("%u", identifier));
+                identifier ++;
+                break;
+            case PartTypeMessage:
+                queue->addObject(((AbstractMessagePart *) part)->mainPart());
+                break;
+            case PartTypeMultipartMixed:
+            case PartTypeMultipartRelated:
+            case PartTypeMultipartAlternative:
+                queue->addObjectsFromArray(((AbstractMultipart *) part)->parts());
+                break;
+        }
+        queueIndex ++;
+    }
+    queue->release();
 }

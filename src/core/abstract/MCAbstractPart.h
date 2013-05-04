@@ -56,7 +56,7 @@ namespace mailcore {
     public: // private
 		virtual void importIMAPFields(struct mailimap_body_fields * fields,
                                       struct mailimap_body_ext_1part * extension);
-        
+        virtual void applyUniquePartID();
         
 	private:
 		String * mUniqueID;
