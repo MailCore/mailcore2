@@ -11,7 +11,6 @@
 		C6BD2873170BC5C500A91AC1 /* MCOCIDURLProtocol.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6BD2870170BC5C500A91AC1 /* MCOCIDURLProtocol.mm */; };
 		C6BD2874170BC5C500A91AC1 /* MCOMessageView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6BD2872170BC5C500A91AC1 /* MCOMessageView.mm */; };
 		C6BD28B4170BDFE500A91AC1 /* MailCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6BD28B3170BDFE500A91AC1 /* MailCore.framework */; };
-		C6BD28BA170C14C300A91AC1 /* MCTApplication.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6BD28B9170C14C300A91AC1 /* MCTApplication.mm */; };
 		C6D42BB616ABB39A002BB4F9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6D42BB516ABB39A002BB4F9 /* Cocoa.framework */; };
 		C6D42BC916ABB39A002BB4F9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D42BC816ABB39A002BB4F9 /* AppDelegate.m */; };
 		C6D42BCC16ABB39A002BB4F9 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D42BCA16ABB39A002BB4F9 /* MainMenu.xib */; };
@@ -72,8 +71,6 @@
 		C6BD2871170BC5C500A91AC1 /* MCOMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOMessageView.h; sourceTree = "<group>"; };
 		C6BD2872170BC5C500A91AC1 /* MCOMessageView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOMessageView.mm; sourceTree = "<group>"; };
 		C6BD2877170BC8ED00A91AC1 /* mailcore2.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = mailcore2.xcodeproj; path = "../../../build-mac/mailcore2.xcodeproj"; sourceTree = "<group>"; };
-		C6BD28B8170C14C300A91AC1 /* MCTApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTApplication.h; sourceTree = "<group>"; };
-		C6BD28B9170C14C300A91AC1 /* MCTApplication.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCTApplication.mm; sourceTree = "<group>"; };
 		C6D42BB116ABB39A002BB4F9 /* macExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6D42BB516ABB39A002BB4F9 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		C6D42BB816ABB39A002BB4F9 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -202,8 +199,6 @@
 				C6D42BE816ACF711002BB4F9 /* MCTMsgListViewController.m */,
 				C6D42BEA16ACFE3F002BB4F9 /* MCTMsgViewController.h */,
 				C6D42BEB16ACFE3F002BB4F9 /* MCTMsgViewController.m */,
-				C6BD28B8170C14C300A91AC1 /* MCTApplication.h */,
-				C6BD28B9170C14C300A91AC1 /* MCTApplication.mm */,
 			);
 			path = macExample;
 			sourceTree = "<group>";
@@ -330,7 +325,6 @@
 				C64FF38416AF97F400F8C162 /* main.mm in Sources */,
 				C6BD2873170BC5C500A91AC1 /* MCOCIDURLProtocol.mm in Sources */,
 				C6BD2874170BC5C500A91AC1 /* MCOMessageView.mm in Sources */,
-				C6BD28BA170C14C300A91AC1 /* MCTApplication.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

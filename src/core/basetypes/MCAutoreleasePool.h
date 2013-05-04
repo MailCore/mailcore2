@@ -30,6 +30,11 @@ namespace mailcore {
 		static void initAutoreleasePoolStackKey();
 		static AutoreleasePool * currentAutoreleasePool();
 		virtual void add(Object * obj);
+#ifdef __APPLE__
+        void * mAppleAutoreleasePool;
+        static void * createAppleAutoreleasePool();
+        static void releaseAppleAutoreleasePool(void * appleAutoreleasePool);
+#endif
 	};
 
 }

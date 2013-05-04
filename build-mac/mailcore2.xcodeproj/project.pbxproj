@@ -232,6 +232,10 @@
 		C64EA82C16A2A08B00778456 /* MCIMAPFetchNamespaceOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA82A16A29FAA00778456 /* MCIMAPFetchNamespaceOperation.cc */; };
 		C64FF39116B3C13000F8C162 /* MCOObjectWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = C64FF39016B3C13000F8C162 /* MCOObjectWrapper.mm */; };
 		C64FF39316B3C25200F8C162 /* MCOObjectWrapper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64FF38F16B3C13000F8C162 /* MCOObjectWrapper.h */; };
+		C668E2C71735C8D500A2BB47 /* MCObjectMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C668E2C51735C8D500A2BB47 /* MCObjectMac.mm */; };
+		C668E2C81735C8D500A2BB47 /* MCObjectMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C668E2C51735C8D500A2BB47 /* MCObjectMac.mm */; };
+		C668E2CC1735CB8900A2BB47 /* MCAutoreleasePoolMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C668E2CA1735CB8900A2BB47 /* MCAutoreleasePoolMac.mm */; };
+		C668E2CD1735CB8900A2BB47 /* MCAutoreleasePoolMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C668E2CA1735CB8900A2BB47 /* MCAutoreleasePoolMac.mm */; };
 		C6A81B931706840C00882C15 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A81B921706840C00882C15 /* UIKit.framework */; };
 		C6A81B941706840C00882C15 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64EA78F169F259200778456 /* Foundation.framework */; };
 		C6A81B961706840C00882C15 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A81B951706840C00882C15 /* CoreGraphics.framework */; };
@@ -1261,6 +1265,8 @@
 		C64EA82B16A2A01400778456 /* MCIMAPFetchNamespaceOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPFetchNamespaceOperation.h; sourceTree = "<group>"; };
 		C64FF38F16B3C13000F8C162 /* MCOObjectWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOObjectWrapper.h; sourceTree = "<group>"; };
 		C64FF39016B3C13000F8C162 /* MCOObjectWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOObjectWrapper.mm; sourceTree = "<group>"; };
+		C668E2C51735C8D500A2BB47 /* MCObjectMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCObjectMac.mm; sourceTree = "<group>"; };
+		C668E2CA1735CB8900A2BB47 /* MCAutoreleasePoolMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCAutoreleasePoolMac.mm; sourceTree = "<group>"; };
 		C6A81B911706840C00882C15 /* test-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "test-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6A81B921706840C00882C15 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		C6A81B951706840C00882C15 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
@@ -1699,6 +1705,7 @@
 			children = (
 				C64EA6A2169E847800778456 /* MCAutoreleasePool.cc */,
 				C64EA6A3169E847800778456 /* MCAutoreleasePool.h */,
+				C668E2CA1735CB8900A2BB47 /* MCAutoreleasePoolMac.mm */,
 				C64EA6A4169E847800778456 /* MCBaseTypes.h */,
 				C64EA6A5169E847800778456 /* MCArray.cc */,
 				C64EA6A6169E847800778456 /* MCArray.h */,
@@ -1722,6 +1729,7 @@
 				C6D6F953171E5CB8006F5B28 /* MCNull.h */,
 				C64EA6B1169E847800778456 /* MCObject.cc */,
 				C64EA6B2169E847800778456 /* MCObject.h */,
+				C668E2C51735C8D500A2BB47 /* MCObjectMac.mm */,
 				C64EA6B3169E847800778456 /* MCRange.cc */,
 				C64EA6B4169E847800778456 /* MCRange.h */,
 				C64EA6B5169E847800778456 /* MCSet.cc */,
@@ -2378,6 +2386,8 @@
 				84AF9E8C172DBE4100E60AA3 /* MCONetService.mm in Sources */,
 				843EE40B172DD5B900C882AA /* MCOMailProvidersManager.mm in Sources */,
 				843EE40F172DD71300C882AA /* MCMailProvidersManager.cc in Sources */,
+				C668E2C71735C8D500A2BB47 /* MCObjectMac.mm in Sources */,
+				C668E2CC1735CB8900A2BB47 /* MCAutoreleasePoolMac.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2548,6 +2558,8 @@
 				84AF9E8D172DBE4100E60AA3 /* MCONetService.mm in Sources */,
 				843EE40C172DD5B900C882AA /* MCOMailProvidersManager.mm in Sources */,
 				843EE410172DD71300C882AA /* MCMailProvidersManager.cc in Sources */,
+				C668E2C81735C8D500A2BB47 /* MCObjectMac.mm in Sources */,
+				C668E2CD1735CB8900A2BB47 /* MCAutoreleasePoolMac.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

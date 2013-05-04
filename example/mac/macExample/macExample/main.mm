@@ -13,7 +13,7 @@
 int main(int argc, char *argv[])
 {
     u_setDataDirectory("/usr/local/share/icu");
-    mailcore::AutoreleasePool * pool = new mailcore::AutoreleasePool();
+    //mailcore::AutoreleasePool * pool = new mailcore::AutoreleasePool();
     return NSApplicationMain(argc, (const char **)argv);
-    pool->release();
+    //pool->release();
 }

@@ -70,11 +70,13 @@ void Object::release()
     }
 }
 
+#ifndef __APPLE__
 Object * Object::autorelease()
 {
     AutoreleasePool::autorelease(this);
     return this;
 }
+#endif
 
 String * Object::className()
 {

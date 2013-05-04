@@ -20,6 +20,10 @@ AutoreleasePool::AutoreleasePool()
 {
     mPoolObjects = carray_new(4);
     
+#if __APPLE__
+    mAppleAutoreleasePool = createAppleAutoreleasePool();
+#endif
+    
     unsigned int idx;
     carray * stack = createAutoreleasePoolStackIfNeeded();
     carray_add(stack, this, &idx);
@@ -27,6 +31,10 @@ AutoreleasePool::AutoreleasePool()
 
 AutoreleasePool::~AutoreleasePool()
 {
+#if __APPLE__
+    releaseAppleAutoreleasePool(mAppleAutoreleasePool);
+#endif
+    
     carray * stack = createAutoreleasePoolStackIfNeeded();
     carray_delete_slow(stack, carray_count(stack) - 1);
     
