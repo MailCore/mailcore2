@@ -17,31 +17,57 @@ using namespace mailcore;
 
 void MailProvider::init()
 {
+    mIdentifier = NULL;
 	mImapServices = new Array();
     mSmtpServices = new Array();
     mPopServices = new Array();
+    mDomainMatch = new Array();
     mMxSet = new Set();
+    mMailboxPaths = NULL;
 }
 
-void MailProvider::initWihInfo(HashMap * info)
+MailProvider::MailProvider()
 {
-	init();
-	
+    init();
+}
+
+MailProvider::~MailProvider()
+{
+	MC_SAFE_RELEASE(mImapServices);
+	MC_SAFE_RELEASE(mSmtpServices);
+	MC_SAFE_RELEASE(mPopServices);
+	MC_SAFE_RELEASE(mMxSet);
+	MC_SAFE_RELEASE(mDomainMatch);
+	MC_SAFE_RELEASE(mMailboxPaths);
+	MC_SAFE_RELEASE(mIdentifier);
+}
+
+MailProvider * MailProvider::providerWithInfo(HashMap * info)
+{
+    MailProvider * provider = new MailProvider();
+    provider->fillWithInfo(info);
+    provider->autorelease();
+    return provider;
+}
+
+void MailProvider::fillWithInfo(HashMap * info)
+{
 	Array * imapInfos;
     Array * smtpInfos;
     Array * popInfos;
     HashMap * serverInfo;
     Array * mxs;
-
-    mDomainMatch = NULL;
+    
+    MC_SAFE_RELEASE(mDomainMatch);
     if (info->objectForKey(MCSTR("domain-match")) != NULL) {
         mDomainMatch = (Array *) info->objectForKey(MCSTR("domain-match"))->retain();
     }
-    mMailboxPaths = NULL;
+    MC_SAFE_RELEASE(mMailboxPaths);
     if (info->objectForKey(MCSTR("mailboxes")) != NULL) {
         mMailboxPaths = (HashMap *) info->objectForKey(MCSTR("mailboxes"))->retain();
     }
     mxs = (Array *) info->objectForKey(MCSTR("mx"));
+    mMxSet->removeAllObjects();
 	mc_foreacharray(String, mx, mxs) {
 		mMxSet->addObject(mx->lowercaseString());
 	}
@@ -51,55 +77,34 @@ void MailProvider::initWihInfo(HashMap * info)
     smtpInfos = (Array *) serverInfo->objectForKey(MCSTR("smtp"));
     popInfos = (Array *) serverInfo->objectForKey(MCSTR("pop"));
     
+    mImapServices->removeAllObjects();
 	mc_foreacharray(HashMap, imapInfo, imapInfos) {
-		NetService * service;
-        
-		service = new NetService(imapInfo);
+		NetService * service = NetService::serviceWithInfo(imapInfo);
         mImapServices->addObject(service);
-        service->release();
 	}
 	
+    mSmtpServices->removeAllObjects();
 	mc_foreacharray(HashMap, smtpInfo, smtpInfos) {
-        NetService * service;
-        
-        service = new NetService(smtpInfo);
+		NetService * service = NetService::serviceWithInfo(smtpInfo);
 		mSmtpServices->addObject(service);
         service->release();
 	}
 	
+    mPopServices->removeAllObjects();
 	mc_foreacharray(HashMap, popInfo, popInfos) {
-        NetService * service;
-        
-        service = new NetService(popInfo);
+		NetService * service = NetService::serviceWithInfo(popInfo);
 		mPopServices->addObject(service);
         service->release();
 	}
 }
 
-MailProvider::MailProvider(HashMap * info)
+void MailProvider::setIdentifier(String * identifier)
 {
-	initWihInfo(info);
+	MC_SAFE_REPLACE_COPY(String, mIdentifier, identifier);
 }
 
-MailProvider::MailProvider(Data * infoData) {
-	initWihInfo((HashMap *) JSON::objectFromJSONData(infoData));
-}
-
-MailProvider::~MailProvider() {
-	delete mImapServices;
-	delete mSmtpServices;
-	delete mPopServices;
-	delete mMxSet;
-	delete mDomainMatch;
-	delete mMailboxPaths;
-	delete mIdentifier;
-}
-
-void MailProvider::setIdentifier(String * identifier) {
-	mIdentifier = identifier;
-}
-
-String * MailProvider::identifier() {
+String * MailProvider::identifier()
+{
 	return mIdentifier;
 }
 
@@ -212,6 +217,7 @@ bool MailProvider::isMainFolder(String * folderPath, String * prefix)
     return false;
 }
 
-String * MailProvider::description() {
-    return String::stringWithUTF8Format("<%s:%p, %s>", className()->UTF8Characters(), this, identifier());
+String * MailProvider::description()
+{       
+    return String::stringWithUTF8Format("<%s:%p, %s>", className()->UTF8Characters(), this, MCUTF8(mIdentifier));
 }

@@ -10,19 +10,39 @@
 
 using namespace mailcore;
 
-void NetService::init() {
-		
+void NetService::init()
+{
+    mHostname = NULL;
+    mPort = 0;
+    mConnectionType = ConnectionTypeClear;
 }
 
-NetService::NetService(HashMap * info) {
+NetService::NetService()
+{
 	init();
-	
+}
+
+NetService::~NetService()
+{
+	MC_SAFE_RELEASE(mHostname);
+}
+
+NetService * NetService::serviceWithInfo(HashMap * info)
+{
+    NetService * service = new NetService();
+    service->fillWithInfo(info);
+    service->autorelease();
+    return service;
+}
+
+void NetService::fillWithInfo(HashMap * info)
+{
 	bool ssl = false;
     bool starttls = false;
 	
-	this->setHostname((String *) info->objectForKey(MCSTR("hostname")));
+	setHostname((String *) info->objectForKey(MCSTR("hostname")));
     if (info->objectForKey(MCSTR("port")) != NULL) {
-        this->setPort(((Value *) info->objectForKey(MCSTR("port")))->intValue());
+        setPort(((Value *) info->objectForKey(MCSTR("port")))->intValue());
     }
     if (info->objectForKey(MCSTR("ssl")) != NULL) {
         ssl = ((Value *) info->objectForKey(MCSTR("ssl")))->boolValue();
@@ -41,13 +61,9 @@ NetService::NetService(HashMap * info) {
     }
 }
 
-NetService::~NetService() {
-	delete mHostname;
-}
-
 void NetService::setHostname(String *hostname)
 {
-	mHostname = hostname;
+    MC_SAFE_REPLACE_COPY(String, mHostname, hostname);
 }
 
 String * NetService::hostname()
@@ -75,7 +91,8 @@ ConnectionType NetService::connectionType()
 	return mConnectionType;
 }
 
-String * NetService::normalizedHostnameWithEmail(String * email) {
+String * NetService::normalizedHostnameWithEmail(String * email)
+{
 	Array *components = email->componentsSeparatedByString(MCSTR("@"));
 	String *hostname = (String *) mHostname->copy();
 	if (components->count() != 0) {
@@ -85,7 +102,8 @@ String * NetService::normalizedHostnameWithEmail(String * email) {
 	return mHostname;
 }
 
-HashMap * NetService::info() {
+HashMap * NetService::info()
+{
 	HashMap * result;
     
     result = new HashMap();

@@ -7,14 +7,25 @@
 //
 
 #import "MCOMailProvider.h"
+
+#include <typeinfo>
+
 #include "MCMailProvider.h"
 
 #import "NSDictionary+MCO.h"
 #import "NSArray+MCO.h"
 #import "NSString+MCO.h"
+#import "NSObject+MCO.h"
 
 @implementation MCOMailProvider {
 	mailcore::MailProvider * _provider;
+}
+
+#define nativeType mailcore::MailProvider
+
++ (void) load
+{
+    MCORegisterClass(self, &typeid(nativeType));
 }
 
 - (mailcore::Object *) mco_mcObject
@@ -25,40 +36,42 @@
 + (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object
 {
     mailcore::MailProvider * provider = (mailcore::MailProvider *) object;
-    return [[self alloc] initWithProvider:provider];
+    return [[self alloc] initWithMCProvider:provider];
 }
 
 - (id) initWithInfo:(NSDictionary *)info
 {
 	self = [super init];
 	
-	_provider = new mailcore::MailProvider([info mco_mcHashMap]);
+	_provider = mailcore::MailProvider::providerWithInfo([info mco_mcHashMap]);
+    _provider->retain();
 	
 	return self;
 }
 
-- (id) initWithProvider:(mailcore::MailProvider *)provider
+- (id) initWithMCProvider:(mailcore::MailProvider *)provider
 {
 	self = [super init];
 	
 	_provider = provider;
+    _provider->retain();
 	
 	return self;
 }
 
 - (NSArray *) imapServices
 {
-	return [NSArray mco_arrayWithMCArray:_provider->imapServices()];
+    return MCO_OBJC_BRIDGE_GET(imapServices);
 }
 
 - (NSArray *) smtpServices
 {
-	return [NSArray mco_arrayWithMCArray:_provider->smtpServices()];
+    return MCO_OBJC_BRIDGE_GET(smtpServices);
 }
 
 - (NSArray *) popServices
 {
-	return [NSArray mco_arrayWithMCArray:_provider->popServices()];
+    return MCO_OBJC_BRIDGE_GET(popServices);
 }
 
 - (BOOL) matchEmail:(NSString *)email
@@ -73,40 +86,41 @@
 
 - (NSString *) sentMailFolderPath
 {
-	return [NSString mco_stringWithMCString:_provider->sentMailFolderPath()];
+    return MCO_OBJC_BRIDGE_GET(sentMailFolderPath);
 }
 
 - (NSString *) starredFolderPath
 {
-	return [NSString mco_stringWithMCString:_provider->starredFolderPath()];
+    return MCO_OBJC_BRIDGE_GET(starredFolderPath);
 }
 
 - (NSString *) allMailFolderPath
 {
-	return [NSString mco_stringWithMCString:_provider->allMailFolderPath()];
+    return MCO_OBJC_BRIDGE_GET(allMailFolderPath);
 }
 
 - (NSString *) trashFolderPath
 {
-	return [NSString mco_stringWithMCString:_provider->trashFolderPath()];
+    return MCO_OBJC_BRIDGE_GET(trashFolderPath);
 }
 
 - (NSString *) draftsFolderPath
 {
-	return [NSString mco_stringWithMCString:_provider->draftsFolderPath()];
+    return MCO_OBJC_BRIDGE_GET(draftsFolderPath);
 }
 
 - (NSString *) spamFolderPath
 {
-	return [NSString mco_stringWithMCString:_provider->spamFolderPath()];
+    return MCO_OBJC_BRIDGE_GET(spamFolderPath);
 }
 
 - (NSString *) importantFolderPath
 {
-	return [NSString mco_stringWithMCString:_provider->spamFolderPath()];
+    return MCO_OBJC_BRIDGE_GET(importantFolderPath);
 }
 
-- (BOOL) isMainFolder:(NSString *)folderPath prefix:(NSString *)prefix {
+- (BOOL) isMainFolder:(NSString *)folderPath prefix:(NSString *)prefix
+{
 	return _provider->isMainFolder(folderPath.mco_mcString, prefix.mco_mcString);
 }
 

@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE__MCNetService__
-#define __MAILCORE__MCNetService__
+#ifndef __MAILCORE_MCNETSERVICE_H_
+#define __MAILCORE_MCNETSERVICE_H_
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCMessageConstants.h>
@@ -18,28 +18,31 @@ namespace mailcore {
 	class NetService : public Object {
 		
 	public:
-		NetService(HashMap * info);
-		~NetService();
+		NetService();
+		virtual ~NetService();
 
-		void setHostname(String * hostname);
-		String * hostname();
+		virtual void setHostname(String * hostname);
+		virtual String * hostname();
 		
-		void setPort(unsigned int port);
-		unsigned int port();
+		virtual void setPort(unsigned int port);
+		virtual unsigned int port();
 		
-		void setConnectionType(ConnectionType connectionType);
-		ConnectionType connectionType();
+		virtual void setConnectionType(ConnectionType connectionType);
+		virtual ConnectionType connectionType();
 				
-		HashMap * info();
-		
-		String * normalizedHostnameWithEmail(String * email);
-				
+		virtual String * normalizedHostnameWithEmail(String * email);
+        
+    public: // serialization
+        static NetService * serviceWithInfo(HashMap * info);
+		virtual HashMap * info();
+        
 	private:
 		String * mHostname;
 		unsigned int mPort;
 		ConnectionType mConnectionType;
 		
 		void init();
+        void fillWithInfo(HashMap * info);
 	};
 }
 

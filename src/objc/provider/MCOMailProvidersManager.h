@@ -17,7 +17,5 @@
 - (MCOMailProvider *) providerForEmail:(NSString *)email;
 - (MCOMailProvider *) providerForMX:(NSString *)hostname;
 - (MCOMailProvider *) providerForIdentifier:(NSString *)identifier;
-- (void) registerProviders:(NSDictionary *)providers;
-- (void) registerProvidersFilename:(NSString *)filename;
 
 @end

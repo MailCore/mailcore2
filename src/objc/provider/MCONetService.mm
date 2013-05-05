@@ -11,10 +11,13 @@
 
 #import "NSDictionary+MCO.h"
 #import "NSString+MCO.h"
+#import "NSObject+MCO.h"
 
 @implementation MCONetService {
 	mailcore::NetService * _netService;
 }
+
+#define nativeType mailcore::NetService
 
 - (mailcore::Object *) mco_mcObject
 {
@@ -29,14 +32,15 @@
 
 + (MCONetService *) netServiceWithInfo:(NSDictionary *)info
 {
-	return [[[MCONetService alloc] initWithInfo:info] autorelease];
+	return [[[self alloc] initWithInfo:info] autorelease];
 }
 
 - (id) initWithInfo:(NSDictionary *)info
 {
 	self = [super init];
 	
-	_netService = new mailcore::NetService(info.mco_mcHashMap);
+	_netService = mailcore::NetService::serviceWithInfo(info.mco_mcHashMap);
+    _netService->retain();
 	
 	return self;
 }
@@ -46,29 +50,14 @@
 	self = [super init];
 	
 	_netService = netService;
+    _netService->retain();
 	
 	return self;
 }
 
-- (void) setHostname:(NSString *)hostname {
-	_netService->setHostname(hostname.mco_mcString);
-}
-
-- (NSString *) hostname {
-	return [NSString mco_stringWithMCString:_netService->hostname()];
-}
-
-- (void) setPort:(unsigned int)port {
-	_netService->setPort(port);
-}
-
-- (unsigned int) port {
-	return _netService->port();
-}
-
-- (MCONetServiceConnectionType) connectionType {
-	return (MCONetServiceConnectionType) _netService->connectionType();
-}
+MCO_OBJC_SYNTHESIZE_STRING(setHostname, hostname)
+MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setPort, port)
+MCO_OBJC_SYNTHESIZE_SCALAR(MCOConnectionType, mailcore::ConnectionType, setConnectionType, connectionType)
 
 - (NSDictionary *) info
 {

@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE__MCMailProvidersManager__
-#define __MAILCORE__MCMailProvidersManager__
+#ifndef __MAILCORE_MCMAILPROVIDERSMANAGER_H_
+#define __MAILCORE_MCMAILPROVIDERSMANAGER_H_
 
 #include <MailCore/MCBaseTypes.h>
 
@@ -17,26 +17,19 @@ namespace mailcore {
 	class MailProvider;
 	
 	class MailProvidersManager : public Object {
-	
+        
 	public:
-		static MailProvidersManager * sharedManager()
-		{
-			static MailProvidersManager * instance = new MailProvidersManager();
-			instance->init();
-			return instance;
-		}
+		static MailProvidersManager * sharedManager();
 		
-		MailProvider * providerForEmail(String * email);
-		MailProvider * providerForMX(String * hostname);
-		MailProvider * providerForIdentifier(String * identifier);
+		virtual MailProvider * providerForEmail(String * email);
+		virtual MailProvider * providerForMX(String * hostname);
+		virtual MailProvider * providerForIdentifier(String * identifier);
 		
-		void registerProviders(HashMap * providers);
-		void registerProvidersFilename(String * filename);
+		virtual void registerProvidersWithFilename(String * filename);
 		
 	private:
 		MailProvidersManager();
-		MailProvidersManager(MailProvidersManager const&);
-		void operator=(MailProvidersManager const&);
+		void registerProviders(HashMap * providers);
 		
 		HashMap * mProviders;
 		

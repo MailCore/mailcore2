@@ -18,7 +18,7 @@
 
 + (MCOMailProvidersManager *) sharedManager
 {
-	static MCOMailProvidersManager *sharedInstance = nil;
+	static MCOMailProvidersManager * sharedInstance = nil;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
 		sharedInstance = [[self alloc] init]; \
@@ -31,39 +31,29 @@
     NSString * filename;
     
     self = [super init];
-        
+    
     filename =  [[NSBundle bundleForClass:[self class]] pathForResource:@"providers" ofType:@"json"];
-    [self registerProvidersFilename:filename];
+	mailcore::MailProvidersManager::sharedManager()->registerProvidersWithFilename(filename.mco_mcString);
     
     return self;
-}
-
-- (void) registerProviders:(NSDictionary *)providers
-{
-	mailcore::MailProvidersManager::sharedManager()->registerProviders(providers.mco_mcHashMap);
-}
-
-- (void) registerProvidersFilename:(NSString *)filename
-{
-	mailcore::MailProvidersManager::sharedManager()->registerProvidersFilename(filename.mco_mcString);
 }
 
 - (MCOMailProvider *) providerForEmail:(NSString *)email
 {
 	mailcore::MailProvider *provider = mailcore::MailProvidersManager::sharedManager()->providerForEmail(email.mco_mcString);
-    return [MCOMailProvider mco_objectWithMCObject:(mailcore::Object *) provider];
+    return MCO_TO_OBJC(provider);
 }
 
 - (MCOMailProvider *) providerForMX:(NSString *)hostname
 {
 	mailcore::MailProvider *provider = mailcore::MailProvidersManager::sharedManager()->providerForMX(hostname.mco_mcString);
-    return [MCOMailProvider mco_objectWithMCObject:(mailcore::Object *) provider];
+    return MCO_TO_OBJC(provider);
 }
 
 - (MCOMailProvider *) providerForIdentifier:(NSString *)identifier
 {
 	mailcore::MailProvider *provider = mailcore::MailProvidersManager::sharedManager()->providerForIdentifier(identifier.mco_mcString);
-    return [MCOMailProvider mco_objectWithMCObject:(mailcore::Object *) provider];
+    return MCO_TO_OBJC(provider);
 }
 
 @end

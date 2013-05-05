@@ -76,7 +76,7 @@
 		C63CD68016BDCDD400DB18F1 /* MCDateFormatter.cc in Sources */ = {isa = PBXBuildFile; fileRef = C63CD67916BDCDD400DB18F1 /* MCDateFormatter.cc */; };
 		C63CD68116BDCDD400DB18F1 /* MCHTMLRenderer.cc in Sources */ = {isa = PBXBuildFile; fileRef = C63CD67B16BDCDD400DB18F1 /* MCHTMLRenderer.cc */; };
 		C63CD68216BDCDD400DB18F1 /* MCSizeFormatter.cc in Sources */ = {isa = PBXBuildFile; fileRef = C63CD67D16BDCDD400DB18F1 /* MCSizeFormatter.cc */; };
-		C63CD68616BE148B00DB18F1 /* MCHTMLRendererCallback.c in Sources */ = {isa = PBXBuildFile; fileRef = C63CD68416BE148B00DB18F1 /* MCHTMLRendererCallback.c */; };
+		C63CD68616BE148B00DB18F1 /* MCHTMLRendererCallback.cc in Sources */ = {isa = PBXBuildFile; fileRef = C63CD68416BE148B00DB18F1 /* MCHTMLRendererCallback.cc */; };
 		C63CD68816BE1BBF00DB18F1 /* MCAddressDisplay.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD67816BDCDD400DB18F1 /* MCAddressDisplay.h */; };
 		C63CD68916BE1BC100DB18F1 /* MCDateFormatter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD67A16BDCDD400DB18F1 /* MCDateFormatter.h */; };
 		C63CD68A16BE1BC400DB18F1 /* MCSizeFormatter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD67E16BDCDD400DB18F1 /* MCSizeFormatter.h */; };
@@ -512,7 +512,7 @@
 		C6BA2BE81705F4E6003F0E9E /* MCDateFormatter.cc in Sources */ = {isa = PBXBuildFile; fileRef = C63CD67916BDCDD400DB18F1 /* MCDateFormatter.cc */; };
 		C6BA2BE91705F4E6003F0E9E /* MCHTMLRenderer.cc in Sources */ = {isa = PBXBuildFile; fileRef = C63CD67B16BDCDD400DB18F1 /* MCHTMLRenderer.cc */; };
 		C6BA2BEA1705F4E6003F0E9E /* MCSizeFormatter.cc in Sources */ = {isa = PBXBuildFile; fileRef = C63CD67D16BDCDD400DB18F1 /* MCSizeFormatter.cc */; };
-		C6BA2BEB1705F4E6003F0E9E /* MCHTMLRendererCallback.c in Sources */ = {isa = PBXBuildFile; fileRef = C63CD68416BE148B00DB18F1 /* MCHTMLRendererCallback.c */; };
+		C6BA2BEB1705F4E6003F0E9E /* MCHTMLRendererCallback.cc in Sources */ = {isa = PBXBuildFile; fileRef = C63CD68416BE148B00DB18F1 /* MCHTMLRendererCallback.cc */; };
 		C6BA2BEC1705F4E6003F0E9E /* MCHTMLCleaner.cc in Sources */ = {isa = PBXBuildFile; fileRef = C63CD68F16BE566D00DB18F1 /* MCHTMLCleaner.cc */; };
 		C6BA2BED1705F4E6003F0E9E /* MCIMAPSyncResult.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64BB21F16E34DCA000DB34C /* MCIMAPSyncResult.cc */; };
 		C6BA2BEE1705F4E6003F0E9E /* MCIMAPCapabilityOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64BB22916E5C0A3000DB34C /* MCIMAPCapabilityOperation.cc */; };
@@ -1072,7 +1072,7 @@
 		C63CD67C16BDCDD400DB18F1 /* MCHTMLRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCHTMLRenderer.h; sourceTree = "<group>"; };
 		C63CD67D16BDCDD400DB18F1 /* MCSizeFormatter.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCSizeFormatter.cc; sourceTree = "<group>"; };
 		C63CD67E16BDCDD400DB18F1 /* MCSizeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSizeFormatter.h; sourceTree = "<group>"; };
-		C63CD68416BE148B00DB18F1 /* MCHTMLRendererCallback.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MCHTMLRendererCallback.c; sourceTree = "<group>"; };
+		C63CD68416BE148B00DB18F1 /* MCHTMLRendererCallback.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCHTMLRendererCallback.cc; sourceTree = "<group>"; };
 		C63CD68516BE148B00DB18F1 /* MCHTMLRendererCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCHTMLRendererCallback.h; sourceTree = "<group>"; };
 		C63CD68716BE1AB600DB18F1 /* MCRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRenderer.h; sourceTree = "<group>"; };
 		C63CD68F16BE566D00DB18F1 /* MCHTMLCleaner.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCHTMLCleaner.cc; sourceTree = "<group>"; };
@@ -1469,7 +1469,7 @@
 				C63CD67E16BDCDD400DB18F1 /* MCSizeFormatter.h */,
 				C63CD67B16BDCDD400DB18F1 /* MCHTMLRenderer.cc */,
 				C63CD67C16BDCDD400DB18F1 /* MCHTMLRenderer.h */,
-				C63CD68416BE148B00DB18F1 /* MCHTMLRendererCallback.c */,
+				C63CD68416BE148B00DB18F1 /* MCHTMLRendererCallback.cc */,
 				C63CD68516BE148B00DB18F1 /* MCHTMLRendererCallback.h */,
 				C63CD68716BE1AB600DB18F1 /* MCRenderer.h */,
 			);
@@ -2324,7 +2324,7 @@
 				C63CD68016BDCDD400DB18F1 /* MCDateFormatter.cc in Sources */,
 				C63CD68116BDCDD400DB18F1 /* MCHTMLRenderer.cc in Sources */,
 				C63CD68216BDCDD400DB18F1 /* MCSizeFormatter.cc in Sources */,
-				C63CD68616BE148B00DB18F1 /* MCHTMLRendererCallback.c in Sources */,
+				C63CD68616BE148B00DB18F1 /* MCHTMLRendererCallback.cc in Sources */,
 				C63CD69116BE566E00DB18F1 /* MCHTMLCleaner.cc in Sources */,
 				C64BB22116E34DCB000DB34C /* MCIMAPSyncResult.cc in Sources */,
 				C64BB22B16E5C0A4000DB34C /* MCIMAPCapabilityOperation.cc in Sources */,
@@ -2496,7 +2496,7 @@
 				C6BA2BE81705F4E6003F0E9E /* MCDateFormatter.cc in Sources */,
 				C6BA2BE91705F4E6003F0E9E /* MCHTMLRenderer.cc in Sources */,
 				C6BA2BEA1705F4E6003F0E9E /* MCSizeFormatter.cc in Sources */,
-				C6BA2BEB1705F4E6003F0E9E /* MCHTMLRendererCallback.c in Sources */,
+				C6BA2BEB1705F4E6003F0E9E /* MCHTMLRendererCallback.cc in Sources */,
 				C6BA2BEC1705F4E6003F0E9E /* MCHTMLCleaner.cc in Sources */,
 				C6BA2BED1705F4E6003F0E9E /* MCIMAPSyncResult.cc in Sources */,
 				C6BA2BEE1705F4E6003F0E9E /* MCIMAPCapabilityOperation.cc in Sources */,

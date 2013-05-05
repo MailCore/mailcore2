@@ -21,6 +21,13 @@ MailProvidersManager::MailProvidersManager() {
 	init();
 }
 
+MailProvidersManager * MailProvidersManager::sharedManager()
+{
+    static MailProvidersManager * instance = new MailProvidersManager();
+    return instance;
+}
+
+
 MailProvider * MailProvidersManager::providerForEmail(String * email)
 {
 	mc_foreachdictionaryValue(MailProvider, provider, mProviders) {
@@ -49,19 +56,17 @@ MailProvider * MailProvidersManager::providerForIdentifier(String * identifier)
 void MailProvidersManager::registerProviders(HashMap * providers)
 {
 	mc_foreachdictionaryKeyAndValue(String, identifier, HashMap, providerInfo, providers) {
-        MailProvider * provider = new MailProvider(providerInfo);
+        MailProvider * provider = MailProvider::providerWithInfo(providerInfo);
         provider->setIdentifier(identifier);
-        MCLog("register %s", MCUTF8DESC(identifier));
+        //MCLog("register %s", MCUTF8DESC(identifier));
         mProviders->setObjectForKey(identifier, provider);
-        provider->release();
 	}
 }
 
-void MailProvidersManager::registerProvidersFilename(String * filename)
+void MailProvidersManager::registerProvidersWithFilename(String * filename)
 {
 	HashMap * providersInfos;
     
     providersInfos = (HashMap *) JSON::objectFromJSONData(Data::dataWithContentsOfFile(filename));
     registerProviders(providersInfos);
-    providersInfos->release();
 }

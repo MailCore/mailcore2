@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE__MCMailProvider__
-#define __MAILCORE__MCMailProvider__
+#ifndef __MAILCORE_MCMAILPROVIDER_H_
+#define __MAILCORE_MCMAILPROVIDER_H_
 
 #include <MailCore/MCBaseTypes.h>
 
@@ -19,32 +19,38 @@ namespace mailcore {
     class MailProvider : public Object {
         
     public:
-		MailProvider(HashMap * info);
-		MailProvider(Data * infoData);
-		~MailProvider();
+        static MailProvider * providerWithInfo(HashMap * info);
+        
+		MailProvider();
+		virtual ~MailProvider();
 		
-		void setIdentifier(String * identifier);
-		String * identifier();
+		virtual String * identifier();
 		
-		Array * imapServices();
-		Array * smtpServices();
-		Array * popServices();
+		virtual Array * imapServices();
+		virtual Array * smtpServices();
+		virtual Array * popServices();
 		
-		bool matchEmail(String * email);
-		bool matchMX(String * hostname);
+		virtual bool matchEmail(String * email);
+		virtual bool matchMX(String * hostname);
 		
-		String * sentMailFolderPath();
-		String * starredFolderPath();
-		String * allMailFolderPath();
-		String * trashFolderPath();
-		String * draftsFolderPath();
-		String * spamFolderPath();
-		String * importantFolderPath();
+		virtual String * sentMailFolderPath();
+		virtual String * starredFolderPath();
+		virtual String * allMailFolderPath();
+		virtual String * trashFolderPath();
+		virtual String * draftsFolderPath();
+		virtual String * spamFolderPath();
+		virtual String * importantFolderPath();
 		
-		bool isMainFolder(String * folderPath, String * prefix);
+        // Returns true if one of the folders above matches the given one.
+		virtual bool isMainFolder(String * folderPath, String * prefix);
 		
+    public: // subclass behavior
 		virtual String * description();
 		
+    public: // private
+		virtual void setIdentifier(String * identifier);
+		virtual void fillWithInfo(HashMap * info);
+        
 	private:
 		String * mIdentifier;
 		Array * mDomainMatch;
@@ -55,7 +61,6 @@ namespace mailcore {
 		Set* mMxSet;
 		
 		void init();
-		void initWihInfo(HashMap * info);
     };
 };
 
