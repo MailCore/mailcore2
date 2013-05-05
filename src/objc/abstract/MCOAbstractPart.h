@@ -21,6 +21,7 @@ typedef enum {
     
     // Used for a message part (MIME type: message/rfc822).
     // The part will be a MCOAbstractMessagePart.
+    // It's when a message is sent as attachment of an other message.
     MCOPartTypeMessage,
     
     // Used for a multipart, multipart/mixed.
