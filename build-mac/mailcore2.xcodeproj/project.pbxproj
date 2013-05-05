@@ -24,8 +24,6 @@
 		84AF9E7A172DAD7500E60AA3 /* MCNetService.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84AF9E78172DAD7500E60AA3 /* MCNetService.cc */; };
 		84AF9E7B172DAD7500E60AA3 /* MCNetService.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84AF9E78172DAD7500E60AA3 /* MCNetService.cc */; };
 		84AF9E7E172DBAF600E60AA3 /* providers.json in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E7D172DBAF600E60AA3 /* providers.json */; };
-		84AF9E80172DBB0300E60AA3 /* providers.json in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E7D172DBAF600E60AA3 /* providers.json */; };
-		84AF9E82172DBB0B00E60AA3 /* providers.json in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E7D172DBAF600E60AA3 /* providers.json */; };
 		84AF9E88172DBC4700E60AA3 /* MCOMailProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84AF9E87172DBC4700E60AA3 /* MCOMailProvider.mm */; };
 		84AF9E89172DBC4700E60AA3 /* MCOMailProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84AF9E87172DBC4700E60AA3 /* MCOMailProvider.mm */; };
 		84AF9E8C172DBE4100E60AA3 /* MCONetService.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84AF9E8B172DBE4000E60AA3 /* MCONetService.mm */; };
@@ -236,6 +234,7 @@
 		C668E2C81735C8D500A2BB47 /* MCObjectMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C668E2C51735C8D500A2BB47 /* MCObjectMac.mm */; };
 		C668E2CC1735CB8900A2BB47 /* MCAutoreleasePoolMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C668E2CA1735CB8900A2BB47 /* MCAutoreleasePoolMac.mm */; };
 		C668E2CD1735CB8900A2BB47 /* MCAutoreleasePoolMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C668E2CA1735CB8900A2BB47 /* MCAutoreleasePoolMac.mm */; };
+		C668E2DD1736333900A2BB47 /* providers.json in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E7D172DBAF600E60AA3 /* providers.json */; };
 		C6A81B931706840C00882C15 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A81B921706840C00882C15 /* UIKit.framework */; };
 		C6A81B941706840C00882C15 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64EA78F169F259200778456 /* Foundation.framework */; };
 		C6A81B961706840C00882C15 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A81B951706840C00882C15 /* CoreGraphics.framework */; };
@@ -2166,7 +2165,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84AF9E80172DBB0300E60AA3 /* providers.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2174,7 +2172,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84AF9E82172DBB0B00E60AA3 /* providers.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2182,6 +2179,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C668E2DD1736333900A2BB47 /* providers.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

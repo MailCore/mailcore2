@@ -287,7 +287,7 @@ static void testAddresses()
 
 static void testProviders() {
 	NSString *filename =  [[NSBundle bundleForClass:[MCOMessageBuilder class]] pathForResource:@"providers" ofType:@"json"];
-	mailcore::MailProvidersManager::sharedManager()->registerProvidersFilename(filename.mco_mcString);
+	mailcore::MailProvidersManager::sharedManager()->registerProvidersWithFilename(filename.mco_mcString);
 	
 	NSLog(@"Providers: %s", MCUTF8DESC(mailcore::MailProvidersManager::sharedManager()->providerForEmail(MCSTR("email1@gmail.com"))));
 }
