@@ -48,4 +48,4 @@ namespace mailcore {
 
 #endif
 	
-#endif /* defined(__MAILCORE__MCNetService__) */
+#endif

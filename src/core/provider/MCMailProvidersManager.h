@@ -39,4 +39,4 @@ namespace mailcore {
 
 #endif
 
-#endif /* defined(__MAILCORE__MCMailProvidersManager__) */
+#endif
