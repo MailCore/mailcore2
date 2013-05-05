@@ -16,6 +16,11 @@
 
 using namespace mailcore;
 
+class HTMLRendererIMAPDummyCallback : public HTMLRendererIMAPCallback {
+public:
+    virtual Data * dataForIMAPPart(String * folder, IMAPPart * part) { return Data::data(); }
+};
+
 enum {
     RENDER_STATE_NONE,
     RENDER_STATE_HAD_ATTACHMENT,
@@ -34,6 +39,8 @@ struct htmlRendererContext {
     bool hasMixedTextAndAttachments;
     bool firstAttachment;
     bool hasTextPart;
+    Array * relatedAttachments;
+    Array * attachments;
 };
 
 class DefaultTemplateCallback : public Object, public HTMLRendererTemplateCallback {
@@ -50,7 +57,9 @@ static String * renderTemplate(String * templateContent, HashMap * values);
 
 static String * htmlForAbstractMessage(String * folder, AbstractMessage * message,
                                        HTMLRendererIMAPCallback * dataCallback,
-                                       HTMLRendererTemplateCallback * htmlCallback);
+                                       HTMLRendererTemplateCallback * htmlCallback,
+                                       Array * attachments,
+                                       Array * relatedAttachments);
 
 static bool isTextPart(AbstractPart * part, htmlRendererContext * context)
 {
@@ -142,7 +151,9 @@ static bool messagePartContainsMimeType(AbstractMessagePart * part, String * mim
 
 static String * htmlForAbstractMessage(String * folder, AbstractMessage * message,
                                        HTMLRendererIMAPCallback * dataCallback,
-                                       HTMLRendererTemplateCallback * htmlCallback)
+                                       HTMLRendererTemplateCallback * htmlCallback,
+                                       Array * attachments,
+                                       Array * relatedAttachments)
 {
     AbstractPart * mainPart = NULL;
     
@@ -162,6 +173,8 @@ static String * htmlForAbstractMessage(String * folder, AbstractMessage * messag
     htmlRendererContext context;
     context.dataCallback = dataCallback;
     context.htmlCallback = htmlCallback;
+    context.relatedAttachments = relatedAttachments;
+    context.attachments = attachments;
     context.firstRendered = 0;
     context.folder = folder;
     context.state = RENDER_STATE_NONE;
@@ -172,6 +185,8 @@ static String * htmlForAbstractMessage(String * folder, AbstractMessage * messag
     context.hasTextPart = false;
     htmlForAbstractPart(mainPart, &context);
     
+    context.relatedAttachments = NULL;
+    context.attachments = NULL;
     context.hasMixedTextAndAttachments = (context.state == RENDER_STATE_HAD_ATTACHMENT_THEN_TEXT);
     context.pass = 1;
     context.firstAttachment = false;
@@ -194,13 +209,13 @@ static String * htmlForAbstractMessage(String * folder, AbstractMessage * messag
     return result;
 }
 
-String * htmlForAbstractSinglePart(AbstractPart * part, htmlRendererContext * context);
-String * htmlForAbstractMessagePart(AbstractMessagePart * part, htmlRendererContext * context);
-String * htmlForAbstractMultipartRelated(AbstractMultipart * part, htmlRendererContext * context);
-String * htmlForAbstractMultipartMixed(AbstractMultipart * part, htmlRendererContext * context);
-String * htmlForAbstractMultipartAlternative(AbstractMultipart * part, htmlRendererContext * context);
+static String * htmlForAbstractSinglePart(AbstractPart * part, htmlRendererContext * context);
+static String * htmlForAbstractMessagePart(AbstractMessagePart * part, htmlRendererContext * context);
+static String * htmlForAbstractMultipartRelated(AbstractMultipart * part, htmlRendererContext * context);
+static String * htmlForAbstractMultipartMixed(AbstractMultipart * part, htmlRendererContext * context);
+static String * htmlForAbstractMultipartAlternative(AbstractMultipart * part, htmlRendererContext * context);
 
-String * htmlForAbstractPart(AbstractPart * part, htmlRendererContext * context)
+static String * htmlForAbstractPart(AbstractPart * part, htmlRendererContext * context)
 {
     switch (part->partType()) {
         case PartTypeSingle:
@@ -219,7 +234,7 @@ String * htmlForAbstractPart(AbstractPart * part, htmlRendererContext * context)
     return NULL;
 }
 
-String * htmlForAbstractSinglePart(AbstractPart * part, htmlRendererContext * context)
+static String * htmlForAbstractSinglePart(AbstractPart * part, htmlRendererContext * context)
 {
     String * mimeType = NULL;
     if (part->mimeType() != NULL) {
@@ -324,11 +339,15 @@ String * htmlForAbstractSinglePart(AbstractPart * part, htmlRendererContext * co
         result->appendString(separatorString);
         result->appendString(content);
         
+        if (context->attachments != NULL) {
+            context->attachments->addObject(part);
+        }
+        
         return result;
     }
 }
 
-String * htmlForAbstractMessagePart(AbstractMessagePart * part, htmlRendererContext * context)
+static String * htmlForAbstractMessagePart(AbstractMessagePart * part, htmlRendererContext * context)
 {
     if (context->pass == 0) {
         return NULL;
@@ -357,7 +376,7 @@ String * htmlForAbstractMultipartAlternative(AbstractMultipart * part, htmlRende
     return htmlForAbstractPart(preferredAlternative, context);
 }
 
-String * htmlForAbstractMultipartMixed(AbstractMultipart * part, htmlRendererContext * context)
+static String * htmlForAbstractMultipartMixed(AbstractMultipart * part, htmlRendererContext * context)
 {
     String * result = String::string();
     for(unsigned int i = 0 ; i < part->parts()->count() ; i ++) {
@@ -373,7 +392,7 @@ String * htmlForAbstractMultipartMixed(AbstractMultipart * part, htmlRendererCon
     return  result;
 }
 
-String * htmlForAbstractMultipartRelated(AbstractMultipart * part, htmlRendererContext * context)
+static String * htmlForAbstractMultipartRelated(AbstractMultipart * part, htmlRendererContext * context)
 {
     if (part->parts()->count() == 0) {
         if (context->pass == 0) {
@@ -384,11 +403,18 @@ String * htmlForAbstractMultipartRelated(AbstractMultipart * part, htmlRendererC
         }
     }
     
+    // root of the multipart/related.
     AbstractPart * subpart = (AbstractPart *) part->parts()->objectAtIndex(0);
+    if (context->relatedAttachments != NULL) {
+        for(unsigned int i = 1 ; i < part->parts()->count() ; i ++) {
+            AbstractPart * otherSubpart = (AbstractPart *) part->parts()->objectAtIndex(i);
+            context->relatedAttachments->addObject(otherSubpart);
+        }
+    }
     return htmlForAbstractPart(subpart, context);
 }
 
-void fillTemplateDictionaryFromMCHashMap(ctemplate::TemplateDictionary * dict, HashMap * mcHashMap)
+static void fillTemplateDictionaryFromMCHashMap(ctemplate::TemplateDictionary * dict, HashMap * mcHashMap)
 {
     Array * keys = mcHashMap->allKeys();
     
@@ -424,7 +450,7 @@ void fillTemplateDictionaryFromMCHashMap(ctemplate::TemplateDictionary * dict, H
     }
 }
 
-String * renderTemplate(String * templateContent, HashMap * values)
+static String * renderTemplate(String * templateContent, HashMap * values)
 {
     ctemplate::TemplateDictionary dict("template dict");
     std::string output;
@@ -445,7 +471,7 @@ String * renderTemplate(String * templateContent, HashMap * values)
 String * HTMLRenderer::htmlForRFC822Message(MessageParser * message,
                                             HTMLRendererTemplateCallback * htmlCallback)
 {
-    return htmlForAbstractMessage(NULL, message, NULL, htmlCallback);
+    return htmlForAbstractMessage(NULL, message, NULL, htmlCallback, NULL, NULL);
 }
 
 String * HTMLRenderer::htmlForIMAPMessage(String * folder,
@@ -453,5 +479,27 @@ String * HTMLRenderer::htmlForIMAPMessage(String * folder,
                                           HTMLRendererIMAPCallback * dataCallback,
                                           HTMLRendererTemplateCallback * htmlCallback)
 {
-    return htmlForAbstractMessage(folder, message, dataCallback, htmlCallback);
+    return htmlForAbstractMessage(folder, message, dataCallback, htmlCallback, NULL, NULL);
+}
+
+Array * HTMLRenderer::attachmentsForMessage(AbstractMessage * message)
+{
+    Array * attachments = Array::array();
+    HTMLRendererIMAPCallback * dataCallback = new HTMLRendererIMAPDummyCallback();
+    String * ignoredResult = htmlForAbstractMessage(NULL, message, dataCallback, NULL, attachments, NULL);
+    delete dataCallback;
+    dataCallback = NULL;
+    (void) ignoredResult; // remove unused variable warning.
+    return attachments;
+}
+
+Array * HTMLRenderer::htmlInlineAttachmentsForMessage(AbstractMessage * message)
+{
+    Array * htmlInlineAttachments = Array::array();
+    HTMLRendererIMAPCallback * dataCallback = new HTMLRendererIMAPDummyCallback();
+    String * ignoredResult = htmlForAbstractMessage(NULL, message, dataCallback, NULL, NULL, htmlInlineAttachments);
+    delete dataCallback;
+    dataCallback = NULL;
+    (void) ignoredResult; // remove unused variable warning.
+    return htmlInlineAttachments;
 }

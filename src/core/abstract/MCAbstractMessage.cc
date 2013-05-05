@@ -1,6 +1,7 @@
 #include "MCAbstractMessage.h"
 
 #include "MCMessageHeader.h"
+#include "MCHTMLRenderer.h"
 
 using namespace mailcore;
 
@@ -68,3 +69,14 @@ AbstractPart * AbstractMessage::partForUniqueID(String * uniqueID)
     MCAssert(0);
     return NULL;
 }
+
+Array * AbstractMessage::attachments()
+{
+    return HTMLRenderer::attachmentsForMessage(this);
+}
+
+Array * AbstractMessage::htmlInlineAttachments()
+{
+    return HTMLRenderer::htmlInlineAttachmentsForMessage(this);
+}
+

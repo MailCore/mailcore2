@@ -26,6 +26,9 @@
 // Returns the part with the given unique identifier.
 - (MCOAbstractPart *) partForUniqueID:(NSString *)uniqueID;
 
+- (NSArray *) attachments;
+- (NSArray *) htmlInlineAttachments;
+
 @end
 
 #endif

@@ -30,6 +30,9 @@ namespace mailcore {
                                            IMAPMessage * message,
                                            HTMLRendererIMAPCallback * dataCallback,
                                            HTMLRendererTemplateCallback * htmlCallback);
+        
+        static Array * attachmentsForMessage(AbstractMessage * message);
+        static Array * htmlInlineAttachmentsForMessage(AbstractMessage * message);
     };
 };
 

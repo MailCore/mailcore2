@@ -30,6 +30,7 @@
 - (void) setMessage:(MCOIMAPMessage *)message
 {
     NSLog(@"set message : %@", message);
+    NSLog(@"set attachments: %@ %@", [message attachments], [message htmlInlineAttachments]);
     for(MCOOperation * op in _ops) {
         [op cancel];
     }
