@@ -30,7 +30,7 @@
     return [[self alloc] initWithNetService:netService];
 }
 
-+ (MCONetService *) netServiceWithInfo:(NSDictionary *)info
++ (MCONetService *) serviceWithInfo:(NSDictionary *)info
 {
 	return [[[self alloc] initWithInfo:info] autorelease];
 }
