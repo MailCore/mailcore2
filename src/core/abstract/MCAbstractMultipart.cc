@@ -56,7 +56,7 @@ String * AbstractMultipart::description()
         partTypeName = "related";
         break;
         case PartTypeMultipartAlternative:
-        partTypeName = "alernative";
+        partTypeName = "alternative";
         break;
     }
     
