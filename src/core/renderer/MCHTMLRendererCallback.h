@@ -29,6 +29,7 @@ namespace mailcore {
     class HTMLRendererTemplateCallback {
     public:
         virtual bool canPreviewPart(AbstractPart * part);
+        virtual bool shouldShowPart(AbstractPart * part);
         
         virtual HashMap * templateValuesForHeader(MessageHeader * header);
         virtual HashMap * templateValuesForPart(AbstractPart * part);
@@ -40,7 +41,7 @@ namespace mailcore {
         virtual String * templateForEmbeddedMessage();
         virtual String * templateForEmbeddedMessageHeader();
         virtual String * templateForAttachmentSeparator();
-        
+		
         // Can be used to filter some HTML tags.
         virtual String * filterHTMLForPart(String * html);
         
