@@ -28,6 +28,14 @@ bool MCOAbstractMessageRendererCallback::canPreviewPart(mailcore::AbstractPart *
     return mailcore::HTMLRendererTemplateCallback::canPreviewPart(part);
 }
 
+bool MCOAbstractMessageRendererCallback::shouldShowPart(mailcore::AbstractPart * part)
+{
+    if ([mRendererDelegate respondsToSelector:@selector(MCOAbstractMessage:shouldShowPart:)]) {
+        return [mRendererDelegate MCOAbstractMessage:mMessage shouldShowPart:MCO_TO_OBJC(part)];
+    }
+    return mailcore::HTMLRendererTemplateCallback::shouldShowPart(part);
+}
+
 mailcore::HashMap * MCOAbstractMessageRendererCallback::templateValuesForHeader(mailcore::MessageHeader * header)
 {
     mailcore::HashMap * result = NULL;

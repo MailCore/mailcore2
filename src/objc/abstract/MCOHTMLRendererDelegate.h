@@ -35,6 +35,9 @@
 // If not, the attachment template will be used.
 - (BOOL) MCOAbstractMessage:(MCOAbstractMessage *)msg canPreviewPart:(MCOAbstractPart *)part;
 
+// This delegate method should return YES if the part should be rendered.
+- (BOOL) MCOAbstractMessage:(MCOAbstractMessage *)msg shouldShowPart:(MCOAbstractPart *)part;
+
 // This delegate method returns the values to be applied to the template for the given header.
 // See the content of MCHTMLRendererCallback.cpp for the default values of the header.
 - (NSDictionary *) MCOAbstractMessage:(MCOAbstractMessage *)msg templateValuesForHeader:(MCOMessageHeader *)header;
