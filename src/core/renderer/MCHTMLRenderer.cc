@@ -294,6 +294,10 @@ static String * htmlForAbstractSinglePart(AbstractPart * part, htmlRendererConte
         }
     }
     else {
+		
+		if (!context->htmlCallback->shouldShowPart(part))
+            return MCSTR("");
+		
         if (context->pass == 0) {
             if (context->state == RENDER_STATE_NONE) {
                 context->state = RENDER_STATE_HAD_ATTACHMENT;
