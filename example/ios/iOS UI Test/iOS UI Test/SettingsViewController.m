@@ -11,25 +11,14 @@
 
 NSString * const UsernameKey = @"username";
 NSString * const PasswordKey = @"password";
-
-@interface SettingsViewController ()
-
-@end
+NSString * const HostnameKey = @"hostname";
 
 @implementation SettingsViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)done:(id)sender {
-	[[NSUserDefaults standardUserDefaults] setObject:self.emailTextField.text forKey:UsernameKey];
+	[[NSUserDefaults standardUserDefaults] setObject:self.emailTextField.text ?: @"" forKey:UsernameKey];
 	[[FXKeychain defaultKeychain] setObject:self.passwordTextField.text ?: @"" forKey:PasswordKey];
+	[[NSUserDefaults standardUserDefaults] setObject:self.hostnameTextField.text ?: @"" forKey:HostnameKey];
 	
 	[self.delegate settingsViewControllerFinished:self];
 }
@@ -40,12 +29,7 @@ NSString * const PasswordKey = @"password";
 	self.view.backgroundColor = [UIColor underPageBackgroundColor];
 	self.emailTextField.text = [[NSUserDefaults standardUserDefaults] stringForKey:UsernameKey];
 	self.passwordTextField.text = [[FXKeychain defaultKeychain] objectForKey:PasswordKey];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+	self.hostnameTextField.text = [[NSUserDefaults standardUserDefaults] stringForKey:HostnameKey];
 }
 
 @end

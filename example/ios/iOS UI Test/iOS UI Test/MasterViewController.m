@@ -24,19 +24,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	[[NSUserDefaults standardUserDefaults] registerDefaults:@{ HostnameKey: @"imap.gmail.com" }];
+	
 	NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:UsernameKey];
 	NSString *password = [[FXKeychain defaultKeychain] objectForKey:PasswordKey];
-	[self loadAccountWithUsername:username password:password];
+	NSString *hostname = [[NSUserDefaults standardUserDefaults] objectForKey:HostnameKey];
+	
+	[self loadAccountWithUsername:username password:password hostname:hostname];
 }
 
-- (void)loadAccountWithUsername:(NSString *)username password:(NSString *)password {
+- (void)loadAccountWithUsername:(NSString *)username password:(NSString *)password hostname:(NSString *)hostname {
 	if (!username.length || !password.length) {
 		[self performSelector:@selector(showSettingsViewController:) withObject:nil afterDelay:0.5];
 		return;
 	}
 	
 	self.imapSession = [[MCOIMAPSession alloc] init];
-	self.imapSession.hostname = @"imap.gmail.com";
+	self.imapSession.hostname = hostname;
 	self.imapSession.port = 993;
 	self.imapSession.username = username;
 	self.imapSession.password = password;
@@ -74,7 +78,9 @@
 	[self.imapMessagesFetchOp start:^(NSError *error, NSArray *messages, MCOIndexSet *vanishedMessages) {
 		MasterViewController *strongSelf = weakSelf;
 		NSLog(@"fetched all messages.");
-		strongSelf.messages = [NSArray arrayWithArray:messages];
+		
+		NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"header.date" ascending:NO];
+		strongSelf.messages = [messages sortedArrayUsingDescriptors:@[sort]];//[NSArray   arrayWithArray:messages];
 		[strongSelf.tableView reloadData];
 	}];
 }
@@ -116,10 +122,13 @@
 	
 	NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:UsernameKey];
 	NSString *password = [[FXKeychain defaultKeychain] objectForKey:PasswordKey];
+	NSString *hostname = [[NSUserDefaults standardUserDefaults] objectForKey:HostnameKey];
 	
-	if (![username isEqualToString:self.imapSession.username] || ![password isEqualToString:self.imapSession.password]) {
+	if (![username isEqualToString:self.imapSession.username] ||
+		![password isEqualToString:self.imapSession.password] ||
+		![hostname isEqualToString:self.imapSession.hostname]) {
 		self.imapSession = nil;
-		[self loadAccountWithUsername:username password:password];
+		[self loadAccountWithUsername:username password:password hostname:hostname];
 	}
 }
 

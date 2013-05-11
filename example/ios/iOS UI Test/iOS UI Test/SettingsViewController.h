@@ -10,6 +10,7 @@
 
 extern NSString * const UsernameKey;
 extern NSString * const PasswordKey;
+extern NSString * const HostnameKey;
 
 @protocol SettingsViewControllerDelegate;
 
@@ -17,6 +18,7 @@ extern NSString * const PasswordKey;
 
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UITextField *hostnameTextField;
 @property (nonatomic, weak) id<SettingsViewControllerDelegate> delegate;
 - (IBAction)done:(id)sender;
 
