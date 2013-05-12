@@ -7,7 +7,8 @@
 //
 
 #import "MCTMsgViewController.h"
-
+#import <CoreGraphics/CoreGraphics.h>
+#import <ImageIO/ImageIO.h>
 #import "MCOMessageView.h"
 
 @interface MCTMsgViewController () <MCOMessageViewDelegate>
@@ -68,7 +69,7 @@
 
 - (void) setMessage:(MCOIMAPMessage *)message
 {
-    NSLog(@"set message : %@", message);
+    if (mailcore::logEnabled) NSLog(@"set message : %@", message);
     for(MCOOperation * op in _ops) {
         [op cancel];
     }
@@ -87,7 +88,7 @@
 
 - (MCOIMAPFetchContentOperation *) _fetchIMAPPartWithUniqueID:(NSString *)partUniqueID folder:(NSString *)folder
 {
-    NSLog(@"%@ is missing, fetching", partUniqueID);
+    if (mailcore::logEnabled) NSLog(@"%@ is missing, fetching", partUniqueID);
     
     if ([_pending containsObject:partUniqueID]) {
         return NULL;
@@ -110,7 +111,7 @@
         [_ops removeObject:op];
         [_storage setObject:data forKey:partUniqueID];
         [_pending removeObject:partUniqueID];
-        NSLog(@"downloaded %@", partUniqueID);
+        if (mailcore::logEnabled) NSLog(@"downloaded %@", partUniqueID);
         
         [self _callbackForPartUniqueID:partUniqueID error:nil];
     }];
@@ -124,11 +125,11 @@ typedef void (^DownloadCallback)(NSError * error);
 {
     NSArray * blocks;
     blocks = [_callbacks objectForKey:partUniqueID];
-    NSLog(@"%@", blocks);
+    if (mailcore::logEnabled) NSLog(@"%@", blocks);
     for(DownloadCallback block in blocks) {
         block(error);
     }
-    NSLog(@"done: %@", blocks);
+    if (mailcore::logEnabled) NSLog(@"done: %@", blocks);
 }
 
 - (NSString *) MCOMessageView_templateForAttachment:(MCOMessageView *)view
@@ -198,7 +199,7 @@ typedef void (^DownloadCallback)(NSError * error);
 {
     MCOIMAPFetchContentOperation * op = [self _fetchIMAPPartWithUniqueID:partUniqueID folder:_folder];
     [op setProgress:^(unsigned int current, unsigned int maximum) {
-        NSLog(@"progress content: %u/%u", current, maximum);
+        if (mailcore::logEnabled) NSLog(@"progress content: %u/%u", current, maximum);
     }];
     [_ops addObject:op];
     if (downloadFinished != NULL) {
@@ -225,47 +226,45 @@ typedef void (^DownloadCallback)(NSError * error);
 #define IMAGE_PREVIEW_HEIGHT 300
 #define IMAGE_PREVIEW_WIDTH 500
 
-- (NSData *) _convertToJPEGData:(NSData *)data
-{
-//    CGImageRef imageSource;
-//    CGImageRef thumbnail;
-//    NSMutableDictionary * info;
-//    int width;
-//    int height;
-//    float quality;
-//    
-//    width = IMAGE_PREVIEW_WIDTH;
-//    height = IMAGE_PREVIEW_HEIGHT;
-//    quality = 1.0;
-//    
-//    imageSource = CGImageSourceCreateWithData((__bridge CFDataRef) data, NULL);
-//    if (imageSource == NULL)
-//        return nil;
-//    
-//    info = [[NSMutableDictionary alloc] init];
-//    [info setObject:(id) kCFBooleanTrue forKey:(id) kCGImageSourceCreateThumbnailWithTransform];
-//    [info setObject:(id) kCFBooleanTrue forKey:(id) kCGImageSourceCreateThumbnailFromImageAlways];
-//    [info setObject:(id) [NSNumber numberWithFloat:(float) IMAGE_PREVIEW_WIDTH] forKey:(id) kCGImageSourceThumbnailMaxPixelSize];
-//    thumbnail = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, (CFDictionaryRef) info);
-//    [info release];
-//    
-//    CGImageDestinationRef destination;
-//    NSMutableData * destData = [NSMutableData data];
-//    
-//    destination = CGImageDestinationCreateWithData((CFMutableDataRef) destData,
-//                                                   (CFStringRef) @"public.jpeg",
-//                                                   1, NULL);
-//    
-//    CGImageDestinationAddImage(destination, thumbnail, NULL);
-//    CGImageDestinationFinalize(destination);
-//    
-//    CFRelease(destination);
-//    
-//    CFRelease(thumbnail);
-//    CFRelease(imageSource);
-//    
-//    return destData;
-    return nil;
+- (NSData *) _convertToJPEGData:(NSData *)data {
+    CGImageSourceRef imageSource;
+    CGImageRef thumbnail;
+    NSMutableDictionary * info;
+    int width;
+    int height;
+    float quality;
+
+    width = IMAGE_PREVIEW_WIDTH;
+    height = IMAGE_PREVIEW_HEIGHT;
+    quality = 1.0;
+
+    imageSource = CGImageSourceCreateWithData((__bridge CFDataRef) data, NULL);
+    if (imageSource == NULL)
+        return nil;
+
+    info = [[NSMutableDictionary alloc] init];
+    [info setObject:(id) kCFBooleanTrue forKey:(id) kCGImageSourceCreateThumbnailWithTransform];
+    [info setObject:(id) kCFBooleanTrue forKey:(id) kCGImageSourceCreateThumbnailFromImageAlways];
+    [info setObject:(id) [NSNumber numberWithFloat:(float) IMAGE_PREVIEW_WIDTH] forKey:(id) kCGImageSourceThumbnailMaxPixelSize];
+    thumbnail = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, (__bridge CFDictionaryRef) info);
+    //[info release];
+
+    CGImageDestinationRef destination;
+    NSMutableData * destData = [NSMutableData data];
+
+    destination = CGImageDestinationCreateWithData((__bridge CFMutableDataRef) destData,
+													+                                                   (CFStringRef) @"public.jpeg",
+													+                                                   1, NULL);
+
+    CGImageDestinationAddImage(destination, thumbnail, NULL);
+    CGImageDestinationFinalize(destination);
+
+    CFRelease(destination);
+
+    CFRelease(thumbnail);
+    CFRelease(imageSource);
+
+    return destData;
 }
 
 @end

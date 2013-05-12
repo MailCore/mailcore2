@@ -24,9 +24,12 @@
 		AB9EAE3617036FD700D750C7 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB9EAE3417036FD600D750C7 /* SettingsViewController.m */; };
 		AB9EAE3717036FD700D750C7 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB9EAE3517036FD700D750C7 /* SettingsViewController.xib */; };
 		AB9EAE40170374D900D750C7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB9EAE3F170374D900D750C7 /* Security.framework */; };
+		ABE40268173F0151007F1FB3 /* MCOMessageViewScript.js in Sources */ = {isa = PBXBuildFile; fileRef = ABE40267173F0151007F1FB3 /* MCOMessageViewScript.js */; };
+		ABE40269173F0282007F1FB3 /* MCOMessageViewScript.js in Resources */ = {isa = PBXBuildFile; fileRef = ABE40267173F0151007F1FB3 /* MCOMessageViewScript.js */; };
+		ABE4026B173F3FCE007F1FB3 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE4026A173F3FCE007F1FB3 /* ImageIO.framework */; };
 		B12AAA3317322654003551C7 /* MCOCIDURLProtocol.mm in Sources */ = {isa = PBXBuildFile; fileRef = B12AAA2E17322654003551C7 /* MCOCIDURLProtocol.mm */; };
 		B12AAA3417322654003551C7 /* MCOMessageView.mm in Sources */ = {isa = PBXBuildFile; fileRef = B12AAA3017322654003551C7 /* MCOMessageView.mm */; };
-		B12AAA3517322654003551C7 /* MCTMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B12AAA3217322654003551C7 /* MCTMsgViewController.m */; };
+		B12AAA3517322654003551C7 /* MCTMsgViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B12AAA3217322654003551C7 /* MCTMsgViewController.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,12 +103,14 @@
 		AB9EAE3417036FD600D750C7 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		AB9EAE3517036FD700D750C7 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		AB9EAE3F170374D900D750C7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		ABE40267173F0151007F1FB3 /* MCOMessageViewScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = MCOMessageViewScript.js; sourceTree = "<group>"; };
+		ABE4026A173F3FCE007F1FB3 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		B12AAA2D17322654003551C7 /* MCOCIDURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOCIDURLProtocol.h; sourceTree = "<group>"; };
 		B12AAA2E17322654003551C7 /* MCOCIDURLProtocol.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOCIDURLProtocol.mm; sourceTree = "<group>"; };
 		B12AAA2F17322654003551C7 /* MCOMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOMessageView.h; sourceTree = "<group>"; };
 		B12AAA3017322654003551C7 /* MCOMessageView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOMessageView.mm; sourceTree = "<group>"; };
 		B12AAA3117322654003551C7 /* MCTMsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTMsgViewController.h; sourceTree = "<group>"; };
-		B12AAA3217322654003551C7 /* MCTMsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTMsgViewController.m; sourceTree = "<group>"; };
+		B12AAA3217322654003551C7 /* MCTMsgViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCTMsgViewController.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +119,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB7BA446171389CC00104953 /* libMailCore-ios.a in Frameworks */,
+				ABE4026B173F3FCE007F1FB3 /* ImageIO.framework in Frameworks */,
 				AB9EAE40170374D900D750C7 /* Security.framework in Frameworks */,
 				AB9EAE06170368F000D750C7 /* UIKit.framework in Frameworks */,
 				AB9EAE08170368F000D750C7 /* Foundation.framework in Frameworks */,
@@ -168,6 +174,7 @@
 		AB9EAE04170368F000D750C7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ABE4026A173F3FCE007F1FB3 /* ImageIO.framework */,
 				AB7BA4471713913F00104953 /* CFNetwork.framework */,
 				AB9EAE3F170374D900D750C7 /* Security.framework */,
 				AB9EAE05170368F000D750C7 /* UIKit.framework */,
@@ -191,12 +198,13 @@
 				B12AAA2E17322654003551C7 /* MCOCIDURLProtocol.mm */,
 				B12AAA2F17322654003551C7 /* MCOMessageView.h */,
 				B12AAA3017322654003551C7 /* MCOMessageView.mm */,
+				ABE40267173F0151007F1FB3 /* MCOMessageViewScript.js */,
 				B12AAA3117322654003551C7 /* MCTMsgViewController.h */,
-				B12AAA3217322654003551C7 /* MCTMsgViewController.m */,
-				AB9EAE0C170368F000D750C7 /* Supporting Files */,
+				B12AAA3217322654003551C7 /* MCTMsgViewController.mm */,
 				AB9EAE3317036FD600D750C7 /* SettingsViewController.h */,
 				AB9EAE3417036FD600D750C7 /* SettingsViewController.m */,
 				AB9EAE3517036FD700D750C7 /* SettingsViewController.xib */,
+				AB9EAE0C170368F000D750C7 /* Supporting Files */,
 				AB665BC917134336007F2151 /* common */,
 			);
 			path = "iOS UI Test";
@@ -311,6 +319,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABE40269173F0282007F1FB3 /* MCOMessageViewScript.js in Resources */,
 				AB9EAE10170368F000D750C7 /* InfoPlist.strings in Resources */,
 				AB9EAE18170368F000D750C7 /* Default.png in Resources */,
 				AB9EAE1A170368F000D750C7 /* Default@2x.png in Resources */,
@@ -334,7 +343,8 @@
 				AB665BCD17134336007F2151 /* FXKeychain.m in Sources */,
 				B12AAA3317322654003551C7 /* MCOCIDURLProtocol.mm in Sources */,
 				B12AAA3417322654003551C7 /* MCOMessageView.mm in Sources */,
-				B12AAA3517322654003551C7 /* MCTMsgViewController.m in Sources */,
+				B12AAA3517322654003551C7 /* MCTMsgViewController.mm in Sources */,
+				ABE40268173F0151007F1FB3 /* MCOMessageViewScript.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

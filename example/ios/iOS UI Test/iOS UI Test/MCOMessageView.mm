@@ -90,7 +90,68 @@
             MCAssert(0);
         }
     }
-    [_webView loadHTMLString:content baseURL:nil];
+	NSLog(@"%s",__PRETTY_FUNCTION__);
+	
+	if (content == nil) {
+		[_webView loadHTMLString:@"" baseURL:/*[NSURL URLWithString:urlString]*/nil];
+		return;
+	}
+	
+	NSMutableString * html = [NSMutableString string];
+	NSURL * jsURL = [[NSBundle mainBundle] URLForResource:@"MCOMessageViewScript" withExtension:@"js"];
+	[html appendFormat:@"<html><head><script src=\"%@\"></script></head><body'>%@</body><iframe src='x-mailcore-msgviewloaded:' style='width: 0px; height: 0px; border: none;'></iframe></html>",
+	 [jsURL absoluteString], content];
+	[_webView loadHTMLString:html baseURL:nil];
+}
+
+- (void) _loadImages
+{
+	NSLog(@"%s",__PRETTY_FUNCTION__);
+	NSString * result = [_webView stringByEvaluatingJavaScriptFromString:@"findCIDImageURL()"];
+	NSData * data = [result dataUsingEncoding:NSUTF8StringEncoding];
+	NSError *error = nil;
+	NSArray * imagesURLStrings = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+	
+	for(NSString * urlString in imagesURLStrings) {
+		MCOAbstractPart * part = nil;
+		NSURL * url;
+		
+		url = [NSURL URLWithString:urlString];
+		if ([MCOCIDURLProtocol isCID:url]) {
+			part = [self _partForCIDURL:url];
+		}
+		else if ([MCOCIDURLProtocol isXMailcoreImage:url]) {
+			NSString * specifier = [url resourceSpecifier];
+			NSString * partUniqueID = specifier;
+			part = [self _partForUniqueID:partUniqueID];
+		}
+		
+		NSString * partUniqueID = [part uniqueID];
+		NSData * data = [[self delegate] MCOMessageView:self dataForPartWithUniqueID:partUniqueID];
+		if (data == NULL) {
+			[[self delegate] MCOMessageView:self fetchDataForPartWithUniqueID:partUniqueID downloadedFinished:^(NSError * error) {
+				NSData * downloadedData = [[self delegate] MCOMessageView:self dataForPartWithUniqueID:partUniqueID];
+				NSData * previewData = [[self delegate] MCOMessageView:self previewForData:downloadedData isHTMLInlineImage:[MCOCIDURLProtocol isCID:url]];
+				NSString *filename = [NSString stringWithFormat:@"%lu", (unsigned long)urlString.hash];
+				NSURL *cacheURL = [self cacheJPEGImageData:previewData withFilename:filename];				
+				
+				NSString *replaceScript = [NSString stringWithFormat:@"replaceImageSrc(\"%@\", \"%@\")", urlString, cacheURL.absoluteString];
+				[_webView stringByEvaluatingJavaScriptFromString:replaceScript];
+				
+				[MCOCIDURLProtocol partDownloadedMessage:_message partUniqueID:partUniqueID data:previewData];
+			}];
+		}
+		[MCOCIDURLProtocol startLoadingWithMessage:_message
+									  partUniqueID:partUniqueID
+											  data:data
+										   request:nil];
+	}
+}
+
+- (NSURL *)cacheJPEGImageData:(NSData *)imageData withFilename:(NSString *)filename {
+	NSString *path = [[NSTemporaryDirectory() stringByAppendingPathComponent:filename] stringByAppendingPathExtension:@"jpg"];
+	[imageData writeToFile:path atomically:YES];	
+	return [NSURL fileURLWithPath:path];
 }
 
 - (MCOAbstractPart *) _partForCIDURL:(NSURL *)url
@@ -121,7 +182,7 @@
     NSURLRequest *responseRequest = [self webView:webView resource:nil willSendRequest:request redirectResponse:nil fromDataSource:nil];
     
     //NSLog(@"responseRequest:%@", responseRequest);
-    
+
     if(responseRequest == request) {
         return YES;
     } else {
@@ -134,6 +195,11 @@
 - (NSURLRequest *)webView:(UIWebView *)sender resource:(id)identifier willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse fromDataSource:(id)dataSource
 {
     MCOAbstractPart * part = NULL;
+    
+    if ([[[request URL] scheme] isEqualToString:@"x-mailcore-msgviewloaded"]) {
+        [self _loadImages];
+        return request;
+    }
     
     if ([MCOCIDURLProtocol isCID:[request URL]]) {
         part = [self _partForCIDURL:[request URL]];

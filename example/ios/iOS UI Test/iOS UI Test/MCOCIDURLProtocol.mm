@@ -56,6 +56,7 @@
 {
     self = [super initWithRequest:request cachedResponse:cachedResponse client:client];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_downloaded:) name:MCOCIDURLProtocolDownloadedNotification object:nil];
+	//NSLog(@"%@", [request mainDocumentURL]);
     return self;
 }
 
@@ -82,6 +83,7 @@
 - (void) startLoading
 {
     //NSLog(@"waiting for %p %@", self, [self _partUniqueID]);
+	//NSLog(@"%@", [self request]);
     if ([self _data] != NULL) {
         [[self class] partDownloadedMessage:[self _message] partUniqueID:[self _partUniqueID] data:[self _data]];
     }

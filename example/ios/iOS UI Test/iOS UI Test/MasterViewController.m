@@ -80,7 +80,7 @@
 		NSLog(@"fetched all messages.");
 		
 		NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"header.date" ascending:NO];
-		strongSelf.messages = [messages sortedArrayUsingDescriptors:@[sort]];//[NSArray   arrayWithArray:messages];
+		strongSelf.messages = [messages sortedArrayUsingDescriptors:@[sort]];
 		[strongSelf.tableView reloadData];
 	}];
 }
@@ -135,6 +135,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MCOIMAPMessage *msg = self.messages[indexPath.row];
     MCTMsgViewController *vc = [[MCTMsgViewController alloc] init];
+	vc.folder = @"INBOX";
     vc.message = msg;
     vc.session = self.imapSession;
     [self.navigationController pushViewController:vc animated:YES];
