@@ -1,4 +1,0 @@
-[submodule "submodules/libjson"]
-	path = submodules/libjson
-	url = git://github.com/dinhviethoa/libjson.git
-    ignore = dirty
