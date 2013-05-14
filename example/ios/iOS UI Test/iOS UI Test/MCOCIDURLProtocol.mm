@@ -82,8 +82,6 @@
 
 - (void) startLoading
 {
-    //NSLog(@"waiting for %p %@", self, [self _partUniqueID]);
-	//NSLog(@"%@", [self request]);
     if ([self _data] != NULL) {
         [[self class] partDownloadedMessage:[self _message] partUniqueID:[self _partUniqueID] data:[self _data]];
     }
@@ -93,7 +91,6 @@
 {
     NSDictionary * userInfo = [notification userInfo];
     
-    //NSLog(@"downloaded?");
     NSString * notifPartID = [userInfo objectForKey:@"PartUniqueID"];
     MCOAbstractMessage * notifMessage = [userInfo objectForKey:@"Message"];
     if (notifMessage != [self _message]) {
@@ -102,9 +99,7 @@
     if (![[self _partUniqueID] isEqualToString:notifPartID]) {
         return;
     }
-    
-    //NSLog(@"downloaded2 %p %@", self, notifPartID);
-    
+	
     NSData * data = [userInfo objectForKey:@"Data"];
     NSURLResponse * response = [[NSURLResponse alloc] initWithURL:[[self request] URL] MIMEType:@"application/data"
                                             expectedContentLength:[data length] textEncodingName:nil];
@@ -141,7 +136,6 @@
         [userInfo setObject:data forKey:@"Data"];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:MCOCIDURLProtocolDownloadedNotification object:nil userInfo:userInfo];
-    //NSLog(@"downloaded %p %@", self, partUniqueID);
 }
 
 @end

@@ -69,7 +69,7 @@
 
 - (void) setMessage:(MCOIMAPMessage *)message
 {
-    if (mailcore::logEnabled) NSLog(@"set message : %@", message);
+	MCLog("set message : %s", message.description.UTF8String);
     for(MCOOperation * op in _ops) {
         [op cancel];
     }
@@ -88,7 +88,7 @@
 
 - (MCOIMAPFetchContentOperation *) _fetchIMAPPartWithUniqueID:(NSString *)partUniqueID folder:(NSString *)folder
 {
-    if (mailcore::logEnabled) NSLog(@"%@ is missing, fetching", partUniqueID);
+    MCLog("%s is missing, fetching", partUniqueID.description.UTF8String);
     
     if ([_pending containsObject:partUniqueID]) {
         return NULL;
@@ -111,7 +111,7 @@
         [_ops removeObject:op];
         [_storage setObject:data forKey:partUniqueID];
         [_pending removeObject:partUniqueID];
-        if (mailcore::logEnabled) NSLog(@"downloaded %@", partUniqueID);
+        MCLog("downloaded %s", partUniqueID.description.UTF8String);
         
         [self _callbackForPartUniqueID:partUniqueID error:nil];
     }];
@@ -125,11 +125,9 @@ typedef void (^DownloadCallback)(NSError * error);
 {
     NSArray * blocks;
     blocks = [_callbacks objectForKey:partUniqueID];
-    if (mailcore::logEnabled) NSLog(@"%@", blocks);
     for(DownloadCallback block in blocks) {
         block(error);
     }
-    if (mailcore::logEnabled) NSLog(@"done: %@", blocks);
 }
 
 - (NSString *) MCOMessageView_templateForAttachment:(MCOMessageView *)view
@@ -199,7 +197,7 @@ typedef void (^DownloadCallback)(NSError * error);
 {
     MCOIMAPFetchContentOperation * op = [self _fetchIMAPPartWithUniqueID:partUniqueID folder:_folder];
     [op setProgress:^(unsigned int current, unsigned int maximum) {
-        if (mailcore::logEnabled) NSLog(@"progress content: %u/%u", current, maximum);
+        MCLog("progress content: %u/%u", current, maximum);
     }];
     [_ops addObject:op];
     if (downloadFinished != NULL) {

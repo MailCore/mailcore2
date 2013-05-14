@@ -89,11 +89,9 @@
             content = nil;
             MCAssert(0);
         }
-    }
-	NSLog(@"%s",__PRETTY_FUNCTION__);
-	
+    }	
 	if (content == nil) {
-		[_webView loadHTMLString:@"" baseURL:/*[NSURL URLWithString:urlString]*/nil];
+		[_webView loadHTMLString:@"" baseURL:nil];
 		return;
 	}
 	
@@ -106,7 +104,6 @@
 
 - (void) _loadImages
 {
-	NSLog(@"%s",__PRETTY_FUNCTION__);
 	NSString * result = [_webView stringByEvaluatingJavaScriptFromString:@"findCIDImageURL()"];
 	NSData * data = [result dataUsingEncoding:NSUTF8StringEncoding];
 	NSError *error = nil;
@@ -181,8 +178,6 @@
     
     NSURLRequest *responseRequest = [self webView:webView resource:nil willSendRequest:request redirectResponse:nil fromDataSource:nil];
     
-    //NSLog(@"responseRequest:%@", responseRequest);
-
     if(responseRequest == request) {
         return YES;
     } else {
