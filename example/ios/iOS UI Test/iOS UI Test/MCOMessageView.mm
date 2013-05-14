@@ -130,7 +130,7 @@
 				NSData * downloadedData = [[self delegate] MCOMessageView:self dataForPartWithUniqueID:partUniqueID];
 				NSData * previewData = [[self delegate] MCOMessageView:self previewForData:downloadedData isHTMLInlineImage:[MCOCIDURLProtocol isCID:url]];
 				NSString *filename = [NSString stringWithFormat:@"%lu", (unsigned long)urlString.hash];
-				NSURL *cacheURL = [self cacheJPEGImageData:previewData withFilename:filename];				
+				NSURL *cacheURL = [self _cacheJPEGImageData:previewData withFilename:filename];
 				
 				NSString *replaceScript = [NSString stringWithFormat:@"replaceImageSrc(\"%@\", \"%@\")", urlString, cacheURL.absoluteString];
 				[_webView stringByEvaluatingJavaScriptFromString:replaceScript];
@@ -145,7 +145,8 @@
 	}
 }
 
-- (NSURL *)cacheJPEGImageData:(NSData *)imageData withFilename:(NSString *)filename {
+- (NSURL *) _cacheJPEGImageData:(NSData *)imageData withFilename:(NSString *)filename
+{
 	NSString *path = [[NSTemporaryDirectory() stringByAppendingPathComponent:filename] stringByAppendingPathExtension:@"jpg"];
 	[imageData writeToFile:path atomically:YES];	
 	return [NSURL fileURLWithPath:path];
