@@ -16,13 +16,14 @@ var findCIDImageURL = function() {
 	return JSON.stringify(imgLinks);
 }
 
-var replaceImageSrc = function(original, local) {	
+var replaceImageSrc = function(jsonString) {
+	var parsedJson = JSON.parse(jsonString);
 	var images = imageElements();
 	
 	for (var i = 0; i < images.length; i++) {
 		var url = images[i].getAttribute('src');
-		if (url.indexOf(original) == 0) {
-			images[i].setAttribute('src', local);
+		if (url.indexOf(parsedJson.URLKey) == 0) {
+			images[i].setAttribute('src', parsedJson.LocalPathKey);
 			break;
 		}
 	}

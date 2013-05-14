@@ -146,7 +146,10 @@
 			NSString *filename = [NSString stringWithFormat:@"%lu", (unsigned long)urlString.hash];
 			NSURL *cacheURL = [self _cacheJPEGImageData:previewData withFilename:filename];
 			
-			NSString *replaceScript = [NSString stringWithFormat:@"replaceImageSrc(\"%@\", \"%@\")", urlString, cacheURL.absoluteString];
+			NSDictionary *args = @{ @"URLKey": urlString, @"LocalPathKey": cacheURL.absoluteString };
+			NSString *jsonString = [self _jsonEscapedStringFromDictionary:args];
+			
+			NSString *replaceScript = [NSString stringWithFormat:@"replaceImageSrc(\"%@\")", jsonString];
 			[_webView stringByEvaluatingJavaScriptFromString:replaceScript];
 		};
 		
@@ -158,6 +161,14 @@
 			replaceImages(nil);
 		}
 	}
+}
+
+- (NSString *) _jsonEscapedStringFromDictionary:(NSDictionary *)dictionary {
+	NSData *json = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:nil];
+	NSString *jsonString = [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
+	jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
+	jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+	return jsonString;
 }
 
 - (NSURL *) _cacheJPEGImageData:(NSData *)imageData withFilename:(NSString *)filename
