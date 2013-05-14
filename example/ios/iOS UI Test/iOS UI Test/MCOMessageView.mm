@@ -139,16 +139,23 @@
 		
 		NSString * partUniqueID = [part uniqueID];
 		NSData * data = [[self delegate] MCOMessageView:self dataForPartWithUniqueID:partUniqueID];
+		
+		void (^replaceImages)(NSError *error) = ^(NSError *error) {
+			NSData * downloadedData = [[self delegate] MCOMessageView:self dataForPartWithUniqueID:partUniqueID];
+			NSData * previewData = [[self delegate] MCOMessageView:self previewForData:downloadedData isHTMLInlineImage:[self _isCID:url]];
+			NSString *filename = [NSString stringWithFormat:@"%lu", (unsigned long)urlString.hash];
+			NSURL *cacheURL = [self _cacheJPEGImageData:previewData withFilename:filename];
+			
+			NSString *replaceScript = [NSString stringWithFormat:@"replaceImageSrc(\"%@\", \"%@\")", urlString, cacheURL.absoluteString];
+			[_webView stringByEvaluatingJavaScriptFromString:replaceScript];
+		};
+		
 		if (data == NULL) {
 			[[self delegate] MCOMessageView:self fetchDataForPartWithUniqueID:partUniqueID downloadedFinished:^(NSError * error) {
-				NSData * downloadedData = [[self delegate] MCOMessageView:self dataForPartWithUniqueID:partUniqueID];
-				NSData * previewData = [[self delegate] MCOMessageView:self previewForData:downloadedData isHTMLInlineImage:[self _isCID:url]];
-				NSString *filename = [NSString stringWithFormat:@"%lu", (unsigned long)urlString.hash];
-				NSURL *cacheURL = [self _cacheJPEGImageData:previewData withFilename:filename];
-				
-				NSString *replaceScript = [NSString stringWithFormat:@"replaceImageSrc(\"%@\", \"%@\")", urlString, cacheURL.absoluteString];
-				[_webView stringByEvaluatingJavaScriptFromString:replaceScript];
+				replaceImages(error);
 			}];
+		} else {
+			replaceImages(nil);
 		}
 	}
 }
