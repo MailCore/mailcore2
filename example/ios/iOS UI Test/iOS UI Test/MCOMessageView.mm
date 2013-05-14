@@ -8,8 +8,6 @@
 
 #import "MCOMessageView.h"
 
-//#import "MCOCIDURLProtocol.h"
-
 @interface MCOMessageView () <MCOHTMLRendererIMAPDelegate>
 
 @end
