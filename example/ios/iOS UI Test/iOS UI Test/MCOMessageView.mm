@@ -148,14 +148,8 @@
 				
 				NSString *replaceScript = [NSString stringWithFormat:@"replaceImageSrc(\"%@\", \"%@\")", urlString, cacheURL.absoluteString];
 				[_webView stringByEvaluatingJavaScriptFromString:replaceScript];
-				
-				//[MCOCIDURLProtocol partDownloadedMessage:_message partUniqueID:partUniqueID data:previewData];
 			}];
 		}
-//		[MCOCIDURLProtocol startLoadingWithMessage:_message
-//									  partUniqueID:partUniqueID
-//											  data:data
-//										   request:nil];
 	}
 }
 

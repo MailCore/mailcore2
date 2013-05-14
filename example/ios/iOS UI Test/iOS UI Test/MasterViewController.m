@@ -22,7 +22,7 @@
 @implementation MasterViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+	[super viewDidLoad];
 	
 	[[NSUserDefaults standardUserDefaults] registerDefaults:@{ HostnameKey: @"imap.gmail.com" }];
 	
@@ -64,9 +64,9 @@
 
 - (void)loadEmails {
 	MCOIMAPMessagesRequestKind requestKind = (MCOIMAPMessagesRequestKind)
-    (MCOIMAPMessagesRequestKindHeaders | MCOIMAPMessagesRequestKindStructure |
-     MCOIMAPMessagesRequestKindInternalDate | MCOIMAPMessagesRequestKindHeaderSubject |
-     MCOIMAPMessagesRequestKindFlags);
+	(MCOIMAPMessagesRequestKindHeaders | MCOIMAPMessagesRequestKindStructure |
+	 MCOIMAPMessagesRequestKindInternalDate | MCOIMAPMessagesRequestKindHeaderSubject |
+	 MCOIMAPMessagesRequestKindFlags);
 	self.imapMessagesFetchOp = [self.imapSession fetchMessagesByUIDOperationWithFolder:@"INBOX"
 																		   requestKind:requestKind
 																				  uids:[MCOIndexSet indexSetWithRange:MCORangeMake(1, UINT64_MAX)]];
@@ -86,7 +86,7 @@
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+	[super didReceiveMemoryWarning];
 	NSLog(@"%s",__PRETTY_FUNCTION__);
 }
 
@@ -101,12 +101,12 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 	
 	MCOIMAPMessage *message = self.messages[indexPath.row];
 	cell.textLabel.text = message.header.subject;
 	
-    return cell;
+	return cell;
 }
 
 - (void)showSettingsViewController:(id)sender {
@@ -133,12 +133,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    MCOIMAPMessage *msg = self.messages[indexPath.row];
-    MCTMsgViewController *vc = [[MCTMsgViewController alloc] init];
+	MCOIMAPMessage *msg = self.messages[indexPath.row];
+	MCTMsgViewController *vc = [[MCTMsgViewController alloc] init];
 	vc.folder = @"INBOX";
-    vc.message = msg;
-    vc.session = self.imapSession;
-    [self.navigationController pushViewController:vc animated:YES];
+	vc.message = msg;
+	vc.session = self.imapSession;
+	[self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
