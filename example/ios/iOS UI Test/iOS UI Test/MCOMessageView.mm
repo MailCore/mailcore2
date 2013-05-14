@@ -134,6 +134,9 @@
 			part = [self _partForUniqueID:partUniqueID];
 		}
 		
+		if (part == nil)
+			continue;
+		
 		NSString * partUniqueID = [part uniqueID];
 		NSData * data = [[self delegate] MCOMessageView:self dataForPartWithUniqueID:partUniqueID];
 		if (data == NULL) {
