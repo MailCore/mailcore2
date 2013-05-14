@@ -143,17 +143,17 @@
 		void (^replaceImages)(NSError *error) = ^(NSError *error) {
 			NSData * downloadedData = [[self delegate] MCOMessageView:self dataForPartWithUniqueID:partUniqueID];
 			NSData * previewData = [[self delegate] MCOMessageView:self previewForData:downloadedData isHTMLInlineImage:[self _isCID:url]];
-			NSString *filename = [NSString stringWithFormat:@"%lu", (unsigned long)urlString.hash];
-			NSURL *cacheURL = [self _cacheJPEGImageData:previewData withFilename:filename];
+			NSString * filename = [NSString stringWithFormat:@"%lu", (unsigned long)urlString.hash];
+			NSURL * cacheURL = [self _cacheJPEGImageData:previewData withFilename:filename];
 			
-			NSDictionary *args = @{ @"URLKey": urlString, @"LocalPathKey": cacheURL.absoluteString };
-			NSString *jsonString = [self _jsonEscapedStringFromDictionary:args];
+			NSDictionary * args = @{ @"URLKey": urlString, @"LocalPathKey": cacheURL.absoluteString };
+			NSString * jsonString = [self _jsonEscapedStringFromDictionary:args];
 			
-			NSString *replaceScript = [NSString stringWithFormat:@"replaceImageSrc(\"%@\")", jsonString];
+			NSString * replaceScript = [NSString stringWithFormat:@"replaceImageSrc(\"%@\")", jsonString];
 			[_webView stringByEvaluatingJavaScriptFromString:replaceScript];
 		};
 		
-		if (data == NULL) {
+		if (data == nil) {
 			[[self delegate] MCOMessageView:self fetchDataForPartWithUniqueID:partUniqueID downloadedFinished:^(NSError * error) {
 				replaceImages(error);
 			}];
@@ -163,9 +163,10 @@
 	}
 }
 
-- (NSString *) _jsonEscapedStringFromDictionary:(NSDictionary *)dictionary {
-	NSData *json = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:nil];
-	NSString *jsonString = [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
+- (NSString *) _jsonEscapedStringFromDictionary:(NSDictionary *)dictionary
+{
+	NSData * json = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:nil];
+	NSString * jsonString = [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
 	jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
 	jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
 	return jsonString;
@@ -173,7 +174,7 @@
 
 - (NSURL *) _cacheJPEGImageData:(NSData *)imageData withFilename:(NSString *)filename
 {
-	NSString *path = [[NSTemporaryDirectory() stringByAppendingPathComponent:filename] stringByAppendingPathExtension:@"jpg"];
+	NSString * path = [[NSTemporaryDirectory() stringByAppendingPathComponent:filename] stringByAppendingPathExtension:@"jpg"];
 	[imageData writeToFile:path atomically:YES];	
 	return [NSURL fileURLWithPath:path];
 }
