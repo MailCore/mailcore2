@@ -27,7 +27,6 @@
 		ABE40268173F0151007F1FB3 /* MCOMessageViewScript.js in Sources */ = {isa = PBXBuildFile; fileRef = ABE40267173F0151007F1FB3 /* MCOMessageViewScript.js */; };
 		ABE40269173F0282007F1FB3 /* MCOMessageViewScript.js in Resources */ = {isa = PBXBuildFile; fileRef = ABE40267173F0151007F1FB3 /* MCOMessageViewScript.js */; };
 		ABE4026B173F3FCE007F1FB3 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE4026A173F3FCE007F1FB3 /* ImageIO.framework */; };
-		B12AAA3317322654003551C7 /* MCOCIDURLProtocol.mm in Sources */ = {isa = PBXBuildFile; fileRef = B12AAA2E17322654003551C7 /* MCOCIDURLProtocol.mm */; };
 		B12AAA3417322654003551C7 /* MCOMessageView.mm in Sources */ = {isa = PBXBuildFile; fileRef = B12AAA3017322654003551C7 /* MCOMessageView.mm */; };
 		B12AAA3517322654003551C7 /* MCTMsgViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B12AAA3217322654003551C7 /* MCTMsgViewController.mm */; };
 /* End PBXBuildFile section */
@@ -105,8 +104,6 @@
 		AB9EAE3F170374D900D750C7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		ABE40267173F0151007F1FB3 /* MCOMessageViewScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = MCOMessageViewScript.js; sourceTree = "<group>"; };
 		ABE4026A173F3FCE007F1FB3 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		B12AAA2D17322654003551C7 /* MCOCIDURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOCIDURLProtocol.h; sourceTree = "<group>"; };
-		B12AAA2E17322654003551C7 /* MCOCIDURLProtocol.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOCIDURLProtocol.mm; sourceTree = "<group>"; };
 		B12AAA2F17322654003551C7 /* MCOMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOMessageView.h; sourceTree = "<group>"; };
 		B12AAA3017322654003551C7 /* MCOMessageView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOMessageView.mm; sourceTree = "<group>"; };
 		B12AAA3117322654003551C7 /* MCTMsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTMsgViewController.h; sourceTree = "<group>"; };
@@ -194,8 +191,6 @@
 				AB9EAE1D170368F000D750C7 /* MainStoryboard.storyboard */,
 				AB9EAE20170368F000D750C7 /* MasterViewController.h */,
 				AB9EAE21170368F000D750C7 /* MasterViewController.m */,
-				B12AAA2D17322654003551C7 /* MCOCIDURLProtocol.h */,
-				B12AAA2E17322654003551C7 /* MCOCIDURLProtocol.mm */,
 				B12AAA2F17322654003551C7 /* MCOMessageView.h */,
 				B12AAA3017322654003551C7 /* MCOMessageView.mm */,
 				ABE40267173F0151007F1FB3 /* MCOMessageViewScript.js */,
@@ -341,7 +336,6 @@
 				AB9EAE22170368F000D750C7 /* MasterViewController.m in Sources */,
 				AB9EAE3617036FD700D750C7 /* SettingsViewController.m in Sources */,
 				AB665BCD17134336007F2151 /* FXKeychain.m in Sources */,
-				B12AAA3317322654003551C7 /* MCOCIDURLProtocol.mm in Sources */,
 				B12AAA3417322654003551C7 /* MCOMessageView.mm in Sources */,
 				B12AAA3517322654003551C7 /* MCTMsgViewController.mm in Sources */,
 				ABE40268173F0151007F1FB3 /* MCOMessageViewScript.js in Sources */,
