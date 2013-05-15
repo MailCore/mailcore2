@@ -175,8 +175,14 @@ typedef void (^DownloadCallback)(NSError * error);
 
 - (NSData *) MCOMessageView:(MCOMessageView *)view dataForPartWithUniqueID:(NSString *)partUniqueID
 {
-    NSData * data = [_storage objectForKey:partUniqueID];
-    return data;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"FetchFullMessageEnabled"]) {
+        MCOAttachment * attachment = (MCOAttachment *) [[_messageView message] partForUniqueID:partUniqueID];
+        return [attachment data];
+    }
+    else {
+        NSData * data = [_storage objectForKey:partUniqueID];
+        return data;
+    }
 }
 
 - (void) MCOMessageView:(MCOMessageView *)view fetchDataForPartWithUniqueID:(NSString *)partUniqueID
