@@ -24,7 +24,6 @@
 		AB9EAE3617036FD700D750C7 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB9EAE3417036FD600D750C7 /* SettingsViewController.m */; };
 		AB9EAE3717036FD700D750C7 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB9EAE3517036FD700D750C7 /* SettingsViewController.xib */; };
 		AB9EAE40170374D900D750C7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB9EAE3F170374D900D750C7 /* Security.framework */; };
-		ABE40268173F0151007F1FB3 /* MCOMessageViewScript.js in Sources */ = {isa = PBXBuildFile; fileRef = ABE40267173F0151007F1FB3 /* MCOMessageViewScript.js */; };
 		ABE40269173F0282007F1FB3 /* MCOMessageViewScript.js in Resources */ = {isa = PBXBuildFile; fileRef = ABE40267173F0151007F1FB3 /* MCOMessageViewScript.js */; };
 		ABE4026B173F3FCE007F1FB3 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE4026A173F3FCE007F1FB3 /* ImageIO.framework */; };
 		B12AAA3417322654003551C7 /* MCOMessageView.mm in Sources */ = {isa = PBXBuildFile; fileRef = B12AAA3017322654003551C7 /* MCOMessageView.mm */; };
@@ -338,7 +337,6 @@
 				AB665BCD17134336007F2151 /* FXKeychain.m in Sources */,
 				B12AAA3417322654003551C7 /* MCOMessageView.mm in Sources */,
 				B12AAA3517322654003551C7 /* MCTMsgViewController.mm in Sources */,
-				ABE40268173F0151007F1FB3 /* MCOMessageViewScript.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

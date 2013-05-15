@@ -147,7 +147,7 @@
 			NSDictionary * args = @{ @"URLKey": urlString, @"LocalPathKey": cacheURL.absoluteString };
 			NSString * jsonString = [self _jsonEscapedStringFromDictionary:args];
 			
-			NSString * replaceScript = [NSString stringWithFormat:@"replaceImageSrc(\"%@\")", jsonString];
+			NSString * replaceScript = [NSString stringWithFormat:@"replaceImageSrc(%@)", jsonString];
 			[_webView stringByEvaluatingJavaScriptFromString:replaceScript];
 		};
 		
@@ -165,8 +165,6 @@
 {
 	NSData * json = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:nil];
 	NSString * jsonString = [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
-	jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
-	jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
 	return jsonString;
 }
 

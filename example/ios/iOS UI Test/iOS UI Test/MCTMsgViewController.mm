@@ -251,15 +251,14 @@ typedef void (^DownloadCallback)(NSError * error);
     [info setObject:(id) kCFBooleanTrue forKey:(id) kCGImageSourceCreateThumbnailFromImageAlways];
     [info setObject:(id) [NSNumber numberWithFloat:(float) IMAGE_PREVIEW_WIDTH] forKey:(id) kCGImageSourceThumbnailMaxPixelSize];
     thumbnail = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, (__bridge CFDictionaryRef) info);
-    //[info release];
 
     CGImageDestinationRef destination;
     NSMutableData * destData = [NSMutableData data];
 
     destination = CGImageDestinationCreateWithData((__bridge CFMutableDataRef) destData,
-													+                                                   (CFStringRef) @"public.jpeg",
-													+                                                   1, NULL);
-
+                                                   (CFStringRef) @"public.jpeg",
+                                                   1, NULL);
+    
     CGImageDestinationAddImage(destination, thumbnail, NULL);
     CGImageDestinationFinalize(destination);
 
