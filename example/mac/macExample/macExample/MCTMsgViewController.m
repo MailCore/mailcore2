@@ -186,7 +186,9 @@ typedef void (^DownloadCallback)(NSError * error);
     [op setProgress:^(unsigned int current, unsigned int maximum) {
         NSLog(@"progress content: %u/%u", current, maximum);
     }];
-    [_ops addObject:op];
+    if (op != nil) {
+        [_ops addObject:op];
+    }
     if (downloadFinished != NULL) {
         NSMutableArray * blocks;
         blocks = [_callbacks objectForKey:partUniqueID];
