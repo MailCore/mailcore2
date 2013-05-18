@@ -23,6 +23,7 @@
 @class MCOAbstractPart;
 @class MCOAbstractMessage;
 @class MCOMessageHeader;
+@class MCOAbstractMessagePart;
 
 @protocol MCOHTMLRendererDelegate <NSObject>
 
@@ -51,14 +52,14 @@
 
 // This delegate method returns the template for the main header of the message.
 // See the content of MCHTMLRendererCallback.cpp for the default values of the template.
-- (NSString *) MCOAbstractMessage_templateForMainHeader:(MCOAbstractMessage *)msg;
+- (NSString *) MCOAbstractMessage:(MCOAbstractMessage *)msg templateForMainHeader:(MCOMessageHeader *)header;
 
 // This delegate method returns the template an image attachment.
-- (NSString *) MCOAbstractMessage_templateForImage:(MCOAbstractMessage *)msg;
+- (NSString *) MCOAbstractMessage:(MCOAbstractMessage *)msg templateForImage:(MCOAbstractPart *)header;
 
 // This delegate method returns the template attachment other than images.
 // See the content of MCHTMLRendererCallback.cpp for the default values of the template.
-- (NSString *) MCOAbstractMessage_templateForAttachment:(MCOAbstractMessage *)msg;
+- (NSString *) MCOAbstractMessage:(MCOAbstractMessage *)msg templateForAttachment:(MCOAbstractPart *)part;
 
 // This delegate method returns the template of the main message.
 // It should include HEADER and a BODY values.
@@ -68,11 +69,11 @@
 // This delegate method returns the template of an embedded message (included as attachment).
 // It should include HEADER and a BODY values.
 // See the content of MCHTMLRendererCallback.cpp for the default values of the template.
-- (NSString *) MCOAbstractMessage_templateForEmbeddedMessage:(MCOAbstractMessage *)msg;
+- (NSString *) MCOAbstractMessage:(MCOAbstractMessage *)msg templateForEmbeddedMessage:(MCOAbstractMessagePart *)part;
 
 // This delegate method returns the template for the header of an embedded message.
 // See the content of MCHTMLRendererCallback.cpp for the default values of the template.
-- (NSString *) MCOAbstractMessage_templateForEmbeddedMessageHeader:(MCOAbstractMessage *)msg;
+- (NSString *) MCOAbstractMessage:(MCOAbstractMessage *)msg templateForEmbeddedMessageHeader:(MCOMessageHeader *)header;
 
 // This delegate method returns the separator between the text of the message and the attachments.
 // This delegate method returns the template for the header of an embedded message.

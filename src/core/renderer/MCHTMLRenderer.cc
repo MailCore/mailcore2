@@ -198,12 +198,12 @@ static String * htmlForAbstractMessage(String * folder, AbstractMessage * messag
     content = htmlCallback->filterHTMLForMessage(content);
     
     HashMap * values = htmlCallback->templateValuesForHeader(message->header());
-    String * headerString = renderTemplate(htmlCallback->templateForMainHeader(), values);
+    String * headerString = renderTemplate(htmlCallback->templateForMainHeader(message->header()), values);
     
     HashMap * msgValues = new HashMap();
     msgValues->setObjectForKey(MCSTR("HEADER"), headerString);
     msgValues->setObjectForKey(MCSTR("BODY"), content);
-    String * result = renderTemplate(htmlCallback->templateForMessage(), msgValues);
+    String * result = renderTemplate(htmlCallback->templateForMessage(message), msgValues);
     msgValues->release();
     
     return result;
@@ -330,14 +330,14 @@ static String * htmlForAbstractSinglePart(AbstractPart * part, htmlRendererConte
                                                                             part->uniqueID()->UTF8Characters());
             HashMap * values = context->htmlCallback->templateValuesForPart(part);
             values->setObjectForKey(MCSTR("URL"), url);
-            content = renderTemplate(context->htmlCallback->templateForImage(), values);
+            content = renderTemplate(context->htmlCallback->templateForImage(part), values);
         }
         else {
             if (part->className()->isEqual(MCSTR("mailcore::IMAPPart"))) {
                 context->dataCallback->prefetchAttachmentIMAPPart(context->folder, (IMAPPart *) part);
             }
             HashMap * values = context->htmlCallback->templateValuesForPart(part);
-            content = renderTemplate(context->htmlCallback->templateForAttachment(), values);
+            content = renderTemplate(context->htmlCallback->templateForAttachment(part), values);
         }
         
         result->appendString(separatorString);
@@ -360,12 +360,12 @@ static String * htmlForAbstractMessagePart(AbstractMessagePart * part, htmlRende
     MCAssert(substring != NULL);
     
     HashMap * values = context->htmlCallback->templateValuesForHeader(part->header());
-    String * headerString = renderTemplate(context->htmlCallback->templateForEmbeddedMessageHeader(), values);
+    String * headerString = renderTemplate(context->htmlCallback->templateForEmbeddedMessageHeader(part->header()), values);
 	
 	HashMap * msgValues = new HashMap();
     msgValues->setObjectForKey(MCSTR("HEADER"), headerString);
     msgValues->setObjectForKey(MCSTR("BODY"), substring);
-    String * result = renderTemplate(context->htmlCallback->templateForEmbeddedMessage(), msgValues);
+    String * result = renderTemplate(context->htmlCallback->templateForEmbeddedMessage(part), msgValues);
     msgValues->release();
 
     return result;

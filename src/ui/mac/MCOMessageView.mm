@@ -205,9 +205,17 @@
     }
     
     if (![[self delegate] respondsToSelector:@selector(MCOMessageView:canPreviewPart:)]) {
-        return false;
+        return NO;
     }
     return [[self delegate] MCOMessageView:self canPreviewPart:part];
+}
+
+- (BOOL) MCOAbstractMessage:(MCOAbstractMessage *)msg shouldShowPart:(MCOAbstractPart *)part
+{
+    if (![[self delegate] respondsToSelector:@selector(MCOMessageView:shouldShowPart:)]) {
+        return YES;
+    }
+    return [[self delegate] MCOMessageView:self shouldShowPart:part];
 }
 
 - (NSDictionary *) MCOAbstractMessage:(MCOAbstractMessage *)msg templateValuesForHeader:(MCOMessageHeader *)header
@@ -226,19 +234,19 @@
     return [[self delegate] MCOMessageView:self templateValuesForPartWithUniqueID:[part uniqueID]];
 }
 
-- (NSString *) MCOAbstractMessage_templateForMainHeader:(MCOAbstractMessage *)msg
+- (NSString *) MCOAbstractMessage:(MCOAbstractMessage *)msg templateForMainHeader:(MCOMessageHeader *)header
 {
-    if (![[self delegate] respondsToSelector:@selector(MCOMessageView_templateForMainHeader:)]) {
+    if (![[self delegate] respondsToSelector:@selector(MCOMessageView:templateForMainHeader:)]) {
         return nil;
     }
-    return [[self delegate] MCOMessageView_templateForMainHeader:self];
+    return [[self delegate] MCOMessageView:self templateForMainHeader:header];
 }
 
-- (NSString *) MCOAbstractMessage_templateForImage:(MCOAbstractMessage *)msg
+- (NSString *) MCOAbstractMessage:(MCOAbstractMessage *)msg templateForImage:(MCOAbstractPart *)part
 {
     NSString * templateString;
-    if ([[self delegate] respondsToSelector:@selector(MCOMessageView_templateForImage:)]) {
-        templateString = [[self delegate] MCOMessageView_templateForImage:self];
+    if ([[self delegate] respondsToSelector:@selector(MCOMessageView:templateForImage:)]) {
+        templateString = [[self delegate] MCOMessageView:self templateForImage:part];
     }
     else {
         templateString = @"<img src=\"{{URL}}\"/>";
@@ -247,12 +255,12 @@
     return templateString;
 }
 
-- (NSString *) MCOAbstractMessage_templateForAttachment:(MCOAbstractMessage *)msg
+- (NSString *) MCOAbstractMessage:(MCOAbstractMessage *)msg templateForAttachment:(MCOAbstractPart *)part
 {
-    if (![[self delegate] respondsToSelector:@selector(MCOMessageView_templateForAttachment:)]) {
+    if (![[self delegate] respondsToSelector:@selector(MCOMessageView:templateForAttachment:)]) {
         return NULL;
     }
-    NSString * templateString = [[self delegate] MCOMessageView_templateForAttachment:self];
+    NSString * templateString = [[self delegate] MCOMessageView:self templateForAttachment:part];
     templateString = [NSString stringWithFormat:@"<div id=\"{{CONTENTID}}\">%@</div>", templateString];
     return templateString;
 }
@@ -265,20 +273,20 @@
     return [[self delegate] MCOMessageView_templateForMessage:self];
 }
 
-- (NSString *) MCOAbstractMessage_templateForEmbeddedMessage:(MCOAbstractMessage *)msg
+- (NSString *) MCOAbstractMessage:(MCOAbstractMessage *)msg templateForEmbeddedMessage:(MCOAbstractMessagePart *)part
 {
-    if (![[self delegate] respondsToSelector:@selector(MCOMessageView_templateForEmbeddedMessage:)]) {
+    if (![[self delegate] respondsToSelector:@selector(MCOMessageView:templateForEmbeddedMessage:)]) {
         return NULL;
     }
-    return [[self delegate] MCOMessageView_templateForEmbeddedMessage:self];
+    return [[self delegate] MCOMessageView:self templateForEmbeddedMessage:part];
 }
 
-- (NSString *) MCOAbstractMessage_templateForEmbeddedMessageHeader:(MCOAbstractMessage *)msg
+- (NSString *) MCOAbstractMessage:(MCOAbstractMessage *)msg templateForEmbeddedMessageHeader:(MCOMessageHeader *)header
 {
-    if (![[self delegate] respondsToSelector:@selector(MCOMessageView_templateForEmbeddedMessageHeader:)]) {
+    if (![[self delegate] respondsToSelector:@selector(MCOMessageView:templateForEmbeddedMessageHeader:)]) {
         return NULL;
     }
-    return [[self delegate] MCOMessageView_templateForEmbeddedMessageHeader:self];
+    return [[self delegate] MCOMessageView:self templateForEmbeddedMessageHeader:header];
 }
 
 - (NSString *) MCOAbstractMessage_templateForAttachmentSeparator:(MCOAbstractMessage *)msg

@@ -26,12 +26,12 @@ public:
     virtual bool shouldShowPart(mailcore::AbstractPart * part);
     virtual mailcore::HashMap * templateValuesForHeader(mailcore::MessageHeader * header);
     virtual mailcore::HashMap * templateValuesForPart(mailcore::AbstractPart * part);
-    virtual mailcore::String * templateForMainHeader();
-    virtual mailcore::String * templateForImage();
-    virtual mailcore::String * templateForAttachment();
-    virtual mailcore::String * templateForMessage();
-    virtual mailcore::String * templateForEmbeddedMessage();
-    virtual mailcore::String * templateForEmbeddedMessageHeader();
+    virtual mailcore::String * templateForMainHeader(mailcore::MessageHeader * header);
+    virtual mailcore::String * templateForImage(mailcore::AbstractPart * part);
+    virtual mailcore::String * templateForAttachment(mailcore::AbstractPart * part);
+    virtual mailcore::String * templateForMessage(mailcore::AbstractMessage * message);
+    virtual mailcore::String * templateForEmbeddedMessage(mailcore::AbstractMessagePart * part);
+    virtual mailcore::String * templateForEmbeddedMessageHeader(mailcore::MessageHeader * header);
     virtual mailcore::String * templateForAttachmentSeparator();
     virtual mailcore::String * filterHTMLForPart(mailcore::String * html);
     virtual mailcore::String * filterHTMLForMessage(mailcore::String * html);

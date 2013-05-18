@@ -34,12 +34,12 @@ namespace mailcore {
         virtual HashMap * templateValuesForHeader(MessageHeader * header);
         virtual HashMap * templateValuesForPart(AbstractPart * part);
         
-        virtual String * templateForMainHeader();
-        virtual String * templateForImage();
-        virtual String * templateForAttachment();
-        virtual String * templateForMessage();
-        virtual String * templateForEmbeddedMessage();
-        virtual String * templateForEmbeddedMessageHeader();
+        virtual String * templateForMainHeader(MessageHeader * header);
+        virtual String * templateForImage(AbstractPart * part);
+        virtual String * templateForAttachment(AbstractPart * part);
+        virtual String * templateForMessage(AbstractMessage * message);
+        virtual String * templateForEmbeddedMessage(AbstractMessagePart * part);
+        virtual String * templateForEmbeddedMessageHeader(MessageHeader * header);
         virtual String * templateForAttachmentSeparator();
 		
         // Can be used to filter some HTML tags.

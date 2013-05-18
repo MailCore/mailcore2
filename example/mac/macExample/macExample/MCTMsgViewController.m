@@ -117,7 +117,7 @@ typedef void (^DownloadCallback)(NSError * error);
     NSLog(@"done: %@", blocks);
 }
 
-- (NSString *) MCOMessageView_templateForAttachment:(MCOMessageView *)view
+- (NSString *) MCOMessageView:(MCOMessageView *)view templateForAttachment:(MCOAbstractPart *)part
 {
     return @"<div><img src=\"http://www.iconshock.com/img_jpg/OFFICE/general/jpg/128/attachment_icon.jpg\"/></div>\
 {{#HASSIZE}}\
