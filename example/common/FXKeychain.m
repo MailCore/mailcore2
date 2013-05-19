@@ -105,7 +105,13 @@
     NSAssert(!object || (object && data), @"FXKeychain failed to encode object for key '%@', error: %@", key, error);
 
     //delete existing data
-    OSStatus status = SecItemDelete((__bridge CFDictionaryRef)query);
+	CFTypeRef result;
+	[query setObject:(__bridge id)kCFBooleanTrue forKey:(__bridge id)kSecReturnRef];
+    OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query, &result);//SecItemDelete((__bridge CFDictionaryRef)query);
+	if (status == errSecSuccess) {
+		status = SecKeychainItemDelete((SecKeychainItemRef) result);
+		CFRelease(result);
+	}
     
     //write data
     if (data)
