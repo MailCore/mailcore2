@@ -11,11 +11,6 @@
 @class MCTMsgListViewController;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
-    IBOutlet NSButton * _loginButton;
-    IBOutlet NSButton * _cancelButton;
-    IBOutlet NSTextField * _loginTextField;
-    IBOutlet NSTextField * _passwordTextField;
-    IBOutlet NSProgressIndicator * _progressView;
     IBOutlet MCTMsgListViewController * _msgListViewController;
     IBOutlet NSWindow * _accountWindow;
 }

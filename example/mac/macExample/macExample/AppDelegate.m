@@ -11,15 +11,20 @@
 #import <MailCore/MailCore.h>
 
 #import "MCTMsgListViewController.h"
+#import "FXKeychain.h"
 
 @interface AppDelegate () <NSTextFieldDelegate>
+@property (nonatomic, copy) NSString *login;
+@property (nonatomic, copy) NSString *hostname;
+@property (nonatomic, copy) NSString *password;
+@property (nonatomic, readonly) BOOL loginEnabled;
+@property (nonatomic, readonly) BOOL loggingIn;
 
+@property (nonatomic, retain) MCOIMAPSession *session;
+@property (nonatomic, retain) MCOIMAPOperation *checkOp;
 @end
 
-@implementation AppDelegate {
-    MCOIMAPSession * _session;
-    MCOIMAPOperation * _checkOp;
-}
+@implementation AppDelegate
 
 - (void) dealloc
 {
@@ -28,61 +33,57 @@
 
 - (void) awakeFromNib
 {
-    [_loginTextField setDelegate:self];
-    [_passwordTextField setDelegate:self];
-}
-
-- (void) applicationDidFinishLaunching:(NSNotification *)aNotification
-{
-    [self _updateState];
-    
-    NSString * login = [[NSUserDefaults standardUserDefaults] stringForKey:@"Login"];
-    NSString * password = [[NSUserDefaults standardUserDefaults] stringForKey:@"Password"];
-    
-    if (([login length] == 0) || ([password length] == 0)) {
-        [_accountWindow makeKeyAndOrderFront:nil];
-    }
-    else {
-        [_loginTextField setStringValue:login];
-        [_passwordTextField setStringValue:password];
-    }
+	[[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"Hostname": @"imap.gmail.com" }];
+	
+	self.login = [[NSUserDefaults standardUserDefaults] stringForKey:@"Login"];
+	self.hostname = [[NSUserDefaults standardUserDefaults] stringForKey:@"Hostname"];
+	self.password = [[FXKeychain defaultKeychain] objectForKey:@"Password"];
+	
+	if (self.login.length && self.password.length) {
+		[self accountLogin:nil];
+	} else {
+		[_accountWindow makeKeyAndOrderFront:nil];
+	}
 }
 
 - (void) accountLogin:(id)sender
 {
-    NSString * login = [_loginTextField stringValue];
-    NSString * password = [_passwordTextField stringValue];
-    
     NSLog(@"try login");
-    _session = [[MCOIMAPSession alloc] init];
-    [_session setHostname:@"imap.gmail.com"];
-    [_session setPort:993];
-    [_session setUsername:login];
-    [_session setPassword:password];
-    [_session setConnectionType:MCOConnectionTypeTLS];
-    _checkOp = [[_session checkAccountOperation] retain];
-    NSLog(@"start op");
-    [_checkOp start:^(NSError * error) {
+	[[NSUserDefaults standardUserDefaults] setObject:self.login forKey:@"Login"];
+	[[NSUserDefaults standardUserDefaults] setObject:self.hostname forKey:@"Hostname"];
+	
+	if (![[[FXKeychain defaultKeychain] objectForKey:@"Password"] isEqualToString:self.password]) {
+		[[FXKeychain defaultKeychain] removeObjectForKey:@"Password"];
+		[[FXKeychain defaultKeychain] setObject:self.password forKey:@"Password"];
+	}	
+	
+    self.session = [[MCOIMAPSession alloc] init];
+    [self.session setHostname:self.hostname];
+    [self.session setPort:993];
+    [self.session setUsername:self.login];
+    [self.session setPassword:self.password];
+    [self.session setConnectionType:MCOConnectionTypeTLS];
+    self.checkOp = [self.session checkAccountOperation];
+	
+	NSLog(@"start op");
+    [self.checkOp start:^(NSError * error) {
         [_accountWindow orderOut:nil];
-        
-        NSString * login = [_loginTextField stringValue];
-        NSString * password = [_passwordTextField stringValue];
-        [[NSUserDefaults standardUserDefaults] setObject:login forKey:@"Login"];
-        [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"Password"];
-        
-        [_checkOp release];
+	
+		[self willChangeValueForKey:@"loggingIn"];
+                
+        [self.checkOp release];
         _checkOp = nil;
-        [_session release];
+        [self.session release];
         _session = nil;
-        
-        [self _updateState];
-        
-        NSLog(@"op done %@", error);
-        
-        [_msgListViewController connect];
-    }];
-    
-    [self _updateState];
+		
+		[self didChangeValueForKey:@"loggingIn"];
+		
+		NSLog(@"op done (error: %@)", error);
+		if (error != nil)
+			[_accountWindow makeKeyAndOrderFront:nil];
+		
+        [_msgListViewController connectWithHostname:self.hostname login:self.login password:self.password];
+	}];
 }
 
 - (void) accountCancel:(id)sender
@@ -92,38 +93,26 @@
     _checkOp = nil;
     [_session release];
     _session = nil;
-    
-    [self _updateState];
 }
 
-- (void) _updateState
++ (NSSet *)keyPathsForValuesAffectingLoginEnabled
 {
-    if (_checkOp == nil) {
-        [_loginTextField setEnabled:YES];
-        [_passwordTextField setEnabled:YES];
-        NSString * login = [_loginTextField stringValue];
-        NSString * password = [_passwordTextField stringValue];
-        if (([login length] > 0) && ([password length] > 0)) {
-            [_loginButton setEnabled:YES];
-        }
-        else {
-            [_loginButton setEnabled:NO];
-        }
-        [_cancelButton setEnabled:NO];
-        [_progressView stopAnimation:nil];
-    }
-    else {
-        [_loginTextField setEnabled:NO];
-        [_passwordTextField setEnabled:NO];
-        [_loginButton setEnabled:NO];
-        [_cancelButton setEnabled:YES];
-        [_progressView startAnimation:nil];
-    }
+	return [NSSet setWithObjects:@"password", @"login", @"hostname", nil];
 }
 
-- (void) controlTextDidChange:(NSNotification *)aNotification
++ (NSSet *)keyPathsForValuesAffectingLoggingIn
 {
-    [self _updateState];
+	return [NSSet setWithObjects:@"checkOp", nil];
+}
+
+- (BOOL)loginEnabled
+{
+	return self.password.length && self.login.length && self.hostname.length && _checkOp == nil;
+}
+
+- (BOOL)loggingIn
+{
+	return (self.checkOp != nil);
 }
 
 @end
