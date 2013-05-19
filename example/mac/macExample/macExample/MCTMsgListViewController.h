@@ -19,6 +19,6 @@
     NSArray * _messages;
 }
 
-- (void) connect;
+- (void) connectWithHostname:(NSString *)hostname login:(NSString *)login password:(NSString *)password;
 
 @end
