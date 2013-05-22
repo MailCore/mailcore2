@@ -432,16 +432,7 @@
 				CLANG_CXX_LIBRARY = "libstdc++";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOS UI Test/iOS UI Test-Prefix.pch";
-				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "iOS UI Test/iOS UI Test-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../../../Externals/libetpan-ios/lib\"",
-					"\"$(SRCROOT)/../../../Externals/icu4c-ios/lib\"",
-					"\"$(SRCROOT)/../../../Externals/ctemplate-ios/lib\"",
-					"\"$(SRCROOT)/../../../Externals/libsasl-ios/lib\"",
-					"\"$(SRCROOT)/../../../Externals/tidy-html5-ios/lib\"",
-					"\"$(SRCROOT)/../../../Externals/libsasl-ios/lib/sasl2\"",
-				);
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
 					"-letpan-ios",
@@ -465,16 +456,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOS UI Test/iOS UI Test-Prefix.pch";
-				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "iOS UI Test/iOS UI Test-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../../../Externals/libetpan-ios/lib\"",
-					"\"$(SRCROOT)/../../../Externals/icu4c-ios/lib\"",
-					"\"$(SRCROOT)/../../../Externals/ctemplate-ios/lib\"",
-					"\"$(SRCROOT)/../../../Externals/libsasl-ios/lib\"",
-					"\"$(SRCROOT)/../../../Externals/tidy-html5-ios/lib\"",
-					"\"$(SRCROOT)/../../../Externals/libsasl-ios/lib/sasl2\"",
-				);
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
 					"-letpan-ios",

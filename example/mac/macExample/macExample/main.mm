@@ -8,12 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 #include <MailCore/MailCore.h>
-#include <unicode/putil.h>
 
 int main(int argc, char *argv[])
 {
-    u_setDataDirectory("/usr/local/share/icu");
-    //mailcore::AutoreleasePool * pool = new mailcore::AutoreleasePool();
+    //mailcore::setICUDataDirectory(MCSTR("/usr/local/share/icu"));
     return NSApplicationMain(argc, (const char **)argv);
-    //pool->release();
 }

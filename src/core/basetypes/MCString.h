@@ -127,7 +127,8 @@ namespace mailcore {
 		void appendBytes(const char * bytes, unsigned int length, const char * charset);
 		void appendUTF8CharactersLength(const char * UTF8Characters, unsigned int length);
 	};
-
+    
+    void setICUDataDirectory(String * directory);
 }
 
 #endif

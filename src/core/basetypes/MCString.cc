@@ -2049,3 +2049,7 @@ bool String::isEqualCaseInsensitive(String * otherString)
     return caseInsensitiveCompare(otherString) == 0;
 }
 
+void mailcore::setICUDataDirectory(String * directory)
+{
+    u_setDataDirectory(directory->fileSystemRepresentation());
+}

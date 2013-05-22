@@ -424,19 +424,7 @@
 			buildSettings = {
 				CLANG_CXX_LIBRARY = "libc++";
 				COMBINE_HIDPI_IMAGES = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../../Externals/libetpan/include",
-					"$(SRCROOT)/../../../Externals/icu4c/include",
-					"$(SRCROOT)/../../../Externals/ctemplate/include",
-					/usr/include/tidy,
-					/usr/include/libxml2,
-				);
 				INFOPLIST_FILE = "macExample/macExample-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/../../../Externals/libetpan/lib",
-					"$(SRCROOT)/../../../Externals/icu4c/lib",
-					"$(SRCROOT)/../../../Externals/ctemplate/lib",
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -447,19 +435,7 @@
 			buildSettings = {
 				CLANG_CXX_LIBRARY = "libc++";
 				COMBINE_HIDPI_IMAGES = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../../Externals/libetpan/include",
-					"$(SRCROOT)/../../../Externals/icu4c/include",
-					"$(SRCROOT)/../../../Externals/ctemplate/include",
-					/usr/include/tidy,
-					/usr/include/libxml2,
-				);
 				INFOPLIST_FILE = "macExample/macExample-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/../../../Externals/libetpan/lib",
-					"$(SRCROOT)/../../../Externals/icu4c/lib",
-					"$(SRCROOT)/../../../Externals/ctemplate/lib",
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

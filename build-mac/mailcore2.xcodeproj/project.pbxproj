@@ -2205,7 +2205,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT/../scripts\"\n./prepare-mac.sh\n";
+			shellScript = "cd \"$SRCROOT/../scripts\"\n./prepare.sh\nif test x$? != x0 ; then\n  exit 1\nfi\nfor lib in ctemplate icu4c libetpan ; do\n  rsync -av \"$SRCROOT/../Externals/$lib/lib/\" \"$BUILT_PRODUCTS_DIR\"\ndone\n";
 		};
 		C6BA2B0A1705F4E6003F0E9E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2218,7 +2218,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT/../scripts\"\n./prepare-ios.sh\n";
+			shellScript = "cd \"$SRCROOT/../scripts\"\n./prepare-ios.sh\nif test x$? != x0 ; then\n  exit 1\nfi\nfor lib in ctemplate-ios  icu4c-ios libetpan-ios libsasl-ios    tidy-html5-ios ; do\n  rsync -av \"$SRCROOT/../Externals/$lib/lib/\" \"$BUILT_PRODUCTS_DIR\"\ndone\n";
 		};
 		C6BD28A6170BD87600A91AC1 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2696,6 +2696,8 @@
 		C64EA53C169E772200778456 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				PRODUCT_NAME = MailCore;
@@ -2705,6 +2707,8 @@
 		C64EA53D169E772200778456 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				PRODUCT_NAME = MailCore;
@@ -2740,10 +2744,6 @@
 				);
 				INFOPLIST_FILE = "../tests-ios/tests-ios-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../Externals/libsasl-ios/lib/sasl2\"",
-				);
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
 					"-letpan-ios",
@@ -2778,10 +2778,6 @@
 				);
 				INFOPLIST_FILE = "../tests-ios/tests-ios-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../Externals/libsasl-ios/lib/sasl2\"",
-				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
@@ -2839,11 +2835,14 @@
 		C6BD289E170BD71100A91AC1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "framework-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_LDFLAGS = (
 					"-lctemplate",
 					"-letpan",
@@ -2866,11 +2865,14 @@
 		C6BD289F170BD71100A91AC1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "framework-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_LDFLAGS = (
 					"-lctemplate",
 					"-letpan",
