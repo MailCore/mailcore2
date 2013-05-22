@@ -89,7 +89,7 @@ done
 mkdir -p "$tmpdir/bin/icu4c"
 cp -R "$tmpdir/bin/icu4c-x86_64/include" "$tmpdir/bin/icu4c"
 mkdir -p "$tmpdir/bin/icu4c/share/icu"
-cp "$tmpdir/bin/icu4c-x86_64/share/icu/$versionfolder/icudt50l.dat" "$tmpdir/bin/icu4c/share/icu"
+cp "$tmpdir/bin/icu4c-x86_64/share/icu/$versionfolder/icudt51l.dat" "$tmpdir/bin/icu4c/share/icu"
 mkdir -p "$tmpdir/bin/icu4c/lib"
 cd "$tmpdir/bin"
 
