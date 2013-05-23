@@ -524,12 +524,14 @@ void IMAPSession::connect(ErrorCode * pError)
         MCLog("STARTTLS connect");
         r = mailimap_socket_connect_voip(mImap, MCUTF8(mHostname), mPort, isVoIPEnabled());
         if (hasError(r)) {
+            unsetup();
             * pError = ErrorConnection;
             return;
         }
 
         r = mailimap_socket_starttls(mImap);
         if (hasError(r)) {
+            unsetup();
             MCLog("no TLS %i", r);
             * pError = ErrorTLSNotAvailable;
             return;
@@ -540,11 +542,13 @@ void IMAPSession::connect(ErrorCode * pError)
         r = mailimap_ssl_connect_voip(mImap, MCUTF8(mHostname), mPort, isVoIPEnabled());
         MCLog("ssl connect %s %u %u", MCUTF8(mHostname), mPort, r);
         if (hasError(r)) {
+            unsetup();
             MCLog("connect error %i", r);
             * pError = ErrorConnection;
             return;
         }
         if (!checkCertificate()) {
+            unsetup();
             MCLog("ssl connect certificate ERROR %d", r);
             * pError = ErrorCertificate;
             return;
@@ -557,6 +561,7 @@ void IMAPSession::connect(ErrorCode * pError)
         r = mailimap_socket_connect_voip(mImap, MCUTF8(mHostname), mPort, isVoIPEnabled());
         MCLog("socket connect %i", r);
         if (hasError(r)) {
+            unsetup();
             MCLog("connect error %i", r);
             * pError = ErrorConnection;
             return;
