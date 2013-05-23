@@ -105,14 +105,18 @@
     NSAssert(!object || (object && data), @"FXKeychain failed to encode object for key '%@', error: %@", key, error);
 
     //delete existing data
+#if __IPHONE_4_0 && TARGET_OS_IPHONE 
+	OSStatus status = SecItemDelete((__bridge CFDictionaryRef)query);
+#else
 	CFTypeRef result;
 	[query setObject:(__bridge id)kCFBooleanTrue forKey:(__bridge id)kSecReturnRef];
-    OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query, &result);//SecItemDelete((__bridge CFDictionaryRef)query);
+    OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query, &result);
 	if (status == errSecSuccess) {
 		status = SecKeychainItemDelete((SecKeychainItemRef) result);
 		CFRelease(result);
 	}
-    
+#endif
+	
     //write data
     if (data)
     {
