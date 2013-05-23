@@ -66,6 +66,16 @@ In this sample, we retrieved and printed a list of email headers from an IMAP se
 
 ### Anatomy of a Message ###
 
+Background Reading:
+    * [RFC821](http://tools.ietf.org/html/rfc821)
+    * [RFC822](http://tools.ietf.org/html/rfc822)
+    * [RFC5322](http://tools.ietf.org/html/rfc5322)
+    * [RFC2045](http://tools.ietf.org/html/rfc2045)
+    * [RFC2046](http://tools.ietf.org/html/rfc2046)
+    * [RFC2047](http://tools.ietf.org/html/rfc2047)
+    * [RFC2048](http://tools.ietf.org/html/rfc2048)
+    * [RFC2049](http://tools.ietf.org/html/rfc2049)
+
 MailCore 2 has a new message structure that more closely mimics the structure of raw emails.  This gives you as the user a lot of power, but can also be a little bewildering at first.  When a fetch request completes and returns its results to your block, you will get an array of `MCOIMAPMessage` objects.  Depending on what `kind` the fetch was made with, this message object can be only partially loaded from IMAP.  In our example above, we used the `MCOIMAPMessagesRequestKindHeaders` as our `requestKind`.  So we won't find any fields outside of the `header` filled out in the returned messages array.  If you need more data, you can combine the `MCOIMAPMessagesRequestKind` bit masks:
 
 
