@@ -35,7 +35,7 @@ MailCore 2 brings a new API designed from the ground up to be fast, portable, an
 
 Using MailCore 2 is just a little more complex conceptually than the original MailCore.  All fetch requests in MailCore 2 are made asynchronously through a queue.  What does this mean?  Well, let's  take a look at a simple example:
 
-```
+```objc
     MCOIMAPSession *session = [[MCOIMAPSession alloc] init];
     [session setHostname:@"imap.gmail.com"];
     [session setPort:993];
@@ -69,7 +69,7 @@ In this sample, we retrieved and printed a list of email headers from an IMAP se
 MailCore 2 has a new message structure that more closely mimics the structure of raw emails.  This gives you as the user a lot of power, but can also be a little bewildering at first.  When a fetch request completes and returns its results to your block, you will get an array of `MCOIMAPMessage` objects.  Depending on what `kind` the fetch was made with, this message object can be only partially loaded from IMAP.  In our example above, we used the `MCOIMAPMessagesRequestKindHeaders` as our `requestKind`.  So we won't find any fields outside of the `header` filled out in the returned messages array.  If you need more data, you can combine the `MCOIMAPMessagesRequestKind` bit masks:
 
 
-```
+```objc
     //From the Mac Example
     MCOIMAPMessagesRequestKind requestKind = (MCOIMAPMessagesRequestKind)
     (MCOIMAPMessagesRequestKindHeaders | MCOIMAPMessagesRequestKindStructure |
