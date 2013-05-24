@@ -339,12 +339,24 @@
 // Returns an operation to fetch an attachment.
 // The operation needs to be started.
 //
+// Example 1:
 // {
 //   ...
 //   MCOIMAPFetchContentOperation * op = [session fetchMessageAttachmentByUIDOperationWithFolder:@"INBOX"
 //                                                                                           uid:456
 //                                                                                        partID:@"1.2"
 //                                                                                      encoding:MCOEncodingBase64];
+//   [op start:^(NSError * error, NSData * partData) {
+//      ...
+//   }];
+//
+// Example 2:
+// {
+//   ...
+//   MCOIMAPFetchContentOperation * op = [session fetchMessageAttachmentByUIDOperationWithFolder:@"INBOX"
+//                                                                                           uid:[message uid]
+//                                                                                        partID:[part partID]
+//                                                                                      encoding:[part encoding]];
 //   [op start:^(NSError * error, NSData * partData) {
 //      ...
 //   }];

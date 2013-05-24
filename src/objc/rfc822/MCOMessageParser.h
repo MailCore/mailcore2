@@ -10,6 +10,10 @@
 
 #define __MAILCORE_MCOMESSAGEPARSER_H_
 
+// This class implements a parsed message.
+// When the full content of a message has been fetched using POP or IMAP,
+// you need to parse it.
+
 #import <MailCore/MCOAbstractMessage.h>
 
 @protocol MCOHTMLRendererDelegate;

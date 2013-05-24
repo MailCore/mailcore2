@@ -13,6 +13,9 @@
 #import <MailCore/MCOAbstractMessage.h>
 
 // This class will allow you to build a RFC 822 formatted message.
+// For example when you need to send a message using SMTP,
+// you need to generate first a RFC 822 formatted message.
+// This class will help you do that.
 
 /*
  

@@ -11,6 +11,13 @@
 #define __MAILCORE_MCOIMAPMESSAGE_H_
 
 // This class implements an IMAP message.
+// If you fetched the MIME structure of the message, you can fetch
+// efficiently the content of the message by fetching only the parts
+// that you need to show it.
+// For example, you could fetch only the text parts to show the summary
+// of the message, using -[MCOIMAPSession fetchMessageAttachmentByUIDOperationWithFolder:uid:partID:encoding:]
+// You can also decide to fetch entirely the message using
+// -[MCOIMAPSession fetchMessageByUIDOperationWithFolder:uid:]
 
 #import <MailCore/MCOAbstractMessage.h>
 #import <MailCore/MCOConstants.h>
