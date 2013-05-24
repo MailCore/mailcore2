@@ -30,6 +30,9 @@
 		84AF9E8D172DBE4100E60AA3 /* MCONetService.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84AF9E8B172DBE4000E60AA3 /* MCONetService.mm */; };
 		A24BED28174FF16E004AC144 /* MCOPROVIDER.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A24BED27174FF0AC004AC144 /* MCOPROVIDER.h */; };
 		A24BED29174FF17C004AC144 /* MCOPROVIDER.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A24BED27174FF0AC004AC144 /* MCOPROVIDER.h */; };
+		A24BED5317501641004AC144 /* MCONetService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84AF9E8A172DBE4000E60AA3 /* MCONetService.h */; };
+		A24BED541750168B004AC144 /* MCOMailProvider.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84AF9E86172DBC4700E60AA3 /* MCOMailProvider.h */; };
+		A24BED551750169C004AC144 /* MCOMailProvidersManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 843EE409172DD5B900C882AA /* MCOMailProvidersManager.h */; };
 		C07AD5D7FD82F8ACAB576231 /* NSError+MCO.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C07AD44B013BB42A240B4F04 /* NSError+MCO.h */; };
 		C07AD99B2E2054C684DB8FF6 /* NSError+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = C07ADFE43E22B38EFF23ADB5 /* NSError+MCO.mm */; };
 		C07ADC28B83E7959BF114D46 /* MCOIMAPSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = C07AD057D3C8FBDC7AC95733 /* MCOIMAPSession.mm */; };
@@ -856,6 +859,9 @@
 			dstPath = include/MailCore;
 			dstSubfolderSpec = 16;
 			files = (
+				A24BED551750169C004AC144 /* MCOMailProvidersManager.h in CopyFiles */,
+				A24BED541750168B004AC144 /* MCOMailProvider.h in CopyFiles */,
+				A24BED5317501641004AC144 /* MCONetService.h in CopyFiles */,
 				A24BED28174FF16E004AC144 /* MCOPROVIDER.h in CopyFiles */,
 				843EE415172DDF5F00C882AA /* MCProvider.h in CopyFiles */,
 				843EE416172DDF5F00C882AA /* MCMailProvidersManager.h in CopyFiles */,
