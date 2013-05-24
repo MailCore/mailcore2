@@ -18,6 +18,7 @@
 #import <MailCore/MCORFC822.h>
 #import <MailCore/MCOPOP.h>
 #import <MailCore/MCOSMTP.h>
+#import <MailCore/MCOPROVIDER.h>
 
 #endif
 
