@@ -82,7 +82,7 @@
             content = nil;
             MCAssert(0);
         }
-    }	
+    }
 	if (content == nil) {
 		[_webView loadHTMLString:@"" baseURL:nil];
 		return;
@@ -124,9 +124,11 @@
 		
 		url = [NSURL URLWithString:urlString];
 		if ([self _isCID:url]) {
+            NSLog(@"url is cidurl:%@", url);
 			part = [self _partForCIDURL:url];
 		}
 		else if ([self _isXMailcoreImage:url]) {
+            NSLog(@"url is x-mailcore-img:%@", url);
 			NSString * specifier = [url resourceSpecifier];
 			NSString * partUniqueID = specifier;
 			part = [self _partForUniqueID:partUniqueID];
@@ -171,7 +173,7 @@
 - (NSURL *) _cacheJPEGImageData:(NSData *)imageData withFilename:(NSString *)filename
 {
 	NSString * path = [[NSTemporaryDirectory() stringByAppendingPathComponent:filename] stringByAppendingPathExtension:@"jpg"];
-	[imageData writeToFile:path atomically:YES];	
+	[imageData writeToFile:path atomically:YES];
 	return [NSURL fileURLWithPath:path];
 }
 
@@ -211,7 +213,7 @@
 }
 
 - (NSURLRequest *)webView:(UIWebView *)sender resource:(id)identifier willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse fromDataSource:(id)dataSource
-{    
+{
     if ([[[request URL] scheme] isEqualToString:@"x-mailcore-msgviewloaded"]) {
         [self _loadImages];
     }
@@ -238,8 +240,9 @@
         [supportedImageExtension addObject:@"jpeg"];
     }
     
-    if ([supportedImageMimeTypes containsObject:[[part mimeType] lowercaseString]])
+    if ([supportedImageMimeTypes containsObject:[[part mimeType] lowercaseString]]) {
         return YES;
+    }
     
     NSString * ext = nil;
     if ([part filename] != nil) {
@@ -274,7 +277,7 @@
     return [[self delegate] MCOMessageView:self templateValuesForPartWithUniqueID:[part uniqueID]];
 }
 
-- (NSString *) MCOAbstractMessage_templateForMainHeader:(MCOAbstractMessage *)msg
+- (NSString *) MCOAbstractMessage:(MCOAbstractMessage *)msg templateForMainHeader:(MCOMessageHeader *)header
 {
     if (![[self delegate] respondsToSelector:@selector(MCOMessageView_templateForMainHeader:)]) {
         return nil;
@@ -282,7 +285,7 @@
     return [[self delegate] MCOMessageView_templateForMainHeader:self];
 }
 
-- (NSString *) MCOAbstractMessage_templateForImage:(MCOAbstractMessage *)msg
+- (NSString *) MCOAbstractMessage:(MCOAbstractMessage *)msg templateForImage:(MCOAbstractPart *)header
 {
     NSString * templateString;
     if ([[self delegate] respondsToSelector:@selector(MCOMessageView_templateForImage:)]) {
@@ -295,7 +298,7 @@
     return templateString;
 }
 
-- (NSString *) MCOAbstractMessage_templateForAttachment:(MCOAbstractMessage *)msg
+- (NSString *) MCOAbstractMessage:(MCOAbstractMessage *)msg templateForAttachment:(MCOAbstractPart *)part
 {
     if (![[self delegate] respondsToSelector:@selector(MCOMessageView_templateForAttachment:)]) {
         return NULL;
@@ -313,7 +316,7 @@
     return [[self delegate] MCOMessageView_templateForMessage:self];
 }
 
-- (NSString *) MCOAbstractMessage_templateForEmbeddedMessage:(MCOAbstractMessage *)msg
+- (NSString *) MCOAbstractMessage:(MCOAbstractMessage *)msg templateForEmbeddedMessage:(MCOAbstractMessagePart *)part
 {
     if (![[self delegate] respondsToSelector:@selector(MCOMessageView_templateForEmbeddedMessage:)]) {
         return NULL;
@@ -321,7 +324,7 @@
     return [[self delegate] MCOMessageView_templateForEmbeddedMessage:self];
 }
 
-- (NSString *) MCOAbstractMessage_templateForEmbeddedMessageHeader:(MCOAbstractMessage *)msg
+- (NSString *) MCOAbstractMessage:(MCOAbstractMessage *)msg templateForEmbeddedMessageHeader:(MCOMessageHeader *)header
 {
     if (![[self delegate] respondsToSelector:@selector(MCOMessageView_templateForEmbeddedMessageHeader:)]) {
         return NULL;
