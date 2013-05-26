@@ -759,7 +759,12 @@ void IMAPSession::selectIfNeeded(String * folder, ErrorCode * pError)
     if (* pError != ErrorNone)
         return;
     
-    if (mState == STATE_LOGGEDIN) {
+    if (mState == STATE_SELECTED) {
+        if (mCurrentFolder != NULL &&  mCurrentFolder->caseInsensitiveCompare(folder) != 0) {
+            select(folder, pError);
+        }
+    }
+    else if (mState == STATE_LOGGEDIN) {
         select(folder, pError);
     }
     else {
