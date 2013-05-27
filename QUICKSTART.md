@@ -89,8 +89,48 @@ MailCore 2 has a new message structure that more closely mimics the structure of
 
 Many of the properties you probably need are either in the `header` of an MCOIMAPMessage, or direct properties of the message.
 
-So now comes the tricky part: you want the full message bodies from the emails.  MailCore 2 allows you to fetch the entire contents of a message through the `MCOIMAPFetchContentOperation` instance, which responds with the NSData representation of the email.  You can then use `MCOMessageParser` to generate your HTML body content.  For more info on this, please see the Mac or iOS demo projects.
+So now comes the tricky part: you want the full message bodies from the emails.  MailCore 2 allows you to fetch the entire contents of a message through the `MCOIMAPFetchContentOperation` instance, which responds with the NSData representation of the email.  You can then use `MCOMessageParser` to generate your HTML body content.
 
+### HTML Rendering ###
+
+The three subclasses of MCOAbstractMessage (MCOIMAPMessage, MCOMessageParser, MCOMessageBuilder) each have html rendering APIs.  HTML rendering of emails is actually a pretty complex operation.  Emails come in many shapes and forms, and writing a single rendering engine for every application is difficult, and ultimately constricts you as the user.  Instead, MailCore 2 uses HTML rendering delegates that you can use to compose a single html body out of a (potentially) complicated body structure.
+
+So, to render HTML from a MCOAbstractMessage subclass (MCOMessageParser, MCOIMAPMessage, MCOMessageBuilder), you can implement the `MCOHTMLRendererDelegate` protocol.  For each body part or attachment, you provide a delegate method that is able to provide a template, and the data to fit in that template.  For example, here is one method pair for the main header:
+
+```objc
+- (NSString *)MCOMessageView_templateForMainHeader:(MCOMessageView *)view {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    return @"<div style=\"background-color:#eee\">\
+    <div><b>From:</b> {{FROM}}</div>\
+    <div><b>To:</b> {{TO}}</div>\
+    </div>";
+}
+
+- (NSDictionary *)MCOMessageView:(MCOMessageView *)view templateValuesForHeader:(MCOMessageHeader *)header {
+    NSMutableDictionary *templateValues = [[NSMutableDictionary alloc] init];
+    
+    if(header.from) {
+        templateValues[@"FROM"] = header.from.displayName ?: (header.from.mailbox ?: @"N/A");
+    }
+    
+    if(header.to.count > 0) {
+        NSMutableString *toString = [[NSMutableString alloc] init];
+        for(MCOAddress *address in header.to) {
+            if(toString.length > 0) {
+                [toString appendString:@", "];
+            }
+            [toString appendFormat:@"%@", address.displayName ?: (address.mailbox ?: @"N/A")];
+        }
+        templateValues[@"TO"] = toString;
+    }
+    
+    NSLog(@"%s:%@", __PRETTY_FUNCTION__, templateValues);
+    
+    return templateValues;
+}
+```
+
+As you can see, we use [ctemplates](https://code.google.com/p/ctemplate/) in order to format and insert the data we want to display in different parts of the message.  
 
 ### TODO for this guide ###
 * Add images
