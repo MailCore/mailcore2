@@ -19,6 +19,11 @@
 
 #define nativeType mailcore::NetService
 
++ (void) load
+{
+    MCORegisterClass(self, &typeid(nativeType));
+}
+
 - (mailcore::Object *) mco_mcObject
 {
     return _netService;
