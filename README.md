@@ -1,7 +1,7 @@
 ## Mailcore 2
 
 MailCore 2 provide a simple and asynchronous API to work with e-mail protocols IMAP, POP and SMTP.
-The API has been redesigned from ground.
+The API has been redesigned from ground up.
 
 - POP, IMAP and SMTP support
 - RFC822 parser and generator
