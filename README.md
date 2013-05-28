@@ -1,11 +1,6 @@
 ## Mailcore 2: Introduction ##
 
-<<<<<<< HEAD
 MailCore 2 brings a new API designed from the ground up to be fast, portable, and asynchronous.  It features:
-=======
-MailCore 2 provide a simple and asynchronous API to work with e-mail protocols IMAP, POP and SMTP.
-The API has been redesigned from ground up.
->>>>>>> upstream/master
 
 - **POP**, **IMAP** and **SMTP** support
 - **[RFC822](http://www.ietf.org/rfc/rfc0822.txt)** parser and generator
@@ -48,7 +43,6 @@ Using MailCore 2 is just a little more complex conceptually than the original Ma
     [session setPassword:@"123456"];
     [session setConnectionType:MCOConnectionTypeTLS];
 
-<<<<<<< HEAD
     MCOIMAPMessagesRequestKind requestKind = MCOIMAPMessagesRequestKindHeaders;
     NSString *folder = @"INBOX";
     MCOIndexSet *uids = [MCOIndexSet indexSetWithRange:MCORangeMake(1, UINT64_MAX)];
@@ -144,8 +138,3 @@ As you can see, we use [ctemplates](https://code.google.com/p/ctemplate/) in ord
 * Add images
 * Add more in-depth steps/examples for how to work with imap messages
 * Add examples for POP and SMTP.
-=======
-- Add libMailCore-ios.a
-- Set "Other Linker Flags": `-lctemplate-ios -letpan-ios -licudata -licui18n -licuuc -lxml2 -lsasl2 -liconv -ltidy -lstdc++ -all_load`
-- Make sure to use GNU C++ standard library.
->>>>>>> upstream/master
