@@ -24,7 +24,7 @@ MailCore 2 brings a new API designed from the ground up to be fast, portable, an
         - In Build Phases, add a Target Dependency of `static mailcore2 osx`.
 4. **For iOS** - If you're targeting iOS, you have to link against MailCore 2 as a static library:
     * Add `libMailCore-ios.a`
-    * Set 'Other Linker Flags': `lctemplate-ios -letpan-ios -licudata -licui18n -licuuc -lxml2 -lsasl2 -liconv -ltidy -lstdc++ -all_load`
+    * Set 'Other Linker Flags': `-lctemplate-ios -letpan-ios -licudata -licui18n -licuuc -lxml2 -lsasl2 -liconv -ltidy -lstdc++ -all_load`
     * Make sure to use GNU C++ standard library.  In Build Settings, locate 'C++ Standard Library', and select `libstdc++`.
     * In Build Phases, add a Target Dependency of `static mailcore2 ios`.
 5. Profit.
