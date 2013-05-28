@@ -1172,7 +1172,7 @@ String * String::extractedSubjectAndKeepBracket(bool keepBracket)
 String * String::uuidString()
 {
     uuid_t uuid;
-#ifdef __MACH__
+#ifdef _UUID_STRING_T
     uuid_string_t uuidString;
 #else
     char uuidString[37];
