@@ -24,5 +24,5 @@ The API has been redesigned from ground up.
 ### iOS static library
 
 - Add libMailCore-ios.a
-- Set "Other Linker Flags": `lctemplate-ios -letpan-ios -licudata -licui18n -licuuc -lxml2 -lsasl2 -liconv -ltidy -lstdc++ -all_load`
+- Set "Other Linker Flags": `-lctemplate-ios -letpan-ios -licudata -licui18n -licuuc -lxml2 -lsasl2 -liconv -ltidy -lstdc++ -all_load`
 - Make sure to use GNU C++ standard library.
