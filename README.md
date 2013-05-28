@@ -1,6 +1,6 @@
 ## Mailcore 2: Introduction ##
 
-MailCore 2 brings a new API designed from the ground up to be fast, portable, and asynchronous.  It features:
+MailCore 2 provides a simple and asynchronous Objective-C API to work with the e-mail protocols **IMAP**, **POP** and **SMTP**. The API has been redesigned from the ground up.  It features:
 
 - **POP**, **IMAP** and **SMTP** support
 - **[RFC822](http://www.ietf.org/rfc/rfc0822.txt)** parser and generator
