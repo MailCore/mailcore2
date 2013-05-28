@@ -66,6 +66,8 @@ In this sample, we retrieved and printed a list of email headers from an IMAP se
 
 ### Anatomy of a Message ###
 
+<embed src="mailcore-schema.svg" type="image/svg+xml" />
+
 Background Reading:
 * [RFC821](http://tools.ietf.org/html/rfc821)
 * [RFC822](http://tools.ietf.org/html/rfc822)
