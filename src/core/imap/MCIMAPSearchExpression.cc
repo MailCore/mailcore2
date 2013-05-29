@@ -19,7 +19,7 @@ IMAPSearchExpression::IMAPSearchExpression()
 IMAPSearchExpression::IMAPSearchExpression(IMAPSearchExpression * other)
 {
     init();
-	mKind = IMAPSearchKindNone;
+	mKind = other->mKind;
     MC_SAFE_REPLACE_COPY(String, mHeader, other->mHeader);
     MC_SAFE_REPLACE_COPY(String, mValue, other->mValue);
     MC_SAFE_REPLACE_COPY(IMAPSearchExpression, mLeftExpression, other->mLeftExpression);
