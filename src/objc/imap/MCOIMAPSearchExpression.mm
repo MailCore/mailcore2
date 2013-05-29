@@ -37,6 +37,11 @@
     return [[[self alloc] initWithMCExpression:expr] autorelease];
 }
 
+- (mailcore::Object *) mco_mcObject
+{
+    return _nativeExpr;
+}
+
 - (id) initWithMCExpression:(mailcore::IMAPSearchExpression *)expr
 {
     self = [super init];
