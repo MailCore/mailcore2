@@ -20,4 +20,6 @@
 - (id) initWithInfo:(NSDictionary *)info;
 - (NSDictionary *) info;
 
+- (NSString *) hostnameWithEmail:(NSString *)email;
+
 @end
