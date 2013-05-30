@@ -10,7 +10,7 @@ if test x$1 != xskipprebuilt ; then
       git pull --rebase
       cd ..
     else
-      git clone --depth=1 https://github.com/dinhviethoa/mailcore2-deps.git
+      git clone --depth=1 https://github.com/MailCore/mailcore2-deps.git
     fi
     cp mailcore2-deps/*.zip ../builds/builds
     popd
