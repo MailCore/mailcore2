@@ -14,25 +14,25 @@
 #import "NSObject+MCO.h"
 
 @implementation MCONetService {
-	mailcore::NetService * _netService;
+	mailcore::NetService *_netService;
 }
 
 #define nativeType mailcore::NetService
 
 + (void) load
 {
-    MCORegisterClass(self, &typeid(nativeType));
+	MCORegisterClass( self, &typeid(nativeType) );
 }
 
 - (mailcore::Object *) mco_mcObject
 {
-    return _netService;
+	return _netService;
 }
 
 + (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object
 {
-    mailcore::NetService * netService = (mailcore::NetService *) object;
-    return [[self alloc] initWithNetService:netService];
+	mailcore::NetService *netService = (mailcore::NetService *)object;
+	return [[self alloc] initWithNetService:netService];
 }
 
 + (MCONetService *) serviceWithInfo:(NSDictionary *)info
@@ -45,7 +45,7 @@
 	self = [super init];
 	
 	_netService = mailcore::NetService::serviceWithInfo(info.mco_mcHashMap);
-    _netService->retain();
+	_netService->retain();
 	
 	return self;
 }
@@ -55,7 +55,7 @@
 	self = [super init];
 	
 	_netService = netService;
-    _netService->retain();
+	_netService->retain();
 	
 	return self;
 }
@@ -69,13 +69,14 @@ MCO_OBJC_SYNTHESIZE_SCALAR(MCOConnectionType, mailcore::ConnectionType, setConne
 	return [NSDictionary mco_dictionaryWithMCHashMap:_netService->info()];
 }
 
-- (NSString*)hostnameWithEmail:(NSString*)email
+- (NSString *) hostnameWithEmail:(NSString *)email
 {
 	NSString *result = nil;
 	NSArray *components = [email componentsSeparatedByString:@"@"];
 	if (components.count == 0) {
 		return self.hostname;
-	} else {
+	}
+	else {
 		result = [self.hostname stringByReplacingOccurrencesOfString:@"{domain}" withString:[components lastObject]];
 	}
 	return [NSString mco_stringWithMCString:_netService->normalizedHostnameWithEmail(email.mco_mcString)];
