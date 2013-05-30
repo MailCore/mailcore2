@@ -1283,7 +1283,6 @@ void IMAPSession::copyMessages(String * folder, IndexSet * uidSet, String * dest
     * pError = ErrorNone;
 
     release:
-    MC_SAFE_RELEASE(uidSetResult);
 
     for(clistiter * iter = clist_begin(setList) ; iter != NULL ; iter = clist_next(iter)) {
         struct mailimap_set * current_set;
