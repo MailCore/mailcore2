@@ -48,7 +48,7 @@ int IMAPFolderInfoOperation::messageCount()
 void IMAPFolderInfoOperation::main()
 {
     ErrorCode error;
-    session()->session()->select(folder(), &error);
+    session()->session()->selectIfNeeded(folder(), &error);
     mUidNext = session()->session()->uidNext();
     mUidValidity = session()->session()->uidValidity();
     mModSequenceValue = session()->session()->modSequenceValue();
