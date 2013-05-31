@@ -59,6 +59,7 @@ namespace mailcore {
 		virtual void setDefaultNamespace(IMAPNamespace * ns);
 		virtual IMAPNamespace * defaultNamespace();
 
+        virtual void selectIfNeeded(String * folder, ErrorCode * pError);
 		virtual void select(String * folder, ErrorCode * pError);
 		
 		virtual Array * /* IMAPFolder */ fetchSubscribedFolders(ErrorCode * pError);
@@ -172,7 +173,6 @@ namespace mailcore {
 		void unsetup();
 		void connectIfNeeded(ErrorCode * pError);
 		void loginIfNeeded(ErrorCode * pError);
-		void selectIfNeeded(String * folder, ErrorCode * pError);
 		char fetchDelimiterIfNeeded(char defaultDelimiter, ErrorCode * pError);
 		IMAPSyncResult * fetchMessages(String * folder, IMAPMessagesRequestKind requestKind, bool fetchByUID,
                                        struct mailimap_set * imapset, uint64_t modseq, HashMap * mapping, uint32_t startUid,
