@@ -214,7 +214,7 @@
 //
 - (MCOIMAPCopyMessagesOperation *)copyMessagesOperationWithFolder:(NSString *)folder
                                                              uids:(MCOIndexSet *)uids
-                                                       destFolder:(NSString *)destFolder;
+                                                       destFolder:(NSString *)destFolder NS_RETURNS_NOT_RETAINED;
 
 
 // Returns an operation to expunge a folder.
