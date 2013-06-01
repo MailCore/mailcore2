@@ -15,6 +15,7 @@
 #import <MailCore/MCOAbstractMultipart.h>
 #import <MailCore/MCOAbstractPart.h>
 #import <MailCore/MCOAddress.h>
+#import <MailCore/MCOConstants.h>
 #import <MailCore/MCOMessageHeader.h>
 #import <MailCore/MCOHTMLRendererDelegate.h>
 #import <MailCore/MCOHTMLRendererIMAPDelegate.h>
