@@ -12,7 +12,7 @@
 
 #import <MailCore/MCOAbstractMultipart.h>
 
-// Multipart parsed from RFC 822 message data.
+/** Multipart parsed from RFC 822 message data. */
 
 @interface MCOMultipart : MCOAbstractMultipart <NSCopying>
 

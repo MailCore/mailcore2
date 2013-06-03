@@ -87,14 +87,12 @@ void MailProvider::fillWithInfo(HashMap * info)
 	mc_foreacharray(HashMap, smtpInfo, smtpInfos) {
 		NetService * service = NetService::serviceWithInfo(smtpInfo);
 		mSmtpServices->addObject(service);
-        service->release();
 	}
 	
     mPopServices->removeAllObjects();
 	mc_foreacharray(HashMap, popInfo, popInfos) {
 		NetService * service = NetService::serviceWithInfo(popInfo);
 		mPopServices->addObject(service);
-        service->release();
 	}
 }
 

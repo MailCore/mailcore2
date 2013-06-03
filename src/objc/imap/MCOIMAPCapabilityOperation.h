@@ -10,7 +10,10 @@
 
 #define __MAILCORE_MCOIMAPCAPBILITYOPERATION_H_
 
-// This class implements an operation to query capabilities.
+/** 
+ This class implements an operation to query for IMAP capabilities, 
+ like for example the extensions UIDPLUS, IDLE, NAMESPACE, ... etc
+*/
 
 #import <MailCore/MCOIMAPBaseOperation.h>
 
@@ -18,11 +21,18 @@
 
 @interface MCOIMAPCapabilityOperation : MCOIMAPBaseOperation
 
-// Starts the asynchronous operation.
-// On success, the completion block will be called with nil as error. capabilities is a set of IMAP capabilities.
-// See MCOConstants.h / MCOIMAPCapability.
-// On failure, error will be set with MCOErrorDomain as domain and an error code available in MCOConstants.h.
-// info will be nil.
+
+/** 
+ Starts the asynchronous capabilities operation.
+
+ @param completionBlock Called when the operation is finished.
+
+ - On success `error` will be nil and `capabilities` will contain a set of IMAP capabilities.
+   See `MCOConstants.h` under `MCOIMAPCapability` for a list of possible values.
+ 
+ - On failure, `error` will be set with `MCOErrorDomain` as domain and an 
+   error code available in MCOConstants.h, `capabilities` will be nil
+*/
 - (void) start:(void (^)(NSError * error, MCOIndexSet * capabilities))completionBlock;
 
 @end

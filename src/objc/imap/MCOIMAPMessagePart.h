@@ -10,14 +10,13 @@
 
 #define __MAILCORE_MCOIMAPMESSAGEPART_H_
 
-// This class implements a message part.
+/** Represents a message part. */
 
 #import <MailCore/MCOAbstractMessagePart.h>
 
 @interface MCOIMAPMessagePart : MCOAbstractMessagePart <NSCopying>
 
-// It's the part identifier.
-// A part identifier looks like 1.2.1
+/** A part identifier is of the form 1.2.1*/
 @property (nonatomic, copy) NSString * partID;
 
 @end

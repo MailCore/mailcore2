@@ -163,7 +163,7 @@ MCO_OBJC_SYNTHESIZE_STRING(setMailbox, mailbox)
 
 @end
 
-@implementation NSArray (MCONSArray)
+@implementation NSArray (MCOAddress)
 
 - (NSString *) mco_RFC822StringForAddresses
 {

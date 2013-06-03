@@ -10,25 +10,25 @@
 
 #define __MAILCORE_MCOIMAPNAMESPACEITEM_H_
 
-// This class implements an IMAP namespace item.
+/** Represents a namespace item */
 
 #import <Foundation/Foundation.h>
 
 @interface MCOIMAPNamespaceItem : NSObject <NSCopying>
 
-// This is the prefix for this namespace item.
+/** This is the prefix for this namespace item */
 @property (nonatomic, copy) NSString * prefix;
 
-// This is the delimiter of the path for this namespace item.
+/** This is the delimiter of the path for this namespace item */
 @property (nonatomic, assign) char delimiter;
 
-// Returns folder path for given path components in the context of this namespace item.
+/** Returns folder path for given path components in the context of this namespace item */
 - (NSString *) pathForComponents:(NSArray *)components;
 
-// Returns components for the given path in the context of this namespace item.
+/** Returns components for the given path in the context of this namespace */
 - (NSArray *) componentsForPath:(NSString *)path;
 
-// Returns YES if the namespace contains this folder path.
+/** Returns YES if the namespace contains this folder path */
 - (BOOL) containsFolder:(NSString *)folder;
 
 @end

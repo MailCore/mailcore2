@@ -14,20 +14,23 @@
 
 #import <MailCore/MCOConstants.h>
 
+/** Represents a single IMAP message part */
+
 @interface MCOIMAPPart : MCOAbstractPart <NSCopying>
 
-// It's the part identifier.
-// A part identifier looks like 1.2.1
+/** A part identifier looks like 1.2.1 */
 @property (nonatomic, copy) NSString * partID;
 
-// It's the size of the single part.
+/** The size of the single part in bytes */
 @property (nonatomic, nonatomic) unsigned int size;
 
-// It's the encoding of the single part.
+/** It's the encoding of the single part */
 @property (nonatomic, nonatomic) MCOEncoding encoding;
 
-// Returns the decoded size of the part.
-// For example, for a part that's encoded with base64, it will return actual_size * 3/4.
+/**
+ Returns the decoded size of the part.
+ For example, for a part that's encoded with base64, it will return actual_size * 3/4.
+*/
 - (unsigned int) decodedSize;
 
 @end

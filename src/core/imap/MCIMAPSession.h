@@ -129,6 +129,9 @@ namespace mailcore {
         virtual bool isQResyncEnabled();
         virtual bool isIdentityEnabled();
         
+    public: // private
+		virtual void loginIfNeeded(ErrorCode * pError);
+        
 	private:
 		String * mHostname;
 		unsigned int mPort;
@@ -171,7 +174,6 @@ namespace mailcore {
 		void setup();
 		void unsetup();
 		void connectIfNeeded(ErrorCode * pError);
-		void loginIfNeeded(ErrorCode * pError);
 		void selectIfNeeded(String * folder, ErrorCode * pError);
 		char fetchDelimiterIfNeeded(char defaultDelimiter, ErrorCode * pError);
 		IMAPSyncResult * fetchMessages(String * folder, IMAPMessagesRequestKind requestKind, bool fetchByUID,
