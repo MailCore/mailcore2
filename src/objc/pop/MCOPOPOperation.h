@@ -13,13 +13,23 @@
 #import <Foundation/Foundation.h>
 #import <MailCore/MCOOperation.h>
 
-// This is an asynchronous POP3 operation.
-// See MCOPOPSession for more info.
+/**
+ This is a generic asynchronous POP3 operation. 
+ @see MCOPOPSession
+*/
 
 @interface MCOPOPOperation : MCOOperation
 
-// On success, the completion block will be called with nil as error.
-// On failure, error will be set with MCOErrorDomain as domain and an error code available in MCOConstants.h.
+/** 
+ Starts the asynchronous operation.
+
+ @param completionBlock Called when the operation is finished.
+
+ - On success `error` will be nil
+ 
+ - On failure, `error` will be set with `MCOErrorDomain` as domain and an 
+   error code available in MCOConstants.h,
+*/
 - (void) start:(void (^)(NSError * error))completionBlock;
 
 @end

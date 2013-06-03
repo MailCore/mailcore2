@@ -12,18 +12,18 @@
 
 #import <Foundation/Foundation.h>
 
-// This is information of a message fetched by MCOPOPFetchMessagesOperation.
+/** This is information of a message fetched by MCOPOPFetchMessagesOperation.*/
 
 @interface MCOPOPMessageInfo : NSObject <NSCopying>
 
-// This is the index of a given message.
+/** This is the index of a given message.*/
 @property (nonatomic, assign) unsigned int index;
 
-// This is the size of the given message.
+/** This is the size of the given message.*/
 @property (nonatomic, assign) unsigned int size;
 
-// This is the unique identifier of the message.
-// It can be used as a cache identifier.
+/** This is the unique identifier of the message.
+ It can be used as a cache identifier.*/
 @property (nonatomic, copy) NSString * uid;
 
 @end
