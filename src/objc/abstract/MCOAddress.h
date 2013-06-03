@@ -68,7 +68,7 @@
 
 @end
 
-@interface NSArray (MCONSArray)
+@interface NSArray (MCOAddress)
 
 /** Returns the RFC822 encoding of the addresses.*/
 - (NSString *) mco_RFC822StringForAddresses;
