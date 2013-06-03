@@ -32,19 +32,4 @@
     return mailcore::Data::dataWithBytes((const char *) [self bytes], (unsigned int) [self length]);
 }
 
-- (NSString *) stringWithDetectedCharset
-{
-	return [NSString mco_stringWithMCString:self.mco_mcData->stringWithDetectedCharset()];
-}
-
-- (NSString *) stringWithDetectedCharset:(const char *)hintCharset
-{
-	return [NSString mco_stringWithMCString:self.mco_mcData->stringWithDetectedCharset(mailcore::String::stringWithUTF8Characters(hintCharset), false)];
-}
-
-- (NSString *) stringWithDetectedCharset:(const char *)charset isHTML:(BOOL)isHTML
-{
-	return [NSString mco_stringWithMCString:self.mco_mcData->stringWithDetectedCharset(mailcore::String::stringWithUTF8Characters(charset), isHTML)];
-}
-
 @end
