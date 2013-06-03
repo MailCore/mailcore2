@@ -35,6 +35,12 @@
     return [result retain];
 }
 
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+	[encoder encodeObject:self.displayName forKey:@"displayName"];
+	[encoder encodeObject:self.mailbox forKey:@"mailbox"];
+}
+
 + (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object
 {
     mailcore::Address * address = (mailcore::Address *) object;
@@ -111,6 +117,16 @@
     _nativeAddress->retain();
     
     return self;
+}
+
+- (id)initWithCoder:(NSCoder *)coder
+{
+	self = [self init];
+	
+	self.displayName = [[coder decodeObjectForKey:@"displayName"] retain];
+	self.mailbox = [[coder decodeObjectForKey:@"mailbox"] retain];
+	
+	return self;
 }
 
 + (MCOAddress *) addressWithMCAddress:(mailcore::Address *)address

@@ -12,7 +12,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MCOAddress : NSObject <NSCopying>
+@interface MCOAddress : NSObject <NSCopying, NSCoding>
 
 // Creates an address with a display name and a mailbox.
 // Example: [MCOAddress addressWithDisplayName:@"DINH Viêt Hoà" mailbox:@"hoa@etpan.org"]
