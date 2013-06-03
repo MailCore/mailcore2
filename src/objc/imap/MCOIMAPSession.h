@@ -63,7 +63,7 @@
 */
 @property (nonatomic, assign) MCOConnectionType connectionType;
 
-/** This is the timeout of the connection. *//
+/** This is the timeout of the connection. */
 @property (nonatomic, assign) NSTimeInterval timeout;
 
 /** When set to YES, the connection will fail if the certificate is incorrect. */
