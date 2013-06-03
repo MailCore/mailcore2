@@ -321,7 +321,16 @@
 		"domain-match":[
 						"googlemail\\.com",
 						"gmail\\.com"
-						]
+						],
+		"mailboxes":{
+			"sentmail":"[Gmail]/Sent",
+			"allmail":"[Gmail]/All Mail",
+			"starred":"[Gmail]/Starred",
+			"trash":"[Gmail]/Trash",
+			"drafts":"[Gmail]/Drafts",
+			"spam":"[Gmail]/Spam",
+			"important":"[Gmail]/Important"
+		}
 	},
 	"gmx":{
 		"servers":{
