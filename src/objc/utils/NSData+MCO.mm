@@ -9,8 +9,6 @@
 #import "NSData+MCO.h"
 
 #include "MCData.h"
-#include "MCString.h"
-#import "NSString+MCO.h"
 
 @implementation NSData (MCO)
 
