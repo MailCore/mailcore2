@@ -1975,6 +1975,7 @@ String * String::substringWithRange(Range range)
 }
 
 static chash * uniquedStringHash = NULL;
+static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 
 static void initUniquedStringHash()
 {
@@ -1991,14 +1992,17 @@ String * String::uniquedStringWithUTF8Characters(const char * UTF8Characters)
     pthread_once(&once, initUniquedStringHash);
     key.data = (void *) UTF8Characters;
     key.len = (unsigned int) strlen(UTF8Characters);
+    pthread_mutex_lock(&lock);
     r = chash_get(uniquedStringHash, &key, &value);
     if (r == 0) {
+        pthread_mutex_unlock(&lock);
         return (String *) value.data;
     }
     else {
         value.data = new String(UTF8Characters);
         value.len = 0;
         chash_set(uniquedStringHash, &key, &value, NULL);
+        pthread_mutex_unlock(&lock);
         return (String *) value.data;
     }
 }
