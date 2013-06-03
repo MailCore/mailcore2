@@ -38,6 +38,31 @@
     return self;
 }
 
+- (id) initWithCoder:(NSCoder *)decoder
+{
+	self = [super init];
+	
+	self.header = [[decoder decodeObjectForKey:@"header"] retain];
+	
+	return self;
+}
+
+- (void) encodeWithCoder:(NSCoder *)encoder
+{
+	[encoder encodeObject:self.header forKey:@"header"];
+}
+
+- (id) copyWithZone:(NSZone *)zone
+{
+	MCOAbstractMessage *message;
+	
+	
+	message = [[[self class] alloc] initWithMCMessage:(mailcore::AbstractMessage *)_message->copy()];
+	message.header = [self header];
+	
+	return message;
+}
+
 - (void) dealloc
 {
     _message->release();
