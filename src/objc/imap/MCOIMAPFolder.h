@@ -10,20 +10,23 @@
 
 #define __MAILCORE_MCOIMAPFOLDER_H_
 
-// This class implements an IMAP folder.
+/** This class represents an IMAP folder */
 
 #import <Foundation/Foundation.h>
 #import <MailCore/MCOConstants.h>
 
 @interface MCOIMAPFolder : NSObject <NSCopying>
 
-// It's the path of the folder.
+/** The folder's path, like for example INBOX.Archive */
 @property (nonatomic, copy) NSString * path;
 
-// It's the delimiter for each component of the path.
+/** It's the delimiter for each component of the path. Commonly . or / */
 @property (nonatomic, assign) char delimiter;
 
-// It's the flags of the folder. See MCOIMAPFolderFlag.
+/** 
+ Any flags the folder may have, like if the folder is for Drafts, Spam, Junk, etc. Or
+ it could be marked with metadata like that it has no children.
+*/
 @property (nonatomic, assign) MCOIMAPFolderFlag flags;
 
 @end

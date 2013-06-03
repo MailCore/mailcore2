@@ -10,7 +10,7 @@
 
 #define __MAILCORE_MCOIMAPBASEOPERATION_H_
 
-// It's a generic IMAP operation with progress.
+/** Represents a generic IMAP operation with methods that are called with progress updates */
 
 #import <MailCore/MCOOperation.h>
 
@@ -19,13 +19,21 @@ typedef void (^MCOIMAPBaseOperationItemProgressBlock)(unsigned int current);
 
 @interface MCOIMAPBaseOperation : MCOOperation
 
-// those two methods can be overriden by subclasses.
+/* Can be overriden by subclasses */
 
-// It will be called when a send or receive of a content of a message will occur.
-- (void) bodyProgress:(unsigned int)current maximum:(unsigned int)maximum;
+/* 
+ Will be called when a sending or receiving the contents of a message 
+ @param current The number of bytes sent or received
+ @param maximum The total number of bytes expected
+*/
+- (void)bodyProgress:(unsigned int)current maximum:(unsigned int)maximum;
 
-// It will be called when a new item is received in a list of items.
-- (void) itemProgress:(unsigned int)current maximum:(unsigned int)maximum;
+/*
+ Will be called when a new item is received in a list of items, like for example a message list
+ @param current The number of items downloaded
+ @param maximum The total number of items expected
+*/
+- (void)itemProgress:(unsigned int)current maximum:(unsigned int)maximum;
 
 @end
 

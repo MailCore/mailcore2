@@ -12,19 +12,25 @@
 
 #import <MailCore/MCOSMTPOperation.h>
 
-// This is an asynchronous operation that will send a message through SMTP.
+/** This is an asynchronous operation that will send a message through SMTP. */
 
 typedef void (^MCOSMTPOperationProgressBlock)(unsigned int current, unsigned int maximum);
 
 @interface MCOSMTPSendOperation : MCOSMTPOperation
 
-// This block will be called during the progression while sending the message
-// when some bytes have been sent to the network.
+/** This block will be called as the message is sent */
 @property (nonatomic, copy) MCOSMTPOperationProgressBlock progress;
 
-// Starts the asynchronous operation.
-// On success, the completion block will be called with nil as error.
-// On failure, error will be set with MCOErrorDomain as domain and an error code available in MCOConstants.h.
+/* 
+ Starts the asynchronous operation.
+
+ @param completionBlock Called when the operation is finished.
+
+ - On success `error` will be nil
+ 
+ - On failure, `error` will be set with `MCOErrorDomain` as domain and an 
+   error code available in MCOConstants.h,
+*/
 - (void) start:(void (^)(NSError * error))completionBlock;
 
 @end

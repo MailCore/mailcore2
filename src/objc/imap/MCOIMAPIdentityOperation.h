@@ -10,17 +10,28 @@
 
 #define __MAILCORE_MCOIMAPIDENTITYOPERATION_H_
 
-// This class implements an operation to get/send identity.
+/** 
+ This class implements an operation to get the servers identification info or
+ to send the clients identification info. Useful for bug reports and usage
+ statistics. 
+ @warn Not all servers support this.
+*/
 
 #import <MailCore/MCOIMAPBaseOperation.h>
 
 @interface MCOIMAPIdentityOperation : MCOIMAPBaseOperation
 
-// Starts the asynchronous operation.
-// On success, the completion block will be called with nil as error. serverIdentity contains the server identity information.
-// See RFC 2971 for the common keys of this dictionary.
-// On failure, error will be set with MCOErrorDomain as domain and an error code available in MCOConstants.h.
-// serverIdentity will be nil.
+/** 
+ Starts the asynchronous identity operation.
+
+ @param completionBlock Called when the operation is finished.
+
+ - On success `error` will be nil and `serverIdentity` will contain identifying server information.
+   See [RFC2971](http://tools.ietf.org/html/rfc2971) for commons dictionary keys.
+ 
+ - On failure, `error` will be set with `MCOErrorDomain` as domain and an 
+   error code available in `MCOConstants.h`, `serverIdentity` will be nil
+*/
 - (void) start:(void (^)(NSError * error, NSDictionary * serverIdentity))completionBlock;
 
 @end

@@ -12,23 +12,23 @@
 
 #import <Foundation/Foundation.h>
 
-// This class is a cluster for some folder information.
+/* This class holds IMAP folder metadata */
 
 @interface MCOIMAPFolderInfo : NSObject
 
-// Returns a new allocated folder info.
+/** Create an empty instance */
 + (MCOIMAPFolderInfo *) info;
 
-// UIDNEXT value.
+/** The folder's IMAP UIDNEXT value. Used to determine the uid for the next received message. */
 @property (nonatomic, assign) uint32_t uidNext;
 
-// UIDVALIDITY value.
+/** The folders IMAP UIDVALIDITY value. Must be used to determine if the server has changed assigned UIDs */
 @property (nonatomic, assign) uint32_t uidValidity;
 
-// MODSEQ value.
+/** An advanced value used for doing quick flag syncs if the server supports it. The MODSEQ value. */
 @property (nonatomic, assign) uint64_t modSequenceValue;
 
-// number of messages.
+/** Total number of messages in the folder */
 @property (nonatomic, assign) int messageCount;
 
 @end
