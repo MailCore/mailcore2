@@ -119,6 +119,11 @@
     return MCO_OBJC_BRIDGE_GET(importantFolderPath);
 }
 
+- (NSString *) identifier
+{
+    return MCO_OBJC_BRIDGE_GET(identifier);
+}
+
 - (BOOL) isMainFolder:(NSString *)folderPath prefix:(NSString *)prefix
 {
 	return _provider->isMainFolder(folderPath.mco_mcString, prefix.mco_mcString);
