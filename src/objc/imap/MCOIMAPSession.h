@@ -70,7 +70,7 @@
 @property (nonatomic, assign) BOOL checkCertificateEnabled;
 
 /** When set to YES, VoIP capability will be enabled on the IMAP connection on iOS */
-@property (nonatomic, assign, getter=isVoIPEnabled) BOOL VoIPEnabled;
+@property (nonatomic, assign, getter=isVoIPEnabled) BOOL voIPEnabled;
 
 /** The default delimiter for the folder paths */
 @property (nonatomic, assign) char delimiter;
