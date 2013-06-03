@@ -1,3 +1,9 @@
+#!/bin/sh
+
+if test -f prepare.sh ; then
+  cd ..
+fi
+
 appledoc \
 --no-create-docset \
 --no-install-docset \
@@ -8,5 +14,5 @@ appledoc \
 --ignore "*.m" \
 --no-warn-invalid-crossref \
 --no-repeat-first-par \
---output ~/mailcore2-docs \
+--output appledoc \
 src
