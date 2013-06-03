@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <MailCore/MCOConstants.h>
 
-@interface MCONetService : NSObject
+@interface MCONetService : NSObject <NSCopying>
 
 @property (nonatomic, copy) NSString * hostname;
 @property (nonatomic, assign) unsigned int port;
