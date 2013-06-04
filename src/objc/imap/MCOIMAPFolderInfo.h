@@ -31,8 +31,8 @@
 // number of messages.
 @property (nonatomic, assign) int messageCount;
 
-// number of unseen messages.
-@property (nonatomic, assign) int unseenCount;
+// first uid of the unseen messages.
+@property (nonatomic, assign) uint32_t firstUnseenUid;
 
 @end
 

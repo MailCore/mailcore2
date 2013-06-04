@@ -329,7 +329,7 @@ void IMAPSession::init()
 	mUIDNext = 0;
     mModSequenceValue = 0;
 	mFolderMsgCount = 0;
-    mFolderUnseenCount = 0;
+    mFirstUnseenUid = 0;
 	mLastFetchedSequenceNumber = 0;
 	mCurrentFolder = NULL;
     pthread_mutex_init(&mIdleLock, NULL);
@@ -842,9 +842,9 @@ void IMAPSession::select(String * folder, ErrorCode * pError)
         }
         
         if (mImap->imap_selection_info->sel_first_unseen) {
-            mFolderUnseenCount = (unsigned int) (mImap->imap_selection_info->sel_first_unseen);
+            mFirstUnseenUid = mImap->imap_selection_info->sel_first_unseen;
         } else {
-            mFolderUnseenCount = -1;
+            mFirstUnseenUid = -1;
         }
         
         
@@ -2702,9 +2702,9 @@ unsigned int IMAPSession::lastFolderMessageCount()
     return mFolderMsgCount;
 }
 
-unsigned int IMAPSession::lastFolderUnseenCount()
+uint32_t IMAPSession::firstUnseenUid()
 {
-    return mFolderUnseenCount;
+    return mFirstUnseenUid;
 }
 
 IMAPSyncResult * IMAPSession::syncMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,

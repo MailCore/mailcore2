@@ -19,7 +19,7 @@ IMAPFolderInfoOperation::IMAPFolderInfoOperation()
     mUidValidity = 0;
     mMessageCount = 0;
     mModSequenceValue = 0;
-    mUnseenCount = 0;
+    mFirstUnseenUid = 0;
 }
 
 IMAPFolderInfoOperation::~IMAPFolderInfoOperation()
@@ -46,9 +46,9 @@ int IMAPFolderInfoOperation::messageCount()
     return mMessageCount;
 }
 
-int IMAPFolderInfoOperation::unseenCount()
+uint32_t IMAPFolderInfoOperation::firstUnseenUid()
 {
-    return mUnseenCount;
+    return mFirstUnseenUid;
 }
 
 void IMAPFolderInfoOperation::main()
@@ -72,7 +72,7 @@ void IMAPFolderInfoOperation::main()
     mUidValidity = session()->session()->uidValidity();
     mModSequenceValue = session()->session()->modSequenceValue();
     mMessageCount = session()->session()->lastFolderMessageCount();
-    mUnseenCount = session()->session()->lastFolderUnseenCount();
+    mFirstUnseenUid = session()->session()->firstUnseenUid();
 
     setError(error);
 }

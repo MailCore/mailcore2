@@ -26,7 +26,7 @@ namespace mailcore {
         virtual uint32_t uidValidity();
         virtual uint64_t modSequenceValue();
         virtual int messageCount();
-        virtual int unseenCount();
+        virtual uint32_t firstUnseenUid();
         
     public: // subclass behavior
         virtual void main();
@@ -37,7 +37,7 @@ namespace mailcore {
         uint32_t mUidValidity;
         uint64_t mModSequenceValue;
         int mMessageCount;
-        int mUnseenCount;
+        uint32_t mFirstUnseenUid;
         
     };
 
