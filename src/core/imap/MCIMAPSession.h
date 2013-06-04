@@ -122,6 +122,8 @@ namespace mailcore {
 		virtual uint32_t uidNext();
         virtual uint64_t modSequenceValue();
 		virtual unsigned int lastFolderMessageCount();
+        virtual unsigned int lastFolderUnseenCount();
+        
         
         virtual bool isIdleEnabled();
         virtual bool isXListEnabled();
@@ -157,6 +159,8 @@ namespace mailcore {
 		uint32_t mUIDNext;
         uint64_t mModSequenceValue;
 		unsigned int mFolderMsgCount;
+        unsigned int mFolderUnseenCount;
+        
 		unsigned int mLastFetchedSequenceNumber;
 		String * mCurrentFolder;
 		pthread_mutex_t mIdleLock;

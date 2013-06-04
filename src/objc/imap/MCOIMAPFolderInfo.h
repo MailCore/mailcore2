@@ -31,6 +31,9 @@
 // number of messages.
 @property (nonatomic, assign) int messageCount;
 
+// number of unseen messages.
+@property (nonatomic, assign) int unseenCount;
+
 @end
 
 #endif
