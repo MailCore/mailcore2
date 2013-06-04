@@ -10,18 +10,29 @@
 
 #define __MAILCORE_MCOIMAPIDLEOPERATION_H_
 
-// This class implements an idle operation.
+/** 
+ This class implements an IMAP IDLE. IDLE is used to keep a connection
+ open with the server so that new messages can be pushed to the client.
+ See [RFC2177](http://tools.ietf.org/html/rfc2177)
+*/
 
 #import <MailCore/MCOIMAPBaseOperation.h>
 
 @interface MCOIMAPIdleOperation : MCOIMAPBaseOperation
 
-// Interrupts the IDLE operation.
+/** Stop the current IDLE session */
 - (void) interruptIdle;
 
-// Starts the asynchronous operation.
-// On success, the completion block will be called with nil as error.
-// On failure, error will be set with MCOErrorDomain as domain and an error code available in MCOConstants.h.
+/** 
+ Starts IDLE
+
+ @param completionBlock Called when the IDLE times out, errors out or detects a change
+
+ - On success `error` will be nil
+ 
+ - On failure, `error` will be set with `MCOErrorDomain` as domain and an 
+   error code available in `MCOConstants.h`
+*/
 - (void) start:(void (^)(NSError * error))completionBlock;
 
 @end

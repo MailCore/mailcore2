@@ -10,9 +10,11 @@
 
 #define __MAILCORE_MCOMESSAGEPARSER_H_
 
-// This class implements a parsed message.
-// When the full content of a message has been fetched using POP or IMAP,
-// you need to parse it.
+/**
+ This class implements a parsed message.
+ When the full content of a message has been fetched using POP or IMAP,
+ you need to parse it.
+*/
 
 #import <MailCore/MCOAbstractMessage.h>
 
@@ -20,21 +22,20 @@
 
 @interface MCOMessageParser : MCOAbstractMessage <NSCopying>
 
-// returns a parsed message from the given RFC 822 data.
+/** returns a parsed message from the given RFC 822 data.*/
 + (MCOMessageParser *) messageParserWithData:(NSData *)data;
 
-// data is the RFC 822 formatted message.
+/** data is the RFC 822 formatted message.*/
 - (id) initWithData:(NSData *)data;
 - (void) dealloc;
 
-// It's the main part of the message. It can be MCOMessagePart, MCOMultipart or MCOAttachment.
+/** It's the main part of the message. It can be MCOMessagePart, MCOMultipart or MCOAttachment.*/
 - (MCOAbstractPart *) mainPart;
 
-// data of the RFC 822 formatted message. It's the input of the parser.
+/** data of the RFC 822 formatted message. It's the input of the parser.*/
 - (NSData *) data;
 
-// HTML rendering of the message to be displayed in a web view.
-// delegate can be nil.
+/** HTML rendering of the message to be displayed in a web view. delegate can be nil.*/
 - (NSString *) htmlRenderingWithDelegate:(id <MCOHTMLRendererDelegate>)delegate;
 
 @end

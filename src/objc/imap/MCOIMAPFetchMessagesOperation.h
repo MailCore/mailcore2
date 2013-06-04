@@ -13,21 +13,28 @@
 #import <MailCore/MCOIMAPBaseOperation.h>
 #import <MailCore/MCOConstants.h>
 
-// This class implements an operation to fetch a list of messages.
+/** This class implements an operation to fetch a list of messages from a folder */
 
 @class MCOIndexSet;
 
 @interface MCOIMAPFetchMessagesOperation : MCOIMAPBaseOperation
 
-// This block will be called each time a new message information will be downloaded.
+/** This block will be called each time a new message is downloaded. */
 @property (nonatomic, copy) MCOIMAPBaseOperationItemProgressBlock progress;
 
-// Starts the asynchronous operation.
-// On success, the completion block will be called with nil as error. messages will be an array of MCOIMAPMessage.
-// vanishedMessages will contain the messages removed on the server if the server supports QRESYNC and if it was a sync request.
-// In other case, vanishedMessages will be nil.
-// On failure, error will be set with MCOErrorDomain as domain and an error code available in MCOConstants.h.
-// messages and vanishedMessages will be nil.
+/** 
+ Starts the asynchronous fetch operation.
+
+ @param completionBlock Called when the operation is finished.
+
+ - On success `error` will be nil and `messages` will be an array of MCOIMAPMessage.
+   `vanishedMessages` will contain the messages removed on the server if the server supports QRESYNC and if it was a sync request
+ 
+ - On failure, `error` will be set with `MCOErrorDomain` as domain and an 
+   error code available in `MCOConstants.h`, `messages` and `vanishedMessages` will be nil
+
+   If you are not supporting QRESYNC you can safely ignore `vanishedMessages`.
+*/
 - (void) start:(void (^)(NSError * error, NSArray * /* MCOIMAPMessage */ messages, MCOIndexSet * vanishedMessages))completionBlock;
 
 @end

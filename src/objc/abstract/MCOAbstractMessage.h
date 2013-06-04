@@ -17,16 +17,19 @@
 
 @interface MCOAbstractMessage : NSObject
 
-// Header of the message.
+/** Header of the message. */
 @property (nonatomic, strong) MCOMessageHeader * header;
 
-// Returns the part with the given Content-ID.
+/** Returns the part with the given Content-ID.*/
 - (MCOAbstractPart *) partForContentID:(NSString *)contentID;
 
-// Returns the part with the given unique identifier.
+/** Returns the part with the given unique identifier.*/
 - (MCOAbstractPart *) partForUniqueID:(NSString *)uniqueID;
 
+/** All attachments in the message */
 - (NSArray *) attachments;
+
+/** All HTML bodies */
 - (NSArray *) htmlInlineAttachments;
 
 @end

@@ -13,15 +13,20 @@
 #import <Foundation/Foundation.h>
 #import <MailCore/MCOPOPOperation.h>
 
-// This is an asynchronous operation that will fetch the list of a messages on the account.
+/** This is an asynchronous operation that will fetch the list of a messages on the POP3 account. */
 
 @interface MCOPOPFetchMessagesOperation : MCOPOPOperation
 
-// Starts the asynchronous operation.
-// On success, the completion block will be called with nil as error and the fetched messages list.
-// Messages will be an array of MCOPOPMessageInfo.
-// On failure, error will be set with MCOErrorDomain as domain and an error code available in MCOConstants.h.
-// messageData will be nil.
+/** 
+ Starts the asynchronous fetch operation.
+
+ @param completionBlock Called when the operation is finished.
+
+ - On success `error` will be nil and `messages` will be an array of MCOPOPMessageInfo
+ 
+ - On failure, `error` will be set with `MCOErrorDomain` as domain and an 
+   error code available in MCOConstants.h, `messages` will be null
+*/
 - (void) start:(void (^)(NSError * error, NSArray * /* MCOPOPMessageInfo */ messages))completionBlock;
 
 @end

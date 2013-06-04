@@ -15,7 +15,7 @@
 
 @interface MCOAbstractMultipart : MCOAbstractPart
 
-// Returns the subparts of that multipart.
+/** Returns the subparts of that multipart.*/
 @property (nonatomic, copy) NSArray * /* MCOAbstractPart */ parts;
 
 @end
