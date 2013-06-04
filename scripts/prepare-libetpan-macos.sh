@@ -1,6 +1,7 @@
 #!/bin/sh
 
 url="https://github.com/dinhviethoa/libetpan.git"
+rev=349d184dcf2008ee7b5396743580e32b3bf65689
 
 pushd `dirname $0` > /dev/null
 scriptpath=`pwd`
@@ -31,7 +32,8 @@ else
 	git clone $url
 	cd libetpan
 fi
-version=`git rev-parse HEAD | cut -c1-10`
+#version=`git rev-parse HEAD | cut -c1-10`
+version=`echo $rev | cut -c1-10`
 
 if test -f "$resultdir/libetpan-$version.zip" ; then
 	echo install from cache
@@ -48,6 +50,8 @@ popd >/dev/null
 pushd . >/dev/null
 
 cp -R "$builddir/downloads/libetpan" "$srcdir/libetpan"
+cd "$srcdir/libetpan"
+git checkout $rev
 echo building libetpan
 
 cd "$srcdir/libetpan/build-mac"
