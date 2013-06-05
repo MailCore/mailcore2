@@ -66,6 +66,12 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
     return MCO_TO_OBJC(coreOp);
 }
 
+- (MCOIMAPFolderStatusOperation *) folderStatusOperation:(NSString *)folder
+{
+    IMAPFolderStatusOperation * coreOp = MCO_NATIVE_INSTANCE->folderStatusOperation([folder mco_mcString]);
+    return MCO_TO_OBJC(coreOp);
+}
+
 - (MCOIMAPFetchFoldersOperation *) fetchSubscribedFoldersOperation
 {
     IMAPOperation *coreOp = MCO_NATIVE_INSTANCE->fetchSubscribedFoldersOperation();

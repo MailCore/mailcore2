@@ -5,9 +5,22 @@
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCMessageConstants.h>
 
+
+
 #ifdef __cplusplus
 
 namespace mailcore {
+    
+    
+    struct folder_status {
+        uint32_t total_unseen;
+        uint32_t total_messages;
+        uint32_t total_recent;
+        uint32_t uid_next;
+        uint32_t uid_validity;
+    };
+    
+    
 
 	extern String * IMAPNamespacePersonal;
 	extern String * IMAPNamespaceOther;
@@ -23,6 +36,9 @@ namespace mailcore {
 	public:
 		IMAPSession();
 		virtual ~IMAPSession();
+        
+        
+        
 		
 		virtual void setHostname(String * hostname);
 		virtual String * hostname();
@@ -60,6 +76,7 @@ namespace mailcore {
 		virtual IMAPNamespace * defaultNamespace();
 
 		virtual void select(String * folder, ErrorCode * pError);
+        virtual folder_status folderStatus(String * folder, ErrorCode * pError);
 		
 		virtual Array * /* IMAPFolder */ fetchSubscribedFolders(ErrorCode * pError);
 		virtual Array * /* IMAPFolder */ fetchAllFolders(ErrorCode * pError); // will use xlist if available
@@ -125,6 +142,7 @@ namespace mailcore {
         virtual uint32_t firstUnseenUid();
         
         
+        
         virtual bool isIdleEnabled();
         virtual bool isXListEnabled();
         virtual bool isCondstoreEnabled();
@@ -160,6 +178,8 @@ namespace mailcore {
         uint64_t mModSequenceValue;
 		unsigned int mFolderMsgCount;
         uint32_t mFirstUnseenUid;
+        
+
         
 		unsigned int mLastFetchedSequenceNumber;
 		String * mCurrentFolder;

@@ -25,6 +25,7 @@ namespace mailcore {
     class IMAPFetchContentOperation;
 	class IMAPIdleOperation;
     class IMAPFolderInfoOperation;
+    class IMAPFolderStatusOperation;
 	class IMAPNamespace;
     class IMAPSearchOperation;
     class IMAPSearchExpression;
@@ -78,6 +79,8 @@ namespace mailcore {
         virtual unsigned int maximumConnections();
         
 		virtual IMAPFolderInfoOperation * folderInfoOperation(String * folder);
+        virtual IMAPFolderStatusOperation * folderStatusOperation(String * folder);
+        
 		
 		virtual IMAPFetchFoldersOperation * fetchSubscribedFoldersOperation();
 		virtual IMAPFetchFoldersOperation * fetchAllFoldersOperation();

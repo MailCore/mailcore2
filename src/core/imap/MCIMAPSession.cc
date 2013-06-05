@@ -33,6 +33,7 @@ static void initialize() {
     IMAPNamespacePersonal = (String *) MCSTR("IMAPNamespacePersonal")->retain();
 	IMAPNamespaceOther = (String *) MCSTR("IMAPNamespaceOther")->retain();
 	IMAPNamespaceShared = (String *) MCSTR("IMAPNamespaceShared")->retain();
+    
     pool->release();
 }
 
@@ -854,6 +855,152 @@ void IMAPSession::select(String * folder, ErrorCode * pError)
     mState = STATE_SELECTED;
     * pError = ErrorNone;
     MCLog("select ok");
+}
+
+
+
+
+
+folder_status IMAPSession::folderStatus(String * folder, ErrorCode * pError)
+{
+    int r;
+    
+    MCLog("status");
+    MCAssert(mState == STATE_LOGGEDIN || mState == STATE_SELECTED);
+
+    struct mailimap_mailbox_data_status * status;
+
+    struct mailimap_status_att_list * status_att_list;
+        
+    status_att_list = mailimap_status_att_list_new_empty();
+    mailimap_status_att_list_add(status_att_list,MAILIMAP_STATUS_ATT_UNSEEN);
+    mailimap_status_att_list_add(status_att_list,MAILIMAP_STATUS_ATT_MESSAGES);
+    mailimap_status_att_list_add(status_att_list,MAILIMAP_STATUS_ATT_RECENT);
+    mailimap_status_att_list_add(status_att_list,MAILIMAP_STATUS_ATT_UIDNEXT);
+    mailimap_status_att_list_add(status_att_list,MAILIMAP_STATUS_ATT_UIDVALIDITY);
+    
+//    clist *list;
+//    int attribute = MAILIMAP_STATUS_ATT_UNSEEN;
+//    int attribute1 = MAILIMAP_STATUS_ATT_MESSAGES;
+//    int attribute2 = MAILIMAP_STATUS_ATT_RECENT;
+//    
+//    
+//    list = clist_new();
+//    clist_append(list, &attribute);
+//    clist_append(list, &attribute1);
+//    clist_append(list, &attribute2);
+    
+    //mailimap_status_att_list *attr_list = mailimap_status_att_list_new(list);
+    
+    
+    //HashMap *result = HashMap::hashMap();
+    
+    r = mailimap_status(mImap, MCUTF8(folder), status_att_list, &status);
+    
+    struct folder_status fs;
+    
+    MCLog("status error : %i", r);
+    if (r == MAILIMAP_ERROR_STREAM) {
+        * pError = ErrorConnection;
+        MCLog("status error : %s %i", MCUTF8DESC(this), * pError);
+        return fs;
+    }
+    else if (r == MAILIMAP_ERROR_PARSE) {
+        * pError = ErrorParse;
+        return fs;
+    }
+    else if (hasError(r)) {
+        * pError = ErrorNonExistantFolder;
+        //MC_SAFE_RELEASE(mCurrentFolder);
+        return fs;
+    }
+    
+    clistiter * cur;
+    
+    
+
+
+    
+    if (status != NULL) {
+        
+            struct mailimap_status_info * status_info;
+            for(cur = clist_begin(status->st_info_list) ; cur != NULL ;
+                cur = clist_next(cur)) {                
+                
+                status_info = (struct mailimap_status_info *) clist_content(cur);
+                                
+                switch (status_info->st_att) {
+                    case MAILIMAP_STATUS_ATT_UNSEEN:
+                        fs.total_unseen = status_info->st_value;
+                        break;
+                    case MAILIMAP_STATUS_ATT_MESSAGES:
+                        fs.total_messages = status_info->st_value;
+                        break;
+                    case MAILIMAP_STATUS_ATT_RECENT:
+                        fs.total_recent = status_info->st_value;
+                        break;
+                    case MAILIMAP_STATUS_ATT_UIDNEXT:
+                        fs.uid_next = status_info->st_value;
+                        break;                        
+                    case MAILIMAP_STATUS_ATT_UIDVALIDITY:
+                        fs.uid_validity = status_info->st_value;
+                        break;                        
+                }
+            }            
+        
+        
+    }
+    
+    
+    
+    //result->setObjectForKey(folder,  Value::valueWithPointerValue(&fs));
+    
+    
+    
+    mailimap_status_att_list_free(status_att_list);
+    
+    
+    return fs;
+//    MCLog("select error : %i", r);
+//    if (r == MAILIMAP_ERROR_STREAM) {
+//        * pError = ErrorConnection;
+//        MCLog("select error : %s %i", MCUTF8DESC(this), * pError);
+//        return;
+//    }
+//    else if (r == MAILIMAP_ERROR_PARSE) {
+//        * pError = ErrorParse;
+//        return;
+//    }
+//    else if (hasError(r)) {
+//        * pError = ErrorNonExistantFolder;
+//        MC_SAFE_RELEASE(mCurrentFolder);
+//        return;
+//    }
+//    
+//    MC_SAFE_REPLACE_COPY(String, mCurrentFolder, folder);
+//    
+//    if (mImap->imap_selection_info != NULL) {
+//        mUIDValidity = mImap->imap_selection_info->sel_uidvalidity;
+//        mUIDNext = mImap->imap_selection_info->sel_uidnext;
+//        if (mImap->imap_selection_info->sel_has_exists) {
+//            mFolderMsgCount = (unsigned int) (mImap->imap_selection_info->sel_exists);
+//        } else {
+//            mFolderMsgCount = -1;
+//        }
+//        
+//        if (mImap->imap_selection_info->sel_first_unseen) {
+//            mFirstUnseenUid = mImap->imap_selection_info->sel_first_unseen;
+//        } else {
+//            mFirstUnseenUid = -1;
+//        }
+//        
+//        
+//        mModSequenceValue = get_mod_sequence_value(mImap);
+//    }
+//    
+//    mState = STATE_SELECTED;
+//    * pError = ErrorNone;
+//    MCLog("select ok");
 }
 
 #pragma mark mailbox flags conversion

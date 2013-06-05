@@ -17,6 +17,7 @@
 @class MCOIMAPOperation;
 @class MCOIMAPNamespace;
 @class MCOIMAPFolderInfoOperation;
+@class MCOIMAPFolderStatusOperation;
 @class MCOIMAPAppendMessageOperation;
 @class MCOIMAPCopyMessagesOperation;
 @class MCOIndexSet;
@@ -113,6 +114,32 @@
           ...
      }];
 */
+
+
+/**
+ Returns an operation that retrieves folder status (like UIDNext - Unseen -)
+ 
+ MCOIMAPFolderStatusOperation * op = [session folderStatusOperation:@"INBOX"];
+ [op start:^(NSError *error, MCOIMAPFolderStatus * info) {
+ NSLog(@"UIDNEXT: %lu", (unsigned long) [info uidNext]);
+ NSLog(@"UIDVALIDITY: %lu", (unsigned long) [info uidValidity]);
+ NSLog(@"messages count: %lu", [info totalMessages]);
+ }];
+ */
+
+- (MCOIMAPFolderStatusOperation *) folderStatusOperation:(NSString *)folder;
+
+/**
+ Returns an operation that gets the list of subscribed folders.
+ 
+ MCOIMAPFetchFoldersOperation * op = [session fetchAllFoldersOperation];
+ [op start:^(NSError * error, NSArray * folders) {
+ ...
+ }];
+ */
+
+
+
 - (MCOIMAPFetchFoldersOperation *) fetchSubscribedFoldersOperation;
 
 /**
