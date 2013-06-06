@@ -16,7 +16,7 @@ using namespace mailcore;
 void IMAPCheckAccountOperation::main()
 {
     ErrorCode error;
-    session()->session()->connect(&error);
+    session()->session()->connectIfNeeded(&error);
     if (error == ErrorNone)
         session()->session()->login(&error);
     setError(error);
