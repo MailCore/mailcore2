@@ -55,12 +55,12 @@
 - (id) initWithCoder:(NSCoder *)aDecoder {
 	self = [super initWithCoder:aDecoder];
 	
-	self.uid = [aDecoder decodeInt32ForKey:@"uid"];
-	self.flags = (MCOMessageFlag)[aDecoder decodeIntForKey:@"flags"];
-	self.originalFlags = (MCOMessageFlag)[aDecoder decodeIntForKey:@"originalFlags"];
-	self.modSeqValue = [aDecoder decodeInt64ForKey:@"modSeqValue"];
-	self.mainPart = [aDecoder decodeObjectForKey:@"mainPart"];
-	self.gmailLabels = [aDecoder decodeObjectForKey:@"gmailLabels"];
+	[self setUid:[aDecoder decodeInt32ForKey:@"uid"]];
+	[self setFlags:(MCOMessageFlag)[aDecoder decodeIntForKey:@"flags"]];
+	[self setOriginalFlags:(MCOMessageFlag)[aDecoder decodeIntForKey:@"originalFlags"]];
+	[self setModSeqValue:[aDecoder decodeInt64ForKey:@"modSeqValue"]];
+	[self setMainPart:[[aDecoder decodeObjectForKey:@"mainPart"] retain]];
+	[self setGmailLabels:[[aDecoder decodeObjectForKey:@"gmailLabels"] retain]];
 
 	return self;
 }

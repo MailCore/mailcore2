@@ -29,43 +29,20 @@
     MCORegisterClass(self, &typeid(nativeType));
 }
 
-- (id)initWithCoder:(NSCoder *)decoder
-{
-	self = [super init];
-	
-	self.messageID = [[decoder decodeObjectForKey:@"messageID"] retain];
-	self.references = [[decoder decodeObjectForKey:@"references"] retain];
-	self.inReplyTo = [[decoder decodeObjectForKey:@"inReplyTo"] retain];
-	self.sender = [[decoder decodeObjectForKey:@"sender"] retain];
-	self.from = [[decoder decodeObjectForKey:@"from"] retain];
-	self.to = [[decoder decodeObjectForKey:@"to"] retain];
-	self.cc = [[decoder decodeObjectForKey:@"cc"] retain];
-	self.bcc = [[decoder decodeObjectForKey:@"bcc"] retain];
-	self.replyTo = [[decoder decodeObjectForKey:@"replyTo"] retain];
-	self.subject = [[decoder decodeObjectForKey:@"subject"] retain];
-	self.date = [[decoder decodeObjectForKey:@"date"] retain];
-	self.receivedDate = [[decoder decodeObjectForKey:@"receivedDate"] retain];
-	if (self.receivedDate == nil) {
-		self.receivedDate = [self.date retain];
-	}
-	
-	return self;
-}
-
 - (void) encodeWithCoder:(NSCoder *)encoder
 {
-	[encoder encodeObject:self.messageID forKey:@"messageID"];
-	[encoder encodeObject:self.references forKey:@"references"];
-	[encoder encodeObject:self.inReplyTo forKey:@"inReplyTo"];
-	[encoder encodeObject:self.sender forKey:@"sender"];
-	[encoder encodeObject:self.from forKey:@"from"];
-	[encoder encodeObject:self.to forKey:@"to"];
-	[encoder encodeObject:self.cc forKey:@"cc"];
-	[encoder encodeObject:self.bcc forKey:@"bcc"];
-	[encoder encodeObject:self.replyTo forKey:@"replyTo"];
-	[encoder encodeObject:self.subject forKey:@"subject"];
-	[encoder encodeObject:self.date forKey:@"date"];
-	[encoder encodeObject:self.receivedDate forKey:@"receivedDate"];
+	[encoder encodeObject:[self messageID] forKey:@"messageID"];
+	[encoder encodeObject:[self references] forKey:@"references"];
+	[encoder encodeObject:[self inReplyTo] forKey:@"inReplyTo"];
+	[encoder encodeObject:[self sender] forKey:@"sender"];
+	[encoder encodeObject:[self from] forKey:@"from"];
+	[encoder encodeObject:[self to] forKey:@"to"];
+	[encoder encodeObject:[self cc] forKey:@"cc"];
+	[encoder encodeObject:[self bcc] forKey:@"bcc"];
+	[encoder encodeObject:[self replyTo] forKey:@"replyTo"];
+	[encoder encodeObject:[self subject] forKey:@"subject"];
+	[encoder encodeObject:[self date] forKey:@"date"];
+	[encoder encodeObject:[self receivedDate] forKey:@"receivedDate"];
 }
 
 - (id) copyWithZone:(NSZone *)zone
@@ -104,6 +81,29 @@
     _nativeHeader->retain();
     
     return self;
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+	self = [super init];
+	
+	[self setMessageID:[[decoder decodeObjectForKey:@"messageID"] retain]];
+	[self setReferences:[[decoder decodeObjectForKey:@"references"] retain]];
+	[self setInReplyTo:[[decoder decodeObjectForKey:@"inReplyTo"] retain]];
+	[self setSender:[[decoder decodeObjectForKey:@"sender"] retain]];
+	[self setFrom:[[decoder decodeObjectForKey:@"from"] retain]];
+	[self setTo:[[decoder decodeObjectForKey:@"to"] retain]];
+	[self setCc:[[decoder decodeObjectForKey:@"cc"] retain]];
+	[self setBcc:[[decoder decodeObjectForKey:@"bcc"] retain]];
+	[self setReplyTo:[[decoder decodeObjectForKey:@"replyTo"] retain]];
+	[self setSubject:[[decoder decodeObjectForKey:@"subject"] retain]];
+	[self setDate:[[decoder decodeObjectForKey:@"date"] retain]];
+	[self setReceivedDate:[[decoder decodeObjectForKey:@"receivedDate"] retain]];
+	if (self.receivedDate == nil) {
+		self.receivedDate = [[self date] retain];
+	}
+	
+	return self;
 }
 
 + (MCOMessageHeader *) messageHeaderWithMCMessageHeader:(mailcore::MessageHeader *)header

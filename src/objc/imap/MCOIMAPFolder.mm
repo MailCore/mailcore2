@@ -67,9 +67,9 @@
 {
 	self = [self init];
 	
-	self.path = [aDecoder decodeObjectForKey:@"path"];
-	self.delimiter = [aDecoder decodeIntForKey:@"delimiter"];
-	self.flags = (MCOIMAPFolderFlag)[aDecoder decodeInt32ForKey:@"flags"];
+	[self setPath:[[aDecoder decodeObjectForKey:@"path"] retain]];
+	[self setDelimiter:[aDecoder decodeIntForKey:@"delimiter"]];
+	[self setFlags:(MCOIMAPFolderFlag)[aDecoder decodeInt32ForKey:@"flags"]];
 
 	return self;
 }
