@@ -31,6 +31,13 @@
     return [result retain];
 }
 
+- (void) encodeWithCoder:(NSCoder *)aCoder
+{
+	[aCoder encodeObject:self.path forKey:@"path"];
+	[aCoder encodeInt:self.delimiter forKey:@"delimiter"];
+	[aCoder encodeInt32:self.flags forKey:@"flags"];
+}
+
 + (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object
 {
     mailcore::IMAPFolder * folder = (mailcore::IMAPFolder *) object;
@@ -54,6 +61,17 @@
     _nativeFolder->retain();
     
     return self;
+}
+
+- (id) initWithCoder:(NSCoder *)aDecoder
+{
+	self = [self init];
+	
+	self.path = [aDecoder decodeObjectForKey:@"path"];
+	self.delimiter = [aDecoder decodeIntForKey:@"delimiter"];
+	self.flags = (MCOIMAPFolderFlag)[aDecoder decodeInt32ForKey:@"flags"];
+
+	return self;
 }
 
 - (void) dealloc
