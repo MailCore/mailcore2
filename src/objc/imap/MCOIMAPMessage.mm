@@ -35,10 +35,34 @@
     return [result retain];
 }
 
+- (void) encodeWithCoder:(NSCoder *)aCoder
+{
+	[super encodeWithCoder:aCoder];
+	[aCoder encodeInt32:self.uid forKey:@"uid"];
+	[aCoder encodeInt:self.flags forKey:@"flags"];
+	[aCoder encodeInt:self.originalFlags forKey:@"originalFlags"];
+	[aCoder encodeInt64:self.modSeqValue forKey:@"modSeqValue"];
+	[aCoder encodeObject:self.mainPart forKey:@"mainPart"];
+	[aCoder encodeObject:self.gmailLabels forKey:@"gmailLabels"];
+}
+
 + (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object
 {
     mailcore::IMAPMessage * msg = (mailcore::IMAPMessage *) object;
     return [[[self alloc] initWithMCMessage:msg] autorelease];
+}
+
+- (id) initWithCoder:(NSCoder *)aDecoder {
+	self = [super initWithCoder:aDecoder];
+	
+	self.uid = [aDecoder decodeInt32ForKey:@"uid"];
+	self.flags = (MCOMessageFlag)[aDecoder decodeIntForKey:@"flags"];
+	self.originalFlags = (MCOMessageFlag)[aDecoder decodeIntForKey:@"originalFlags"];
+	self.modSeqValue = [aDecoder decodeInt64ForKey:@"modSeqValue"];
+	self.mainPart = [aDecoder decodeObjectForKey:@"mainPart"];
+	self.gmailLabels = [aDecoder decodeObjectForKey:@"gmailLabels"];
+
+	return self;
 }
 
 MCO_OBJC_SYNTHESIZE_SCALAR(uint32_t, uint32_t, setUid, uid)
