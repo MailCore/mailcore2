@@ -22,8 +22,8 @@
 {
 	self = [super init];
 	
-	[self setHeader:[[decoder decodeObjectForKey:@"header"] retain]];
-	[self setMainPart:[[decoder decodeObjectForKey:@"mainPart"] retain]];
+	[self setHeader:[decoder decodeObjectForKey:@"header"]];
+	[self setMainPart:[decoder decodeObjectForKey:@"mainPart"]];
 
 	return self;
 }

@@ -40,9 +40,11 @@
 
 - (id) initWithCoder:(NSCoder *)decoder
 {
-	self = [super init];
+	MCOAbstractMessage * abstractPart = [[[[self class] alloc] init] autorelease];
+	mailcore::AbstractMessage * message = (mailcore::AbstractMessage *) [abstractPart mco_mcObject];
+	message->setHeader((mailcore::MessageHeader *) [[decoder decodeObjectForKey:@"header"] mco_mcObject]);
 	
-	self.header = [[decoder decodeObjectForKey:@"header"] retain];
+	self = [self initWithMCMessage:message];
 	
 	return self;
 }
@@ -56,9 +58,8 @@
 {
 	MCOAbstractMessage *message;
 	
-	
 	message = [[[self class] alloc] initWithMCMessage:(mailcore::AbstractMessage *)_message->copy()];
-	[message setHeader:[[self header] copy]];
+	[message setHeader:[[[self header] copy] autorelease]];
 	
 	return message;
 }

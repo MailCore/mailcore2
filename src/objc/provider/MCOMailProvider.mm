@@ -36,7 +36,7 @@
 + (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object
 {
     mailcore::MailProvider * provider = (mailcore::MailProvider *) object;
-    return [[self alloc] initWithMCProvider:provider];
+    return [[[self alloc] initWithMCProvider:provider] autorelease];
 }
 
 - (id) initWithInfo:(NSDictionary *)info

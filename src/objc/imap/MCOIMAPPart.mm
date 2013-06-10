@@ -47,7 +47,7 @@
 - (id) initWithCoder:(NSCoder *)aDecoder {
 	self = [super initWithCoder:aDecoder];
 	
-	[self setPartID:[[aDecoder decodeObjectForKey:@"partID"] retain]];
+	[self setPartID:[aDecoder decodeObjectForKey:@"partID"]];
 	[self setSize:(unsigned int) [aDecoder decodeInt64ForKey:@"size"]];
 	[self setEncoding:(MCOEncoding) [aDecoder decodeIntForKey:@"encoding"]];
 
