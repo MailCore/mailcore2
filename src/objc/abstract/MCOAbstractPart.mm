@@ -39,17 +39,17 @@
 
 - (id) initWithCoder:(NSCoder *)decoder
 {
-	
-	mailcore::AbstractPart * part = new mailcore::AbstractPart();
+	MCOAbstractPart *abstractPart = [[[[self class] alloc] init] autorelease];
+	mailcore::AbstractPart * part = (mailcore::AbstractPart *) [abstractPart mco_mcObject];
 	part->setPartType((mailcore::PartType)[decoder decodeIntForKey:@"partType"]);
-	part->setFilename([[[decoder decodeObjectForKey:@"filename"] retain] mco_mcString]);
-	part->setMimeType([[[decoder decodeObjectForKey:@"mimeType"] retain] mco_mcString]);
-	part->setCharset([[[decoder decodeObjectForKey:@"charset"] retain] mco_mcString]);
-	part->setUniqueID([[[decoder decodeObjectForKey:@"uniqueID"] retain] mco_mcString]);
-	part->setContentID([[[decoder decodeObjectForKey:@"contentID"] retain] mco_mcString]);
-	part->setContentLocation([[[decoder decodeObjectForKey:@"contentLocation"] retain] mco_mcString]);
+	part->setFilename([[decoder decodeObjectForKey:@"filename"] mco_mcString]);
+	part->setMimeType([[decoder decodeObjectForKey:@"mimeType"] mco_mcString]);
+	part->setCharset([[decoder decodeObjectForKey:@"charset"] mco_mcString]);
+	part->setUniqueID([[decoder decodeObjectForKey:@"uniqueID"] mco_mcString]);
+	part->setContentID([[decoder decodeObjectForKey:@"contentID"] mco_mcString]);
+	part->setContentLocation([[decoder decodeObjectForKey:@"contentLocation"] mco_mcString]);
 	part->setInlineAttachment([decoder decodeBoolForKey:@"inlineAttachment"]);
-	part->setMessage((mailcore::AbstractMessage *) [[[decoder decodeObjectForKey:@"message"] retain] mco_mcObject]);
+	part->setMessage((mailcore::AbstractMessage *) [[decoder decodeObjectForKey:@"message"] mco_mcObject]);
 	
 	self = [self initWithMCPart:part];
 

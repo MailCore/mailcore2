@@ -32,7 +32,7 @@
 + (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object
 {
 	mailcore::NetService *netService = (mailcore::NetService *)object;
-	return [[self alloc] initWithNetService:netService];
+	return [[[self alloc] initWithNetService:netService] autorelease];
 }
 
 + (MCONetService *) serviceWithInfo:(NSDictionary *)info

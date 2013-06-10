@@ -20,7 +20,7 @@
 {
 	self = [super initWithCoder:decoder];
 	
-	[self setParts:[[decoder decodeObjectForKey:@"parts"] retain]];
+	[self setParts:[decoder decodeObjectForKey:@"parts"]];
 	
 	return self;
 }

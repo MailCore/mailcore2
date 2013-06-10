@@ -59,8 +59,8 @@
 	[self setFlags:(MCOMessageFlag)[aDecoder decodeIntForKey:@"flags"]];
 	[self setOriginalFlags:(MCOMessageFlag)[aDecoder decodeIntForKey:@"originalFlags"]];
 	[self setModSeqValue:[aDecoder decodeInt64ForKey:@"modSeqValue"]];
-	[self setMainPart:[[aDecoder decodeObjectForKey:@"mainPart"] retain]];
-	[self setGmailLabels:[[aDecoder decodeObjectForKey:@"gmailLabels"] retain]];
+	[self setMainPart:[aDecoder decodeObjectForKey:@"mainPart"]];
+	[self setGmailLabels:[aDecoder decodeObjectForKey:@"gmailLabels"]];
 
 	return self;
 }
