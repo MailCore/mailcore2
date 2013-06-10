@@ -15,7 +15,7 @@
 
 @class MCOMessageHeader;
 
-@interface MCOAbstractMessagePart : MCOAbstractPart
+@interface MCOAbstractMessagePart : MCOAbstractPart <NSCoding>
 
 // Returns the header of the embedded message.
 @property (nonatomic, strong) MCOMessageHeader * header;
