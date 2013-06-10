@@ -123,8 +123,8 @@
 {
 	self = [self init];
 	
-	self.displayName = [[coder decodeObjectForKey:@"displayName"] retain];
-	self.mailbox = [[coder decodeObjectForKey:@"mailbox"] retain];
+	[self setDisplayName:[[coder decodeObjectForKey:@"displayName"] retain]];
+	[self setMailbox:[[coder decodeObjectForKey:@"mailbox"] retain]];
 	
 	return self;
 }

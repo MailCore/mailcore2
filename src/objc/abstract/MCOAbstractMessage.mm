@@ -58,7 +58,7 @@
 	
 	
 	message = [[[self class] alloc] initWithMCMessage:(mailcore::AbstractMessage *)_message->copy()];
-	message.header = [self header];
+	[message setHeader:[[self header] copy]];
 	
 	return message;
 }

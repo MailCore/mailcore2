@@ -20,14 +20,14 @@
 {
 	self = [super initWithCoder:decoder];
 	
-	self.parts = [[decoder decodeObjectForKey:@"parts"] retain];
+	[self setParts:[[decoder decodeObjectForKey:@"parts"] retain]];
 	
 	return self;
 }
 
 - (void) encodeWithCoder:(NSCoder *)encoder
 {
-	[encoder encodeObject:self.parts forKey:@"parts"];
+	[encoder encodeObject:[self parts] forKey:@"parts"];
 }
 
 MCO_OBJC_SYNTHESIZE_ARRAY(setParts, parts)
