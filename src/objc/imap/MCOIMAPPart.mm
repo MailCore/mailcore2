@@ -30,10 +30,28 @@
     return [result retain];
 }
 
+- (void) encodeWithCoder:(NSCoder *)aCoder
+{
+	[super encodeWithCoder:aCoder];
+	[aCoder encodeObject:self.partID forKey:@"partID"];
+	[aCoder encodeInt64:self.size forKey:@"size"];
+	[aCoder encodeInt:self.encoding forKey:@"encoding"];
+}
+
 + (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object
 {
     mailcore::IMAPPart * part = (mailcore::IMAPPart *) object;
     return [[[self alloc] initWithMCPart:part] autorelease];
+}
+
+- (id) initWithCoder:(NSCoder *)aDecoder {
+	self = [super initWithCoder:aDecoder];
+	
+	self.partID = [aDecoder decodeObjectForKey:@"partID"];
+	self.size = [aDecoder decodeInt64ForKey:@"size"];
+	self.encoding = (MCOEncoding)[aDecoder decodeIntForKey:@"encoding"];
+
+	return self;
 }
 
 MCO_OBJC_SYNTHESIZE_STRING(setPartID, partID)
