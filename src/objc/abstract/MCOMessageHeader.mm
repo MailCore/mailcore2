@@ -54,18 +54,18 @@
 
 - (void) encodeWithCoder:(NSCoder *)encoder
 {
-	[encoder encodeObject:self.messageID forKey:@"messageID"];
-	[encoder encodeObject:self.references forKey:@"references"];
-	[encoder encodeObject:self.inReplyTo forKey:@"inReplyTo"];
-	[encoder encodeObject:self.sender forKey:@"sender"];
-	[encoder encodeObject:self.from forKey:@"from"];
-	[encoder encodeObject:self.to forKey:@"to"];
-	[encoder encodeObject:self.cc forKey:@"cc"];
-	[encoder encodeObject:self.bcc forKey:@"bcc"];
-	[encoder encodeObject:self.replyTo forKey:@"replyTo"];
-	[encoder encodeObject:self.subject forKey:@"subject"];
-	[encoder encodeObject:self.date forKey:@"date"];
-	[encoder encodeObject:self.receivedDate forKey:@"receivedDate"];
+	[encoder encodeObject:[self messageID] forKey:@"messageID"];
+	[encoder encodeObject:[self references] forKey:@"references"];
+	[encoder encodeObject:[self inReplyTo] forKey:@"inReplyTo"];
+	[encoder encodeObject:[self sender] forKey:@"sender"];
+	[encoder encodeObject:[self from] forKey:@"from"];
+	[encoder encodeObject:[self to] forKey:@"to"];
+	[encoder encodeObject:[self cc] forKey:@"cc"];
+	[encoder encodeObject:[self bcc] forKey:@"bcc"];
+	[encoder encodeObject:[self replyTo] forKey:@"replyTo"];
+	[encoder encodeObject:[self subject] forKey:@"subject"];
+	[encoder encodeObject:[self date] forKey:@"date"];
+	[encoder encodeObject:[self receivedDate] forKey:@"receivedDate"];
 }
 
 - (id) copyWithZone:(NSZone *)zone
@@ -104,29 +104,6 @@
     _nativeHeader->retain();
     
     return self;
-}
-
-- (id)initWithCoder:(NSCoder *)decoder
-{
-	self = [super init];
-	
-	[self setMessageID:[decoder decodeObjectForKey:@"messageID"]];
-	[self setReferences:[decoder decodeObjectForKey:@"references"]];
-	[self setInReplyTo:[decoder decodeObjectForKey:@"inReplyTo"]];
-	[self setSender:[decoder decodeObjectForKey:@"sender"]];
-	[self setFrom:[decoder decodeObjectForKey:@"from"]];
-	[self setTo:[decoder decodeObjectForKey:@"to"]];
-	[self setCc:[decoder decodeObjectForKey:@"cc"]];
-	[self setBcc:[decoder decodeObjectForKey:@"bcc"]];
-	[self setReplyTo:[decoder decodeObjectForKey:@"replyTo"]];
-	[self setSubject:[decoder decodeObjectForKey:@"subject"]];
-	[self setDate:[decoder decodeObjectForKey:@"date"]];
-	[self setReceivedDate:[decoder decodeObjectForKey:@"receivedDate"]];
-	if ([self receivedDate] == nil) {
-		[self setReceivedDate:[[[self date] copy] autorelease]];
-	}
-	
-	return self;
 }
 
 + (MCOMessageHeader *) messageHeaderWithMCMessageHeader:(mailcore::MessageHeader *)header
