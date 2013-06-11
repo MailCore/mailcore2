@@ -846,7 +846,7 @@ void IMAPSession::select(String * folder, ErrorCode * pError)
         if (mImap->imap_selection_info->sel_first_unseen) {
             mFirstUnseenUid = mImap->imap_selection_info->sel_first_unseen;
         } else {
-            mFirstUnseenUid = -1;
+            mFirstUnseenUid = 0;
         }
         
         
