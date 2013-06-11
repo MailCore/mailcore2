@@ -33,9 +33,9 @@
 
 - (void) encodeWithCoder:(NSCoder *)aCoder
 {
-	[aCoder encodeObject:self.path forKey:@"path"];
-	[aCoder encodeInt:self.delimiter forKey:@"delimiter"];
-	[aCoder encodeInt32:self.flags forKey:@"flags"];
+	[aCoder encodeObject:[self path] forKey:@"path"];
+	[aCoder encodeInt:[self delimiter] forKey:@"delimiter"];
+	[aCoder encodeInt32:[self flags] forKey:@"flags"];
 }
 
 + (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object

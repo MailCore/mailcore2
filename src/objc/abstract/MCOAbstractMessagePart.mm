@@ -30,8 +30,8 @@
 
 - (void) encodeWithCoder:(NSCoder *)encoder
 {
-	[encoder encodeObject:self.header forKey:@"header"];
-	[encoder encodeObject:self.mainPart forKey:@"mainPart"];
+	[encoder encodeObject:[self header] forKey:@"header"];
+	[encoder encodeObject:[self mainPart] forKey:@"mainPart"];
 }
 
 MCO_OBJC_SYNTHESIZE(MessageHeader, setHeader, header)
