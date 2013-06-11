@@ -22,14 +22,11 @@ namespace mailcore {
         IMAPFolderStatusOperation();
         virtual ~IMAPFolderStatusOperation();
         
-        
         virtual uint32_t uidNext();
         virtual uint32_t uidValidity();
         virtual uint32_t totalMessages();
         virtual uint32_t totalRecent();
         virtual uint32_t totalUnseen();
-        virtual String folderPath();
-
         
     public: // subclass behavior
         virtual void main();
@@ -40,9 +37,7 @@ namespace mailcore {
          uint32_t mUidValidity;
          uint32_t mTotalMessages;
          uint32_t mTotalRecent;
-         uint32_t mTotalUnseen;
-         String mFolderPath;
-        
+         uint32_t mTotalUnseen;        
     };
     
 }

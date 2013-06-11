@@ -10,26 +10,20 @@
 
 #include "MCIMAPSession.h"
 #include "MCIMAPAsyncConnection.h"
+#include "MCIMAPFolderStatus.h"
 
 using namespace mailcore;
 
 IMAPFolderStatusOperation::IMAPFolderStatusOperation()
-{
-    uint32_t mUidNext = 0;
-    uint32_t mUidValidity = 0;
-    uint32_t mTotalMessages = 0;
-    uint32_t mTotalRecent = 0;
-    uint32_t mTotalUnseen = 0;
-    String mFolderPath = "";
-}
+{}
 
 IMAPFolderStatusOperation::~IMAPFolderStatusOperation()
 {
-}
-
-String IMAPFolderStatusOperation::folderPath()
-{
-    return mFolderPath;
+	mUidNext = 0;
+	mUidValidity = 0;
+	mTotalMessages = 0;
+	mTotalRecent = 0;
+	mTotalUnseen = 0;
 }
 
 uint32_t IMAPFolderStatusOperation::uidNext()
@@ -67,20 +61,18 @@ void IMAPFolderStatusOperation::main()
         return;
     }
     
-    folder_status status = session()->session()->folderStatus(folder(), &error);
+    IMAPFolderStatus *status = session()->session()->folderStatus(folder(), &error);
     if (error != ErrorCode::ErrorNone) {
         setError(error);
         return;
     }
     
     
-    mUidNext = status.uid_next;
-    mUidValidity = status.uid_validity;
-    mTotalMessages = status.total_messages;
-    mTotalRecent = status.total_recent;
-    mTotalUnseen = status.total_unseen;
-
-
+    mUidNext = status->uidNext();
+    mUidValidity = status->uidValidity();
+    mTotalMessages = status->totalMessage();
+    mTotalRecent = status->totalRecent();
+    mTotalUnseen = status->totalUnseen();
     
     setError(error);
 }

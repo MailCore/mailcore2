@@ -10,18 +10,7 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-    
-    
-    struct folder_status {
-        uint32_t total_unseen;
-        uint32_t total_messages;
-        uint32_t total_recent;
-        uint32_t uid_next;
-        uint32_t uid_validity;
-    };
-    
-    
-
+        
 	extern String * IMAPNamespacePersonal;
 	extern String * IMAPNamespaceOther;
 	extern String * IMAPNamespaceShared;
@@ -31,6 +20,7 @@ namespace mailcore {
 	class IMAPFolder;
 	class IMAPProgressCallback;
     class IMAPSyncResult;
+    class IMAPFolderStatus;
 	
 	class IMAPSession : public Object {
 	public:
@@ -76,7 +66,7 @@ namespace mailcore {
 		virtual IMAPNamespace * defaultNamespace();
 
 		virtual void select(String * folder, ErrorCode * pError);
-        virtual folder_status folderStatus(String * folder, ErrorCode * pError);
+        virtual IMAPFolderStatus * folderStatus(String * folder, ErrorCode * pError);
 		
 		virtual Array * /* IMAPFolder */ fetchSubscribedFolders(ErrorCode * pError);
 		virtual Array * /* IMAPFolder */ fetchAllFolders(ErrorCode * pError); // will use xlist if available

@@ -14,17 +14,17 @@ namespace mailcore {
 	class IMAPAppendMessageOperation;
 	class IMAPCopyMessagesOperation;
 	class IMAPFetchMessagesOperation;
-    class IMAPFetchContentOperation;
+    	class IMAPFetchContentOperation;
 	class IMAPIdleOperation;
-    class IMAPFolderInfoOperation;
-    class IMAPFolderStatusOperation;
+    	class IMAPFolderInfoOperation;
+    	class IMAPFolderStatusOperation;
 	class IMAPSession;
 	class IMAPNamespace;
-    class IMAPSearchOperation;
-    class IMAPSearchExpression;
-    class IMAPFetchNamespaceOperation;
-    class IMAPIdentityOperation;
-    class IMAPCapabilityOperation;
+    	class IMAPSearchOperation;
+    	class IMAPSearchExpression;
+    	class IMAPFetchNamespaceOperation;
+    	class IMAPIdentityOperation;
+    	class IMAPCapabilityOperation;
 
 	class IMAPAsyncConnection : public Object {
 	public:
@@ -65,7 +65,7 @@ namespace mailcore {
 		virtual IMAPNamespace * defaultNamespace();
 
 		virtual IMAPFolderInfoOperation * folderInfoOperation(String * folder);
-        virtual IMAPFolderStatusOperation * folderStatusOperation(String * folder);
+        	virtual IMAPFolderStatusOperation * folderStatusOperation(String * folder);
 		
 		virtual IMAPFetchFoldersOperation * fetchSubscribedFoldersOperation();
 		virtual IMAPFetchFoldersOperation * fetchAllFoldersOperation();
@@ -87,7 +87,7 @@ namespace mailcore {
                                                                          IndexSet * uids);
 		virtual IMAPFetchMessagesOperation * fetchMessagesByNumberOperation(String * folder, IMAPMessagesRequestKind requestKind,
                                                                             IndexSet * numbers);
-        virtual IMAPFetchMessagesOperation * syncMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
+        	virtual IMAPFetchMessagesOperation * syncMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
                                                                IndexSet * uids, uint64_t modSeq);
         
 		virtual IMAPFetchContentOperation * fetchMessageByUIDOperation(String * folder, uint32_t uid);
@@ -106,24 +106,24 @@ namespace mailcore {
 		
 		virtual IMAPIdentityOperation * identityOperation(String * vendor, String * name, String * version);
         
-        virtual IMAPOperation * checkAccountOperation();
+        	virtual IMAPOperation * checkAccountOperation();
         
-        virtual IMAPCapabilityOperation * capabilityOperation();
+        	virtual IMAPCapabilityOperation * capabilityOperation();
         
     private:
 		IMAPSession * mSession;
 		OperationQueue * mQueue;
-        char mDelimiter;
-        IMAPNamespace * mDefaultNamespace;
-        String * mLastFolder;
+        	char mDelimiter;
+        	IMAPNamespace * mDefaultNamespace;
+        	String * mLastFolder;
 		
 		void queue(IMAPOperation * op);
 		
     public: // private
-        virtual void runOperation(IMAPOperation * operation);
-        virtual IMAPSession * session();
+        	virtual void runOperation(IMAPOperation * operation);
+        	virtual IMAPSession * session();
         
-        virtual unsigned int operationsCount();
+        	virtual unsigned int operationsCount();
         
 		virtual void setLastFolder(String * folder);
 		virtual String * lastFolder();
