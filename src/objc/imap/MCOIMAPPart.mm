@@ -33,9 +33,9 @@
 - (void) encodeWithCoder:(NSCoder *)aCoder
 {
 	[super encodeWithCoder:aCoder];
-	[aCoder encodeObject:self.partID forKey:@"partID"];
-	[aCoder encodeInt64:self.size forKey:@"size"];
-	[aCoder encodeInt:self.encoding forKey:@"encoding"];
+	[aCoder encodeObject:[self partID] forKey:@"partID"];
+	[aCoder encodeInt64:[self size] forKey:@"size"];
+	[aCoder encodeInt:[self encoding] forKey:@"encoding"];
 }
 
 + (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object

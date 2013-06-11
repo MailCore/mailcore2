@@ -51,7 +51,7 @@
 
 - (void) encodeWithCoder:(NSCoder *)encoder
 {
-	[encoder encodeObject:self.header forKey:@"header"];
+	[encoder encodeObject:[self header] forKey:@"header"];
 }
 
 - (id) copyWithZone:(NSZone *)zone

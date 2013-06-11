@@ -37,8 +37,8 @@
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
-	[encoder encodeObject:self.displayName forKey:@"displayName"];
-	[encoder encodeObject:self.mailbox forKey:@"mailbox"];
+	[encoder encodeObject:[self displayName] forKey:@"displayName"];
+	[encoder encodeObject:[self mailbox] forKey:@"mailbox"];
 }
 
 + (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object

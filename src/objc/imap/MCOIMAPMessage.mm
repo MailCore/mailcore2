@@ -38,12 +38,12 @@
 - (void) encodeWithCoder:(NSCoder *)aCoder
 {
 	[super encodeWithCoder:aCoder];
-	[aCoder encodeInt32:self.uid forKey:@"uid"];
-	[aCoder encodeInt:self.flags forKey:@"flags"];
-	[aCoder encodeInt:self.originalFlags forKey:@"originalFlags"];
-	[aCoder encodeInt64:self.modSeqValue forKey:@"modSeqValue"];
-	[aCoder encodeObject:self.mainPart forKey:@"mainPart"];
-	[aCoder encodeObject:self.gmailLabels forKey:@"gmailLabels"];
+	[aCoder encodeInt32:[self uid] forKey:@"uid"];
+	[aCoder encodeInt:[self flags] forKey:@"flags"];
+	[aCoder encodeInt:[self originalFlags] forKey:@"originalFlags"];
+	[aCoder encodeInt64:[self modSeqValue] forKey:@"modSeqValue"];
+	[aCoder encodeObject:[self mainPart] forKey:@"mainPart"];
+	[aCoder encodeObject:[self gmailLabels] forKey:@"gmailLabels"];
 }
 
 + (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object

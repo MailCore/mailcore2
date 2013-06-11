@@ -99,8 +99,8 @@
 	[self setSubject:[decoder decodeObjectForKey:@"subject"]];
 	[self setDate:[decoder decodeObjectForKey:@"date"]];
 	[self setReceivedDate:[decoder decodeObjectForKey:@"receivedDate"]];
-	if (self.receivedDate == nil) {
-		self.receivedDate = [[[self date] copy] autorelease];
+	if ([self receivedDate] == nil) {
+		[self setReceivedDate:[[[self date] copy] autorelease]];
 	}
 	
 	return self;
