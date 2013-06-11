@@ -11,7 +11,7 @@
 #include <unicode/putil.h>
 #include <unicode/uclean.h>
 #include <unicode/ucnv.h>
-#include <MailCore/MailCore.h>
+#include <MailCore/mailcore.h>
 
 extern "C" {
     extern int mailstream_debug;
@@ -300,6 +300,13 @@ static void testAttachments()
 	MCLog("%s", MCUTF8DESC(str));
 }
 
+static void testArchiving() {
+	MCOAddress * address = [MCOAddress addressWithDisplayName:@"Name" mailbox:@"someemail@gmail.com"];
+	NSData * encodedData = [NSKeyedArchiver archivedDataWithRootObject:address];
+	MCOAddress * dearchivedAddress = [NSKeyedUnarchiver unarchiveObjectWithData:encodedData];
+	MCLog("%s %s", [[dearchivedAddress displayName] UTF8String], [[dearchivedAddress mailbox] UTF8String]);
+}
+
 void testObjC()
 {
     MCOIMAPSession *session = [[MCOIMAPSession alloc] init];
@@ -359,6 +366,7 @@ void testAll()
     //testAddresses();
 	//testAttachments();
 	//testProviders();
+	//testArchiving();
     testObjC();
     
     MCLog("pool release");
