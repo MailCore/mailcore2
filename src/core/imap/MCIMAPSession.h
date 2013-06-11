@@ -141,6 +141,7 @@ namespace mailcore {
         
     public: // private
 		virtual void loginIfNeeded(ErrorCode * pError);
+        virtual void connectIfNeeded(ErrorCode * pError);
         
 	private:
 		String * mHostname;
@@ -187,7 +188,6 @@ namespace mailcore {
 		static void items_progress(size_t current, size_t maximum, void * context);
 		void setup();
 		void unsetup();
-		void connectIfNeeded(ErrorCode * pError);
 		void selectIfNeeded(String * folder, ErrorCode * pError);
 		char fetchDelimiterIfNeeded(char defaultDelimiter, ErrorCode * pError);
 		IMAPSyncResult * fetchMessages(String * folder, IMAPMessagesRequestKind requestKind, bool fetchByUID,
