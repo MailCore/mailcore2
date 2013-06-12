@@ -72,10 +72,6 @@ void OperationQueue::runOperations()
         if ((op == NULL) && quitting) {
             MCLog("stopping %p", this);
             mailsem_up(mStopSem);
-            
-            retain(); // (2)
-            performMethodOnMainThread((Object::Method) &OperationQueue::stoppedOnMainThread, NULL, true);
-            
             pool->release();
             break;
         }
@@ -144,16 +140,12 @@ void OperationQueue::checkRunningAfterDelay(void * context)
     // Number of operations can't be changed because it runs on main thread.
     // And addOperation() should also be called from main thread.
     
-    release(); // (1)
-}
-
-void OperationQueue::stoppedOnMainThread(void * context)
-{
-    MCLog("thread stopped %p", this);
-    mailsem_down(mStopSem);
-    mStarted = false;
+    if (quitting) {
+        mailsem_down(mStopSem);
+        mStarted = false;
+    }
     
-    release(); // (2)
+    release(); // (1)
 }
 
 void OperationQueue::startThread()

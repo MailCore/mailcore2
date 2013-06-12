@@ -41,7 +41,6 @@ namespace mailcore {
 		void callbackOnMainThread(Operation * op);
 		void checkRunningOnMainThread(void * context);
 		void checkRunningAfterDelay(void * context);
-        void stoppedOnMainThread(void * context);
 		
 	};
 	
