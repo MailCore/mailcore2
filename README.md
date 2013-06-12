@@ -30,6 +30,9 @@ MailCore 2 provides a simple and asynchronous Objective-C API to work with the e
     * In Build Phases, add a Target Dependency of `static mailcore2 ios`.
 5. Profit.
 
+Here's a video that shows all the steps for iOS:
+http://www.youtube.com/watch?v=9fAo6oBzlQI
+
 ## Basic IMAP Usage ##
 
 Using MailCore 2 is just a little more complex conceptually than the original MailCore.  All fetch requests in MailCore 2 are made asynchronously through a queue.  What does this mean?  Well, let's  take a look at a simple example:
