@@ -31,6 +31,9 @@
 /** Total number of messages in the folder */
 @property (nonatomic, assign) int messageCount;
 
+// first uid of the unseen messages.
+@property (nonatomic, assign) uint32_t firstUnseenUid;
+
 @end
 
 #endif
