@@ -59,8 +59,14 @@ core/basetypes/MCHash.h
 core/basetypes/MCHashMap.h
 core/basetypes/MCHTMLCleaner.h
 core/basetypes/MCIndexSet.h
+core/basetypes/MCIterator.h
+core/basetypes/MCICUTypes.h
+core/basetypes/MCJSON.h
+core/basetypes/MCLibetpanTypes.h
 core/basetypes/MCLog.h
 core/basetypes/MCMainThread.h
+core/basetypes/MCMD5.h
+core/basetypes/MCNull.h
 core/basetypes/MCObject.h
 core/basetypes/MCOperation.h
 core/basetypes/MCOperationCallback.h
@@ -72,6 +78,7 @@ core/basetypes/MCUtils.h
 core/basetypes/MCValue.h
 core/imap/MCIMAP.h
 core/imap/MCIMAPFolder.h
+core/imap/MCIMAPFolderStatus.h
 core/imap/MCIMAPMessage.h
 core/imap/MCIMAPMessagePart.h
 core/imap/MCIMAPMultipart.h
@@ -87,6 +94,12 @@ core/pop/MCPOP.h
 core/pop/MCPOPMessageInfo.h
 core/pop/MCPOPProgressCallback.h
 core/pop/MCPOPSession.h
+core/provider/MCMailProvider.h
+core/provider/MCMailProvidersManager.h
+core/provider/MCNetService.h
+core/provider/MCProvider.h
+core/renderer/MCAddressDisplay.h
+core/renderer/MCDateFormatter.h
 core/renderer/MCHTMLRendererCallback.h
 core/renderer/MCRenderer.h
 core/rfc822/MCAttachment.h
@@ -211,7 +224,7 @@ core/basetypes/MCData.cc
 core/basetypes/MCHash.cc
 core/basetypes/MCHashMap.cc
 core/basetypes/MCHTMLCleaner.cc
-core/basetypes/MCIndexSet.cpp
+core/basetypes/MCIndexSet.cc
 core/basetypes/MCLog.cc
 core/basetypes/MCMainThread.mm
 core/basetypes/MCObject.cc
@@ -238,16 +251,16 @@ core/imap/MCIMAPNamespaceItem.cc
 core/imap/MCIMAPPart.cc
 core/imap/MCIMAPSearchExpression.cc
 core/imap/MCIMAPSession.cc
-core/imap/MCIMAPSyncResult.cpp
+core/imap/MCIMAPSyncResult.cc
 
 core/pop/MCPOPMessageInfo.cc
 core/pop/MCPOPSession.cc
 
-core/renderer/MCAddressDisplay.cpp
-core/renderer/MCDateFormatter.cpp
-core/renderer/MCHTMLRenderer.cpp
-core/renderer/MCHTMLRendererCallback.cpp
-core/renderer/MCSizeFormatter.cpp
+core/renderer/MCAddressDisplay.cc
+core/renderer/MCDateFormatter.cc
+core/renderer/MCHTMLRenderer.cc
+core/renderer/MCHTMLRendererCallback.cc
+core/renderer/MCSizeFormatter.cc
 
 core/rfc822/MCAttachment.cc
 core/rfc822/MCMessageBuilder.cc
@@ -259,8 +272,8 @@ core/smtp/MCSMTPSession.cc
 
 async/imap/MCIMAPAppendMessageOperation.cc
 async/imap/MCIMAPAsyncConnection.cc
-async/imap/MCIMAPAsyncSession.cpp
-async/imap/MCIMAPCapabilityOperation.cpp
+async/imap/MCIMAPAsyncSession.cc
+async/imap/MCIMAPCapabilityOperation.cc
 async/imap/MCIMAPCheckAccountOperation.cc
 async/imap/MCIMAPCopyMessagesOperation.cc
 async/imap/MCIMAPCreateFolderOperation.cc
