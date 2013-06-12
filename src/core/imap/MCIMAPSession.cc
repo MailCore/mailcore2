@@ -914,13 +914,13 @@ IMAPFolderStatus * IMAPSession::folderStatus(String * folder, ErrorCode * pError
                                 
                 switch (status_info->st_att) {
                     case MAILIMAP_STATUS_ATT_UNSEEN:
-                        fs->setTotalUnseen(status_info->st_value);
+                        fs->setUnreadCount(status_info->st_value);
                         break;
                     case MAILIMAP_STATUS_ATT_MESSAGES:
-                        fs->setTotalMessages(status_info->st_value);
+                        fs->setMessageCount(status_info->st_value);
                         break;
                     case MAILIMAP_STATUS_ATT_RECENT:
-                        fs->setTotalRecent(status_info->st_value);
+                        fs->setRecentCount(status_info->st_value);
                         break;
                     case MAILIMAP_STATUS_ATT_UIDNEXT:
                         fs->setUidNext(status_info->st_value);

@@ -53,9 +53,9 @@ typedef void (^CompletionType)(NSError *error, MCOIMAPFolderStatus *status);
         MCOIMAPFolderStatus * status = [MCOIMAPFolderStatus status];
         [status setUidNext:MCO_NATIVE_INSTANCE->uidNext()];
         [status setUidValidity:MCO_NATIVE_INSTANCE->uidValidity()];
-        [status setTotalMessages:MCO_NATIVE_INSTANCE->totalMessages()];
-        [status setTotalRecent:MCO_NATIVE_INSTANCE->totalRecent()];
-        [status setTotalUnseen:MCO_NATIVE_INSTANCE->totalUnseen()];        
+        [status setTotalMessages:MCO_NATIVE_INSTANCE->messageCount()];
+        [status setTotalRecent:MCO_NATIVE_INSTANCE->recentCount()];
+        [status setTotalUnseen:MCO_NATIVE_INSTANCE->unreadCount()];
         
         _completionBlock(nil, status);
     } else {

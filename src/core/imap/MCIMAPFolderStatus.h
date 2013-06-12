@@ -23,14 +23,14 @@ namespace mailcore {
         IMAPFolderStatus();
         virtual ~IMAPFolderStatus();
         		
-		virtual void setTotalUnseen(u_int32_t unseen);
-		virtual u_int32_t totalUnseen();
+		virtual void setUnreadCount(u_int32_t unread);
+		virtual u_int32_t unreadCount();
 		
-		virtual void setTotalMessages(u_int32_t messages);
-		virtual u_int32_t totalMessage();
+		virtual void setMessageCount(u_int32_t messages);
+		virtual u_int32_t messageCount();
         
-        virtual void setTotalRecent(u_int32_t recent);
-		virtual u_int32_t totalRecent();
+        virtual void setRecentCount(u_int32_t recent);
+		virtual u_int32_t recentCount();
 		
         virtual void setUidNext(u_int32_t uidNext);
 		virtual u_int32_t uidNext();                
@@ -44,9 +44,9 @@ namespace mailcore {
 		virtual Object * copy();		
         
 	private:
-		u_int32_t mTotalUnseen;
-        u_int32_t mTotalMessages;
-        u_int32_t mTotalRecent;
+		u_int32_t mUnreadCount;
+        u_int32_t mMessageCount;
+        u_int32_t mRecentCount;
         u_int32_t mUidNext;
         u_int32_t mUidValidity;
         

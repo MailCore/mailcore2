@@ -12,9 +12,9 @@ using namespace mailcore;
 
 void IMAPFolderStatus::init()
 {
-    mTotalUnseen = 0;
-    mTotalMessages = 0;
-    mTotalRecent = 0;
+    mUnreadCount = 0;
+    mMessageCount = 0;
+    mRecentCount = 0;
     mUidNext = 0;
     mUidValidity = 0;
 }
@@ -28,9 +28,9 @@ IMAPFolderStatus::IMAPFolderStatus()
 IMAPFolderStatus::IMAPFolderStatus(IMAPFolderStatus * other)
 {
     init();
-    setTotalUnseen(other->totalUnseen());
-    setTotalMessages(other->totalMessage());
-    setTotalRecent(other->totalRecent());
+    setUnreadCount(other->unreadCount());
+    setMessageCount(other->messageCount());
+    setRecentCount(other->recentCount());
     setUidNext(other->uidNext());
     setUidValidity(other->uidValidity());    
 }
@@ -43,34 +43,34 @@ Object * IMAPFolderStatus::copy()
     return new IMAPFolderStatus(this);
 }
 
-void IMAPFolderStatus::setTotalUnseen(u_int32_t unseen)
+void IMAPFolderStatus::setUnreadCount(u_int32_t unseen)
 {
-    mTotalUnseen = unseen;
+    mUnreadCount = unseen;
 }
 
-u_int32_t IMAPFolderStatus::totalUnseen()
+u_int32_t IMAPFolderStatus::unreadCount()
 {
-    return mTotalUnseen;
+    return mUnreadCount;
 }
 
-void IMAPFolderStatus::setTotalMessages(u_int32_t messages)
+void IMAPFolderStatus::setMessageCount(u_int32_t messages)
 {
-    mTotalMessages = messages;
+    mMessageCount = messages;
 }
 
-u_int32_t IMAPFolderStatus::totalMessage()
+u_int32_t IMAPFolderStatus::messageCount()
 {
-    return mTotalMessages;
+    return mMessageCount;
 }
 
-void IMAPFolderStatus::setTotalRecent(u_int32_t recent)
+void IMAPFolderStatus::setRecentCount(u_int32_t recent)
 {
-    mTotalRecent = recent;
+    mRecentCount = recent;
 }
 
-u_int32_t IMAPFolderStatus::totalRecent()
+u_int32_t IMAPFolderStatus::recentCount()
 {
-    return mTotalRecent;
+    return mRecentCount;
 }
 
 void IMAPFolderStatus::setUidNext(u_int32_t uidNext)
