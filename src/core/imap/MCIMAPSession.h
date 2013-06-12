@@ -10,11 +10,11 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-        
+    
 	extern String * IMAPNamespacePersonal;
 	extern String * IMAPNamespaceOther;
 	extern String * IMAPNamespaceShared;
-
+    
 	class IMAPNamespace;
 	class IMAPSearchExpression;
 	class IMAPFolder;
@@ -26,63 +26,60 @@ namespace mailcore {
 	public:
 		IMAPSession();
 		virtual ~IMAPSession();
-        
-        
-        
 		
 		virtual void setHostname(String * hostname);
 		virtual String * hostname();
-
+        
 		virtual void setPort(unsigned int port);
 		virtual unsigned int port();
-
+        
 		virtual void setUsername(String * username);
 		virtual String * username();
-
+        
 		virtual void setPassword(String * password);
 		virtual String * password();
-
+        
 		virtual void setAuthType(AuthType authType);
 		virtual AuthType authType();
-
+        
 		virtual void setConnectionType(ConnectionType connectionType);
 		virtual ConnectionType connectionType();
-
+        
 		virtual void setTimeout(time_t timeout);
 		virtual time_t timeout();
 		
 		virtual void setCheckCertificateEnabled(bool enabled);
 		virtual bool isCheckCertificateEnabled();
-
+        
 		virtual void setVoIPEnabled(bool enabled);
 		virtual bool isVoIPEnabled();
-
+        
         // Needed for fetchSubscribedFolders() and fetchAllFolders().
 		virtual void setDelimiter(char delimiter);
 		virtual char delimiter();
-
+        
         // Needed for fetchSubscribedFolders() and fetchAllFolders().
 		virtual void setDefaultNamespace(IMAPNamespace * ns);
 		virtual IMAPNamespace * defaultNamespace();
-
+        
 		virtual void select(String * folder, ErrorCode * pError);
         virtual IMAPFolderStatus * folderStatus(String * folder, ErrorCode * pError);
 		
 		virtual Array * /* IMAPFolder */ fetchSubscribedFolders(ErrorCode * pError);
 		virtual Array * /* IMAPFolder */ fetchAllFolders(ErrorCode * pError); // will use xlist if available
-
+        
 		virtual void renameFolder(String * folder, String * otherName, ErrorCode * pError);
 		virtual void deleteFolder(String * folder, ErrorCode * pError);
 		virtual void createFolder(String * folder, ErrorCode * pError);
-
+        
 		virtual void subscribeFolder(String * folder, ErrorCode * pError);
 		virtual void unsubscribeFolder(String * folder, ErrorCode * pError);
-
+        
 		virtual void appendMessage(String * folder, Data * messageData, MessageFlag flags,
-			IMAPProgressCallback * progressCallback, uint32_t * createdUID, ErrorCode * pError);
+                                   IMAPProgressCallback * progressCallback, uint32_t * createdUID, ErrorCode * pError);
 		
 		virtual void copyMessages(String * folder, IndexSet * uidSet, String * destFolder,
-			 IndexSet ** pDestUIDs, ErrorCode * pError);
+                                  IndexSet ** pDestUIDs, ErrorCode * pError);
 		
 		virtual void expunge(String * folder, ErrorCode * pError);
 		
@@ -92,11 +89,11 @@ namespace mailcore {
                                                                 IndexSet * numbers, IMAPProgressCallback * progressCallback, ErrorCode * pError);
         
 		virtual Data * fetchMessageByUID(String * folder, uint32_t uid,
-			IMAPProgressCallback * progressCallback, ErrorCode * pError);
+                                         IMAPProgressCallback * progressCallback, ErrorCode * pError);
 		virtual Data * fetchMessageAttachmentByUID(String * folder, uint32_t uid, String * partID,
-		    Encoding encoding, IMAPProgressCallback * progressCallback, ErrorCode * pError);
-		virtual HashMap * fetchMessageNumberUIDMapping(String * folder, uint32_t fromUID, uint32_t toUID,
-			ErrorCode * pError);
+                                                   Encoding encoding, IMAPProgressCallback * progressCallback, ErrorCode * pError);
+        virtual HashMap * fetchMessageNumberUIDMapping(String * folder, uint32_t fromUID, uint32_t toUID,
+                                                       ErrorCode * pError);
         
         /* When CONDSTORE or QRESYNC is available */
         virtual IMAPSyncResult * syncMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
@@ -131,17 +128,15 @@ namespace mailcore {
 		virtual unsigned int lastFolderMessageCount();
         virtual uint32_t firstUnseenUid();
         
-        
-        
-        virtual bool isIdleEnabled();
-        virtual bool isXListEnabled();
-        virtual bool isCondstoreEnabled();
-        virtual bool isQResyncEnabled();
-        virtual bool isIdentityEnabled();
+		virtual bool isIdleEnabled();
+		virtual bool isXListEnabled();
+		virtual bool isCondstoreEnabled();
+		virtual bool isQResyncEnabled();
+		virtual bool isIdentityEnabled();
         
     public: // private
 		virtual void loginIfNeeded(ErrorCode * pError);
-        virtual void connectIfNeeded(ErrorCode * pError);
+		virtual void connectIfNeeded(ErrorCode * pError);
         
 	private:
 		String * mHostname;
@@ -156,21 +151,19 @@ namespace mailcore {
 		IMAPNamespace * mDefaultNamespace;
 		time_t mTimeout;
 		
-        bool mBodyProgressEnabled;
+		bool mBodyProgressEnabled;
 		bool mIdleEnabled;
 		bool mXListEnabled;
-        bool mCondstoreEnabled;
-        bool mQResyncEnabled;
-        bool mIdentityEnabled;
+		bool mCondstoreEnabled;
+		bool mQResyncEnabled;
+		bool mIdentityEnabled;
 		String * mWelcomeString;
 		bool mNeedsMboxMailWorkaround;
 		uint32_t mUIDValidity;
 		uint32_t mUIDNext;
-        uint64_t mModSequenceValue;
+		uint64_t mModSequenceValue;
 		unsigned int mFolderMsgCount;
-        uint32_t mFirstUnseenUid;
-        
-
+		uint32_t mFirstUnseenUid;
         
 		unsigned int mLastFetchedSequenceNumber;
 		String * mCurrentFolder;
@@ -193,7 +186,6 @@ namespace mailcore {
 		IMAPSyncResult * fetchMessages(String * folder, IMAPMessagesRequestKind requestKind, bool fetchByUID,
                                        struct mailimap_set * imapset, uint64_t modseq, HashMap * mapping, uint32_t startUid,
                                        IMAPProgressCallback * progressCallback, ErrorCode * pError);
-		
 	};
 }
 

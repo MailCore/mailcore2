@@ -20,11 +20,12 @@ IMAPFolderStatusOperation::IMAPFolderStatusOperation()
 	mUidValidity = 0;
 	mMessageCount = 0;
 	mRecentCount = 0;
-	mUnreadCount = 0;
+	mUnseenCount = 0;
 }
 
 IMAPFolderStatusOperation::~IMAPFolderStatusOperation()
-{}
+{
+}
 
 uint32_t IMAPFolderStatusOperation::uidNext()
 {
@@ -46,9 +47,9 @@ uint32_t IMAPFolderStatusOperation::recentCount()
     return mRecentCount;
 }
 
-uint32_t IMAPFolderStatusOperation::unreadCount()
+uint32_t IMAPFolderStatusOperation::unseenCount()
 {
-    return mUnreadCount;
+    return mUnseenCount;
 }
 
 void IMAPFolderStatusOperation::main()
@@ -72,7 +73,7 @@ void IMAPFolderStatusOperation::main()
     mUidValidity = status->uidValidity();
     mMessageCount = status->messageCount();
     mRecentCount = status->recentCount();
-    mUnreadCount = status->unreadCount();
+    mUnseenCount = status->unseenCount();
     
     setError(error);
 }

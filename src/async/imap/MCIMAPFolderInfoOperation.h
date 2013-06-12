@@ -21,7 +21,6 @@ namespace mailcore {
         IMAPFolderInfoOperation();
         virtual ~IMAPFolderInfoOperation();
         
-        
         virtual uint32_t uidNext();
         virtual uint32_t uidValidity();
         virtual uint64_t modSequenceValue();

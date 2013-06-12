@@ -12,7 +12,7 @@ using namespace mailcore;
 
 void IMAPFolderStatus::init()
 {
-    mUnreadCount = 0;
+    mUnseenCount = 0;
     mMessageCount = 0;
     mRecentCount = 0;
     mUidNext = 0;
@@ -28,7 +28,7 @@ IMAPFolderStatus::IMAPFolderStatus()
 IMAPFolderStatus::IMAPFolderStatus(IMAPFolderStatus * other)
 {
     init();
-    setUnreadCount(other->unreadCount());
+    setUnseenCount(other->unseenCount());
     setMessageCount(other->messageCount());
     setRecentCount(other->recentCount());
     setUidNext(other->uidNext());
@@ -43,14 +43,14 @@ Object * IMAPFolderStatus::copy()
     return new IMAPFolderStatus(this);
 }
 
-void IMAPFolderStatus::setUnreadCount(u_int32_t unseen)
+void IMAPFolderStatus::setUnseenCount(u_int32_t unseen)
 {
-    mUnreadCount = unseen;
+    mUnseenCount = unseen;
 }
 
-u_int32_t IMAPFolderStatus::unreadCount()
+u_int32_t IMAPFolderStatus::unseenCount()
 {
-    return mUnreadCount;
+    return mUnseenCount;
 }
 
 void IMAPFolderStatus::setMessageCount(u_int32_t messages)

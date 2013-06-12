@@ -914,7 +914,7 @@ IMAPFolderStatus * IMAPSession::folderStatus(String * folder, ErrorCode * pError
                                 
                 switch (status_info->st_att) {
                     case MAILIMAP_STATUS_ATT_UNSEEN:
-                        fs->setUnreadCount(status_info->st_value);
+                        fs->setUnseenCount(status_info->st_value);
                         break;
                     case MAILIMAP_STATUS_ATT_MESSAGES:
                         fs->setMessageCount(status_info->st_value);
