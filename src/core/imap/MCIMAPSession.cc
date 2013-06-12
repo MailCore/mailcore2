@@ -13,6 +13,7 @@
 #include "MCIMAPProgressCallback.h"
 #include "MCIMAPNamespace.h"
 #include "MCIMAPSyncResult.h"
+#include "MCIMAPFolderStatus.h"
 
 using namespace mailcore;
 
@@ -33,6 +34,7 @@ static void initialize() {
     IMAPNamespacePersonal = (String *) MCSTR("IMAPNamespacePersonal")->retain();
 	IMAPNamespaceOther = (String *) MCSTR("IMAPNamespaceOther")->retain();
 	IMAPNamespaceShared = (String *) MCSTR("IMAPNamespaceShared")->retain();
+    
     pool->release();
 }
 
@@ -329,6 +331,7 @@ void IMAPSession::init()
 	mUIDNext = 0;
     mModSequenceValue = 0;
 	mFolderMsgCount = 0;
+    mFirstUnseenUid = 0;
 	mLastFetchedSequenceNumber = 0;
 	mCurrentFolder = NULL;
     pthread_mutex_init(&mIdleLock, NULL);
@@ -840,12 +843,101 @@ void IMAPSession::select(String * folder, ErrorCode * pError)
             mFolderMsgCount = -1;
         }
         
+        if (mImap->imap_selection_info->sel_first_unseen) {
+            mFirstUnseenUid = mImap->imap_selection_info->sel_first_unseen;
+        } else {
+            mFirstUnseenUid = 0;
+        }
+        
+        
         mModSequenceValue = get_mod_sequence_value(mImap);
     }
 
     mState = STATE_SELECTED;
     * pError = ErrorNone;
     MCLog("select ok");
+}
+
+
+
+
+
+IMAPFolderStatus * IMAPSession::folderStatus(String * folder, ErrorCode * pError)
+{
+    int r;
+    
+    MCLog("status");
+    MCAssert(mState == STATE_LOGGEDIN || mState == STATE_SELECTED);
+
+    struct mailimap_mailbox_data_status * status;
+
+    struct mailimap_status_att_list * status_att_list;
+        
+    status_att_list = mailimap_status_att_list_new_empty();
+    mailimap_status_att_list_add(status_att_list,MAILIMAP_STATUS_ATT_UNSEEN);
+    mailimap_status_att_list_add(status_att_list,MAILIMAP_STATUS_ATT_MESSAGES);
+    mailimap_status_att_list_add(status_att_list,MAILIMAP_STATUS_ATT_RECENT);
+    mailimap_status_att_list_add(status_att_list,MAILIMAP_STATUS_ATT_UIDNEXT);
+    mailimap_status_att_list_add(status_att_list,MAILIMAP_STATUS_ATT_UIDVALIDITY);    
+    
+    r = mailimap_status(mImap, MCUTF8(folder), status_att_list, &status);
+    
+    IMAPFolderStatus * fs;
+    fs = new IMAPFolderStatus();
+    fs->autorelease();
+    
+    MCLog("status error : %i", r);
+    if (r == MAILIMAP_ERROR_STREAM) {
+        * pError = ErrorConnection;
+        MCLog("status error : %s %i", MCUTF8DESC(this), * pError);
+        return fs;
+    }
+    else if (r == MAILIMAP_ERROR_PARSE) {
+        * pError = ErrorParse;
+        return fs;
+    }
+    else if (hasError(r)) {
+        * pError = ErrorNonExistantFolder;
+        return fs;
+    }
+    
+    clistiter * cur;
+    
+    
+    if (status != NULL) {
+        
+            struct mailimap_status_info * status_info;
+            for(cur = clist_begin(status->st_info_list) ; cur != NULL ;
+                cur = clist_next(cur)) {                
+                
+                status_info = (struct mailimap_status_info *) clist_content(cur);
+                                
+                switch (status_info->st_att) {
+                    case MAILIMAP_STATUS_ATT_UNSEEN:
+                        fs->setUnreadCount(status_info->st_value);
+                        break;
+                    case MAILIMAP_STATUS_ATT_MESSAGES:
+                        fs->setMessageCount(status_info->st_value);
+                        break;
+                    case MAILIMAP_STATUS_ATT_RECENT:
+                        fs->setRecentCount(status_info->st_value);
+                        break;
+                    case MAILIMAP_STATUS_ATT_UIDNEXT:
+                        fs->setUidNext(status_info->st_value);
+                        break;                        
+                    case MAILIMAP_STATUS_ATT_UIDVALIDITY:
+                        fs->setUidValidity(status_info->st_value);
+                        break;                        
+                }
+            }            
+        
+        
+    }
+        
+    mailimap_status_att_list_free(status_att_list);
+    
+    
+    return fs;
 }
 
 #pragma mark mailbox flags conversion
@@ -2692,6 +2784,11 @@ uint64_t IMAPSession::modSequenceValue()
 unsigned int IMAPSession::lastFolderMessageCount()
 {
     return mFolderMsgCount;
+}
+
+uint32_t IMAPSession::firstUnseenUid()
+{
+    return mFirstUnseenUid;
 }
 
 IMAPSyncResult * IMAPSession::syncMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,

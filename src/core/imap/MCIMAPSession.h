@@ -5,10 +5,12 @@
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCMessageConstants.h>
 
+
+
 #ifdef __cplusplus
 
 namespace mailcore {
-
+        
 	extern String * IMAPNamespacePersonal;
 	extern String * IMAPNamespaceOther;
 	extern String * IMAPNamespaceShared;
@@ -18,11 +20,15 @@ namespace mailcore {
 	class IMAPFolder;
 	class IMAPProgressCallback;
     class IMAPSyncResult;
+    class IMAPFolderStatus;
 	
 	class IMAPSession : public Object {
 	public:
 		IMAPSession();
 		virtual ~IMAPSession();
+        
+        
+        
 		
 		virtual void setHostname(String * hostname);
 		virtual String * hostname();
@@ -60,6 +66,7 @@ namespace mailcore {
 		virtual IMAPNamespace * defaultNamespace();
 
 		virtual void select(String * folder, ErrorCode * pError);
+        virtual IMAPFolderStatus * folderStatus(String * folder, ErrorCode * pError);
 		
 		virtual Array * /* IMAPFolder */ fetchSubscribedFolders(ErrorCode * pError);
 		virtual Array * /* IMAPFolder */ fetchAllFolders(ErrorCode * pError); // will use xlist if available
@@ -122,6 +129,9 @@ namespace mailcore {
 		virtual uint32_t uidNext();
         virtual uint64_t modSequenceValue();
 		virtual unsigned int lastFolderMessageCount();
+        virtual uint32_t firstUnseenUid();
+        
+        
         
         virtual bool isIdleEnabled();
         virtual bool isXListEnabled();
@@ -158,6 +168,10 @@ namespace mailcore {
 		uint32_t mUIDNext;
         uint64_t mModSequenceValue;
 		unsigned int mFolderMsgCount;
+        uint32_t mFirstUnseenUid;
+        
+
+        
 		unsigned int mLastFetchedSequenceNumber;
 		String * mCurrentFolder;
 		pthread_mutex_t mIdleLock;

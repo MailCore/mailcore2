@@ -19,6 +19,7 @@
 #include <MailCore/MCIMAPFetchContentOperation.h>
 #include <MailCore/MCIMAPIdleOperation.h>
 #include <MailCore/MCIMAPFolderInfoOperation.h>
+#include <MailCore/MCIMAPFolderStatusOperation.h>
 #include <MailCore/MCIMAPSession.h>
 #include <MailCore/MCIMAPNamespace.h>
 #include <MailCore/MCIMAPSearchOperation.h>
@@ -27,5 +28,6 @@
 #include <MailCore/MCIMAPIdentityOperation.h>
 #include <MailCore/MCIMAPCapabilityOperation.h>
 #include <MailCore/MCIMAPOperationCallback.h>
+
 
 #endif
