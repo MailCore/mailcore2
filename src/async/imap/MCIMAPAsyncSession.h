@@ -22,16 +22,17 @@ namespace mailcore {
 	class IMAPAppendMessageOperation;
 	class IMAPCopyMessagesOperation;
 	class IMAPFetchMessagesOperation;
-    class IMAPFetchContentOperation;
+	class IMAPFetchContentOperation;
 	class IMAPIdleOperation;
-    class IMAPFolderInfoOperation;
+	class IMAPFolderInfoOperation;
+	class IMAPFolderStatusOperation;
 	class IMAPNamespace;
-    class IMAPSearchOperation;
-    class IMAPSearchExpression;
-    class IMAPFetchNamespaceOperation;
-    class IMAPIdentityOperation;
-    class IMAPAsyncConnection;
-    class IMAPCapabilityOperation;
+	class IMAPSearchOperation;
+	class IMAPSearchExpression;
+	class IMAPFetchNamespaceOperation;
+	class IMAPIdentityOperation;
+	class IMAPAsyncConnection;
+	class IMAPCapabilityOperation;
     
 	class IMAPAsyncSession : public Object {
 	public:
@@ -71,13 +72,14 @@ namespace mailcore {
 		virtual void setDefaultNamespace(IMAPNamespace * ns);
 		virtual IMAPNamespace * defaultNamespace();
         
-        virtual void setAllowsFolderConcurrentAccessEnabled(bool enabled);
-        virtual bool allowsFolderConcurrentAccessEnabled();
+		virtual void setAllowsFolderConcurrentAccessEnabled(bool enabled);
+		virtual bool allowsFolderConcurrentAccessEnabled();
         
-        virtual void setMaximumConnections(unsigned int maxConnections);
-        virtual unsigned int maximumConnections();
+		virtual void setMaximumConnections(unsigned int maxConnections);
+		virtual unsigned int maximumConnections();
         
 		virtual IMAPFolderInfoOperation * folderInfoOperation(String * folder);
+		virtual IMAPFolderStatusOperation * folderStatusOperation(String * folder);
 		
 		virtual IMAPFetchFoldersOperation * fetchSubscribedFoldersOperation();
 		virtual IMAPFetchFoldersOperation * fetchAllFoldersOperation();
@@ -119,9 +121,9 @@ namespace mailcore {
 		
 		virtual IMAPIdentityOperation * identityOperation(String * vendor, String * name, String * version);
         
-        virtual IMAPOperation * checkAccountOperation();
+		virtual IMAPOperation * checkAccountOperation();
         
-        virtual IMAPCapabilityOperation * capabilityOperation();
+		virtual IMAPCapabilityOperation * capabilityOperation();
         
 	private:
         Array * mSessions;
@@ -140,11 +142,10 @@ namespace mailcore {
         bool mAllowsFolderConcurrentAccessEnabled;
 		unsigned int mMaximumConnections;
         
-        IMAPAsyncConnection * sessionForFolder(String * folder, bool urgent = false);
-        IMAPAsyncConnection * session();
-        IMAPAsyncConnection * matchingSessionForFolder(String * folder);
-        IMAPAsyncConnection * availableSession();
-        
+		IMAPAsyncConnection * sessionForFolder(String * folder, bool urgent = false);
+		IMAPAsyncConnection * session();
+		IMAPAsyncConnection * matchingSessionForFolder(String * folder);
+		IMAPAsyncConnection * availableSession();
 	};
 }
 

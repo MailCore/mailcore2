@@ -1,26 +1,26 @@
 //
-//  MCOIMAPFolderInfoOperation.m
+//  MCOIMAPFolderStatusOperation.mm
 //  mailcore2
 //
-//  Created by DINH Viêt Hoà on 3/25/13.
+//  Created by Sebastian on 6/5/13.
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import "MCOIMAPFolderInfoOperation.h"
+#import "MCOIMAPFolderStatusOperation.h"
 
 #include "MCAsyncIMAP.h"
 
 #import "MCOOperation+Private.h"
-#import "MCOIMAPFolderInfo.h"
+#import "MCOIMAPFolderStatus.h"
 #import "MCOUtils.h"
 
-typedef void (^CompletionType)(NSError *error, MCOIMAPFolderInfo *info);
+typedef void (^CompletionType)(NSError *error, MCOIMAPFolderStatus *status);
 
-@implementation MCOIMAPFolderInfoOperation {
+@implementation MCOIMAPFolderStatusOperation {
     CompletionType _completionBlock;
 }
 
-#define nativeType mailcore::IMAPFolderInfoOperation
+#define nativeType mailcore::IMAPFolderStatusOperation
 
 + (void) load
 {
@@ -39,7 +39,7 @@ typedef void (^CompletionType)(NSError *error, MCOIMAPFolderInfo *info);
     [super dealloc];
 }
 
-- (void)start:(void (^)(NSError * error, MCOIMAPFolderInfo * info))completionBlock {
+- (void)start:(void (^)(NSError * error, MCOIMAPFolderStatus * status))completionBlock {
     _completionBlock = [completionBlock copy];
     [self start];
 }
@@ -50,14 +50,14 @@ typedef void (^CompletionType)(NSError *error, MCOIMAPFolderInfo *info);
     
     nativeType *op = MCO_NATIVE_INSTANCE;
     if (op->error() == mailcore::ErrorNone) {
-        MCOIMAPFolderInfo * info = [MCOIMAPFolderInfo info];
-        [info setUidNext:MCO_NATIVE_INSTANCE->uidNext()];
-        [info setUidValidity:MCO_NATIVE_INSTANCE->uidValidity()];
-        [info setModSequenceValue:MCO_NATIVE_INSTANCE->modSequenceValue()];
-        [info setMessageCount:MCO_NATIVE_INSTANCE->messageCount()];
-        [info setFirstUnseenUid:MCO_NATIVE_INSTANCE->firstUnseenUid()];
+        MCOIMAPFolderStatus * status = [MCOIMAPFolderStatus status];
+        [status setUidNext:MCO_NATIVE_INSTANCE->uidNext()];
+        [status setUidValidity:MCO_NATIVE_INSTANCE->uidValidity()];
+        [status setTotalMessages:MCO_NATIVE_INSTANCE->messageCount()];
+        [status setTotalRecent:MCO_NATIVE_INSTANCE->recentCount()];
+        [status setTotalUnseen:MCO_NATIVE_INSTANCE->unseenCount()];
         
-        _completionBlock(nil, info);
+        _completionBlock(nil, status);
     } else {
         _completionBlock([NSError mco_errorWithErrorCode:op->error()], nil);
     }

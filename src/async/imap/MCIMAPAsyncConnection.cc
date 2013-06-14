@@ -10,6 +10,7 @@
 
 #include "MCIMAP.h"
 #include "MCIMAPFolderInfoOperation.h"
+#include "MCIMAPFolderStatusOperation.h"
 #include "MCIMAPFetchFoldersOperation.h"
 #include "MCIMAPRenameFolderOperation.h"
 #include "MCIMAPDeleteFolderOperation.h"
@@ -164,6 +165,15 @@ IMAPNamespace * IMAPAsyncConnection::defaultNamespace()
 IMAPFolderInfoOperation * IMAPAsyncConnection::folderInfoOperation(String * folder)
 {
     IMAPFolderInfoOperation * op = new IMAPFolderInfoOperation();
+    op->setSession(this);
+    op->setFolder(folder);
+    op->autorelease();
+    return op;
+}
+
+IMAPFolderStatusOperation * IMAPAsyncConnection::folderStatusOperation(String * folder)
+{
+    IMAPFolderStatusOperation * op = new IMAPFolderStatusOperation();
     op->setSession(this);
     op->setFolder(folder);
     op->autorelease();

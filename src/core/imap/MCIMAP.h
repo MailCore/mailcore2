@@ -13,5 +13,6 @@
 #include <MailCore/MCIMAPSearchExpression.h>
 #include <MailCore/MCIMAPSession.h>
 #include <MailCore/MCIMAPSyncResult.h>
+#include <MailCore/MCIMAPFolderStatus.h>
 
 #endif

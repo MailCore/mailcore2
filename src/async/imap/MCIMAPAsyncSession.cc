@@ -273,6 +273,12 @@ IMAPFolderInfoOperation * IMAPAsyncSession::folderInfoOperation(String * folder)
     return session->folderInfoOperation(folder);
 }
 
+IMAPFolderStatusOperation * IMAPAsyncSession::folderStatusOperation(String * folder)
+{
+    IMAPAsyncConnection * session = sessionForFolder(folder);
+    return session->folderStatusOperation(folder);
+}
+
 IMAPFetchFoldersOperation * IMAPAsyncSession::fetchSubscribedFoldersOperation()
 {
     IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));

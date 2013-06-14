@@ -14,17 +14,18 @@ namespace mailcore {
 	class IMAPAppendMessageOperation;
 	class IMAPCopyMessagesOperation;
 	class IMAPFetchMessagesOperation;
-    class IMAPFetchContentOperation;
+	class IMAPFetchContentOperation;
 	class IMAPIdleOperation;
-    class IMAPFolderInfoOperation;
+	class IMAPFolderInfoOperation;
+	class IMAPFolderStatusOperation;
 	class IMAPSession;
 	class IMAPNamespace;
-    class IMAPSearchOperation;
-    class IMAPSearchExpression;
-    class IMAPFetchNamespaceOperation;
-    class IMAPIdentityOperation;
-    class IMAPCapabilityOperation;
-
+	class IMAPSearchOperation;
+	class IMAPSearchExpression;
+	class IMAPFetchNamespaceOperation;
+	class IMAPIdentityOperation;
+	class IMAPCapabilityOperation;
+    
 	class IMAPAsyncConnection : public Object {
 	public:
 		IMAPAsyncConnection();
@@ -32,49 +33,50 @@ namespace mailcore {
 		
 		virtual void setHostname(String * hostname);
 		virtual String * hostname();
-
+        
 		virtual void setPort(unsigned int port);
 		virtual unsigned int port();
-
+        
 		virtual void setUsername(String * username);
 		virtual String * username();
-
+        
 		virtual void setPassword(String * password);
 		virtual String * password();
-
+        
 		virtual void setAuthType(AuthType authType);
 		virtual AuthType authType();
-
+        
 		virtual void setConnectionType(ConnectionType connectionType);
 		virtual ConnectionType connectionType();
-
+        
 		virtual void setTimeout(time_t timeout);
 		virtual time_t timeout();
 		
 		virtual void setCheckCertificateEnabled(bool enabled);
 		virtual bool isCheckCertificateEnabled();
-
+        
 		virtual void setVoIPEnabled(bool enabled);
 		virtual bool isVoIPEnabled();
-
+        
 		virtual void setDelimiter(char delimiter);
 		virtual char delimiter();
-
+        
 		virtual void setDefaultNamespace(IMAPNamespace * ns);
 		virtual IMAPNamespace * defaultNamespace();
-
+        
 		virtual IMAPFolderInfoOperation * folderInfoOperation(String * folder);
+        virtual IMAPFolderStatusOperation * folderStatusOperation(String * folder);
 		
 		virtual IMAPFetchFoldersOperation * fetchSubscribedFoldersOperation();
 		virtual IMAPFetchFoldersOperation * fetchAllFoldersOperation();
-
+        
 		virtual IMAPOperation * renameFolderOperation(String * folder, String * otherName);
 		virtual IMAPOperation * deleteFolderOperation(String * folder);
 		virtual IMAPOperation * createFolderOperation(String * folder);
-
+        
 		virtual IMAPOperation * subscribeFolderOperation(String * folder);
 		virtual IMAPOperation * unsubscribeFolderOperation(String * folder);
-
+        
 		virtual IMAPAppendMessageOperation * appendMessageOperation(String * folder, Data * messageData, MessageFlag flags);
 		
 		virtual IMAPCopyMessagesOperation * copyMessagesOperation(String * folder, IndexSet * uids, String * destFolder);
@@ -90,7 +92,7 @@ namespace mailcore {
         
 		virtual IMAPFetchContentOperation * fetchMessageByUIDOperation(String * folder, uint32_t uid);
 		virtual IMAPFetchContentOperation * fetchMessageAttachmentByUIDOperation(String * folder, uint32_t uid, String * partID,
-		    Encoding encoding);
+                                                                                 Encoding encoding);
 		
 		virtual IMAPOperation * storeFlagsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags);
 		virtual IMAPOperation * storeLabelsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, Array * labels);
@@ -111,17 +113,17 @@ namespace mailcore {
     private:
 		IMAPSession * mSession;
 		OperationQueue * mQueue;
-        char mDelimiter;
-        IMAPNamespace * mDefaultNamespace;
-        String * mLastFolder;
+		char mDelimiter;
+		IMAPNamespace * mDefaultNamespace;
+		String * mLastFolder;
 		
 		void queue(IMAPOperation * op);
 		
     public: // private
-        virtual void runOperation(IMAPOperation * operation);
-        virtual IMAPSession * session();
+		virtual void runOperation(IMAPOperation * operation);
+		virtual IMAPSession * session();
         
-        virtual unsigned int operationsCount();
+		virtual unsigned int operationsCount();
         
 		virtual void setLastFolder(String * folder);
 		virtual String * lastFolder();
