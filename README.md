@@ -10,9 +10,10 @@ MailCore 2 provides a simple and asynchronous Objective-C API to work with the e
 
 ## Installation ##
 
-1. Checkout MailCore2 into a directory relative to your project.
-2. Under the `build-mac` directory, locate the `mailcore2.xcodeproj` file, and drag this into your Xcode project.
-3. **For Mac** - If you're building for Mac, you can either link against MailCore 2 as a framework, or as a static library:
+1. If you're migrating from MailCore1, you should first clean your build folder.
+2. Checkout MailCore2 into a directory relative to your project.
+3. Under the `build-mac` directory, locate the `mailcore2.xcodeproj` file, and drag this into your Xcode project.
+4. **For Mac** - If you're building for Mac, you can either link against MailCore 2 as a framework, or as a static library:
     * Mac framework
         - Go to Build Phases from your build target, and under 'Link Binary With Libraries', add `MailCore.framework`.
         - Make sure to use LLVM C++ standard library.  Open Build Settings, scroll down to 'C++ Standard Library', and select `libc++`.
@@ -22,13 +23,13 @@ MailCore 2 provides a simple and asynchronous Objective-C API to work with the e
         - Set 'Other Linker Flags' under Build Settings: `-lctemplate -letpan -licudata -licui18n -licuuc -lxml2 -lsasl2 -liconv -ltidy -lc++ -all_load`
         - Make sure to use LLVM C++ standard library.  In Build Settings, locate 'C++ Standard Library', and select `libc++`.
         - In Build Phases, add a Target Dependency of `static mailcore2 osx`.
-4. **For iOS** - If you're targeting iOS, you have to link against MailCore 2 as a static library:
+5. **For iOS** - If you're targeting iOS, you have to link against MailCore 2 as a static library:
     * Add `libMailCore-ios.a`
     * Add `CFNetwork.framework`
     * Set 'Other Linker Flags': `-lctemplate-ios -letpan-ios -licudata -licui18n -licuuc -lxml2 -lsasl2 -liconv -ltidy -lstdc++ -all_load`
     * Make sure to use GNU C++ standard library.  In Build Settings, locate 'C++ Standard Library', and select `libstdc++`.
     * In Build Phases, add a Target Dependency of `static mailcore2 ios`.
-5. Profit.
+6. Profit.
 
 Here's a video that shows all the steps for iOS:
 http://www.youtube.com/watch?v=9fAo6oBzlQI
