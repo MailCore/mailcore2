@@ -154,6 +154,8 @@ void OperationQueue::stoppedOnMainThread(void * context)
     mStarted = false;
     
     release(); // (2)
+
+    release(); // (3)
 }
 
 void OperationQueue::startThread()
@@ -161,6 +163,7 @@ void OperationQueue::startThread()
     if (mStarted)
         return;
     
+    retain(); // (3)
     mQuitting = false;
     mStarted = true;
     pthread_create(&mThreadID, NULL, (void * (*)(void *)) OperationQueue::runOperationsOnThread, this);
