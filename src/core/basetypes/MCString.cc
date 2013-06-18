@@ -1224,7 +1224,9 @@ unsigned int String::replaceOccurrencesOfString(String * occurrence, String * re
         dest_p += replacement->length();
     }
     // copy remaining
-    u_strcpy(dest_p, p);
+    if(p) {
+    	u_strcpy(dest_p, p);	
+    }
     
     free(mUnicodeChars);
     mUnicodeChars = unicodeChars;
