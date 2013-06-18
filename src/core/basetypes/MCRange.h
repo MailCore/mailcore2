@@ -6,6 +6,10 @@
 
 #include <inttypes.h>
 
+#ifndef UINT64_MAX
+# define UINT64_MAX 18446744073709551615ULL
+#endif
+
 namespace mailcore {
     
     class IndexSet;
