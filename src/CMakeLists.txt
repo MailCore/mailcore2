@@ -1,368 +1,50 @@
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_CXX_FLAGS "-std=c++11 -stdlib=libc++")
+IF(APPLE)
+  set(CMAKE_CXX_FLAGS "-std=c++11 -stdlib=libc++")
+ELSE()
+  set(CMAKE_CXX_FLAGS "-std=gnu++0x")
+ENDIF()
+
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(core)
+include(async)
+include(objc)
 
 file(GLOB_RECURSE
-    source_files
-    *.h
-    *.m
-    *.c
+  source_files
+  *.h
+  *.m
+  *.c
 )
 
 SET_SOURCE_FILES_PROPERTIES(
-	${source_files}
-    PROPERTIES LANGUAGE C
+  ${source_files}
+  PROPERTIES LANGUAGE C
 )
 
 file(COPY
-async/imap/MCAsyncIMAP.h
-async/imap/MCIMAPAppendMessageOperation.h
-async/imap/MCIMAPAsyncConnection.h
-async/imap/MCIMAPAsyncSession.h
-async/imap/MCIMAPCopyMessagesOperation.h
-async/imap/MCIMAPFetchContentOperation.h
-async/imap/MCIMAPFetchFoldersOperation.h
-async/imap/MCIMAPFetchMessagesOperation.h
-async/imap/MCIMAPFetchNamespaceOperation.h
-async/imap/MCIMAPFolderInfoOperation.h
-async/imap/MCIMAPIdentityOperation.h
-async/imap/MCIMAPIdleOperation.h
-async/imap/MCIMAPOperation.h
-async/imap/MCIMAPOperationCallback.h
-async/imap/MCIMAPSearchOperation.h
-async/imap/MCIMAPCapabilityOperation.h
-async/MCAsync.h
-async/pop/MCAsyncPOP.h
-async/pop/MCPOPAsyncSession.h
-async/pop/MCPOPFetchHeaderOperation.h
-async/pop/MCPOPFetchMessageOperation.h
-async/pop/MCPOPFetchMessagesOperation.h
-async/pop/MCPOPOperation.h
-async/pop/MCPOPOperationCallback.h
-async/smtp/MCAsyncSMTP.h
-async/smtp/MCSMTPAsyncSession.h
-async/smtp/MCSMTPOperation.h
-async/smtp/MCSMTPOperationCallback.h
-core/abstract/MCAbstract.h
-core/abstract/MCAbstractMessage.h
-core/abstract/MCAbstractMessagePart.h
-core/abstract/MCAbstractMultipart.h
-core/abstract/MCAbstractPart.h
-core/abstract/MCAddress.h
-core/abstract/MCMessageConstants.h
-core/abstract/MCMessageHeader.h
-core/basetypes/MCArray.h
-core/basetypes/MCAssert.h
-core/basetypes/MCAutoreleasePool.h
-core/basetypes/MCBaseTypes.h
-core/basetypes/MCData.h
-core/basetypes/MCHash.h
-core/basetypes/MCHashMap.h
-core/basetypes/MCHTMLCleaner.h
-core/basetypes/MCIndexSet.h
-core/basetypes/MCIterator.h
-core/basetypes/MCICUTypes.h
-core/basetypes/MCJSON.h
-core/basetypes/MCLibetpanTypes.h
-core/basetypes/MCLog.h
-core/basetypes/MCMainThread.h
-core/basetypes/MCMD5.h
-core/basetypes/MCNull.h
-core/basetypes/MCObject.h
-core/basetypes/MCOperation.h
-core/basetypes/MCOperationCallback.h
-core/basetypes/MCOperationQueue.h
-core/basetypes/MCRange.h
-core/basetypes/MCSet.h
-core/basetypes/MCString.h
-core/basetypes/MCUtils.h
-core/basetypes/MCValue.h
-core/imap/MCIMAP.h
-core/imap/MCIMAPFolder.h
-core/imap/MCIMAPFolderStatus.h
-core/imap/MCIMAPMessage.h
-core/imap/MCIMAPMessagePart.h
-core/imap/MCIMAPMultipart.h
-core/imap/MCIMAPNamespace.h
-core/imap/MCIMAPNamespaceItem.h
-core/imap/MCIMAPPart.h
-core/imap/MCIMAPProgressCallback.h
-core/imap/MCIMAPSearchExpression.h
-core/imap/MCIMAPSession.h
-core/imap/MCIMAPSyncResult.h
-core/MCCore.h
-core/pop/MCPOP.h
-core/pop/MCPOPMessageInfo.h
-core/pop/MCPOPProgressCallback.h
-core/pop/MCPOPSession.h
-core/provider/MCMailProvider.h
-core/provider/MCMailProvidersManager.h
-core/provider/MCNetService.h
-core/provider/MCProvider.h
-core/renderer/MCAddressDisplay.h
-core/renderer/MCDateFormatter.h
-core/renderer/MCHTMLRendererCallback.h
-core/renderer/MCRenderer.h
-core/rfc822/MCAttachment.h
-core/rfc822/MCMessageBuilder.h
-core/rfc822/MCMessageParser.h
-core/rfc822/MCMessagePart.h
-core/rfc822/MCMultipart.h
-core/rfc822/MCRFC822.h
-core/smtp/MCSMTP.h
-core/smtp/MCSMTPProgressCallback.h
-core/smtp/MCSMTPSession.h
-MailCore.h
+  MailCore.h
+  ${public_headers_objc}
+  ${public_headers_core}
+  ${public_headers_async}
 
-objc/abstract/MCOAbstract.h
-objc/abstract/MCOAbstractMessage+Private.h
-objc/abstract/MCOAbstractMessage.h
-objc/abstract/MCOAbstractMessagePart.h
-objc/abstract/MCOAbstractMultipart.h
-objc/abstract/MCOAbstractPart.h
-objc/abstract/MCOAddress.h
-objc/abstract/MCOConstants.h
-objc/abstract/MCOHTMLRendererDelegate.h
-objc/abstract/MCOHTMLRendererIMAPDelegate.h
-objc/abstract/MCOMessageHeader.h
-
-objc/imap/MCOIMAP.h
-objc/imap/MCOIMAPAppendMessageOperation.h
-objc/imap/MCOIMAPBaseOperation.h
-objc/imap/MCOIMAPCapabilityOperation.h
-objc/imap/MCOIMAPCopyMessagesOperation.h
-objc/imap/MCOIMAPFetchContentOperation.h
-objc/imap/MCOIMAPFetchFoldersOperation.h
-objc/imap/MCOIMAPFetchMessagesOperation.h
-objc/imap/MCOIMAPFetchNamespaceOperation.h
-objc/imap/MCOIMAPFolder.h
-objc/imap/MCOIMAPFolderInfo.h
-objc/imap/MCOIMAPFolderInfoOperation.h
-objc/imap/MCOIMAPIdentityOperation.h
-objc/imap/MCOIMAPIdleOperation.h
-objc/imap/MCOIMAPMessage.h
-objc/imap/MCOIMAPMessagePart.h
-objc/imap/MCOIMAPMultipart.h
-objc/imap/MCOIMAPNamespace.h
-objc/imap/MCOIMAPNamespaceItem.h
-objc/imap/MCOIMAPOperation.h
-objc/imap/MCOIMAPPart.h
-objc/imap/MCOIMAPSearchExpression.h
-objc/imap/MCOIMAPSearchOperation.h
-objc/imap/MCOIMAPSession.h
-
-objc/MCObjC.h
-objc/pop/MCOPOP.h
-objc/pop/MCOPOPFetchHeaderOperation.h
-objc/pop/MCOPOPFetchMessageOperation.h
-objc/pop/MCOPOPFetchMessagesOperation.h
-objc/pop/MCOPOPMessageInfo.h
-objc/pop/MCOPOPOperation.h
-objc/pop/MCOPOPSession.h
-objc/rfc822/MCOAttachment.h
-objc/rfc822/MCOMessageBuilder.h
-objc/rfc822/MCOMessageParser.h
-objc/rfc822/MCOMessagePart.h
-objc/rfc822/MCOMultipart.h
-objc/rfc822/MCORFC822.h
-objc/smtp/MCOSMTP.h
-objc/smtp/MCOSMTPOperation.h
-objc/smtp/MCOSMTPSendOperation.h
-objc/smtp/MCOSMTPSession.h
-objc/utils/MCOIndexSet.h
-objc/utils/MCOObjectWrapper.h
-objc/utils/MCOOperation+Private.h
-objc/utils/MCOOperation.h
-objc/utils/MCORange.h
-objc/utils/MCOUtils.h
-objc/utils/NSArray+MCO.h
-objc/utils/NSData+MCO.h
-objc/utils/NSDictionary+MCO.h
-objc/utils/NSError+MCO.h
-objc/utils/NSObject+MCO.h
-objc/utils/NSString+MCO.h
-objc/utils/NSValue+MCO.h
-
-DESTINATION
-${CMAKE_CURRENT_BINARY_DIR}/include/MailCore
+  DESTINATION
+  ${CMAKE_CURRENT_BINARY_DIR}/include/MailCore
 )
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/include
-${CMAKE_CURRENT_SOURCE_DIR}/async
-${CMAKE_CURRENT_SOURCE_DIR}/async/imap
-${CMAKE_CURRENT_SOURCE_DIR}/async/pop
-${CMAKE_CURRENT_SOURCE_DIR}/async/smtp
-${CMAKE_CURRENT_SOURCE_DIR}/core
-${CMAKE_CURRENT_SOURCE_DIR}/core/abstract
-${CMAKE_CURRENT_SOURCE_DIR}/core/basetypes
-${CMAKE_CURRENT_SOURCE_DIR}/core/imap
-${CMAKE_CURRENT_SOURCE_DIR}/core/pop
-${CMAKE_CURRENT_SOURCE_DIR}/core/renderer
-${CMAKE_CURRENT_SOURCE_DIR}/core/rfc822
-${CMAKE_CURRENT_SOURCE_DIR}/core/smtp
-${CMAKE_CURRENT_SOURCE_DIR}/objc
-${CMAKE_CURRENT_SOURCE_DIR}/objc/abstract
-${CMAKE_CURRENT_SOURCE_DIR}/objc/imap
-${CMAKE_CURRENT_SOURCE_DIR}/objc/pop
-${CMAKE_CURRENT_SOURCE_DIR}/objc/rfc822
-${CMAKE_CURRENT_SOURCE_DIR}/objc/smtp
-${CMAKE_CURRENT_SOURCE_DIR}/objc/utils
-${CMAKE_CURRENT_SOURCE_DIR}/../Externals/ctemplate/include
-${CMAKE_CURRENT_SOURCE_DIR}/../Externals/icu4c/include
-${CMAKE_CURRENT_SOURCE_DIR}/../Externals/libetpan/include
-/usr/include/tidy
-/usr/include/libxml2/
+  ${async_includes}
+  ${core_includes}
+  ${objc_includes}
+  ${CMAKE_CURRENT_SOURCE_DIR}/../Externals/ctemplate/include
+  ${CMAKE_CURRENT_SOURCE_DIR}/../Externals/icu4c/include
+  ${CMAKE_CURRENT_SOURCE_DIR}/../Externals/libetpan/include
+  /usr/include/tidy
+  /usr/include/libxml2/
 )
 
-add_library (MailCore
-
-core/MCCore.h
-
-core/basetypes/MCArray.cc
-core/basetypes/MCAssert.cc
-core/basetypes/MCAutoreleasePool.cc
-core/basetypes/MCData.cc
-core/basetypes/MCHash.cc
-core/basetypes/MCHashMap.cc
-core/basetypes/MCHTMLCleaner.cc
-core/basetypes/MCIndexSet.cc
-core/basetypes/MCLog.cc
-core/basetypes/MCMainThread.mm
-core/basetypes/MCObject.cc
-core/basetypes/MCOperation.cc
-core/basetypes/MCOperationQueue.cc
-core/basetypes/MCRange.cc
-core/basetypes/MCSet.cc
-core/basetypes/MCString.cc
-core/basetypes/MCValue.cc
-
-core/abstract/MCAbstractMessage.cc
-core/abstract/MCAbstractMessagePart.cc
-core/abstract/MCAbstractMultipart.cc
-core/abstract/MCAbstractPart.cc
-core/abstract/MCAddress.cc
-core/abstract/MCMessageHeader.cc
-
-core/imap/MCIMAPFolder.cc
-core/imap/MCIMAPMessage.cc
-core/imap/MCIMAPMessagePart.cc
-core/imap/MCIMAPMultipart.cc
-core/imap/MCIMAPNamespace.cc
-core/imap/MCIMAPNamespaceItem.cc
-core/imap/MCIMAPPart.cc
-core/imap/MCIMAPSearchExpression.cc
-core/imap/MCIMAPSession.cc
-core/imap/MCIMAPSyncResult.cc
-
-core/pop/MCPOPMessageInfo.cc
-core/pop/MCPOPSession.cc
-
-core/renderer/MCAddressDisplay.cc
-core/renderer/MCDateFormatter.cc
-core/renderer/MCHTMLRenderer.cc
-core/renderer/MCHTMLRendererCallback.cc
-core/renderer/MCSizeFormatter.cc
-
-core/rfc822/MCAttachment.cc
-core/rfc822/MCMessageBuilder.cc
-core/rfc822/MCMessageParser.cc
-core/rfc822/MCMessagePart.cc
-core/rfc822/MCMultipart.cc
-
-core/smtp/MCSMTPSession.cc
-
-async/imap/MCIMAPAppendMessageOperation.cc
-async/imap/MCIMAPAsyncConnection.cc
-async/imap/MCIMAPAsyncSession.cc
-async/imap/MCIMAPCapabilityOperation.cc
-async/imap/MCIMAPCheckAccountOperation.cc
-async/imap/MCIMAPCopyMessagesOperation.cc
-async/imap/MCIMAPCreateFolderOperation.cc
-async/imap/MCIMAPDeleteFolderOperation.cc
-async/imap/MCIMAPExpungeOperation.cc
-async/imap/MCIMAPFetchContentOperation.cc
-async/imap/MCIMAPFetchFoldersOperation.cc
-async/imap/MCIMAPFetchMessagesOperation.cc
-async/imap/MCIMAPFetchNamespaceOperation.cc
-async/imap/MCIMAPFolderInfoOperation.cc
-async/imap/MCIMAPIdentityOperation.cc
-async/imap/MCIMAPIdleOperation.cc
-async/imap/MCIMAPOperation.cc
-async/imap/MCIMAPRenameFolderOperation.cc
-async/imap/MCIMAPSearchOperation.cc
-async/imap/MCIMAPStoreFlagsOperation.cc
-async/imap/MCIMAPStoreLabelsOperation.cc
-async/imap/MCIMAPSubscribeFolderOperation.cc
-
-async/pop/MCPOPAsyncSession.cc
-async/pop/MCPOPDeleteMessagesOperation.cc
-async/pop/MCPOPFetchHeaderOperation.cc
-async/pop/MCPOPFetchMessageOperation.cc
-async/pop/MCPOPFetchMessagesOperation.cc
-async/pop/MCPOPOperation.cc
-
-async/smtp/MCSMTPAsyncSession.cc
-async/smtp/MCSMTPCheckAccountOperation.cc
-async/smtp/MCSMTPOperation.cc
-async/smtp/MCSMTPSendWithDataOperation.cc
-
-objc/abstract/MCOAbstractMessage.mm
-objc/abstract/MCOAbstractMessagePart.mm
-objc/abstract/MCOAbstractMessageRendererCallback.mm
-objc/abstract/MCOAbstractMultipart.mm
-objc/abstract/MCOAbstractPart.mm
-objc/abstract/MCOAddress.mm
-objc/abstract/MCOMessageHeader.mm
-
-objc/imap/MCOIMAPAppendMessageOperation.mm
-objc/imap/MCOIMAPBaseOperation.mm
-objc/imap/MCOIMAPCapabilityOperation.mm
-objc/imap/MCOIMAPCopyMessagesOperation.mm
-objc/imap/MCOIMAPFetchContentOperation.mm
-objc/imap/MCOIMAPFetchFoldersOperation.mm
-objc/imap/MCOIMAPFetchMessagesOperation.mm
-objc/imap/MCOIMAPFetchNamespaceOperation.mm
-objc/imap/MCOIMAPFolder.mm
-objc/imap/MCOIMAPFolderInfo.m
-objc/imap/MCOIMAPFolderInfoOperation.mm
-objc/imap/MCOIMAPIdentityOperation.mm
-objc/imap/MCOIMAPIdleOperation.mm
-objc/imap/MCOIMAPMessage.mm
-objc/imap/MCOIMAPMessagePart.mm
-objc/imap/MCOIMAPMultipart.mm
-objc/imap/MCOIMAPNamespace.mm
-objc/imap/MCOIMAPNamespaceItem.mm
-objc/imap/MCOIMAPOperation.mm
-objc/imap/MCOIMAPPart.mm
-objc/imap/MCOIMAPSearchExpression.mm
-objc/imap/MCOIMAPSearchOperation.mm
-objc/imap/MCOIMAPSession.mm
-
-objc/pop/MCOPOPFetchHeaderOperation.mm
-objc/pop/MCOPOPFetchMessageOperation.mm
-objc/pop/MCOPOPFetchMessagesOperation.mm
-objc/pop/MCOPOPMessageInfo.mm
-objc/pop/MCOPOPOperation.mm
-objc/pop/MCOPOPSession.mm
-
-objc/rfc822/MCOAttachment.mm
-objc/rfc822/MCOMessageBuilder.mm
-objc/rfc822/MCOMessageParser.mm
-objc/rfc822/MCOMessagePart.mm
-objc/rfc822/MCOMultipart.mm
-
-objc/smtp/MCOSMTPOperation.mm
-objc/smtp/MCOSMTPSendOperation.mm
-objc/smtp/MCOSMTPSession.mm
-
-objc/utils/MCOIndexSet.mm
-objc/utils/MCOObjectWrapper.mm
-objc/utils/MCOOperation.mm
-objc/utils/MCORange.mm
-objc/utils/NSArray+MCO.mm
-objc/utils/NSData+MCO.mm
-objc/utils/NSDictionary+MCO.mm
-objc/utils/NSError+MCO.mm
-objc/utils/NSObject+MCO.mm
-objc/utils/NSString+MCO.mm
-objc/utils/NSValue+MCO.mm
+add_library(MailCore
+  ${core_files}
+  ${async_files}
+  ${objc_files}
 )
