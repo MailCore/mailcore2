@@ -60,6 +60,11 @@
 	return self;
 }
 
+- (id) copyWithZone:(NSZone *)zone
+{
+    return [[MCONetService mco_objectWithMCObject:_netService] retain];
+}
+
 MCO_OBJC_SYNTHESIZE_STRING(setHostname, hostname)
 MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setPort, port)
 MCO_OBJC_SYNTHESIZE_SCALAR(MCOConnectionType, mailcore::ConnectionType, setConnectionType, connectionType)
