@@ -305,13 +305,23 @@
 /**
  Returns an operation to fetch messages by (sequence) number.
  For example: show 50 most recent uids.
-     MCOIMAPFetchMessagesOperation * op = [session fetchMessagesByNumberOperationWithFolder:@"INBOX"
-                                                                                requestKind:MCOIMAPMessagesRequestKindUID
-                                                                                       uids:MCORangeMake(messageCount - 50, messageCount)];
-     [op start:^(NSError * error, NSArray * messages, MCOIndexSet * vanishedMessages) {
-        for(MCOIMAPMessage * msg in messages) {
-          NSLog(@"%lu", [msg uid]);
-        }
+     NSString *folder = @"INBOX";
+     MCOIMAPFolderInfoOperation *folderInfo = [session folderInfoOperation:folder];
+    
+     [folderInfo start:^(NSError *error, MCOIMAPFolderInfo *info) {
+         int messageCount = [info messageCount];
+         int numberOfMessages = 50;
+         MCOIndexSet *numbers = [MCOIndexSet indexSetWithRange:MCORangeMake(messageCount - numberOfMessages, numberOfMessages)];
+        
+         MCOIMAPFetchMessagesOperation *fetchOperation = [session fetchMessagesByNumberOperationWithFolder:folder
+                                                                                               requestKind:MCOIMAPMessagesRequestKindUid
+                                                                                                   numbers:numbers];
+         
+         [fetchOperation start:^(NSError *error, NSArray *messages, MCOIndexSet *vanishedMessages) {
+             for (MCOIMAPMessage * message in messages) {
+                 NSLog(@"%u", [message uid]);
+             }
+         }];
      }];
 */
 - (MCOIMAPFetchMessagesOperation *) fetchMessagesByNumberOperationWithFolder:(NSString *)folder
