@@ -20,13 +20,13 @@ MailCore 2 provides a simple and asynchronous Objective-C API to work with the e
         - In Build Phases, add a Target Dependency of `mailcore osx` (it's the one with a little toolbox icon).
     * Mac static library
         - Go to Build Phases from your build target, and under 'Link Binary With Libraries', add `libMailCore.a`.
-        - Set 'Other Linker Flags' under Build Settings: `-lctemplate -letpan -licudata -licui18n -licuuc -lxml2 -lsasl2 -liconv -ltidy -lc++ -all_load`
+        - Set 'Other Linker Flags' under Build Settings: `-lctemplate -letpan -licudata -licui18n -licuuc -lxml2 -lsasl2 -liconv -ltidy -lc++ -stdlib=libc++ -all_load`
         - Make sure to use LLVM C++ standard library.  In Build Settings, locate 'C++ Standard Library', and select `libc++`.
         - In Build Phases, add a Target Dependency of `static mailcore2 osx`.
 5. **For iOS** - If you're targeting iOS, you have to link against MailCore 2 as a static library:
     * Add `libMailCore-ios.a`
     * Add `CFNetwork.framework`
-    * Set 'Other Linker Flags': `-lctemplate-ios -letpan-ios -licudata -licui18n -licuuc -lxml2 -lsasl2 -liconv -ltidy -lstdc++ -all_load`
+    * Set 'Other Linker Flags': `-lctemplate-ios -letpan-ios -licudata -licui18n -licuuc -lxml2 -lsasl2 -liconv -ltidy -lstdc++ -stdlib=libstdc++ -all_load`
     * Make sure to use GNU C++ standard library.  In Build Settings, locate 'C++ Standard Library', and select `libstdc++`.
     * In Build Phases, add a Target Dependency of `static mailcore2 ios`.
 6. Profit.
