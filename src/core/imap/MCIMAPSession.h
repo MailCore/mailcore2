@@ -106,7 +106,7 @@ namespace mailcore {
 		virtual IndexSet * search(String * folder, IMAPSearchKind kind, String * searchString, ErrorCode * pError);
 		virtual IndexSet * search(String * folder, IMAPSearchExpression * expression, ErrorCode * pError);
 		
-		virtual void setupIdle();
+		virtual bool setupIdle();
 		virtual void idle(String * folder, uint32_t lastKnownUID, ErrorCode * pError);
 		virtual void interruptIdle();
 		virtual void unsetupIdle();
@@ -168,6 +168,7 @@ namespace mailcore {
 		unsigned int mLastFetchedSequenceNumber;
 		String * mCurrentFolder;
 		pthread_mutex_t mIdleLock;
+		bool mCanIdle;
 		int mState;
 		mailimap * mImap;
 		IMAPProgressCallback * mProgressCallback;

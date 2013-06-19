@@ -335,6 +335,7 @@ void IMAPSession::init()
 	mLastFetchedSequenceNumber = 0;
 	mCurrentFolder = NULL;
     pthread_mutex_init(&mIdleLock, NULL);
+    mCanIdle = false;
 	mState = STATE_DISCONNECTED;
 	mImap = NULL;
 	mProgressCallback = NULL;
@@ -499,8 +500,11 @@ void IMAPSession::unsetup()
 {
     mailimap * imap;
     
+    LOCK();
     imap = mImap;
     mImap = NULL;
+    mCanIdle = false;
+    UNLOCK();
     
 	if (imap != NULL) {
         if (imap->imap_stream != NULL) {
@@ -588,6 +592,9 @@ void IMAPSession::connect(ErrorCode * pError)
     * pError = ErrorNone;
 	mState = STATE_CONNECTED;
 	MCLog("connect ok");
+    LOCK();
+    mCanIdle = true;
+    UNLOCK();
 }
 
 void IMAPSession::connectIfNeeded(ErrorCode * pError)
@@ -2316,12 +2323,16 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchExpression * expressio
     return result;
 }
 
-void IMAPSession::setupIdle()
+bool IMAPSession::setupIdle()
 {
     // main thread
     LOCK();
-    mailstream_setup_idle(mImap->imap_stream);
+    bool canIdle = mCanIdle;
+    if (mCanIdle) {
+        mailstream_setup_idle(mImap->imap_stream);
+    }
     UNLOCK();
+    return canIdle;
 }
 
 void IMAPSession::idle(String * folder, uint32_t lastKnownUID, ErrorCode * pError)
@@ -2411,7 +2422,9 @@ void IMAPSession::interruptIdle()
 {
     // main thread
     LOCK();
-    mailstream_interrupt_idle(mImap->imap_stream);
+    if (mCanIdle) {
+        mailstream_interrupt_idle(mImap->imap_stream);
+    }
     UNLOCK();
 }
 
@@ -2419,7 +2432,9 @@ void IMAPSession::unsetupIdle()
 {
     // main thread
     LOCK();
-    mailstream_unsetup_idle(mImap->imap_stream);
+    if (mCanIdle) {
+        mailstream_unsetup_idle(mImap->imap_stream);
+    }
     UNLOCK();
 }
 

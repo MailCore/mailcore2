@@ -16,6 +16,7 @@ using namespace mailcore;
 IMAPIdleOperation::IMAPIdleOperation()
 {
     mLastKnownUid = 0;
+    mSetupSuccess = false;
 }
 
 IMAPIdleOperation::~IMAPIdleOperation()
@@ -34,17 +35,23 @@ uint32_t IMAPIdleOperation::lastKnownUID()
 
 void IMAPIdleOperation::prepare()
 {
-    session()->session()->setupIdle();
+    mSetupSuccess = session()->session()->setupIdle();
 }
 
 void IMAPIdleOperation::unprepare()
 {
-    session()->session()->unsetupIdle();
+    if (mSetupSuccess) {
+        session()->session()->unsetupIdle();
+    }
 }
 
 void IMAPIdleOperation::main()
 {
     performMethodOnMainThread((Object::Method) &IMAPIdleOperation::prepare, NULL);
+    
+    if (!mSetupSuccess) {
+        return;
+    }
     
     ErrorCode error;
     session()->session()->idle(folder(), mLastKnownUid, &error);
@@ -55,6 +62,8 @@ void IMAPIdleOperation::main()
 
 void IMAPIdleOperation::interruptIdle()
 {
-    session()->session()->interruptIdle();
+    if (mSetupSuccess) {
+        session()->session()->interruptIdle();
+    }
 }
 
