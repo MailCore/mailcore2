@@ -14,7 +14,7 @@
 
 #import <MailCore/MCOAbstractMessagePart.h>
 
-@interface MCOIMAPMessagePart : MCOAbstractMessagePart <NSCopying>
+@interface MCOIMAPMessagePart : MCOAbstractMessagePart <NSCoding, NSCopying>
 
 /** A part identifier is of the form 1.2.1*/
 @property (nonatomic, copy) NSString * partID;

@@ -27,6 +27,30 @@
     MCORegisterClass(self, &typeid(nativeType));
 }
 
+- (id) initWithCoder:(NSCoder *)aDecoder {
+	self = [super initWithCoder:aDecoder];
+	
+	[self setUid:[aDecoder decodeInt32ForKey:@"uid"]];
+	[self setFlags:(MCOMessageFlag)[aDecoder decodeIntForKey:@"flags"]];
+	[self setOriginalFlags:(MCOMessageFlag)[aDecoder decodeIntForKey:@"originalFlags"]];
+	[self setModSeqValue:[aDecoder decodeInt64ForKey:@"modSeqValue"]];
+	[self setMainPart:[aDecoder decodeObjectForKey:@"mainPart"]];
+	[self setGmailLabels:[aDecoder decodeObjectForKey:@"gmailLabels"]];
+	
+	return self;
+}
+
+- (void) encodeWithCoder:(NSCoder *)aCoder
+{
+	[super encodeWithCoder:aCoder];
+	[aCoder encodeInt32:[self uid] forKey:@"uid"];
+	[aCoder encodeInt:[self flags] forKey:@"flags"];
+	[aCoder encodeInt:[self originalFlags] forKey:@"originalFlags"];
+	[aCoder encodeInt64:[self modSeqValue] forKey:@"modSeqValue"];
+	[aCoder encodeObject:[self mainPart] forKey:@"mainPart"];
+	[aCoder encodeObject:[self gmailLabels] forKey:@"gmailLabels"];
+}
+
 - (id) copyWithZone:(NSZone *)zone
 {
     nativeType * nativeObject = (nativeType *) [self mco_mcObject]->copy();

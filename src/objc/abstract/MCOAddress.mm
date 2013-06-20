@@ -113,6 +113,22 @@
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)coder
+{
+	self = [self init];
+	
+	[self setDisplayName:[coder decodeObjectForKey:@"displayName"]];
+	[self setMailbox:[coder decodeObjectForKey:@"mailbox"]];
+	
+	return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+	[encoder encodeObject:[self displayName] forKey:@"displayName"];
+	[encoder encodeObject:[self mailbox] forKey:@"mailbox"];
+}
+
 + (MCOAddress *) addressWithMCAddress:(mailcore::Address *)address
 {
     if (address == NULL)

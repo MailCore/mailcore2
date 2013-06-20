@@ -13,7 +13,7 @@
    This class provides a specific way to access a given service
 */
 
-@interface MCONetService : NSObject
+@interface MCONetService : NSObject <NSCopying>
 
 /**
    The hostname of the server. [MCONetService hostnameWithEmail:] is recommended

@@ -18,6 +18,22 @@
 
 #define nativeType mailcore::AbstractMessagePart
 
+- (id) initWithCoder:(NSCoder *)decoder
+{
+	self = [super init];
+	
+	[self setHeader:[decoder decodeObjectForKey:@"header"]];
+	[self setMainPart:[decoder decodeObjectForKey:@"mainPart"]];
+	
+	return self;
+}
+
+- (void) encodeWithCoder:(NSCoder *)encoder
+{
+	[encoder encodeObject:[self header] forKey:@"header"];
+	[encoder encodeObject:[self mainPart] forKey:@"mainPart"];
+}
+
 MCO_OBJC_SYNTHESIZE(MessageHeader, setHeader, header)
 MCO_OBJC_SYNTHESIZE(AbstractMessagePart, setMainPart, mainPart)
 

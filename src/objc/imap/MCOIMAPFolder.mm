@@ -56,6 +56,24 @@
     return self;
 }
 
+- (id) initWithCoder:(NSCoder *)aDecoder
+{
+	self = [self init];
+	
+	[self setPath:[aDecoder decodeObjectForKey:@"path"]];
+	[self setDelimiter:[aDecoder decodeIntForKey:@"delimiter"]];
+	[self setFlags:(MCOIMAPFolderFlag)[aDecoder decodeInt32ForKey:@"flags"]];
+	
+	return self;
+}
+
+- (void) encodeWithCoder:(NSCoder *)aCoder
+{
+	[aCoder encodeObject:[self path] forKey:@"path"];
+	[aCoder encodeInt:[self delimiter] forKey:@"delimiter"];
+	[aCoder encodeInt32:[self flags] forKey:@"flags"];
+}
+
 - (void) dealloc
 {
     MC_SAFE_RELEASE(_nativeFolder);
