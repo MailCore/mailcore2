@@ -309,9 +309,9 @@
      MCOIMAPFolderInfoOperation *folderInfo = [session folderInfoOperation:folder];
     
      [folderInfo start:^(NSError *error, MCOIMAPFolderInfo *info) {
-         int messageCount = [info messageCount];
          int numberOfMessages = 50;
-         MCOIndexSet *numbers = [MCOIndexSet indexSetWithRange:MCORangeMake(messageCount - numberOfMessages, numberOfMessages)];
+         numberOfMessages -= 1;
+         MCOIndexSet *numbers = [MCOIndexSet indexSetWithRange:MCORangeMake([info messageCount] - numberOfMessages, numberOfMessages)];
         
          MCOIMAPFetchMessagesOperation *fetchOperation = [session fetchMessagesByNumberOperationWithFolder:folder
                                                                                                requestKind:MCOIMAPMessagesRequestKindUid
