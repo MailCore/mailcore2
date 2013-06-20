@@ -1076,48 +1076,52 @@ Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool
         Array * recipient;
         
         recipient = new Array();
-        for(unsigned int i = 0 ; i < to()->count() ; i ++) {
-            Address * address = (Address *) to()->objectAtIndex(i);
-            if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
-                continue;
-            }
-            if (address->mailbox()->isEqualCaseInsensitive(from()->mailbox())) {
-                recipient->addObjectsFromArray(replyTo());
-                for(unsigned int j = 0 ; j < to()->count() ; j ++) {
-                    Address * address = (Address *) replyTo()->objectAtIndex(j);
-                    if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
-                        continue;
-                    }
-                    if (address->mailbox() == NULL)
-                        continue;
-                    addedAddresses->addObject(address->mailbox()->lowercaseString());
-                }
-            }
-            else {
-                if (address->mailbox() != NULL) {
-                    recipient->addObject(address);
-                    addedAddresses->addObject(address->mailbox()->lowercaseString());
-                }
-            }
-            hasTo = true;
-        }
+		if (to() != NULL && to()->count() > 0) {
+			for(unsigned int i = 0 ; i < to()->count() ; i ++) {
+				Address * address = (Address *) to()->objectAtIndex(i);
+				if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
+					continue;
+				}
+				if (address->mailbox()->isEqualCaseInsensitive(from()->mailbox())) {
+					recipient->addObjectsFromArray(replyTo());
+					for(unsigned int j = 0 ; j < to()->count() ; j ++) {
+						Address * address = (Address *) replyTo()->objectAtIndex(j);
+						if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
+							continue;
+						}
+						if (address->mailbox() == NULL)
+							continue;
+						addedAddresses->addObject(address->mailbox()->lowercaseString());
+					}
+				}
+				else {
+					if (address->mailbox() != NULL) {
+						recipient->addObject(address);
+						addedAddresses->addObject(address->mailbox()->lowercaseString());
+					}
+				}
+				hasTo = true;
+			}
+		}
         toField = recipient;
         toField->retain()->autorelease();
         recipient->release();
         
         if (replyAll) {
             recipient = new Array();
-            for(unsigned int i = 0 ; i < cc()->count() ; i ++) {
-                Address * address = (Address *) cc()->objectAtIndex(i);
-                if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
-                    continue;
-                }
-                if (address->mailbox() == NULL)
-                    continue;
-                recipient->addObject(address);
-                addedAddresses->addObject(address->mailbox()->lowercaseString());
-                hasCc = true;
-            }
+ 			if (cc() != NULL && cc()->count() > 0) {
+			   for(unsigned int i = 0 ; i < cc()->count() ; i ++) {
+					Address * address = (Address *) cc()->objectAtIndex(i);
+					if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
+						continue;
+					}
+					if (address->mailbox() == NULL)
+						continue;
+					recipient->addObject(address);
+					addedAddresses->addObject(address->mailbox()->lowercaseString());
+					hasCc = true;
+				}
+			}
             ccField = recipient;
             ccField->retain()->autorelease();
             recipient->release();
@@ -1153,7 +1157,7 @@ Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool
             Array * recipient;
             
             recipient = new Array();
-			if (to() != NULL) {
+			if (to() != NULL && to()->count() > 0) {
 				for(unsigned int i = 0 ; i < to()->count() ; i ++) {
 					Address * address = (Address *) to()->objectAtIndex(i);
 					if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
@@ -1165,7 +1169,7 @@ Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool
 					addedAddresses->addObject(address->mailbox()->lowercaseString());
 				}
 			}
-			if (cc() != NULL) {
+			if (cc() != NULL && cc()->count() > 0) {
 				for(unsigned int i = 0 ; i < cc()->count() ; i ++) {
 					Address * address = (Address *) cc()->objectAtIndex(i);
 					if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
