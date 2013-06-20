@@ -1153,26 +1153,30 @@ Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool
             Array * recipient;
             
             recipient = new Array();
-            for(unsigned int i = 0 ; i < to()->count() ; i ++) {
-                Address * address = (Address *) to()->objectAtIndex(i);
-                if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
-                    continue;
-                }
-                if (address->mailbox() == NULL)
-                    continue;
-                recipient->addObject(address);
-                addedAddresses->addObject(address->mailbox()->lowercaseString());
-            }
-            for(unsigned int i = 0 ; i < cc()->count() ; i ++) {
-                Address * address = (Address *) cc()->objectAtIndex(i);
-                if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
-                    continue;
-                }
-                if (address->mailbox() == NULL)
-                    continue;
-                recipient->addObject(address);
-                addedAddresses->addObject(address->mailbox()->lowercaseString());
-            }
+			if (to() != NULL) {
+				for(unsigned int i = 0 ; i < to()->count() ; i ++) {
+					Address * address = (Address *) to()->objectAtIndex(i);
+					if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
+						continue;
+					}
+					if (address->mailbox() == NULL)
+						continue;
+					recipient->addObject(address);
+					addedAddresses->addObject(address->mailbox()->lowercaseString());
+				}
+			}
+			if (cc() != NULL) {
+				for(unsigned int i = 0 ; i < cc()->count() ; i ++) {
+					Address * address = (Address *) cc()->objectAtIndex(i);
+					if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
+						continue;
+					}
+					if (address->mailbox() == NULL)
+						continue;
+					recipient->addObject(address);
+					addedAddresses->addObject(address->mailbox()->lowercaseString());
+				}
+			}
             if (recipient->count() > 0) {
                 hasCc = true;
             }
