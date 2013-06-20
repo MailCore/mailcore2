@@ -36,7 +36,7 @@
 {
 	[super encodeWithCoder:aCoder];
 	[aCoder encodeObject:[self partID] forKey:@"partID"];
-	[aCoder encodeInt64:[self size] forKey:@"size"];
+	[aCoder encodeInt:[self size] forKey:@"size"];
 	[aCoder encodeInt:[self encoding] forKey:@"encoding"];
 }
 

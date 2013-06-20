@@ -29,6 +29,44 @@
     MCORegisterClass(self, &typeid(nativeType));
 }
 
+- (id) copyWithZone:(NSZone *)zone
+{
+    nativeType * nativeObject = (nativeType *) [self mco_mcObject]->copy();
+    id result = [[self class] mco_objectWithMCObject:nativeObject];
+    MC_SAFE_RELEASE(nativeObject);
+    return [result retain];
+}
+
++ (id) mco_objectWithMCObject:(mailcore::Object *)object
+{
+    mailcore::MessageHeader * header = (mailcore::MessageHeader *) object;
+    return [[[self alloc] initWithMCMessageHeader:header] autorelease];
+}
+
+- (mailcore::Object *) mco_mcObject
+{
+    return _nativeHeader;
+}
+
+- (id) init
+{
+    self = [super init];
+    
+    _nativeHeader = new mailcore::MessageHeader();
+    
+    return self;
+}
+
+- (id) initWithMCMessageHeader:(mailcore::MessageHeader *)header
+{
+    self = [super init];
+    
+    _nativeHeader = header;
+    _nativeHeader->retain();
+    
+    return self;
+}
+
 - (id)initWithCoder:(NSCoder *)decoder
 {
 	self = [super init];
@@ -66,45 +104,6 @@
 	[encoder encodeObject:[self subject] forKey:@"subject"];
 	[encoder encodeObject:[self date] forKey:@"date"];
 	[encoder encodeObject:[self receivedDate] forKey:@"receivedDate"];
-}
-
-
-- (id) copyWithZone:(NSZone *)zone
-{
-    nativeType * nativeObject = (nativeType *) [self mco_mcObject]->copy();
-    id result = [[self class] mco_objectWithMCObject:nativeObject];
-    MC_SAFE_RELEASE(nativeObject);
-    return [result retain];
-}
-
-+ (id) mco_objectWithMCObject:(mailcore::Object *)object
-{
-    mailcore::MessageHeader * header = (mailcore::MessageHeader *) object;
-    return [[[self alloc] initWithMCMessageHeader:header] autorelease];
-}
-
-- (mailcore::Object *) mco_mcObject
-{
-    return _nativeHeader;
-}
-
-- (id) init
-{
-    self = [super init];
-    
-    _nativeHeader = new mailcore::MessageHeader();
-    
-    return self;
-}
-
-- (id) initWithMCMessageHeader:(mailcore::MessageHeader *)header
-{
-    self = [super init];
-    
-    _nativeHeader = header;
-    _nativeHeader->retain();
-    
-    return self;
 }
 
 + (MCOMessageHeader *) messageHeaderWithMCMessageHeader:(mailcore::MessageHeader *)header

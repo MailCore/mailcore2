@@ -71,7 +71,7 @@
 {
 	[aCoder encodeObject:[self path] forKey:@"path"];
 	[aCoder encodeInt:[self delimiter] forKey:@"delimiter"];
-	[aCoder encodeInt32:[self flags] forKey:@"flags"];
+	[aCoder encodeInt:[self flags] forKey:@"flags"];
 }
 
 - (void) dealloc
