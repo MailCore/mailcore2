@@ -38,6 +38,32 @@
     return self;
 }
 
+- (id) initWithCoder:(NSCoder *)decoder
+{
+	MCOAbstractMessage * abstractPart = [[[[self class] alloc] init] autorelease];
+	mailcore::AbstractMessage * message = (mailcore::AbstractMessage *) [abstractPart mco_mcObject];
+	message->setHeader((mailcore::MessageHeader *) [[decoder decodeObjectForKey:@"header"] mco_mcObject]);
+	
+	self = [self initWithMCMessage:message];
+	
+	return self;
+}
+
+- (void) encodeWithCoder:(NSCoder *)encoder
+{
+	[encoder encodeObject:[self header] forKey:@"header"];
+}
+
+- (id) copyWithZone:(NSZone *)zone
+{
+	MCOAbstractMessage *message;
+	
+	message = [[[self class] alloc] initWithMCMessage:(mailcore::AbstractMessage *)_message->copy()->autorelease()];
+	[message setHeader:[[[self header] copy] autorelease]];
+	
+	return message;
+}
+
 - (void) dealloc
 {
     _message->release();

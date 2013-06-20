@@ -32,7 +32,7 @@
 + (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object
 {
 	mailcore::NetService *netService = (mailcore::NetService *)object;
-	return [[self alloc] initWithNetService:netService];
+	return [[[self alloc] initWithNetService:netService] autorelease];
 }
 
 + (MCONetService *) serviceWithInfo:(NSDictionary *)info
@@ -58,6 +58,11 @@
 	_netService->retain();
 	
 	return self;
+}
+
+- (id) copyWithZone:(NSZone *)zone
+{
+    return [[MCONetService mco_objectWithMCObject:_netService] retain];
 }
 
 MCO_OBJC_SYNTHESIZE_STRING(setHostname, hostname)

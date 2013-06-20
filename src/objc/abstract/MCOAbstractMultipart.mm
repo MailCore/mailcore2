@@ -16,6 +16,20 @@
 
 #define nativeType mailcore::AbstractMultipart
 
+- (id) initWithCoder:(NSCoder *)decoder
+{
+	self = [super initWithCoder:decoder];
+	
+	[self setParts:[decoder decodeObjectForKey:@"parts"]];
+	
+	return self;
+}
+
+- (void) encodeWithCoder:(NSCoder *)encoder
+{
+	[encoder encodeObject:[self parts] forKey:@"parts"];
+}
+
 MCO_OBJC_SYNTHESIZE_ARRAY(setParts, parts)
 
 @end

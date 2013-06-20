@@ -36,7 +36,7 @@
 + (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object
 {
     mailcore::MailProvider * provider = (mailcore::MailProvider *) object;
-    return [[self alloc] initWithMCProvider:provider];
+    return [[[self alloc] initWithMCProvider:provider] autorelease];
 }
 
 - (id) initWithInfo:(NSDictionary *)info
@@ -117,6 +117,11 @@
 - (NSString *) importantFolderPath
 {
     return MCO_OBJC_BRIDGE_GET(importantFolderPath);
+}
+
+- (NSString *) identifier
+{
+    return MCO_OBJC_BRIDGE_GET(identifier);
 }
 
 - (BOOL) isMainFolder:(NSString *)folderPath prefix:(NSString *)prefix
