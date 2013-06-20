@@ -33,20 +33,20 @@
 {
 	self = [super init];
 	
-	self.messageID = [[decoder decodeObjectForKey:@"messageID"] retain];
-	self.references = [[decoder decodeObjectForKey:@"references"] retain];
-	self.inReplyTo = [[decoder decodeObjectForKey:@"inReplyTo"] retain];
-	self.sender = [[decoder decodeObjectForKey:@"sender"] retain];
-	self.from = [[decoder decodeObjectForKey:@"from"] retain];
-	self.to = [[decoder decodeObjectForKey:@"to"] retain];
-	self.cc = [[decoder decodeObjectForKey:@"cc"] retain];
-	self.bcc = [[decoder decodeObjectForKey:@"bcc"] retain];
-	self.replyTo = [[decoder decodeObjectForKey:@"replyTo"] retain];
-	self.subject = [[decoder decodeObjectForKey:@"subject"] retain];
-	self.date = [[decoder decodeObjectForKey:@"date"] retain];
-	self.receivedDate = [[decoder decodeObjectForKey:@"receivedDate"] retain];
-	if (self.receivedDate == nil) {
-		self.receivedDate = [self.date retain];
+	[self setMessageID:[decoder decodeObjectForKey:@"messageID"]];
+	[self setReferences:[decoder decodeObjectForKey:@"references"]];
+	[self setInReplyTo:[decoder decodeObjectForKey:@"inReplyTo"]];
+	[self setSender:[decoder decodeObjectForKey:@"sender"]];
+	[self setFrom:[decoder decodeObjectForKey:@"from"]];
+	[self setTo:[decoder decodeObjectForKey:@"to"]];
+	[self setCc:[decoder decodeObjectForKey:@"cc"]];
+	[self setBcc:[decoder decodeObjectForKey:@"bcc"]];
+	[self setReplyTo:[decoder decodeObjectForKey:@"replyTo"]];
+	[self setSubject:[decoder decodeObjectForKey:@"subject"]];
+	[self setDate:[decoder decodeObjectForKey:@"date"]];
+	[self setReceivedDate:[decoder decodeObjectForKey:@"receivedDate"]];
+	if ([self receivedDate] == nil) {
+		[self setReceivedDate:[[self date] copy]];
 	}
 	
 	return self;
