@@ -1076,7 +1076,7 @@ Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool
         Array * recipient;
         
         recipient = new Array();
-		if (to() != NULL && to()->count() > 0) {
+		if (to() != NULL) {
 			for(unsigned int i = 0 ; i < to()->count() ; i ++) {
 				Address * address = (Address *) to()->objectAtIndex(i);
 				if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
@@ -1109,7 +1109,7 @@ Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool
         
         if (replyAll) {
             recipient = new Array();
- 			if (cc() != NULL && cc()->count() > 0) {
+ 			if (cc() != NULL) {
 			   for(unsigned int i = 0 ; i < cc()->count() ; i ++) {
 					Address * address = (Address *) cc()->objectAtIndex(i);
 					if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
@@ -1157,7 +1157,7 @@ Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool
             Array * recipient;
             
             recipient = new Array();
-			if (to() != NULL && to()->count() > 0) {
+			if (to() != NULL) {
 				for(unsigned int i = 0 ; i < to()->count() ; i ++) {
 					Address * address = (Address *) to()->objectAtIndex(i);
 					if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
@@ -1169,7 +1169,7 @@ Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool
 					addedAddresses->addObject(address->mailbox()->lowercaseString());
 				}
 			}
-			if (cc() != NULL && cc()->count() > 0) {
+			if (cc() != NULL) {
 				for(unsigned int i = 0 ; i < cc()->count() ; i ++) {
 					Address * address = (Address *) cc()->objectAtIndex(i);
 					if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
