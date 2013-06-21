@@ -2,16 +2,14 @@
 
 #define __MAILCORE_MCASSERT_H_
 
+#define MCAssert(cond) MCAssertInternal(__FILE__, __LINE__, cond, #cond)
+
 #ifdef __cplusplus
-
-#define MCAssert(cond) mailcore::assertInteral(__FILE__, __LINE__, cond, #cond)
-
-namespace mailcore {
-
-    void assertInteral(const char * filename, unsigned int line, int cond, const char * condString);
-    
+extern "C" {
+#endif	
+	void MCAssertInternal(const char * filename, unsigned int line, int cond, const char * condString);
+#ifdef __cplusplus
 }
-
 #endif
 
 #endif
