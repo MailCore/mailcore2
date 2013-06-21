@@ -3,6 +3,14 @@
 #define __MAILCORE_MCUTILS_H
 
 #ifdef __cplusplus
+	#define MAILCORE_EXTERN		extern "C"
+	#define MAILCORE_PRIVATE_EXTERN	__attribute__((visibility("hidden"))) extern "C"
+#else
+	#define MAILCORE_EXTERN		extern
+	#define MAILCORE_PRIVATE_EXTERN	__attribute__((visibility("hidden"))) extern
+#endif
+
+#ifdef __cplusplus
 
 #define MC_SAFE_RETAIN(o) ((o) != NULL ? (o)->retain() : NULL)
 #define MC_SAFE_COPY(o) ((o) != NULL ? (o)->copy() : NULL)

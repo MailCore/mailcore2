@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void mailcore::assertInteral(const char * filename, unsigned int line, int cond, const char * condString)
+void assertInteral(const char * filename, unsigned int line, int cond, const char * condString)
 {
     if (cond) {
         return;
