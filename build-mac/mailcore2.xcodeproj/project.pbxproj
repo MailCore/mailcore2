@@ -115,7 +115,7 @@
 		C64EA6FF169E847800778456 /* MCMessageHeader.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA69F169E847800778456 /* MCMessageHeader.cc */; };
 		C64EA701169E847800778456 /* MCAutoreleasePool.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6A2169E847800778456 /* MCAutoreleasePool.cc */; };
 		C64EA704169E847800778456 /* MCArray.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6A5169E847800778456 /* MCArray.cc */; };
-		C64EA706169E847800778456 /* MCAssert.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6A7169E847800778456 /* MCAssert.cc */; };
+		C64EA706169E847800778456 /* MCAssert.c in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6A7169E847800778456 /* MCAssert.c */; };
 		C64EA708169E847800778456 /* MCData.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6A9169E847800778456 /* MCData.cc */; };
 		C64EA70A169E847800778456 /* MCHash.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6AB169E847800778456 /* MCHash.cc */; };
 		C64EA70C169E847800778456 /* MCHashMap.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6AD169E847800778456 /* MCHashMap.cc */; };
@@ -435,7 +435,7 @@
 		C6BA2B9E1705F4E6003F0E9E /* MCMessageHeader.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA69F169E847800778456 /* MCMessageHeader.cc */; };
 		C6BA2B9F1705F4E6003F0E9E /* MCAutoreleasePool.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6A2169E847800778456 /* MCAutoreleasePool.cc */; };
 		C6BA2BA01705F4E6003F0E9E /* MCArray.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6A5169E847800778456 /* MCArray.cc */; };
-		C6BA2BA11705F4E6003F0E9E /* MCAssert.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6A7169E847800778456 /* MCAssert.cc */; };
+		C6BA2BA11705F4E6003F0E9E /* MCAssert.c in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6A7169E847800778456 /* MCAssert.c */; };
 		C6BA2BA21705F4E6003F0E9E /* MCData.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6A9169E847800778456 /* MCData.cc */; };
 		C6BA2BA31705F4E6003F0E9E /* MCHash.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6AB169E847800778456 /* MCHash.cc */; };
 		C6BA2BA41705F4E6003F0E9E /* MCHashMap.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6AD169E847800778456 /* MCHashMap.cc */; };
@@ -1176,7 +1176,7 @@
 		C64EA6A4169E847800778456 /* MCBaseTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBaseTypes.h; sourceTree = "<group>"; };
 		C64EA6A5169E847800778456 /* MCArray.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCArray.cc; sourceTree = "<group>"; };
 		C64EA6A6169E847800778456 /* MCArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCArray.h; sourceTree = "<group>"; };
-		C64EA6A7169E847800778456 /* MCAssert.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCAssert.cc; sourceTree = "<group>"; };
+		C64EA6A7169E847800778456 /* MCAssert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MCAssert.c; sourceTree = "<group>"; };
 		C64EA6A8169E847800778456 /* MCAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAssert.h; sourceTree = "<group>"; };
 		C64EA6A9169E847800778456 /* MCData.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCData.cc; sourceTree = "<group>"; };
 		C64EA6AA169E847800778456 /* MCData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCData.h; sourceTree = "<group>"; };
@@ -1759,7 +1759,7 @@
 				C64EA6A4169E847800778456 /* MCBaseTypes.h */,
 				C64EA6A5169E847800778456 /* MCArray.cc */,
 				C64EA6A6169E847800778456 /* MCArray.h */,
-				C64EA6A7169E847800778456 /* MCAssert.cc */,
+				C64EA6A7169E847800778456 /* MCAssert.c */,
 				C64EA6A8169E847800778456 /* MCAssert.h */,
 				C64EA6A9169E847800778456 /* MCData.cc */,
 				C64EA6AA169E847800778456 /* MCData.h */,
@@ -2303,7 +2303,7 @@
 				C64EA6FF169E847800778456 /* MCMessageHeader.cc in Sources */,
 				C64EA701169E847800778456 /* MCAutoreleasePool.cc in Sources */,
 				C64EA704169E847800778456 /* MCArray.cc in Sources */,
-				C64EA706169E847800778456 /* MCAssert.cc in Sources */,
+				C64EA706169E847800778456 /* MCAssert.c in Sources */,
 				C64EA708169E847800778456 /* MCData.cc in Sources */,
 				C64EA70A169E847800778456 /* MCHash.cc in Sources */,
 				C64EA70C169E847800778456 /* MCHashMap.cc in Sources */,
@@ -2481,7 +2481,7 @@
 				C6BA2B9E1705F4E6003F0E9E /* MCMessageHeader.cc in Sources */,
 				C6BA2B9F1705F4E6003F0E9E /* MCAutoreleasePool.cc in Sources */,
 				C6BA2BA01705F4E6003F0E9E /* MCArray.cc in Sources */,
-				C6BA2BA11705F4E6003F0E9E /* MCAssert.cc in Sources */,
+				C6BA2BA11705F4E6003F0E9E /* MCAssert.c in Sources */,
 				C6BA2BA21705F4E6003F0E9E /* MCData.cc in Sources */,
 				C6BA2BA31705F4E6003F0E9E /* MCHash.cc in Sources */,
 				C6BA2BA41705F4E6003F0E9E /* MCHashMap.cc in Sources */,
