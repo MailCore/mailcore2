@@ -14,7 +14,7 @@
 #define nativeType mailcore::IMAPFolderStatus
 
 @implementation MCOIMAPFolderStatus {
-	mailcore::IMAPFolderStatus _folderStatus;
+	mailcore::IMAPFolderStatus *_folderStatus;
 }
 
 + (MCOIMAPFolderStatus *) status
@@ -53,5 +53,10 @@ MCO_OBJC_SYNTHESIZE_SCALAR(uint32_t, uint32_t, setRecentCount, recentCount)
 MCO_OBJC_SYNTHESIZE_SCALAR(uint32_t, uint32_t, setUidNext, uidNext)
 MCO_OBJC_SYNTHESIZE_SCALAR(uint32_t, uint32_t, setUidValidity, uidValidity)
 
+- (void) dealloc
+{
+	_folderStatus->release();
+    [super dealloc];
+}
 
 @end
