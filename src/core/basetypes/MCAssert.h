@@ -4,8 +4,8 @@
 
 #include "MCUtils.h"
 
-#define MCAssert(cond) assertInteral(__FILE__, __LINE__, cond, #cond)
+#define MCAssert(cond) MCAssertInternal(__FILE__, __LINE__, cond, #cond)
 
-MAILCORE_EXTERN void assertInteral(const char * filename, unsigned int line, int cond, const char * condString);
+MAILCORE_EXTERN void MCAssertInternal(const char * filename, unsigned int line, int cond, const char * condString);
 
 #endif
