@@ -59,6 +59,8 @@
 	return self;
 }
 
+MCO_OBJC_SYNTHESIZE_STRING(setIdentifier, identifier);
+
 - (NSArray *) imapServices
 {
     return MCO_OBJC_BRIDGE_GET(imapServices);
