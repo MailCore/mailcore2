@@ -26,7 +26,7 @@ namespace mailcore {
         virtual void main();
         
     private:
-        Array * mMessages;
+        Array * /* POPMessageInfo */ mMessages;
     };
 }
 

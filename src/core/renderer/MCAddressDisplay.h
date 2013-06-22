@@ -22,9 +22,9 @@ namespace mailcore {
         static String * shortDisplayStringForAddress(Address * address);
         static String * veryShortDisplayStringForAddress(Address * address);
         
-        static String * displayStringForAddresses(Array * addresses);
-        static String * shortDisplayStringForAddresses(Array * addresses);
-        static String * veryShortDisplayStringForAddresses(Array * addresses);
+        static String * displayStringForAddresses(Array * /* Address */ addresses);
+        static String * shortDisplayStringForAddresses(Array * /* Address */ addresses);
+        static String * veryShortDisplayStringForAddresses(Array * /* Address */ addresses);
     };
     
 };

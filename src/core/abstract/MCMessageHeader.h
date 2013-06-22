@@ -19,11 +19,11 @@ namespace mailcore {
 		virtual void setMessageID(String * messageID);
 		virtual String * messageID();
 		
-		virtual void setReferences(Array * references);
-		virtual Array * references();
+		virtual void setReferences(Array * /* String * references);
+		virtual Array * /* String */ references();
 		
-		virtual void setInReplyTo(Array * inReplyTo);
-		virtual Array * inReplyTo();
+		virtual void setInReplyTo(Array * /* String */ inReplyTo);
+		virtual Array * /* String */ inReplyTo();
 		
 		virtual void setDate(time_t date);
 		virtual time_t date();
@@ -37,17 +37,17 @@ namespace mailcore {
 		virtual void setFrom(Address * from);
 		virtual Address * from();
 		
-		virtual void setTo(Array * to);
-		virtual Array * to();
+		virtual void setTo(Array * /* Address */ to);
+		virtual Array * /* Address */ to();
 		
-		virtual void setCc(Array * cc);
-		virtual Array * cc();
+		virtual void setCc(Array * /* Address */ cc);
+		virtual Array * /* Address */ cc();
 		
-		virtual void setBcc(Array * bcc);
-		virtual Array * bcc();
+		virtual void setBcc(Array * /* Address */ bcc);
+		virtual Array * /* Address */ bcc();
 		
-		virtual void setReplyTo(Array * replyTo);
-		virtual Array * replyTo();
+		virtual void setReplyTo(Array * /* Address */ replyTo);
+		virtual Array * /* Address */ replyTo();
 		
 		virtual void setSubject(String * subject);
 		virtual String * subject();

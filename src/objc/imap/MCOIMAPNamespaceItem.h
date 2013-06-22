@@ -26,7 +26,7 @@
 - (NSString *) pathForComponents:(NSArray *)components;
 
 /** Returns components for the given path in the context of this namespace */
-- (NSArray *) componentsForPath:(NSString *)path;
+- (NSArray * /* NSString */) componentsForPath:(NSString *)path;
 
 /** Returns YES if the namespace contains this folder path */
 - (BOOL) containsFolder:(NSString *)folder;

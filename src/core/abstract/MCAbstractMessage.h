@@ -21,8 +21,8 @@ namespace mailcore {
         virtual AbstractPart * partForContentID(String * contentID);
         virtual AbstractPart * partForUniqueID(String * uniqueID);
         
-        virtual Array * attachments();
-        virtual Array * htmlInlineAttachments();
+        virtual Array * /* AbstractPart */ attachments();
+        virtual Array * /* AbstractPart */ htmlInlineAttachments();
         
     public: //subclass behavior
 		AbstractMessage(AbstractMessage * other);

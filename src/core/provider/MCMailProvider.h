@@ -26,9 +26,9 @@ namespace mailcore {
 		
 		virtual String * identifier();
 		
-		virtual Array * imapServices();
-		virtual Array * smtpServices();
-		virtual Array * popServices();
+		virtual Array * /* NetService */ imapServices();
+		virtual Array * /* NetService */ smtpServices();
+		virtual Array * /* NetService */ popServices();
 		
 		virtual bool matchEmail(String * email);
 		virtual bool matchMX(String * hostname);
@@ -53,12 +53,12 @@ namespace mailcore {
         
 	private:
 		String * mIdentifier;
-		Array * mDomainMatch;
-		Array * mImapServices;
-		Array * mSmtpServices;
-		Array * mPopServices;
+		Array * /* String */ mDomainMatch;
+		Array * /* NetService */ mImapServices;
+		Array * /* NetService */ mSmtpServices;
+		Array * /* NetService */ mPopServices;
 		HashMap * mMailboxPaths;
-		Set* mMxSet;
+		Set * mMxSet;
 		
 		void init();
     };
