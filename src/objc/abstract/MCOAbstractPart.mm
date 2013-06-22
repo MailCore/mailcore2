@@ -57,7 +57,6 @@ MCO_OBJC_SYNTHESIZE_STRING(setUniqueID, uniqueID)
 MCO_OBJC_SYNTHESIZE_STRING(setContentID, contentID)
 MCO_OBJC_SYNTHESIZE_STRING(setContentLocation, contentLocation)
 MCO_OBJC_SYNTHESIZE_BOOL(setInlineAttachment, isInlineAttachment)
-MCO_OBJC_SYNTHESIZE(AbstractMessage, setMessage, message)
 
 - (MCOAbstractPart *) partForContentID:(NSString *)contentID
 {

@@ -27,8 +27,6 @@ namespace mailcore {
 		virtual String * description();
 		virtual Object * copy();
         
-		virtual void setMessage(AbstractMessage * message);
-        
         virtual AbstractPart * partForContentID(String * contentID);
         virtual AbstractPart * partForUniqueID(String * uniqueID);
         
@@ -36,7 +34,6 @@ namespace mailcore {
 		AbstractPart * mMainPart;
 		MessageHeader * mHeader;
 		void init();
-		void applyMessage();
 	};
 }
 
