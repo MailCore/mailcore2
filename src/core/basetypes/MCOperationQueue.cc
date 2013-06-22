@@ -1,13 +1,15 @@
 #include "MCOperationQueue.h"
 
+#include <libetpan/libetpan.h>
+
 #include "MCOperation.h"
 #include "MCOperationCallback.h"
+#include "MCOperationQueueCallback.h"
 #include "MCMainThread.h"
 #include "MCUtils.h"
 #include "MCArray.h"
 #include "MCLog.h"
 #include "MCAutoreleasePool.h"
-#include <libetpan/libetpan.h>
 
 using namespace mailcore;
 
@@ -21,6 +23,8 @@ OperationQueue::OperationQueue()
     mStartSem = mailsem_new();
     mStopSem = mailsem_new();
     mWaitingFinishedSem = mailsem_new();
+    mQuitting = false;
+    mCallback = NULL;
 }
 
 OperationQueue::~OperationQueue()
@@ -153,6 +157,10 @@ void OperationQueue::stoppedOnMainThread(void * context)
     mailsem_down(mStopSem);
     mStarted = false;
     
+    if (mCallback) {
+        mCallback->queueIdle();
+    }
+    
     release(); // (2)
 
     release(); // (3)
@@ -179,6 +187,16 @@ unsigned int OperationQueue::count()
     pthread_mutex_unlock(&mLock);
     
     return count;
+}
+
+void OperationQueue::setCallback(OperationQueueCallback * callback)
+{
+    mCallback = callback;
+}
+
+OperationQueueCallback * OperationQueue::callback()
+{
+    return mCallback;
 }
 
 #if 0

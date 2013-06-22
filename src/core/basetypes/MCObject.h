@@ -38,6 +38,7 @@ namespace mailcore {
 		virtual void performMethod(Method method, void * context);
 		virtual void performMethodOnMainThread(Method method, void * context, bool waitUntilDone = false);
 		virtual void performMethodAfterDelay(Method method, void * context, double delay);
+		virtual void cancelDelayedPerformMethod(Method method, void * context);
         
 	private:
 		pthread_mutex_t mLock;

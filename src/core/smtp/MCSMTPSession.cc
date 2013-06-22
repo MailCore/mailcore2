@@ -679,3 +679,7 @@ void SMTPSession::sendMessage(MessageBuilder * msg, SMTPProgressCallback * callb
     recipients->release();
 }
 
+bool SMTPSession::isDisconnected()
+{
+    return mState == STATE_DISCONNECTED;
+}

@@ -1,18 +1,39 @@
 #include "MCSMTPAsyncSession.h"
 
 #include "MCSMTPSession.h"
-//#include "MCSMTPSendWithRecipientOperation.h"
 #include "MCSMTPSendWithDataOperation.h"
-//#include "MCSMTPSendWithBuilderOperation.h"
 #include "MCSMTPCheckAccountOperation.h"
+#include "MCSMTPDisconnectOperation.h"
 #include "MCSMTPOperation.h"
+#include "MCOperationQueueCallback.h"
 
 using namespace mailcore;
+
+namespace mailcore {
+    class SMTPOperationQueueCallback  : public OperationQueueCallback {
+    public:
+        SMTPOperationQueueCallback(SMTPAsyncSession * session) {
+            mSession = session;
+        }
+        
+        virtual ~SMTPOperationQueueCallback() {
+        }
+        
+        virtual void queueIdle() {
+            mSession->tryAutomaticDisconnect();
+        }
+        
+    private:
+        SMTPAsyncSession * mSession;
+    };
+}
 
 SMTPAsyncSession::SMTPAsyncSession()
 {
     mSession = new SMTPSession();
     mQueue = new OperationQueue();
+    mQueueCallback = new SMTPOperationQueueCallback(this);
+    mQueue->setCallback(mQueueCallback);
 }
 
 SMTPAsyncSession::~SMTPAsyncSession()
@@ -113,7 +134,7 @@ bool SMTPAsyncSession::useHeloIPEnabled()
 
 void SMTPAsyncSession::runOperation(SMTPOperation * operation)
 {
-#warning disconnect after delay
+    cancelDelayedPerformMethod((Object::Method) &SMTPAsyncSession::tryAutomaticDisconnectAfterDelay, NULL);
     mQueue->addOperation(operation);
 }
 
@@ -122,17 +143,23 @@ SMTPSession * SMTPAsyncSession::session()
     return mSession;
 }
 
-#if 0
-SMTPOperation * SMTPAsyncSession::sendMessageOperationWithFromAndRecipient(Address * from, Array * recipients, Data * messageData)
+void SMTPAsyncSession::tryAutomaticDisconnect()
 {
-    SMTPSendWithRecipientOperation * op = new SMTPSendWithRecipientOperation();
-    op->setSession(this);
-    op->setFrom(from);
-    op->setRecipients(recipients);
-    op->setMessageData(messageData);
-    return (SMTPOperation *) op->autorelease();
+    // It's safe since no thread is running when this function is called.
+    if (mSession->isDisconnected()) {
+        return;
+    }
+    
+    performMethodAfterDelay((Object::Method) &SMTPAsyncSession::tryAutomaticDisconnectAfterDelay, NULL, 30);
 }
-#endif
+
+void SMTPAsyncSession::tryAutomaticDisconnectAfterDelay(void * context)
+{
+    SMTPDisconnectOperation * op = new SMTPDisconnectOperation();
+    op->setSession(this);
+    op->autorelease();
+    op->start();
+}
 
 SMTPOperation * SMTPAsyncSession::sendMessageOperation(Data * messageData)
 {
@@ -142,16 +169,6 @@ SMTPOperation * SMTPAsyncSession::sendMessageOperation(Data * messageData)
     return (SMTPOperation *) op->autorelease();
 }
 
-#if 0
-SMTPOperation * SMTPAsyncSession::sendMessageOperation(MessageBuilder * msg)
-{
-    SMTPSendWithBuilderOperation * op = new SMTPSendWithBuilderOperation();
-    op->setSession(this);
-    op->setBuilder(msg);
-    return (SMTPOperation *) op->autorelease();
-}
-#endif
-
 SMTPOperation * SMTPAsyncSession::checkAccountOperation(Address * from)
 {
     SMTPCheckAccountOperation * op = new SMTPCheckAccountOperation();
@@ -159,4 +176,3 @@ SMTPOperation * SMTPAsyncSession::checkAccountOperation(Address * from)
     op->setSession(this);
     return (SMTPOperation *) op->autorelease();
 }
-

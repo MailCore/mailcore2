@@ -52,13 +52,18 @@ void mailcore::callOnMainThreadAndWait(void (* function)(void *), void * context
 	[caller release];
 }
 
-void mailcore::callAfterDelay(void (* function)(void *), void * context, double time)
+void * mailcore::callAfterDelay(void (* function)(void *), void * context, double time)
 {
 	LEPPPMainThreadCaller * caller;
 	caller = [[LEPPPMainThreadCaller alloc] init];
 	[caller setFunction:function];
 	[caller setContext:context];
 	[caller performSelector:@selector(call) withObject:nil afterDelay:time];
-	[caller release];
+    return [caller autorelease];
 }
 
+void mailcore::cancelDelayedCall(void * delayedCall)
+{
+	LEPPPMainThreadCaller * caller = (LEPPPMainThreadCaller *) delayedCall;
+    [NSObject cancelPreviousPerformRequestsWithTarget:caller selector:@selector(call) object:nil];
+}
