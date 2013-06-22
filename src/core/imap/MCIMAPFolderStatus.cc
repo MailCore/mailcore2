@@ -17,6 +17,7 @@ void IMAPFolderStatus::init()
     mRecentCount = 0;
     mUidNext = 0;
     mUidValidity = 0;
+    mHighestModSeqValue = 0;
 }
 
 IMAPFolderStatus::IMAPFolderStatus()
@@ -32,7 +33,8 @@ IMAPFolderStatus::IMAPFolderStatus(IMAPFolderStatus * other)
     setMessageCount(other->messageCount());
     setRecentCount(other->recentCount());
     setUidNext(other->uidNext());
-    setUidValidity(other->uidValidity());    
+    setUidValidity(other->uidValidity());
+    setHighestModSeqValue(other->highestModSeqValue());
 }
 
 IMAPFolderStatus::~IMAPFolderStatus()
@@ -44,66 +46,77 @@ Object * IMAPFolderStatus::copy()
     return new IMAPFolderStatus(this);
 }
 
-void IMAPFolderStatus::setUnseenCount(u_int32_t unseen)
+void IMAPFolderStatus::setUnseenCount(uint32_t unseen)
 {
     mUnseenCount = unseen;
 }
 
-u_int32_t IMAPFolderStatus::unseenCount()
+uint32_t IMAPFolderStatus::unseenCount()
 {
     return mUnseenCount;
 }
 
-void IMAPFolderStatus::setMessageCount(u_int32_t messages)
+void IMAPFolderStatus::setMessageCount(uint32_t messages)
 {
     mMessageCount = messages;
 }
 
-u_int32_t IMAPFolderStatus::messageCount()
+uint32_t IMAPFolderStatus::messageCount()
 {
     return mMessageCount;
 }
 
-void IMAPFolderStatus::setRecentCount(u_int32_t recent)
+void IMAPFolderStatus::setRecentCount(uint32_t recent)
 {
     mRecentCount = recent;
 }
 
-u_int32_t IMAPFolderStatus::recentCount()
+uint32_t IMAPFolderStatus::recentCount()
 {
     return mRecentCount;
 }
 
-void IMAPFolderStatus::setUidNext(u_int32_t uidNext)
+void IMAPFolderStatus::setUidNext(uint32_t uidNext)
 {
     mUidNext = uidNext;
 }
 
-u_int32_t IMAPFolderStatus::uidNext()
+uint32_t IMAPFolderStatus::uidNext()
 {
     return mUidNext;
 }
 
-void IMAPFolderStatus::setUidValidity(u_int32_t uidValidity)
+void IMAPFolderStatus::setUidValidity(uint32_t uidValidity)
 {
     mUidValidity = uidValidity;
 }
 
-u_int32_t IMAPFolderStatus::uidValidity()
+uint32_t IMAPFolderStatus::uidValidity()
 {
     return mUidValidity;
+}
+
+void IMAPFolderStatus::setHighestModSeqValue(uint64_t highestModSeqValue)
+{
+    mHighestModSeqValue = highestModSeqValue;
+}
+
+uint64_t IMAPFolderStatus::highestModSeqValue()
+{
+    return mHighestModSeqValue;
 }
 
 String * IMAPFolderStatus::description()
 {
     String * result = String::string();
-    result->appendUTF8Format("<%s:%p msg_count: %u, unseen_count: %u, recent_count: %u, uid_next: %u, uid_validity: %u>",
+    result->appendUTF8Format("<%s:%p msg_count: %u, unseen_count: %u, recent_count: %u, uid_next: %u, uid_validity: %u, highestmodseqvalue :%llu>",
                              className()->UTF8Characters(),
                              this,
                              (unsigned int) messageCount(),
                              (unsigned int) unseenCount(),
                              (unsigned int) recentCount(),
                              (unsigned int) uidNext(),
-                             (unsigned int) uidValidity());
+                             (unsigned int) uidValidity(),
+                             (unsigned long long) highestModSeqValue());
     return result;
 }

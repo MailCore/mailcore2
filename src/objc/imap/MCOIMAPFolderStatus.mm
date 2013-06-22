@@ -67,5 +67,6 @@ MCO_OBJC_SYNTHESIZE_SCALAR(uint32_t, uint32_t, setMessageCount, messageCount)
 MCO_OBJC_SYNTHESIZE_SCALAR(uint32_t, uint32_t, setRecentCount, recentCount)
 MCO_OBJC_SYNTHESIZE_SCALAR(uint32_t, uint32_t, setUidNext, uidNext)
 MCO_OBJC_SYNTHESIZE_SCALAR(uint32_t, uint32_t, setUidValidity, uidValidity)
+MCO_OBJC_SYNTHESIZE_SCALAR(uint64_t, uint64_t, setHighestModSeqValue, highestModSeqValue)
 
 @end

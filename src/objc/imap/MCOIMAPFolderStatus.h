@@ -28,12 +28,11 @@
 /** Number of unseen messages in the folder */
 @property (nonatomic, assign) uint32_t unseenCount;
 
-// Number of messages in the folder
+/** Number of messages in the folder */
 @property (nonatomic, assign) uint32_t messageCount;
 
-// We need also the the folder path
-
-
+/** Highest modification sequence value for this folder. See CONDSTORE RFC 4551. */
+@property (nonatomic, assign) uint64_t setHighestModSeqValue;
 
 @end
 
