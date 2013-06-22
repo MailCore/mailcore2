@@ -30,8 +30,29 @@
 #include "MCIMAPIdleOperation.h"
 #include "MCIMAPIdentityOperation.h"
 #include "MCIMAPCapabilityOperation.h"
+#include "MCOperationQueueCallback.h"
+#include "MCIMAPDisconnectOperation.h"
 
 using namespace mailcore;
+
+namespace mailcore {
+    class IMAPOperationQueueCallback  : public Object, public OperationQueueCallback {
+    public:
+        IMAPOperationQueueCallback(IMAPAsyncConnection * connection) {
+            mConnection = connection;
+        }
+        
+        virtual ~IMAPOperationQueueCallback() {
+        }
+        
+        virtual void queueIdle() {
+            mConnection->tryAutomaticDisconnect();
+        }
+        
+    private:
+        IMAPAsyncConnection * mConnection;
+    };
+}
 
 IMAPAsyncConnection::IMAPAsyncConnection()
 {
@@ -40,10 +61,13 @@ IMAPAsyncConnection::IMAPAsyncConnection()
     mDefaultNamespace = NULL;
     mDelimiter = 0;
     mLastFolder = NULL;
+    mQueueCallback = new IMAPOperationQueueCallback(this);
+    mQueue->setCallback(mQueueCallback);
 }
 
 IMAPAsyncConnection::~IMAPAsyncConnection()
 {
+    MC_SAFE_RELEASE(mQueueCallback);
     MC_SAFE_RELEASE(mLastFolder);
     MC_SAFE_RELEASE(mDefaultNamespace);
     MC_SAFE_RELEASE(mQueue);
@@ -439,8 +463,26 @@ unsigned int IMAPAsyncConnection::operationsCount()
 
 void IMAPAsyncConnection::runOperation(IMAPOperation * operation)
 {
-#warning disconnect after delay
+    cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
     mQueue->addOperation(operation);
+}
+
+void IMAPAsyncConnection::tryAutomaticDisconnect()
+{
+    // It's safe since no thread is running when this function is called.
+    if (mSession->isDisconnected()) {
+        return;
+    }
+    
+    performMethodAfterDelay((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, 30);
+}
+
+void IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay(void * context)
+{
+    IMAPDisconnectOperation * op = new IMAPDisconnectOperation();
+    op->setSession(this);
+    op->autorelease();
+    op->start();
 }
 
 void IMAPAsyncConnection::setLastFolder(String * folder)

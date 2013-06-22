@@ -31,6 +31,8 @@
 		C07ADC28B83E7959BF114D46 /* MCOIMAPSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = C07AD057D3C8FBDC7AC95733 /* MCOIMAPSession.mm */; };
 		C608167517759967001F1018 /* MCSMTPDisconnectOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C608167317759967001F1018 /* MCSMTPDisconnectOperation.cc */; };
 		C608167617759968001F1018 /* MCSMTPDisconnectOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C608167317759967001F1018 /* MCSMTPDisconnectOperation.cc */; };
+		C608167B177635D2001F1018 /* MCIMAPDisconnectOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C6081679177635D2001F1018 /* MCIMAPDisconnectOperation.cc */; };
+		C608167C177635D2001F1018 /* MCIMAPDisconnectOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C6081679177635D2001F1018 /* MCIMAPDisconnectOperation.cc */; };
 		C623C58616FD6A50001BBEFC /* MCOConstants.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB26D16FD63F6000DB34C /* MCOConstants.h */; };
 		C623C58716FD6A61001BBEFC /* MCOOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB25716FD3BC2000DB34C /* MCOOperation.h */; };
 		C623C58816FD6DF6001BBEFC /* NSValue+MCO.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB25016FC2846000DB34C /* NSValue+MCO.h */; };
@@ -1077,6 +1079,8 @@
 		C608167317759967001F1018 /* MCSMTPDisconnectOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCSMTPDisconnectOperation.cc; sourceTree = "<group>"; };
 		C608167417759967001F1018 /* MCSMTPDisconnectOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSMTPDisconnectOperation.h; sourceTree = "<group>"; };
 		C6081678177625AD001F1018 /* MCOperationQueueCallback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCOperationQueueCallback.h; sourceTree = "<group>"; };
+		C6081679177635D2001F1018 /* MCIMAPDisconnectOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPDisconnectOperation.cc; sourceTree = "<group>"; };
+		C608167A177635D2001F1018 /* MCIMAPDisconnectOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPDisconnectOperation.h; sourceTree = "<group>"; };
 		C623C58A16FD8C22001BBEFC /* MCOAbstractMessage+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MCOAbstractMessage+Private.h"; sourceTree = "<group>"; };
 		C623C58B16FE52C0001BBEFC /* MCOHTMLRendererDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCOHTMLRendererDelegate.h; sourceTree = "<group>"; };
 		C623C58D16FE6B45001BBEFC /* MCOIMAPOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPOperation.h; sourceTree = "<group>"; };
@@ -1674,6 +1678,8 @@
 				C64BB22A16E5C0A3000DB34C /* MCIMAPCapabilityOperation.h */,
 				9EF9AB10175F319A0027FA3B /* MCIMAPFolderStatusOperation.cc */,
 				9EF9AB0E175F30C20027FA3B /* MCIMAPFolderStatusOperation.h */,
+				C6081679177635D2001F1018 /* MCIMAPDisconnectOperation.cc */,
+				C608167A177635D2001F1018 /* MCIMAPDisconnectOperation.h */,
 			);
 			path = imap;
 			sourceTree = "<group>";
@@ -2433,6 +2439,7 @@
 				C6A81BC717068EB000882C15 /* MCOSMTPOperation.mm in Sources */,
 				C6A81BD61706903500882C15 /* MCOPOPSession.mm in Sources */,
 				C6A81BDA1706903E00882C15 /* MCOPOPFetchHeaderOperation.mm in Sources */,
+				C608167B177635D2001F1018 /* MCIMAPDisconnectOperation.cc in Sources */,
 				C6A81BDE1706904800882C15 /* MCOPOPFetchMessageOperation.mm in Sources */,
 				C6A81BE21706905600882C15 /* MCOPOPOperation.mm in Sources */,
 				C6A81BE61706906D00882C15 /* MCOPOPFetchMessagesOperation.mm in Sources */,
@@ -2612,6 +2619,7 @@
 				C6A81BC817068EB000882C15 /* MCOSMTPOperation.mm in Sources */,
 				C6A81BD71706903500882C15 /* MCOPOPSession.mm in Sources */,
 				C6A81BDB1706903E00882C15 /* MCOPOPFetchHeaderOperation.mm in Sources */,
+				C608167C177635D2001F1018 /* MCIMAPDisconnectOperation.cc in Sources */,
 				C6A81BDF1706904800882C15 /* MCOPOPFetchMessageOperation.mm in Sources */,
 				C6A81BE31706905600882C15 /* MCOPOPOperation.mm in Sources */,
 				C6A81BE71706906D00882C15 /* MCOPOPFetchMessagesOperation.mm in Sources */,

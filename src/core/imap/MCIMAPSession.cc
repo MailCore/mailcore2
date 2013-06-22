@@ -514,6 +514,8 @@ void IMAPSession::unsetup()
 		mailimap_free(imap);
 		imap = NULL;
 	}
+    
+    mState = STATE_DISCONNECTED;
 }
 
 void IMAPSession::connect(ErrorCode * pError)
@@ -2912,3 +2914,7 @@ bool IMAPSession::isIdentityEnabled()
     return mIdentityEnabled;
 }
 
+bool IMAPSession::isDisconnected()
+{
+    return mState == STATE_DISCONNECTED;
+}

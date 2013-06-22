@@ -10,7 +10,7 @@
 using namespace mailcore;
 
 namespace mailcore {
-    class SMTPOperationQueueCallback  : public OperationQueueCallback {
+    class SMTPOperationQueueCallback  : public Object, public OperationQueueCallback {
     public:
         SMTPOperationQueueCallback(SMTPAsyncSession * session) {
             mSession = session;
@@ -38,6 +38,7 @@ SMTPAsyncSession::SMTPAsyncSession()
 
 SMTPAsyncSession::~SMTPAsyncSession()
 {
+    MC_SAFE_RELEASE(mQueueCallback);
     MC_SAFE_RELEASE(mQueue);
     MC_SAFE_RELEASE(mSession);
 }

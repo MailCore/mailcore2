@@ -10,6 +10,7 @@
 
 #include "MCIMAPAsyncConnection.h"
 #include "MCIMAPNamespace.h"
+#include "MCOperationQueueCallback.h"
 
 #define DEFAULT_MAX_CONNECTIONS 3
 

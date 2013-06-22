@@ -25,5 +25,4 @@ void SMTPDisconnectOperation::main()
 {
     session()->session()->disconnect();
     setError(ErrorCode::ErrorNone);
-    fprintf(stderr, "smtp disconnect\n");
 }
