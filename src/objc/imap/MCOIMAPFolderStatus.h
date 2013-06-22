@@ -14,7 +14,7 @@
 
 /* This class holds IMAP folder metadata */
 
-@interface MCOIMAPFolderStatus : NSObject
+@interface MCOIMAPFolderStatus : NSObject <NSCopying>
 
 /** Create an empty instance */
 + (MCOIMAPFolderStatus *) status;
@@ -26,13 +26,13 @@
 @property (nonatomic, assign) uint32_t uidValidity;
 
 /** Number of recent messages received in the folder */
-@property (nonatomic, assign) uint32_t totalRecent;
+@property (nonatomic, assign) uint32_t recentCount;
 
 /** Number of unseen messages in the folder */
-@property (nonatomic, assign) uint32_t totalUnseen;
+@property (nonatomic, assign) uint32_t unseenCount;
 
 // Number of messages in the folder
-@property (nonatomic, assign) uint32_t totalMessages;
+@property (nonatomic, assign) uint32_t messageCount;
 
 // We need also the the folder path
 
