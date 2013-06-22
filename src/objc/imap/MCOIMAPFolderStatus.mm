@@ -14,7 +14,7 @@
 #define nativeType mailcore::IMAPFolderStatus
 
 @implementation MCOIMAPFolderStatus {
-	mailcore::IMAPFolderStatus *_folderStatus;
+	mailcore::IMAPFolderStatus * _nativeStatus;
 }
 
 + (void) load
@@ -27,14 +27,14 @@
     self = [super init];
     
     status->retain();
-    _folderStatus = status;
+    _nativeStatus = status;
     
     return self;
 }
 
 - (void) dealloc
 {
-    MC_SAFE_RELEASE(_folderStatus);
+    MC_SAFE_RELEASE(_nativeStatus);
     [super dealloc];
 }
 
@@ -46,7 +46,7 @@
 
 - (mailcore::Object *) mco_mcObject
 {
-    return _folderStatus;
+    return _nativeStatus;
 }
 
 - (id) copyWithZone:(NSZone *)zone
