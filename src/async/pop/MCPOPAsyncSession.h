@@ -52,7 +52,7 @@ namespace mailcore {
 		virtual void setCheckCertificateEnabled(bool enabled);
 		virtual bool isCheckCertificateEnabled();
         
-		virtual POPFetchMessagesOperation * fetchMessagesOperation();
+        virtual POPFetchMessagesOperation * fetchMessagesOperation();
         
         virtual POPFetchHeaderOperation * fetchHeaderOperation(unsigned int index);
         
@@ -60,6 +60,8 @@ namespace mailcore {
         
         // Will disconnect.
         virtual POPOperation * deleteMessagesOperation(IndexSet * indexes);
+        
+        virtual POPOperation * disconnectOperation();
         
         virtual POPOperation * checkAccountOperation();
         
