@@ -36,7 +36,8 @@ IMAPFolderStatus::IMAPFolderStatus(IMAPFolderStatus * other)
 }
 
 IMAPFolderStatus::~IMAPFolderStatus()
-{ }
+{
+}
 
 Object * IMAPFolderStatus::copy()
 {
@@ -91,4 +92,18 @@ void IMAPFolderStatus::setUidValidity(u_int32_t uidValidity)
 u_int32_t IMAPFolderStatus::uidValidity()
 {
     return mUidValidity;
+}
+
+String * IMAPFolderStatus::description()
+{
+    String * result = String::string();
+    result->appendUTF8Format("<%s:%p msg_count: %u, unseen_count: %u, recent_count: %u, uid_next: %u, uid_validity: %u>",
+                             className()->UTF8Characters(),
+                             this,
+                             (unsigned int) messageCount(),
+                             (unsigned int) unseenCount(),
+                             (unsigned int) recentCount(),
+                             (unsigned int) uidNext(),
+                             (unsigned int) uidValidity());
+    return result;
 }

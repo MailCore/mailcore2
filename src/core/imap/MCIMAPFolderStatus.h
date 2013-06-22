@@ -41,6 +41,7 @@ namespace mailcore {
     public: // subclass behavior
 		IMAPFolderStatus(IMAPFolderStatus * other);
 		virtual Object * copy();		
+		virtual String * description();
 
 	private:
 		u_int32_t mUnseenCount;

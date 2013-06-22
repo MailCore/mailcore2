@@ -50,8 +50,7 @@ typedef void (^CompletionType)(NSError *error, MCOIMAPFolderStatus *status);
     
     nativeType *op = MCO_NATIVE_INSTANCE;
     if (op->error() == mailcore::ErrorNone) {
-        MCOIMAPFolderStatus * status = [MCOIMAPFolderStatus mco_objectWithMCObject:op];
-        
+        MCOIMAPFolderStatus * status = MCO_TO_OBJC(op->status());
         _completionBlock(nil, status);
     } else {
         _completionBlock([NSError mco_errorWithErrorCode:op->error()], nil);

@@ -17,27 +17,21 @@
 
 namespace mailcore {
     
+    class IMAPFolderStatus;
+    
     class IMAPFolderStatusOperation : public IMAPOperation {
     public:
         IMAPFolderStatusOperation();
         virtual ~IMAPFolderStatusOperation();
         
-        virtual uint32_t uidNext();
-        virtual uint32_t uidValidity();
-        virtual uint32_t messageCount();
-        virtual uint32_t recentCount();
-        virtual uint32_t unseenCount();
+        // Results.
+        virtual IMAPFolderStatus * status();
         
     public: // subclass behavior
         virtual void main();
         
     private:
-        
-         uint32_t mUidNext;
-         uint32_t mUidValidity;
-         uint32_t mMessageCount;
-         uint32_t mRecentCount;
-         uint32_t mUnseenCount;
+        IMAPFolderStatus * mStatus;
     };
     
 }

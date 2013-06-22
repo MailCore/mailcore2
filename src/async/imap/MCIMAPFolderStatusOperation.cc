@@ -16,40 +16,12 @@ using namespace mailcore;
 
 IMAPFolderStatusOperation::IMAPFolderStatusOperation()
 {
-    mUidNext = 0;
-	mUidValidity = 0;
-	mMessageCount = 0;
-	mRecentCount = 0;
-	mUnseenCount = 0;
+    mStatus = NULL;
 }
 
 IMAPFolderStatusOperation::~IMAPFolderStatusOperation()
 {
-}
-
-uint32_t IMAPFolderStatusOperation::uidNext()
-{
-    return mUidNext;
-}
-
-uint32_t IMAPFolderStatusOperation::uidValidity()
-{
-    return mUidValidity;
-}
-
-uint32_t IMAPFolderStatusOperation::messageCount()
-{
-    return mMessageCount;
-}
-
-uint32_t IMAPFolderStatusOperation::recentCount()
-{
-    return mRecentCount;
-}
-
-uint32_t IMAPFolderStatusOperation::unseenCount()
-{
-    return mUnseenCount;
+    MC_SAFE_RELEASE(mStatus);
 }
 
 void IMAPFolderStatusOperation::main()
@@ -68,13 +40,12 @@ void IMAPFolderStatusOperation::main()
         return;
     }
     
-    
-    mUidNext = status->uidNext();
-    mUidValidity = status->uidValidity();
-    mMessageCount = status->messageCount();
-    mRecentCount = status->recentCount();
-    mUnseenCount = status->unseenCount();
-    
+    MC_SAFE_REPLACE_RETAIN(IMAPFolderStatus, mStatus, status);
     setError(error);
+}
+
+IMAPFolderStatus * IMAPFolderStatusOperation::status()
+{
+    return mStatus;
 }
 

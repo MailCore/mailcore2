@@ -1667,8 +1667,8 @@
 				C62C6ED716A398FA00737497 /* MCIMAPFolderInfoOperation.h */,
 				C64BB22916E5C0A3000DB34C /* MCIMAPCapabilityOperation.cc */,
 				C64BB22A16E5C0A3000DB34C /* MCIMAPCapabilityOperation.h */,
-				9EF9AB0E175F30C20027FA3B /* MCIMAPFolderStatusOperation.h */,
 				9EF9AB10175F319A0027FA3B /* MCIMAPFolderStatusOperation.cc */,
+				9EF9AB0E175F30C20027FA3B /* MCIMAPFolderStatusOperation.h */,
 			);
 			path = imap;
 			sourceTree = "<group>";

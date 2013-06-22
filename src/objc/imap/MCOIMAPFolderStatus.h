@@ -16,9 +16,6 @@
 
 @interface MCOIMAPFolderStatus : NSObject <NSCopying>
 
-/** Create an empty instance */
-+ (MCOIMAPFolderStatus *) status;
-
 /** The folder's IMAP UIDNEXT value. Used to determine the uid for the next received message. */
 @property (nonatomic, assign) uint32_t uidNext;
 

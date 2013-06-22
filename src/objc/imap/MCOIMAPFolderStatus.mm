@@ -17,10 +17,9 @@
 	mailcore::IMAPFolderStatus *_folderStatus;
 }
 
-+ (MCOIMAPFolderStatus *) status
++ (void) load
 {
-	mailcore::IMAPFolderStatus folderStatus = new mailcore::IMAPFolderStatus();
-    return [[[MCOIMAPFolderStatus alloc] init] autorelease];
+    MCORegisterClass(self, &typeid(nativeType));
 }
 
 - (id) initWithMCFolderStatus:(mailcore::IMAPFolderStatus *)status
@@ -33,10 +32,21 @@
     return self;
 }
 
+- (void) dealloc
+{
+    MC_SAFE_RELEASE(_folderStatus);
+    [super dealloc];
+}
+
 + (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object
 {
     mailcore::IMAPFolderStatus * status = (mailcore::IMAPFolderStatus *) object;
     return [[[self alloc] initWithMCFolderStatus:status] autorelease];
+}
+
+- (mailcore::Object *) mco_mcObject
+{
+    return _folderStatus;
 }
 
 - (id) copyWithZone:(NSZone *)zone
@@ -47,16 +57,15 @@
     return [result retain];
 }
 
+- (NSString *) description
+{
+    return MCO_OBJC_BRIDGE_GET(description);
+}
+
 MCO_OBJC_SYNTHESIZE_SCALAR(uint32_t, uint32_t, setUnseenCount, unseenCount)
 MCO_OBJC_SYNTHESIZE_SCALAR(uint32_t, uint32_t, setMessageCount, messageCount)
 MCO_OBJC_SYNTHESIZE_SCALAR(uint32_t, uint32_t, setRecentCount, recentCount)
 MCO_OBJC_SYNTHESIZE_SCALAR(uint32_t, uint32_t, setUidNext, uidNext)
 MCO_OBJC_SYNTHESIZE_SCALAR(uint32_t, uint32_t, setUidValidity, uidValidity)
-
-- (void) dealloc
-{
-	_folderStatus->release();
-    [super dealloc];
-}
 
 @end
