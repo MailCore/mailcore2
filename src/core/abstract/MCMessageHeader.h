@@ -19,7 +19,7 @@ namespace mailcore {
 		virtual void setMessageID(String * messageID);
 		virtual String * messageID();
 		
-		virtual void setReferences(Array * /* String * references);
+		virtual void setReferences(Array * /* String */ references);
 		virtual Array * /* String */ references();
 		
 		virtual void setInReplyTo(Array * /* String */ inReplyTo);
