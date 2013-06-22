@@ -27,8 +27,8 @@ namespace mailcore {
         virtual void setKind(IMAPStoreFlagsRequestKind kind);
         virtual IMAPStoreFlagsRequestKind kind();
         
-        virtual void setLabels(Array * labels);
-        virtual Array * labels();
+        virtual void setLabels(Array * /* String */ labels);
+        virtual Array * /* String */ labels();
         
     public: // subclass behavior
         virtual void main();
@@ -36,7 +36,7 @@ namespace mailcore {
     private:
         IndexSet * mUids;
         IMAPStoreFlagsRequestKind mKind;
-        Array * mLabels;
+        Array * /* String */ mLabels;
         
     };
 }

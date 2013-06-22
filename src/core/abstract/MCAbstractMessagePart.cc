@@ -66,21 +66,6 @@ AbstractPart * AbstractMessagePart::mainPart()
 void AbstractMessagePart::setMainPart(AbstractPart * mainPart)
 {
     MC_SAFE_REPLACE_RETAIN(AbstractPart, mMainPart, mainPart);
-    applyMessage();
-}
-
-void AbstractMessagePart::applyMessage()
-{
-    if (mMainPart == NULL)
-        return;
-    
-    mMainPart->setMessage(message());
-}
-
-void AbstractMessagePart::setMessage(AbstractMessage * message)
-{
-    AbstractPart::setMessage(message);
-    applyMessage();
 }
 
 AbstractPart * AbstractMessagePart::partForContentID(String * contentID)

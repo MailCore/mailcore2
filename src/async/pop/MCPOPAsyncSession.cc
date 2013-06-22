@@ -144,6 +144,11 @@ POPOperation * POPAsyncSession::deleteMessagesOperation(IndexSet * indexes)
     return op;
 }
 
+POPOperation * POPAsyncSession::disconnectOperation()
+{
+    return deleteMessagesOperation(IndexSet::indexSet());
+}
+
 POPOperation * POPAsyncSession::checkAccountOperation()
 {
     POPCheckAccountOperation * op = new POPCheckAccountOperation();

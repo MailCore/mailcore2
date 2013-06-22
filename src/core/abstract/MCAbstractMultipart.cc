@@ -39,7 +39,6 @@ Array * AbstractMultipart::parts()
 void AbstractMultipart::setParts(Array * parts)
 {
     MC_SAFE_REPLACE_COPY(Array, mParts, parts);
-    applyMessage();
 }
 
 String * AbstractMultipart::description()
@@ -68,23 +67,6 @@ String * AbstractMultipart::description()
 Object * AbstractMultipart::copy()
 {
     return new AbstractMultipart(this);
-}
-
-void AbstractMultipart::applyMessage()
-{
-    if (mParts == NULL)
-        return;
-    
-    for(unsigned int i = 0 ; i < mParts->count() ; i ++) {
-        AbstractPart * part = (AbstractPart *) mParts->objectAtIndex(i);
-        part->setMessage(message());
-    }
-}
-
-void AbstractMultipart::setMessage(AbstractMessage * message)
-{
-    AbstractPart::setMessage(message);
-    applyMessage();
 }
 
 AbstractPart * AbstractMultipart::partForContentID(String * contentID)

@@ -44,7 +44,7 @@ namespace mailcore {
         bool mFetchByUidEnabled;
         IndexSet * mIndexes;
         IMAPMessagesRequestKind mKind;
-        Array * mMessages;
+        Array * /* IMAPMessage */ mMessages;
         IndexSet * mVanishedMessages;
         uint64_t mModSequenceValue;
         

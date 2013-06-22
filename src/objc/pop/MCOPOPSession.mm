@@ -80,6 +80,12 @@ MCO_OBJC_SYNTHESIZE_BOOL(setCheckCertificateEnabled, isCheckCertificateEnabled)
     return [[[MCOPOPOperation alloc] initWithMCOperation:coreOp] autorelease];
 }
 
+- (MCOPOPOperation *) disconnectOperation
+{
+    mailcore::POPOperation * coreOp = MCO_NATIVE_INSTANCE->disconnectOperation();
+    return [[[MCOPOPOperation alloc] initWithMCOperation:coreOp] autorelease];
+}
+
 - (MCOPOPOperation *) checkAccountOperation
 {
     mailcore::POPOperation * coreOp = MCO_NATIVE_INSTANCE->checkAccountOperation();

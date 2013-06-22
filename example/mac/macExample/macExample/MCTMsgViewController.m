@@ -76,7 +76,7 @@
     NSLog(@"%@ is missing, fetching", partUniqueID);
     
     if ([_pending containsObject:partUniqueID]) {
-        return NULL;
+        return nil;
     }
     
     MCOIMAPPart * part = (MCOIMAPPart *) [_message partForUniqueID:partUniqueID];

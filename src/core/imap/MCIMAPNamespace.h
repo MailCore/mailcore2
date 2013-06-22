@@ -18,12 +18,12 @@ namespace mailcore {
 		virtual String * mainPrefix();
 		virtual char mainDelimiter();
 
-		virtual Array * prefixes();
+		virtual Array * /* String */ prefixes();
 
 		virtual String * pathForComponents(Array * components);
 		virtual String * pathForComponentsAndPrefix(Array * components, String * prefix);
 
-		virtual Array * componentsFromPath(String * path);
+		virtual Array * /* String */ componentsFromPath(String * path);
 
 		virtual bool containsFolderPath(String * path);
 
@@ -35,7 +35,7 @@ namespace mailcore {
 		virtual Object * copy();
         
 	private:
-		Array * mItems;
+		Array * /* String */ mItems;
 		void init();
 		IMAPNamespaceItem * mainItem();
 		IMAPNamespaceItem * itemForPath(String * path);

@@ -66,9 +66,6 @@ typedef enum {
 /** Returns whether the part is an explicit inline attachment.*/
 @property (nonatomic, assign, getter=isInlineAttachment) BOOL inlineAttachment;
 
-/** Returns the owner message of the part.*/
-@property (nonatomic, weak) MCOAbstractMessage * message;
-
 /** Returns the part with the given Content-ID among this part and its subparts.*/
 - (MCOAbstractPart *) partForContentID:(NSString *)contentID;
 

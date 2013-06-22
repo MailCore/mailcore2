@@ -102,6 +102,16 @@ See MCOConnectionType for more information.*/
 - (MCOPOPOperation *) deleteMessagesOperationWithIndexes:(MCOIndexSet *)indexes;
 
 /**
+ Returns an operation that will disconnect the session.
+ 
+ MCOPOPOperation * op = [session disconnectOperation];
+ [op start:^(NSError * error) {
+ ...
+ }];
+ */
+- (MCOPOPOperation *) disconnectOperation;
+
+/**
  Returns an operation that will check whether the POP account is valid.
 
      MCOPOPOperation * op = [session checkAccountOperation];

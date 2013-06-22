@@ -84,23 +84,13 @@
 
 + (MCOIMAPSearchExpression *) searchAnd:(MCOIMAPSearchExpression *)expression other:(MCOIMAPSearchExpression *)other
 {
-    mailcore::IMAPSearchExpression * copyExpr = (mailcore::IMAPSearchExpression *) expression->_nativeExpr->copy();
-    mailcore::IMAPSearchExpression * copyOther = (mailcore::IMAPSearchExpression *) other->_nativeExpr->copy();
-    mailcore::IMAPSearchExpression * result = mailcore::IMAPSearchExpression::searchAnd(copyExpr, copyOther);
-    copyExpr->release();
-    copyOther->release();
-    
+    mailcore::IMAPSearchExpression * result = mailcore::IMAPSearchExpression::searchOr(expression->_nativeExpr, other->_nativeExpr);
     return MCO_TO_OBJC(result);
 }
 
 + (MCOIMAPSearchExpression *) searchOr:(MCOIMAPSearchExpression *)expression other:(MCOIMAPSearchExpression *)other
 {
-    mailcore::IMAPSearchExpression * copyExpr = (mailcore::IMAPSearchExpression *) expression->_nativeExpr->copy();
-    mailcore::IMAPSearchExpression * copyOther = (mailcore::IMAPSearchExpression *) other->_nativeExpr->copy();
-    mailcore::IMAPSearchExpression * result = mailcore::IMAPSearchExpression::searchOr(copyExpr, copyOther);
-    copyExpr->release();
-    copyOther->release();
-    
+    mailcore::IMAPSearchExpression * result = mailcore::IMAPSearchExpression::searchOr(expression->_nativeExpr, other->_nativeExpr);
     return MCO_TO_OBJC(result);
 }
 

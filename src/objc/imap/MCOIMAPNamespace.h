@@ -30,7 +30,7 @@
 - (char) mainDelimiter;
 
 /** Returns the list of prefixes of this namespace. */
-- (NSArray *) prefixes;
+- (NSArray * /* NSString */) prefixes;
 
 /**
  Returns the folder path for the given list of path components in the context
@@ -45,7 +45,7 @@
 - (NSString *) pathForComponents:(NSArray *)components prefix:(NSString *)prefix;
 
 /** Returns the components given a folder path. */
-- (NSArray *) componentsFromPath:(NSString *)path;
+- (NSArray * /* NSString */) componentsFromPath:(NSString *)path;
 
 /** Returns YES if the namespace contains the given folder path. */
 - (BOOL) containsFolderPath:(NSString *)path;

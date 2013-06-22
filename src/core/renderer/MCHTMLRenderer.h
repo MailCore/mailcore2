@@ -31,11 +31,11 @@ namespace mailcore {
                                            HTMLRendererIMAPCallback * dataCallback,
                                            HTMLRendererTemplateCallback * htmlCallback);
         
-        static Array * attachmentsForMessage(AbstractMessage * message);
-        static Array * htmlInlineAttachmentsForMessage(AbstractMessage * message);
+        static Array * /* AbstractPart */ attachmentsForMessage(AbstractMessage * message);
+        static Array * /* AbstractPart */ htmlInlineAttachmentsForMessage(AbstractMessage * message);
     };
 };
 
 #endif
 
-#endif /* defined(__testUI__MCHTMLRenderer__) */
+#endif

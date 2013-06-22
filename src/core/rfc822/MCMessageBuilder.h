@@ -50,8 +50,8 @@ namespace mailcore {
 	private:
 		String * mHTMLBody;
 		String * mTextBody;
-		Array * mAttachments;
-		Array * mRelatedAttachments;
+		Array * /* Attachment */ mAttachments;
+		Array * /* Attachment */ mRelatedAttachments;
 		String * mBoundaryPrefix;
 		void init();
 		Data * dataAndFilterBcc(bool filterBcc);

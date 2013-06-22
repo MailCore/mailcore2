@@ -20,7 +20,7 @@ namespace mailcore {
 		virtual char delimiter();
 
 		virtual String * pathForComponents(Array * components);
-		virtual Array * componentsForPath(String * path);
+		virtual Array * /* String */ componentsForPath(String * path);
 
 		virtual bool containsFolder(String * folder);
         

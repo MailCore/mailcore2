@@ -160,16 +160,6 @@ void AbstractPart::setInlineAttachment(bool inlineAttachment)
     mInlineAttachment = inlineAttachment;
 }
 
-AbstractMessage * AbstractPart::message()
-{
-    return mMessage;
-}
-
-void AbstractPart::setMessage(AbstractMessage * message)
-{
-    mMessage = message;
-}
-
 void AbstractPart::importIMAPFields(struct mailimap_body_fields * fields,
     struct mailimap_body_ext_1part * extension)
 {
