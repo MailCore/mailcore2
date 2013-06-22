@@ -91,7 +91,7 @@
     MCLog("%s is missing, fetching", partUniqueID.description.UTF8String);
     
     if ([_pending containsObject:partUniqueID]) {
-        return NULL;
+        return nil;
     }
     
     MCOIMAPPart * part = (MCOIMAPPart *) [_message partForUniqueID:partUniqueID];
@@ -205,7 +205,9 @@ typedef void (^DownloadCallback)(NSError * error);
     [op setProgress:^(unsigned int current, unsigned int maximum) {
         MCLog("progress content: %u/%u", current, maximum);
     }];
-    [_ops addObject:op];
+    if (op != nil) {
+        [_ops addObject:op];
+    }
     if (downloadFinished != NULL) {
         NSMutableArray * blocks;
         blocks = [_callbacks objectForKey:partUniqueID];
