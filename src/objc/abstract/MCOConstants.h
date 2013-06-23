@@ -134,6 +134,8 @@ typedef enum {
     MCOIMAPMessagesRequestKindHeaderSubject = 1 << 5,
     /** Gmail Labels.*/
     MCOIMAPMessagesRequestKindGmailLabels   = 1 << 6,
+    /** Gmail Thread ID.*/
+    MCOIMAPMessagesRequestKindGmailThreadID = 1 << 7,
 } MCOIMAPMessagesRequestKind;
 
 /** It defines the behavior of the STORE flags request.*/
