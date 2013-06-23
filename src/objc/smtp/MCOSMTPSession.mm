@@ -15,6 +15,7 @@
 #import "MCOSMTPOperation.h"
 #import "MCOOperation+Private.h"
 #import "MCOAddress.h"
+#import "MCOSMTPOperation+Private.h"
 
 @implementation MCOSMTPSession {
     mailcore::SMTPAsyncSession * _session;
@@ -55,13 +56,17 @@ MCO_OBJC_SYNTHESIZE_BOOL(setUseHeloIPEnabled, useHeloIPEnabled)
 - (MCOSMTPSendOperation *) sendOperationWithData:(NSData *)messageData
 {
     mailcore::SMTPOperation * coreOp = MCO_NATIVE_INSTANCE->sendMessageOperation([messageData mco_mcData]);
-    return [[[MCOSMTPSendOperation alloc] initWithMCOperation:coreOp] autorelease];
+    MCOSMTPSendOperation * result = [[[MCOSMTPSendOperation alloc] initWithMCOperation:coreOp] autorelease];
+    [result setSession:self];
+    return result;
 }
 
 - (MCOOperation *) checkAccountOperationWithFrom:(MCOAddress *)from
 {
     mailcore::SMTPOperation *coreOp = MCO_NATIVE_INSTANCE->checkAccountOperation(MCO_FROM_OBJC(mailcore::Address, from));
-    return [[[MCOSMTPOperation alloc] initWithMCOperation:coreOp] autorelease];
+    MCOSMTPOperation * result = [[[MCOSMTPOperation alloc] initWithMCOperation:coreOp] autorelease];
+    [result setSession:self];
+    return result;
 }
 
 @end

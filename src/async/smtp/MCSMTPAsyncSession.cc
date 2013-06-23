@@ -19,8 +19,13 @@ namespace mailcore {
         virtual ~SMTPOperationQueueCallback() {
         }
         
-        virtual void queueIdle() {
+        virtual void queueStartRunning() {
+            mSession->retain();
+        }
+        
+        virtual void queueStoppedRunning() {
             mSession->tryAutomaticDisconnect();
+            mSession->release();
         }
         
     private:
@@ -38,6 +43,7 @@ SMTPAsyncSession::SMTPAsyncSession()
 
 SMTPAsyncSession::~SMTPAsyncSession()
 {
+    cancelDelayedPerformMethod((Object::Method) &SMTPAsyncSession::tryAutomaticDisconnectAfterDelay, NULL);
     MC_SAFE_RELEASE(mQueueCallback);
     MC_SAFE_RELEASE(mQueue);
     MC_SAFE_RELEASE(mSession);

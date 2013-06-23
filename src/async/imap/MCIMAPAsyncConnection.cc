@@ -32,6 +32,7 @@
 #include "MCIMAPCapabilityOperation.h"
 #include "MCOperationQueueCallback.h"
 #include "MCIMAPDisconnectOperation.h"
+#include "MCIMAPAsyncSession.h"
 
 using namespace mailcore;
 
@@ -45,8 +46,13 @@ namespace mailcore {
         virtual ~IMAPOperationQueueCallback() {
         }
         
-        virtual void queueIdle() {
+        virtual void queueStartRunning() {
+            mConnection->queueStartRunning();
+        }
+        
+        virtual void queueStoppedRunning() {
             mConnection->tryAutomaticDisconnect();
+            mConnection->queueStoppedRunning();
         }
         
     private:
@@ -63,10 +69,12 @@ IMAPAsyncConnection::IMAPAsyncConnection()
     mLastFolder = NULL;
     mQueueCallback = new IMAPOperationQueueCallback(this);
     mQueue->setCallback(mQueueCallback);
+    mOwner = NULL;
 }
 
 IMAPAsyncConnection::~IMAPAsyncConnection()
 {
+    cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
     MC_SAFE_RELEASE(mQueueCallback);
     MC_SAFE_RELEASE(mLastFolder);
     MC_SAFE_RELEASE(mDefaultNamespace);
@@ -485,6 +493,18 @@ void IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay(void * context)
     op->start();
 }
 
+void IMAPAsyncConnection::queueStartRunning()
+{
+    this->retain();
+    mOwner->retain();
+}
+
+void IMAPAsyncConnection::queueStoppedRunning()
+{
+    mOwner->release();
+    this->release();
+}
+
 void IMAPAsyncConnection::setLastFolder(String * folder)
 {
     MC_SAFE_REPLACE_COPY(String, mLastFolder, folder);
@@ -494,4 +514,15 @@ String * IMAPAsyncConnection::lastFolder()
 {
     return mLastFolder;
 }
+
+void IMAPAsyncConnection::setOwner(IMAPAsyncSession * owner)
+{
+    mOwner = owner;
+}
+
+IMAPAsyncSession * IMAPAsyncConnection::owner()
+{
+    return mOwner;
+}
+
 

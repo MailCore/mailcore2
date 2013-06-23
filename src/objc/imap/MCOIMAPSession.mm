@@ -13,6 +13,7 @@
 #import "MCOObjectWrapper.h"
 #import "MCOIMAPOperation.h"
 #import "MCOIMAPFetchFoldersOperation.h"
+#import "MCOIMAPBaseOperation+Private.h"
 
 #import "MCOUtils.h"
 
@@ -60,57 +61,74 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
 
 #pragma mark - Operations
 
+#define MCO_TO_OBJC_OP(op) [self _objcOperationFromNativeOp:op];
+#define OPAQUE_OPERATION(op) [self _objcOpaqueOperationFromNativeOp:op]
+
+- (id) _objcOperationFromNativeOp:(IMAPOperation *)op
+{
+    MCOIMAPBaseOperation * result = MCO_TO_OBJC(op);
+    [result setSession:self];
+    return result;
+}
+
+- (id) _objcOpaqueOperationFromNativeOp:(IMAPOperation *)op
+{
+    MCOIMAPOperation * result = [[[MCOIMAPOperation alloc] initWithMCOperation:op] autorelease];
+    [result setSession:self];
+    return result;
+}
+
 - (MCOIMAPFolderInfoOperation *) folderInfoOperation:(NSString *)folder
 {
     IMAPFolderInfoOperation * coreOp = MCO_NATIVE_INSTANCE->folderInfoOperation([folder mco_mcString]);
-    return MCO_TO_OBJC(coreOp);
+    return MCO_TO_OBJC_OP(coreOp);
 }
 
 - (MCOIMAPFolderStatusOperation *) folderStatusOperation:(NSString *)folder
 {
     IMAPFolderStatusOperation * coreOp = MCO_NATIVE_INSTANCE->folderStatusOperation([folder mco_mcString]);
-    return MCO_TO_OBJC(coreOp);
+    return MCO_TO_OBJC_OP(coreOp);
 }
 
 - (MCOIMAPFetchFoldersOperation *) fetchSubscribedFoldersOperation
 {
     IMAPOperation *coreOp = MCO_NATIVE_INSTANCE->fetchSubscribedFoldersOperation();
-    return MCO_TO_OBJC(coreOp);
+    return MCO_TO_OBJC_OP(coreOp);
 }
 
 - (MCOIMAPFetchFoldersOperation *)fetchAllFoldersOperation {
     IMAPOperation *coreOp = MCO_NATIVE_INSTANCE->fetchAllFoldersOperation();
-    return MCO_TO_OBJC(coreOp);
+    return MCO_TO_OBJC_OP(coreOp);
 }
 
 - (MCOIMAPOperation *) renameFolderOperation:(NSString *)folder otherName:(NSString *)otherName
 {
     IMAPOperation *coreOp = MCO_NATIVE_INSTANCE->renameFolderOperation([folder mco_mcString], [otherName mco_mcString]);
-    return [[[MCOIMAPOperation alloc] initWithMCOperation:coreOp] autorelease];
+    return OPAQUE_OPERATION(coreOp);
 }
 
 - (MCOIMAPOperation *) deleteFolderOperation:(NSString *)folder
 {
     IMAPOperation *coreOp = MCO_NATIVE_INSTANCE->deleteFolderOperation([folder mco_mcString]);
-    return [[[MCOIMAPOperation alloc] initWithMCOperation:coreOp] autorelease];
+    return OPAQUE_OPERATION(coreOp);
 }
 
 - (MCOIMAPOperation *) createFolderOperation:(NSString *)folder
 {
     IMAPOperation *coreOp = MCO_NATIVE_INSTANCE->createFolderOperation([folder mco_mcString]);
-    return [[[MCOIMAPOperation alloc] initWithMCOperation:coreOp] autorelease];
+    return OPAQUE_OPERATION(coreOp);
 }
 
 - (MCOIMAPOperation *) subscribeFolderOperation:(NSString *)folder
 {
     IMAPOperation *coreOp = MCO_NATIVE_INSTANCE->subscribeFolderOperation([folder mco_mcString]);
-    return [[[MCOIMAPOperation alloc] initWithMCOperation:coreOp] autorelease];
+    return OPAQUE_OPERATION(coreOp);
 }
 
 - (MCOIMAPOperation *) unsubscribeFolderOperation:(NSString *)folder
 {
     IMAPOperation *coreOp = MCO_NATIVE_INSTANCE->unsubscribeFolderOperation([folder mco_mcString]);
-    return [[[MCOIMAPOperation alloc] initWithMCOperation:coreOp] autorelease];
+    return OPAQUE_OPERATION(coreOp);
 }
 
 - (MCOIMAPAppendMessageOperation *)appendMessageOperationWithFolder:(NSString *)folder
@@ -120,7 +138,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
     IMAPAppendMessageOperation * coreOp = MCO_NATIVE_INSTANCE->appendMessageOperation([folder mco_mcString],
                                                                                       [messageData mco_mcData],
                                                                                       (MessageFlag) flags);
-    return MCO_TO_OBJC(coreOp);
+    return MCO_TO_OBJC_OP(coreOp);
 }
 
 - (MCOIMAPCopyMessagesOperation *)copyMessagesOperationWithFolder:(NSString *)folder
@@ -130,14 +148,14 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
     IMAPCopyMessagesOperation * coreOp = MCO_NATIVE_INSTANCE->copyMessagesOperation([folder mco_mcString],
                                                                                     MCO_FROM_OBJC(IndexSet, uids),
                                                                                     [destFolder mco_mcString]);
-    return MCO_TO_OBJC(coreOp);
+    return MCO_TO_OBJC_OP(coreOp);
 }
 
 
 - (MCOIMAPOperation *) expungeOperation:(NSString *)folder
 {
     IMAPOperation *coreOp = MCO_NATIVE_INSTANCE->expungeOperation([folder mco_mcString]);
-    return [[[MCOIMAPOperation alloc] initWithMCOperation:coreOp] autorelease];
+    return OPAQUE_OPERATION(coreOp);
 }
 
 - (MCOIMAPFetchMessagesOperation *) fetchMessagesByUIDOperationWithFolder:(NSString *)folder
@@ -147,7 +165,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
     IMAPFetchMessagesOperation * coreOp = MCO_NATIVE_INSTANCE->fetchMessagesByUIDOperation([folder mco_mcString],
                                                                                            (IMAPMessagesRequestKind) requestKind,
                                                                                            MCO_FROM_OBJC(IndexSet, uids));
-    return MCO_TO_OBJC(coreOp);
+    return MCO_TO_OBJC_OP(coreOp);
 }
 
 - (MCOIMAPFetchMessagesOperation *) fetchMessagesByNumberOperationWithFolder:(NSString *)folder
@@ -157,7 +175,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
     IMAPFetchMessagesOperation * coreOp = MCO_NATIVE_INSTANCE->fetchMessagesByNumberOperation([folder mco_mcString],
                                                                                               (IMAPMessagesRequestKind) requestKind,
                                                                                               MCO_FROM_OBJC(IndexSet, numbers));
-    return MCO_TO_OBJC(coreOp);
+    return MCO_TO_OBJC_OP(coreOp);
 }
 
 - (MCOIMAPFetchMessagesOperation *) syncMessagesByUIDWithFolder:(NSString *)folder
@@ -169,7 +187,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
                                                                                  (IMAPMessagesRequestKind) requestKind,
                                                                                  MCO_FROM_OBJC(IndexSet, uids),
                                                                                  modSeq);
-    return MCO_TO_OBJC(coreOp);
+    return MCO_TO_OBJC_OP(coreOp);
 }
 
 - (MCOIMAPFetchContentOperation *) fetchMessageByUIDOperationWithFolder:(NSString *)folder
@@ -177,7 +195,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
                                                                  urgent:(BOOL)urgent
 {
     IMAPFetchContentOperation * coreOp = MCO_NATIVE_INSTANCE->fetchMessageByUIDOperation([folder mco_mcString], uid, urgent);
-    return MCO_TO_OBJC(coreOp);
+    return MCO_TO_OBJC_OP(coreOp);
 }
 
 - (MCOIMAPFetchContentOperation *) fetchMessageByUIDOperationWithFolder:(NSString *)folder
@@ -197,7 +215,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
                                                                                                    [partID mco_mcString],
                                                                                                    (Encoding) encoding,
                                                                                                    urgent);
-    return MCO_TO_OBJC(coreOp);
+    return MCO_TO_OBJC_OP(coreOp);
 }
 
 - (MCOIMAPFetchContentOperation *) fetchMessageAttachmentByUIDOperationWithFolder:(NSString *)folder
@@ -217,7 +235,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
                                                                       MCO_FROM_OBJC(IndexSet, uids),
                                                                       (IMAPStoreFlagsRequestKind) kind,
                                                                       (MessageFlag) flags);
-    return [[[MCOIMAPOperation alloc] initWithMCOperation:coreOp] autorelease];
+    return OPAQUE_OPERATION(coreOp);
 }
 
 - (MCOIMAPOperation *) storeLabelsOperationWithFolder:(NSString *)folder
@@ -229,7 +247,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
                                                                        MCO_FROM_OBJC(IndexSet, uids),
                                                                        (IMAPStoreFlagsRequestKind) kind,
                                                                        MCO_FROM_OBJC(Array, labels));
-    return [[[MCOIMAPOperation alloc] initWithMCOperation:coreOp] autorelease];
+    return OPAQUE_OPERATION(coreOp);
 }
 
 - (MCOIMAPSearchOperation *) searchOperationWithFolder:(NSString *)folder
@@ -239,7 +257,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
     IMAPSearchOperation * coreOp = MCO_NATIVE_INSTANCE->searchOperation([folder mco_mcString],
                                                                         (IMAPSearchKind) kind,
                                                                         [searchString mco_mcString]);
-    return MCO_TO_OBJC(coreOp);
+    return MCO_TO_OBJC_OP(coreOp);
 }
 
 - (MCOIMAPSearchOperation *) searchExpressionOperationWithFolder:(NSString *)folder
@@ -247,20 +265,20 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
 {
     IMAPSearchOperation * coreOp = MCO_NATIVE_INSTANCE->searchOperation([folder mco_mcString],
                                                                         MCO_FROM_OBJC(IMAPSearchExpression, expression));
-    return MCO_TO_OBJC(coreOp);
+    return MCO_TO_OBJC_OP(coreOp);
 }
 
 - (MCOIMAPIdleOperation *) idleOperationWithFolder:(NSString *)folder
                                       lastKnownUID:(uint32_t)lastKnownUID
 {
     IMAPIdleOperation * coreOp = MCO_NATIVE_INSTANCE->idleOperation([folder mco_mcString], lastKnownUID);
-    return MCO_TO_OBJC(coreOp);
+    return MCO_TO_OBJC_OP(coreOp);
 }
 
 - (MCOIMAPFetchNamespaceOperation *) fetchNamespaceOperation
 {
     IMAPFetchNamespaceOperation * coreOp = MCO_NATIVE_INSTANCE->fetchNamespaceOperation();
-    return MCO_TO_OBJC(coreOp);
+    return MCO_TO_OBJC_OP(coreOp);
 }
 
 - (MCOIMAPIdentityOperation *) identityOperationWithVendor:(NSString *)vendor
@@ -270,19 +288,19 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
     IMAPIdentityOperation * coreOp = MCO_NATIVE_INSTANCE->identityOperation([vendor mco_mcString],
                                                                             [name mco_mcString],
                                                                             [version mco_mcString]);
-    return MCO_TO_OBJC(coreOp);
+    return MCO_TO_OBJC_OP(coreOp);
 }
 
 - (MCOIMAPOperation *)checkAccountOperation
 {
     IMAPOperation *coreOp = MCO_NATIVE_INSTANCE->checkAccountOperation();
-    return [[[MCOIMAPOperation alloc] initWithMCOperation:coreOp] autorelease];
+    return OPAQUE_OPERATION(coreOp);
 }
 
 - (MCOIMAPCapabilityOperation *) capabilityOperation
 {
     IMAPCapabilityOperation * coreOp = MCO_NATIVE_INSTANCE->capabilityOperation();
-    return MCO_TO_OBJC(coreOp);
+    return MCO_TO_OBJC_OP(coreOp);
 }
 
 @end

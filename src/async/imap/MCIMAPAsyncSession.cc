@@ -174,6 +174,7 @@ unsigned int IMAPAsyncSession::maximumConnections()
 IMAPAsyncConnection * IMAPAsyncSession::session()
 {
     IMAPAsyncConnection * session = new IMAPAsyncConnection();
+    session->setOwner(this);
     session->autorelease();
     
     session->setHostname(mHostname);

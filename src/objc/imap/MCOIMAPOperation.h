@@ -12,9 +12,9 @@
 
 /** This class implements a generic IMAP operation */
 
-#import <MailCore/MCOOperation.h>
+#import <MailCore/MCOIMAPBaseOperation.h>
 
-@interface MCOIMAPOperation : MCOOperation
+@interface MCOIMAPOperation : MCOIMAPBaseOperation
 
 /** 
  Starts the asynchronous append operation.
