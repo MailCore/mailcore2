@@ -514,6 +514,8 @@ void IMAPSession::unsetup()
 		mailimap_free(imap);
 		imap = NULL;
 	}
+    
+    mState = STATE_DISCONNECTED;
 }
 
 void IMAPSession::connect(ErrorCode * pError)
@@ -1582,6 +1584,7 @@ struct msg_att_handler_data {
     bool needsBody;
     bool needsFlags;
     bool needsGmailLabels;
+    bool needsGmailThreadID;
     uint32_t startUid;
 };
 
@@ -1594,6 +1597,7 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
     bool hasBody;
     bool hasFlags;
     bool hasGmailLabels;
+	bool hasGmailThreadID;
     struct msg_att_handler_data * msg_att_context;
     // struct
     IMAPSession * self;
@@ -1607,6 +1611,7 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
     bool needsBody;
     bool needsFlags;
     bool needsGmailLabels;
+    bool needsGmailThreadID;
     uint32_t startUid;
     
     msg_att_context = (struct msg_att_handler_data *) context;
@@ -1621,13 +1626,15 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
     needsBody = msg_att_context->needsBody;
     needsFlags = msg_att_context->needsFlags;
     needsGmailLabels = msg_att_context->needsGmailLabels;
+    needsGmailThreadID = msg_att_context->needsGmailThreadID;
     startUid = msg_att_context->startUid;
     
     hasHeader = false;
     hasBody = false;
     hasFlags = false;
     hasGmailLabels = false;
-    
+    hasGmailThreadID = false;
+	
     msg = new IMAPMessage();
     
     uid = 0;
@@ -1718,6 +1725,13 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
                 }
                 labels->release();
             }
+            else if (ext_data->ext_extension == &mailimap_extension_xgmthrid) {
+                uint64_t * threadID;
+                
+                threadID = (uint64_t *) ext_data->ext_data;
+                msg->setGmailThreadID(*threadID);
+                hasGmailThreadID = true;
+            }
         }
     }
     for(item_iter = clist_begin(msg_att->att_list) ; item_iter != NULL ; item_iter = clist_next(item_iter)) {
@@ -1752,7 +1766,10 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
         msg->release();
         return;
     }
-    
+    if (needsGmailThreadID && !hasGmailThreadID) {
+        msg->release();
+        return;
+    }
     if (uid != 0) {
         msg->setUid(uid);
     }
@@ -1780,6 +1797,7 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
     bool needsBody;
     bool needsFlags;
     bool needsGmailLabels;
+    bool needsGmailThreadID;
     Array * messages;
     IndexSet * vanishedMessages;
     
@@ -1803,7 +1821,8 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
     needsBody = false;
     needsFlags = false;
     needsGmailLabels = false;
-    
+    needsGmailThreadID = false;
+
     fetch_type = mailimap_fetch_type_new_fetch_att_list_empty();
     fetch_att = mailimap_fetch_att_new_uid();
     mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
@@ -1818,6 +1837,11 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
         fetch_att = mailimap_fetch_att_new_xgmlabels();
         mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
         needsGmailLabels = true;
+    }
+    if ((requestKind & IMAPMessagesRequestKindGmailThreadID) != 0) {
+        fetch_att = mailimap_fetch_att_new_xgmthrid();
+        mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
+        needsGmailThreadID = true;
     }
     if ((requestKind & IMAPMessagesRequestKindFullHeaders) != 0) {
         clist * hdrlist;
@@ -1908,7 +1932,7 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
     msg_att_data.needsFlags = needsFlags;
     msg_att_data.needsGmailLabels = needsGmailLabels;
     msg_att_data.startUid = startUid;
-    
+    msg_att_data.needsGmailThreadID = needsGmailThreadID;
     mailimap_set_msg_att_handler(mImap, msg_att_handler, &msg_att_data);
     
     mBodyProgressEnabled = false;
@@ -2912,3 +2936,7 @@ bool IMAPSession::isIdentityEnabled()
     return mIdentityEnabled;
 }
 
+bool IMAPSession::isDisconnected()
+{
+    return mState == STATE_DISCONNECTED;
+}

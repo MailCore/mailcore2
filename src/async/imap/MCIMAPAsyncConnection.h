@@ -25,6 +25,8 @@ namespace mailcore {
 	class IMAPFetchNamespaceOperation;
 	class IMAPIdentityOperation;
 	class IMAPCapabilityOperation;
+    class IMAPOperationQueueCallback;
+    class IMAPAsyncSession;
     
 	class IMAPAsyncConnection : public Object {
 	public:
@@ -116,8 +118,10 @@ namespace mailcore {
 		char mDelimiter;
 		IMAPNamespace * mDefaultNamespace;
 		String * mLastFolder;
-		
-		void queue(IMAPOperation * op);
+        IMAPOperationQueueCallback * mQueueCallback;
+		IMAPAsyncSession * mOwner;
+        
+        virtual void tryAutomaticDisconnectAfterDelay(void * context);
 		
     public: // private
 		virtual void runOperation(IMAPOperation * operation);
@@ -127,6 +131,13 @@ namespace mailcore {
         
 		virtual void setLastFolder(String * folder);
 		virtual String * lastFolder();
+        
+        virtual void tryAutomaticDisconnect();
+        virtual void queueStartRunning();
+        virtual void queueStoppedRunning();
+        
+        virtual void setOwner(IMAPAsyncSession * owner);
+        virtual IMAPAsyncSession * owner();
     };
 }
 

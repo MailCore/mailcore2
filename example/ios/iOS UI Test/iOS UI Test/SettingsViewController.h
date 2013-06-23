@@ -11,6 +11,7 @@
 extern NSString * const UsernameKey;
 extern NSString * const PasswordKey;
 extern NSString * const HostnameKey;
+extern NSString * const FetchFullMessageKey;
 
 @protocol SettingsViewControllerDelegate;
 
@@ -19,6 +20,7 @@ extern NSString * const HostnameKey;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *hostnameTextField;
+@property (weak, nonatomic) IBOutlet UISwitch *fetchFullMessageSwitch;
 @property (nonatomic, weak) id<SettingsViewControllerDelegate> delegate;
 - (IBAction)done:(id)sender;
 

@@ -22,7 +22,8 @@ namespace mailcore {
     class POPFetchMessageOperation;
     class POPDeleteMessagesOperation;
     class POPFetchMessagesOperation;
-	
+	class POPOperationQueueCallback;
+    
 	class POPAsyncSession : public Object {
 	public:
 		POPAsyncSession();
@@ -68,6 +69,7 @@ namespace mailcore {
 	private:
         POPSession * mSession;
         OperationQueue * mQueue;
+        POPOperationQueueCallback * mQueueCallback;
 		
     public: // private
         virtual void runOperation(POPOperation * operation);

@@ -10,6 +10,7 @@
 
 #include "MCIMAPAsyncConnection.h"
 #include "MCIMAPNamespace.h"
+#include "MCOperationQueueCallback.h"
 
 #define DEFAULT_MAX_CONNECTIONS 3
 
@@ -173,6 +174,7 @@ unsigned int IMAPAsyncSession::maximumConnections()
 IMAPAsyncConnection * IMAPAsyncSession::session()
 {
     IMAPAsyncConnection * session = new IMAPAsyncConnection();
+    session->setOwner(this);
     session->autorelease();
     
     session->setHostname(mHostname);

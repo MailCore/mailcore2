@@ -142,10 +142,10 @@ namespace mailcore {
         bool mAllowsFolderConcurrentAccessEnabled;
 		unsigned int mMaximumConnections;
         
-		IMAPAsyncConnection * sessionForFolder(String * folder, bool urgent = false);
-		IMAPAsyncConnection * session();
-		IMAPAsyncConnection * matchingSessionForFolder(String * folder);
-		IMAPAsyncConnection * availableSession();
+		virtual IMAPAsyncConnection * sessionForFolder(String * folder, bool urgent = false);
+		virtual IMAPAsyncConnection * session();
+		virtual IMAPAsyncConnection * matchingSessionForFolder(String * folder);
+		virtual IMAPAsyncConnection * availableSession();
 	};
 }
 

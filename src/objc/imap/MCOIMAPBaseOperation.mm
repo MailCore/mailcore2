@@ -7,10 +7,12 @@
 //
 
 #import "MCOIMAPBaseOperation.h"
+#import "MCOIMAPBaseOperation+Private.h"
 
 #import "MCOOperation+Private.h"
 
 #import "MCAsyncIMAP.h"
+#import "MCOIMAPSession.h"
 
 class MCOIMAPBaseOperationIMAPCallback : public mailcore::IMAPOperationCallback {
 public:
@@ -33,6 +35,7 @@ private:
 
 @implementation MCOIMAPBaseOperation {
     MCOIMAPBaseOperationIMAPCallback * _imapCallback;
+    MCOIMAPSession * _session;
 }
 
 - (id) initWithMCOperation:(mailcore::Operation *)op
@@ -47,8 +50,20 @@ private:
 
 - (void) dealloc
 {
+    [_session release];
     delete _imapCallback;
     [super dealloc];
+}
+
+- (void) setSession:(MCOIMAPSession *)session
+{
+    [_session release];
+    _session = [session retain];
+}
+
+- (MCOIMAPSession *) session
+{
+    return _session;
 }
 
 - (void) bodyProgress:(unsigned int)current maximum:(unsigned int)maximum

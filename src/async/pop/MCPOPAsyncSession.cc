@@ -14,17 +14,44 @@
 #include "MCPOPDeleteMessagesOperation.h"
 #include "MCPOPFetchMessagesOperation.h"
 #include "MCPOPCheckAccountOperation.h"
+#include "MCOperationQueueCallback.h"
 
 using namespace mailcore;
+
+namespace mailcore {
+    class POPOperationQueueCallback  : public Object, public OperationQueueCallback {
+    public:
+        POPOperationQueueCallback(POPAsyncSession * session) {
+            mSession = session;
+        }
+        
+        virtual ~POPOperationQueueCallback() {
+        }
+        
+        virtual void queueStartRunning() {
+            mSession->retain();
+        }
+        
+        virtual void queueStoppedRunning() {
+            mSession->release();
+        }
+        
+    private:
+        POPAsyncSession * mSession;
+    };
+}
 
 POPAsyncSession::POPAsyncSession()
 {
     mSession = new POPSession();
     mQueue = new OperationQueue();
+    mQueueCallback = new POPOperationQueueCallback(this);
+    mQueue->setCallback(mQueueCallback);
 }
 
 POPAsyncSession::~POPAsyncSession()
 {
+    MC_SAFE_RELEASE(mQueueCallback);
     MC_SAFE_RELEASE(mSession);
     MC_SAFE_RELEASE(mQueue);
 }
@@ -164,6 +191,5 @@ POPSession * POPAsyncSession::session()
 
 void POPAsyncSession::runOperation(POPOperation * operation)
 {
-#warning disconnect after delay
     mQueue->addOperation(operation);
 }
