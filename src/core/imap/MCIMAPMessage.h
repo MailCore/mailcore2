@@ -39,7 +39,7 @@ namespace mailcore {
         virtual Array * /* String */ gmailLabels();
         
         virtual void setGmailThreadID(String * threadID);
-        virtual String * /* String */ gmailThreadID();
+        virtual String * gmailThreadID();
         
         virtual AbstractPart * partForPartID(String * partID);
         

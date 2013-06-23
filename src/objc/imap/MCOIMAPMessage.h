@@ -50,7 +50,7 @@
 @property (nonatomic, copy) NSArray * /* NSString */ gmailLabels;
 
 /** Gmail thread iD of the message */
-@property (nonatomic, copy) NSString * /* NSString */ gmailThreadID;
+@property (nonatomic, copy) NSString * gmailThreadID;
 
 /**
  Returns the part with the given part identifier.
