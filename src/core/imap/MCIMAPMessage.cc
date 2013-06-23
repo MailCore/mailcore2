@@ -17,8 +17,8 @@ void IMAPMessage::init()
     mUid = 0;
     mFlags = MessageFlagNone;
     mOriginalFlags = MessageFlagNone;
-	mMainPart = NULL;
-	mLabels = NULL;
+    mMainPart = NULL;
+    mLabels = NULL;
     mModSeqValue = 0;
 }
 
@@ -120,6 +120,16 @@ void IMAPMessage::setGmailLabels(Array * labels)
 Array * IMAPMessage::gmailLabels()
 {
     return mLabels;
+}
+
+void IMAPMessage::setGmailMessageID(uint64_t msgID)
+{
+    mMessageID = msgID;
+}
+
+uint64_t IMAPMessage::gmailMessageID()
+{
+    return mMessageID;
 }
 
 void IMAPMessage::setGmailThreadID(uint64_t threadID)
