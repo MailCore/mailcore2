@@ -1582,7 +1582,7 @@ struct msg_att_handler_data {
     bool needsBody;
     bool needsFlags;
     bool needsGmailLabels;
-	bool needsGmailThreadID;
+    bool needsGmailThreadID;
     uint32_t startUid;
 };
 
@@ -1609,7 +1609,7 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
     bool needsBody;
     bool needsFlags;
     bool needsGmailLabels;
-	bool needsGmailThreadID;
+    bool needsGmailThreadID;
     uint32_t startUid;
     
     msg_att_context = (struct msg_att_handler_data *) context;
@@ -1624,7 +1624,7 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
     needsBody = msg_att_context->needsBody;
     needsFlags = msg_att_context->needsFlags;
     needsGmailLabels = msg_att_context->needsGmailLabels;
-	needsGmailThreadID = msg_att_context->needsGmailThreadID;
+    needsGmailThreadID = msg_att_context->needsGmailThreadID;
     startUid = msg_att_context->startUid;
     
     hasHeader = false;
@@ -1723,13 +1723,13 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
                 }
                 labels->release();
             }
-			if (ext_data->ext_extension == &mailimap_extension_xgmthrid) {
-				String * threadID;
-
-				threadID = String::stringWithUTF8Characters((char *) ext_data->ext_data);
-				msg->setGmailThreadID(threadID);
-				hasGmailThreadID = true;
-			}
+            else if (ext_data->ext_extension == &mailimap_extension_xgmthrid) {
+                String * threadID;
+                
+                threadID = String::stringWithUTF8Characters((char *) ext_data->ext_data);
+                msg->setGmailThreadID(threadID);
+                hasGmailThreadID = true;
+            }
         }
     }
     for(item_iter = clist_begin(msg_att->att_list) ; item_iter != NULL ; item_iter = clist_next(item_iter)) {
@@ -1765,9 +1765,9 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
         return;
     }
     if (needsGmailThreadID && !hasGmailThreadID) {
-		msg->release();
-		return;
-	}
+        msg->release();
+        return;
+    }
     if (uid != 0) {
         msg->setUid(uid);
     }
@@ -1795,7 +1795,7 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
     bool needsBody;
     bool needsFlags;
     bool needsGmailLabels;
-	bool needsGmailThreadID;
+    bool needsGmailThreadID;
     Array * messages;
     IndexSet * vanishedMessages;
     
@@ -1819,7 +1819,7 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
     needsBody = false;
     needsFlags = false;
     needsGmailLabels = false;
-	needsGmailThreadID = false;
+    needsGmailThreadID = false;
 
     fetch_type = mailimap_fetch_type_new_fetch_att_list_empty();
     fetch_att = mailimap_fetch_att_new_uid();
@@ -1836,12 +1836,12 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
         mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
         needsGmailLabels = true;
     }
-	if ((requestKind & IMAPMessagesRequestKindGmailThreadID) != 0) {
+    if ((requestKind & IMAPMessagesRequestKindGmailThreadID) != 0) {
 		MCLog("request flags");
         fetch_att = mailimap_fetch_att_new_xgmthrid();
         mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
         needsGmailThreadID = true;
-	}
+    }
     if ((requestKind & IMAPMessagesRequestKindFullHeaders) != 0) {
         clist * hdrlist;
         char * header;
