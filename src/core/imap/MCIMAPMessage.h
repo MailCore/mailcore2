@@ -10,33 +10,36 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-
+    
     class IMAPPart;
     class HTMLRendererIMAPCallback;
     class HTMLRendererTemplateCallback;
     
-	class IMAPMessage : public AbstractMessage {
-	public:
-		IMAPMessage();
-		~IMAPMessage();
-		
-		virtual uint32_t uid();
-		virtual void setUid(uint32_t uid);
-		
-		virtual void setFlags(MessageFlag flags);
-		virtual MessageFlag flags();
-		
-		virtual void setOriginalFlags(MessageFlag flags);
-		virtual MessageFlag originalFlags();
-		
-		virtual uint64_t modSeqValue();
-		virtual void setModSeqValue(uint64_t uid);
+    class IMAPMessage : public AbstractMessage {
+    public:
+        IMAPMessage();
+        ~IMAPMessage();
         
-		virtual void setMainPart(AbstractPart * mainPart);
-		virtual AbstractPart * mainPart();
-		
-		virtual void setGmailLabels(Array * /* String */ labels);
-		virtual Array * /* String */ gmailLabels();
+        virtual uint32_t uid();
+        virtual void setUid(uint32_t uid);
+        
+        virtual void setFlags(MessageFlag flags);
+        virtual MessageFlag flags();
+        
+        virtual void setOriginalFlags(MessageFlag flags);
+        virtual MessageFlag originalFlags();
+        
+        virtual uint64_t modSeqValue();
+        virtual void setModSeqValue(uint64_t uid);
+        
+        virtual void setMainPart(AbstractPart * mainPart);
+        virtual AbstractPart * mainPart();
+        
+        virtual void setGmailLabels(Array * /* String */ labels);
+        virtual Array * /* String */ gmailLabels();
+        
+        virtual void setGmailThreadID(uint64_t threadID);
+        virtual uint64_t gmailThreadID();
         
         virtual AbstractPart * partForPartID(String * partID);
         
@@ -48,20 +51,21 @@ namespace mailcore {
                                        HTMLRendererTemplateCallback * htmlCallback = NULL);
         
     public: // subclass behavior
-		IMAPMessage(IMAPMessage * other);
-		virtual Object * copy();
-		virtual String * description();
+        IMAPMessage(IMAPMessage * other);
+        virtual Object * copy();
+        virtual String * description();
         
-	private:
+    private:
         uint64_t mModSeqValue;
-		uint32_t mUid;
-		MessageFlag mFlags;
-		MessageFlag mOriginalFlags;
-		AbstractPart * mMainPart;
-		Array * /* String */ mLabels;
-		void init();
-	};
-
+        uint32_t mUid;
+        MessageFlag mFlags;
+        MessageFlag mOriginalFlags;
+        AbstractPart * mMainPart;
+        Array * /* String */ mLabels;
+        uint64_t mThreadID;
+        void init();
+    };
+    
 }
 
 #endif
