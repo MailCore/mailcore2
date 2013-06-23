@@ -38,6 +38,9 @@ namespace mailcore {
         virtual void setGmailLabels(Array * /* String */ labels);
         virtual Array * /* String */ gmailLabels();
         
+        virtual void setGmailMessageID(uint64_t msgID);
+        virtual uint64_t gmailMessageID();
+        		
         virtual void setGmailThreadID(uint64_t threadID);
         virtual uint64_t gmailThreadID();
         
@@ -62,6 +65,7 @@ namespace mailcore {
         MessageFlag mOriginalFlags;
         AbstractPart * mMainPart;
         Array * /* String */ mLabels;
+        uint64_t mMessageID;
         uint64_t mThreadID;
         void init();
     };

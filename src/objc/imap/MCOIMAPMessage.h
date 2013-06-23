@@ -49,7 +49,10 @@
 /** All Gmail labels of the message */
 @property (nonatomic, copy) NSArray * /* NSString */ gmailLabels;
 
-/** Gmail thread iD of the message */
+/** Gmail message ID of the message */
+@property (nonatomic, assign) uint64_t gmailMessageID;
+
+/** Gmail thread ID of the message */
 @property (nonatomic, assign) uint64_t gmailThreadID;
 
 /**
