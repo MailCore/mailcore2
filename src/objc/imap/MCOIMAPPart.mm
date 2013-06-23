@@ -26,7 +26,7 @@
 	self = [super initWithCoder:aDecoder];
 	
 	[self setPartID:[aDecoder decodeObjectForKey:@"partID"]];
-	[self setSize:(unsigned int) [aDecoder decodeInt64ForKey:@"size"]];
+	[self setSize:(unsigned int) [aDecoder decodeIntForKey:@"size"]];
 	[self setEncoding:(MCOEncoding) [aDecoder decodeIntForKey:@"encoding"]];
 	
 	return self;

@@ -62,7 +62,7 @@
 
 - (id) copyWithZone:(NSZone *)zone
 {
-    return [[MCONetService mco_objectWithMCObject:_netService->autorelease()] retain];
+    return [[MCONetService mco_objectWithMCObject:_netService->copy()->autorelease()] retain];
 }
 
 MCO_OBJC_SYNTHESIZE_STRING(setHostname, hostname)

@@ -84,7 +84,7 @@
 	[self setDate:[decoder decodeObjectForKey:@"date"]];
 	[self setReceivedDate:[decoder decodeObjectForKey:@"receivedDate"]];
 	if ([self receivedDate] == nil) {
-		[self setReceivedDate:[[self date] copy]];
+		[self setReceivedDate:[[[self date] copy] autorelease]];
 	}
 	
 	return self;

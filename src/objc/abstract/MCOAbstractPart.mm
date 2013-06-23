@@ -49,7 +49,6 @@
 	part->setContentID([[decoder decodeObjectForKey:@"contentID"] mco_mcString]);
 	part->setContentLocation([[decoder decodeObjectForKey:@"contentLocation"] mco_mcString]);
 	part->setInlineAttachment([decoder decodeBoolForKey:@"inlineAttachment"]);
-	part->setMessage((mailcore::AbstractMessage *) [[decoder decodeObjectForKey:@"message"] mco_mcObject]);
 	
 	self = [self initWithMCPart:part];
 	
@@ -68,7 +67,6 @@
 	[encoder encodeObject:[self contentID] forKey:@"contentID"];
 	[encoder encodeObject:[self contentLocation] forKey:@"contentLocation"];
 	[encoder encodeBool:[self isInlineAttachment] forKey:@"inlineAttachment"];
-	[encoder encodeObject:[self message] forKey:@"message"];
 }
 
 - (void) dealloc

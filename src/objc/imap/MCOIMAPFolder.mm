@@ -62,7 +62,7 @@
 	
 	[self setPath:[aDecoder decodeObjectForKey:@"path"]];
 	[self setDelimiter:[aDecoder decodeIntForKey:@"delimiter"]];
-	[self setFlags:(MCOIMAPFolderFlag)[aDecoder decodeInt32ForKey:@"flags"]];
+	[self setFlags:(MCOIMAPFolderFlag)[aDecoder decodeIntForKey:@"flags"]];
 	
 	return self;
 }
