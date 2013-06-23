@@ -20,6 +20,8 @@ void IMAPMessage::init()
     mMainPart = NULL;
     mLabels = NULL;
     mModSeqValue = 0;
+    mThreadID = 0;
+    mMessageID = 0;
 }
 
 IMAPMessage::IMAPMessage()
@@ -35,7 +37,8 @@ IMAPMessage::IMAPMessage(IMAPMessage * other)
     setOriginalFlags(other->originalFlags());
     setMainPart((AbstractPart *) other->mainPart()->copy()->autorelease());
     setGmailLabels(other->gmailLabels());
-	setGmailThreadID(other->gmailThreadID());
+    setGmailThreadID(other->gmailThreadID());
+    setGmailMessageID(other->gmailMessageID());
 }
 
 IMAPMessage::~IMAPMessage()
