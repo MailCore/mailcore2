@@ -13,6 +13,7 @@ namespace mailcore {
 	class SMTPOperation;
 	class SMTPSession;
     class Address;
+    class SMTPOperationQueueCallback;
 
 	class SMTPAsyncSession : public Object {
 	public:
@@ -52,13 +53,14 @@ namespace mailcore {
     public: // private
         virtual void runOperation(SMTPOperation * operation);
         virtual SMTPSession * session();
+        virtual void tryAutomaticDisconnect();
         
 	private:
-		SMTPSession * mSession;
-		OperationQueue * mQueue;
-		
-		void queue(SMTPOperation * op);
-		
+        SMTPSession * mSession;
+        OperationQueue * mQueue;
+        SMTPOperationQueueCallback * mQueueCallback;
+
+        virtual void tryAutomaticDisconnectAfterDelay(void * context);
 	};
 	
 }

@@ -26,11 +26,17 @@
 /** Returns the part with the given unique identifier.*/
 - (MCOAbstractPart *) partForUniqueID:(NSString *)uniqueID;
 
-/** All attachments in the message */
-- (NSArray *) attachments;
+/** All attachments in the message.
+ It will return an array of MCOIMAPPart for MCOIMAPMessage.
+ It will return an array of MCOAttachment for MCOMessageParser.
+ It will return an array of MCOAttachment for MCOMessageBuilder. */
+- (NSArray * /* MCOAbstractPart */) attachments;
 
-/** All HTML bodies */
-- (NSArray *) htmlInlineAttachments;
+/** All image attachments included inline in the message through cid: URLs.
+ It will return an array of MCOIMAPPart for MCOIMAPMessage.
+ It will return an array of MCOAttachment for MCOMessageParser.
+ It will return an array of MCOAttachment for MCOMessageBuilder. */
+- (NSArray * /* MCOAbstractPart */) htmlInlineAttachments;
 
 @end
 

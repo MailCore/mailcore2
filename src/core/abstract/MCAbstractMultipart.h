@@ -22,14 +22,12 @@ namespace mailcore {
 		virtual String * description();
 		virtual Object * copy();
         
-		virtual void setMessage(AbstractMessage * message);
         virtual AbstractPart * partForContentID(String * contentID);
         virtual AbstractPart * partForUniqueID(String * uniqueID);
 		
 	private:
 		Array * mParts;
 		void init();
-		void applyMessage();
 	};
 }
 

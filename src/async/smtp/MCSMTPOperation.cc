@@ -82,4 +82,3 @@ void SMTPOperation::bodyProgressOnMainThread(void * ctx)
     }
     free(context);
 }
-

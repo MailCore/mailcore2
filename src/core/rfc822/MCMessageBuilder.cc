@@ -553,12 +553,6 @@ String * MessageBuilder::textBody()
 
 void MessageBuilder::setAttachments(Array * attachments)
 {
-    if (attachments != NULL) {
-        for(unsigned int i = 0 ; i < attachments->count() ; i ++) {
-            Attachment * attachment = (Attachment *) attachments->objectAtIndex(i);
-            attachment->setMessage(this);
-        }
-    }
     MC_SAFE_REPLACE_COPY(Array, mAttachments, attachments);
 }
 
@@ -572,18 +566,11 @@ void MessageBuilder::addAttachment(Attachment * attachment)
     if (mAttachments == NULL) {
         mAttachments = new Array();
     }
-    attachment->setMessage(this);
     mAttachments->addObject(attachment);
 }
 
 void MessageBuilder::setRelatedAttachments(Array * attachments)
 {
-    if (attachments != NULL) {
-        for(unsigned int i = 0 ; i < attachments->count() ; i ++) {
-            Attachment * attachment = (Attachment *) attachments->objectAtIndex(i);
-            attachment->setMessage(this);
-        }
-    }
     MC_SAFE_REPLACE_COPY(Array, mRelatedAttachments, attachments);
 }
 
@@ -597,7 +584,6 @@ void MessageBuilder::addRelatedAttachment(Attachment * attachment)
     if (mRelatedAttachments == NULL) {
         mRelatedAttachments = new Array();
     }
-    attachment->setMessage(this);
     mRelatedAttachments->addObject(attachment);
 }
 

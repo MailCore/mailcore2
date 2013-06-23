@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <typeinfo>
 #include <cxxabi.h>
+#include <libetpan/libetpan.h>
 
 #include "MCAutoreleasePool.h"
 #include "MCString.h"
@@ -115,6 +116,26 @@ struct mainThreadCallData {
     Object * obj;
     void * context;
     Object::Method method;
+    void * caller;
+};
+
+static pthread_once_t delayedPerformOnce = PTHREAD_ONCE_INIT;
+static chash * delayedPerformHash = NULL;
+
+static void reallyInitDelayedPerform()
+{
+    delayedPerformHash = chash_new(CHASH_DEFAULTSIZE, CHASH_COPYKEY);
+}
+
+static void initDelayedPerform()
+{
+    pthread_once(&delayedPerformOnce, reallyInitDelayedPerform);
+}
+
+struct mainThreadCallKeyData {
+    Object * obj;
+    void * context;
+    Object::Method method;
 };
 
 static void performOnMainThread(void * info)
@@ -134,7 +155,7 @@ static void performOnMainThread(void * info)
     free(data);
 }
 
-static void callAfterDelay(void * info)
+static void performAfterDelay(void * info)
 {
     struct mainThreadCallData * data;
     void * context;
@@ -145,6 +166,15 @@ static void callAfterDelay(void * info)
     obj = data->obj;
     context = data->context;
     method = data->method;
+    
+    chashdatum key;
+    struct mainThreadCallKeyData keyData;
+    keyData.obj = obj;
+    keyData.context = context;
+    keyData.method = method;
+    key.data = &keyData;
+    key.len = sizeof(keyData);
+    chash_delete(delayedPerformHash, &key, NULL);
     
     (obj->*method)(context);
     
@@ -159,6 +189,7 @@ void Object::performMethodOnMainThread(Method method, void * context, bool waitU
     data->obj = this;
     data->context = context;
     data->method = method;
+    data->caller = NULL;
     
     if (waitUntilDone) {
         callOnMainThreadAndWait(performOnMainThread, data);
@@ -170,12 +201,48 @@ void Object::performMethodOnMainThread(Method method, void * context, bool waitU
 
 void Object::performMethodAfterDelay(Method method, void * context, double delay)
 {
+    initDelayedPerform();
+    
     struct mainThreadCallData * data;
     
     data = (struct mainThreadCallData *) calloc(sizeof(* data), 1);
     data->obj = this;
     data->context = context;
     data->method = method;
+    data->caller = callAfterDelay(performAfterDelay, data, delay);
     
-    callAfterDelay(performOnMainThread, data, delay);
+    chashdatum key;
+    chashdatum value;
+    struct mainThreadCallKeyData keyData;
+    keyData.obj = this;
+    keyData.context = context;
+    keyData.method = method;
+    key.data = &keyData;
+    key.len = sizeof(keyData);
+    value.data = (void *) data;
+    value.len = 0;
+    chash_set(delayedPerformHash, &key, &value, NULL);
+}
+
+void Object::cancelDelayedPerformMethod(Method method, void * context)
+{
+    initDelayedPerform();
+    
+    int r;
+    chashdatum key;
+    chashdatum value;
+    struct mainThreadCallKeyData keyData;
+    keyData.obj = this;
+    keyData.context = context;
+    keyData.method = method;
+    key.data = &keyData;
+    key.len = sizeof(keyData);
+    r = chash_get(delayedPerformHash, &key, &value);
+    if (r < 0)
+        return;
+    
+    chash_delete(delayedPerformHash, &key, NULL);
+    struct mainThreadCallData * data = (struct mainThreadCallData *) value.data;
+    cancelDelayedCall(data->caller);
+    free(data);
 }

@@ -14,10 +14,7 @@
 
 /* This class holds IMAP folder metadata */
 
-@interface MCOIMAPFolderStatus : NSObject
-
-/** Create an empty instance */
-+ (MCOIMAPFolderStatus *) status;
+@interface MCOIMAPFolderStatus : NSObject <NSCopying>
 
 /** The folder's IMAP UIDNEXT value. Used to determine the uid for the next received message. */
 @property (nonatomic, assign) uint32_t uidNext;
@@ -26,17 +23,16 @@
 @property (nonatomic, assign) uint32_t uidValidity;
 
 /** Number of recent messages received in the folder */
-@property (nonatomic, assign) uint32_t totalRecent;
+@property (nonatomic, assign) uint32_t recentCount;
 
 /** Number of unseen messages in the folder */
-@property (nonatomic, assign) uint32_t totalUnseen;
+@property (nonatomic, assign) uint32_t unseenCount;
 
-// Number of messages in the folder
-@property (nonatomic, assign) uint32_t totalMessages;
+/** Number of messages in the folder */
+@property (nonatomic, assign) uint32_t messageCount;
 
-// We need also the the folder path
-
-
+/** Highest modification sequence value for this folder. See CONDSTORE RFC 4551. */
+@property (nonatomic, assign) uint64_t setHighestModSeqValue;
 
 @end
 

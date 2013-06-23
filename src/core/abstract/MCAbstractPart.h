@@ -40,9 +40,6 @@ namespace mailcore {
 		virtual bool isInlineAttachment();
 		virtual void setInlineAttachment(bool inlineAttachment);
 		
-		virtual AbstractMessage * message();
-		virtual void setMessage(AbstractMessage * message);
-		
         virtual AbstractPart * partForContentID(String * contentID);
         virtual AbstractPart * partForUniqueID(String * uniqueID);
         
@@ -67,7 +64,6 @@ namespace mailcore {
 		String * mContentLocation;
 		bool mInlineAttachment;
 		PartType mPartType;
-		AbstractMessage * mMessage; // weak
 		void init();
 	};
 	

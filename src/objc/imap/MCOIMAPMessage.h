@@ -46,8 +46,8 @@
 /** Main MIME part of the message */
 @property (nonatomic, retain) MCOAbstractPart * mainPart;
 
-/** Any Gmail labels of the message */
-@property (nonatomic, copy) NSArray * gmailLabels;
+/** All Gmail labels of the message */
+@property (nonatomic, copy) NSArray * /* NSString */ gmailLabels;
 
 /**
  Returns the part with the given part identifier.

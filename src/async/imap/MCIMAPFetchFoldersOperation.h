@@ -32,7 +32,7 @@ namespace mailcore {
         virtual void main();
         
     private:
-        String * mFolder;
+        String * /* IMAPFolder */ mFolder;
         bool mFetchSubscribedEnabled;
         Array * mFolders;
         void setDelimiterDataOnMainThread(char * delimiterData);

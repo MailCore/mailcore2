@@ -23,31 +23,36 @@ namespace mailcore {
 		IMAPFolderStatus();
 		virtual ~IMAPFolderStatus();
 
-		virtual void setUnseenCount(u_int32_t unseen);
-		virtual u_int32_t unseenCount();
+		virtual void setUnseenCount(uint32_t unseen);
+		virtual uint32_t unseenCount();
 
-		virtual void setMessageCount(u_int32_t messages);
-		virtual u_int32_t messageCount();
+		virtual void setMessageCount(uint32_t messages);
+		virtual uint32_t messageCount();
 
-		virtual void setRecentCount(u_int32_t recent);
-		virtual u_int32_t recentCount();
+		virtual void setRecentCount(uint32_t recent);
+		virtual uint32_t recentCount();
 
-		virtual void setUidNext(u_int32_t uidNext);
-		virtual u_int32_t uidNext();                
+		virtual void setUidNext(uint32_t uidNext);
+		virtual uint32_t uidNext();
 
-		virtual void setUidValidity(u_int32_t uidValidity);
-		virtual u_int32_t uidValidity();
+		virtual void setUidValidity(uint32_t uidValidity);
+		virtual uint32_t uidValidity();
+        
+        virtual void setHighestModSeqValue(uint64_t highestModSeqValue);
+        virtual uint64_t highestModSeqValue();
 
     public: // subclass behavior
 		IMAPFolderStatus(IMAPFolderStatus * other);
 		virtual Object * copy();		
+		virtual String * description();
 
 	private:
-		u_int32_t mUnseenCount;
-		u_int32_t mMessageCount;
-		u_int32_t mRecentCount;
-		u_int32_t mUidNext;
-		u_int32_t mUidValidity;
+		uint32_t mUnseenCount;
+		uint32_t mMessageCount;
+		uint32_t mRecentCount;
+		uint32_t mUidNext;
+		uint32_t mUidValidity;
+        uint64_t mHighestModSeqValue;
 
 		void init();
 	};

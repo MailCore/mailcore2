@@ -22,19 +22,19 @@
    A list of ways that you can connect to the IMAP server
    @return An array of MCONetService
 */
-- (NSArray *) imapServices;
+- (NSArray * /* MCONetService */) imapServices;
 
 /**
    A list of ways that you can connect to the SMTP server
    @return An array of MCONetService
 */
-- (NSArray *) smtpServices;
+- (NSArray * /* MCONetService */) smtpServices;
 
 /**
    A list of ways that you can connect to the POP3 server
    @return An array of MCONetService
 */
-- (NSArray *) popServices;
+- (NSArray * /* MCONetService */) popServices;
 
 - (BOOL) matchEmail:(NSString *)email;
 - (BOOL) matchMX:(NSString *)hostname;

@@ -514,6 +514,8 @@ void IMAPSession::unsetup()
 		mailimap_free(imap);
 		imap = NULL;
 	}
+    
+    mState = STATE_DISCONNECTED;
 }
 
 void IMAPSession::connect(ErrorCode * pError)
@@ -881,11 +883,14 @@ IMAPFolderStatus * IMAPSession::folderStatus(String * folder, ErrorCode * pError
     struct mailimap_status_att_list * status_att_list;
         
     status_att_list = mailimap_status_att_list_new_empty();
-    mailimap_status_att_list_add(status_att_list,MAILIMAP_STATUS_ATT_UNSEEN);
-    mailimap_status_att_list_add(status_att_list,MAILIMAP_STATUS_ATT_MESSAGES);
-    mailimap_status_att_list_add(status_att_list,MAILIMAP_STATUS_ATT_RECENT);
-    mailimap_status_att_list_add(status_att_list,MAILIMAP_STATUS_ATT_UIDNEXT);
-    mailimap_status_att_list_add(status_att_list,MAILIMAP_STATUS_ATT_UIDVALIDITY);    
+    mailimap_status_att_list_add(status_att_list, MAILIMAP_STATUS_ATT_UNSEEN);
+    mailimap_status_att_list_add(status_att_list, MAILIMAP_STATUS_ATT_MESSAGES);
+    mailimap_status_att_list_add(status_att_list, MAILIMAP_STATUS_ATT_RECENT);
+    mailimap_status_att_list_add(status_att_list, MAILIMAP_STATUS_ATT_UIDNEXT);
+    mailimap_status_att_list_add(status_att_list, MAILIMAP_STATUS_ATT_UIDVALIDITY);
+    if (mCondstoreEnabled) {
+        mailimap_status_att_list_add(status_att_list, MAILIMAP_STATUS_ATT_HIGHESTMODSEQ);
+    }
     
     r = mailimap_status(mImap, MCUTF8(folder), status_att_list, &status);
     
@@ -934,7 +939,15 @@ IMAPFolderStatus * IMAPSession::folderStatus(String * folder, ErrorCode * pError
                         break;                        
                     case MAILIMAP_STATUS_ATT_UIDVALIDITY:
                         fs->setUidValidity(status_info->st_value);
-                        break;                        
+                        break;
+                    case MAILIMAP_STATUS_ATT_EXTENSION: {
+                        struct mailimap_extension_data * ext_data = status_info->st_ext_data;
+                        if (ext_data->ext_extension == &mailimap_extension_condstore) {
+                            struct mailimap_condstore_status_info * status_info = (struct mailimap_condstore_status_info *) ext_data->ext_data;
+                            fs->setHighestModSeqValue(status_info->cs_highestmodseq_value);
+                        }
+                        break;
+                    }
                 }
             }            
         
@@ -2901,3 +2914,7 @@ bool IMAPSession::isIdentityEnabled()
     return mIdentityEnabled;
 }
 
+bool IMAPSession::isDisconnected()
+{
+    return mState == STATE_DISCONNECTED;
+}
