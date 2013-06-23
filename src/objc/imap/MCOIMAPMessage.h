@@ -49,6 +49,9 @@
 /** All Gmail labels of the message */
 @property (nonatomic, copy) NSArray * /* NSString */ gmailLabels;
 
+/** Gmail thread iD of the message */
+@property (nonatomic, copy) NSString * /* NSString */ gmailThreadID;
+
 /**
  Returns the part with the given part identifier.
  @param partID A part identifier looks like 1.2.1
