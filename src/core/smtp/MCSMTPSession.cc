@@ -44,12 +44,10 @@ SMTPSession::SMTPSession()
 
 SMTPSession::~SMTPSession()
 {
-    MCLog("dealloc");
     MC_SAFE_RELEASE(mLastSMTPResponse);
     MC_SAFE_RELEASE(mHostname);
     MC_SAFE_RELEASE(mUsername);
     MC_SAFE_RELEASE(mPassword);
-    MCLog("dealloc4");
 }
 
 void SMTPSession::setHostname(String * hostname)

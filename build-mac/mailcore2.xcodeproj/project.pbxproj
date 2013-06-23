@@ -1077,6 +1077,7 @@
 		C07AD44B013BB42A240B4F04 /* NSError+MCO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+MCO.h"; sourceTree = "<group>"; };
 		C07ADFE43E22B38EFF23ADB5 /* NSError+MCO.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSError+MCO.mm"; sourceTree = "<group>"; };
 		C60136941776B96600A5AF45 /* MCOSMTPOperation+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MCOSMTPOperation+Private.h"; sourceTree = "<group>"; };
+		C60136951776C31000A5AF45 /* MCOPOPOperation+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MCOPOPOperation+Private.h"; sourceTree = "<group>"; };
 		C608167317759967001F1018 /* MCSMTPDisconnectOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCSMTPDisconnectOperation.cc; sourceTree = "<group>"; };
 		C608167417759967001F1018 /* MCSMTPDisconnectOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSMTPDisconnectOperation.h; sourceTree = "<group>"; };
 		C6081678177625AD001F1018 /* MCOperationQueueCallback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCOperationQueueCallback.h; sourceTree = "<group>"; };
@@ -2009,6 +2010,7 @@
 				C6A81BD41706903500882C15 /* MCOPOPSession.h */,
 				C6A81BD51706903500882C15 /* MCOPOPSession.mm */,
 				C6A81BE01706905600882C15 /* MCOPOPOperation.h */,
+				C60136951776C31000A5AF45 /* MCOPOPOperation+Private.h */,
 				C6A81BE11706905600882C15 /* MCOPOPOperation.mm */,
 				C6A81BD81706903E00882C15 /* MCOPOPFetchHeaderOperation.h */,
 				C6A81BD91706903E00882C15 /* MCOPOPFetchHeaderOperation.mm */,

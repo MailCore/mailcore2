@@ -14,6 +14,7 @@
 #import "MCOPOPOperation.h"
 #import "MCOOperation+Private.h"
 #import "MCOPOPFetchMessagesOperation.h"
+#import "MCOPOPOperation+Private.h"
 
 @implementation MCOPOPSession {
     mailcore::POPAsyncSession * _session;
@@ -55,41 +56,59 @@ MCO_OBJC_SYNTHESIZE_BOOL(setCheckCertificateEnabled, isCheckCertificateEnabled)
 
 #pragma mark - Operations
 
+
+#define MCO_TO_OBJC_OP(op) [self _objcOperationFromNativeOp:op];
+#define OPAQUE_OPERATION(op) [self _objcOpaqueOperationFromNativeOp:op]
+
+- (id) _objcOperationFromNativeOp:(mailcore::POPOperation *)op
+{
+    MCOPOPOperation * result = MCO_TO_OBJC(op);
+    [result setSession:self];
+    return result;
+}
+
+- (id) _objcOpaqueOperationFromNativeOp:(mailcore::POPOperation *)op
+{
+    MCOPOPOperation * result = [[[MCOPOPOperation alloc] initWithMCOperation:op] autorelease];
+    [result setSession:self];
+    return result;
+}
+
 - (MCOPOPFetchMessagesOperation *) fetchMessagesOperation
 {
     mailcore::POPFetchMessagesOperation * coreOp = MCO_NATIVE_INSTANCE->fetchMessagesOperation();
-    return MCO_TO_OBJC(coreOp);
+    return MCO_TO_OBJC_OP(coreOp);
 }
 
 - (MCOPOPFetchHeaderOperation *) fetchHeaderOperationWithIndex:(unsigned int)index
 {
     mailcore::POPFetchHeaderOperation * coreOp = MCO_NATIVE_INSTANCE->fetchHeaderOperation(index);
-    return MCO_TO_OBJC(coreOp);
+    return MCO_TO_OBJC_OP(coreOp);
 }
 
 - (MCOPOPFetchMessageOperation *) fetchMessageOperationWithIndex:(unsigned int)index;
 {
     mailcore::POPFetchMessageOperation * coreOp = MCO_NATIVE_INSTANCE->fetchMessageOperation(index);
-    return MCO_TO_OBJC(coreOp);
+    return MCO_TO_OBJC_OP(coreOp);
 }
 
 // Will disconnect.
 - (MCOPOPOperation *) deleteMessagesOperationWithIndexes:(MCOIndexSet *)indexes
 {
     mailcore::POPOperation * coreOp = MCO_NATIVE_INSTANCE->deleteMessagesOperation(MCO_FROM_OBJC(mailcore::IndexSet, indexes));
-    return [[[MCOPOPOperation alloc] initWithMCOperation:coreOp] autorelease];
+    return OPAQUE_OPERATION(coreOp);
 }
 
 - (MCOPOPOperation *) disconnectOperation
 {
     mailcore::POPOperation * coreOp = MCO_NATIVE_INSTANCE->disconnectOperation();
-    return [[[MCOPOPOperation alloc] initWithMCOperation:coreOp] autorelease];
+    return OPAQUE_OPERATION(coreOp);
 }
 
 - (MCOPOPOperation *) checkAccountOperation
 {
     mailcore::POPOperation * coreOp = MCO_NATIVE_INSTANCE->checkAccountOperation();
-    return [[[MCOPOPOperation alloc] initWithMCOperation:coreOp] autorelease];
+    return OPAQUE_OPERATION(coreOp);
 }
 
 @end
