@@ -40,7 +40,7 @@
     MCOIMAPMessagesRequestKind requestKind = (MCOIMAPMessagesRequestKind)
     (MCOIMAPMessagesRequestKindHeaders | MCOIMAPMessagesRequestKindStructure |
      MCOIMAPMessagesRequestKindInternalDate | MCOIMAPMessagesRequestKindHeaderSubject |
-     MCOIMAPMessagesRequestKindFlags);
+     MCOIMAPMessagesRequestKindFlags | MCOIMAPMessagesRequestKindGmailThreadID);
     
     _op = [_session fetchMessagesByUIDOperationWithFolder:FOLDER requestKind:requestKind uids:[MCOIndexSet indexSetWithRange:MCORangeMake(1, UINT64_MAX)]];
     [_op setProgress:^(unsigned int current){
@@ -54,7 +54,7 @@
         _messages = [[messages sortedArrayUsingDescriptors:@[sort]] retain];
 		
         NSLog(@"%i messages", (int) [_messages count]);
-        //NSLog(@"%@", _messages);
+        NSLog(@"%llu", [[_messages objectAtIndex:0]gmailThreadID]);
         [_tableView reloadData];
 		self.loading = NO;
     }];

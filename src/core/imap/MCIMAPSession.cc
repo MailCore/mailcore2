@@ -1724,10 +1724,10 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
                 labels->release();
             }
             else if (ext_data->ext_extension == &mailimap_extension_xgmthrid) {
-                String * threadID;
+                uint64_t * threadID;
                 
-                threadID = String::stringWithUTF8Characters((char *) ext_data->ext_data);
-                msg->setGmailThreadID(threadID);
+                threadID = (uint64_t *) ext_data->ext_data;
+                msg->setGmailThreadID(*threadID);
                 hasGmailThreadID = true;
             }
         }
@@ -1837,7 +1837,6 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
         needsGmailLabels = true;
     }
     if ((requestKind & IMAPMessagesRequestKindGmailThreadID) != 0) {
-		MCLog("request flags");
         fetch_att = mailimap_fetch_att_new_xgmthrid();
         mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
         needsGmailThreadID = true;

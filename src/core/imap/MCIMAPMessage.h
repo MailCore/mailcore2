@@ -10,13 +10,13 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-
+    
     class IMAPPart;
     class HTMLRendererIMAPCallback;
     class HTMLRendererTemplateCallback;
     
-	class IMAPMessage : public AbstractMessage {
-	public:
+    class IMAPMessage : public AbstractMessage {
+    public:
         IMAPMessage();
         ~IMAPMessage();
         
@@ -38,8 +38,8 @@ namespace mailcore {
         virtual void setGmailLabels(Array * /* String */ labels);
         virtual Array * /* String */ gmailLabels();
         
-        virtual void setGmailThreadID(String * threadID);
-        virtual String * gmailThreadID();
+        virtual void setGmailThreadID(uint64_t threadID);
+        virtual uint64_t gmailThreadID();
         
         virtual AbstractPart * partForPartID(String * partID);
         
@@ -55,17 +55,17 @@ namespace mailcore {
         virtual Object * copy();
         virtual String * description();
         
-	private:
+    private:
         uint64_t mModSeqValue;
         uint32_t mUid;
         MessageFlag mFlags;
         MessageFlag mOriginalFlags;
         AbstractPart * mMainPart;
         Array * /* String */ mLabels;
-        String * mThreadID;
+        uint64_t mThreadID;
         void init();
-	};
-
+    };
+    
 }
 
 #endif

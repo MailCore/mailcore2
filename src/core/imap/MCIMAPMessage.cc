@@ -122,12 +122,12 @@ Array * IMAPMessage::gmailLabels()
     return mLabels;
 }
 
-void IMAPMessage::setGmailThreadID(String * threadID)
+void IMAPMessage::setGmailThreadID(uint64_t threadID)
 {
-    MC_SAFE_REPLACE_COPY(String, mThreadID, threadID);
+    mThreadID = threadID;
 }
 
-String * IMAPMessage::gmailThreadID()
+uint64_t IMAPMessage::gmailThreadID()
 {
     return mThreadID;
 }

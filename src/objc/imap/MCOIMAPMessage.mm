@@ -47,7 +47,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(MCOMessageFlag, mailcore::MessageFlag, setOriginalFla
 MCO_OBJC_SYNTHESIZE_SCALAR(uint64_t, uint64_t, setModSeqValue, modSeqValue)
 MCO_OBJC_SYNTHESIZE(AbstractPart, setMainPart, mainPart)
 MCO_OBJC_SYNTHESIZE_ARRAY(setGmailLabels, gmailLabels)
-MCO_OBJC_SYNTHESIZE_STRING(setGmailThreadID, gmailThreadID)
+MCO_OBJC_SYNTHESIZE_SCALAR(uint64_t, uint64_t, setGmailThreadID, gmailThreadID)
 
 - (MCOAbstractPart *) partForPartID:(NSString *)partID
 {
