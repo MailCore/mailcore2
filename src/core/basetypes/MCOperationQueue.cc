@@ -127,6 +127,7 @@ void OperationQueue::callbackOnMainThread(Operation * op)
 
 void OperationQueue::checkRunningOnMainThread(void * context)
 {
+    cancelDelayedPerformMethod((Object::Method) &OperationQueue::checkRunningAfterDelay, NULL);
     performMethodAfterDelay((Object::Method) &OperationQueue::checkRunningAfterDelay, NULL, 1);
 }
 
