@@ -18,6 +18,9 @@ MailCore 2 provides a simple and asynchronous Objective-C API to work with the e
         - Go to Build Phases from your build target, and under 'Link Binary With Libraries', add `MailCore.framework`.
         - Make sure to use LLVM C++ standard library.  Open Build Settings, scroll down to 'C++ Standard Library', and select `libc++`.
         - In Build Phases, add a Target Dependency of `mailcore osx` (it's the one with a little toolbox icon).
+        - Goto `Editor > Add Build Phase > Copy Files`.
+        - Expand the newly created Build Phase and change it's destination to "Frameworks".
+        - Click the `+` icon and select `MailCore.framework`.
     * Mac static library
         - Go to Build Phases from your build target, and under 'Link Binary With Libraries', add `libMailCore.a`.
         - Set 'Other Linker Flags' under Build Settings: `-lctemplate -letpan -licudata -licui18n -licuuc -lxml2 -lsasl2 -liconv -ltidy` `-lc++ -stdlib=libc++ -all_load`
