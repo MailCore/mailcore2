@@ -478,7 +478,7 @@ MessageBuilder::MessageBuilder(MessageBuilder * other)
 {
     init();
     setHTMLBody(other->mHTMLBody);
-    setHTMLBody(other->mTextBody);
+    setTextBody(other->mTextBody);
     setAttachments(other->mAttachments);
     setRelatedAttachments(other->mRelatedAttachments);
     MC_SAFE_REPLACE_COPY(String, mBoundaryPrefix, other->mBoundaryPrefix);
