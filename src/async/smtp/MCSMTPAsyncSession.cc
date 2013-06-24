@@ -157,6 +157,7 @@ void SMTPAsyncSession::tryAutomaticDisconnect()
         return;
     }
     
+    cancelDelayedPerformMethod((Object::Method) &SMTPAsyncSession::tryAutomaticDisconnectAfterDelay, NULL);
     performMethodAfterDelay((Object::Method) &SMTPAsyncSession::tryAutomaticDisconnectAfterDelay, NULL, 30);
 }
 

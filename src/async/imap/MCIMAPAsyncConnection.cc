@@ -482,6 +482,7 @@ void IMAPAsyncConnection::tryAutomaticDisconnect()
         return;
     }
     
+    cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
     performMethodAfterDelay((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, 30);
 }
 
