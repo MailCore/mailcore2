@@ -10,6 +10,9 @@ if test x$1 != xskipprebuilt ; then
   fi
   timestamp=`ruby -e 'puts Time.now.to_i'`
   age=$((($timestamp-$file_timestamp)/3600)) # in hours
+  if test ! -d ../Externals/prebuilt ; then
+    age=1
+  fi
   if test $age -gt 0 ; then
     networkerror=no
     #echo "$url_prefix/prebuilt.list"
@@ -20,6 +23,7 @@ if test x$1 != xskipprebuilt ; then
     
     if test x$networkerror = xyes ; then
       echo WARNING: could not get prebuilt.list from repository
+      exit 1
     fi
     
     mv prebuilt.list.tmp prebuilt.list
@@ -27,7 +31,7 @@ if test x$1 != xskipprebuilt ; then
     if test -f prebuilt.list ; then
       files=`cat prebuilt.list`
       mkdir -p ../Externals/builds/builds
-      mkdir -p ../Externals/prebuilt/mailcore2-deps
+      mkdir -p ../Externals/prebuilt
       pushd ../Externals/prebuilt
       rm -rf .git
       if test -d mailcore2-deps ; then
