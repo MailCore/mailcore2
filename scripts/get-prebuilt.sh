@@ -33,7 +33,7 @@ if test x$1 != xskipprebuilt ; then
     for filename in $files ; do
       if test ! -f $filename ; then
         echo get $filename
-        curl -O "$url_prefix/$filename"
+        curl -L -O "$url_prefix/$filename"
       fi
     done
     rsync --exclude=.git -av ./ ../../builds/builds/
