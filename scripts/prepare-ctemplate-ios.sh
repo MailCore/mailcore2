@@ -43,7 +43,7 @@ if test -f "$resultdir/ctemplate-ios-$version.zip" ; then
 	unzip -q "$resultdir/ctemplate-ios-$version.zip" -d ../Externals/tmp
 	mv "../Externals/tmp/ctemplate-ios-$version/ctemplate-ios" ../Externals
   mkdir -p ../Externals/installed
-  ln -s "$resultdir/ctemplate-ios-$version.zip" ../Externals/installed
+  ln -sf "$resultdir/ctemplate-ios-$version.zip" ../Externals/installed
 	rm -rf ../Externals/tmp
 	exit 0
 fi

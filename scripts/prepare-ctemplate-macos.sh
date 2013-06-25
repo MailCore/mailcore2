@@ -49,7 +49,7 @@ if test -f "$resultdir/ctemplate-$version.zip" ; then
 	unzip -q "$resultdir/ctemplate-$version.zip" -d ../Externals/tmp
 	mv "../Externals/tmp/ctemplate-$version/ctemplate" ../Externals
   mkdir -p ../Externals/installed
-  ln -s "$resultdir/ctemplate-$version.zip" ../Externals/installed
+  ln -sf "$resultdir/ctemplate-$version.zip" ../Externals/installed
 	rm -rf ../Externals/tmp
 	exit 0
 fi

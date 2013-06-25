@@ -42,7 +42,7 @@ if test -f "$resultdir/tidy-html5-ios-$version.zip" ; then
 	unzip -q "$resultdir/tidy-html5-ios-$version.zip" -d ../Externals/tmp
 	mv "../Externals/tmp/tidy-html5-ios-$version/tidy-html5-ios" ../Externals
   mkdir -p ../Externals/installed
-  ln -s "$resultdir/tidy-html5-ios-$version.zip" ../Externals/installed
+  ln -sf "$resultdir/tidy-html5-ios-$version.zip" ../Externals/installed
 	rm -rf ../Externals/tmp
 	exit 0
 fi

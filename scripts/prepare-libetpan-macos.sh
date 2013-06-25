@@ -43,7 +43,7 @@ if test -f "$resultdir/libetpan-$version.zip" ; then
 	unzip -q "$resultdir/libetpan-$version.zip" -d ../Externals/tmp
 	mv "../Externals/tmp/libetpan-$version/libetpan" ../Externals
   mkdir -p ../Externals/installed
-  ln -s "$resultdir/libetpan-$version.zip" ../Externals/installed
+  ln -sf "$resultdir/libetpan-$version.zip" ../Externals/installed
 	rm -rf ../Externals/tmp
 	exit 0
 fi
