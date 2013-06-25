@@ -72,7 +72,7 @@ void OperationQueue::runOperations()
         quitting = mQuitting;
         pthread_mutex_unlock(&mLock);
 
-        MCLog("quitting %i %p", mQuitting, op);
+        //MCLog("quitting %i %p", mQuitting, op);
         if ((op == NULL) && quitting) {
             MCLog("stopping %p", this);
             mailsem_up(mStopSem);
