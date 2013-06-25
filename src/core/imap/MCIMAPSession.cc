@@ -14,6 +14,8 @@
 #include "MCIMAPNamespace.h"
 #include "MCIMAPSyncResult.h"
 #include "MCIMAPFolderStatus.h"
+#include "MCConnectionLogger.h"
+#include "MCConnectionLoggerUtils.h"
 
 using namespace mailcore;
 
@@ -308,38 +310,39 @@ static IndexSet * indexSetFromSet(struct mailimap_set * imap_set)
 void IMAPSession::init()
 {
     mHostname = NULL;
-	mPort = 0;
+    mPort = 0;
     mUsername = NULL;
     mPassword = NULL;
     mAuthType = AuthTypeSASLNone;
     mConnectionType = ConnectionTypeClear;
-	mCheckCertificateEnabled = true;
+    mCheckCertificateEnabled = true;
     mVoIPEnabled = true;
-	mDelimiter = 0;
-	
+    mDelimiter = 0;
+    
     mBodyProgressEnabled = true;
     mIdleEnabled = false;
-	mXListEnabled = false;
+    mXListEnabled = false;
     mQResyncEnabled = false;
     mCondstoreEnabled = false;
     mIdentityEnabled = false;
     mWelcomeString = NULL;
-	mNeedsMboxMailWorkaround = false;
-	mDefaultNamespace = NULL;
-	mTimeout = 30;
-	mUIDValidity = 0;
-	mUIDNext = 0;
+    mNeedsMboxMailWorkaround = false;
+    mDefaultNamespace = NULL;
+    mTimeout = 30;
+    mUIDValidity = 0;
+    mUIDNext = 0;
     mModSequenceValue = 0;
-	mFolderMsgCount = 0;
+    mFolderMsgCount = 0;
     mFirstUnseenUid = 0;
-	mLastFetchedSequenceNumber = 0;
-	mCurrentFolder = NULL;
+    mLastFetchedSequenceNumber = 0;
+    mCurrentFolder = NULL;
     pthread_mutex_init(&mIdleLock, NULL);
     mCanIdle = false;
-	mState = STATE_DISCONNECTED;
-	mImap = NULL;
-	mProgressCallback = NULL;
-	mProgressItemsCount = 0;
+    mState = STATE_DISCONNECTED;
+    mImap = NULL;
+    mProgressCallback = NULL;
+    mProgressItemsCount = 0;
+    mConnectionLogger = NULL;
 }
 
 IMAPSession::IMAPSession()
@@ -487,6 +490,26 @@ void IMAPSession::items_progress(size_t current, size_t maximum, void * context)
     session->itemsProgress((unsigned int) current, (unsigned int) maximum);
 }
 
+static void logger(mailimap * imap, int log_type, const char * buffer, size_t size, void * context)
+{
+    IMAPSession * session = (IMAPSession *) context;
+    
+    if (session->connectionLogger() == NULL)
+        return;
+    
+    ConnectionLogType type = getConnectionType(log_type);
+    bool isBuffer = isBufferFromLogType(log_type);
+    
+    if (isBuffer) {
+        Data * data = Data::dataWithBytes(buffer, (unsigned int) size);
+        session->connectionLogger()->logBuffer(type, data);
+    }
+    else {
+        Data * data = Data::dataWithBytes(buffer, (unsigned int) size);
+        session->connectionLogger()->logString(type, String::stringWithData(data));
+    }
+}
+
 void IMAPSession::setup()
 {
 	MCAssert(mImap == NULL);
@@ -494,6 +517,7 @@ void IMAPSession::setup()
 	mImap = mailimap_new(0, NULL);
     mailimap_set_timeout(mImap, timeout());
     mailimap_set_progress_callback(mImap, body_progress, IMAPSession::items_progress, this);
+    mailimap_set_logger(mImap, logger, this);
 }
 
 void IMAPSession::unsetup()
@@ -2963,4 +2987,14 @@ bool IMAPSession::isIdentityEnabled()
 bool IMAPSession::isDisconnected()
 {
     return mState == STATE_DISCONNECTED;
+}
+
+void IMAPSession::setConnectionLogger(ConnectionLogger * logger)
+{
+    mConnectionLogger = logger;
+}
+
+ConnectionLogger * IMAPSession::connectionLogger()
+{
+    return mConnectionLogger;
 }

@@ -8,6 +8,7 @@
 #include "MCMessageParser.h"
 #include "MCMessageHeader.h"
 #include "MCSMTPProgressCallback.h"
+#include "MCConnectionLoggerUtils.h"
 
 using namespace mailcore;
 
@@ -35,6 +36,7 @@ void SMTPSession::init()
     mLastSMTPResponse = NULL;
     mLastLibetpanError = 0;
     mLastSMTPResponseCode = 0;
+    mConnectionLogger = NULL;
 }
 
 SMTPSession::SMTPSession()
@@ -161,11 +163,34 @@ void SMTPSession::bodyProgress(unsigned int current, unsigned int maximum)
     }
 }
 
+
+static void logger(mailsmtp * pop3, int log_type, const char * buffer, size_t size, void * context)
+{
+    SMTPSession * session = (SMTPSession *) context;
+    
+    if (session->connectionLogger() == NULL)
+        return;
+    
+    ConnectionLogType type = getConnectionType(log_type);
+    bool isBuffer = isBufferFromLogType(log_type);
+    
+    if (isBuffer) {
+        Data * data = Data::dataWithBytes(buffer, (unsigned int) size);
+        session->connectionLogger()->logBuffer(type, data);
+    }
+    else {
+        Data * data = Data::dataWithBytes(buffer, (unsigned int) size);
+        session->connectionLogger()->logString(type, String::stringWithData(data));
+    }
+}
+
+
 void SMTPSession::setup()
 {
-	mSmtp = mailsmtp_new(0, NULL);
-	mailsmtp_set_timeout(mSmtp, timeout());
+    mSmtp = mailsmtp_new(0, NULL);
+    mailsmtp_set_timeout(mSmtp, timeout());
     mailsmtp_set_progress_callback(mSmtp, body_progress, this);
+    mailsmtp_set_logger(mSmtp, logger, this);
 }
 
 void SMTPSession::unsetup()
@@ -680,4 +705,14 @@ void SMTPSession::sendMessage(MessageBuilder * msg, SMTPProgressCallback * callb
 bool SMTPSession::isDisconnected()
 {
     return mState == STATE_DISCONNECTED;
+}
+
+void SMTPSession::setConnectionLogger(ConnectionLogger * logger)
+{
+    mConnectionLogger = logger;
+}
+
+ConnectionLogger * SMTPSession::connectionLogger()
+{
+    return mConnectionLogger;
 }
