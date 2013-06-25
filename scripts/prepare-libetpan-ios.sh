@@ -46,6 +46,9 @@ if test -f "$resultdir/libetpan-ios-$version.zip" ; then
 	unzip -q "$resultdir/libsasl-ios-$version.zip" -d ../Externals/tmp
 	mv "../Externals/tmp/libetpan-ios-$version/libetpan-ios" ../Externals
 	mv "../Externals/tmp/libsasl-ios-$version/libsasl-ios" ../Externals
+  mkdir -p ../Externals/installed
+  ln -s "$resultdir/libetpan-ios-$version.zip" ../Externals/installed
+  ln -s "$resultdir/libsasl-ios-$version.zip" ../Externals/installed
 	rm -rf ../Externals/tmp
 	exit 0
 fi

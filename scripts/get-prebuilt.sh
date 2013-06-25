@@ -1,6 +1,7 @@
 #!/bin/sh
 
-url_prefix="https://github.com/MailCore/mailcore2-deps/raw/master"
+url="https://github.com/MailCore/mailcore2-deps"
+url_prefix="$url/raw/master"
 
 if test x$1 != xskipprebuilt ; then
   file_timestamp=0
@@ -22,21 +23,28 @@ if test x$1 != xskipprebuilt ; then
     fi
     
     mv prebuilt.list.tmp prebuilt.list
-  fi
   
-  if test -f prebuilt.list ; then
-    files=`cat prebuilt.list`
-    mkdir -p ../Externals/builds/builds
-    mkdir -p ../Externals/prebuilt/mailcore2-deps
-    pushd ../Externals/prebuilt/mailcore2-deps
-    rm -rf .git
-    for filename in $files ; do
-      if test ! -f $filename ; then
-        echo get $filename
-        curl -L -O "$url_prefix/$filename"
+    if test -f prebuilt.list ; then
+      files=`cat prebuilt.list`
+      mkdir -p ../Externals/builds/builds
+      mkdir -p ../Externals/prebuilt/mailcore2-deps
+      pushd ../Externals/prebuilt
+      rm -rf .git
+      if test -d mailcore2-deps ; then
+        cd mailcore2-deps
+        git pull --rebase
+        cd ..
+      else
+        git clone --depth 1 "$url"
       fi
-    done
-    rsync --exclude=.git -av ./ ../../builds/builds/
-    popd
-  fi
+      # for filename in $files ; do
+        #   if test ! -f $filename ; then
+        #     echo get $filename
+        #     curl -L -O "$url_prefix/$filename"
+        #   fi
+        # done
+        rsync --exclude=.git -av mailcore2-deps/ ../builds/builds/
+        popd
+      fi
+    fi
 fi
