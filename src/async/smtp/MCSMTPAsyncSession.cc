@@ -237,7 +237,7 @@ void SMTPAsyncSession::logConnection(ConnectionLogType logType, Data * buffer)
 {
     pthread_mutex_lock(&mConnectionLoggerLock);
     if (mConnectionLogger != NULL) {
-        mConnectionLogger->log(mConnectionLogger->context(), this, logType, buffer);
+        mConnectionLogger->log(this, logType, buffer);
     }
     pthread_mutex_unlock(&mConnectionLoggerLock);
 }

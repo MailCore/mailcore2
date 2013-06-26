@@ -176,10 +176,10 @@ static void logger(mailsmtp * smtp, int log_type, const char * buffer, size_t si
     
     if (isBuffer) {
         Data * data = Data::dataWithBytes(buffer, (unsigned int) size);
-        session->connectionLogger()->log(session->connectionLogger()->context(), session, type, data);
+        session->connectionLogger()->log(session, type, data);
     }
     else {
-        session->connectionLogger()->log(session->connectionLogger()->context(), session, type, NULL);
+        session->connectionLogger()->log(session, type, NULL);
     }
 }
 
