@@ -22,8 +22,32 @@
 
 using namespace mailcore;
 
+@interface MCOIMAPSession ()
+
+- (void) _logWithSender:(void *)sender connectionType:(MCOConnectionLogType)logType data:(NSData *)data;
+
+@end
+
+class MCOIMAPConnectionLoggerBridge : public Object, public ConnectionLogger {
+public:
+    MCOIMAPConnectionLoggerBridge(MCOIMAPSession * session)
+    {
+        mSession = session;
+    }
+    
+    virtual void log(void * context, void * sender, ConnectionLogType logType, Data * data)
+    {
+        [mSession _logWithSender:sender connectionType:(MCOConnectionLogType)logType data:MCO_TO_OBJC(data)];
+    }
+    
+private:
+    MCOIMAPSession * mSession;
+};
+
 @implementation MCOIMAPSession {
     IMAPAsyncSession * _session;
+    MCOConnectionLogger _connectionLogger;
+    MCOIMAPConnectionLoggerBridge * _loggerBridge;
 }
 
 #define nativeType mailcore::IMAPAsyncSession
@@ -35,13 +59,16 @@ using namespace mailcore;
 
 - (id)init {
     self = [super init];
-    if (self) {
-        _session = new IMAPAsyncSession();
-    }
+    
+    _session = new IMAPAsyncSession();
+    _loggerBridge = new MCOIMAPConnectionLoggerBridge(self);
+    
     return self;
 }
 
 - (void)dealloc {
+    MC_SAFE_RELEASE(_loggerBridge);
+    [_connectionLogger release];
     _session->release();
     [super dealloc];
 }
@@ -58,6 +85,24 @@ MCO_OBJC_SYNTHESIZE_BOOL(setVoIPEnabled, isVoIPEnabled)
 MCO_OBJC_SYNTHESIZE_SCALAR(char, char, setDelimiter, delimiter)
 MCO_OBJC_SYNTHESIZE_SCALAR(BOOL, BOOL, setAllowsFolderConcurrentAccessEnabled, allowsFolderConcurrentAccessEnabled)
 MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, maximumConnections)
+
+- (void) setConnectionLogger:(MCOConnectionLogger)connectionLogger
+{
+    [_connectionLogger release];
+    _connectionLogger = [connectionLogger copy];
+    
+    if (_connectionLogger != nil) {
+        _session->setConnectionLogger(_loggerBridge);
+    }
+    else {
+        _session->setConnectionLogger(NULL);
+    }
+}
+
+- (MCOConnectionLogger) connectionLogger
+{
+    return _connectionLogger;
+}
 
 #pragma mark - Operations
 
@@ -301,6 +346,11 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
 {
     IMAPCapabilityOperation * coreOp = MCO_NATIVE_INSTANCE->capabilityOperation();
     return MCO_TO_OBJC_OP(coreOp);
+}
+
+- (void) _logWithSender:(void *)sender connectionType:(MCOConnectionLogType)logType data:(NSData *)data
+{
+    _connectionLogger(sender, logType, data);
 }
 
 @end
