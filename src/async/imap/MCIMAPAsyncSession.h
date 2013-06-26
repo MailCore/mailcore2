@@ -33,7 +33,6 @@ namespace mailcore {
 	class IMAPIdentityOperation;
 	class IMAPAsyncConnection;
 	class IMAPCapabilityOperation;
-    class ConnectionLogger;
     
 	class IMAPAsyncSession : public Object {
 	public:
