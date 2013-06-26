@@ -17,8 +17,34 @@
 #import "MCOAddress.h"
 #import "MCOSMTPOperation+Private.h"
 
+using namespace mailcore;
+
+@interface MCOSMTPSession ()
+
+- (void) _logWithSender:(void *)sender connectionType:(MCOConnectionLogType)logType data:(NSData *)data;
+
+@end
+
+class MCOSMTPConnectionLoggerBridge : public Object, public ConnectionLogger {
+public:
+    MCOSMTPConnectionLoggerBridge(MCOSMTPSession * session)
+    {
+        mSession = session;
+    }
+    
+    virtual void log(void * context, void * sender, ConnectionLogType logType, Data * data)
+    {
+        [mSession _logWithSender:sender connectionType:(MCOConnectionLogType)logType data:MCO_TO_OBJC(data)];
+    }
+    
+private:
+    MCOSMTPSession * mSession;
+};
+
 @implementation MCOSMTPSession {
     mailcore::SMTPAsyncSession * _session;
+    MCOConnectionLogger _connectionLogger;
+    MCOSMTPConnectionLoggerBridge * _loggerBridge;
 }
 
 #define nativeType mailcore::SMTPAsyncSession
@@ -30,13 +56,16 @@
 
 - (id)init {
     self = [super init];
-    if (self) {
-        _session = new mailcore::SMTPAsyncSession();
-    }
+    
+    _session = new mailcore::SMTPAsyncSession();
+    _loggerBridge = new MCOSMTPConnectionLoggerBridge(self);
+    
     return self;
 }
 
 - (void)dealloc {
+    MC_SAFE_RELEASE(_loggerBridge);
+    [_connectionLogger release];
     _session->release();
     [super dealloc];
 }
@@ -50,6 +79,24 @@ MCO_OBJC_SYNTHESIZE_SCALAR(MCOConnectionType, mailcore::ConnectionType, setConne
 MCO_OBJC_SYNTHESIZE_SCALAR(NSTimeInterval, time_t, setTimeout, timeout)
 MCO_OBJC_SYNTHESIZE_BOOL(setCheckCertificateEnabled, isCheckCertificateEnabled)
 MCO_OBJC_SYNTHESIZE_BOOL(setUseHeloIPEnabled, useHeloIPEnabled)
+
+- (void) setConnectionLogger:(MCOConnectionLogger)connectionLogger
+{
+    [_connectionLogger release];
+    _connectionLogger = [connectionLogger copy];
+    
+    if (_connectionLogger != nil) {
+        _session->setConnectionLogger(_loggerBridge);
+    }
+    else {
+        _session->setConnectionLogger(NULL);
+    }
+}
+
+- (MCOConnectionLogger) connectionLogger
+{
+    return _connectionLogger;
+}
 
 #pragma mark - Operations
 
@@ -67,6 +114,11 @@ MCO_OBJC_SYNTHESIZE_BOOL(setUseHeloIPEnabled, useHeloIPEnabled)
     MCOSMTPOperation * result = [[[MCOSMTPOperation alloc] initWithMCOperation:coreOp] autorelease];
     [result setSession:self];
     return result;
+}
+
+- (void) _logWithSender:(void *)sender connectionType:(MCOConnectionLogType)logType data:(NSData *)data
+{
+    _connectionLogger(sender, logType, data);
 }
 
 @end

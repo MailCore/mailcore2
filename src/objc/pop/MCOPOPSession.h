@@ -53,6 +53,15 @@ See MCOConnectionType for more information.*/
 /** When set to YES, the connection will fail if the certificate is incorrect.*/
 @property (nonatomic, assign, getter=isCheckCertificateEnabled) BOOL checkCertificateEnabled;
 
+/**
+ Sets logger callback. The network traffic will be sent to this block.
+ 
+ [session setConnectionLogger:^(void * connectionID, MCOConnectionLogType type, NSData * data) {
+   ...
+ }];
+ */
+@property (nonatomic, copy) MCOConnectionLogger connectionLogger;
+
 /** @name Operations */
 
 /**

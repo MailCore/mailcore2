@@ -16,8 +16,34 @@
 #import "MCOPOPFetchMessagesOperation.h"
 #import "MCOPOPOperation+Private.h"
 
+using namespace mailcore;
+
+@interface MCOPOPSession ()
+
+- (void) _logWithSender:(void *)sender connectionType:(MCOConnectionLogType)logType data:(NSData *)data;
+
+@end
+
+class MCOPOPConnectionLoggerBridge : public Object, public ConnectionLogger {
+public:
+    MCOPOPConnectionLoggerBridge(MCOPOPSession * session)
+    {
+        mSession = session;
+    }
+    
+    virtual void log(void * context, void * sender, ConnectionLogType logType, Data * data)
+    {
+        [mSession _logWithSender:sender connectionType:(MCOConnectionLogType)logType data:MCO_TO_OBJC(data)];
+    }
+    
+private:
+    MCOPOPSession * mSession;
+};
+
 @implementation MCOPOPSession {
     mailcore::POPAsyncSession * _session;
+    MCOConnectionLogger _connectionLogger;
+    MCOPOPConnectionLoggerBridge * _loggerBridge;
 }
 
 #define nativeType mailcore::POPAsyncSession
@@ -34,13 +60,16 @@
 
 - (id)init {
     self = [super init];
-    if (self) {
-        _session = new mailcore::POPAsyncSession();
-    }
+    
+    _session = new mailcore::POPAsyncSession();
+    _loggerBridge = new MCOPOPConnectionLoggerBridge(self);
+    
     return self;
 }
 
 - (void)dealloc {
+    MC_SAFE_RELEASE(_loggerBridge);
+    [_connectionLogger release];
     _session->release();
     [super dealloc];
 }
@@ -53,6 +82,24 @@ MCO_OBJC_SYNTHESIZE_SCALAR(MCOAuthType, mailcore::AuthType, setAuthType, authTyp
 MCO_OBJC_SYNTHESIZE_SCALAR(MCOConnectionType, mailcore::ConnectionType, setConnectionType, connectionType)
 MCO_OBJC_SYNTHESIZE_SCALAR(NSTimeInterval, time_t, setTimeout, timeout)
 MCO_OBJC_SYNTHESIZE_BOOL(setCheckCertificateEnabled, isCheckCertificateEnabled)
+
+- (void) setConnectionLogger:(MCOConnectionLogger)connectionLogger
+{
+    [_connectionLogger release];
+    _connectionLogger = [connectionLogger copy];
+    
+    if (_connectionLogger != nil) {
+        _session->setConnectionLogger(_loggerBridge);
+    }
+    else {
+        _session->setConnectionLogger(NULL);
+    }
+}
+
+- (MCOConnectionLogger) connectionLogger
+{
+    return _connectionLogger;
+}
 
 #pragma mark - Operations
 
@@ -109,6 +156,11 @@ MCO_OBJC_SYNTHESIZE_BOOL(setCheckCertificateEnabled, isCheckCertificateEnabled)
 {
     mailcore::POPOperation * coreOp = MCO_NATIVE_INSTANCE->checkAccountOperation();
     return OPAQUE_OPERATION(coreOp);
+}
+
+- (void) _logWithSender:(void *)sender connectionType:(MCOConnectionLogType)logType data:(NSData *)data
+{
+    _connectionLogger(sender, logType, data);
 }
 
 @end

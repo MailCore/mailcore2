@@ -324,4 +324,28 @@ typedef enum {
     MCOErrorInvalidAccount,
 } MCOErrorCode;
 
+/** Here's the list of connection log types.*/
+typedef enum {
+    /** Received data.*/
+    MCOConnectionLogTypeReceived,
+    /** Sent data.*/
+    MCOConnectionLogTypeSent,
+    /** Sent private data. It can be a password.*/
+    MCOConnectionLogTypeSentPrivate,
+    /** Parse error.*/
+    MCOConnectionLogTypeErrorParse,
+    /** Error while receiving data. The data passed to the log will be nil.*/
+    MCOConnectionLogTypeErrorReceived,
+    /** Error while sending dataThe data passed to the log will be nil.*/
+    MCOConnectionLogTypeErrorSent,
+} MCOConnectionLogType;
+
+/**
+ It's a network traffic logger.
+ @param connectionID is the identifier of the underlaying network socket.
+ @param type is the type of the log.
+ @param data is the data related to the log.
+ */
+typedef void (^MCOConnectionLogger)(void * connectionID, MCOConnectionLogType type, NSData * data);
+
 #endif

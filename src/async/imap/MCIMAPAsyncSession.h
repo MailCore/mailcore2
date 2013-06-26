@@ -127,7 +127,7 @@ namespace mailcore {
 		virtual IMAPOperation * checkAccountOperation();
         
 		virtual IMAPCapabilityOperation * capabilityOperation();
-        
+    
 	private:
         Array * mSessions;
         
