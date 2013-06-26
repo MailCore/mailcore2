@@ -15,6 +15,7 @@
 #include "MCPOPFetchMessagesOperation.h"
 #include "MCPOPCheckAccountOperation.h"
 #include "MCOperationQueueCallback.h"
+#include "MCConnectionLogger.h"
 
 using namespace mailcore;
 
@@ -39,6 +40,24 @@ namespace mailcore {
     private:
         POPAsyncSession * mSession;
     };
+    
+    class POPConnectionLogger : public Object, public ConnectionLogger {
+    public:
+        POPConnectionLogger(POPAsyncSession * session) {
+            mSession = session;
+        }
+        
+        virtual ~POPConnectionLogger() {
+        }
+        
+        virtual void log(void * context, void * sender, ConnectionLogType logType, Data * buffer)
+        {
+            mSession->logConnection(logType, buffer);
+        }
+        
+    private:
+        POPAsyncSession * mSession;
+    };
 }
 
 POPAsyncSession::POPAsyncSession()
@@ -47,10 +66,16 @@ POPAsyncSession::POPAsyncSession()
     mQueue = new OperationQueue();
     mQueueCallback = new POPOperationQueueCallback(this);
     mQueue->setCallback(mQueueCallback);
+    mConnectionLogger = NULL;
+    pthread_mutex_init(&mConnectionLoggerLock, NULL);
+    mInternalLogger = new POPConnectionLogger(this);
+    mSession->setConnectionLogger(mInternalLogger);
 }
 
 POPAsyncSession::~POPAsyncSession()
 {
+    MC_SAFE_RELEASE(mInternalLogger);
+    pthread_mutex_destroy(&mConnectionLoggerLock);
     MC_SAFE_RELEASE(mQueueCallback);
     MC_SAFE_RELEASE(mSession);
     MC_SAFE_RELEASE(mQueue);
@@ -192,4 +217,37 @@ POPSession * POPAsyncSession::session()
 void POPAsyncSession::runOperation(POPOperation * operation)
 {
     mQueue->addOperation(operation);
+}
+
+void POPAsyncSession::setConnectionLogger(ConnectionLogger * logger)
+{
+    pthread_mutex_lock(&mConnectionLoggerLock);
+    mConnectionLogger = logger;
+    if (mConnectionLogger != NULL) {
+        mSession->setConnectionLogger(mInternalLogger);
+    }
+    else {
+        mSession->setConnectionLogger(NULL);
+    }
+    pthread_mutex_unlock(&mConnectionLoggerLock);
+}
+
+ConnectionLogger * POPAsyncSession::connectionLogger()
+{
+    ConnectionLogger * result;
+    
+    pthread_mutex_lock(&mConnectionLoggerLock);
+    result = mConnectionLogger;
+    pthread_mutex_unlock(&mConnectionLoggerLock);
+    
+    return result;
+}
+
+void POPAsyncSession::logConnection(ConnectionLogType logType, Data * buffer)
+{
+    pthread_mutex_lock(&mConnectionLoggerLock);
+    if (mConnectionLogger != NULL) {
+        mConnectionLogger->log(mConnectionLogger->context(), this, logType, buffer);
+    }
+    pthread_mutex_unlock(&mConnectionLoggerLock);
 }

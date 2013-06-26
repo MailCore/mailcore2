@@ -69,7 +69,7 @@ namespace mailcore {
         virtual ~IMAPConnectionLogger() {
         }
         
-        virtual void log(ConnectionLogType logType, Data * buffer)
+        virtual void log(void * context, void * sender, ConnectionLogType logType, Data * buffer)
         {
             mConnection->logConnection(logType, buffer);
         }
