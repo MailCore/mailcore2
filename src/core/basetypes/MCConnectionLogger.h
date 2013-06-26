@@ -35,8 +35,7 @@ namespace mailcore {
     
     class ConnectionLogger {
     public:
-        virtual void log(void * context, void * sender, ConnectionLogType logType, Data * buffer) {}
-        virtual void * context() { return NULL; }
+        virtual void log(void * sender, ConnectionLogType logType, Data * buffer) {}
     };
     
 }
