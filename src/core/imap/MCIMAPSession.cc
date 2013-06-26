@@ -498,15 +498,17 @@ static void logger(mailimap * imap, int log_type, const char * buffer, size_t si
         return;
     
     ConnectionLogType type = getConnectionType(log_type);
+    if ((int) type == -1)
+        return;
+    
     bool isBuffer = isBufferFromLogType(log_type);
     
     if (isBuffer) {
         Data * data = Data::dataWithBytes(buffer, (unsigned int) size);
-        session->connectionLogger()->logBuffer(type, data);
+        session->connectionLogger()->log(session->connectionLogger()->context(), session, type, data);
     }
     else {
-        Data * data = Data::dataWithBytes(buffer, (unsigned int) size);
-        session->connectionLogger()->logString(type, String::stringWithData(data));
+        session->connectionLogger()->log(session->connectionLogger()->context(), session, type, NULL);
     }
 }
 
