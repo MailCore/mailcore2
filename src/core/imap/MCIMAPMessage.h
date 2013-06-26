@@ -6,6 +6,7 @@
 #include <MailCore/MCAbstractMessage.h>
 #include <MailCore/MCMessageConstants.h>
 #include <MailCore/MCAbstractPart.h>
+#include <MailCore/MCIMAPSession.h>
 
 #ifdef __cplusplus
 
@@ -52,6 +53,18 @@ namespace mailcore {
         virtual String * htmlRendering(String * folder,
                                        HTMLRendererIMAPCallback * dataCallback,
                                        HTMLRendererTemplateCallback * htmlCallback = NULL);
+        
+        virtual String * htmlRenderingWithSession(IMAPSession * session,
+                                                  String * folder);
+        
+        virtual String * htmlBodyRenderingWithSession(IMAPSession * session,
+                                                      String * folder);
+        
+        virtual String * plainTextRenderingWithSession(IMAPSession * session,
+                                                       String * folder);
+        
+        virtual String * plainTextBodyRenderingWithSession(IMAPSession * session,
+                                                           String * folder);
         
     public: // subclass behavior
         IMAPMessage(IMAPMessage * other);
