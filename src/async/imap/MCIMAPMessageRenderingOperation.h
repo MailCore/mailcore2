@@ -16,27 +16,34 @@
 
 namespace mailcore {
     
+    typedef enum {
+        RenderingTypeHTML,
+        RenderingTypeHTMLBody,
+        RenderingTypePlainText,
+        RenderingTypePlainTextBody
+    } RenderingType;
+    
     class IMAPMessageRenderingOperation : public IMAPOperation {
     public:
         IMAPMessageRenderingOperation();
         virtual ~IMAPMessageRenderingOperation();
         
+        virtual void setRenderingType(RenderingType type);
+        virtual RenderingType renderingType();
+        
         virtual void setUid(uint32_t uid);
         virtual uint32_t uid();
         
-        // Results.        
-        virtual void htmlRendering();
-        virtual void htmlBodyRendering();
-        
-        virtual void plainTextRendering();
-        virtual void plainTextBodyRendering();
+        // Result.
+        virtual String * result();
         
     public: // subclass behavior
         virtual void main();
     
     private:
+        RenderingType mRenderingType;
+        String * mResult;
         uint32_t mUid;
-        Data * mData;
         
     };
 }

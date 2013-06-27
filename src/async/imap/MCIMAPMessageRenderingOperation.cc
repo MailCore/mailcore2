@@ -15,13 +15,24 @@ using namespace mailcore;
 
 IMAPMessageRenderingOperation::IMAPMessageRenderingOperation()
 {
+    mRenderingType = (RenderingType) NULL;
+    mResult = NULL;
     mUid = 0;
-    mData = NULL;
 }
 
 IMAPMessageRenderingOperation::~IMAPMessageRenderingOperation()
 {
-    MC_SAFE_RELEASE(mData);
+    MC_SAFE_RELEASE(mResult);
+}
+
+void IMAPMessageRenderingOperation::setRenderingType(RenderingType type)
+{
+    mRenderingType = type;
+}
+
+RenderingType IMAPMessageRenderingOperation::renderingType()
+{
+    return mRenderingType;
 }
 
 void IMAPMessageRenderingOperation::setUid(uint32_t uid)
@@ -34,30 +45,27 @@ uint32_t IMAPMessageRenderingOperation::uid()
     return mUid;
 }
 
-void htmlRendering()
+String * result()
 {
-    
-}
-
-void htmlBodyRendering()
-{
-    
-}
-
-void plainTextRendering()
-{
-    
-}
-
-void plainTextBodyRendering()
-{
-    
+    return mResult;
 }
 
 void IMAPMessageRenderingOperation::main()
 {
     ErrorCode error;
-    mData = session()->session()->fetchMessageByUID(folder(), mUid, this, &error);
-    MC_SAFE_RETAIN(mData);
+    
+    if (mRenderingType == RenderingTypeHTML) {
+        mResult = session()->session()->htmlRendering(msg, folder());
+    }
+    else if (mRenderingType == RenderingTypeHTMLBody) {
+        mResult = session()->session()->htmlBodyRendering(msg, folder());
+    }
+    else if (mRenderingType == RenderingTypePlainText) {
+        mResult = session()->session()->plainTextRendering(msg, folder());
+    }
+    else if (mRenderingType == RenderingTypePlainTextBody) {
+        mResult = session()->session()->plainTextBodyRendering(msg, folder());
+    }
+    
     setError(error);
 }

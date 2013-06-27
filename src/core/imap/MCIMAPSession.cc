@@ -2998,3 +2998,23 @@ ConnectionLogger * IMAPSession::connectionLogger()
 {
     return mConnectionLogger;
 }
+
+String * htmlRendering(IMAPMessage * msg, String * folder)
+{
+    
+}
+
+String * htmlBodyRendering(IMAPMessage * msg, String * folder)
+{
+    
+}
+
+String * plainTextRendering(IMAPMessage * msg, String * folder)
+{
+    
+}
+
+String * plainTextBodyRendering(IMAPMessage * msg, String * folder)
+{
+    
+}
