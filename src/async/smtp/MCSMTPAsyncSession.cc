@@ -19,11 +19,11 @@ namespace mailcore {
         virtual ~SMTPOperationQueueCallback() {
         }
         
-        virtual void queueStartRunning() {
+        virtual void queueStartRunning(OperationQueue * queue) {
             mSession->retain();
         }
         
-        virtual void queueStoppedRunning() {
+        virtual void queueStoppedRunning(OperationQueue * queue) {
             mSession->tryAutomaticDisconnect();
             mSession->release();
         }

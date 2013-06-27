@@ -47,11 +47,11 @@ namespace mailcore {
         virtual ~IMAPOperationQueueCallback() {
         }
         
-        virtual void queueStartRunning() {
+        virtual void queueStartRunning(OperationQueue * queue) {
             mConnection->queueStartRunning();
         }
         
-        virtual void queueStoppedRunning() {
+        virtual void queueStoppedRunning(OperationQueue * queue) {
             mConnection->tryAutomaticDisconnect();
             mConnection->queueStoppedRunning();
         }
