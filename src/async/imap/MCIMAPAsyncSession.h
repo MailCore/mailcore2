@@ -12,6 +12,7 @@
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCMessageConstants.h>
+#include <MailCore/MCIMAPMessage.h>
 
 #ifdef __cplusplus
 
@@ -124,6 +125,12 @@ namespace mailcore {
 		virtual IMAPOperation * checkAccountOperation();
         
 		virtual IMAPCapabilityOperation * capabilityOperation();
+        
+        virtual void htmlRendering(IMAPMessage * msg, String * folder, IMAPMessageRenderingCallback * callback);
+        virtual void htmlBodyRendering(IMAPMessage * msg, String * folder, IMAPMessageRenderingCallback * callback);
+        
+        virtual void plainTextRendering(IMAPMessage * msg, String * folder, IMAPMessageRenderingCallback * callback);
+        virtual void plainTextBodyRendering(IMAPMessage * msg, String * folder, IMAPMessageRenderingCallback * callback);
         
 	private:
         Array * mSessions;

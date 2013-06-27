@@ -429,3 +429,22 @@ IMAPCapabilityOperation * IMAPAsyncSession::capabilityOperation()
     return session->capabilityOperation();
 }
 
+void htmlRendering(IMAPMessage * msg, String * folder, IMAPMessageRenderingCallback * callback)
+{
+    
+}
+
+void htmlBodyRendering(IMAPMessage * msg, String * folder, IMAPMessageRenderingCallback * callback)
+{
+    
+}
+
+void plainTextRendering(IMAPMessage * msg, String * folder, IMAPMessageRenderingCallback * callback)
+{
+    
+}
+
+void plainTextBodyRendering(IMAPMessage * msg, String * folder, IMAPMessageRenderingCallback * callback)
+{
+    
+}
