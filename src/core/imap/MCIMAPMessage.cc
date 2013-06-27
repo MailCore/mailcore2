@@ -208,26 +208,3 @@ String * IMAPMessage::htmlRendering(String * folder,
     return HTMLRenderer::htmlForIMAPMessage(folder, this, dataCallback, htmlCallback);
 }
 
-String * IMAPMessage::htmlRenderingWithSession(IMAPSession * session,
-                                               String * folder)
-{
-    
-}
-
-String * IMAPMessage::plainTextRenderingWithSession(IMAPSession * session,
-                                                    String * folder)
-{
-    
-}
-
-String * IMAPMessage::htmlBodyRenderingWithSession(IMAPSession * session,
-                                                   String * folder)
-{
-    
-}
-
-String * IMAPMessage::plainTextBodyRenderingWithSession(IMAPSession * session,
-                                                        String * folder)
-{
-    
-}
