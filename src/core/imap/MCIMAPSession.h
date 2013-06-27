@@ -136,11 +136,11 @@ namespace mailcore {
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
         
-        virtual String * htmlRendering(IMAPMessage * msg, String * folder);
-        virtual String * htmlBodyRendering(IMAPMessage * msg, String * folder);
+        virtual String * htmlRendering(IMAPMessage * msg, String * folder, ErrorCode * pError);
+        virtual String * htmlBodyRendering(IMAPMessage * msg, String * folder, ErrorCode * pError);
         
-        virtual String * plainTextRendering(IMAPMessage * msg, String * folder);
-        virtual String * plainTextBodyRendering(IMAPMessage * msg, String * folder);
+        virtual String * plainTextRendering(IMAPMessage * msg, String * folder, ErrorCode * pError);
+        virtual String * plainTextBodyRendering(IMAPMessage * msg, String * folder, ErrorCode * pError);
         
         
     public: // private
