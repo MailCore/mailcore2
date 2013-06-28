@@ -80,18 +80,6 @@ private:
     [self start];
 }
 
-- (void)operationCompleted {
-    if (_completionBlock == NULL)
-        return;
-    
-    nativeType *op = MCO_NATIVE_INSTANCE;
-    if (op->error() == mailcore::ErrorNone) {
-        _completionBlock(nil);
-    } else {
-        _completionBlock([NSError mco_errorWithErrorCode:op->error()]);
-    }
-}
-
 - (void) bodyProgress:(unsigned int)current maximum:(unsigned int)maximum
 {
     if (_progress != NULL) {

@@ -54,6 +54,8 @@ typedef void (^CompletionType)(NSError *error, NSArray * messages);
     } else {
         _completionBlock([NSError mco_errorWithErrorCode:op->error()], nil);
     }
+    [_completionBlock release];
+    _completionBlock = nil;
 }
 
 
