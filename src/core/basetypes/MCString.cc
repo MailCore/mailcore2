@@ -781,7 +781,9 @@ String * String::stringWithVUTF8Format(const char * format, va_list ap)
 {
     char * result;
     vasprintf(&result, format, ap);
-    return stringWithUTF8Characters(result);
+    String * str = stringWithUTF8Characters(result);
+    free(result);
+    return str;
 }
 
 String * String::stringWithUTF8Characters(const char * UTF8Characters)
