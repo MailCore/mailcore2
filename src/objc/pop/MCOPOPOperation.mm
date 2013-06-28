@@ -12,17 +12,20 @@
 
 #import "MCOUtils.h"
 #import "MCOOperation+Private.h"
+#import "MCOPOPSession.h"
 
 typedef void (^CompletionType)(NSError *error);
 
 @implementation MCOPOPOperation {
     CompletionType _completionBlock;
+    MCOPOPSession * _session;
 }
 
 #define nativeType mailcore::POPOperation
 
 - (void) dealloc
 {
+    [_session release];
     [_completionBlock release];
     [super dealloc];
 }
@@ -40,5 +43,15 @@ typedef void (^CompletionType)(NSError *error);
     _completionBlock(error);
 }
 
+- (void) setSession:(MCOPOPSession *)session
+{
+    [_session release];
+    _session = [session retain];
+}
+
+- (MCOPOPSession *) session
+{
+    return _session;
+}
 
 @end

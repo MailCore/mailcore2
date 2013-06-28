@@ -1,7 +1,7 @@
 #!/bin/sh
 
 url="https://github.com/dinhviethoa/libetpan.git"
-rev=349d184dcf2008ee7b5396743580e32b3bf65689
+rev=78427a0506be00e1e72ac8f88aa4b71bebd4137f
 
 pushd `dirname $0` > /dev/null
 scriptpath=`pwd`
@@ -42,6 +42,8 @@ if test -f "$resultdir/libetpan-$version.zip" ; then
 	mkdir -p ../Externals/tmp
 	unzip -q "$resultdir/libetpan-$version.zip" -d ../Externals/tmp
 	mv "../Externals/tmp/libetpan-$version/libetpan" ../Externals
+  mkdir -p ../Externals/installed
+  ln -sf "$resultdir/libetpan-$version.zip" ../Externals/installed
 	rm -rf ../Externals/tmp
 	exit 0
 fi

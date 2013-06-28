@@ -119,21 +119,25 @@ typedef enum {
 /** It's the information to fetch for a given message in the IMAP FETCH request.*/
 typedef enum {
     /** UID of the message.*/
-    MCOIMAPMessagesRequestKindUid           = 0, /** This is the default and it's always fetched*/
+    MCOIMAPMessagesRequestKindUid            = 0, /** This is the default and it's always fetched*/
     /** Flags of the message.*/
-    MCOIMAPMessagesRequestKindFlags         = 1 << 0,
+    MCOIMAPMessagesRequestKindFlags          = 1 << 0,
     /** Headers of the message (parsed by the server).*/
-    MCOIMAPMessagesRequestKindHeaders       = 1 << 1,
+    MCOIMAPMessagesRequestKindHeaders        = 1 << 1,
     /** MIME structure of the message.*/
-    MCOIMAPMessagesRequestKindStructure     = 1 << 2,
+    MCOIMAPMessagesRequestKindStructure      = 1 << 2,
     /** Received date.*/
-    MCOIMAPMessagesRequestKindInternalDate  = 1 << 3,
+    MCOIMAPMessagesRequestKindInternalDate   = 1 << 3,
     /** Headers through headers data.*/
-    MCOIMAPMessagesRequestKindFullHeaders   = 1 << 4,
+    MCOIMAPMessagesRequestKindFullHeaders    = 1 << 4,
     /** Subject of the message.*/
-    MCOIMAPMessagesRequestKindHeaderSubject = 1 << 5,
+    MCOIMAPMessagesRequestKindHeaderSubject  = 1 << 5,
     /** Gmail Labels.*/
-    MCOIMAPMessagesRequestKindGmailLabels   = 1 << 6,
+    MCOIMAPMessagesRequestKindGmailLabels    = 1 << 6,
+	/** Gmail Message ID.*/
+    MCOIMAPMessagesRequestKindGmailMessageID = 1 << 7,
+    /** Gmail Thread ID.*/
+    MCOIMAPMessagesRequestKindGmailThreadID  = 1 << 8,
 } MCOIMAPMessagesRequestKind;
 
 /** It defines the behavior of the STORE flags request.*/
@@ -319,5 +323,29 @@ typedef enum {
     /** SMTP: Error while checking account.*/
     MCOErrorInvalidAccount,
 } MCOErrorCode;
+
+/** Here's the list of connection log types.*/
+typedef enum {
+    /** Received data.*/
+    MCOConnectionLogTypeReceived,
+    /** Sent data.*/
+    MCOConnectionLogTypeSent,
+    /** Sent private data. It can be a password.*/
+    MCOConnectionLogTypeSentPrivate,
+    /** Parse error.*/
+    MCOConnectionLogTypeErrorParse,
+    /** Error while receiving data. The data passed to the log will be nil.*/
+    MCOConnectionLogTypeErrorReceived,
+    /** Error while sending dataThe data passed to the log will be nil.*/
+    MCOConnectionLogTypeErrorSent,
+} MCOConnectionLogType;
+
+/**
+ It's a network traffic logger.
+ @param connectionID is the identifier of the underlaying network socket.
+ @param type is the type of the log.
+ @param data is the data related to the log.
+ */
+typedef void (^MCOConnectionLogger)(void * connectionID, MCOConnectionLogType type, NSData * data);
 
 #endif

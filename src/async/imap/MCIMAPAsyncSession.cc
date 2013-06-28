@@ -11,6 +11,7 @@
 #include "MCIMAPAsyncConnection.h"
 #include "MCIMAPNamespace.h"
 #include "MCOperationQueueCallback.h"
+#include "MCConnectionLogger.h"
 
 #define DEFAULT_MAX_CONNECTIONS 3
 
@@ -33,6 +34,7 @@ IMAPAsyncSession::IMAPAsyncSession()
     mDelimiter = 0;
     mDefaultNamespace = NULL;
     mTimeout = 30.;
+    mConnectionLogger = NULL;
 }
 
 IMAPAsyncSession::~IMAPAsyncSession()
@@ -174,6 +176,8 @@ unsigned int IMAPAsyncSession::maximumConnections()
 IMAPAsyncConnection * IMAPAsyncSession::session()
 {
     IMAPAsyncConnection * session = new IMAPAsyncConnection();
+    session->setConnectionLogger(mConnectionLogger);
+    session->setOwner(this);
     session->autorelease();
     
     session->setHostname(mHostname);
@@ -428,3 +432,16 @@ IMAPCapabilityOperation * IMAPAsyncSession::capabilityOperation()
     return session->capabilityOperation();
 }
 
+void IMAPAsyncSession::setConnectionLogger(ConnectionLogger * logger)
+{
+    mConnectionLogger = logger;
+    for(unsigned int i = 0 ; i < mSessions->count() ; i ++) {
+        IMAPAsyncConnection * currentSession = (IMAPAsyncConnection *) mSessions->objectAtIndex(i);
+        currentSession->setConnectionLogger(logger);
+    }
+}
+
+ConnectionLogger * IMAPAsyncSession::connectionLogger()
+{
+    return mConnectionLogger;
+}

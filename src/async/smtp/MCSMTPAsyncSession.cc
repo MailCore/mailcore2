@@ -19,8 +19,31 @@ namespace mailcore {
         virtual ~SMTPOperationQueueCallback() {
         }
         
-        virtual void queueIdle() {
+        virtual void queueStartRunning(OperationQueue * queue) {
+            mSession->retain();
+        }
+        
+        virtual void queueStoppedRunning(OperationQueue * queue) {
             mSession->tryAutomaticDisconnect();
+            mSession->release();
+        }
+        
+    private:
+        SMTPAsyncSession * mSession;
+    };
+    
+    class SMTPConnectionLogger : public Object, public ConnectionLogger {
+    public:
+        SMTPConnectionLogger(SMTPAsyncSession * session) {
+            mSession = session;
+        }
+        
+        virtual ~SMTPConnectionLogger() {
+        }
+        
+        virtual void log(void * context, void * sender, ConnectionLogType logType, Data * buffer)
+        {
+            mSession->logConnection(logType, buffer);
         }
         
     private:
@@ -34,10 +57,17 @@ SMTPAsyncSession::SMTPAsyncSession()
     mQueue = new OperationQueue();
     mQueueCallback = new SMTPOperationQueueCallback(this);
     mQueue->setCallback(mQueueCallback);
+    mConnectionLogger = NULL;
+    pthread_mutex_init(&mConnectionLoggerLock, NULL);
+    mInternalLogger = new SMTPConnectionLogger(this);
+    mSession->setConnectionLogger(mInternalLogger);
 }
 
 SMTPAsyncSession::~SMTPAsyncSession()
 {
+    MC_SAFE_RELEASE(mInternalLogger);
+    pthread_mutex_destroy(&mConnectionLoggerLock);
+    cancelDelayedPerformMethod((Object::Method) &SMTPAsyncSession::tryAutomaticDisconnectAfterDelay, NULL);
     MC_SAFE_RELEASE(mQueueCallback);
     MC_SAFE_RELEASE(mQueue);
     MC_SAFE_RELEASE(mSession);
@@ -151,6 +181,7 @@ void SMTPAsyncSession::tryAutomaticDisconnect()
         return;
     }
     
+    cancelDelayedPerformMethod((Object::Method) &SMTPAsyncSession::tryAutomaticDisconnectAfterDelay, NULL);
     performMethodAfterDelay((Object::Method) &SMTPAsyncSession::tryAutomaticDisconnectAfterDelay, NULL, 30);
 }
 
@@ -176,4 +207,37 @@ SMTPOperation * SMTPAsyncSession::checkAccountOperation(Address * from)
     op->setFrom(from);
     op->setSession(this);
     return (SMTPOperation *) op->autorelease();
+}
+
+void SMTPAsyncSession::setConnectionLogger(ConnectionLogger * logger)
+{
+    pthread_mutex_lock(&mConnectionLoggerLock);
+    mConnectionLogger = logger;
+    if (mConnectionLogger != NULL) {
+        mSession->setConnectionLogger(mInternalLogger);
+    }
+    else {
+        mSession->setConnectionLogger(NULL);
+    }
+    pthread_mutex_unlock(&mConnectionLoggerLock);
+}
+
+ConnectionLogger * SMTPAsyncSession::connectionLogger()
+{
+    ConnectionLogger * result;
+    
+    pthread_mutex_lock(&mConnectionLoggerLock);
+    result = mConnectionLogger;
+    pthread_mutex_unlock(&mConnectionLoggerLock);
+    
+    return result;
+}
+
+void SMTPAsyncSession::logConnection(ConnectionLogType logType, Data * buffer)
+{
+    pthread_mutex_lock(&mConnectionLoggerLock);
+    if (mConnectionLogger != NULL) {
+        mConnectionLogger->log(this, logType, buffer);
+    }
+    pthread_mutex_unlock(&mConnectionLoggerLock);
 }

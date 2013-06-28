@@ -1,15 +1,15 @@
 #!/bin/sh
 ./get-prebuilt.sh
 
-if test ! -d ../Externals/tidy-html5-ios ; then
+missing=no
+for filename in `cat prebuilt.list|grep -- -ios` ; do
+  if test ! -f "../Externals/installed/$filename" ; then
+    missing=yes
+  fi
+done
+if test $missing = yes ; then
   ./prepare-tidy-ios.sh
-fi
-if test ! -d ../Externals/icu4c-ios ; then
   ./prepare-icu4c-ios.sh
-fi
-if test ! -d ../Externals/libetpan-ios ; then
   ./prepare-libetpan-ios.sh
-fi
-if test ! -d ../Externals/ctemplate-ios ; then
   ./prepare-ctemplate-ios.sh
 fi

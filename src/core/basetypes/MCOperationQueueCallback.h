@@ -15,7 +15,8 @@ namespace mailcore {
     
 	class OperationQueueCallback {
     public:
-        virtual void queueIdle() {}
+        virtual void queueStartRunning(OperationQueue * queue) {}
+        virtual void queueStoppedRunning(OperationQueue * queue) {}
     };
 }
 

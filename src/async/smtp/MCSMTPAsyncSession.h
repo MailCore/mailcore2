@@ -14,6 +14,7 @@ namespace mailcore {
 	class SMTPSession;
     class Address;
     class SMTPOperationQueueCallback;
+    class SMTPConnectionLogger;
 
 	class SMTPAsyncSession : public Object {
 	public:
@@ -47,6 +48,9 @@ namespace mailcore {
 		virtual void setUseHeloIPEnabled(bool enabled);
 		virtual bool useHeloIPEnabled();
 		
+        virtual void setConnectionLogger(ConnectionLogger * logger);
+        virtual ConnectionLogger * connectionLogger();
+        
 		virtual SMTPOperation * sendMessageOperation(Data * messageData);
         virtual SMTPOperation * checkAccountOperation(Address * from);
         
@@ -54,11 +58,15 @@ namespace mailcore {
         virtual void runOperation(SMTPOperation * operation);
         virtual SMTPSession * session();
         virtual void tryAutomaticDisconnect();
-        
+        virtual void logConnection(ConnectionLogType logType, Data * buffer);
+
 	private:
         SMTPSession * mSession;
         OperationQueue * mQueue;
         SMTPOperationQueueCallback * mQueueCallback;
+        ConnectionLogger * mConnectionLogger;
+        pthread_mutex_t mConnectionLoggerLock;
+        SMTPConnectionLogger * mInternalLogger;
 
         virtual void tryAutomaticDisconnectAfterDelay(void * context);
 	};

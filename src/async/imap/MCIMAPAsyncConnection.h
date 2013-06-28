@@ -26,6 +26,8 @@ namespace mailcore {
 	class IMAPIdentityOperation;
 	class IMAPCapabilityOperation;
     class IMAPOperationQueueCallback;
+    class IMAPAsyncSession;
+    class IMAPConnectionLogger;
     
 	class IMAPAsyncConnection : public Object {
 	public:
@@ -64,6 +66,9 @@ namespace mailcore {
         
 		virtual void setDefaultNamespace(IMAPNamespace * ns);
 		virtual IMAPNamespace * defaultNamespace();
+        
+        virtual void setConnectionLogger(ConnectionLogger * logger);
+        virtual ConnectionLogger * connectionLogger();
         
 		virtual IMAPFolderInfoOperation * folderInfoOperation(String * folder);
         virtual IMAPFolderStatusOperation * folderStatusOperation(String * folder);
@@ -118,7 +123,11 @@ namespace mailcore {
 		IMAPNamespace * mDefaultNamespace;
 		String * mLastFolder;
         IMAPOperationQueueCallback * mQueueCallback;
-		
+		IMAPAsyncSession * mOwner;
+        ConnectionLogger * mConnectionLogger;
+        IMAPConnectionLogger * mInternalLogger;
+        pthread_mutex_t mConnectionLoggerLock;
+        
         virtual void tryAutomaticDisconnectAfterDelay(void * context);
 		
     public: // private
@@ -131,6 +140,13 @@ namespace mailcore {
 		virtual String * lastFolder();
         
         virtual void tryAutomaticDisconnect();
+        virtual void queueStartRunning();
+        virtual void queueStoppedRunning();
+        
+        virtual void setOwner(IMAPAsyncSession * owner);
+        virtual IMAPAsyncSession * owner();
+
+        virtual void logConnection(ConnectionLogType logType, Data * buffer);
     };
 }
 

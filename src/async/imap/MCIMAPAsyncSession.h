@@ -78,6 +78,9 @@ namespace mailcore {
 		virtual void setMaximumConnections(unsigned int maxConnections);
 		virtual unsigned int maximumConnections();
         
+        virtual void setConnectionLogger(ConnectionLogger * logger);
+        virtual ConnectionLogger * connectionLogger();
+        
 		virtual IMAPFolderInfoOperation * folderInfoOperation(String * folder);
 		virtual IMAPFolderStatusOperation * folderStatusOperation(String * folder);
 		
@@ -124,7 +127,7 @@ namespace mailcore {
 		virtual IMAPOperation * checkAccountOperation();
         
 		virtual IMAPCapabilityOperation * capabilityOperation();
-        
+    
 	private:
         Array * mSessions;
         
@@ -141,6 +144,7 @@ namespace mailcore {
 		time_t mTimeout;
         bool mAllowsFolderConcurrentAccessEnabled;
 		unsigned int mMaximumConnections;
+        ConnectionLogger * mConnectionLogger;
         
 		virtual IMAPAsyncConnection * sessionForFolder(String * folder, bool urgent = false);
 		virtual IMAPAsyncConnection * session();

@@ -15,9 +15,36 @@
 #import "MCOSMTPOperation.h"
 #import "MCOOperation+Private.h"
 #import "MCOAddress.h"
+#import "MCOSMTPOperation+Private.h"
+
+using namespace mailcore;
+
+@interface MCOSMTPSession ()
+
+- (void) _logWithSender:(void *)sender connectionType:(MCOConnectionLogType)logType data:(NSData *)data;
+
+@end
+
+class MCOSMTPConnectionLoggerBridge : public Object, public ConnectionLogger {
+public:
+    MCOSMTPConnectionLoggerBridge(MCOSMTPSession * session)
+    {
+        mSession = session;
+    }
+    
+    virtual void log(void * context, void * sender, ConnectionLogType logType, Data * data)
+    {
+        [mSession _logWithSender:sender connectionType:(MCOConnectionLogType)logType data:MCO_TO_OBJC(data)];
+    }
+    
+private:
+    MCOSMTPSession * mSession;
+};
 
 @implementation MCOSMTPSession {
     mailcore::SMTPAsyncSession * _session;
+    MCOConnectionLogger _connectionLogger;
+    MCOSMTPConnectionLoggerBridge * _loggerBridge;
 }
 
 #define nativeType mailcore::SMTPAsyncSession
@@ -29,13 +56,16 @@
 
 - (id)init {
     self = [super init];
-    if (self) {
-        _session = new mailcore::SMTPAsyncSession();
-    }
+    
+    _session = new mailcore::SMTPAsyncSession();
+    _loggerBridge = new MCOSMTPConnectionLoggerBridge(self);
+    
     return self;
 }
 
 - (void)dealloc {
+    MC_SAFE_RELEASE(_loggerBridge);
+    [_connectionLogger release];
     _session->release();
     [super dealloc];
 }
@@ -50,18 +80,45 @@ MCO_OBJC_SYNTHESIZE_SCALAR(NSTimeInterval, time_t, setTimeout, timeout)
 MCO_OBJC_SYNTHESIZE_BOOL(setCheckCertificateEnabled, isCheckCertificateEnabled)
 MCO_OBJC_SYNTHESIZE_BOOL(setUseHeloIPEnabled, useHeloIPEnabled)
 
+- (void) setConnectionLogger:(MCOConnectionLogger)connectionLogger
+{
+    [_connectionLogger release];
+    _connectionLogger = [connectionLogger copy];
+    
+    if (_connectionLogger != nil) {
+        _session->setConnectionLogger(_loggerBridge);
+    }
+    else {
+        _session->setConnectionLogger(NULL);
+    }
+}
+
+- (MCOConnectionLogger) connectionLogger
+{
+    return _connectionLogger;
+}
+
 #pragma mark - Operations
 
 - (MCOSMTPSendOperation *) sendOperationWithData:(NSData *)messageData
 {
     mailcore::SMTPOperation * coreOp = MCO_NATIVE_INSTANCE->sendMessageOperation([messageData mco_mcData]);
-    return [[[MCOSMTPSendOperation alloc] initWithMCOperation:coreOp] autorelease];
+    MCOSMTPSendOperation * result = [[[MCOSMTPSendOperation alloc] initWithMCOperation:coreOp] autorelease];
+    [result setSession:self];
+    return result;
 }
 
 - (MCOOperation *) checkAccountOperationWithFrom:(MCOAddress *)from
 {
     mailcore::SMTPOperation *coreOp = MCO_NATIVE_INSTANCE->checkAccountOperation(MCO_FROM_OBJC(mailcore::Address, from));
-    return [[[MCOSMTPOperation alloc] initWithMCOperation:coreOp] autorelease];
+    MCOSMTPOperation * result = [[[MCOSMTPOperation alloc] initWithMCOperation:coreOp] autorelease];
+    [result setSession:self];
+    return result;
+}
+
+- (void) _logWithSender:(void *)sender connectionType:(MCOConnectionLogType)logType data:(NSData *)data
+{
+    _connectionLogger(sender, logType, data);
 }
 
 @end

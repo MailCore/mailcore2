@@ -12,17 +12,20 @@
 
 #import "MCOUtils.h"
 #import "MCOOperation+Private.h"
+#import "MCOSMTPSession.h"
 
 typedef void (^CompletionType)(NSError *error);
 
 @implementation MCOSMTPOperation {
     CompletionType _completionBlock;
+    MCOSMTPSession * _session;
 }
 
 #define nativeType mailcore::SMTPOperation
 
 - (void) dealloc
 {
+    [_session release];
     [_completionBlock release];
     [super dealloc];
 }
@@ -38,6 +41,17 @@ typedef void (^CompletionType)(NSError *error);
     
     NSError * error = [NSError mco_errorWithErrorCode:MCO_NATIVE_INSTANCE->error()];
     _completionBlock(error);
+}
+
+- (void) setSession:(MCOSMTPSession *)session
+{
+    [_session release];
+    _session = [session retain];
+}
+
+- (MCOSMTPSession *) session
+{
+    return _session;
 }
 
 @end

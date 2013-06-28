@@ -6,6 +6,7 @@
 #include "MCPOPMessageInfo.h"
 #include "MCPOPProgressCallback.h"
 #include "MCMessageHeader.h"
+#include "MCConnectionLoggerUtils.h"
 
 using namespace mailcore;
 
@@ -31,6 +32,7 @@ void POPSession::init()
     mCapabilities = POPCapabilityNone;
     mProgressCallback = NULL;
     mState = STATE_DISCONNECTED;
+    mConnectionLogger = NULL;
 }
 
 POPSession::POPSession()
@@ -146,10 +148,30 @@ void POPSession::body_progress(size_t current, size_t maximum, void * context)
     session->bodyProgress((unsigned int) current, (unsigned int) maximum);
 }
 
+static void logger(mailpop3 * pop3, int log_type, const char * buffer, size_t size, void * context)
+{
+    POPSession * session = (POPSession *) context;
+    
+    if (session->connectionLogger() == NULL)
+        return;
+    
+    ConnectionLogType type = getConnectionType(log_type);
+    bool isBuffer = isBufferFromLogType(log_type);
+    
+    if (isBuffer) {
+        Data * data = Data::dataWithBytes(buffer, (unsigned int) size);
+        session->connectionLogger()->log(session, type, data);
+    }
+    else {
+        session->connectionLogger()->log(session, type, NULL);
+    }
+}
+
 void POPSession::setup()
 {
 	mPop = mailpop3_new(0, NULL);
     mailpop3_set_progress_callback(mPop, POPSession::body_progress, this);
+    mailpop3_set_logger(mPop, logger, this);
 }
 
 void POPSession::unsetup()
@@ -544,3 +566,12 @@ void POPSession::checkAccount(ErrorCode * pError)
     loginIfNeeded(pError);
 }
 
+void POPSession::setConnectionLogger(ConnectionLogger * logger)
+{
+    mConnectionLogger = logger;
+}
+
+ConnectionLogger * POPSession::connectionLogger()
+{
+    return mConnectionLogger;
+}

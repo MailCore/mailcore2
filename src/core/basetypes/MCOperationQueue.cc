@@ -72,7 +72,7 @@ void OperationQueue::runOperations()
         quitting = mQuitting;
         pthread_mutex_unlock(&mLock);
 
-        MCLog("quitting %i %p", mQuitting, op);
+        //MCLog("quitting %i %p", mQuitting, op);
         if ((op == NULL) && quitting) {
             MCLog("stopping %p", this);
             mailsem_up(mStopSem);
@@ -127,6 +127,7 @@ void OperationQueue::callbackOnMainThread(Operation * op)
 
 void OperationQueue::checkRunningOnMainThread(void * context)
 {
+    cancelDelayedPerformMethod((Object::Method) &OperationQueue::checkRunningAfterDelay, NULL);
     performMethodAfterDelay((Object::Method) &OperationQueue::checkRunningAfterDelay, NULL, 1);
 }
 
@@ -158,7 +159,7 @@ void OperationQueue::stoppedOnMainThread(void * context)
     mStarted = false;
     
     if (mCallback) {
-        mCallback->queueIdle();
+        mCallback->queueStoppedRunning(this);
     }
     
     release(); // (2)
@@ -170,6 +171,10 @@ void OperationQueue::startThread()
 {
     if (mStarted)
         return;
+    
+    if (mCallback) {
+        mCallback->queueStartRunning(this);
+    }
     
     retain(); // (3)
     mQuitting = false;

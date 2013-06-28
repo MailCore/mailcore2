@@ -17,9 +17,11 @@ void IMAPMessage::init()
     mUid = 0;
     mFlags = MessageFlagNone;
     mOriginalFlags = MessageFlagNone;
-	mMainPart = NULL;
-	mLabels = NULL;
+    mMainPart = NULL;
+    mLabels = NULL;
     mModSeqValue = 0;
+    mThreadID = 0;
+    mMessageID = 0;
 }
 
 IMAPMessage::IMAPMessage()
@@ -35,6 +37,8 @@ IMAPMessage::IMAPMessage(IMAPMessage * other)
     setOriginalFlags(other->originalFlags());
     setMainPart((AbstractPart *) other->mainPart()->copy()->autorelease());
     setGmailLabels(other->gmailLabels());
+    setGmailThreadID(other->gmailThreadID());
+    setGmailMessageID(other->gmailMessageID());
 }
 
 IMAPMessage::~IMAPMessage()
@@ -119,6 +123,26 @@ void IMAPMessage::setGmailLabels(Array * labels)
 Array * IMAPMessage::gmailLabels()
 {
     return mLabels;
+}
+
+void IMAPMessage::setGmailMessageID(uint64_t msgID)
+{
+    mMessageID = msgID;
+}
+
+uint64_t IMAPMessage::gmailMessageID()
+{
+    return mMessageID;
+}
+
+void IMAPMessage::setGmailThreadID(uint64_t threadID)
+{
+    mThreadID = threadID;
+}
+
+uint64_t IMAPMessage::gmailThreadID()
+{
+    return mThreadID;
 }
 
 AbstractPart * IMAPMessage::partForPartID(String * partID)

@@ -27,6 +27,8 @@ if test -f "$resultdir/icu4c-ios-$version.zip" ; then
 	mkdir -p ../Externals/tmp
 	unzip -q "$resultdir/icu4c-ios-$version.zip" -d ../Externals/tmp
 	mv "../Externals/tmp/icu4c-ios-$version/icu4c-ios" ../Externals
+  mkdir -p ../Externals/installed
+  ln -sf "$resultdir/icu4c-ios-$version.zip" ../Externals/installed
 	rm -rf ../Externals/tmp
 	exit 0
 fi

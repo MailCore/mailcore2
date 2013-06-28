@@ -25,5 +25,6 @@
 #include <MailCore/MCLibetpanTypes.h>
 #include <MailCore/MCICUTypes.h>
 #include <MailCore/MCIterator.h>
+#include <MailCore/MCConnectionLogger.h>
 
 #endif

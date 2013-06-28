@@ -32,6 +32,8 @@
 #include "MCIMAPCapabilityOperation.h"
 #include "MCOperationQueueCallback.h"
 #include "MCIMAPDisconnectOperation.h"
+#include "MCIMAPAsyncSession.h"
+#include "MCConnectionLogger.h"
 
 using namespace mailcore;
 
@@ -45,8 +47,31 @@ namespace mailcore {
         virtual ~IMAPOperationQueueCallback() {
         }
         
-        virtual void queueIdle() {
+        virtual void queueStartRunning(OperationQueue * queue) {
+            mConnection->queueStartRunning();
+        }
+        
+        virtual void queueStoppedRunning(OperationQueue * queue) {
             mConnection->tryAutomaticDisconnect();
+            mConnection->queueStoppedRunning();
+        }
+        
+    private:
+        IMAPAsyncConnection * mConnection;
+    };
+    
+    class IMAPConnectionLogger : public Object, public ConnectionLogger {
+    public:
+        IMAPConnectionLogger(IMAPAsyncConnection * connection) {
+            mConnection = connection;
+        }
+        
+        virtual ~IMAPConnectionLogger() {
+        }
+        
+        virtual void log(void * context, void * sender, ConnectionLogType logType, Data * buffer)
+        {
+            mConnection->logConnection(logType, buffer);
         }
         
     private:
@@ -63,10 +88,17 @@ IMAPAsyncConnection::IMAPAsyncConnection()
     mLastFolder = NULL;
     mQueueCallback = new IMAPOperationQueueCallback(this);
     mQueue->setCallback(mQueueCallback);
+    mOwner = NULL;
+    mConnectionLogger = NULL;
+    pthread_mutex_init(&mConnectionLoggerLock, NULL);
+    mInternalLogger = new IMAPConnectionLogger(this);
 }
 
 IMAPAsyncConnection::~IMAPAsyncConnection()
 {
+    cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
+    pthread_mutex_destroy(&mConnectionLoggerLock);
+    MC_SAFE_RELEASE(mInternalLogger);
     MC_SAFE_RELEASE(mQueueCallback);
     MC_SAFE_RELEASE(mLastFolder);
     MC_SAFE_RELEASE(mDefaultNamespace);
@@ -474,6 +506,7 @@ void IMAPAsyncConnection::tryAutomaticDisconnect()
         return;
     }
     
+    cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
     performMethodAfterDelay((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, 30);
 }
 
@@ -483,6 +516,18 @@ void IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay(void * context)
     op->setSession(this);
     op->autorelease();
     op->start();
+}
+
+void IMAPAsyncConnection::queueStartRunning()
+{
+    this->retain();
+    mOwner->retain();
+}
+
+void IMAPAsyncConnection::queueStoppedRunning()
+{
+    mOwner->release();
+    this->release();
 }
 
 void IMAPAsyncConnection::setLastFolder(String * folder)
@@ -495,3 +540,45 @@ String * IMAPAsyncConnection::lastFolder()
     return mLastFolder;
 }
 
+void IMAPAsyncConnection::setOwner(IMAPAsyncSession * owner)
+{
+    mOwner = owner;
+}
+
+IMAPAsyncSession * IMAPAsyncConnection::owner()
+{
+    return mOwner;
+}
+
+void IMAPAsyncConnection::setConnectionLogger(ConnectionLogger * logger)
+{
+    pthread_mutex_lock(&mConnectionLoggerLock);
+    mConnectionLogger = logger;
+    if (mConnectionLogger != NULL) {
+        mSession->setConnectionLogger(mInternalLogger);
+    }
+    else {
+        mSession->setConnectionLogger(NULL);
+    }
+    pthread_mutex_unlock(&mConnectionLoggerLock);
+}
+
+ConnectionLogger * IMAPAsyncConnection::connectionLogger()
+{
+    ConnectionLogger * result;
+    
+    pthread_mutex_lock(&mConnectionLoggerLock);
+    result = mConnectionLogger;
+    pthread_mutex_unlock(&mConnectionLoggerLock);
+    
+    return result;
+}
+
+void IMAPAsyncConnection::logConnection(ConnectionLogType logType, Data * buffer)
+{
+    pthread_mutex_lock(&mConnectionLoggerLock);
+    if (mConnectionLogger != NULL) {
+        mConnectionLogger->log(this, logType, buffer);
+    }
+    pthread_mutex_unlock(&mConnectionLoggerLock);
+}

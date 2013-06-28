@@ -67,7 +67,13 @@ static mailcore::Data * testMessageBuilder()
     
     MCLog("%s", data->bytes());
     
+    mailcore::MessageBuilder * msg2 = new mailcore::MessageBuilder(msg);
+    mailcore::String *htmlBody = msg->htmlBody();
+    mailcore::String *htmlBody2 = msg2->htmlBody();
+    MCAssert(htmlBody->isEqual(htmlBody2));
+    
     msg->release();
+    msg2->release();
     
     return data;
 }

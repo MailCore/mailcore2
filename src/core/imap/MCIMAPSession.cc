@@ -14,6 +14,8 @@
 #include "MCIMAPNamespace.h"
 #include "MCIMAPSyncResult.h"
 #include "MCIMAPFolderStatus.h"
+#include "MCConnectionLogger.h"
+#include "MCConnectionLoggerUtils.h"
 
 using namespace mailcore;
 
@@ -308,38 +310,39 @@ static IndexSet * indexSetFromSet(struct mailimap_set * imap_set)
 void IMAPSession::init()
 {
     mHostname = NULL;
-	mPort = 0;
+    mPort = 0;
     mUsername = NULL;
     mPassword = NULL;
     mAuthType = AuthTypeSASLNone;
     mConnectionType = ConnectionTypeClear;
-	mCheckCertificateEnabled = true;
+    mCheckCertificateEnabled = true;
     mVoIPEnabled = true;
-	mDelimiter = 0;
-	
+    mDelimiter = 0;
+    
     mBodyProgressEnabled = true;
     mIdleEnabled = false;
-	mXListEnabled = false;
+    mXListEnabled = false;
     mQResyncEnabled = false;
     mCondstoreEnabled = false;
     mIdentityEnabled = false;
     mWelcomeString = NULL;
-	mNeedsMboxMailWorkaround = false;
-	mDefaultNamespace = NULL;
-	mTimeout = 30;
-	mUIDValidity = 0;
-	mUIDNext = 0;
+    mNeedsMboxMailWorkaround = false;
+    mDefaultNamespace = NULL;
+    mTimeout = 30;
+    mUIDValidity = 0;
+    mUIDNext = 0;
     mModSequenceValue = 0;
-	mFolderMsgCount = 0;
+    mFolderMsgCount = 0;
     mFirstUnseenUid = 0;
-	mLastFetchedSequenceNumber = 0;
-	mCurrentFolder = NULL;
+    mLastFetchedSequenceNumber = 0;
+    mCurrentFolder = NULL;
     pthread_mutex_init(&mIdleLock, NULL);
     mCanIdle = false;
-	mState = STATE_DISCONNECTED;
-	mImap = NULL;
-	mProgressCallback = NULL;
-	mProgressItemsCount = 0;
+    mState = STATE_DISCONNECTED;
+    mImap = NULL;
+    mProgressCallback = NULL;
+    mProgressItemsCount = 0;
+    mConnectionLogger = NULL;
 }
 
 IMAPSession::IMAPSession()
@@ -487,6 +490,28 @@ void IMAPSession::items_progress(size_t current, size_t maximum, void * context)
     session->itemsProgress((unsigned int) current, (unsigned int) maximum);
 }
 
+static void logger(mailimap * imap, int log_type, const char * buffer, size_t size, void * context)
+{
+    IMAPSession * session = (IMAPSession *) context;
+    
+    if (session->connectionLogger() == NULL)
+        return;
+    
+    ConnectionLogType type = getConnectionType(log_type);
+    if ((int) type == -1)
+        return;
+    
+    bool isBuffer = isBufferFromLogType(log_type);
+    
+    if (isBuffer) {
+        Data * data = Data::dataWithBytes(buffer, (unsigned int) size);
+        session->connectionLogger()->log(session, type, data);
+    }
+    else {
+        session->connectionLogger()->log(session, type, NULL);
+    }
+}
+
 void IMAPSession::setup()
 {
 	MCAssert(mImap == NULL);
@@ -494,6 +519,7 @@ void IMAPSession::setup()
 	mImap = mailimap_new(0, NULL);
     mailimap_set_timeout(mImap, timeout());
     mailimap_set_progress_callback(mImap, body_progress, IMAPSession::items_progress, this);
+    mailimap_set_logger(mImap, logger, this);
 }
 
 void IMAPSession::unsetup()
@@ -1584,6 +1610,8 @@ struct msg_att_handler_data {
     bool needsBody;
     bool needsFlags;
     bool needsGmailLabels;
+    bool needsGmailMessageID;
+    bool needsGmailThreadID;
     uint32_t startUid;
 };
 
@@ -1596,6 +1624,8 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
     bool hasBody;
     bool hasFlags;
     bool hasGmailLabels;
+    bool hasGmailMessageID;
+    bool hasGmailThreadID;
     struct msg_att_handler_data * msg_att_context;
     // struct
     IMAPSession * self;
@@ -1609,6 +1639,8 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
     bool needsBody;
     bool needsFlags;
     bool needsGmailLabels;
+    bool needsGmailMessageID;
+    bool needsGmailThreadID;
     uint32_t startUid;
     
     msg_att_context = (struct msg_att_handler_data *) context;
@@ -1623,13 +1655,17 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
     needsBody = msg_att_context->needsBody;
     needsFlags = msg_att_context->needsFlags;
     needsGmailLabels = msg_att_context->needsGmailLabels;
+    needsGmailMessageID = msg_att_context->needsGmailMessageID;
+    needsGmailThreadID = msg_att_context->needsGmailThreadID;
     startUid = msg_att_context->startUid;
     
     hasHeader = false;
     hasBody = false;
     hasFlags = false;
     hasGmailLabels = false;
-    
+    hasGmailMessageID = false;
+    hasGmailThreadID = false;
+	
     msg = new IMAPMessage();
     
     uid = 0;
@@ -1720,6 +1756,20 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
                 }
                 labels->release();
             }
+            else if (ext_data->ext_extension == &mailimap_extension_xgmthrid) {
+                uint64_t * threadID;
+                
+                threadID = (uint64_t *) ext_data->ext_data;
+                msg->setGmailThreadID(*threadID);
+                hasGmailThreadID = true;
+            }
+            else if (ext_data->ext_extension == &mailimap_extension_xgmmsgid) {
+                uint64_t * msgID;
+                
+                msgID = (uint64_t *) ext_data->ext_data;
+                msg->setGmailMessageID(*msgID);
+                hasGmailMessageID = true;
+            }
         }
     }
     for(item_iter = clist_begin(msg_att->att_list) ; item_iter != NULL ; item_iter = clist_next(item_iter)) {
@@ -1754,7 +1804,14 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
         msg->release();
         return;
     }
-    
+    if (needsGmailThreadID && !hasGmailThreadID) {
+        msg->release();
+        return;
+    }
+    if (needsGmailMessageID && !hasGmailMessageID) {
+        msg->release();
+        return;
+    }
     if (uid != 0) {
         msg->setUid(uid);
     }
@@ -1782,11 +1839,13 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
     bool needsBody;
     bool needsFlags;
     bool needsGmailLabels;
+    bool needsGmailMessageID;
+    bool needsGmailThreadID;
     Array * messages;
     IndexSet * vanishedMessages;
     
     selectIfNeeded(folder, pError);
-	if (* pError != ErrorNone)
+    if (* pError != ErrorNone)
         return NULL;
     
     if (mNeedsMboxMailWorkaround) {
@@ -1805,7 +1864,9 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
     needsBody = false;
     needsFlags = false;
     needsGmailLabels = false;
-    
+    needsGmailMessageID = false;
+    needsGmailThreadID = false;
+
     fetch_type = mailimap_fetch_type_new_fetch_att_list_empty();
     fetch_att = mailimap_fetch_att_new_uid();
     mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
@@ -1820,6 +1881,16 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
         fetch_att = mailimap_fetch_att_new_xgmlabels();
         mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
         needsGmailLabels = true;
+    }
+    if ((requestKind & IMAPMessagesRequestKindGmailThreadID) != 0) {
+        fetch_att = mailimap_fetch_att_new_xgmthrid();
+        mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
+        needsGmailThreadID = true;
+    }
+	if ((requestKind & IMAPMessagesRequestKindGmailMessageID) != 0) {
+        fetch_att = mailimap_fetch_att_new_xgmmsgid();
+        mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
+        needsGmailMessageID = true;
     }
     if ((requestKind & IMAPMessagesRequestKindFullHeaders) != 0) {
         clist * hdrlist;
@@ -1910,7 +1981,8 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
     msg_att_data.needsFlags = needsFlags;
     msg_att_data.needsGmailLabels = needsGmailLabels;
     msg_att_data.startUid = startUid;
-    
+    msg_att_data.needsGmailMessageID = needsGmailMessageID;
+    msg_att_data.needsGmailThreadID = needsGmailThreadID;
     mailimap_set_msg_att_handler(mImap, msg_att_handler, &msg_att_data);
     
     mBodyProgressEnabled = false;
@@ -2917,4 +2989,14 @@ bool IMAPSession::isIdentityEnabled()
 bool IMAPSession::isDisconnected()
 {
     return mState == STATE_DISCONNECTED;
+}
+
+void IMAPSession::setConnectionLogger(ConnectionLogger * logger)
+{
+    mConnectionLogger = logger;
+}
+
+ConnectionLogger * IMAPSession::connectionLogger()
+{
+    return mConnectionLogger;
 }

@@ -132,6 +132,9 @@ namespace mailcore {
         virtual bool isQResyncEnabled();
         virtual bool isIdentityEnabled();
         
+        virtual void setConnectionLogger(ConnectionLogger * logger);
+        virtual ConnectionLogger * connectionLogger();
+        
     public: // private
         virtual void loginIfNeeded(ErrorCode * pError);
         virtual void connectIfNeeded(ErrorCode * pError);
@@ -172,6 +175,7 @@ namespace mailcore {
         mailimap * mImap;
         IMAPProgressCallback * mProgressCallback;
         unsigned int mProgressItemsCount;
+        ConnectionLogger * mConnectionLogger;
         
         void init();
         void bodyProgress(unsigned int current, unsigned int maximum);

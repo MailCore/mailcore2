@@ -64,6 +64,15 @@
 */
 @property (nonatomic, assign, getter=isUseHeloIPEnabled) BOOL useHeloIPEnabled;
 
+/**
+ Sets logger callback. The network traffic will be sent to this block.
+ 
+ [session setConnectionLogger:^(void * connectionID, MCOConnectionLogType type, NSData * data) {
+   ...
+ }];
+ */
+@property (nonatomic, copy) MCOConnectionLogger connectionLogger;
+
 /** @name Operations */
 
 /**
