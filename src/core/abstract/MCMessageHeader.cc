@@ -45,6 +45,7 @@ MessageHeader::MessageHeader(MessageHeader * other)
     setDate(other->date());
     setReceivedDate(other->receivedDate());
     setUserAgent(other->mUserAgent);
+    setExtraHeaders(other->mExtraHeaders);
 }
 
 void MessageHeader::init(bool generateDate, bool generateMessageID)
@@ -62,6 +63,7 @@ void MessageHeader::init(bool generateDate, bool generateMessageID)
     mDate = (time_t) -1;
 	mReceivedDate = (time_t) -1;
     mUserAgent = NULL;
+    mExtraHeaders = NULL;
     
 	if (generateDate) {
         time_t date;
@@ -113,6 +115,7 @@ MessageHeader::~MessageHeader()
     MC_SAFE_RELEASE(mReplyTo);
     MC_SAFE_RELEASE(mSubject);
     MC_SAFE_RELEASE(mUserAgent);
+    MC_SAFE_RELEASE(mExtraHeaders);
 }
 
 String * MessageHeader::description()
@@ -290,6 +293,24 @@ void MessageHeader::setUserAgent(String * userAgent)
 String * MessageHeader::userAgent()
 {
     return mUserAgent;
+}
+
+void MessageHeader::setExtraHeaders(HashMap * headers) {
+    MC_SAFE_REPLACE_COPY(HashMap, mExtraHeaders, headers);
+}
+
+void MessageHeader::addHeader(String * header, String * value) {
+    if (!mExtraHeaders) {
+        mExtraHeaders = new HashMap();
+    }
+    mExtraHeaders->setObjectForKey(header, value);
+}
+
+String * MessageHeader::getHeader(String *header) {
+    if (mExtraHeaders) {
+        return (String *)mExtraHeaders->objectForKey(header);
+    }
+    return NULL;
 }
 
 String * MessageHeader::extractedSubject()
@@ -822,6 +843,21 @@ struct mailimf_fields * MessageHeader::createIMFFieldsAndFilterBcc(bool filterBc
 		field = mailimf_field_new_custom(strdup("X-Mailer"), strdup(mUserAgent->UTF8Characters()));
 		mailimf_fields_add(fields, field);
 	}
+    
+    if (mExtraHeaders != NULL) {
+        HashMapIter *iter;
+        
+        for (iter = mExtraHeaders->iteratorBegin(); iter != NULL; iter = mExtraHeaders->iteratorNext(iter)) {
+            struct mailimf_field * field;
+            String * key;
+            String * value;
+            
+            key = (String *)iter->key;
+            value = (String *)iter->value;
+            field = mailimf_field_new_custom(strdup(key->UTF8Characters()), strdup(value->UTF8Characters()));
+            mailimf_fields_add(fields, field);
+        }
+    }
 	
 	return fields;
 }

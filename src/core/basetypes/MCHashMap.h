@@ -10,7 +10,12 @@ namespace mailcore {
 
 	class String;
 	class Array;
-	struct HashMapCell;
+    struct HashMapCell {
+        unsigned int func;
+        Object * key;
+        Object * value;
+        HashMapCell * next;
+    };
 	typedef HashMapCell HashMapIter;
 
 	class HashMap : public Object {
@@ -28,6 +33,9 @@ namespace mailcore {
 		virtual Array * allValues();
 		virtual void removeAllObjects();
         
+		HashMapIter * iteratorBegin();
+		HashMapIter * iteratorNext(HashMapIter * iter);
+        
     public: // subclass behavior
 		HashMap(HashMap * o);
 		virtual String * description();
@@ -37,8 +45,6 @@ namespace mailcore {
 		unsigned int mAllocated;
 		unsigned int mCount;
 		void ** mCells;
-		HashMapIter * iteratorBegin();
-		HashMapIter * iteratorNext(HashMapIter * iter);
 		void allocate(unsigned int size);
 		void init();
 	};

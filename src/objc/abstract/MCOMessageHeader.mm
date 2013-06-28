@@ -94,6 +94,14 @@ MCO_OBJC_SYNTHESIZE_ARRAY(setReplyTo, replyTo)
 MCO_OBJC_SYNTHESIZE_STRING(setSubject, subject)
 MCO_OBJC_SYNTHESIZE_STRING(setUserAgent, userAgent)
 
+- (void)addHeader:(NSString *)header value:(NSString *)value {
+    _nativeHeader->addHeader(MCO_FROM_OBJC(mailcore::String, header), MCO_FROM_OBJC(mailcore::String, value));
+}
+
+- (NSString *)getHeader:(NSString *)header {
+    return MCO_TO_OBJC(_nativeHeader->getHeader(MCO_FROM_OBJC(mailcore::String, header)));
+}
+
 - (NSString *) extractedSubject
 {
     return MCO_OBJC_BRIDGE_GET(extractedSubject);

@@ -54,8 +54,12 @@ namespace mailcore {
 		
 		virtual void setUserAgent(String * userAgent);
 		virtual String * userAgent();
-		
-		virtual String * extractedSubject();
+        
+        virtual void addHeader(String *header, String *value);
+        virtual void setExtraHeaders(HashMap *headers);
+        virtual String * getHeader(String *header);
+        
+        String * extractedSubject();
 		virtual String * partialExtractedSubject();
 		virtual void importHeadersData(Data * data);
         
@@ -89,6 +93,7 @@ namespace mailcore {
 	    time_t mDate;
 		time_t mReceivedDate;
 		String * mUserAgent;
+        HashMap * mExtraHeaders;
 		void init(bool generateDate, bool generateMessageID);
         Array * recipientWithReplyAll(bool replyAll, bool includeTo, bool includeCc, Array * senderEmails);
 	};

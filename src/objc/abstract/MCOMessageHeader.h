@@ -57,6 +57,9 @@
 /** User-Agent.*/
 @property (nonatomic, copy) NSString * userAgent;
 
+- (void)addHeader:(NSString *)header value:(NSString *)value;
+- (NSString *)getHeader:(NSString *)header;
+
 /** Extracted subject (also remove square brackets).*/
 - (NSString *) extractedSubject;
 
