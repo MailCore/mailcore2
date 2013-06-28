@@ -25,7 +25,7 @@ NetService::NetService()
 NetService::NetService(NetService * other)
 {
     init();
-    mHostname = (String *) MC_SAFE_COPY(other->mHostname);
+    MC_SAFE_REPLACE_COPY(String, mHostname, other->mHostname);
     mPort = other->mPort;
     mConnectionType = other->mConnectionType;
 }

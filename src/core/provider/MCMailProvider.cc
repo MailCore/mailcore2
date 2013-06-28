@@ -34,13 +34,13 @@ MailProvider::MailProvider()
 MailProvider::MailProvider(MailProvider * other)
 {
     init();
-    mIdentifier = (String *) MC_SAFE_COPY(other->mIdentifier);
-    mImapServices = (Array *) MC_SAFE_COPY(other->mImapServices);
-    mSmtpServices = (Array *) MC_SAFE_COPY(other->mSmtpServices);
-    mPopServices = (Array *) MC_SAFE_COPY(other->mPopServices);
-    mDomainMatch = (Array *) MC_SAFE_COPY(other->mDomainMatch);
-    mMxSet = (Set *) MC_SAFE_COPY(other->mMxSet);
-    mMailboxPaths = (HashMap *) MC_SAFE_COPY(other->mMailboxPaths);
+    MC_SAFE_REPLACE_COPY(String, mIdentifier, other->mIdentifier);
+    MC_SAFE_REPLACE_COPY(Array, mImapServices, other->mImapServices);
+    MC_SAFE_REPLACE_COPY(Array, mSmtpServices, other->mSmtpServices);
+    MC_SAFE_REPLACE_COPY(Array, mPopServices, other->mPopServices);
+    MC_SAFE_REPLACE_COPY(Array, mDomainMatch, other->mDomainMatch);
+    MC_SAFE_REPLACE_COPY(Set, mMxSet, other->mMxSet);
+    MC_SAFE_REPLACE_COPY(HashMap, mMailboxPaths, other->mMailboxPaths);
 }
 
 MailProvider::~MailProvider()
