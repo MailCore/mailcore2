@@ -15,35 +15,40 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-	class NetService : public Object {
-		
-	public:
-		NetService();
-		virtual ~NetService();
-
-		virtual void setHostname(String * hostname);
-		virtual String * hostname();
-		
-		virtual void setPort(unsigned int port);
-		virtual unsigned int port();
-		
-		virtual void setConnectionType(ConnectionType connectionType);
-		virtual ConnectionType connectionType();
-				
-		virtual String * normalizedHostnameWithEmail(String * email);
+    class NetService : public Object {
+    
+    public:
+        NetService();
+        virtual ~NetService();
+        
+        virtual void setHostname(String * hostname);
+        virtual String * hostname();
+        
+        virtual void setPort(unsigned int port);
+        virtual unsigned int port();
+        
+        virtual void setConnectionType(ConnectionType connectionType);
+        virtual ConnectionType connectionType();
+        	
+        virtual String * normalizedHostnameWithEmail(String * email);
         
     public: // serialization
         static NetService * serviceWithInfo(HashMap * info);
-		virtual HashMap * info();
+        virtual HashMap * info();
+    
+    public: //subclass behavior
+        NetService(NetService * other);
+        virtual String * description();
+        virtual Object * copy();
+    		
+    private:
+        String * mHostname;
+        unsigned int mPort;
+        ConnectionType mConnectionType;
         
-	private:
-		String * mHostname;
-		unsigned int mPort;
-		ConnectionType mConnectionType;
-		
-		void init();
+        void init();
         void fillWithInfo(HashMap * info);
-	};
+    };
 }
 
 #endif
