@@ -29,7 +29,7 @@
 
 @protocol MCOHTMLRendererIMAPDelegate;
 
-@interface MCOIMAPMessage : MCOAbstractMessage <NSCoding, NSCopying>
+@interface MCOIMAPMessage : MCOAbstractMessage <NSCopying>
 
 /** IMAP UID of the message. */
 @property (nonatomic, assign) uint32_t uid;

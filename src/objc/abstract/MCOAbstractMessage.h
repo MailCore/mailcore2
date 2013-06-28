@@ -15,7 +15,7 @@
 @class MCOMessageHeader;
 @class MCOAbstractPart;
 
-@interface MCOAbstractMessage : NSObject <NSCoding, NSCopying>
+@interface MCOAbstractMessage : NSObject <NSCopying>
 
 /** Header of the message. */
 @property (nonatomic, strong) MCOMessageHeader * header;

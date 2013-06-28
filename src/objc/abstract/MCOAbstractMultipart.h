@@ -13,7 +13,7 @@
 #import <Foundation/Foundation.h>
 #import <MailCore/MCOAbstractPart.h>
 
-@interface MCOAbstractMultipart : MCOAbstractPart <NSCoding>
+@interface MCOAbstractMultipart : MCOAbstractPart
 
 /** Returns the subparts of that multipart.*/
 @property (nonatomic, copy) NSArray * /* MCOAbstractPart */ parts;

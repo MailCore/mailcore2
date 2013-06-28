@@ -22,26 +22,12 @@
     MCORegisterClass(self, &typeid(nativeType));
 }
 
-- (id) initWithCoder:(NSCoder *)aDecoder {
-	self = [super initWithCoder:aDecoder];
-	
-	[self setPartID:[aDecoder decodeObjectForKey:@"partID"]];
-	
-	return self;
-}
-
 - (id) copyWithZone:(NSZone *)zone
 {
     nativeType * nativeObject = (nativeType *) [self mco_mcObject]->copy();
     id result = [[self class] mco_objectWithMCObject:nativeObject];
     MC_SAFE_RELEASE(nativeObject);
     return [result retain];
-}
-
-- (void) encodeWithCoder:(NSCoder *)aCoder
-{
-	[super encodeWithCoder:aCoder];
-	[aCoder encodeObject:[self partID] forKey:@"partID"];
 }
 
 + (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object

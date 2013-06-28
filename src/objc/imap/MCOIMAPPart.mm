@@ -22,24 +22,6 @@
     MCORegisterClass(self, &typeid(nativeType));
 }
 
-- (id) initWithCoder:(NSCoder *)aDecoder {
-	self = [super initWithCoder:aDecoder];
-	
-	[self setPartID:[aDecoder decodeObjectForKey:@"partID"]];
-	[self setSize:(unsigned int) [aDecoder decodeIntForKey:@"size"]];
-	[self setEncoding:(MCOEncoding) [aDecoder decodeIntForKey:@"encoding"]];
-	
-	return self;
-}
-
-- (void) encodeWithCoder:(NSCoder *)aCoder
-{
-	[super encodeWithCoder:aCoder];
-	[aCoder encodeObject:[self partID] forKey:@"partID"];
-	[aCoder encodeInt:[self size] forKey:@"size"];
-	[aCoder encodeInt:[self encoding] forKey:@"encoding"];
-}
-
 - (id) copyWithZone:(NSZone *)zone
 {
     nativeType * nativeObject = (nativeType *) [self mco_mcObject]->copy();
