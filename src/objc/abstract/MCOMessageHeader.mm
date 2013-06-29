@@ -67,6 +67,12 @@
     return self;
 }
 
+- (void) dealloc
+{
+    _nativeHeader->release();
+    [super dealloc];
+}
+
 + (MCOMessageHeader *) messageHeaderWithMCMessageHeader:(mailcore::MessageHeader *)header
 {
     if (header == NULL)
