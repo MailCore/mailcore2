@@ -15,7 +15,7 @@ using namespace mailcore;
 
 IMAPMessageRenderingOperation::IMAPMessageRenderingOperation()
 {
-    mRenderingType = (RenderingType) NULL;
+    mRenderingType = RenderingTypePlainTextBody;
     mResult = NULL;
     mUid = 0;
 }
