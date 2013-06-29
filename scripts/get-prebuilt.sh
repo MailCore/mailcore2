@@ -42,14 +42,8 @@ if test x$1 != xskipprebuilt ; then
       else
         git clone --depth 1 "$url"
       fi
-      # for filename in $files ; do
-        #   if test ! -f $filename ; then
-        #     echo get $filename
-        #     curl -L -O "$url_prefix/$filename"
-        #   fi
-        # done
-        rsync --exclude=.git -av mailcore2-deps/ ../builds/builds/
-        popd
-      fi
+      rsync --exclude=.git -av mailcore2-deps/ ../builds/builds/
+      popd
     fi
+  fi
 fi
