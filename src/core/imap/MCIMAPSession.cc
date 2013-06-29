@@ -16,6 +16,8 @@
 #include "MCIMAPFolderStatus.h"
 #include "MCConnectionLogger.h"
 #include "MCConnectionLoggerUtils.h"
+#include "MCHTMLRenderer.h"
+#include "MCMessageRendererHelper.h"
 
 using namespace mailcore;
 
@@ -2999,22 +3001,24 @@ ConnectionLogger * IMAPSession::connectionLogger()
     return mConnectionLogger;
 }
 
-String * htmlRendering(IMAPMessage * msg, String * folder)
+String * htmlRendering(IMAPMessage * message, String * folder)
+{
+    MessageRendererHelper * messageRendererHelper = new MessageRendererHelper;
+    
+    HTMLRenderer::htmlForIMAPMessage(folder, message, messageRendererHelper->dataCallback, messageRendererHelper->htmlCallback);
+}
+
+String * htmlBodyRendering(IMAPMessage * message, String * folder)
 {
     
 }
 
-String * htmlBodyRendering(IMAPMessage * msg, String * folder)
+String * plainTextRendering(IMAPMessage * message, String * folder)
 {
     
 }
 
-String * plainTextRendering(IMAPMessage * msg, String * folder)
-{
-    
-}
-
-String * plainTextBodyRendering(IMAPMessage * msg, String * folder)
+String * plainTextBodyRendering(IMAPMessage * message, String * folder)
 {
     
 }
