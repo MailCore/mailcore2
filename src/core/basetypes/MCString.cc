@@ -10,6 +10,9 @@
 #include <libetpan/libetpan.h>
 #include <libxml/xmlmemory.h>
 #include <libxml/HTMLparser.h>
+#if __APPLE__
+#include <CoreFoundation/CoreFoundation.h>
+#endif
 
 #include "MCData.h"
 #include "MCHash.h"
@@ -1123,6 +1126,20 @@ String * String::uppercaseString()
 
 void String::appendBytes(const char * bytes, unsigned int length, const char * charset)
 {
+#if __APPLE__
+    CFStringRef encodingName = CFStringCreateWithCString(NULL, charset, kCFStringEncodingUTF8);
+    CFStringEncoding encoding = CFStringConvertIANACharSetNameToEncoding(encodingName);
+    CFStringRef cfStr = CFStringCreateWithBytes(NULL, (const UInt8 *) bytes, (CFIndex) length, encoding, false);
+    if (cfStr != NULL) {
+        CFDataRef data = CFStringCreateExternalRepresentation(NULL, cfStr, kCFStringEncodingUTF16, '_');
+        if (data != NULL) {
+            appendCharactersLength((const UChar *) CFDataGetBytePtr(data), (unsigned int) CFDataGetLength(data) / 2);
+            CFRelease(data);
+        }
+        CFRelease(cfStr);
+    }
+    CFRelease(encodingName);
+#else
     UErrorCode err;
     
     err = U_ZERO_ERROR;
@@ -1152,6 +1169,7 @@ void String::appendBytes(const char * bytes, unsigned int length, const char * c
     free(dest);
     
     ucnv_close(converter);
+#endif
 }
 
 String * String::extractedSubject()
@@ -1812,12 +1830,33 @@ String * String::pathExtension()
 
 Data * String::dataUsingEncoding(const char * charset)
 {
-    UErrorCode err;
-    Data * data;
-    
     if (charset == NULL) {
         charset = "utf-8";
     }
+    
+#if __APPLE__
+    Data * data;
+    
+    data = NULL;
+    CFStringRef encodingName = CFStringCreateWithCString(NULL, charset, kCFStringEncodingUTF8);
+    CFStringEncoding encoding = CFStringConvertIANACharSetNameToEncoding(encodingName);
+    CFStringRef cfStr = CFStringCreateWithBytes(NULL, (const UInt8 *) mUnicodeChars,
+        (CFIndex) mLength * sizeof(* mUnicodeChars), kCFStringEncodingUTF16, false);
+    if (cfStr != NULL) {
+        CFDataRef cfData = CFStringCreateExternalRepresentation(NULL, cfStr, encoding, '_');
+        if (cfData != NULL) {
+            data = Data::dataWithBytes((const char *) CFDataGetBytePtr(cfData),
+                                       (unsigned int) CFDataGetLength(cfData));
+            CFRelease(cfData);
+        }
+        CFRelease(cfStr);
+    }
+    CFRelease(encodingName);
+    
+    return data;
+#else
+    UErrorCode err;
+    Data * data;
     
     err = U_ZERO_ERROR;
     UConverter * converter = ucnv_open(charset, &err); 
@@ -1848,6 +1887,7 @@ Data * String::dataUsingEncoding(const char * charset)
     ucnv_close(converter);
     
     return data;
+#endif
 }
 
 const char * String::fileSystemRepresentation()
