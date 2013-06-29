@@ -1793,7 +1793,7 @@ String * String::flattenHTML()
 
 bool String::hasSuffix(String * suffix)
 {
-    if (mLength > suffix->mLength) {
+    if (mLength >= suffix->mLength) {
         if (u_memcmp(suffix->mUnicodeChars + (mLength - suffix->mLength),
         mUnicodeChars, suffix->mLength) == 0) {
             return true;
@@ -1804,7 +1804,7 @@ bool String::hasSuffix(String * suffix)
 
 bool String::hasPrefix(String * prefix)
 {
-    if (mLength > prefix->mLength) {
+    if (mLength >= prefix->mLength) {
         if (u_memcmp(prefix->mUnicodeChars, mUnicodeChars, prefix->mLength) == 0) {
             return true;
         }
