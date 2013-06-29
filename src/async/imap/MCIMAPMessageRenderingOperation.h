@@ -11,6 +11,7 @@
 #define __MAILCORE_MCIMAPMessageRenderingOperation_H_
 
 #include <MailCore/MCIMAPOperation.h>
+#include <MailCore/MCIMAPMessage.h>
 
 #ifdef __cplusplus
 
@@ -31,8 +32,8 @@ namespace mailcore {
         virtual void setRenderingType(RenderingType type);
         virtual RenderingType renderingType();
         
-        virtual void setUid(uint32_t uid);
-        virtual uint32_t uid();
+        virtual void setMessage(IMAPMessage * message);
+        virtual IMAPMessage message();
         
         // Result.
         virtual String * result();
@@ -43,7 +44,7 @@ namespace mailcore {
     private:
         RenderingType mRenderingType;
         String * mResult;
-        uint32_t mUid;
+        IMAPMessage * mMessage;
         
     };
 }
