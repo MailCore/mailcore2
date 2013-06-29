@@ -37,6 +37,11 @@ namespace mailcore {
         virtual void setPassword(String * password);
         virtual String * password();
         
+        // To authenticate using OAuth2, username and oauth2token should be set.
+        // auth type to use is AuthTypeOAuth2.
+        virtual void setOAuth2Token(String * token);
+        virtual String * OAuth2Token();
+        
         virtual void setAuthType(AuthType authType);
         virtual AuthType authType();
         
@@ -145,6 +150,7 @@ namespace mailcore {
         unsigned int mPort;
         String * mUsername;
         String * mPassword;
+        String * mOAuth2Token;
         AuthType mAuthType;
         ConnectionType mConnectionType;
         bool mCheckCertificateEnabled;
