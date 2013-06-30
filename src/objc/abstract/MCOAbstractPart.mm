@@ -27,6 +27,12 @@
     return _part;
 }
 
+- (id) init
+{
+    MCAssert(0);
+    return nil;
+}
+
 - (id) initWithMCPart:(mailcore::AbstractPart *)part
 {
     self = [super init];
@@ -39,7 +45,7 @@
 
 - (void) dealloc
 {
-    _part->release();
+    MC_SAFE_RELEASE(_part);
     [super dealloc];
 }
 
