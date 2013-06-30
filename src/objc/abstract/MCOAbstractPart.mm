@@ -27,6 +27,14 @@
     return _part;
 }
 
+- (id) init
+{
+    nativeType *part = new nativeType();
+    self = [self initWithMCPart:part];
+    part->release();
+    return self;
+}
+
 - (id) initWithMCPart:(mailcore::AbstractPart *)part
 {
     self = [super init];

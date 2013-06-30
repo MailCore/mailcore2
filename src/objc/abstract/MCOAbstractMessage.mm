@@ -28,6 +28,14 @@
     return _message;
 }
 
+- (id) init
+{
+    nativeType *message = new nativeType();
+    self = [self initWithMCMessage:message];
+    message->release();
+    return self;
+}
+
 - (id) initWithMCMessage:(mailcore::AbstractMessage *)message
 {
     self = [super init];
