@@ -54,6 +54,8 @@ typedef void (^CompletionType)(NSError *error, MCOIndexSet * destUids);
     } else {
         _completionBlock([NSError mco_errorWithErrorCode:op->error()], 0);
     }
+    [_completionBlock release];
+    _completionBlock = nil;
 }
 
 @end

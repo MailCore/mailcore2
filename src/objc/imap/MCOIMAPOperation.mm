@@ -38,6 +38,8 @@ typedef void (^CompletionType)(NSError *error);
     
     NSError * error = [NSError mco_errorWithErrorCode:MCO_NATIVE_INSTANCE->error()];
     _completionBlock(error);
+    [_completionBlock release];
+    _completionBlock = nil;
 }
 
 @end

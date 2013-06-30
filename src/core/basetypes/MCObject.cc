@@ -83,7 +83,9 @@ String * Object::className()
 {
     int status;
     char * unmangled = abi::__cxa_demangle(typeid(* this).name(), NULL, NULL, &status);
-	return mailcore::String::uniquedStringWithUTF8Characters(unmangled);
+    String * result = String::uniquedStringWithUTF8Characters(unmangled);
+    free(unmangled);
+    return result;
 }
 
 String * Object::description()

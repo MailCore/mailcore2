@@ -45,8 +45,10 @@ namespace mailcore {
 		virtual bool isMainFolder(String * folderPath, String * prefix);
 		
     public: // subclass behavior
+		MailProvider(MailProvider * other);
 		virtual String * description();
-		
+		virtual Object * copy();
+
     public: // private
 		virtual void setIdentifier(String * identifier);
 		virtual void fillWithInfo(HashMap * info);
