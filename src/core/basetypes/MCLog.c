@@ -9,7 +9,7 @@
 #include <unistd.h>
 
 static pid_t sPid = -1;
-bool mailcore::logEnabled = false;
+bool MCLogEnabled = false;
 
 __attribute__((constructor))
 static void initialize() {
@@ -20,7 +20,7 @@ static void logInternalv(FILE * file,
     const char * user, const char * filename, unsigned int line,
     int dumpStack, const char * format, va_list argp);
 
-void mailcore::logInternal(const char * user,
+void MCLogInternal(const char * user,
 	const char * filename, 
 	unsigned int line, 
 	int dumpStack, 
