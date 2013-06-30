@@ -30,10 +30,8 @@
 
 - (id) init
 {
-    nativeType *message = new nativeType();
-    self = [self initWithMCMessage:message];
-    message->release();
-    return self;
+    MCAssert(0);
+    return nil;
 }
 
 - (id) initWithMCMessage:(mailcore::AbstractMessage *)message
@@ -48,7 +46,7 @@
 
 - (void) dealloc
 {
-    _message->release();
+    MC_SAFE_RELEASE(_message);
     [super dealloc];
 }
 

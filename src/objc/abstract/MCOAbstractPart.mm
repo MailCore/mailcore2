@@ -29,10 +29,8 @@
 
 - (id) init
 {
-    nativeType *part = new nativeType();
-    self = [self initWithMCPart:part];
-    part->release();
-    return self;
+    MCAssert(0);
+    return nil;
 }
 
 - (id) initWithMCPart:(mailcore::AbstractPart *)part
@@ -47,7 +45,7 @@
 
 - (void) dealloc
 {
-    _part->release();
+    MC_SAFE_RELEASE(_part);
     [super dealloc];
 }
 
