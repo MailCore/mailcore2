@@ -51,7 +51,7 @@ namespace mailcore {
     
     class HTMLBodyRendererTemplateCallback : public HTMLRendererTemplateCallback {
         
-    }
+    };
 
 }
 

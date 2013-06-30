@@ -23,7 +23,7 @@ namespace mailcore {
         virtual HTMLRendererTemplateCallback * htmlCallback();
         virtual HTMLBodyRendererTemplateCallback * htmlBodyCallback();
         
-    }
+    };
 }
 
 #endif
