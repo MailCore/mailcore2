@@ -1131,7 +1131,7 @@ void String::appendBytes(const char * bytes, unsigned int length, const char * c
     CFStringEncoding encoding = CFStringConvertIANACharSetNameToEncoding(encodingName);
     CFStringRef cfStr = CFStringCreateWithBytes(NULL, (const UInt8 *) bytes, (CFIndex) length, encoding, false);
     if (cfStr != NULL) {
-        CFDataRef data = CFStringCreateExternalRepresentation(NULL, cfStr, kCFStringEncodingUTF16, '_');
+        CFDataRef data = CFStringCreateExternalRepresentation(NULL, cfStr, kCFStringEncodingUTF16LE, '_');
         if (data != NULL) {
             appendCharactersLength((const UChar *) CFDataGetBytePtr(data), (unsigned int) CFDataGetLength(data) / 2);
             CFRelease(data);
@@ -1841,7 +1841,7 @@ Data * String::dataUsingEncoding(const char * charset)
     CFStringRef encodingName = CFStringCreateWithCString(NULL, charset, kCFStringEncodingUTF8);
     CFStringEncoding encoding = CFStringConvertIANACharSetNameToEncoding(encodingName);
     CFStringRef cfStr = CFStringCreateWithBytes(NULL, (const UInt8 *) mUnicodeChars,
-        (CFIndex) mLength * sizeof(* mUnicodeChars), kCFStringEncodingUTF16, false);
+        (CFIndex) mLength * sizeof(* mUnicodeChars), kCFStringEncodingUTF16LE, false);
     if (cfStr != NULL) {
         CFDataRef cfData = CFStringCreateExternalRepresentation(NULL, cfStr, encoding, '_');
         if (cfData != NULL) {
