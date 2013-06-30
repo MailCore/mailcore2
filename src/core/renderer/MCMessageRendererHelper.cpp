@@ -19,3 +19,8 @@ HTMLRendererTemplateCallback * MessageRendererHelper::htmlCallback()
 {
     return new HTMLRendererTemplateCallback();
 }
+
+HTMLRendererTemplateCallback * MessageRendererHelper::htmlBodyCallback()
+{
+    return new HTMLBodyRendererTemplateCallback();
+}

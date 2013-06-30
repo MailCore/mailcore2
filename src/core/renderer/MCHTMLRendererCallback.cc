@@ -262,3 +262,8 @@ bool HTMLRendererTemplateCallback::shouldShowPart(AbstractPart * part)
 {
 	return true;
 }
+
+mailcore::String * HTMLBodyRendererTemplateCallback::templateForMainHeader(MessageHeader * header)
+{
+    return MCSTR("");
+}

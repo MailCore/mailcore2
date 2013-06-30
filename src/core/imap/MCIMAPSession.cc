@@ -18,6 +18,8 @@
 #include "MCConnectionLoggerUtils.h"
 #include "MCHTMLRenderer.h"
 #include "MCMessageRendererHelper.h"
+#include "MCString.h"
+#include "MCUtils.h"
 
 using namespace mailcore;
 
@@ -3004,21 +3006,42 @@ ConnectionLogger * IMAPSession::connectionLogger()
 String * htmlRendering(IMAPMessage * message, String * folder)
 {
     MessageRendererHelper * messageRendererHelper = new MessageRendererHelper;
+    String * htmlString = HTMLRenderer::htmlForIMAPMessage(folder,
+                                                           message,
+                                                           messageRendererHelper->dataCallback(),
+                                                           messageRendererHelper->htmlCallback());
     
-    HTMLRenderer::htmlForIMAPMessage(folder, message, messageRendererHelper->dataCallback, messageRendererHelper->htmlCallback);
+    return htmlString;
 }
 
 String * htmlBodyRendering(IMAPMessage * message, String * folder)
 {
+    MessageRendererHelper * messageRendererHelper = new MessageRendererHelper;
     
+    String * htmlBodyString = HTMLRenderer::htmlForIMAPMessage(folder,
+                                                               message,
+                                                               messageRendererHelper->dataCallback(),
+                                                               messageRendererHelper->htmlBodyCallback());
+
+    return htmlBodyString;
 }
 
 String * plainTextRendering(IMAPMessage * message, String * folder)
 {
+    String * htmlString = this->htmlRendering(message, folder);
+    String * plainTextString = htmlString->flattenHTML();
     
+    return plainTextString;
 }
 
 String * plainTextBodyRendering(IMAPMessage * message, String * folder)
 {
+    String * htmlBodyString = this->htmlBodyRendering(message, folder);
+    String * plainTextBodyString = htmlBodyString->flattenHTML();
     
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\n"), MCSTR(" "));
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\t"), MCSTR(" "));
+    
+    return plainTextBodyString;
 }
