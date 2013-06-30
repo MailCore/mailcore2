@@ -19,17 +19,8 @@ namespace mailcore {
     
     class MessageRendererHelper {
     public:
-        MessageRendererHelper();
-        virtual ~MessageRendererHelper();
-        
-        virtual void setSession(IMAPSession * session);
-        virtual IMAPSession session();
-        
         virtual HTMLRendererIMAPCallback * dataCallback();
         virtual HTMLRendererTemplateCallback * htmlCallback();
-    
-    private:
-        IMAPSession * mSession;
         
     }
 }

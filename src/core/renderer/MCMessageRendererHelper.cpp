@@ -10,32 +10,12 @@
 
 using namespace mailcore;
 
-MessageRendererHelper::MessageRendererHelper()
-{
-    mSession = NULL;
-}
-
-MessageRendererHelper::~MessageRendererHelper()
-{
-    MC_SAFE_RELEASE(mSession);
-}
-
-void MessageRendererHelper::setSession(IMAPSession * session)
-{
-    mSession = session;
-}
-
-IMAPSession MessageRendererHelper::session()
-{
-    return mSession;
-}
-
 HTMLRendererIMAPCallback * MessageRendererHelper::dataCallback()
 {
-
+    return new HTMLRendererIMAPCallback();
 }
 
 HTMLRendererTemplateCallback * MessageRendererHelper::htmlCallback()
 {
-    
+    return new HTMLRendererTemplateCallback();
 }
