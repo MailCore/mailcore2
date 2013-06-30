@@ -3028,7 +3028,7 @@ String * htmlBodyRendering(IMAPMessage * message, String * folder)
 
 String * plainTextRendering(IMAPMessage * message, String * folder)
 {
-    String * htmlString = this->htmlRendering(message, folder);
+    String * htmlString = htmlRendering(message, folder);
     String * plainTextString = htmlString->flattenHTML();
     
     return plainTextString;
@@ -3036,7 +3036,7 @@ String * plainTextRendering(IMAPMessage * message, String * folder)
 
 String * plainTextBodyRendering(IMAPMessage * message, String * folder)
 {
-    String * htmlBodyString = this->htmlBodyRendering(message, folder);
+    String * htmlBodyString = htmlBodyRendering(message, folder);
     String * plainTextBodyString = htmlBodyString->flattenHTML();
     
     plainTextBodyString->replaceOccurrencesOfString(MCSTR("\n"), MCSTR(" "));
