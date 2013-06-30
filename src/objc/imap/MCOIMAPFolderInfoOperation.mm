@@ -61,6 +61,8 @@ typedef void (^CompletionType)(NSError *error, MCOIMAPFolderInfo *info);
     } else {
         _completionBlock([NSError mco_errorWithErrorCode:op->error()], nil);
     }
+    [_completionBlock release];
+    _completionBlock = nil;
 }
 
 @end

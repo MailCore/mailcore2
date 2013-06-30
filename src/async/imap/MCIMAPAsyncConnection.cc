@@ -47,11 +47,11 @@ namespace mailcore {
         virtual ~IMAPOperationQueueCallback() {
         }
         
-        virtual void queueStartRunning() {
+        virtual void queueStartRunning(OperationQueue * queue) {
             mConnection->queueStartRunning();
         }
         
-        virtual void queueStoppedRunning() {
+        virtual void queueStoppedRunning(OperationQueue * queue) {
             mConnection->tryAutomaticDisconnect();
             mConnection->queueStoppedRunning();
         }
@@ -144,6 +144,16 @@ void IMAPAsyncConnection::setPassword(String * password)
 String * IMAPAsyncConnection::password()
 {
     return mSession->password();
+}
+
+void IMAPAsyncConnection::setOAuth2Token(String * token)
+{
+    mSession->setOAuth2Token(token);
+}
+
+String * IMAPAsyncConnection::OAuth2Token()
+{
+    return mSession->OAuth2Token();
 }
 
 void IMAPAsyncConnection::setAuthType(AuthType authType)

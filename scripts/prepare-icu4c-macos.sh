@@ -6,6 +6,7 @@ url="http://download.icu-project.org/files/icu4c/$versionfolder/icu4c-$version-s
 package_filename="icu4c-$version-src.tgz"
 arch="x86_64"
 sysrootpath="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk"
+enable_icu_data=0
 
 arch_flags=""
 for current_arch in $arch ; do
@@ -90,8 +91,10 @@ done
 
 mkdir -p "$tmpdir/bin/icu4c"
 cp -R "$tmpdir/bin/icu4c-x86_64/include" "$tmpdir/bin/icu4c"
-mkdir -p "$tmpdir/bin/icu4c/share/icu"
-cp "$tmpdir/bin/icu4c-x86_64/share/icu/$versionfolder/icudt51l.dat" "$tmpdir/bin/icu4c/share/icu"
+if test x$enable_icu_data = x1 ; then
+  mkdir -p "$tmpdir/bin/icu4c/share/icu"
+  cp "$tmpdir/bin/icu4c-x86_64/share/icu/$versionfolder/icudt51l.dat" "$tmpdir/bin/icu4c/share/icu"
+fi
 mkdir -p "$tmpdir/bin/icu4c/lib"
 cd "$tmpdir/bin"
 

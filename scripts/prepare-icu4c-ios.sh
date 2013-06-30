@@ -6,6 +6,7 @@ version='51_1'
 url="http://download.icu-project.org/files/icu4c/$versionfolder/icu4c-$version-src.tgz"
 package_filename="icu4c-$version-src.tgz"
 sysrootpath="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk"
+enable_icu_data=0
 
 pushd `dirname $0` > /dev/null
 scriptpath=`pwd`
@@ -115,8 +116,10 @@ done
 
 mkdir -p "$tmpdir/bin/icu4c-ios"
 cp -R $tmpdir/crossbuild/icu4c-x86_64/include "$tmpdir/bin/icu4c-ios"
-mkdir -p "$tmpdir/bin/icu4c-ios/share/icu"
-cp "$tmpdir/crossbuild/icu4c-x86_64/share/icu/$versionfolder/icudt51l.dat" "$tmpdir/bin/icu4c-ios/share/icu"
+if test x$enable_icu_data = x1 ; then
+  mkdir -p "$tmpdir/bin/icu4c-ios/share/icu"
+  cp "$tmpdir/crossbuild/icu4c-x86_64/share/icu/$versionfolder/icudt51l.dat" "$tmpdir/bin/icu4c-ios/share/icu"
+fi
 mkdir -p "$tmpdir/bin/icu4c-ios/lib"
 cd "$tmpdir/bin"
 

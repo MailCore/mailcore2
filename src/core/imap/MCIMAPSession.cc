@@ -313,6 +313,7 @@ void IMAPSession::init()
     mPort = 0;
     mUsername = NULL;
     mPassword = NULL;
+    mOAuth2Token = NULL;
     mAuthType = AuthTypeSASLNone;
     mConnectionType = ConnectionTypeClear;
     mCheckCertificateEnabled = true;
@@ -355,6 +356,7 @@ IMAPSession::~IMAPSession()
     MC_SAFE_RELEASE(mHostname);
     MC_SAFE_RELEASE(mUsername);
     MC_SAFE_RELEASE(mPassword);
+    MC_SAFE_RELEASE(mOAuth2Token);
     MC_SAFE_RELEASE(mWelcomeString);
     MC_SAFE_RELEASE(mDefaultNamespace);
     MC_SAFE_RELEASE(mCurrentFolder);
@@ -399,6 +401,16 @@ void IMAPSession::setPassword(String * password)
 String * IMAPSession::password()
 {
     return mPassword;
+}
+
+void IMAPSession::setOAuth2Token(String * token)
+{
+    MC_SAFE_REPLACE_COPY(String, mOAuth2Token, token);
+}
+
+String * IMAPSession::OAuth2Token()
+{
+    return mOAuth2Token;
 }
 
 void IMAPSession::setAuthType(AuthType authType)
@@ -745,6 +757,10 @@ void IMAPSession::login(ErrorCode * pError)
                 NULL,
                 utf8username, utf8username,
                 utf8password, NULL/* realm */);
+            break;
+            
+        case AuthTypeXOAuth2:
+            r = mailimap_oauth2_authenticate(mImap, MCUTF8(mUsername), MCUTF8(mOAuth2Token));
             break;
 	}
     if (r == MAILIMAP_ERROR_STREAM) {
