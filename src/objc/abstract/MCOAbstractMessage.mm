@@ -28,6 +28,12 @@
     return _message;
 }
 
+- (id) init
+{
+    MCAssert(0);
+    return nil;
+}
+
 - (id) initWithMCMessage:(mailcore::AbstractMessage *)message
 {
     self = [super init];
@@ -40,7 +46,7 @@
 
 - (void) dealloc
 {
-    _message->release();
+    MC_SAFE_RELEASE(_message);
     [super dealloc];
 }
 
