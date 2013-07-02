@@ -68,6 +68,7 @@ namespace mailcore {
         IMAPMessagesRequestKindGmailLabels   = 1 << 6,
         IMAPMessagesRequestKindGmailMessageID = 1 << 7,
         IMAPMessagesRequestKindGmailThreadID  = 1 << 8,
+        IMAPMessagesRequestKindExtraHeaders  = 1 << 9,
     };
 
     enum IMAPFetchRequestType {

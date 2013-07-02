@@ -33,6 +33,9 @@ namespace mailcore {
         virtual void setKind(IMAPMessagesRequestKind kind);
         virtual IMAPMessagesRequestKind kind();
         
+        virtual void setExtraHeaders(Array * extraHeaders);
+        virtual Array * extraHeaders();
+        
         // Result.
         virtual Array * /* IMAPMessage */ messages();
         virtual IndexSet * vanishedMessages();
@@ -44,6 +47,7 @@ namespace mailcore {
         bool mFetchByUidEnabled;
         IndexSet * mIndexes;
         IMAPMessagesRequestKind mKind;
+        Array * /* String */ mExtraHeaders;
         Array * /* IMAPMessage */ mMessages;
         IndexSet * mVanishedMessages;
         uint64_t mModSequenceValue;

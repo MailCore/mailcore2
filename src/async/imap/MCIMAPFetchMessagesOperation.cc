@@ -21,6 +21,7 @@ IMAPFetchMessagesOperation::IMAPFetchMessagesOperation()
     mMessages = NULL;
     mVanishedMessages = NULL;
     mModSequenceValue = 0;
+    mExtraHeaders = NULL;
 }
 
 IMAPFetchMessagesOperation::~IMAPFetchMessagesOperation()
@@ -28,6 +29,7 @@ IMAPFetchMessagesOperation::~IMAPFetchMessagesOperation()
     MC_SAFE_RELEASE(mIndexes);
     MC_SAFE_RELEASE(mMessages);
     MC_SAFE_RELEASE(mVanishedMessages);
+    MC_SAFE_RELEASE(mExtraHeaders);
 }
 
 void IMAPFetchMessagesOperation::setFetchByUidEnabled(bool enabled)
@@ -70,6 +72,14 @@ IMAPMessagesRequestKind IMAPFetchMessagesOperation::kind()
     return mKind;
 }
 
+void IMAPFetchMessagesOperation::setExtraHeaders(Array * extraHeaders) {
+    MC_SAFE_REPLACE_COPY(Array, mExtraHeaders, extraHeaders);
+}
+
+Array * IMAPFetchMessagesOperation::extraHeaders() {
+    return mExtraHeaders;
+}
+
 Array * IMAPFetchMessagesOperation::messages()
 {
     return mMessages;
@@ -87,18 +97,18 @@ void IMAPFetchMessagesOperation::main()
         if (mModSequenceValue != 0) {
             IMAPSyncResult * syncResult;
             
-            syncResult = session()->session()->syncMessagesByUID(folder(), mKind, mIndexes, mModSequenceValue, this, &error);
+            syncResult = session()->session()->syncMessagesByUID(folder(), mKind, mIndexes, mModSequenceValue, this, &error, mExtraHeaders);
             if (syncResult != NULL) {
                 mMessages = syncResult->modifiedOrAddedMessages();
                 mVanishedMessages = syncResult->vanishedMessages();
             }
         }
         else {
-            mMessages = session()->session()->fetchMessagesByUID(folder(), mKind, mIndexes, this, &error);
+            mMessages = session()->session()->fetchMessagesByUID(folder(), mKind, mIndexes, this, &error, mExtraHeaders);
         }
     }
     else {
-        mMessages = session()->session()->fetchMessagesByNumber(folder(), mKind, mIndexes, this, &error);
+        mMessages = session()->session()->fetchMessagesByNumber(folder(), mKind, mIndexes, this, &error, mExtraHeaders);
     }
     MC_SAFE_RETAIN(mMessages);
     MC_SAFE_RETAIN(mVanishedMessages);

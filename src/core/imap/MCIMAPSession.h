@@ -88,9 +88,11 @@ namespace mailcore {
         virtual void expunge(String * folder, ErrorCode * pError);
         
         virtual Array * /* IMAPMessage */ fetchMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
-                                                             IndexSet * uids, IMAPProgressCallback * progressCallback, ErrorCode * pError);
+                                                             IndexSet * uids, IMAPProgressCallback * progressCallback,
+                                                             ErrorCode * pError, Array * extraHeaders = NULL);
         virtual Array * /* IMAPMessage */ fetchMessagesByNumber(String * folder, IMAPMessagesRequestKind requestKind,
-                                                                IndexSet * numbers, IMAPProgressCallback * progressCallback, ErrorCode * pError);
+                                                                IndexSet * numbers, IMAPProgressCallback * progressCallback,
+                                                                ErrorCode * pError,  Array * extraHeaders = NULL);
         
         virtual Data * fetchMessageByUID(String * folder, uint32_t uid,
                                          IMAPProgressCallback * progressCallback, ErrorCode * pError);
@@ -102,7 +104,8 @@ namespace mailcore {
         /* When CONDSTORE or QRESYNC is available */
         virtual IMAPSyncResult * syncMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
                                                    IndexSet * uids, uint64_t modseq,
-                                                   IMAPProgressCallback * progressCallback, ErrorCode * pError);
+                                                   IMAPProgressCallback * progressCallback, ErrorCode * pError,
+                                                   Array * extraHeaders = NULL);
         
         virtual void storeFlags(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, ErrorCode * pError);
         virtual void storeLabels(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, Array * labels, ErrorCode * pError);
@@ -207,9 +210,10 @@ namespace mailcore {
         void unsetup();
         void selectIfNeeded(String * folder, ErrorCode * pError);
         char fetchDelimiterIfNeeded(char defaultDelimiter, ErrorCode * pError);
-        IMAPSyncResult * fetchMessages(String * folder, IMAPMessagesRequestKind requestKind, bool fetchByUID,
-                                       struct mailimap_set * imapset, uint64_t modseq, HashMap * mapping, uint32_t startUid,
-                                       IMAPProgressCallback * progressCallback, ErrorCode * pError);
+        IMAPSyncResult * fetchMessages(String * folder, IMAPMessagesRequestKind requestKind,
+                                       bool fetchByUID, struct mailimap_set * imapset, uint64_t modseq,
+                                       HashMap * mapping, uint32_t startUid, IMAPProgressCallback * progressCallback,
+                                       ErrorCode * pError,  Array * extraHeaders);
     };
 }
 
