@@ -10,6 +10,15 @@
 
 using namespace mailcore;
 
+namespace mailcore {
+    struct HashMapCell {
+        unsigned int func;
+        Object * key;
+        Object * value;
+        HashMapCell * next;
+    };
+}
+
 #define CHASH_DEFAULTSIZE 13
 #define CHASH_MAXDEPTH    3
 

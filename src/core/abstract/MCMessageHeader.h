@@ -55,9 +55,12 @@ namespace mailcore {
 		virtual void setUserAgent(String * userAgent);
 		virtual String * userAgent();
         
-        virtual void addHeader(String *header, String *value);
         virtual void setExtraHeaders(HashMap *headers);
-        virtual String * getHeader(String *header);
+        virtual HashMap * extraHeaders();
+        
+        virtual void addHeader(String *name, String * value);
+        virtual void removeHeader(String *name);
+        virtual String * headerForName(String *name);
         
         String * extractedSubject();
 		virtual String * partialExtractedSubject();

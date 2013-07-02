@@ -299,16 +299,26 @@ void MessageHeader::setExtraHeaders(HashMap * headers) {
     MC_SAFE_REPLACE_COPY(HashMap, mExtraHeaders, headers);
 }
 
-void MessageHeader::addHeader(String * header, String * value) {
-    if (!mExtraHeaders) {
-        mExtraHeaders = new HashMap();
-    }
-    mExtraHeaders->setObjectForKey(header, value);
+HashMap * MessageHeader::extraHeaders() {
+    return mExtraHeaders;
 }
 
-String * MessageHeader::getHeader(String *header) {
+void MessageHeader::addHeader(String * name, String * object) {
+    if (mExtraHeaders == NULL) {
+        mExtraHeaders = new HashMap();
+    }
+    mExtraHeaders->setObjectForKey(name, object);
+}
+
+void MessageHeader::removeHeader(String * name) {
+    if (mExtraHeaders != NULL) {
+        mExtraHeaders->removeObjectForKey(name);
+    }
+}
+
+String * MessageHeader::headerForName(String * name) {
     if (mExtraHeaders) {
-        return (String *)mExtraHeaders->objectForKey(header);
+        return (String *)mExtraHeaders->objectForKey(name);
     }
     return NULL;
 }
@@ -845,16 +855,10 @@ struct mailimf_fields * MessageHeader::createIMFFieldsAndFilterBcc(bool filterBc
 	}
     
     if (mExtraHeaders != NULL) {
-        HashMapIter *iter;
-        
-        for (iter = mExtraHeaders->iteratorBegin(); iter != NULL; iter = mExtraHeaders->iteratorNext(iter)) {
+        mc_foreachdictionaryKeyAndValue(String, header, String, value, mExtraHeaders) {
             struct mailimf_field * field;
-            String * key;
-            String * value;
             
-            key = (String *)iter->key;
-            value = (String *)iter->value;
-            field = mailimf_field_new_custom(strdup(key->UTF8Characters()), strdup(value->UTF8Characters()));
+            field = mailimf_field_new_custom(strdup(header->UTF8Characters()), strdup(value->UTF8Characters()));
             mailimf_fields_add(fields, field);
         }
     }
