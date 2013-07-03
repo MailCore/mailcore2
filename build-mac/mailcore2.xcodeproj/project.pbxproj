@@ -675,6 +675,8 @@
 		DA0F1C7C177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = DA0F1C79177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.cc */; };
 		DAD1C7D8177E92650011AC59 /* MCMessageRendererHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAD1C7D6177E92650011AC59 /* MCMessageRendererHelper.cpp */; };
 		DAD1C7D9177E92650011AC59 /* MCMessageRendererHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAD1C7D6177E92650011AC59 /* MCMessageRendererHelper.cpp */; };
+		DAD28C8B1783CFFC00F2BB8F /* MCHTMLBodyRendererCallback.cc in Sources */ = {isa = PBXBuildFile; fileRef = DAD28C891783CFFC00F2BB8F /* MCHTMLBodyRendererCallback.cc */; };
+		DAD28C8C1783CFFC00F2BB8F /* MCHTMLBodyRendererCallback.cc in Sources */ = {isa = PBXBuildFile; fileRef = DAD28C891783CFFC00F2BB8F /* MCHTMLBodyRendererCallback.cc */; };
 		F87F190C16BB62B00012652F /* MCOIMAPFetchFoldersOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = F87F190B16BB62B00012652F /* MCOIMAPFetchFoldersOperation.mm */; };
 		F8EA941716BB1C9D0011AC6F /* MCOIMAPSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F8EA941416BAED6E0011AC6F /* MCOIMAPSession.h */; };
 /* End PBXBuildFile section */
@@ -1453,6 +1455,8 @@
 		DA0F1C7A177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPMessageRenderingOperation.h; sourceTree = "<group>"; };
 		DAD1C7D6177E92650011AC59 /* MCMessageRendererHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCMessageRendererHelper.cpp; sourceTree = "<group>"; };
 		DAD1C7D7177E92650011AC59 /* MCMessageRendererHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMessageRendererHelper.h; sourceTree = "<group>"; };
+		DAD28C891783CFFC00F2BB8F /* MCHTMLBodyRendererCallback.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCHTMLBodyRendererCallback.cc; sourceTree = "<group>"; };
+		DAD28C8A1783CFFC00F2BB8F /* MCHTMLBodyRendererCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCHTMLBodyRendererCallback.h; sourceTree = "<group>"; };
 		F87F190816BB62690012652F /* MCOIMAPFetchFoldersOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPFetchFoldersOperation.h; sourceTree = "<group>"; };
 		F87F190B16BB62B00012652F /* MCOIMAPFetchFoldersOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOIMAPFetchFoldersOperation.mm; sourceTree = "<group>"; };
 		F8EA941416BAED6E0011AC6F /* MCOIMAPSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPSession.h; sourceTree = "<group>"; };
@@ -1551,6 +1555,8 @@
 				C63CD68716BE1AB600DB18F1 /* MCRenderer.h */,
 				DAD1C7D6177E92650011AC59 /* MCMessageRendererHelper.cpp */,
 				DAD1C7D7177E92650011AC59 /* MCMessageRendererHelper.h */,
+				DAD28C891783CFFC00F2BB8F /* MCHTMLBodyRendererCallback.cc */,
+				DAD28C8A1783CFFC00F2BB8F /* MCHTMLBodyRendererCallback.h */,
 			);
 			path = renderer;
 			sourceTree = "<group>";
@@ -2494,6 +2500,7 @@
 				9EF9AB19175F36600027FA3B /* MCOIMAPFolderStatusOperation.mm in Sources */,
 				9E774D891767C7F60065EB9B /* MCIMAPFolderStatus.cc in Sources */,
 				DAD1C7D8177E92650011AC59 /* MCMessageRendererHelper.cpp in Sources */,
+				DAD28C8B1783CFFC00F2BB8F /* MCHTMLBodyRendererCallback.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2677,6 +2684,7 @@
 				9EF9AB1A175F36600027FA3B /* MCOIMAPFolderStatusOperation.mm in Sources */,
 				9E774D8A1767C7F60065EB9B /* MCIMAPFolderStatus.cc in Sources */,
 				DAD1C7D9177E92650011AC59 /* MCMessageRendererHelper.cpp in Sources */,
+				DAD28C8C1783CFFC00F2BB8F /* MCHTMLBodyRendererCallback.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

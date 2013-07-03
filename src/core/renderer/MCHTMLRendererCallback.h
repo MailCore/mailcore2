@@ -48,10 +48,6 @@ namespace mailcore {
         // Can be used to hide quoted text.
         virtual String * filterHTMLForMessage(String * html);
     };
-    
-    class HTMLBodyRendererTemplateCallback : public HTMLRendererTemplateCallback {
-        virtual String * templateForMainHeader(MessageHeader * header);
-    };
 
 }
 
