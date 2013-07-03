@@ -140,6 +140,8 @@ namespace mailcore {
         virtual String * htmlBodyRendering(IMAPMessage * message, String * folder);
         
         virtual String * plainTextRendering(IMAPMessage * message, String * folder);
+        
+        // Double spaces, tab and return characters will be replaced with single spaces.
         virtual String * plainTextBodyRendering(IMAPMessage * message, String * folder);
         
     public: // private
