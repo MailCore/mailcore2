@@ -33,6 +33,8 @@ typedef enum {
     MCOAuthTypeSASLNTLM          = 1 << 6,
     /** Kerberos 4 authentication.*/
     MCOAuthTypeSASLKerberosV4    = 1 << 7,
+    /** OAuth2 authentication.*/
+    MCOAuthTypeXOAuth2           = 1 << 8,
 } MCOAuthType;
 
 /** It's the IMAP flags of the folder.*/
