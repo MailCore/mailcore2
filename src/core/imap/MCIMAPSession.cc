@@ -3009,7 +3009,7 @@ String * htmlRendering(IMAPMessage * message, String * folder)
     String * htmlString = HTMLRenderer::htmlForIMAPMessage(folder,
                                                            message,
                                                            messageRendererHelper->dataCallback(),
-                                                           messageRendererHelper->htmlCallback());
+                                                           NULL);
     
     return htmlString;
 }
