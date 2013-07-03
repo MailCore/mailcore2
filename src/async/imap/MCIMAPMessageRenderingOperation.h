@@ -33,7 +33,7 @@ namespace mailcore {
         virtual RenderingType renderingType();
         
         virtual void setMessage(IMAPMessage * message);
-        virtual IMAPMessage message();
+        virtual IMAPMessage * message();
         
         // Result.
         virtual String * result();
