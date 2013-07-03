@@ -80,16 +80,16 @@ private:
     [self start];
 }
 
+// This method needs to be duplicated from MCOSMTPOperation since _completionBlock
+// references the instance of this subclass and not the one from MCOSMTPOperation.
 - (void)operationCompleted {
     if (_completionBlock == NULL)
         return;
     
-    nativeType *op = MCO_NATIVE_INSTANCE;
-    if (op->error() == mailcore::ErrorNone) {
-        _completionBlock(nil);
-    } else {
-        _completionBlock([NSError mco_errorWithErrorCode:op->error()]);
-    }
+    NSError * error = [NSError mco_errorWithErrorCode:MCO_NATIVE_INSTANCE->error()];
+    _completionBlock(error);
+    [_completionBlock release];
+    _completionBlock = NULL;
 }
 
 - (void) bodyProgress:(unsigned int)current maximum:(unsigned int)maximum

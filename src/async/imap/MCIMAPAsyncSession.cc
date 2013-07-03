@@ -11,6 +11,7 @@
 #include "MCIMAPAsyncConnection.h"
 #include "MCIMAPNamespace.h"
 #include "MCOperationQueueCallback.h"
+#include "MCConnectionLogger.h"
 
 #define DEFAULT_MAX_CONNECTIONS 3
 
@@ -26,6 +27,7 @@ IMAPAsyncSession::IMAPAsyncSession()
     mPort = 0;
     mUsername = NULL;
     mPassword = NULL;
+    mOAuth2Token = NULL;
     mAuthType = AuthTypeSASLNone;
     mConnectionType = ConnectionTypeClear;
     mCheckCertificateEnabled = true;
@@ -33,11 +35,17 @@ IMAPAsyncSession::IMAPAsyncSession()
     mDelimiter = 0;
     mDefaultNamespace = NULL;
     mTimeout = 30.;
+    mConnectionLogger = NULL;
 }
 
 IMAPAsyncSession::~IMAPAsyncSession()
 {
     MC_SAFE_RELEASE(mSessions);
+    MC_SAFE_RELEASE(mHostname);
+    MC_SAFE_RELEASE(mUsername);
+    MC_SAFE_RELEASE(mPassword);
+    MC_SAFE_RELEASE(mOAuth2Token);
+    MC_SAFE_RELEASE(mDefaultNamespace);
 }
 
 void IMAPAsyncSession::setHostname(String * hostname)
@@ -78,6 +86,16 @@ void IMAPAsyncSession::setPassword(String * password)
 String * IMAPAsyncSession::password()
 {
     return mPassword;
+}
+
+void IMAPAsyncSession::setOAuth2Token(String * token)
+{
+    MC_SAFE_REPLACE_COPY(String, mOAuth2Token, token);
+}
+
+String * IMAPAsyncSession::OAuth2Token()
+{
+    return mOAuth2Token;
 }
 
 void IMAPAsyncSession::setAuthType(AuthType authType)
@@ -174,6 +192,7 @@ unsigned int IMAPAsyncSession::maximumConnections()
 IMAPAsyncConnection * IMAPAsyncSession::session()
 {
     IMAPAsyncConnection * session = new IMAPAsyncConnection();
+    session->setConnectionLogger(mConnectionLogger);
     session->setOwner(this);
     session->autorelease();
     
@@ -181,6 +200,7 @@ IMAPAsyncConnection * IMAPAsyncSession::session()
     session->setPort(mPort);
     session->setUsername(mUsername);
     session->setPassword(mPassword);
+    session->setOAuth2Token(mOAuth2Token);
     session->setAuthType(mAuthType);
     session->setConnectionType(mConnectionType);
     session->setTimeout(mTimeout);
@@ -429,3 +449,16 @@ IMAPCapabilityOperation * IMAPAsyncSession::capabilityOperation()
     return session->capabilityOperation();
 }
 
+void IMAPAsyncSession::setConnectionLogger(ConnectionLogger * logger)
+{
+    mConnectionLogger = logger;
+    for(unsigned int i = 0 ; i < mSessions->count() ; i ++) {
+        IMAPAsyncConnection * currentSession = (IMAPAsyncConnection *) mSessions->objectAtIndex(i);
+        currentSession->setConnectionLogger(logger);
+    }
+}
+
+ConnectionLogger * IMAPAsyncSession::connectionLogger()
+{
+    return mConnectionLogger;
+}

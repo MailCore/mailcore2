@@ -159,7 +159,7 @@ void OperationQueue::stoppedOnMainThread(void * context)
     mStarted = false;
     
     if (mCallback) {
-        mCallback->queueStoppedRunning();
+        mCallback->queueStoppedRunning(this);
     }
     
     release(); // (2)
@@ -173,7 +173,7 @@ void OperationQueue::startThread()
         return;
     
     if (mCallback) {
-        mCallback->queueStartRunning();
+        mCallback->queueStartRunning(this);
     }
     
     retain(); // (3)

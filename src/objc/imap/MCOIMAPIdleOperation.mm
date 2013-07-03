@@ -53,6 +53,8 @@ typedef void (^CompletionType)(NSError *error);
     } else {
         _completionBlock([NSError mco_errorWithErrorCode:op->error()]);
     }
+    [_completionBlock release];
+    _completionBlock = nil;
 }
 
 - (void) interruptIdle

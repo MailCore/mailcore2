@@ -23,6 +23,7 @@ namespace mailcore {
     class POPDeleteMessagesOperation;
     class POPFetchMessagesOperation;
 	class POPOperationQueueCallback;
+    class POPConnectionLogger;
     
 	class POPAsyncSession : public Object {
 	public:
@@ -53,6 +54,9 @@ namespace mailcore {
 		virtual void setCheckCertificateEnabled(bool enabled);
 		virtual bool isCheckCertificateEnabled();
         
+        virtual void setConnectionLogger(ConnectionLogger * logger);
+        virtual ConnectionLogger * connectionLogger();
+        
         virtual POPFetchMessagesOperation * fetchMessagesOperation();
         
         virtual POPFetchHeaderOperation * fetchHeaderOperation(unsigned int index);
@@ -70,11 +74,14 @@ namespace mailcore {
         POPSession * mSession;
         OperationQueue * mQueue;
         POPOperationQueueCallback * mQueueCallback;
+        ConnectionLogger * mConnectionLogger;
+        pthread_mutex_t mConnectionLoggerLock;
+        POPConnectionLogger * mInternalLogger;
 		
     public: // private
         virtual void runOperation(POPOperation * operation);
         virtual POPSession * session();
-        
+        virtual void logConnection(ConnectionLogType logType, Data * buffer);
     };
 }
 

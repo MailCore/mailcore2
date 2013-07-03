@@ -160,11 +160,10 @@ static void logger(mailpop3 * pop3, int log_type, const char * buffer, size_t si
     
     if (isBuffer) {
         Data * data = Data::dataWithBytes(buffer, (unsigned int) size);
-        session->connectionLogger()->logBuffer(type, data);
+        session->connectionLogger()->log(session, type, data);
     }
     else {
-        Data * data = Data::dataWithBytes(buffer, (unsigned int) size);
-        session->connectionLogger()->logString(type, String::stringWithData(data));
+        session->connectionLogger()->log(session, type, NULL);
     }
 }
 

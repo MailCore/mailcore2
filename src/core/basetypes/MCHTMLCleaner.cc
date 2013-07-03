@@ -68,6 +68,7 @@ String * HTMLCleaner::cleanHTML(String * input)
     
     String * result = String::stringWithUTF8Characters((const char *) output.bp);
     
+    tidyBufFree(&docbuf);
     tidyBufFree(&output);
     tidyBufFree(&errbuf);
     tidyRelease(tdoc);

@@ -33,6 +33,8 @@ typedef enum {
     MCOAuthTypeSASLNTLM          = 1 << 6,
     /** Kerberos 4 authentication.*/
     MCOAuthTypeSASLKerberosV4    = 1 << 7,
+    /** OAuth2 authentication.*/
+    MCOAuthTypeXOAuth2           = 1 << 8,
 } MCOAuthType;
 
 /** It's the IMAP flags of the folder.*/
@@ -323,5 +325,29 @@ typedef enum {
     /** SMTP: Error while checking account.*/
     MCOErrorInvalidAccount,
 } MCOErrorCode;
+
+/** Here's the list of connection log types.*/
+typedef enum {
+    /** Received data.*/
+    MCOConnectionLogTypeReceived,
+    /** Sent data.*/
+    MCOConnectionLogTypeSent,
+    /** Sent private data. It can be a password.*/
+    MCOConnectionLogTypeSentPrivate,
+    /** Parse error.*/
+    MCOConnectionLogTypeErrorParse,
+    /** Error while receiving data. The data passed to the log will be nil.*/
+    MCOConnectionLogTypeErrorReceived,
+    /** Error while sending dataThe data passed to the log will be nil.*/
+    MCOConnectionLogTypeErrorSent,
+} MCOConnectionLogType;
+
+/**
+ It's a network traffic logger.
+ @param connectionID is the identifier of the underlaying network socket.
+ @param type is the type of the log.
+ @param data is the data related to the log.
+ */
+typedef void (^MCOConnectionLogger)(void * connectionID, MCOConnectionLogType type, NSData * data);
 
 #endif

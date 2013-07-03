@@ -9,6 +9,8 @@
 #ifndef __MAILCORE_CONNECTION_LOGGER_H_
 #define __MAILCORE_CONNECTION_LOGGER_H_
 
+#include <stdlib.h>
+
 #ifdef __cplusplus
 
 namespace mailcore {
@@ -17,20 +19,23 @@ namespace mailcore {
     class String;
     
     enum ConnectionLogType {
-        ConnectionLogTypeGeneric,
+        // Received data
         ConnectionLogTypeReceived,
+        // Sent data
         ConnectionLogTypeSent,
+        // Sent private data
         ConnectionLogTypeSentPrivate,
-        ConnectionLogTypeErrorGeneric,
+        // Parse error
+        ConnectionLogTypeErrorParse,
+        // Error while receiving data - log() is called with a NULL buffer.
         ConnectionLogTypeErrorReceived,
+        // Error while sending data - log() is called with a NULL buffer.
         ConnectionLogTypeErrorSent,
-        ConnectionLogTypeErrorSentPrivate,
     };
     
     class ConnectionLogger {
     public:
-        virtual void logBuffer(ConnectionLogType logType, Data * buffer) {}
-        virtual void logString(ConnectionLogType logType, String * log) {}
+        virtual void log(void * sender, ConnectionLogType logType, Data * buffer) {}
     };
     
 }

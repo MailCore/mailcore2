@@ -33,6 +33,7 @@
 #include "MCOperationQueueCallback.h"
 #include "MCIMAPDisconnectOperation.h"
 #include "MCIMAPAsyncSession.h"
+#include "MCConnectionLogger.h"
 
 using namespace mailcore;
 
@@ -46,13 +47,31 @@ namespace mailcore {
         virtual ~IMAPOperationQueueCallback() {
         }
         
-        virtual void queueStartRunning() {
+        virtual void queueStartRunning(OperationQueue * queue) {
             mConnection->queueStartRunning();
         }
         
-        virtual void queueStoppedRunning() {
+        virtual void queueStoppedRunning(OperationQueue * queue) {
             mConnection->tryAutomaticDisconnect();
             mConnection->queueStoppedRunning();
+        }
+        
+    private:
+        IMAPAsyncConnection * mConnection;
+    };
+    
+    class IMAPConnectionLogger : public Object, public ConnectionLogger {
+    public:
+        IMAPConnectionLogger(IMAPAsyncConnection * connection) {
+            mConnection = connection;
+        }
+        
+        virtual ~IMAPConnectionLogger() {
+        }
+        
+        virtual void log(void * context, void * sender, ConnectionLogType logType, Data * buffer)
+        {
+            mConnection->logConnection(logType, buffer);
         }
         
     private:
@@ -70,11 +89,16 @@ IMAPAsyncConnection::IMAPAsyncConnection()
     mQueueCallback = new IMAPOperationQueueCallback(this);
     mQueue->setCallback(mQueueCallback);
     mOwner = NULL;
+    mConnectionLogger = NULL;
+    pthread_mutex_init(&mConnectionLoggerLock, NULL);
+    mInternalLogger = new IMAPConnectionLogger(this);
 }
 
 IMAPAsyncConnection::~IMAPAsyncConnection()
 {
     cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
+    pthread_mutex_destroy(&mConnectionLoggerLock);
+    MC_SAFE_RELEASE(mInternalLogger);
     MC_SAFE_RELEASE(mQueueCallback);
     MC_SAFE_RELEASE(mLastFolder);
     MC_SAFE_RELEASE(mDefaultNamespace);
@@ -120,6 +144,16 @@ void IMAPAsyncConnection::setPassword(String * password)
 String * IMAPAsyncConnection::password()
 {
     return mSession->password();
+}
+
+void IMAPAsyncConnection::setOAuth2Token(String * token)
+{
+    mSession->setOAuth2Token(token);
+}
+
+String * IMAPAsyncConnection::OAuth2Token()
+{
+    return mSession->OAuth2Token();
 }
 
 void IMAPAsyncConnection::setAuthType(AuthType authType)
@@ -526,4 +560,35 @@ IMAPAsyncSession * IMAPAsyncConnection::owner()
     return mOwner;
 }
 
+void IMAPAsyncConnection::setConnectionLogger(ConnectionLogger * logger)
+{
+    pthread_mutex_lock(&mConnectionLoggerLock);
+    mConnectionLogger = logger;
+    if (mConnectionLogger != NULL) {
+        mSession->setConnectionLogger(mInternalLogger);
+    }
+    else {
+        mSession->setConnectionLogger(NULL);
+    }
+    pthread_mutex_unlock(&mConnectionLoggerLock);
+}
 
+ConnectionLogger * IMAPAsyncConnection::connectionLogger()
+{
+    ConnectionLogger * result;
+    
+    pthread_mutex_lock(&mConnectionLoggerLock);
+    result = mConnectionLogger;
+    pthread_mutex_unlock(&mConnectionLoggerLock);
+    
+    return result;
+}
+
+void IMAPAsyncConnection::logConnection(ConnectionLogType logType, Data * buffer)
+{
+    pthread_mutex_lock(&mConnectionLoggerLock);
+    if (mConnectionLogger != NULL) {
+        mConnectionLogger->log(this, logType, buffer);
+    }
+    pthread_mutex_unlock(&mConnectionLoggerLock);
+}

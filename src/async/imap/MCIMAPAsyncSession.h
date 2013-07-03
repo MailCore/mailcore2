@@ -51,6 +51,11 @@ namespace mailcore {
 		virtual void setPassword(String * password);
 		virtual String * password();
         
+        // To authenticate using OAuth2, username and oauth2token should be set.
+        // auth type to use is AuthTypeOAuth2.
+        virtual void setOAuth2Token(String * token);
+        virtual String * OAuth2Token();
+        
 		virtual void setAuthType(AuthType authType);
 		virtual AuthType authType();
         
@@ -77,6 +82,9 @@ namespace mailcore {
         
 		virtual void setMaximumConnections(unsigned int maxConnections);
 		virtual unsigned int maximumConnections();
+        
+        virtual void setConnectionLogger(ConnectionLogger * logger);
+        virtual ConnectionLogger * connectionLogger();
         
 		virtual IMAPFolderInfoOperation * folderInfoOperation(String * folder);
 		virtual IMAPFolderStatusOperation * folderStatusOperation(String * folder);
@@ -124,7 +132,7 @@ namespace mailcore {
 		virtual IMAPOperation * checkAccountOperation();
         
 		virtual IMAPCapabilityOperation * capabilityOperation();
-        
+    
 	private:
         Array * mSessions;
         
@@ -132,6 +140,7 @@ namespace mailcore {
 		unsigned int mPort;
 		String * mUsername;
 		String * mPassword;
+        String * mOAuth2Token;
 		AuthType mAuthType;
 		ConnectionType mConnectionType;
 		bool mCheckCertificateEnabled;
@@ -141,6 +150,7 @@ namespace mailcore {
 		time_t mTimeout;
         bool mAllowsFolderConcurrentAccessEnabled;
 		unsigned int mMaximumConnections;
+        ConnectionLogger * mConnectionLogger;
         
 		virtual IMAPAsyncConnection * sessionForFolder(String * folder, bool urgent = false);
 		virtual IMAPAsyncConnection * session();
