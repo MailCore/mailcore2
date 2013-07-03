@@ -20,7 +20,7 @@ HTMLRendererTemplateCallback * MessageRendererHelper::htmlCallback()
     return new HTMLRendererTemplateCallback();
 }
 
-HTMLRendererTemplateCallback * MessageRendererHelper::htmlBodyCallback()
+HTMLBodyRendererTemplateCallback * MessageRendererHelper::htmlBodyCallback()
 {
     return new HTMLBodyRendererTemplateCallback();
 }
