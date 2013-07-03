@@ -1,5 +1,5 @@
 //
-//  MCIMAPAsyncSession.cpp
+//  MCIMAPAsyncSession.cc
 //  mailcore2
 //
 //  Created by DINH Viêt Hoà on 1/17/13.
