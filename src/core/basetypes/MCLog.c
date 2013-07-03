@@ -7,6 +7,7 @@
 #include <sys/time.h>
 #include <pthread.h>
 #include <unistd.h>
+#include <stdbool.h>
 
 static pid_t sPid = -1;
 bool MCLogEnabled = false;
