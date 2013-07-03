@@ -50,7 +50,7 @@ namespace mailcore {
     };
     
     class HTMLBodyRendererTemplateCallback : public HTMLRendererTemplateCallback {
-        
+        virtual String * templateForMainHeader(MessageHeader * header);
     };
 
 }
