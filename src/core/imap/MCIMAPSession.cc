@@ -3042,6 +3042,7 @@ String * plainTextBodyRendering(IMAPMessage * message, String * folder)
     plainTextBodyString->replaceOccurrencesOfString(MCSTR("\n"), MCSTR(" "));
     plainTextBodyString->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
     plainTextBodyString->replaceOccurrencesOfString(MCSTR("\t"), MCSTR(" "));
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("  "), MCSTR(" "));
     
     return plainTextBodyString;
 }
