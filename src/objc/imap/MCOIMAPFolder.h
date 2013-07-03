@@ -15,7 +15,7 @@
 #import <Foundation/Foundation.h>
 #import <MailCore/MCOConstants.h>
 
-@interface MCOIMAPFolder : NSObject <NSCoding, NSCopying>
+@interface MCOIMAPFolder : NSObject <NSCopying>
 
 /** The folder's path, like for example INBOX.Archive */
 @property (nonatomic, copy) NSString * path;

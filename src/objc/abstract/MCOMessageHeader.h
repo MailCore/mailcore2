@@ -16,7 +16,7 @@
 
 @class MCOAddress;
 
-@interface MCOMessageHeader : NSObject <NSCoding, NSCopying>
+@interface MCOMessageHeader : NSObject <NSCopying>
 
 /** Message-ID field.*/
 @property (nonatomic, copy) NSString * messageID;
