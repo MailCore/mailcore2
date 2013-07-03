@@ -351,7 +351,7 @@ void testAll()
     displayName = MCSTR("My Email");
     
     mailcore::AutoreleasePool * pool = new mailcore::AutoreleasePool();
-    MCLogEnabled = true;
+    MCLogEnabled = 1;
     mailstream_debug = 1;
     
     //mailcore::Data * data = testMessageBuilder();

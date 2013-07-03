@@ -10,7 +10,7 @@
 
 namespace mailcore {
     
-    extern bool MCLogEnabled;
+    extern int MCLogEnabled;
     
 #ifndef __printflike
 #define __printflike(a,b)
