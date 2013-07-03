@@ -318,7 +318,7 @@ void MessageHeader::removeHeader(String * name) {
 
 String * MessageHeader::headerForName(String * name) {
     if (mExtraHeaders) {
-        return (String *)mExtraHeaders->objectForKey(name);
+        return (String *) mExtraHeaders->objectForKey(name);
     }
     return NULL;
 }
