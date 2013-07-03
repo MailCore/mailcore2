@@ -11,6 +11,7 @@
 #define __MAILCORE_MCMESSAGERENDERERHELPER_H_
 
 #include "MCHTMLRendererCallback.h"
+#include "MCHTMLBodyRendererCallback.h"
 #include "MCIMAPSession.h"
 
 #ifdef __cplusplus
@@ -19,8 +20,15 @@ namespace mailcore {
     
     class MessageRendererHelper {
     public:
+        MessageRendererHelper();
+        ~MessageRendererHelper();
+
         virtual HTMLRendererIMAPCallback * dataCallback();
         virtual HTMLBodyRendererTemplateCallback * htmlBodyCallback();
+    
+    private:
+        HTMLRendererIMAPCallback * mDataCallback;
+        HTMLBodyRendererTemplateCallback * mHtmlCallback;
         
     };
 }

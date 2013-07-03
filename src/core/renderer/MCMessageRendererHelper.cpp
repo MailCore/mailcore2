@@ -10,12 +10,24 @@
 
 using namespace mailcore;
 
+MessageRendererHelper::MessageRendererHelper()
+{
+    mDataCallback = new HTMLRendererIMAPCallback();
+    mHtmlCallback = new HTMLBodyRendererTemplateCallback();
+}
+
+MessageRendererHelper::~MessageRendererHelper()
+{
+    MC_SAFE_RELEASE(mDataCallback);
+    MC_SAFE_RELEASE(mHtmlCallback);
+}
+
 HTMLRendererIMAPCallback * MessageRendererHelper::dataCallback()
 {
-    return new HTMLRendererIMAPCallback();
+    return mDataCallback;
 }
 
 HTMLBodyRendererTemplateCallback * MessageRendererHelper::htmlBodyCallback()
 {
-    return new HTMLBodyRendererTemplateCallback();
+    return mHtmlCallback;
 }
