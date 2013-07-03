@@ -17,20 +17,21 @@
 
 namespace mailcore {
     
+    // If this type becomes public it must be moved to MCConstants.h
     typedef enum {
         RenderingTypeHTML,
         RenderingTypeHTMLBody,
         RenderingTypePlainText,
         RenderingTypePlainTextBody
-    } RenderingType;
+    } IMAPMessageRenderingType;
     
     class IMAPMessageRenderingOperation : public IMAPOperation {
     public:
         IMAPMessageRenderingOperation();
         virtual ~IMAPMessageRenderingOperation();
         
-        virtual void setRenderingType(RenderingType type);
-        virtual RenderingType renderingType();
+        virtual void setRenderingType(IMAPMessageRenderingType type);
+        virtual IMAPMessageRenderingType renderingType();
         
         virtual void setMessage(IMAPMessage * message);
         virtual IMAPMessage * message();
@@ -42,7 +43,7 @@ namespace mailcore {
         virtual void main();
     
     private:
-        RenderingType mRenderingType;
+        IMAPMessageRenderingType mRenderingType;
         String * mResult;
         IMAPMessage * mMessage;
         

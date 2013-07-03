@@ -26,12 +26,12 @@ IMAPMessageRenderingOperation::~IMAPMessageRenderingOperation()
     MC_SAFE_RELEASE(mResult);
 }
 
-void IMAPMessageRenderingOperation::setRenderingType(RenderingType type)
+void IMAPMessageRenderingOperation::setRenderingType(IMAPMessageRenderingType type)
 {
     mRenderingType = type;
 }
 
-RenderingType IMAPMessageRenderingOperation::renderingType()
+IMAPMessageRenderingType IMAPMessageRenderingOperation::renderingType()
 {
     return mRenderingType;
 }
