@@ -3,6 +3,7 @@
 #include <libetpan/libetpan.h>
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #include "MCIMAPSearchExpression.h"
 #include "MCIMAPFolder.h"
@@ -3057,10 +3058,21 @@ String * plainTextBodyRendering(IMAPMessage * message, String * folder)
     String * htmlBodyString = htmlBodyRendering(message, folder);
     String * plainTextBodyString = htmlBodyString->flattenHTML();
     
-    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\n"), MCSTR(" "));
-    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
-    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\t"), MCSTR(" "));
     plainTextBodyString->replaceOccurrencesOfString(MCSTR("  "), MCSTR(" "));
     
-    return plainTextBodyString;
+    char c;
+    int i = 0;
+    char string[] = plainTextBodyString;
+    
+    while (string[i]) {
+        c = string[i];
+        
+        if (isspace(c)) {
+            string[i] = " ";
+        }
+        
+        i++;
+    }
+    
+    return string;
 }
