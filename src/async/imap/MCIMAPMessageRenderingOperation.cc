@@ -46,7 +46,7 @@ IMAPMessage * IMAPMessageRenderingOperation::message()
     return mMessage;
 }
 
-String * result()
+String * IMAPMessageRenderingOperation::result()
 {
     return mResult;
 }
