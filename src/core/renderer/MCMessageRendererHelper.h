@@ -20,7 +20,6 @@ namespace mailcore {
     class MessageRendererHelper {
     public:
         virtual HTMLRendererIMAPCallback * dataCallback();
-        virtual HTMLRendererTemplateCallback * htmlCallback();
         virtual HTMLBodyRendererTemplateCallback * htmlBodyCallback();
         
     };

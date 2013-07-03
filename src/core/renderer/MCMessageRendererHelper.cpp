@@ -15,11 +15,6 @@ HTMLRendererIMAPCallback * MessageRendererHelper::dataCallback()
     return new HTMLRendererIMAPCallback();
 }
 
-HTMLRendererTemplateCallback * MessageRendererHelper::htmlCallback()
-{
-    return new HTMLRendererTemplateCallback();
-}
-
 HTMLBodyRendererTemplateCallback * MessageRendererHelper::htmlBodyCallback()
 {
     return new HTMLBodyRendererTemplateCallback();
