@@ -37,7 +37,7 @@ static void logInternalv(FILE * file,
     const char * user, const char * filename, unsigned int line,
     int dumpStack, const char * format, va_list argp)
 {
-    if (!mailcore::logEnabled)
+    if (!MCLogEnabled)
         return;
     
     while (1) {
