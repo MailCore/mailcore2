@@ -3063,20 +3063,11 @@ String * IMAPSession::plainTextBodyRendering(IMAPMessage * message, String * fol
     String * plainTextBodyString = htmlBodyString->flattenHTML();
     
     plainTextBodyString->replaceOccurrencesOfString(MCSTR("  "), MCSTR(" "));
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\t"), MCSTR(" "));
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\n"), MCSTR(" "));
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\v"), MCSTR(" "));
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\f"), MCSTR(" "));
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
     
-    char c;
-    int i = 0;
-    char string[] = plainTextBodyString;
-    
-    while (string[i]) {
-        c = string[i];
-        
-        if (isspace(c)) {
-            string[i] = " ";
-        }
-        
-        i++;
-    }
-    
-    return string;
+    return plainTextBodyString;
 }
