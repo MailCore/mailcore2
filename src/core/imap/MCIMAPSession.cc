@@ -349,6 +349,8 @@ void IMAPSession::init()
     mProgressCallback = NULL;
     mProgressItemsCount = 0;
     mConnectionLogger = NULL;
+    mDataCallback = new HTMLRendererIMAPCallback();
+    mHtmlCallback = new HTMLBodyRendererTemplateCallback();
 }
 
 IMAPSession::IMAPSession()
@@ -366,6 +368,8 @@ IMAPSession::~IMAPSession()
     MC_SAFE_RELEASE(mDefaultNamespace);
     MC_SAFE_RELEASE(mCurrentFolder);
     pthread_mutex_destroy(&mIdleLock);
+    MC_SAFE_RELEASE(mDataCallback);
+    MC_SAFE_RELEASE(mHtmlCallback);
 }
 
 void IMAPSession::setHostname(String * hostname)
@@ -3027,7 +3031,7 @@ String * IMAPSession::htmlRendering(IMAPMessage * message, String * folder)
     MessageRendererHelper * messageRendererHelper = new MessageRendererHelper;
     String * htmlString = HTMLRenderer::htmlForIMAPMessage(folder,
                                                            message,
-                                                           messageRendererHelper->dataCallback(),
+                                                           mDataCallback,
                                                            NULL);
     
     return htmlString;
@@ -3039,8 +3043,8 @@ String * IMAPSession::htmlBodyRendering(IMAPMessage * message, String * folder)
     
     String * htmlBodyString = HTMLRenderer::htmlForIMAPMessage(folder,
                                                                message,
-                                                               messageRendererHelper->dataCallback(),
-                                                               messageRendererHelper->htmlBodyCallback());
+                                                               mDataCallback,
+                                                               mHtmlBodyCallback);
 
     return htmlBodyString;
 }
