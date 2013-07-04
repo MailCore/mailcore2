@@ -12,10 +12,13 @@
     if (code == mailcore::ErrorNone) {
         return nil;
     }
-
+    
+    NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
+    [userInfo setObject:MCOLocalizedDescriptionTable[code] forKey:NSLocalizedDescriptionKey];
+    
     NSError *error = [NSError errorWithDomain:MCOErrorDomain
                                          code:(int)code
-                                     userInfo:nil];
+                                     userInfo:userInfo];
     return error;
 }
 @end
