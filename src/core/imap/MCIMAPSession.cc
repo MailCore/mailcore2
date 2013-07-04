@@ -3022,7 +3022,7 @@ ConnectionLogger * IMAPSession::connectionLogger()
     return mConnectionLogger;
 }
 
-String * htmlRendering(IMAPMessage * message, String * folder)
+String * IMAPSession::htmlRendering(IMAPMessage * message, String * folder)
 {
     MessageRendererHelper * messageRendererHelper = new MessageRendererHelper;
     String * htmlString = HTMLRenderer::htmlForIMAPMessage(folder,
@@ -3033,7 +3033,7 @@ String * htmlRendering(IMAPMessage * message, String * folder)
     return htmlString;
 }
 
-String * htmlBodyRendering(IMAPMessage * message, String * folder)
+String * IMAPSession::htmlBodyRendering(IMAPMessage * message, String * folder)
 {
     MessageRendererHelper * messageRendererHelper = new MessageRendererHelper;
     
@@ -3045,7 +3045,7 @@ String * htmlBodyRendering(IMAPMessage * message, String * folder)
     return htmlBodyString;
 }
 
-String * plainTextRendering(IMAPMessage * message, String * folder)
+String * IMAPSession::plainTextRendering(IMAPMessage * message, String * folder)
 {
     String * htmlString = htmlRendering(message, folder);
     String * plainTextString = htmlString->flattenHTML();
@@ -3053,7 +3053,7 @@ String * plainTextRendering(IMAPMessage * message, String * folder)
     return plainTextString;
 }
 
-String * plainTextBodyRendering(IMAPMessage * message, String * folder)
+String * IMAPSession::plainTextBodyRendering(IMAPMessage * message, String * folder)
 {
     String * htmlBodyString = htmlBodyRendering(message, folder);
     String * plainTextBodyString = htmlBodyString->flattenHTML();
