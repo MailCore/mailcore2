@@ -125,7 +125,7 @@
 		C64EA708169E847800778456 /* MCData.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6A9169E847800778456 /* MCData.cc */; };
 		C64EA70A169E847800778456 /* MCHash.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6AB169E847800778456 /* MCHash.cc */; };
 		C64EA70C169E847800778456 /* MCHashMap.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6AD169E847800778456 /* MCHashMap.cc */; };
-		C64EA70E169E847800778456 /* MCLog.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6AF169E847800778456 /* MCLog.cc */; };
+		C64EA70E169E847800778456 /* MCLog.c in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6AF169E847800778456 /* MCLog.c */; };
 		C64EA710169E847800778456 /* MCObject.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6B1169E847800778456 /* MCObject.cc */; };
 		C64EA712169E847800778456 /* MCRange.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6B3169E847800778456 /* MCRange.cc */; };
 		C64EA714169E847800778456 /* MCSet.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6B5169E847800778456 /* MCSet.cc */; };
@@ -449,7 +449,7 @@
 		C6BA2BA21705F4E6003F0E9E /* MCData.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6A9169E847800778456 /* MCData.cc */; };
 		C6BA2BA31705F4E6003F0E9E /* MCHash.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6AB169E847800778456 /* MCHash.cc */; };
 		C6BA2BA41705F4E6003F0E9E /* MCHashMap.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6AD169E847800778456 /* MCHashMap.cc */; };
-		C6BA2BA51705F4E6003F0E9E /* MCLog.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6AF169E847800778456 /* MCLog.cc */; };
+		C6BA2BA51705F4E6003F0E9E /* MCLog.c in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6AF169E847800778456 /* MCLog.c */; };
 		C6BA2BA61705F4E6003F0E9E /* MCObject.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6B1169E847800778456 /* MCObject.cc */; };
 		C6BA2BA71705F4E6003F0E9E /* MCRange.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6B3169E847800778456 /* MCRange.cc */; };
 		C6BA2BA81705F4E6003F0E9E /* MCSet.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6B5169E847800778456 /* MCSet.cc */; };
@@ -1206,7 +1206,7 @@
 		C64EA6AC169E847800778456 /* MCHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCHash.h; sourceTree = "<group>"; };
 		C64EA6AD169E847800778456 /* MCHashMap.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCHashMap.cc; sourceTree = "<group>"; };
 		C64EA6AE169E847800778456 /* MCHashMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCHashMap.h; sourceTree = "<group>"; };
-		C64EA6AF169E847800778456 /* MCLog.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCLog.cc; sourceTree = "<group>"; };
+		C64EA6AF169E847800778456 /* MCLog.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MCLog.c; sourceTree = "<group>"; };
 		C64EA6B0169E847800778456 /* MCLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCLog.h; sourceTree = "<group>"; };
 		C64EA6B1169E847800778456 /* MCObject.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCObject.cc; sourceTree = "<group>"; };
 		C64EA6B2169E847800778456 /* MCObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCObject.h; sourceTree = "<group>"; };
@@ -1802,7 +1802,7 @@
 				C6D6F966171FCF9F006F5B28 /* MCJSONParser.h */,
 				C6D6F950171E5CB8006F5B28 /* MCMD5.cc */,
 				C6D6F951171E5CB8006F5B28 /* MCMD5.h */,
-				C64EA6AF169E847800778456 /* MCLog.cc */,
+				C64EA6AF169E847800778456 /* MCLog.c */,
 				C64EA6B0169E847800778456 /* MCLog.h */,
 				C6D6F952171E5CB8006F5B28 /* MCNull.cc */,
 				C6D6F953171E5CB8006F5B28 /* MCNull.h */,
@@ -2345,7 +2345,7 @@
 				C64EA708169E847800778456 /* MCData.cc in Sources */,
 				C64EA70A169E847800778456 /* MCHash.cc in Sources */,
 				C64EA70C169E847800778456 /* MCHashMap.cc in Sources */,
-				C64EA70E169E847800778456 /* MCLog.cc in Sources */,
+				C64EA70E169E847800778456 /* MCLog.c in Sources */,
 				C64EA710169E847800778456 /* MCObject.cc in Sources */,
 				C64EA712169E847800778456 /* MCRange.cc in Sources */,
 				C64EA714169E847800778456 /* MCSet.cc in Sources */,
@@ -2527,7 +2527,7 @@
 				C6BA2BA21705F4E6003F0E9E /* MCData.cc in Sources */,
 				C6BA2BA31705F4E6003F0E9E /* MCHash.cc in Sources */,
 				C6BA2BA41705F4E6003F0E9E /* MCHashMap.cc in Sources */,
-				C6BA2BA51705F4E6003F0E9E /* MCLog.cc in Sources */,
+				C6BA2BA51705F4E6003F0E9E /* MCLog.c in Sources */,
 				C6BA2BA61705F4E6003F0E9E /* MCObject.cc in Sources */,
 				C6BA2BA71705F4E6003F0E9E /* MCRange.cc in Sources */,
 				C6BA2BA81705F4E6003F0E9E /* MCSet.cc in Sources */,

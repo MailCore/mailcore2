@@ -31,7 +31,7 @@ public:
         mSession = session;
     }
     
-    virtual void log(void * context, void * sender, ConnectionLogType logType, Data * data)
+    virtual void log(void * sender, ConnectionLogType logType, Data * data)
     {
         [mSession _logWithSender:sender connectionType:(MCOConnectionLogType)logType data:MCO_TO_OBJC(data)];
     }

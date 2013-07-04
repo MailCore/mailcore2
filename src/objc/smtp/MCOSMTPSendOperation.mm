@@ -80,6 +80,18 @@ private:
     [self start];
 }
 
+// This method needs to be duplicated from MCOSMTPOperation since _completionBlock
+// references the instance of this subclass and not the one from MCOSMTPOperation.
+- (void)operationCompleted {
+    if (_completionBlock == NULL)
+        return;
+    
+    NSError * error = [NSError mco_errorWithErrorCode:MCO_NATIVE_INSTANCE->error()];
+    _completionBlock(error);
+    [_completionBlock release];
+    _completionBlock = NULL;
+}
+
 - (void) bodyProgress:(unsigned int)current maximum:(unsigned int)maximum
 {
     if (_progress != NULL) {
