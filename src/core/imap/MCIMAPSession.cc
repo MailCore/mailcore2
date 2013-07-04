@@ -18,7 +18,6 @@
 #include "MCConnectionLogger.h"
 #include "MCConnectionLoggerUtils.h"
 #include "MCHTMLRenderer.h"
-#include "MCMessageRendererHelper.h"
 #include "MCString.h"
 #include "MCUtils.h"
 
@@ -3028,7 +3027,6 @@ ConnectionLogger * IMAPSession::connectionLogger()
 
 String * IMAPSession::htmlRendering(IMAPMessage * message, String * folder)
 {
-    MessageRendererHelper * messageRendererHelper = new MessageRendererHelper;
     String * htmlString = HTMLRenderer::htmlForIMAPMessage(folder,
                                                            message,
                                                            mDataCallback,
@@ -3038,9 +3036,7 @@ String * IMAPSession::htmlRendering(IMAPMessage * message, String * folder)
 }
 
 String * IMAPSession::htmlBodyRendering(IMAPMessage * message, String * folder)
-{
-    MessageRendererHelper * messageRendererHelper = new MessageRendererHelper;
-    
+{    
     String * htmlBodyString = HTMLRenderer::htmlForIMAPMessage(folder,
                                                                message,
                                                                mDataCallback,
