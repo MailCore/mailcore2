@@ -3040,7 +3040,7 @@ String * IMAPSession::htmlBodyRendering(IMAPMessage * message, String * folder)
     String * htmlBodyString = HTMLRenderer::htmlForIMAPMessage(folder,
                                                                message,
                                                                mDataCallback,
-                                                               mHtmlBodyCallback);
+                                                               mHtmlCallback);
 
     return htmlBodyString;
 }
