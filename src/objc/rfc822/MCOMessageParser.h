@@ -20,7 +20,7 @@
 
 @protocol MCOHTMLRendererDelegate;
 
-@interface MCOMessageParser : MCOAbstractMessage <NSCopying>
+@interface MCOMessageParser : MCOAbstractMessage
 
 /** returns a parsed message from the given RFC 822 data.*/
 + (MCOMessageParser *) messageParserWithData:(NSData *)data;
