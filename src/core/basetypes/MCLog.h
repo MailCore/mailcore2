@@ -4,13 +4,9 @@
 
 #include <stdio.h>
 
-#ifdef __cplusplus
-
 #define MCLog(...) MCLogInternal(NULL, __FILE__, __LINE__, 0, __VA_ARGS__)
-
-namespace mailcore {
     
-    extern int MCLogEnabled;
+extern int MCLogEnabled;
     
 #ifndef __printflike
 #define __printflike(a,b)
@@ -26,10 +22,6 @@ extern "C" {
                        const char * format, ...) __printflike(5, 6);
 #ifdef __cplusplus
 }
-#endif
-
-}
-
 #endif
 
 #endif
