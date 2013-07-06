@@ -3,7 +3,6 @@
 #include <libetpan/libetpan.h>
 #include <string.h>
 #include <stdlib.h>
-#include <ctype.h>
 
 #include "MCIMAPSearchExpression.h"
 #include "MCIMAPFolder.h"
