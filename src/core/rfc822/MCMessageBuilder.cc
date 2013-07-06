@@ -691,3 +691,22 @@ String * MessageBuilder::htmlRendering(HTMLRendererTemplateCallback * htmlCallba
     MessageParser * message = MessageParser::messageParserWithData(data());
     return message->htmlRendering(htmlCallback);
 }
+
+String * MessageBuilder::htmlBodyRendering()
+{
+    MessageParser * message = MessageParser::messageParserWithData(data());
+    return message->htmlBodyRendering();
+}
+
+String * MessageBuilder::plainTextRendering()
+{
+    MessageParser * message = MessageParser::messageParserWithData(data());
+    return message->plainTextRendering();
+}
+
+String * MessageBuilder::plainTextBodyRendering()
+{
+    MessageParser * message = MessageParser::messageParserWithData(data());
+    return message->plainTextBodyRendering();
+}
+

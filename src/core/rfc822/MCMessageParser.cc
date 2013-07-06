@@ -5,6 +5,7 @@
 #include "MCAttachment.h"
 #include "MCMessageHeader.h"
 #include "MCHTMLRenderer.h"
+#include "HTMLBodyRendererTemplateCallback.h"
 
 using namespace mailcore;
 
@@ -96,3 +97,32 @@ String * MessageParser::htmlRendering(HTMLRendererTemplateCallback * htmlCallbac
     return HTMLRenderer::htmlForRFC822Message(this, htmlCallback);
 }
 
+String * MessageParser::htmlBodyRendering()
+{
+    HTMLBodyRendererTemplateCallback * callback = new HTMLBodyRendererTemplateCallback();
+    String * result = htmlRendering(callback);
+    MC_SAFE_RELEASE(callback);
+    return result;
+}
+
+String * MessageParser::plainTextRendering()
+{
+    String * html = htmlRendering(NULL);
+    return html->flattenHTML();
+}
+
+String * MessageParser::plainTextBodyRendering()
+{
+    String * html = htmlBodyRendering();
+    String * plainTextBodyString = html->flattenHTML();
+    
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\t"), MCSTR(" "));
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\n"), MCSTR(" "));
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\v"), MCSTR(" "));
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\f"), MCSTR(" "));
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
+    while (plainTextBodyString->replaceOccurrencesOfString(MCSTR("  "), MCSTR(" "))) {
+        // do nothing.
+    }
+    return plainTextBodyString;
+}
