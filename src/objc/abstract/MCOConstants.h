@@ -324,6 +324,8 @@ typedef enum {
     MCOErrorDeleteMessage,
     /** SMTP: Error while checking account.*/
     MCOErrorInvalidAccount,
+    /** The count of all errors */
+    MCOErrorCodeCount,
 } MCOErrorCode;
 
 /** Here's the list of connection log types.*/
