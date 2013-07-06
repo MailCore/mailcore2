@@ -5,7 +5,6 @@
 #include "MCIMAPMessagePart.h"
 #include "MCIMAPMultipart.h"
 #include "MCHTMLRenderer.h"
-#include "MCIMAPSession.h"
 
 using namespace mailcore;
 
@@ -209,34 +208,3 @@ String * IMAPMessage::htmlRendering(String * folder,
     return HTMLRenderer::htmlForIMAPMessage(folder, this, dataCallback, htmlCallback);
 }
 
-String * IMAPMessage::htmlRendering(String * folder)
-{
-    IMAPSession * session = new IMAPSession();
-    String * htmlString = session->htmlRendering(this, folder);
-    MC_SAFE_RELEASE(session);
-    return htmlString;
-}
-
-String * IMAPMessage::htmlBodyRendering(String * folder)
-{
-    IMAPSession * session = new IMAPSession();
-    String * htmlBodyString = session->htmlBodyRendering(this, folder);
-    MC_SAFE_RELEASE(session);
-    return htmlBodyString;
-}
-
-String * IMAPMessage::plainTextRendering(String * folder)
-{
-    IMAPSession * session = new IMAPSession();
-    String * plainTextString = session->plainTextRendering(this, folder);
-    MC_SAFE_RELEASE(session);
-    return plainTextString;
-}
-
-String * IMAPMessage::plainTextBodyRendering(String * folder)
-{
-    IMAPSession * session = new IMAPSession();
-    String * plainTextBodyString = session->plainTextBodyRendering(this, folder);
-    MC_SAFE_RELEASE(session);
-    return plainTextBodyString;
-}
