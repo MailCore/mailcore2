@@ -26,6 +26,11 @@ namespace mailcore {
         virtual void prefetchImageIMAPPart(String * folder, IMAPPart * part) {}
     };
     
+    class HTMLRendererIMAPDataCallback : public Object, public HTMLRendererIMAPCallback {
+    public:
+        virtual Data * dataForIMAPPart(String * folder, IMAPPart * part) { return Data::data(); }
+    };
+    
     class HTMLRendererTemplateCallback {
     public:
         virtual bool canPreviewPart(AbstractPart * part);

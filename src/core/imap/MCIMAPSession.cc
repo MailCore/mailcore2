@@ -3024,7 +3024,7 @@ ConnectionLogger * IMAPSession::connectionLogger()
 
 String * IMAPSession::htmlRendering(IMAPMessage * message, String * folder)
 {
-    HTMLRendererIMAPCallback * dataCallback = new HTMLRendererIMAPCallback();
+    HTMLRendererIMAPDataCallback * dataCallback = new HTMLRendererIMAPDataCallback();
     
     String * htmlString = HTMLRenderer::htmlForIMAPMessage(folder,
                                                            message,
@@ -3037,7 +3037,7 @@ String * IMAPSession::htmlRendering(IMAPMessage * message, String * folder)
 
 String * IMAPSession::htmlBodyRendering(IMAPMessage * message, String * folder)
 {    
-    HTMLRendererIMAPCallback * dataCallback = new HTMLRendererIMAPCallback();
+    HTMLRendererIMAPDataCallback * dataCallback = new HTMLRendererIMAPDataCallback();
     HTMLBodyRendererTemplateCallback * htmlCallback = new HTMLBodyRendererTemplateCallback();
     
     String * htmlBodyString = HTMLRenderer::htmlForIMAPMessage(folder,
