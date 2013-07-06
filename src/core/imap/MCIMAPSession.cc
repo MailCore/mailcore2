@@ -19,7 +19,7 @@
 #include "MCHTMLRenderer.h"
 #include "MCString.h"
 #include "MCUtils.h"
-#include "MCHTMLRendererCallback.h"
+#include "MCHTMLRendererIMAPDataCallback.h"
 #include "MCHTMLBodyRendererTemplateCallback.h"
 
 using namespace mailcore;
