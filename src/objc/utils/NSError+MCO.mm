@@ -8,7 +8,7 @@
 #import "MCOConstants.h"
 
 static NSString * MCOLocalizedDescriptionTable[] = {
-    @"", /** MCOErrorNone */
+    @"The operation succeeded.", /** MCOErrorNone */
     @"A stable connection to the server could not be established.",                   /** MCOErrorConnection */
     @"The server does not support TLS/SSL connections.",                              /** MCOErrorTLSNotAvailable */
     @"Unable to parse response from server.",                                         /** MCOErrorParse */
