@@ -19,6 +19,8 @@
 #include "MCHTMLRenderer.h"
 #include "MCString.h"
 #include "MCUtils.h"
+#include "MCHTMLRendererCallback.h"
+#include "MCHTMLBodyRendererTemplateCallback.h"
 
 using namespace mailcore;
 
@@ -347,8 +349,6 @@ void IMAPSession::init()
     mProgressCallback = NULL;
     mProgressItemsCount = 0;
     mConnectionLogger = NULL;
-    mDataCallback = new HTMLRendererIMAPCallback();
-    mHtmlCallback = new HTMLBodyRendererTemplateCallback();
 }
 
 IMAPSession::IMAPSession()
@@ -366,8 +366,6 @@ IMAPSession::~IMAPSession()
     MC_SAFE_RELEASE(mDefaultNamespace);
     MC_SAFE_RELEASE(mCurrentFolder);
     pthread_mutex_destroy(&mIdleLock);
-    MC_SAFE_RELEASE(mDataCallback);
-    MC_SAFE_RELEASE(mHtmlCallback);
 }
 
 void IMAPSession::setHostname(String * hostname)
@@ -3026,21 +3024,29 @@ ConnectionLogger * IMAPSession::connectionLogger()
 
 String * IMAPSession::htmlRendering(IMAPMessage * message, String * folder)
 {
+    HTMLRendererIMAPCallback * dataCallback = new HTMLRendererIMAPCallback();
+    
     String * htmlString = HTMLRenderer::htmlForIMAPMessage(folder,
                                                            message,
-                                                           mDataCallback,
+                                                           dataCallback,
                                                            NULL);
-    
+
+    MC_SAFE_RELEASE(dataCallback);
     return htmlString;
 }
 
 String * IMAPSession::htmlBodyRendering(IMAPMessage * message, String * folder)
 {    
+    HTMLRendererIMAPCallback * dataCallback = new HTMLRendererIMAPCallback();
+    HTMLBodyRendererTemplateCallback * htmlCallback = new HTMLBodyRendererTemplateCallback();
+    
     String * htmlBodyString = HTMLRenderer::htmlForIMAPMessage(folder,
                                                                message,
-                                                               mDataCallback,
-                                                               mHtmlCallback);
+                                                               dataCallback,
+                                                               htmlCallback);
 
+    MC_SAFE_RELEASE(dataCallback);
+    MC_SAFE_RELEASE(htmlCallback);
     return htmlBodyString;
 }
 

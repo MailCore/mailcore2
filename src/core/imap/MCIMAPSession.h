@@ -5,8 +5,6 @@
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCMessageConstants.h>
 #include <MailCore/MCIMAPMessage.h>
-#include <MailCore/MCHTMLRendererCallback.h>
-#include <MailCore/MCHTMLBodyRendererTemplateCallback.h>
 
 #ifdef __cplusplus
 
@@ -198,9 +196,6 @@ namespace mailcore {
         IMAPProgressCallback * mProgressCallback;
         unsigned int mProgressItemsCount;
         ConnectionLogger * mConnectionLogger;
-        
-        HTMLRendererIMAPCallback * mDataCallback;
-        HTMLBodyRendererTemplateCallback * mHtmlCallback;
         
         void init();
         void bodyProgress(unsigned int current, unsigned int maximum);
