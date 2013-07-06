@@ -3058,12 +3058,15 @@ String * IMAPSession::plainTextBodyRendering(IMAPMessage * message, String * fol
     String * htmlBodyString = htmlBodyRendering(message, folder);
     String * plainTextBodyString = htmlBodyString->flattenHTML();
     
-    plainTextBodyString->replaceOccurrencesOfString(MCSTR("  "), MCSTR(" "));
     plainTextBodyString->replaceOccurrencesOfString(MCSTR("\t"), MCSTR(" "));
     plainTextBodyString->replaceOccurrencesOfString(MCSTR("\n"), MCSTR(" "));
     plainTextBodyString->replaceOccurrencesOfString(MCSTR("\v"), MCSTR(" "));
     plainTextBodyString->replaceOccurrencesOfString(MCSTR("\f"), MCSTR(" "));
     plainTextBodyString->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
+    
+    while (plainTextBodyString->replaceOccurrencesOfString(MCSTR("  "), MCSTR(" ")) > 0) {
+        /* do nothing */
+    }
     
     return plainTextBodyString;
 }
