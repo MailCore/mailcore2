@@ -70,6 +70,19 @@
 - (NSString *) htmlRenderingWithFolder:(NSString *)folder
                               delegate:(id <MCOHTMLRendererIMAPDelegate>)delegate;
 
+/** HTML rendering of the message to be displayed in a web view.*/
+- (NSString *) htmlRenderingWithFolder:(NSString *)folder;
+
+/** HTML rendering of the body of the message to be displayed in a web view.*/
+- (NSString *) htmlBodyRenderingWithFolder:(NSString *)folder;
+
+/** Text rendering of the message.*/
+- (NSString *) plainTextRenderingWithFolder:(NSString *)folder;
+
+/** Text rendering of the body of the message. All end of line will be removed and white spaces cleaned up.
+ This method can be used to generate the summary of the message.*/
+- (NSString *) plainTextBodyRenderingWithFolder:(NSString *)folder;
+
 @end
 
 #endif

@@ -65,4 +65,24 @@ MCO_OBJC_SYNTHESIZE_SCALAR(uint64_t, uint64_t, setGmailMessageID, gmailMessageID
     return result;
 }
 
+- (NSString *) htmlRenderingWithFolder:(NSString *)folder
+{
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->htmlRendering([folder mco_mcString]));
+}
+
+- (NSString *) htmlBodyRenderingWithFolder:(NSString *)folder
+{
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->htmlBodyRendering([folder mco_mcString]));
+}
+
+- (NSString *) plainTextRenderingWithFolder:(NSString *)folder
+{
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->plainTextRendering([folder mco_mcString]));
+}
+
+- (NSString *) plainTextBodyRenderingWithFolder:(NSString *)folder
+{
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->plainTextBodyRendering([folder mco_mcString]));
+}
+
 @end
