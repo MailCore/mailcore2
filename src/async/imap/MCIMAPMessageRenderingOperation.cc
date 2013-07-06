@@ -56,16 +56,16 @@ void IMAPMessageRenderingOperation::main()
     ErrorCode error;
     
     if (mRenderingType == RenderingTypeHTML) {
-        mResult = session()->session()->htmlRendering(mMessage, folder());
+        mResult = session()->session()->htmlRendering(mMessage, folder(), &error);
     }
     else if (mRenderingType == RenderingTypeHTMLBody) {
-        mResult = session()->session()->htmlBodyRendering(mMessage, folder());
+        mResult = session()->session()->htmlBodyRendering(mMessage, folder(), &error);
     }
     else if (mRenderingType == RenderingTypePlainText) {
-        mResult = session()->session()->plainTextRendering(mMessage, folder());
+        mResult = session()->session()->plainTextRendering(mMessage, folder(), &error);
     }
     else if (mRenderingType == RenderingTypePlainTextBody) {
-        mResult = session()->session()->plainTextBodyRendering(mMessage, folder());
+        mResult = session()->session()->plainTextBodyRendering(mMessage, folder(), &error);
     }
     
     setError(error);
