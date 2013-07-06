@@ -38,7 +38,7 @@ IMAPMessageRenderingType IMAPMessageRenderingOperation::renderingType()
 
 void IMAPMessageRenderingOperation::setMessage(IMAPMessage * message)
 {
-    mMessage = MC_SAFE_REPLACE_COPY(IMAPMessage, mMessage, message);
+    MC_SAFE_REPLACE_COPY(IMAPMessage, mMessage, message);
 }
 
 IMAPMessage * IMAPMessageRenderingOperation::message()
