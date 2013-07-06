@@ -53,6 +53,12 @@ namespace mailcore {
                                        HTMLRendererIMAPCallback * dataCallback,
                                        HTMLRendererTemplateCallback * htmlCallback = NULL);
         
+        virtual String * htmlRendering(String * folder);
+        virtual String * htmlBodyRendering(String * folder);
+        
+        virtual String * plainTextRendering(String * folder);
+        virtual String * plainTextBodyRendering(String * folder);
+        
     public: // subclass behavior
         IMAPMessage(IMAPMessage * other);
         virtual Object * copy();
