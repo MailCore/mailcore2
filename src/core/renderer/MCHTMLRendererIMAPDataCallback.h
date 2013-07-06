@@ -18,7 +18,7 @@ namespace mailcore {
     
     class HTMLRendererIMAPDataCallback : public Object, public HTMLRendererIMAPCallback {
     public:
-        HTMLRendererIMAPDataCallback();
+        HTMLRendererIMAPDataCallback(IMAPSession * session, uint32_t uid);
         
         virtual Data * dataForIMAPPart(String * folder, IMAPPart * part);
         virtual ErrorCode error();
