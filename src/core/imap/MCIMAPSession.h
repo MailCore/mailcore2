@@ -143,12 +143,17 @@ namespace mailcore {
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
         
+        /** HTML rendering of the body of the message to be displayed in a web view.*/
         virtual String * htmlRendering(IMAPMessage * message, String * folder);
+        
+        /** HTML rendering of the body of the message.*/
         virtual String * htmlBodyRendering(IMAPMessage * message, String * folder);
         
+        /** Text rendering of the message.*/
         virtual String * plainTextRendering(IMAPMessage * message, String * folder);
         
-        // Double spaces, tab and return characters will be replaced with single spaces.
+        /** Text rendering of the body of the message. All end of line will be removed and white spaces cleaned up.
+         This method can be used to generate the summary of the message.*/
         virtual String * plainTextBodyRendering(IMAPMessage * message, String * folder);
         
     public: // private
