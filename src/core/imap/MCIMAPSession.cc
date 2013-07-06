@@ -3022,9 +3022,10 @@ ConnectionLogger * IMAPSession::connectionLogger()
     return mConnectionLogger;
 }
 
-String * IMAPSession::htmlRendering(IMAPMessage * message, String * folder, ErrorCode * pError)
+String * IMAPSession::htmlRendering(IMAPMessage * message, String * folder, ErrorCode pError)
 {
     HTMLRendererIMAPDataCallback * dataCallback = new HTMLRendererIMAPDataCallback();
+    pError = dataCallback->error();
     
     String * htmlString = HTMLRenderer::htmlForIMAPMessage(folder,
                                                            message,
@@ -3035,10 +3036,12 @@ String * IMAPSession::htmlRendering(IMAPMessage * message, String * folder, Erro
     return htmlString;
 }
 
-String * IMAPSession::htmlBodyRendering(IMAPMessage * message, String * folder, ErrorCode * pError)
+String * IMAPSession::htmlBodyRendering(IMAPMessage * message, String * folder, ErrorCode pError)
 {    
     HTMLRendererIMAPDataCallback * dataCallback = new HTMLRendererIMAPDataCallback();
     HTMLBodyRendererTemplateCallback * htmlCallback = new HTMLBodyRendererTemplateCallback();
+
+    pError = dataCallback->error();
     
     String * htmlBodyString = HTMLRenderer::htmlForIMAPMessage(folder,
                                                                message,
@@ -3050,7 +3053,7 @@ String * IMAPSession::htmlBodyRendering(IMAPMessage * message, String * folder, 
     return htmlBodyString;
 }
 
-String * IMAPSession::plainTextRendering(IMAPMessage * message, String * folder, ErrorCode * pError)
+String * IMAPSession::plainTextRendering(IMAPMessage * message, String * folder, ErrorCode pError)
 {
     String * htmlString = htmlRendering(message, folder, pError);
     String * plainTextString = htmlString->flattenHTML();
@@ -3058,7 +3061,7 @@ String * IMAPSession::plainTextRendering(IMAPMessage * message, String * folder,
     return plainTextString;
 }
 
-String * IMAPSession::plainTextBodyRendering(IMAPMessage * message, String * folder, ErrorCode * pError)
+String * IMAPSession::plainTextBodyRendering(IMAPMessage * message, String * folder, ErrorCode pError)
 {
     String * htmlBodyString = htmlBodyRendering(message, folder, pError);
     String * plainTextBodyString = htmlBodyString->flattenHTML();
