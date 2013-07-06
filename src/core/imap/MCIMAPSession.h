@@ -6,7 +6,7 @@
 #include <MailCore/MCMessageConstants.h>
 #include <MailCore/MCIMAPMessage.h>
 #include <MailCore/MCHTMLRendererCallback.h>
-#include <MailCore/MCHTMLBodyRendererCallback.h>
+#include <MailCore/MCHTMLBodyRendererTemplateCallback.h>
 
 #ifdef __cplusplus
 
