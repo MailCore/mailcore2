@@ -462,3 +462,11 @@ ConnectionLogger * IMAPAsyncSession::connectionLogger()
 {
     return mConnectionLogger;
 }
+
+IMAPMessageRenderingOperation * IMAPAsyncSession::renderingOperation(IMAPMessage * message,
+                                                                     String * folder,
+                                                                     IMAPMessageRenderingType type);
+{
+    IMAPAsyncConnection * session = sessionForFolder(folder);
+    return session->renderingOperation(message, folder, type);
+}

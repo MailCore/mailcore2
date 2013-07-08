@@ -26,6 +26,7 @@
 
 #import <MailCore/MCOAbstractMessage.h>
 #import <MailCore/MCOConstants.h>
+#import <MailCore/MCOIMAPSession.h>
 
 @protocol MCOHTMLRendererIMAPDelegate;
 
@@ -71,17 +72,29 @@
                               delegate:(id <MCOHTMLRendererIMAPDelegate>)delegate;
 
 /** HTML rendering of the message to be displayed in a web view.*/
-- (NSString *) htmlRenderingWithFolder:(NSString *)folder;
+- (NSString *) htmlRenderingWithSession:(MCOIMAPSession *)session
+                                 folder:(NSString *)folder
+                                   done:(void (^)(NSString * htmlString,
+                                                  NSError * error))completionBlock;
 
 /** HTML rendering of the body of the message to be displayed in a web view.*/
-- (NSString *) htmlBodyRenderingWithFolder:(NSString *)folder;
+- (NSString *) htmlBodyRenderingWithSession:(MCOIMAPSession *)session
+                                     folder:(NSString *)folder
+                                       done:(void (^)(NSString * htmlString,
+                                                      NSError * error))completionBlock;
 
 /** Text rendering of the message.*/
-- (NSString *) plainTextRenderingWithFolder:(NSString *)folder;
+- (NSString *) plainTextRenderingWithSession:(MCOIMAPSession *)session
+                                      folder:(NSString *)folder
+                                        done:(void (^)(NSString * htmlString,
+                                                       NSError * error))completionBlock;
 
 /** Text rendering of the body of the message. All end of line will be removed and white spaces cleaned up.
  This method can be used to generate the summary of the message.*/
-- (NSString *) plainTextBodyRenderingWithFolder:(NSString *)folder;
+- (NSString *) plainTextBodyRenderingWithSession:(MCOIMAPSession *)session
+                                          folder:(NSString *)folder
+                                            done:(void (^)(NSString * htmlString,
+                                                           NSError * error))completionBlock;
 
 @end
 

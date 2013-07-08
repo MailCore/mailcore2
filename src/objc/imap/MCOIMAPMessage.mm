@@ -15,6 +15,7 @@
 #import "MCOAbstractMessageRendererCallback.h"
 #import "MCOHTMLRendererDelegate.h"
 #import "MCOHTMLRendererIMAPDelegate.h"
+#import "MCOIMAPMessageRenderingOperation.h"
 
 @implementation MCOIMAPMessage {
     mailcore::IMAPMessage * _message;
@@ -65,24 +66,60 @@ MCO_OBJC_SYNTHESIZE_SCALAR(uint64_t, uint64_t, setGmailMessageID, gmailMessageID
     return result;
 }
 
-- (NSString *) htmlRenderingWithFolder:(NSString *)folder
+- (NSString *) htmlRenderingWithSession:(MCOIMAPSession *)session
+                                 folder:(NSString *)folder
+                                   done:(void (^)(NSString * htmlString,
+                                                  NSError * error))completionBlock
 {
-    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->htmlRendering([folder mco_mcString]));
+    MCOIMAPMessageRenderingOperation * op = [session renderingOperationForMessage:self
+                                                                         inFolder:folder
+                                                                             type:MCOIMAPMessageRenderingTypeHTML];
+    
+    [op start:^(NSString * htmlString, NSError * error) ] {
+        completionBlock(htmlString, error);
+    }];
 }
 
-- (NSString *) htmlBodyRenderingWithFolder:(NSString *)folder
+- (NSString *) htmlBodyRenderingWithSession:(MCOIMAPSession *)session
+                                     folder:(NSString *)folder
+                                       done:(void (^)(NSString * htmlString,
+                                                      NSError * error))completionBlock
 {
-    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->htmlBodyRendering([folder mco_mcString]));
+    MCOIMAPMessageRenderingOperation * op = [session renderingOperationForMessage:self
+                                                                         inFolder:folder
+                                                                             type:MCOIMAPMessageRenderingTypeHTMLBody];
+    
+    [op start:^(NSString * htmlString, NSError * error) ] {
+        completionBlock(htmlString, error);
+    }];
 }
 
-- (NSString *) plainTextRenderingWithFolder:(NSString *)folder
+- (NSString *) plainTextRenderingWithSession:(MCOIMAPSession *)session
+                                      folder:(NSString *)folder
+                                        done:(void (^)(NSString * htmlString,
+                                                       NSError * error))completionBlock
 {
-    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->plainTextRendering([folder mco_mcString]));
+    MCOIMAPMessageRenderingOperation * op = [session renderingOperationForMessage:self
+                                                                         inFolder:folder
+                                                                             type:MCOIMAPMessageRenderingTypePlainText];
+    
+    [op start:^(NSString * htmlString, NSError * error) ] {
+        completionBlock(htmlString, error);
+    }];
 }
 
-- (NSString *) plainTextBodyRenderingWithFolder:(NSString *)folder
+- (NSString *) plainTextBodyRenderingWithSession:(MCOIMAPSession *)session
+                                          folder:(NSString *)folder
+                                            done:(void (^)(NSString * htmlString,
+                                                           NSError * error))completionBlock
 {
-    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->plainTextBodyRendering([folder mco_mcString]));
+    MCOIMAPMessageRenderingOperation * op = [session renderingOperationForMessage:self
+                                                                         inFolder:folder
+                                                                             type:MCOIMAPMessageRenderingTypePlainTextBody];
+    
+    [op start:^(NSString * htmlString, NSError * error) ] {
+        completionBlock(htmlString, error);
+    }];
 }
 
 @end

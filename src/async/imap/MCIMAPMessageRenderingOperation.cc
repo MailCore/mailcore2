@@ -16,7 +16,7 @@ using namespace mailcore;
 IMAPMessageRenderingOperation::IMAPMessageRenderingOperation()
 {
     mMessage = NULL;
-    mRenderingType = RenderingTypePlainTextBody;
+    mRenderingType = IMAPMessageRenderingTypePlainTextBody;
     mResult = NULL;
 }
 
@@ -55,16 +55,16 @@ void IMAPMessageRenderingOperation::main()
 {
     ErrorCode error;
     
-    if (mRenderingType == RenderingTypeHTML) {
+    if (mRenderingType == IMAPMessageRenderingTypeHTML) {
         mResult = session()->session()->htmlRendering(mMessage, folder(), &error);
     }
-    else if (mRenderingType == RenderingTypeHTMLBody) {
+    else if (mRenderingType == IMAPMessageRenderingTypeHTMLBody) {
         mResult = session()->session()->htmlBodyRendering(mMessage, folder(), &error);
     }
-    else if (mRenderingType == RenderingTypePlainText) {
+    else if (mRenderingType == IMAPMessageRenderingTypePlainText) {
         mResult = session()->session()->plainTextRendering(mMessage, folder(), &error);
     }
-    else if (mRenderingType == RenderingTypePlainTextBody) {
+    else if (mRenderingType == IMAPMessageRenderingTypePlainTextBody) {
         mResult = session()->session()->plainTextBodyRendering(mMessage, folder(), &error);
     }
     

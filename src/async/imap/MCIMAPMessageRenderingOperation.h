@@ -19,10 +19,10 @@ namespace mailcore {
     
     // If this type becomes public it must be moved to MCConstants.h
     typedef enum {
-        RenderingTypeHTML,
-        RenderingTypeHTMLBody,
-        RenderingTypePlainText,
-        RenderingTypePlainTextBody
+        IMAPMessageRenderingTypeHTML,
+        IMAPMessageRenderingTypeHTMLBody,
+        IMAPMessageRenderingTypePlainText,
+        IMAPMessageRenderingTypePlainTextBody
     } IMAPMessageRenderingType;
     
     class IMAPMessageRenderingOperation : public IMAPOperation {

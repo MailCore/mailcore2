@@ -29,6 +29,7 @@
 @class MCOIMAPSearchExpression;
 @class MCOIMAPIdentityOperation;
 @class MCOIMAPCapabilityOperation;
+@class MCOIMAPMessageRenderingOperation;
 
 /**
  This is the main IMAP class from which all operations are created 
@@ -533,6 +534,22 @@
 */
 - (MCOIMAPSearchOperation *) searchExpressionOperationWithFolder:(NSString *)folder
                                                       expression:(MCOIMAPSearchExpression *)expression;
+
+/** @name Rendering Operations */
+
+/**
+ Returns an operation to render messages in a simple fashion.
+ 
+    MCOIMAPMessageRenderingOperation * op = [session renderingOperationWithMessage:msg
+                                                                            folder:@"INBOX"
+                                                                     renderingType:IMAPMessageRenderingTypeHTML];
+    [op start:^(NSError * error) {
+        ...
+    }];
+*/
+- (MCOIMAPMessageRenderingOperation *) renderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                              folder:(NSString *)folder
+                                                                type:(MCOIMAPMessageRenderingType)type;
 
 @end
 

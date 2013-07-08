@@ -28,6 +28,7 @@ namespace mailcore {
     class IMAPOperationQueueCallback;
     class IMAPAsyncSession;
     class IMAPConnectionLogger;
+    class IMAPMessageRenderingOperation;
     
     class IMAPAsyncConnection : public Object {
     public:
@@ -118,6 +119,10 @@ namespace mailcore {
         virtual IMAPOperation * checkAccountOperation();
         
         virtual IMAPCapabilityOperation * capabilityOperation();
+        
+        virtual IMAPMessageRenderingOperation * renderingOperation(IMAPMessage * message,
+                                                                   String * folder,
+                                                                   IMAPMessageRenderingType type);
         
     private:
         IMAPSession * mSession;

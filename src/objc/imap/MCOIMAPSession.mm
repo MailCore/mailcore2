@@ -14,6 +14,7 @@
 #import "MCOIMAPOperation.h"
 #import "MCOIMAPFetchFoldersOperation.h"
 #import "MCOIMAPBaseOperation+Private.h"
+#import "MCOIMAPMessageRenderingOperation.h"
 
 #import "MCOUtils.h"
 
@@ -352,6 +353,14 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
 - (void) _logWithSender:(void *)sender connectionType:(MCOConnectionLogType)logType data:(NSData *)data
 {
     _connectionLogger(sender, logType, data);
+}
+
+- (MCOIMAPMessageRenderingOperation *) renderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                              folder:(NSString *)folder
+                                                                type:(MCOIMAPMessageRenderingType)type
+{
+    MCOIMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->renderingOperation(message, [folder mco_mcString], type);
+    return MCO_TO_OBJC_OP(coreOp);
 }
 
 @end
