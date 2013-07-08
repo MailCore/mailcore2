@@ -3024,26 +3024,23 @@ ConnectionLogger * IMAPSession::connectionLogger()
 
 String * IMAPSession::htmlRendering(IMAPMessage * message, String * folder, ErrorCode * pError)
 {
-    if (* pError != ErrorNone) {
-        return NULL;
-    }
-    
     HTMLRendererIMAPDataCallback * dataCallback = new HTMLRendererIMAPDataCallback(this, message->uid());
     String * htmlString = HTMLRenderer::htmlForIMAPMessage(folder,
                                                            message,
                                                            dataCallback,
                                                            NULL);
-
+    * pError = dataCallback->error();
+    
+    if (* pError != ErrorNone) {
+        return NULL;
+    }
+    
     MC_SAFE_RELEASE(dataCallback);
     return htmlString;
 }
 
 String * IMAPSession::htmlBodyRendering(IMAPMessage * message, String * folder, ErrorCode * pError)
 {    
-    if (* pError != ErrorNone) {
-        return NULL;
-    }
-    
     HTMLRendererIMAPDataCallback * dataCallback = new HTMLRendererIMAPDataCallback(this, message->uid());
     HTMLBodyRendererTemplateCallback * htmlCallback = new HTMLBodyRendererTemplateCallback();
     
@@ -3052,6 +3049,12 @@ String * IMAPSession::htmlBodyRendering(IMAPMessage * message, String * folder, 
                                                                dataCallback,
                                                                htmlCallback);
 
+    * pError = dataCallback->error();
+    
+    if (* pError != ErrorNone) {
+        return NULL;
+    }
+    
     MC_SAFE_RELEASE(dataCallback);
     MC_SAFE_RELEASE(htmlCallback);
     return htmlBodyString;
@@ -3059,22 +3062,24 @@ String * IMAPSession::htmlBodyRendering(IMAPMessage * message, String * folder, 
 
 String * IMAPSession::plainTextRendering(IMAPMessage * message, String * folder, ErrorCode * pError)
 {
+    String * htmlString = htmlRendering(message, folder, pError);
+    
     if (* pError != ErrorNone) {
         return NULL;
     }
     
-    String * htmlString = htmlRendering(message, folder, pError);
     String * plainTextString = htmlString->flattenHTML();
     return plainTextString;
 }
 
 String * IMAPSession::plainTextBodyRendering(IMAPMessage * message, String * folder, ErrorCode * pError)
 {
+    String * htmlBodyString = htmlBodyRendering(message, folder, pError);
+    
     if (* pError != ErrorNone) {
         return NULL;
     }
     
-    String * htmlBodyString = htmlBodyRendering(message, folder, pError);
     String * plainTextBodyString = htmlBodyString->flattenHTML();
     
     plainTextBodyString->replaceOccurrencesOfString(MCSTR("\t"), MCSTR(" "));
