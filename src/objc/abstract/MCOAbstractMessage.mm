@@ -46,12 +46,10 @@
 
 - (id) copyWithZone:(NSZone *)zone
 {
-    MCOAbstractMessage *message;
-    
-    message = [[[self class] alloc] initWithMCMessage:(mailcore::AbstractMessage *)_message->copy()->autorelease()];
-    [message setHeader:[[[self header] copy] autorelease]];
-    
-    return message;
+    nativeType * nativeObject = (nativeType *) [self mco_mcObject]->copy();
+    id result = [[self class] mco_objectWithMCObject:nativeObject];
+    MC_SAFE_RELEASE(nativeObject);
+    return [result retain];
 }
 
 - (void) dealloc
