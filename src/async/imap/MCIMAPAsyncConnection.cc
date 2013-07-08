@@ -605,3 +605,27 @@ IMAPMessageRenderingOperation * IMAPAsyncConnection::renderingOperation(IMAPMess
     op->autorelease();
     return op;
 }
+
+IMAPMessageRenderingOperation * IMAPAsyncConnection::htmlRenderingOperation(IMAPMessage * message,
+                                                                            String * folder)
+{
+    return renderingOperation(message, folder, IMAPMessageRenderingTypeHTML);
+}
+
+IMAPMessageRenderingOperation * IMAPAsyncConnection::htmlBodyRenderingOperation(IMAPMessage * message,
+                                                                                String * folder)
+{
+    return renderingOperation(message, folder, IMAPMessageRenderingTypeHTMLBody);
+}
+
+IMAPMessageRenderingOperation * IMAPAsyncConnection::plainTextRenderingOperation(IMAPMessage * message,
+                                                                                 String * folder)
+{
+    return renderingOperation(message, folder, IMAPMessageRenderingTypePlainText);
+}
+
+IMAPMessageRenderingOperation * IMAPAsyncConnection::plainTextBodyRenderingOperation(IMAPMessage * message,
+                                                                                     String * folder)
+{
+    return renderingOperation(message, folder, IMAPMessageRenderingTypePlainTextBody);
+}

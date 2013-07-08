@@ -120,9 +120,11 @@ namespace mailcore {
         
         virtual IMAPCapabilityOperation * capabilityOperation();
         
-        virtual IMAPMessageRenderingOperation * renderingOperation(IMAPMessage * message,
-                                                                   String * folder,
-                                                                   IMAPMessageRenderingType type);
+        virtual IMAPMessageRenderingOperation * htmlRenderingOperation(IMAPMessage * message, String * folder);
+        virtual IMAPMessageRenderingOperation * htmlBodyRenderingOperation(IMAPMessage * message, String * folder);
+        virtual IMAPMessageRenderingOperation * plainTextRenderingOperation(IMAPMessage * message, String * folder);
+        virtual IMAPMessageRenderingOperation * plainTextBodyRenderingOperation(IMAPMessage * message, String * folder);
+        
         
     private:
         IMAPSession * mSession;
@@ -137,6 +139,9 @@ namespace mailcore {
         pthread_mutex_t mConnectionLoggerLock;
         
         virtual void tryAutomaticDisconnectAfterDelay(void * context);
+        virtual IMAPMessageRenderingOperation * renderingOperation(IMAPMessage * message,
+                                                                   String * folder,
+                                                                   IMAPMessageRenderingType type);
         
     public: // private
         virtual void runOperation(IMAPOperation * operation);
