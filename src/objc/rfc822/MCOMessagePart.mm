@@ -22,14 +22,6 @@
     MCORegisterClass(self, &typeid(nativeType));
 }
 
-- (id) copyWithZone:(NSZone *)zone
-{
-    nativeType * nativeObject = (nativeType *) [self mco_mcObject]->copy();
-    id result = [[self class] mco_objectWithMCObject:nativeObject];
-    MC_SAFE_RELEASE(nativeObject);
-    return [result retain];
-}
-
 + (id) mco_objectWithMCObject:(mailcore::Object *)object
 {
     mailcore::MessagePart * part = (mailcore::MessagePart *) object;
