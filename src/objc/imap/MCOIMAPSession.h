@@ -30,6 +30,7 @@
 @class MCOIMAPIdentityOperation;
 @class MCOIMAPCapabilityOperation;
 @class MCOIMAPMessageRenderingOperation;
+@class MCOIMAPMessage;
 
 /**
  This is the main IMAP class from which all operations are created 
@@ -538,18 +539,56 @@
 /** @name Rendering Operations */
 
 /**
- Returns an operation to render messages in a simple fashion.
+ Returns an operation to render the HTML version of a message in a simple fashion.
  
-    MCOIMAPMessageRenderingOperation * op = [session renderingOperationWithMessage:msg
-                                                                            folder:@"INBOX"
-                                                                             type:IMAPMessageRenderingTypeHTML];
+    MCOIMAPMessageRenderingOperation * op = [session htmlRenderingOperationWithMessage:msg
+                                                                            folder:@"INBOX"];
+    
     [op start:^(NSString * htmlString, NSError * error) {
         ...
     }];
 */
-- (MCOIMAPMessageRenderingOperation *) renderingOperationWithMessage:(MCOIMAPMessage *)message
-                                                              folder:(NSString *)folder
-                                                                type:(MCOIMAPMessageRenderingType)type;
+- (MCOIMAPMessageRenderingOperation *) htmlRenderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                                  folder:(NSString *)folder;
+
+/**
+ Returns an operation to render the HTML body of a message in a simple fashion.
+ 
+    MCOIMAPMessageRenderingOperation * op = [session htmlBodyRenderingOperationWithMessage:msg
+                                                                                    folder:@"INBOX"];
+    
+    [op start:^(NSString * htmlString, NSError * error) {
+        ...
+    }];
+ */
+- (MCOIMAPMessageRenderingOperation *) htmlBodyRenderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                                      folder:(NSString *)folder;
+
+/**
+ Returns an operation to render the plain text version of a message in a simple fashion.
+ 
+    MCOIMAPMessageRenderingOperation * op = [session plainTextRenderingOperationWithMessage:msg
+                                                                                     folder:@"INBOX"];
+
+    [op start:^(NSString * htmlString, NSError * error) {
+        ...
+    }];
+ */
+- (MCOIMAPMessageRenderingOperation *) plainTextRenderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                                       folder:(NSString *)folder;
+
+/**
+ Returns an operation to render the plain text body of a message in a simple fashion.
+ 
+    MCOIMAPMessageRenderingOperation * op = [session plainTextBodyRenderingOperationWithMessage:msg
+                                                                                         folder:@"INBOX"];
+ 
+    [op start:^(NSString * htmlString, NSError * error) {
+        ...
+    }];
+ */
+- (MCOIMAPMessageRenderingOperation *) plainTextBodyRenderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                                           folder:(NSString *)folder;
 
 @end
 

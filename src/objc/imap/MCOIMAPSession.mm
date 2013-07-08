@@ -355,11 +355,31 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
     _connectionLogger(sender, logType, data);
 }
 
-- (MCOIMAPMessageRenderingOperation *) renderingOperationWithMessage:(MCOIMAPMessage *)message
-                                                              folder:(NSString *)folder
-                                                                type:(MCOIMAPMessageRenderingType)type
+- (MCOIMAPMessageRenderingOperation *) htmlRenderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                                  folder:(NSString *)folder
 {
-    MCOIMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->renderingOperation(message, [folder mco_mcString], type);
+    MCOIMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->htmlRenderingOperation(message, [folder mco_mcString]);
+    return MCO_TO_OBJC_OP(coreOp);
+}
+
+- (MCOIMAPMessageRenderingOperation *) htmlBodyRenderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                                      folder:(NSString *)folder
+{
+    MCOIMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->htmlBodyRenderingOperation(message, [folder mco_mcString]);
+    return MCO_TO_OBJC_OP(coreOp);
+}
+
+- (MCOIMAPMessageRenderingOperation *) plainTextRenderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                                       folder:(NSString *)folder
+{
+    MCOIMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->plainTextRenderingOperation(message, [folder mco_mcString]);
+    return MCO_TO_OBJC_OP(coreOp);
+}
+
+- (MCOIMAPMessageRenderingOperation *) plainTextBodyRenderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                                           folder:(NSString *)folder
+{
+    MCOIMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->plainTextBodyRenderingOperation(message, [folder mco_mcString]);
     return MCO_TO_OBJC_OP(coreOp);
 }
 
