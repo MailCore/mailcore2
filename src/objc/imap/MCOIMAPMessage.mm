@@ -71,9 +71,9 @@ MCO_OBJC_SYNTHESIZE_SCALAR(uint64_t, uint64_t, setGmailMessageID, gmailMessageID
                                    done:(void (^)(NSString * htmlString,
                                                   NSError * error))completionBlock
 {
-    MCOIMAPMessageRenderingOperation * op = [session renderingOperationForMessage:self
-                                                                         inFolder:folder
-                                                                             type:MCOIMAPMessageRenderingTypeHTML];
+    MCOIMAPMessageRenderingOperation * op = [session renderingOperationWithMessage:self
+                                                                            folder:folder
+                                                                              type:MCOIMAPMessageRenderingTypeHTML];
     
     [op start:^(NSString * htmlString, NSError * error) ] {
         completionBlock(htmlString, error);
@@ -85,9 +85,9 @@ MCO_OBJC_SYNTHESIZE_SCALAR(uint64_t, uint64_t, setGmailMessageID, gmailMessageID
                                        done:(void (^)(NSString * htmlString,
                                                       NSError * error))completionBlock
 {
-    MCOIMAPMessageRenderingOperation * op = [session renderingOperationForMessage:self
-                                                                         inFolder:folder
-                                                                             type:MCOIMAPMessageRenderingTypeHTMLBody];
+    MCOIMAPMessageRenderingOperation * op = [session renderingOperationWithMessage:self
+                                                                            folder:folder
+                                                                              type:MCOIMAPMessageRenderingTypeHTMLBody];
     
     [op start:^(NSString * htmlString, NSError * error) ] {
         completionBlock(htmlString, error);
@@ -99,9 +99,9 @@ MCO_OBJC_SYNTHESIZE_SCALAR(uint64_t, uint64_t, setGmailMessageID, gmailMessageID
                                         done:(void (^)(NSString * htmlString,
                                                        NSError * error))completionBlock
 {
-    MCOIMAPMessageRenderingOperation * op = [session renderingOperationForMessage:self
-                                                                         inFolder:folder
-                                                                             type:MCOIMAPMessageRenderingTypePlainText];
+    MCOIMAPMessageRenderingOperation * op = [session renderingOperationWithMessage:self
+                                                                            folder:folder
+                                                                              type:MCOIMAPMessageRenderingTypePlainText];
     
     [op start:^(NSString * htmlString, NSError * error) ] {
         completionBlock(htmlString, error);
@@ -113,9 +113,9 @@ MCO_OBJC_SYNTHESIZE_SCALAR(uint64_t, uint64_t, setGmailMessageID, gmailMessageID
                                             done:(void (^)(NSString * htmlString,
                                                            NSError * error))completionBlock
 {
-    MCOIMAPMessageRenderingOperation * op = [session renderingOperationForMessage:self
-                                                                         inFolder:folder
-                                                                             type:MCOIMAPMessageRenderingTypePlainTextBody];
+    MCOIMAPMessageRenderingOperation * op = [session renderingOperationWithMessage:self
+                                                                            folder:folder
+                                                                              type:MCOIMAPMessageRenderingTypePlainTextBody];
     
     [op start:^(NSString * htmlString, NSError * error) ] {
         completionBlock(htmlString, error);
