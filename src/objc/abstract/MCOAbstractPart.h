@@ -37,7 +37,7 @@ typedef enum {
     MCOPartTypeMultipartAlternative,
 } MCOPartType;
 
-@interface MCOAbstractPart : NSObject
+@interface MCOAbstractPart : NSObject <NSCopying>
 
 /** Returns type of the part (single / message part / multipart/mixed,
  multipart/related, multipart/alternative). See MCOPartType.*/

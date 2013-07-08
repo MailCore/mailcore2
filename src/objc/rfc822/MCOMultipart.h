@@ -14,7 +14,7 @@
 
 /** Multipart parsed from RFC 822 message data. */
 
-@interface MCOMultipart : MCOAbstractMultipart <NSCopying>
+@interface MCOMultipart : MCOAbstractMultipart
 
 @end
 

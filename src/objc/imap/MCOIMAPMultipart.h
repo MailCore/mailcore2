@@ -14,7 +14,7 @@
 
 #import <MailCore/MCOAbstractMultipart.h>
 
-@interface MCOIMAPMultipart : MCOAbstractMultipart <NSCopying>
+@interface MCOIMAPMultipart : MCOAbstractMultipart
 
 /** A part identifier looks like 1.2.1 */
 @property (nonatomic, copy) NSString * partID;
