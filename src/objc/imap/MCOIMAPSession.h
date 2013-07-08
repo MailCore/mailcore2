@@ -542,8 +542,8 @@
  
     MCOIMAPMessageRenderingOperation * op = [session renderingOperationWithMessage:msg
                                                                             folder:@"INBOX"
-                                                                     renderingType:IMAPMessageRenderingTypeHTML];
-    [op start:^(NSError * error) {
+                                                                             type:IMAPMessageRenderingTypeHTML];
+    [op start:^(NSString * htmlString, NSError * error) {
         ...
     }];
 */
