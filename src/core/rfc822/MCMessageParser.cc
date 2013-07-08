@@ -43,7 +43,7 @@ MessageParser::MessageParser(Data * data)
 	mailmessage_free(msg);
 }
 
-MessageParser::MessageParser(MessageParser * other)
+MessageParser::MessageParser(MessageParser * other) : AbstractMessage(other)
 {
     init();
     MC_SAFE_REPLACE_RETAIN(Data, mData, other->mData);
