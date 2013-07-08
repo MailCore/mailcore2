@@ -4,26 +4,24 @@
 
 #include <stdio.h>
 
-#ifdef __cplusplus
-
-#define MCLog(...) mailcore::logInternal(NULL, __FILE__, __LINE__, 0, __VA_ARGS__)
-
-namespace mailcore {
+#define MCLog(...) MCLogInternal(NULL, __FILE__, __LINE__, 0, __VA_ARGS__)
     
-    extern bool logEnabled;
+extern int MCLogEnabled;
     
 #ifndef __printflike
 #define __printflike(a,b)
 #endif
 
-    void logInternal(const char * user,
-                     const char * filename,
-                     unsigned int line,
-                     int dumpStack,
-                     const char * format, ...) __printflike(5, 6);
-    
+#ifdef __cplusplus
+extern "C" {
+#endif
+    void MCLogInternal(const char * user,
+                       const char * filename,
+                       unsigned int line,
+                       int dumpStack,
+                       const char * format, ...) __printflike(5, 6);
+#ifdef __cplusplus
 }
-
 #endif
 
 #endif

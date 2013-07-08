@@ -16,7 +16,6 @@
 namespace mailcore {
     
     class Data;
-    class String;
     
     enum ConnectionLogType {
         // Received data

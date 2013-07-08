@@ -16,7 +16,7 @@ AbstractMessagePart::AbstractMessagePart()
     init();
 }
 
-AbstractMessagePart::AbstractMessagePart(AbstractMessagePart * other)
+AbstractMessagePart::AbstractMessagePart(AbstractMessagePart * other) : AbstractPart(other)
 {
     init();
     if (other->mainPart() != NULL) {

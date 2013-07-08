@@ -474,7 +474,7 @@ MessageBuilder::MessageBuilder()
     init();
 }
 
-MessageBuilder::MessageBuilder(MessageBuilder * other)
+MessageBuilder::MessageBuilder(MessageBuilder * other) : AbstractMessage(other)
 {
     init();
     setHTMLBody(other->mHTMLBody);
@@ -691,3 +691,22 @@ String * MessageBuilder::htmlRendering(HTMLRendererTemplateCallback * htmlCallba
     MessageParser * message = MessageParser::messageParserWithData(data());
     return message->htmlRendering(htmlCallback);
 }
+
+String * MessageBuilder::htmlBodyRendering()
+{
+    MessageParser * message = MessageParser::messageParserWithData(data());
+    return message->htmlBodyRendering();
+}
+
+String * MessageBuilder::plainTextRendering()
+{
+    MessageParser * message = MessageParser::messageParserWithData(data());
+    return message->plainTextRendering();
+}
+
+String * MessageBuilder::plainTextBodyRendering()
+{
+    MessageParser * message = MessageParser::messageParserWithData(data());
+    return message->plainTextBodyRendering();
+}
+

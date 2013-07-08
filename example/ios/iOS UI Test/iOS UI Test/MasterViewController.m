@@ -45,9 +45,16 @@
 	self.imapSession.username = username;
 	self.imapSession.password = password;
 	self.imapSession.connectionType = MCOConnectionTypeTLS;
-	
+    MasterViewController * __weak weakSelf = self;
+	self.imapSession.connectionLogger = ^(void * connectionID, MCOConnectionLogType type, NSData * data) {
+        @synchronized(weakSelf) {
+            if (type != MCOConnectionLogTypeSentPrivate) {
+                NSLog(@"event logged:%p %i withData: %@", connectionID, type, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+            }
+        }
+    };
+    
 	NSLog(@"checking account");
-	__weak MasterViewController *weakSelf = self;
 	self.imapCheckOp = [self.imapSession checkAccountOperation];
 	[self.imapCheckOp start:^(NSError *error) {
 		MasterViewController *strongSelf = weakSelf;

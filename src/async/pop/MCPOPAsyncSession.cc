@@ -50,7 +50,7 @@ namespace mailcore {
         virtual ~POPConnectionLogger() {
         }
         
-        virtual void log(void * context, void * sender, ConnectionLogType logType, Data * buffer)
+        virtual void log(void * sender, ConnectionLogType logType, Data * buffer)
         {
             mSession->logConnection(logType, buffer);
         }
