@@ -19,6 +19,14 @@
 		C6D42BE516ABB511002BB4F9 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6D42BE416ABB511002BB4F9 /* WebKit.framework */; };
 		C6D42BE916ACF711002BB4F9 /* MCTMsgListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D42BE816ACF711002BB4F9 /* MCTMsgListViewController.m */; };
 		C6D42BEC16ACFE3F002BB4F9 /* MCTMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D42BEB16ACFE3F002BB4F9 /* MCTMsgViewController.m */; };
+		C6D718CC178B7160008ED15F /* MailCore.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6BD28B3170BDFE500A91AC1 /* MailCore.framework */; };
+		C6D71912178B7942008ED15F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6D71911178B7942008ED15F /* SystemConfiguration.framework */; };
+		C6D7192F178B7D65008ED15F /* GTMOAuth2Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D71924178B7D55008ED15F /* GTMOAuth2Authentication.m */; };
+		C6D71930178B7D67008ED15F /* GTMOAuth2SignIn.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D71926178B7D55008ED15F /* GTMOAuth2SignIn.m */; };
+		C6D71931178B7D6C008ED15F /* GTMHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D7191F178B7D55008ED15F /* GTMHTTPFetcher.m */; };
+		C6D71932178B7D6E008ED15F /* GTMHTTPFetchHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D71921178B7D55008ED15F /* GTMHTTPFetchHistory.m */; };
+		C6D71933178B7D72008ED15F /* GTMOAuth2Window.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D71928178B7D55008ED15F /* GTMOAuth2Window.xib */; };
+		C6D71934178B7D72008ED15F /* GTMOAuth2WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D7192A178B7D55008ED15F /* GTMOAuth2WindowController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +74,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		C6D718CB178B714A008ED15F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C6D718CC178B7160008ED15F /* MailCore.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		AB666C5717484E6200545290 /* FXKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FXKeychain.h; path = ../../../common/FXKeychain.h; sourceTree = "<group>"; };
 		AB666C5817484E6200545290 /* FXKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FXKeychain.m; path = ../../../common/FXKeychain.m; sourceTree = "<group>"; };
@@ -90,6 +111,18 @@
 		C6D42BE816ACF711002BB4F9 /* MCTMsgListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTMsgListViewController.m; sourceTree = "<group>"; };
 		C6D42BEA16ACFE3F002BB4F9 /* MCTMsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTMsgViewController.h; sourceTree = "<group>"; };
 		C6D42BEB16ACFE3F002BB4F9 /* MCTMsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTMsgViewController.m; sourceTree = "<group>"; };
+		C6D71911178B7942008ED15F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		C6D7191E178B7D55008ED15F /* GTMHTTPFetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTMHTTPFetcher.h; sourceTree = "<group>"; };
+		C6D7191F178B7D55008ED15F /* GTMHTTPFetcher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTMHTTPFetcher.m; sourceTree = "<group>"; };
+		C6D71920178B7D55008ED15F /* GTMHTTPFetchHistory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTMHTTPFetchHistory.h; sourceTree = "<group>"; };
+		C6D71921178B7D55008ED15F /* GTMHTTPFetchHistory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTMHTTPFetchHistory.m; sourceTree = "<group>"; };
+		C6D71923178B7D55008ED15F /* GTMOAuth2Authentication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2Authentication.h; sourceTree = "<group>"; };
+		C6D71924178B7D55008ED15F /* GTMOAuth2Authentication.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2Authentication.m; sourceTree = "<group>"; };
+		C6D71925178B7D55008ED15F /* GTMOAuth2SignIn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2SignIn.h; sourceTree = "<group>"; };
+		C6D71926178B7D55008ED15F /* GTMOAuth2SignIn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2SignIn.m; sourceTree = "<group>"; };
+		C6D71928178B7D55008ED15F /* GTMOAuth2Window.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GTMOAuth2Window.xib; sourceTree = "<group>"; };
+		C6D71929178B7D55008ED15F /* GTMOAuth2WindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2WindowController.h; sourceTree = "<group>"; };
+		C6D7192A178B7D55008ED15F /* GTMOAuth2WindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2WindowController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +130,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6D71912178B7942008ED15F /* SystemConfiguration.framework in Frameworks */,
 				AB666C5B1748558000545290 /* Security.framework in Frameworks */,
 				C6BD28B4170BDFE500A91AC1 /* MailCore.framework in Frameworks */,
 				C6D42BE516ABB511002BB4F9 /* WebKit.framework in Frameworks */,
@@ -186,6 +220,7 @@
 		C6D42BB416ABB39A002BB4F9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C6D71911178B7942008ED15F /* SystemConfiguration.framework */,
 				AB666C5A1748558000545290 /* Security.framework */,
 				C6D42BE416ABB511002BB4F9 /* WebKit.framework */,
 				C6D42BB516ABB39A002BB4F9 /* Cocoa.framework */,
@@ -207,6 +242,7 @@
 		C6D42BBB16ABB39A002BB4F9 /* macExample */ = {
 			isa = PBXGroup;
 			children = (
+				C6D7191C178B7D55008ED15F /* gtm-oauth2 */,
 				AB666C5217484E3100545290 /* External */,
 				C6D42BBC16ABB39A002BB4F9 /* Supporting Files */,
 				C6D42BC716ABB39A002BB4F9 /* AppDelegate.h */,
@@ -229,6 +265,49 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		C6D7191C178B7D55008ED15F /* gtm-oauth2 */ = {
+			isa = PBXGroup;
+			children = (
+				C6D7191D178B7D55008ED15F /* HTTPFetcher */,
+				C6D71922178B7D55008ED15F /* Source */,
+			);
+			name = "gtm-oauth2";
+			path = "../../../common/gtm-oauth2";
+			sourceTree = "<group>";
+		};
+		C6D7191D178B7D55008ED15F /* HTTPFetcher */ = {
+			isa = PBXGroup;
+			children = (
+				C6D7191E178B7D55008ED15F /* GTMHTTPFetcher.h */,
+				C6D7191F178B7D55008ED15F /* GTMHTTPFetcher.m */,
+				C6D71920178B7D55008ED15F /* GTMHTTPFetchHistory.h */,
+				C6D71921178B7D55008ED15F /* GTMHTTPFetchHistory.m */,
+			);
+			path = HTTPFetcher;
+			sourceTree = "<group>";
+		};
+		C6D71922178B7D55008ED15F /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				C6D71923178B7D55008ED15F /* GTMOAuth2Authentication.h */,
+				C6D71924178B7D55008ED15F /* GTMOAuth2Authentication.m */,
+				C6D71925178B7D55008ED15F /* GTMOAuth2SignIn.h */,
+				C6D71926178B7D55008ED15F /* GTMOAuth2SignIn.m */,
+				C6D71927178B7D55008ED15F /* Mac */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		C6D71927178B7D55008ED15F /* Mac */ = {
+			isa = PBXGroup;
+			children = (
+				C6D71928178B7D55008ED15F /* GTMOAuth2Window.xib */,
+				C6D71929178B7D55008ED15F /* GTMOAuth2WindowController.h */,
+				C6D7192A178B7D55008ED15F /* GTMOAuth2WindowController.m */,
+			);
+			path = Mac;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -239,6 +318,7 @@
 				C6D42BAD16ABB39A002BB4F9 /* Sources */,
 				C6D42BAE16ABB39A002BB4F9 /* Frameworks */,
 				C6D42BAF16ABB39A002BB4F9 /* Resources */,
+				C6D718CB178B714A008ED15F /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -326,6 +406,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6D42BCC16ABB39A002BB4F9 /* MainMenu.xib in Resources */,
+				C6D71933178B7D72008ED15F /* GTMOAuth2Window.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,12 +418,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6D42BC916ABB39A002BB4F9 /* AppDelegate.m in Sources */,
+				C6D71930178B7D67008ED15F /* GTMOAuth2SignIn.m in Sources */,
 				C6D42BE916ACF711002BB4F9 /* MCTMsgListViewController.m in Sources */,
 				C6D42BEC16ACFE3F002BB4F9 /* MCTMsgViewController.m in Sources */,
+				C6D71931178B7D6C008ED15F /* GTMHTTPFetcher.m in Sources */,
+				C6D71934178B7D72008ED15F /* GTMOAuth2WindowController.m in Sources */,
 				C64FF38416AF97F400F8C162 /* main.mm in Sources */,
 				C6BD2873170BC5C500A91AC1 /* MCOCIDURLProtocol.mm in Sources */,
 				C6BD2874170BC5C500A91AC1 /* MCOMessageView.mm in Sources */,
 				AB666C5917484E6200545290 /* FXKeychain.m in Sources */,
+				C6D7192F178B7D65008ED15F /* GTMOAuth2Authentication.m in Sources */,
+				C6D71932178B7D6E008ED15F /* GTMHTTPFetchHistory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
