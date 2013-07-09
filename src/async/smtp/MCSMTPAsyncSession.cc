@@ -41,7 +41,7 @@ namespace mailcore {
         virtual ~SMTPConnectionLogger() {
         }
         
-        virtual void log(void * context, void * sender, ConnectionLogType logType, Data * buffer)
+        virtual void log(void * sender, ConnectionLogType logType, Data * buffer)
         {
             mSession->logConnection(logType, buffer);
         }
@@ -111,6 +111,16 @@ void SMTPAsyncSession::setPassword(String * password)
 String * SMTPAsyncSession::password()
 {
     return mSession->password();
+}
+
+void SMTPAsyncSession::setOAuth2Token(String * token)
+{
+    mSession->setOAuth2Token(token);
+}
+
+String * SMTPAsyncSession::OAuth2Token()
+{
+    return mSession->OAuth2Token();
 }
 
 void SMTPAsyncSession::setAuthType(AuthType authType)

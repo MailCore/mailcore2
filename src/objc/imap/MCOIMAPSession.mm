@@ -35,7 +35,7 @@ public:
         mSession = session;
     }
     
-    virtual void log(void * context, void * sender, ConnectionLogType logType, Data * data)
+    virtual void log(void * sender, ConnectionLogType logType, Data * data)
     {
         [mSession _logWithSender:sender connectionType:(MCOConnectionLogType)logType data:MCO_TO_OBJC(data)];
     }
@@ -77,6 +77,7 @@ MCO_OBJC_SYNTHESIZE_STRING(setHostname, hostname)
 MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setPort, port)
 MCO_OBJC_SYNTHESIZE_STRING(setUsername, username)
 MCO_OBJC_SYNTHESIZE_STRING(setPassword, password)
+MCO_OBJC_SYNTHESIZE_STRING(setOAuth2Token, OAuth2Token)
 MCO_OBJC_SYNTHESIZE_SCALAR(MCOAuthType, mailcore::AuthType, setAuthType, authType)
 MCO_OBJC_SYNTHESIZE_SCALAR(MCOConnectionType, mailcore::ConnectionType, setConnectionType, connectionType)
 MCO_OBJC_SYNTHESIZE_SCALAR(NSTimeInterval, time_t, setTimeout, timeout)

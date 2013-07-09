@@ -12,6 +12,6 @@
 #import <MailCore/MailCore.h>
 
 int main(int argc, char *argv[]) {
-	mailcore::logEnabled = true;
+	MCLogEnabled = 1;
 	return UIApplicationMain(argc, argv, nil, @"AppDelegate");
 }

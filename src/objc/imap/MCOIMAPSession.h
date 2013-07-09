@@ -40,16 +40,19 @@
 @interface MCOIMAPSession : NSObject
 
 /** This is the hostname of the IMAP server to connect to. */
-@property (nonatomic, strong) NSString *hostname;
+@property (nonatomic, copy) NSString *hostname;
 
 /** This is the port of the IMAP server to connect to. */
 @property (nonatomic, assign) unsigned int port;
 
 /** This is the username of the account. */
-@property (nonatomic, strong) NSString *username;
+@property (nonatomic, copy) NSString *username;
 
 /** This is the password of the account. */
-@property (nonatomic, strong) NSString *password;
+@property (nonatomic, copy) NSString *password;
+
+/** This is the OAuth2 token. */
+@property (nonatomic, copy) NSString *OAuth2Token;
 
 /** 
  This is the authentication type to use to connect.

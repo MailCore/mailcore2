@@ -75,4 +75,20 @@ MCO_OBJC_SYNTHESIZE_STRING(setBoundaryPrefix, boundaryPrefix)
     return result;
 }
 
+
+- (NSString *) htmlBodyRendering
+{
+    return MCO_OBJC_BRIDGE_GET(htmlBodyRendering);
+}
+
+- (NSString *) plainTextRendering
+{
+    return MCO_OBJC_BRIDGE_GET(plainTextRendering);
+}
+
+- (NSString *) plainTextBodyRendering
+{
+    return MCO_OBJC_BRIDGE_GET(plainTextBodyRendering);
+}
+
 @end

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4457.6" systemVersion="12E55" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+    <dependencies>
+        <deployment version="1050" defaultVersion="1080" identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4457.6"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="3330"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="GTMOAuth2WindowController">
+            <connections>
+                <action selector="closeWindow:" destination="17" id="42"/>
+                <outlet property="keychainCheckbox" destination="43" id="46"/>
+                <outlet property="webBackButton" destination="19" id="47"/>
+                <outlet property="webCloseButton" destination="17" id="48"/>
+                <outlet property="webView" destination="5" id="49"/>
+                <outlet property="window" destination="3" id="8"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application"/>
+        <window title="Sign In" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" wantsToBeColor="NO" visibleAtLaunch="NO" animationBehavior="default" id="3">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="74" y="707" width="515" height="419"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1178"/>
+            <value key="minSize" type="size" width="475" height="290"/>
+            <view key="contentView" id="4">
+                <rect key="frame" x="0.0" y="0.0" width="515" height="419"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <webView id="5">
+                        <rect key="frame" x="0.0" y="20" width="515" height="399"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12"/>
+                        <connections>
+                            <action selector="goBack:" destination="19" id="28"/>
+                            <action selector="goForward:" destination="26" id="29"/>
+                        </connections>
+                    </webView>
+                    <button id="17">
+                        <rect key="frame" x="479" y="0.0" width="16" height="19"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSStopProgressTemplate" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="18">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                        </buttonCell>
+                    </button>
+                    <button id="19">
+                        <rect key="frame" x="437" y="0.0" width="16" height="19"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSGoLeftTemplate" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="20">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <binding destination="-2" name="enabled" keyPath="webView.canGoBack" id="31"/>
+                        </connections>
+                    </button>
+                    <button id="26">
+                        <rect key="frame" x="456" y="0.0" width="16" height="19"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSGoRightTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="27">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <binding destination="-2" name="enabled" keyPath="webView.canGoForward" id="35"/>
+                        </connections>
+                    </button>
+                    <button id="43">
+                        <rect key="frame" x="2" y="1" width="429" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <buttonCell key="cell" type="check" title="Stay signed in to this account" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" state="on" inset="2" id="44">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="smallSystem"/>
+                        </buttonCell>
+                    </button>
+                </subviews>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="7"/>
+            </connections>
+        </window>
+        <userDefaultsController id="32"/>
+    </objects>
+    <resources>
+        <image name="NSGoLeftTemplate" width="9" height="9"/>
+        <image name="NSGoRightTemplate" width="9" height="9"/>
+        <image name="NSStopProgressTemplate" width="11" height="11"/>
+    </resources>
+    <classes>
+        <class className="GTMOAuth2WindowController" superclassName="NSWindowController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GTMOAuth2WindowController.h"/>
+            <relationships>
+                <relationship kind="action" name="closeWindow:"/>
+                <relationship kind="outlet" name="completionPlaceholder_"/>
+                <relationship kind="outlet" name="delegate_"/>
+                <relationship kind="outlet" name="keychainCheckbox" candidateClass="NSButton"/>
+                <relationship kind="outlet" name="userData_"/>
+                <relationship kind="outlet" name="webBackButton" candidateClass="NSButton"/>
+                <relationship kind="outlet" name="webCloseButton" candidateClass="NSButton"/>
+                <relationship kind="outlet" name="webView" candidateClass="WebView"/>
+            </relationships>
+        </class>
+    </classes>
+</document>

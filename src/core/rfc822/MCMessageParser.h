@@ -24,6 +24,10 @@ namespace mailcore {
 		virtual Data * data();
         
         virtual String * htmlRendering(HTMLRendererTemplateCallback * htmlCallback = NULL);
+        virtual String * htmlBodyRendering();
+        
+        virtual String * plainTextRendering();
+        virtual String * plainTextBodyRendering();
         
     public: // subclass behavior
 		MessageParser(MessageParser * other);

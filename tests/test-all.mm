@@ -84,6 +84,7 @@ static void testMessageParser(mailcore::Data * data)
     MCLog("%s", MCUTF8DESC(parser));
     MCLog("HTML rendering");
     MCLog("%s", MCUTF8(parser->htmlRendering()));
+    MCLog("%s", MCUTF8(parser->plainTextBodyRendering()));
 }
 
 static void testIMAP()
@@ -351,7 +352,7 @@ void testAll()
     displayName = MCSTR("My Email");
     
     mailcore::AutoreleasePool * pool = new mailcore::AutoreleasePool();
-    mailcore::logEnabled = true;
+    MCLogEnabled = 1;
     mailstream_debug = 1;
     
     //mailcore::Data * data = testMessageBuilder();
@@ -365,7 +366,7 @@ void testAll()
     //testAddresses();
 	//testAttachments();
 	//testProviders();
-    testObjC();
+    //testObjC();
     
     MCLog("pool release");
     pool->release();

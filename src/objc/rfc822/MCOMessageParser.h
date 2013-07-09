@@ -20,7 +20,7 @@
 
 @protocol MCOHTMLRendererDelegate;
 
-@interface MCOMessageParser : MCOAbstractMessage <NSCopying>
+@interface MCOMessageParser : MCOAbstractMessage
 
 /** returns a parsed message from the given RFC 822 data.*/
 + (MCOMessageParser *) messageParserWithData:(NSData *)data;
@@ -37,6 +37,16 @@
 
 /** HTML rendering of the message to be displayed in a web view. delegate can be nil.*/
 - (NSString *) htmlRenderingWithDelegate:(id <MCOHTMLRendererDelegate>)delegate;
+
+/** HTML rendering of the body of the message to be displayed in a web view.*/
+- (NSString *) htmlBodyRendering;
+
+/** Text rendering of the message.*/
+- (NSString *) plainTextRendering;
+
+/** Text rendering of the body of the message. All end of line will be removed and white spaces cleaned up.
+ This method can be used to generate the summary of the message.*/
+- (NSString *) plainTextBodyRendering;
 
 @end
 

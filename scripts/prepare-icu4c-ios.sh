@@ -3,6 +3,7 @@
 sdkversion=6.1
 versionfolder='51.1'
 version='51_1'
+build_version="$version~1"
 url="http://download.icu-project.org/files/icu4c/$versionfolder/icu4c-$version-src.tgz"
 package_filename="icu4c-$version-src.tgz"
 sysrootpath="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk"
@@ -22,14 +23,14 @@ logdir="$tempbuilddir/log"
 resultdir="$builddir/builds"
 tmpdir="$tempbuilddir/tmp"
 
-if test -f "$resultdir/icu4c-ios-$version.zip" ; then
+if test -f "$resultdir/icu4c-ios-$build_version.zip" ; then
 	echo install from cache
 	rm -rf ../Externals/icu4c-ios
 	mkdir -p ../Externals/tmp
-	unzip -q "$resultdir/icu4c-ios-$version.zip" -d ../Externals/tmp
-	mv "../Externals/tmp/icu4c-ios-$version/icu4c-ios" ../Externals
+	unzip -q "$resultdir/icu4c-ios-$build_version.zip" -d ../Externals/tmp
+	mv "../Externals/tmp/icu4c-ios-$build_version/icu4c-ios" ../Externals
   mkdir -p ../Externals/installed
-  ln -sf "$resultdir/icu4c-ios-$version.zip" ../Externals/installed
+  ln -sf "$resultdir/icu4c-ios-$build_version.zip" ../Externals/installed
 	rm -rf ../Externals/tmp
 	exit 0
 fi
@@ -57,6 +58,11 @@ fi
 
 tar xf "$package_filename"
 
+TOOLCHAIN=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+export CC=$TOOLCHAIN/clang
+export CXX=$TOOLCHAIN/clang++
+export LDLAGS="-lc++ -isysroot $sysrootpath"
+
 echo build x86_64
 MARCH=x86_64
 mkdir -p "$tmpdir/crossbuild/"
@@ -75,7 +81,8 @@ sysroot="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/
 cd "$srcdir/icu/source"
 for MARCH in $MARCHS; do
   export CFLAGS="-arch ${MARCH} -isysroot ${sysroot} -DUCONFIG_NO_FILE_IO=1"
-  export CXXFLAGS=$CFLAGS
+  export CXXFLAGS="$CFLAGS -stdlib=libstdc++ -std=gnu++11"
+  export LDFLAGS="-lstdc++ -stdlib=libstdc++"
 
   echo building $MARCH
   
@@ -99,7 +106,8 @@ MARCHS=i386
 cd "$srcdir/icu/source"
 for MARCH in $MARCHS; do
   export CFLAGS="-arch ${MARCH} -isysroot ${sysroot} -DUCONFIG_NO_FILE_IO=1"
-  export CXXFLAGS=$CFLAGS
+  export CXXFLAGS="$CFLAGS -stdlib=libstdc++ -std=gnu++11"
+  export LDFLAGS="-lstdc++ -stdlib=libstdc++"
 
   echo building $MARCH
   
@@ -152,21 +160,21 @@ lipo -create $icutu_paths -output icu4c-ios/lib/libicutu.a
 lipo -create $icuuc_paths -output icu4c-ios/lib/libicuuc.a
 
 cd "$tmpdir/bin"
-mkdir -p "icu4c-ios-$version"
-mv icu4c-ios "icu4c-ios-$version"
-zip -qry "$resultdir/icu4c-ios-$version.zip" "icu4c-ios-$version"
+mkdir -p "icu4c-ios-$build_version"
+mv icu4c-ios "icu4c-ios-$build_version"
+zip -qry "$resultdir/icu4c-ios-$build_version.zip" "icu4c-ios-$build_version"
 rm -f "$resultdir/icu4c-ios-latest.zip"
 cd "$resultdir"
-ln -s "icu4c-ios-$version.zip" "icu4c-ios-latest.zip"
+ln -s "icu4c-ios-$build_version.zip" "icu4c-ios-latest.zip"
 
-echo build of icu4c-$version done
+echo build of icu4c-$build_version done
 
 popd
 
 rm -rf ../Externals/icu4c-ios
 mkdir -p ../Externals/tmp
-unzip -q "$resultdir/icu4c-ios-$version.zip" -d ../Externals/tmp
-mv "../Externals/tmp/icu4c-ios-$version/icu4c-ios" ../Externals
+unzip -q "$resultdir/icu4c-ios-$build_version.zip" -d ../Externals/tmp
+mv "../Externals/tmp/icu4c-ios-$build_version/icu4c-ios" ../Externals
 rm -rf ../Externals/tmp
 
 echo cleaning
