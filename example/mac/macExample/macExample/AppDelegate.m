@@ -9,8 +9,8 @@
 #import "AppDelegate.h"
 
 #import <MailCore/MailCore.h>
-#import <GTMOAuth2/GTMOAuth2WindowController.h>
-#import <GTMOAuth2/GTMOAuth2SignIn.h>
+#import "GTMOAuth2WindowController.h"
+#import "GTMOAuth2SignIn.h"
 
 #import "MCTMsgListViewController.h"
 #import "FXKeychain.h"
@@ -94,11 +94,11 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
         // Authentication failed
     } else {
         // Authentication succeeded
-        [self retrieveAccessToken:auth];
+        [self loginWithAuth:auth];
     }
 }
 
-- (void) retrieveAccessToken:(GTMOAuth2Authentication *)auth
+- (void) loginWithAuth:(GTMOAuth2Authentication *)auth
 {
     self.login = [auth userEmail];
     self.oauth2Token = [auth accessToken];
