@@ -12,18 +12,11 @@
 
 #include <MailCore/MCIMAPOperation.h>
 #include <MailCore/MCIMAPMessage.h>
+#include "MCMessageConstantsPrivate.h"
 
 #ifdef __cplusplus
 
 namespace mailcore {
-    
-    // If this type becomes public it must be moved to MCConstants.h
-    typedef enum {
-        IMAPMessageRenderingTypeHTML,
-        IMAPMessageRenderingTypeHTMLBody,
-        IMAPMessageRenderingTypePlainText,
-        IMAPMessageRenderingTypePlainTextBody
-    } IMAPMessageRenderingType;
     
     class IMAPMessageRenderingOperation : public IMAPOperation {
     public:

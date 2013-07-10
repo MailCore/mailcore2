@@ -1459,6 +1459,7 @@
 		C6F61FB41702AB2F0073032E /* MCOIMAPBaseOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOIMAPBaseOperation.mm; sourceTree = "<group>"; };
 		DA0F1C79177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPMessageRenderingOperation.cc; sourceTree = "<group>"; };
 		DA0F1C7A177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPMessageRenderingOperation.h; sourceTree = "<group>"; };
+		DA81EECD178E2AC500A8C678 /* MCMessageConstantsPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCMessageConstantsPrivate.h; sourceTree = "<group>"; };
 		DA89896B178A47D200F6D90A /* MCOIMAPMessageRenderingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPMessageRenderingOperation.h; sourceTree = "<group>"; };
 		DA89896C178A47D200F6D90A /* MCOIMAPMessageRenderingOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOIMAPMessageRenderingOperation.mm; sourceTree = "<group>"; };
 		DAACAD4F17886807000B4517 /* MCHTMLRendererIMAPDataCallback.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCHTMLRendererIMAPDataCallback.cc; sourceTree = "<group>"; };
@@ -1797,6 +1798,7 @@
 				C64EA69E169E847800778456 /* MCMessageConstants.h */,
 				C64EA69F169E847800778456 /* MCMessageHeader.cc */,
 				C64EA6A0169E847800778456 /* MCMessageHeader.h */,
+				DA81EECD178E2AC500A8C678 /* MCMessageConstantsPrivate.h */,
 			);
 			path = abstract;
 			sourceTree = "<group>";
