@@ -15,7 +15,6 @@
 #import "MCOAbstractMessageRendererCallback.h"
 #import "MCOHTMLRendererDelegate.h"
 #import "MCOHTMLRendererIMAPDelegate.h"
-#import "MCOIMAPMessageRenderingOperation.h"
 
 @implementation MCOIMAPMessage {
     mailcore::IMAPMessage * _message;
@@ -64,62 +63,6 @@ MCO_OBJC_SYNTHESIZE_SCALAR(uint64_t, uint64_t, setGmailMessageID, gmailMessageID
     htmlRenderCallback->release();
     
     return result;
-}
-
-- (NSString *) htmlRenderingWithSession:(MCOIMAPSession *)session
-                                 folder:(NSString *)folder
-                                   done:(void (^)(NSString * htmlString,
-                                                  NSError * error))completionBlock
-{
-    MCOIMAPMessageRenderingOperation * op = [session renderingOperationWithMessage:self
-                                                                            folder:folder
-                                                                              type:MCOIMAPMessageRenderingTypeHTML];
-    
-    [op start:^(NSString * htmlString, NSError * error) ] {
-        completionBlock(htmlString, error);
-    }];
-}
-
-- (NSString *) htmlBodyRenderingWithSession:(MCOIMAPSession *)session
-                                     folder:(NSString *)folder
-                                       done:(void (^)(NSString * htmlString,
-                                                      NSError * error))completionBlock
-{
-    MCOIMAPMessageRenderingOperation * op = [session renderingOperationWithMessage:self
-                                                                            folder:folder
-                                                                              type:MCOIMAPMessageRenderingTypeHTMLBody];
-    
-    [op start:^(NSString * htmlString, NSError * error) ] {
-        completionBlock(htmlString, error);
-    }];
-}
-
-- (NSString *) plainTextRenderingWithSession:(MCOIMAPSession *)session
-                                      folder:(NSString *)folder
-                                        done:(void (^)(NSString * htmlString,
-                                                       NSError * error))completionBlock
-{
-    MCOIMAPMessageRenderingOperation * op = [session renderingOperationWithMessage:self
-                                                                            folder:folder
-                                                                              type:MCOIMAPMessageRenderingTypePlainText];
-    
-    [op start:^(NSString * htmlString, NSError * error) ] {
-        completionBlock(htmlString, error);
-    }];
-}
-
-- (NSString *) plainTextBodyRenderingWithSession:(MCOIMAPSession *)session
-                                          folder:(NSString *)folder
-                                            done:(void (^)(NSString * htmlString,
-                                                           NSError * error))completionBlock
-{
-    MCOIMAPMessageRenderingOperation * op = [session renderingOperationWithMessage:self
-                                                                            folder:folder
-                                                                              type:MCOIMAPMessageRenderingTypePlainTextBody];
-    
-    [op start:^(NSString * htmlString, NSError * error) ] {
-        completionBlock(htmlString, error);
-    }];
 }
 
 @end
