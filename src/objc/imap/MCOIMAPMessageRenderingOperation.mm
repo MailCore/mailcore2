@@ -9,6 +9,7 @@
 #import "MCOIMAPMessageRenderingOperation.h"
 
 #include "MCAsyncIMAP.h"
+#include "MCIMAPMessageRenderingOperation.h"
 
 #import "MCOOperation+Private.h"
 #import "MCOUtils.h"
