@@ -50,7 +50,7 @@ typedef void (^CompletionType)(NSString * htmlString, NSError * error);
     
     nativeType *op = MCO_NATIVE_INSTANCE;
     if (op->error() == mailcore::ErrorNone) {
-        _completionBlock(op->result(), nil);
+        _completionBlock([NSString mco_stringWithMCString:op->result()], nil);
     } else {
         _completionBlock(nil, [NSError mco_errorWithErrorCode:op->error()]);
     }
