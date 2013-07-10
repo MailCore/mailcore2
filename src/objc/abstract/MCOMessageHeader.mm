@@ -98,8 +98,15 @@ MCO_OBJC_SYNTHESIZE_STRING(setUserAgent, userAgent)
     _nativeHeader->addHeader(MCO_FROM_OBJC(mailcore::String, name), MCO_FROM_OBJC(mailcore::String, value));
 }
 
-- (NSString *)headerForName:(NSString *)name {
-    return MCO_TO_OBJC(_nativeHeader->headerForName((MCO_FROM_OBJC(mailcore::String, name))));
+- (NSString *)headerValueForName:(NSString *)name {
+    return MCO_TO_OBJC(_nativeHeader->headerValueForName((MCO_FROM_OBJC(mailcore::String, name))));
+}
+- (void)removeHeaderForName:(NSString *)name {
+    _nativeHeader->removeHeader(MCO_FROM_OBJC(mailcore::String, name));
+}
+
+- (NSArray * /* NSString */)allHeadersNames {
+    return MCO_TO_OBJC(_nativeHeader->allExtraHeadersNames());
 }
 
 - (NSString *) extractedSubject

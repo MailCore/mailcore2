@@ -299,8 +299,8 @@ void MessageHeader::setExtraHeaders(HashMap * headers) {
     MC_SAFE_REPLACE_COPY(HashMap, mExtraHeaders, headers);
 }
 
-HashMap * MessageHeader::extraHeaders() {
-    return mExtraHeaders;
+Array * MessageHeader::allExtraHeadersNames() {
+    return mExtraHeaders->allKeys();
 }
 
 void MessageHeader::addHeader(String * name, String * object) {
@@ -316,7 +316,7 @@ void MessageHeader::removeHeader(String * name) {
     }
 }
 
-String * MessageHeader::headerForName(String * name) {
+String * MessageHeader::headerValueForName(String * name) {
     if (mExtraHeaders) {
         return (String *) mExtraHeaders->objectForKey(name);
     }
