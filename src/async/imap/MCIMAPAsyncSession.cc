@@ -463,10 +463,30 @@ ConnectionLogger * IMAPAsyncSession::connectionLogger()
     return mConnectionLogger;
 }
 
-IMAPMessageRenderingOperation * IMAPAsyncSession::renderingOperation(IMAPMessage * message,
-                                                                     String * folder,
-                                                                     IMAPMessageRenderingType type);
+IMAPMessageRenderingOperation * IMAPAsyncSession::htmlRenderingOperation(IMAPMessage * message,
+                                                                         String * folder)
 {
     IMAPAsyncConnection * session = sessionForFolder(folder);
-    return session->renderingOperation(message, folder, type);
+    return session->htmlRenderingOperation(message, folder);
+}
+
+IMAPMessageRenderingOperation * IMAPAsyncSession::htmlBodyRenderingOperation(IMAPMessage * message,
+                                                                             String * folder)
+{
+    IMAPAsyncConnection * session = sessionForFolder(folder);
+    return session->htmlBodyRenderingOperation(message, folder);
+}
+
+IMAPMessageRenderingOperation * IMAPAsyncSession::plainTextRenderingOperation(IMAPMessage * message,
+                                                                              String * folder)
+{
+    IMAPAsyncConnection * session = sessionForFolder(folder);
+    return session->plainTextRenderingOperation(message, folder);
+}
+
+IMAPMessageRenderingOperation * IMAPAsyncSession::plainTextBodyRenderingOperation(IMAPMessage * message,
+                                                                                  String * folder)
+{
+    IMAPAsyncConnection * session = sessionForFolder(folder);
+    return session->plainTextBodyRenderingOperation(message, folder);
 }
