@@ -358,28 +358,28 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
 - (MCOIMAPMessageRenderingOperation *) htmlRenderingOperationWithMessage:(MCOIMAPMessage *)message
                                                                   folder:(NSString *)folder
 {
-    MCOIMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->htmlRenderingOperation(message, [folder mco_mcString]);
+    IMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->htmlRenderingOperation(MCO_FROM_OBJC(IMAPMessage, message), [folder mco_mcString]);
     return MCO_TO_OBJC_OP(coreOp);
 }
 
 - (MCOIMAPMessageRenderingOperation *) htmlBodyRenderingOperationWithMessage:(MCOIMAPMessage *)message
                                                                       folder:(NSString *)folder
 {
-    MCOIMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->htmlBodyRenderingOperation(message, [folder mco_mcString]);
+    IMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->htmlBodyRenderingOperation(MCO_FROM_OBJC(IMAPMessage, message), [folder mco_mcString]);
     return MCO_TO_OBJC_OP(coreOp);
 }
 
 - (MCOIMAPMessageRenderingOperation *) plainTextRenderingOperationWithMessage:(MCOIMAPMessage *)message
                                                                        folder:(NSString *)folder
 {
-    MCOIMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->plainTextRenderingOperation(message, [folder mco_mcString]);
+    IMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->plainTextRenderingOperation(MCO_FROM_OBJC(IMAPMessage, message), [folder mco_mcString]);
     return MCO_TO_OBJC_OP(coreOp);
 }
 
 - (MCOIMAPMessageRenderingOperation *) plainTextBodyRenderingOperationWithMessage:(MCOIMAPMessage *)message
                                                                            folder:(NSString *)folder
 {
-    MCOIMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->plainTextBodyRenderingOperation(message, [folder mco_mcString]);
+    IMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->plainTextBodyRenderingOperation(MCO_FROM_OBJC(IMAPMessage, message), [folder mco_mcString]);
     return MCO_TO_OBJC_OP(coreOp);
 }
 
