@@ -29,13 +29,13 @@ void IMAPFolderStatusOperation::main()
     ErrorCode error;
     
     session()->session()->loginIfNeeded(&error);
-    if (error != ErrorCode::ErrorNone) {
+    if (error != ErrorNone) {
         setError(error);
         return;
     }
     
     IMAPFolderStatus *status = session()->session()->folderStatus(folder(), &error);
-    if (error != ErrorCode::ErrorNone) {
+    if (error != ErrorNone) {
         setError(error);
         return;
     }

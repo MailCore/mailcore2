@@ -24,5 +24,5 @@ IMAPDisconnectOperation::~IMAPDisconnectOperation()
 void IMAPDisconnectOperation::main()
 {
     session()->session()->disconnect();
-    setError(ErrorCode::ErrorNone);
+    setError(ErrorNone);
 }
