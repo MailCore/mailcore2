@@ -29,6 +29,7 @@ namespace mailcore {
     class IMAPAsyncSession;
     class IMAPConnectionLogger;
     class IMAPMessageRenderingOperation;
+    class IMAPMessage;
     
     class IMAPAsyncConnection : public Object {
     public:
