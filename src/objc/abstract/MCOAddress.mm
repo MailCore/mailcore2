@@ -93,6 +93,39 @@
 	return [NSArray mco_arrayWithMCArray:mailcore::Address::addressesWithNonEncodedRFC822String(string.mco_mcString)];
 }
 
+#pragma mark - NSCoding
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+	self = [super init];
+	if (self)
+	{
+		NSString *displayName = [decoder decodeObjectForKey:@"displayName"];
+		NSString *mailbox = [decoder decodeObjectForKey:@"mailbox"];
+		
+		if (displayName.length && mailbox.length)
+		{
+			_nativeAddress = mailcore::Address::addressWithDisplayName([displayName mco_mcString], [mailbox mco_mcString]);
+		}
+		else if (mailbox.length)
+		{
+			_nativeAddress = mailcore::Address::addressWithMailbox([mailbox mco_mcString]);
+		}
+		else
+		{
+			NSAssert(0, @"Trying to initWithCoder: a MCOAddress without mailbox");
+		}
+	}
+	return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+	[coder encodeObject:self.displayName forKey:@"displayName"];
+	[coder encodeObject:self.mailbox forKey:@"mailbox"];
+}
+
+#pragma mark -
 
 - (id) init
 {
