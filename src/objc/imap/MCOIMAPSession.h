@@ -539,7 +539,7 @@
 /** @name Rendering Operations */
 
 /**
- Returns an operation to render the HTML version of a message in a simple fashion.
+ Returns an operation to render the HTML version of a message to be displayed in a web view.
  
     MCOIMAPMessageRenderingOperation * op = [session htmlRenderingOperationWithMessage:msg
                                                                             folder:@"INBOX"];
@@ -552,7 +552,7 @@
                                                                   folder:(NSString *)folder;
 
 /**
- Returns an operation to render the HTML body of a message in a simple fashion.
+ Returns an operation to render the HTML body of a message to be displayed in a web view.
  
     MCOIMAPMessageRenderingOperation * op = [session htmlBodyRenderingOperationWithMessage:msg
                                                                                     folder:@"INBOX"];
@@ -565,7 +565,7 @@
                                                                       folder:(NSString *)folder;
 
 /**
- Returns an operation to render the plain text version of a message in a simple fashion.
+ Returns an operation to render the plain text version of a message.
  
     MCOIMAPMessageRenderingOperation * op = [session plainTextRenderingOperationWithMessage:msg
                                                                                      folder:@"INBOX"];
@@ -578,7 +578,9 @@
                                                                        folder:(NSString *)folder;
 
 /**
- Returns an operation to render the plain text body of a message in a simple fashion.
+ Returns an operation to render the plain text body of a message.
+ All end of line will be removed and white spaces cleaned up.
+ This method can be used to generate the summary of the message.
  
     MCOIMAPMessageRenderingOperation * op = [session plainTextBodyRenderingOperationWithMessage:msg
                                                                                          folder:@"INBOX"];
