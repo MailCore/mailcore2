@@ -295,32 +295,37 @@ String * MessageHeader::userAgent()
     return mUserAgent;
 }
 
-void MessageHeader::setExtraHeaders(HashMap * headers) {
+void MessageHeader::setExtraHeaders(HashMap * headers)
+{
     MC_SAFE_REPLACE_COPY(HashMap, mExtraHeaders, headers);
 }
 
-Array * MessageHeader::allExtraHeadersNames() {
+Array * MessageHeader::allExtraHeadersNames()
+{
+    if (mExtraHeaders == NULL)
+        return Array::array();
     return mExtraHeaders->allKeys();
 }
 
-void MessageHeader::addHeader(String * name, String * object) {
-    if (mExtraHeaders == NULL) {
+void MessageHeader::addHeader(String * name, String * object)
+{
+    if (mExtraHeaders == NULL)
         mExtraHeaders = new HashMap();
-    }
     mExtraHeaders->setObjectForKey(name, object);
 }
 
-void MessageHeader::removeHeader(String * name) {
-    if (mExtraHeaders != NULL) {
-        mExtraHeaders->removeObjectForKey(name);
-    }
+void MessageHeader::removeHeader(String * name)
+{
+    if (mExtraHeaders == NULL)
+        return;
+    mExtraHeaders->removeObjectForKey(name);
 }
 
-String * MessageHeader::headerValueForName(String * name) {
-    if (mExtraHeaders) {
-        return (String *) mExtraHeaders->objectForKey(name);
-    }
-    return NULL;
+String * MessageHeader::headerValueForName(String * name)
+{
+    if (mExtraHeaders == NULL)
+        return NULL;
+    return (String *) mExtraHeaders->objectForKey(name);
 }
 
 String * MessageHeader::extractedSubject()

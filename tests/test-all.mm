@@ -53,9 +53,10 @@ static mailcore::Data * testMessageBuilder()
     bcc->addObject(mailcore::Address::addressWithDisplayName(MCSTR("Hidden Recipient"), MCSTR("foobar@bcc-recipient.org")));
     msg->header()->setTo(to);
     msg->header()->setBcc(bcc);
-    msg->header()->addHeader(MCSTR("X-Custom-Header"), MCSTR("Custom Header Value"));
     to->release();
     bcc->release();
+    MCAssert(msg->header()->allExtraHeadersNames()->count() == 0);
+    msg->header()->addHeader(MCSTR("X-Custom-Header"), MCSTR("Custom Header Value"));
     msg->header()->setSubject(MCSTR("Mon projet d'été"));
     msg->setHTMLBody(MCSTR("<div>Hello <img src=\"cid:1234\"></div>"));
     msg->addAttachment(mailcore::Attachment::attachmentWithContentsOfFile(MCSTR("first-filename")));
