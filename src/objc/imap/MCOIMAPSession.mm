@@ -20,6 +20,8 @@
 
 #import <MailCore/MCAsync.h>
 
+#include "MCIMAPMessageRenderingOperation.h"
+
 
 using namespace mailcore;
 
