@@ -82,7 +82,6 @@
 		C63CD68816BE1BBF00DB18F1 /* MCAddressDisplay.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD67816BDCDD400DB18F1 /* MCAddressDisplay.h */; };
 		C63CD68916BE1BC100DB18F1 /* MCDateFormatter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD67A16BDCDD400DB18F1 /* MCDateFormatter.h */; };
 		C63CD68A16BE1BC400DB18F1 /* MCSizeFormatter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD67E16BDCDD400DB18F1 /* MCSizeFormatter.h */; };
-		C63CD68B16BE1BC600DB18F1 /* MCHTMLRenderer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD67C16BDCDD400DB18F1 /* MCHTMLRenderer.h */; };
 		C63CD68C16BE1BC800DB18F1 /* MCHTMLRendererCallback.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD68516BE148B00DB18F1 /* MCHTMLRendererCallback.h */; };
 		C63CD68D16BE1BCA00DB18F1 /* MCRenderer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD68716BE1AB600DB18F1 /* MCRenderer.h */; };
 		C63CD68E16BE324100DB18F1 /* MCOIMAPFetchFoldersOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F87F190816BB62690012652F /* MCOIMAPFetchFoldersOperation.h */; };
@@ -343,7 +342,6 @@
 		C6BA2B351705F4E6003F0E9E /* MCIndexSet.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB22D16E5C1EE000DB34C /* MCIndexSet.h */; };
 		C6BA2B361705F4E6003F0E9E /* MCIMAPCapabilityOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB22A16E5C0A3000DB34C /* MCIMAPCapabilityOperation.h */; };
 		C6BA2B371705F4E6003F0E9E /* MCAsyncIMAP.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA7F916A15A9200778456 /* MCAsyncIMAP.h */; };
-		C6BA2B381705F4E6003F0E9E /* MCHTMLRenderer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD67C16BDCDD400DB18F1 /* MCHTMLRenderer.h */; };
 		C6BA2B391705F4E6003F0E9E /* MCSizeFormatter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD67E16BDCDD400DB18F1 /* MCSizeFormatter.h */; };
 		C6BA2B3A1705F4E6003F0E9E /* MCOAddress.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB24016EDAAF3000DB34C /* MCOAddress.h */; };
 		C6BA2B3B1705F4E6003F0E9E /* MCOAbstractMessage.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB23316EDAA17000DB34C /* MCOAbstractMessage.h */; };
@@ -783,7 +781,6 @@
 				C64BB22F16E885C3000DB34C /* MCIndexSet.h in CopyFiles */,
 				C64BB23016E8876F000DB34C /* MCIMAPCapabilityOperation.h in CopyFiles */,
 				C62C6EE016A696AB00737497 /* MCAsyncIMAP.h in CopyFiles */,
-				C63CD68B16BE1BC600DB18F1 /* MCHTMLRenderer.h in CopyFiles */,
 				C63CD68A16BE1BC400DB18F1 /* MCSizeFormatter.h in CopyFiles */,
 				C64BB24C16EEFCC2000DB34C /* MCOAddress.h in CopyFiles */,
 				C64BB25616FD333C000DB34C /* MCOAbstractMessage.h in CopyFiles */,
@@ -971,7 +968,6 @@
 				C6BA2B351705F4E6003F0E9E /* MCIndexSet.h in CopyFiles */,
 				C6BA2B361705F4E6003F0E9E /* MCIMAPCapabilityOperation.h in CopyFiles */,
 				C6BA2B371705F4E6003F0E9E /* MCAsyncIMAP.h in CopyFiles */,
-				C6BA2B381705F4E6003F0E9E /* MCHTMLRenderer.h in CopyFiles */,
 				C6BA2B391705F4E6003F0E9E /* MCSizeFormatter.h in CopyFiles */,
 				C6BA2B3A1705F4E6003F0E9E /* MCOAddress.h in CopyFiles */,
 				C6BA2B3B1705F4E6003F0E9E /* MCOAbstractMessage.h in CopyFiles */,
