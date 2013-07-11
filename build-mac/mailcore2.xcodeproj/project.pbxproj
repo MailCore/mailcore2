@@ -2120,16 +2120,6 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		C6BD288A170BD71100A91AC1 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
 		C64EA536169E772200778456 /* static mailcore2 osx */ = {
 			isa = PBXNativeTarget;
@@ -2212,7 +2202,6 @@
 				C6BD2888170BD71100A91AC1 /* Sources */,
 				C6BD28A6170BD87600A91AC1 /* ShellScript */,
 				C6BD2889170BD71100A91AC1 /* Frameworks */,
-				C6BD288A170BD71100A91AC1 /* Headers */,
 				C6BD288B170BD71100A91AC1 /* Resources */,
 			);
 			buildRules = (
@@ -2326,7 +2315,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp -R  \"$BUILT_PRODUCTS_DIR/include/MailCore/\" \"$BUILT_PRODUCTS_DIR/$PUBLIC_HEADERS_FOLDER_PATH\"\n";
+			shellScript = "rsync -a  \"$BUILT_PRODUCTS_DIR/include/MailCore/\" \"$BUILT_PRODUCTS_DIR/$PUBLIC_HEADERS_FOLDER_PATH\"\nrm -f \"$BUILT_PRODUCTS_DIR/$FULL_PRODUCT_NAME/Headers\"\nln -sf \"$BUILT_PRODUCTS_DIR/$VERSIONS_FOLDER_PATH/$CURRENT_VERSION/Headers\" \"$BUILT_PRODUCTS_DIR/$FULL_PRODUCT_NAME/Headers\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
