@@ -215,12 +215,12 @@ namespace mailcore {
     };
     
     // Private type - It should not be used directly.
-    enum {
+    enum IMAPMessageRenderingType {
         IMAPMessageRenderingTypeHTML,
         IMAPMessageRenderingTypeHTMLBody,
         IMAPMessageRenderingTypePlainText,
         IMAPMessageRenderingTypePlainTextBody
-    } IMAPMessageRenderingType;
+    };
 }
 
 #endif
