@@ -37,5 +37,6 @@
 #import <MailCore/MCOIMAPIdentityOperation.h>
 #import <MailCore/MCOIMAPCapabilityOperation.h>
 #import <MailCore/MCOIMAPSearchExpression.h>
+#import <MailCore/MCOIMAPMessageRenderingOperation.h>
 
 #endif
