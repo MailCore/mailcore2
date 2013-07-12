@@ -26,6 +26,7 @@
 
 #import <MailCore/MCOAbstractMessage.h>
 #import <MailCore/MCOConstants.h>
+#import <MailCore/MCOIMAPSession.h>
 
 @protocol MCOHTMLRendererIMAPDelegate;
 
