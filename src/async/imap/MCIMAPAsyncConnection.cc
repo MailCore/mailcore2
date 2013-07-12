@@ -601,6 +601,7 @@ IMAPMessageRenderingOperation * IMAPAsyncConnection::renderingOperation(IMAPMess
 {
     IMAPMessageRenderingOperation * op = new IMAPMessageRenderingOperation();
     op->setSession(this);
+    op->setMessage(message);
     op->setFolder(folder);
     op->setRenderingType(type);
     op->autorelease();
