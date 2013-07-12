@@ -53,7 +53,7 @@ String * IMAPMessageRenderingOperation::result()
 
 void IMAPMessageRenderingOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     
     if (mRenderingType == IMAPMessageRenderingTypeHTML) {
         mResult = session()->session()->htmlRendering(mMessage, folder(), &error);
