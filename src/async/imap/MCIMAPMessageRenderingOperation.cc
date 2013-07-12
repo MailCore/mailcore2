@@ -57,20 +57,17 @@ void IMAPMessageRenderingOperation::main()
     
     if (mRenderingType == IMAPMessageRenderingTypeHTML) {
         mResult = session()->session()->htmlRendering(mMessage, folder(), &error);
-        MC_SAFE_RETAIN(mResult);
     }
     else if (mRenderingType == IMAPMessageRenderingTypeHTMLBody) {
         mResult = session()->session()->htmlBodyRendering(mMessage, folder(), &error);
-        MC_SAFE_RETAIN(mResult);
     }
     else if (mRenderingType == IMAPMessageRenderingTypePlainText) {
         mResult = session()->session()->plainTextRendering(mMessage, folder(), &error);
-        MC_SAFE_RETAIN(mResult);
     }
     else if (mRenderingType == IMAPMessageRenderingTypePlainTextBody) {
         mResult = session()->session()->plainTextBodyRendering(mMessage, folder(), &error);
-        MC_SAFE_RETAIN(mResult);
     }
     
+    MC_SAFE_RETAIN(mResult);
     setError(error);
 }
