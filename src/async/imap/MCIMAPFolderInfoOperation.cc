@@ -56,13 +56,13 @@ void IMAPFolderInfoOperation::main()
     ErrorCode error;
     
     session()->session()->loginIfNeeded(&error);
-    if (error != ErrorCode::ErrorNone) {
+    if (error != ErrorNone) {
         setError(error);
         return;
     }
     
     session()->session()->select(folder(), &error);
-    if (error != ErrorCode::ErrorNone) {
+    if (error != ErrorNone) {
         setError(error);
         return;
     }

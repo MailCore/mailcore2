@@ -692,76 +692,76 @@ void IMAPSession::login(ErrorCode * pError)
 			break;
 			
 		case AuthTypeSASLCRAMMD5:
-        r = mailimap_authenticate(mImap, "CRAM-MD5",
-            MCUTF8(mHostname),
-            NULL,
-            NULL,
-            utf8username, utf8username,
-            utf8password, NULL);
-        break;
+            r = mailimap_authenticate(mImap, "CRAM-MD5",
+                                      MCUTF8(mHostname),
+                                      NULL,
+                                      NULL,
+                                      utf8username, utf8username,
+                                      utf8password, NULL);
+            break;
 			
         case AuthTypeSASLPlain:
-        r = mailimap_authenticate(mImap, "PLAIN",
-            MCUTF8(mHostname),
-            NULL,
-            NULL,
-            utf8username, utf8username,
-            utf8password, NULL);
-        break;
+            r = mailimap_authenticate(mImap, "PLAIN",
+                                      MCUTF8(mHostname),
+                                      NULL,
+                                      NULL,
+                                      utf8username, utf8username,
+                                      utf8password, NULL);
+            break;
 			
 		case AuthTypeSASLGSSAPI:
 			// needs to be tested
 			r = mailimap_authenticate(mImap, "GSSAPI",
-                MCUTF8(mHostname),
-                NULL,
-                NULL,
-                utf8username, utf8username,
-                utf8password, NULL /* realm */);
+                                      MCUTF8(mHostname),
+                                      NULL,
+                                      NULL,
+                                      utf8username, utf8username,
+                                      utf8password, NULL /* realm */);
 			break;
 			
 		case AuthTypeSASLDIGESTMD5:
 			r = mailimap_authenticate(mImap, "DIGEST-MD5",
-                MCUTF8(mHostname),
-                NULL,
-                NULL,
-                utf8username, utf8username,
-                utf8password, NULL);
+                                      MCUTF8(mHostname),
+                                      NULL,
+                                      NULL,
+                                      utf8username, utf8username,
+                                      utf8password, NULL);
             break;
-
-            case AuthTypeSASLLogin:
+            
+        case AuthTypeSASLLogin:
             r = mailimap_authenticate(mImap, "LOGIN",
-                MCUTF8(mHostname),
-                NULL,
-                NULL,
-                utf8username, utf8username,
-                utf8password, NULL);
+                                      MCUTF8(mHostname),
+                                      NULL,
+                                      NULL,
+                                      utf8username, utf8username,
+                                      utf8password, NULL);
             break;
-
-            case AuthTypeSASLSRP:
+            
+        case AuthTypeSASLSRP:
             r = mailimap_authenticate(mImap, "SRP",
-                MCUTF8(mHostname),
-                NULL,
-                NULL,
-                utf8username, utf8username,
-                utf8password, NULL);
+                                      MCUTF8(mHostname),
+                                      NULL,
+                                      NULL,
+                                      utf8username, utf8username,
+                                      utf8password, NULL);
             break;
 			
-            case AuthTypeSASLNTLM:
+        case AuthTypeSASLNTLM:
             r = mailimap_authenticate(mImap, "NTLM",
-                MCUTF8(mHostname),
-                NULL,
-                NULL,
-                utf8username, utf8username,
-                utf8password, NULL/* realm */);
+                                      MCUTF8(mHostname),
+                                      NULL,
+                                      NULL,
+                                      utf8username, utf8username,
+                                      utf8password, NULL/* realm */);
             break;
 			
-		case AuthTypeSASLKerberosV4:
+        case AuthTypeSASLKerberosV4:
 			r = mailimap_authenticate(mImap, "KERBEROS_V4",
-                MCUTF8(mHostname),
-                NULL,
-                NULL,
-                utf8username, utf8username,
-                utf8password, NULL/* realm */);
+                                      MCUTF8(mHostname),
+                                      NULL,
+                                      NULL,
+                                      utf8username, utf8username,
+                                      utf8password, NULL/* realm */);
             break;
             
         case AuthTypeXOAuth2:
@@ -778,7 +778,7 @@ void IMAPSession::login(ErrorCode * pError)
     }
     else if (hasError(r)) {
         String * response;
-
+        
         response = MCSTR("");
         if (mImap->imap_response != NULL) {
             response = String::stringWithUTF8Characters(mImap->imap_response);

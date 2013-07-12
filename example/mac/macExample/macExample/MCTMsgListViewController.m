@@ -21,20 +21,36 @@
 
 @implementation MCTMsgListViewController
 
-- (void) connectWithHostname:(NSString *)hostname login:(NSString *)login password:(NSString *)password
+- (void) connectWithHostname:(NSString *)hostname
+                       login:(NSString *)login
+                    password:(NSString *)password
+                 oauth2Token:(NSString *)oauth2Token
 {
     [_msgViewController setFolder:FOLDER];
 
-    if (([login length] == 0) || ([password length] == 0))
-        return;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"OAuth2Enabled"]) {
+        if (([login length] == 0) || ([oauth2Token length] == 0))
+            return;
+    }
+    else {
+        if (([login length] == 0) || ([password length] == 0))
+            return;
+    }
     
 	self.loading = YES;
 	
     _session = [[MCOIMAPSession alloc] init];
     [_session setHostname:hostname];
     [_session setPort:993];
-    [_session setUsername:login];
-    [_session setPassword:password];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"OAuth2Enabled"]) {
+        [_session setUsername:login];
+        [_session setOAuth2Token:oauth2Token];
+        [_session setAuthType:MCOAuthTypeXOAuth2];
+    }
+    else {
+        [_session setUsername:login];
+        [_session setPassword:password];
+    }
     [_session setConnectionType:MCOConnectionTypeTLS];
     
     MCOIMAPMessagesRequestKind requestKind = (MCOIMAPMessagesRequestKind)
@@ -53,6 +69,7 @@
 		NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"header.date" ascending:NO];
         _messages = [[messages sortedArrayUsingDescriptors:@[sort]] retain];
 		
+        NSLog(@"error: %@", error);
         NSLog(@"%i messages", (int) [_messages count]);
         //NSLog(@"%@", _messages);
         [_tableView reloadData];

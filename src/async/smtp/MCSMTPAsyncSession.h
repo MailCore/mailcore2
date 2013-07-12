@@ -33,6 +33,9 @@ namespace mailcore {
 		virtual void setPassword(String * password);
 		virtual String * password();
 
+        virtual void setOAuth2Token(String * token);
+        virtual String * OAuth2Token();
+        
 		virtual void setAuthType(AuthType authType);
 		virtual AuthType authType();
 

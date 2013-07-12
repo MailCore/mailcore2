@@ -55,8 +55,8 @@ void IMAPFetchFoldersOperation::main()
     
     char * delimiterData = (char *) malloc(1);
     * delimiterData = session()->session()->delimiter();
-    session()->performMethodOnMainThread((Object::Method) &IMAPFetchFoldersOperation::setDelimiterDataOnMainThread,
-                                         delimiterData);
+    performMethodOnMainThread((Object::Method) &IMAPFetchFoldersOperation::setDelimiterDataOnMainThread,
+                              delimiterData, true);
 }
 
 void IMAPFetchFoldersOperation::setDelimiterDataOnMainThread(char * delimiterData)

@@ -16,7 +16,7 @@
 
     It can either parsed from RFC 822 message data or created to build a message.*/
 
-@interface MCOAttachment : MCOAbstractPart <NSCopying>
+@interface MCOAttachment : MCOAbstractPart
 
 /** Returns a MIME type for a filename.*/
 + (NSString *) mimeTypeForFilename:(NSString *)filename;

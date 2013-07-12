@@ -474,7 +474,7 @@ MessageBuilder::MessageBuilder()
     init();
 }
 
-MessageBuilder::MessageBuilder(MessageBuilder * other)
+MessageBuilder::MessageBuilder(MessageBuilder * other) : AbstractMessage(other)
 {
     init();
     setHTMLBody(other->mHTMLBody);

@@ -113,6 +113,16 @@ String * SMTPAsyncSession::password()
     return mSession->password();
 }
 
+void SMTPAsyncSession::setOAuth2Token(String * token)
+{
+    mSession->setOAuth2Token(token);
+}
+
+String * SMTPAsyncSession::OAuth2Token()
+{
+    return mSession->OAuth2Token();
+}
+
 void SMTPAsyncSession::setAuthType(AuthType authType)
 {
     mSession->setAuthType(authType);

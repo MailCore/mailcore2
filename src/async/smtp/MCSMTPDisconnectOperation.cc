@@ -24,5 +24,5 @@ SMTPDisconnectOperation::~SMTPDisconnectOperation()
 void SMTPDisconnectOperation::main()
 {
     session()->session()->disconnect();
-    setError(ErrorCode::ErrorNone);
+    setError(ErrorNone);
 }

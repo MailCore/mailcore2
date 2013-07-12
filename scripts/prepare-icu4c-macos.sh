@@ -2,6 +2,7 @@
 
 versionfolder='51.1'
 version='51_1'
+build_version="$version~1"
 url="http://download.icu-project.org/files/icu4c/$versionfolder/icu4c-$version-src.tgz"
 package_filename="icu4c-$version-src.tgz"
 arch="x86_64"
@@ -27,14 +28,14 @@ logdir="$tempbuilddir/log"
 resultdir="$builddir/builds"
 tmpdir="$tempbuilddir/tmp"
 
-if test -f "$resultdir/icu4c-$version.zip" ; then
+if test -f "$resultdir/icu4c-$build_version.zip" ; then
 	echo install from cache
 	rm -rf ../Externals/icu4c
 	mkdir -p ../Externals/tmp
-	unzip -q "$resultdir/icu4c-$version.zip" -d ../Externals/tmp
-	mv "../Externals/tmp/icu4c-$version/icu4c" ../Externals
+	unzip -q "$resultdir/icu4c-$build_version.zip" -d ../Externals/tmp
+	mv "../Externals/tmp/icu4c-$build_version/icu4c" ../Externals
   mkdir -p ../Externals/installed
-  ln -sf "$resultdir/icu4c-$version.zip" ../Externals/installed
+  ln -sf "$resultdir/icu4c-$build_version.zip" ../Externals/installed
 	rm -rf ../Externals/tmp
 	exit 0
 fi
@@ -126,21 +127,21 @@ lipo -create $icutu_paths -output icu4c/lib/libicutu.a
 lipo -create $icuuc_paths -output icu4c/lib/libicuuc.a
 
 cd "$tmpdir/bin"
-mkdir -p "icu4c-$version"
-mv icu4c "icu4c-$version"
-zip -qry "$resultdir/icu4c-$version.zip" "icu4c-$version"
+mkdir -p "icu4c-$build_version"
+mv icu4c "icu4c-$build_version"
+zip -qry "$resultdir/icu4c-$build_version.zip" "icu4c-$build_version"
 rm -f "$resultdir/icu4c-latest.zip"
 cd "$resultdir"
-ln -s "icu4c-$version.zip" "icu4c-latest.zip"
+ln -s "icu4c-$build_version.zip" "icu4c-latest.zip"
 
-echo build of icu4c-$version done
+echo build of icu4c-$build_version done
 
 popd
 
 rm -rf ../Externals/icu4c
 mkdir -p ../Externals/tmp
-unzip -q "$resultdir/icu4c-$version.zip" -d ../Externals/tmp
-mv "../Externals/tmp/icu4c-$version/icu4c" ../Externals
+unzip -q "$resultdir/icu4c-$build_version.zip" -d ../Externals/tmp
+mv "../Externals/tmp/icu4c-$build_version/icu4c" ../Externals
 rm -rf ../Externals/tmp
 
 echo cleaning
