@@ -12,7 +12,6 @@
 
 #include <MailCore/MCIMAPOperation.h>
 #include <MailCore/MCIMAPMessage.h>
-#include "MCMessageConstantsPrivate.h"
 
 #ifdef __cplusplus
 

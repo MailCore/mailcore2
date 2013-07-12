@@ -4,7 +4,6 @@
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCMessageConstants.h>
-#include "MCMessageConstantsPrivate.h"
 
 #ifdef __cplusplus
 
