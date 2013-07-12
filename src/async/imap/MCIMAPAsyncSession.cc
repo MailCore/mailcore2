@@ -1,5 +1,5 @@
 //
-//  MCIMAPAsyncSession.cpp
+//  MCIMAPAsyncSession.cc
 //  mailcore2
 //
 //  Created by DINH Viêt Hoà on 1/17/13.
@@ -461,4 +461,32 @@ void IMAPAsyncSession::setConnectionLogger(ConnectionLogger * logger)
 ConnectionLogger * IMAPAsyncSession::connectionLogger()
 {
     return mConnectionLogger;
+}
+
+IMAPMessageRenderingOperation * IMAPAsyncSession::htmlRenderingOperation(IMAPMessage * message,
+                                                                         String * folder)
+{
+    IMAPAsyncConnection * session = sessionForFolder(folder);
+    return session->htmlRenderingOperation(message, folder);
+}
+
+IMAPMessageRenderingOperation * IMAPAsyncSession::htmlBodyRenderingOperation(IMAPMessage * message,
+                                                                             String * folder)
+{
+    IMAPAsyncConnection * session = sessionForFolder(folder);
+    return session->htmlBodyRenderingOperation(message, folder);
+}
+
+IMAPMessageRenderingOperation * IMAPAsyncSession::plainTextRenderingOperation(IMAPMessage * message,
+                                                                              String * folder)
+{
+    IMAPAsyncConnection * session = sessionForFolder(folder);
+    return session->plainTextRenderingOperation(message, folder);
+}
+
+IMAPMessageRenderingOperation * IMAPAsyncSession::plainTextBodyRenderingOperation(IMAPMessage * message,
+                                                                                  String * folder)
+{
+    IMAPAsyncConnection * session = sessionForFolder(folder);
+    return session->plainTextBodyRenderingOperation(message, folder);
 }
