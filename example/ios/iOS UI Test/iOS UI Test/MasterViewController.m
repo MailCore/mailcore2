@@ -171,6 +171,13 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 	
 	MCOIMAPMessage *message = self.messages[indexPath.row];
 	cell.textLabel.text = message.header.subject;
+    
+    MCOIMAPMessageRenderingOperation * op = [self.imapSession plainTextBodyRenderingOperationWithMessage:message
+                                                                                                  folder:@"INBOX"];
+    
+    [op start:^(NSString * htmlString, NSError * error) {
+        cell.detailTextLabel.text = htmlString;
+    }];
 	
 	return cell;
 }
