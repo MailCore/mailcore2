@@ -45,6 +45,7 @@ MessageHeader::MessageHeader(MessageHeader * other)
     setDate(other->date());
     setReceivedDate(other->receivedDate());
     setUserAgent(other->mUserAgent);
+    setExtraHeaders(other->mExtraHeaders);
 }
 
 void MessageHeader::init(bool generateDate, bool generateMessageID)
@@ -62,6 +63,7 @@ void MessageHeader::init(bool generateDate, bool generateMessageID)
     mDate = (time_t) -1;
 	mReceivedDate = (time_t) -1;
     mUserAgent = NULL;
+    mExtraHeaders = NULL;
     
 	if (generateDate) {
         time_t date;
@@ -113,6 +115,7 @@ MessageHeader::~MessageHeader()
     MC_SAFE_RELEASE(mReplyTo);
     MC_SAFE_RELEASE(mSubject);
     MC_SAFE_RELEASE(mUserAgent);
+    MC_SAFE_RELEASE(mExtraHeaders);
 }
 
 String * MessageHeader::description()
@@ -290,6 +293,39 @@ void MessageHeader::setUserAgent(String * userAgent)
 String * MessageHeader::userAgent()
 {
     return mUserAgent;
+}
+
+void MessageHeader::setExtraHeaders(HashMap * headers)
+{
+    MC_SAFE_REPLACE_COPY(HashMap, mExtraHeaders, headers);
+}
+
+Array * MessageHeader::allExtraHeadersNames()
+{
+    if (mExtraHeaders == NULL)
+        return Array::array();
+    return mExtraHeaders->allKeys();
+}
+
+void MessageHeader::addHeader(String * name, String * object)
+{
+    if (mExtraHeaders == NULL)
+        mExtraHeaders = new HashMap();
+    mExtraHeaders->setObjectForKey(name, object);
+}
+
+void MessageHeader::removeHeader(String * name)
+{
+    if (mExtraHeaders == NULL)
+        return;
+    mExtraHeaders->removeObjectForKey(name);
+}
+
+String * MessageHeader::headerValueForName(String * name)
+{
+    if (mExtraHeaders == NULL)
+        return NULL;
+    return (String *) mExtraHeaders->objectForKey(name);
 }
 
 String * MessageHeader::extractedSubject()
@@ -822,6 +858,15 @@ struct mailimf_fields * MessageHeader::createIMFFieldsAndFilterBcc(bool filterBc
 		field = mailimf_field_new_custom(strdup("X-Mailer"), strdup(mUserAgent->UTF8Characters()));
 		mailimf_fields_add(fields, field);
 	}
+    
+    if (mExtraHeaders != NULL) {
+        mc_foreachdictionaryKeyAndValue(String, header, String, value, mExtraHeaders) {
+            struct mailimf_field * field;
+            
+            field = mailimf_field_new_custom(strdup(header->UTF8Characters()), strdup(value->UTF8Characters()));
+            mailimf_fields_add(fields, field);
+        }
+    }
 	
 	return fields;
 }

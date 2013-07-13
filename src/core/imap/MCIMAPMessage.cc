@@ -29,7 +29,7 @@ IMAPMessage::IMAPMessage()
     init();
 }
 
-IMAPMessage::IMAPMessage(IMAPMessage * other)
+IMAPMessage::IMAPMessage(IMAPMessage * other) : AbstractMessage(other)
 {
     init();
     setUid(other->uid());

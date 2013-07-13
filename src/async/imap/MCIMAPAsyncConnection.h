@@ -28,6 +28,8 @@ namespace mailcore {
     class IMAPOperationQueueCallback;
     class IMAPAsyncSession;
     class IMAPConnectionLogger;
+    class IMAPMessageRenderingOperation;
+    class IMAPMessage;
     
     class IMAPAsyncConnection : public Object {
     public:
@@ -119,6 +121,12 @@ namespace mailcore {
         
         virtual IMAPCapabilityOperation * capabilityOperation();
         
+        virtual IMAPMessageRenderingOperation * htmlRenderingOperation(IMAPMessage * message, String * folder);
+        virtual IMAPMessageRenderingOperation * htmlBodyRenderingOperation(IMAPMessage * message, String * folder);
+        virtual IMAPMessageRenderingOperation * plainTextRenderingOperation(IMAPMessage * message, String * folder);
+        virtual IMAPMessageRenderingOperation * plainTextBodyRenderingOperation(IMAPMessage * message, String * folder);
+        
+        
     private:
         IMAPSession * mSession;
         OperationQueue * mQueue;
@@ -132,6 +140,9 @@ namespace mailcore {
         pthread_mutex_t mConnectionLoggerLock;
         
         virtual void tryAutomaticDisconnectAfterDelay(void * context);
+        virtual IMAPMessageRenderingOperation * renderingOperation(IMAPMessage * message,
+                                                                   String * folder,
+                                                                   IMAPMessageRenderingType type);
         
     public: // private
         virtual void runOperation(IMAPOperation * operation);

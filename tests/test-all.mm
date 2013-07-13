@@ -55,6 +55,8 @@ static mailcore::Data * testMessageBuilder()
     msg->header()->setBcc(bcc);
     to->release();
     bcc->release();
+    MCAssert(msg->header()->allExtraHeadersNames()->count() == 0);
+    msg->header()->addHeader(MCSTR("X-Custom-Header"), MCSTR("Custom Header Value"));
     msg->header()->setSubject(MCSTR("Mon projet d'été"));
     msg->setHTMLBody(MCSTR("<div>Hello <img src=\"cid:1234\"></div>"));
     msg->addAttachment(mailcore::Attachment::attachmentWithContentsOfFile(MCSTR("first-filename")));
@@ -84,6 +86,7 @@ static void testMessageParser(mailcore::Data * data)
     MCLog("%s", MCUTF8DESC(parser));
     MCLog("HTML rendering");
     MCLog("%s", MCUTF8(parser->htmlRendering()));
+    MCLog("%s", MCUTF8(parser->plainTextBodyRendering()));
 }
 
 static void testIMAP()
@@ -365,7 +368,7 @@ void testAll()
     //testAddresses();
 	//testAttachments();
 	//testProviders();
-    testObjC();
+    //testObjC();
     
     MCLog("pool release");
     pool->release();

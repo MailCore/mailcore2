@@ -24,6 +24,7 @@ void SMTPSession::init()
     mPort = 0;
     mUsername = NULL;
     mPassword = NULL;
+    mOAuth2Token = NULL;
     mAuthType = AuthTypeSASLNone;
     mConnectionType = ConnectionTypeClear;
     mTimeout = 30;
@@ -50,6 +51,7 @@ SMTPSession::~SMTPSession()
     MC_SAFE_RELEASE(mHostname);
     MC_SAFE_RELEASE(mUsername);
     MC_SAFE_RELEASE(mPassword);
+    MC_SAFE_RELEASE(mOAuth2Token);
 }
 
 void SMTPSession::setHostname(String * hostname)
@@ -90,6 +92,16 @@ void SMTPSession::setPassword(String * password)
 String * SMTPSession::password()
 {
     return mPassword;
+}
+
+void SMTPSession::setOAuth2Token(String * token)
+{
+    MC_SAFE_REPLACE_COPY(String, mOAuth2Token, token);
+}
+
+String * SMTPSession::OAuth2Token()
+{
+    return mOAuth2Token;
 }
 
 void SMTPSession::setAuthType(AuthType authType)
@@ -404,86 +416,90 @@ void SMTPSession::login(ErrorCode * pError)
     switch (authType()) {
         case 0:
         default:
-        r = mailesmtp_auth_sasl(mSmtp, "PLAIN",
-            MCUTF8(mHostname),
-            NULL,
-            NULL,
-            MCUTF8(mUsername), MCUTF8(mUsername),
-            MCUTF8(mPassword), NULL);
-        break;
-
+            r = mailesmtp_auth_sasl(mSmtp, "PLAIN",
+                                    MCUTF8(mHostname),
+                                    NULL,
+                                    NULL,
+                                    MCUTF8(mUsername), MCUTF8(mUsername),
+                                    MCUTF8(mPassword), NULL);
+            break;
+            
         case AuthTypeSASLCRAMMD5:
-        r = mailesmtp_auth_sasl(mSmtp, "CRAM-MD5",
-            MCUTF8(mHostname),
-            NULL,
-            NULL,
-            MCUTF8(mUsername), MCUTF8(mUsername),
-            MCUTF8(mPassword), NULL);
-        break;
-
+            r = mailesmtp_auth_sasl(mSmtp, "CRAM-MD5",
+                                    MCUTF8(mHostname),
+                                    NULL,
+                                    NULL,
+                                    MCUTF8(mUsername), MCUTF8(mUsername),
+                                    MCUTF8(mPassword), NULL);
+            break;
+            
         case AuthTypeSASLPlain:
-        r = mailesmtp_auth_sasl(mSmtp, "PLAIN",
-            MCUTF8(mHostname),
-            NULL,
-            NULL,
-            MCUTF8(mUsername), MCUTF8(mUsername),
-            MCUTF8(mPassword), NULL);
-        break;
-
+            r = mailesmtp_auth_sasl(mSmtp, "PLAIN",
+                                    MCUTF8(mHostname),
+                                    NULL,
+                                    NULL,
+                                    MCUTF8(mUsername), MCUTF8(mUsername),
+                                    MCUTF8(mPassword), NULL);
+            break;
+            
         case AuthTypeSASLGSSAPI:
             // needs to be tested
-        r = mailesmtp_auth_sasl(mSmtp, "GSSAPI",
-            MCUTF8(mHostname),
-            NULL,
-            NULL,
-            MCUTF8(mUsername), MCUTF8(mUsername),
-            MCUTF8(mPassword), NULL);
-        break;
-
+            r = mailesmtp_auth_sasl(mSmtp, "GSSAPI",
+                                    MCUTF8(mHostname),
+                                    NULL,
+                                    NULL,
+                                    MCUTF8(mUsername), MCUTF8(mUsername),
+                                    MCUTF8(mPassword), NULL);
+            break;
+            
         case AuthTypeSASLDIGESTMD5:
-        r = mailesmtp_auth_sasl(mSmtp, "DIGEST-MD5",
-            MCUTF8(mHostname),
-            NULL,
-            NULL,
-            MCUTF8(mUsername), MCUTF8(mUsername),
-            MCUTF8(mPassword), NULL);
-        break;
-
+            r = mailesmtp_auth_sasl(mSmtp, "DIGEST-MD5",
+                                    MCUTF8(mHostname),
+                                    NULL,
+                                    NULL,
+                                    MCUTF8(mUsername), MCUTF8(mUsername),
+                                    MCUTF8(mPassword), NULL);
+            break;
+            
         case AuthTypeSASLLogin:
-        r = mailesmtp_auth_sasl(mSmtp, "LOGIN",
-            MCUTF8(mHostname),
-            NULL,
-            NULL,
-            MCUTF8(mUsername), MCUTF8(mUsername),
-            MCUTF8(mPassword), NULL);
-        break;
-
+            r = mailesmtp_auth_sasl(mSmtp, "LOGIN",
+                                    MCUTF8(mHostname),
+                                    NULL,
+                                    NULL,
+                                    MCUTF8(mUsername), MCUTF8(mUsername),
+                                    MCUTF8(mPassword), NULL);
+            break;
+            
         case AuthTypeSASLSRP:
-        r = mailesmtp_auth_sasl(mSmtp, "SRP",
-            MCUTF8(mHostname),
-            NULL,
-            NULL,
-            MCUTF8(mUsername), MCUTF8(mUsername),
-            MCUTF8(mPassword), NULL);
-        break;
-
+            r = mailesmtp_auth_sasl(mSmtp, "SRP",
+                                    MCUTF8(mHostname),
+                                    NULL,
+                                    NULL,
+                                    MCUTF8(mUsername), MCUTF8(mUsername),
+                                    MCUTF8(mPassword), NULL);
+            break;
+            
         case AuthTypeSASLNTLM:
-        r = mailesmtp_auth_sasl(mSmtp, "NTLM",
-            MCUTF8(mHostname),
-            NULL,
-            NULL,
-            MCUTF8(mUsername), MCUTF8(mUsername),
-            MCUTF8(mPassword), NULL /* realm */);
-        break;
-
+            r = mailesmtp_auth_sasl(mSmtp, "NTLM",
+                                    MCUTF8(mHostname),
+                                    NULL,
+                                    NULL,
+                                    MCUTF8(mUsername), MCUTF8(mUsername),
+                                    MCUTF8(mPassword), NULL /* realm */);
+            break;
+            
         case AuthTypeSASLKerberosV4:
-        r = mailesmtp_auth_sasl(mSmtp, "KERBEROS_V4",
-            MCUTF8(mHostname),
-            NULL,
-            NULL,
-            MCUTF8(mUsername), MCUTF8(mUsername),
-            MCUTF8(mPassword), NULL /* realm */);
-        break;
+            r = mailesmtp_auth_sasl(mSmtp, "KERBEROS_V4",
+                                    MCUTF8(mHostname),
+                                    NULL,
+                                    NULL,
+                                    MCUTF8(mUsername), MCUTF8(mUsername),
+                                    MCUTF8(mPassword), NULL /* realm */);
+            break;
+            
+        case AuthTypeXOAuth2:
+            r = mailsmtp_oauth2_authenticate(mSmtp, MCUTF8(mUsername), MCUTF8(mOAuth2Token));
+            break;
     }
     if (r == MAILSMTP_ERROR_STREAM) {
         * pError = ErrorConnection;
@@ -516,7 +532,7 @@ void SMTPSession::checkAccount(Address * from, ErrorCode * pError)
         return;
     }
     
-    r = mailsmtp_rcpt(mSmtp, "email@invalid");
+    r = mailsmtp_rcpt(mSmtp, "email@invalid.com");
     if (r == MAILSMTP_ERROR_STREAM) {
         * pError = ErrorConnection;
         return;

@@ -55,8 +55,9 @@ cp -R "$builddir/downloads/ctemplate" "$srcdir/ctemplate"
 echo building ctemplate
 cd "$srcdir/ctemplate"
 
-export CC=clang
-export CXX=clang++
+TOOLCHAIN=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+export CC=$TOOLCHAIN/clang
+export CXX=$TOOLCHAIN/clang++
 export LDLAGS="-lc++ -isysroot $sysrootpath"
 
 sdk="iphoneos$sdkversion"
@@ -65,8 +66,11 @@ sysroot="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/
 ARCH=arm
 MARCHS="armv7 armv7s"
 for MARCH in $MARCHS; do
+  echo "$logdir/ctemplate-build.log"
   export CFLAGS="-arch ${MARCH} -isysroot $sysroot"
-  export CXXFLAGS=$CFLAGS
+  export CXXFLAGS="$CFLAGS -stdlib=libstdc++ -std=gnu++11"
+  export LDFLAGS="-lstdc++ -stdlib=libstdc++"
+  
   ./configure --host=${ARCH} --disable-shared --disable-dependency-tracking >> "$logdir/ctemplate-build.log"
   make >> "$logdir/ctemplate-build.log"
   make install-libLTLIBRARIES "prefix=$tmpdir/bin/ctemplate-ios/$sdk/$MARCH" >> "$logdir/ctemplate-build.log"
@@ -91,8 +95,11 @@ ARCH=i386
 MARCHS=i386
 
 for MARCH in $MARCHS; do
+  echo "$logdir/ctemplate-build.log"
   export CFLAGS="-arch ${MARCH} -isysroot $sysroot"
-  export CXXFLAGS=$CFLAGS
+  export CXXFLAGS="$CFLAGS -stdlib=libstdc++ -std=gnu++11"
+  export LDFLAGS="-lstdc++ -stdlib=libstdc++"
+  
   ./configure --host=${ARCH} --disable-shared --disable-dependency-tracking >> "$logdir/ctemplate-build.log"
   make >> "$logdir/ctemplate-build.log"
   make install-libLTLIBRARIES "prefix=$tmpdir/bin/ctemplate-ios/$sdk/$MARCH" >> "$logdir/ctemplate-build.log"

@@ -34,6 +34,7 @@
 #include "MCIMAPDisconnectOperation.h"
 #include "MCIMAPAsyncSession.h"
 #include "MCConnectionLogger.h"
+#include "MCIMAPMessageRenderingOperation.h"
 
 using namespace mailcore;
 
@@ -591,4 +592,41 @@ void IMAPAsyncConnection::logConnection(ConnectionLogType logType, Data * buffer
         mConnectionLogger->log(this, logType, buffer);
     }
     pthread_mutex_unlock(&mConnectionLoggerLock);
+}
+
+IMAPMessageRenderingOperation * IMAPAsyncConnection::renderingOperation(IMAPMessage * message,
+                                                                        String * folder,
+                                                                        IMAPMessageRenderingType type)
+{
+    IMAPMessageRenderingOperation * op = new IMAPMessageRenderingOperation();
+    op->setSession(this);
+    op->setMessage(message);
+    op->setFolder(folder);
+    op->setRenderingType(type);
+    op->autorelease();
+    return op;
+}
+
+IMAPMessageRenderingOperation * IMAPAsyncConnection::htmlRenderingOperation(IMAPMessage * message,
+                                                                            String * folder)
+{
+    return renderingOperation(message, folder, IMAPMessageRenderingTypeHTML);
+}
+
+IMAPMessageRenderingOperation * IMAPAsyncConnection::htmlBodyRenderingOperation(IMAPMessage * message,
+                                                                                String * folder)
+{
+    return renderingOperation(message, folder, IMAPMessageRenderingTypeHTMLBody);
+}
+
+IMAPMessageRenderingOperation * IMAPAsyncConnection::plainTextRenderingOperation(IMAPMessage * message,
+                                                                                 String * folder)
+{
+    return renderingOperation(message, folder, IMAPMessageRenderingTypePlainText);
+}
+
+IMAPMessageRenderingOperation * IMAPAsyncConnection::plainTextBodyRenderingOperation(IMAPMessage * message,
+                                                                                     String * folder)
+{
+    return renderingOperation(message, folder, IMAPMessageRenderingTypePlainTextBody);
 }

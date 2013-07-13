@@ -39,6 +39,9 @@
 /** This is the password of the account. */
 @property (nonatomic, copy) NSString * password;
 
+/** This is the OAuth2 token. */
+@property (nonatomic, copy) NSString *OAuth2Token;
+
 /** 
  This is the authentication type to use to connect.
  `MCOAuthTypeSASLNone` means that it uses the clear-text is used (and is the default).

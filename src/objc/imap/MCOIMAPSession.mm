@@ -14,10 +14,13 @@
 #import "MCOIMAPOperation.h"
 #import "MCOIMAPFetchFoldersOperation.h"
 #import "MCOIMAPBaseOperation+Private.h"
+#import "MCOIMAPMessageRenderingOperation.h"
 
 #import "MCOUtils.h"
 
 #import <MailCore/MCAsync.h>
+
+#include "MCIMAPMessageRenderingOperation.h"
 
 
 using namespace mailcore;
@@ -77,6 +80,7 @@ MCO_OBJC_SYNTHESIZE_STRING(setHostname, hostname)
 MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setPort, port)
 MCO_OBJC_SYNTHESIZE_STRING(setUsername, username)
 MCO_OBJC_SYNTHESIZE_STRING(setPassword, password)
+MCO_OBJC_SYNTHESIZE_STRING(setOAuth2Token, OAuth2Token)
 MCO_OBJC_SYNTHESIZE_SCALAR(MCOAuthType, mailcore::AuthType, setAuthType, authType)
 MCO_OBJC_SYNTHESIZE_SCALAR(MCOConnectionType, mailcore::ConnectionType, setConnectionType, connectionType)
 MCO_OBJC_SYNTHESIZE_SCALAR(NSTimeInterval, time_t, setTimeout, timeout)
@@ -351,6 +355,34 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
 - (void) _logWithSender:(void *)sender connectionType:(MCOConnectionLogType)logType data:(NSData *)data
 {
     _connectionLogger(sender, logType, data);
+}
+
+- (MCOIMAPMessageRenderingOperation *) htmlRenderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                                  folder:(NSString *)folder
+{
+    IMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->htmlRenderingOperation(MCO_FROM_OBJC(IMAPMessage, message), [folder mco_mcString]);
+    return MCO_TO_OBJC_OP(coreOp);
+}
+
+- (MCOIMAPMessageRenderingOperation *) htmlBodyRenderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                                      folder:(NSString *)folder
+{
+    IMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->htmlBodyRenderingOperation(MCO_FROM_OBJC(IMAPMessage, message), [folder mco_mcString]);
+    return MCO_TO_OBJC_OP(coreOp);
+}
+
+- (MCOIMAPMessageRenderingOperation *) plainTextRenderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                                       folder:(NSString *)folder
+{
+    IMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->plainTextRenderingOperation(MCO_FROM_OBJC(IMAPMessage, message), [folder mco_mcString]);
+    return MCO_TO_OBJC_OP(coreOp);
+}
+
+- (MCOIMAPMessageRenderingOperation *) plainTextBodyRenderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                                           folder:(NSString *)folder
+{
+    IMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->plainTextBodyRenderingOperation(MCO_FROM_OBJC(IMAPMessage, message), [folder mco_mcString]);
+    return MCO_TO_OBJC_OP(coreOp);
 }
 
 @end

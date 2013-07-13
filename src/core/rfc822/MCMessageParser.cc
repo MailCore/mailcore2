@@ -5,6 +5,7 @@
 #include "MCAttachment.h"
 #include "MCMessageHeader.h"
 #include "MCHTMLRenderer.h"
+#include "MCHTMLBodyRendererTemplateCallback.h"
 
 using namespace mailcore;
 
@@ -42,7 +43,7 @@ MessageParser::MessageParser(Data * data)
 	mailmessage_free(msg);
 }
 
-MessageParser::MessageParser(MessageParser * other)
+MessageParser::MessageParser(MessageParser * other) : AbstractMessage(other)
 {
     init();
     MC_SAFE_REPLACE_RETAIN(Data, mData, other->mData);
@@ -96,3 +97,32 @@ String * MessageParser::htmlRendering(HTMLRendererTemplateCallback * htmlCallbac
     return HTMLRenderer::htmlForRFC822Message(this, htmlCallback);
 }
 
+String * MessageParser::htmlBodyRendering()
+{
+    HTMLBodyRendererTemplateCallback * callback = new HTMLBodyRendererTemplateCallback();
+    String * result = htmlRendering(callback);
+    MC_SAFE_RELEASE(callback);
+    return result;
+}
+
+String * MessageParser::plainTextRendering()
+{
+    String * html = htmlRendering(NULL);
+    return html->flattenHTML();
+}
+
+String * MessageParser::plainTextBodyRendering()
+{
+    String * html = htmlBodyRendering();
+    String * plainTextBodyString = html->flattenHTML();
+    
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\t"), MCSTR(" "));
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\n"), MCSTR(" "));
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\v"), MCSTR(" "));
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\f"), MCSTR(" "));
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
+    while (plainTextBodyString->replaceOccurrencesOfString(MCSTR("  "), MCSTR(" "))) {
+        // do nothing.
+    }
+    return plainTextBodyString;
+}
