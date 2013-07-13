@@ -617,6 +617,7 @@
 		C6D6F97017211173006F5B28 /* MCIterator.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6D6F96D1721028D006F5B28 /* MCIterator.h */; };
 		C6D6F97117211177006F5B28 /* MCIterator.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6D6F96D1721028D006F5B28 /* MCIterator.h */; };
 		C6E665001790963E0063F2CF /* MCIMAPMessageRenderingOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DA0F1C7A177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.h */; };
+		C6E6652F1791B2530063F2CF /* MCIMAPMessageRenderingOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DA0F1C7A177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.h */; };
 		C6EB30DE16B5B8050091F4F1 /* MCObjC.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6EB30DC16B5B7770091F4F1 /* MCObjC.h */; };
 		C6EB30F716B8C9480091F4F1 /* NSDictionary+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6EB30F616B8C9480091F4F1 /* NSDictionary+MCO.mm */; };
 		C6EB30F816B8DED30091F4F1 /* NSDictionary+MCO.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6EB30F516B8C9480091F4F1 /* NSDictionary+MCO.h */; };
@@ -907,6 +908,7 @@
 			dstSubfolderSpec = 16;
 			files = (
 				DAE42E8A178F7E2200E0DB8F /* MCOIMAPMessageRenderingOperation.h in CopyFiles */,
+				C6E6652F1791B2530063F2CF /* MCIMAPMessageRenderingOperation.h in CopyFiles */,
 				9E774D8B1767CD3C0065EB9B /* MCIMAPFolderStatus.h in CopyFiles */,
 				9EF9AB25175F40C70027FA3B /* MCIMAPFolderStatusOperation.h in CopyFiles */,
 				9EF9AB20175F3FD10027FA3B /* MCOIMAPFolderStatus.h in CopyFiles */,
