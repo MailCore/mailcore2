@@ -33,6 +33,8 @@ namespace mailcore {
 	class IMAPIdentityOperation;
 	class IMAPAsyncConnection;
 	class IMAPCapabilityOperation;
+    class IMAPMessageRenderingOperation;
+    class IMAPMessage;
     
 	class IMAPAsyncSession : public Object {
 	public:
@@ -132,6 +134,11 @@ namespace mailcore {
 		virtual IMAPOperation * checkAccountOperation();
         
 		virtual IMAPCapabilityOperation * capabilityOperation();
+        
+        virtual IMAPMessageRenderingOperation * htmlRenderingOperation(IMAPMessage * message, String * folder);
+        virtual IMAPMessageRenderingOperation * htmlBodyRenderingOperation(IMAPMessage * message, String * folder);
+        virtual IMAPMessageRenderingOperation * plainTextRenderingOperation(IMAPMessage * message, String * folder);
+        virtual IMAPMessageRenderingOperation * plainTextBodyRenderingOperation(IMAPMessage * message, String * folder);
     
 	private:
         Array * mSessions;

@@ -5,7 +5,7 @@
 #include "MCAttachment.h"
 #include "MCMessageHeader.h"
 #include "MCHTMLRenderer.h"
-#include "HTMLBodyRendererTemplateCallback.h"
+#include "MCHTMLBodyRendererTemplateCallback.h"
 
 using namespace mailcore;
 

@@ -1,105 +1,3 @@
-set(public_headers_objc_abstract
-  objc/abstract/MCOAbstract.h
-  objc/abstract/MCOAbstractMessage.h
-  objc/abstract/MCOAbstractMessagePart.h
-  objc/abstract/MCOAbstractMultipart.h
-  objc/abstract/MCOAbstractPart.h
-  objc/abstract/MCOAddress.h
-  objc/abstract/MCOConstants.h
-  objc/abstract/MCOHTMLRendererDelegate.h
-  objc/abstract/MCOHTMLRendererIMAPDelegate.h
-  objc/abstract/MCOMessageHeader.h
-)
-
-set(public_headers_objc_imap
-  objc/imap/MCOIMAP.h
-  objc/imap/MCOIMAPAppendMessageOperation.h
-  objc/imap/MCOIMAPBaseOperation.h
-  objc/imap/MCOIMAPCapabilityOperation.h
-  objc/imap/MCOIMAPCopyMessagesOperation.h
-  objc/imap/MCOIMAPFetchContentOperation.h
-  objc/imap/MCOIMAPFetchFoldersOperation.h
-  objc/imap/MCOIMAPFetchMessagesOperation.h
-  objc/imap/MCOIMAPFetchNamespaceOperation.h
-  objc/imap/MCOIMAPFolder.h
-  objc/imap/MCOIMAPFolderInfo.h
-  objc/imap/MCOIMAPFolderInfoOperation.h
-  objc/imap/MCOIMAPFolderStatus.h
-  objc/imap/MCOIMAPFolderStatusOperation.h
-  objc/imap/MCOIMAPIdentityOperation.h
-  objc/imap/MCOIMAPIdleOperation.h
-  objc/imap/MCOIMAPMessage.h
-  objc/imap/MCOIMAPMessagePart.h
-  objc/imap/MCOIMAPMultipart.h
-  objc/imap/MCOIMAPNamespace.h
-  objc/imap/MCOIMAPNamespaceItem.h
-  objc/imap/MCOIMAPOperation.h
-  objc/imap/MCOIMAPPart.h
-  objc/imap/MCOIMAPSearchExpression.h
-  objc/imap/MCOIMAPSearchOperation.h
-  objc/imap/MCOIMAPSession.h
-)
-
-set(public_headers_objc_pop
-  objc/pop/MCOPOP.h
-  objc/pop/MCOPOPFetchHeaderOperation.h
-  objc/pop/MCOPOPFetchMessageOperation.h
-  objc/pop/MCOPOPFetchMessagesOperation.h
-  objc/pop/MCOPOPMessageInfo.h
-  objc/pop/MCOPOPOperation.h
-  objc/pop/MCOPOPSession.h
-)
-
-set(public_headers_objc_provider
-  objc/provider/MCOProvider.h
-  objc/provider/MCOMailProvider.h
-  objc/provider/MCOMailProvidersManager.h
-  objc/provider/MCONetService.h
-)
-
-set(public_headers_objc_rfc822
-  objc/rfc822/MCOAttachment.h
-  objc/rfc822/MCOMessageBuilder.h
-  objc/rfc822/MCOMessageParser.h
-  objc/rfc822/MCOMessagePart.h
-  objc/rfc822/MCOMultipart.h
-  objc/rfc822/MCORFC822.h
-)
-
-set(public_headers_objc_smtp
-  objc/smtp/MCOSMTP.h
-  objc/smtp/MCOSMTPOperation.h
-  objc/smtp/MCOSMTPSendOperation.h
-  objc/smtp/MCOSMTPSession.h
-)
-
-set(public_headers_objc_utils
-  objc/utils/MCOIndexSet.h
-  objc/utils/MCOObjectWrapper.h
-  objc/utils/MCOOperation.h
-  objc/utils/MCORange.h
-  objc/utils/MCOUtils.h
-  objc/utils/NSArray+MCO.h
-  objc/utils/NSData+MCO.h
-  objc/utils/NSDictionary+MCO.h
-  objc/utils/NSError+MCO.h
-  objc/utils/NSObject+MCO.h
-  objc/utils/NSString+MCO.h
-  objc/utils/NSValue+MCO.h
-)
-
-IF(APPLE)
-set(public_headers_objc
-  objc/MCObjC.h
-  ${public_headers_objc_abstract}
-  ${public_headers_objc_imap}
-  ${public_headers_objc_pop}
-  ${public_headers_objc_rfc822}
-  ${public_headers_objc_smtp}
-  ${public_headers_objc_utils}
-)
-ENDIF()
-
 # Files to build
 
 set(async_objc_abstract
@@ -130,6 +28,7 @@ set(async_objc_imap
   objc/imap/MCOIMAPIdleOperation.mm
   objc/imap/MCOIMAPMessage.mm
   objc/imap/MCOIMAPMessagePart.mm
+  objc/imap/MCOIMAPMessageRenderingOperation.mm
   objc/imap/MCOIMAPMultipart.mm
   objc/imap/MCOIMAPNamespace.mm
   objc/imap/MCOIMAPNamespaceItem.mm

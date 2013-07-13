@@ -16,6 +16,11 @@
 #include "MCIMAPFolderStatus.h"
 #include "MCConnectionLogger.h"
 #include "MCConnectionLoggerUtils.h"
+#include "MCHTMLRenderer.h"
+#include "MCString.h"
+#include "MCUtils.h"
+#include "MCHTMLRendererIMAPDataCallback.h"
+#include "MCHTMLBodyRendererTemplateCallback.h"
 
 using namespace mailcore;
 
@@ -3015,4 +3020,77 @@ void IMAPSession::setConnectionLogger(ConnectionLogger * logger)
 ConnectionLogger * IMAPSession::connectionLogger()
 {
     return mConnectionLogger;
+}
+
+String * IMAPSession::htmlRendering(IMAPMessage * message, String * folder, ErrorCode * pError)
+{
+    HTMLRendererIMAPDataCallback * dataCallback = new HTMLRendererIMAPDataCallback(this, message->uid());
+    String * htmlString = HTMLRenderer::htmlForIMAPMessage(folder,
+                                                           message,
+                                                           dataCallback,
+                                                           NULL);
+    * pError = dataCallback->error();
+    
+    if (* pError != ErrorNone) {
+        return NULL;
+    }
+    
+    MC_SAFE_RELEASE(dataCallback);
+    return htmlString;
+}
+
+String * IMAPSession::htmlBodyRendering(IMAPMessage * message, String * folder, ErrorCode * pError)
+{    
+    HTMLRendererIMAPDataCallback * dataCallback = new HTMLRendererIMAPDataCallback(this, message->uid());
+    HTMLBodyRendererTemplateCallback * htmlCallback = new HTMLBodyRendererTemplateCallback();
+    
+    String * htmlBodyString = HTMLRenderer::htmlForIMAPMessage(folder,
+                                                               message,
+                                                               dataCallback,
+                                                               htmlCallback);
+
+    * pError = dataCallback->error();
+    
+    if (* pError != ErrorNone) {
+        return NULL;
+    }
+    
+    MC_SAFE_RELEASE(dataCallback);
+    MC_SAFE_RELEASE(htmlCallback);
+    return htmlBodyString;
+}
+
+String * IMAPSession::plainTextRendering(IMAPMessage * message, String * folder, ErrorCode * pError)
+{
+    String * htmlString = htmlRendering(message, folder, pError);
+    
+    if (* pError != ErrorNone) {
+        return NULL;
+    }
+    
+    String * plainTextString = htmlString->flattenHTML();
+    return plainTextString;
+}
+
+String * IMAPSession::plainTextBodyRendering(IMAPMessage * message, String * folder, ErrorCode * pError)
+{
+    String * htmlBodyString = htmlBodyRendering(message, folder, pError);
+    
+    if (* pError != ErrorNone) {
+        return NULL;
+    }
+    
+    String * plainTextBodyString = htmlBodyString->flattenHTML();
+    
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\t"), MCSTR(" "));
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\n"), MCSTR(" "));
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\v"), MCSTR(" "));
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\f"), MCSTR(" "));
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
+    
+    while (plainTextBodyString->replaceOccurrencesOfString(MCSTR("  "), MCSTR(" ")) > 0) {
+        /* do nothing */
+    }
+    
+    return plainTextBodyString;
 }

@@ -6,6 +6,7 @@ ELSE()
 ENDIF()
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(public-headers)
 include(core)
 include(async)
 include(objc)
@@ -93,10 +94,7 @@ SET_SOURCE_FILES_PROPERTIES(
 )
 
 file(COPY
-  MailCore.h
-  ${public_headers_objc}
-  ${public_headers_core}
-  ${public_headers_async}
+  ${public_headers}
 
   DESTINATION
   ${CMAKE_CURRENT_BINARY_DIR}/include/MailCore

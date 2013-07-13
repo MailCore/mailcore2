@@ -532,7 +532,7 @@ void SMTPSession::checkAccount(Address * from, ErrorCode * pError)
         return;
     }
     
-    r = mailsmtp_rcpt(mSmtp, "email@invalid");
+    r = mailsmtp_rcpt(mSmtp, "email@invalid.com");
     if (r == MAILSMTP_ERROR_STREAM) {
         * pError = ErrorConnection;
         return;
