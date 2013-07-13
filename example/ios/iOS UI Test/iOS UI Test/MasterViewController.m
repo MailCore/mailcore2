@@ -20,13 +20,12 @@
 
 @interface MasterViewController ()
 @property (nonatomic, strong) NSArray *messages;
+@property (nonatomic, strong) NSMutableDictionary *messagesBodyDictionary;
 
 @property (nonatomic, strong) MCOIMAPOperation *imapCheckOp;
 @property (nonatomic, strong) MCOIMAPSession *imapSession;
 @property (nonatomic, strong) MCOIMAPFetchMessagesOperation *imapMessagesFetchOp;
-
 @property (nonatomic, strong) NSMutableArray *messageBodyFetchOps;
-@property (nonatomic, strong) NSMutableDictionary *messagesBodyDictionary;
 @end
 
 @implementation MasterViewController
@@ -113,7 +112,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 	self.imapSession.connectionLogger = ^(void * connectionID, MCOConnectionLogType type, NSData * data) {
         @synchronized(weakSelf) {
             if (type != MCOConnectionLogTypeSentPrivate) {
-//                NSLog(@"event logged:%p %i withData: %@", connectionID, type, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                NSLog(@"event logged:%p %i withData: %@", connectionID, type, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
             }
         }
     };
@@ -148,38 +147,38 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 	
 	[inboxFolderInfo start:^(NSError *error, MCOIMAPFolderInfo *info) {
 		self.imapMessagesFetchOp =
-		[self.imapSession fetchMessagesByNumberOperationWithFolder:@"INBOX"
+		[self.imapSession fetchMessagesByNumberOperationWithFolder:inboxFolder
 													   requestKind:requestKind
 														   numbers:
 		 [MCOIndexSet indexSetWithRange:MCORangeMake([info messageCount] - numberOfMessages, numberOfMessages)]];
 		
 		
 		[self.imapMessagesFetchOp setProgress:^(unsigned int progress) {
-			NSLog(@"Progress: %u", progress);
+			NSLog(@"Progress: %u of %u", progress, numberOfMessages);
 		}];
 		
 		__weak MasterViewController *weakSelf = self;
 		[self.imapMessagesFetchOp start:^(NSError *error, NSArray *messages, MCOIndexSet *vanishedMessages) {
 			MasterViewController *strongSelf = weakSelf;
-			NSLog(@"fetched all messages.");
+			NSLog(@"Fetched all messages.");
 			
 			NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"header.date" ascending:NO];
 			strongSelf.messages = [messages sortedArrayUsingDescriptors:@[sort]];
-			[strongSelf loadAllBodiesInMessagesArray:strongSelf.messages];
+			[strongSelf loadAllBodiesInMessagesArray:strongSelf.messages folder:inboxFolder];
 			[strongSelf.tableView reloadData];
 		}];
 	}];
 	
 }
 
-- (void)loadAllBodiesInMessagesArray:(NSArray *)messageArray
+- (void)loadAllBodiesInMessagesArray:(NSArray *)messageArray folder:(NSString *)folder
 {
 	NSUInteger messageIdx = 0;
 	
 	for (MCOIMAPMessage *message in messageArray)
 	{
 		MCOIMAPFetchContentOperation *op =
-		[self.imapSession fetchMessageByUIDOperationWithFolder:@"INBOX" uid:message.uid];
+		[self.imapSession fetchMessageByUIDOperationWithFolder:folder uid:message.uid];
 		[self.messageBodyFetchOps addObject:op];
 		[op start:^(NSError * error, NSData * data) {
 			if ([error code] != MCOErrorNone) {
@@ -245,7 +244,6 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 	
 	MCOIMAPMessage *message = self.messages[indexPath.row];
 	cell.textLabel.text = message.header.subject;
-	//	cell.detailTextLabel.text = [NSString stringWithFormat:@"MIME Type: %@", message.mainPart.mimeType];
 	NSString *uidKey = [NSString stringWithFormat:@"%d", message.uid];
 	cell.detailTextLabel.text = self.messagesBodyDictionary[uidKey];
 	
