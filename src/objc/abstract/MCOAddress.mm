@@ -115,6 +115,8 @@
 		{
 			NSAssert(0, @"Trying to initWithCoder: a MCOAddress without mailbox");
 		}
+		
+		_nativeAddress->retain();
 	}
 	return self;
 }
