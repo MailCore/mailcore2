@@ -11,6 +11,7 @@
 #import "FXKeychain.h"
 #import "MCTMsgViewController.h"
 #import "GTMOAuth2ViewControllerTouch.h"
+#import "MCTTableViewCell.h"
 
 #define CLIENT_ID @"the-client-id"
 #define CLIENT_SECRET @"the-client-secret"
@@ -167,15 +168,17 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+	MCTTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 	
 	MCOIMAPMessage *message = self.messages[indexPath.row];
 	cell.textLabel.text = message.header.subject;
     
-    MCOIMAPMessageRenderingOperation * op = [self.imapSession plainTextBodyRenderingOperationWithMessage:message
-                                                                                                  folder:@"INBOX"];
+    [cell.messageRenderingOperation cancel];
     
-    [op start:^(NSString * htmlString, NSError * error) {
+    cell.messageRenderingOperation = [self.imapSession plainTextBodyRenderingOperationWithMessage:message
+                                                                                           folder:@"INBOX"];
+    
+    [cell.messageRenderingOperation start:^(NSString * htmlString, NSError * error) {
         cell.detailTextLabel.text = htmlString;
     }];
 	
