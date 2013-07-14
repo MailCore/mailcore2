@@ -28,6 +28,6 @@
 #include <MailCore/MCIMAPIdentityOperation.h>
 #include <MailCore/MCIMAPCapabilityOperation.h>
 #include <MailCore/MCIMAPOperationCallback.h>
-
+#include <MailCore/MCIMAPMessageRenderingOperation.h>
 
 #endif

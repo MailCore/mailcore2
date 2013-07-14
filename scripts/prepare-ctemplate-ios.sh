@@ -58,7 +58,6 @@ cd "$srcdir/ctemplate"
 TOOLCHAIN=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
 export CC=$TOOLCHAIN/clang
 export CXX=$TOOLCHAIN/clang++
-export LDLAGS="-lc++ -isysroot $sysrootpath"
 
 sdk="iphoneos$sdkversion"
 sysroot="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$sdkversion.sdk"

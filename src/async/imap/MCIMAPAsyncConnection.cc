@@ -35,7 +35,6 @@
 #include "MCIMAPAsyncSession.h"
 #include "MCConnectionLogger.h"
 #include "MCIMAPMessageRenderingOperation.h"
-#include "MCMessageConstantsPrivate.h"
 
 using namespace mailcore;
 

@@ -65,7 +65,6 @@ export CC=clang
 export CXX=clang++
 export CFLAGS="$arch_flags"
 export CXXFLAGS="-std=c++11 -stdlib=libc++ $arch_flags"
-export LDLAGS="-lc++ $arch_flags -isysroot $sysrootpath"
 ./configure --disable-shared --disable-dependency-tracking >> "$logdir/ctemplate-build.log"
 #make libctemplate.la >> "$logdir/ctemplate-build.log"
 #make libctemplate_nothreads.la >> "$logdir/ctemplate-build.log"

@@ -213,6 +213,14 @@ namespace mailcore {
         PartTypeMultipartRelated,
         PartTypeMultipartAlternative,
     };
+    
+    // Private type - It should not be used directly.
+    enum IMAPMessageRenderingType {
+        IMAPMessageRenderingTypeHTML,
+        IMAPMessageRenderingTypeHTMLBody,
+        IMAPMessageRenderingTypePlainText,
+        IMAPMessageRenderingTypePlainTextBody
+    };
 }
 
 #endif
