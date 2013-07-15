@@ -178,8 +178,8 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
     cell.messageRenderingOperation = [self.imapSession plainTextBodyRenderingOperationWithMessage:message
                                                                                            folder:@"INBOX"];
     
-    [cell.messageRenderingOperation start:^(NSString * htmlString, NSError * error) {
-        cell.detailTextLabel.text = htmlString;
+    [cell.messageRenderingOperation start:^(NSString * plainTextBodyString, NSError * error) {
+        cell.detailTextLabel.text = plainTextBodyString;
         cell.messageRenderingOperation = nil;
     }];
 	
