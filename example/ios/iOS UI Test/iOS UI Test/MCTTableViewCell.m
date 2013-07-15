@@ -10,6 +10,12 @@
 
 @implementation MCTTableViewCell
 
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
+    return self;
+}
+
 - (void)prepareForReuse
 {
     [self.messageRenderingOperation cancel];

@@ -168,7 +168,10 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	MCTTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    NSString * cellIdentifier = @"Cell";
+    [tableView registerClass:[MCTTableViewCell class] forCellReuseIdentifier:cellIdentifier];
+
+	MCTTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
 	MCOIMAPMessage *message = self.messages[indexPath.row];
     
 	cell.textLabel.text = message.header.subject;
