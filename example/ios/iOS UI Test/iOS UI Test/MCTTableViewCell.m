@@ -10,4 +10,10 @@
 
 @implementation MCTTableViewCell
 
+- (void)prepareForReuse
+{
+    [self.messageRenderingOperation cancel];
+    self.detailTextLabel.text = @" ";
+}
+
 @end

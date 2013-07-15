@@ -169,12 +169,9 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	MCTTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-	[cell.messageRenderingOperation cancel];
-    cell.detailTextLabel.text = @" ";
-    
 	MCOIMAPMessage *message = self.messages[indexPath.row];
-	cell.textLabel.text = message.header.subject;
     
+	cell.textLabel.text = message.header.subject;
     cell.messageRenderingOperation = [self.imapSession plainTextBodyRenderingOperationWithMessage:message
                                                                                            folder:@"INBOX"];
     
