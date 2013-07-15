@@ -180,6 +180,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
     
     [cell.messageRenderingOperation start:^(NSString * htmlString, NSError * error) {
         cell.detailTextLabel.text = htmlString;
+        cell.messageRenderingOperation = nil;
     }];
 	
 	return cell;
