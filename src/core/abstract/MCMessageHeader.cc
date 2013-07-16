@@ -378,7 +378,7 @@ void MessageHeader::importIMFFields(struct mailimf_fields * fields)
         
         switch (field->fld_type) {
             case MAILIMF_FIELD_ORIG_DATE:
-                if (date() == 0) {
+                if (date() == (time_t) -1) {
                     time_t timestamp;
                     timestamp = timestamp_from_date(field->fld_data.fld_orig_date->dt_date_time);
                     setDate(timestamp);
