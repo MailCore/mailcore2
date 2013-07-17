@@ -91,6 +91,14 @@ set(smtp_files
   core/smtp/MCSMTPSession.cc
 )
 
+set(zip_files
+  core/zip/MCZip.cc
+  core/zip/MiniZip/ioapi.c
+  core/zip/MiniZip/mztools.c
+  core/zip/MiniZip/unzip.c
+  core/zip/MiniZip/zip.c
+)
+
 set(core_files
   ${basetypes_files}
   ${abstract_files}
@@ -99,6 +107,7 @@ set(core_files
   ${renderer_files}
   ${rfc822_files}
   ${smtp_files}
+  ${zip_files}
 )
 
 # Includes for build
@@ -113,4 +122,6 @@ set(core_includes
   ${CMAKE_CURRENT_SOURCE_DIR}/core/renderer
   ${CMAKE_CURRENT_SOURCE_DIR}/core/rfc822
   ${CMAKE_CURRENT_SOURCE_DIR}/core/smtp
+  ${CMAKE_CURRENT_SOURCE_DIR}/core/zip
+  ${CMAKE_CURRENT_SOURCE_DIR}/core/zip/MiniZip
 )

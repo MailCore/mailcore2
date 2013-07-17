@@ -1913,6 +1913,13 @@ String * String::stringByAppendingPathComponent(String * component)
     return result;
 }
 
+String * String::stringByDeletingLastPathComponent()
+{
+    String * component = lastPathComponent();
+    String * result = (String *) this->copy()->autorelease();
+    result->deleteCharactersInRange(RangeMake(result->length() - component->length(), component->length()));
+    return result;
+}
 
 Array * String::componentsSeparatedByString(String * separator)
 {

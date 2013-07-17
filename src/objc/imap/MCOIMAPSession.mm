@@ -90,6 +90,16 @@ MCO_OBJC_SYNTHESIZE_SCALAR(char, char, setDelimiter, delimiter)
 MCO_OBJC_SYNTHESIZE_SCALAR(BOOL, BOOL, setAllowsFolderConcurrentAccessEnabled, allowsFolderConcurrentAccessEnabled)
 MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, maximumConnections)
 
+- (void) setDefaultNamespace:(MCOIMAPNamespace *)defaultNamespace
+{
+    _session->setDefaultNamespace(MCO_FROM_OBJC(IMAPNamespace, defaultNamespace));
+}
+
+- (MCOIMAPNamespace *) defaultNamespace
+{
+    return MCO_TO_OBJC(_session->defaultNamespace());
+}
+
 - (void) setConnectionLogger:(MCOConnectionLogger)connectionLogger
 {
     [_connectionLogger release];

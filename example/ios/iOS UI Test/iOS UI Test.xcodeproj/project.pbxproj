@@ -516,6 +516,7 @@
 					"-all_load",
 					"-ltidy",
 					"-lstdc++",
+					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -540,6 +541,7 @@
 					"-all_load",
 					"-ltidy",
 					"-lstdc++",
+					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

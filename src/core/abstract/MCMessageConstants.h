@@ -204,6 +204,7 @@ namespace mailcore {
         ErrorFetchMessageList,
         ErrorDeleteMessage,
         ErrorInvalidAccount,
+        ErrorFile,
     };
     
     enum PartType {
