@@ -246,6 +246,8 @@ typedef enum {
     MCOIMAPCapabilityAuthSKey,
     /** AUTH=SRP Capability.*/
     MCOIMAPCapabilityAuthSRP,
+    /** AUTH=XOAUTH2.*/
+    MCOIMAPCapabilityXOAUTH2,
 } MCOIMAPCapability;
 
 /** Error domain for mailcore.*/
