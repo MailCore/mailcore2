@@ -35,6 +35,7 @@
 		C6D71951178BB8B4008ED15F /* GTMOAuth2ViewControllerTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D71947178BA812008ED15F /* GTMOAuth2ViewControllerTouch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C6D71952178BB8B4008ED15F /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D71948178BA812008ED15F /* GTMOAuth2ViewTouch.xib */; };
 		C6D71954178BB91E008ED15F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6D71953178BB91E008ED15F /* SystemConfiguration.framework */; };
+		DA9AD477179331A600743873 /* MCTTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9AD476179331A600743873 /* MCTTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +127,8 @@
 		C6D71947178BA812008ED15F /* GTMOAuth2ViewControllerTouch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2ViewControllerTouch.m; sourceTree = "<group>"; };
 		C6D71948178BA812008ED15F /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
 		C6D71953178BB91E008ED15F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		DA9AD475179331A600743873 /* MCTTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTTableViewCell.h; sourceTree = "<group>"; };
+		DA9AD476179331A600743873 /* MCTTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +225,8 @@
 				AB9EAE3517036FD700D750C7 /* SettingsViewController.xib */,
 				AB9EAE0C170368F000D750C7 /* Supporting Files */,
 				AB665BC917134336007F2151 /* common */,
+				DA9AD475179331A600743873 /* MCTTableViewCell.h */,
+				DA9AD476179331A600743873 /* MCTTableViewCell.m */,
 			);
 			path = "iOS UI Test";
 			sourceTree = "<group>";
@@ -408,6 +413,7 @@
 				C6D7194F178BB8B4008ED15F /* GTMOAuth2Authentication.m in Sources */,
 				B12AAA3417322654003551C7 /* MCOMessageView.mm in Sources */,
 				B12AAA3517322654003551C7 /* MCTMsgViewController.mm in Sources */,
+				DA9AD477179331A600743873 /* MCTTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
