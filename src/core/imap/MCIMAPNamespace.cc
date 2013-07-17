@@ -93,7 +93,7 @@ String * IMAPNamespace::pathForComponents(Array * components)
 
 String * IMAPNamespace::pathForComponentsAndPrefix(Array * components, String * prefix)
 {
-    IMAPNamespaceItem * item = itemForPath(path);
+    IMAPNamespaceItem * item = itemForPath(prefix);
     if (item == NULL)
         return NULL;
     return item->pathForComponents(components);
