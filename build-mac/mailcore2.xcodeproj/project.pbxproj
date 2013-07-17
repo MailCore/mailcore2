@@ -618,6 +618,16 @@
 		C6D6F97117211177006F5B28 /* MCIterator.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6D6F96D1721028D006F5B28 /* MCIterator.h */; };
 		C6E665001790963E0063F2CF /* MCIMAPMessageRenderingOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DA0F1C7A177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.h */; };
 		C6E6652F1791B2530063F2CF /* MCIMAPMessageRenderingOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DA0F1C7A177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.h */; };
+		C6E665B51796500B0063F2CF /* MCZip.cc in Sources */ = {isa = PBXBuildFile; fileRef = C6E665AA1796500B0063F2CF /* MCZip.cc */; };
+		C6E665B61796500B0063F2CF /* MCZip.cc in Sources */ = {isa = PBXBuildFile; fileRef = C6E665AA1796500B0063F2CF /* MCZip.cc */; };
+		C6E665B71796500B0063F2CF /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = C6E665AD1796500B0063F2CF /* ioapi.c */; };
+		C6E665B81796500B0063F2CF /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = C6E665AD1796500B0063F2CF /* ioapi.c */; };
+		C6E665B91796500C0063F2CF /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = C6E665AF1796500B0063F2CF /* mztools.c */; };
+		C6E665BA1796500C0063F2CF /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = C6E665AF1796500B0063F2CF /* mztools.c */; };
+		C6E665BB1796500C0063F2CF /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = C6E665B11796500B0063F2CF /* unzip.c */; };
+		C6E665BC1796500C0063F2CF /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = C6E665B11796500B0063F2CF /* unzip.c */; };
+		C6E665BD1796500C0063F2CF /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = C6E665B31796500B0063F2CF /* zip.c */; };
+		C6E665BE1796500C0063F2CF /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = C6E665B31796500B0063F2CF /* zip.c */; };
 		C6EB30DE16B5B8050091F4F1 /* MCObjC.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6EB30DC16B5B7770091F4F1 /* MCObjC.h */; };
 		C6EB30F716B8C9480091F4F1 /* NSDictionary+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6EB30F616B8C9480091F4F1 /* NSDictionary+MCO.mm */; };
 		C6EB30F816B8DED30091F4F1 /* NSDictionary+MCO.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6EB30F516B8C9480091F4F1 /* NSDictionary+MCO.h */; };
@@ -1411,6 +1421,16 @@
 		C6D6F966171FCF9F006F5B28 /* MCJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCJSONParser.h; sourceTree = "<group>"; };
 		C6D6F9691720F8F4006F5B28 /* MCICUTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCICUTypes.h; sourceTree = "<group>"; };
 		C6D6F96D1721028D006F5B28 /* MCIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIterator.h; sourceTree = "<group>"; };
+		C6E665AA1796500B0063F2CF /* MCZip.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCZip.cc; sourceTree = "<group>"; };
+		C6E665AB1796500B0063F2CF /* MCZip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCZip.h; sourceTree = "<group>"; };
+		C6E665AD1796500B0063F2CF /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		C6E665AE1796500B0063F2CF /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		C6E665AF1796500B0063F2CF /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
+		C6E665B01796500B0063F2CF /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
+		C6E665B11796500B0063F2CF /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		C6E665B21796500B0063F2CF /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		C6E665B31796500B0063F2CF /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
+		C6E665B41796500B0063F2CF /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
 		C6EB30DC16B5B7770091F4F1 /* MCObjC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCObjC.h; sourceTree = "<group>"; };
 		C6EB30F516B8C9480091F4F1 /* NSDictionary+MCO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+MCO.h"; sourceTree = "<group>"; };
 		C6EB30F616B8C9480091F4F1 /* NSDictionary+MCO.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSDictionary+MCO.mm"; sourceTree = "<group>"; };
@@ -1771,6 +1791,7 @@
 		C64EA691169E847800778456 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				C6E665A91796500B0063F2CF /* zip */,
 				C64EA692169E847800778456 /* abstract */,
 				C64EA6A1169E847800778456 /* basetypes */,
 				C64EA6C3169E847800778456 /* imap */,
@@ -2045,6 +2066,31 @@
 				C6CCC5C816FFE54F0077A5FC /* MCORange.h */,
 			);
 			path = utils;
+			sourceTree = "<group>";
+		};
+		C6E665A91796500B0063F2CF /* zip */ = {
+			isa = PBXGroup;
+			children = (
+				C6E665AA1796500B0063F2CF /* MCZip.cc */,
+				C6E665AB1796500B0063F2CF /* MCZip.h */,
+				C6E665AC1796500B0063F2CF /* MiniZip */,
+			);
+			path = zip;
+			sourceTree = "<group>";
+		};
+		C6E665AC1796500B0063F2CF /* MiniZip */ = {
+			isa = PBXGroup;
+			children = (
+				C6E665AD1796500B0063F2CF /* ioapi.c */,
+				C6E665AE1796500B0063F2CF /* ioapi.h */,
+				C6E665AF1796500B0063F2CF /* mztools.c */,
+				C6E665B01796500B0063F2CF /* mztools.h */,
+				C6E665B11796500B0063F2CF /* unzip.c */,
+				C6E665B21796500B0063F2CF /* unzip.h */,
+				C6E665B31796500B0063F2CF /* zip.c */,
+				C6E665B41796500B0063F2CF /* zip.h */,
+			);
+			path = MiniZip;
 			sourceTree = "<group>";
 		};
 		C6F61F771701420A0073032E /* pop */ = {
@@ -2358,6 +2404,7 @@
 				C64EA6FF169E847800778456 /* MCMessageHeader.cc in Sources */,
 				C64EA701169E847800778456 /* MCAutoreleasePool.cc in Sources */,
 				C64EA704169E847800778456 /* MCArray.cc in Sources */,
+				C6E665B51796500B0063F2CF /* MCZip.cc in Sources */,
 				C64EA706169E847800778456 /* MCAssert.c in Sources */,
 				C64EA708169E847800778456 /* MCData.cc in Sources */,
 				C64EA70A169E847800778456 /* MCHash.cc in Sources */,
@@ -2408,7 +2455,9 @@
 				C64EA82016A29E4100778456 /* MCIMAPStoreFlagsOperation.cc in Sources */,
 				C64EA82316A29E5300778456 /* MCIMAPStoreLabelsOperation.cc in Sources */,
 				C64EA82616A29EE500778456 /* MCIMAPSearchOperation.cc in Sources */,
+				C6E665BD1796500C0063F2CF /* zip.c in Sources */,
 				C64EA82916A29F2200778456 /* MCIMAPIdleOperation.cc in Sources */,
+				C6E665B91796500C0063F2CF /* mztools.c in Sources */,
 				C64EA82C16A2A08B00778456 /* MCIMAPFetchNamespaceOperation.cc in Sources */,
 				C62C6ED416A2A0E600737497 /* MCIMAPIdentityOperation.cc in Sources */,
 				C62C6ED816A398FA00737497 /* MCIMAPFolderInfoOperation.cc in Sources */,
@@ -2423,6 +2472,7 @@
 				C6D42C1D16AE03D6002BB4F9 /* NSData+MCO.mm in Sources */,
 				C6D42C1E16AE03D6002BB4F9 /* NSString+MCO.mm in Sources */,
 				C64FF39116B3C13000F8C162 /* MCOObjectWrapper.mm in Sources */,
+				C6E665B71796500B0063F2CF /* ioapi.c in Sources */,
 				C07ADC28B83E7959BF114D46 /* MCOIMAPSession.mm in Sources */,
 				C07AD99B2E2054C684DB8FF6 /* NSError+MCO.mm in Sources */,
 				F87F190C16BB62B00012652F /* MCOIMAPFetchFoldersOperation.mm in Sources */,
@@ -2473,6 +2523,7 @@
 				C6F61F9017016B0A0073032E /* MCOIMAPFetchNamespaceOperation.mm in Sources */,
 				C6F61F9317016B250073032E /* MCOIMAPIdentityOperation.mm in Sources */,
 				C6F61F9617016B310073032E /* MCOIMAPCapabilityOperation.mm in Sources */,
+				C6E665BB1796500C0063F2CF /* unzip.c in Sources */,
 				C6F61F9917016B460073032E /* MCOIMAPSearchExpression.mm in Sources */,
 				C6F61F9F17016EA10073032E /* MCOIMAPFolderInfo.m in Sources */,
 				C6F61FB51702AB340073032E /* MCOIMAPBaseOperation.mm in Sources */,
@@ -2544,6 +2595,7 @@
 				C6BA2B9E1705F4E6003F0E9E /* MCMessageHeader.cc in Sources */,
 				C6BA2B9F1705F4E6003F0E9E /* MCAutoreleasePool.cc in Sources */,
 				C6BA2BA01705F4E6003F0E9E /* MCArray.cc in Sources */,
+				C6E665B61796500B0063F2CF /* MCZip.cc in Sources */,
 				C6BA2BA11705F4E6003F0E9E /* MCAssert.c in Sources */,
 				C6BA2BA21705F4E6003F0E9E /* MCData.cc in Sources */,
 				C6BA2BA31705F4E6003F0E9E /* MCHash.cc in Sources */,
@@ -2594,7 +2646,9 @@
 				C6BA2BCF1705F4E6003F0E9E /* MCIMAPStoreFlagsOperation.cc in Sources */,
 				C6BA2BD01705F4E6003F0E9E /* MCIMAPStoreLabelsOperation.cc in Sources */,
 				C6BA2BD11705F4E6003F0E9E /* MCIMAPSearchOperation.cc in Sources */,
+				C6E665BE1796500C0063F2CF /* zip.c in Sources */,
 				C6BA2BD21705F4E6003F0E9E /* MCIMAPIdleOperation.cc in Sources */,
+				C6E665BA1796500C0063F2CF /* mztools.c in Sources */,
 				C6BA2BD31705F4E6003F0E9E /* MCIMAPFetchNamespaceOperation.cc in Sources */,
 				C6BA2BD41705F4E6003F0E9E /* MCIMAPIdentityOperation.cc in Sources */,
 				C6BA2BD51705F4E6003F0E9E /* MCIMAPFolderInfoOperation.cc in Sources */,
@@ -2609,6 +2663,7 @@
 				C6BA2BDE1705F4E6003F0E9E /* NSData+MCO.mm in Sources */,
 				C6BA2BDF1705F4E6003F0E9E /* NSString+MCO.mm in Sources */,
 				C6BA2BE01705F4E6003F0E9E /* MCOObjectWrapper.mm in Sources */,
+				C6E665B81796500B0063F2CF /* ioapi.c in Sources */,
 				C6BA2BE11705F4E6003F0E9E /* MCOIMAPSession.mm in Sources */,
 				C6BA2BE21705F4E6003F0E9E /* NSError+MCO.mm in Sources */,
 				C6BA2BE31705F4E6003F0E9E /* MCOIMAPFetchFoldersOperation.mm in Sources */,
@@ -2659,6 +2714,7 @@
 				C6BA2C0F1705F4E6003F0E9E /* MCOIMAPFetchNamespaceOperation.mm in Sources */,
 				C6BA2C101705F4E6003F0E9E /* MCOIMAPIdentityOperation.mm in Sources */,
 				C6BA2C111705F4E6003F0E9E /* MCOIMAPCapabilityOperation.mm in Sources */,
+				C6E665BC1796500C0063F2CF /* unzip.c in Sources */,
 				C6BA2C121705F4E6003F0E9E /* MCOIMAPSearchExpression.mm in Sources */,
 				C6BA2C131705F4E6003F0E9E /* MCOIMAPFolderInfo.m in Sources */,
 				C6BA2C141705F4E6003F0E9E /* MCOIMAPBaseOperation.mm in Sources */,
@@ -2891,6 +2947,7 @@
 					"-liconv",
 					"-all_load",
 					"-ltidy",
+					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2926,6 +2983,7 @@
 					"-liconv",
 					"-all_load",
 					"-ltidy",
+					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2992,6 +3050,7 @@
 					"-liconv",
 					"-all_load",
 					"-ltidy",
+					"-lz",
 				);
 				PRODUCT_NAME = MailCore;
 				WRAPPER_EXTENSION = framework;
@@ -3022,6 +3081,7 @@
 					"-liconv",
 					"-all_load",
 					"-ltidy",
+					"-lz",
 				);
 				PRODUCT_NAME = MailCore;
 				WRAPPER_EXTENSION = framework;

@@ -133,6 +133,24 @@ else()
 endif()
 
 
+# detect zlib
+
+find_path(ZLIB_INCLUDE_DIR
+  NAMES zlib.h
+  PATHS ${additional_includes}
+)
+find_library(ZLIB_LIBRARY
+  NAMES z
+  PATHS ${additional_lib_searchpath}
+)
+
+if(NOT ZLIB_INCLUDE_DIR OR NOT ZLIB_LIBRARY)
+  message(FATAL_ERROR "ERROR: Could not find zlib")
+else()
+  message(STATUS "Found zlib")
+endif()
+
+
 file(GLOB_RECURSE
   source_files
   *.h
