@@ -97,18 +97,22 @@ void IMAPFetchMessagesOperation::main()
         if (mModSequenceValue != 0) {
             IMAPSyncResult * syncResult;
             
-            syncResult = session()->session()->syncMessagesByUID(folder(), mKind, mIndexes, mModSequenceValue, this, &error, mExtraHeaders);
+            syncResult = session()->session()->syncMessagesByUIDWithExtraHeaders(folder(), mKind, mIndexes,
+                                                                                 mModSequenceValue, this, mExtraHeaders,
+                                                                                 &error);
             if (syncResult != NULL) {
                 mMessages = syncResult->modifiedOrAddedMessages();
                 mVanishedMessages = syncResult->vanishedMessages();
             }
         }
         else {
-            mMessages = session()->session()->fetchMessagesByUID(folder(), mKind, mIndexes, this, &error, mExtraHeaders);
+            mMessages = session()->session()->fetchMessagesByUIDWithExtraHeaders(folder(), mKind, mIndexes, this,
+                                                                                 mExtraHeaders, &error);
         }
     }
     else {
-        mMessages = session()->session()->fetchMessagesByNumber(folder(), mKind, mIndexes, this, &error, mExtraHeaders);
+        mMessages = session()->session()->fetchMessagesByNumberWithExtraHeaders(folder(), mKind, mIndexes, this,
+                                                                                mExtraHeaders, &error);
     }
     MC_SAFE_RETAIN(mMessages);
     MC_SAFE_RETAIN(mVanishedMessages);

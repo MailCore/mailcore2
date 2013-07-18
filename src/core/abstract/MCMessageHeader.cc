@@ -22,9 +22,6 @@ static Array * lep_address_list_from_lep_mailbox(struct mailimf_mailbox_list * m
 static Array * msg_id_to_string_array(clist * msgids);
 static clist * msg_id_from_string_array(Array * msgids);
 
-static Array * keyword_to_string_array(clist * keywords);
-static Array * clist_to_string_array(clist * cstrs);
-
 #define MAX_HOSTNAME 512
 
 MessageHeader::MessageHeader()
@@ -375,24 +372,29 @@ void MessageHeader::importIMFFields(struct mailimf_fields * fields)
         struct mailimf_field * field;
 
         field = (mailimf_field *)clist_content(cur);
-        
+
         switch (field->fld_type) {
             case MAILIMF_FIELD_ORIG_DATE:
+                // Set only if date is not set
                 if (date() == (time_t) -1) {
                     time_t timestamp;
+
                     timestamp = timestamp_from_date(field->fld_data.fld_orig_date->dt_date_time);
                     setDate(timestamp);
                     setReceivedDate(timestamp);
                 }
                 break;
             case MAILIMF_FIELD_SUBJECT:
+                // Set only if subject is not set
                 if (subject() == NULL) {
                     char * subject;
+
                     subject = field->fld_data.fld_subject->sbj_value;
                     setSubject(String::stringByDecodingMIMEHeaderValue(subject));
                 }
                 break;
             case MAILIMF_FIELD_SENDER:
+                // Set only if sender is not set
                 if (sender() == NULL) {
                     struct mailimf_mailbox * mb;
                     Address * address;
@@ -405,6 +407,7 @@ void MessageHeader::importIMFFields(struct mailimf_fields * fields)
                 }
                 break;
             case MAILIMF_FIELD_FROM:
+                // Set only if from is not set
                 if (from() == NULL) {
                     struct mailimf_mailbox_list * mb_list;
                     Array * addresses;
@@ -417,6 +420,7 @@ void MessageHeader::importIMFFields(struct mailimf_fields * fields)
                 }
                 break;
             case MAILIMF_FIELD_REPLY_TO:
+                // Set only if reply-to is not set
                 if (replyTo() == NULL) {
                     struct mailimf_address_list * addr_list;
                     Array * addresses;
@@ -427,6 +431,7 @@ void MessageHeader::importIMFFields(struct mailimf_fields * fields)
                 }
                 break;
             case MAILIMF_FIELD_TO:
+                // Set only if to is not set
                 if (to() == NULL) {
                     struct mailimf_address_list * addr_list;
                     Array * addresses;
@@ -437,6 +442,7 @@ void MessageHeader::importIMFFields(struct mailimf_fields * fields)
                 }
                 break;
             case MAILIMF_FIELD_CC:
+                // Set only if cc is not set
                 if (cc() == NULL) {
                     struct mailimf_address_list * addr_list;
                     Array * addresses;
@@ -447,6 +453,7 @@ void MessageHeader::importIMFFields(struct mailimf_fields * fields)
                 }
                 break;
             case MAILIMF_FIELD_BCC:
+                // Set only if bcc is not set
                 if (bcc() == NULL) {
                     struct mailimf_address_list * addr_list;
                     Array * addresses;
@@ -457,6 +464,7 @@ void MessageHeader::importIMFFields(struct mailimf_fields * fields)
                 }
                 break;
             case MAILIMF_FIELD_MESSAGE_ID:
+                // message-id has a default value set by the constructor, so we can't check for NULL here
                 char * msgid;
                 String * str;
                     
@@ -465,6 +473,7 @@ void MessageHeader::importIMFFields(struct mailimf_fields * fields)
                 setMessageID(str);
                 break;
             case MAILIMF_FIELD_REFERENCES:
+                // Set only if references is not set
                 if (references() == NULL) {
                     clist * msg_id_list;
                     Array * msgids;
@@ -475,6 +484,7 @@ void MessageHeader::importIMFFields(struct mailimf_fields * fields)
                 }
                 break;
             case MAILIMF_FIELD_IN_REPLY_TO:
+                // Set only if in-reply-to is not set
                 if (inReplyTo() == NULL) {
                     clist * msg_id_list;
                     Array * msgids;
@@ -485,6 +495,8 @@ void MessageHeader::importIMFFields(struct mailimf_fields * fields)
                 }
                 break;
             case MAILIMF_FIELD_COMMENTS:
+                // Set only if comments is not set
+                // TODO: Per RFC5322, multiple comments fields are allowed, should that here
                 if (headerValueForName(MCSTR("Comments")) == NULL) {
                     char * comments;
                     String * str;
@@ -500,6 +512,7 @@ void MessageHeader::importIMFFields(struct mailimf_fields * fields)
                 
                 fieldName = field->fld_data.fld_optional_field->fld_name;
                 fieldNameStr = String::stringWithUTF8Characters(fieldName);
+                // Set only if this optional-field is not set
                 if (headerValueForName(fieldNameStr) == NULL) {
                     char * fieldValue;
                     String * fieldValueStr;
@@ -510,16 +523,8 @@ void MessageHeader::importIMFFields(struct mailimf_fields * fields)
                 }
                 break;
             case MAILIMF_FIELD_KEYWORDS:
-//                TODO: deal with non-string headers in mExtraHeaders
-//                if (headerForName(MCSTR("Keywords")) == NULL) {
-//                    clist * keywords_list;
-//                    Array * keywords;
-//                
-//                    keywords_list = field->fld_data.fld_keywords->kw_list;
-//                    keywords = keyword_to_string_array(keywords_list);
-//                    addHeader(MCSTR("Keywords"), keywords);
-//                }
-//                break;
+                // TODO: need deal with non-string headers in mExtraHeaders since Keywords is a list
+                break;
             default:
                 break;
         }
@@ -804,27 +809,17 @@ static struct mailimf_address_list * lep_address_list_from_array(Array * address
 
 static Array * msg_id_to_string_array(clist * msgids)
 {
-    return clist_to_string_array(msgids);
-}
-
-static Array * keyword_to_string_array(clist * keywords)
-{
-    return clist_to_string_array(keywords);
-}
-
-static Array * clist_to_string_array(clist * cstrs)
-{
 	clistiter * cur;
 	Array * result;
 	
 	result = Array::array();
 	
-	for(cur = clist_begin(cstrs) ; cur != NULL ; cur = clist_next(cur)) {
-		char * cstr;
+	for(cur = clist_begin(msgids) ; cur != NULL ; cur = clist_next(cur)) {
+		char * msgid;
 		String * str;
 		
-		cstr = (char *) clist_content(cur);
-		str = String::stringWithUTF8Characters(cstr);
+		msgid = (char *) clist_content(cur);
+		str = String::stringWithUTF8Characters(msgid);
         result->addObject(str);
 	}
 	

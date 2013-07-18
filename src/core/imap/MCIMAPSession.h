@@ -89,11 +89,21 @@ namespace mailcore {
         
         virtual Array * /* IMAPMessage */ fetchMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
                                                              IndexSet * uids, IMAPProgressCallback * progressCallback,
-                                                             ErrorCode * pError, Array * extraHeaders = NULL);
+                                                             ErrorCode * pError);
+        virtual Array * /* IMAPMessage */ fetchMessagesByUIDWithExtraHeaders(String * folder,
+                                                                             IMAPMessagesRequestKind requestKind,
+                                                                             IndexSet * uids,
+                                                                             IMAPProgressCallback * progressCallback,
+                                                                             Array * extraHeaders, ErrorCode * pError);
         virtual Array * /* IMAPMessage */ fetchMessagesByNumber(String * folder, IMAPMessagesRequestKind requestKind,
                                                                 IndexSet * numbers, IMAPProgressCallback * progressCallback,
-                                                                ErrorCode * pError,  Array * extraHeaders = NULL);
-        
+                                                                ErrorCode * pError);
+        virtual Array * /* IMAPMessage */ fetchMessagesByNumberWithExtraHeaders(String * folder,
+                                                                                IMAPMessagesRequestKind requestKind,
+                                                                                IndexSet * numbers,
+                                                                                IMAPProgressCallback * progressCallback,
+                                                                                Array * extraHeaders, ErrorCode * pError);
+
         virtual Data * fetchMessageByUID(String * folder, uint32_t uid,
                                          IMAPProgressCallback * progressCallback, ErrorCode * pError);
         virtual Data * fetchMessageAttachmentByUID(String * folder, uint32_t uid, String * partID,
@@ -104,9 +114,13 @@ namespace mailcore {
         /* When CONDSTORE or QRESYNC is available */
         virtual IMAPSyncResult * syncMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
                                                    IndexSet * uids, uint64_t modseq,
-                                                   IMAPProgressCallback * progressCallback, ErrorCode * pError,
-                                                   Array * extraHeaders = NULL);
-        
+                                                   IMAPProgressCallback * progressCallback, ErrorCode * pError);
+        /* Same as syncMessagesByUID, allows for extra headers */
+        virtual IMAPSyncResult * syncMessagesByUIDWithExtraHeaders(String * folder, IMAPMessagesRequestKind requestKind,
+                                                                   IndexSet * uids, uint64_t modseq,
+                                                                   IMAPProgressCallback * progressCallback,
+                                                                   Array * extraHeaders, ErrorCode * pError);
+
         virtual void storeFlags(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, ErrorCode * pError);
         virtual void storeLabels(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, Array * labels, ErrorCode * pError);
         
@@ -213,7 +227,7 @@ namespace mailcore {
         IMAPSyncResult * fetchMessages(String * folder, IMAPMessagesRequestKind requestKind,
                                        bool fetchByUID, struct mailimap_set * imapset, uint64_t modseq,
                                        HashMap * mapping, uint32_t startUid, IMAPProgressCallback * progressCallback,
-                                       ErrorCode * pError,  Array * extraHeaders);
+                                       Array * extraHeaders, ErrorCode * pError);
     };
 }
 
