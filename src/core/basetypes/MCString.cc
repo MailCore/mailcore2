@@ -1127,8 +1127,15 @@ String * String::uppercaseString()
 void String::appendBytes(const char * bytes, unsigned int length, const char * charset)
 {
 #if __APPLE__
-    CFStringRef encodingName = CFStringCreateWithCString(NULL, charset, kCFStringEncodingUTF8);
-    CFStringEncoding encoding = CFStringConvertIANACharSetNameToEncoding(encodingName);
+    CFStringEncoding encoding;
+    if (strcasecmp(charset, "mutf-7") == 0) {
+        encoding = kCFStringEncodingUTF7_IMAP;
+    }
+    else {
+        CFStringRef encodingName = CFStringCreateWithCString(NULL, charset, kCFStringEncodingUTF8);
+        encoding = CFStringConvertIANACharSetNameToEncoding(encodingName);
+        CFRelease(encodingName);
+    }
     CFStringRef cfStr = CFStringCreateWithBytes(NULL, (const UInt8 *) bytes, (CFIndex) length, encoding, false);
     if (cfStr != NULL) {
         CFDataRef data = CFStringCreateExternalRepresentation(NULL, cfStr, kCFStringEncodingUTF16LE, '_');
@@ -1138,7 +1145,6 @@ void String::appendBytes(const char * bytes, unsigned int length, const char * c
         }
         CFRelease(cfStr);
     }
-    CFRelease(encodingName);
 #else
     UErrorCode err;
     
