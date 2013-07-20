@@ -137,6 +137,7 @@ namespace mailcore {
         virtual bool isCondstoreEnabled();
         virtual bool isQResyncEnabled();
         virtual bool isIdentityEnabled();
+        virtual bool isXOAuthEnabled();
         
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
@@ -179,6 +180,7 @@ namespace mailcore {
         bool mCondstoreEnabled;
         bool mQResyncEnabled;
         bool mIdentityEnabled;
+        bool mXOauth2Enabled;
         String * mWelcomeString;
         bool mNeedsMboxMailWorkaround;
         uint32_t mUIDValidity;
