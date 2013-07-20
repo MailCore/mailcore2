@@ -129,6 +129,7 @@ bool POPSession::isCheckCertificateEnabled()
 
 bool POPSession::checkCertificate()
 {
+    //TODO check certificate
     return true;
 }
 

@@ -487,6 +487,7 @@ static bool hasError(int errorCode)
 
 bool IMAPSession::checkCertificate()
 {
+    //TODO check certificate
     return true;
 }
 
