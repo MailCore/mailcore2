@@ -487,7 +487,6 @@ static bool hasError(int errorCode)
 
 bool IMAPSession::checkCertificate()
 {
-#warning check certificate
     return true;
 }
 
