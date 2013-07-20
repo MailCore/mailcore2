@@ -88,10 +88,22 @@ namespace mailcore {
         virtual void expunge(String * folder, ErrorCode * pError);
         
         virtual Array * /* IMAPMessage */ fetchMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
-                                                             IndexSet * uids, IMAPProgressCallback * progressCallback, ErrorCode * pError);
+                                                             IndexSet * uids, IMAPProgressCallback * progressCallback,
+                                                             ErrorCode * pError);
+        virtual Array * /* IMAPMessage */ fetchMessagesByUIDWithExtraHeaders(String * folder,
+                                                                             IMAPMessagesRequestKind requestKind,
+                                                                             IndexSet * uids,
+                                                                             IMAPProgressCallback * progressCallback,
+                                                                             Array * extraHeaders, ErrorCode * pError);
         virtual Array * /* IMAPMessage */ fetchMessagesByNumber(String * folder, IMAPMessagesRequestKind requestKind,
-                                                                IndexSet * numbers, IMAPProgressCallback * progressCallback, ErrorCode * pError);
-        
+                                                                IndexSet * numbers, IMAPProgressCallback * progressCallback,
+                                                                ErrorCode * pError);
+        virtual Array * /* IMAPMessage */ fetchMessagesByNumberWithExtraHeaders(String * folder,
+                                                                                IMAPMessagesRequestKind requestKind,
+                                                                                IndexSet * numbers,
+                                                                                IMAPProgressCallback * progressCallback,
+                                                                                Array * extraHeaders, ErrorCode * pError);
+
         virtual Data * fetchMessageByUID(String * folder, uint32_t uid,
                                          IMAPProgressCallback * progressCallback, ErrorCode * pError);
         virtual Data * fetchMessageAttachmentByUID(String * folder, uint32_t uid, String * partID,
@@ -103,7 +115,12 @@ namespace mailcore {
         virtual IMAPSyncResult * syncMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
                                                    IndexSet * uids, uint64_t modseq,
                                                    IMAPProgressCallback * progressCallback, ErrorCode * pError);
-        
+        /* Same as syncMessagesByUID, allows for extra headers */
+        virtual IMAPSyncResult * syncMessagesByUIDWithExtraHeaders(String * folder, IMAPMessagesRequestKind requestKind,
+                                                                   IndexSet * uids, uint64_t modseq,
+                                                                   IMAPProgressCallback * progressCallback,
+                                                                   Array * extraHeaders, ErrorCode * pError);
+
         virtual void storeFlags(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, ErrorCode * pError);
         virtual void storeLabels(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, Array * labels, ErrorCode * pError);
         
@@ -209,9 +226,10 @@ namespace mailcore {
         void unsetup();
         void selectIfNeeded(String * folder, ErrorCode * pError);
         char fetchDelimiterIfNeeded(char defaultDelimiter, ErrorCode * pError);
-        IMAPSyncResult * fetchMessages(String * folder, IMAPMessagesRequestKind requestKind, bool fetchByUID,
-                                       struct mailimap_set * imapset, uint64_t modseq, HashMap * mapping, uint32_t startUid,
-                                       IMAPProgressCallback * progressCallback, ErrorCode * pError);
+        IMAPSyncResult * fetchMessages(String * folder, IMAPMessagesRequestKind requestKind,
+                                       bool fetchByUID, struct mailimap_set * imapset, uint64_t modseq,
+                                       HashMap * mapping, uint32_t startUid, IMAPProgressCallback * progressCallback,
+                                       Array * extraHeaders, ErrorCode * pError);
     };
 }
 

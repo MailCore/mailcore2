@@ -64,4 +64,12 @@ typedef void (^CompletionType)(NSError *error, NSArray * messages, MCOIndexSet *
     }
 }
 
+- (void)setExtraHeaders:(NSArray *)extraHeaders {
+    MCO_NATIVE_INSTANCE->setExtraHeaders(MCO_FROM_OBJC(mailcore::Array, extraHeaders));
+}
+
+- (NSArray *)extraHeaders {
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->extraHeaders());
+}
+
 @end
