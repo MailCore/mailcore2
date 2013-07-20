@@ -487,7 +487,7 @@ static bool hasError(int errorCode)
 
 bool IMAPSession::checkCertificate()
 {
-#warning check certificate
+    //TODO check certificate
     return true;
 }
 
@@ -2976,6 +2976,10 @@ IndexSet * IMAPSession::capability(ErrorCode * pError)
         result->addIndex(IMAPCapabilityQResync);
         mQResyncEnabled = true;
     }
+    if (mailimap_has_xoauth2(mImap)) {
+        result->addIndex(IMAPCapabilityXOAuth2);
+        mXOauth2Enabled = true;
+    }
     
     * pError = ErrorNone;
     result->autorelease();
@@ -3005,6 +3009,10 @@ bool IMAPSession::isQResyncEnabled()
 bool IMAPSession::isIdentityEnabled()
 {
     return mIdentityEnabled;
+}
+
+bool IMAPSession::isXOAuthEnabled() {
+	return mXOauth2Enabled;
 }
 
 bool IMAPSession::isDisconnected()
