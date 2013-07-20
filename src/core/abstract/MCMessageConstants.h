@@ -121,6 +121,7 @@ namespace mailcore {
         IMAPCapabilityAuthPlain,
         IMAPCapabilityAuthSKey,
         IMAPCapabilityAuthSRP,
+        IMAPCapabilityXOAuth2,
     };
 
     enum POPCapability {
