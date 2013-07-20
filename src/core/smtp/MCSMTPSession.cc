@@ -146,7 +146,7 @@ bool SMTPSession::isCheckCertificateEnabled()
 
 bool SMTPSession::checkCertificate()
 {
-#warning check certificate
+    //TODO check certificate
     return true;
 }
 
