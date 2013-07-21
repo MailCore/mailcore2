@@ -22,6 +22,9 @@
 /** This block will be called each time a new message is downloaded. */
 @property (nonatomic, copy) MCOIMAPBaseOperationItemProgressBlock progress;
 
+/** Extra headers to request. Must set requestKind | IMAPMessagesRequestKindExtraHeaders */
+@property (nonatomic, copy) NSArray * extraHeaders;
+
 /** 
  Starts the asynchronous fetch operation.
 

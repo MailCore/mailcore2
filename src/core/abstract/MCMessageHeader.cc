@@ -155,6 +155,11 @@ String * MessageHeader::description()
 	if (mUserAgent != NULL) {
         result->appendUTF8Format("X-Mailer: %s\n", mUserAgent->UTF8Characters());
     }
+    if (mExtraHeaders != NULL) {
+        mc_foreachdictionaryKeyAndValue(String, header, String, value, mExtraHeaders) {
+            result->appendUTF8Format("%s: %s\n", header->UTF8Characters(), value->UTF8Characters());
+        }
+    }
     result->appendUTF8Format(">");
     
     return result;
@@ -355,127 +360,178 @@ void MessageHeader::importHeadersData(Data * data)
 	}
     
     importIMFFields(fields);
-    
+
     mailimf_fields_free(fields);
 }
 
 void MessageHeader::importIMFFields(struct mailimf_fields * fields)
 {
-	struct mailimf_single_fields single_fields;
-	
-	mailimf_single_fields_init(&single_fields, fields);
-	
-	/* date */
-	
-	if (single_fields.fld_orig_date != NULL) {
-		time_t timestamp;
-		timestamp = timestamp_from_date(single_fields.fld_orig_date->dt_date_time);
-        setDate(timestamp);
-        setReceivedDate(timestamp);
-		//MCLog("%lu %lu", (unsigned long) timestamp, date());
-	}
-	
-	/* subject */
-	if (single_fields.fld_subject != NULL) {
-		char * subject;
-		
-		subject = single_fields.fld_subject->sbj_value;
-		setSubject(String::stringByDecodingMIMEHeaderValue(subject));
-	}
-	
-	/* sender */
-	if (single_fields.fld_sender != NULL) {
-		struct mailimf_mailbox * mb;
-		Address * address;
-        
-		mb = single_fields.fld_sender->snd_mb;
-       if (mb != NULL) {
-           address = Address::addressWithIMFMailbox(mb);
-           setSender(address);
-       }
-	}
+    clistiter * cur;
+    cur = clist_begin(fields->fld_list);
+    while (cur != NULL) {
+        struct mailimf_field * field;
+
+        field = (mailimf_field *)clist_content(cur);
+
+        switch (field->fld_type) {
+            case MAILIMF_FIELD_ORIG_DATE:
+                // Set only if date is not set
+                if (date() == (time_t) -1) {
+                    time_t timestamp;
+
+                    timestamp = timestamp_from_date(field->fld_data.fld_orig_date->dt_date_time);
+                    setDate(timestamp);
+                    setReceivedDate(timestamp);
+                }
+                break;
+            case MAILIMF_FIELD_SUBJECT:
+                // Set only if subject is not set
+                if (subject() == NULL) {
+                    char * subject;
+
+                    subject = field->fld_data.fld_subject->sbj_value;
+                    setSubject(String::stringByDecodingMIMEHeaderValue(subject));
+                }
+                break;
+            case MAILIMF_FIELD_SENDER:
+                // Set only if sender is not set
+                if (sender() == NULL) {
+                    struct mailimf_mailbox * mb;
+                    Address * address;
+                    
+                    mb = field->fld_data.fld_sender->snd_mb;
+                    if (mb != NULL) {
+                        address = Address::addressWithIMFMailbox(mb);
+                        setSender(address);
+                    }
+                }
+                break;
+            case MAILIMF_FIELD_FROM:
+                // Set only if from is not set
+                if (from() == NULL) {
+                    struct mailimf_mailbox_list * mb_list;
+                    Array * addresses;
+                    
+                    mb_list = field->fld_data.fld_from->frm_mb_list;
+                    addresses = lep_address_list_from_lep_mailbox(mb_list);
+                    if (addresses->count() > 0) {
+                        setFrom((Address *) (addresses->objectAtIndex(0)));
+                    }
+                }
+                break;
+            case MAILIMF_FIELD_REPLY_TO:
+                // Set only if reply-to is not set
+                if (replyTo() == NULL) {
+                    struct mailimf_address_list * addr_list;
+                    Array * addresses;
+
+                    addr_list = field->fld_data.fld_reply_to->rt_addr_list;
+                    addresses = lep_address_list_from_lep_addr(addr_list);
+                    setReplyTo(addresses);
+                }
+                break;
+            case MAILIMF_FIELD_TO:
+                // Set only if to is not set
+                if (to() == NULL) {
+                    struct mailimf_address_list * addr_list;
+                    Array * addresses;
+
+                    addr_list = field->fld_data.fld_to->to_addr_list;
+                    addresses = lep_address_list_from_lep_addr(addr_list);
+                    setTo(addresses);
+                }
+                break;
+            case MAILIMF_FIELD_CC:
+                // Set only if cc is not set
+                if (cc() == NULL) {
+                    struct mailimf_address_list * addr_list;
+                    Array * addresses;
+
+                    addr_list = field->fld_data.fld_cc->cc_addr_list;
+                    addresses = lep_address_list_from_lep_addr(addr_list);
+                    setCc(addresses);
+                }
+                break;
+            case MAILIMF_FIELD_BCC:
+                // Set only if bcc is not set
+                if (bcc() == NULL) {
+                    struct mailimf_address_list * addr_list;
+                    Array * addresses;
+
+                    addr_list = field->fld_data.fld_bcc->bcc_addr_list;
+                    addresses = lep_address_list_from_lep_addr(addr_list);
+                    setBcc(addresses);
+                }
+                break;
+            case MAILIMF_FIELD_MESSAGE_ID:
+                // message-id has a default value set by the constructor, so we can't check for NULL here
+                char * msgid;
+                String * str;
+                    
+                msgid = field->fld_data.fld_message_id->mid_value;
+                str = String::stringWithUTF8Characters(msgid);
+                setMessageID(str);
+                break;
+            case MAILIMF_FIELD_REFERENCES:
+                // Set only if references is not set
+                if (references() == NULL) {
+                    clist * msg_id_list;
+                    Array * msgids;
+                    
+                    msg_id_list = field->fld_data.fld_references->mid_list;
+                    msgids = msg_id_to_string_array(msg_id_list);
+                    setReferences(msgids);
+                }
+                break;
+            case MAILIMF_FIELD_IN_REPLY_TO:
+                // Set only if in-reply-to is not set
+                if (inReplyTo() == NULL) {
+                    clist * msg_id_list;
+                    Array * msgids;
+                    
+                    msg_id_list = field->fld_data.fld_references->mid_list;
+                    msgids = msg_id_to_string_array(msg_id_list);
+                    setReferences(msgids);
+                }
+                break;
+            case MAILIMF_FIELD_COMMENTS:
+                // Set only if comments is not set
+                // TODO: Per RFC5322, multiple comments fields are allowed, should that here
+                if (headerValueForName(MCSTR("Comments")) == NULL) {
+                    char * comments;
+                    String * str;
+                
+                    comments = field->fld_data.fld_comments->cm_value;
+                    str = String::stringWithUTF8Characters(comments);
+                    addHeader(MCSTR("Comments"), str);
+                }
+                break;
+            case MAILIMF_FIELD_OPTIONAL_FIELD:
+                char * fieldName;
+                String * fieldNameStr;
+                
+                fieldName = field->fld_data.fld_optional_field->fld_name;
+                fieldNameStr = String::stringWithUTF8Characters(fieldName);
+                // Set only if this optional-field is not set
+                if (headerValueForName(fieldNameStr) == NULL) {
+                    char * fieldValue;
+                    String * fieldValueStr;
+                    
+                    fieldValue = field->fld_data.fld_optional_field->fld_value;
+                    fieldValueStr = String::stringWithUTF8Characters(fieldValue);
+                    addHeader(fieldNameStr, fieldValueStr);
+                }
+                break;
+            case MAILIMF_FIELD_KEYWORDS:
+                // TODO: need deal with non-string headers in mExtraHeaders since Keywords is a list
+                break;
+            default:
+                break;
+        }
+        cur = clist_next(cur);
+
     
-	/* from */
-	if (single_fields.fld_from != NULL) {
-		struct mailimf_mailbox_list * mb_list;
-		Array * addresses;
-		
-		mb_list = single_fields.fld_from->frm_mb_list;
-		addresses = lep_address_list_from_lep_mailbox(mb_list);
-		if (addresses->count() > 0) {
-			setFrom((Address *) (addresses->objectAtIndex(0)));
-		}
-	}
-	
-	/* replyto */
-	if (single_fields.fld_reply_to != NULL) {
-		struct mailimf_address_list * addr_list;
-		Array * addresses;
-		
-		addr_list = single_fields.fld_reply_to->rt_addr_list;
-		addresses = lep_address_list_from_lep_addr(addr_list);
-        setReplyTo(addresses);
-	}
-	
-	/* to */
-	if (single_fields.fld_to != NULL) {
-		struct mailimf_address_list * addr_list;
-		Array * addresses;
-		
-		addr_list = single_fields.fld_to->to_addr_list;
-		addresses = lep_address_list_from_lep_addr(addr_list);
-        setTo(addresses);
-	}
-	
-	/* cc */
-	if (single_fields.fld_cc != NULL) {
-		struct mailimf_address_list * addr_list;
-		Array * addresses;
-		
-		addr_list = single_fields.fld_cc->cc_addr_list;
-		addresses = lep_address_list_from_lep_addr(addr_list);
-        setCc(addresses);
-	}
-	
-	/* bcc */
-	if (single_fields.fld_bcc != NULL) {
-		struct mailimf_address_list * addr_list;
-		Array * addresses;
-		
-		addr_list = single_fields.fld_bcc->bcc_addr_list;
-		addresses = lep_address_list_from_lep_addr(addr_list);
-        setBcc(addresses);
-	}
-	
-	/* msgid */
-	if (single_fields.fld_message_id != NULL) {
-		char * msgid;
-		String * str;
-        
-		msgid = single_fields.fld_message_id->mid_value;
-        str = String::stringWithUTF8Characters(msgid);
-        setMessageID(str);
-	}
-	
-	/* references */
-	if (single_fields.fld_references != NULL) {
-		clist * msg_id_list;
-		Array * msgids;
-		
-		msg_id_list = single_fields.fld_references->mid_list;
-		msgids = msg_id_to_string_array(msg_id_list);
-        setReferences(msgids);
-	}
-	
-	/* inreplyto */
-	if (single_fields.fld_in_reply_to != NULL) {
-		clist * msg_id_list;
-		Array * msgids;
-		
-		msg_id_list = single_fields.fld_in_reply_to->mid_list;
-		msgids = msg_id_to_string_array(msg_id_list);
-        setInReplyTo(msgids);
-	}
+    }
 }
 
 static time_t timestamp_from_date(struct mailimf_date_time * date_time)
