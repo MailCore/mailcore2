@@ -14,12 +14,10 @@
 		9E774D8C1767CD490065EB9B /* MCIMAPFolderStatus.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9E774D871767C54E0065EB9B /* MCIMAPFolderStatus.h */; };
 		9EF9AB09175F2EC60027FA3B /* MCOIMAPFolderStatus.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9EF9AB07175F2EC60027FA3B /* MCOIMAPFolderStatus.mm */; };
 		9EF9AB0A175F2EC60027FA3B /* MCOIMAPFolderStatus.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9EF9AB07175F2EC60027FA3B /* MCOIMAPFolderStatus.mm */; };
-		9EF9AB0B175F2EC60027FA3B /* MCOIMAPFolderStatus.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9EF9AB07175F2EC60027FA3B /* MCOIMAPFolderStatus.mm */; };
 		9EF9AB11175F319A0027FA3B /* MCIMAPFolderStatusOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9EF9AB10175F319A0027FA3B /* MCIMAPFolderStatusOperation.cc */; };
 		9EF9AB12175F319A0027FA3B /* MCIMAPFolderStatusOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9EF9AB10175F319A0027FA3B /* MCIMAPFolderStatusOperation.cc */; };
 		9EF9AB19175F36600027FA3B /* MCOIMAPFolderStatusOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9EF9AB18175F36600027FA3B /* MCOIMAPFolderStatusOperation.mm */; };
 		9EF9AB1A175F36600027FA3B /* MCOIMAPFolderStatusOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9EF9AB18175F36600027FA3B /* MCOIMAPFolderStatusOperation.mm */; };
-		9EF9AB1B175F36600027FA3B /* MCOIMAPFolderStatusOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9EF9AB18175F36600027FA3B /* MCOIMAPFolderStatusOperation.mm */; };
 		9EF9AB20175F3FD10027FA3B /* MCOIMAPFolderStatus.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9EF9AB06175F2EC60027FA3B /* MCOIMAPFolderStatus.h */; };
 		9EF9AB21175F3FD10027FA3B /* MCOIMAPFolderStatusOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9EF9AB16175F35C60027FA3B /* MCOIMAPFolderStatusOperation.h */; };
 		9EF9AB22175F406D0027FA3B /* MCOIMAPFolderStatus.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9EF9AB06175F2EC60027FA3B /* MCOIMAPFolderStatus.h */; };
@@ -2568,8 +2566,6 @@
 			files = (
 				C64EA7AB16A00AF600778456 /* main.mm in Sources */,
 				C6A81BAF170684D300882C15 /* test-all.mm in Sources */,
-				9EF9AB0B175F2EC60027FA3B /* MCOIMAPFolderStatus.mm in Sources */,
-				9EF9AB1B175F36600027FA3B /* MCOIMAPFolderStatusOperation.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
