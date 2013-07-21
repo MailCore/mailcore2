@@ -362,6 +362,12 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
     return MCO_TO_OBJC_OP(coreOp);
 }
 
+- (MCOIMAPOperation *) enableCompressionOperation
+{
+    IMAPOperation * coreOp = MCO_NATIVE_INSTANCE->enableCompressions();
+    return MCO_TO_OBJC_OP(coreOp);
+}
+
 - (void) _logWithSender:(void *)sender connectionType:(MCOConnectionLogType)logType data:(NSData *)data
 {
     _connectionLogger(sender, logType, data);
