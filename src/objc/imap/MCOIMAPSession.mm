@@ -14,10 +14,13 @@
 #import "MCOIMAPOperation.h"
 #import "MCOIMAPFetchFoldersOperation.h"
 #import "MCOIMAPBaseOperation+Private.h"
+#import "MCOIMAPMessageRenderingOperation.h"
 
 #import "MCOUtils.h"
 
 #import <MailCore/MCAsync.h>
+
+#include "MCIMAPMessageRenderingOperation.h"
 
 
 using namespace mailcore;
@@ -86,6 +89,16 @@ MCO_OBJC_SYNTHESIZE_BOOL(setVoIPEnabled, isVoIPEnabled)
 MCO_OBJC_SYNTHESIZE_SCALAR(char, char, setDelimiter, delimiter)
 MCO_OBJC_SYNTHESIZE_SCALAR(BOOL, BOOL, setAllowsFolderConcurrentAccessEnabled, allowsFolderConcurrentAccessEnabled)
 MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, maximumConnections)
+
+- (void) setDefaultNamespace:(MCOIMAPNamespace *)defaultNamespace
+{
+    _session->setDefaultNamespace(MCO_FROM_OBJC(IMAPNamespace, defaultNamespace));
+}
+
+- (MCOIMAPNamespace *) defaultNamespace
+{
+    return MCO_TO_OBJC(_session->defaultNamespace());
+}
 
 - (void) setConnectionLogger:(MCOConnectionLogger)connectionLogger
 {
@@ -352,6 +365,34 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
 - (void) _logWithSender:(void *)sender connectionType:(MCOConnectionLogType)logType data:(NSData *)data
 {
     _connectionLogger(sender, logType, data);
+}
+
+- (MCOIMAPMessageRenderingOperation *) htmlRenderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                                  folder:(NSString *)folder
+{
+    IMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->htmlRenderingOperation(MCO_FROM_OBJC(IMAPMessage, message), [folder mco_mcString]);
+    return MCO_TO_OBJC_OP(coreOp);
+}
+
+- (MCOIMAPMessageRenderingOperation *) htmlBodyRenderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                                      folder:(NSString *)folder
+{
+    IMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->htmlBodyRenderingOperation(MCO_FROM_OBJC(IMAPMessage, message), [folder mco_mcString]);
+    return MCO_TO_OBJC_OP(coreOp);
+}
+
+- (MCOIMAPMessageRenderingOperation *) plainTextRenderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                                       folder:(NSString *)folder
+{
+    IMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->plainTextRenderingOperation(MCO_FROM_OBJC(IMAPMessage, message), [folder mco_mcString]);
+    return MCO_TO_OBJC_OP(coreOp);
+}
+
+- (MCOIMAPMessageRenderingOperation *) plainTextBodyRenderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                                           folder:(NSString *)folder
+{
+    IMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->plainTextBodyRenderingOperation(MCO_FROM_OBJC(IMAPMessage, message), [folder mco_mcString]);
+    return MCO_TO_OBJC_OP(coreOp);
 }
 
 @end

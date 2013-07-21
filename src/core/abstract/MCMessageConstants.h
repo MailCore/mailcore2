@@ -68,6 +68,7 @@ namespace mailcore {
         IMAPMessagesRequestKindGmailLabels   = 1 << 6,
         IMAPMessagesRequestKindGmailMessageID = 1 << 7,
         IMAPMessagesRequestKindGmailThreadID  = 1 << 8,
+        IMAPMessagesRequestKindExtraHeaders  = 1 << 9,
     };
 
     enum IMAPFetchRequestType {
@@ -121,6 +122,7 @@ namespace mailcore {
         IMAPCapabilityAuthPlain,
         IMAPCapabilityAuthSKey,
         IMAPCapabilityAuthSRP,
+        IMAPCapabilityXOAuth2,
     };
 
     enum POPCapability {
@@ -204,6 +206,7 @@ namespace mailcore {
         ErrorFetchMessageList,
         ErrorDeleteMessage,
         ErrorInvalidAccount,
+        ErrorFile,
     };
     
     enum PartType {
@@ -212,6 +215,14 @@ namespace mailcore {
         PartTypeMultipartMixed,
         PartTypeMultipartRelated,
         PartTypeMultipartAlternative,
+    };
+    
+    // Private type - It should not be used directly.
+    enum IMAPMessageRenderingType {
+        IMAPMessageRenderingTypeHTML,
+        IMAPMessageRenderingTypeHTMLBody,
+        IMAPMessageRenderingTypePlainText,
+        IMAPMessageRenderingTypePlainTextBody
     };
 }
 

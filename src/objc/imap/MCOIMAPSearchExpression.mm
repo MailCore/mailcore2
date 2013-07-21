@@ -84,7 +84,7 @@
 
 + (MCOIMAPSearchExpression *) searchAnd:(MCOIMAPSearchExpression *)expression other:(MCOIMAPSearchExpression *)other
 {
-    mailcore::IMAPSearchExpression * result = mailcore::IMAPSearchExpression::searchOr(expression->_nativeExpr, other->_nativeExpr);
+    mailcore::IMAPSearchExpression * result = mailcore::IMAPSearchExpression::searchAnd(expression->_nativeExpr, other->_nativeExpr);
     return MCO_TO_OBJC(result);
 }
 

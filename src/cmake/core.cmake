@@ -1,110 +1,3 @@
-# public headers
-
-set(public_headers_abstract
-  core/abstract/MCAbstract.h
-  core/abstract/MCAbstractMessage.h
-  core/abstract/MCAbstractMessagePart.h
-  core/abstract/MCAbstractMultipart.h
-  core/abstract/MCAbstractPart.h
-  core/abstract/MCAddress.h
-  core/abstract/MCMessageConstants.h
-  core/abstract/MCMessageHeader.h
-)
-
-set(public_headers_basetypes
-  core/basetypes/MCArray.h
-  core/basetypes/MCAssert.h
-  core/basetypes/MCAutoreleasePool.h
-  core/basetypes/MCBaseTypes.h
-  core/basetypes/MCData.h
-  core/basetypes/MCHash.h
-  core/basetypes/MCHashMap.h
-  core/basetypes/MCHTMLCleaner.h
-  core/basetypes/MCIndexSet.h
-  core/basetypes/MCIterator.h
-  core/basetypes/MCICUTypes.h
-  core/basetypes/MCJSON.h
-  core/basetypes/MCLibetpanTypes.h
-  core/basetypes/MCLog.h
-  core/basetypes/MCMainThread.h
-  core/basetypes/MCMD5.h
-  core/basetypes/MCNull.h
-  core/basetypes/MCObject.h
-  core/basetypes/MCOperation.h
-  core/basetypes/MCOperationCallback.h
-  core/basetypes/MCOperationQueue.h
-  core/basetypes/MCRange.h
-  core/basetypes/MCSet.h
-  core/basetypes/MCString.h
-  core/basetypes/MCUtils.h
-  core/basetypes/MCValue.h
-)
-
-set(public_headers_imap
-  core/imap/MCIMAP.h
-  core/imap/MCIMAPFolder.h
-  core/imap/MCIMAPFolderStatus.h
-  core/imap/MCIMAPMessage.h
-  core/imap/MCIMAPMessagePart.h
-  core/imap/MCIMAPMultipart.h
-  core/imap/MCIMAPNamespace.h
-  core/imap/MCIMAPNamespaceItem.h
-  core/imap/MCIMAPPart.h
-  core/imap/MCIMAPProgressCallback.h
-  core/imap/MCIMAPSearchExpression.h
-  core/imap/MCIMAPSession.h
-  core/imap/MCIMAPSyncResult.h
-)
-
-set(public_headers_pop
-  core/pop/MCPOP.h
-  core/pop/MCPOPMessageInfo.h
-  core/pop/MCPOPProgressCallback.h
-  core/pop/MCPOPSession.h
-)
-
-set(public_headers_provider
-  core/provider/MCMailProvider.h
-  core/provider/MCMailProvidersManager.h
-  core/provider/MCNetService.h
-  core/provider/MCProvider.h
-)
-
-set(public_headers_renderer
-  core/renderer/MCAddressDisplay.h
-  core/renderer/MCDateFormatter.h
-  core/renderer/MCHTMLRendererCallback.h
-  core/renderer/MCRenderer.h
-  core/renderer/MCSizeFormatter.h
-)
-
-set(public_headers_rfc822
-  core/rfc822/MCAttachment.h
-  core/rfc822/MCMessageBuilder.h
-  core/rfc822/MCMessageParser.h
-  core/rfc822/MCMessagePart.h
-  core/rfc822/MCMultipart.h
-  core/rfc822/MCRFC822.h
-)
-
-set(public_headers_smtp
-  core/smtp/MCSMTP.h
-  core/smtp/MCSMTPProgressCallback.h
-  core/smtp/MCSMTPSession.h
-)
-
-set(public_headers_core
-  core/MCCore.h
-  ${public_headers_basetypes}
-  ${public_headers_renderer}
-  ${public_headers_imap}
-  ${public_headers_pop}
-  ${public_headers_smtp}
-  ${public_headers_abstract}
-  ${public_headers_rfc822}
-  ${public_headers_provider}
-)
-
 # Files to build
 
 set(abstract_files
@@ -126,8 +19,9 @@ ENDIF()
 
 set(basetypes_files
   core/basetypes/MCArray.cc
-  core/basetypes/MCAssert.cc
+  core/basetypes/MCAssert.c
   core/basetypes/MCAutoreleasePool.cc
+  core/basetypes/MCConnectionLoggerUtils.cc
   core/basetypes/MCData.cc
   core/basetypes/MCHash.cc
   core/basetypes/MCHashMap.cc
@@ -135,7 +29,8 @@ set(basetypes_files
   core/basetypes/MCIndexSet.cc
   core/basetypes/MCJSON.cc
   core/basetypes/MCJSONParser.cc
-  core/basetypes/MCLog.cc
+  core/basetypes/MCLibetpan.cc
+  core/basetypes/MCLog.c
   core/basetypes/MCMD5.cc
   core/basetypes/MCNull.cc
   core/basetypes/MCObject.cc
@@ -176,9 +71,12 @@ set(provider_files
 set(renderer_files
   core/renderer/MCAddressDisplay.cc
   core/renderer/MCDateFormatter.cc
+  core/renderer/MCHTMLBodyRendererTemplateCallback.cc
   core/renderer/MCHTMLRenderer.cc
   core/renderer/MCHTMLRendererCallback.cc
+  core/renderer/MCHTMLRendererIMAPDataCallback.cc
   core/renderer/MCSizeFormatter.cc
+  
 )
 
 set(rfc822_files
@@ -193,6 +91,14 @@ set(smtp_files
   core/smtp/MCSMTPSession.cc
 )
 
+set(zip_files
+  core/zip/MCZip.cc
+  core/zip/MiniZip/ioapi.c
+  core/zip/MiniZip/mztools.c
+  core/zip/MiniZip/unzip.c
+  core/zip/MiniZip/zip.c
+)
+
 set(core_files
   ${basetypes_files}
   ${abstract_files}
@@ -201,6 +107,7 @@ set(core_files
   ${renderer_files}
   ${rfc822_files}
   ${smtp_files}
+  ${zip_files}
 )
 
 # Includes for build
@@ -215,4 +122,6 @@ set(core_includes
   ${CMAKE_CURRENT_SOURCE_DIR}/core/renderer
   ${CMAKE_CURRENT_SOURCE_DIR}/core/rfc822
   ${CMAKE_CURRENT_SOURCE_DIR}/core/smtp
+  ${CMAKE_CURRENT_SOURCE_DIR}/core/zip
+  ${CMAKE_CURRENT_SOURCE_DIR}/core/zip/MiniZip
 )

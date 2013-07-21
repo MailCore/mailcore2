@@ -5,9 +5,12 @@
 #include "MCMessageHeader.h"
 #include "MCMessageConstants.h"
 #include "MCLog.h"
+#include "MCZip.h"
 
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+#include <sys/stat.h>
 #include <libetpan/libetpan.h>
 
 using namespace mailcore;
@@ -124,12 +127,36 @@ String * Attachment::mimeTypeForFilename(String * filename)
 
 Attachment * Attachment::attachmentWithContentsOfFile(String * filename)
 {
+    const char * cPath = filename->fileSystemRepresentation();
+    struct stat statinfo;
+    int r;
+    
+    r = stat(cPath, &statinfo);
+    if (r < 0) {
+        return NULL;
+    }
+    
+    if (S_ISDIR(statinfo.st_mode)) {
+        String * zipFilename = CreateTemporaryZipFileFromFolder(filename);
+        if (zipFilename == NULL) {
+            return NULL;
+        }
+        Attachment * result = attachmentWithContentsOfFile(zipFilename);
+        RemoveTemporaryZipFile(zipFilename);
+        return result;
+    }
+    else {
+        Data * data = Data::dataWithContentsOfFile(filename);
+        return attachmentWithData(filename, data);
+    }
+}
+
+Attachment * Attachment::attachmentWithData(String * filename, Data * data)
+{
     Attachment * attachment;
 	String * mimeType;
-	Data * data;
 	
     attachment = new Attachment();
-    data = Data::dataWithContentsOfFile(filename);
     mimeType = Attachment::mimeTypeForFilename(filename);
 	if (mimeType != NULL) {
         attachment->setMimeType(mimeType);

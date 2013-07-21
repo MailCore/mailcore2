@@ -1,5 +1,5 @@
 //
-//  HTMLBodyRendererTemplateCallback.h
+//  MCHTMLBodyRendererTemplateCallback.h
 //  mailcore2
 //
 //  Created by Paul Young on 02/07/2013.

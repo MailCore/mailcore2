@@ -57,6 +57,18 @@
 /** User-Agent.*/
 @property (nonatomic, copy) NSString * userAgent;
 
+/** Adds a custom header.*/
+- (void)addHeaderValue:(NSString *)value forName:(NSString *)name;
+
+/** Remove a given custom header.*/
+- (void)removeHeaderForName:(NSString *)name;
+
+/** Returns the value of a given custom header.*/
+- (NSString *)headerValueForName:(NSString *)name;
+
+/** Returns an array with the names of all custom headers.*/
+- (NSArray * /* NSString */)allHeadersNames;
+
 /** Extracted subject (also remove square brackets).*/
 - (NSString *) extractedSubject;
 

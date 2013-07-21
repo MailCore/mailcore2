@@ -29,6 +29,8 @@
 @class MCOIMAPSearchExpression;
 @class MCOIMAPIdentityOperation;
 @class MCOIMAPCapabilityOperation;
+@class MCOIMAPMessageRenderingOperation;
+@class MCOIMAPMessage;
 
 /**
  This is the main IMAP class from which all operations are created 
@@ -71,7 +73,7 @@
 @property (nonatomic, assign) NSTimeInterval timeout;
 
 /** When set to YES, the connection will fail if the certificate is incorrect. */
-@property (nonatomic, assign) BOOL checkCertificateEnabled;
+@property (nonatomic, assign, getter=isCheckCertificateEnabled) BOOL checkCertificateEnabled;
 
 /** When set to YES, VoIP capability will be enabled on the IMAP connection on iOS */
 @property (nonatomic, assign, getter=isVoIPEnabled) BOOL voIPEnabled;
@@ -533,6 +535,62 @@
 */
 - (MCOIMAPSearchOperation *) searchExpressionOperationWithFolder:(NSString *)folder
                                                       expression:(MCOIMAPSearchExpression *)expression;
+
+/** @name Rendering Operations */
+
+/**
+ Returns an operation to render the HTML version of a message to be displayed in a web view.
+ 
+    MCOIMAPMessageRenderingOperation * op = [session htmlRenderingOperationWithMessage:msg
+                                                                            folder:@"INBOX"];
+    
+    [op start:^(NSString * htmlString, NSError * error) {
+        ...
+    }];
+*/
+- (MCOIMAPMessageRenderingOperation *) htmlRenderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                                  folder:(NSString *)folder;
+
+/**
+ Returns an operation to render the HTML body of a message to be displayed in a web view.
+ 
+    MCOIMAPMessageRenderingOperation * op = [session htmlBodyRenderingOperationWithMessage:msg
+                                                                                    folder:@"INBOX"];
+    
+    [op start:^(NSString * htmlString, NSError * error) {
+        ...
+    }];
+ */
+- (MCOIMAPMessageRenderingOperation *) htmlBodyRenderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                                      folder:(NSString *)folder;
+
+/**
+ Returns an operation to render the plain text version of a message.
+ 
+    MCOIMAPMessageRenderingOperation * op = [session plainTextRenderingOperationWithMessage:msg
+                                                                                     folder:@"INBOX"];
+
+    [op start:^(NSString * htmlString, NSError * error) {
+        ...
+    }];
+ */
+- (MCOIMAPMessageRenderingOperation *) plainTextRenderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                                       folder:(NSString *)folder;
+
+/**
+ Returns an operation to render the plain text body of a message.
+ All end of line will be removed and white spaces cleaned up.
+ This method can be used to generate the summary of the message.
+ 
+    MCOIMAPMessageRenderingOperation * op = [session plainTextBodyRenderingOperationWithMessage:msg
+                                                                                         folder:@"INBOX"];
+ 
+    [op start:^(NSString * htmlString, NSError * error) {
+        ...
+    }];
+ */
+- (MCOIMAPMessageRenderingOperation *) plainTextBodyRenderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                                           folder:(NSString *)folder;
 
 @end
 

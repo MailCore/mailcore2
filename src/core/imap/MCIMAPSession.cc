@@ -16,6 +16,11 @@
 #include "MCIMAPFolderStatus.h"
 #include "MCConnectionLogger.h"
 #include "MCConnectionLoggerUtils.h"
+#include "MCHTMLRenderer.h"
+#include "MCString.h"
+#include "MCUtils.h"
+#include "MCHTMLRendererIMAPDataCallback.h"
+#include "MCHTMLBodyRendererTemplateCallback.h"
 
 using namespace mailcore;
 
@@ -482,7 +487,7 @@ static bool hasError(int errorCode)
 
 bool IMAPSession::checkCertificate()
 {
-#warning check certificate
+    //TODO check certificate
     return true;
 }
 
@@ -1717,7 +1722,8 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
                 hasHeader = true;
             }
             else if (att_static->att_type == MAILIMAP_MSG_ATT_BODY_SECTION) {
-                if ((requestKind & IMAPMessagesRequestKindFullHeaders) != 0) {
+                if ((requestKind & IMAPMessagesRequestKindFullHeaders) != 0 ||
+                    (requestKind & IMAPMessagesRequestKindExtraHeaders) != 0) {
                     char * bytes;
                     size_t length;
                     
@@ -1844,7 +1850,7 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
 
 IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequestKind requestKind, bool fetchByUID,
                                             struct mailimap_set * imapset, uint64_t modseq, HashMap * mapping, uint32_t startUid,
-                                            IMAPProgressCallback * progressCallback, ErrorCode * pError)
+                                            IMAPProgressCallback * progressCallback, Array * extraHeaders, ErrorCode * pError)
 {
     struct mailimap_fetch_type * fetch_type;
     clist * fetch_result;
@@ -1864,9 +1870,12 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
     if (* pError != ErrorNone)
         return NULL;
     
-    if (mNeedsMboxMailWorkaround) {
+    if (mNeedsMboxMailWorkaround && ((requestKind & IMAPMessagesRequestKindHeaders) != 0)) {
         requestKind = (IMAPMessagesRequestKind) (requestKind & ~IMAPMessagesRequestKindHeaders);
         requestKind = (IMAPMessagesRequestKind) (requestKind | IMAPMessagesRequestKindFullHeaders);
+    }
+    if (extraHeaders != NULL) {
+        requestKind = (IMAPMessagesRequestKind) (requestKind | IMAPMessagesRequestKindExtraHeaders);
     }
     
     if ((requestKind & IMAPMessagesRequestKindHeaders) != 0) {
@@ -1981,6 +1990,28 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
 		fetch_att = mailimap_fetch_att_new_internaldate();
         mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
 	}
+    if ((requestKind & IMAPMessagesRequestKindExtraHeaders) != 0) {
+        // custom header request
+        clist * hdrlist;
+        char * header;
+        struct mailimap_header_list * imap_hdrlist;
+        struct mailimap_section * section;
+        
+        if (extraHeaders && extraHeaders->count() > 0) {
+            hdrlist = clist_new();
+            for (unsigned int i = 0; i < extraHeaders->count(); i++) {
+                String *headerString = (String *)extraHeaders->objectAtIndex(i);
+                header = strdup(headerString->UTF8Characters());
+                clist_append(hdrlist, header);
+            }
+            
+            imap_hdrlist = mailimap_header_list_new(hdrlist);
+            section = mailimap_section_new_header_fields(imap_hdrlist);
+            fetch_att = mailimap_fetch_att_new_body_peek_section(section);
+            mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
+            needsHeader = true;
+        }
+    }
     
     struct msg_att_handler_data msg_att_data;
     
@@ -2081,7 +2112,7 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
                 requestKind = (IMAPMessagesRequestKind) (requestKind | IMAPMessagesRequestKindFullHeaders);
 
                 result = fetchMessages(folder, requestKind, fetchByUID,
-                    imapset, modseq, NULL, startUid, progressCallback, pError);
+                    imapset, modseq, NULL, startUid, progressCallback, extraHeaders, pError);
                 if (result != NULL) {
                     if (result->modifiedOrAddedMessages() != NULL) {
                         if (result->modifiedOrAddedMessages()->count() > 0) {
@@ -2102,9 +2133,17 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
 Array * IMAPSession::fetchMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
                                         IndexSet * uids, IMAPProgressCallback * progressCallback, ErrorCode * pError)
 {
+    return fetchMessagesByUIDWithExtraHeaders(folder, requestKind, uids, progressCallback, NULL, pError);
+}
+
+
+Array * IMAPSession::fetchMessagesByUIDWithExtraHeaders(String * folder, IMAPMessagesRequestKind requestKind,
+                                                        IndexSet * uids, IMAPProgressCallback * progressCallback,
+                                                        Array * extraHeaders, ErrorCode * pError)
+{
     struct mailimap_set * imapset = setFromIndexSet(uids);
     IMAPSyncResult * syncResult = fetchMessages(folder, requestKind, true, imapset, 0, NULL, 0,
-                                                progressCallback, pError);
+                                                progressCallback, extraHeaders, pError);
     if (syncResult == NULL)
         return NULL;
     Array * result = syncResult->modifiedOrAddedMessages();
@@ -2114,11 +2153,19 @@ Array * IMAPSession::fetchMessagesByUID(String * folder, IMAPMessagesRequestKind
 }
 
 Array * IMAPSession::fetchMessagesByNumber(String * folder, IMAPMessagesRequestKind requestKind,
-                                           IndexSet * numbers, IMAPProgressCallback * progressCallback, ErrorCode * pError)
+                                           IndexSet * numbers, IMAPProgressCallback * progressCallback,
+                                           ErrorCode * pError)
+{
+    return fetchMessagesByNumberWithExtraHeaders(folder, requestKind, numbers, progressCallback, NULL, pError);
+}
+
+Array * IMAPSession::fetchMessagesByNumberWithExtraHeaders(String * folder, IMAPMessagesRequestKind requestKind,
+                                                           IndexSet * numbers, IMAPProgressCallback * progressCallback,
+                                                           Array * extraHeaders, ErrorCode * pError)
 {
     struct mailimap_set * imapset = setFromIndexSet(numbers);
     IMAPSyncResult * syncResult = fetchMessages(folder, requestKind, false, imapset, 0, NULL, 0,
-                                                progressCallback, pError);
+                                                progressCallback, extraHeaders, pError);
     if (syncResult == NULL)
         return NULL;
     Array * result = syncResult->modifiedOrAddedMessages();
@@ -2911,13 +2958,22 @@ IMAPSyncResult * IMAPSession::syncMessagesByUID(String * folder, IMAPMessagesReq
                                                 IndexSet * uids, uint64_t modseq,
                                                 IMAPProgressCallback * progressCallback, ErrorCode * pError)
 {
+    return syncMessagesByUIDWithExtraHeaders(folder, requestKind, uids, modseq, progressCallback, NULL, pError);
+}
+
+IMAPSyncResult * IMAPSession::syncMessagesByUIDWithExtraHeaders(String * folder, IMAPMessagesRequestKind requestKind,
+                                                IndexSet * uids, uint64_t modseq,
+                                                IMAPProgressCallback * progressCallback, Array * extraHeaders,
+                                                ErrorCode * pError)
+{
     MCAssert(uids->rangesCount() > 0);
     struct mailimap_set * imapset = setFromIndexSet(uids);
     IMAPSyncResult * result = fetchMessages(folder, requestKind, true, imapset, modseq, NULL,
                                             (uint32_t) uids->allRanges()[0].location,
-                                            progressCallback, pError);
+                                            progressCallback, extraHeaders, pError);
     mailimap_set_free(imapset);
     return result;
+
 }
 
 IndexSet * IMAPSession::capability(ErrorCode * pError)
@@ -2971,6 +3027,10 @@ IndexSet * IMAPSession::capability(ErrorCode * pError)
         result->addIndex(IMAPCapabilityQResync);
         mQResyncEnabled = true;
     }
+    if (mailimap_has_xoauth2(mImap)) {
+        result->addIndex(IMAPCapabilityXOAuth2);
+        mXOauth2Enabled = true;
+    }
     
     * pError = ErrorNone;
     result->autorelease();
@@ -3002,6 +3062,10 @@ bool IMAPSession::isIdentityEnabled()
     return mIdentityEnabled;
 }
 
+bool IMAPSession::isXOAuthEnabled() {
+	return mXOauth2Enabled;
+}
+
 bool IMAPSession::isDisconnected()
 {
     return mState == STATE_DISCONNECTED;
@@ -3015,4 +3079,77 @@ void IMAPSession::setConnectionLogger(ConnectionLogger * logger)
 ConnectionLogger * IMAPSession::connectionLogger()
 {
     return mConnectionLogger;
+}
+
+String * IMAPSession::htmlRendering(IMAPMessage * message, String * folder, ErrorCode * pError)
+{
+    HTMLRendererIMAPDataCallback * dataCallback = new HTMLRendererIMAPDataCallback(this, message->uid());
+    String * htmlString = HTMLRenderer::htmlForIMAPMessage(folder,
+                                                           message,
+                                                           dataCallback,
+                                                           NULL);
+    * pError = dataCallback->error();
+    
+    if (* pError != ErrorNone) {
+        return NULL;
+    }
+    
+    MC_SAFE_RELEASE(dataCallback);
+    return htmlString;
+}
+
+String * IMAPSession::htmlBodyRendering(IMAPMessage * message, String * folder, ErrorCode * pError)
+{    
+    HTMLRendererIMAPDataCallback * dataCallback = new HTMLRendererIMAPDataCallback(this, message->uid());
+    HTMLBodyRendererTemplateCallback * htmlCallback = new HTMLBodyRendererTemplateCallback();
+    
+    String * htmlBodyString = HTMLRenderer::htmlForIMAPMessage(folder,
+                                                               message,
+                                                               dataCallback,
+                                                               htmlCallback);
+
+    * pError = dataCallback->error();
+    
+    if (* pError != ErrorNone) {
+        return NULL;
+    }
+    
+    MC_SAFE_RELEASE(dataCallback);
+    MC_SAFE_RELEASE(htmlCallback);
+    return htmlBodyString;
+}
+
+String * IMAPSession::plainTextRendering(IMAPMessage * message, String * folder, ErrorCode * pError)
+{
+    String * htmlString = htmlRendering(message, folder, pError);
+    
+    if (* pError != ErrorNone) {
+        return NULL;
+    }
+    
+    String * plainTextString = htmlString->flattenHTML();
+    return plainTextString;
+}
+
+String * IMAPSession::plainTextBodyRendering(IMAPMessage * message, String * folder, ErrorCode * pError)
+{
+    String * htmlBodyString = htmlBodyRendering(message, folder, pError);
+    
+    if (* pError != ErrorNone) {
+        return NULL;
+    }
+    
+    String * plainTextBodyString = htmlBodyString->flattenHTML();
+    
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\t"), MCSTR(" "));
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\n"), MCSTR(" "));
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\v"), MCSTR(" "));
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\f"), MCSTR(" "));
+    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
+    
+    while (plainTextBodyString->replaceOccurrencesOfString(MCSTR("  "), MCSTR(" ")) > 0) {
+        /* do nothing */
+    }
+    
+    return plainTextBodyString;
 }
