@@ -1870,9 +1870,12 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
     if (* pError != ErrorNone)
         return NULL;
     
-    if (mNeedsMboxMailWorkaround) {
+    if (mNeedsMboxMailWorkaround && ((requestKind & IMAPMessagesRequestKindHeaders) != 0)) {
         requestKind = (IMAPMessagesRequestKind) (requestKind & ~IMAPMessagesRequestKindHeaders);
         requestKind = (IMAPMessagesRequestKind) (requestKind | IMAPMessagesRequestKindFullHeaders);
+    }
+    if (extraHeaders != NULL) {
+        requestKind = (IMAPMessagesRequestKind) (requestKind | IMAPMessagesRequestKindExtraHeaders);
     }
     
     if ((requestKind & IMAPMessagesRequestKindHeaders) != 0) {
