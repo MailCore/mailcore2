@@ -354,7 +354,7 @@ void MessageHeader::importHeadersData(Data * data)
 	int r;
 	
 	cur_token = 0;
-	r = mailimf_fields_parse(data->bytes(), data->length(), &cur_token, &fields);
+	r = mailimf_envelope_and_optional_fields_parse(data->bytes(), data->length(), &cur_token, &fields);
 	if (r != MAILIMF_NO_ERROR) {
 		return;
 	}
@@ -494,18 +494,6 @@ void MessageHeader::importIMFFields(struct mailimf_fields * fields)
                     setReferences(msgids);
                 }
                 break;
-            case MAILIMF_FIELD_COMMENTS:
-                // Set only if comments is not set
-                // TODO: Per RFC5322, multiple comments fields are allowed, should that here
-                if (headerValueForName(MCSTR("Comments")) == NULL) {
-                    char * comments;
-                    String * str;
-                
-                    comments = field->fld_data.fld_comments->cm_value;
-                    str = String::stringWithUTF8Characters(comments);
-                    addHeader(MCSTR("Comments"), str);
-                }
-                break;
             case MAILIMF_FIELD_OPTIONAL_FIELD:
                 char * fieldName;
                 String * fieldNameStr;
@@ -522,10 +510,9 @@ void MessageHeader::importIMFFields(struct mailimf_fields * fields)
                     addHeader(fieldNameStr, fieldValueStr);
                 }
                 break;
-            case MAILIMF_FIELD_KEYWORDS:
-                // TODO: need deal with non-string headers in mExtraHeaders since Keywords is a list
-                break;
             default:
+                // It won't happen with mailimf_envelope_and_optional_fields_parse().
+                MCAssert(0);
                 break;
         }
         cur = clist_next(cur);
