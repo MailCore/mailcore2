@@ -175,9 +175,9 @@ typedef enum {
 } MCOIMAPSearchKind;
 
 /** Keys for the namespace dictionary.*/
-#define MCOIMAPNamespacePersonal @"IMAPNamespacePersonal";
-#define MCOIMAPNamespaceOther @"IMAPNamespaceOther";
-#define MCOIMAPNamespaceShared @"IMAPNamespaceShared";
+#define MCOIMAPNamespacePersonal @"IMAPNamespacePersonal"
+#define MCOIMAPNamespaceOther @"IMAPNamespaceOther"
+#define MCOIMAPNamespaceShared @"IMAPNamespaceShared"
 
 /** This is the constants for the IMAP capabilities.*/
 /** See corresponding RFC for more information.*/

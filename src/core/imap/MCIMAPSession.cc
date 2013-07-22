@@ -2729,7 +2729,7 @@ HashMap * IMAPSession::fetchNamespace(ErrorCode * pError)
     if (namespace_data->ns_shared != NULL) {
         ns = new IMAPNamespace();
         ns->importIMAPNamespace(namespace_data->ns_shared);
-        result->setObjectForKey(IMAPNamespaceOther, ns);
+        result->setObjectForKey(IMAPNamespaceShared, ns);
         ns->release();
     }
     
