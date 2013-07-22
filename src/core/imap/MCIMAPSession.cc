@@ -674,8 +674,8 @@ void IMAPSession::login(ErrorCode * pError)
 	
 	MCAssert(mState == STATE_CONNECTED);
 	
-    const char* utf8username;
-    const char* utf8password;
+    const char * utf8username;
+    const char * utf8password;
     utf8username = MCUTF8(mUsername);
     utf8password = MCUTF8(mPassword);
     if (utf8username == NULL) {
@@ -756,7 +756,7 @@ void IMAPSession::login(ErrorCode * pError)
             break;
 			
         case AuthTypeSASLKerberosV4:
-			r = mailimap_authenticate(mImap, "KERBEROS_V4",
+            r = mailimap_authenticate(mImap, "KERBEROS_V4",
                                       MCUTF8(mHostname),
                                       NULL,
                                       NULL,
@@ -765,7 +765,7 @@ void IMAPSession::login(ErrorCode * pError)
             break;
             
         case AuthTypeXOAuth2:
-            r = mailimap_oauth2_authenticate(mImap, MCUTF8(mUsername), MCUTF8(mOAuth2Token));
+            r = mailimap_oauth2_authenticate(mImap, utf8username, MCUTF8(mOAuth2Token));
             break;
 	}
     if (r == MAILIMAP_ERROR_STREAM) {
