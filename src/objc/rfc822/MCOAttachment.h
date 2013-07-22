@@ -24,6 +24,9 @@
 /** Returns a file attachment with the content of the given file.*/
 + (MCOAttachment *) attachmentWithContentsOfFile:(NSString *)filename;
 
+/** Returns a file attachment with the given data and filename.*/
++ (MCOAttachment *) attachmentWithData:(NSData *)data filename:(NSString *)filename;
+
 /** Returns a part with an HTML content.*/
 + (MCOAttachment *) attachmentWithHTMLString:(NSString *)htmlString;
 
