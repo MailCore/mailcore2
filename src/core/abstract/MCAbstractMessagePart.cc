@@ -75,5 +75,5 @@ AbstractPart * AbstractMessagePart::partForContentID(String * contentID)
 
 AbstractPart * AbstractMessagePart::partForUniqueID(String * contentID)
 {
-    return mainPart()->partForContentID(contentID);
+    return mainPart()->partForUniqueID(contentID);
 }
