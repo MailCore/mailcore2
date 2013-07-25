@@ -17,6 +17,8 @@
 #define CLIENT_SECRET @"the-client-secret"
 #define KEYCHAIN_ITEM_NAME @"MailCore OAuth 2.0 Token"
 
+#define NUMBER_OF_MESSAGES_TO_LOAD		10
+
 @interface MasterViewController ()
 @property (nonatomic, strong) NSArray *messages;
 
@@ -109,7 +111,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 	self.imapSession.connectionLogger = ^(void * connectionID, MCOConnectionLogType type, NSData * data) {
         @synchronized(weakSelf) {
             if (type != MCOConnectionLogTypeSentPrivate) {
-                NSLog(@"event logged:%p %i withData: %@", connectionID, type, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+//                NSLog(@"event logged:%p %i withData: %@", connectionID, type, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
             }
         }
     };
@@ -134,21 +136,37 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 	(MCOIMAPMessagesRequestKindHeaders | MCOIMAPMessagesRequestKindStructure |
 	 MCOIMAPMessagesRequestKindInternalDate | MCOIMAPMessagesRequestKindHeaderSubject |
 	 MCOIMAPMessagesRequestKindFlags);
-	self.imapMessagesFetchOp = [self.imapSession fetchMessagesByUIDOperationWithFolder:@"INBOX"
-																		   requestKind:requestKind
-																				  uids:[MCOIndexSet indexSetWithRange:MCORangeMake(1, UINT64_MAX)]];
-	[self.imapMessagesFetchOp setProgress:^(unsigned int progress) {
-		//NSLog(@"progress: %u", progress);
-	}];
 	
-	__weak MasterViewController *weakSelf = self;
-	[self.imapMessagesFetchOp start:^(NSError *error, NSArray *messages, MCOIndexSet *vanishedMessages) {
-		MasterViewController *strongSelf = weakSelf;
-		NSLog(@"fetched all messages.");
+	NSString *inboxFolder = @"INBOX";
+	MCOIMAPFolderInfoOperation *inboxFolderInfo = [self.imapSession folderInfoOperation:inboxFolder];
+	
+	[inboxFolderInfo start:^(NSError *error, MCOIMAPFolderInfo *info)
+	{
+		NSUInteger numberOfMessagesToLoad =
+		MIN([info messageCount], NUMBER_OF_MESSAGES_TO_LOAD);
 		
-		NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"header.date" ascending:NO];
-		strongSelf.messages = [messages sortedArrayUsingDescriptors:@[sort]];
-		[strongSelf.tableView reloadData];
+		if (numberOfMessagesToLoad == 0)
+			return;
+				
+		self.imapMessagesFetchOp =
+		[self.imapSession fetchMessagesByNumberOperationWithFolder:inboxFolder
+													   requestKind:requestKind
+														   numbers:
+		 [MCOIndexSet indexSetWithRange:MCORangeMake([info messageCount] - (numberOfMessagesToLoad - 1), (numberOfMessagesToLoad - 1))]];
+		
+		[self.imapMessagesFetchOp setProgress:^(unsigned int progress) {
+			NSLog(@"Progress: %u of %u", progress, numberOfMessagesToLoad);
+		}];
+		
+		__weak MasterViewController *weakSelf = self;
+		[self.imapMessagesFetchOp start:^(NSError *error, NSArray *messages, MCOIndexSet *vanishedMessages) {
+			MasterViewController *strongSelf = weakSelf;
+			NSLog(@"fetched all messages.");
+			
+			NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"header.date" ascending:NO];
+			strongSelf.messages = [messages sortedArrayUsingDescriptors:@[sort]];
+			[strongSelf.tableView reloadData];
+		}];
 	}];
 }
 
