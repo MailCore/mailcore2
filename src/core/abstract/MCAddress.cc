@@ -433,7 +433,7 @@ static Array * lep_address_list_from_lep_mailbox(struct mailimf_mailbox_list * m
 	Array * result;
 	clistiter * cur;
 	
-	result = new Array();
+	result = Array::array();
 	for(cur = clist_begin(mb_list->mb_list) ; cur != NULL ; cur = clist_next(cur)) {
 		struct mailimf_mailbox * mb;
 		Address * address;
@@ -456,7 +456,7 @@ static Array * lep_address_list_from_lep_addr(struct mailimf_address_list * addr
 	Array * result;
 	clistiter * cur;
 	
-	result = new Array();
+	result = Array::array();
 	
 	for(cur = clist_begin(addr_list->ad_list) ; cur != NULL ;
 		cur = clist_next(cur)) {
