@@ -633,6 +633,9 @@
 		C6EB310116B8E6E60091F4F1 /* NSObject+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6EB310016B8E6E50091F4F1 /* NSObject+MCO.mm */; };
 		C6EB310216B8E7D60091F4F1 /* NSObject+MCO.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6EB30FF16B8E6E50091F4F1 /* NSObject+MCO.h */; };
 		C6EB310316B8E7D80091F4F1 /* NSArray+MCO.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6EB30FD16B8E50F0091F4F1 /* NSArray+MCO.h */; };
+		C6ED6D1A17A1919500A4A14C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6ED6D1917A1919500A4A14C /* Security.framework */; };
+		C6ED6D1B17A191B100A4A14C /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64EA7B016A00BBB00778456 /* CoreServices.framework */; };
+		C6ED6D1D17A191BF00A4A14C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6ED6D1C17A191BF00A4A14C /* Security.framework */; };
 		C6F5B9E216FEA1E800D9DABD /* MCOIMAPMessage.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6F5B9E116FEA1E800D9DABD /* MCOIMAPMessage.mm */; };
 		C6F5B9E516FEA27500D9DABD /* MCOIMAPMessagePart.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6F5B9E416FEA27500D9DABD /* MCOIMAPMessagePart.mm */; };
 		C6F5B9E816FEA28600D9DABD /* MCOIMAPMultipart.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6F5B9E716FEA28600D9DABD /* MCOIMAPMultipart.mm */; };
@@ -1436,6 +1439,8 @@
 		C6EB30FD16B8E50F0091F4F1 /* NSArray+MCO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MCO.h"; sourceTree = "<group>"; };
 		C6EB30FF16B8E6E50091F4F1 /* NSObject+MCO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MCO.h"; sourceTree = "<group>"; };
 		C6EB310016B8E6E50091F4F1 /* NSObject+MCO.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSObject+MCO.mm"; sourceTree = "<group>"; };
+		C6ED6D1917A1919500A4A14C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		C6ED6D1C17A191BF00A4A14C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		C6F5B9E016FEA1E800D9DABD /* MCOIMAPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPMessage.h; sourceTree = "<group>"; };
 		C6F5B9E116FEA1E800D9DABD /* MCOIMAPMessage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOIMAPMessage.mm; sourceTree = "<group>"; };
 		C6F5B9E316FEA27500D9DABD /* MCOIMAPMessagePart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPMessagePart.h; sourceTree = "<group>"; };
@@ -1514,6 +1519,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6ED6D1D17A191BF00A4A14C /* Security.framework in Frameworks */,
 				C6A81BB41706891B00882C15 /* CFNetwork.framework in Frameworks */,
 				C6A81BB2170685A700882C15 /* libMailCore-ios.a in Frameworks */,
 				C6A81B931706840C00882C15 /* UIKit.framework in Frameworks */,
@@ -1533,6 +1539,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6ED6D1B17A191B100A4A14C /* CoreServices.framework in Frameworks */,
+				C6ED6D1A17A1919500A4A14C /* Security.framework in Frameworks */,
 				C6BD28A3170BD84F00A91AC1 /* libMailCore.a in Frameworks */,
 				C6BD288F170BD71100A91AC1 /* Cocoa.framework in Frameworks */,
 			);
@@ -1964,6 +1972,8 @@
 		C64EA78E169F259200778456 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C6ED6D1C17A191BF00A4A14C /* Security.framework */,
+				C6ED6D1917A1919500A4A14C /* Security.framework */,
 				C6A81BB31706891B00882C15 /* CFNetwork.framework */,
 				C64EA7B016A00BBB00778456 /* CoreServices.framework */,
 				C64EA78F169F259200778456 /* Foundation.framework */,
