@@ -19,18 +19,34 @@
 
 #define NUMBER_OF_MESSAGES_TO_LOAD		10
 
+static NSString *mailCellIdentifier = @"MailCell";
+static NSString *inboxInfoIdentifier = @"InboxStatusCell";
+
 @interface MasterViewController ()
 @property (nonatomic, strong) NSArray *messages;
 
 @property (nonatomic, strong) MCOIMAPOperation *imapCheckOp;
 @property (nonatomic, strong) MCOIMAPSession *imapSession;
 @property (nonatomic, strong) MCOIMAPFetchMessagesOperation *imapMessagesFetchOp;
+
+
+@property (nonatomic) NSInteger totalNumberOfInboxMessages;
+@property (nonatomic) BOOL isLoading;
+@property (nonatomic, strong) UIActivityIndicatorView *loadMoreActivityView;
+@property (nonatomic, strong) NSMutableDictionary *messagePreviews;
 @end
 
 @implementation MasterViewController
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	
+	[self.tableView registerClass:[MCTTableViewCell class]
+		   forCellReuseIdentifier:mailCellIdentifier];
+
+	self.loadMoreActivityView =
+	[[UIActivityIndicatorView alloc]
+	 initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 	
 	[[NSUserDefaults standardUserDefaults] registerDefaults:@{ HostnameKey: @"imap.gmail.com" }];
 	
@@ -115,6 +131,13 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
             }
         }
     };
+	
+	// Reset the inbox
+	self.messages = nil;
+	self.totalNumberOfInboxMessages = -1;
+	self.isLoading = NO;
+	self.messagePreviews = [NSMutableDictionary dictionary];
+	[self.tableView reloadData];
     
 	NSLog(@"checking account");
 	self.imapCheckOp = [self.imapSession checkAccountOperation];
@@ -122,7 +145,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 		MasterViewController *strongSelf = weakSelf;
 		NSLog(@"finished checking account.");
 		if (error == nil) {
-			[strongSelf loadEmails];
+			[strongSelf loadLastNMessages:NUMBER_OF_MESSAGES_TO_LOAD];
 		} else {
 			NSLog(@"error loading account: %@", error);
 		}
@@ -131,7 +154,10 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 	}];
 }
 
-- (void)loadEmails {
+- (void)loadLastNMessages:(NSUInteger)nMessages
+{
+	self.isLoading = YES;
+	
 	MCOIMAPMessagesRequestKind requestKind = (MCOIMAPMessagesRequestKind)
 	(MCOIMAPMessagesRequestKindHeaders | MCOIMAPMessagesRequestKindStructure |
 	 MCOIMAPMessagesRequestKindInternalDate | MCOIMAPMessagesRequestKindHeaderSubject |
@@ -142,29 +168,73 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 	
 	[inboxFolderInfo start:^(NSError *error, MCOIMAPFolderInfo *info)
 	{
+		BOOL totalNumberOfMessagesDidChange =
+		self.totalNumberOfInboxMessages != [info messageCount];
+		
+		self.totalNumberOfInboxMessages = [info messageCount];
+		
 		NSUInteger numberOfMessagesToLoad =
-		MIN([info messageCount], NUMBER_OF_MESSAGES_TO_LOAD);
+		MIN(self.totalNumberOfInboxMessages, nMessages);
 		
 		if (numberOfMessagesToLoad == 0)
+		{
+			self.isLoading = NO;
 			return;
-				
+		}
+		
+		MCORange fetchRange;
+		
+		// If total number of messages did not change since last fetch,
+		// assume nothing was deleted since our last fetch and just
+		// fetch what we don't have
+		if (!totalNumberOfMessagesDidChange && self.messages.count)
+		{
+			numberOfMessagesToLoad -= self.messages.count;
+			
+			fetchRange =
+			MCORangeMake(self.totalNumberOfInboxMessages -
+						 self.messages.count -
+						 (numberOfMessagesToLoad - 1),
+						 (numberOfMessagesToLoad - 1));
+		}
+		
+		// Else just fetch the last N messages
+		else
+		{
+			fetchRange =
+			MCORangeMake(self.totalNumberOfInboxMessages -
+						 (numberOfMessagesToLoad - 1),
+						 (numberOfMessagesToLoad - 1));
+		}
+		
 		self.imapMessagesFetchOp =
 		[self.imapSession fetchMessagesByNumberOperationWithFolder:inboxFolder
 													   requestKind:requestKind
 														   numbers:
-		 [MCOIndexSet indexSetWithRange:MCORangeMake([info messageCount] - (numberOfMessagesToLoad - 1), (numberOfMessagesToLoad - 1))]];
+		 [MCOIndexSet indexSetWithRange:fetchRange]];
 		
 		[self.imapMessagesFetchOp setProgress:^(unsigned int progress) {
 			NSLog(@"Progress: %u of %u", progress, numberOfMessagesToLoad);
 		}];
 		
 		__weak MasterViewController *weakSelf = self;
-		[self.imapMessagesFetchOp start:^(NSError *error, NSArray *messages, MCOIndexSet *vanishedMessages) {
+		[self.imapMessagesFetchOp start:
+		 ^(NSError *error, NSArray *messages, MCOIndexSet *vanishedMessages)
+		{
 			MasterViewController *strongSelf = weakSelf;
 			NSLog(@"fetched all messages.");
 			
-			NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"header.date" ascending:NO];
-			strongSelf.messages = [messages sortedArrayUsingDescriptors:@[sort]];
+			self.isLoading = NO;
+			
+			NSSortDescriptor *sort =
+			[NSSortDescriptor sortDescriptorWithKey:@"header.date" ascending:NO];
+			
+			NSMutableArray *combinedMessages =
+			[NSMutableArray arrayWithArray:messages];
+			[combinedMessages addObjectsFromArray:strongSelf.messages];
+			
+			strongSelf.messages =
+			[combinedMessages sortedArrayUsingDescriptors:@[sort]];
 			[strongSelf.tableView reloadData];
 		}];
 	}];
@@ -178,30 +248,103 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return 1;
+	return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	if (section == 1)
+	{
+		if (self.totalNumberOfInboxMessages >= 0)
+			return 1;
+		
+		return 0;
+	}
+	
 	return self.messages.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString * cellIdentifier = @"Cell";
-    [tableView registerClass:[MCTTableViewCell class] forCellReuseIdentifier:cellIdentifier];
-
-	MCTTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-	MCOIMAPMessage *message = self.messages[indexPath.row];
-    
-	cell.textLabel.text = message.header.subject;
-    cell.messageRenderingOperation = [self.imapSession plainTextBodyRenderingOperationWithMessage:message
-                                                                                           folder:@"INBOX"];
-    
-    [cell.messageRenderingOperation start:^(NSString * plainTextBodyString, NSError * error) {
-        cell.detailTextLabel.text = plainTextBodyString;
-        cell.messageRenderingOperation = nil;
-    }];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	switch (indexPath.section)
+	{
+		case 0:
+		{
+			MCTTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:mailCellIdentifier forIndexPath:indexPath];
+			MCOIMAPMessage *message = self.messages[indexPath.row];
+			
+			cell.textLabel.text = message.header.subject;
+			
+			NSString *uidKey = [NSString stringWithFormat:@"%d", message.uid];
+			NSString *cachedPreview = self.messagePreviews[uidKey];
+			
+			if (cachedPreview)
+			{
+				cell.detailTextLabel.text = cachedPreview;
+			}
+			else
+			{
+				cell.messageRenderingOperation = [self.imapSession plainTextBodyRenderingOperationWithMessage:message
+																									   folder:@"INBOX"];
+				
+				[cell.messageRenderingOperation start:^(NSString * plainTextBodyString, NSError * error) {
+					cell.detailTextLabel.text = plainTextBodyString;
+					cell.messageRenderingOperation = nil;
+					self.messagePreviews[uidKey] = plainTextBodyString;
+				}];
+			}
+			
+			return cell;
+			break;
+		}
+			
+		case 1:
+		{
+			UITableViewCell *cell =
+			[tableView dequeueReusableCellWithIdentifier:inboxInfoIdentifier];
+			
+			if (!cell)
+			{
+				cell =
+				[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+									   reuseIdentifier:inboxInfoIdentifier];
+				
+				cell.textLabel.font = [UIFont boldSystemFontOfSize:14];
+				cell.textLabel.textAlignment = NSTextAlignmentCenter;
+				cell.detailTextLabel.textAlignment = NSTextAlignmentCenter;
+			}
+			
+			if (self.messages.count < self.totalNumberOfInboxMessages)
+			{
+				cell.textLabel.text =
+				[NSString stringWithFormat:@"Load %d more",
+				 MIN(self.totalNumberOfInboxMessages - self.messages.count,
+					 NUMBER_OF_MESSAGES_TO_LOAD)];
+			}
+			else
+			{
+				cell.textLabel.text = nil;
+			}
+			
+			cell.detailTextLabel.text =
+			[NSString stringWithFormat:@"%d message(s)",
+			 self.totalNumberOfInboxMessages];
+			
+			cell.accessoryView = self.loadMoreActivityView;
+			
+			if (self.isLoading)
+				[self.loadMoreActivityView startAnimating];
+			else
+				[self.loadMoreActivityView stopAnimating];
+			
+			return cell;
+			break;
+		}
+			
+		default:
+			return nil;
+			break;
+	}
 	
-	return cell;
 }
 
 - (void)showSettingsViewController:(id)sender {
@@ -228,12 +371,41 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	MCOIMAPMessage *msg = self.messages[indexPath.row];
-	MCTMsgViewController *vc = [[MCTMsgViewController alloc] init];
-	vc.folder = @"INBOX";
-	vc.message = msg;
-	vc.session = self.imapSession;
-	[self.navigationController pushViewController:vc animated:YES];
+	
+	switch (indexPath.section)
+	{
+		case 0:
+		{
+			MCOIMAPMessage *msg = self.messages[indexPath.row];
+			MCTMsgViewController *vc = [[MCTMsgViewController alloc] init];
+			vc.folder = @"INBOX";
+			vc.message = msg;
+			vc.session = self.imapSession;
+			[self.navigationController pushViewController:vc animated:YES];
+			
+			break;
+		}
+			
+		case 1:
+		{
+			UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+			
+			if (!self.isLoading &&
+				self.messages.count < self.totalNumberOfInboxMessages)
+			{
+				[self loadLastNMessages:self.messages.count + NUMBER_OF_MESSAGES_TO_LOAD];
+				cell.accessoryView = self.loadMoreActivityView;
+				[self.loadMoreActivityView startAnimating];
+			}
+			
+			[tableView deselectRowAtIndexPath:indexPath animated:YES];
+			break;
+		}
+			
+		default:
+			break;
+	}
+
 }
 
 @end
