@@ -71,14 +71,22 @@ void SMTPOperation::bodyProgress(SMTPSession * session, unsigned int current, un
     struct progressContext * context = (struct progressContext *) calloc(sizeof(* context), 1);
     context->current = current;
     context->maximum = maximum;
+    
+    retain();
     performMethodOnMainThread((Object::Method) &SMTPOperation::bodyProgressOnMainThread, context);
 }
 
 void SMTPOperation::bodyProgressOnMainThread(void * ctx)
 {
+    if (isCancelled()) {
+        release();
+        return;
+    }
+
     struct progressContext * context = (struct progressContext *) ctx;
     if (mSmtpCallback != NULL) {
         mSmtpCallback->bodyProgress(this, context->current, context->maximum);
     }
     free(context);
+    release();
 }
