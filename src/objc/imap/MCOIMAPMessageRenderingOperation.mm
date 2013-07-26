@@ -39,12 +39,21 @@ typedef void (^CompletionType)(NSString * htmlString, NSError * error);
     [super dealloc];
 }
 
-- (void)start:(void (^)(NSString * htmlString, NSError * error))completionBlock {
+- (void) start:(void (^)(NSString * htmlString, NSError * error))completionBlock
+{
     _completionBlock = [completionBlock copy];
     [self start];
 }
 
-- (void)operationCompleted {
+- (void) cancel
+{
+  [_completionBlock release];
+  _completionBlock = nil;
+  [super cancel];
+}
+
+- (void) operationCompleted
+{
     if (_completionBlock == NULL)
         return;
     

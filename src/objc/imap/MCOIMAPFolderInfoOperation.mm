@@ -39,12 +39,21 @@ typedef void (^CompletionType)(NSError *error, MCOIMAPFolderInfo *info);
     [super dealloc];
 }
 
-- (void)start:(void (^)(NSError * error, MCOIMAPFolderInfo * info))completionBlock {
+- (void)start:(void (^)(NSError * error, MCOIMAPFolderInfo * info))completionBlock
+{
     _completionBlock = [completionBlock copy];
     [self start];
 }
 
-- (void)operationCompleted {
+- (void) cancel
+{
+  [_completionBlock release];
+  _completionBlock = nil;
+  [super cancel];
+}
+
+- (void) operationCompleted
+{
     if (_completionBlock == NULL)
         return;
     
@@ -58,7 +67,8 @@ typedef void (^CompletionType)(NSError *error, MCOIMAPFolderInfo *info);
         [info setFirstUnseenUid:MCO_NATIVE_INSTANCE->firstUnseenUid()];
         
         _completionBlock(nil, info);
-    } else {
+    }
+    else {
         _completionBlock([NSError mco_errorWithErrorCode:op->error()], nil);
     }
     [_completionBlock release];
