@@ -21,6 +21,7 @@
 #include "MCUtils.h"
 #include "MCHTMLRendererIMAPDataCallback.h"
 #include "MCHTMLBodyRendererTemplateCallback.h"
+#include "MCCertificateUtils.h"
 
 using namespace mailcore;
 
@@ -468,7 +469,6 @@ bool IMAPSession::isVoIPEnabled()
     return mVoIPEnabled;
 }
 
-
 void IMAPSession::setDelimiter(char delimiter)
 {
     mDelimiter = delimiter;
@@ -487,8 +487,7 @@ static bool hasError(int errorCode)
 
 bool IMAPSession::checkCertificate()
 {
-    //TODO check certificate
-    return true;
+    return mailcore::checkCertificate(mImap->imap_stream, hostname());
 }
 
 void IMAPSession::body_progress(size_t current, size_t maximum, void * context)
@@ -674,8 +673,8 @@ void IMAPSession::login(ErrorCode * pError)
 	
 	MCAssert(mState == STATE_CONNECTED);
 	
-    const char* utf8username;
-    const char* utf8password;
+    const char * utf8username;
+    const char * utf8password;
     utf8username = MCUTF8(mUsername);
     utf8password = MCUTF8(mPassword);
     if (utf8username == NULL) {
@@ -756,7 +755,7 @@ void IMAPSession::login(ErrorCode * pError)
             break;
 			
         case AuthTypeSASLKerberosV4:
-			r = mailimap_authenticate(mImap, "KERBEROS_V4",
+            r = mailimap_authenticate(mImap, "KERBEROS_V4",
                                       MCUTF8(mHostname),
                                       NULL,
                                       NULL,
@@ -765,7 +764,7 @@ void IMAPSession::login(ErrorCode * pError)
             break;
             
         case AuthTypeXOAuth2:
-            r = mailimap_oauth2_authenticate(mImap, MCUTF8(mUsername), MCUTF8(mOAuth2Token));
+            r = mailimap_oauth2_authenticate(mImap, utf8username, MCUTF8(mOAuth2Token));
             break;
 	}
     if (r == MAILIMAP_ERROR_STREAM) {
@@ -2729,7 +2728,7 @@ HashMap * IMAPSession::fetchNamespace(ErrorCode * pError)
     if (namespace_data->ns_shared != NULL) {
         ns = new IMAPNamespace();
         ns->importIMAPNamespace(namespace_data->ns_shared);
-        result->setObjectForKey(IMAPNamespaceOther, ns);
+        result->setObjectForKey(IMAPNamespaceShared, ns);
         ns->release();
     }
     

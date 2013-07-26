@@ -43,19 +43,29 @@ typedef void (^CompletionType)(NSError *error, NSArray *folder);
     [super dealloc];
 }
 
-- (void)start:(void (^)(NSError *error, NSArray * /* MCOIMAPFolder */ folders))completionBlock {
+- (void) start:(void (^)(NSError *error, NSArray * /* MCOIMAPFolder */ folders))completionBlock
+{
     _completionBlock = [completionBlock copy];
     [self start];
 }
 
-- (void)operationCompleted {
+- (void) cancel
+{
+  [_completionBlock release];
+  _completionBlock = nil;
+  [super cancel];
+}
+
+- (void)operationCompleted
+{
     if (_completionBlock == NULL)
         return;
     
     nativeType *op = MCO_NATIVE_INSTANCE;
     if (op->error() == ErrorNone) {
         _completionBlock(nil, MCO_TO_OBJC(op->folders()));
-    } else {
+    }
+    else {
         _completionBlock([NSError mco_errorWithErrorCode:op->error()], nil);
     }
     [_completionBlock release];

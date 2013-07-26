@@ -70,7 +70,7 @@ unsigned int IndexSet::count()
 {
     unsigned int total = 0;
     for(unsigned int i = 0 ; i < mCount ; i ++) {
-        total += mRanges[i].length;
+        total += mRanges[i].length + 1;
     }
     return total;
 }

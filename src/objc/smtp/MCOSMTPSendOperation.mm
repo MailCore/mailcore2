@@ -57,7 +57,7 @@ private:
     return [[[self alloc] initWithMCOperation:op] autorelease];
 }
 
-- (id)initWithMCOperation:(mailcore::Operation *)op
+- (id) initWithMCOperation:(mailcore::Operation *)op
 {
     self = [super initWithMCOperation:op];
     
@@ -75,14 +75,23 @@ private:
     [super dealloc];
 }
 
-- (void)start:(void (^)(NSError *error))completionBlock {
+- (void) start:(void (^)(NSError *error))completionBlock
+{
     _completionBlock = [completionBlock copy];
     [self start];
 }
 
+- (void) cancel
+{
+    [_completionBlock release];
+    _completionBlock = nil;
+    [super cancel];
+}
+
 // This method needs to be duplicated from MCOSMTPOperation since _completionBlock
 // references the instance of this subclass and not the one from MCOSMTPOperation.
-- (void)operationCompleted {
+- (void)operationCompleted
+{
     if (_completionBlock == NULL)
         return;
     

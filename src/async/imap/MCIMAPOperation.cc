@@ -94,8 +94,10 @@ void IMAPOperation::bodyProgress(IMAPSession * session, unsigned int current, un
 
 void IMAPOperation::bodyProgressOnMainThread(void * ctx)
 {
-    if (isCancelled())
+    if (isCancelled()) {
+        release();
         return;
+    }
     
     struct progressContext * context = (struct progressContext *) ctx;
     if (mImapCallback != NULL) {
@@ -107,10 +109,8 @@ void IMAPOperation::bodyProgressOnMainThread(void * ctx)
 
 void IMAPOperation::itemsProgress(IMAPSession * session, unsigned int current, unsigned int maximum)
 {
-    if (isCancelled()) {
-        release();
+    if (isCancelled())
         return;
-    }
     
     struct progressContext * context = (struct progressContext *) calloc(sizeof(* context), 1);
     context->current = current;

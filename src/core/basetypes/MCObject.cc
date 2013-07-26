@@ -66,7 +66,9 @@ void Object::release()
     pthread_mutex_unlock(&mLock);
     
     if (shouldRelease && !zombieEnabled) {
-        //MCLog("dealloc %s", className()->description()->UTF8Characters());
+        //int status;
+        //char * unmangled = abi::__cxa_demangle(typeid(* this).name(), NULL, NULL, &status);
+        //MCLog("dealloc %p %s", this, unmangled);
         delete this;
     }
 }

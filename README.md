@@ -8,6 +8,9 @@ MailCore 2 provides a simple and asynchronous Objective-C API to work with the e
 - **HTML** rendering of messages
 - **iOS** and **Mac** support
 
+[![Build Status](https://travis-ci.org/MailCore/mailcore2.png?branch=master)](https://travis-ci.org/MailCore/mailcore2)
+
+
 ## Installation ##
 
 1. If you're migrating from MailCore1, you should first clean your build folder.

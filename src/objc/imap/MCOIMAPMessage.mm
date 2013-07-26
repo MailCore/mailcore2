@@ -16,9 +16,7 @@
 #import "MCOHTMLRendererDelegate.h"
 #import "MCOHTMLRendererIMAPDelegate.h"
 
-@implementation MCOIMAPMessage {
-    mailcore::IMAPMessage * _message;
-}
+@implementation MCOIMAPMessage
 
 #define nativeType mailcore::IMAPMessage
 
