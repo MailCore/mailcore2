@@ -58,6 +58,9 @@ namespace mailcore {
         virtual void setVoIPEnabled(bool enabled);
         virtual bool isVoIPEnabled();
         
+        virtual void setCompressionEnabled(bool enabled);
+        virtual bool isCompressionEnabled();
+        
         // Needed for fetchSubscribedFolders() and fetchAllFolders().
         virtual void setDelimiter(char delimiter);
         virtual char delimiter();
@@ -155,6 +158,7 @@ namespace mailcore {
         virtual bool isQResyncEnabled();
         virtual bool isIdentityEnabled();
         virtual bool isXOAuthEnabled();
+        virtual bool isCompressionEnabled();
         
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
@@ -198,6 +202,7 @@ namespace mailcore {
         bool mQResyncEnabled;
         bool mIdentityEnabled;
         bool mXOauth2Enabled;
+        bool mCompressionEnabled;
         String * mWelcomeString;
         bool mNeedsMboxMailWorkaround;
         uint32_t mUIDValidity;
@@ -225,6 +230,7 @@ namespace mailcore {
         void setup();
         void unsetup();
         void selectIfNeeded(String * folder, ErrorCode * pError);
+        void enableCompression(ErrorCode * pError);
         char fetchDelimiterIfNeeded(char defaultDelimiter, ErrorCode * pError);
         IMAPSyncResult * fetchMessages(String * folder, IMAPMessagesRequestKind requestKind,
                                        bool fetchByUID, struct mailimap_set * imapset, uint64_t modseq,

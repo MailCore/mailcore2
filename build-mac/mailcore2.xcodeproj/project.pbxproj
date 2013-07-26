@@ -697,6 +697,9 @@
 		DAE42E89178F7E1800E0DB8F /* MCOIMAPMessageRenderingOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DA89896B178A47D200F6D90A /* MCOIMAPMessageRenderingOperation.h */; };
 		DAE42E8A178F7E2200E0DB8F /* MCOIMAPMessageRenderingOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DA89896B178A47D200F6D90A /* MCOIMAPMessageRenderingOperation.h */; };
 		F87F190C16BB62B00012652F /* MCOIMAPFetchFoldersOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = F87F190B16BB62B00012652F /* MCOIMAPFetchFoldersOperation.mm */; };
+		F895C0231797078E00696A81 /* MCIMAPEnableCompressionOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = F895C0211797078C00696A81 /* MCIMAPEnableCompressionOperation.cc */; };
+		F895C0241797078E00696A81 /* MCIMAPEnableCompressionOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = F895C0211797078C00696A81 /* MCIMAPEnableCompressionOperation.cc */; };
+		F895C0251797078E00696A81 /* MCIMAPEnableCompressionOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = F895C0211797078C00696A81 /* MCIMAPEnableCompressionOperation.cc */; };
 		F8EA941716BB1C9D0011AC6F /* MCOIMAPSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F8EA941416BAED6E0011AC6F /* MCOIMAPSession.h */; };
 /* End PBXBuildFile section */
 
@@ -1498,6 +1501,8 @@
 		DAD28C8A1783CFFC00F2BB8F /* MCHTMLBodyRendererTemplateCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCHTMLBodyRendererTemplateCallback.h; sourceTree = "<group>"; };
 		F87F190816BB62690012652F /* MCOIMAPFetchFoldersOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPFetchFoldersOperation.h; sourceTree = "<group>"; };
 		F87F190B16BB62B00012652F /* MCOIMAPFetchFoldersOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOIMAPFetchFoldersOperation.mm; sourceTree = "<group>"; };
+		F895C0211797078C00696A81 /* MCIMAPEnableCompressionOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPEnableCompressionOperation.cc; sourceTree = "<group>"; };
+		F895C0221797078D00696A81 /* MCIMAPEnableCompressionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPEnableCompressionOperation.h; sourceTree = "<group>"; };
 		F8EA941416BAED6E0011AC6F /* MCOIMAPSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPSession.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1752,6 +1757,8 @@
 				C608167A177635D2001F1018 /* MCIMAPDisconnectOperation.h */,
 				DA0F1C79177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.cc */,
 				DA0F1C7A177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.h */,
+				F895C0211797078C00696A81 /* MCIMAPEnableCompressionOperation.cc */,
+				F895C0221797078D00696A81 /* MCIMAPEnableCompressionOperation.h */,
 			);
 			path = imap;
 			sourceTree = "<group>";
@@ -2582,6 +2589,7 @@
 				BD63713B177DFF080094121B /* MCLibetpan.cc in Sources */,
 				DAACAD5117886807000B4517 /* MCHTMLRendererIMAPDataCallback.cc in Sources */,
 				DA89896D178A47D200F6D90A /* MCOIMAPMessageRenderingOperation.mm in Sources */,
+				F895C0231797078E00696A81 /* MCIMAPEnableCompressionOperation.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2772,6 +2780,7 @@
 				BD63713C177DFF080094121B /* MCLibetpan.cc in Sources */,
 				DAACAD5217886807000B4517 /* MCHTMLRendererIMAPDataCallback.cc in Sources */,
 				DA89896E178A47D200F6D90A /* MCOIMAPMessageRenderingOperation.mm in Sources */,
+				F895C0241797078E00696A81 /* MCIMAPEnableCompressionOperation.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2780,6 +2789,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6BD28AB170BDB6B00A91AC1 /* MCOFramework.mm in Sources */,
+				F895C0251797078E00696A81 /* MCIMAPEnableCompressionOperation.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

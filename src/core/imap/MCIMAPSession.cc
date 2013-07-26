@@ -2656,6 +2656,27 @@ HashMap * IMAPSession::identity(String * vendor, String * name, String * version
     return result;
 }
 
+void IMAPSession::enableCompression(ErrorCode * pError)
+{
+    int r;
+    r = mailimap_compress(mImap);
+	if (r == MAILIMAP_ERROR_STREAM) {
+        * pError = ErrorConnection;
+        return;
+    }
+    else if (r == MAILIMAP_ERROR_PARSE) {
+        * pError = ErrorParse;
+        return;
+    }
+    else if (hasError(r)) {
+        * pError = ErrorCompression;
+        return;
+	}
+    
+    this->mCompressionEnabled = true;
+    * pError = ErrorNone;
+}
+
 void IMAPSession::bodyProgress(unsigned int current, unsigned int maximum)
 {
     if (!mBodyProgressEnabled)
@@ -3063,6 +3084,11 @@ bool IMAPSession::isIdentityEnabled()
 
 bool IMAPSession::isXOAuthEnabled() {
 	return mXOauth2Enabled;
+}
+
+bool IMAPSession::isCompressionEnabled()
+{
+    return mCompressionEnabled;
 }
 
 bool IMAPSession::isDisconnected()

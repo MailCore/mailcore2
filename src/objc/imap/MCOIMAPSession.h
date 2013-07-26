@@ -507,6 +507,18 @@
 */
 - (MCOIMAPCapabilityOperation *) capabilityOperation;
 
+
+/**
+ Attempts to enable compression of the IMAP stream. Many servers don't support this,
+ check the capabilities first
+ 
+     MCOIMAPOperation * op = [session enableCompressionOperation];
+     [op start:^(NSError * error) {
+     ...
+     }];
+ */
+- (MCOIMAPOperation *) enableCompressionOperation;
+
 /** @name Search Operations */
 
 /**
