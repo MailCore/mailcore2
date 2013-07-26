@@ -73,14 +73,22 @@ void POPOperation::bodyProgress(POPSession * session, unsigned int current, unsi
     struct progressContext * context = (struct progressContext *) calloc(sizeof(* context), 1);
     context->current = current;
     context->maximum = maximum;
+    
+    retain();
     performMethodOnMainThread((Object::Method) &POPOperation::bodyProgressOnMainThread, context);
 }
 
 void POPOperation::bodyProgressOnMainThread(void * ctx)
 {
+    if (isCancelled()) {
+        release();
+        return;
+    }
+    
     struct progressContext * context = (struct progressContext *) ctx;
     if (mPopCallback != NULL) {
         mPopCallback->bodyProgress(this, context->current, context->maximum);
     }
     free(context);
+    release();
 }
