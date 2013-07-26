@@ -9,6 +9,7 @@
 #include "MCMessageHeader.h"
 #include "MCSMTPProgressCallback.h"
 #include "MCConnectionLoggerUtils.h"
+#include "MCCertificateUtils.h"
 
 using namespace mailcore;
 
@@ -146,8 +147,7 @@ bool SMTPSession::isCheckCertificateEnabled()
 
 bool SMTPSession::checkCertificate()
 {
-    //TODO check certificate
-    return true;
+    return mailcore::checkCertificate(mSmtp->stream, hostname());
 }
 
 void SMTPSession::setUseHeloIPEnabled(bool enabled)

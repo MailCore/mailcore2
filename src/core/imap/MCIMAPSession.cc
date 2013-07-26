@@ -21,6 +21,7 @@
 #include "MCUtils.h"
 #include "MCHTMLRendererIMAPDataCallback.h"
 #include "MCHTMLBodyRendererTemplateCallback.h"
+#include "MCCertificateUtils.h"
 
 using namespace mailcore;
 
@@ -468,7 +469,6 @@ bool IMAPSession::isVoIPEnabled()
     return mVoIPEnabled;
 }
 
-
 void IMAPSession::setDelimiter(char delimiter)
 {
     mDelimiter = delimiter;
@@ -487,8 +487,7 @@ static bool hasError(int errorCode)
 
 bool IMAPSession::checkCertificate()
 {
-    //TODO check certificate
-    return true;
+    return mailcore::checkCertificate(mImap->imap_stream, hostname());
 }
 
 void IMAPSession::body_progress(size_t current, size_t maximum, void * context)

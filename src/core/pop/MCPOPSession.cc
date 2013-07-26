@@ -7,6 +7,7 @@
 #include "MCPOPProgressCallback.h"
 #include "MCMessageHeader.h"
 #include "MCConnectionLoggerUtils.h"
+#include "MCCertificateUtils.h"
 
 using namespace mailcore;
 
@@ -129,8 +130,7 @@ bool POPSession::isCheckCertificateEnabled()
 
 bool POPSession::checkCertificate()
 {
-    //TODO check certificate
-    return true;
+    return mailcore::checkCertificate(mPop->pop3_stream, hostname());
 }
 
 void POPSession::bodyProgress(unsigned int current, unsigned int maximum)
