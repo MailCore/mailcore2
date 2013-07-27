@@ -1805,7 +1805,7 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
                 msg->header()->importIMAPInternalDate(att_static->att_data.att_internal_date);
             }
         }
-    } 
+    }
     
     if (fetchByUID) {
         if (uid < startUid) {
