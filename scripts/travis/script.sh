@@ -13,6 +13,6 @@ xcodebuild -project build-mac/mailcore2.xcodeproj -sdk iphonesimulator6.1 -targe
 echo Building library for Mac
 xcodebuild -project build-mac/mailcore2.xcodeproj -sdk macosx10.8 -target "static mailcore2 osx" build > /dev/null
 echo Building framework for Mac
-xcodebuild -project build-mac/mailcore2.xcodeproj -sdk macosx10.8 -target "mailcore2 osx" build > /dev/null
+xcodebuild -project build-mac/mailcore2.xcodeproj -sdk macosx10.8 -target "mailcore osx" build > /dev/null
 echo Link test for Mac
 xcodebuild -project build-mac/mailcore2.xcodeproj -sdk macosx10.8 -target "tests" build > /dev/null
