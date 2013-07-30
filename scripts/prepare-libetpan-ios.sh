@@ -2,7 +2,7 @@
 
 sdkversion=6.1
 url="https://github.com/dinhviethoa/libetpan.git"
-rev=cac11d6c749fa6e9d2882cdee81e275b09516a89
+rev=dd5b9660819d8a800bd6464373bf63d77d3f8eba
 
 pushd `dirname $0` > /dev/null
 scriptpath=`pwd`
