@@ -29,8 +29,7 @@ bool mailcore::checkCertificate(mailstream * stream, String * hostname)
     
     carray * cCerts = mailstream_get_certificate_chain(stream);
     if (cCerts == NULL) {
-        // No certificates has been returned.
-        // TODO: Should investigate why it happens with CFNetwork.
+        fprintf(stderr, "warning: No certificate chain retrieved");
         return true;
     }
     for(unsigned int i = 0 ; i < carray_count(cCerts) ; i ++) {
