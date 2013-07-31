@@ -30,7 +30,7 @@ bool mailcore::checkCertificate(mailstream * stream, String * hostname)
     carray * cCerts = mailstream_get_certificate_chain(stream);
     if (cCerts == NULL) {
         fprintf(stderr, "warning: No certificate chain retrieved");
-        return true;
+        return false;
     }
     for(unsigned int i = 0 ; i < carray_count(cCerts) ; i ++) {
         MMAPString * str;
@@ -62,6 +62,7 @@ bool mailcore::checkCertificate(mailstream * stream, String * hostname)
     CFRelease(certificates);
     CFRelease(policy);
     CFRelease(hostnameCFString);
+    mailstream_certificate_chain_free(cCerts);
     
     return result;
 #else
