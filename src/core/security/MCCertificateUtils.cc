@@ -19,19 +19,24 @@ bool mailcore::checkCertificate(mailstream * stream, String * hostname)
 {
 #if __APPLE__
     bool result = false;
-    CFStringRef hostnameCFString = CFStringCreateWithCharacters(NULL, (const UniChar *) hostname->unicodeCharacters(),
-                                                                hostname->length());
-    SecPolicyRef policy = SecPolicyCreateSSL(true, hostnameCFString);
-    
+    CFStringRef hostnameCFString;
+    SecPolicyRef policy;
     CFMutableArrayRef certificates;
-    SecTrustRef trust;
-    certificates = CFArrayCreateMutable(NULL, 0, &kCFTypeArrayCallBacks);
+    SecTrustRef trust = NULL;
+    SecTrustResultType trustResult;
+    OSStatus status;
     
     carray * cCerts = mailstream_get_certificate_chain(stream);
     if (cCerts == NULL) {
         fprintf(stderr, "warning: No certificate chain retrieved");
-        return false;
+        goto err;
     }
+    
+    hostnameCFString = CFStringCreateWithCharacters(NULL, (const UniChar *) hostname->unicodeCharacters(),
+                                                                hostname->length());
+    policy = SecPolicyCreateSSL(true, hostnameCFString);
+    certificates = CFArrayCreateMutable(NULL, 0, &kCFTypeArrayCallBacks);
+    
     for(unsigned int i = 0 ; i < carray_count(cCerts) ; i ++) {
         MMAPString * str;
         str = (MMAPString *) carray_get(cCerts, i);
@@ -39,31 +44,34 @@ bool mailcore::checkCertificate(mailstream * stream, String * hostname)
         SecCertificateRef cert = SecCertificateCreateWithData(NULL, data);
         CFArrayAppendValue(certificates, cert);
         CFRelease(data);
-        
-        OSStatus status = SecTrustCreateWithCertificates(certificates, policy, &trust);
-        SecTrustResultType trustResult;
-        status = SecTrustEvaluate(trust, &trustResult);
-        switch (trustResult) {
-            case kSecTrustResultUnspecified:
-            case kSecTrustResultProceed:
-                // certificate chain is ok
-                result = true;
-                break;
-                
-            default:
-                // certificate chain is invalid
-                break;
-        }
-        
         CFRelease(cert);
     }
     
+    status = SecTrustCreateWithCertificates(certificates, policy, &trust);
+    if (status != noErr) {
+        goto free_certs;
+    }
+    
+    status = SecTrustEvaluate(trust, &trustResult);
+    switch (trustResult) {
+        case kSecTrustResultUnspecified:
+        case kSecTrustResultProceed:
+            // certificate chain is ok
+            result = true;
+            break;
+            
+        default:
+            // certificate chain is invalid
+            break;
+    }
+    
     CFRelease(trust);
+free_certs:
     CFRelease(certificates);
+    mailstream_certificate_chain_free(cCerts);
     CFRelease(policy);
     CFRelease(hostnameCFString);
-    mailstream_certificate_chain_free(cCerts);
-    
+err:
     return result;
 #else
     //TODO check certificate
