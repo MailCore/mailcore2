@@ -26,22 +26,22 @@ type * __variable; \
 mailcore::ArrayIterator __variable##__iterator = mailcore::ArrayIteratorInit(__array); \
 for (unsigned int __index = 0; NULL != (__variable = mailcore::ArrayIteratorNext(&__variable##__iterator)); __index++)
 
-#define mc_foreachdictionaryKey(keyType, __key, __dictionary) \
+#define mc_foreachhashmapKey(keyType, __key, __hashmap) \
 keyType * __key; \
-HashMapIterator __key##__iterator = HashMapIteratorInit(__dictionary, true, false); \
+HashMapIterator __key##__iterator = HashMapIteratorInit(__hashmap, true, false); \
 while (HashMapIteratorRun(&__key##__iterator)) \
 while (HashMapIteratorNext(&__key##__iterator, &__key, NULL))
 
-#define mc_foreachdictionaryValue(valueType, __value, __dictionary) \
+#define mc_foreachhashmapValue(valueType, __value, __hashmap) \
 valueType * __value; \
-HashMapIterator __value##__iterator = HashMapIteratorInit(__dictionary, false, true); \
+HashMapIterator __value##__iterator = HashMapIteratorInit(__hashmap, false, true); \
 while (HashMapIteratorRun(&__value##__iterator)) \
 while (HashMapIteratorNext(&__value##__iterator, NULL, (Object **) &__value))
 
-#define mc_foreachdictionaryKeyAndValue(keyType, __key, valueType, __value, __dictionary) \
+#define mc_foreachhashmapKeyAndValue(keyType, __key, valueType, __value, __hashmap) \
 keyType * __key; \
 valueType * __value; \
-HashMapIterator __key##__value##__iterator = HashMapIteratorInit(__dictionary, true, true); \
+HashMapIterator __key##__value##__iterator = HashMapIteratorInit(__hashmap, true, true); \
 while (HashMapIteratorRun(&__key##__value##__iterator)) \
 while (HashMapIteratorNext(&__key##__value##__iterator, (Object **) &__key, (Object **) &__value))
 

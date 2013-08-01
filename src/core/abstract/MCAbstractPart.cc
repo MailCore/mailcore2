@@ -282,3 +282,87 @@ void AbstractPart::applyUniquePartID()
     }
     queue->release();
 }
+
+HashMap * AbstractPart::serializable()
+{
+    HashMap * result = Object::serializable();
+    
+    if (uniqueID() != NULL) {
+        result->setObjectForKey(MCSTR("uniqueID"), uniqueID());
+    }
+    if (filename() != NULL) {
+        result->setObjectForKey(MCSTR("filename"), filename());
+    }
+    if (mimeType() != NULL) {
+        result->setObjectForKey(MCSTR("mimeType"), mimeType());
+    }
+    if (charset() != NULL) {
+        result->setObjectForKey(MCSTR("charset"), charset());
+    }
+    if (contentID() != NULL) {
+        result->setObjectForKey(MCSTR("contentID"), contentID());
+    }
+    if (contentLocation() != NULL) {
+        result->setObjectForKey(MCSTR("contentLocation"), contentLocation());
+    }
+    if (mInlineAttachment) {
+        result->setObjectForKey(MCSTR("inlineAttachment"), MCSTR("1"));
+    }
+    String * partTypeStr;
+    switch (mPartType) {
+        default:
+        case PartTypeSingle:
+            partTypeStr = MCSTR("single");
+            break;
+        case PartTypeMessage:
+            partTypeStr = MCSTR("message");
+            break;
+        case PartTypeMultipartMixed:
+            partTypeStr = MCSTR("multipart/mixed");
+            break;
+        case PartTypeMultipartRelated:
+            partTypeStr = MCSTR("multipart/related");
+            break;
+        case PartTypeMultipartAlternative:
+            partTypeStr = MCSTR("multipart/alternative");
+            break;
+    }
+    result->setObjectForKey(MCSTR("partType"), partTypeStr);
+    
+    return result;
+}
+
+void AbstractPart::importSerializable(HashMap * serializable)
+{
+    setUniqueID((String *) serializable->objectForKey(MCSTR("uniqueID")));
+    setFilename((String *) serializable->objectForKey(MCSTR("filename")));
+    setMimeType((String *) serializable->objectForKey(MCSTR("mimeType")));
+    setCharset((String *) serializable->objectForKey(MCSTR("charset")));
+    setContentID((String *) serializable->objectForKey(MCSTR("contentID")));
+    setContentLocation((String *) serializable->objectForKey(MCSTR("contentLocation")));
+    String * value = (String *) serializable->objectForKey(MCSTR("inlineAttachment"));
+    if (value != NULL) {
+        if (value->intValue()) {
+            setInlineAttachment(true);
+        }
+    }
+    value = (String *) serializable->objectForKey(MCSTR("partType"));
+    if (value != NULL) {
+        if (value->isEqual(MCSTR("single"))) {
+            setPartType(PartTypeSingle);
+        }
+        else if (value->isEqual(MCSTR("message"))) {
+            setPartType(PartTypeMessage);
+        }
+        else if (value->isEqual(MCSTR("multipart/mixed"))) {
+            setPartType(PartTypeMultipartMixed);
+        }
+        else if (value->isEqual(MCSTR("multipart/related"))) {
+            setPartType(PartTypeMultipartRelated);
+        }
+        else if (value->isEqual(MCSTR("multipart/alternative"))) {
+            setPartType(PartTypeMultipartAlternative);
+        }
+    }
+    PartType mPartType;
+}

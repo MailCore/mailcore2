@@ -37,7 +37,8 @@ String * mailcore::IMAPNamespaceOther = NULL;
 String * mailcore::IMAPNamespaceShared = NULL;
 
 __attribute__((constructor))
-static void initialize() {
+static void initialize()
+{
     AutoreleasePool * pool = new AutoreleasePool();
     IMAPNamespacePersonal = (String *) MCSTR("IMAPNamespacePersonal")->retain();
 	IMAPNamespaceOther = (String *) MCSTR("IMAPNamespaceOther")->retain();

@@ -25,6 +25,7 @@
 #include "MCAutoreleasePool.h"
 #include "MCValue.h"
 #include "MCHTMLCleaner.h"
+#include "MCBase64.h"
 
 using namespace mailcore;
 
@@ -2108,6 +2109,15 @@ String * String::cleanedHTMLString()
 bool String::isEqualCaseInsensitive(String * otherString)
 {
     return caseInsensitiveCompare(otherString) == 0;
+}
+
+Data * String::decodedBase64Data()
+{
+    const char * utf8 = UTF8Characters();
+    char * decoded = MCDecodeBase64(utf8, strlen(utf8));
+    Data * result = Data::dataWithBytes(decoded, strlen(decoded));
+    free(decoded);
+    return result;
 }
 
 void mailcore::setICUDataDirectory(String * directory)

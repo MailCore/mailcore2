@@ -108,6 +108,8 @@ namespace mailcore {
         virtual String * htmlEncodedString();
 		virtual String * cleanedHTMLString();
         
+        virtual Data * decodedBase64Data();
+        
     public: // private
 		static String * uniquedStringWithUTF8Characters(const char * UTF8Characters);
         

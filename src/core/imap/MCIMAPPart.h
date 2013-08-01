@@ -31,6 +31,8 @@ namespace mailcore {
     public: // subclass behavior
 		IMAPPart(IMAPPart * other);
 		virtual Object * copy();
+        virtual HashMap * serializable();
+        virtual void importSerializable(HashMap * serializable);
         
     public: // private
 		static AbstractPart * attachmentWithIMAPBody(struct mailimap_body * body);

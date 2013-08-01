@@ -30,7 +30,7 @@ MailProvidersManager * MailProvidersManager::sharedManager()
 
 MailProvider * MailProvidersManager::providerForEmail(String * email)
 {
-	mc_foreachdictionaryValue(MailProvider, provider, mProviders) {
+	mc_foreachhashmapValue(MailProvider, provider, mProviders) {
         if (provider->matchEmail(email))
             return provider;
 	}
@@ -40,7 +40,7 @@ MailProvider * MailProvidersManager::providerForEmail(String * email)
 
 MailProvider * MailProvidersManager::providerForMX(String * hostname)
 {
-	mc_foreachdictionaryValue(MailProvider, provider, mProviders) {
+	mc_foreachhashmapValue(MailProvider, provider, mProviders) {
         if (provider->matchMX(hostname))
             return provider;
 	}
@@ -55,7 +55,7 @@ MailProvider * MailProvidersManager::providerForIdentifier(String * identifier)
 
 void MailProvidersManager::registerProviders(HashMap * providers)
 {
-	mc_foreachdictionaryKeyAndValue(String, identifier, HashMap, providerInfo, providers) {
+	mc_foreachhashmapKeyAndValue(String, identifier, HashMap, providerInfo, providers) {
         MailProvider * provider = MailProvider::providerWithInfo(providerInfo);
         provider->setIdentifier(identifier);
         //MCLog("register %s", MCUTF8DESC(identifier));

@@ -44,7 +44,6 @@ MessageHeader::MessageHeader(MessageHeader * other)
     setSubject(other->mSubject);
     setDate(other->date());
     setReceivedDate(other->receivedDate());
-    setUserAgent(other->mUserAgent);
     setExtraHeaders(other->mExtraHeaders);
 }
 
@@ -62,7 +61,6 @@ void MessageHeader::init(bool generateDate, bool generateMessageID)
 	mSubject = NULL;
     mDate = (time_t) -1;
 	mReceivedDate = (time_t) -1;
-    mUserAgent = NULL;
     mExtraHeaders = NULL;
     
 	if (generateDate) {
@@ -114,7 +112,6 @@ MessageHeader::~MessageHeader()
     MC_SAFE_RELEASE(mBcc);
     MC_SAFE_RELEASE(mReplyTo);
     MC_SAFE_RELEASE(mSubject);
-    MC_SAFE_RELEASE(mUserAgent);
     MC_SAFE_RELEASE(mExtraHeaders);
 }
 
@@ -152,11 +149,8 @@ String * MessageHeader::description()
 	if (mSubject != NULL) {
         result->appendUTF8Format("Subject: %s\n", mSubject->UTF8Characters());
     }
-	if (mUserAgent != NULL) {
-        result->appendUTF8Format("X-Mailer: %s\n", mUserAgent->UTF8Characters());
-    }
     if (mExtraHeaders != NULL) {
-        mc_foreachdictionaryKeyAndValue(String, header, String, value, mExtraHeaders) {
+        mc_foreachhashmapKeyAndValue(String, header, String, value, mExtraHeaders) {
             result->appendUTF8Format("%s: %s\n", header->UTF8Characters(), value->UTF8Characters());
         }
     }
@@ -292,12 +286,12 @@ String * MessageHeader::subject()
 
 void MessageHeader::setUserAgent(String * userAgent)
 {
-    MC_SAFE_REPLACE_COPY(String, mUserAgent, userAgent);
+    setExtraHeader(MCSTR("X-Mailer"), userAgent);
 }
 
 String * MessageHeader::userAgent()
 {
-    return mUserAgent;
+    return extraHeaderValueForName(MCSTR("X-Mailer"));
 }
 
 void MessageHeader::setExtraHeaders(HashMap * headers)
@@ -312,21 +306,25 @@ Array * MessageHeader::allExtraHeadersNames()
     return mExtraHeaders->allKeys();
 }
 
-void MessageHeader::addHeader(String * name, String * object)
+void MessageHeader::setExtraHeader(String * name, String * object)
 {
     if (mExtraHeaders == NULL)
         mExtraHeaders = new HashMap();
+    if (object == NULL) {
+        removeExtraHeader(name);
+        return;
+    }
     mExtraHeaders->setObjectForKey(name, object);
 }
 
-void MessageHeader::removeHeader(String * name)
+void MessageHeader::removeExtraHeader(String * name)
 {
     if (mExtraHeaders == NULL)
         return;
     mExtraHeaders->removeObjectForKey(name);
 }
 
-String * MessageHeader::headerValueForName(String * name)
+String * MessageHeader::extraHeaderValueForName(String * name)
 {
     if (mExtraHeaders == NULL)
         return NULL;
@@ -498,13 +496,13 @@ void MessageHeader::importIMFFields(struct mailimf_fields * fields)
         fieldName = field->fld_data.fld_optional_field->fld_name;
         fieldNameStr = String::stringWithUTF8Characters(fieldName);
         // Set only if this optional-field is not set
-        if (headerValueForName(fieldNameStr) == NULL) {
+        if (extraHeaderValueForName(fieldNameStr) == NULL) {
             char * fieldValue;
             String * fieldValueStr;
             
             fieldValue = field->fld_data.fld_optional_field->fld_value;
             fieldValueStr = String::stringWithUTF8Characters(fieldValue);
-            addHeader(fieldNameStr, fieldValueStr);
+            setExtraHeader(fieldNameStr, fieldValueStr);
         }
     }
 }
@@ -883,15 +881,8 @@ struct mailimf_fields * MessageHeader::createIMFFieldsAndFilterBcc(bool filterBc
         imfReferences,
         imfSubject);
 	
-	if (mUserAgent != NULL) {
-		struct mailimf_field * field;
-		
-		field = mailimf_field_new_custom(strdup("X-Mailer"), strdup(mUserAgent->UTF8Characters()));
-		mailimf_fields_add(fields, field);
-	}
-    
     if (mExtraHeaders != NULL) {
-        mc_foreachdictionaryKeyAndValue(String, header, String, value, mExtraHeaders) {
+        mc_foreachhashmapKeyAndValue(String, header, String, value, mExtraHeaders) {
             struct mailimf_field * field;
             
             field = mailimf_field_new_custom(strdup(header->UTF8Characters()), strdup(value->UTF8Characters()));
@@ -1347,3 +1338,73 @@ MessageHeader * MessageHeader::forwardHeader()
     return result;
 }
 
+HashMap * MessageHeader::serializable()
+{
+    HashMap * result = Object::serializable();
+    
+    if (messageID() != NULL) {
+        result->setObjectForKey(MCSTR("messageID"), messageID());
+    }
+    if (references() != NULL) {
+        result->setObjectForKey(MCSTR("references"), references());
+    }
+    if (inReplyTo() != NULL) {
+        result->setObjectForKey(MCSTR("inReplyTo"), inReplyTo());
+    }
+    if (sender() != NULL) {
+        result->setObjectForKey(MCSTR("sender"), sender()->serializable());
+    }
+    if (from() != NULL) {
+        result->setObjectForKey(MCSTR("from"), from()->serializable());
+    }
+    if (to() != NULL) {
+        result->setObjectForKey(MCSTR("to"), to()->serializable());
+    }
+    if (cc() != NULL) {
+        result->setObjectForKey(MCSTR("cc"), cc()->serializable());
+    }
+    if (bcc() != NULL) {
+        result->setObjectForKey(MCSTR("bcc"), bcc()->serializable());
+    }
+    if (replyTo() != NULL) {
+        result->setObjectForKey(MCSTR("replyTo"), replyTo()->serializable());
+    }
+    if (subject() != NULL) {
+        result->setObjectForKey(MCSTR("subject"), subject());
+    }
+    result->setObjectForKey(MCSTR("date"), String::stringWithUTF8Format("%lld", (unsigned long long) date()));
+    result->setObjectForKey(MCSTR("receivedDate"), String::stringWithUTF8Format("%lld", (unsigned long long) receivedDate()));
+    if (mExtraHeaders != NULL) {
+        result->setObjectForKey(MCSTR("extraHeaders"), mExtraHeaders);
+    }
+    
+    return result;
+}
+
+void MessageHeader::importSerializable(HashMap * hashmap)
+{
+    setMessageID((String *) hashmap->objectForKey(MCSTR("messageID")));
+    setReferences((Array *) hashmap->objectForKey(MCSTR("references")));
+    setInReplyTo((Array *) hashmap->objectForKey(MCSTR("inReplyTo")));
+    setSender((Address *) Object::objectWithSerializable((HashMap *) hashmap->objectForKey(MCSTR("sender"))));
+    setFrom((Address *) Object::objectWithSerializable((HashMap *) hashmap->objectForKey(MCSTR("from"))));
+    setTo((Array *) Object::objectWithSerializable((HashMap *) hashmap->objectForKey(MCSTR("to"))));
+    setCc((Array *)Object::objectWithSerializable((HashMap *) hashmap->objectForKey(MCSTR("cc"))));
+    setBcc((Array *)Object::objectWithSerializable((HashMap *) hashmap->objectForKey(MCSTR("bcc"))));
+    setReplyTo((Array *)Object::objectWithSerializable((HashMap *) hashmap->objectForKey(MCSTR("replyTo"))));
+    setSubject((String *) hashmap->objectForKey(MCSTR("subject")));
+    setDate((time_t) ((String *) hashmap->objectForKey(MCSTR("date")))->unsignedLongLongValue());
+    setReceivedDate((time_t) ((String *) hashmap->objectForKey(MCSTR("receivedDate")))->unsignedLongLongValue());
+    setExtraHeaders((HashMap *) hashmap->objectForKey(MCSTR("extraHeaders")));
+}
+
+static void * createObject()
+{
+    return new MessageHeader();
+}
+
+__attribute__((constructor))
+static void initialize()
+{
+    Object::registerObjectConstructor("mailcore::MessageHeader", &createObject);
+}

@@ -32,6 +32,8 @@ namespace mailcore {
 		HashMap(HashMap * o);
 		virtual String * description();
 		virtual Object * copy();
+		virtual HashMap * serializable();
+        virtual void importSerializable(HashMap * serializable);
         
 	private:
 		unsigned int mAllocated;

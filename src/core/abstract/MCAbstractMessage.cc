@@ -80,3 +80,16 @@ Array * AbstractMessage::htmlInlineAttachments()
     return HTMLRenderer::htmlInlineAttachmentsForMessage(this);
 }
 
+HashMap * AbstractMessage::serializable()
+{
+    HashMap * result = Object::serializable();
+    if (header() != NULL) {
+        result->setObjectForKey(MCSTR("header"), mHeader->serializable());
+    }
+    return result;
+}
+
+void AbstractMessage::importSerializable(HashMap * hashmap)
+{
+    setHeader((MessageHeader *) Object::objectWithSerializable((HashMap *) hashmap->objectForKey(MCSTR("header"))));
+}

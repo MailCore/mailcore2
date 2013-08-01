@@ -28,6 +28,8 @@
     return [[[self alloc] initWithMCPart:part] autorelease];
 }
 
+MCO_SYNTHESIZE_NSCODING
+
 MCO_OBJC_SYNTHESIZE_STRING(setPartID, partID)
 
 @end

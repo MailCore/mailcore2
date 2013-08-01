@@ -236,6 +236,8 @@
 		C668E2CC1735CB8900A2BB47 /* MCAutoreleasePoolMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C668E2CA1735CB8900A2BB47 /* MCAutoreleasePoolMac.mm */; };
 		C668E2CD1735CB8900A2BB47 /* MCAutoreleasePoolMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C668E2CA1735CB8900A2BB47 /* MCAutoreleasePoolMac.mm */; };
 		C668E2DD1736333900A2BB47 /* providers.json in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E7D172DBAF600E60AA3 /* providers.json */; };
+		C67597C217A8D65000DA69DF /* MCBase64.c in Sources */ = {isa = PBXBuildFile; fileRef = C67597C117A8D65000DA69DF /* MCBase64.c */; };
+		C67597C317A8D65000DA69DF /* MCBase64.c in Sources */ = {isa = PBXBuildFile; fileRef = C67597C117A8D65000DA69DF /* MCBase64.c */; };
 		C68B2AEE1778A865005E61EF /* MCConnectionLogger.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C68B2AEB1778A589005E61EF /* MCConnectionLogger.h */; };
 		C68B2AEF1778A869005E61EF /* MCConnectionLogger.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C68B2AEB1778A589005E61EF /* MCConnectionLogger.h */; };
 		C68B2AF717797389005E61EF /* MCConnectionLoggerUtils.cc in Sources */ = {isa = PBXBuildFile; fileRef = C68B2AF517797389005E61EF /* MCConnectionLoggerUtils.cc */; };
@@ -1348,6 +1350,8 @@
 		C64FF39016B3C13000F8C162 /* MCOObjectWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOObjectWrapper.mm; sourceTree = "<group>"; };
 		C668E2C51735C8D500A2BB47 /* MCObjectMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCObjectMac.mm; sourceTree = "<group>"; };
 		C668E2CA1735CB8900A2BB47 /* MCAutoreleasePoolMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCAutoreleasePoolMac.mm; sourceTree = "<group>"; };
+		C67597C117A8D65000DA69DF /* MCBase64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MCBase64.c; sourceTree = "<group>"; };
+		C67597C417A8D66000DA69DF /* MCBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBase64.h; sourceTree = "<group>"; };
 		C68B2AEB1778A589005E61EF /* MCConnectionLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCConnectionLogger.h; sourceTree = "<group>"; };
 		C68B2AF517797389005E61EF /* MCConnectionLoggerUtils.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCConnectionLoggerUtils.cc; sourceTree = "<group>"; };
 		C68B2AF617797389005E61EF /* MCConnectionLoggerUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCConnectionLoggerUtils.h; sourceTree = "<group>"; };
@@ -1840,33 +1844,55 @@
 		C64EA6A1169E847800778456 /* basetypes */ = {
 			isa = PBXGroup;
 			children = (
-				C64EA6A2169E847800778456 /* MCAutoreleasePool.cc */,
-				C64EA6A3169E847800778456 /* MCAutoreleasePool.h */,
-				C668E2CA1735CB8900A2BB47 /* MCAutoreleasePoolMac.mm */,
-				C64EA6A4169E847800778456 /* MCBaseTypes.h */,
 				C64EA6A5169E847800778456 /* MCArray.cc */,
 				C64EA6A6169E847800778456 /* MCArray.h */,
 				C64EA6A7169E847800778456 /* MCAssert.c */,
 				C64EA6A8169E847800778456 /* MCAssert.h */,
+				C64EA6A2169E847800778456 /* MCAutoreleasePool.cc */,
+				C64EA6A3169E847800778456 /* MCAutoreleasePool.h */,
+				C668E2CA1735CB8900A2BB47 /* MCAutoreleasePoolMac.mm */,
+				C67597C117A8D65000DA69DF /* MCBase64.c */,
+				C67597C417A8D66000DA69DF /* MCBase64.h */,
+				C64EA6A4169E847800778456 /* MCBaseTypes.h */,
+				C68B2AEB1778A589005E61EF /* MCConnectionLogger.h */,
+				C68B2AF517797389005E61EF /* MCConnectionLoggerUtils.cc */,
+				C68B2AF617797389005E61EF /* MCConnectionLoggerUtils.h */,
 				C64EA6A9169E847800778456 /* MCData.cc */,
 				C64EA6AA169E847800778456 /* MCData.h */,
 				C64EA6AB169E847800778456 /* MCHash.cc */,
 				C64EA6AC169E847800778456 /* MCHash.h */,
 				C64EA6AD169E847800778456 /* MCHashMap.cc */,
 				C64EA6AE169E847800778456 /* MCHashMap.h */,
+				C63CD68F16BE566D00DB18F1 /* MCHTMLCleaner.cc */,
+				C63CD69016BE566E00DB18F1 /* MCHTMLCleaner.h */,
+				C6D6F9691720F8F4006F5B28 /* MCICUTypes.h */,
+				C64BB22C16E5C1EE000DB34C /* MCIndexSet.cc */,
+				C64BB22D16E5C1EE000DB34C /* MCIndexSet.h */,
+				C6D6F96D1721028D006F5B28 /* MCIterator.h */,
 				C6D6F7F7171E595D006F5B28 /* MCJSON.cc */,
 				C6D6F7F8171E595D006F5B28 /* MCJSON.h */,
 				C6D6F965171FCF9F006F5B28 /* MCJSONParser.cc */,
 				C6D6F966171FCF9F006F5B28 /* MCJSONParser.h */,
-				C6D6F950171E5CB8006F5B28 /* MCMD5.cc */,
-				C6D6F951171E5CB8006F5B28 /* MCMD5.h */,
+				BD637139177DFF080094121B /* MCLibetpan.cc */,
+				BD63713A177DFF080094121B /* MCLibetpan.h */,
+				C6AC1131171249DF00B715B7 /* MCLibetpanTypes.h */,
 				C64EA6AF169E847800778456 /* MCLog.c */,
 				C64EA6B0169E847800778456 /* MCLog.h */,
+				C64EA6BC169E847800778456 /* MCMainThread.h */,
+				C64EA6BD169E847800778456 /* MCMainThread.mm */,
+				C6D6F950171E5CB8006F5B28 /* MCMD5.cc */,
+				C6D6F951171E5CB8006F5B28 /* MCMD5.h */,
 				C6D6F952171E5CB8006F5B28 /* MCNull.cc */,
 				C6D6F953171E5CB8006F5B28 /* MCNull.h */,
 				C64EA6B1169E847800778456 /* MCObject.cc */,
 				C64EA6B2169E847800778456 /* MCObject.h */,
 				C668E2C51735C8D500A2BB47 /* MCObjectMac.mm */,
+				C64EA6BE169E847800778456 /* MCOperation.cc */,
+				C64EA6BF169E847800778456 /* MCOperation.h */,
+				C64EA6C0169E847800778456 /* MCOperationCallback.h */,
+				C64EA6C1169E847800778456 /* MCOperationQueue.cc */,
+				C64EA6C2169E847800778456 /* MCOperationQueue.h */,
+				C6081678177625AD001F1018 /* MCOperationQueueCallback.h */,
 				C64EA6B3169E847800778456 /* MCRange.cc */,
 				C64EA6B4169E847800778456 /* MCRange.h */,
 				C64EA6B5169E847800778456 /* MCSet.cc */,
@@ -1877,26 +1903,6 @@
 				C64EA6BA169E847800778456 /* MCValue.cc */,
 				C64EA6BB169E847800778456 /* MCValue.h */,
 				C64BB25316FC2AA0000DB34C /* MCValuePrivate.h */,
-				C64EA6BC169E847800778456 /* MCMainThread.h */,
-				C64EA6BD169E847800778456 /* MCMainThread.mm */,
-				C64EA6BE169E847800778456 /* MCOperation.cc */,
-				C64EA6BF169E847800778456 /* MCOperation.h */,
-				C64EA6C0169E847800778456 /* MCOperationCallback.h */,
-				C64EA6C1169E847800778456 /* MCOperationQueue.cc */,
-				C64EA6C2169E847800778456 /* MCOperationQueue.h */,
-				C6081678177625AD001F1018 /* MCOperationQueueCallback.h */,
-				C63CD68F16BE566D00DB18F1 /* MCHTMLCleaner.cc */,
-				C63CD69016BE566E00DB18F1 /* MCHTMLCleaner.h */,
-				C64BB22C16E5C1EE000DB34C /* MCIndexSet.cc */,
-				C64BB22D16E5C1EE000DB34C /* MCIndexSet.h */,
-				C6AC1131171249DF00B715B7 /* MCLibetpanTypes.h */,
-				C6D6F9691720F8F4006F5B28 /* MCICUTypes.h */,
-				C6D6F96D1721028D006F5B28 /* MCIterator.h */,
-				C68B2AEB1778A589005E61EF /* MCConnectionLogger.h */,
-				C68B2AF517797389005E61EF /* MCConnectionLoggerUtils.cc */,
-				C68B2AF617797389005E61EF /* MCConnectionLoggerUtils.h */,
-				BD637139177DFF080094121B /* MCLibetpan.cc */,
-				BD63713A177DFF080094121B /* MCLibetpan.h */,
 			);
 			path = basetypes;
 			sourceTree = "<group>";
@@ -2526,6 +2532,7 @@
 				C64BB26A16FD44C2000DB34C /* MCOMultipart.mm in Sources */,
 				C623C58F16FE6B45001BBEFC /* MCOIMAPOperation.mm in Sources */,
 				C623C59316FE750E001BBEFC /* MCOIMAPFolder.mm in Sources */,
+				C67597C217A8D65000DA69DF /* MCBase64.c in Sources */,
 				C6F5B9E216FEA1E800D9DABD /* MCOIMAPMessage.mm in Sources */,
 				C6F5B9E516FEA27500D9DABD /* MCOIMAPMessagePart.mm in Sources */,
 				C6F5B9E816FEA28600D9DABD /* MCOIMAPMultipart.mm in Sources */,
@@ -2716,6 +2723,7 @@
 				C6BA2BFC1705F4E6003F0E9E /* MCOMultipart.mm in Sources */,
 				C6BA2BFD1705F4E6003F0E9E /* MCOIMAPOperation.mm in Sources */,
 				C6BA2BFE1705F4E6003F0E9E /* MCOIMAPFolder.mm in Sources */,
+				C67597C317A8D65000DA69DF /* MCBase64.c in Sources */,
 				C6BA2BFF1705F4E6003F0E9E /* MCOIMAPMessage.mm in Sources */,
 				C6BA2C001705F4E6003F0E9E /* MCOIMAPMessagePart.mm in Sources */,
 				C6BA2C011705F4E6003F0E9E /* MCOIMAPMultipart.mm in Sources */,
