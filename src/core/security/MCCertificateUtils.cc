@@ -55,7 +55,7 @@ bool mailcore::checkCertificate(mailstream * stream, String * hostname)
                 break;
         }
         
-        CFRelease(cert); 
+        CFRelease(cert);
     }
     
     CFRelease(trust);
