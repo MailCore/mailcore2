@@ -29,6 +29,11 @@
 
 using namespace mailcore;
 
+void mailcore::setICUDataDirectory(String * directory)
+{
+    u_setDataDirectory(directory->fileSystemRepresentation());
+}
+
 #pragma mark quote headers string
 
 static inline int to_be_quoted(const char * word, size_t size, int subject)
@@ -1987,6 +1992,12 @@ unsigned long long String::unsignedLongLongValue()
     return strtoull(UTF8Characters(), NULL, 10);
 }
 
+double String::doubleValue()
+{
+    return strtod(UTF8Characters(), NULL);
+
+}
+
 Data * String::mUTF7EncodedData()
 {
     return dataUsingEncoding("mutf-7");
@@ -2120,7 +2131,26 @@ Data * String::decodedBase64Data()
     return result;
 }
 
-void mailcore::setICUDataDirectory(String * directory)
+HashMap * String::serializable()
 {
-    u_setDataDirectory(directory->fileSystemRepresentation());
+    HashMap * result = Object::serializable();
+    result->setObjectForKey(MCSTR("value"), this);
+    return result;
+}
+
+void String::importSerializable(HashMap * serializable)
+{
+    String * value = (String *) serializable->objectForKey(MCSTR("value"));
+    setString(value);
+}
+
+static void * createObject()
+{
+    return new String();
+}
+
+__attribute__((constructor))
+static void initialize()
+{
+    Object::registerObjectConstructor("mailcore::String", &createObject);
 }

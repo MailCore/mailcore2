@@ -315,3 +315,14 @@ void HashMap::importSerializable(HashMap * serializable)
         setObjectForKey(key, value);
     }
 }
+
+static void * createObject()
+{
+    return new HashMap();
+}
+
+__attribute__((constructor))
+static void initialize()
+{
+    Object::registerObjectConstructor("mailcore::HashMap", &createObject);
+}

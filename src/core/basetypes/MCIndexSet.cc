@@ -12,6 +12,9 @@
 #include "MCAssert.h"
 #include "MCRange.h"
 #include "MCLog.h"
+#include "MCArray.h"
+#include "MCHashMap.h"
+#include "MCUtils.h"
 
 using namespace mailcore;
 
@@ -370,3 +373,34 @@ void IndexSet::intersectsRange(Range range)
     }
 }
 
+
+HashMap * IndexSet::serializable()
+{
+    HashMap * result = Object::serializable();
+    Array * ranges = Array::array();
+    for(unsigned int i = 0 ; i < mCount ; i ++) {
+        ranges->addObject(RangeToString(mRanges[i]));
+    }
+    result->setObjectForKey(MCSTR("ranges"), ranges);
+    return result;
+}
+
+void IndexSet::importSerializable(HashMap * serializable)
+{
+    Array * ranges = (Array *) serializable->objectForKey(MCSTR("ranges"));
+    for(unsigned int i = 0 ; i < ranges->count() ; i ++) {
+        String * rangeStr = (String *) ranges->objectAtIndex(i);
+        addRange(RangeFromString(rangeStr));
+    }
+}
+
+static void * createObject()
+{
+    return new IndexSet();
+}
+
+__attribute__((constructor))
+static void initialize()
+{
+    Object::registerObjectConstructor("mailcore::IndexSet", &createObject);
+}
