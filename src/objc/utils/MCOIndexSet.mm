@@ -18,6 +18,8 @@
 
 #define nativeType mailcore::IndexSet
 
+MCO_SYNTHESIZE_NSCODING
+
 + (void) load
 {
     MCORegisterClass(self, &typeid(nativeType));
