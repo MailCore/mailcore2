@@ -477,6 +477,13 @@ IMAPMessageRenderingOperation * IMAPAsyncSession::htmlBodyRenderingOperation(IMA
     return session->htmlBodyRenderingOperation(message, folder);
 }
 
+IMAPMessageRenderingOperation * IMAPAsyncSession::htmlBareRenderingOperation(IMAPMessage * message,
+                                                                             String * folder)
+{
+    IMAPAsyncConnection * session = sessionForFolder(folder);
+    return session->htmlBareRenderingOperation(message, folder);
+}
+
 IMAPMessageRenderingOperation * IMAPAsyncSession::plainTextRenderingOperation(IMAPMessage * message,
                                                                               String * folder)
 {

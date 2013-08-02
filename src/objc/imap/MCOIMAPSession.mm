@@ -381,6 +381,13 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
     return MCO_TO_OBJC_OP(coreOp);
 }
 
+- (MCOIMAPMessageRenderingOperation *) htmlBareRenderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                                      folder:(NSString *)folder
+{
+    IMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->htmlBareRenderingOperation(MCO_FROM_OBJC(IMAPMessage, message), [folder mco_mcString]);
+    return MCO_TO_OBJC_OP(coreOp);
+}
+
 - (MCOIMAPMessageRenderingOperation *) plainTextRenderingOperationWithMessage:(MCOIMAPMessage *)message
                                                                        folder:(NSString *)folder
 {

@@ -564,6 +564,21 @@
 - (MCOIMAPMessageRenderingOperation *) htmlBodyRenderingOperationWithMessage:(MCOIMAPMessage *)message
                                                                       folder:(NSString *)folder;
 
+
+/**
+ Returns an operation to render the bare HTML body of a message to be displayed in a web view.
+ This does not include a header or attachments at the end.
+ 
+ MCOIMAPMessageRenderingOperation * op = [session htmlBareRenderingOperationWithMessage:msg
+ folder:@"INBOX"];
+ 
+ [op start:^(NSString * htmlString, NSError * error) {
+ ...
+ }];
+ */
+- (MCOIMAPMessageRenderingOperation *) htmlBareRenderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                                      folder:(NSString *)folder;
+
 /**
  Returns an operation to render the plain text version of a message.
  
