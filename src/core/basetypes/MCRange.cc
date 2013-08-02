@@ -1,6 +1,9 @@
 #include "MCRange.h"
 
 #include "MCIndexSet.h"
+#include "MCHashMap.h"
+#include "MCString.h"
+#include "MCUtils.h"
 
 #include <sys/param.h>
 
@@ -137,4 +140,13 @@ uint64_t mailcore::RangeRightBound(Range range)
     return range.location + range.length;
 }
 
+String * mailcore::RangeToString(Range range)
+{
+    return String::stringWithUTF8Format("%llu-%llu", (unsigned long long) range.location,
+                                        (unsigned long long) range.length);
+}
 
+Range mailcore::RangeFromString(String * rangeString)
+{
+    Array * components = rangeString->componentsSeparatedByString(MCSTR("-"));
+}

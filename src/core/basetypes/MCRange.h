@@ -13,6 +13,7 @@
 namespace mailcore {
     
     class IndexSet;
+    class String;
     
     // infinite length : UINT64_MAX
     // empty range : location = UINT64_MAX
@@ -30,6 +31,8 @@ namespace mailcore {
     bool RangeHasIntersection(Range range1, Range range2);
     uint64_t RangeLeftBound(Range range);
     uint64_t RangeRightBound(Range range);
+    String * RangeToString(Range range);
+    Range RangeFromString(String * rangeString);
 }
 
 #endif
