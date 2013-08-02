@@ -66,8 +66,14 @@
             ]
         },
         "mx":[
+            "mx1.sub3.homie.mail.dreamhost.com",
+            "mx2.sub3.homie.mail.dreamhost.com",
             "mx1.sub4.homie.mail.dreamhost.com",
-            "mx2.sub4.homie.mail.dreamhost.com"
+            "mx2.sub4.homie.mail.dreamhost.com",
+            "mx1.sub5.homie.mail.dreamhost.com",
+            "mx2.sub5.homie.mail.dreamhost.com",
+            "mx1.balanced.homie.mail.dreamhost.com",
+            "mx2.balanced.homie.mail.dreamhost.com"
         ],
         "mailboxes":{
             "drafts":"Drafts",
