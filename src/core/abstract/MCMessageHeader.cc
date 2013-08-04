@@ -1282,7 +1282,12 @@ MessageHeader * MessageHeader::replyHeader(bool replyAll, Array * addressesExclu
 	inReplyTo = NULL;
 	
     result = new MessageHeader();
-    subjectValue = MCSTR("Re: ")->stringByAppendingString(subject());
+    if (subject() == NULL) {
+        subjectValue = MCSTR("Re: ");
+    }
+    else {
+        subjectValue = MCSTR("Re: ")->stringByAppendingString(subject());
+    }
 	if (references() != NULL) {
 		referencesValue = (Array *) (references()->copy());
 		referencesValue->autorelease();
@@ -1318,7 +1323,12 @@ MessageHeader * MessageHeader::forwardHeader()
 	inReplyTo = NULL;
 
     result = new MessageHeader();
-    subjectValue = MCSTR("Fw: ")->stringByAppendingString(subject());
+    if (subject() == NULL) {
+        subjectValue = MCSTR("Fw: ");
+    }
+    else {
+        subjectValue = MCSTR("Fw: ")->stringByAppendingString(subject());
+    }
 	if (references() != NULL) {
 		referencesValue = (Array *) (references()->copy());
 		referencesValue->autorelease();
@@ -1326,7 +1336,7 @@ MessageHeader * MessageHeader::forwardHeader()
 			referencesValue->addObject(messageID());
 		}
 	}
-	if (messageID()) {
+	if (messageID() != NULL) {
 		inReplyTo = Array::array();
 		inReplyTo->addObject(messageID());
 	}
