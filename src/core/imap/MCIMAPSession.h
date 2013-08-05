@@ -155,6 +155,7 @@ namespace mailcore {
         virtual bool isQResyncEnabled();
         virtual bool isIdentityEnabled();
         virtual bool isXOAuthEnabled();
+        virtual bool isNamespaceEnabled();
         
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
@@ -172,10 +173,20 @@ namespace mailcore {
          This method can be used to generate the summary of the message.*/
         virtual String * plainTextBodyRendering(IMAPMessage * message, String * folder, ErrorCode * pError);
         
+        /** Enable automatic query of the capabilities of the IMAP server when set to true. */
+        virtual void setAutomaticCapabilitiesEnabled(bool enabled);
+        
+        /** Check if the automatic query of the capabilities of the IMAP server is enabled. */
+        virtual bool isAutomaticCapabilitiesEnabled();
+        
+        virtual void setAutomaticNamespaceEnabled(bool enabled);
+        virtual bool isAutomaticNamespaceEnabled();
+        
     public: // private
         virtual void loginIfNeeded(ErrorCode * pError);
         virtual void connectIfNeeded(ErrorCode * pError);
         virtual bool isDisconnected();
+        virtual bool isAutomaticConfigurationDone();
         
     private:
         String * mHostname;
@@ -198,6 +209,7 @@ namespace mailcore {
         bool mQResyncEnabled;
         bool mIdentityEnabled;
         bool mXOauth2Enabled;
+        bool mNamespaceEnabled;
         String * mWelcomeString;
         bool mNeedsMboxMailWorkaround;
         uint32_t mUIDValidity;
@@ -215,6 +227,9 @@ namespace mailcore {
         IMAPProgressCallback * mProgressCallback;
         unsigned int mProgressItemsCount;
         ConnectionLogger * mConnectionLogger;
+        bool mAutomaticCapabilitiesEnabled;
+        bool mAutomaticNamespaceEnabled;
+        bool mAutomaticConfigurationDone;
         
         void init();
         void bodyProgress(unsigned int current, unsigned int maximum);
@@ -230,6 +245,9 @@ namespace mailcore {
                                        bool fetchByUID, struct mailimap_set * imapset, uint64_t modseq,
                                        HashMap * mapping, uint32_t startUid, IMAPProgressCallback * progressCallback,
                                        Array * extraHeaders, ErrorCode * pError);
+        void capabilitySetWithSessionState(IndexSet * capabilities);
+        bool enableFeature(String * feature);
+        void enableFeatures();
     };
 }
 
