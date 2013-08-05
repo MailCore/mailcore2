@@ -78,6 +78,20 @@ MCO_NATIVE_INSTANCE->setter((mcType) getter); \
     MCO_NATIVE_INSTANCE->setter([getter timeIntervalSince1970]); \
 }
 
+#define MCO_SYNTHESIZE_NSCODING \
+- (id) initWithCoder:(NSCoder *)coder \
+{ \
+  mailcore::HashMap * serializable = MCO_FROM_OBJC(mailcore::HashMap, [coder decodeObjectForKey:@"info"]); \
+  self = MCO_TO_OBJC(mailcore::Object::objectWithSerializable(serializable)); \
+  [self retain]; \
+  return self; \
+} \
+\
+- (void) encodeWithCoder:(NSCoder *)coder \
+{ \
+    [coder encodeObject:MCO_TO_OBJC(MCO_FROM_OBJC(nativeType, self)->serializable()) forKey:@"info"]; \
+}
+
 @interface NSObject (MCO)
 
 #ifdef __cplusplus

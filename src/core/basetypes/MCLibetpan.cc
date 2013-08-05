@@ -11,7 +11,8 @@
 #include <libetpan/libetpan.h>
 
 __attribute__((constructor))
-static void initialize() {
+static void initialize()
+{
     // It will enable CFStream on platforms that supports it.
     mailstream_cfstream_enabled = 1;
 }

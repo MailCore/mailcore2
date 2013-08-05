@@ -12,7 +12,8 @@ static pid_t sPid = -1;
 int MCLogEnabled = 0;
 
 __attribute__((constructor))
-static void initialize() {
+static void initialize()
+{
     sPid = getpid();
 }
 

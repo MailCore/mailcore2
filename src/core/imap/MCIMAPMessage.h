@@ -57,6 +57,8 @@ namespace mailcore {
         IMAPMessage(IMAPMessage * other);
         virtual Object * copy();
         virtual String * description();
+        virtual HashMap * serializable();
+        virtual void importSerializable(HashMap * serializable);
         
     private:
         uint64_t mModSeqValue;
@@ -64,9 +66,9 @@ namespace mailcore {
         MessageFlag mFlags;
         MessageFlag mOriginalFlags;
         AbstractPart * mMainPart;
-        Array * /* String */ mLabels;
-        uint64_t mMessageID;
-        uint64_t mThreadID;
+        Array * /* String */ mGmailLabels;
+        uint64_t mGmailMessageID;
+        uint64_t mGmailThreadID;
         void init();
     };
     

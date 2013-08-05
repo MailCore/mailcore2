@@ -10,6 +10,8 @@
 
 #import "MCOIndexSet.h"
 #import "MCOIndexSet+Private.h"
+#import "NSObject+MCO.h"
+#import "NSString+MCO.h"
 
 #include <string.h>
 
@@ -77,5 +79,15 @@ uint64_t MCORangeRightBound(MCORange range)
 {
     mailcore::Range mcRange = MCORangeToMCRange(range);
     return mailcore::RangeRightBound(mcRange);
+}
+
+NSString * MCORangeToString(MCORange range)
+{
+    return MCO_TO_OBJC(mailcore::RangeToString(MCORangeToMCRange(range)));
+}
+
+MCORange MCORangeFromString(NSString * rangeString)
+{
+    return MCORangeWithMCRange(mailcore::RangeFromString([rangeString mco_mcString]));
 }
 

@@ -31,6 +31,8 @@
     return [[[self alloc] initWithMCMessage:msg] autorelease];
 }
 
+MCO_SYNTHESIZE_NSCODING
+
 MCO_OBJC_SYNTHESIZE_SCALAR(uint32_t, uint32_t, setUid, uid)
 MCO_OBJC_SYNTHESIZE_SCALAR(MCOMessageFlag, mailcore::MessageFlag, setFlags, flags)
 MCO_OBJC_SYNTHESIZE_SCALAR(MCOMessageFlag, mailcore::MessageFlag, setOriginalFlags, originalFlags)

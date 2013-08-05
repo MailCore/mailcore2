@@ -35,6 +35,8 @@
     return [result retain];
 }
 
+MCO_SYNTHESIZE_NSCODING
+
 + (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object
 {
     mailcore::Address * address = (mailcore::Address *) object;

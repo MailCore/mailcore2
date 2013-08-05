@@ -210,7 +210,7 @@ String * MailProvider::importantFolderPath()
 
 bool MailProvider::isMainFolder(String * folderPath, String * prefix)
 {
-    mc_foreachdictionaryValue(String, path, mMailboxPaths) {
+    mc_foreachhashmapValue(String, path, mMailboxPaths) {
         String * fullPath;
         
         if (prefix != NULL) {

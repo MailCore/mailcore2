@@ -37,3 +37,30 @@ String * IMAPMessagePart::partID()
 {
     return mPartID;
 }
+
+HashMap * IMAPMessagePart::serializable()
+{
+    HashMap * result = AbstractMessagePart::serializable();
+    if (partID() != NULL) {
+        result->setObjectForKey(MCSTR("partID"), partID());
+    }
+    return result;
+}
+
+void IMAPMessagePart::importSerializable(HashMap * serializable)
+{
+    AbstractMessagePart::importSerializable(serializable);
+    String * partID = (String *) serializable->objectForKey(MCSTR("partID"));
+    setPartID(partID);
+}
+
+static void * createObject()
+{
+    return new IMAPMessagePart();
+}
+
+__attribute__((constructor))
+static void initialize()
+{
+    Object::registerObjectConstructor("mailcore::IMAPMessagePart", &createObject);
+}

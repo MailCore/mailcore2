@@ -25,8 +25,14 @@
 #include "MCAutoreleasePool.h"
 #include "MCValue.h"
 #include "MCHTMLCleaner.h"
+#include "MCBase64.h"
 
 using namespace mailcore;
+
+void mailcore::setICUDataDirectory(String * directory)
+{
+    u_setDataDirectory(directory->fileSystemRepresentation());
+}
 
 #pragma mark quote headers string
 
@@ -1986,6 +1992,12 @@ unsigned long long String::unsignedLongLongValue()
     return strtoull(UTF8Characters(), NULL, 10);
 }
 
+double String::doubleValue()
+{
+    return strtod(UTF8Characters(), NULL);
+
+}
+
 Data * String::mUTF7EncodedData()
 {
     return dataUsingEncoding("mutf-7");
@@ -2110,7 +2122,35 @@ bool String::isEqualCaseInsensitive(String * otherString)
     return caseInsensitiveCompare(otherString) == 0;
 }
 
-void mailcore::setICUDataDirectory(String * directory)
+Data * String::decodedBase64Data()
 {
-    u_setDataDirectory(directory->fileSystemRepresentation());
+    const char * utf8 = UTF8Characters();
+    char * decoded = MCDecodeBase64(utf8, strlen(utf8));
+    Data * result = Data::dataWithBytes(decoded, strlen(decoded));
+    free(decoded);
+    return result;
+}
+
+HashMap * String::serializable()
+{
+    HashMap * result = Object::serializable();
+    result->setObjectForKey(MCSTR("value"), this);
+    return result;
+}
+
+void String::importSerializable(HashMap * serializable)
+{
+    String * value = (String *) serializable->objectForKey(MCSTR("value"));
+    setString(value);
+}
+
+static void * createObject()
+{
+    return new String();
+}
+
+__attribute__((constructor))
+static void initialize()
+{
+    Object::registerObjectConstructor("mailcore::String", &createObject);
 }

@@ -64,6 +64,12 @@ uint64_t MCORangeLeftBound(MCORange range);
 /** Returns right bound of a range.*/
 uint64_t MCORangeRightBound(MCORange range);
 
+/** Returns a serializable form (NSString) of a range */
+NSString * MCORangeToString(MCORange range);
+
+/** Create a range from a serializable form (NSString). */
+MCORange MCORangeFromString(NSString * rangeString);
+
 #ifdef __cplusplus
 }
 #endif

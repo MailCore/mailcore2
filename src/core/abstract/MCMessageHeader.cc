@@ -44,39 +44,37 @@ MessageHeader::MessageHeader(MessageHeader * other)
     setSubject(other->mSubject);
     setDate(other->date());
     setReceivedDate(other->receivedDate());
-    setUserAgent(other->mUserAgent);
     setExtraHeaders(other->mExtraHeaders);
 }
 
 void MessageHeader::init(bool generateDate, bool generateMessageID)
 {
-	mMessageID = NULL;
-	mReferences = NULL;
-	mInReplyTo = NULL;
+    mMessageID = NULL;
+    mReferences = NULL;
+    mInReplyTo = NULL;
     mSender = NULL;
-	mFrom = NULL;
-	mTo = NULL;
-	mCc = NULL;
-	mBcc = NULL;
-	mReplyTo = NULL;
-	mSubject = NULL;
+    mFrom = NULL;
+    mTo = NULL;
+    mCc = NULL;
+    mBcc = NULL;
+    mReplyTo = NULL;
+    mSubject = NULL;
     mDate = (time_t) -1;
-	mReceivedDate = (time_t) -1;
-    mUserAgent = NULL;
+    mReceivedDate = (time_t) -1;
     mExtraHeaders = NULL;
     
-	if (generateDate) {
+    if (generateDate) {
         time_t date;
         date = time(NULL);
         setDate(date);
         setReceivedDate(date);
-	}
-	if (generateMessageID) {
-    	static String * hostname = NULL;
-    	static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
-    	
-		pthread_mutex_lock(&lock);
-		if (hostname == NULL) {
+    }
+    if (generateMessageID) {
+        static String * hostname = NULL;
+        static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+        
+        pthread_mutex_lock(&lock);
+        if (hostname == NULL) {
             char name[MAX_HOSTNAME];
             int r;
 
@@ -91,15 +89,15 @@ void MessageHeader::init(bool generateDate, bool generateMessageID)
                 hostname = new String("localhost");
             }
         }
-		pthread_mutex_unlock(&lock);
-		
-    	String * messageID = new String();
+        pthread_mutex_unlock(&lock);
+        
+        String * messageID = new String();
         messageID->appendString(String::uuidString());
         messageID->appendUTF8Characters("@");
         messageID->appendString(hostname);
         setMessageID(messageID);
         messageID->release();
-	}
+    }
 }
 
 MessageHeader::~MessageHeader()
@@ -114,7 +112,6 @@ MessageHeader::~MessageHeader()
     MC_SAFE_RELEASE(mBcc);
     MC_SAFE_RELEASE(mReplyTo);
     MC_SAFE_RELEASE(mSubject);
-    MC_SAFE_RELEASE(mUserAgent);
     MC_SAFE_RELEASE(mExtraHeaders);
 }
 
@@ -134,7 +131,7 @@ String * MessageHeader::description()
     if (mSender != NULL) {
         result->appendUTF8Format("Sender: %s\n", mSender->description()->UTF8Characters());
     }
-	if (mFrom != NULL) {
+    if (mFrom != NULL) {
         result->appendUTF8Format("From: %s\n", mFrom->description()->UTF8Characters());
     }
     if (mTo != NULL) {
@@ -149,14 +146,11 @@ String * MessageHeader::description()
     if (mReplyTo != NULL) {
         result->appendUTF8Format("Reply-To: %s\n", mReplyTo->description()->UTF8Characters());
     }
-	if (mSubject != NULL) {
+    if (mSubject != NULL) {
         result->appendUTF8Format("Subject: %s\n", mSubject->UTF8Characters());
     }
-	if (mUserAgent != NULL) {
-        result->appendUTF8Format("X-Mailer: %s\n", mUserAgent->UTF8Characters());
-    }
     if (mExtraHeaders != NULL) {
-        mc_foreachdictionaryKeyAndValue(String, header, String, value, mExtraHeaders) {
+        mc_foreachhashmapKeyAndValue(String, header, String, value, mExtraHeaders) {
             result->appendUTF8Format("%s: %s\n", header->UTF8Characters(), value->UTF8Characters());
         }
     }
@@ -292,12 +286,12 @@ String * MessageHeader::subject()
 
 void MessageHeader::setUserAgent(String * userAgent)
 {
-    MC_SAFE_REPLACE_COPY(String, mUserAgent, userAgent);
+    setExtraHeader(MCSTR("X-Mailer"), userAgent);
 }
 
 String * MessageHeader::userAgent()
 {
-    return mUserAgent;
+    return extraHeaderValueForName(MCSTR("X-Mailer"));
 }
 
 void MessageHeader::setExtraHeaders(HashMap * headers)
@@ -312,21 +306,25 @@ Array * MessageHeader::allExtraHeadersNames()
     return mExtraHeaders->allKeys();
 }
 
-void MessageHeader::addHeader(String * name, String * object)
+void MessageHeader::setExtraHeader(String * name, String * object)
 {
     if (mExtraHeaders == NULL)
         mExtraHeaders = new HashMap();
+    if (object == NULL) {
+        removeExtraHeader(name);
+        return;
+    }
     mExtraHeaders->setObjectForKey(name, object);
 }
 
-void MessageHeader::removeHeader(String * name)
+void MessageHeader::removeExtraHeader(String * name)
 {
     if (mExtraHeaders == NULL)
         return;
     mExtraHeaders->removeObjectForKey(name);
 }
 
-String * MessageHeader::headerValueForName(String * name)
+String * MessageHeader::extraHeaderValueForName(String * name)
 {
     if (mExtraHeaders == NULL)
         return NULL;
@@ -349,15 +347,15 @@ String * MessageHeader::partialExtractedSubject()
 
 void MessageHeader::importHeadersData(Data * data)
 {
-	size_t cur_token;
-	struct mailimf_fields * fields;
-	int r;
-	
-	cur_token = 0;
-	r = mailimf_envelope_and_optional_fields_parse(data->bytes(), data->length(), &cur_token, &fields);
-	if (r != MAILIMF_NO_ERROR) {
-		return;
-	}
+    size_t cur_token;
+    struct mailimf_fields * fields;
+    int r;
+    
+    cur_token = 0;
+    r = mailimf_envelope_and_optional_fields_parse(data->bytes(), data->length(), &cur_token, &fields);
+    if (r != MAILIMF_NO_ERROR) {
+        return;
+    }
     
     importIMFFields(fields);
 
@@ -366,210 +364,198 @@ void MessageHeader::importHeadersData(Data * data)
 
 void MessageHeader::importIMFFields(struct mailimf_fields * fields)
 {
-    clistiter * cur;
-    cur = clist_begin(fields->fld_list);
-    while (cur != NULL) {
+    struct mailimf_single_fields single_fields;
+    
+    mailimf_single_fields_init(&single_fields, fields);
+    
+    /* date */
+    
+    if (single_fields.fld_orig_date != NULL) {
+        time_t timestamp;
+        timestamp = timestamp_from_date(single_fields.fld_orig_date->dt_date_time);
+        setDate(timestamp);
+        setReceivedDate(timestamp);
+        //MCLog("%lu %lu", (unsigned long) timestamp, date());
+    }
+    
+    /* subject */
+    if (single_fields.fld_subject != NULL) {
+        char * subject;
+        
+        subject = single_fields.fld_subject->sbj_value;
+        setSubject(String::stringByDecodingMIMEHeaderValue(subject));
+    }
+    
+    /* sender */
+    if (single_fields.fld_sender != NULL) {
+        struct mailimf_mailbox * mb;
+        Address * address;
+        
+        mb = single_fields.fld_sender->snd_mb;
+        if (mb != NULL) {
+            address = Address::addressWithIMFMailbox(mb);
+            setSender(address);
+        }
+    }
+    
+    /* from */
+    if (single_fields.fld_from != NULL) {
+        struct mailimf_mailbox_list * mb_list;
+        Array * addresses;
+        
+        mb_list = single_fields.fld_from->frm_mb_list;
+        addresses = lep_address_list_from_lep_mailbox(mb_list);
+        if (addresses->count() > 0) {
+            setFrom((Address *) (addresses->objectAtIndex(0)));
+        }
+    }
+    
+    /* replyto */
+    if (single_fields.fld_reply_to != NULL) {
+        struct mailimf_address_list * addr_list;
+        Array * addresses;
+        
+        addr_list = single_fields.fld_reply_to->rt_addr_list;
+        addresses = lep_address_list_from_lep_addr(addr_list);
+        setReplyTo(addresses);
+    }
+    
+    /* to */
+    if (single_fields.fld_to != NULL) {
+        struct mailimf_address_list * addr_list;
+        Array * addresses;
+        
+        addr_list = single_fields.fld_to->to_addr_list;
+        addresses = lep_address_list_from_lep_addr(addr_list);
+        setTo(addresses);
+    }
+    
+    /* cc */
+    if (single_fields.fld_cc != NULL) {
+        struct mailimf_address_list * addr_list;
+        Array * addresses;
+        
+        addr_list = single_fields.fld_cc->cc_addr_list;
+        addresses = lep_address_list_from_lep_addr(addr_list);
+        setCc(addresses);
+    }
+    
+    /* bcc */
+    if (single_fields.fld_bcc != NULL) {
+        struct mailimf_address_list * addr_list;
+        Array * addresses;
+        
+        addr_list = single_fields.fld_bcc->bcc_addr_list;
+        addresses = lep_address_list_from_lep_addr(addr_list);
+        setBcc(addresses);
+    }
+    
+    /* msgid */
+    if (single_fields.fld_message_id != NULL) {
+        char * msgid;
+        String * str;
+        
+        msgid = single_fields.fld_message_id->mid_value;
+        str = String::stringWithUTF8Characters(msgid);
+        setMessageID(str);
+    }
+    
+    /* references */
+    if (single_fields.fld_references != NULL) {
+        clist * msg_id_list;
+        Array * msgids;
+        
+        msg_id_list = single_fields.fld_references->mid_list;
+        msgids = msg_id_to_string_array(msg_id_list);
+        setReferences(msgids);
+    }
+    
+    /* inreplyto */
+    if (single_fields.fld_in_reply_to != NULL) {
+        clist * msg_id_list;
+        Array * msgids;
+        
+        msg_id_list = single_fields.fld_in_reply_to->mid_list;
+        msgids = msg_id_to_string_array(msg_id_list);
+        setInReplyTo(msgids);
+    }
+    
+    // Take care of other headers.
+    for(clistiter * cur = clist_begin(fields->fld_list) ; cur != NULL ; cur = clist_next(cur)) {
         struct mailimf_field * field;
 
         field = (mailimf_field *)clist_content(cur);
 
-        switch (field->fld_type) {
-            case MAILIMF_FIELD_ORIG_DATE:
-                // Set only if date is not set
-                if (date() == (time_t) -1) {
-                    time_t timestamp;
-
-                    timestamp = timestamp_from_date(field->fld_data.fld_orig_date->dt_date_time);
-                    setDate(timestamp);
-                    setReceivedDate(timestamp);
-                }
-                break;
-            case MAILIMF_FIELD_SUBJECT:
-                // Set only if subject is not set
-                if (subject() == NULL) {
-                    char * subject;
-
-                    subject = field->fld_data.fld_subject->sbj_value;
-                    setSubject(String::stringByDecodingMIMEHeaderValue(subject));
-                }
-                break;
-            case MAILIMF_FIELD_SENDER:
-                // Set only if sender is not set
-                if (sender() == NULL) {
-                    struct mailimf_mailbox * mb;
-                    Address * address;
-                    
-                    mb = field->fld_data.fld_sender->snd_mb;
-                    if (mb != NULL) {
-                        address = Address::addressWithIMFMailbox(mb);
-                        setSender(address);
-                    }
-                }
-                break;
-            case MAILIMF_FIELD_FROM:
-                // Set only if from is not set
-                if (from() == NULL) {
-                    struct mailimf_mailbox_list * mb_list;
-                    Array * addresses;
-                    
-                    mb_list = field->fld_data.fld_from->frm_mb_list;
-                    addresses = lep_address_list_from_lep_mailbox(mb_list);
-                    if (addresses->count() > 0) {
-                        setFrom((Address *) (addresses->objectAtIndex(0)));
-                    }
-                }
-                break;
-            case MAILIMF_FIELD_REPLY_TO:
-                // Set only if reply-to is not set
-                if (replyTo() == NULL) {
-                    struct mailimf_address_list * addr_list;
-                    Array * addresses;
-
-                    addr_list = field->fld_data.fld_reply_to->rt_addr_list;
-                    addresses = lep_address_list_from_lep_addr(addr_list);
-                    setReplyTo(addresses);
-                }
-                break;
-            case MAILIMF_FIELD_TO:
-                // Set only if to is not set
-                if (to() == NULL) {
-                    struct mailimf_address_list * addr_list;
-                    Array * addresses;
-
-                    addr_list = field->fld_data.fld_to->to_addr_list;
-                    addresses = lep_address_list_from_lep_addr(addr_list);
-                    setTo(addresses);
-                }
-                break;
-            case MAILIMF_FIELD_CC:
-                // Set only if cc is not set
-                if (cc() == NULL) {
-                    struct mailimf_address_list * addr_list;
-                    Array * addresses;
-
-                    addr_list = field->fld_data.fld_cc->cc_addr_list;
-                    addresses = lep_address_list_from_lep_addr(addr_list);
-                    setCc(addresses);
-                }
-                break;
-            case MAILIMF_FIELD_BCC:
-                // Set only if bcc is not set
-                if (bcc() == NULL) {
-                    struct mailimf_address_list * addr_list;
-                    Array * addresses;
-
-                    addr_list = field->fld_data.fld_bcc->bcc_addr_list;
-                    addresses = lep_address_list_from_lep_addr(addr_list);
-                    setBcc(addresses);
-                }
-                break;
-            case MAILIMF_FIELD_MESSAGE_ID:
-                // message-id has a default value set by the constructor, so we can't check for NULL here
-                char * msgid;
-                String * str;
-                    
-                msgid = field->fld_data.fld_message_id->mid_value;
-                str = String::stringWithUTF8Characters(msgid);
-                setMessageID(str);
-                break;
-            case MAILIMF_FIELD_REFERENCES:
-                // Set only if references is not set
-                if (references() == NULL) {
-                    clist * msg_id_list;
-                    Array * msgids;
-                    
-                    msg_id_list = field->fld_data.fld_references->mid_list;
-                    msgids = msg_id_to_string_array(msg_id_list);
-                    setReferences(msgids);
-                }
-                break;
-            case MAILIMF_FIELD_IN_REPLY_TO:
-                // Set only if in-reply-to is not set
-                if (inReplyTo() == NULL) {
-                    clist * msg_id_list;
-                    Array * msgids;
-                    
-                    msg_id_list = field->fld_data.fld_references->mid_list;
-                    msgids = msg_id_to_string_array(msg_id_list);
-                    setReferences(msgids);
-                }
-                break;
-            case MAILIMF_FIELD_OPTIONAL_FIELD:
-                char * fieldName;
-                String * fieldNameStr;
-                
-                fieldName = field->fld_data.fld_optional_field->fld_name;
-                fieldNameStr = String::stringWithUTF8Characters(fieldName);
-                // Set only if this optional-field is not set
-                if (headerValueForName(fieldNameStr) == NULL) {
-                    char * fieldValue;
-                    String * fieldValueStr;
-                    
-                    fieldValue = field->fld_data.fld_optional_field->fld_value;
-                    fieldValueStr = String::stringWithUTF8Characters(fieldValue);
-                    addHeader(fieldNameStr, fieldValueStr);
-                }
-                break;
-            default:
-                // It won't happen with mailimf_envelope_and_optional_fields_parse().
-                MCAssert(0);
-                break;
+        if (field->fld_type != MAILIMF_FIELD_OPTIONAL_FIELD) {
+            continue;
         }
-        cur = clist_next(cur);
-
-    
+        
+        char * fieldName;
+        String * fieldNameStr;
+        
+        fieldName = field->fld_data.fld_optional_field->fld_name;
+        fieldNameStr = String::stringWithUTF8Characters(fieldName);
+        // Set only if this optional-field is not set
+        if (extraHeaderValueForName(fieldNameStr) == NULL) {
+            char * fieldValue;
+            String * fieldValueStr;
+            
+            fieldValue = field->fld_data.fld_optional_field->fld_value;
+            fieldValueStr = String::stringWithUTF8Characters(fieldValue);
+            setExtraHeader(fieldNameStr, fieldValueStr);
+        }
     }
 }
 
 static time_t timestamp_from_date(struct mailimf_date_time * date_time)
 {
-	struct tm tmval;
-	time_t timeval;
-	int zone_min;
-	int zone_hour;
-	
-	tmval.tm_sec  = date_time->dt_sec;
-	tmval.tm_min  = date_time->dt_min;
-	tmval.tm_hour = date_time->dt_hour;
-	tmval.tm_mday = date_time->dt_day;
-	tmval.tm_mon  = date_time->dt_month - 1;
-	if (date_time->dt_year < 1000) {
-		// workaround when century is not given in year
-		tmval.tm_year = date_time->dt_year + 2000 - 1900;
-	}
-	else {
-		tmval.tm_year = date_time->dt_year - 1900;
-	}
-	
-	timeval = mkgmtime(&tmval);
-	
-	if (date_time->dt_zone >= 0) {
-		zone_hour = date_time->dt_zone / 100;
-		zone_min = date_time->dt_zone % 100;
-	}
-	else {
-		zone_hour = -((- date_time->dt_zone) / 100);
-		zone_min = -((- date_time->dt_zone) % 100);
-	}
-	timeval -= zone_hour * 3600 + zone_min * 60;
-	
-	return timeval;
+    struct tm tmval;
+    time_t timeval;
+    int zone_min;
+    int zone_hour;
+    
+    tmval.tm_sec  = date_time->dt_sec;
+    tmval.tm_min  = date_time->dt_min;
+    tmval.tm_hour = date_time->dt_hour;
+    tmval.tm_mday = date_time->dt_day;
+    tmval.tm_mon  = date_time->dt_month - 1;
+    if (date_time->dt_year < 1000) {
+        // workaround when century is not given in year
+        tmval.tm_year = date_time->dt_year + 2000 - 1900;
+    }
+    else {
+        tmval.tm_year = date_time->dt_year - 1900;
+    }
+    
+    timeval = mkgmtime(&tmval);
+    
+    if (date_time->dt_zone >= 0) {
+        zone_hour = date_time->dt_zone / 100;
+        zone_min = date_time->dt_zone % 100;
+    }
+    else {
+        zone_hour = -((- date_time->dt_zone) / 100);
+        zone_min = -((- date_time->dt_zone) % 100);
+    }
+    timeval -= zone_hour * 3600 + zone_min * 60;
+    
+    return timeval;
 }
 
 static struct mailimf_date_time * get_date_from_timestamp(time_t timeval)
 {
-	struct tm gmt;
-	struct tm lt;
-	int off;
-	struct mailimf_date_time * date_time;
+    struct tm gmt;
+    struct tm lt;
+    int off;
+    struct mailimf_date_time * date_time;
     int sign;
     int hour;
     int min;
-	
-	gmtime_r(&timeval, &gmt);
-	localtime_r(&timeval, &lt);
-	
-	off = (int) ((mkgmtime(&lt) - mkgmtime(&gmt)) / 60);
+    
+    gmtime_r(&timeval, &gmt);
+    localtime_r(&timeval, &lt);
+    
+    off = (int) ((mkgmtime(&lt) - mkgmtime(&gmt)) / 60);
     if (off < 0) {
         sign = -1;
     }
@@ -582,135 +568,135 @@ static struct mailimf_date_time * get_date_from_timestamp(time_t timeval)
     off = hour * 100 + min;
     off = off * sign;
     
-	date_time = mailimf_date_time_new(lt.tm_mday, lt.tm_mon + 1,
-									  lt.tm_year + 1900,
-									  lt.tm_hour, lt.tm_min, lt.tm_sec,
-									  off);
-	
-	return date_time;
+    date_time = mailimf_date_time_new(lt.tm_mday, lt.tm_mon + 1,
+                                      lt.tm_year + 1900,
+                                      lt.tm_hour, lt.tm_min, lt.tm_sec,
+                                      off);
+    
+    return date_time;
 }
 
 static time_t timestamp_from_imap_date(struct mailimap_date_time * date_time)
 {
-	struct tm tmval;
-	time_t timeval;
-	int zone_min;
-	int zone_hour;
-	
-	tmval.tm_sec  = date_time->dt_sec;
-	tmval.tm_min  = date_time->dt_min;
-	tmval.tm_hour = date_time->dt_hour;
-	tmval.tm_mday = date_time->dt_day;
-	tmval.tm_mon  = date_time->dt_month - 1;
-	if (date_time->dt_year < 1000) {
-		// workaround when century is not given in year
-		tmval.tm_year = date_time->dt_year + 2000 - 1900;
-	}
-	else {
-		tmval.tm_year = date_time->dt_year - 1900;
-	}
-	
-	timeval = mkgmtime(&tmval);
-	
-	if (date_time->dt_zone >= 0) {
-		zone_hour = date_time->dt_zone / 100;
-		zone_min = date_time->dt_zone % 100;
-	}
-	else {
-		zone_hour = -((- date_time->dt_zone) / 100);
-		zone_min = -((- date_time->dt_zone) % 100);
-	}
-	timeval -= zone_hour * 3600 + zone_min * 60;
-	
-	return timeval;
+    struct tm tmval;
+    time_t timeval;
+    int zone_min;
+    int zone_hour;
+    
+    tmval.tm_sec  = date_time->dt_sec;
+    tmval.tm_min  = date_time->dt_min;
+    tmval.tm_hour = date_time->dt_hour;
+    tmval.tm_mday = date_time->dt_day;
+    tmval.tm_mon  = date_time->dt_month - 1;
+    if (date_time->dt_year < 1000) {
+        // workaround when century is not given in year
+        tmval.tm_year = date_time->dt_year + 2000 - 1900;
+    }
+    else {
+        tmval.tm_year = date_time->dt_year - 1900;
+    }
+    
+    timeval = mkgmtime(&tmval);
+    
+    if (date_time->dt_zone >= 0) {
+        zone_hour = date_time->dt_zone / 100;
+        zone_min = date_time->dt_zone % 100;
+    }
+    else {
+        zone_hour = -((- date_time->dt_zone) / 100);
+        zone_min = -((- date_time->dt_zone) % 100);
+    }
+    timeval -= zone_hour * 3600 + zone_min * 60;
+    
+    return timeval;
 }
 
-#define INVALID_TIMESTAMP	(-1)
+#define INVALID_TIMESTAMP    (-1)
 
 static int tmcomp(struct tm * atmp, struct tm * btmp)
 {
-	register int	result;
-	
-	if ((result = (atmp->tm_year - btmp->tm_year)) == 0 &&
-		(result = (atmp->tm_mon - btmp->tm_mon)) == 0 &&
-		(result = (atmp->tm_mday - btmp->tm_mday)) == 0 &&
-		(result = (atmp->tm_hour - btmp->tm_hour)) == 0 &&
-		(result = (atmp->tm_min - btmp->tm_min)) == 0)
-		result = atmp->tm_sec - btmp->tm_sec;
-	return result;
+    register int    result;
+    
+    if ((result = (atmp->tm_year - btmp->tm_year)) == 0 &&
+        (result = (atmp->tm_mon - btmp->tm_mon)) == 0 &&
+        (result = (atmp->tm_mday - btmp->tm_mday)) == 0 &&
+        (result = (atmp->tm_hour - btmp->tm_hour)) == 0 &&
+        (result = (atmp->tm_min - btmp->tm_min)) == 0)
+        result = atmp->tm_sec - btmp->tm_sec;
+    return result;
 }
 
 static time_t mkgmtime(struct tm * tmp)
 {
-	register int			dir;
-	register int			bits;
-	register int			saved_seconds;
-	time_t				t;
-	struct tm			yourtm, mytm;
-	
-	yourtm = *tmp;
-	saved_seconds = yourtm.tm_sec;
-	yourtm.tm_sec = 0;
-	/*
-	 ** Calculate the number of magnitude bits in a time_t
-	 ** (this works regardless of whether time_t is
-	 ** signed or unsigned, though lint complains if unsigned).
-	 */
-	for (bits = 0, t = 1; t > 0; ++bits, t <<= 1)
-		;
-	/*
-	 ** If time_t is signed, then 0 is the median value,
-	 ** if time_t is unsigned, then 1 << bits is median.
-	 */
-	if(bits > 40) bits = 40;
-	t = (t < 0) ? 0 : ((time_t) 1 << bits);
-	for ( ; ; ) {
-		gmtime_r(&t, &mytm);
-		dir = tmcomp(&mytm, &yourtm);
-		if (dir != 0) {
-			if (bits-- < 0) {
-				return INVALID_TIMESTAMP;
-			}
-			if (bits < 0)
-				--t;
-			else if (dir > 0)
-				t -= (time_t) 1 << bits;
-			else	t += (time_t) 1 << bits;
-			continue;
-		}
-		break;
-	}
-	t += saved_seconds;
-	return t;
+    register int            dir;
+    register int            bits;
+    register int            saved_seconds;
+    time_t                t;
+    struct tm            yourtm, mytm;
+    
+    yourtm = *tmp;
+    saved_seconds = yourtm.tm_sec;
+    yourtm.tm_sec = 0;
+    /*
+     ** Calculate the number of magnitude bits in a time_t
+     ** (this works regardless of whether time_t is
+     ** signed or unsigned, though lint complains if unsigned).
+     */
+    for (bits = 0, t = 1; t > 0; ++bits, t <<= 1)
+        ;
+    /*
+     ** If time_t is signed, then 0 is the median value,
+     ** if time_t is unsigned, then 1 << bits is median.
+     */
+    if(bits > 40) bits = 40;
+    t = (t < 0) ? 0 : ((time_t) 1 << bits);
+    for ( ; ; ) {
+        gmtime_r(&t, &mytm);
+        dir = tmcomp(&mytm, &yourtm);
+        if (dir != 0) {
+            if (bits-- < 0) {
+                return INVALID_TIMESTAMP;
+            }
+            if (bits < 0)
+                --t;
+            else if (dir > 0)
+                t -= (time_t) 1 << bits;
+            else    t += (time_t) 1 << bits;
+            continue;
+        }
+        break;
+    }
+    t += saved_seconds;
+    return t;
 }
 
 #pragma mark RFC 2822 mailbox conversion
 
 static Array * lep_address_list_from_lep_mailbox(struct mailimf_mailbox_list * mb_list)
 {
-	Array * result;
-	clistiter * cur;
-	
-	result = Array::array();
-	for(cur = clist_begin(mb_list->mb_list) ; cur != NULL ; cur = clist_next(cur)) {
-		struct mailimf_mailbox * mb;
-		Address * address;
-		
-		mb = (struct mailimf_mailbox *) clist_content(cur);
+    Array * result;
+    clistiter * cur;
+    
+    result = Array::array();
+    for(cur = clist_begin(mb_list->mb_list) ; cur != NULL ; cur = clist_next(cur)) {
+        struct mailimf_mailbox * mb;
+        Address * address;
+        
+        mb = (struct mailimf_mailbox *) clist_content(cur);
         address = Address::addressWithIMFMailbox(mb);
         result->addObject(address);
-	}
-	
-	return result;
+    }
+    
+    return result;
 }
 
 static Array * lep_address_list_from_lep_addr(struct mailimf_address_list * addr_list)
 {
-	Array * result;
-	clistiter * cur;
-	
-	result = Array::array();
-	
+    Array * result;
+    clistiter * cur;
+    
+    result = Array::array();
+    
     if (addr_list == NULL) {
         return result;
     }
@@ -719,165 +705,165 @@ static Array * lep_address_list_from_lep_addr(struct mailimf_address_list * addr
         return result;
     }
     
-	for(cur = clist_begin(addr_list->ad_list) ; cur != NULL ;
-		cur = clist_next(cur)) {
-		struct mailimf_address * addr;
-		
-		addr = (struct mailimf_address *) clist_content(cur);
-		switch (addr->ad_type) {
-			case MAILIMF_ADDRESS_MAILBOX:
-			{
-				Address * address;
-				
+    for(cur = clist_begin(addr_list->ad_list) ; cur != NULL ;
+        cur = clist_next(cur)) {
+        struct mailimf_address * addr;
+        
+        addr = (struct mailimf_address *) clist_content(cur);
+        switch (addr->ad_type) {
+            case MAILIMF_ADDRESS_MAILBOX:
+            {
+                Address * address;
+                
                 address = Address::addressWithIMFMailbox(addr->ad_data.ad_mailbox);
                 result->addObject(address);
-				break;
-			}
-			
-			case MAILIMF_ADDRESS_GROUP:
-			{
-				if (addr->ad_data.ad_group->grp_mb_list != NULL) {
-					Array * subArray;
-					
-					subArray = lep_address_list_from_lep_mailbox(addr->ad_data.ad_group->grp_mb_list);
+                break;
+            }
+            
+            case MAILIMF_ADDRESS_GROUP:
+            {
+                if (addr->ad_data.ad_group->grp_mb_list != NULL) {
+                    Array * subArray;
+                    
+                    subArray = lep_address_list_from_lep_mailbox(addr->ad_data.ad_group->grp_mb_list);
                     result->addObjectsFromArray(subArray);
-				}
-				break;
-			}
-		}
-	}
-	
-	return result;
+                }
+                break;
+            }
+        }
+    }
+    
+    return result;
 }
 
 static struct mailimf_mailbox_list * lep_mailbox_list_from_array(Array * addresses)
 {
-	struct mailimf_mailbox_list * mb_list;
-	
-	if (addresses == NULL)
+    struct mailimf_mailbox_list * mb_list;
+    
+    if (addresses == NULL)
         return NULL;
     
-	if (addresses->count() == 0)
+    if (addresses->count() == 0)
         return NULL;
     
-	mb_list = mailimf_mailbox_list_new_empty();
-	
+    mb_list = mailimf_mailbox_list_new_empty();
+    
     for(unsigned i = 0 ; i < addresses->count() ; i ++) {
         Address * address = (Address *) addresses->objectAtIndex(i);
         struct mailimf_mailbox * mailbox = address->createIMFMailbox();
-		mailimf_mailbox_list_add(mb_list, mailbox);
-	}
-	
-	return mb_list;
+        mailimf_mailbox_list_add(mb_list, mailbox);
+    }
+    
+    return mb_list;
 }
 
 static struct mailimf_address_list * lep_address_list_from_array(Array * addresses)
 {
-	struct mailimf_address_list * addr_list;
-	
-	if (addresses == NULL)
+    struct mailimf_address_list * addr_list;
+    
+    if (addresses == NULL)
         return NULL;
-	
-	if (addresses->count() == 0)
+    
+    if (addresses->count() == 0)
         return NULL;
-	
-	addr_list = mailimf_address_list_new_empty();
+    
+    addr_list = mailimf_address_list_new_empty();
 
     for(unsigned i = 0 ; i < addresses->count() ; i ++) {
         Address * address = (Address *) addresses->objectAtIndex(i);
         struct mailimf_address * addr = address->createIMFAddress();
-		mailimf_address_list_add(addr_list, addr);
-	}
-	
-	return addr_list;
+        mailimf_address_list_add(addr_list, addr);
+    }
+    
+    return addr_list;
 }
 
 #pragma mark Message-ID conversion
 
 static Array * msg_id_to_string_array(clist * msgids)
 {
-	clistiter * cur;
-	Array * result;
-	
-	result = Array::array();
-	
-	for(cur = clist_begin(msgids) ; cur != NULL ; cur = clist_next(cur)) {
-		char * msgid;
-		String * str;
-		
-		msgid = (char *) clist_content(cur);
-		str = String::stringWithUTF8Characters(msgid);
+    clistiter * cur;
+    Array * result;
+    
+    result = Array::array();
+    
+    for(cur = clist_begin(msgids) ; cur != NULL ; cur = clist_next(cur)) {
+        char * msgid;
+        String * str;
+        
+        msgid = (char *) clist_content(cur);
+        str = String::stringWithUTF8Characters(msgid);
         result->addObject(str);
-	}
-	
-	return result;
+    }
+    
+    return result;
 }
 
 static clist * msg_id_from_string_array(Array * msgids)
 {
-	clist * result;
-	
-	if (msgids == NULL)
-        return NULL;
-	
-	if (msgids->count() == 0)
+    clist * result;
+    
+    if (msgids == NULL)
         return NULL;
     
-	result = clist_new();
+    if (msgids->count() == 0)
+        return NULL;
+    
+    result = clist_new();
     for(unsigned int i = 0 ; i < msgids->count() ; i ++) {
         String * msgid = (String *) msgids->objectAtIndex(i);
-		clist_append(result, strdup(msgid->UTF8Characters()));
-	}
-	
-	return result;
+        clist_append(result, strdup(msgid->UTF8Characters()));
+    }
+    
+    return result;
 }
 
 struct mailimf_fields * MessageHeader::createIMFFieldsAndFilterBcc(bool filterBcc)
 {
-	struct mailimf_date_time * imfDate;
-	char * imfMsgid;
-	char * imfSubject;
-	struct mailimf_mailbox_list * imfFrom;
-	struct mailimf_address_list * imfReplyTo;
-	struct mailimf_address_list * imfTo;
-	struct mailimf_address_list * imfCc;
-	struct mailimf_address_list * imfBcc;
-	clist * imfInReplyTo;
-	clist * imfReferences;
-	struct mailimf_fields * fields;
-	
-	imfDate = NULL;
-	if (date() != (time_t) -1) {
-		//MCLog("%lu", date());
-		imfDate = get_date_from_timestamp(date());
-	}
-	imfFrom = NULL;
-	if (from() != NULL) {
-		imfFrom = lep_mailbox_list_from_array(Array::arrayWithObject(from()));
-	}
+    struct mailimf_date_time * imfDate;
+    char * imfMsgid;
+    char * imfSubject;
+    struct mailimf_mailbox_list * imfFrom;
+    struct mailimf_address_list * imfReplyTo;
+    struct mailimf_address_list * imfTo;
+    struct mailimf_address_list * imfCc;
+    struct mailimf_address_list * imfBcc;
+    clist * imfInReplyTo;
+    clist * imfReferences;
+    struct mailimf_fields * fields;
+    
+    imfDate = NULL;
+    if (date() != (time_t) -1) {
+        //MCLog("%lu", date());
+        imfDate = get_date_from_timestamp(date());
+    }
+    imfFrom = NULL;
+    if (from() != NULL) {
+        imfFrom = lep_mailbox_list_from_array(Array::arrayWithObject(from()));
+    }
     imfReplyTo = lep_address_list_from_array(replyTo());
     imfTo = lep_address_list_from_array(to());
     imfCc = lep_address_list_from_array(cc());
-	imfBcc = NULL;
+    imfBcc = NULL;
     if (!filterBcc) {
         imfBcc = lep_address_list_from_array(bcc());
     }
-	imfMsgid = NULL;
-	if (messageID() != NULL) {
-		imfMsgid = strdup(messageID()->UTF8Characters());
-	}
+    imfMsgid = NULL;
+    if (messageID() != NULL) {
+        imfMsgid = strdup(messageID()->UTF8Characters());
+    }
     imfInReplyTo = msg_id_from_string_array(inReplyTo());
     imfReferences = msg_id_from_string_array(references());
-	imfSubject = NULL;
-	if ((subject() != NULL) && (subject()->length() > 0)) {
+    imfSubject = NULL;
+    if ((subject() != NULL) && (subject()->length() > 0)) {
         Data * data;
         
         data = subject()->encodedMIMEHeaderValueForSubject();
         if (data->bytes() != NULL) {
             imfSubject = strdup(data->bytes());
         }
-	}
-	
+    }
+    
     if ((imfTo == NULL) && (imfCc == NULL) && (imfBcc == NULL)) {
         imfTo = mailimf_address_list_new_empty();
         mailimf_address_list_add_parse(imfTo, (char *) "Undisclosed recipients:;");
@@ -894,24 +880,17 @@ struct mailimf_fields * MessageHeader::createIMFFieldsAndFilterBcc(bool filterBc
         imfInReplyTo,
         imfReferences,
         imfSubject);
-	
-	if (mUserAgent != NULL) {
-		struct mailimf_field * field;
-		
-		field = mailimf_field_new_custom(strdup("X-Mailer"), strdup(mUserAgent->UTF8Characters()));
-		mailimf_fields_add(fields, field);
-	}
     
     if (mExtraHeaders != NULL) {
-        mc_foreachdictionaryKeyAndValue(String, header, String, value, mExtraHeaders) {
+        mc_foreachhashmapKeyAndValue(String, header, String, value, mExtraHeaders) {
             struct mailimf_field * field;
             
             field = mailimf_field_new_custom(strdup(header->UTF8Characters()), strdup(value->UTF8Characters()));
             mailimf_fields_add(fields, field);
         }
     }
-	
-	return fields;
+    
+    return fields;
 }
 
 extern "C" {
@@ -926,8 +905,8 @@ extern "C" {
 static Array * imap_mailbox_list_to_address_array(clist * imap_mailbox_list)
 {
     clistiter * cur;
-	Array * result;
-	
+    Array * result;
+    
     result = Array::array();
     
     for(cur = clist_begin(imap_mailbox_list) ; cur != NULL ;
@@ -1085,26 +1064,26 @@ void MessageHeader::importIMAPEnvelope(struct mailimap_envelope * env)
 
 void MessageHeader::importIMAPReferences(Data * data)
 {
-	size_t cur_token;
-	struct mailimf_fields * fields;
-	int r;
-	struct mailimf_single_fields single_fields;
-	
-	cur_token = 0;
-	r = mailimf_fields_parse(data->bytes(), data->length(), &cur_token, &fields);
-	if (r != MAILIMF_NO_ERROR) {
-		return;
-	}
-	
-	mailimf_single_fields_init(&single_fields, fields);
-	if (single_fields.fld_references != NULL) {
-		Array * msgids;
-		
-		msgids = msg_id_to_string_array(single_fields.fld_references->mid_list);
+    size_t cur_token;
+    struct mailimf_fields * fields;
+    int r;
+    struct mailimf_single_fields single_fields;
+    
+    cur_token = 0;
+    r = mailimf_fields_parse(data->bytes(), data->length(), &cur_token, &fields);
+    if (r != MAILIMF_NO_ERROR) {
+        return;
+    }
+    
+    mailimf_single_fields_init(&single_fields, fields);
+    if (single_fields.fld_references != NULL) {
+        Array * msgids;
+        
+        msgids = msg_id_to_string_array(single_fields.fld_references->mid_list);
         setReferences(msgids);
-	}
-	if (single_fields.fld_subject != NULL) {
-		if (single_fields.fld_subject->sbj_value != NULL) {
+    }
+    if (single_fields.fld_subject != NULL) {
+        if (single_fields.fld_subject->sbj_value != NULL) {
             bool broken;
             char * value;
             bool isASCII;
@@ -1129,10 +1108,10 @@ void MessageHeader::importIMAPReferences(Data * data)
             if (!broken) {
                 setSubject(String::stringByDecodingMIMEHeaderValue(single_fields.fld_subject->sbj_value));
             }
-		}
-	}
-	
-	mailimf_fields_free(fields);
+        }
+    }
+    
+    mailimf_fields_free(fields);
 }
 
 void MessageHeader::importIMAPInternalDate(struct mailimap_date_time * date)
@@ -1143,9 +1122,9 @@ void MessageHeader::importIMAPInternalDate(struct mailimap_date_time * date)
 Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool includeCc, Array * senderEmails)
 {
     Set * senderEmailsSet;
-	senderEmailsSet = Set::setWithArray(senderEmails);
+    senderEmailsSet = Set::setWithArray(senderEmails);
     
-	bool hasCc;
+    bool hasCc;
     bool hasTo;
     Set * addedAddresses;
     Array * toField;
@@ -1159,57 +1138,57 @@ Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool
     addedAddresses = new Set();
     
     if (senderEmails != NULL &&
-		(senderEmails->containsObject(from()->mailbox()->lowercaseString()) ||
+        (senderEmails->containsObject(from()->mailbox()->lowercaseString()) ||
         senderEmails->containsObject(sender()->mailbox()->lowercaseString()))) {
         Array * recipient;
         
         recipient = new Array();
-		if (to() != NULL) {
-			for(unsigned int i = 0 ; i < to()->count() ; i ++) {
-				Address * address = (Address *) to()->objectAtIndex(i);
-				if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
-					continue;
-				}
-				if (address->mailbox()->isEqualCaseInsensitive(from()->mailbox())) {
-					recipient->addObjectsFromArray(replyTo());
-					for(unsigned int j = 0 ; j < to()->count() ; j ++) {
-						Address * address = (Address *) replyTo()->objectAtIndex(j);
-						if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
-							continue;
-						}
-						if (address->mailbox() == NULL)
-							continue;
-						addedAddresses->addObject(address->mailbox()->lowercaseString());
-					}
-				}
-				else {
-					if (address->mailbox() != NULL) {
-						recipient->addObject(address);
-						addedAddresses->addObject(address->mailbox()->lowercaseString());
-					}
-				}
-				hasTo = true;
-			}
-		}
+        if (to() != NULL) {
+            for(unsigned int i = 0 ; i < to()->count() ; i ++) {
+                Address * address = (Address *) to()->objectAtIndex(i);
+                if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
+                    continue;
+                }
+                if (address->mailbox()->isEqualCaseInsensitive(from()->mailbox())) {
+                    recipient->addObjectsFromArray(replyTo());
+                    for(unsigned int j = 0 ; j < to()->count() ; j ++) {
+                        Address * address = (Address *) replyTo()->objectAtIndex(j);
+                        if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
+                            continue;
+                        }
+                        if (address->mailbox() == NULL)
+                            continue;
+                        addedAddresses->addObject(address->mailbox()->lowercaseString());
+                    }
+                }
+                else {
+                    if (address->mailbox() != NULL) {
+                        recipient->addObject(address);
+                        addedAddresses->addObject(address->mailbox()->lowercaseString());
+                    }
+                }
+                hasTo = true;
+            }
+        }
         toField = recipient;
         toField->retain()->autorelease();
         recipient->release();
         
         if (replyAll) {
             recipient = new Array();
- 			if (cc() != NULL) {
-			   for(unsigned int i = 0 ; i < cc()->count() ; i ++) {
-					Address * address = (Address *) cc()->objectAtIndex(i);
-					if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
-						continue;
-					}
-					if (address->mailbox() == NULL)
-						continue;
-					recipient->addObject(address);
-					addedAddresses->addObject(address->mailbox()->lowercaseString());
-					hasCc = true;
-				}
-			}
+             if (cc() != NULL) {
+               for(unsigned int i = 0 ; i < cc()->count() ; i ++) {
+                    Address * address = (Address *) cc()->objectAtIndex(i);
+                    if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
+                        continue;
+                    }
+                    if (address->mailbox() == NULL)
+                        continue;
+                    recipient->addObject(address);
+                    addedAddresses->addObject(address->mailbox()->lowercaseString());
+                    hasCc = true;
+                }
+            }
             ccField = recipient;
             ccField->retain()->autorelease();
             recipient->release();
@@ -1245,30 +1224,30 @@ Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool
             Array * recipient;
             
             recipient = new Array();
-			if (to() != NULL) {
-				for(unsigned int i = 0 ; i < to()->count() ; i ++) {
-					Address * address = (Address *) to()->objectAtIndex(i);
-					if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
-						continue;
-					}
-					if (address->mailbox() == NULL)
-						continue;
-					recipient->addObject(address);
-					addedAddresses->addObject(address->mailbox()->lowercaseString());
-				}
-			}
-			if (cc() != NULL) {
-				for(unsigned int i = 0 ; i < cc()->count() ; i ++) {
-					Address * address = (Address *) cc()->objectAtIndex(i);
-					if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
-						continue;
-					}
-					if (address->mailbox() == NULL)
-						continue;
-					recipient->addObject(address);
-					addedAddresses->addObject(address->mailbox()->lowercaseString());
-				}
-			}
+            if (to() != NULL) {
+                for(unsigned int i = 0 ; i < to()->count() ; i ++) {
+                    Address * address = (Address *) to()->objectAtIndex(i);
+                    if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
+                        continue;
+                    }
+                    if (address->mailbox() == NULL)
+                        continue;
+                    recipient->addObject(address);
+                    addedAddresses->addObject(address->mailbox()->lowercaseString());
+                }
+            }
+            if (cc() != NULL) {
+                for(unsigned int i = 0 ; i < cc()->count() ; i ++) {
+                    Address * address = (Address *) cc()->objectAtIndex(i);
+                    if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
+                        continue;
+                    }
+                    if (address->mailbox() == NULL)
+                        continue;
+                    recipient->addObject(address);
+                    addedAddresses->addObject(address->mailbox()->lowercaseString());
+                }
+            }
             if (recipient->count() > 0) {
                 hasCc = true;
             }
@@ -1298,23 +1277,28 @@ MessageHeader * MessageHeader::replyHeader(bool replyAll, Array * addressesExclu
     Array * inReplyTo;
     Array * toValue;
     Array * ccValue;
-	
-	referencesValue = NULL;
-	inReplyTo = NULL;
-	
+    
+    referencesValue = NULL;
+    inReplyTo = NULL;
+    
     result = new MessageHeader();
-    subjectValue = MCSTR("Re: ")->stringByAppendingString(subject());
-	if (references() != NULL) {
-		referencesValue = (Array *) (references()->copy());
-		referencesValue->autorelease();
-		if (messageID() != NULL ) {
-			referencesValue->addObject(messageID());
-		}
-	}
-	if (messageID()) {
-		inReplyTo = Array::array();
-		inReplyTo->addObject(messageID());
-	}
+    if (subject() == NULL) {
+        subjectValue = MCSTR("Re: ");
+    }
+    else {
+        subjectValue = MCSTR("Re: ")->stringByAppendingString(subject());
+    }
+    if (references() != NULL) {
+        referencesValue = (Array *) (references()->copy());
+        referencesValue->autorelease();
+        if (messageID() != NULL ) {
+            referencesValue->addObject(messageID());
+        }
+    }
+    if (messageID()) {
+        inReplyTo = Array::array();
+        inReplyTo->addObject(messageID());
+    }
     toValue = recipientWithReplyAll(replyAll, true, false, addressesExcludedFromRecipient);
     ccValue = recipientWithReplyAll(replyAll, false, true, addressesExcludedFromRecipient);;
     
@@ -1335,22 +1319,27 @@ MessageHeader * MessageHeader::forwardHeader()
     Array * referencesValue;
     Array * inReplyTo;
     
-	referencesValue = NULL;
-	inReplyTo = NULL;
+    referencesValue = NULL;
+    inReplyTo = NULL;
 
     result = new MessageHeader();
-    subjectValue = MCSTR("Fw: ")->stringByAppendingString(subject());
-	if (references() != NULL) {
-		referencesValue = (Array *) (references()->copy());
-		referencesValue->autorelease();
-		if (messageID() != NULL ) {
-			referencesValue->addObject(messageID());
-		}
-	}
-	if (messageID()) {
-		inReplyTo = Array::array();
-		inReplyTo->addObject(messageID());
-	}
+    if (subject() == NULL) {
+        subjectValue = MCSTR("Fw: ");
+    }
+    else {
+        subjectValue = MCSTR("Fw: ")->stringByAppendingString(subject());
+    }
+    if (references() != NULL) {
+        referencesValue = (Array *) (references()->copy());
+        referencesValue->autorelease();
+        if (messageID() != NULL ) {
+            referencesValue->addObject(messageID());
+        }
+    }
+    if (messageID() != NULL) {
+        inReplyTo = Array::array();
+        inReplyTo->addObject(messageID());
+    }
     result->setSubject(subjectValue);
     result->setReferences(referencesValue);
     result->setInReplyTo(inReplyTo);
@@ -1359,3 +1348,73 @@ MessageHeader * MessageHeader::forwardHeader()
     return result;
 }
 
+HashMap * MessageHeader::serializable()
+{
+    HashMap * result = Object::serializable();
+    
+    if (messageID() != NULL) {
+        result->setObjectForKey(MCSTR("messageID"), messageID());
+    }
+    if (references() != NULL) {
+        result->setObjectForKey(MCSTR("references"), references());
+    }
+    if (inReplyTo() != NULL) {
+        result->setObjectForKey(MCSTR("inReplyTo"), inReplyTo());
+    }
+    if (sender() != NULL) {
+        result->setObjectForKey(MCSTR("sender"), sender()->serializable());
+    }
+    if (from() != NULL) {
+        result->setObjectForKey(MCSTR("from"), from()->serializable());
+    }
+    if (to() != NULL) {
+        result->setObjectForKey(MCSTR("to"), to()->serializable());
+    }
+    if (cc() != NULL) {
+        result->setObjectForKey(MCSTR("cc"), cc()->serializable());
+    }
+    if (bcc() != NULL) {
+        result->setObjectForKey(MCSTR("bcc"), bcc()->serializable());
+    }
+    if (replyTo() != NULL) {
+        result->setObjectForKey(MCSTR("replyTo"), replyTo()->serializable());
+    }
+    if (subject() != NULL) {
+        result->setObjectForKey(MCSTR("subject"), subject());
+    }
+    result->setObjectForKey(MCSTR("date"), String::stringWithUTF8Format("%lld", (unsigned long long) date()));
+    result->setObjectForKey(MCSTR("receivedDate"), String::stringWithUTF8Format("%lld", (unsigned long long) receivedDate()));
+    if (mExtraHeaders != NULL) {
+        result->setObjectForKey(MCSTR("extraHeaders"), mExtraHeaders);
+    }
+    
+    return result;
+}
+
+void MessageHeader::importSerializable(HashMap * hashmap)
+{
+    setMessageID((String *) hashmap->objectForKey(MCSTR("messageID")));
+    setReferences((Array *) hashmap->objectForKey(MCSTR("references")));
+    setInReplyTo((Array *) hashmap->objectForKey(MCSTR("inReplyTo")));
+    setSender((Address *) Object::objectWithSerializable((HashMap *) hashmap->objectForKey(MCSTR("sender"))));
+    setFrom((Address *) Object::objectWithSerializable((HashMap *) hashmap->objectForKey(MCSTR("from"))));
+    setTo((Array *) Object::objectWithSerializable((HashMap *) hashmap->objectForKey(MCSTR("to"))));
+    setCc((Array *)Object::objectWithSerializable((HashMap *) hashmap->objectForKey(MCSTR("cc"))));
+    setBcc((Array *)Object::objectWithSerializable((HashMap *) hashmap->objectForKey(MCSTR("bcc"))));
+    setReplyTo((Array *)Object::objectWithSerializable((HashMap *) hashmap->objectForKey(MCSTR("replyTo"))));
+    setSubject((String *) hashmap->objectForKey(MCSTR("subject")));
+    setDate((time_t) ((String *) hashmap->objectForKey(MCSTR("date")))->unsignedLongLongValue());
+    setReceivedDate((time_t) ((String *) hashmap->objectForKey(MCSTR("receivedDate")))->unsignedLongLongValue());
+    setExtraHeaders((HashMap *) hashmap->objectForKey(MCSTR("extraHeaders")));
+}
+
+static void * createObject()
+{
+    return new MessageHeader();
+}
+
+__attribute__((constructor))
+static void initialize()
+{
+    Object::registerObjectConstructor("mailcore::MessageHeader", &createObject);
+}

@@ -8,6 +8,7 @@
 #include "MCString.h"
 #include "MCLog.h"
 #include "MCUtils.h"
+#include "MCIterator.h"
 
 using namespace mailcore;
 
@@ -234,4 +235,34 @@ String * Array::componentsJoinedByString(String * delimiter)
         result->appendString(obj->description());
     }
     return result;
+}
+
+HashMap * Array::serializable()
+{
+    HashMap * result = Object::serializable();
+    Array * array = Array::array();
+    mc_foreacharray(Object, item, this) {
+        array->addObject(item->serializable());
+    }
+    result->setObjectForKey(MCSTR("items"), array);
+    return result;
+}
+
+void Array::importSerializable(HashMap * serializable)
+{
+    Array * array = (Array *) serializable->objectForKey(MCSTR("items"));
+    mc_foreacharray(HashMap, item, array) {
+        addObject(Object::objectWithSerializable(item));
+    }
+}
+
+static void * createObject()
+{
+    return new Array();
+}
+
+__attribute__((constructor))
+static void initialize()
+{
+    Object::registerObjectConstructor("mailcore::Array", &createObject);
 }

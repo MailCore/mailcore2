@@ -9,6 +9,8 @@
 #include "MCString.h"
 #include "MCHash.h"
 #include "MCUtils.h"
+#include "MCHashMap.h"
+#include "MCBase64.h"
 
 #define DEFAULT_CHARSET "iso-8859-1"
 
@@ -538,4 +540,35 @@ Data * Data::dataWithCapacity(int capacity)
 {
     Data * result = new Data(capacity);
     return (Data *) result->autorelease();
+}
+
+String * Data::base64String()
+{
+    char * encoded = MCEncodeBase64(bytes(), length());
+    String * result = String::stringWithUTF8Characters(encoded);
+    free(encoded);
+    return result;
+}
+
+HashMap * Data::serializable()
+{
+    HashMap * result = Object::serializable();
+    result->setObjectForKey(MCSTR("data"), base64String());
+    return result;
+}
+
+void Data::importSerializable(HashMap * serializable)
+{
+    setData(((String *) (serializable->objectForKey(MCSTR("data"))))->decodedBase64Data());
+}
+
+static void * createObject()
+{
+    return new Data();
+}
+
+__attribute__((constructor))
+static void initialize()
+{
+    Object::registerObjectConstructor("mailcore::Data", &createObject);
 }

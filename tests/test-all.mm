@@ -56,7 +56,7 @@ static mailcore::Data * testMessageBuilder()
     to->release();
     bcc->release();
     MCAssert(msg->header()->allExtraHeadersNames()->count() == 0);
-    msg->header()->addHeader(MCSTR("X-Custom-Header"), MCSTR("Custom Header Value"));
+    msg->header()->setExtraHeader(MCSTR("X-Custom-Header"), MCSTR("Custom Header Value"));
     msg->header()->setSubject(MCSTR("Mon projet d'été"));
     msg->setHTMLBody(MCSTR("<div>Hello <img src=\"cid:1234\"></div>"));
     msg->addAttachment(mailcore::Attachment::attachmentWithContentsOfFile(MCSTR("first-filename")));

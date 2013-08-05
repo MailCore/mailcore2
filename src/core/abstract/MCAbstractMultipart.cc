@@ -92,3 +92,17 @@ AbstractPart * AbstractMultipart::partForUniqueID(String * uniqueID)
     return NULL;
 }
 
+HashMap * AbstractMultipart::serializable()
+{
+    HashMap * result = (HashMap *) AbstractPart::serializable();
+    if (mParts != NULL) {
+        result->setObjectForKey(MCSTR("parts"), mParts->serializable());
+    }
+    return result;
+}
+
+void AbstractMultipart::importSerializable(HashMap * serializable)
+{
+    AbstractPart::importSerializable(serializable);
+    setParts((Array *) Object::objectWithSerializable((HashMap *) serializable->objectForKey(MCSTR("parts"))));
+}

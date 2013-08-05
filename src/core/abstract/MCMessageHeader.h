@@ -15,7 +15,7 @@ namespace mailcore {
     public:
         MessageHeader();
         virtual ~MessageHeader();
-
+        
         virtual void setMessageID(String * messageID);
         virtual String * messageID();
 
@@ -55,9 +55,9 @@ namespace mailcore {
         virtual void setUserAgent(String * userAgent);
         virtual String * userAgent();
 
-        virtual void addHeader(String *name, String * value);
-        virtual void removeHeader(String *name);
-        virtual String * headerValueForName(String *name);
+        virtual void setExtraHeader(String *name, String * value);
+        virtual void removeExtraHeader(String *name);
+        virtual String * extraHeaderValueForName(String *name);
         virtual Array * allExtraHeadersNames();
 
         String * extractedSubject();
@@ -71,6 +71,8 @@ namespace mailcore {
         MessageHeader(MessageHeader * other);
         virtual String * description();
         virtual Object * copy();
+        virtual HashMap * serializable();
+        virtual void importSerializable(HashMap * serializable);
 
     public: // private
         virtual void importIMAPEnvelope(struct mailimap_envelope * env);
@@ -93,7 +95,6 @@ namespace mailcore {
         String * mSubject;
         time_t mDate;
         time_t mReceivedDate;
-        String * mUserAgent;
         HashMap * mExtraHeaders;
         void init(bool generateDate, bool generateMessageID);
         void setExtraHeaders(HashMap *headers);
