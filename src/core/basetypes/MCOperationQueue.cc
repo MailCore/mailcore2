@@ -84,6 +84,8 @@ void OperationQueue::runOperations()
             break;
         }
 
+        performMethodOnMainThread((Object::Method) &OperationQueue::beforeMain, op, true);
+        
         op->main();
         
         op->retain()->autorelease();
@@ -99,9 +101,7 @@ void OperationQueue::runOperations()
         pthread_mutex_unlock(&mLock);
         
         if (!op->isCancelled()) {
-            if (op->callback() != NULL) {
-                performMethodOnMainThread((Object::Method) &OperationQueue::callbackOnMainThread, op, true);
-            }
+            performMethodOnMainThread((Object::Method) &OperationQueue::callbackOnMainThread, op, true);
         }
         
         if (needsCheckRunning) {
@@ -115,8 +115,15 @@ void OperationQueue::runOperations()
     MCLog("cleanup thread %p", this);
 }
 
+void OperationQueue::beforeMain(Operation * op)
+{
+    op->beforeMain();
+}
+
 void OperationQueue::callbackOnMainThread(Operation * op)
 {
+    op->afterMain();
+    
     if (op->isCancelled())
         return;
     
