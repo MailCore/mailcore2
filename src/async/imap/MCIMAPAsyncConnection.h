@@ -69,6 +69,9 @@ namespace mailcore {
         virtual void setDelimiter(char delimiter);
         virtual char delimiter();
         
+        virtual void setAutomaticConfigurationEnabled(bool enabled);
+        virtual bool isAutomaticConfigurationEnabled();
+        
         virtual void setDefaultNamespace(IMAPNamespace * ns);
         virtual IMAPNamespace * defaultNamespace();
         
@@ -138,6 +141,7 @@ namespace mailcore {
         ConnectionLogger * mConnectionLogger;
         IMAPConnectionLogger * mInternalLogger;
         pthread_mutex_t mConnectionLoggerLock;
+        bool mAutomaticConfigurationEnabled;
         
         virtual void tryAutomaticDisconnectAfterDelay(void * context);
         virtual IMAPMessageRenderingOperation * renderingOperation(IMAPMessage * message,

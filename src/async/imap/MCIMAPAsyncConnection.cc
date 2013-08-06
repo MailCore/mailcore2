@@ -93,6 +93,7 @@ IMAPAsyncConnection::IMAPAsyncConnection()
     mConnectionLogger = NULL;
     pthread_mutex_init(&mConnectionLoggerLock, NULL);
     mInternalLogger = new IMAPConnectionLogger(this);
+    mAutomaticConfigurationEnabled = true;
 }
 
 IMAPAsyncConnection::~IMAPAsyncConnection()
@@ -629,4 +630,16 @@ IMAPMessageRenderingOperation * IMAPAsyncConnection::plainTextBodyRenderingOpera
                                                                                      String * folder)
 {
     return renderingOperation(message, folder, IMAPMessageRenderingTypePlainTextBody);
+}
+
+void IMAPAsyncConnection::setAutomaticConfigurationEnabled(bool enabled)
+{
+    mAutomaticConfigurationEnabled = enabled;
+    mSession->setAutomaticCapabilitiesEnabled(enabled);
+    mSession->setAutomaticNamespaceEnabled(enabled);
+}
+
+bool IMAPAsyncConnection::isAutomaticConfigurationEnabled()
+{
+    return mAutomaticConfigurationEnabled;
 }

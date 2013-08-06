@@ -10,6 +10,7 @@
 
 #include <stdlib.h>
 
+#include "MCIMAPAsyncSession.h"
 #include "MCIMAPSession.h"
 #include "MCIMAPAsyncConnection.h"
 #include "MCIMAPOperationCallback.h"
@@ -132,4 +133,15 @@ void IMAPOperation::itemsProgressOnMainThread(void * ctx)
     }
     free(context);
     release();
+}
+
+void IMAPOperation::beforeMain()
+{
+}
+
+void IMAPOperation::afterMain()
+{
+    if (mSession->session()->isAutomaticConfigurationDone()) {
+        mSession->owner()->automaticConfigurateDone();
+    }
 }

@@ -138,6 +138,9 @@ namespace mailcore {
         virtual IMAPMessageRenderingOperation * htmlBodyRenderingOperation(IMAPMessage * message, String * folder);
         virtual IMAPMessageRenderingOperation * plainTextRenderingOperation(IMAPMessage * message, String * folder);
         virtual IMAPMessageRenderingOperation * plainTextBodyRenderingOperation(IMAPMessage * message, String * folder);
+        
+    public: // private
+        virtual void automaticConfigurateDone();
     
     private:
         Array * mSessions;
@@ -157,6 +160,7 @@ namespace mailcore {
         bool mAllowsFolderConcurrentAccessEnabled;
         unsigned int mMaximumConnections;
         ConnectionLogger * mConnectionLogger;
+        bool mAutomaticConfigurationDone;
         
         virtual IMAPAsyncConnection * sessionForFolder(String * folder, bool urgent = false);
         virtual IMAPAsyncConnection * session();

@@ -36,6 +36,7 @@ IMAPAsyncSession::IMAPAsyncSession()
     mDefaultNamespace = NULL;
     mTimeout = 30.;
     mConnectionLogger = NULL;
+    mAutomaticConfigurationDone = false;
 }
 
 IMAPAsyncSession::~IMAPAsyncSession()
@@ -208,6 +209,9 @@ IMAPAsyncConnection * IMAPAsyncSession::session()
     session->setVoIPEnabled(mVoIPEnabled);
     session->setDelimiter(mDelimiter);
     session->setDefaultNamespace(mDefaultNamespace);
+    if (mAutomaticConfigurationDone) {
+        session->setAutomaticConfigurationEnabled(false);
+    }
     
     return session;
 }
@@ -489,4 +493,9 @@ IMAPMessageRenderingOperation * IMAPAsyncSession::plainTextBodyRenderingOperatio
 {
     IMAPAsyncConnection * session = sessionForFolder(folder);
     return session->plainTextBodyRenderingOperation(message, folder);
+}
+
+void IMAPAsyncSession::automaticConfigurateDone()
+{
+    mAutomaticConfigurationDone = true;
 }
