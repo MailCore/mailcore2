@@ -165,6 +165,10 @@ namespace mailcore {
         /** HTML rendering of the body of the message.*/
         virtual String * htmlBodyRendering(IMAPMessage * message, String * folder, ErrorCode * pError);
         
+		/** HTML rendering of only the bare message content.*/
+        virtual String * htmlBareRendering(IMAPMessage * message, String * folder, ErrorCode * pError);
+
+		
         /** Text rendering of the message.*/
         virtual String * plainTextRendering(IMAPMessage * message, String * folder, ErrorCode * pError);
         

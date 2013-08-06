@@ -21,6 +21,7 @@
 #include "MCUtils.h"
 #include "MCHTMLRendererIMAPDataCallback.h"
 #include "MCHTMLBodyRendererTemplateCallback.h"
+#include "MCHTMLBareRendererTemplateCallback.h"
 #include "MCCertificateUtils.h"
 
 using namespace mailcore;
@@ -3108,6 +3109,27 @@ String * IMAPSession::htmlBodyRendering(IMAPMessage * message, String * folder, 
                                                                dataCallback,
                                                                htmlCallback);
 
+    * pError = dataCallback->error();
+    
+    if (* pError != ErrorNone) {
+        return NULL;
+    }
+    
+    MC_SAFE_RELEASE(dataCallback);
+    MC_SAFE_RELEASE(htmlCallback);
+    return htmlBodyString;
+}
+
+String * IMAPSession::htmlBareRendering(IMAPMessage * message, String * folder, ErrorCode * pError)
+{
+    HTMLRendererIMAPDataCallback * dataCallback = new HTMLRendererIMAPDataCallback(this, message->uid());
+    HTMLBareRendererTemplateCallback * htmlCallback = new HTMLBareRendererTemplateCallback();
+    
+    String * htmlBodyString = HTMLRenderer::htmlForIMAPMessage(folder,
+                                                               message,
+                                                               dataCallback,
+                                                               htmlCallback);
+	
     * pError = dataCallback->error();
     
     if (* pError != ErrorNone) {

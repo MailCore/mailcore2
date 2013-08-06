@@ -61,6 +61,9 @@ void IMAPMessageRenderingOperation::main()
     else if (mRenderingType == IMAPMessageRenderingTypeHTMLBody) {
         mResult = session()->session()->htmlBodyRendering(mMessage, folder(), &error);
     }
+	else if (mRenderingType == IMAPMessageRenderingTypeHTMLBare) {
+        mResult = session()->session()->htmlBareRendering(mMessage, folder(), &error);
+    }
     else if (mRenderingType == IMAPMessageRenderingTypePlainText) {
         mResult = session()->session()->plainTextRendering(mMessage, folder(), &error);
     }

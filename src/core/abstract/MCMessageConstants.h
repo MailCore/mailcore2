@@ -221,6 +221,7 @@ namespace mailcore {
     enum IMAPMessageRenderingType {
         IMAPMessageRenderingTypeHTML,
         IMAPMessageRenderingTypeHTMLBody,
+		IMAPMessageRenderingTypeHTMLBare,
         IMAPMessageRenderingTypePlainText,
         IMAPMessageRenderingTypePlainTextBody
     };

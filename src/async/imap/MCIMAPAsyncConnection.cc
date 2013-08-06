@@ -618,6 +618,11 @@ IMAPMessageRenderingOperation * IMAPAsyncConnection::htmlBodyRenderingOperation(
 {
     return renderingOperation(message, folder, IMAPMessageRenderingTypeHTMLBody);
 }
+IMAPMessageRenderingOperation * IMAPAsyncConnection::htmlBareRenderingOperation(IMAPMessage * message,
+                                                                                String * folder)
+{
+    return renderingOperation(message, folder, IMAPMessageRenderingTypeHTMLBare);
+}
 
 IMAPMessageRenderingOperation * IMAPAsyncConnection::plainTextRenderingOperation(IMAPMessage * message,
                                                                                  String * folder)
