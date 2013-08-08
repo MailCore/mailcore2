@@ -75,5 +75,24 @@ AbstractPart * AbstractMessagePart::partForContentID(String * contentID)
 
 AbstractPart * AbstractMessagePart::partForUniqueID(String * contentID)
 {
-    return mainPart()->partForContentID(contentID);
+    return mainPart()->partForUniqueID(contentID);
+}
+
+HashMap * AbstractMessagePart::serializable()
+{
+    HashMap * result = (HashMap *) AbstractPart::serializable();
+    if (mainPart() != NULL) {
+        result->setObjectForKey(MCSTR("mainPart"), mainPart()->serializable());
+    }
+    if (header() != NULL) {
+        result->setObjectForKey(MCSTR("header"), header()->serializable());
+    }
+    return result;
+}
+
+void AbstractMessagePart::importSerializable(HashMap * serializable)
+{
+    AbstractPart::importSerializable(serializable);
+    setMainPart((AbstractPart *) Object::objectWithSerializable((HashMap *) serializable->objectForKey(MCSTR("mainPart"))));
+    setHeader((MessageHeader *) Object::objectWithSerializable((HashMap *) serializable->objectForKey(MCSTR("header"))));
 }

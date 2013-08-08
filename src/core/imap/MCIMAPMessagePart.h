@@ -7,23 +7,25 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-	
-	class IMAPMessagePart : public AbstractMessagePart {
-	public:
-		IMAPMessagePart();
-		virtual ~IMAPMessagePart();
+    
+    class IMAPMessagePart : public AbstractMessagePart {
+    public:
+        IMAPMessagePart();
+        virtual ~IMAPMessagePart();
         
-		virtual void setPartID(String * partID);
-		virtual String * partID();
+        virtual void setPartID(String * partID);
+        virtual String * partID();
         
     public: // subclass behavior
-		IMAPMessagePart(IMAPMessagePart * other);
-		virtual Object * copy();
+        IMAPMessagePart(IMAPMessagePart * other);
+        virtual Object * copy();
+        virtual HashMap * serializable();
+        virtual void importSerializable(HashMap * serializable);
         
     private:
-		String * mPartID;
-		void init();
-	};
+        String * mPartID;
+        void init();
+    };
 }
 
 #endif

@@ -161,7 +161,9 @@ Attachment * Attachment::attachmentWithData(String * filename, Data * data)
 	if (mimeType != NULL) {
         attachment->setMimeType(mimeType);
 	}
-	attachment->setFilename(filename->lastPathComponent());
+    if (filename != NULL) {
+        attachment->setFilename(filename->lastPathComponent());
+    }
     attachment->setData(data);
 	
 	return (Attachment *) attachment->autorelease();

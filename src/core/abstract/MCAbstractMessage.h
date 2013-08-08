@@ -8,15 +8,15 @@
 namespace mailcore {
 
     class AbstractPart;
-	class MessageHeader;
+    class MessageHeader;
 
-	class AbstractMessage : public Object {
-	public:
-		AbstractMessage();
-		virtual ~AbstractMessage();
+    class AbstractMessage : public Object {
+    public:
+        AbstractMessage();
+        virtual ~AbstractMessage();
 
-		virtual MessageHeader * header();
-		virtual void setHeader(MessageHeader * header);
+        virtual MessageHeader * header();
+        virtual void setHeader(MessageHeader * header);
         
         virtual AbstractPart * partForContentID(String * contentID);
         virtual AbstractPart * partForUniqueID(String * uniqueID);
@@ -25,15 +25,17 @@ namespace mailcore {
         virtual Array * /* AbstractPart */ htmlInlineAttachments();
         
     public: //subclass behavior
-		AbstractMessage(AbstractMessage * other);
-		virtual String * description();
-		virtual Object * copy();
+        AbstractMessage(AbstractMessage * other);
+        virtual String * description();
+        virtual Object * copy();
+        virtual HashMap * serializable();
+        virtual void importSerializable(HashMap * hashmap);
         
-	private:
-		MessageHeader * mHeader;
-		void init();
+    private:
+        MessageHeader * mHeader;
+        void init();
         
-	};
+    };
 }
 
 #endif

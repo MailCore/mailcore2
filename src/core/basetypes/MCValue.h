@@ -69,6 +69,11 @@ namespace mailcore {
 		virtual bool isEqual(Object * otherObject);
 		virtual unsigned int hash();
 		Object * copy();
+        virtual HashMap * serializable();
+        virtual void importSerializable(HashMap * serializable);
+        
+    public: // private
+        static void * createObject();
         
 	private:
 		int mType;

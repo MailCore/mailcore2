@@ -16,9 +16,7 @@
 #import "MCOHTMLRendererDelegate.h"
 #import "MCOHTMLRendererIMAPDelegate.h"
 
-@implementation MCOIMAPMessage {
-    mailcore::IMAPMessage * _message;
-}
+@implementation MCOIMAPMessage
 
 #define nativeType mailcore::IMAPMessage
 
@@ -32,6 +30,8 @@
     mailcore::IMAPMessage * msg = (mailcore::IMAPMessage *) object;
     return [[[self alloc] initWithMCMessage:msg] autorelease];
 }
+
+MCO_SYNTHESIZE_NSCODING
 
 MCO_OBJC_SYNTHESIZE_SCALAR(uint32_t, uint32_t, setUid, uid)
 MCO_OBJC_SYNTHESIZE_SCALAR(MCOMessageFlag, mailcore::MessageFlag, setFlags, flags)

@@ -433,7 +433,7 @@ static Array * lep_address_list_from_lep_mailbox(struct mailimf_mailbox_list * m
 	Array * result;
 	clistiter * cur;
 	
-	result = new Array();
+	result = Array::array();
 	for(cur = clist_begin(mb_list->mb_list) ; cur != NULL ; cur = clist_next(cur)) {
 		struct mailimf_mailbox * mb;
 		Address * address;
@@ -456,7 +456,7 @@ static Array * lep_address_list_from_lep_addr(struct mailimf_address_list * addr
 	Array * result;
 	clistiter * cur;
 	
-	result = new Array();
+	result = Array::array();
 	
 	for(cur = clist_begin(addr_list->ad_list) ; cur != NULL ;
 		cur = clist_next(cur)) {
@@ -492,5 +492,34 @@ static Array * lep_address_list_from_lep_addr(struct mailimf_address_list * addr
 	}
 	
 	return result;
+}
+
+static void * createObject()
+{
+    return new Address();
+}
+
+HashMap * Address::serializable()
+{
+    HashMap * result = Object::serializable();
+    if (mailbox() != NULL) {
+        result->setObjectForKey(MCSTR("mailbox"), mailbox());
+    }
+    if (displayName() != NULL) {
+        result->setObjectForKey(MCSTR("displayName"), displayName());
+    }
+    return result;
+}
+
+void Address::importSerializable(HashMap * serializable)
+{
+    setMailbox((String *) serializable->objectForKey(MCSTR("mailbox")));
+    setDisplayName((String *) serializable->objectForKey(MCSTR("mailbox")));
+}
+
+__attribute__((constructor))
+static void initialize()
+{
+    Object::registerObjectConstructor("mailcore::Address", &createObject);
 }
 

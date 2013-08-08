@@ -38,12 +38,21 @@ typedef void (^CompletionType)(NSError *error, MCOIndexSet * capabilities);
     [super dealloc];
 }
 
-- (void)start:(void (^)(NSError *error, MCOIndexSet * capabilities))completionBlock {
+- (void) start:(void (^)(NSError *error, MCOIndexSet * capabilities))completionBlock
+{
     _completionBlock = [completionBlock copy];
     [self start];
 }
 
-- (void)operationCompleted {
+- (void) cancel
+{
+  [_completionBlock release];
+  _completionBlock = nil;
+  [super cancel];
+}
+
+- (void) operationCompleted
+{
     if (_completionBlock == NULL)
         return;
     

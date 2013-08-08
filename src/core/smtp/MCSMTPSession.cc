@@ -9,6 +9,7 @@
 #include "MCMessageHeader.h"
 #include "MCSMTPProgressCallback.h"
 #include "MCConnectionLoggerUtils.h"
+#include "MCCertificateUtils.h"
 
 using namespace mailcore;
 
@@ -146,8 +147,7 @@ bool SMTPSession::isCheckCertificateEnabled()
 
 bool SMTPSession::checkCertificate()
 {
-    //TODO check certificate
-    return true;
+    return mailcore::checkCertificate(mSmtp->stream, hostname());
 }
 
 void SMTPSession::setUseHeloIPEnabled(bool enabled)
@@ -380,7 +380,7 @@ void SMTPSession::login(ErrorCode * pError)
 {
     int r;
 
-    if ((username() == NULL) || (password() == NULL)) {
+    if ((authType() != AuthTypeXOAuth2) && ((username() == NULL) || (password() == NULL))) {
         mState = STATE_LOGGEDIN;
         * pError = ErrorNone;
         return;
@@ -497,9 +497,14 @@ void SMTPSession::login(ErrorCode * pError)
                                     MCUTF8(mPassword), NULL /* realm */);
             break;
             
-        case AuthTypeXOAuth2:
-            r = mailsmtp_oauth2_authenticate(mSmtp, MCUTF8(mUsername), MCUTF8(mOAuth2Token));
+        case AuthTypeXOAuth2: {
+            const char * utf8Username = MCUTF8(mUsername);
+            if (utf8Username == NULL) {
+                utf8Username = "";
+            }
+            r = mailsmtp_oauth2_authenticate(mSmtp, utf8Username, MCUTF8(mOAuth2Token));
             break;
+        }
     }
     if (r == MAILSMTP_ERROR_STREAM) {
         * pError = ErrorConnection;

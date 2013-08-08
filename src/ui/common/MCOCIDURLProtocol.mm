@@ -8,8 +8,6 @@
 
 #import "MCOCIDURLProtocol.h"
 
-#import "MCOMessageView.h"
-
 #define MCOCIDURLProtocolDownloadedNotification @"MCOCIDURLProtocolDownloadedNotification"
 
 @implementation MCOCIDURLProtocol
@@ -92,7 +90,6 @@
 {
     NSDictionary * userInfo = [notification userInfo];
     
-    //NSLog(@"downloaded?");
     NSString * notifPartID = [userInfo objectForKey:@"PartUniqueID"];
     MCOAbstractMessage * notifMessage = [userInfo objectForKey:@"Message"];
     if (notifMessage != [self _message]) {
@@ -101,8 +98,6 @@
     if (![[self _partUniqueID] isEqualToString:notifPartID]) {
         return;
     }
-    
-    //NSLog(@"downloaded2 %p %@", self, notifPartID);
     
     NSData * data = [userInfo objectForKey:@"Data"];
     NSURLResponse * response = [[NSURLResponse alloc] initWithURL:[[self request] URL] MIMEType:@"application/data"
@@ -142,7 +137,6 @@
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:MCOCIDURLProtocolDownloadedNotification object:nil userInfo:userInfo];
     [userInfo release];
-    //NSLog(@"downloaded %p %@", self, partUniqueID);
 }
 
 @end

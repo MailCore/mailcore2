@@ -38,12 +38,21 @@ typedef void (^CompletionType)(NSError *error, NSArray * messages, MCOIndexSet *
     [super dealloc];
 }
 
-- (void)start:(void (^)(NSError *error, NSArray * messages, MCOIndexSet * vanishedMessages))completionBlock {
+- (void) start:(void (^)(NSError *error, NSArray * messages, MCOIndexSet * vanishedMessages))completionBlock
+{
     _completionBlock = [completionBlock copy];
     [self start];
 }
 
-- (void)operationCompleted {
+- (void) cancel
+{
+  [_completionBlock release];
+  _completionBlock = nil;
+  [super cancel];
+}
+
+- (void) operationCompleted
+{
     if (_completionBlock == NULL)
         return;
     
@@ -62,6 +71,14 @@ typedef void (^CompletionType)(NSError *error, NSArray * messages, MCOIndexSet *
     if (_progress != NULL) {
         _progress(current);
     }
+}
+
+- (void)setExtraHeaders:(NSArray *)extraHeaders {
+    MCO_NATIVE_INSTANCE->setExtraHeaders(MCO_FROM_OBJC(mailcore::Array, extraHeaders));
+}
+
+- (NSArray *)extraHeaders {
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->extraHeaders());
 }
 
 @end

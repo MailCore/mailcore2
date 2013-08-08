@@ -7,6 +7,8 @@
 #include "MCString.h"
 #include "MCUtils.h"
 #include "MCLog.h"
+#include "MCIterator.h"
+#include "MCAssert.h"
 
 using namespace mailcore;
 
@@ -273,4 +275,54 @@ void HashMap::removeAllObjects()
     }
     memset(mCells, 0, mAllocated * sizeof(* mCells));
     mCount = 0;
+}
+
+HashMap * HashMap::serializable()
+{
+    HashMap * result = Object::serializable();
+    Array * keys = Array::array();
+    Array * values = Array::array();
+    mc_foreachhashmapKeyAndValue(Object, key, Object, value, this) {
+        if (MCISKINDOFCLASS(key, String)) {
+            keys->addObject(key);
+        }
+        else {
+            keys->addObject(key->serializable());
+        }
+        values->addObject(value->serializable());
+    }
+    result->setObjectForKey(MCSTR("keys"), keys);
+    result->setObjectForKey(MCSTR("values"), values);
+    return result;
+}
+
+void HashMap::importSerializable(HashMap * serializable)
+{
+    Array * keys = (Array *) serializable->objectForKey(MCSTR("keys"));
+    Array * values = (Array *) serializable->objectForKey(MCSTR("values"));
+    unsigned int count = keys->count();
+    MCAssert(count == values->count());
+    for(unsigned int i = 0 ; i < count ; i ++) {
+        Object * serializedKey = keys->objectAtIndex(i);
+        Object * key;
+        if (MCISKINDOFCLASS(serializedKey, String)) {
+            key = serializedKey;
+        }
+        else {
+            key = Object::objectWithSerializable((HashMap *) serializedKey);
+        }
+        Object * value = Object::objectWithSerializable((HashMap *) keys->objectAtIndex(i));
+        setObjectForKey(key, value);
+    }
+}
+
+static void * createObject()
+{
+    return new HashMap();
+}
+
+__attribute__((constructor))
+static void initialize()
+{
+    Object::registerObjectConstructor("mailcore::HashMap", &createObject);
 }

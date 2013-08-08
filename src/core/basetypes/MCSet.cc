@@ -100,3 +100,27 @@ void Set::addObjectsFromArray(Array * objects)
         addObject(objects->objectAtIndex(i));
     }
 }
+
+HashMap * Set::serializable()
+{
+    HashMap * result = Object::serializable();
+    result->setObjectForKey(MCSTR("items"), allObjects()->serializable());
+    return result;
+}
+
+void Set::importSerializable(HashMap * serializable)
+{
+    Array * array = (Array *) Object::objectWithSerializable((HashMap *) serializable->objectForKey(MCSTR("items")));
+    addObjectsFromArray(array);
+}
+
+static void * createObject()
+{
+    return new Set();
+}
+
+__attribute__((constructor))
+static void initialize()
+{
+    Object::registerObjectConstructor("mailcore::Set", &createObject);
+}

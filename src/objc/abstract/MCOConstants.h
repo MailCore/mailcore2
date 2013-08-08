@@ -140,6 +140,8 @@ typedef enum {
     MCOIMAPMessagesRequestKindGmailMessageID = 1 << 7,
     /** Gmail Thread ID.*/
     MCOIMAPMessagesRequestKindGmailThreadID  = 1 << 8,
+    /** Extra Headers.*/
+    MCOIMAPMessagesRequestKindExtraHeaders   = 1 << 9,
 } MCOIMAPMessagesRequestKind;
 
 /** It defines the behavior of the STORE flags request.*/
@@ -173,9 +175,9 @@ typedef enum {
 } MCOIMAPSearchKind;
 
 /** Keys for the namespace dictionary.*/
-#define MCOIMAPNamespacePersonal @"IMAPNamespacePersonal";
-#define MCOIMAPNamespaceOther @"IMAPNamespaceOther";
-#define MCOIMAPNamespaceShared @"IMAPNamespaceShared";
+#define MCOIMAPNamespacePersonal @"IMAPNamespacePersonal"
+#define MCOIMAPNamespaceOther @"IMAPNamespaceOther"
+#define MCOIMAPNamespaceShared @"IMAPNamespaceShared"
 
 /** This is the constants for the IMAP capabilities.*/
 /** See corresponding RFC for more information.*/

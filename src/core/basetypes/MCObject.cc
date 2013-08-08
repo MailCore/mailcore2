@@ -4,6 +4,7 @@
 #include <typeinfo>
 #include <cxxabi.h>
 #include <libetpan/libetpan.h>
+#include <string.h>
 
 #include "MCAutoreleasePool.h"
 #include "MCString.h"
@@ -13,6 +14,7 @@
 #include "MCAssert.h"
 #include "MCMainThread.h"
 #include "MCLog.h"
+#include "MCHashMap.h"
 
 using namespace mailcore;
 
@@ -66,7 +68,9 @@ void Object::release()
     pthread_mutex_unlock(&mLock);
     
     if (shouldRelease && !zombieEnabled) {
-        //MCLog("dealloc %s", className()->description()->UTF8Characters());
+        //int status;
+        //char * unmangled = abi::__cxa_demangle(typeid(* this).name(), NULL, NULL, &status);
+        //MCLog("dealloc %p %s", this, unmangled);
         delete this;
     }
 }
@@ -248,3 +252,59 @@ void Object::cancelDelayedPerformMethod(Method method, void * context)
     cancelDelayedCall(data->caller);
     free(data);
 }
+
+HashMap * Object::serializable()
+{
+    HashMap * result = HashMap::hashMap();
+    result->setObjectForKey(MCSTR("class"), className());
+    return result;
+}
+
+void Object::importSerializable(HashMap * serializable)
+{
+    MCAssert(0);
+}
+
+static chash * constructors = NULL;
+
+void Object::initObjectConstructors()
+{
+    constructors = chash_new(CHASH_DEFAULTSIZE, CHASH_COPYKEY);
+}
+
+void Object::registerObjectConstructor(char * className, void * (* objectConstructor)(void))
+{
+    static pthread_once_t once = PTHREAD_ONCE_INIT;
+    pthread_once(&once, initObjectConstructors);
+    
+    chashdatum key;
+    chashdatum value;
+    key.data = className;
+    key.len = strlen(className);
+    value.data = (void *) objectConstructor;
+    value.len = 0;
+    chash_set(constructors, &key, &value, NULL);
+}
+
+Object * Object::objectWithSerializable(HashMap * serializable)
+{
+    if (serializable == NULL)
+        return NULL;
+    
+    void * (* objectConstructor)(void) = NULL;
+    
+    chashdatum key;
+    chashdatum value;
+    const char * className = ((String *) serializable->objectForKey(MCSTR("class")))->UTF8Characters();
+    key.data = (void *) className;
+    key.len = strlen(className);
+    int r = chash_get(constructors, &key, &value);
+    if (r < 0)
+        return NULL;
+    
+    objectConstructor = (void * (*)()) value.data;
+    Object * obj = (Object *) objectConstructor();
+    obj->importSerializable(serializable);
+    return obj->autorelease();
+}
+

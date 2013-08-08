@@ -37,3 +37,31 @@ String * IMAPMultipart::partID()
 {
     return mPartID;
 }
+
+HashMap * IMAPMultipart::serializable()
+{
+    HashMap * result = AbstractMultipart::serializable();
+    if (partID() != NULL) {
+        result->setObjectForKey(MCSTR("partID"), partID());
+    }
+    return result;
+}
+
+void IMAPMultipart::importSerializable(HashMap * serializable)
+{
+    AbstractMultipart::importSerializable(serializable);
+    String * partID = (String *) serializable->objectForKey(MCSTR("partID"));
+    setPartID(partID);
+}
+
+static void * createObject()
+{
+    return new IMAPMultipart();
+}
+
+__attribute__((constructor))
+static void initialize()
+{
+    Object::registerObjectConstructor("mailcore::IMAPMultipart", &createObject);
+}
+

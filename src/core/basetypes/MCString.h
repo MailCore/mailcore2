@@ -99,6 +99,7 @@ namespace mailcore {
 		unsigned long unsignedLongValue();
 		long long longLongValue();
 		unsigned long long unsignedLongLongValue();
+		double doubleValue();
 		
 		virtual Data * mUTF7EncodedData();
 		static String * stringWithMUTF7Data(Data * data);
@@ -107,6 +108,8 @@ namespace mailcore {
         
         virtual String * htmlEncodedString();
 		virtual String * cleanedHTMLString();
+        
+        virtual Data * decodedBase64Data();
         
     public: // private
 		static String * uniquedStringWithUTF8Characters(const char * UTF8Characters);
@@ -117,6 +120,8 @@ namespace mailcore {
 		virtual Object * copy();
 		virtual bool isEqual(Object * otherObject);
 		virtual unsigned int hash();
+        virtual HashMap * serializable();
+        virtual void importSerializable(HashMap * serializable);
         
 	private:
 		UChar * mUnicodeChars;

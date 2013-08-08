@@ -285,3 +285,83 @@ IMAPMultipart * IMAPPart::attachmentWithIMAPBodyMultipart(struct mailimap_body_t
 
     return (IMAPMultipart *) attachment->autorelease();
 }
+
+HashMap * IMAPPart::serializable()
+{
+    HashMap * result = AbstractPart::serializable();
+    if (partID() != NULL) {
+        result->setObjectForKey(MCSTR("partID"), partID());
+    }
+    String * encodingString;
+    switch (encoding()) {
+        case Encoding7Bit:
+            encodingString = MCSTR("7bit");
+            break;
+        case Encoding8Bit:
+        default:
+            encodingString = MCSTR("8bit");
+            break;
+        case EncodingBinary:
+            encodingString = MCSTR("binary");
+            break;
+        case EncodingBase64:
+            encodingString = MCSTR("base64");
+            break;
+        case EncodingQuotedPrintable:
+            encodingString = MCSTR("quoted-printable");
+            break;
+        case EncodingUUEncode:
+            encodingString = MCSTR("uuencode");
+            break;
+    }
+    result->setObjectForKey(MCSTR("encoding"), encodingString);
+    String * sizeString = String::stringWithUTF8Format("%lu", size());
+    result->setObjectForKey(MCSTR("size"), sizeString);
+    return result;
+}
+
+void IMAPPart::importSerializable(HashMap * serializable)
+{
+    AbstractPart::importSerializable(serializable);
+    String * partID = (String *) serializable->objectForKey(MCSTR("partID"));
+    setPartID(partID);
+    String * encodingString = (String *) serializable->objectForKey(MCSTR("encoding"));
+    if (encodingString != NULL) {
+        Encoding encoding = Encoding8Bit;
+        if (encodingString->isEqual(MCSTR("7bit"))) {
+            encoding = Encoding7Bit;
+        }
+        else if (encodingString->isEqual(MCSTR("8bit"))) {
+            encoding = Encoding8Bit;
+        }
+        else if (encodingString->isEqual(MCSTR("binary"))) {
+            encoding = EncodingBinary;
+        }
+        else if (encodingString->isEqual(MCSTR("base64"))) {
+            encoding = EncodingBase64;
+        }
+        else if (encodingString->isEqual(MCSTR("quoted-printable"))) {
+            encoding = EncodingQuotedPrintable;
+        }
+        else if (encodingString->isEqual(MCSTR("uuencode"))) {
+            encoding = EncodingUUEncode;
+        }
+        setEncoding(encoding);
+    }
+    String * sizeString = (String *) serializable->objectForKey(MCSTR("size"));
+    if (sizeString != NULL) {
+        setSize(sizeString->unsignedIntValue());
+    }
+}
+
+static void * createObject()
+{
+    return new IMAPPart();
+}
+
+__attribute__((constructor))
+static void initialize()
+{
+    Object::registerObjectConstructor("mailcore::IMAPPart", &createObject);
+}
+

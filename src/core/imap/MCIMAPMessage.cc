@@ -18,10 +18,10 @@ void IMAPMessage::init()
     mFlags = MessageFlagNone;
     mOriginalFlags = MessageFlagNone;
     mMainPart = NULL;
-    mLabels = NULL;
+    mGmailLabels = NULL;
     mModSeqValue = 0;
-    mThreadID = 0;
-    mMessageID = 0;
+    mGmailThreadID = 0;
+    mGmailMessageID = 0;
 }
 
 IMAPMessage::IMAPMessage()
@@ -44,7 +44,7 @@ IMAPMessage::IMAPMessage(IMAPMessage * other) : AbstractMessage(other)
 IMAPMessage::~IMAPMessage()
 {
     MC_SAFE_RELEASE(mMainPart);
-    MC_SAFE_RELEASE(mLabels);
+    MC_SAFE_RELEASE(mGmailLabels);
 }
 
 Object * IMAPMessage::copy()
@@ -117,32 +117,32 @@ AbstractPart * IMAPMessage::mainPart()
 
 void IMAPMessage::setGmailLabels(Array * labels)
 {
-    MC_SAFE_REPLACE_COPY(Array, mLabels, labels);
+    MC_SAFE_REPLACE_COPY(Array, mGmailLabels, labels);
 }
 
 Array * IMAPMessage::gmailLabels()
 {
-    return mLabels;
+    return mGmailLabels;
 }
 
 void IMAPMessage::setGmailMessageID(uint64_t msgID)
 {
-    mMessageID = msgID;
+    mGmailMessageID = msgID;
 }
 
 uint64_t IMAPMessage::gmailMessageID()
 {
-    return mMessageID;
+    return mGmailMessageID;
 }
 
 void IMAPMessage::setGmailThreadID(uint64_t threadID)
 {
-    mThreadID = threadID;
+    mGmailThreadID = threadID;
 }
 
 uint64_t IMAPMessage::gmailThreadID()
 {
-    return mThreadID;
+    return mGmailThreadID;
 }
 
 AbstractPart * IMAPMessage::partForPartID(String * partID)
@@ -208,3 +208,64 @@ String * IMAPMessage::htmlRendering(String * folder,
     return HTMLRenderer::htmlForIMAPMessage(folder, this, dataCallback, htmlCallback);
 }
 
+HashMap * IMAPMessage::serializable()
+{
+    HashMap * result = AbstractMessage::serializable();
+    result->setObjectForKey(MCSTR("modSeqValue"), String::stringWithUTF8Format("%llu", (long long unsigned) modSeqValue()));
+    result->setObjectForKey(MCSTR("uid"), String::stringWithUTF8Format("%lu", (long unsigned) uid()));
+    result->setObjectForKey(MCSTR("flags"), String::stringWithUTF8Format("%u", (unsigned) flags()));
+    result->setObjectForKey(MCSTR("originalFlags"), String::stringWithUTF8Format("%u", (unsigned) originalFlags()));
+    result->setObjectForKey(MCSTR("mainPart"), mMainPart->serializable());
+    if (gmailLabels() != NULL) {
+        result->setObjectForKey(MCSTR("gmailLabels"), gmailLabels());
+    }
+    if (gmailMessageID() != 0) {
+        result->setObjectForKey(MCSTR("gmailMessageID"), String::stringWithUTF8Format("%llu", (long long unsigned) gmailMessageID()));
+    }
+    if (gmailThreadID() != 0) {
+        result->setObjectForKey(MCSTR("gmailThreadID"), String::stringWithUTF8Format("%llu", (long long unsigned) gmailThreadID()));
+    }
+    return result;
+}
+
+void IMAPMessage::importSerializable(HashMap * serializable)
+{
+    AbstractMessage::importSerializable(serializable);
+    String * modSeq = (String *) serializable->objectForKey(MCSTR("modSeqValue"));
+    if (modSeq != NULL) {
+        setModSeqValue(modSeq->unsignedLongLongValue());
+    }
+    String * uid = (String *) serializable->objectForKey(MCSTR("uid"));
+    if (uid != NULL) {
+        setUid(uid->unsignedLongValue());
+    }
+    String * flags = (String *) serializable->objectForKey(MCSTR("flags"));
+    if (flags != NULL) {
+        setFlags((MessageFlag) flags->unsignedIntValue());
+    }
+    String * originalFlags = (String *) serializable->objectForKey(MCSTR("originalFlags"));
+    if (originalFlags != NULL) {
+        setFlags((MessageFlag) originalFlags->unsignedIntValue());
+    }
+    setMainPart((AbstractPart *) Object::objectWithSerializable((HashMap *) serializable->objectForKey(MCSTR("mainPart"))));
+    setGmailLabels((Array *) serializable->objectForKey(MCSTR("gmailLabels")));
+    String * gmailMessageID = (String *) serializable->objectForKey(MCSTR("gmailMessageID"));
+    if (gmailMessageID != NULL) {
+        setGmailMessageID(gmailMessageID->unsignedLongLongValue());
+    }
+    String * gmailThreadID = (String *) serializable->objectForKey(MCSTR("gmailThreadID"));
+    if (gmailThreadID != NULL) {
+        setGmailThreadID(gmailThreadID->unsignedLongLongValue());
+    }
+}
+
+static void * createObject()
+{
+    return new IMAPMessage();
+}
+
+__attribute__((constructor))
+static void initialize()
+{
+    Object::registerObjectConstructor("mailcore::IMAPMessage", &createObject);
+}

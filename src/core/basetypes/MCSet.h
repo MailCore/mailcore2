@@ -8,37 +8,39 @@
 
 namespace mailcore {
 
-	class String;
-	class Array;
-	class HashMap;
+    class String;
+    class Array;
+    class HashMap;
 
-	class Set : public Object {
-	public:
-		Set();
-		Set(Set * o);
-		
-		static Set * set();
-		static Set * setWithArray(Array * objects);
+    class Set : public Object {
+    public:
+        Set();
+        Set(Set * o);
+        
+        static Set * set();
+        static Set * setWithArray(Array * objects);
 
-		virtual unsigned int count();
-		virtual void addObject(Object * obj);
-		virtual void removeObject(Object * obj);
-		virtual bool containsObject(Object * obj);
-		virtual Object * member(Object * obj);
-		
-		virtual Array * allObjects();
-		virtual void removeAllObjects();
-		virtual void addObjectsFromArray(Array * objects);
+        virtual unsigned int count();
+        virtual void addObject(Object * obj);
+        virtual void removeObject(Object * obj);
+        virtual bool containsObject(Object * obj);
+        virtual Object * member(Object * obj);
+        
+        virtual Array * allObjects();
+        virtual void removeAllObjects();
+        virtual void addObjectsFromArray(Array * objects);
         
     public: // subclass behavior
-		virtual ~Set();
-		virtual String * description();
-		virtual Object * copy();
+        virtual ~Set();
+        virtual String * description();
+        virtual Object * copy();
+        virtual HashMap * serializable();
+        virtual void importSerializable(HashMap * serializable);
         
-	private:
-		HashMap * mHash;
-		void init();
-	};
+    private:
+        HashMap * mHash;
+        void init();
+    };
 
 }
 

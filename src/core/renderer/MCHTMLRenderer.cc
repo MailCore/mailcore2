@@ -357,7 +357,8 @@ static String * htmlForAbstractMessagePart(AbstractMessagePart * part, htmlRende
         return NULL;
     }
     String * substring = htmlForAbstractPart(part->mainPart(), context);
-    MCAssert(substring != NULL);
+    if (substring == NULL)
+        return NULL;
     
     HashMap * values = context->htmlCallback->templateValuesForHeader(part->header());
     String * headerString = renderTemplate(context->htmlCallback->templateForEmbeddedMessageHeader(part->header()), values);

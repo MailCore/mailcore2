@@ -42,12 +42,20 @@ typedef void (^CompletionType)(NSError *error, NSData * data);
     [super dealloc];
 }
 
-- (void)start:(void (^)(NSError *error, NSData * data))completionBlock {
+- (void) start:(void (^)(NSError *error, NSData * data))completionBlock {
     _completionBlock = [completionBlock copy];
     [self start];
 }
 
-- (void)operationCompleted {
+- (void) cancel
+{
+  [_completionBlock release];
+  _completionBlock = nil;
+  [super cancel];
+}
+
+- (void) operationCompleted
+{
     if (_completionBlock == NULL)
         return;
     

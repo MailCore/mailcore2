@@ -44,6 +44,8 @@ namespace mailcore {
 		virtual ~IndexSet();
 		virtual String * description();
 		virtual Object * copy();
+		virtual HashMap * serializable();
+        virtual void importSerializable(HashMap * serializable);
         
 	private:
 		Range * mRanges;

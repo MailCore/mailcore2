@@ -34,6 +34,8 @@
 
 #define MCLOCALIZEDSTRING(key) key
 
+#define MCISKINDOFCLASS(instance, class) (dynamic_cast<class *>(instance) != NULL)
+
 #endif
 
 #endif
