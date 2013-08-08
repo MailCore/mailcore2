@@ -83,6 +83,16 @@
 */
 + (MCOIMAPSearchExpression *) searchOr:(MCOIMAPSearchExpression *)expression other:(MCOIMAPSearchExpression *)other;
 
+// charset-controlled methods
++ (MCOIMAPSearchExpression *) searchFrom:(NSString *)value shouldAvoidCharset:(BOOL)shouldAvoidCharset;
++ (MCOIMAPSearchExpression *) searchRecipient:(NSString *)value shouldAvoidCharset:(BOOL)shouldAvoidCharset;
++ (MCOIMAPSearchExpression *) searchSubject:(NSString *)value shouldAvoidCharset:(BOOL)shouldAvoidCharset;
++ (MCOIMAPSearchExpression *) searchContent:(NSString *)value shouldAvoidCharset:(BOOL)shouldAvoidCharset;
++ (MCOIMAPSearchExpression *) searchHeader:(NSString *)header value:(NSString *)value shouldAvoidCharset:(BOOL)shouldAvoidCharset;
++ (MCOIMAPSearchExpression *) searchAnd:(MCOIMAPSearchExpression *)expression other:(MCOIMAPSearchExpression *)other shouldAvoidCharset:(BOOL)shouldAvoidCharset;
++ (MCOIMAPSearchExpression *) searchOr:(MCOIMAPSearchExpression *)expression other:(MCOIMAPSearchExpression *)other shouldAvoidCharset:(BOOL)shouldAvoidCharset;
+
+
 @end
 
 #endif
