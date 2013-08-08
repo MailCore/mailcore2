@@ -9,6 +9,7 @@ void IMAPSearchExpression::init()
 	mValue = NULL;
 	mLeftExpression = NULL;
 	mRightExpression = NULL;
+    mShouldAvoidCharset = false;
 }
 
 IMAPSearchExpression::IMAPSearchExpression()
@@ -16,10 +17,16 @@ IMAPSearchExpression::IMAPSearchExpression()
     init();
 }
 
+IMAPSearchExpression::IMAPSearchExpression(bool shouldAvoidCharset):IMAPSearchExpression()
+{
+    mShouldAvoidCharset = shouldAvoidCharset;
+}
+
 IMAPSearchExpression::IMAPSearchExpression(IMAPSearchExpression * other)
 {
     init();
 	mKind = other->mKind;
+    mShouldAvoidCharset = other->mShouldAvoidCharset;
     MC_SAFE_REPLACE_COPY(String, mHeader, other->mHeader);
     MC_SAFE_REPLACE_COPY(String, mValue, other->mValue);
     MC_SAFE_REPLACE_COPY(IMAPSearchExpression, mLeftExpression, other->mLeftExpression);
@@ -128,6 +135,67 @@ IMAPSearchExpression * IMAPSearchExpression::searchOr(IMAPSearchExpression * lef
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
+// charset-controled methods
+
+IMAPSearchExpression * IMAPSearchExpression::searchFrom(String * value, bool shouldAvoidCharset)
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression(shouldAvoidCharset);
+    expr->mKind = IMAPSearchKindFrom;
+    MC_SAFE_REPLACE_COPY(String, expr->mValue, value);
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchRecipient(String * value, bool shouldAvoidCharset)
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression(shouldAvoidCharset);
+    expr->mKind = IMAPSearchKindRecipient;
+    MC_SAFE_REPLACE_COPY(String, expr->mValue, value);
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchSubject(String * value, bool shouldAvoidCharset)
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression(shouldAvoidCharset);
+    expr->mKind = IMAPSearchKindSubject;
+    MC_SAFE_REPLACE_COPY(String, expr->mValue, value);
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchContent(String * value, bool shouldAvoidCharset)
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression(shouldAvoidCharset);
+    expr->mKind = IMAPSearchKindContent;
+    MC_SAFE_REPLACE_COPY(String, expr->mValue, value);
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchHeader(String * header, String * value, bool shouldAvoidCharset)
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression(shouldAvoidCharset);
+    expr->mKind = IMAPSearchKindHeader;
+    MC_SAFE_REPLACE_COPY(String, expr->mHeader, header);
+    MC_SAFE_REPLACE_COPY(String, expr->mValue, value);
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchAnd(IMAPSearchExpression * left, IMAPSearchExpression * right, bool shouldAvoidCharset)
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression(shouldAvoidCharset);
+    expr->mKind = IMAPSearchKindAnd;
+    MC_SAFE_REPLACE_RETAIN(IMAPSearchExpression, expr->mLeftExpression, left);
+    MC_SAFE_REPLACE_RETAIN(IMAPSearchExpression, expr->mRightExpression, right);
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchOr(IMAPSearchExpression * left, IMAPSearchExpression * right, bool shouldAvoidCharset)
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression(shouldAvoidCharset);
+    expr->mKind = IMAPSearchKindOr;
+    MC_SAFE_REPLACE_RETAIN(IMAPSearchExpression, expr->mLeftExpression, left);
+    MC_SAFE_REPLACE_RETAIN(IMAPSearchExpression, expr->mRightExpression, right);
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
 IMAPSearchKind IMAPSearchExpression::kind()
 {
     return mKind;
@@ -141,6 +209,11 @@ String * IMAPSearchExpression::header()
 String * IMAPSearchExpression::value()
 {
     return mValue;
+}
+
+bool IMAPSearchExpression::shouldAvoidCharset()
+{
+    return mShouldAvoidCharset;
 }
 
 IMAPSearchExpression * IMAPSearchExpression::leftExpression()
