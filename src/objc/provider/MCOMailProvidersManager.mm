@@ -34,7 +34,7 @@
     
     filename = [[NSBundle bundleForClass:[self class]] pathForResource:@"providers" ofType:@"json"];
     if (filename) {
-    mailcore::MailProvidersManager::sharedManager()->registerProvidersWithFilename(filename.mco_mcString);
+        mailcore::MailProvidersManager::sharedManager()->registerProvidersWithFilename(filename.mco_mcString);
     }
 	
     return self;
