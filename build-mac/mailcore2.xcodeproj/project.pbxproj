@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B3C1BDE17ABF309008BBF4C /* MCOIMAPGetQuotaOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C1BDD17ABF307008BBF4C /* MCOIMAPGetQuotaOperation.mm */; };
+		4B3C1BE117ABF4BC008BBF4C /* MCIMAPGetQuotaOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C1BDF17ABF4BB008BBF4C /* MCIMAPGetQuotaOperation.cc */; };
+		4B3C1BE217ABFF7C008BBF4C /* MCOIMAPGetQuotaOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4B3C1BDC17ABF306008BBF4C /* MCOIMAPGetQuotaOperation.h */; };
+		4B3C1BE317ABFF91008BBF4C /* MCOIMAPGetQuotaOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C1BDD17ABF307008BBF4C /* MCOIMAPGetQuotaOperation.mm */; };
+		4B3C1BE417AC0156008BBF4C /* MCIMAPGetQuotaOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4B3C1BE017ABF4BC008BBF4C /* MCIMAPGetQuotaOperation.h */; };
+		4B3C1BE517AC0176008BBF4C /* MCIMAPGetQuotaOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C1BDF17ABF4BB008BBF4C /* MCIMAPGetQuotaOperation.cc */; };
 		84AF9E7E172DBAF600E60AA3 /* providers.json in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E7D172DBAF600E60AA3 /* providers.json */; };
 		9E774D891767C7F60065EB9B /* MCIMAPFolderStatus.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9E774D881767C7F60065EB9B /* MCIMAPFolderStatus.cc */; };
 		9E774D8A1767C7F60065EB9B /* MCIMAPFolderStatus.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9E774D881767C7F60065EB9B /* MCIMAPFolderStatus.cc */; };
@@ -922,6 +928,8 @@
 			dstPath = include/MailCore;
 			dstSubfolderSpec = 16;
 			files = (
+				4B3C1BE417AC0156008BBF4C /* MCIMAPGetQuotaOperation.h in CopyFiles */,
+				4B3C1BE217ABFF7C008BBF4C /* MCOIMAPGetQuotaOperation.h in CopyFiles */,
 				DAE42E8A178F7E2200E0DB8F /* MCOIMAPMessageRenderingOperation.h in CopyFiles */,
 				C6E6652F1791B2530063F2CF /* MCIMAPMessageRenderingOperation.h in CopyFiles */,
 				9E774D8B1767CD3C0065EB9B /* MCIMAPFolderStatus.h in CopyFiles */,
@@ -1099,6 +1107,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4B3C1BDC17ABF306008BBF4C /* MCOIMAPGetQuotaOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPGetQuotaOperation.h; sourceTree = "<group>"; };
+		4B3C1BDD17ABF307008BBF4C /* MCOIMAPGetQuotaOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOIMAPGetQuotaOperation.mm; sourceTree = "<group>"; };
+		4B3C1BDF17ABF4BB008BBF4C /* MCIMAPGetQuotaOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPGetQuotaOperation.cc; sourceTree = "<group>"; };
+		4B3C1BE017ABF4BC008BBF4C /* MCIMAPGetQuotaOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPGetQuotaOperation.h; sourceTree = "<group>"; };
 		84AF9E7D172DBAF600E60AA3 /* providers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = providers.json; path = ../resources/providers.json; sourceTree = "<group>"; };
 		9E774D871767C54E0065EB9B /* MCIMAPFolderStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPFolderStatus.h; sourceTree = "<group>"; };
 		9E774D881767C7F60065EB9B /* MCIMAPFolderStatus.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPFolderStatus.cc; sourceTree = "<group>"; };
@@ -1750,6 +1762,8 @@
 				C62C6ED716A398FA00737497 /* MCIMAPFolderInfoOperation.h */,
 				C64BB22916E5C0A3000DB34C /* MCIMAPCapabilityOperation.cc */,
 				C64BB22A16E5C0A3000DB34C /* MCIMAPCapabilityOperation.h */,
+				4B3C1BDF17ABF4BB008BBF4C /* MCIMAPGetQuotaOperation.cc */,
+				4B3C1BE017ABF4BC008BBF4C /* MCIMAPGetQuotaOperation.h */,
 				9EF9AB10175F319A0027FA3B /* MCIMAPFolderStatusOperation.cc */,
 				9EF9AB0E175F30C20027FA3B /* MCIMAPFolderStatusOperation.h */,
 				C6081679177635D2001F1018 /* MCIMAPDisconnectOperation.cc */,
@@ -2206,6 +2220,8 @@
 				C6F61F9217016B250073032E /* MCOIMAPIdentityOperation.mm */,
 				C6F61F9417016B310073032E /* MCOIMAPCapabilityOperation.h */,
 				C6F61F9517016B310073032E /* MCOIMAPCapabilityOperation.mm */,
+				4B3C1BDC17ABF306008BBF4C /* MCOIMAPGetQuotaOperation.h */,
+				4B3C1BDD17ABF307008BBF4C /* MCOIMAPGetQuotaOperation.mm */,
 				C6F61F9717016B460073032E /* MCOIMAPSearchExpression.h */,
 				C6F61F9817016B460073032E /* MCOIMAPSearchExpression.mm */,
 				9EF9AB06175F2EC60027FA3B /* MCOIMAPFolderStatus.h */,
@@ -2589,6 +2605,8 @@
 				BD63713B177DFF080094121B /* MCLibetpan.cc in Sources */,
 				DAACAD5117886807000B4517 /* MCHTMLRendererIMAPDataCallback.cc in Sources */,
 				DA89896D178A47D200F6D90A /* MCOIMAPMessageRenderingOperation.mm in Sources */,
+				4B3C1BDE17ABF309008BBF4C /* MCOIMAPGetQuotaOperation.mm in Sources */,
+				4B3C1BE117ABF4BC008BBF4C /* MCIMAPGetQuotaOperation.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2780,6 +2798,8 @@
 				BD63713C177DFF080094121B /* MCLibetpan.cc in Sources */,
 				DAACAD5217886807000B4517 /* MCHTMLRendererIMAPDataCallback.cc in Sources */,
 				DA89896E178A47D200F6D90A /* MCOIMAPMessageRenderingOperation.mm in Sources */,
+				4B3C1BE317ABFF91008BBF4C /* MCOIMAPGetQuotaOperation.mm in Sources */,
+				4B3C1BE517AC0176008BBF4C /* MCIMAPGetQuotaOperation.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

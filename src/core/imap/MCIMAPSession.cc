@@ -2445,6 +2445,7 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchExpression * expressio
 
 	clist * result_list = NULL;
     
+//    int r = mailimap_uid_search(mImap, expression->shouldAvoidCharset() ? NULL : "utf-8", key, &result_list);
     int r = mailimap_uid_search(mImap, "utf-8", key, &result_list);
     mailimap_search_key_free(key);
     MCLog("had error : %i", r);
@@ -2469,6 +2470,41 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchExpression * expressio
     mailimap_search_result_free(result_list);
     * pError = ErrorNone;
     return result;
+}
+
+void IMAPSession::getQuota(uint32_t *usage, uint32_t *limit, ErrorCode * pError)
+{
+    static char * const inboxFolderName = "INBOX";
+    mailimap_quota_complete_data *quota_data;
+    selectIfNeeded(MCSTR("INBOX"), pError);
+    
+	if (* pError != ErrorNone)
+        return;
+    
+    int r = mailimap_quota_getquotaroot(mImap, inboxFolderName, &quota_data);
+	if (r == MAILIMAP_ERROR_STREAM) {
+        * pError = ErrorConnection;
+        return;
+    }
+    else if (r == MAILIMAP_ERROR_PARSE) {
+        * pError = ErrorParse;
+        return;
+    }
+    else if (hasError(r)) {
+        * pError = ErrorFetch;
+        return;
+	}
+    for(clistiter * cur = clist_begin(quota_data->quota_list); cur != NULL; cur = clist_next(cur)) {
+        mailimap_quota_quota_data *quota = (mailimap_quota_quota_data*)clist_content(cur);
+        for (clistiter *cur2 = clist_begin(quota->quota_list); cur2 != NULL; cur2 = clist_next(cur2)) {
+            mailimap_quota_quota_resource *res = (mailimap_quota_quota_resource*)clist_content(cur2);
+            if (!strcasecmp("STORAGE", res->resource_name)) {
+                *usage = res->usage;
+                *limit = res->limit;
+            }
+        }
+    }
+    mailimap_quota_complete_data_free(quota_data);    
 }
 
 bool IMAPSession::setupIdle()
