@@ -94,4 +94,44 @@
     return MCO_TO_OBJC(result);
 }
 
+// charset -controlled methods
++ (MCOIMAPSearchExpression *) searchFrom:(NSString *)value shouldAvoidCharset:(BOOL)shouldAvoidCharset
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchFrom([value mco_mcString], shouldAvoidCharset));
+}
+
++ (MCOIMAPSearchExpression *) searchRecipient:(NSString *)value shouldAvoidCharset:(BOOL)shouldAvoidCharset
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchRecipient([value mco_mcString], shouldAvoidCharset));
+}
+
++ (MCOIMAPSearchExpression *) searchSubject:(NSString *)value shouldAvoidCharset:(BOOL)shouldAvoidCharset
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchSubject([value mco_mcString], shouldAvoidCharset));
+}
+
++ (MCOIMAPSearchExpression *) searchContent:(NSString *)value shouldAvoidCharset:(BOOL)shouldAvoidCharset
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchContent([value mco_mcString], shouldAvoidCharset));
+}
+
++ (MCOIMAPSearchExpression *) searchHeader:(NSString *)header value:(NSString *)value shouldAvoidCharset:(BOOL)shouldAvoidCharset
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchHeader([header mco_mcString], [value mco_mcString], shouldAvoidCharset));
+}
+
++ (MCOIMAPSearchExpression *) searchAnd:(MCOIMAPSearchExpression *)expression other:(MCOIMAPSearchExpression *)other shouldAvoidCharset:(BOOL)shouldAvoidCharset
+{
+    mailcore::IMAPSearchExpression * result = mailcore::IMAPSearchExpression::searchAnd(expression->_nativeExpr, other->_nativeExpr, shouldAvoidCharset);
+    return MCO_TO_OBJC(result);
+}
+
++ (MCOIMAPSearchExpression *) searchOr:(MCOIMAPSearchExpression *)expression other:(MCOIMAPSearchExpression *)other shouldAvoidCharset:(BOOL)shouldAvoidCharset
+{
+    mailcore::IMAPSearchExpression * result = mailcore::IMAPSearchExpression::searchOr(expression->_nativeExpr, other->_nativeExpr, shouldAvoidCharset);
+    return MCO_TO_OBJC(result);
+}
+
+
+
 @end
