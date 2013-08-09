@@ -221,7 +221,7 @@ IMAPPart * IMAPPart::attachmentWithIMAPBody1PartBasic(struct mailimap_body_type_
         mimeType = String::stringWithUTF8Format("video/%s", basic->bd_media_basic->med_subtype);
         break;
 		case MAILIMAP_MEDIA_BASIC_OTHER:
-        mimeType = String::stringWithUTF8Format("other/%s", basic->bd_media_basic->med_subtype);
+        mimeType = String::stringWithUTF8Format("%s/%s", basic->bd_media_basic->med_basic_type, basic->bd_media_basic->med_subtype);
         break;
 	}
     attachment->setMimeType(mimeType);
