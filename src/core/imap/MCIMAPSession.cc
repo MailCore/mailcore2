@@ -2445,7 +2445,8 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchExpression * expressio
 
 	clist * result_list = NULL;
     
-    int r = mailimap_uid_search(mImap, "utf-8", key, &result_list);
+    int r = mailimap_uid_search(mImap, expression->shouldAvoidCharset() ? NULL : "utf-8", key, &result_list);
+
     mailimap_search_key_free(key);
     MCLog("had error : %i", r);
 	if (r == MAILIMAP_ERROR_STREAM) {
