@@ -36,7 +36,7 @@
 #import <MailCore/MCOIMAPFetchNamespaceOperation.h>
 #import <MailCore/MCOIMAPIdentityOperation.h>
 #import <MailCore/MCOIMAPCapabilityOperation.h>
-#import <MailCore/MCOIMAPGetQuotaOperation.h>
+#import <MailCore/MCOIMAPQuotaOperation.h>
 #import <MailCore/MCOIMAPSearchExpression.h>
 #import <MailCore/MCOIMAPMessageRenderingOperation.h>
 

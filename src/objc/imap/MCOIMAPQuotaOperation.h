@@ -1,5 +1,5 @@
 //
-//  MCOIMAPGetQuotaOperation.h
+//  MCOIMAPQuotaOperation.h
 //  mailcore2
 //
 //  Created by Petro Korenev on 8/2/13.
@@ -8,7 +8,7 @@
 
 #import "MCOIMAPBaseOperation.h"
 
-@interface MCOIMAPGetQuotaOperation : MCOIMAPBaseOperation
+@interface MCOIMAPQuotaOperation : MCOIMAPBaseOperation
 
 - (void) start:(void (^)(NSError * error, NSUInteger usage, NSUInteger limit))completionBlock;
 

@@ -1,12 +1,12 @@
 //
-//  MCOIMAPGetQuotaOperation.m
+//  MCOIMAPQuotaOperation.m
 //  mailcore2
 //
 //  Created by Petro Korenev on 8/2/13.
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#import "MCOIMAPGetQuotaOperation.h"
+#import "MCOIMAPQuotaOperation.h"
 
 #include "MCAsyncIMAP.h"
 
@@ -15,11 +15,11 @@
 
 typedef void (^CompletionType)(NSError *error, NSUInteger usage, NSUInteger limit);
 
-@implementation MCOIMAPGetQuotaOperation {
+@implementation MCOIMAPQuotaOperation {
     CompletionType _completionBlock;
 }
 
-#define nativeType mailcore::IMAPGetQuotaOperation
+#define nativeType mailcore::IMAPQuotaOperation
 
 + (void) load
 {

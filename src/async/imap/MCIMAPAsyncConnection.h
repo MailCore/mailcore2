@@ -25,7 +25,7 @@ namespace mailcore {
     class IMAPFetchNamespaceOperation;
     class IMAPIdentityOperation;
     class IMAPCapabilityOperation;
-    class IMAPGetQuotaOperation;
+    class IMAPQuotaOperation;
     class IMAPOperationQueueCallback;
     class IMAPAsyncSession;
     class IMAPConnectionLogger;
@@ -121,7 +121,7 @@ namespace mailcore {
         virtual IMAPOperation * checkAccountOperation();
         
         virtual IMAPCapabilityOperation * capabilityOperation();
-        virtual IMAPGetQuotaOperation * getQuotaOperation();
+        virtual IMAPQuotaOperation * quotaOperation();
         
         virtual IMAPMessageRenderingOperation * htmlRenderingOperation(IMAPMessage * message, String * folder);
         virtual IMAPMessageRenderingOperation * htmlBodyRenderingOperation(IMAPMessage * message, String * folder);

@@ -4,7 +4,6 @@ xcuserdata
 .DS_Store
 .idea
 project.xcworkspace
-.svn
 
 example/ios/iOS UI Test/DerivedData
 scripts/prebuilt.list

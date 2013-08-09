@@ -1,14 +1,14 @@
 //
-//  MCIMAPGetQuotaOperation.h
+//  MCIMAPQuotaOperation.h
 //  mailcore2
 //
 //  Created by Petro Korenev on 8/2/13.
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCIMAPGETQUOTAOPERATION_H_
+#ifndef __MAILCORE_MCIMAPQuotaOperation_H_
 
-#define __MAILCORE_MCIMAPGETQUOTAOPERATION_H_
+#define __MAILCORE_MCIMAPQuotaOperation_H_
 
 #include "MCIMAPOperation.h"
 
@@ -16,10 +16,10 @@
 
 namespace mailcore {
     
-    class IMAPGetQuotaOperation : public IMAPOperation {
+    class IMAPQuotaOperation : public IMAPOperation {
     public:
-        IMAPGetQuotaOperation();
-        virtual ~IMAPGetQuotaOperation();
+        IMAPQuotaOperation();
+        virtual ~IMAPQuotaOperation();
         
         // Result.
         virtual uint32_t limit();

@@ -362,9 +362,9 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
     return MCO_TO_OBJC_OP(coreOp);
 }
 
-- (MCOIMAPGetQuotaOperation *) getQuotaOperation
+- (MCOIMAPQuotaOperation *) quotaOperation
 {
-    IMAPGetQuotaOperation * coreOp = MCO_NATIVE_INSTANCE->getQuotaOperation();
+    IMAPQuotaOperation * coreOp = MCO_NATIVE_INSTANCE->quotaOperation();
     return MCO_TO_OBJC_OP((IMAPOperation*)coreOp);
 }
 

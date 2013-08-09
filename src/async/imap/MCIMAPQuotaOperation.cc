@@ -1,42 +1,41 @@
 //
-//  MCIMAPGetQuotaOperation.cc
+//  MCIMAPQuotaOperation.cc
 //  mailcore2
 //
 //  Created by Petro Korenev on 8/2/13.
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#include "MCIMAPGetQuotaOperation.h"
+#include "MCIMAPQuotaOperation.h"
 
 #include "MCIMAPSession.h"
 #include "MCIMAPAsyncConnection.h"
 
 using namespace mailcore;
 
-IMAPGetQuotaOperation::IMAPGetQuotaOperation()
+IMAPQuotaOperation::IMAPQuotaOperation()
 {
     mLimit = 0;
     mUsage = 0;
 }
 
-IMAPGetQuotaOperation::~IMAPGetQuotaOperation()
+IMAPQuotaOperation::~IMAPQuotaOperation()
 {
 }
 
-uint32_t IMAPGetQuotaOperation::limit()
+uint32_t IMAPQuotaOperation::limit()
 {
     return mLimit;
 }
 
-uint32_t IMAPGetQuotaOperation::usage()
+uint32_t IMAPQuotaOperation::usage()
 {
     return mUsage;
 }
 
-void IMAPGetQuotaOperation::main()
+void IMAPQuotaOperation::main()
 {
     ErrorCode error;
     session()->session()->getQuota(&mUsage, &mLimit, &error);
-    fprintf(stderr, "QnIQuESeqUeNcE %d %d", mUsage, mLimit);
     setError(error);
 }
