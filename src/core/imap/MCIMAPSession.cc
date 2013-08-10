@@ -3058,7 +3058,7 @@ IndexSet * IMAPSession::capability(ErrorCode * pError)
         result->addIndex(IMAPCapabilityCondstore);
         mCondstoreEnabled = true;
     }
-    if (mailimap_has_condstore(mImap)) {
+    if (mailimap_has_qresync(mImap)) {
         result->addIndex(IMAPCapabilityQResync);
         mQResyncEnabled = true;
     }
