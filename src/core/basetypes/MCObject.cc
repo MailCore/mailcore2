@@ -272,14 +272,14 @@ void Object::initObjectConstructors()
     constructors = chash_new(CHASH_DEFAULTSIZE, CHASH_COPYKEY);
 }
 
-void Object::registerObjectConstructor(char * className, void * (* objectConstructor)(void))
+void Object::registerObjectConstructor(const char * className, void * (* objectConstructor)(void))
 {
     static pthread_once_t once = PTHREAD_ONCE_INIT;
     pthread_once(&once, initObjectConstructors);
     
     chashdatum key;
     chashdatum value;
-    key.data = className;
+    key.data = (void *) className;
     key.len = strlen(className);
     value.data = (void *) objectConstructor;
     value.len = 0;

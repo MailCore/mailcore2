@@ -29,6 +29,7 @@
 @class MCOIMAPSearchExpression;
 @class MCOIMAPIdentityOperation;
 @class MCOIMAPCapabilityOperation;
+@class MCOIMAPQuotaOperation;
 @class MCOIMAPMessageRenderingOperation;
 @class MCOIMAPMessage;
 
@@ -506,6 +507,8 @@
      }];
 */
 - (MCOIMAPCapabilityOperation *) capabilityOperation;
+
+- (MCOIMAPQuotaOperation *) quotaOperation;
 
 /** @name Search Operations */
 

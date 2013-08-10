@@ -362,6 +362,12 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
     return MCO_TO_OBJC_OP(coreOp);
 }
 
+- (MCOIMAPQuotaOperation *) quotaOperation
+{
+    IMAPQuotaOperation * coreOp = MCO_NATIVE_INSTANCE->quotaOperation();
+    return MCO_TO_OBJC_OP((IMAPOperation*)coreOp);
+}
+
 - (void) _logWithSender:(void *)sender connectionType:(MCOConnectionLogType)logType data:(NSData *)data
 {
     _connectionLogger(sender, logType, data);
