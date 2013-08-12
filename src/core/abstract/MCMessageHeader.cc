@@ -1,6 +1,7 @@
 #include "MCMessageHeader.h"
 
 #include "MCAddress.h"
+#include "MCIterator.h"
 
 #include <string.h>
 #include <unistd.h>
