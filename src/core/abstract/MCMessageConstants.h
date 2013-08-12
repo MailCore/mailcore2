@@ -123,6 +123,7 @@ namespace mailcore {
         IMAPCapabilityAuthSKey,
         IMAPCapabilityAuthSRP,
         IMAPCapabilityXOAuth2,
+        IMAPCapabilityGmail,
     };
 
     enum POPCapability {
