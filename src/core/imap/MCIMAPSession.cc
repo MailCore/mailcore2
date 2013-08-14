@@ -884,6 +884,7 @@ void IMAPSession::select(String * folder, ErrorCode * pError)
     }
     else if (hasError(r)) {
         * pError = ErrorNonExistantFolder;
+        mState == STATE_LOGGEDIN;
         MC_SAFE_RELEASE(mCurrentFolder);
         return;
     }
