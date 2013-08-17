@@ -60,13 +60,9 @@ carray * AutoreleasePool::createAutoreleasePoolStackIfNeeded()
     return stack;
 }
 
-void AutoreleasePool::destroyAutoreleasePoolStack(void *)
+void AutoreleasePool::destroyAutoreleasePoolStack(void * value)
 {
-    init();
-    carray * stack = (carray *) pthread_getspecific(autoreleasePoolStackKey);
-    if (stack == NULL)
-        return;
-    
+    carray * stack = (carray *) value;
     if (carray_count(stack) != 0) {
         MCLog("some autoreleasepool have not been released\n");
     }
