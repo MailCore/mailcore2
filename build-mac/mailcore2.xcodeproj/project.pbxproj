@@ -2840,7 +2840,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = NO;
@@ -2886,7 +2885,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OSX_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan/include\" \"$(SRCROOT)/../Externals/icu4c/include\" \"$(SRCROOT)/../Externals/ctemplate/include\" /usr/include/tidy /usr/include/libxml2";
 				OSX_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan/lib\" \"$(SRCROOT)/../Externals/icu4c/lib\" \"$(SRCROOT)/../Externals/ctemplate/lib\"";
-				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -2894,7 +2892,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = NO;
@@ -2935,43 +2932,50 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OSX_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan/include\" \"$(SRCROOT)/../Externals/icu4c/include\" \"$(SRCROOT)/../Externals/ctemplate/include\" /usr/include/tidy /usr/include/libxml2";
 				OSX_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan/lib\" \"$(SRCROOT)/../Externals/icu4c/lib\" \"$(SRCROOT)/../Externals/ctemplate/lib\"";
-				SDKROOT = macosx;
 			};
 			name = Release;
 		};
 		C64EA53C169E772200778456 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				PRODUCT_NAME = MailCore;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
 		C64EA53D169E772200778456 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				PRODUCT_NAME = MailCore;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
 		C64EA799169F259300778456 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
 		C64EA79A169F259300778456 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -3055,7 +3059,6 @@
 				CLANG_CXX_LIBRARY = "libstdc++";
 				DEAD_CODE_STRIPPING = NO;
 				EXECUTABLE_PREFIX = lib;
-				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "MailCore-ios";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -3072,7 +3075,6 @@
 				CLANG_CXX_LIBRARY = "libstdc++";
 				DEAD_CODE_STRIPPING = NO;
 				EXECUTABLE_PREFIX = lib;
-				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "MailCore-ios";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -3083,6 +3085,7 @@
 		C6BD289E170BD71100A91AC1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -3107,6 +3110,7 @@
 					"-lz",
 				);
 				PRODUCT_NAME = MailCore;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -3114,6 +3118,7 @@
 		C6BD289F170BD71100A91AC1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -3138,6 +3143,7 @@
 					"-lz",
 				);
 				PRODUCT_NAME = MailCore;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
