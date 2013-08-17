@@ -237,7 +237,7 @@ void IMAPMessage::importSerializable(HashMap * serializable)
     }
     String * uid = (String *) serializable->objectForKey(MCSTR("uid"));
     if (uid != NULL) {
-        setUid(uid->unsignedLongValue());
+        setUid((uint32_t) uid->unsignedLongValue());
     }
     String * flags = (String *) serializable->objectForKey(MCSTR("flags"));
     if (flags != NULL) {

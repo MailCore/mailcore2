@@ -364,5 +364,4 @@ void AbstractPart::importSerializable(HashMap * serializable)
             setPartType(PartTypeMultipartAlternative);
         }
     }
-    PartType mPartType;
 }

@@ -884,7 +884,7 @@ void IMAPSession::select(String * folder, ErrorCode * pError)
     }
     else if (hasError(r)) {
         * pError = ErrorNonExistantFolder;
-        mState == STATE_LOGGEDIN;
+        mState = STATE_LOGGEDIN;
         MC_SAFE_RELEASE(mCurrentFolder);
         return;
     }
@@ -2474,14 +2474,9 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchExpression * expressio
 
 void IMAPSession::getQuota(uint32_t *usage, uint32_t *limit, ErrorCode * pError)
 {
-    static char * const inboxFolderName = "INBOX";
     mailimap_quota_complete_data *quota_data;
-    selectIfNeeded(MCSTR("INBOX"), pError);
     
-	if (* pError != ErrorNone)
-        return;
-    
-    int r = mailimap_quota_getquotaroot(mImap, inboxFolderName, &quota_data);
+    int r = mailimap_quota_getquotaroot(mImap, "INBOX", &quota_data);
 	if (r == MAILIMAP_ERROR_STREAM) {
         * pError = ErrorConnection;
         return;

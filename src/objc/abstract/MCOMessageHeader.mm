@@ -102,18 +102,18 @@ MCO_OBJC_SYNTHESIZE_ARRAY(setReplyTo, replyTo)
 MCO_OBJC_SYNTHESIZE_STRING(setSubject, subject)
 MCO_OBJC_SYNTHESIZE_STRING(setUserAgent, userAgent)
 
-- (void)addExtraHeaderValue:(NSString *)value forName:(NSString *)name {
+- (void)addHeaderValue:(NSString *)value forName:(NSString *)name {
     _nativeHeader->setExtraHeader(MCO_FROM_OBJC(mailcore::String, name), MCO_FROM_OBJC(mailcore::String, value));
 }
 
-- (NSString *)extraHeaderValueForName:(NSString *)name {
+- (NSString *)headerValueForName:(NSString *)name {
     return MCO_TO_OBJC(_nativeHeader->extraHeaderValueForName((MCO_FROM_OBJC(mailcore::String, name))));
 }
-- (void)removeExtraHeaderForName:(NSString *)name {
+- (void)removeHeaderForName:(NSString *)name {
     _nativeHeader->removeExtraHeader(MCO_FROM_OBJC(mailcore::String, name));
 }
 
-- (NSArray * /* NSString */)allExtraHeadersNames {
+- (NSArray * /* NSString */)allHeadersNames {
     return MCO_TO_OBJC(_nativeHeader->allExtraHeadersNames());
 }
 

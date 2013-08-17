@@ -2946,7 +2946,6 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
-				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				PRODUCT_NAME = MailCore;
 			};
 			name = Debug;
@@ -2958,7 +2957,6 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
-				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				PRODUCT_NAME = MailCore;
 			};
 			name = Release;

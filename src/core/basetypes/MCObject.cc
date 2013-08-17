@@ -280,7 +280,7 @@ void Object::registerObjectConstructor(const char * className, void * (* objectC
     chashdatum key;
     chashdatum value;
     key.data = (void *) className;
-    key.len = strlen(className);
+    key.len = (unsigned int) strlen(className);
     value.data = (void *) objectConstructor;
     value.len = 0;
     chash_set(constructors, &key, &value, NULL);
@@ -297,7 +297,7 @@ Object * Object::objectWithSerializable(HashMap * serializable)
     chashdatum value;
     const char * className = ((String *) serializable->objectForKey(MCSTR("class")))->UTF8Characters();
     key.data = (void *) className;
-    key.len = strlen(className);
+    key.len = (unsigned int) strlen(className);
     int r = chash_get(constructors, &key, &value);
     if (r < 0)
         return NULL;
