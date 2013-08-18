@@ -80,7 +80,7 @@
 @property (nonatomic, assign, getter=isVoIPEnabled) BOOL voIPEnabled;
 
 /** The default delimiter for the folder paths */
-@property (nonatomic, assign) char delimiter;
+//@property (nonatomic, assign) char delimiter;
 
 /** The default namespace. */
 @property (nonatomic, strong) MCOIMAPNamespace * defaultNamespace;

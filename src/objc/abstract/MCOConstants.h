@@ -328,6 +328,8 @@ typedef enum {
     MCOErrorDeleteMessage,
     /** SMTP: Error while checking account.*/
     MCOErrorInvalidAccount,
+    /** IMAP: Error when trying to enable compression.*/
+    MCOErrorCompression,
     /** The count of all errors */
     MCOErrorCodeCount,
 } MCOErrorCode;

@@ -12,6 +12,7 @@
 #include "MCIMAPNamespace.h"
 #include "MCOperationQueueCallback.h"
 #include "MCConnectionLogger.h"
+#include "MCIMAPSession.h"
 
 #define DEFAULT_MAX_CONNECTIONS 3
 
@@ -32,7 +33,7 @@ IMAPAsyncSession::IMAPAsyncSession()
     mConnectionType = ConnectionTypeClear;
     mCheckCertificateEnabled = true;
     mVoIPEnabled = true;
-    mDelimiter = 0;
+    //mDelimiter = 0;
     mDefaultNamespace = NULL;
     mTimeout = 30.;
     mConnectionLogger = NULL;
@@ -149,7 +150,7 @@ bool IMAPAsyncSession::isVoIPEnabled()
     return mVoIPEnabled;
 }
 
-
+#if 0
 void IMAPAsyncSession::setDelimiter(char delimiter)
 {
     mDelimiter = delimiter;
@@ -159,6 +160,7 @@ char IMAPAsyncSession::delimiter()
 {
     return mDelimiter;
 }
+#endif
 
 IMAPNamespace * IMAPAsyncSession::defaultNamespace()
 {
@@ -207,11 +209,13 @@ IMAPAsyncConnection * IMAPAsyncSession::session()
     session->setTimeout(mTimeout);
     session->setCheckCertificateEnabled(mCheckCertificateEnabled);
     session->setVoIPEnabled(mVoIPEnabled);
-    session->setDelimiter(mDelimiter);
+    //session->setDelimiter(mDelimiter);
     session->setDefaultNamespace(mDefaultNamespace);
+#if 0 // should be implemented properly
     if (mAutomaticConfigurationDone) {
         session->setAutomaticConfigurationEnabled(false);
     }
+#endif
     
     return session;
 }
@@ -501,7 +505,8 @@ IMAPMessageRenderingOperation * IMAPAsyncSession::plainTextBodyRenderingOperatio
     return session->plainTextBodyRenderingOperation(message, folder);
 }
 
-void IMAPAsyncSession::automaticConfigurateDone()
+void IMAPAsyncSession::automaticConfigurationDone(IMAPSession * session)
 {
+    setDefaultNamespace(session->defaultNamespace());
     mAutomaticConfigurationDone = true;
 }

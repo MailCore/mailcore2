@@ -142,6 +142,7 @@ void IMAPOperation::beforeMain()
 void IMAPOperation::afterMain()
 {
     if (mSession->session()->isAutomaticConfigurationDone()) {
-        mSession->owner()->automaticConfigurateDone();
+        mSession->owner()->automaticConfigurationDone(mSession->session());
+        mSession->session()->resetAutomaticConfigurationDone();
     }
 }

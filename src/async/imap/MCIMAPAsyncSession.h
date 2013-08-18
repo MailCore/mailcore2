@@ -36,6 +36,7 @@ namespace mailcore {
     class IMAPQuotaOperation;
     class IMAPMessageRenderingOperation;
     class IMAPMessage;
+    class IMAPSession;
     
     class IMAPAsyncSession : public Object {
     public:
@@ -74,8 +75,8 @@ namespace mailcore {
         virtual void setVoIPEnabled(bool enabled);
         virtual bool isVoIPEnabled();
         
-        virtual void setDelimiter(char delimiter);
-        virtual char delimiter();
+        //virtual void setDelimiter(char delimiter);
+        //virtual char delimiter();
         
         virtual void setDefaultNamespace(IMAPNamespace * ns);
         virtual IMAPNamespace * defaultNamespace();
@@ -142,7 +143,7 @@ namespace mailcore {
         virtual IMAPMessageRenderingOperation * plainTextBodyRenderingOperation(IMAPMessage * message, String * folder);
         
     public: // private
-        virtual void automaticConfigurateDone();
+        virtual void automaticConfigurationDone(IMAPSession * session);
     
     private:
         Array * mSessions;
@@ -156,7 +157,7 @@ namespace mailcore {
         ConnectionType mConnectionType;
         bool mCheckCertificateEnabled;
         bool mVoIPEnabled;
-        char mDelimiter;
+        //char mDelimiter;
         IMAPNamespace * mDefaultNamespace;
         time_t mTimeout;
         bool mAllowsFolderConcurrentAccessEnabled;

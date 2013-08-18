@@ -67,12 +67,13 @@ namespace mailcore {
         virtual void setVoIPEnabled(bool enabled);
         virtual bool isVoIPEnabled();
         
-        virtual void setDelimiter(char delimiter);
-        virtual char delimiter();
+        //virtual void setDelimiter(char delimiter);
+        //virtual char delimiter();
         
         virtual void setAutomaticConfigurationEnabled(bool enabled);
         virtual bool isAutomaticConfigurationEnabled();
         
+        // Needs to be run before starting a connection.
         virtual void setDefaultNamespace(IMAPNamespace * ns);
         virtual IMAPNamespace * defaultNamespace();
         
@@ -135,7 +136,7 @@ namespace mailcore {
     private:
         IMAPSession * mSession;
         OperationQueue * mQueue;
-        char mDelimiter;
+        //char mDelimiter;
         IMAPNamespace * mDefaultNamespace;
         String * mLastFolder;
         IMAPOperationQueueCallback * mQueueCallback;

@@ -144,6 +144,8 @@ namespace mailcore {
         
         virtual IndexSet * capability(ErrorCode * pError);
         
+        virtual void enableCompression(ErrorCode * pError);
+        
         virtual uint32_t uidValidity();
         virtual uint32_t uidNext();
         virtual uint64_t modSequenceValue();
@@ -157,6 +159,7 @@ namespace mailcore {
         virtual bool isIdentityEnabled();
         virtual bool isXOAuthEnabled();
         virtual bool isNamespaceEnabled();
+        virtual bool isCompressionEnabled();
         
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
@@ -175,19 +178,18 @@ namespace mailcore {
         virtual String * plainTextBodyRendering(IMAPMessage * message, String * folder, ErrorCode * pError);
         
         /** Enable automatic query of the capabilities of the IMAP server when set to true. */
-        virtual void setAutomaticCapabilitiesEnabled(bool enabled);
+        virtual void setAutomaticConfigurationEnabled(bool enabled);
         
         /** Check if the automatic query of the capabilities of the IMAP server is enabled. */
-        virtual bool isAutomaticCapabilitiesEnabled();
-        
-        virtual void setAutomaticNamespaceEnabled(bool enabled);
-        virtual bool isAutomaticNamespaceEnabled();
+        virtual bool isAutomaticConfigurationEnabled();
         
     public: // private
         virtual void loginIfNeeded(ErrorCode * pError);
         virtual void connectIfNeeded(ErrorCode * pError);
         virtual bool isDisconnected();
         virtual bool isAutomaticConfigurationDone();
+        virtual void resetAutomaticConfigurationDone();
+        virtual void applyCapabilities(IndexSet * capabilities);
         
     private:
         String * mHostname;
@@ -211,6 +213,7 @@ namespace mailcore {
         bool mIdentityEnabled;
         bool mXOauth2Enabled;
         bool mNamespaceEnabled;
+        bool mCompressionEnabled;
         String * mWelcomeString;
         bool mNeedsMboxMailWorkaround;
         uint32_t mUIDValidity;
@@ -228,8 +231,7 @@ namespace mailcore {
         IMAPProgressCallback * mProgressCallback;
         unsigned int mProgressItemsCount;
         ConnectionLogger * mConnectionLogger;
-        bool mAutomaticCapabilitiesEnabled;
-        bool mAutomaticNamespaceEnabled;
+        bool mAutomaticConfigurationEnabled;
         bool mAutomaticConfigurationDone;
         
         void init();

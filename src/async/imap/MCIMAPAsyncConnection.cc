@@ -86,7 +86,7 @@ IMAPAsyncConnection::IMAPAsyncConnection()
     mSession = new IMAPSession();
     mQueue = new OperationQueue();
     mDefaultNamespace = NULL;
-    mDelimiter = 0;
+    //mDelimiter = 0;
     mLastFolder = NULL;
     mQueueCallback = new IMAPOperationQueueCallback(this);
     mQueue->setCallback(mQueueCallback);
@@ -209,6 +209,7 @@ bool IMAPAsyncConnection::isVoIPEnabled()
     return mSession->isVoIPEnabled();
 }
 
+#if 0
 void IMAPAsyncConnection::setDelimiter(char delimiter)
 {
     mSession->setDelimiter(delimiter);
@@ -219,6 +220,7 @@ char IMAPAsyncConnection::delimiter()
 {
     return mDelimiter;
 }
+#endif
 
 void IMAPAsyncConnection::setDefaultNamespace(IMAPNamespace * ns)
 {
@@ -644,8 +646,7 @@ IMAPMessageRenderingOperation * IMAPAsyncConnection::plainTextBodyRenderingOpera
 void IMAPAsyncConnection::setAutomaticConfigurationEnabled(bool enabled)
 {
     mAutomaticConfigurationEnabled = enabled;
-    mSession->setAutomaticCapabilitiesEnabled(enabled);
-    mSession->setAutomaticNamespaceEnabled(enabled);
+    mSession->setAutomaticConfigurationEnabled(enabled);
 }
 
 bool IMAPAsyncConnection::isAutomaticConfigurationEnabled()
