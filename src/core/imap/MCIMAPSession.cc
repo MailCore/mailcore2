@@ -978,6 +978,7 @@ void IMAPSession::select(String * folder, ErrorCode * pError)
     }
     else if (hasError(r)) {
         * pError = ErrorNonExistantFolder;
+        mState = STATE_LOGGEDIN;
         MC_SAFE_RELEASE(mCurrentFolder);
         return;
     }
@@ -2566,6 +2567,36 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchExpression * expressio
     return result;
 }
 
+void IMAPSession::getQuota(uint32_t *usage, uint32_t *limit, ErrorCode * pError)
+{
+    mailimap_quota_complete_data *quota_data;
+    
+    int r = mailimap_quota_getquotaroot(mImap, "INBOX", &quota_data);
+	if (r == MAILIMAP_ERROR_STREAM) {
+        * pError = ErrorConnection;
+        return;
+    }
+    else if (r == MAILIMAP_ERROR_PARSE) {
+        * pError = ErrorParse;
+        return;
+    }
+    else if (hasError(r)) {
+        * pError = ErrorFetch;
+        return;
+	}
+    for(clistiter * cur = clist_begin(quota_data->quota_list); cur != NULL; cur = clist_next(cur)) {
+        mailimap_quota_quota_data *quota = (mailimap_quota_quota_data*)clist_content(cur);
+        for (clistiter *cur2 = clist_begin(quota->quota_list); cur2 != NULL; cur2 = clist_next(cur2)) {
+            mailimap_quota_quota_resource *res = (mailimap_quota_quota_resource*)clist_content(cur2);
+            if (!strcasecmp("STORAGE", res->resource_name)) {
+                *usage = res->usage;
+                *limit = res->limit;
+            }
+        }
+    }
+    mailimap_quota_complete_data_free(quota_data);    
+}
+
 bool IMAPSession::setupIdle()
 {
     // main thread
@@ -3127,8 +3158,8 @@ void IMAPSession::capabilitySetWithSessionState(IndexSet * capabilities)
         capabilities->addIndex(IMAPCapabilityCondstore);
         mCondstoreEnabled = true;
     }
-    if (mailimap_has_condstore(mImap)) {
-        capabilities->addIndex(IMAPCapabilityQResync);
+    if (mailimap_has_qresync(mImap)) {
+        result->addIndex(IMAPCapabilityQResync);
         mQResyncEnabled = true;
     }
     if (mailimap_has_xoauth2(mImap)) {

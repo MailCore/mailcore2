@@ -126,6 +126,7 @@ namespace mailcore {
         
         virtual IndexSet * search(String * folder, IMAPSearchKind kind, String * searchString, ErrorCode * pError);
         virtual IndexSet * search(String * folder, IMAPSearchExpression * expression, ErrorCode * pError);
+        virtual void getQuota(uint32_t *usage, uint32_t *limit, ErrorCode * pError);
         
         virtual bool setupIdle();
         virtual void idle(String * folder, uint32_t lastKnownUID, ErrorCode * pError);

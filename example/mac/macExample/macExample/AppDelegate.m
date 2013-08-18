@@ -146,7 +146,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
     self.checkOp = [self.session checkAccountOperation];
 	self.session.connectionLogger = ^(void * connectionID, MCOConnectionLogType type, NSData * data) {
         if (type != MCOConnectionLogTypeSentPrivate) {
-            NSLog(@"event logged:%p %i withData: %@", connectionID, type, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+            NSLog(@"event logged:%p %i withData: %@", connectionID, type, [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
         }
     };
 	

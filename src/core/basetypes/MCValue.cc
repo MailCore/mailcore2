@@ -76,6 +76,7 @@ String * Value::description()
             return String::stringWithUTF8Format("<Value:%p:data>", this);
         default:
             MCAssert(0);
+            return NULL;
     }
 }
 
