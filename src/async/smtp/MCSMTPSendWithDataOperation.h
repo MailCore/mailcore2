@@ -23,6 +23,12 @@ namespace mailcore {
         SMTPSendWithDataOperation();
         virtual ~SMTPSendWithDataOperation();
         
+        virtual void setFrom(Address * from);
+        virtual Address * from();
+        
+        virtual void setRecipients(Array * recipients);
+        virtual Array * recipients();
+        
         virtual void setMessageData(Data * data);
         virtual Data * messageData();
         
@@ -31,6 +37,8 @@ namespace mailcore {
         
     private:
         Data * mMessageData;
+        Array * mRecipients;
+        Address * mFrom;
         
     };
 }

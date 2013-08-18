@@ -109,6 +109,19 @@ MCO_OBJC_SYNTHESIZE_BOOL(setUseHeloIPEnabled, useHeloIPEnabled)
     return result;
 }
 
+- (MCOSMTPSendOperation *) sendOperationWithData:(NSData *)messageData
+                                            from:(MCOAddress *)from
+                                      recipients:(NSArray *)recipients
+{
+    mailcore::SMTPOperation * coreOp =
+    MCO_NATIVE_INSTANCE->sendMessageOperation(MCO_FROM_OBJC(Address, from),
+                                              MCO_FROM_OBJC(Array, recipients),
+                                              [messageData mco_mcData]);
+    MCOSMTPSendOperation * result = [[[MCOSMTPSendOperation alloc] initWithMCOperation:coreOp] autorelease];
+    [result setSession:self];
+    return result;
+}
+
 - (MCOOperation *) checkAccountOperationWithFrom:(MCOAddress *)from
 {
     mailcore::SMTPOperation *coreOp = MCO_NATIVE_INSTANCE->checkAccountOperation(MCO_FROM_OBJC(mailcore::Address, from));

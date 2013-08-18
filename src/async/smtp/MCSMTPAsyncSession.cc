@@ -211,6 +211,17 @@ SMTPOperation * SMTPAsyncSession::sendMessageOperation(Data * messageData)
     return (SMTPOperation *) op->autorelease();
 }
 
+SMTPOperation * SMTPAsyncSession::sendMessageOperation(Address * from, Array * recipients,
+                                                       Data * messageData)
+{
+    SMTPSendWithDataOperation * op = new SMTPSendWithDataOperation();
+    op->setSession(this);
+    op->setMessageData(messageData);
+    op->setFrom(from);
+    op->setRecipients(recipients);
+    return (SMTPOperation *) op->autorelease();
+}
+
 SMTPOperation * SMTPAsyncSession::checkAccountOperation(Address * from)
 {
     SMTPCheckAccountOperation * op = new SMTPCheckAccountOperation();

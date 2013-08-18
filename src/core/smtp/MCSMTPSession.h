@@ -58,6 +58,8 @@ namespace mailcore {
         virtual void checkAccount(Address * from, ErrorCode * pError);
         
         virtual void sendMessage(Data * messageData, SMTPProgressCallback * callback, ErrorCode * pError);
+        virtual void sendMessage(Address * from, Array * /* Address */ recipients, Data * messageData,
+                                 SMTPProgressCallback * callback, ErrorCode * pError);
         
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
@@ -93,8 +95,6 @@ namespace mailcore {
         void loginIfNeeded(ErrorCode * pError);
         bool checkCertificate();
         
-        void sendMessage(Address * from, Array * /* Address */ recipients, Data * messageData,
-                         SMTPProgressCallback * callback, ErrorCode * pError);
         void sendMessage(MessageBuilder * msg, SMTPProgressCallback * callback, ErrorCode * pError);
         
     public: // private

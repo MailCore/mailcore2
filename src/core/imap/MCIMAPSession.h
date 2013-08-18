@@ -221,6 +221,7 @@ namespace mailcore {
         uint64_t mModSequenceValue;
         unsigned int mFolderMsgCount;
         uint32_t mFirstUnseenUid;
+        bool mYahooServer;
         
         unsigned int mLastFetchedSequenceNumber;
         String * mCurrentFolder;
