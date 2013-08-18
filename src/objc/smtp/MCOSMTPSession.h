@@ -93,6 +93,24 @@
 - (MCOSMTPSendOperation *) sendOperationWithData:(NSData *)messageData;
 
 /**
+ Returns an operation that will send the given message through SMTP.
+ It will use the sender and recipient set from the parameters.
+ It will also filter out Bcc from the content of the message.
+ 
+ Generate RFC 822 data using MCOMessageBuilder
+ 
+ MCOPOPOperation * op = [session sendOperationWithData:rfc822Data
+                                                  from:[MCOAddress addressWithMailbox:@"hoa@etpan.org"]
+                                            recipients:[NSArray arrayWithObject:[MCOAddress addressWithMailbox:@"laura@etpan.org"]]];
+ [op start:^(NSError * error) {
+ ...
+ }];
+ */
+- (MCOSMTPSendOperation *) sendOperationWithData:(NSData *)messageData
+                                            from:(MCOAddress *)from
+                                      recipients:(NSArray *)recipients;
+
+/**
  Returns an operation that will check whether the SMTP account is valid.
 
      MCOPOPOperation * op = [session checkAccountOperationWithFrom:[MCOAddress addressWithMailbox:@"hoa@etpan.org"]];
