@@ -342,6 +342,7 @@ void IMAPSession::init()
     mModSequenceValue = 0;
     mFolderMsgCount = 0;
     mFirstUnseenUid = 0;
+    mYahooServer = false;
     mLastFetchedSequenceNumber = 0;
     mCurrentFolder = NULL;
     pthread_mutex_init(&mIdleLock, NULL);
@@ -632,6 +633,7 @@ void IMAPSession::connect(ErrorCode * pError)
     
     if (mImap->imap_response != NULL) {
         MC_SAFE_REPLACE_RETAIN(String, mWelcomeString, String::stringWithUTF8Characters(mImap->imap_response));
+        mYahooServer = (mWelcomeString->locationOfString(MCSTR("yahoo.com")) != -1);
     }
     
     * pError = ErrorNone;
@@ -2446,7 +2448,11 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchExpression * expressio
 
 	clist * result_list = NULL;
     
-    int r = mailimap_uid_search(mImap, "utf-8", key, &result_list);
+    const char * charset = "utf-8";
+    if (mYahooServer) {
+        charset = NULL;
+    }
+    int r = mailimap_uid_search(mImap, charset, key, &result_list);
     mailimap_search_key_free(key);
     MCLog("had error : %i", r);
 	if (r == MAILIMAP_ERROR_STREAM) {
