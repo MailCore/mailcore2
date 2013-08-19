@@ -59,8 +59,8 @@ namespace mailcore {
         virtual bool isVoIPEnabled();
         
         // Needed for fetchSubscribedFolders() and fetchAllFolders().
-        virtual void setDelimiter(char delimiter);
-        virtual char delimiter();
+        //virtual void setDelimiter(char delimiter);
+        //virtual char delimiter();
         
         // Needed for fetchSubscribedFolders() and fetchAllFolders().
         virtual void setDefaultNamespace(IMAPNamespace * ns);

@@ -477,6 +477,7 @@ bool IMAPSession::isVoIPEnabled()
     return mVoIPEnabled;
 }
 
+#if 0
 void IMAPSession::setDelimiter(char delimiter)
 {
     mDelimiter = delimiter;
@@ -486,6 +487,7 @@ char IMAPSession::delimiter()
 {
     return mDelimiter;
 }
+#endif
 
 static bool hasError(int errorCode)
 {
@@ -1264,7 +1266,8 @@ Array * /* IMAPFolder */ IMAPSession::fetchSubscribedFolders(ErrorCode * pError)
         if (* pError != ErrorNone)
             return NULL;
         
-        setDelimiter(delimiter);
+        //setDelimiter(delimiter);
+        mDelimiter = delimiter;
     }
     
     String * prefix;
@@ -1299,7 +1302,8 @@ Array * /* IMAPFolder */ IMAPSession::fetchAllFolders(ErrorCode * pError)
         if (* pError != ErrorNone)
             return NULL;
         
-        setDelimiter(delimiter);
+        //setDelimiter(delimiter);
+        mDelimiter = delimiter;
     }
     
     String * prefix = NULL;
