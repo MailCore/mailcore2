@@ -34,6 +34,9 @@ namespace mailcore {
         virtual void setImapCallback(IMAPOperationCallback * callback);
         virtual IMAPOperationCallback * imapCallback();
         
+        virtual void beforeMain();
+        virtual void afterMain();
+        
         virtual void start();
         
         // Result.

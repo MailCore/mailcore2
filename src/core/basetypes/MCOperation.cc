@@ -40,7 +40,15 @@ bool Operation::isCancelled()
 	return value;
 }
 
+void Operation::beforeMain()
+{
+}
+
 void Operation::main()
+{
+}
+
+void Operation::afterMain()
 {
 }
 

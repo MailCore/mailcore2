@@ -18,11 +18,17 @@ namespace mailcore {
 		
 		virtual void setCallback(OperationCallback * callback);
 		virtual OperationCallback * callback();
-		
+        
 		virtual void cancel();
 		virtual bool isCancelled();
 		
+        // Will be called on main thread.
+        virtual void beforeMain();
+        
 		virtual void main();
+        
+        // Will be called on main thread.
+        virtual void afterMain();
 
         virtual void start();
         

@@ -86,7 +86,6 @@ IMAPAsyncConnection::IMAPAsyncConnection()
     mSession = new IMAPSession();
     mQueue = new OperationQueue();
     mDefaultNamespace = NULL;
-    mDelimiter = 0;
     mLastFolder = NULL;
     mQueueCallback = new IMAPOperationQueueCallback(this);
     mQueue->setCallback(mQueueCallback);
@@ -94,6 +93,7 @@ IMAPAsyncConnection::IMAPAsyncConnection()
     mConnectionLogger = NULL;
     pthread_mutex_init(&mConnectionLoggerLock, NULL);
     mInternalLogger = new IMAPConnectionLogger(this);
+    mAutomaticConfigurationEnabled = true;
 }
 
 IMAPAsyncConnection::~IMAPAsyncConnection()
@@ -206,17 +206,6 @@ void IMAPAsyncConnection::setVoIPEnabled(bool enabled)
 bool IMAPAsyncConnection::isVoIPEnabled()
 {
     return mSession->isVoIPEnabled();
-}
-
-void IMAPAsyncConnection::setDelimiter(char delimiter)
-{
-    mSession->setDelimiter(delimiter);
-    mDelimiter = delimiter;
-}
-
-char IMAPAsyncConnection::delimiter()
-{
-    return mDelimiter;
 }
 
 void IMAPAsyncConnection::setDefaultNamespace(IMAPNamespace * ns)
@@ -638,4 +627,15 @@ IMAPMessageRenderingOperation * IMAPAsyncConnection::plainTextBodyRenderingOpera
                                                                                      String * folder)
 {
     return renderingOperation(message, folder, IMAPMessageRenderingTypePlainTextBody);
+}
+
+void IMAPAsyncConnection::setAutomaticConfigurationEnabled(bool enabled)
+{
+    mAutomaticConfigurationEnabled = enabled;
+    mSession->setAutomaticConfigurationEnabled(enabled);
+}
+
+bool IMAPAsyncConnection::isAutomaticConfigurationEnabled()
+{
+    return mAutomaticConfigurationEnabled;
 }
