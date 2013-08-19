@@ -33,7 +33,6 @@ IMAPAsyncSession::IMAPAsyncSession()
     mConnectionType = ConnectionTypeClear;
     mCheckCertificateEnabled = true;
     mVoIPEnabled = true;
-    //mDelimiter = 0;
     mDefaultNamespace = NULL;
     mTimeout = 30.;
     mConnectionLogger = NULL;
@@ -150,18 +149,6 @@ bool IMAPAsyncSession::isVoIPEnabled()
     return mVoIPEnabled;
 }
 
-#if 0
-void IMAPAsyncSession::setDelimiter(char delimiter)
-{
-    mDelimiter = delimiter;
-}
-
-char IMAPAsyncSession::delimiter()
-{
-    return mDelimiter;
-}
-#endif
-
 IMAPNamespace * IMAPAsyncSession::defaultNamespace()
 {
     return mDefaultNamespace;
@@ -209,7 +196,6 @@ IMAPAsyncConnection * IMAPAsyncSession::session()
     session->setTimeout(mTimeout);
     session->setCheckCertificateEnabled(mCheckCertificateEnabled);
     session->setVoIPEnabled(mVoIPEnabled);
-    //session->setDelimiter(mDelimiter);
     session->setDefaultNamespace(mDefaultNamespace);
 #if 0 // should be implemented properly
     if (mAutomaticConfigurationDone) {

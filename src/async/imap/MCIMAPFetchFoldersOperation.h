@@ -35,7 +35,6 @@ namespace mailcore {
         String * /* IMAPFolder */ mFolder;
         bool mFetchSubscribedEnabled;
         Array * mFolders;
-        //void setDelimiterDataOnMainThread(char * delimiterData);
         
     };
 }

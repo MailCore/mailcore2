@@ -477,18 +477,6 @@ bool IMAPSession::isVoIPEnabled()
     return mVoIPEnabled;
 }
 
-#if 0
-void IMAPSession::setDelimiter(char delimiter)
-{
-    mDelimiter = delimiter;
-}
-
-char IMAPSession::delimiter()
-{
-    return mDelimiter;
-}
-#endif
-
 static bool hasError(int errorCode)
 {
 	return ((errorCode != MAILIMAP_NO_ERROR) && (errorCode != MAILIMAP_NO_ERROR_AUTHENTICATED) &&

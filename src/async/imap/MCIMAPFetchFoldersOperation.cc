@@ -52,19 +52,4 @@ void IMAPFetchFoldersOperation::main()
     }
     MC_SAFE_RETAIN(mFolders);
     setError(error);
-    
-#if 0
-    char * delimiterData = (char *) malloc(1);
-    * delimiterData = session()->session()->delimiter();
-    performMethodOnMainThread((Object::Method) &IMAPFetchFoldersOperation::setDelimiterDataOnMainThread,
-                              delimiterData, true);
-#endif
 }
-
-#if 0
-void IMAPFetchFoldersOperation::setDelimiterDataOnMainThread(char * delimiterData)
-{
-    session()->setDelimiter(* delimiterData);
-    free(delimiterData);
-}
-#endif
