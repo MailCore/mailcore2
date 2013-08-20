@@ -2994,6 +2994,7 @@
 				);
 				INFOPLIST_FILE = "../tests-ios/tests-ios-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
 					"-letpan-ios",
@@ -3029,6 +3030,7 @@
 				);
 				INFOPLIST_FILE = "../tests-ios/tests-ios-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
@@ -3059,6 +3061,7 @@
 				CLANG_CXX_LIBRARY = "libstdc++";
 				DEAD_CODE_STRIPPING = NO;
 				EXECUTABLE_PREFIX = lib;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "MailCore-ios";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -3075,6 +3078,7 @@
 				CLANG_CXX_LIBRARY = "libstdc++";
 				DEAD_CODE_STRIPPING = NO;
 				EXECUTABLE_PREFIX = lib;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "MailCore-ios";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
