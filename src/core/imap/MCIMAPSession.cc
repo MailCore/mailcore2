@@ -3197,7 +3197,7 @@ void IMAPSession::applyCapabilities(IndexSet * capabilities)
         mNamespaceEnabled = true;
     }
     if (capabilities->containsIndex(IMAPCapabilityCompressDeflate)) {
-        //mCompressionEnabled = true;
+        mCompressionEnabled = true;
     }
 }
 
