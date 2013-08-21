@@ -355,7 +355,9 @@ void SMTPSession::disconnect()
     if (mSmtp == NULL)
         return;
     
-    mailsmtp_quit(mSmtp);
+    if (mSmtp->stream != NULL) {
+        mailsmtp_quit(mSmtp);
+    }
     
     unsetup();
     
