@@ -1,6 +1,14 @@
 #!/bin/sh
 
-sdkversion=6.1
+if xcodebuild -showsdks|grep iphoneos6.1 >/dev/null ; then
+	sdkversion=6.1
+elif xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
+	sdkversion=7.0
+else
+	echo SDK not found
+	exit 1
+fi	
+
 versionfolder='51.1'
 version='51_1'
 build_version="$version~1"

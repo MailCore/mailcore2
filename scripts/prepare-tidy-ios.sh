@@ -1,6 +1,13 @@
 #!/bin/sh
 
-sdkversion=6.1
+if xcodebuild -showsdks|grep iphoneos6.1 >/dev/null ; then
+	sdkversion=6.1
+elif xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
+	sdkversion=7.0
+else
+	echo SDK not found
+	exit 1
+fi	
 url="https://github.com/dinhviethoa/tidy-html5.git"
 
 pushd `dirname $0` > /dev/null
