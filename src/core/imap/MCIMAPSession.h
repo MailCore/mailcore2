@@ -230,6 +230,7 @@ namespace mailcore {
         ConnectionLogger * mConnectionLogger;
         bool mAutomaticConfigurationEnabled;
         bool mAutomaticConfigurationDone;
+        bool mShouldDisconnect;
         
         void init();
         void bodyProgress(unsigned int current, unsigned int maximum);
