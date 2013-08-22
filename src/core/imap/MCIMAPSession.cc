@@ -642,7 +642,7 @@ void IMAPSession::connect(ErrorCode * pError)
             capabilitySetWithSessionState(IndexSet::indexSet());
         }
         else {
-            IndexSet * capabilities = capability(pError);
+            capability(pError);
             if (* pError != ErrorNone) {
                 MCLog("capabilities failed");
                 unsetup();
@@ -653,9 +653,6 @@ void IMAPSession::connect(ErrorCode * pError)
     
     * pError = ErrorNone;
 	MCLog("connect ok");
-    LOCK();
-    mCanIdle = true;
-    UNLOCK();
 }
 
 void IMAPSession::connectIfNeeded(ErrorCode * pError)
@@ -3140,6 +3137,11 @@ IndexSet * IMAPSession::capability(ErrorCode * pError)
 
 void IMAPSession::capabilitySetWithSessionState(IndexSet * capabilities)
 {
+    if (mailimap_has_idle(mImap)) {
+        LOCK();
+        mCanIdle = true;
+        UNLOCK();
+    }
     if (mailimap_has_id(mImap)) {
         capabilities->addIndex(IMAPCapabilityId);
     }
