@@ -75,6 +75,7 @@ namespace mailcore {
         time_t mTimeout;
         bool mCheckCertificateEnabled;
         bool mUseHeloIPEnabled;
+        bool mShouldDisconnect;
         
         mailsmtp * mSmtp;
         SMTPProgressCallback * mProgressCallback;

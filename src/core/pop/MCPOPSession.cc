@@ -130,6 +130,8 @@ bool POPSession::isCheckCertificateEnabled()
 
 bool POPSession::checkCertificate()
 {
+    if (!isCheckCertificateEnabled())
+        return true;
     return mailcore::checkCertificate(mPop->pop3_stream, hostname());
 }
 
