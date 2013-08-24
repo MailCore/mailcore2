@@ -840,7 +840,7 @@ void IMAPSession::login(ErrorCode * pError)
             capabilitySetWithSessionState(IndexSet::indexSet());
         }
         else {
-            IndexSet * capabilities = capability(pError);
+            capability(pError);
             if (* pError != ErrorNone) {
                 MCLog("capabilities failed");
                 return;
