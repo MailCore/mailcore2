@@ -16,3 +16,9 @@ echo Building framework for Mac
 xcodebuild -project build-mac/mailcore2.xcodeproj -sdk macosx10.8 -target "mailcore osx" build > /dev/null
 echo Link test for Mac
 xcodebuild -project build-mac/mailcore2.xcodeproj -sdk macosx10.8 -target "tests" build > /dev/null
+
+echo Testing CMake build
+mkdir -p build-cmake
+cd build-cmake
+cmake ..
+make
