@@ -38,6 +38,7 @@ namespace mailcore {
     class IMAPMessage;
     class IMAPSession;
     class IMAPIdentity;
+    class OperationQueueCallback;
     
     class IMAPAsyncSession : public Object {
     public:
@@ -87,6 +88,10 @@ namespace mailcore {
         
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
+        
+        virtual void setOperationQueueCallback(OperationQueueCallback * callback);
+        virtual OperationQueueCallback * operationQueueCallback();
+        virtual bool isOperationQueueRunning();
         
         virtual IMAPIdentity * serverIdentity();
         virtual IMAPIdentity * clientIdentity();
@@ -145,7 +150,8 @@ namespace mailcore {
         
     public: // private
         virtual void automaticConfigurationDone(IMAPSession * session);
-    
+        virtual void operationRunningStateChanged();
+        
     private:
         Array * mSessions;
         
@@ -166,6 +172,8 @@ namespace mailcore {
         bool mAutomaticConfigurationDone;
         IMAPIdentity * mServerIdentity;
         IMAPIdentity * mClientIdentity;
+        bool mQueueRunning;
+        OperationQueueCallback * mOperationQueueCallback;
         
         virtual IMAPAsyncConnection * sessionForFolder(String * folder, bool urgent = false);
         virtual IMAPAsyncConnection * session();

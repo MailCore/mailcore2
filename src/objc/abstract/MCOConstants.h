@@ -358,4 +358,9 @@ typedef enum {
  */
 typedef void (^MCOConnectionLogger)(void * connectionID, MCOConnectionLogType type, NSData * data);
 
+/**
+ It's called when asynchronous operations stop/start running.
+ */
+typedef void (^MCOOperationQueueRunningChangeBlock)(void);
+
 #endif

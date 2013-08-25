@@ -146,6 +146,7 @@ namespace mailcore {
         IMAPConnectionLogger * mInternalLogger;
         pthread_mutex_t mConnectionLoggerLock;
         bool mAutomaticConfigurationEnabled;
+        bool mQueueRunning;
         
         virtual void tryAutomaticDisconnectAfterDelay(void * context);
         virtual IMAPMessageRenderingOperation * renderingOperation(IMAPMessage * message,
@@ -169,6 +170,9 @@ namespace mailcore {
         virtual IMAPAsyncSession * owner();
 
         virtual void logConnection(ConnectionLogType logType, Data * buffer);
+        
+        virtual bool isQueueRunning();
+        virtual void setQueueRunning(bool running);
     };
 }
 

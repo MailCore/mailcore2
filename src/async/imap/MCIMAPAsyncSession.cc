@@ -40,6 +40,7 @@ IMAPAsyncSession::IMAPAsyncSession()
     mAutomaticConfigurationDone = false;
     mServerIdentity = new IMAPIdentity();
     mClientIdentity = new IMAPIdentity();
+    mOperationQueueCallback = NULL;
 }
 
 IMAPAsyncSession::~IMAPAsyncSession()
@@ -512,4 +513,43 @@ void IMAPAsyncSession::automaticConfigurationDone(IMAPSession * session)
     MC_SAFE_REPLACE_COPY(IMAPIdentity, mServerIdentity, session->serverIdentity());
     setDefaultNamespace(session->defaultNamespace());
     mAutomaticConfigurationDone = true;
+}
+
+void IMAPAsyncSession::setOperationQueueCallback(OperationQueueCallback * callback)
+{
+    mOperationQueueCallback = callback;
+}
+
+OperationQueueCallback * IMAPAsyncSession::operationQueueCallback()
+{
+    return mOperationQueueCallback;
+}
+
+bool IMAPAsyncSession::isOperationQueueRunning()
+{
+    return mQueueRunning;
+}
+
+void IMAPAsyncSession::operationRunningStateChanged()
+{
+    bool isRunning = false;
+    for(unsigned int i = 0 ; i < mSessions->count() ; i ++) {
+        IMAPAsyncConnection * currentSession = (IMAPAsyncConnection *) mSessions->objectAtIndex(i);
+        if (currentSession->isQueueRunning()){
+            isRunning = true;
+            break;
+        }
+    }
+    if (mQueueRunning == isRunning) {
+        return;
+    }
+    mQueueRunning = isRunning;
+    if (mOperationQueueCallback != NULL) {
+        if (isRunning) {
+            mOperationQueueCallback->queueStartRunning();
+        }
+        else {
+            mOperationQueueCallback->queueStoppedRunning();
+        }
+    }
 }

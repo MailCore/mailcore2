@@ -22,19 +22,20 @@
 #import <MailCore/MCAsync.h>
 
 #include "MCIMAPMessageRenderingOperation.h"
-
+#include "MCOperationQueueCallback.h"
 
 using namespace mailcore;
 
 @interface MCOIMAPSession ()
 
 - (void) _logWithSender:(void *)sender connectionType:(MCOConnectionLogType)logType data:(NSData *)data;
+- (void) _queueRunningChanged;
 
 @end
 
-class MCOIMAPConnectionLoggerBridge : public Object, public ConnectionLogger {
+class MCOIMAPCallbackBridge : public Object, public ConnectionLogger, public OperationQueueCallback {
 public:
-    MCOIMAPConnectionLoggerBridge(MCOIMAPSession * session)
+    MCOIMAPCallbackBridge(MCOIMAPSession * session)
     {
         mSession = session;
     }
@@ -44,6 +45,16 @@ public:
         [mSession _logWithSender:sender connectionType:(MCOConnectionLogType)logType data:MCO_TO_OBJC(data)];
     }
     
+    virtual void queueStartRunning()
+    {
+        [mSession _queueRunningChanged];
+    }
+    
+    virtual void queueStoppedRunning()
+    {
+        [mSession _queueRunningChanged];
+    }
+    
 private:
     MCOIMAPSession * mSession;
 };
@@ -51,7 +62,8 @@ private:
 @implementation MCOIMAPSession {
     IMAPAsyncSession * _session;
     MCOConnectionLogger _connectionLogger;
-    MCOIMAPConnectionLoggerBridge * _loggerBridge;
+    MCOIMAPCallbackBridge * _callbackBridge;
+    MCOOperationQueueRunningChangeBlock _operationQueueRunningChangeBlock;
 }
 
 #define nativeType mailcore::IMAPAsyncSession
@@ -65,13 +77,17 @@ private:
     self = [super init];
     
     _session = new IMAPAsyncSession();
-    _loggerBridge = new MCOIMAPConnectionLoggerBridge(self);
+    _callbackBridge = new MCOIMAPCallbackBridge(self);
+    _session->setOperationQueueCallback(_callbackBridge);
     
     return self;
 }
 
 - (void)dealloc {
-    MC_SAFE_RELEASE(_loggerBridge);
+    _session->setConnectionLogger(NULL);
+    _session->setOperationQueueCallback(NULL);
+    MC_SAFE_RELEASE(_callbackBridge);
+    [_operationQueueRunningChangeBlock release];
     [_connectionLogger release];
     _session->release();
     [super dealloc];
@@ -116,7 +132,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
     _connectionLogger = [connectionLogger copy];
     
     if (_connectionLogger != nil) {
-        _session->setConnectionLogger(_loggerBridge);
+        _session->setConnectionLogger(_callbackBridge);
     }
     else {
         _session->setConnectionLogger(NULL);
@@ -126,6 +142,24 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
 - (MCOConnectionLogger) connectionLogger
 {
     return _connectionLogger;
+}
+
+- (void) setOperationQueueRunningChangeBlock:(MCOOperationQueueRunningChangeBlock)operationQueueRunningChangeBlock
+{
+    [_operationQueueRunningChangeBlock release];
+    _operationQueueRunningChangeBlock = [operationQueueRunningChangeBlock copy];
+    
+    if (_operationQueueRunningChangeBlock != nil) {
+        _session->setOperationQueueCallback(_callbackBridge);
+    }
+    else {
+        _session->setOperationQueueCallback(NULL);
+    }
+}
+
+- (MCOOperationQueueRunningChangeBlock) operationQueueRunningChangeBlock
+{
+    return _operationQueueRunningChangeBlock;
 }
 
 #pragma mark - Operations
@@ -405,6 +439,19 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
 {
     IMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->plainTextBodyRenderingOperation(MCO_FROM_OBJC(IMAPMessage, message), [folder mco_mcString]);
     return MCO_TO_OBJC_OP(coreOp);
+}
+
+- (void) _queueRunningChanged
+{
+    if (_operationQueueRunningChangeBlock == NULL)
+        return;
+    
+    _operationQueueRunningChangeBlock();
+}
+
+- (BOOL) isOperationQueueRunning
+{
+    return _session->isOperationQueueRunning();
 }
 
 @end

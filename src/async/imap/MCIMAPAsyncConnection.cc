@@ -50,12 +50,16 @@ namespace mailcore {
         virtual ~IMAPOperationQueueCallback() {
         }
         
-        virtual void queueStartRunning(OperationQueue * queue) {
+        virtual void queueStartRunning() {
+            mConnection->setQueueRunning(true);
+            mConnection->owner()->operationRunningStateChanged();
             mConnection->queueStartRunning();
         }
         
-        virtual void queueStoppedRunning(OperationQueue * queue) {
+        virtual void queueStoppedRunning() {
+            mConnection->setQueueRunning(false);
             mConnection->tryAutomaticDisconnect();
+            mConnection->owner()->operationRunningStateChanged();
             mConnection->queueStoppedRunning();
         }
         
@@ -96,6 +100,7 @@ IMAPAsyncConnection::IMAPAsyncConnection()
     pthread_mutex_init(&mConnectionLoggerLock, NULL);
     mInternalLogger = new IMAPConnectionLogger(this);
     mAutomaticConfigurationEnabled = true;
+    mQueueRunning = false;
 }
 
 IMAPAsyncConnection::~IMAPAsyncConnection()
@@ -652,4 +657,14 @@ void IMAPAsyncConnection::setAutomaticConfigurationEnabled(bool enabled)
 bool IMAPAsyncConnection::isAutomaticConfigurationEnabled()
 {
     return mAutomaticConfigurationEnabled;
+}
+
+bool IMAPAsyncConnection::isQueueRunning()
+{
+    return mQueueRunning;
+}
+
+void IMAPAsyncConnection::setQueueRunning(bool running)
+{
+    mQueueRunning = running;
 }
