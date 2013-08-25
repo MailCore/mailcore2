@@ -2,7 +2,8 @@
 set -e
 
 echo Building library for iPhoneOS
-xcodebuild -project build-mac/mailcore2.xcodeproj -sdk iphoneos6.1 -target "static mailcore2 ios" build > /dev/null
+#xcodebuild -project build-mac/mailcore2.xcodeproj -sdk iphoneos6.1 -target "static mailcore2 ios" build > /dev/null
+xctool -project build-mac/mailcore2.xcodeproj -sdk iphoneos6.1 -scheme "static mailcore2 ios" build
 echo Building library for iPhoneSimulator
 xcodebuild -project build-mac/mailcore2.xcodeproj -sdk iphonesimulator6.1 -target "static mailcore2 ios" build > /dev/null
 #echo Link test for iPhoneOS
