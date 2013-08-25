@@ -14,5 +14,6 @@
 #include <MailCore/MCIMAPSession.h>
 #include <MailCore/MCIMAPSyncResult.h>
 #include <MailCore/MCIMAPFolderStatus.h>
+#include <MailCore/MCIMAPIdentity.h>
 
 #endif

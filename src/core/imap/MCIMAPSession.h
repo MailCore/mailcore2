@@ -20,6 +20,7 @@ namespace mailcore {
     class IMAPProgressCallback;
     class IMAPSyncResult;
     class IMAPFolderStatus;
+    class IMAPIdentity;
     
     class IMAPSession : public Object {
     public:
@@ -61,6 +62,9 @@ namespace mailcore {
         // Needed for fetchSubscribedFolders() and fetchAllFolders().
         virtual void setDefaultNamespace(IMAPNamespace * ns);
         virtual IMAPNamespace * defaultNamespace();
+        
+        virtual IMAPIdentity * serverIdentity();
+        virtual IMAPIdentity * clientIdentity();
         
         virtual void select(String * folder, ErrorCode * pError);
         virtual IMAPFolderStatus * folderStatus(String * folder, ErrorCode * pError);
@@ -136,7 +140,7 @@ namespace mailcore {
         
         virtual void login(ErrorCode * pError);
         
-        virtual HashMap * identity(String * vendor, String * name, String * version, ErrorCode * pError);
+        IMAPIdentity * identity(IMAPIdentity * clientIdentity, ErrorCode * pError);
         
         virtual IndexSet * capability(ErrorCode * pError);
         
@@ -199,6 +203,8 @@ namespace mailcore {
         bool mVoIPEnabled;
         char mDelimiter;
         IMAPNamespace * mDefaultNamespace;
+        IMAPIdentity * mServerIdentity;
+        IMAPIdentity * mClientIdentity;
         time_t mTimeout;
         
         bool mBodyProgressEnabled;

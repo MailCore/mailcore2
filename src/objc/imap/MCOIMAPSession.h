@@ -32,6 +32,7 @@
 @class MCOIMAPQuotaOperation;
 @class MCOIMAPMessageRenderingOperation;
 @class MCOIMAPMessage;
+@class MCOIMAPIdentity;
 
 /**
  This is the main IMAP class from which all operations are created 
@@ -81,6 +82,12 @@
 
 /** The default namespace. */
 @property (nonatomic, strong) MCOIMAPNamespace * defaultNamespace;
+
+/** The identity of the IMAP client. */
+@property (nonatomic, strong, readonly) MCOIMAPIdentity * clientIdentity;
+
+/** The identity of the IMAP server. */
+@property (nonatomic, strong, readonly) MCOIMAPIdentity * serverIdentity;
 
 /**
  When set to YES, the session is allowed open to open several connections to the same folder.
@@ -469,17 +476,13 @@
 /**
  Returns an operation to send the client or get the server identity.
 
-     MCOIMAPIdentityOperation * op = [session identityOperationWithVendor:@"Mozilla"
-                                                                     name:@"Thunderbird"
-                                                                  version:@"17.0.5"];
-     [op start:^(NSError * error, NSDictionary * serverIdentity) {
+     MCOIMAPIdentity * identity = [MCOIMAPIdentity identityWithVendor:@"Mozilla" name:@"Thunderbird" version:@"17.0.5"];
+     MCOIMAPIdentityOperation * op = [session identityOperationWithClientIdentity:identity];
+     [op start:^(NSError * error, MCOIMAPIdentity * serverIdentity) {
           ...
      }];
 */
-- (MCOIMAPIdentityOperation *) identityOperationWithVendor:(NSString *)vendor
-                                                      name:(NSString *)name
-                                                   version:(NSString *)version;
-
+- (MCOIMAPIdentityOperation *) identityOperationWithClientIdentity:(MCOIMAPIdentity *)identity;
 
 /**
  Returns an operation that will check whether the IMAP account is valid.

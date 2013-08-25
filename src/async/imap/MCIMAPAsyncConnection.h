@@ -31,6 +31,7 @@ namespace mailcore {
     class IMAPConnectionLogger;
     class IMAPMessageRenderingOperation;
     class IMAPMessage;
+    class IMAPIdentity;
     
     class IMAPAsyncConnection : public Object {
     public:
@@ -73,6 +74,9 @@ namespace mailcore {
         // Needs to be run before starting a connection.
         virtual void setDefaultNamespace(IMAPNamespace * ns);
         virtual IMAPNamespace * defaultNamespace();
+        
+        virtual void setClientIdentity(IMAPIdentity * identity);
+        virtual IMAPIdentity * clientIdentity();
         
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
@@ -117,7 +121,7 @@ namespace mailcore {
         
         virtual IMAPFetchNamespaceOperation * fetchNamespaceOperation();
         
-        virtual IMAPIdentityOperation * identityOperation(String * vendor, String * name, String * version);
+        virtual IMAPIdentityOperation * identityOperation(IMAPIdentity * identity);
         
         virtual IMAPOperation * checkAccountOperation();
         
@@ -134,6 +138,7 @@ namespace mailcore {
         IMAPSession * mSession;
         OperationQueue * mQueue;
         IMAPNamespace * mDefaultNamespace;
+        IMAPIdentity * mClientIdentity;
         String * mLastFolder;
         IMAPOperationQueueCallback * mQueueCallback;
         IMAPAsyncSession * mOwner;

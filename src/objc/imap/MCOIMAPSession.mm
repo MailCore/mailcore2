@@ -15,6 +15,7 @@
 #import "MCOIMAPFetchFoldersOperation.h"
 #import "MCOIMAPBaseOperation+Private.h"
 #import "MCOIMAPMessageRenderingOperation.h"
+#import "MCOIMAPIdentity.h"
 
 #import "MCOUtils.h"
 
@@ -97,6 +98,16 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
 - (MCOIMAPNamespace *) defaultNamespace
 {
     return MCO_TO_OBJC(_session->defaultNamespace());
+}
+
+- (MCOIMAPIdentity *) clientIdentity
+{
+    return MCO_OBJC_BRIDGE_GET(clientIdentity);
+}
+
+- (MCOIMAPIdentity *) serverIdentity
+{
+    return MCO_OBJC_BRIDGE_GET(serverIdentity);
 }
 
 - (void) setConnectionLogger:(MCOConnectionLogger)connectionLogger
@@ -339,13 +350,9 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
     return MCO_TO_OBJC_OP(coreOp);
 }
 
-- (MCOIMAPIdentityOperation *) identityOperationWithVendor:(NSString *)vendor
-                                                      name:(NSString *)name
-                                                   version:(NSString *)version
+- (MCOIMAPIdentityOperation *) identityOperationWithClientIdentity:(MCOIMAPIdentity *)identity
 {
-    IMAPIdentityOperation * coreOp = MCO_NATIVE_INSTANCE->identityOperation([vendor mco_mcString],
-                                                                            [name mco_mcString],
-                                                                            [version mco_mcString]);
+    IMAPIdentityOperation * coreOp = MCO_NATIVE_INSTANCE->identityOperation(MCO_FROM_OBJC(IMAPIdentity, identity));
     return MCO_TO_OBJC_OP(coreOp);
 }
 

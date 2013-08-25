@@ -13,6 +13,7 @@
 #include "MCOperationQueueCallback.h"
 #include "MCConnectionLogger.h"
 #include "MCIMAPSession.h"
+#include "MCIMAPIdentity.h"
 
 #define DEFAULT_MAX_CONNECTIONS 3
 
@@ -37,10 +38,14 @@ IMAPAsyncSession::IMAPAsyncSession()
     mTimeout = 30.;
     mConnectionLogger = NULL;
     mAutomaticConfigurationDone = false;
+    mServerIdentity = new IMAPIdentity();
+    mClientIdentity = new IMAPIdentity();
 }
 
 IMAPAsyncSession::~IMAPAsyncSession()
 {
+    MC_SAFE_RELEASE(mServerIdentity);
+    MC_SAFE_RELEASE(mClientIdentity);
     MC_SAFE_RELEASE(mSessions);
     MC_SAFE_RELEASE(mHostname);
     MC_SAFE_RELEASE(mUsername);
@@ -179,6 +184,16 @@ unsigned int IMAPAsyncSession::maximumConnections()
     return mMaximumConnections;
 }
 
+IMAPIdentity * IMAPAsyncSession::serverIdentity()
+{
+    return mServerIdentity;
+}
+
+IMAPIdentity * IMAPAsyncSession::clientIdentity()
+{
+    return mClientIdentity;
+}
+
 IMAPAsyncConnection * IMAPAsyncSession::session()
 {
     IMAPAsyncConnection * session = new IMAPAsyncConnection();
@@ -197,6 +212,7 @@ IMAPAsyncConnection * IMAPAsyncSession::session()
     session->setCheckCertificateEnabled(mCheckCertificateEnabled);
     session->setVoIPEnabled(mVoIPEnabled);
     session->setDefaultNamespace(mDefaultNamespace);
+    session->setClientIdentity(mClientIdentity);
 #if 0 // should be implemented properly
     if (mAutomaticConfigurationDone) {
         session->setAutomaticConfigurationEnabled(false);
@@ -425,10 +441,10 @@ IMAPFetchNamespaceOperation * IMAPAsyncSession::fetchNamespaceOperation()
     return session->fetchNamespaceOperation();
 }
 
-IMAPIdentityOperation * IMAPAsyncSession::identityOperation(String * vendor, String * name, String * version)
+IMAPIdentityOperation * IMAPAsyncSession::identityOperation(IMAPIdentity * identity)
 {
     IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
-    return session->identityOperation(vendor, name, version);
+    return session->identityOperation(identity);
 }
 
 IMAPOperation * IMAPAsyncSession::checkAccountOperation()
@@ -493,6 +509,7 @@ IMAPMessageRenderingOperation * IMAPAsyncSession::plainTextBodyRenderingOperatio
 
 void IMAPAsyncSession::automaticConfigurationDone(IMAPSession * session)
 {
+    MC_SAFE_REPLACE_COPY(IMAPIdentity, mServerIdentity, session->serverIdentity());
     setDefaultNamespace(session->defaultNamespace());
     mAutomaticConfigurationDone = true;
 }

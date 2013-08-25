@@ -22,6 +22,7 @@
 #include "MCHTMLRendererIMAPDataCallback.h"
 #include "MCHTMLBodyRendererTemplateCallback.h"
 #include "MCCertificateUtils.h"
+#include "MCIMAPIdentity.h"
 
 using namespace mailcore;
 
@@ -340,6 +341,8 @@ void IMAPSession::init()
     mWelcomeString = NULL;
     mNeedsMboxMailWorkaround = false;
     mDefaultNamespace = NULL;
+    mServerIdentity = new IMAPIdentity();
+    mClientIdentity = new IMAPIdentity();
     mTimeout = 30;
     mUIDValidity = 0;
     mUIDNext = 0;
@@ -368,6 +371,7 @@ IMAPSession::IMAPSession()
 
 IMAPSession::~IMAPSession()
 {
+    MC_SAFE_RELEASE(mServerIdentity);
     MC_SAFE_RELEASE(mHostname);
     MC_SAFE_RELEASE(mUsername);
     MC_SAFE_RELEASE(mPassword);
@@ -887,6 +891,15 @@ void IMAPSession::login(ErrorCode * pError)
             mDelimiter = folder->delimiter();
             IMAPNamespace * defaultNamespace = IMAPNamespace::namespaceWithPrefix(folder->path(), folder->delimiter());
             setDefaultNamespace(defaultNamespace);
+        }
+        
+        if (isIdentityEnabled()) {
+            IMAPIdentity * serverIdentity = identity(clientIdentity(), pError);
+            if (* pError != ErrorNone) {
+                MCLog("fetch identity failed");
+                return;
+            }
+            MC_SAFE_REPLACE_RETAIN(IMAPIdentity, mServerIdentity, serverIdentity);
         }
     }
     else {
@@ -2749,31 +2762,22 @@ void IMAPSession::disconnect()
     unsetup();
 }
 
-HashMap * IMAPSession::identity(String * vendor, String * name, String * version, ErrorCode * pError)
+IMAPIdentity * IMAPSession::identity(IMAPIdentity * clientIdentity, ErrorCode * pError)
 {
     connectIfNeeded(pError);
     if (* pError != ErrorNone)
         return NULL;
 
     struct mailimap_id_params_list * client_identification;
-    char * dup_name;
-    char * dup_value;
 
     client_identification = mailimap_id_params_list_new_empty();
 
-    if (name != NULL) {
-        dup_name = strdup("name");
-        dup_value = strdup(name->UTF8Characters());
-        mailimap_id_params_list_add_name_value(client_identification, dup_name, dup_value);
-    }
-    if (version != NULL) {
-        dup_name = strdup("version");
-        dup_value = strdup(version->UTF8Characters());
-        mailimap_id_params_list_add_name_value(client_identification, dup_name, dup_value);
-    }
-    if (vendor != NULL) {
-        dup_name = strdup("vendor");
-        dup_value = strdup(vendor->UTF8Characters());
+    mc_foreacharray(String, key, clientIdentity->allInfoKeys()) {
+        char * dup_name;
+        char * dup_value;
+        
+        dup_name = strdup(key->UTF8Characters());
+        dup_value = strdup(clientIdentity->name()->UTF8Characters());
         mailimap_id_params_list_add_name_value(client_identification, dup_name, dup_value);
     }
 
@@ -2795,7 +2799,7 @@ HashMap * IMAPSession::identity(String * vendor, String * name, String * version
         return NULL;
 	}
 
-    HashMap * result = HashMap::hashMap();
+    IMAPIdentity * result = new IMAPIdentity();
     
     clistiter * cur;
     for(cur = clist_begin(server_identification->idpa_list) ; cur != NULL ; cur = clist_next(cur)) {
@@ -2807,12 +2811,13 @@ HashMap * IMAPSession::identity(String * vendor, String * name, String * version
         String * responseValue;
         responseKey = String::stringWithUTF8Characters(param->idpa_name);
         responseValue = String::stringWithUTF8Characters(param->idpa_value);
-        result->setObjectForKey(responseKey, responseValue);
+        result->setInfoForKey(responseKey, responseValue);
     }
 
     mailimap_id_params_list_free(server_identification);
     * pError = ErrorNone;
 
+    result->autorelease();
     return result;
 }
 
@@ -2842,6 +2847,16 @@ IMAPNamespace * IMAPSession::defaultNamespace()
 void IMAPSession::setDefaultNamespace(IMAPNamespace * ns)
 {
     MC_SAFE_REPLACE_RETAIN(IMAPNamespace, mDefaultNamespace, ns);
+}
+
+IMAPIdentity * IMAPSession::serverIdentity()
+{
+    return mServerIdentity;
+}
+
+IMAPIdentity * IMAPSession::clientIdentity()
+{
+    return mClientIdentity;
 }
 
 HashMap * IMAPSession::fetchNamespace(ErrorCode * pError)
