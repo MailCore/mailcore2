@@ -47,6 +47,7 @@ core/imap/MCIMAPSearchExpression.h
 core/imap/MCIMAPSession.h
 core/imap/MCIMAPSyncResult.h
 core/imap/MCIMAPFolderStatus.h
+core/imap/MCIMAPIdentity.h
 core/pop/MCPOP.h
 core/pop/MCPOPMessageInfo.h
 core/pop/MCPOPProgressCallback.h
@@ -88,6 +89,7 @@ async/imap/MCIMAPSearchOperation.h
 async/imap/MCIMAPFetchNamespaceOperation.h
 async/imap/MCIMAPIdentityOperation.h
 async/imap/MCIMAPCapabilityOperation.h
+async/imap/MCIMAPQuotaOperation.h
 async/imap/MCIMAPOperationCallback.h
 async/imap/MCIMAPMessageRenderingOperation.h
 async/pop/MCAsyncPOP.h
@@ -131,6 +133,7 @@ objc/imap/MCOIMAPMessagePart.h
 objc/imap/MCOIMAPMultipart.h
 objc/imap/MCOIMAPNamespace.h
 objc/imap/MCOIMAPNamespaceItem.h
+objc/imap/MCOIMAPIdentity.h
 objc/imap/MCOIMAPPart.h
 objc/imap/MCOIMAPFolderInfoOperation.h
 objc/imap/MCOIMAPFolderInfo.h
@@ -145,6 +148,7 @@ objc/imap/MCOIMAPIdleOperation.h
 objc/imap/MCOIMAPFetchNamespaceOperation.h
 objc/imap/MCOIMAPIdentityOperation.h
 objc/imap/MCOIMAPCapabilityOperation.h
+objc/imap/MCOIMAPQuotaOperation.h
 objc/imap/MCOIMAPSearchExpression.h
 objc/imap/MCOIMAPMessageRenderingOperation.h
 objc/rfc822/MCORFC822.h

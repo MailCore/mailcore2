@@ -21,6 +21,7 @@ set(basetypes_files
   core/basetypes/MCArray.cc
   core/basetypes/MCAssert.c
   core/basetypes/MCAutoreleasePool.cc
+  core/basetypes/MCBase64.c
   core/basetypes/MCConnectionLoggerUtils.cc
   core/basetypes/MCData.cc
   core/basetypes/MCHash.cc
@@ -46,6 +47,7 @@ set(basetypes_files
 set(imap_files
   core/imap/MCIMAPFolder.cc
   core/imap/MCIMAPFolderStatus.cc
+  core/imap/MCIMAPIdentity.cc
   core/imap/MCIMAPMessage.cc
   core/imap/MCIMAPMessagePart.cc
   core/imap/MCIMAPMultipart.cc
@@ -99,6 +101,10 @@ set(zip_files
   core/zip/MiniZip/zip.c
 )
 
+set(security_files
+  core/security/MCCertificateUtils.cc
+)
+
 set(core_files
   ${basetypes_files}
   ${abstract_files}
@@ -106,6 +112,7 @@ set(core_files
   ${pop_files}
   ${renderer_files}
   ${rfc822_files}
+  ${security_files}
   ${smtp_files}
   ${zip_files}
 )
@@ -121,6 +128,7 @@ set(core_includes
   ${CMAKE_CURRENT_SOURCE_DIR}/core/provider
   ${CMAKE_CURRENT_SOURCE_DIR}/core/renderer
   ${CMAKE_CURRENT_SOURCE_DIR}/core/rfc822
+  ${CMAKE_CURRENT_SOURCE_DIR}/core/security
   ${CMAKE_CURRENT_SOURCE_DIR}/core/smtp
   ${CMAKE_CURRENT_SOURCE_DIR}/core/zip
   ${CMAKE_CURRENT_SOURCE_DIR}/core/zip/MiniZip
