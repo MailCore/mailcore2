@@ -894,14 +894,12 @@ void IMAPSession::login(ErrorCode * pError)
         }
         
         if (isIdentityEnabled()) {
-#if 0 // Disabled while ID is not working.
             IMAPIdentity * serverIdentity = identity(clientIdentity(), pError);
             if (* pError != ErrorNone) {
                 MCLog("fetch identity failed");
                 return;
             }
             MC_SAFE_REPLACE_RETAIN(IMAPIdentity, mServerIdentity, serverIdentity);
-#endif
         }
     }
     else {
