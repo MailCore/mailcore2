@@ -1850,8 +1850,15 @@ Data * String::dataUsingEncoding(const char * charset)
     Data * data;
     
     data = NULL;
-    CFStringRef encodingName = CFStringCreateWithCString(NULL, charset, kCFStringEncodingUTF8);
-    CFStringEncoding encoding = CFStringConvertIANACharSetNameToEncoding(encodingName);
+    CFStringEncoding encoding;
+    if (strcasecmp(charset, "mutf-7") == 0) {
+        encoding = kCFStringEncodingUTF7_IMAP;
+    }
+    else {
+        CFStringRef encodingName = CFStringCreateWithCString(NULL, charset, kCFStringEncodingUTF8);
+        encoding = CFStringConvertIANACharSetNameToEncoding(encodingName);
+        CFRelease(encodingName);
+    }
     CFStringRef cfStr = CFStringCreateWithBytes(NULL, (const UInt8 *) mUnicodeChars,
         (CFIndex) mLength * sizeof(* mUnicodeChars), kCFStringEncodingUTF16LE, false);
     if (cfStr != NULL) {
@@ -1863,7 +1870,6 @@ Data * String::dataUsingEncoding(const char * charset)
         }
         CFRelease(cfStr);
     }
-    CFRelease(encodingName);
     
     return data;
 #else
