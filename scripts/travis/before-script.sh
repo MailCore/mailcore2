@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
 
-#brew update
+brew update
 #brew install xctool
-#brew install cmake
+brew install cmake
