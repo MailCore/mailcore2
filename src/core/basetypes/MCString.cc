@@ -1806,8 +1806,8 @@ String * String::flattenHTML()
 bool String::hasSuffix(String * suffix)
 {
     if (mLength >= suffix->mLength) {
-        if (u_memcmp(suffix->mUnicodeChars + (mLength - suffix->mLength),
-        mUnicodeChars, suffix->mLength) == 0) {
+        if (u_memcmp(mUnicodeChars + (mLength - suffix->mLength),
+          suffix->mUnicodeChars, suffix->mLength) == 0) {
             return true;
         }
     }
