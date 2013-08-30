@@ -1,7 +1,7 @@
 #!/bin/sh
 
 url="https://github.com/dinhviethoa/libetpan.git"
-rev=4b8e42fc53509a6933451e326a1a258f403162fa
+rev=df052805726c7825ea7dce127b5df501cbf62238
 
 pushd `dirname $0` > /dev/null
 scriptpath=`pwd`

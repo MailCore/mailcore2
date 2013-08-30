@@ -20,6 +20,7 @@ namespace mailcore {
     class IMAPProgressCallback;
     class IMAPSyncResult;
     class IMAPFolderStatus;
+    class IMAPIdentity;
     
     class IMAPSession : public Object {
     public:
@@ -59,12 +60,11 @@ namespace mailcore {
         virtual bool isVoIPEnabled();
         
         // Needed for fetchSubscribedFolders() and fetchAllFolders().
-        virtual void setDelimiter(char delimiter);
-        virtual char delimiter();
-        
-        // Needed for fetchSubscribedFolders() and fetchAllFolders().
         virtual void setDefaultNamespace(IMAPNamespace * ns);
         virtual IMAPNamespace * defaultNamespace();
+        
+        virtual IMAPIdentity * serverIdentity();
+        virtual IMAPIdentity * clientIdentity();
         
         virtual void select(String * folder, ErrorCode * pError);
         virtual IMAPFolderStatus * folderStatus(String * folder, ErrorCode * pError);
@@ -126,6 +126,7 @@ namespace mailcore {
         
         virtual IndexSet * search(String * folder, IMAPSearchKind kind, String * searchString, ErrorCode * pError);
         virtual IndexSet * search(String * folder, IMAPSearchExpression * expression, ErrorCode * pError);
+        virtual void getQuota(uint32_t *usage, uint32_t *limit, ErrorCode * pError);
         
         virtual bool setupIdle();
         virtual void idle(String * folder, uint32_t lastKnownUID, ErrorCode * pError);
@@ -139,9 +140,11 @@ namespace mailcore {
         
         virtual void login(ErrorCode * pError);
         
-        virtual HashMap * identity(String * vendor, String * name, String * version, ErrorCode * pError);
+        IMAPIdentity * identity(IMAPIdentity * clientIdentity, ErrorCode * pError);
         
         virtual IndexSet * capability(ErrorCode * pError);
+        
+        virtual void enableCompression(ErrorCode * pError);
         
         virtual uint32_t uidValidity();
         virtual uint32_t uidNext();
@@ -155,6 +158,8 @@ namespace mailcore {
         virtual bool isQResyncEnabled();
         virtual bool isIdentityEnabled();
         virtual bool isXOAuthEnabled();
+        virtual bool isNamespaceEnabled();
+        virtual bool isCompressionEnabled();
         
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
@@ -172,10 +177,19 @@ namespace mailcore {
          This method can be used to generate the summary of the message.*/
         virtual String * plainTextBodyRendering(IMAPMessage * message, String * folder, ErrorCode * pError);
         
+        /** Enable automatic query of the capabilities of the IMAP server when set to true. */
+        virtual void setAutomaticConfigurationEnabled(bool enabled);
+        
+        /** Check if the automatic query of the capabilities of the IMAP server is enabled. */
+        virtual bool isAutomaticConfigurationEnabled();
+        
     public: // private
         virtual void loginIfNeeded(ErrorCode * pError);
         virtual void connectIfNeeded(ErrorCode * pError);
         virtual bool isDisconnected();
+        virtual bool isAutomaticConfigurationDone();
+        virtual void resetAutomaticConfigurationDone();
+        virtual void applyCapabilities(IndexSet * capabilities);
         
     private:
         String * mHostname;
@@ -189,6 +203,8 @@ namespace mailcore {
         bool mVoIPEnabled;
         char mDelimiter;
         IMAPNamespace * mDefaultNamespace;
+        IMAPIdentity * mServerIdentity;
+        IMAPIdentity * mClientIdentity;
         time_t mTimeout;
         
         bool mBodyProgressEnabled;
@@ -198,6 +214,8 @@ namespace mailcore {
         bool mQResyncEnabled;
         bool mIdentityEnabled;
         bool mXOauth2Enabled;
+        bool mNamespaceEnabled;
+        bool mCompressionEnabled;
         String * mWelcomeString;
         bool mNeedsMboxMailWorkaround;
         uint32_t mUIDValidity;
@@ -205,6 +223,7 @@ namespace mailcore {
         uint64_t mModSequenceValue;
         unsigned int mFolderMsgCount;
         uint32_t mFirstUnseenUid;
+        bool mYahooServer;
         
         unsigned int mLastFetchedSequenceNumber;
         String * mCurrentFolder;
@@ -215,6 +234,9 @@ namespace mailcore {
         IMAPProgressCallback * mProgressCallback;
         unsigned int mProgressItemsCount;
         ConnectionLogger * mConnectionLogger;
+        bool mAutomaticConfigurationEnabled;
+        bool mAutomaticConfigurationDone;
+        bool mShouldDisconnect;
         
         void init();
         void bodyProgress(unsigned int current, unsigned int maximum);
@@ -230,6 +252,9 @@ namespace mailcore {
                                        bool fetchByUID, struct mailimap_set * imapset, uint64_t modseq,
                                        HashMap * mapping, uint32_t startUid, IMAPProgressCallback * progressCallback,
                                        Array * extraHeaders, ErrorCode * pError);
+        void capabilitySetWithSessionState(IndexSet * capabilities);
+        bool enableFeature(String * feature);
+        void enableFeatures();
     };
 }
 

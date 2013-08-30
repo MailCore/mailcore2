@@ -18,7 +18,7 @@ namespace mailcore {
     class IMAPMessage : public AbstractMessage {
     public:
         IMAPMessage();
-        ~IMAPMessage();
+        virtual ~IMAPMessage();
         
         virtual uint32_t uid();
         virtual void setUid(uint32_t uid);

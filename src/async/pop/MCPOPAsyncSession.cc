@@ -29,11 +29,11 @@ namespace mailcore {
         virtual ~POPOperationQueueCallback() {
         }
         
-        virtual void queueStartRunning(OperationQueue * queue) {
+        virtual void queueStartRunning() {
             mSession->retain();
         }
         
-        virtual void queueStoppedRunning(OperationQueue * queue) {
+        virtual void queueStoppedRunning() {
             mSession->release();
         }
         

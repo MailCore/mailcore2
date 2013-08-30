@@ -272,15 +272,15 @@ void Object::initObjectConstructors()
     constructors = chash_new(CHASH_DEFAULTSIZE, CHASH_COPYKEY);
 }
 
-void Object::registerObjectConstructor(char * className, void * (* objectConstructor)(void))
+void Object::registerObjectConstructor(const char * className, void * (* objectConstructor)(void))
 {
     static pthread_once_t once = PTHREAD_ONCE_INIT;
     pthread_once(&once, initObjectConstructors);
     
     chashdatum key;
     chashdatum value;
-    key.data = className;
-    key.len = strlen(className);
+    key.data = (void *) className;
+    key.len = (unsigned int) strlen(className);
     value.data = (void *) objectConstructor;
     value.len = 0;
     chash_set(constructors, &key, &value, NULL);
@@ -297,7 +297,7 @@ Object * Object::objectWithSerializable(HashMap * serializable)
     chashdatum value;
     const char * className = ((String *) serializable->objectForKey(MCSTR("class")))->UTF8Characters();
     key.data = (void *) className;
-    key.len = strlen(className);
+    key.len = (unsigned int) strlen(className);
     int r = chash_get(constructors, &key, &value);
     if (r < 0)
         return NULL;

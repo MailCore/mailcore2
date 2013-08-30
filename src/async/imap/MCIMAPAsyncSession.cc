@@ -12,6 +12,8 @@
 #include "MCIMAPNamespace.h"
 #include "MCOperationQueueCallback.h"
 #include "MCConnectionLogger.h"
+#include "MCIMAPSession.h"
+#include "MCIMAPIdentity.h"
 
 #define DEFAULT_MAX_CONNECTIONS 3
 
@@ -32,14 +34,19 @@ IMAPAsyncSession::IMAPAsyncSession()
     mConnectionType = ConnectionTypeClear;
     mCheckCertificateEnabled = true;
     mVoIPEnabled = true;
-    mDelimiter = 0;
     mDefaultNamespace = NULL;
     mTimeout = 30.;
     mConnectionLogger = NULL;
+    mAutomaticConfigurationDone = false;
+    mServerIdentity = new IMAPIdentity();
+    mClientIdentity = new IMAPIdentity();
+    mOperationQueueCallback = NULL;
 }
 
 IMAPAsyncSession::~IMAPAsyncSession()
 {
+    MC_SAFE_RELEASE(mServerIdentity);
+    MC_SAFE_RELEASE(mClientIdentity);
     MC_SAFE_RELEASE(mSessions);
     MC_SAFE_RELEASE(mHostname);
     MC_SAFE_RELEASE(mUsername);
@@ -148,17 +155,6 @@ bool IMAPAsyncSession::isVoIPEnabled()
     return mVoIPEnabled;
 }
 
-
-void IMAPAsyncSession::setDelimiter(char delimiter)
-{
-    mDelimiter = delimiter;
-}
-
-char IMAPAsyncSession::delimiter()
-{
-    return mDelimiter;
-}
-
 IMAPNamespace * IMAPAsyncSession::defaultNamespace()
 {
     return mDefaultNamespace;
@@ -189,6 +185,16 @@ unsigned int IMAPAsyncSession::maximumConnections()
     return mMaximumConnections;
 }
 
+IMAPIdentity * IMAPAsyncSession::serverIdentity()
+{
+    return mServerIdentity;
+}
+
+IMAPIdentity * IMAPAsyncSession::clientIdentity()
+{
+    return mClientIdentity;
+}
+
 IMAPAsyncConnection * IMAPAsyncSession::session()
 {
     IMAPAsyncConnection * session = new IMAPAsyncConnection();
@@ -206,8 +212,13 @@ IMAPAsyncConnection * IMAPAsyncSession::session()
     session->setTimeout(mTimeout);
     session->setCheckCertificateEnabled(mCheckCertificateEnabled);
     session->setVoIPEnabled(mVoIPEnabled);
-    session->setDelimiter(mDelimiter);
     session->setDefaultNamespace(mDefaultNamespace);
+    session->setClientIdentity(mClientIdentity);
+#if 0 // should be implemented properly
+    if (mAutomaticConfigurationDone) {
+        session->setAutomaticConfigurationEnabled(false);
+    }
+#endif
     
     return session;
 }
@@ -431,10 +442,10 @@ IMAPFetchNamespaceOperation * IMAPAsyncSession::fetchNamespaceOperation()
     return session->fetchNamespaceOperation();
 }
 
-IMAPIdentityOperation * IMAPAsyncSession::identityOperation(String * vendor, String * name, String * version)
+IMAPIdentityOperation * IMAPAsyncSession::identityOperation(IMAPIdentity * identity)
 {
     IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
-    return session->identityOperation(vendor, name, version);
+    return session->identityOperation(identity);
 }
 
 IMAPOperation * IMAPAsyncSession::checkAccountOperation()
@@ -447,6 +458,12 @@ IMAPCapabilityOperation * IMAPAsyncSession::capabilityOperation()
 {
     IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
     return session->capabilityOperation();
+}
+
+IMAPQuotaOperation * IMAPAsyncSession::quotaOperation()
+{
+    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
+    return session->quotaOperation();
 }
 
 void IMAPAsyncSession::setConnectionLogger(ConnectionLogger * logger)
@@ -489,4 +506,50 @@ IMAPMessageRenderingOperation * IMAPAsyncSession::plainTextBodyRenderingOperatio
 {
     IMAPAsyncConnection * session = sessionForFolder(folder);
     return session->plainTextBodyRenderingOperation(message, folder);
+}
+
+void IMAPAsyncSession::automaticConfigurationDone(IMAPSession * session)
+{
+    MC_SAFE_REPLACE_COPY(IMAPIdentity, mServerIdentity, session->serverIdentity());
+    setDefaultNamespace(session->defaultNamespace());
+    mAutomaticConfigurationDone = true;
+}
+
+void IMAPAsyncSession::setOperationQueueCallback(OperationQueueCallback * callback)
+{
+    mOperationQueueCallback = callback;
+}
+
+OperationQueueCallback * IMAPAsyncSession::operationQueueCallback()
+{
+    return mOperationQueueCallback;
+}
+
+bool IMAPAsyncSession::isOperationQueueRunning()
+{
+    return mQueueRunning;
+}
+
+void IMAPAsyncSession::operationRunningStateChanged()
+{
+    bool isRunning = false;
+    for(unsigned int i = 0 ; i < mSessions->count() ; i ++) {
+        IMAPAsyncConnection * currentSession = (IMAPAsyncConnection *) mSessions->objectAtIndex(i);
+        if (currentSession->isQueueRunning()){
+            isRunning = true;
+            break;
+        }
+    }
+    if (mQueueRunning == isRunning) {
+        return;
+    }
+    mQueueRunning = isRunning;
+    if (mOperationQueueCallback != NULL) {
+        if (isRunning) {
+            mOperationQueueCallback->queueStartRunning();
+        }
+        else {
+            mOperationQueueCallback->queueStoppedRunning();
+        }
+    }
 }

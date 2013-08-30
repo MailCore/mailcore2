@@ -25,11 +25,13 @@ namespace mailcore {
     class IMAPFetchNamespaceOperation;
     class IMAPIdentityOperation;
     class IMAPCapabilityOperation;
+    class IMAPQuotaOperation;
     class IMAPOperationQueueCallback;
     class IMAPAsyncSession;
     class IMAPConnectionLogger;
     class IMAPMessageRenderingOperation;
     class IMAPMessage;
+    class IMAPIdentity;
     
     class IMAPAsyncConnection : public Object {
     public:
@@ -66,11 +68,15 @@ namespace mailcore {
         virtual void setVoIPEnabled(bool enabled);
         virtual bool isVoIPEnabled();
         
-        virtual void setDelimiter(char delimiter);
-        virtual char delimiter();
+        virtual void setAutomaticConfigurationEnabled(bool enabled);
+        virtual bool isAutomaticConfigurationEnabled();
         
+        // Needs to be run before starting a connection.
         virtual void setDefaultNamespace(IMAPNamespace * ns);
         virtual IMAPNamespace * defaultNamespace();
+        
+        virtual void setClientIdentity(IMAPIdentity * identity);
+        virtual IMAPIdentity * clientIdentity();
         
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
@@ -115,11 +121,12 @@ namespace mailcore {
         
         virtual IMAPFetchNamespaceOperation * fetchNamespaceOperation();
         
-        virtual IMAPIdentityOperation * identityOperation(String * vendor, String * name, String * version);
+        virtual IMAPIdentityOperation * identityOperation(IMAPIdentity * identity);
         
         virtual IMAPOperation * checkAccountOperation();
         
         virtual IMAPCapabilityOperation * capabilityOperation();
+        virtual IMAPQuotaOperation * quotaOperation();
         
         virtual IMAPMessageRenderingOperation * htmlRenderingOperation(IMAPMessage * message, String * folder);
         virtual IMAPMessageRenderingOperation * htmlBodyRenderingOperation(IMAPMessage * message, String * folder);
@@ -130,14 +137,16 @@ namespace mailcore {
     private:
         IMAPSession * mSession;
         OperationQueue * mQueue;
-        char mDelimiter;
         IMAPNamespace * mDefaultNamespace;
+        IMAPIdentity * mClientIdentity;
         String * mLastFolder;
         IMAPOperationQueueCallback * mQueueCallback;
         IMAPAsyncSession * mOwner;
         ConnectionLogger * mConnectionLogger;
         IMAPConnectionLogger * mInternalLogger;
         pthread_mutex_t mConnectionLoggerLock;
+        bool mAutomaticConfigurationEnabled;
+        bool mQueueRunning;
         
         virtual void tryAutomaticDisconnectAfterDelay(void * context);
         virtual IMAPMessageRenderingOperation * renderingOperation(IMAPMessage * message,
@@ -161,6 +170,9 @@ namespace mailcore {
         virtual IMAPAsyncSession * owner();
 
         virtual void logConnection(ConnectionLogType logType, Data * buffer);
+        
+        virtual bool isQueueRunning();
+        virtual void setQueueRunning(bool running);
     };
 }
 

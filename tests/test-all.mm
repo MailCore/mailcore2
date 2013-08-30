@@ -8,9 +8,6 @@
 
 #include "test-all.h"
 
-#include <unicode/putil.h>
-#include <unicode/uclean.h>
-#include <unicode/ucnv.h>
 #include <MailCore/MailCore.h>
 
 extern "C" {
@@ -347,8 +344,8 @@ void testObjC()
 
 void testAll()
 {
-    u_setDataDirectory("/usr/local/share/icu");
-    
+    mailcore::setICUDataDirectory(MCSTR("/usr/local/share/icu"));
+	
     email = MCSTR("email@gmail.com");
     password = MCSTR("MyP4ssw0rd");
     displayName = MCSTR("My Email");

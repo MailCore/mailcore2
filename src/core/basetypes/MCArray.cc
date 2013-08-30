@@ -229,7 +229,7 @@ String * Array::componentsJoinedByString(String * delimiter)
     String * result = String::string();
     for(unsigned int i = 0 ; i < count() ; i ++) {
         Object * obj = objectAtIndex(i);
-        if (result != 0) {
+        if (i != 0) {
             result->appendString(delimiter);
         }
         result->appendString(obj->description());

@@ -22,11 +22,13 @@
 #include <MailCore/MCIMAPFolderStatusOperation.h>
 #include <MailCore/MCIMAPSession.h>
 #include <MailCore/MCIMAPNamespace.h>
+#include <MailCore/MCIMAPIdentity.h>
 #include <MailCore/MCIMAPSearchOperation.h>
 #include <MailCore/MCIMAPSearchExpression.h>
 #include <MailCore/MCIMAPFetchNamespaceOperation.h>
 #include <MailCore/MCIMAPIdentityOperation.h>
 #include <MailCore/MCIMAPCapabilityOperation.h>
+#include <MailCore/MCIMAPQuotaOperation.h>
 #include <MailCore/MCIMAPOperationCallback.h>
 #include <MailCore/MCIMAPMessageRenderingOperation.h>
 

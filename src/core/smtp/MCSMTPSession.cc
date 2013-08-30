@@ -14,9 +14,9 @@
 using namespace mailcore;
 
 enum {
-	STATE_DISCONNECTED,
-	STATE_CONNECTED,
-	STATE_LOGGEDIN,
+    STATE_DISCONNECTED,
+    STATE_CONNECTED,
+    STATE_LOGGEDIN,
 };
 
 void SMTPSession::init()
@@ -31,6 +31,7 @@ void SMTPSession::init()
     mTimeout = 30;
     mCheckCertificateEnabled = true;
     mUseHeloIPEnabled = false;
+    mShouldDisconnect = false;
     
     mSmtp = NULL;
     mProgressCallback = NULL;
@@ -147,6 +148,8 @@ bool SMTPSession::isCheckCertificateEnabled()
 
 bool SMTPSession::checkCertificate()
 {
+    if (!isCheckCertificateEnabled())
+        return true;
     return mailcore::checkCertificate(mSmtp->stream, hostname());
 }
 
@@ -212,6 +215,17 @@ void SMTPSession::unsetup()
 
 void SMTPSession::connectIfNeeded(ErrorCode * pError)
 {
+    if (mSmtp != NULL) {
+        // In case pipelining is available, libetpan will disconnect the session.
+        if (mSmtp->stream == NULL) {
+            mShouldDisconnect = true;
+        }
+    }
+    if (mShouldDisconnect) {
+        disconnect();
+        mShouldDisconnect = false;
+    }
+    
     if (mState == STATE_DISCONNECTED) {
         connect(pError);
     }
@@ -222,114 +236,114 @@ void SMTPSession::connectIfNeeded(ErrorCode * pError)
 
 void SMTPSession::connect(ErrorCode * pError)
 {
-	int r;
-	
+    int r;
+    
     setup();
     
     switch (mConnectionType) {
-		case ConnectionTypeStartTLS:
-			MCLog("connect %s %u", MCUTF8(hostname()), (unsigned int) port());
-			r = mailsmtp_socket_connect(mSmtp, MCUTF8(hostname()), port());
-			if (r != MAILSMTP_NO_ERROR) {
+        case ConnectionTypeStartTLS:
+            MCLog("connect %s %u", MCUTF8(hostname()), (unsigned int) port());
+            r = mailsmtp_socket_connect(mSmtp, MCUTF8(hostname()), port());
+            if (r != MAILSMTP_NO_ERROR) {
                 * pError = ErrorConnection;
-				return;
-			}
-			
-			MCLog("init");
-            if (useHeloIPEnabled()) {
-                r = mailsmtp_init_with_ip(mSmtp, 1);
-            } else {
-                r = mailsmtp_init(mSmtp);
+                goto close;
             }
-			if (r == MAILSMTP_ERROR_STREAM) {
-                * pError = ErrorConnection;
-				return;
-			}
-			else if (r != MAILSMTP_NO_ERROR) {
-                * pError = ErrorConnection;
-				return;
-			}
-			
-			MCLog("start TLS");
-			r = mailsmtp_socket_starttls(mSmtp);
-			if (r != MAILSMTP_NO_ERROR) {
-                * pError = ErrorStartTLSNotAvailable;
-				return;
-			}
-			MCLog("done");
-			if (!checkCertificate()) {
-                * pError = ErrorCertificate;
-                return;
-            }
-			
-			MCLog("init after starttls");
-            if (useHeloIPEnabled()) {
-                r = mailsmtp_init_with_ip(mSmtp, 1);
-            } else {
-                r = mailsmtp_init(mSmtp);
-            }
-			if (r == MAILSMTP_ERROR_STREAM) {
-                * pError = ErrorConnection;
-				return;
-			}
-			else if (r != MAILSMTP_NO_ERROR) {
-                * pError = ErrorConnection;
-				return;
-			}
             
-			break;
-			
-		case ConnectionTypeTLS:
-			r = mailsmtp_ssl_connect(mSmtp, MCUTF8(mHostname), port());
-			if (r != MAILSMTP_NO_ERROR) {
+            MCLog("init");
+            if (useHeloIPEnabled()) {
+                r = mailsmtp_init_with_ip(mSmtp, 1);
+            } else {
+                r = mailsmtp_init(mSmtp);
+            }
+            if (r == MAILSMTP_ERROR_STREAM) {
                 * pError = ErrorConnection;
-				return;
-			}
-			if (!checkCertificate()) {
+                goto close;
+            }
+            else if (r != MAILSMTP_NO_ERROR) {
+                * pError = ErrorConnection;
+                goto close;
+            }
+            
+            MCLog("start TLS");
+            r = mailsmtp_socket_starttls(mSmtp);
+            if (r != MAILSMTP_NO_ERROR) {
+                * pError = ErrorStartTLSNotAvailable;
+                goto close;
+            }
+            MCLog("done");
+            if (!checkCertificate()) {
                 * pError = ErrorCertificate;
-                return;
+                goto close;
             }
-			
-			MCLog("init");
+            
+            MCLog("init after starttls");
             if (useHeloIPEnabled()) {
                 r = mailsmtp_init_with_ip(mSmtp, 1);
             } else {
                 r = mailsmtp_init(mSmtp);
             }
-			if (r == MAILSMTP_ERROR_STREAM) {
+            if (r == MAILSMTP_ERROR_STREAM) {
                 * pError = ErrorConnection;
-				return;
-			}
-			else if (r != MAILSMTP_NO_ERROR) {
+                goto close;
+            }
+            else if (r != MAILSMTP_NO_ERROR) {
                 * pError = ErrorConnection;
-				return;
-			}
-			
-			break;
-			
-		default:
-			r = mailsmtp_socket_connect(mSmtp, MCUTF8(hostname()), port());
-			if (r != MAILIMAP_NO_ERROR) {
+                goto close;
+            }
+            
+            break;
+            
+        case ConnectionTypeTLS:
+            r = mailsmtp_ssl_connect(mSmtp, MCUTF8(mHostname), port());
+            if (r != MAILSMTP_NO_ERROR) {
                 * pError = ErrorConnection;
-				return;
-			}
-			
-			MCLog("init");
+                goto close;
+            }
+            if (!checkCertificate()) {
+                * pError = ErrorCertificate;
+                goto close;
+            }
+            
+            MCLog("init");
             if (useHeloIPEnabled()) {
                 r = mailsmtp_init_with_ip(mSmtp, 1);
             } else {
                 r = mailsmtp_init(mSmtp);
             }
-			if (r == MAILSMTP_ERROR_STREAM) {
+            if (r == MAILSMTP_ERROR_STREAM) {
                 * pError = ErrorConnection;
-				return;
-			}
-			else if (r != MAILSMTP_NO_ERROR) {
+                goto close;
+            }
+            else if (r != MAILSMTP_NO_ERROR) {
                 * pError = ErrorConnection;
-				return;
-			}
-			
-			break;
+                goto close;
+            }
+            
+            break;
+            
+        default:
+            r = mailsmtp_socket_connect(mSmtp, MCUTF8(hostname()), port());
+            if (r != MAILIMAP_NO_ERROR) {
+                * pError = ErrorConnection;
+                goto close;
+            }
+            
+            MCLog("init");
+            if (useHeloIPEnabled()) {
+                r = mailsmtp_init_with_ip(mSmtp, 1);
+            } else {
+                r = mailsmtp_init(mSmtp);
+            }
+            if (r == MAILSMTP_ERROR_STREAM) {
+                * pError = ErrorConnection;
+                goto close;
+            }
+            else if (r != MAILSMTP_NO_ERROR) {
+                * pError = ErrorConnection;
+                goto close;
+            }
+            
+            break;
     }
     
     mailstream_low * low;
@@ -348,6 +362,10 @@ void SMTPSession::connect(ErrorCode * pError)
     
     mState = STATE_CONNECTED;
     * pError = ErrorNone;
+    return;
+    
+close:
+    unsetup();
 }
 
 void SMTPSession::disconnect()
@@ -355,7 +373,9 @@ void SMTPSession::disconnect()
     if (mSmtp == NULL)
         return;
     
-    mailsmtp_quit(mSmtp);
+    if (mSmtp->stream != NULL) {
+        mailsmtp_quit(mSmtp);
+    }
     
     unsetup();
     
@@ -508,6 +528,7 @@ void SMTPSession::login(ErrorCode * pError)
     }
     if (r == MAILSMTP_ERROR_STREAM) {
         * pError = ErrorConnection;
+        mShouldDisconnect = true;
         return;
     }
     else if (r != MAILSMTP_NO_ERROR) {
@@ -530,6 +551,7 @@ void SMTPSession::checkAccount(Address * from, ErrorCode * pError)
     r = mailsmtp_mail(mSmtp, MCUTF8(from->mailbox()));
     if (r == MAILSMTP_ERROR_STREAM) {
         * pError = ErrorConnection;
+        mShouldDisconnect = true;
         return;
     }
     else if (r != MAILSMTP_NO_ERROR) {
@@ -540,6 +562,7 @@ void SMTPSession::checkAccount(Address * from, ErrorCode * pError)
     r = mailsmtp_rcpt(mSmtp, "email@invalid.com");
     if (r == MAILSMTP_ERROR_STREAM) {
         * pError = ErrorConnection;
+        mShouldDisconnect = true;
         return;
     }
     else if (r != MAILSMTP_NO_ERROR) {
@@ -587,6 +610,7 @@ void SMTPSession::sendMessage(Address * from, Array * recipients, Data * message
         r = mailesmtp_send(mSmtp, MCUTF8(from->mailbox()), 0, NULL,
             address_list,
             messageData->bytes(), messageData->length());
+        mailsmtp_quit(mSmtp);
     }
     esmtp_address_list_free(address_list);
 
@@ -601,6 +625,7 @@ void SMTPSession::sendMessage(Address * from, Array * recipients, Data * message
 
     if ((r == MAILSMTP_ERROR_STREAM) || (r == MAILSMTP_ERROR_CONNECTION_REFUSED)) {
         * pError = ErrorConnection;
+        mShouldDisconnect = true;
         goto err;
     }
     else if (r == MAILSMTP_ERROR_EXCEED_STORAGE_ALLOCATION) {

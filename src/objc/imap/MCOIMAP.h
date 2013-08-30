@@ -19,6 +19,7 @@
 #import <MailCore/MCOIMAPMultipart.h>
 #import <MailCore/MCOIMAPNamespace.h>
 #import <MailCore/MCOIMAPNamespaceItem.h>
+#import <MailCore/MCOIMAPIdentity.h>
 #import <MailCore/MCOIMAPPart.h>
 #import <MailCore/MCOIMAPFolderInfoOperation.h>
 #import <MailCore/MCOIMAPFolderInfo.h>
@@ -36,6 +37,7 @@
 #import <MailCore/MCOIMAPFetchNamespaceOperation.h>
 #import <MailCore/MCOIMAPIdentityOperation.h>
 #import <MailCore/MCOIMAPCapabilityOperation.h>
+#import <MailCore/MCOIMAPQuotaOperation.h>
 #import <MailCore/MCOIMAPSearchExpression.h>
 #import <MailCore/MCOIMAPMessageRenderingOperation.h>
 

@@ -328,6 +328,8 @@ typedef enum {
     MCOErrorDeleteMessage,
     /** SMTP: Error while checking account.*/
     MCOErrorInvalidAccount,
+    /** IMAP: Error when trying to enable compression.*/
+    MCOErrorCompression,
     /** The count of all errors */
     MCOErrorCodeCount,
 } MCOErrorCode;
@@ -355,5 +357,10 @@ typedef enum {
  @param data is the data related to the log.
  */
 typedef void (^MCOConnectionLogger)(void * connectionID, MCOConnectionLogType type, NSData * data);
+
+/**
+ It's called when asynchronous operations stop/start running.
+ */
+typedef void (^MCOOperationQueueRunningChangeBlock)(void);
 
 #endif

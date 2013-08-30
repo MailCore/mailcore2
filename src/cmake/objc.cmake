@@ -1,6 +1,6 @@
 # Files to build
 
-set(async_objc_abstract
+set(objc_abstract_files
   objc/abstract/MCOAbstractMessage.mm
   objc/abstract/MCOAbstractMessagePart.mm
   objc/abstract/MCOAbstractMessageRendererCallback.mm
@@ -10,7 +10,7 @@ set(async_objc_abstract
   objc/abstract/MCOMessageHeader.mm
 )
 
-set(async_objc_imap
+set(objc_imap_files
   objc/imap/MCOIMAPAppendMessageOperation.mm
   objc/imap/MCOIMAPBaseOperation.mm
   objc/imap/MCOIMAPCapabilityOperation.mm
@@ -22,8 +22,9 @@ set(async_objc_imap
   objc/imap/MCOIMAPFolder.mm
   objc/imap/MCOIMAPFolderInfo.m
   objc/imap/MCOIMAPFolderInfoOperation.mm
-  objc/imap/MCOIMAPFolderStatus.m
+  objc/imap/MCOIMAPFolderStatus.mm
   objc/imap/MCOIMAPFolderStatusOperation.mm
+  objc/imap/MCOIMAPIdentity.mm
   objc/imap/MCOIMAPIdentityOperation.mm
   objc/imap/MCOIMAPIdleOperation.mm
   objc/imap/MCOIMAPMessage.mm
@@ -34,12 +35,13 @@ set(async_objc_imap
   objc/imap/MCOIMAPNamespaceItem.mm
   objc/imap/MCOIMAPOperation.mm
   objc/imap/MCOIMAPPart.mm
+  objc/imap/MCOIMAPQuotaOperation.mm
   objc/imap/MCOIMAPSearchExpression.mm
   objc/imap/MCOIMAPSearchOperation.mm
   objc/imap/MCOIMAPSession.mm
 )
 
-set(async_objc_pop
+set(objc_pop_files
   objc/pop/MCOPOPFetchHeaderOperation.mm
   objc/pop/MCOPOPFetchMessageOperation.mm
   objc/pop/MCOPOPFetchMessagesOperation.mm
@@ -48,13 +50,13 @@ set(async_objc_pop
   objc/pop/MCOPOPSession.mm
 )
 
-set(async_objc_provider
+set(objc_provider_files
   objc/provider/MCOMailProvider.mm
   objc/provider/MCOMailProvidersManager.mm
   objc/provider/MCONetService.mm
 )
 
-set(async_objc_rfc822
+set(objc_rfc822_files
   objc/rfc822/MCOAttachment.mm
   objc/rfc822/MCOMessageBuilder.mm
   objc/rfc822/MCOMessageParser.mm
@@ -62,13 +64,13 @@ set(async_objc_rfc822
   objc/rfc822/MCOMultipart.mm
 )
 
-set(async_objc_smtp
+set(objc_smtp_files
   objc/smtp/MCOSMTPOperation.mm
   objc/smtp/MCOSMTPSendOperation.mm
   objc/smtp/MCOSMTPSession.mm
 )
 
-set(async_objc_utils
+set(objc_utils_files
   objc/utils/MCOIndexSet.mm
   objc/utils/MCOObjectWrapper.mm
   objc/utils/MCOOperation.mm
@@ -83,13 +85,13 @@ set(async_objc_utils
 )
 
 IF(APPLE)
-set(async_objc
-  ${async_objc_abstract}
-  ${async_objc_imap}
-  ${async_objc_pop}
-  ${async_objc_rfc822}
-  ${async_objc_smtp}
-  ${async_objc_utils}
+set(objc_files
+  ${objc_abstract_files}
+  ${objc_imap_files}
+  ${objc_pop_files}
+  ${objc_rfc822_files}
+  ${objc_smtp_files}
+  ${objc_utils_files}
 )
 ENDIF()
 

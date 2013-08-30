@@ -18,12 +18,12 @@
 
 + (MCOMailProvidersManager *) sharedManager
 {
-	static MCOMailProvidersManager * sharedInstance = nil;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		sharedInstance = [[self alloc] init]; \
-	});
-	return sharedInstance;
+    static MCOMailProvidersManager * sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self alloc] init]; \
+    });
+    return sharedInstance;
 }
 
 - (id) init
@@ -32,27 +32,29 @@
     
     self = [super init];
     
-    filename =  [[NSBundle bundleForClass:[self class]] pathForResource:@"providers" ofType:@"json"];
-	mailcore::MailProvidersManager::sharedManager()->registerProvidersWithFilename(filename.mco_mcString);
-    
+    filename = [[NSBundle bundleForClass:[self class]] pathForResource:@"providers" ofType:@"json"];
+    if (filename) {
+        mailcore::MailProvidersManager::sharedManager()->registerProvidersWithFilename(filename.mco_mcString);
+    }
+	
     return self;
 }
 
 - (MCOMailProvider *) providerForEmail:(NSString *)email
 {
-	mailcore::MailProvider *provider = mailcore::MailProvidersManager::sharedManager()->providerForEmail(email.mco_mcString);
+    mailcore::MailProvider *provider = mailcore::MailProvidersManager::sharedManager()->providerForEmail(email.mco_mcString);
     return MCO_TO_OBJC(provider);
 }
 
 - (MCOMailProvider *) providerForMX:(NSString *)hostname
 {
-	mailcore::MailProvider *provider = mailcore::MailProvidersManager::sharedManager()->providerForMX(hostname.mco_mcString);
+    mailcore::MailProvider *provider = mailcore::MailProvidersManager::sharedManager()->providerForMX(hostname.mco_mcString);
     return MCO_TO_OBJC(provider);
 }
 
 - (MCOMailProvider *) providerForIdentifier:(NSString *)identifier
 {
-	mailcore::MailProvider *provider = mailcore::MailProvidersManager::sharedManager()->providerForIdentifier(identifier.mco_mcString);
+    mailcore::MailProvider *provider = mailcore::MailProvidersManager::sharedManager()->providerForIdentifier(identifier.mco_mcString);
     return MCO_TO_OBJC(provider);
 }
 

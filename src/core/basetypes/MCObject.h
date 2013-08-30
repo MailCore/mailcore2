@@ -44,7 +44,7 @@ namespace mailcore {
         virtual void cancelDelayedPerformMethod(Method method, void * context);
         
         // serialization utils
-        static void registerObjectConstructor(char * className, void * (* objectConstructor)(void));
+        static void registerObjectConstructor(const char * className, void * (* objectConstructor)(void));
         static Object * objectWithSerializable(HashMap * serializable);
         
     public: // private

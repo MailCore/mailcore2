@@ -16,31 +16,25 @@
 
 namespace mailcore {
     
+    class IMAPIdentity;
+    
     class IMAPIdentityOperation : public IMAPOperation {
     public:
         IMAPIdentityOperation();
         virtual ~IMAPIdentityOperation();
         
-        virtual void setVendor(String * vendor);
-        virtual String * vendor();
-        
-        virtual void setName(String * name);
-        virtual String * name();
-        
-        virtual void setVersion(String * version);
-        virtual String * version();
+        virtual void setClientIdentity(IMAPIdentity * identity);
+        virtual IMAPIdentity * clientIdentity();
         
         // Result.
-        virtual HashMap * serverIdentity();
+        virtual IMAPIdentity * serverIdentity();
         
     public: // subclass behavior
         virtual void main();
         
     private:
-        String * mVendor;
-        String * mName;
-        String * mVersion;
-        HashMap * mServerIdentity;
+        IMAPIdentity * mClientIdentity;
+        IMAPIdentity * mServerIdentity;
         
     };
 }

@@ -10,56 +10,33 @@
 
 #include "MCIMAPSession.h"
 #include "MCIMAPAsyncConnection.h"
+#include "MCIMAPIdentity.h"
 
 using namespace mailcore;
 
 IMAPIdentityOperation::IMAPIdentityOperation()
 {
-    mVendor = NULL;
-    mName = NULL;
-    mVersion = NULL;
+    mClientIdentity = NULL;
     mServerIdentity = NULL;
 }
 
 IMAPIdentityOperation::~IMAPIdentityOperation()
 {
-    MC_SAFE_RELEASE(mVendor);
-    MC_SAFE_RELEASE(mName);
-    MC_SAFE_RELEASE(mVersion);
+    MC_SAFE_RELEASE(mClientIdentity);
     MC_SAFE_RELEASE(mServerIdentity);
 }
 
-void IMAPIdentityOperation::setVendor(String * vendor)
+void IMAPIdentityOperation::setClientIdentity(IMAPIdentity * identity)
 {
-    MC_SAFE_REPLACE_COPY(String, mVendor, vendor);
+    MC_SAFE_REPLACE_COPY(IMAPIdentity, mClientIdentity, identity);
 }
 
-String * IMAPIdentityOperation::vendor()
+IMAPIdentity * IMAPIdentityOperation::clientIdentity()
 {
-    return mVendor;
+    return mClientIdentity;
 }
 
-void IMAPIdentityOperation::setName(String * name)
-{
-    MC_SAFE_REPLACE_COPY(String, mName, name);
-}
-
-String * IMAPIdentityOperation::name()
-{
-    return mName;
-}
-
-void IMAPIdentityOperation::setVersion(String * version)
-{
-    MC_SAFE_REPLACE_COPY(String, mVersion, version);
-}
-
-String * IMAPIdentityOperation::version()
-{
-    return mVersion;
-}
-
-HashMap * IMAPIdentityOperation::serverIdentity()
+IMAPIdentity * IMAPIdentityOperation::serverIdentity()
 {
     return mServerIdentity;
 }
@@ -67,7 +44,7 @@ HashMap * IMAPIdentityOperation::serverIdentity()
 void IMAPIdentityOperation::main()
 {
     ErrorCode error;
-    mServerIdentity = session()->session()->identity(mVendor, mName, mVersion, &error);
+    mServerIdentity = session()->session()->identity(mClientIdentity, &error);
     MC_SAFE_RETAIN(mServerIdentity);
     setError(error);
 }

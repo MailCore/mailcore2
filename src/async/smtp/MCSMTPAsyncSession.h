@@ -55,6 +55,8 @@ namespace mailcore {
         virtual ConnectionLogger * connectionLogger();
         
 		virtual SMTPOperation * sendMessageOperation(Data * messageData);
+		virtual SMTPOperation * sendMessageOperation(Address * from, Array * recipients,
+                                                     Data * messageData);
         virtual SMTPOperation * checkAccountOperation(Address * from);
         
     public: // private

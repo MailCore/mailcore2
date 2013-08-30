@@ -123,6 +123,7 @@ namespace mailcore {
         IMAPCapabilityAuthSKey,
         IMAPCapabilityAuthSRP,
         IMAPCapabilityXOAuth2,
+        IMAPCapabilityGmail,
     };
 
     enum POPCapability {
@@ -207,6 +208,7 @@ namespace mailcore {
         ErrorDeleteMessage,
         ErrorInvalidAccount,
         ErrorFile,
+        ErrorCompression,
     };
     
     enum PartType {

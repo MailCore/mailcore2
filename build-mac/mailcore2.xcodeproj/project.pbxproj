@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B3C1BDE17ABF309008BBF4C /* MCOIMAPQuotaOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C1BDD17ABF307008BBF4C /* MCOIMAPQuotaOperation.mm */; };
+		4B3C1BE117ABF4BC008BBF4C /* MCIMAPQuotaOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C1BDF17ABF4BB008BBF4C /* MCIMAPQuotaOperation.cc */; };
+		4B3C1BE217ABFF7C008BBF4C /* MCOIMAPQuotaOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4B3C1BDC17ABF306008BBF4C /* MCOIMAPQuotaOperation.h */; };
+		4B3C1BE317ABFF91008BBF4C /* MCOIMAPQuotaOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C1BDD17ABF307008BBF4C /* MCOIMAPQuotaOperation.mm */; };
+		4B3C1BE417AC0156008BBF4C /* MCIMAPQuotaOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4B3C1BE017ABF4BC008BBF4C /* MCIMAPQuotaOperation.h */; };
+		4B3C1BE517AC0176008BBF4C /* MCIMAPQuotaOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C1BDF17ABF4BB008BBF4C /* MCIMAPQuotaOperation.cc */; };
+		4BE4029117B548B900ECC5E4 /* MCOIMAPQuotaOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4B3C1BDC17ABF306008BBF4C /* MCOIMAPQuotaOperation.h */; };
+		4BE4029217B548D900ECC5E4 /* MCIMAPQuotaOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4B3C1BE017ABF4BC008BBF4C /* MCIMAPQuotaOperation.h */; };
 		84AF9E7E172DBAF600E60AA3 /* providers.json in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E7D172DBAF600E60AA3 /* providers.json */; };
 		9E774D891767C7F60065EB9B /* MCIMAPFolderStatus.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9E774D881767C7F60065EB9B /* MCIMAPFolderStatus.cc */; };
 		9E774D8A1767C7F60065EB9B /* MCIMAPFolderStatus.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9E774D881767C7F60065EB9B /* MCIMAPFolderStatus.cc */; };
@@ -84,6 +92,14 @@
 		C63CD68D16BE1BCA00DB18F1 /* MCRenderer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD68716BE1AB600DB18F1 /* MCRenderer.h */; };
 		C63CD68E16BE324100DB18F1 /* MCOIMAPFetchFoldersOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F87F190816BB62690012652F /* MCOIMAPFetchFoldersOperation.h */; };
 		C63CD69116BE566E00DB18F1 /* MCHTMLCleaner.cc in Sources */ = {isa = PBXBuildFile; fileRef = C63CD68F16BE566D00DB18F1 /* MCHTMLCleaner.cc */; };
+		C63D315C17C9155C00A4D993 /* MCIMAPIdentity.cc in Sources */ = {isa = PBXBuildFile; fileRef = C63D315A17C9155C00A4D993 /* MCIMAPIdentity.cc */; };
+		C63D315D17C9155C00A4D993 /* MCIMAPIdentity.cc in Sources */ = {isa = PBXBuildFile; fileRef = C63D315A17C9155C00A4D993 /* MCIMAPIdentity.cc */; };
+		C63D315E17C9279700A4D993 /* MCIMAPIdentity.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63D315B17C9155C00A4D993 /* MCIMAPIdentity.h */; };
+		C63D315F17C9279D00A4D993 /* MCIMAPIdentity.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63D315B17C9155C00A4D993 /* MCIMAPIdentity.h */; };
+		C63D316217C92D8300A4D993 /* MCOIMAPIdentity.mm in Sources */ = {isa = PBXBuildFile; fileRef = C63D316117C92D8300A4D993 /* MCOIMAPIdentity.mm */; };
+		C63D316317C92D8300A4D993 /* MCOIMAPIdentity.mm in Sources */ = {isa = PBXBuildFile; fileRef = C63D316117C92D8300A4D993 /* MCOIMAPIdentity.mm */; };
+		C63D316617C997B400A4D993 /* MCOIMAPIdentity.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63D316017C92D8300A4D993 /* MCOIMAPIdentity.h */; };
+		C63D316717C997BA00A4D993 /* MCOIMAPIdentity.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63D316017C92D8300A4D993 /* MCOIMAPIdentity.h */; };
 		C64BB22116E34DCB000DB34C /* MCIMAPSyncResult.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64BB21F16E34DCA000DB34C /* MCIMAPSyncResult.cc */; };
 		C64BB22B16E5C0A4000DB34C /* MCIMAPCapabilityOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64BB22916E5C0A3000DB34C /* MCIMAPCapabilityOperation.cc */; };
 		C64BB22E16E5C1EE000DB34C /* MCIndexSet.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64BB22C16E5C1EE000DB34C /* MCIndexSet.cc */; };
@@ -733,8 +749,12 @@
 			dstPath = include/MailCore;
 			dstSubfolderSpec = 16;
 			files = (
+				4BE4029217B548D900ECC5E4 /* MCIMAPQuotaOperation.h in CopyFiles */,
+				4BE4029117B548B900ECC5E4 /* MCOIMAPQuotaOperation.h in CopyFiles */,
 				C6E665001790963E0063F2CF /* MCIMAPMessageRenderingOperation.h in CopyFiles */,
 				DAE42E89178F7E1800E0DB8F /* MCOIMAPMessageRenderingOperation.h in CopyFiles */,
+				C63D316617C997B400A4D993 /* MCOIMAPIdentity.h in CopyFiles */,
+				C63D315E17C9279700A4D993 /* MCIMAPIdentity.h in CopyFiles */,
 				9E774D8C1767CD490065EB9B /* MCIMAPFolderStatus.h in CopyFiles */,
 				9EF9AB24175F409D0027FA3B /* MCIMAPFolderStatusOperation.h in CopyFiles */,
 				9EF9AB22175F406D0027FA3B /* MCOIMAPFolderStatus.h in CopyFiles */,
@@ -922,6 +942,9 @@
 			dstPath = include/MailCore;
 			dstSubfolderSpec = 16;
 			files = (
+				4B3C1BE417AC0156008BBF4C /* MCIMAPQuotaOperation.h in CopyFiles */,
+				4B3C1BE217ABFF7C008BBF4C /* MCOIMAPQuotaOperation.h in CopyFiles */,
+				C63D316717C997BA00A4D993 /* MCOIMAPIdentity.h in CopyFiles */,
 				DAE42E8A178F7E2200E0DB8F /* MCOIMAPMessageRenderingOperation.h in CopyFiles */,
 				C6E6652F1791B2530063F2CF /* MCIMAPMessageRenderingOperation.h in CopyFiles */,
 				9E774D8B1767CD3C0065EB9B /* MCIMAPFolderStatus.h in CopyFiles */,
@@ -930,6 +953,7 @@
 				9EF9AB21175F3FD10027FA3B /* MCOIMAPFolderStatusOperation.h in CopyFiles */,
 				C6CF62D5175325BB006398B9 /* MCOMailProvider.h in CopyFiles */,
 				C6CF62D6175325BD006398B9 /* MCOMailProvidersManager.h in CopyFiles */,
+				C63D315F17C9279D00A4D993 /* MCIMAPIdentity.h in CopyFiles */,
 				C6CF62D7175325BF006398B9 /* MCONetService.h in CopyFiles */,
 				C6CF62D8175325C5006398B9 /* MCOProvider.h in CopyFiles */,
 				C68B2AEF1778A869005E61EF /* MCConnectionLogger.h in CopyFiles */,
@@ -1099,6 +1123,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4B3C1BDC17ABF306008BBF4C /* MCOIMAPQuotaOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPQuotaOperation.h; sourceTree = "<group>"; };
+		4B3C1BDD17ABF307008BBF4C /* MCOIMAPQuotaOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOIMAPQuotaOperation.mm; sourceTree = "<group>"; };
+		4B3C1BDF17ABF4BB008BBF4C /* MCIMAPQuotaOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPQuotaOperation.cc; sourceTree = "<group>"; };
+		4B3C1BE017ABF4BC008BBF4C /* MCIMAPQuotaOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPQuotaOperation.h; sourceTree = "<group>"; };
 		84AF9E7D172DBAF600E60AA3 /* providers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = providers.json; path = ../resources/providers.json; sourceTree = "<group>"; };
 		9E774D871767C54E0065EB9B /* MCIMAPFolderStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPFolderStatus.h; sourceTree = "<group>"; };
 		9E774D881767C7F60065EB9B /* MCIMAPFolderStatus.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPFolderStatus.cc; sourceTree = "<group>"; };
@@ -1160,6 +1188,10 @@
 		C63CD68716BE1AB600DB18F1 /* MCRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRenderer.h; sourceTree = "<group>"; };
 		C63CD68F16BE566D00DB18F1 /* MCHTMLCleaner.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCHTMLCleaner.cc; sourceTree = "<group>"; };
 		C63CD69016BE566E00DB18F1 /* MCHTMLCleaner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCHTMLCleaner.h; sourceTree = "<group>"; };
+		C63D315A17C9155C00A4D993 /* MCIMAPIdentity.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPIdentity.cc; sourceTree = "<group>"; };
+		C63D315B17C9155C00A4D993 /* MCIMAPIdentity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPIdentity.h; sourceTree = "<group>"; };
+		C63D316017C92D8300A4D993 /* MCOIMAPIdentity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPIdentity.h; sourceTree = "<group>"; };
+		C63D316117C92D8300A4D993 /* MCOIMAPIdentity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOIMAPIdentity.mm; sourceTree = "<group>"; };
 		C64BB21F16E34DCA000DB34C /* MCIMAPSyncResult.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPSyncResult.cc; sourceTree = "<group>"; };
 		C64BB22016E34DCB000DB34C /* MCIMAPSyncResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPSyncResult.h; sourceTree = "<group>"; };
 		C64BB22916E5C0A3000DB34C /* MCIMAPCapabilityOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPCapabilityOperation.cc; sourceTree = "<group>"; };
@@ -1750,6 +1782,8 @@
 				C62C6ED716A398FA00737497 /* MCIMAPFolderInfoOperation.h */,
 				C64BB22916E5C0A3000DB34C /* MCIMAPCapabilityOperation.cc */,
 				C64BB22A16E5C0A3000DB34C /* MCIMAPCapabilityOperation.h */,
+				4B3C1BDF17ABF4BB008BBF4C /* MCIMAPQuotaOperation.cc */,
+				4B3C1BE017ABF4BC008BBF4C /* MCIMAPQuotaOperation.h */,
 				9EF9AB10175F319A0027FA3B /* MCIMAPFolderStatusOperation.cc */,
 				9EF9AB0E175F30C20027FA3B /* MCIMAPFolderStatusOperation.h */,
 				C6081679177635D2001F1018 /* MCIMAPDisconnectOperation.cc */,
@@ -1934,6 +1968,8 @@
 				C64BB22016E34DCB000DB34C /* MCIMAPSyncResult.h */,
 				9E774D871767C54E0065EB9B /* MCIMAPFolderStatus.h */,
 				9E774D881767C7F60065EB9B /* MCIMAPFolderStatus.cc */,
+				C63D315B17C9155C00A4D993 /* MCIMAPIdentity.h */,
+				C63D315A17C9155C00A4D993 /* MCIMAPIdentity.cc */,
 			);
 			path = imap;
 			sourceTree = "<group>";
@@ -2206,6 +2242,8 @@
 				C6F61F9217016B250073032E /* MCOIMAPIdentityOperation.mm */,
 				C6F61F9417016B310073032E /* MCOIMAPCapabilityOperation.h */,
 				C6F61F9517016B310073032E /* MCOIMAPCapabilityOperation.mm */,
+				4B3C1BDC17ABF306008BBF4C /* MCOIMAPQuotaOperation.h */,
+				4B3C1BDD17ABF307008BBF4C /* MCOIMAPQuotaOperation.mm */,
 				C6F61F9717016B460073032E /* MCOIMAPSearchExpression.h */,
 				C6F61F9817016B460073032E /* MCOIMAPSearchExpression.mm */,
 				9EF9AB06175F2EC60027FA3B /* MCOIMAPFolderStatus.h */,
@@ -2214,6 +2252,8 @@
 				9EF9AB18175F36600027FA3B /* MCOIMAPFolderStatusOperation.mm */,
 				DA89896B178A47D200F6D90A /* MCOIMAPMessageRenderingOperation.h */,
 				DA89896C178A47D200F6D90A /* MCOIMAPMessageRenderingOperation.mm */,
+				C63D316017C92D8300A4D993 /* MCOIMAPIdentity.h */,
+				C63D316117C92D8300A4D993 /* MCOIMAPIdentity.mm */,
 			);
 			path = imap;
 			sourceTree = "<group>";
@@ -2474,6 +2514,7 @@
 				C64EA7FC16A2959800778456 /* MCIMAPFetchFoldersOperation.cc in Sources */,
 				C64EA80216A295E400778456 /* MCIMAPRenameFolderOperation.cc in Sources */,
 				C64EA80516A2997E00778456 /* MCIMAPDeleteFolderOperation.cc in Sources */,
+				C63D315C17C9155C00A4D993 /* MCIMAPIdentity.cc in Sources */,
 				C64EA80816A2999A00778456 /* MCIMAPCreateFolderOperation.cc in Sources */,
 				C64EA80B16A299B700778456 /* MCIMAPSubscribeFolderOperation.cc in Sources */,
 				C64EA81116A299ED00778456 /* MCIMAPAppendMessageOperation.cc in Sources */,
@@ -2542,6 +2583,7 @@
 				C6F5B9F416FEAC6C00D9DABD /* MCOIndexSet.mm in Sources */,
 				C6F5B9FE16FED18600D9DABD /* MCOAbstractMessageRendererCallback.mm in Sources */,
 				C6CCC5C716FFE5190077A5FC /* MCORange.mm in Sources */,
+				C63D316217C92D8300A4D993 /* MCOIMAPIdentity.mm in Sources */,
 				C6F61F7B170169EE0073032E /* MCOIMAPFolderInfoOperation.mm in Sources */,
 				C6F61F7E170169FB0073032E /* MCOIMAPAppendMessageOperation.mm in Sources */,
 				C6F61F8117016A0D0073032E /* MCOIMAPCopyMessagesOperation.mm in Sources */,
@@ -2589,6 +2631,8 @@
 				BD63713B177DFF080094121B /* MCLibetpan.cc in Sources */,
 				DAACAD5117886807000B4517 /* MCHTMLRendererIMAPDataCallback.cc in Sources */,
 				DA89896D178A47D200F6D90A /* MCOIMAPMessageRenderingOperation.mm in Sources */,
+				4B3C1BDE17ABF309008BBF4C /* MCOIMAPQuotaOperation.mm in Sources */,
+				4B3C1BE117ABF4BC008BBF4C /* MCIMAPQuotaOperation.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2665,6 +2709,7 @@
 				C6BA2BC51705F4E6003F0E9E /* MCIMAPFetchFoldersOperation.cc in Sources */,
 				C6BA2BC61705F4E6003F0E9E /* MCIMAPRenameFolderOperation.cc in Sources */,
 				C6BA2BC71705F4E6003F0E9E /* MCIMAPDeleteFolderOperation.cc in Sources */,
+				C63D315D17C9155C00A4D993 /* MCIMAPIdentity.cc in Sources */,
 				C6BA2BC81705F4E6003F0E9E /* MCIMAPCreateFolderOperation.cc in Sources */,
 				C6BA2BC91705F4E6003F0E9E /* MCIMAPSubscribeFolderOperation.cc in Sources */,
 				C6BA2BCA1705F4E6003F0E9E /* MCIMAPAppendMessageOperation.cc in Sources */,
@@ -2733,6 +2778,7 @@
 				C6BA2C051705F4E6003F0E9E /* MCOIndexSet.mm in Sources */,
 				C6BA2C061705F4E6003F0E9E /* MCOAbstractMessageRendererCallback.mm in Sources */,
 				C6BA2C071705F4E6003F0E9E /* MCORange.mm in Sources */,
+				C63D316317C92D8300A4D993 /* MCOIMAPIdentity.mm in Sources */,
 				C6BA2C081705F4E6003F0E9E /* MCOIMAPFolderInfoOperation.mm in Sources */,
 				C6BA2C091705F4E6003F0E9E /* MCOIMAPAppendMessageOperation.mm in Sources */,
 				C6BA2C0A1705F4E6003F0E9E /* MCOIMAPCopyMessagesOperation.mm in Sources */,
@@ -2780,6 +2826,8 @@
 				BD63713C177DFF080094121B /* MCLibetpan.cc in Sources */,
 				DAACAD5217886807000B4517 /* MCHTMLRendererIMAPDataCallback.cc in Sources */,
 				DA89896E178A47D200F6D90A /* MCOIMAPMessageRenderingOperation.mm in Sources */,
+				4B3C1BE317ABFF91008BBF4C /* MCOIMAPQuotaOperation.mm in Sources */,
+				4B3C1BE517AC0176008BBF4C /* MCIMAPQuotaOperation.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2816,7 +2864,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = NO;
@@ -2862,7 +2909,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OSX_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan/include\" \"$(SRCROOT)/../Externals/icu4c/include\" \"$(SRCROOT)/../Externals/ctemplate/include\" /usr/include/tidy /usr/include/libxml2";
 				OSX_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan/lib\" \"$(SRCROOT)/../Externals/icu4c/lib\" \"$(SRCROOT)/../Externals/ctemplate/lib\"";
-				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -2870,7 +2916,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = NO;
@@ -2911,45 +2956,50 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OSX_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan/include\" \"$(SRCROOT)/../Externals/icu4c/include\" \"$(SRCROOT)/../Externals/ctemplate/include\" /usr/include/tidy /usr/include/libxml2";
 				OSX_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan/lib\" \"$(SRCROOT)/../Externals/icu4c/lib\" \"$(SRCROOT)/../Externals/ctemplate/lib\"";
-				SDKROOT = macosx;
 			};
 			name = Release;
 		};
 		C64EA53C169E772200778456 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
-				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				PRODUCT_NAME = MailCore;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
 		C64EA53D169E772200778456 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
-				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				PRODUCT_NAME = MailCore;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
 		C64EA799169F259300778456 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
 		C64EA79A169F259300778456 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -2968,6 +3018,7 @@
 				);
 				INFOPLIST_FILE = "../tests-ios/tests-ios-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
 					"-letpan-ios",
@@ -3003,6 +3054,7 @@
 				);
 				INFOPLIST_FILE = "../tests-ios/tests-ios-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
@@ -3061,6 +3113,7 @@
 		C6BD289E170BD71100A91AC1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -3085,6 +3138,7 @@
 					"-lz",
 				);
 				PRODUCT_NAME = MailCore;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -3092,6 +3146,7 @@
 		C6BD289F170BD71100A91AC1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -3116,6 +3171,7 @@
 					"-lz",
 				);
 				PRODUCT_NAME = MailCore;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;

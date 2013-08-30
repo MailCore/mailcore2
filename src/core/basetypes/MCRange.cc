@@ -4,6 +4,7 @@
 #include "MCHashMap.h"
 #include "MCString.h"
 #include "MCUtils.h"
+#include "MCArray.h"
 
 #include <sys/param.h>
 
@@ -149,4 +150,9 @@ String * mailcore::RangeToString(Range range)
 Range mailcore::RangeFromString(String * rangeString)
 {
     Array * components = rangeString->componentsSeparatedByString(MCSTR("-"));
+    if (components->count() != 2)
+        return RangeEmpty;
+    String * locationString = (String *) components->objectAtIndex(0);
+    String * lengthString = (String *) components->objectAtIndex(1);
+    return RangeMake(locationString->unsignedLongLongValue(), lengthString->unsignedLongLongValue());
 }

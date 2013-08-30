@@ -19,11 +19,11 @@ namespace mailcore {
         virtual ~SMTPOperationQueueCallback() {
         }
         
-        virtual void queueStartRunning(OperationQueue * queue) {
+        virtual void queueStartRunning() {
             mSession->retain();
         }
         
-        virtual void queueStoppedRunning(OperationQueue * queue) {
+        virtual void queueStoppedRunning() {
             mSession->tryAutomaticDisconnect();
             mSession->release();
         }
@@ -208,6 +208,17 @@ SMTPOperation * SMTPAsyncSession::sendMessageOperation(Data * messageData)
     SMTPSendWithDataOperation * op = new SMTPSendWithDataOperation();
     op->setSession(this);
     op->setMessageData(messageData);
+    return (SMTPOperation *) op->autorelease();
+}
+
+SMTPOperation * SMTPAsyncSession::sendMessageOperation(Address * from, Array * recipients,
+                                                       Data * messageData)
+{
+    SMTPSendWithDataOperation * op = new SMTPSendWithDataOperation();
+    op->setSession(this);
+    op->setMessageData(messageData);
+    op->setFrom(from);
+    op->setRecipients(recipients);
     return (SMTPOperation *) op->autorelease();
 }
 

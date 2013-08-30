@@ -33,8 +33,12 @@ namespace mailcore {
     class IMAPIdentityOperation;
     class IMAPAsyncConnection;
     class IMAPCapabilityOperation;
+    class IMAPQuotaOperation;
     class IMAPMessageRenderingOperation;
     class IMAPMessage;
+    class IMAPSession;
+    class IMAPIdentity;
+    class OperationQueueCallback;
     
     class IMAPAsyncSession : public Object {
     public:
@@ -73,9 +77,6 @@ namespace mailcore {
         virtual void setVoIPEnabled(bool enabled);
         virtual bool isVoIPEnabled();
         
-        virtual void setDelimiter(char delimiter);
-        virtual char delimiter();
-        
         virtual void setDefaultNamespace(IMAPNamespace * ns);
         virtual IMAPNamespace * defaultNamespace();
         
@@ -87,6 +88,13 @@ namespace mailcore {
         
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
+        
+        virtual void setOperationQueueCallback(OperationQueueCallback * callback);
+        virtual OperationQueueCallback * operationQueueCallback();
+        virtual bool isOperationQueueRunning();
+        
+        virtual IMAPIdentity * serverIdentity();
+        virtual IMAPIdentity * clientIdentity();
         
         virtual IMAPFolderInfoOperation * folderInfoOperation(String * folder);
         virtual IMAPFolderStatusOperation * folderStatusOperation(String * folder);
@@ -128,17 +136,22 @@ namespace mailcore {
         
         virtual IMAPFetchNamespaceOperation * fetchNamespaceOperation();
         
-        virtual IMAPIdentityOperation * identityOperation(String * vendor, String * name, String * version);
+        virtual IMAPIdentityOperation * identityOperation(IMAPIdentity * identity);
         
         virtual IMAPOperation * checkAccountOperation();
         
         virtual IMAPCapabilityOperation * capabilityOperation();
+        virtual IMAPQuotaOperation * quotaOperation();
         
         virtual IMAPMessageRenderingOperation * htmlRenderingOperation(IMAPMessage * message, String * folder);
         virtual IMAPMessageRenderingOperation * htmlBodyRenderingOperation(IMAPMessage * message, String * folder);
         virtual IMAPMessageRenderingOperation * plainTextRenderingOperation(IMAPMessage * message, String * folder);
         virtual IMAPMessageRenderingOperation * plainTextBodyRenderingOperation(IMAPMessage * message, String * folder);
-    
+        
+    public: // private
+        virtual void automaticConfigurationDone(IMAPSession * session);
+        virtual void operationRunningStateChanged();
+        
     private:
         Array * mSessions;
         
@@ -151,12 +164,16 @@ namespace mailcore {
         ConnectionType mConnectionType;
         bool mCheckCertificateEnabled;
         bool mVoIPEnabled;
-        char mDelimiter;
         IMAPNamespace * mDefaultNamespace;
         time_t mTimeout;
         bool mAllowsFolderConcurrentAccessEnabled;
         unsigned int mMaximumConnections;
         ConnectionLogger * mConnectionLogger;
+        bool mAutomaticConfigurationDone;
+        IMAPIdentity * mServerIdentity;
+        IMAPIdentity * mClientIdentity;
+        bool mQueueRunning;
+        OperationQueueCallback * mOperationQueueCallback;
         
         virtual IMAPAsyncConnection * sessionForFolder(String * folder, bool urgent = false);
         virtual IMAPAsyncConnection * session();

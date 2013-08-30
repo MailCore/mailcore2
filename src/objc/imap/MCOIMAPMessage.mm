@@ -25,6 +25,14 @@
     MCORegisterClass(self, &typeid(nativeType));
 }
 
+- (id) init
+{
+    mailcore::IMAPMessage * msg = new mailcore::IMAPMessage();
+    self = [self initWithMCMessage:msg];
+    msg->release();
+    return self;
+}
+
 + (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object
 {
     mailcore::IMAPMessage * msg = (mailcore::IMAPMessage *) object;
