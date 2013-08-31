@@ -209,6 +209,8 @@ namespace mailcore {
         ErrorInvalidAccount,
         ErrorFile,
         ErrorCompression,
+        ErrorNoSender,
+        ErrorNoRecipient,
     };
     
     enum PartType {
