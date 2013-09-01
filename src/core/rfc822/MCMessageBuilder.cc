@@ -194,6 +194,7 @@ static struct mailmime * get_other_text_part(const char * mime_type, const char 
 
 static struct mailmime * get_file_part(const char * filename, const char * mime_type, int is_inline,
                                        const char * content_id,
+                                       const char * content_description,
                                        const char * text, size_t length)
 {
 	char * disposition_name;
@@ -204,7 +205,8 @@ static struct mailmime * get_file_part(const char * filename, const char * mime_
 	struct mailmime * mime;
 	struct mailmime_fields * mime_fields;
 	char * dup_content_id;
-	
+    char * dup_content_description;
+
 	disposition_name = NULL;
 	if (filename != NULL) {
 		disposition_name = strdup(filename);
@@ -224,8 +226,11 @@ static struct mailmime * get_file_part(const char * filename, const char * mime_
     dup_content_id = NULL;
     if (content_id != NULL)
         dup_content_id = strdup(content_id);
+    dup_content_description = NULL;
+    if (content_description != NULL)
+        dup_content_description = strdup(content_description);
 	mime_fields = mailmime_fields_new_with_data(encoding,
-												dup_content_id, NULL, disposition, NULL);
+												dup_content_id, dup_content_description, disposition, NULL);
 	mime = part_new_empty(content, mime_fields, NULL, 1);
 	mailmime_set_body_text(mime, (char *) text, length);
 	
@@ -262,6 +267,7 @@ static struct mailmime * mime_from_attachment(Attachment * att)
         mime = get_file_part(att->filename()->encodedMIMEHeaderValue()->bytes(),
             MCUTF8(att->mimeType()), att->isInlineAttachment(),
             MCUTF8(att->contentID()),
+            att->contentDescription()->encodedMIMEHeaderValue()->bytes(),
             data->bytes(), data->length());
     }
     return mime;

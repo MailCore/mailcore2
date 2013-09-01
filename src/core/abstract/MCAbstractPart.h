@@ -36,7 +36,10 @@ namespace mailcore {
         
         virtual String * contentLocation();
         virtual void setContentLocation(String * contentLocation);
-        
+
+        virtual String * contentDescription();
+        virtual void setContentDescription(String * contentDescription);
+
         virtual bool isInlineAttachment();
         virtual void setInlineAttachment(bool inlineAttachment);
         
@@ -64,6 +67,7 @@ namespace mailcore {
         String * mCharset;
         String * mContentID;
         String * mContentLocation;
+        String * mContentDescription;
         bool mInlineAttachment;
         PartType mPartType;
         void init();

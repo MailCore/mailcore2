@@ -36,6 +36,7 @@ void AbstractPart::init()
     mCharset = NULL;
     mContentID = NULL;
     mContentLocation = NULL;
+    mContentDescription = NULL;
     mInlineAttachment = false;
     mPartType = PartTypeSingle;
 }
@@ -48,6 +49,7 @@ AbstractPart::~AbstractPart()
     MC_SAFE_RELEASE(mCharset);
     MC_SAFE_RELEASE(mContentID);
     MC_SAFE_RELEASE(mContentLocation);
+    MC_SAFE_RELEASE(mContentDescription);
 }
 
 String * AbstractPart::description()
@@ -68,6 +70,9 @@ String * AbstractPart::description()
     }
     if (mContentLocation != NULL) {
         result->appendUTF8Format("content-location: %s\n", mContentLocation->UTF8Characters());
+    }
+    if (mContentDescription != NULL) {
+        result->appendUTF8Format("content-description: %s\n", mContentDescription->UTF8Characters());
     }
     result->appendUTF8Format("inline: %i\n", mInlineAttachment);
     result->appendUTF8Format(">");
@@ -148,6 +153,16 @@ String * AbstractPart::contentLocation()
 void AbstractPart::setContentLocation(String * contentLocation)
 {
     MC_SAFE_REPLACE_COPY(String, mContentLocation, contentLocation);
+}
+
+String * AbstractPart::contentDescription()
+{
+    return mContentDescription;
+}
+
+void AbstractPart::setContentDescription(String * contentDescription)
+{
+    MC_SAFE_REPLACE_COPY(String, mContentDescription, contentDescription);
 }
 
 bool AbstractPart::isInlineAttachment()
@@ -305,6 +320,9 @@ HashMap * AbstractPart::serializable()
     if (contentLocation() != NULL) {
         result->setObjectForKey(MCSTR("contentLocation"), contentLocation());
     }
+    if (contentDescription() != NULL) {
+        result->setObjectForKey(MCSTR("contentDescription"), contentDescription());
+    }
     if (mInlineAttachment) {
         result->setObjectForKey(MCSTR("inlineAttachment"), MCSTR("1"));
     }
@@ -340,6 +358,7 @@ void AbstractPart::importSerializable(HashMap * serializable)
     setCharset((String *) serializable->objectForKey(MCSTR("charset")));
     setContentID((String *) serializable->objectForKey(MCSTR("contentID")));
     setContentLocation((String *) serializable->objectForKey(MCSTR("contentLocation")));
+    setContentDescription((String *) serializable->objectForKey(MCSTR("contentDescription")));
     String * value = (String *) serializable->objectForKey(MCSTR("inlineAttachment"));
     if (value != NULL) {
         if (value->intValue()) {
