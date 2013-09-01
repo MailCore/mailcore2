@@ -63,6 +63,9 @@ typedef enum {
 /** Returns the value of the Content-Location field of the part.*/
 @property (nonatomic, copy) NSString * contentLocation;
 
+/** Returns the value of the Content-Description field of the part.*/
+@property (nonatomic, copy) NSString * contentDescription;
+
 /** Returns whether the part is an explicit inline attachment.*/
 @property (nonatomic, assign, getter=isInlineAttachment) BOOL inlineAttachment;
 
