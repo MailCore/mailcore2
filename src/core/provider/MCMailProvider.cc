@@ -85,6 +85,10 @@ void MailProvider::fillWithInfo(HashMap * info)
     }
     
     serverInfo = (HashMap *) info->objectForKey(MCSTR("servers"));
+    if (serverInfo == NULL) {
+        MCLog("servers key missing from provider %s", MCUTF8DESC(info));
+    }
+    MCAssert(serverInfo != NULL);
     imapInfos = (Array *) serverInfo->objectForKey(MCSTR("imap"));
     smtpInfos = (Array *) serverInfo->objectForKey(MCSTR("smtp"));
     popInfos = (Array *) serverInfo->objectForKey(MCSTR("pop"));
