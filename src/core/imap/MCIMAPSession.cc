@@ -3189,6 +3189,15 @@ IndexSet * IMAPSession::capability(ErrorCode * pError)
 
 void IMAPSession::capabilitySetWithSessionState(IndexSet * capabilities)
 {
+    if (mailimap_has_extension(mImap, (char *)"STARTTLS")) {
+        capabilities->addIndex(IMAPCapabilityStartTLS);
+    }
+    if (mailimap_has_authentication(mImap, (char *)"PLAIN")) {
+        capabilities->addIndex(IMAPCapabilityAuthPlain);
+    }
+    if (mailimap_has_authentication(mImap, (char *)"LOGIN")) {
+        capabilities->addIndex(IMAPCapabilityAuthLogin);
+    }
     if (mailimap_has_idle(mImap)) {
         LOCK();
         mCanIdle = true;
