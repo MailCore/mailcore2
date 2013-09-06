@@ -448,6 +448,12 @@ IMAPIdentityOperation * IMAPAsyncSession::identityOperation(IMAPIdentity * ident
     return session->identityOperation(identity);
 }
 
+IMAPOperation * IMAPAsyncSession::connectOperation()
+{
+    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
+    return session->connectOperation();
+}
+
 IMAPOperation * IMAPAsyncSession::checkAccountOperation()
 {
     IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));

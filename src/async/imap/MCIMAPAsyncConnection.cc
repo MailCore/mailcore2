@@ -25,6 +25,7 @@
 #include "MCIMAPStoreFlagsOperation.h"
 #include "MCIMAPStoreLabelsOperation.h"
 #include "MCIMAPSearchOperation.h"
+#include "MCIMAPConnectOperation.h"
 #include "MCIMAPCheckAccountOperation.h"
 #include "MCIMAPFetchNamespaceOperation.h"
 #include "MCIMAPIdleOperation.h"
@@ -483,6 +484,14 @@ IMAPIdentityOperation * IMAPAsyncConnection::identityOperation(IMAPIdentity * id
     IMAPIdentityOperation * op = new IMAPIdentityOperation();
     op->setSession(this);
     op->setClientIdentity(identity);
+    op->autorelease();
+    return op;
+}
+
+IMAPOperation * IMAPAsyncConnection::connectOperation()
+{
+    IMAPConnectOperation * op = new IMAPConnectOperation();
+    op->setSession(this);
     op->autorelease();
     return op;
 }

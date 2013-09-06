@@ -123,6 +123,7 @@ namespace mailcore {
         
         virtual IMAPIdentityOperation * identityOperation(IMAPIdentity * identity);
         
+        virtual IMAPOperation * connectOperation();
         virtual IMAPOperation * checkAccountOperation();
         
         virtual IMAPCapabilityOperation * capabilityOperation();
