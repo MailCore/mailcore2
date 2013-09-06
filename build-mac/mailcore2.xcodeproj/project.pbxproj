@@ -16,6 +16,7 @@
 		4BE4029117B548B900ECC5E4 /* MCOIMAPQuotaOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4B3C1BDC17ABF306008BBF4C /* MCOIMAPQuotaOperation.h */; };
 		4BE4029217B548D900ECC5E4 /* MCIMAPQuotaOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4B3C1BE017ABF4BC008BBF4C /* MCIMAPQuotaOperation.h */; };
 		84AF9E7E172DBAF600E60AA3 /* providers.json in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E7D172DBAF600E60AA3 /* providers.json */; };
+		943F1A9A17D964F600F0C798 /* MCIMAPConnectOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 943F1A9817D964F600F0C798 /* MCIMAPConnectOperation.cc */; };
 		9E774D891767C7F60065EB9B /* MCIMAPFolderStatus.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9E774D881767C7F60065EB9B /* MCIMAPFolderStatus.cc */; };
 		9E774D8A1767C7F60065EB9B /* MCIMAPFolderStatus.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9E774D881767C7F60065EB9B /* MCIMAPFolderStatus.cc */; };
 		9E774D8B1767CD3C0065EB9B /* MCIMAPFolderStatus.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9E774D871767C54E0065EB9B /* MCIMAPFolderStatus.h */; };
@@ -1128,6 +1129,8 @@
 		4B3C1BDF17ABF4BB008BBF4C /* MCIMAPQuotaOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPQuotaOperation.cc; sourceTree = "<group>"; };
 		4B3C1BE017ABF4BC008BBF4C /* MCIMAPQuotaOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPQuotaOperation.h; sourceTree = "<group>"; };
 		84AF9E7D172DBAF600E60AA3 /* providers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = providers.json; path = ../resources/providers.json; sourceTree = "<group>"; };
+		943F1A9817D964F600F0C798 /* MCIMAPConnectOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPConnectOperation.cc; sourceTree = "<group>"; };
+		943F1A9917D964F600F0C798 /* MCIMAPConnectOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPConnectOperation.h; sourceTree = "<group>"; };
 		9E774D871767C54E0065EB9B /* MCIMAPFolderStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPFolderStatus.h; sourceTree = "<group>"; };
 		9E774D881767C7F60065EB9B /* MCIMAPFolderStatus.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPFolderStatus.cc; sourceTree = "<group>"; };
 		9EF9AB06175F2EC60027FA3B /* MCOIMAPFolderStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPFolderStatus.h; sourceTree = "<group>"; };
@@ -1746,6 +1749,8 @@
 				C64EA7F416A15A6300778456 /* MCIMAPOperationCallback.h */,
 				C64EA7F616A15A7800778456 /* MCIMAPCheckAccountOperation.cc */,
 				C64EA7F716A15A7800778456 /* MCIMAPCheckAccountOperation.h */,
+				943F1A9817D964F600F0C798 /* MCIMAPConnectOperation.cc */,
+				943F1A9917D964F600F0C798 /* MCIMAPConnectOperation.h */,
 				C64EA7FA16A2959700778456 /* MCIMAPFetchFoldersOperation.cc */,
 				C64EA7FB16A2959700778456 /* MCIMAPFetchFoldersOperation.h */,
 				C64EA80016A295E200778456 /* MCIMAPRenameFolderOperation.cc */,
@@ -2420,7 +2425,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		C64EA780169E867600778456 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -2511,6 +2516,7 @@
 				C64EA7EA16A154B300778456 /* MCSMTPCheckAccountOperation.cc in Sources */,
 				C64EA7F116A15A4D00778456 /* MCIMAPOperation.cc in Sources */,
 				C64EA7F816A15A7800778456 /* MCIMAPCheckAccountOperation.cc in Sources */,
+				943F1A9A17D964F600F0C798 /* MCIMAPConnectOperation.cc in Sources */,
 				C64EA7FC16A2959800778456 /* MCIMAPFetchFoldersOperation.cc in Sources */,
 				C64EA80216A295E400778456 /* MCIMAPRenameFolderOperation.cc in Sources */,
 				C64EA80516A2997E00778456 /* MCIMAPDeleteFolderOperation.cc in Sources */,
