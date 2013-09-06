@@ -24,6 +24,7 @@ AbstractPart::AbstractPart(AbstractPart * other)
     setCharset(other->mCharset);
     setContentID(other->mContentID);
     setContentLocation(other->mContentLocation);
+    setContentDescription(other->mContentDescription);
     setInlineAttachment(other->mInlineAttachment);
     setPartType(other->mPartType);
 }
@@ -209,7 +210,10 @@ void AbstractPart::importIMAPFields(struct mailimap_body_fields * fields,
             free(contentid);
 		}
     }
-	
+    if (fields->bd_description != NULL) {
+        setContentDescription(String::stringWithUTF8Characters(fields->bd_description));
+	}
+    
     if (extension != NULL) {
         if (extension->bd_disposition != NULL) {
             if (strcasecmp(extension->bd_disposition->dsp_type, "inline") == 0) {

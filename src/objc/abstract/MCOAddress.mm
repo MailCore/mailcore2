@@ -54,6 +54,9 @@ MCO_SYNTHESIZE_NSCODING
     MCOAddress * result = [[[MCOAddress alloc] init] autorelease];
     MC_SAFE_RELEASE(result->_nativeAddress);
     result->_nativeAddress = mailcore::Address::addressWithDisplayName([displayName mco_mcString], [mailbox mco_mcString]);
+    if (!result->_nativeAddress) {
+        return NULL;
+    }
     result->_nativeAddress->retain();
     return result;
 }
@@ -63,6 +66,9 @@ MCO_SYNTHESIZE_NSCODING
     MCOAddress * result = [[[MCOAddress alloc] init] autorelease];
     MC_SAFE_RELEASE(result->_nativeAddress);
     result->_nativeAddress = mailcore::Address::addressWithMailbox([mailbox mco_mcString]);
+    if (!result->_nativeAddress) {
+        return NULL;
+    }
     result->_nativeAddress->retain();
     return result;
 }
@@ -72,6 +78,9 @@ MCO_SYNTHESIZE_NSCODING
     MCOAddress * result = [[[MCOAddress alloc] init] autorelease];
     MC_SAFE_RELEASE(result->_nativeAddress);
     result->_nativeAddress = mailcore::Address::addressWithRFC822String([RFC822String mco_mcString]);
+    if (!result->_nativeAddress) {
+        return NULL;
+    }
     result->_nativeAddress->retain();
     return result;
 }
@@ -81,6 +90,9 @@ MCO_SYNTHESIZE_NSCODING
     MCOAddress * result = [[[MCOAddress alloc] init] autorelease];
     MC_SAFE_RELEASE(result->_nativeAddress);
     result->_nativeAddress = mailcore::Address::addressWithNonEncodedRFC822String([nonEncodedRFC822String mco_mcString]);
+    if (!result->_nativeAddress) {
+        return NULL;
+    }
     result->_nativeAddress->retain();
     return result;
 }
