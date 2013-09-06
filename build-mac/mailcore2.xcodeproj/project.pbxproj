@@ -18,6 +18,8 @@
 		84AF9E7E172DBAF600E60AA3 /* providers.json in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E7D172DBAF600E60AA3 /* providers.json */; };
 		943F1A9A17D964F600F0C798 /* MCIMAPConnectOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 943F1A9817D964F600F0C798 /* MCIMAPConnectOperation.cc */; };
 		943F1A9E17D96C5500F0C798 /* MCIMAPConnectOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 943F1A9817D964F600F0C798 /* MCIMAPConnectOperation.cc */; };
+		943F1AA017D9736100F0C798 /* MCIMAPConnectOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 943F1A9917D964F600F0C798 /* MCIMAPConnectOperation.h */; };
+		943F1AA117D973A800F0C798 /* MCIMAPConnectOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 943F1A9917D964F600F0C798 /* MCIMAPConnectOperation.h */; };
 		9E774D891767C7F60065EB9B /* MCIMAPFolderStatus.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9E774D881767C7F60065EB9B /* MCIMAPFolderStatus.cc */; };
 		9E774D8A1767C7F60065EB9B /* MCIMAPFolderStatus.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9E774D881767C7F60065EB9B /* MCIMAPFolderStatus.cc */; };
 		9E774D8B1767CD3C0065EB9B /* MCIMAPFolderStatus.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9E774D871767C54E0065EB9B /* MCIMAPFolderStatus.h */; };
@@ -751,6 +753,7 @@
 			dstPath = include/MailCore;
 			dstSubfolderSpec = 16;
 			files = (
+				943F1AA017D9736100F0C798 /* MCIMAPConnectOperation.h in CopyFiles */,
 				4BE4029217B548D900ECC5E4 /* MCIMAPQuotaOperation.h in CopyFiles */,
 				4BE4029117B548B900ECC5E4 /* MCOIMAPQuotaOperation.h in CopyFiles */,
 				C6E665001790963E0063F2CF /* MCIMAPMessageRenderingOperation.h in CopyFiles */,
@@ -944,6 +947,7 @@
 			dstPath = include/MailCore;
 			dstSubfolderSpec = 16;
 			files = (
+				943F1AA117D973A800F0C798 /* MCIMAPConnectOperation.h in CopyFiles */,
 				4B3C1BE417AC0156008BBF4C /* MCIMAPQuotaOperation.h in CopyFiles */,
 				4B3C1BE217ABFF7C008BBF4C /* MCOIMAPQuotaOperation.h in CopyFiles */,
 				C63D316717C997BA00A4D993 /* MCOIMAPIdentity.h in CopyFiles */,
