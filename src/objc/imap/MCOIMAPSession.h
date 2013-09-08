@@ -504,6 +504,17 @@
 - (MCOIMAPIdentityOperation *) identityOperationWithClientIdentity:(MCOIMAPIdentity *)identity;
 
 /**
+ Returns an operation that will connect to the given IMAP server without authenticating.
+ Useful for checking initial server capabilities.
+ 
+ MCOIMAPOperation * op = [session connectOperation];
+ [op start:^(NSError * error) {
+ ...
+ }];
+ */
+- (MCOIMAPOperation *)connectOperation;
+
+/**
  Returns an operation that will check whether the IMAP account is valid.
 
      MCOIMAPOperation * op = [session checkAccountOperation];
@@ -511,6 +522,7 @@
           ...
      }];
 */
+
 - (MCOIMAPOperation *) checkAccountOperation;
 
 /**

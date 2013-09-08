@@ -133,6 +133,7 @@ err:
 }
 
 static struct mailmime * get_text_part(const char * mime_type, const char * charset, const char * content_id,
+                                const char * description,
 								const char * text, size_t length, int encoding_type)
 {
 	struct mailmime_fields * mime_fields;
@@ -142,6 +143,7 @@ static struct mailmime * get_text_part(const char * mime_type, const char * char
 	struct mailmime_disposition * disposition;
 	struct mailmime_mechanism * encoding;
 	char * dup_content_id;
+    char * dup_description;
     
 	encoding = mailmime_mechanism_new(encoding_type, NULL);
 	disposition = mailmime_disposition_new_with_data(MAILMIME_DISPOSITION_TYPE_INLINE,
@@ -149,8 +151,11 @@ static struct mailmime * get_text_part(const char * mime_type, const char * char
     dup_content_id = NULL;
     if (content_id != NULL)
         dup_content_id = strdup(content_id);
+    dup_description = NULL;
+    if (dup_description != NULL)
+        dup_description = strdup(description);
 	mime_fields = mailmime_fields_new_with_data(encoding,
-                                                dup_content_id, NULL, disposition, NULL);
+                                                dup_content_id, dup_description, disposition, NULL);
 	
 	content = mailmime_content_new_with_str(mime_type);
 	if (charset == NULL) {
@@ -167,6 +172,7 @@ static struct mailmime * get_text_part(const char * mime_type, const char * char
 }
 
 static struct mailmime * get_plain_text_part(const char * mime_type, const char * charset, const char * content_id,
+                                      const char * description,
                                       const char * text, size_t length)
 {
     bool needsQuotedPrintable;
@@ -183,17 +189,19 @@ static struct mailmime * get_plain_text_part(const char * mime_type, const char 
     if (needsQuotedPrintable) {
         mechanism = MAILMIME_MECHANISM_QUOTED_PRINTABLE;
     }
-    return get_text_part(mime_type, charset, content_id, text, length, mechanism);
+    return get_text_part(mime_type, charset, content_id, description, text, length, mechanism);
 }
 
 static struct mailmime * get_other_text_part(const char * mime_type, const char * charset, const char * content_id,
+                                      const char * description,
                                       const char * text, size_t length)
 {
-    return get_text_part(mime_type, charset, content_id, text, length, MAILMIME_MECHANISM_QUOTED_PRINTABLE);
+    return get_text_part(mime_type, charset, content_id, description, text, length, MAILMIME_MECHANISM_QUOTED_PRINTABLE);
 }
 
 static struct mailmime * get_file_part(const char * filename, const char * mime_type, int is_inline,
                                        const char * content_id,
+                                       const char * content_description,
                                        const char * text, size_t length)
 {
 	char * disposition_name;
@@ -204,7 +212,8 @@ static struct mailmime * get_file_part(const char * filename, const char * mime_
 	struct mailmime * mime;
 	struct mailmime_fields * mime_fields;
 	char * dup_content_id;
-	
+    char * dup_content_description;
+
 	disposition_name = NULL;
 	if (filename != NULL) {
 		disposition_name = strdup(filename);
@@ -224,13 +233,18 @@ static struct mailmime * get_file_part(const char * filename, const char * mime_
     dup_content_id = NULL;
     if (content_id != NULL)
         dup_content_id = strdup(content_id);
+    dup_content_description = NULL;
+    if (content_description != NULL)
+        dup_content_description = strdup(content_description);
 	mime_fields = mailmime_fields_new_with_data(encoding,
-												dup_content_id, NULL, disposition, NULL);
+												dup_content_id, dup_content_description, disposition, NULL);
 	mime = part_new_empty(content, mime_fields, NULL, 1);
 	mailmime_set_body_text(mime, (char *) text, length);
 	
 	return mime;
 }
+
+#define MIME_ENCODED_STR(str) (str != NULL ? str->encodedMIMEHeaderValue()->bytes() : NULL)
 
 static struct mailmime * mime_from_attachment(Attachment * att)
 {
@@ -251,17 +265,20 @@ static struct mailmime * mime_from_attachment(Attachment * att)
     else if (att->isInlineAttachment() && att->mimeType()->lowercaseString()->isEqual(MCSTR("text/plain"))) {
         mime = get_plain_text_part(MCUTF8(att->mimeType()), MCUTF8(att->charset()),
             MCUTF8(att->contentID()),
+            MIME_ENCODED_STR(att->contentDescription()),
             data->bytes(), data->length());
     }
     else if (att->isInlineAttachment() && att->mimeType()->lowercaseString()->hasPrefix(MCSTR("text/"))) {
         mime = get_other_text_part(MCUTF8(att->mimeType()), MCUTF8(att->charset()),
             MCUTF8(att->contentID()),
+            MIME_ENCODED_STR(att->contentDescription()),
             data->bytes(), data->length());
     }
     else {
-        mime = get_file_part(att->filename()->encodedMIMEHeaderValue()->bytes(),
+        mime = get_file_part(MIME_ENCODED_STR(att->filename()),
             MCUTF8(att->mimeType()), att->isInlineAttachment(),
             MCUTF8(att->contentID()),
+            MIME_ENCODED_STR(att->contentDescription()),
             data->bytes(), data->length());
     }
     return mime;

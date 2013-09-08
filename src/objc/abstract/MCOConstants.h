@@ -330,6 +330,10 @@ typedef enum {
     MCOErrorInvalidAccount,
     /** IMAP: Error when trying to enable compression.*/
     MCOErrorCompression,
+    /** SMTP: Error when no sender has been specified.*/
+    MCOErrorNoSender,
+    /** SMTP: Error when no recipient has been specified.*/
+    MCOErrorNoRecipient,
     /** The count of all errors */
     MCOErrorCodeCount,
 } MCOErrorCode;

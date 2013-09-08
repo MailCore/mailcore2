@@ -579,6 +579,15 @@ void SMTPSession::sendMessage(Address * from, Array * recipients, Data * message
     clist * address_list;
     int r;
 
+    if (from == NULL) {
+        * pError = ErrorNoSender;
+        return;
+    }
+    if ((recipients == NULL) || (recipients->count() == 0)) {
+        * pError = ErrorNoRecipient;
+        return;
+    }
+    
     messageData = dataWithFilteredBcc(messageData);
     
     mProgressCallback = callback;

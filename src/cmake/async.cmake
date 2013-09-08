@@ -6,6 +6,7 @@ set(async_imap_files
   async/imap/MCIMAPAsyncSession.cc
   async/imap/MCIMAPCapabilityOperation.cc
   async/imap/MCIMAPCheckAccountOperation.cc
+  async/imap/MCIMAPConnectOperation.cc
   async/imap/MCIMAPCopyMessagesOperation.cc
   async/imap/MCIMAPCreateFolderOperation.cc
   async/imap/MCIMAPDeleteFolderOperation.cc
