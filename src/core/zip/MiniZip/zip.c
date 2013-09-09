@@ -1045,6 +1045,7 @@ extern int ZEXPORT zipCloseFileInZipRaw (file, uncompressed_size, crc32)
         uLong uTotalOutBefore;
         if (zi->ci.stream.avail_out == 0)
         {
+            zipFlushWriteBuffer(zi);
             zi->ci.stream.avail_out = (uInt)Z_BUFSIZE;
             zi->ci.stream.next_out = zi->ci.buffered_data;
         }
