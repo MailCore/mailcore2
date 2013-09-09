@@ -102,7 +102,7 @@ ConnectionType NetService::connectionType()
 String * NetService::normalizedHostnameWithEmail(String * email)
 {
     Array *components = email->componentsSeparatedByString(MCSTR("@"));
-    String *hostname = (String *) mHostname->copy();
+    String *hostname = (String *) mHostname->copy()->autorelease();
     if (components->count() != 0) {
         hostname->replaceOccurrencesOfString(MCSTR("{domain}"), (String *) components->lastObject());
         return hostname;

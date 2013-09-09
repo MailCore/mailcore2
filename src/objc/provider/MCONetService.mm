@@ -79,14 +79,6 @@ MCO_OBJC_SYNTHESIZE_SCALAR(MCOConnectionType, mailcore::ConnectionType, setConne
 
 - (NSString *) hostnameWithEmail:(NSString *)email
 {
-    NSString *result = nil;
-    NSArray *components = [email componentsSeparatedByString:@"@"];
-    if (components.count == 0) {
-        return self.hostname;
-    }
-    else {
-        result = [self.hostname stringByReplacingOccurrencesOfString:@"{domain}" withString:[components lastObject]];
-    }
     return [NSString mco_stringWithMCString:_netService->normalizedHostnameWithEmail(email.mco_mcString)];
 }
 
