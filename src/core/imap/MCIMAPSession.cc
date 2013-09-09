@@ -214,16 +214,11 @@ static int compareValuesUnsignedLong(void * value1, void * value2, void * contex
 
 static struct mailimap_set * setFromArray(Array * array)
 {
-    unsigned int currentIndex;
-    unsigned int currentFirst;
-    unsigned int currentValue;
-    unsigned int lastValue;
+    unsigned int currentIndex = 0;
+    unsigned int currentFirst = 0;
+    unsigned int currentValue = 0;
+    unsigned int lastValue = 0;
     struct mailimap_set * imap_set;
-    
-    currentFirst = 0;
-    currentValue = 0;
-    lastValue = 0;
-	currentIndex = 0;
     
 	array = array->sortedArray(compareValuesUnsignedLong, NULL);
     imap_set = mailimap_set_new_empty();

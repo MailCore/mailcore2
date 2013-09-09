@@ -67,10 +67,9 @@ char * MCEncodeBase64(const char * in, int len)
 char * MCDecodeBase64(const char * in, int len)
 {
     char * output, * out;
-    int i, c1, c2, c3, c4, out_len;
+    int i, c1, c2, c3, c4;
     int max_out_len;
     
-    out_len = 0;
     max_out_len = ((len + 3) * 4 / 3) + 1;
     
     output = malloc(max_out_len);
