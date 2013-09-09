@@ -1122,9 +1122,6 @@ void MessageHeader::importIMAPInternalDate(struct mailimap_date_time * date)
 
 Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool includeCc, Array * senderEmails)
 {
-    Set * senderEmailsSet;
-    senderEmailsSet = Set::setWithArray(senderEmails);
-    
     bool hasCc;
     bool hasTo;
     Set * addedAddresses;

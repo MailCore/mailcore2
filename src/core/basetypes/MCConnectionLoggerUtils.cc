@@ -15,32 +15,25 @@
 mailcore::ConnectionLogType mailcore::getConnectionType(int log_type)
 {
     ConnectionLogType type = (ConnectionLogType) -1;
-    bool isBuffer = false;
     
     switch (log_type) {
         case MAILSTREAM_LOG_TYPE_ERROR_PARSE:
             type = ConnectionLogTypeErrorParse;
-            isBuffer = true;
             break;
         case MAILSTREAM_LOG_TYPE_ERROR_RECEIVED:
             type = ConnectionLogTypeErrorReceived;
-            isBuffer = true;
             break;
         case MAILSTREAM_LOG_TYPE_ERROR_SENT:
             type = ConnectionLogTypeErrorSent;
-            isBuffer = true;
             break;
         case MAILSTREAM_LOG_TYPE_DATA_RECEIVED:
             type = ConnectionLogTypeReceived;
-            isBuffer = true;
             break;
         case MAILSTREAM_LOG_TYPE_DATA_SENT:
             type = ConnectionLogTypeSent;
-            isBuffer = true;
             break;
         case MAILSTREAM_LOG_TYPE_DATA_SENT_PRIVATE:
             type = ConnectionLogTypeSentPrivate;
-            isBuffer = true;
             break;
     }
     return type;
