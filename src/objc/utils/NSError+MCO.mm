@@ -64,6 +64,7 @@ static NSString * MCOLocalizedDescriptionTable[] = {
     NSError *error = [NSError errorWithDomain:MCOErrorDomain
                                          code:(int)code
                                      userInfo:userInfo];
+    [userInfo release];
     return error;
 }
 @end

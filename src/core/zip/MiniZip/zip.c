@@ -604,6 +604,7 @@ extern zipFile ZEXPORT zipOpen2 (pathname, append, globalcomment, pzlib_filefunc
         if (err!=ZIP_OK)
         {
             ZCLOSE(ziinit.z_filefunc, ziinit.filestream);
+            TRYFREE(zi);
             return NULL;
         }
 
