@@ -82,6 +82,7 @@ set(objc_utils_files
   objc/utils/NSObject+MCO.mm
   objc/utils/NSString+MCO.mm
   objc/utils/NSValue+MCO.mm
+  objc/utils/NSIndexSet+MCO.m
 )
 
 IF(APPLE)

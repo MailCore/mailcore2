@@ -23,5 +23,6 @@
 #import <MailCore/MCOConstants.h>
 #import <MailCore/MCOIndexSet.h>
 #import <MailCore/MCORange.h>
+#import <MailCore/NSIndexSet+MCO.h>
 
 #endif

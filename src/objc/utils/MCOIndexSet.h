@@ -57,6 +57,9 @@
 /** Enumerates all the indexes of the index set.*/
 - (void) enumerateIndexes:(void (^)(uint64_t idx))block;
 
+/** Returns an NSIndexSet from a MCOIndexSet */
+- (NSIndexSet *) nsIndexSet;
+
 @end
 
 #endif
