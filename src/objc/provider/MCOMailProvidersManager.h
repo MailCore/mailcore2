@@ -42,4 +42,10 @@
 */
 - (MCOMailProvider *) providerForIdentifier:(NSString *)identifier;
 
+/**
+   Registers the providers in the JSON file at the file path so they
+   can be used with MCOMailProvidersManager.
+ */
+- (void)registerProvidersWithFilename:(NSString *)filename;
+
 @end

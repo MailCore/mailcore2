@@ -58,4 +58,9 @@
     return MCO_TO_OBJC(provider);
 }
 
+- (void)registerProvidersWithFilename:(NSString *)filename
+{
+    mailcore::MailProvidersManager::sharedManager()->registerProvidersWithFilename(filename.mco_mcString);
+}
+
 @end
