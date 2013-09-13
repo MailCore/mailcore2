@@ -44,6 +44,8 @@ void POPFetchHeaderOperation::main()
 {
     ErrorCode error;
     mHeader = session()->session()->fetchHeader(mMessageIndex, &error);
-    mHeader->retain();
+    if (mHeader != NULL) {
+        mHeader->retain();
+    }
     setError(error);
 }

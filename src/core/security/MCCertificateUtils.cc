@@ -53,6 +53,10 @@ bool mailcore::checkCertificate(mailstream * stream, String * hostname)
     }
     
     status = SecTrustEvaluate(trust, &trustResult);
+    if (status != noErr) {
+        goto free_certs;
+    }
+    
     switch (trustResult) {
         case kSecTrustResultUnspecified:
         case kSecTrustResultProceed:

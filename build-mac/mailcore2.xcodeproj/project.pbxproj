@@ -262,6 +262,10 @@
 		C68B2AEF1778A869005E61EF /* MCConnectionLogger.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C68B2AEB1778A589005E61EF /* MCConnectionLogger.h */; };
 		C68B2AF717797389005E61EF /* MCConnectionLoggerUtils.cc in Sources */ = {isa = PBXBuildFile; fileRef = C68B2AF517797389005E61EF /* MCConnectionLoggerUtils.cc */; };
 		C68B2AF817797389005E61EF /* MCConnectionLoggerUtils.cc in Sources */ = {isa = PBXBuildFile; fileRef = C68B2AF517797389005E61EF /* MCConnectionLoggerUtils.cc */; };
+		C69BA85B17DEFCCB00D601B7 /* NSIndexSet+MCO.m in Sources */ = {isa = PBXBuildFile; fileRef = C69BA85A17DEFCCB00D601B7 /* NSIndexSet+MCO.m */; };
+		C69BA85C17DEFCCB00D601B7 /* NSIndexSet+MCO.m in Sources */ = {isa = PBXBuildFile; fileRef = C69BA85A17DEFCCB00D601B7 /* NSIndexSet+MCO.m */; };
+		C69BA85D17DEFD9A00D601B7 /* NSIndexSet+MCO.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C69BA85917DEFCCB00D601B7 /* NSIndexSet+MCO.h */; };
+		C69BA85E17DEFD9F00D601B7 /* NSIndexSet+MCO.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C69BA85917DEFCCB00D601B7 /* NSIndexSet+MCO.h */; };
 		C6A81B931706840C00882C15 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A81B921706840C00882C15 /* UIKit.framework */; };
 		C6A81B941706840C00882C15 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64EA78F169F259200778456 /* Foundation.framework */; };
 		C6A81B961706840C00882C15 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A81B951706840C00882C15 /* CoreGraphics.framework */; };
@@ -756,6 +760,7 @@
 				943F1AA017D9736100F0C798 /* MCIMAPConnectOperation.h in CopyFiles */,
 				4BE4029217B548D900ECC5E4 /* MCIMAPQuotaOperation.h in CopyFiles */,
 				4BE4029117B548B900ECC5E4 /* MCOIMAPQuotaOperation.h in CopyFiles */,
+				C69BA85E17DEFD9F00D601B7 /* NSIndexSet+MCO.h in CopyFiles */,
 				C6E665001790963E0063F2CF /* MCIMAPMessageRenderingOperation.h in CopyFiles */,
 				DAE42E89178F7E1800E0DB8F /* MCOIMAPMessageRenderingOperation.h in CopyFiles */,
 				C63D316617C997B400A4D993 /* MCOIMAPIdentity.h in CopyFiles */,
@@ -991,6 +996,7 @@
 				C6BA2B141705F4E6003F0E9E /* MCOMessagePart.h in CopyFiles */,
 				C6D6F95C171E5D65006F5B28 /* MCJSON.h in CopyFiles */,
 				C6BA2B151705F4E6003F0E9E /* MCOIMAPFolderInfoOperation.h in CopyFiles */,
+				C69BA85D17DEFD9A00D601B7 /* NSIndexSet+MCO.h in CopyFiles */,
 				C6BA2B161705F4E6003F0E9E /* MCOIMAPFetchMessagesOperation.h in CopyFiles */,
 				C6BA2B171705F4E6003F0E9E /* MCOIMAPCopyMessagesOperation.h in CopyFiles */,
 				C6D6F95D171E5D67006F5B28 /* MCMD5.h in CopyFiles */,
@@ -1395,6 +1401,8 @@
 		C68B2AEB1778A589005E61EF /* MCConnectionLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCConnectionLogger.h; sourceTree = "<group>"; };
 		C68B2AF517797389005E61EF /* MCConnectionLoggerUtils.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCConnectionLoggerUtils.cc; sourceTree = "<group>"; };
 		C68B2AF617797389005E61EF /* MCConnectionLoggerUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCConnectionLoggerUtils.h; sourceTree = "<group>"; };
+		C69BA85917DEFCCB00D601B7 /* NSIndexSet+MCO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSIndexSet+MCO.h"; sourceTree = "<group>"; };
+		C69BA85A17DEFCCB00D601B7 /* NSIndexSet+MCO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexSet+MCO.m"; sourceTree = "<group>"; };
 		C6A81B911706840C00882C15 /* test-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "test-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6A81B921706840C00882C15 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		C6A81B951706840C00882C15 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
@@ -2129,6 +2137,8 @@
 				C6F5B9F316FEAC6C00D9DABD /* MCOIndexSet.mm */,
 				C6CCC5C616FFE5190077A5FC /* MCORange.mm */,
 				C6CCC5C816FFE54F0077A5FC /* MCORange.h */,
+				C69BA85917DEFCCB00D601B7 /* NSIndexSet+MCO.h */,
+				C69BA85A17DEFCCB00D601B7 /* NSIndexSet+MCO.m */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -2531,6 +2541,7 @@
 				C64EA81116A299ED00778456 /* MCIMAPAppendMessageOperation.cc in Sources */,
 				C64EA81416A29A2300778456 /* MCIMAPCopyMessagesOperation.cc in Sources */,
 				C64EA81716A29A8700778456 /* MCIMAPExpungeOperation.cc in Sources */,
+				C69BA85B17DEFCCB00D601B7 /* NSIndexSet+MCO.m in Sources */,
 				C64EA81A16A29AF200778456 /* MCIMAPFetchMessagesOperation.cc in Sources */,
 				C64EA81D16A29DC500778456 /* MCIMAPFetchContentOperation.cc in Sources */,
 				C64EA82016A29E4100778456 /* MCIMAPStoreFlagsOperation.cc in Sources */,
@@ -2727,6 +2738,7 @@
 				C6BA2BCA1705F4E6003F0E9E /* MCIMAPAppendMessageOperation.cc in Sources */,
 				C6BA2BCB1705F4E6003F0E9E /* MCIMAPCopyMessagesOperation.cc in Sources */,
 				C6BA2BCC1705F4E6003F0E9E /* MCIMAPExpungeOperation.cc in Sources */,
+				C69BA85C17DEFCCB00D601B7 /* NSIndexSet+MCO.m in Sources */,
 				C6BA2BCD1705F4E6003F0E9E /* MCIMAPFetchMessagesOperation.cc in Sources */,
 				C6BA2BCE1705F4E6003F0E9E /* MCIMAPFetchContentOperation.cc in Sources */,
 				C6BA2BCF1705F4E6003F0E9E /* MCIMAPStoreFlagsOperation.cc in Sources */,

@@ -217,7 +217,9 @@ void IndexSet::addRange(Range range)
     if (rangeIndex > 0) {
         tryToMergeAdjacentRanges(rangeIndex - 1);
     }
-    tryToMergeAdjacentRanges(rangeIndex);
+    if (rangeIndex < mCount - 1) {
+        tryToMergeAdjacentRanges(rangeIndex);
+    }
 }
 
 void IndexSet::tryToMergeAdjacentRanges(unsigned int rangeIndex)

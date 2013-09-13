@@ -589,10 +589,6 @@ static char * extract_subject(char * str, int keep_bracket)
 		 */
 		
 		while (len > 0) {
-			int chg;
-			
-			chg = 0;
-			
 			/* subj-trailer    = "(fwd)" / WSP */
 			if (subj[len - 1] == ' ') {
 				subj[len - 1] = '\0';
@@ -655,15 +651,10 @@ static char * extract_subject(char * str, int keep_bracket)
 		 */
 		
 		if (len >= 5) {
-			size_t saved_begin;
-			
-			saved_begin = begin;
 			if (strncasecmp(subj + begin, "[fwd:", 5) == 0) {
 				begin += 5;
 				
-				if (subj[len - 1] != ']')
-					saved_begin = begin;
-				else {
+				if (subj[len - 1] == ']') {
 					subj[len - 1] = '\0';
 					len --;
 					do_repeat_6 = 1;

@@ -113,6 +113,7 @@ objc/utils/MCOOperation.h
 objc/abstract/MCOConstants.h
 objc/utils/MCOIndexSet.h
 objc/utils/MCORange.h
+objc/utils/NSIndexSet+MCO.h
 objc/abstract/MCOAbstract.h
 objc/abstract/MCOAbstractMessage.h
 objc/abstract/MCOAbstractMessagePart.h
