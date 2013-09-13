@@ -750,5 +750,63 @@
             "sentmail":"Sent Messages",
             "trash":"Deleted Messages"
         }
+    },
+    "outlook":{
+        "servers":{
+            "imap":[
+                {
+                    "port":993,
+                    "hostname":"imap-mail.outlook.com",
+                    "ssl":true
+                }
+            ],
+            "smtp":[
+                {
+                    "port":25,
+                    "hostname":"smtp-mail.outlook.com",
+                    "starttls":true
+                }
+            ]
+        },
+        "domain-match":[
+            "outlook\\.com",
+            "outlook\\.com\\.ar",
+            "outlook\\.com\\.au",
+            "outlook\\.at",
+            "outlook\\.be",
+            "outlook\\.com\\.br",
+            "outlook\\.cl",
+            "outlook\\.cz",
+            "outlook\\.dk",
+            "outlook\\.fr",
+            "outlook\\.de",
+            "outlook\\.com\\.gr",
+            "outlook\\.co\\.id",
+            "outlook\\.ie",
+            "outlook\\.it",
+            "outlook\\.hu",
+            "outlook\\.jp",
+            "outlook\\.kr",
+            "outlook\\.lv",
+            "outlook\\.my",
+            "outlook\\.co\\.nz",
+            "outlook\\.com\\.pe",
+            "outlook\\.ph",
+            "outlook\\.pt",
+            "outlook\\.sa",
+            "outlook\\.sg",
+            "outlook\\.sk",
+            "outlook\\.es",
+            "outlook\\.co\\.th",
+            "outlook\\.com\\.tr",
+            "outlook\\.com\\.vn"
+        ],
+        "mailboxes":{
+            "drafts":"Drafts",
+            "allmail":"Archive",
+            "spam":"Junk",
+            "sentmail":"Sent Messages",
+            "trash":"Deleted Messages"
+        }
     }
 }
