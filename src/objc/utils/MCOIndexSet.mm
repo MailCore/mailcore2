@@ -152,7 +152,11 @@ MCO_SYNTHESIZE_NSCODING
     NSMutableIndexSet * result = [NSMutableIndexSet indexSet];
     MCORange * allRanges = [self allRanges];
     for(unsigned int i = 0 ; i < [self rangesCount] ; i ++) {
-        [result addIndexesInRange:NSMakeRange((NSUInteger) allRanges[i].location, (NSUInteger) allRanges[i].length)];
+        NSUInteger len = allRanges[i].length;
+        if (len == 0) {
+            continue;
+        }
+        [result addIndexesInRange:NSMakeRange((NSUInteger) allRanges[i].location, len)];
     }
     return result;
 }
