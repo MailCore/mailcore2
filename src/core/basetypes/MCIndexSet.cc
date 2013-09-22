@@ -148,7 +148,7 @@ int IndexSet::leftRangeIndexForIndexWithBounds(uint64_t idx, unsigned int left, 
     Range middleRange = mRanges[middle];
     
     if (left == right) {
-        if (idx <= middleRange.location) {
+        if (idx <= middleRange.location + middleRange.length - 1) {
             return left;
         }
         else {
@@ -156,7 +156,7 @@ int IndexSet::leftRangeIndexForIndexWithBounds(uint64_t idx, unsigned int left, 
         }
     }
     
-    if (idx <= middleRange.location) {
+    if (idx <= middleRange.location + middleRange.length - 1) {
         return leftRangeIndexForIndexWithBounds(idx, left, middle);
     }
     else {
@@ -233,7 +233,7 @@ void IndexSet::tryToMergeAdjacentRanges(unsigned int rangeIndex)
     
     uint64_t right = RangeRightBound(mRanges[rangeIndex + 1]);
     removeRangeIndex(rangeIndex + 1, 1);
-    mRanges[rangeIndex].length = right - mRanges[rangeIndex].location;
+    mRanges[rangeIndex].length = right - mRanges[rangeIndex].location + 1;
 }
 
 void IndexSet::mergeRanges(unsigned int rangeIndex)
@@ -261,7 +261,7 @@ void IndexSet::mergeRanges(unsigned int rangeIndex)
 
 void IndexSet::addIndex(uint64_t idx)
 {
-    addRange(RangeMake(idx, 0));
+    addRange(RangeMake(idx, 1));
 }
 
 void IndexSet::removeRangeIndex(unsigned int rangeIndex, unsigned int count)
@@ -309,7 +309,7 @@ void IndexSet::removeRange(Range range)
 
 void IndexSet::removeIndex(uint64_t idx)
 {
-    removeRange(RangeMake(idx, 0));
+    removeRange(RangeMake(idx, 1));
 }
 
 bool IndexSet::containsIndex(uint64_t idx)
@@ -345,14 +345,14 @@ String * IndexSet::description()
         if (i != 0) {
             result->appendUTF8Format(",");
         }
-        if (mRanges[i].length == 0) {
+        if (mRanges[i].length == 1) {
             result->appendUTF8Format("%llu",
                                      (unsigned long long) mRanges[i].location);
         }
         else {
             result->appendUTF8Format("%llu-%llu",
                                      (unsigned long long) mRanges[i].location,
-                                     (unsigned long long) (mRanges[i].location + mRanges[i].length));
+                                     (unsigned long long) (mRanges[i].location + mRanges[i].length - 1));
         }
     }
     return result;
