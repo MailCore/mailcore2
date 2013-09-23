@@ -14,6 +14,10 @@ Range mailcore::RangeEmpty = {UINT64_MAX, 0};
 
 Range mailcore::RangeMake(uint64_t location, uint64_t length)
 {
+    if (length == 0)
+    {
+        return RangeEmpty;
+    }
     Range range;
     range.location = location;
     range.length = length;
@@ -47,7 +51,7 @@ Range mailcore::RangeIntersection(Range range1, Range range2)
             return RangeMake(leftResult, UINT64_MAX);
         }
         else {
-            return RangeMake(leftResult, rightResult - leftResult);
+            return RangeMake(leftResult, rightResult - leftResult + 1);
         }
     }
 }
@@ -78,7 +82,7 @@ IndexSet * mailcore::RangeRemoveRange(Range range1, Range range2)
     right2 = RangeRightBound(range2);
     
     if (left2 > left1) {
-        result->addRange(RangeMake(left1, left2 - left1 - 1));
+        result->addRange(RangeMake(left1, left2 - left1));
     }
     
     if (right2 != UINT64_MAX) {
@@ -87,7 +91,7 @@ IndexSet * mailcore::RangeRemoveRange(Range range1, Range range2)
         }
         else {
             if (right2 < right1) {
-                result->addRange(RangeMake(right2 + 1, right1 - (right2 + 1)));
+                result->addRange(RangeMake(right2 + 1, right1 - right2));
             }
         }
     }
@@ -124,7 +128,7 @@ IndexSet * mailcore::RangeUnion(Range range1, Range range2)
             return IndexSet::indexSetWithRange(RangeMake(resultLeft, UINT64_MAX));
         }
         else {
-            return IndexSet::indexSetWithRange(RangeMake(resultLeft, resultRight - resultLeft));
+            return IndexSet::indexSetWithRange(RangeMake(resultLeft, resultRight - resultLeft + 1));
         }
     }
 }
@@ -138,7 +142,7 @@ uint64_t mailcore::RangeRightBound(Range range)
 {
     if (range.length == UINT64_MAX)
         return UINT64_MAX;
-    return range.location + range.length;
+    return range.location + range.length - 1;
 }
 
 String * mailcore::RangeToString(Range range)

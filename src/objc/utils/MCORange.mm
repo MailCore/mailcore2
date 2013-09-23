@@ -19,6 +19,10 @@ MCORange MCORangeEmpty = {UINT64_MAX, 0};
 
 MCORange MCORangeMake(uint64_t location, uint64_t length)
 {
+    if (length == 0)
+    {
+        return MCORangeEmpty;
+    }
     MCORange result;
     result.location = location;
     result.length = length;

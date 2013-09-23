@@ -2019,12 +2019,12 @@ String * String::mUTF7DecodedString()
 
 String * String::substringFromIndex(unsigned int idx)
 {
-    return substringWithRange(RangeMake(idx, length() - idx));
+    return substringWithRange(RangeMake(idx, length() - idx + 1));
 }
 
 String * String::substringToIndex(unsigned int idx)
 {
-    return substringWithRange(RangeMake(0, idx));
+    return substringWithRange(RangeMake(0, idx + 1));
 }
 
 String * String::substringWithRange(Range range)
