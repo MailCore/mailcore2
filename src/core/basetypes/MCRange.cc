@@ -14,6 +14,10 @@ Range mailcore::RangeEmpty = {UINT64_MAX, 0};
 
 Range mailcore::RangeMake(uint64_t location, uint64_t length)
 {
+    if (length == 0)
+    {
+        return RangeEmpty;
+    }
     Range range;
     range.location = location;
     range.length = length;

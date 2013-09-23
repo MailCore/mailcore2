@@ -306,7 +306,7 @@ static IndexSet * indexSetFromSet(struct mailimap_set * imap_set)
             indexSet->addRange(RangeMake(item->set_first, UINT64_MAX));
         }
         else {
-            indexSet->addRange(RangeMake(item->set_first, item->set_last - item->set_first));
+            indexSet->addRange(RangeMake(item->set_first, item->set_last - item->set_first + 1));
         }
     }
     return indexSet;

@@ -61,7 +61,7 @@ namespace mailcore {
         int leftRangeIndexForIndex(uint64_t idx);
         int leftRangeIndexForIndexWithBounds(uint64_t idx, unsigned int left, unsigned int right);
         void mergeRanges(unsigned int rangeIndex);
-        void tryToMergeAdjacentRanges(unsigned int rangeIndex);
+        bool tryToMergeAdjacentRanges(unsigned int rangeIndex);
 	};
 
 }
