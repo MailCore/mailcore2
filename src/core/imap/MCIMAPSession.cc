@@ -1335,6 +1335,22 @@ Array * /* IMAPFolder */ IMAPSession::fetchAllFolders(ErrorCode * pError)
     Array * result = resultsWithError(r, imap_folders, pError);
     if (* pError == ErrorConnection)
         mShouldDisconnect = true;
+    
+    bool hasInbox = false;
+    mc_foreacharray(IMAPFolder, folder, result) {
+        if (folder->path()->isEqual(MCSTR("INBOX"))) {
+            hasInbox = true;
+        }
+    }
+    
+    if (!hasInbox) {
+        r = mailimap_list(mImap, "", "INBOX", &imap_folders);
+        Array * inboxResult = resultsWithError(r, imap_folders, pError);
+        if (* pError == ErrorConnection)
+            mShouldDisconnect = true;
+        result->addObjectsFromArray(inboxResult);
+    }
+    
     return result;
 }
 
