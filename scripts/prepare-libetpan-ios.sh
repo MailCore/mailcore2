@@ -9,8 +9,8 @@ else
 	exit 1
 fi	
 
-url="https://github.com/dinhviethoa/libetpan.git"
-rev=df052805726c7825ea7dce127b5df501cbf62238
+url="https://github.com/mronge/libetpan.git"
+rev=1d93aeef6d9a0bde6c2382926c5b6829d3872900
 
 pushd `dirname $0` > /dev/null
 scriptpath=`pwd`
@@ -71,7 +71,7 @@ echo building libetpan
 
 cd "$srcdir/libetpan/build-mac"
 sdk="iphoneos$sdkversion"
-archs="armv7 armv7s"
+archs="armv7 armv7s arm64"
 echo building $sdk
 xcodebuild -project libetpan.xcodeproj -sdk $sdk -target "libetpan ios" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$archs"
 if test x$? != x0 ; then
