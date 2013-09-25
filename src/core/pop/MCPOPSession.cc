@@ -579,9 +579,11 @@ void POPSession::noop(ErrorCode * pError) {
     if (* pError != ErrorNone) {
         return;
     }
-    r = mailpop3_noop(mPop);
-    if ((r == MAILPOP3_ERROR_STREAM) || (r == MAILPOP3_ERROR_BAD_STATE)) {
-        * pError = ErrorConnection;
+    if (mPop->pop3_stream != NULL) {
+        r = mailpop3_noop(mPop);
+        if ((r == MAILPOP3_ERROR_STREAM) || (r == MAILPOP3_ERROR_BAD_STATE)) {
+            * pError = ErrorConnection;
+        }
     }
 }
 

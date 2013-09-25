@@ -1105,6 +1105,28 @@ IMAPFolderStatus * IMAPSession::folderStatus(String * folder, ErrorCode * pError
     return fs;
 }
 
+void IMAPSession::noop(ErrorCode * pError) {
+    int r;
+    
+    if (mImap == NULL)
+        return;
+    
+    MCLog("connect");
+    loginIfNeeded(pError);
+    if (* pError != ErrorNone) {
+        return;
+    }
+    if (mImap->imap_stream != NULL) {
+        r = mailimap_noop(mImap);
+        if (r == MAILIMAP_ERROR_STREAM) {
+            * pError = ErrorConnection;
+        }
+        if (r == MAILIMAP_ERROR_NOOP) {
+            * pError = ErrorNoop;
+        }
+    }
+}
+
 #pragma mark mailbox flags conversion
 
 static struct {
