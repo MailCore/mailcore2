@@ -472,14 +472,14 @@ MessageHeader * POPSession::fetchHeader(unsigned int index, ErrorCode * pError)
     }
     
     r = mailpop3_top(mPop, index, 0, &content, &content_len);
-	if (r == MAILPOP3_ERROR_STREAM) {
+    if (r == MAILPOP3_ERROR_STREAM) {
         * pError = ErrorConnection;
         return NULL;
     }
     else if (r != MAILPOP3_NO_ERROR) {
         * pError = ErrorFetch;
         return NULL;
-	}
+    }
     
     Data * data;
     data = new Data(content, (unsigned int) content_len);
@@ -514,14 +514,14 @@ Data * POPSession::fetchMessage(unsigned int index, POPProgressCallback * callba
     
     r = mailpop3_retr(mPop, index, &content, &content_len);
     mProgressCallback = NULL;
-	if (r == MAILPOP3_ERROR_STREAM) {
+    if (r == MAILPOP3_ERROR_STREAM) {
         * pError = ErrorConnection;
         return NULL;
     }
     else if (r != MAILPOP3_NO_ERROR) {
         * pError = ErrorFetch;
         return NULL;
-	}
+    }
     
     Data * result;
     result = Data::dataWithBytes(content, (unsigned int) content_len);
@@ -546,15 +546,15 @@ void POPSession::deleteMessage(unsigned int index, ErrorCode * pError)
     }
     
     r = mailpop3_dele(mPop, index);
-	if (r == MAILPOP3_ERROR_STREAM) {
+    if (r == MAILPOP3_ERROR_STREAM) {
         * pError = ErrorConnection;
         return;
     }
     else if (r != MAILPOP3_NO_ERROR) {
         * pError = ErrorDeleteMessage;
         return;
-	}
-	
+    }
+    
     * pError = ErrorNone;
 }
 
@@ -566,6 +566,23 @@ void POPSession::deleteMessage(POPMessageInfo * msg, ErrorCode * pError)
 void POPSession::checkAccount(ErrorCode * pError)
 {
     loginIfNeeded(pError);
+}
+
+void POPSession::noop(ErrorCode * pError) {
+    int r;
+    
+    if (mPop == NULL)
+        return;
+    
+    MCLog("connect");
+    loginIfNeeded(pError);
+    if (* pError != ErrorNone) {
+        return;
+    }
+    r = mailpop3_noop(mPop);
+    if ((r == MAILPOP3_ERROR_STREAM) || (r == MAILPOP3_ERROR_BAD_STATE)) {
+        * pError = ErrorConnection;
+    }
 }
 
 void POPSession::setConnectionLogger(ConnectionLogger * logger)

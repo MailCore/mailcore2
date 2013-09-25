@@ -18,6 +18,8 @@
 		84AF9E7E172DBAF600E60AA3 /* providers.json in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E7D172DBAF600E60AA3 /* providers.json */; };
 		84B639E317F279BB003B5BA2 /* MCSMTPNoopOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84B639E117F279BB003B5BA2 /* MCSMTPNoopOperation.cc */; };
 		84B639E417F279BB003B5BA2 /* MCSMTPNoopOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84B639E117F279BB003B5BA2 /* MCSMTPNoopOperation.cc */; };
+		84B639E817F27EBD003B5BA2 /* MCPOPNoopOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84B639E617F27EBD003B5BA2 /* MCPOPNoopOperation.cc */; };
+		84B639E917F27EBD003B5BA2 /* MCPOPNoopOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84B639E617F27EBD003B5BA2 /* MCPOPNoopOperation.cc */; };
 		943F1A9A17D964F600F0C798 /* MCIMAPConnectOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 943F1A9817D964F600F0C798 /* MCIMAPConnectOperation.cc */; };
 		943F1A9E17D96C5500F0C798 /* MCIMAPConnectOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 943F1A9817D964F600F0C798 /* MCIMAPConnectOperation.cc */; };
 		943F1AA017D9736100F0C798 /* MCIMAPConnectOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 943F1A9917D964F600F0C798 /* MCIMAPConnectOperation.h */; };
@@ -1144,6 +1146,8 @@
 		84AF9E7D172DBAF600E60AA3 /* providers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = providers.json; path = ../resources/providers.json; sourceTree = "<group>"; };
 		84B639E117F279BB003B5BA2 /* MCSMTPNoopOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCSMTPNoopOperation.cc; sourceTree = "<group>"; };
 		84B639E217F279BB003B5BA2 /* MCSMTPNoopOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSMTPNoopOperation.h; sourceTree = "<group>"; };
+		84B639E617F27EBD003B5BA2 /* MCPOPNoopOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCPOPNoopOperation.cc; sourceTree = "<group>"; };
+		84B639E717F27EBD003B5BA2 /* MCPOPNoopOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPOPNoopOperation.h; sourceTree = "<group>"; };
 		943F1A9817D964F600F0C798 /* MCIMAPConnectOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPConnectOperation.cc; sourceTree = "<group>"; };
 		943F1A9917D964F600F0C798 /* MCIMAPConnectOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPConnectOperation.h; sourceTree = "<group>"; };
 		9E774D871767C54E0065EB9B /* MCIMAPFolderStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPFolderStatus.h; sourceTree = "<group>"; };
@@ -1832,6 +1836,8 @@
 				C62C6F0516A7E54400737497 /* MCPOPFetchMessagesOperation.h */,
 				C6AC10FE17114DAF00B715B7 /* MCPOPCheckAccountOperation.cc */,
 				C6AC10FF17114DAF00B715B7 /* MCPOPCheckAccountOperation.h */,
+				84B639E617F27EBD003B5BA2 /* MCPOPNoopOperation.cc */,
+				84B639E717F27EBD003B5BA2 /* MCPOPNoopOperation.h */,
 				C62C6EF916A7C93F00737497 /* MCPOPOperation.cc */,
 				C62C6EFA16A7C94000737497 /* MCPOPOperation.h */,
 				C62C6EFC16A7CA1500737497 /* MCPOPOperationCallback.h */,
@@ -2558,6 +2564,7 @@
 				C64EA82916A29F2200778456 /* MCIMAPIdleOperation.cc in Sources */,
 				C6E665B91796500C0063F2CF /* mztools.c in Sources */,
 				C64EA82C16A2A08B00778456 /* MCIMAPFetchNamespaceOperation.cc in Sources */,
+				84B639E817F27EBD003B5BA2 /* MCPOPNoopOperation.cc in Sources */,
 				C62C6ED416A2A0E600737497 /* MCIMAPIdentityOperation.cc in Sources */,
 				C62C6ED816A398FA00737497 /* MCIMAPFolderInfoOperation.cc in Sources */,
 				C62C6EDA16A3D60700737497 /* MCIMAPAsyncConnection.cc in Sources */,
@@ -2756,6 +2763,7 @@
 				C6BA2BD21705F4E6003F0E9E /* MCIMAPIdleOperation.cc in Sources */,
 				C6E665BA1796500C0063F2CF /* mztools.c in Sources */,
 				C6BA2BD31705F4E6003F0E9E /* MCIMAPFetchNamespaceOperation.cc in Sources */,
+				84B639E917F27EBD003B5BA2 /* MCPOPNoopOperation.cc in Sources */,
 				C6BA2BD41705F4E6003F0E9E /* MCIMAPIdentityOperation.cc in Sources */,
 				C6BA2BD51705F4E6003F0E9E /* MCIMAPFolderInfoOperation.cc in Sources */,
 				C6BA2BD61705F4E6003F0E9E /* MCIMAPAsyncConnection.cc in Sources */,

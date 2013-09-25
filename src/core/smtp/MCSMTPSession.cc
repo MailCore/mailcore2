@@ -761,6 +761,7 @@ void SMTPSession::noop(ErrorCode * pError) {
     
     if (mSmtp == NULL)
         return;
+    
     MCLog("connect");
     loginIfNeeded(pError);
     if (* pError != ErrorNone) {
