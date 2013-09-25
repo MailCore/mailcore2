@@ -210,7 +210,8 @@ POPOperation * POPAsyncSession::checkAccountOperation()
     return op;
 }
 
-POPOperation * POPAsyncSession::noopOperation() {
+POPOperation * POPAsyncSession::noopOperation()
+{
     POPNoopOperation * op = new POPNoopOperation();
     op->setSession(this);
     op->autorelease();

@@ -231,7 +231,8 @@ SMTPOperation * SMTPAsyncSession::checkAccountOperation(Address * from)
     return (SMTPOperation *) op->autorelease();
 }
 
-SMTPOperation * SMTPAsyncSession::noopOperation() {
+SMTPOperation * SMTPAsyncSession::noopOperation()
+{
     SMTPNoopOperation * op = new SMTPNoopOperation();
     op->setSession(this);
     return (SMTPOperation *) op->autorelease();

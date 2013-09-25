@@ -1105,7 +1105,8 @@ IMAPFolderStatus * IMAPSession::folderStatus(String * folder, ErrorCode * pError
     return fs;
 }
 
-void IMAPSession::noop(ErrorCode * pError) {
+void IMAPSession::noop(ErrorCode * pError)
+{
     int r;
     
     if (mImap == NULL)

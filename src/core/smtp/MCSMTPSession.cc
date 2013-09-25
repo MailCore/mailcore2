@@ -756,7 +756,8 @@ void SMTPSession::sendMessage(MessageBuilder * msg, SMTPProgressCallback * callb
     recipients->release();
 }
 
-void SMTPSession::noop(ErrorCode * pError) {
+void SMTPSession::noop(ErrorCode * pError)
+{
     int r;
     
     if (mSmtp == NULL)

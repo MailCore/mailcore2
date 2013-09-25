@@ -568,7 +568,8 @@ void POPSession::checkAccount(ErrorCode * pError)
     loginIfNeeded(pError);
 }
 
-void POPSession::noop(ErrorCode * pError) {
+void POPSession::noop(ErrorCode * pError)
+{
     int r;
     
     if (mPop == NULL)
