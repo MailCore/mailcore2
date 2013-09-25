@@ -158,6 +158,12 @@ MCO_OBJC_SYNTHESIZE_BOOL(setCheckCertificateEnabled, isCheckCertificateEnabled)
     return OPAQUE_OPERATION(coreOp);
 }
 
+- (MCOPOPOperation *) noopOperation
+{
+    mailcore::POPOperation * coreOp = MCO_NATIVE_INSTANCE->noopOperation();
+    return OPAQUE_OPERATION(coreOp);
+}
+
 - (void) _logWithSender:(void *)sender connectionType:(MCOConnectionLogType)logType data:(NSData *)data
 {
     _connectionLogger(sender, logType, data);

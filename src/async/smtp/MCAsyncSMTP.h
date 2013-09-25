@@ -12,6 +12,7 @@
 
 #include <MailCore/MCSMTPAsyncSession.h>
 #include <MailCore/MCSMTPOperation.h>
+#include <MailCore/MCSMTPNoopOperation.h>
 #include <MailCore/MCSMTPOperationCallback.h>
 
 #endif

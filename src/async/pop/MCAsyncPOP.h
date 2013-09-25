@@ -15,6 +15,7 @@
 #include <MailCore/MCPOPFetchHeaderOperation.h>
 #include <MailCore/MCPOPFetchMessageOperation.h>
 #include <MailCore/MCPOPFetchMessagesOperation.h>
+#include <MailCore/MCPOPNoopOperation.h>
 #include <MailCore/MCPOPOperationCallback.h>
 
 #endif
