@@ -16,7 +16,7 @@
     MCOIndexSet * result = [MCOIndexSet indexSet];;
     
     [self enumerateRangesUsingBlock:^(NSRange range, BOOL * stop) {
-        [result addRange:MCORangeMake(range.location, range.length)];
+        [result addRange:MCORangeMake(range.location, range.length - 1)];
     }];
     
     return result;
