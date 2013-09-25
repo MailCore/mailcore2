@@ -4,6 +4,7 @@
 #include "MCSMTPSendWithDataOperation.h"
 #include "MCSMTPCheckAccountOperation.h"
 #include "MCSMTPDisconnectOperation.h"
+#include "MCSMTPNoopOperation.h"
 #include "MCSMTPOperation.h"
 #include "MCOperationQueueCallback.h"
 
@@ -226,6 +227,12 @@ SMTPOperation * SMTPAsyncSession::checkAccountOperation(Address * from)
 {
     SMTPCheckAccountOperation * op = new SMTPCheckAccountOperation();
     op->setFrom(from);
+    op->setSession(this);
+    return (SMTPOperation *) op->autorelease();
+}
+
+SMTPOperation * SMTPAsyncSession::noopOperation() {
+    SMTPNoopOperation * op = new SMTPNoopOperation();
     op->setSession(this);
     return (SMTPOperation *) op->autorelease();
 }

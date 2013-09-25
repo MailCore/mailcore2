@@ -41,7 +41,7 @@ namespace mailcore {
         SMTPOperationCallback * mSmtpCallback;
         ErrorCode mError;
     private:
-		virtual void bodyProgress(SMTPSession * session, unsigned int current, unsigned int maximum);
+        virtual void bodyProgress(SMTPSession * session, unsigned int current, unsigned int maximum);
         virtual void bodyProgressOnMainThread(void * context);
     };
     

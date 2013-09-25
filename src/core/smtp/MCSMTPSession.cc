@@ -756,6 +756,24 @@ void SMTPSession::sendMessage(MessageBuilder * msg, SMTPProgressCallback * callb
     recipients->release();
 }
 
+void SMTPSession::noop(ErrorCode * pError) {
+    int r;
+    
+    if (mSmtp == NULL)
+        return;
+    MCLog("connect");
+    loginIfNeeded(pError);
+    if (* pError != ErrorNone) {
+        return;
+    }
+    if (mSmtp->stream != NULL) {
+        r = mailsmtp_noop(mSmtp);
+        if (r == MAILSMTP_ERROR_STREAM) {
+            * pError = ErrorConnection;
+        }
+    }
+}
+
 bool SMTPSession::isDisconnected()
 {
     return mState == STATE_DISCONNECTED;
