@@ -2,15 +2,17 @@
 
 if xcodebuild -showsdks|grep iphoneos6.1 >/dev/null ; then
 	sdkversion=6.1
+         devicearchs="armv7 armv7s"
 elif xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
 	sdkversion=7.0
+         devicearchs="armv7 armv7s arm64"
 else
 	echo SDK not found
 	exit 1
 fi	
 
-url="https://github.com/dinhviethoa/libetpan.git"
-rev=df052805726c7825ea7dce127b5df501cbf62238
+url="https://github.com/dihnviethoa/libetpan.git"
+rev=df52b2892a372a73916c8532557c80569dc30258
 
 pushd `dirname $0` > /dev/null
 scriptpath=`pwd`
@@ -71,17 +73,16 @@ echo building libetpan
 
 cd "$srcdir/libetpan/build-mac"
 sdk="iphoneos$sdkversion"
-archs="armv7 armv7s"
 echo building $sdk
-xcodebuild -project libetpan.xcodeproj -sdk $sdk -target "libetpan ios" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$archs"
+xcodebuild -project libetpan.xcodeproj -sdk $sdk -target "libetpan ios" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$devicearchs"
 if test x$? != x0 ; then
   echo failed
   exit 1
 fi
 sdk="iphonesimulator$sdkversion"
-archs="i386"
+simarchs="i386"
 echo building $sdk
-xcodebuild -project libetpan.xcodeproj -sdk $sdk -target "libetpan ios" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$archs"
+xcodebuild -project libetpan.xcodeproj -sdk $sdk -target "libetpan ios" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$simarchs"
 if test x$? != x0 ; then
   echo failed
   exit 1
