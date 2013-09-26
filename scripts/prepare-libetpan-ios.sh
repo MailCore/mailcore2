@@ -11,8 +11,8 @@ else
 	exit 1
 fi	
 
-url="https://github.com/mronge/libetpan.git"
-rev=1d93aeef6d9a0bde6c2382926c5b6829d3872900
+url="https://github.com/dihnviethoa/libetpan.git"
+rev=df52b2892a372a73916c8532557c80569dc30258
 
 pushd `dirname $0` > /dev/null
 scriptpath=`pwd`
