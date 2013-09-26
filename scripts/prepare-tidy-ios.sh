@@ -62,7 +62,7 @@ echo building tidy-html5
 
 cd "$srcdir/tidy-html5/build-mac"
 sdk="iphoneos$sdkversion"
-archs="armv7 armv7s arm64"
+archs="armv7 armv7s"
 echo building $sdk
 xcodebuild -project Tidy.xcodeproj -sdk $sdk -target "tidy" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$archs" >/dev/null 2>&1
 if test x$? != x0 ; then
