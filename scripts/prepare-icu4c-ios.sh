@@ -2,8 +2,10 @@
 
 if xcodebuild -showsdks|grep iphoneos6.1 >/dev/null ; then
 	sdkversion=6.1
+          archs="armv7 armv7s i386"
 elif xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
 	sdkversion=7.0
+         archs="armv7 armv7s arm64 i386"
 else
 	echo SDK not found
 	exit 1
@@ -81,7 +83,15 @@ make >> "$logdir/icu4c-build.log"
 make install "prefix=$tmpdir/crossbuild/icu4c-$MARCH" >> "$logdir/icu4c-build.log"
 
 ARCH=arm
-MARCHS="armv7 armv7s"
+if xcodebuild -showsdks|grep iphoneos6.1 >/dev/null ; then
+          MARCHS="armv7 armv7s"
+elif xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
+	sdkversion=7.0
+         MARCHS="armv7 armv7s arm64"
+else
+	echo SDK not found
+	exit 1
+fi	
 
 iphonesdk="iphoneos$sdkversion"
 sysroot="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$sdkversion.sdk"
@@ -147,7 +157,6 @@ iculx_paths=""
 icutest_paths=""
 icutu_paths=""
 icuuc_paths=""
-archs="armv7 armv7s i386"
 for cur_arch in $archs ; do
 	icudata_paths="$icudata_paths icu4c-$cur_arch/lib/libicudata.a"
 	icui18n_paths="$icui18n_paths icu4c-$cur_arch/lib/libicui18n.a"
