@@ -4,10 +4,8 @@ url="https://github.com/dinhviethoa/ctemplate"
 
 if xcodebuild -showsdks|grep iphoneos6.1 >/dev/null ; then
 	sdkversion=6.1
-         MARCHS="armv7 armv7s"
 elif xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
 	sdkversion=7.0
-         MARCHS="armv7 armv7s arm64"
 else
 	echo SDK not found
 	exit 1
@@ -72,6 +70,7 @@ sdk="iphoneos$sdkversion"
 sysroot="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$sdkversion.sdk"
 
 ARCH=arm
+MARCHS="armv7 armv7s"
 for MARCH in $MARCHS; do
   echo "$logdir/ctemplate-build.log"
   export CFLAGS="-arch ${MARCH} -isysroot $sysroot"

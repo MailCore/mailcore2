@@ -2,10 +2,8 @@
 
 if xcodebuild -showsdks|grep iphoneos6.1 >/dev/null ; then
 	sdkversion=6.1
-         devicearchs="armv7 armv7s"
 elif xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
 	sdkversion=7.0
-         devicearchs="armv7 armv7s arm64"
 else
 	echo SDK not found
 	exit 1
@@ -56,16 +54,17 @@ done
 echo building mailcore2
 cd "$srcdir/mailcore2/build-mac"
 sdk="iphoneos$sdkversion"
+archs="armv7 armv7s"
 echo building $sdk
-xcodebuild -project mailcore2.xcodeproj -sdk $sdk -target "static mailcore2 ios" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$devicearchs"
+xcodebuild -project mailcore2.xcodeproj -sdk $sdk -target "static mailcore2 ios" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$archs"
 if test x$? != x0 ; then
   echo failed
   exit 1
 fi
 sdk="iphonesimulator$sdkversion"
-simarchs="i386"
+archs="i386"
 echo building $sdk
-xcodebuild -project mailcore2.xcodeproj -sdk $sdk -target "static mailcore2 ios" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$simarchs"
+xcodebuild -project mailcore2.xcodeproj -sdk $sdk -target "static mailcore2 ios" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$archs"
 if test x$? != x0 ; then
   echo failed
   exit 1
