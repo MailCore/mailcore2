@@ -29,7 +29,6 @@
 #include <MailCore/MCIMAPIdentityOperation.h>
 #include <MailCore/MCIMAPCapabilityOperation.h>
 #include <MailCore/MCIMAPQuotaOperation.h>
-#include <MailCore/MCIMAPNoopOperation.h>
 #include <MailCore/MCIMAPOperationCallback.h>
 #include <MailCore/MCIMAPMessageRenderingOperation.h>
 

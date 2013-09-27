@@ -8,7 +8,7 @@
 
 #import "MCOPOPNoopOperation.h"
 
-#include "MCAsyncPOP.h"
+#include "MCPOPNoopOperation.h"
 
 #import "MCOOperation+Private.h"
 #import "MCOUtils.h"

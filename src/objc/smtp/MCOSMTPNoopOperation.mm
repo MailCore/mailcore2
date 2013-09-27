@@ -8,7 +8,7 @@
 
 #import "MCOSMTPNoopOperation.h"
 
-#include "MCAsyncSMTP.h"
+#include "MCSMTPNoopOperation.h"
 
 #import "MCOUtils.h"
 #import "MCOOperation+Private.h"

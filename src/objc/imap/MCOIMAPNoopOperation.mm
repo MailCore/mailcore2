@@ -8,7 +8,7 @@
 
 #import "MCOIMAPNoopOperation.h"
 
-#include "MCAsyncIMAP.h"
+#include "MCIMAPNoopOperation.h"
 
 #import "MCOOperation+Private.h"
 #import "MCOUtils.h"
