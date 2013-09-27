@@ -28,8 +28,8 @@
 		84B639E417F279BB003B5BA2 /* MCSMTPNoopOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84B639E117F279BB003B5BA2 /* MCSMTPNoopOperation.cc */; };
 		84B639E817F27EBD003B5BA2 /* MCPOPNoopOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84B639E617F27EBD003B5BA2 /* MCPOPNoopOperation.cc */; };
 		84B639E917F27EBD003B5BA2 /* MCPOPNoopOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84B639E617F27EBD003B5BA2 /* MCPOPNoopOperation.cc */; };
-		84B639ED17F280F3003B5BA2 /* MCIMAPNoopOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84B639EB17F280F3003B5BA2 /* MCIMAPNoopOperation.cpp */; };
-		84B639EE17F280F3003B5BA2 /* MCIMAPNoopOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84B639EB17F280F3003B5BA2 /* MCIMAPNoopOperation.cpp */; };
+		84B639ED17F280F3003B5BA2 /* MCIMAPNoopOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84B639EB17F280F3003B5BA2 /* MCIMAPNoopOperation.cc */; };
+		84B639EE17F280F3003B5BA2 /* MCIMAPNoopOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84B639EB17F280F3003B5BA2 /* MCIMAPNoopOperation.cc */; };
 		84B639F117F282B4003B5BA2 /* MCOPOPNoopOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84B639F017F282B4003B5BA2 /* MCOPOPNoopOperation.mm */; };
 		84B639F217F282B4003B5BA2 /* MCOPOPNoopOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84B639F017F282B4003B5BA2 /* MCOPOPNoopOperation.mm */; };
 		84B639F317F2839C003B5BA2 /* MCOPOPNoopOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84B639EF17F282B4003B5BA2 /* MCOPOPNoopOperation.h */; };
@@ -1176,7 +1176,7 @@
 		84B639E217F279BB003B5BA2 /* MCSMTPNoopOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSMTPNoopOperation.h; sourceTree = "<group>"; };
 		84B639E617F27EBD003B5BA2 /* MCPOPNoopOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCPOPNoopOperation.cc; sourceTree = "<group>"; };
 		84B639E717F27EBD003B5BA2 /* MCPOPNoopOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPOPNoopOperation.h; sourceTree = "<group>"; };
-		84B639EB17F280F3003B5BA2 /* MCIMAPNoopOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPNoopOperation.cpp; sourceTree = "<group>"; };
+		84B639EB17F280F3003B5BA2 /* MCIMAPNoopOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPNoopOperation.cc; sourceTree = "<group>"; };
 		84B639EC17F280F3003B5BA2 /* MCIMAPNoopOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPNoopOperation.h; sourceTree = "<group>"; };
 		84B639EF17F282B4003B5BA2 /* MCOPOPNoopOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOPOPNoopOperation.h; sourceTree = "<group>"; };
 		84B639F017F282B4003B5BA2 /* MCOPOPNoopOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOPOPNoopOperation.mm; sourceTree = "<group>"; };
@@ -1848,7 +1848,7 @@
 				C608167A177635D2001F1018 /* MCIMAPDisconnectOperation.h */,
 				DA0F1C79177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.cc */,
 				DA0F1C7A177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.h */,
-				84B639EB17F280F3003B5BA2 /* MCIMAPNoopOperation.cpp */,
+				84B639EB17F280F3003B5BA2 /* MCIMAPNoopOperation.cc */,
 				84B639EC17F280F3003B5BA2 /* MCIMAPNoopOperation.h */,
 			);
 			path = imap;
@@ -2538,7 +2538,7 @@
 			files = (
 				C64EA6F4169E847800778456 /* MCAbstractMessage.cc in Sources */,
 				C64EA6F6169E847800778456 /* MCAbstractMessagePart.cc in Sources */,
-				84B639ED17F280F3003B5BA2 /* MCIMAPNoopOperation.cpp in Sources */,
+				84B639ED17F280F3003B5BA2 /* MCIMAPNoopOperation.cc in Sources */,
 				C64EA6F8169E847800778456 /* MCAbstractMultipart.cc in Sources */,
 				C64EA6FA169E847800778456 /* MCAbstractPart.cc in Sources */,
 				C64EA6FC169E847800778456 /* MCAddress.cc in Sources */,
@@ -2741,7 +2741,7 @@
 			files = (
 				C6BA2B991705F4E6003F0E9E /* MCAbstractMessage.cc in Sources */,
 				C6BA2B9A1705F4E6003F0E9E /* MCAbstractMessagePart.cc in Sources */,
-				84B639EE17F280F3003B5BA2 /* MCIMAPNoopOperation.cpp in Sources */,
+				84B639EE17F280F3003B5BA2 /* MCIMAPNoopOperation.cc in Sources */,
 				C6BA2B9B1705F4E6003F0E9E /* MCAbstractMultipart.cc in Sources */,
 				C6BA2B9C1705F4E6003F0E9E /* MCAbstractPart.cc in Sources */,
 				C6BA2B9D1705F4E6003F0E9E /* MCAddress.cc in Sources */,
