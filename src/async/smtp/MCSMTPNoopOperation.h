@@ -1,13 +1,13 @@
 //
-//  SMTPDisconnectOperation.h
+//  MCSMTPNoopOperation.h
 //  mailcore2
 //
-//  Created by DINH Viêt Hoà on 6/22/13.
+//  Created by Robert Widmann on 9/24/13.
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCSMTPDISCONNECTOPERATION_H_
-#define __MAILCORE_MCSMTPDISCONNECTOPERATION_H_
+#ifndef __MAILCORE_MCSMTPNOOPOPERATION_H_
+#define __MAILCORE_MCSMTPNOOPOPERATION_H_
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCAbstract.h>
@@ -16,15 +16,16 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-    
-    class SMTPDisconnectOperation : public SMTPOperation {
+
+    class SMTPNoopOperation : public SMTPOperation {
     public:
-        SMTPDisconnectOperation();
-        virtual ~SMTPDisconnectOperation();
+        SMTPNoopOperation();
+        virtual ~SMTPNoopOperation();
         
     public: // subclass behavior
         virtual void main();
     };
+    	
 }
 
 #endif
