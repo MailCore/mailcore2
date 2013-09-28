@@ -34,6 +34,7 @@
 #include "MCIMAPQuotaOperation.h"
 #include "MCOperationQueueCallback.h"
 #include "MCIMAPDisconnectOperation.h"
+#include "MCIMAPNoopOperation.h"
 #include "MCIMAPAsyncSession.h"
 #include "MCConnectionLogger.h"
 #include "MCIMAPMessageRenderingOperation.h"
@@ -499,6 +500,14 @@ IMAPOperation * IMAPAsyncConnection::connectOperation()
 IMAPOperation * IMAPAsyncConnection::checkAccountOperation()
 {
     IMAPCheckAccountOperation * op = new IMAPCheckAccountOperation();
+    op->setSession(this);
+    op->autorelease();
+    return op;
+}
+
+IMAPOperation * IMAPAsyncConnection::noopOperation()
+{
+    IMAPNoopOperation * op = new IMAPNoopOperation();
     op->setSession(this);
     op->autorelease();
     return op;

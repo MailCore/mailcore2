@@ -130,6 +130,16 @@ See MCOConnectionType for more information.*/
 */
 - (MCOPOPOperation *) checkAccountOperation;
 
+/**
+ Returns an operation that will perform a No-Op operation.
+ 
+ MCOPOPOperation * op = [session noopOperation];
+ [op start:^(NSError * error) {
+ ...
+ }];
+ */
+- (MCOPOPOperation *) noopOperation;
+
 @end
 
 #endif

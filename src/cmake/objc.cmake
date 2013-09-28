@@ -38,6 +38,7 @@ set(objc_imap_files
   objc/imap/MCOIMAPQuotaOperation.mm
   objc/imap/MCOIMAPSearchExpression.mm
   objc/imap/MCOIMAPSearchOperation.mm
+  objc/imap/MCOIMAPNoopOperation.mm
   objc/imap/MCOIMAPSession.mm
 )
 
@@ -45,6 +46,7 @@ set(objc_pop_files
   objc/pop/MCOPOPFetchHeaderOperation.mm
   objc/pop/MCOPOPFetchMessageOperation.mm
   objc/pop/MCOPOPFetchMessagesOperation.mm
+  objc/pop/MCOPOPNoopOperation.mm
   objc/pop/MCOPOPMessageInfo.mm
   objc/pop/MCOPOPOperation.mm
   objc/pop/MCOPOPSession.mm
@@ -67,6 +69,7 @@ set(objc_rfc822_files
 set(objc_smtp_files
   objc/smtp/MCOSMTPOperation.mm
   objc/smtp/MCOSMTPSendOperation.mm
+  objc/smtp/MCOSMTPNoopOperation.mm
   objc/smtp/MCOSMTPSession.mm
 )
 

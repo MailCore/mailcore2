@@ -396,6 +396,12 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
     return OPAQUE_OPERATION(coreOp);
 }
 
+- (MCOIMAPOperation *) noopOperation
+{
+    IMAPOperation *coreOp = MCO_NATIVE_INSTANCE->noopOperation();
+    return OPAQUE_OPERATION(coreOp);
+}
+
 - (MCOIMAPOperation *)checkAccountOperation
 {
     IMAPOperation *coreOp = MCO_NATIVE_INSTANCE->checkAccountOperation();

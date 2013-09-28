@@ -28,6 +28,7 @@ set(async_imap_files
   async/imap/MCIMAPStoreFlagsOperation.cc
   async/imap/MCIMAPStoreLabelsOperation.cc
   async/imap/MCIMAPSubscribeFolderOperation.cc
+  async/imap/MCIMAPNoopOperation.cc
 )
 
 set(async_pop_files
@@ -37,6 +38,7 @@ set(async_pop_files
   async/pop/MCPOPFetchHeaderOperation.cc
   async/pop/MCPOPFetchMessageOperation.cc
   async/pop/MCPOPFetchMessagesOperation.cc
+  async/pop/MCPOPNoopOperation.cc
   async/pop/MCPOPOperation.cc
 )
 
@@ -46,6 +48,7 @@ set(async_smtp_files
   async/smtp/MCSMTPDisconnectOperation.cc
   async/smtp/MCSMTPOperation.cc
   async/smtp/MCSMTPSendWithDataOperation.cc
+  async/smtp/MCSMTPNoopOperation.cc
 )
 
 set(async_files
