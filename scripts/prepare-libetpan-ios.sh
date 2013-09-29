@@ -11,8 +11,8 @@ else
 	exit 1
 fi	
 
-url="https://github.com/mronge/libetpan.git"
-rev=1d93aeef6d9a0bde6c2382926c5b6829d3872900
+url="https://github.com/dinhviethoa/libetpan.git"
+rev=6c030e4f5c56da91d41ac68a277509a30ca45b77
 
 pushd `dirname $0` > /dev/null
 scriptpath=`pwd`
@@ -74,15 +74,15 @@ echo building libetpan
 cd "$srcdir/libetpan/build-mac"
 sdk="iphoneos$sdkversion"
 echo building $sdk
-xcodebuild -project libetpan.xcodeproj -sdk $sdk -target "libetpan ios" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$devicearchs"
+xcodebuild -project libetpan.xcodeproj -sdk $sdk -target "libetpan ios" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$devicearchs" IPHONEOS_DEPLOYMENT_TARGET="$sdkversion"
 if test x$? != x0 ; then
   echo failed
   exit 1
 fi
 sdk="iphonesimulator$sdkversion"
-simarchs="i386"
+simarchs="i386 x86_64"
 echo building $sdk
-xcodebuild -project libetpan.xcodeproj -sdk $sdk -target "libetpan ios" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$simarchs"
+xcodebuild -project libetpan.xcodeproj -sdk $sdk -target "libetpan ios" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$simarchs" IPHONEOS_DEPLOYMENT_TARGET="$sdkversion"
 if test x$? != x0 ; then
   echo failed
   exit 1

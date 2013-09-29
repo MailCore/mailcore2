@@ -42,16 +42,17 @@ else
 	cd tidy-html5
 fi
 version=`git rev-parse HEAD | cut -c1-10`
+build_version="$version~1"
 
-if test -f "$resultdir/tidy-html5-ios-$version.zip" ; then
+if test -f "$resultdir/tidy-html5-ios-$build_version.zip" ; then
 	echo install from cache
 	popd >/dev/null
 	rm -rf ../Externals/tidy-html5-ios
 	mkdir -p ../Externals/tmp
-	unzip -q "$resultdir/tidy-html5-ios-$version.zip" -d ../Externals/tmp
-	mv "../Externals/tmp/tidy-html5-ios-$version/tidy-html5-ios" ../Externals
+	unzip -q "$resultdir/tidy-html5-ios-$build_version.zip" -d ../Externals/tmp
+	mv "../Externals/tmp/tidy-html5-ios-$build_version/tidy-html5-ios" ../Externals
   mkdir -p ../Externals/installed
-  ln -sf "$resultdir/tidy-html5-ios-$version.zip" ../Externals/installed
+  ln -sf "$resultdir/tidy-html5-ios-$build_version.zip" ../Externals/installed
 	rm -rf ../Externals/tmp
 	exit 0
 fi
@@ -65,15 +66,15 @@ echo building tidy-html5
 cd "$srcdir/tidy-html5/build-mac"
 sdk="iphoneos$sdkversion"
 echo building $sdk
-xcodebuild -project Tidy.xcodeproj -sdk $sdk -target "tidy" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$devicearchs" >/dev/null 2>&1
+xcodebuild -project Tidy.xcodeproj -sdk $sdk -target "tidy" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$devicearchs" IPHONEOS_DEPLOYMENT_TARGET="$sdkversion" >/dev/null 2>&1
 if test x$? != x0 ; then
   echo failed
   exit 1
 fi
 sdk="iphonesimulator$sdkversion"
-simarchs="i386"
+simarchs="i386 x86_64"
 echo building $sdk
-xcodebuild -project Tidy.xcodeproj -sdk $sdk -target "tidy" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$simarchs" >/dev/null 2>&1
+xcodebuild -project Tidy.xcodeproj -sdk $sdk -target "tidy" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$simarchs" IPHONEOS_DEPLOYMENT_TARGET="$sdkversion" >/dev/null 2>&1
 if test x$? != x0 ; then
   echo failed
   exit 1
@@ -81,25 +82,25 @@ fi
 echo finished
 
 cd "$tmpdir/bin"
-mkdir -p "tidy-html5-ios-$version/tidy-html5-ios"
-mkdir -p "tidy-html5-ios-$version/tidy-html5-ios/lib"
+mkdir -p "tidy-html5-ios-$build_version/tidy-html5-ios"
+mkdir -p "tidy-html5-ios-$build_version/tidy-html5-ios/lib"
 lipo -create Release-iphoneos/libtidy.a \
   Release-iphonesimulator/libtidy.a \
-  -output "tidy-html5-ios-$version/tidy-html5-ios/lib/libtidy.a"
-mv Release-iphoneos/include "tidy-html5-ios-$version/tidy-html5-ios"
-zip -qry "$resultdir/tidy-html5-ios-$version.zip" "tidy-html5-ios-$version"
+  -output "tidy-html5-ios-$build_version/tidy-html5-ios/lib/libtidy.a"
+mv Release-iphoneos/include "tidy-html5-ios-$build_version/tidy-html5-ios"
+zip -qry "$resultdir/tidy-html5-ios-$build_version.zip" "tidy-html5-ios-$build_version"
 rm -f "$resultdir/tidy-html5-ios=latest.zip"
 cd "$resultdir"
-ln -s "tidy-html5-ios-$version.zip" "tidy-html5-ios-latest.zip"
+ln -s "tidy-html5-ios-$build_version.zip" "tidy-html5-ios-latest.zip"
 
-echo build of tidy-html5-ios-$version done
+echo build of tidy-html5-ios-$build_version done
 
 popd >/dev/null
 
 rm -rf ../Externals/tidy-html5-ios
 mkdir -p ../Externals/tmp
-unzip -q "$resultdir/tidy-html5-ios-$version.zip" -d ../Externals/tmp
-mv "../Externals/tmp/tidy-html5-ios-$version/tidy-html5-ios" ../Externals
+unzip -q "$resultdir/tidy-html5-ios-$build_version.zip" -d ../Externals/tmp
+mv "../Externals/tmp/tidy-html5-ios-$build_version/tidy-html5-ios" ../Externals
 rm -rf ../Externals/tmp
 
 echo cleaning

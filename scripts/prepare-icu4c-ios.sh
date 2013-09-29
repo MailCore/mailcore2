@@ -1,19 +1,19 @@
 #!/bin/sh
 
-if xcodebuild -showsdks|grep iphoneos6.1 >/dev/null ; then
-	sdkversion=6.1
-          archs="armv7 armv7s i386"
-elif xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
-	sdkversion=7.0
-         archs="armv7 armv7s arm64 i386"
+if xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
+    sdkversion=7.0
+    archs="armv7 armv7s arm64 i386 x86_64"
+elif xcodebuild -showsdks|grep iphoneos6.1 >/dev/null ; then
+    sdkversion=6.1
+    archs="armv7 armv7s i386"
 else
-	echo SDK not found
-	exit 1
+    echo SDK not found
+    exit 1
 fi	
 
 versionfolder='51.1'
 version='51_1'
-build_version="$version~1"
+build_version="$version~2"
 url="http://download.icu-project.org/files/icu4c/$versionfolder/icu4c-$version-src.tgz"
 package_filename="icu4c-$version-src.tgz"
 sysrootpath="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk"
@@ -67,6 +67,9 @@ else
 fi
 
 tar xf "$package_filename"
+cd icu
+patch -p1 < "$scriptpath/icu4c-ios.patch"
+cd ..
 
 TOOLCHAIN=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
 export CC=$TOOLCHAIN/clang
@@ -83,14 +86,14 @@ make >> "$logdir/icu4c-build.log"
 make install "prefix=$tmpdir/crossbuild/icu4c-$MARCH" >> "$logdir/icu4c-build.log"
 
 ARCH=arm
-if xcodebuild -showsdks|grep iphoneos6.1 >/dev/null ; then
-          MARCHS="armv7 armv7s"
-elif xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
-	sdkversion=7.0
-         MARCHS="armv7 armv7s arm64"
+if xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
+    sdkversion=7.0
+    MARCHS="armv7 armv7s arm64"
+elif xcodebuild -showsdks|grep iphoneos6.1 >/dev/null ; then
+    MARCHS="armv7 armv7s"
 else
-	echo SDK not found
-	exit 1
+    echo SDK not found
+    exit 1
 fi	
 
 iphonesdk="iphoneos$sdkversion"
@@ -98,7 +101,7 @@ sysroot="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/
 
 cd "$srcdir/icu/source"
 for MARCH in $MARCHS; do
-  export CFLAGS="-arch ${MARCH} -isysroot ${sysroot} -DUCONFIG_NO_FILE_IO=1"
+  export CFLAGS="-arch ${MARCH} -isysroot ${sysroot} -DUCONFIG_NO_FILE_IO=1 -miphoneos-version-min=$sdkversion"
   export CXXFLAGS="$CFLAGS -stdlib=libstdc++ -std=gnu++11"
   export LDFLAGS="-lstdc++ -stdlib=libstdc++"
 
@@ -119,11 +122,11 @@ sdk="iphonesimulator$sdkversion"
 sysroot="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator$sdkversion.sdk"
 
 ARCH=i386
-MARCHS=i386
+MARCHS="x86_64 i386"
 
 cd "$srcdir/icu/source"
 for MARCH in $MARCHS; do
-  export CFLAGS="-arch ${MARCH} -isysroot ${sysroot} -DUCONFIG_NO_FILE_IO=1"
+  export CFLAGS="-arch ${MARCH} -isysroot ${sysroot} -DUCONFIG_NO_FILE_IO=1 -miphoneos-version-min=$sdkversion"
   export CXXFLAGS="$CFLAGS -stdlib=libstdc++ -std=gnu++11"
   export LDFLAGS="-lstdc++ -stdlib=libstdc++"
 
@@ -131,7 +134,7 @@ for MARCH in $MARCHS; do
   
 	mkdir -p "$tmpdir/build/icu4c-$MARCH"
 	cd "$tmpdir/build/icu4c-$MARCH"
-	"$srcdir/icu/source/configure" --host=$ARCH-apple-darwin10.6.0 --enable-static --disable-shared --with-data-packaging=archive --with-cross-build=$tmpdir/crossbuild/icu4c-x86_64 >> "$logdir/icu4c-build.log"
+	"$srcdir/icu/source/configure" --host=$MARCH-apple-darwin10.6.0 --enable-static --disable-shared --with-data-packaging=archive --with-cross-build=$tmpdir/crossbuild/icu4c-x86_64 >> "$logdir/icu4c-build.log"
 	make >> "$logdir/icu4c-build.log"
 	make install "prefix=$tmpdir/bin/icu4c-$MARCH" >> "$logdir/icu4c-build.log"
 	if test x$? != x0 ; then
