@@ -84,7 +84,7 @@ void OperationQueue::runOperations()
             break;
         }
 
-        performMethodOnMainThread((Object::Method) &OperationQueue::beforeMain, op, true);
+        performOnCallbackThread(op, (Object::Method) &OperationQueue::beforeMain, op, true);
         
         op->main();
         
@@ -101,7 +101,7 @@ void OperationQueue::runOperations()
         pthread_mutex_unlock(&mLock);
         
         if (!op->isCancelled()) {
-            performMethodOnMainThread((Object::Method) &OperationQueue::callbackOnMainThread, op, true);
+            performOnCallbackThread(op, (Object::Method) &OperationQueue::callbackOnMainThread, op, true);
         }
         
         if (needsCheckRunning) {
@@ -113,6 +113,19 @@ void OperationQueue::runOperations()
         pool->release();
     }
     MCLog("cleanup thread %p", this);
+}
+
+void OperationQueue::performOnCallbackThread(Operation * op, Method method, void * context, bool waitUntilDone)
+{
+#if __APPLE__
+    dispatch_queue_t queue = op->callbackDispatchQueue();
+    if (queue == NULL) {
+        queue = dispatch_get_main_queue();
+    }
+    performMethodOnDispatchQueue(method, context, op->callbackDispatchQueue(), waitUntilDone);
+#else
+    performMethodOnMainThread(method, context, waitUntilDone);
+#endif
 }
 
 void OperationQueue::beforeMain(Operation * op)
