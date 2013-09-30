@@ -529,6 +529,14 @@ IMAPQuotaOperation * IMAPAsyncConnection::quotaOperation()
     return op;
 }
 
+IMAPOperation * IMAPAsyncConnection::disconnectOperation()
+{
+    IMAPDisconnectOperation * op = new IMAPDisconnectOperation();
+    op->setSession(this);
+    op->autorelease();
+    return op;
+}
+
 IMAPSession * IMAPAsyncConnection::session()
 {
     return mSession;

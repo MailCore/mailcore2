@@ -539,6 +539,8 @@
 
 - (MCOIMAPQuotaOperation *) quotaOperation;
 
+- (MCOIMAPOperation *) disconnectOperation;
+
 /** @name Search Operations */
 
 /**
