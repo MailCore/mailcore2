@@ -2793,6 +2793,12 @@ void IMAPSession::unsetupIdle()
 
 void IMAPSession::disconnect()
 {
+    if (mState == STATE_DISCONNECTED)
+    {
+        return;
+    }
+    
+    mailimap_logout(mImap);
     unsetup();
 }
 

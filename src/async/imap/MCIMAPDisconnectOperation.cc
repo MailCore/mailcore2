@@ -13,14 +13,6 @@
 
 using namespace mailcore;
 
-IMAPDisconnectOperation::IMAPDisconnectOperation()
-{
-}
-
-IMAPDisconnectOperation::~IMAPDisconnectOperation()
-{
-}
-
 void IMAPDisconnectOperation::main()
 {
     session()->session()->disconnect();

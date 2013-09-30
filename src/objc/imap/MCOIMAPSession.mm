@@ -423,7 +423,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
 - (MCOIMAPOperation *) disconnectOperation
 {
     IMAPOperation *coreOp = MCO_NATIVE_INSTANCE->disconnectOperation();
-    return MCO_TO_OBJC_OP(coreOp);
+    return OPAQUE_OPERATION(coreOp);
 }
 
 - (void) _logWithSender:(void *)sender connectionType:(MCOConnectionLogType)logType data:(NSData *)data
