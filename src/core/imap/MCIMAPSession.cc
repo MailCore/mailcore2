@@ -2797,8 +2797,6 @@ void IMAPSession::disconnect()
     {
         return;
     }
-    
-    mailimap_logout(mImap);
     unsetup();
 }
 

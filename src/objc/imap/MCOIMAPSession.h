@@ -539,6 +539,15 @@
 
 - (MCOIMAPQuotaOperation *) quotaOperation;
 
+/**
+ Returns an operation to disconnect cleanly from the server.
+ 
+ MCOIMAPOperation *op = [session disconnectOperationSendLogout:YES];
+ [disconnectOperation start:^(NSError *error) {
+    ...
+ }];
+ 
+ */
 - (MCOIMAPOperation *) disconnectOperation;
 
 /** @name Search Operations */
