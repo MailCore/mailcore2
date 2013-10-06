@@ -62,6 +62,9 @@ else
 fi
 
 tar xf "$package_filename"
+cd icu
+patch -p1 < "$scriptpath/icu4c-ios.patch"
+cd ..
 
 echo building icu4c
 cd "$srcdir/icu/source"

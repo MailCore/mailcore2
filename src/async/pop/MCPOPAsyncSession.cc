@@ -14,6 +14,7 @@
 #include "MCPOPDeleteMessagesOperation.h"
 #include "MCPOPFetchMessagesOperation.h"
 #include "MCPOPCheckAccountOperation.h"
+#include "MCPOPNoopOperation.h"
 #include "MCOperationQueueCallback.h"
 #include "MCConnectionLogger.h"
 
@@ -204,6 +205,14 @@ POPOperation * POPAsyncSession::disconnectOperation()
 POPOperation * POPAsyncSession::checkAccountOperation()
 {
     POPCheckAccountOperation * op = new POPCheckAccountOperation();
+    op->setSession(this);
+    op->autorelease();
+    return op;
+}
+
+POPOperation * POPAsyncSession::noopOperation()
+{
+    POPNoopOperation * op = new POPNoopOperation();
     op->setSession(this);
     op->autorelease();
     return op;

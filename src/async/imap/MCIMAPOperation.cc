@@ -9,6 +9,9 @@
 #include "MCIMAPOperation.h"
 
 #include <stdlib.h>
+#if __APPLE__
+#include <dispatch/dispatch.h>
+#endif
 
 #include "MCIMAPAsyncSession.h"
 #include "MCIMAPSession.h"
@@ -90,7 +93,7 @@ void IMAPOperation::bodyProgress(IMAPSession * session, unsigned int current, un
     context->current = current;
     context->maximum = maximum;
     retain();
-    performMethodOnMainThread((Object::Method) &IMAPOperation::bodyProgressOnMainThread, context);
+    performMethodOnMainThread((Object::Method) &IMAPOperation::bodyProgressOnMainThread, context, true);
 }
 
 void IMAPOperation::bodyProgressOnMainThread(void * ctx)
@@ -117,7 +120,7 @@ void IMAPOperation::itemsProgress(IMAPSession * session, unsigned int current, u
     context->current = current;
     context->maximum = maximum;
     retain();
-    performMethodOnMainThread((Object::Method) &IMAPOperation::itemsProgressOnMainThread, context);
+    performMethodOnMainThread((Object::Method) &IMAPOperation::itemsProgressOnMainThread, context, true);
 }
 
 void IMAPOperation::itemsProgressOnMainThread(void * ctx)

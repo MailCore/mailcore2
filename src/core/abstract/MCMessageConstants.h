@@ -211,6 +211,7 @@ namespace mailcore {
         ErrorCompression,
         ErrorNoSender,
         ErrorNoRecipient,
+        ErrorNoop,
     };
     
     enum PartType {

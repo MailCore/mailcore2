@@ -47,6 +47,7 @@ static NSString * MCOLocalizedDescriptionTable[] = {
     @"Compression is not available",                                                  /** MCOErrorCompression */
     @"A sender is required to send message",                                          /** MCOErrorNoSender */
     @"A recipient is required to send message",                                       /** MCOErrorNoRecipient */
+    @"An error occured while performing a No-Op operation.",                          /** MCOErrorNoop */
 };
 
 @implementation NSError (MCO)

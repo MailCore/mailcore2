@@ -21,34 +21,36 @@ namespace mailcore {
         
         virtual void setHostname(String * hostname);
         virtual String * hostname();
-
+        
         virtual void setPort(unsigned int port);
         virtual unsigned int port();
-
+        
         virtual void setUsername(String * username);
         virtual String * username();
-
+        
         virtual void setPassword(String * password);
         virtual String * password();
-
+        
         virtual void setAuthType(AuthType authType);
         virtual AuthType authType();
-
+        
         virtual void setConnectionType(ConnectionType connectionType);
         virtual ConnectionType connectionType();
-
+        
         virtual void setTimeout(time_t timeout);
         virtual time_t timeout();
         
         virtual void setCheckCertificateEnabled(bool enabled);
         virtual bool isCheckCertificateEnabled();
-
+        
         virtual void connect(ErrorCode * pError);
         virtual void disconnect();
         
         virtual void login(ErrorCode * pError);
         
         virtual void checkAccount(ErrorCode * pError);
+        
+        virtual void noop(ErrorCode * pError);
         
         Array * /* POPMessageInfo */ fetchMessages(ErrorCode * pError);
         

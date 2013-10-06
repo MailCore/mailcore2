@@ -136,6 +136,8 @@ namespace mailcore {
         virtual void connect(ErrorCode * pError);
         virtual void disconnect();
         
+        virtual void noop(ErrorCode * pError);
+        
         virtual HashMap * fetchNamespace(ErrorCode * pError);
         
         virtual void login(ErrorCode * pError);

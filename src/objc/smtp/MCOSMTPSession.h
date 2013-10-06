@@ -120,6 +120,16 @@
 */
 - (MCOSMTPOperation *) checkAccountOperationWithFrom:(MCOAddress *)from;
 
+/**
+ Returns an operation that will perform a No-Op.
+ 
+ MCOPOPOperation * op = [session noopOperation];
+ [op start:^(NSError * error) {
+ ...
+ }];
+ */
+- (MCOSMTPOperation *) noopOperation;
+
 @end
 
 #endif

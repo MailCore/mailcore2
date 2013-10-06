@@ -503,6 +503,16 @@
 - (MCOIMAPOperation *)connectOperation;
 
 /**
+ Returns an operation that will perform a No-Op operation on the given IMAP server.
+ 
+ MCOIMAPOperation * op = [session noopOperation];
+ [op start:^(NSError * error) {
+ ...
+ }];
+ */
+- (MCOIMAPOperation *) noopOperation;
+
+/**
  Returns an operation that will check whether the IMAP account is valid.
 
      MCOIMAPOperation * op = [session checkAccountOperation];

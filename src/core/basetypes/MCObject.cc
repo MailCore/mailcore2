@@ -205,6 +205,22 @@ void Object::performMethodOnMainThread(Method method, void * context, bool waitU
     }
 }
 
+#if __APPLE__
+void Object::performMethodOnDispatchQueue(Method method, void * context, void * targetDispatchQueue, bool waitUntilDone)
+{
+    if (waitUntilDone) {
+        dispatch_sync((dispatch_queue_t) targetDispatchQueue, ^{
+            (this->*method)(context);
+        });
+    }
+    else {
+        dispatch_async((dispatch_queue_t) targetDispatchQueue, ^{
+            (this->*method)(context);
+        });
+    }
+}
+#endif
+
 void Object::performMethodAfterDelay(Method method, void * context, double delay)
 {
     initDelayedPerform();
