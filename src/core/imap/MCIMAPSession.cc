@@ -348,7 +348,7 @@ void IMAPSession::init()
     mLastFetchedSequenceNumber = 0;
     mCurrentFolder = NULL;
     pthread_mutex_init(&mIdleLock, NULL);
-    mCanIdle = false;
+    mCanIdle = true;
     mState = STATE_DISCONNECTED;
     mImap = NULL;
     mProgressCallback = NULL;
