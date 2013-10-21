@@ -478,6 +478,12 @@ IMAPOperation * IMAPAsyncSession::noopOperation()
     return session->noopOperation();
 }
 
+IMAPOperation * IMAPAsyncSession::disconnectOperation()
+{
+    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
+    return session->disconnectOperation();
+}
+
 void IMAPAsyncSession::setConnectionLogger(ConnectionLogger * logger)
 {
     mConnectionLogger = logger;

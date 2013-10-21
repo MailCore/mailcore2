@@ -146,6 +146,8 @@ namespace mailcore {
         
         virtual IMAPOperation * noopOperation();
         
+        virtual IMAPOperation * disconnectOperation();
+        
         virtual IMAPMessageRenderingOperation * htmlRenderingOperation(IMAPMessage * message, String * folder);
         virtual IMAPMessageRenderingOperation * htmlBodyRenderingOperation(IMAPMessage * message, String * folder);
         virtual IMAPMessageRenderingOperation * plainTextRenderingOperation(IMAPMessage * message, String * folder);

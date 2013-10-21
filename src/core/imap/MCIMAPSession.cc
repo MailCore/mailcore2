@@ -2793,6 +2793,10 @@ void IMAPSession::unsetupIdle()
 
 void IMAPSession::disconnect()
 {
+    if (mState == STATE_DISCONNECTED)
+    {
+        return;
+    }
     unsetup();
 }
 
