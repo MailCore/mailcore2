@@ -852,6 +852,7 @@ void IMAPSession::login(ErrorCode * pError)
     enableFeatures();
 
     if (isAutomaticConfigurationEnabled()) {
+        bool hasDefaultNamespace = false;
         if (isNamespaceEnabled()) {
             HashMap * result = fetchNamespace(pError);
             if (* pError != ErrorNone) {
@@ -859,10 +860,14 @@ void IMAPSession::login(ErrorCode * pError)
                 return;
             }
             IMAPNamespace * personalNamespace = (IMAPNamespace *) result->objectForKey(IMAPNamespacePersonal);
-            setDefaultNamespace(personalNamespace);
-            mDelimiter = defaultNamespace()->mainDelimiter();
+            if (personalNamespace != NULL) {
+                setDefaultNamespace(personalNamespace);
+                mDelimiter = defaultNamespace()->mainDelimiter();
+                hasDefaultNamespace = true;
+            }
         }
-        else {
+        
+        if (!hasDefaultNamespace) {
             clist * imap_folders;
             IMAPFolder * folder;
             Array * folders;
@@ -884,7 +889,7 @@ void IMAPSession::login(ErrorCode * pError)
             }
             
             mDelimiter = folder->delimiter();
-            IMAPNamespace * defaultNamespace = IMAPNamespace::namespaceWithPrefix(folder->path(), folder->delimiter());
+            IMAPNamespace * defaultNamespace = IMAPNamespace::namespaceWithPrefix(MCSTR(""), folder->delimiter());
             setDefaultNamespace(defaultNamespace);
         }
         
