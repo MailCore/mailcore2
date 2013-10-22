@@ -12,6 +12,7 @@
 
 #import "MCOUtils.h"
 #import "MCOSMTPSendOperation.h"
+#import "MCOSMTPNoopOperation.h"
 #import "MCOSMTPOperation.h"
 #import "MCOOperation+Private.h"
 #import "MCOAddress.h"
@@ -126,6 +127,14 @@ MCO_OBJC_SYNTHESIZE_BOOL(setUseHeloIPEnabled, useHeloIPEnabled)
 {
     mailcore::SMTPOperation *coreOp = MCO_NATIVE_INSTANCE->checkAccountOperation(MCO_FROM_OBJC(mailcore::Address, from));
     MCOSMTPOperation * result = [[[MCOSMTPOperation alloc] initWithMCOperation:coreOp] autorelease];
+    [result setSession:self];
+    return result;
+}
+
+- (MCOSMTPOperation *) noopOperation
+{
+    mailcore::SMTPOperation * coreOp = MCO_NATIVE_INSTANCE->noopOperation();
+    MCOSMTPNoopOperation * result = [[[MCOSMTPNoopOperation alloc] initWithMCOperation:coreOp] autorelease];
     [result setSession:self];
     return result;
 }

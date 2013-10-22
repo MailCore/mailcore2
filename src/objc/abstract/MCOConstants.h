@@ -334,6 +334,8 @@ typedef enum {
     MCOErrorNoSender,
     /** SMTP: Error when no recipient has been specified.*/
     MCOErrorNoRecipient,
+    /** IMAP: Error when a noop operation fails.*/
+    MCOErrorNoop,
     /** The count of all errors */
     MCOErrorCodeCount,
 } MCOErrorCode;

@@ -64,6 +64,8 @@ namespace mailcore {
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
         
+        virtual void noop(ErrorCode * pError);
+        
     private:
         String * mHostname;
         unsigned int mPort;

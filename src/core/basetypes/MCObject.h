@@ -3,6 +3,9 @@
 #define __MAILCORE_MCOBJECT_H_
 
 #include <pthread.h>
+#if __APPLE__
+#include <dispatch/dispatch.h>
+#endif
 
 #ifdef __cplusplus
 
@@ -40,6 +43,9 @@ namespace mailcore {
         typedef void (Object::*Method) (void *);
         virtual void performMethod(Method method, void * context);
         virtual void performMethodOnMainThread(Method method, void * context, bool waitUntilDone = false);
+#if __APPLE__
+        virtual void performMethodOnDispatchQueue(Method method, void * context, void * targetDispatchQueue, bool waitUntilDone = false);
+#endif
         virtual void performMethodAfterDelay(Method method, void * context, double delay);
         virtual void cancelDelayedPerformMethod(Method method, void * context);
         

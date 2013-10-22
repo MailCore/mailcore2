@@ -126,6 +126,8 @@ namespace mailcore {
         virtual IMAPOperation * connectOperation();
         virtual IMAPOperation * checkAccountOperation();
         
+        virtual IMAPOperation * noopOperation();
+        
         virtual IMAPCapabilityOperation * capabilityOperation();
         virtual IMAPQuotaOperation * quotaOperation();
         

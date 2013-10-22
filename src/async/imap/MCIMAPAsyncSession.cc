@@ -472,6 +472,12 @@ IMAPQuotaOperation * IMAPAsyncSession::quotaOperation()
     return session->quotaOperation();
 }
 
+IMAPOperation * IMAPAsyncSession::noopOperation()
+{
+    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
+    return session->noopOperation();
+}
+
 void IMAPAsyncSession::setConnectionLogger(ConnectionLogger * logger)
 {
     mConnectionLogger = logger;

@@ -348,7 +348,7 @@ void IMAPSession::init()
     mLastFetchedSequenceNumber = 0;
     mCurrentFolder = NULL;
     pthread_mutex_init(&mIdleLock, NULL);
-    mCanIdle = false;
+    mCanIdle = true;
     mState = STATE_DISCONNECTED;
     mImap = NULL;
     mProgressCallback = NULL;
@@ -852,6 +852,7 @@ void IMAPSession::login(ErrorCode * pError)
     enableFeatures();
 
     if (isAutomaticConfigurationEnabled()) {
+        bool hasDefaultNamespace = false;
         if (isNamespaceEnabled()) {
             HashMap * result = fetchNamespace(pError);
             if (* pError != ErrorNone) {
@@ -859,10 +860,14 @@ void IMAPSession::login(ErrorCode * pError)
                 return;
             }
             IMAPNamespace * personalNamespace = (IMAPNamespace *) result->objectForKey(IMAPNamespacePersonal);
-            setDefaultNamespace(personalNamespace);
-            mDelimiter = defaultNamespace()->mainDelimiter();
+            if (personalNamespace != NULL) {
+                setDefaultNamespace(personalNamespace);
+                mDelimiter = defaultNamespace()->mainDelimiter();
+                hasDefaultNamespace = true;
+            }
         }
-        else {
+        
+        if (!hasDefaultNamespace) {
             clist * imap_folders;
             IMAPFolder * folder;
             Array * folders;
@@ -884,7 +889,7 @@ void IMAPSession::login(ErrorCode * pError)
             }
             
             mDelimiter = folder->delimiter();
-            IMAPNamespace * defaultNamespace = IMAPNamespace::namespaceWithPrefix(folder->path(), folder->delimiter());
+            IMAPNamespace * defaultNamespace = IMAPNamespace::namespaceWithPrefix(MCSTR(""), folder->delimiter());
             setDefaultNamespace(defaultNamespace);
         }
         
@@ -1103,6 +1108,29 @@ IMAPFolderStatus * IMAPSession::folderStatus(String * folder, ErrorCode * pError
     
     
     return fs;
+}
+
+void IMAPSession::noop(ErrorCode * pError)
+{
+    int r;
+    
+    if (mImap == NULL)
+        return;
+    
+    MCLog("connect");
+    loginIfNeeded(pError);
+    if (* pError != ErrorNone) {
+        return;
+    }
+    if (mImap->imap_stream != NULL) {
+        r = mailimap_noop(mImap);
+        if (r == MAILIMAP_ERROR_STREAM) {
+            * pError = ErrorConnection;
+        }
+        if (r == MAILIMAP_ERROR_NOOP) {
+            * pError = ErrorNoop;
+        }
+    }
 }
 
 #pragma mark mailbox flags conversion

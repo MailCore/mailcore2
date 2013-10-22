@@ -2,10 +2,12 @@
 
 url="https://github.com/dinhviethoa/ctemplate"
 
-if xcodebuild -showsdks|grep iphoneos6.1 >/dev/null ; then
-	sdkversion=6.1
-elif xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
+if xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
 	sdkversion=7.0
+         MARCHS="armv7 armv7s arm64"
+elif xcodebuild -showsdks|grep iphoneos6.1 >/dev/null ; then
+	sdkversion=6.1
+         MARCHS="armv7 armv7s"
 else
 	echo SDK not found
 	exit 1
@@ -41,16 +43,17 @@ else
 	cd ctemplate
 fi
 version=`git rev-parse HEAD | cut -c1-10`
+build_version="$version~1"
 
-if test -f "$resultdir/ctemplate-ios-$version.zip" ; then
+if test -f "$resultdir/ctemplate-ios-$build_version.zip" ; then
 	echo install from cache
 	popd >/dev/null
 	rm -rf ../Externals/ctemplate-ios
 	mkdir -p ../Externals/tmp
-	unzip -q "$resultdir/ctemplate-ios-$version.zip" -d ../Externals/tmp
-	mv "../Externals/tmp/ctemplate-ios-$version/ctemplate-ios" ../Externals
+	unzip -q "$resultdir/ctemplate-ios-$build_version.zip" -d ../Externals/tmp
+	mv "../Externals/tmp/ctemplate-ios-$build_version/ctemplate-ios" ../Externals
   mkdir -p ../Externals/installed
-  ln -sf "$resultdir/ctemplate-ios-$version.zip" ../Externals/installed
+  ln -sf "$resultdir/ctemplate-ios-$build_version.zip" ../Externals/installed
 	rm -rf ../Externals/tmp
 	exit 0
 fi
@@ -70,10 +73,10 @@ sdk="iphoneos$sdkversion"
 sysroot="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$sdkversion.sdk"
 
 ARCH=arm
-MARCHS="armv7 armv7s"
 for MARCH in $MARCHS; do
+  echo build for $MARCH
   echo "$logdir/ctemplate-build.log"
-  export CFLAGS="-arch ${MARCH} -isysroot $sysroot"
+  export CFLAGS="-arch ${MARCH} -isysroot $sysroot -miphoneos-version-min=$sdkversion"
   export CXXFLAGS="$CFLAGS -stdlib=libstdc++ -std=gnu++11"
   export LDFLAGS="-lstdc++ -stdlib=libstdc++"
   
@@ -98,15 +101,16 @@ sdk="iphonesimulator$sdkversion"
 sysroot="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator$sdkversion.sdk"
 
 ARCH=i386
-MARCHS=i386
+MARCHS="i386 x86_64"
 
 for MARCH in $MARCHS; do
+  echo build for $MARCH
   echo "$logdir/ctemplate-build.log"
-  export CFLAGS="-arch ${MARCH} -isysroot $sysroot"
+  export CFLAGS="-arch ${MARCH} -isysroot $sysroot -miphoneos-version-min=$sdkversion"
   export CXXFLAGS="$CFLAGS -stdlib=libstdc++ -std=gnu++11"
   export LDFLAGS="-lstdc++ -stdlib=libstdc++"
   
-  ./configure --host=${ARCH} --disable-shared --disable-dependency-tracking >> "$logdir/ctemplate-build.log"
+  ./configure --host=${MARCH} --disable-shared --disable-dependency-tracking >> "$logdir/ctemplate-build.log"
   make >> "$logdir/ctemplate-build.log"
   make install-libLTLIBRARIES "prefix=$tmpdir/bin/ctemplate-ios/$sdk/$MARCH" >> "$logdir/ctemplate-build.log"
   if test x$? != x0 ; then
@@ -126,27 +130,29 @@ done
 echo finished
 
 cd "$tmpdir/bin"
-mkdir -p "ctemplate-ios-$version/ctemplate-ios/lib"
-mv ctemplate-ios/include "ctemplate-ios-$version/ctemplate-ios"
+mkdir -p "ctemplate-ios-$build_version/ctemplate-ios/lib"
+mv ctemplate-ios/include "ctemplate-ios-$build_version/ctemplate-ios"
 lipo -create ctemplate-ios/iphonesimulator$sdkversion/i386/lib/libctemplate.a \
+  ctemplate-ios/iphonesimulator$sdkversion/x86_64/lib/libctemplate.a \
   ctemplate-ios/iphoneos$sdkversion/armv7/lib/libctemplate.a \
   ctemplate-ios/iphoneos$sdkversion/armv7s/lib/libctemplate.a \
-  -output "ctemplate-ios-$version/ctemplate-ios/lib/libctemplate-ios.a"
-rm -f "$resultdir/ctemplate-ios-$version.zip"
-zip -qry "$resultdir/ctemplate-ios-$version.zip" "ctemplate-ios-$version"
+  ctemplate-ios/iphoneos$sdkversion/arm64/lib/libctemplate.a \
+  -output "ctemplate-ios-$build_version/ctemplate-ios/lib/libctemplate-ios.a"
+rm -f "$resultdir/ctemplate-ios-$build_version.zip"
+zip -qry "$resultdir/ctemplate-ios-$build_version.zip" "ctemplate-ios-$build_version"
 rm -f "$resultdir/ctemplate-ios-latest.zip"
 cd "$resultdir"
-ln -s "ctemplate-ios-$version.zip" "ctemplate-ios-latest.zip"
+ln -s "ctemplate-ios-$build_version.zip" "ctemplate-ios-latest.zip"
 
-echo build of ctemplate-ios-$version done
+echo build of ctemplate-ios-$build_version done
 echo $tmpdir
 
 popd >/dev/null
 
 rm -rf ../Externals/ctemplate-ios
 mkdir -p ../Externals/tmp
-unzip -q "$resultdir/ctemplate-ios-$version.zip" -d ../Externals/tmp
-mv "../Externals/tmp/ctemplate-ios-$version/ctemplate-ios" ../Externals
+unzip -q "$resultdir/ctemplate-ios-$build_version.zip" -d ../Externals/tmp
+mv "../Externals/tmp/ctemplate-ios-$build_version/ctemplate-ios" ../Externals
 rm -rf ../Externals/tmp
 
 echo cleaning
