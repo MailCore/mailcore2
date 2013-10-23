@@ -8,7 +8,7 @@ Operation::Operation()
 	mCancelled = false;
 	pthread_mutex_init(&mLock, NULL);
 #if __APPLE__
-    mCallbackDispatchQueue = dispatch_get_current_queue();
+    mCallbackDispatchQueue = dispatch_get_main_queue();
 #else
     mCallbackDispatchQueue = NULL;
 #endif
