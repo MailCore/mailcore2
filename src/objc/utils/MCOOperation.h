@@ -14,14 +14,19 @@
 
 @interface MCOOperation : NSObject
 
+/** Returns whether the operation is cancelled.*/
 @property (readonly) BOOL isCancelled;
 
-// This methods is called on the main thread when the asynchronous operation is finished.
-// Needs to be overriden by subclasses.
+/** The queue this operation dispatches the callback on.  Defaults to the main queue.*/
+@property (nonatomic, assign) dispatch_queue_t callbackDispatchQueue;
+
+/** This methods is called on the main thread when the asynchronous operation is finished.
+ Needs to be overriden by subclasses.*/
 - (void) operationCompleted;
 
-// Cancel the operation.
+/** Cancel the operation.*/
 - (void) cancel;
+
 
 @end
 

@@ -13,23 +13,23 @@
 
 namespace mailcore {
 
-	class OperationCallback;
+    class OperationCallback;
 
-	class Operation : public Object {
-	public:
-		Operation();
-		virtual ~Operation();
-		
-		virtual void setCallback(OperationCallback * callback);
-		virtual OperationCallback * callback();
+    class Operation : public Object {
+    public:
+        Operation();
+        virtual ~Operation();
         
-		virtual void cancel();
-		virtual bool isCancelled();
-		
+        virtual void setCallback(OperationCallback * callback);
+        virtual OperationCallback * callback();
+        
+        virtual void cancel();
+        virtual bool isCancelled();
+        
         // Will be called on main thread.
         virtual void beforeMain();
         
-		virtual void main();
+        virtual void main();
         
         // Will be called on main thread.
         virtual void afterMain();
@@ -40,17 +40,17 @@ namespace mailcore {
         virtual void setCallbackDispatchQueue(dispatch_queue_t callbackDispatchQueue);
         virtual dispatch_queue_t callbackDispatchQueue();
 #endif
-        
-	private:
-		OperationCallback * mCallback;
-		bool mCancelled;
-		pthread_mutex_t mLock;
+
+    private:
+        OperationCallback * mCallback;
+        bool mCancelled;
+        pthread_mutex_t mLock;
 #ifdef __APPLE__
         dispatch_queue_t mCallbackDispatchQueue;
 #endif
-		
-	};
-	
+
+    };
+    
 }
 
 #endif
