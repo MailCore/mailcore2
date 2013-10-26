@@ -514,7 +514,7 @@ HashMap * Address::serializable()
 void Address::importSerializable(HashMap * serializable)
 {
     setMailbox((String *) serializable->objectForKey(MCSTR("mailbox")));
-    setDisplayName((String *) serializable->objectForKey(MCSTR("mailbox")));
+    setDisplayName((String *) serializable->objectForKey(MCSTR("displayName")));
 }
 
 __attribute__((constructor))
