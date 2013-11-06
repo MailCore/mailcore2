@@ -366,6 +366,7 @@ IMAPSession::IMAPSession()
 
 IMAPSession::~IMAPSession()
 {
+    MC_SAFE_RELEASE(mClientIdentity);
     MC_SAFE_RELEASE(mServerIdentity);
     MC_SAFE_RELEASE(mHostname);
     MC_SAFE_RELEASE(mUsername);
@@ -3459,7 +3460,8 @@ bool IMAPSession::enableFeature(String * feature)
     r = mailimap_enable(mImap, caps, &result);
     if (r != MAILIMAP_NO_ERROR)
         return false;
-
+    
+    mailimap_capability_data_free(caps);
     mailimap_capability_data_free(result);
     
     return true;
