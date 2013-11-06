@@ -4,11 +4,11 @@ using namespace mailcore;
 
 Operation::Operation()
 {
-	mCallback = NULL;
-	mCancelled = false;
-	pthread_mutex_init(&mLock, NULL);
+    mCallback = NULL;
+    mCancelled = false;
+    pthread_mutex_init(&mLock, NULL);
 #if __APPLE__
-    mCallbackDispatchQueue = dispatch_get_current_queue();
+    mCallbackDispatchQueue = dispatch_get_main_queue();
 #else
     mCallbackDispatchQueue = NULL;
 #endif
@@ -16,33 +16,33 @@ Operation::Operation()
 
 Operation::~Operation()
 {
-	pthread_mutex_destroy(&mLock);
+    pthread_mutex_destroy(&mLock);
 }
 
 void Operation::setCallback(OperationCallback * callback)
 {
-	mCallback = callback;
+    mCallback = callback;
 }
 
 OperationCallback * Operation::callback()
 {
-	return mCallback;
+    return mCallback;
 }
 
 void Operation::cancel()
 {
-	pthread_mutex_lock(&mLock);
-	mCancelled = true;
-	pthread_mutex_unlock(&mLock);
+    pthread_mutex_lock(&mLock);
+    mCancelled = true;
+    pthread_mutex_unlock(&mLock);
 }
 
 bool Operation::isCancelled()
 {
-	pthread_mutex_lock(&mLock);
-	bool value = mCancelled;
-	pthread_mutex_unlock(&mLock);
-	
-	return value;
+    pthread_mutex_lock(&mLock);
+    bool value = mCancelled;
+    pthread_mutex_unlock(&mLock);
+    
+    return value;
 }
 
 void Operation::beforeMain()
