@@ -20,6 +20,7 @@ namespace mailcore {
 		virtual IMAPSearchExpression * leftExpression();
 		virtual IMAPSearchExpression * rightExpression();
 		
+        static IMAPSearchExpression * searchAll();
 		static IMAPSearchExpression * searchFrom(String * value);
 		static IMAPSearchExpression * searchRecipient(String * value);
 		static IMAPSearchExpression * searchSubject(String * value);

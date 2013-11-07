@@ -2533,6 +2533,9 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchKind kind, String * se
     
     expr = NULL;
     switch (kind) {
+        case IMAPSearchKindAll:
+        expr = IMAPSearchExpression::searchAll();
+        break;
         case IMAPSearchKindFrom:
         expr = IMAPSearchExpression::searchFrom(searchString);
         break;
@@ -2555,6 +2558,9 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchKind kind, String * se
 static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpression * expression)
 {
 	switch (expression->kind()) {
+        case IMAPSearchKindAll: {
+            return mailimap_search_key_new_all();
+        }
         case IMAPSearchKindFrom:
         {
             return mailimap_search_key_new_from(strdup(expression->value()->UTF8Characters()));
