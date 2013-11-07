@@ -40,6 +40,8 @@ String * IMAPSearchExpression::description()
         default:
         case IMAPSearchKindNone:
         return String::stringWithUTF8Format("<%s:%p None>", MCUTF8(className()), this);
+        case IMAPSearchKindAll:
+        return String::stringWithUTF8Format("<%s:%p ALL>", MCUTF8(className()), this);
         case IMAPSearchKindFrom:
         return String::stringWithUTF8Format("<%s:%p From %s>", MCUTF8(className()), this,
             MCUTF8(mValue->description()));
@@ -82,6 +84,13 @@ IMAPSearchExpression * IMAPSearchExpression::searchRecipient(String * value)
     IMAPSearchExpression * expr = new IMAPSearchExpression();
     expr->mKind = IMAPSearchKindRecipient;
     MC_SAFE_REPLACE_COPY(String, expr->mValue, value);
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchAll()
+{
+    IMAPSearchExpression *expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindAll;
     return (IMAPSearchExpression *) expr->autorelease();
 }
 

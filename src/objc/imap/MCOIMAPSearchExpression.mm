@@ -57,6 +57,11 @@
     [super dealloc];
 }
 
++ (MCOIMAPSearchExpression *) searchAll
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchAll());
+}
+
 + (MCOIMAPSearchExpression *) searchFrom:(NSString *)value
 {
     return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchFrom([value mco_mcString]));

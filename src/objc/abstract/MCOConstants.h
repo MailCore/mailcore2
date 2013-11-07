@@ -156,6 +156,8 @@ typedef enum {
 
 /** It's the search type.*/
 typedef enum {
+    /** Search All */
+    MCOIMAPSearchKindAll,
     /** No search.*/
     MCOIMAPSearchKindNone,
     /** Match sender.*/
