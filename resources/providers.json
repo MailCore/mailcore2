@@ -808,5 +808,32 @@
             "sentmail":"Sent Messages",
             "trash":"Deleted Messages"
         }
+    },
+     "qq": {
+        "servers": {
+            "imap": [
+                {
+                    "port": 993,
+                    "hostname": "imap.exmail.qq.com",
+                    "ssl": true
+                }
+            ],
+            "smtp": [
+                {
+                    "port": 465,
+                    "hostname": "smtp.exmail.qq.com",
+                    "ssl": true
+                }
+            ]
+        },
+        "domain-match": [
+            "qq\\.com"
+        ],
+        "mailboxes": {
+            "drafts": "Drafts",
+            "spam": "Junk",
+            "sentmail": "Sent Messages",
+            "trash": "Deleted Messages"
+        }
     }
 }
