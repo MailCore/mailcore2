@@ -30,6 +30,7 @@ set(objc_imap_files
   objc/imap/MCOIMAPMessage.mm
   objc/imap/MCOIMAPMessagePart.mm
   objc/imap/MCOIMAPMessageRenderingOperation.mm
+  objc/imap/MCOIMAPMultiDisconnectOperation.mm
   objc/imap/MCOIMAPMultipart.mm
   objc/imap/MCOIMAPNamespace.mm
   objc/imap/MCOIMAPNamespaceItem.mm

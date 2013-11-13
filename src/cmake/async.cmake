@@ -21,6 +21,7 @@ set(async_imap_files
   async/imap/MCIMAPIdentityOperation.cc
   async/imap/MCIMAPIdleOperation.cc
   async/imap/MCIMAPMessageRenderingOperation.cc
+  async/imap/MCIMAPMultiDisconnectOperation.cc
   async/imap/MCIMAPOperation.cc
   async/imap/MCIMAPQuotaOperation.cc
   async/imap/MCIMAPRenameFolderOperation.cc
