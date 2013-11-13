@@ -54,7 +54,7 @@
 /** Subject of the message.*/
 @property (nonatomic, copy) NSString * subject;
 
-/** User-Agent.*/
+/** Email user agent name: X-Mailer header.*/
 @property (nonatomic, copy) NSString * userAgent;
 
 /** Adds a custom header.*/
