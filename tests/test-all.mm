@@ -83,7 +83,8 @@ static void testMessageParser(mailcore::Data * data)
     MCLog("%s", MCUTF8DESC(parser));
     MCLog("HTML rendering");
     MCLog("%s", MCUTF8(parser->htmlRendering()));
-    MCLog("%s", MCUTF8(parser->plainTextBodyRendering()));
+    MCLog("%s", MCUTF8(parser->plainTextBodyRendering(true)));
+    MCLog("%s", MCUTF8(parser->plainTextBodyRendering(false)));
 }
 
 static void testIMAP()

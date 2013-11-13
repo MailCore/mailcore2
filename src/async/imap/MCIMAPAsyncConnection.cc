@@ -667,9 +667,12 @@ IMAPMessageRenderingOperation * IMAPAsyncConnection::plainTextRenderingOperation
 }
 
 IMAPMessageRenderingOperation * IMAPAsyncConnection::plainTextBodyRenderingOperation(IMAPMessage * message,
-                                                                                     String * folder)
+                                                                                     String * folder,
+                                                                                     bool stripWhitespace)
 {
-    return renderingOperation(message, folder, IMAPMessageRenderingTypePlainTextBody);
+    return renderingOperation(message, folder,
+                              stripWhitespace ? IMAPMessageRenderingTypePlainTextBodyAndStripWhitespace :
+                                                IMAPMessageRenderingTypePlainTextBody);
 }
 
 void IMAPAsyncConnection::setAutomaticConfigurationEnabled(bool enabled)

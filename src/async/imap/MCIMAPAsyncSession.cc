@@ -526,10 +526,11 @@ IMAPMessageRenderingOperation * IMAPAsyncSession::plainTextRenderingOperation(IM
 }
 
 IMAPMessageRenderingOperation * IMAPAsyncSession::plainTextBodyRenderingOperation(IMAPMessage * message,
-                                                                                  String * folder)
+                                                                                  String * folder,
+                                                                                  bool stripWhitespace)
 {
     IMAPAsyncConnection * session = sessionForFolder(folder);
-    return session->plainTextBodyRenderingOperation(message, folder);
+    return session->plainTextBodyRenderingOperation(message, folder, stripWhitespace);
 }
 
 void IMAPAsyncSession::automaticConfigurationDone(IMAPSession * session)

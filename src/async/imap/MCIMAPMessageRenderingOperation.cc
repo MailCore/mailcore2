@@ -65,7 +65,10 @@ void IMAPMessageRenderingOperation::main()
         mResult = session()->session()->plainTextRendering(mMessage, folder(), &error);
     }
     else if (mRenderingType == IMAPMessageRenderingTypePlainTextBody) {
-        mResult = session()->session()->plainTextBodyRendering(mMessage, folder(), &error);
+        mResult = session()->session()->plainTextBodyRendering(mMessage, folder(), false, &error);
+    }
+    else if (mRenderingType == IMAPMessageRenderingTypePlainTextBodyAndStripWhitespace) {
+        mResult = session()->session()->plainTextBodyRendering(mMessage, folder(), true, &error);
     }
     
     MC_SAFE_RETAIN(mResult);

@@ -118,18 +118,20 @@ String * MessageParser::plainTextRendering()
     return html->flattenHTML();
 }
 
-String * MessageParser::plainTextBodyRendering()
+String * MessageParser::plainTextBodyRendering(bool stripWhitespace)
 {
     String * html = htmlBodyRendering();
     String * plainTextBodyString = html->flattenHTML();
     
-    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\t"), MCSTR(" "));
-    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\n"), MCSTR(" "));
-    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\v"), MCSTR(" "));
-    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\f"), MCSTR(" "));
-    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
-    while (plainTextBodyString->replaceOccurrencesOfString(MCSTR("  "), MCSTR(" "))) {
-        // do nothing.
+    if (stripWhitespace) {
+        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\t"), MCSTR(" "));
+        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\n"), MCSTR(" "));
+        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\v"), MCSTR(" "));
+        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\f"), MCSTR(" "));
+        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
+        while (plainTextBodyString->replaceOccurrencesOfString(MCSTR("  "), MCSTR(" "))) {
+            // do nothing.
+        }
     }
     return plainTextBodyString;
 }

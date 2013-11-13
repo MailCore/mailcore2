@@ -75,7 +75,6 @@ MCO_OBJC_SYNTHESIZE_STRING(setBoundaryPrefix, boundaryPrefix)
     return result;
 }
 
-
 - (NSString *) htmlBodyRendering
 {
     return MCO_OBJC_BRIDGE_GET(htmlBodyRendering);
@@ -88,7 +87,12 @@ MCO_OBJC_SYNTHESIZE_STRING(setBoundaryPrefix, boundaryPrefix)
 
 - (NSString *) plainTextBodyRendering
 {
-    return MCO_OBJC_BRIDGE_GET(plainTextBodyRendering);
+    return [self plainTextBodyRenderingAndStripWhitespace:YES];
+}
+
+- (NSString *) plainTextBodyRenderingAndStripWhitespace:(BOOL)stripWhitespace
+{
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->plainTextBodyRendering(stripWhitespace));
 }
 
 @end

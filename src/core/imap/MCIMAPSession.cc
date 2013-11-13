@@ -3417,7 +3417,7 @@ String * IMAPSession::plainTextRendering(IMAPMessage * message, String * folder,
     return plainTextString;
 }
 
-String * IMAPSession::plainTextBodyRendering(IMAPMessage * message, String * folder, ErrorCode * pError)
+String * IMAPSession::plainTextBodyRendering(IMAPMessage * message, String * folder, bool stripWhitespace, ErrorCode * pError)
 {
     String * htmlBodyString = htmlBodyRendering(message, folder, pError);
     
@@ -3427,14 +3427,16 @@ String * IMAPSession::plainTextBodyRendering(IMAPMessage * message, String * fol
     
     String * plainTextBodyString = htmlBodyString->flattenHTML();
     
-    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\t"), MCSTR(" "));
-    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\n"), MCSTR(" "));
-    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\v"), MCSTR(" "));
-    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\f"), MCSTR(" "));
-    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
-    
-    while (plainTextBodyString->replaceOccurrencesOfString(MCSTR("  "), MCSTR(" ")) > 0) {
-        /* do nothing */
+    if (stripWhitespace) {
+        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\t"), MCSTR(" "));
+        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\n"), MCSTR(" "));
+        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\v"), MCSTR(" "));
+        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\f"), MCSTR(" "));
+        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
+        
+        while (plainTextBodyString->replaceOccurrencesOfString(MCSTR("  "), MCSTR(" ")) > 0) {
+            /* do nothing */
+        }
     }
     
     return plainTextBodyString;

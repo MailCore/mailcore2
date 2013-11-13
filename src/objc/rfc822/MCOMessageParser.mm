@@ -81,7 +81,12 @@
 
 - (NSString *) plainTextBodyRendering
 {
-    return MCO_OBJC_BRIDGE_GET(plainTextBodyRendering);
+    return [self plainTextBodyRenderingAndStripWhitespace:YES];
+}
+
+- (NSString *) plainTextBodyRenderingAndStripWhitespace:(BOOL)stripWhitespace
+{
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->plainTextBodyRendering(stripWhitespace));
 }
 
 @end
