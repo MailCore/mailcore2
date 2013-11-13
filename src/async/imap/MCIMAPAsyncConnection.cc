@@ -529,6 +529,14 @@ IMAPQuotaOperation * IMAPAsyncConnection::quotaOperation()
     return op;
 }
 
+IMAPOperation * IMAPAsyncConnection::disconnectOperation()
+{
+    IMAPDisconnectOperation * op = new IMAPDisconnectOperation();
+    op->setSession(this);
+    op->autorelease();
+    return op;
+}
+
 IMAPSession * IMAPAsyncConnection::session()
 {
     return mSession;
@@ -558,9 +566,7 @@ void IMAPAsyncConnection::tryAutomaticDisconnect()
 
 void IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay(void * context)
 {
-    IMAPDisconnectOperation * op = new IMAPDisconnectOperation();
-    op->setSession(this);
-    op->autorelease();
+    IMAPOperation * op = disconnectOperation();
     op->start();
 }
 

@@ -14,6 +14,7 @@
 #include "MCConnectionLogger.h"
 #include "MCIMAPSession.h"
 #include "MCIMAPIdentity.h"
+#include "MCIMAPMultiDisconnectOperation.h"
 
 #define DEFAULT_MAX_CONNECTIONS 3
 
@@ -476,6 +477,17 @@ IMAPOperation * IMAPAsyncSession::noopOperation()
 {
     IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
     return session->noopOperation();
+}
+
+IMAPOperation * IMAPAsyncSession::disconnectOperation()
+{
+    IMAPMultiDisconnectOperation * op = new IMAPMultiDisconnectOperation();
+    op->autorelease();
+    for(unsigned int i = 0 ; i < mSessions->count() ; i ++) {
+        IMAPAsyncConnection * currentSession = (IMAPAsyncConnection *) mSessions->objectAtIndex(i);
+        op->addOperation(currentSession->disconnectOperation());
+    }
+    return op;
 }
 
 void IMAPAsyncSession::setConnectionLogger(ConnectionLogger * logger)

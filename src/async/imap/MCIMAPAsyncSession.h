@@ -140,6 +140,7 @@ namespace mailcore {
         
         virtual IMAPOperation * connectOperation();
         virtual IMAPOperation * checkAccountOperation();
+        virtual IMAPOperation * disconnectOperation();
         
         virtual IMAPCapabilityOperation * capabilityOperation();
         virtual IMAPQuotaOperation * quotaOperation();

@@ -453,6 +453,12 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
     return MCO_TO_OBJC_OP(coreOp);
 }
 
+- (MCOIMAPOperation *) disconnectOperation
+{
+    IMAPOperation * coreOp = MCO_NATIVE_INSTANCE->disconnectOperation();
+    return MCO_TO_OBJC_OP(coreOp);
+}
+
 - (void) _queueRunningChanged
 {
     if (_operationQueueRunningChangeBlock == NULL)

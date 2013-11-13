@@ -624,6 +624,17 @@
 - (MCOIMAPMessageRenderingOperation *) plainTextBodyRenderingOperationWithMessage:(MCOIMAPMessage *)message
                                                                            folder:(NSString *)folder;
 
+/**
+ Returns an operation to disconnect the session.
+ It will disconnect all the sockets created by the session.
+ 
+    MCOIMAPOperation * op = [session disconnectOperation];
+    [op start:^(NSError * error) {
+       ...
+    }];
+ */
+- (MCOIMAPOperation *) disconnectOperation;
+
 @end
 
 #endif
