@@ -228,7 +228,8 @@ namespace mailcore {
         IMAPMessageRenderingTypeHTML,
         IMAPMessageRenderingTypeHTMLBody,
         IMAPMessageRenderingTypePlainText,
-        IMAPMessageRenderingTypePlainTextBody
+        IMAPMessageRenderingTypePlainTextBody,
+        IMAPMessageRenderingTypePlainTextBodyAndStripWhitespace,
     };
 }
 
