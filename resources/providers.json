@@ -808,5 +808,60 @@
             "sentmail":"Sent Messages",
             "trash":"Deleted Messages"
         }
+    },
+     "qq": {
+        "servers": {
+            "imap": [
+                {
+                    "port": 993,
+                    "hostname": "imap.exmail.qq.com",
+                    "ssl": true
+                }
+            ],
+            "smtp": [
+                {
+                    "port": 465,
+                    "hostname": "smtp.exmail.qq.com",
+                    "ssl": true
+                }
+            ]
+        },
+        "domain-match": [
+            "qq\\.com"
+        ],
+        "mailboxes": {
+            "drafts": "Drafts",
+            "spam": "Junk",
+            "sentmail": "Sent Messages",
+            "trash": "Deleted Messages"
+        }
+    },
+    "openmailbox": {
+        "servers": {
+            "imap": [
+                {
+                    "port": 143,
+                    "hostname": "imap.openmailbox.org",
+                    "starttls": true
+                }
+            ],
+            "smtp": [
+                {
+                    "port": 587,
+                    "hostname": "smtp.openmailbox.org",
+                    "starttls": true
+                }
+            ]
+        },
+        "domain-match": [
+            "openmailbox\\.org"
+        ],
+        "mailboxes": {
+            "drafts": "Drafts",
+            "allmail": "Archive",
+            "spam": "Spam",
+            "sentmail": "Sent",
+            "trash": "Trash"
+        }
     }
 }
