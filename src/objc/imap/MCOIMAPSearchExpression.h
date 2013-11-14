@@ -15,8 +15,6 @@
 #import <Foundation/Foundation.h>
 #import <MailCore/MCOConstants.h>
 
-@class MCOIndexSet;
-
 @interface MCOIMAPSearchExpression : NSObject
 
 /** 
