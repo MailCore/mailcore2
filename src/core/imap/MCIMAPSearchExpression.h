@@ -17,17 +17,17 @@ namespace mailcore {
 		virtual IMAPSearchKind kind();
 		virtual String * header();
 		virtual String * value();
-        virtual uint64_t longNumber();
+		virtual uint64_t longNumber();
 		virtual IMAPSearchExpression * leftExpression();
 		virtual IMAPSearchExpression * rightExpression();
 		
-        static IMAPSearchExpression * searchAll();
+		static IMAPSearchExpression * searchAll();
 		static IMAPSearchExpression * searchFrom(String * value);
 		static IMAPSearchExpression * searchRecipient(String * value);
 		static IMAPSearchExpression * searchSubject(String * value);
 		static IMAPSearchExpression * searchContent(String * value);
 		static IMAPSearchExpression * searchHeader(String * header, String * value);
-        static IMAPSearchExpression * searchGmailThreadId(uint64_t number);
+		static IMAPSearchExpression * searchGmailThreadId(uint64_t number);
 		static IMAPSearchExpression * searchAnd(IMAPSearchExpression * left, IMAPSearchExpression * right);
 		static IMAPSearchExpression * searchOr(IMAPSearchExpression * left, IMAPSearchExpression * right);
         

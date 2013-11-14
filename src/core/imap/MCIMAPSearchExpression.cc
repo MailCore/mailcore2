@@ -7,7 +7,7 @@ void IMAPSearchExpression::init()
 	mKind = IMAPSearchKindNone;
 	mHeader = NULL;
 	mValue = NULL;
-    mLongNumber = NULL;
+    mLongNumber = 0;
 	mLeftExpression = NULL;
 	mRightExpression = NULL;
 }
@@ -20,7 +20,7 @@ IMAPSearchExpression::IMAPSearchExpression()
 IMAPSearchExpression::IMAPSearchExpression(IMAPSearchExpression * other)
 {
     init();
-	mKind = other->mKind;
+    mKind = other->mKind;
     mLongNumber = other->mLongNumber;
     MC_SAFE_REPLACE_COPY(String, mHeader, other->mHeader);
     MC_SAFE_REPLACE_COPY(String, mValue, other->mValue);
