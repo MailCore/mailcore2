@@ -15,6 +15,8 @@
 #import <Foundation/Foundation.h>
 #import <MailCore/MCOConstants.h>
 
+@class MCOIndexSet;
+
 @interface MCOIMAPSearchExpression : NSObject
 
 /** 
@@ -70,6 +72,15 @@
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchHeader:@"List-Id" value:@"shoes"]
 **/
 + (MCOIMAPSearchExpression *) searchHeader:(NSString *)header value:(NSString *)value;
+
+/**
+ Creates a search expression that matches emails with the given gmail thread id
+ 
+ Example:
+ 
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchGmailThredId:aThreadId]
+ */
++ (MCOIMAPSearchExpression *) searchGmailThreadId:(uint64_t)number;
 
 /**
  Creates a search expression that's a disjunction of two search expressions.

@@ -17,6 +17,7 @@ namespace mailcore {
 		virtual IMAPSearchKind kind();
 		virtual String * header();
 		virtual String * value();
+        virtual uint64_t longNumber();
 		virtual IMAPSearchExpression * leftExpression();
 		virtual IMAPSearchExpression * rightExpression();
 		
@@ -26,6 +27,7 @@ namespace mailcore {
 		static IMAPSearchExpression * searchSubject(String * value);
 		static IMAPSearchExpression * searchContent(String * value);
 		static IMAPSearchExpression * searchHeader(String * header, String * value);
+        static IMAPSearchExpression * searchGmailThreadId(uint64_t number);
 		static IMAPSearchExpression * searchAnd(IMAPSearchExpression * left, IMAPSearchExpression * right);
 		static IMAPSearchExpression * searchOr(IMAPSearchExpression * left, IMAPSearchExpression * right);
         
@@ -38,6 +40,7 @@ namespace mailcore {
 		IMAPSearchKind mKind;
 		String * mHeader;
 		String * mValue;
+        uint64_t mLongNumber;
 		IMAPSearchExpression * mLeftExpression;
 		IMAPSearchExpression * mRightExpression;
 		void init();
