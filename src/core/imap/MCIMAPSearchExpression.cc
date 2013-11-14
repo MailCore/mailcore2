@@ -4,12 +4,12 @@ using namespace mailcore;
 
 void IMAPSearchExpression::init()
 {
-	mKind = IMAPSearchKindNone;
-	mHeader = NULL;
-	mValue = NULL;
+    mKind = IMAPSearchKindNone;
+    mHeader = NULL;
+    mValue = NULL;
     mLongNumber = 0;
-	mLeftExpression = NULL;
-	mRightExpression = NULL;
+    mLeftExpression = NULL;
+    mRightExpression = NULL;
 }
 
 IMAPSearchExpression::IMAPSearchExpression()
