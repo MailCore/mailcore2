@@ -41,7 +41,7 @@ void MCORegisterClass(Class aClass, const std::type_info * info)
     key.len = sizeof(hash_value);
 #else
     key.data = (void *) info->name();
-    key.len = strlen(info->name());
+    key.len = (unsigned int) strlen(info->name());
 #endif
     value.data = aClass;
     value.len = 0;
@@ -61,7 +61,7 @@ static Class classWithTypeInfo(const std::type_info * info)
     key.len = sizeof(hash_value);
 #else
     key.data = (void *) info->name();
-    key.len = strlen(info->name());
+    key.len = (unsigned int) strlen(info->name());
 #endif
     r = chash_get(classHash, &key, &value);
     if (r < 0)
