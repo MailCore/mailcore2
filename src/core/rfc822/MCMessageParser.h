@@ -27,7 +27,7 @@ namespace mailcore {
         virtual String * htmlBodyRendering();
         
         virtual String * plainTextRendering();
-        virtual String * plainTextBodyRendering();
+        virtual String * plainTextBodyRendering(bool stripWhitespace);
         
     public: // subclass behavior
 		MessageParser(MessageParser * other);

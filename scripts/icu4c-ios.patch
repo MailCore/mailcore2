@@ -1,0 +1,19 @@
+--- a/source/common/umutex.h    2013-08-02 08:46:47.000000000 +0200
++++ b/source/common/umutex.h    2013-08-02 08:49:38.000000000 +0200
+@@ -50,12 +50,16 @@
+ #if U_PLATFORM_IS_DARWIN_BASED
+ #if defined(__STRICT_ANSI__)
+ #define UPRV_REMAP_INLINE
++#if !defined(__clang_major__) || (defined(__clang_major__) && __clang_major__ < 5)
+ #define inline
++#endif // #if __clang_major__ < 5
+ #endif
+ #include <libkern/OSAtomic.h>
+ #define USE_MAC_OS_ATOMIC_INCREMENT 1
+ #if defined(UPRV_REMAP_INLINE)
++#if !defined(__clang_major__) || (defined(__clang_major__) && __clang_major__ < 5)
+ #undef inline
++#endif // #if __clang_major__ < 5
+ #undef UPRV_REMAP_INLINE
+ #endif
+ #endif

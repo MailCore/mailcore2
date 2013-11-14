@@ -71,6 +71,10 @@
  This method can be used to generate the summary of the message.*/
 - (NSString *) plainTextBodyRendering;
 
+/** Text rendering of the body of the message. All end of line will be removed and white spaces cleaned up if requested.
+ This method can be used to generate the summary of the message.*/
+- (NSString *) plainTextBodyRenderingAndStripWhitespace:(BOOL)stripWhitespace;
+
 @end
 
 #endif

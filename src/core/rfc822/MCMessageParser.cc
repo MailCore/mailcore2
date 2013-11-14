@@ -32,15 +32,22 @@ MessageParser::MessageParser(Data * data)
     init();
     mData = (Data *) data->retain();
     
-	mailmessage * msg;
-	struct mailmime * mime;
-	
-	msg = data_message_init(data->bytes(), data->length());
-	mailmessage_get_bodystructure(msg, &mime);
+    mailmessage * msg;
+    struct mailmime * mime;
+    
+    msg = data_message_init(data->bytes(), data->length());
+    mailmessage_get_bodystructure(msg, &mime);
     mMainPart = (AbstractPart *) Attachment::attachmentsWithMIME(msg->msg_mime)->retain();
     mMainPart->applyUniquePartID();
-    header()->importIMFFields(msg->msg_fields);
-	mailmessage_free(msg);
+    
+    size_t cur_token = 0;
+    struct mailimf_fields * fields;
+    int r = mailimf_envelope_and_optional_fields_parse(data->bytes(), data->length(), &cur_token, &fields);
+    if (r == MAILIMAP_NO_ERROR) {
+        header()->importIMFFields(fields);
+        mailimf_fields_free(fields);
+    }
+    mailmessage_free(msg);
 }
 
 MessageParser::MessageParser(MessageParser * other) : AbstractMessage(other)
@@ -111,18 +118,20 @@ String * MessageParser::plainTextRendering()
     return html->flattenHTML();
 }
 
-String * MessageParser::plainTextBodyRendering()
+String * MessageParser::plainTextBodyRendering(bool stripWhitespace)
 {
     String * html = htmlBodyRendering();
     String * plainTextBodyString = html->flattenHTML();
     
-    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\t"), MCSTR(" "));
-    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\n"), MCSTR(" "));
-    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\v"), MCSTR(" "));
-    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\f"), MCSTR(" "));
-    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
-    while (plainTextBodyString->replaceOccurrencesOfString(MCSTR("  "), MCSTR(" "))) {
-        // do nothing.
+    if (stripWhitespace) {
+        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\t"), MCSTR(" "));
+        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\n"), MCSTR(" "));
+        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\v"), MCSTR(" "));
+        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\f"), MCSTR(" "));
+        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
+        while (plainTextBodyString->replaceOccurrencesOfString(MCSTR("  "), MCSTR(" "))) {
+            // do nothing.
+        }
     }
     return plainTextBodyString;
 }

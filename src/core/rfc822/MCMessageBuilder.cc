@@ -721,9 +721,9 @@ String * MessageBuilder::plainTextRendering()
     return message->plainTextRendering();
 }
 
-String * MessageBuilder::plainTextBodyRendering()
+String * MessageBuilder::plainTextBodyRendering(bool stripWhitespace)
 {
     MessageParser * message = MessageParser::messageParserWithData(data());
-    return message->plainTextBodyRendering();
+    return message->plainTextBodyRendering(stripWhitespace);
 }
 

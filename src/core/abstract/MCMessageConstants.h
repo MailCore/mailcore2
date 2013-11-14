@@ -161,6 +161,7 @@ namespace mailcore {
     };
     
     enum IMAPSearchKind {
+        IMAPSearchKindAll,
         IMAPSearchKindNone,
         IMAPSearchKindFrom,
         IMAPSearchKindRecipient,
@@ -227,7 +228,8 @@ namespace mailcore {
         IMAPMessageRenderingTypeHTML,
         IMAPMessageRenderingTypeHTMLBody,
         IMAPMessageRenderingTypePlainText,
-        IMAPMessageRenderingTypePlainTextBody
+        IMAPMessageRenderingTypePlainTextBody,
+        IMAPMessageRenderingTypePlainTextBodyAndStripWhitespace,
     };
 }
 

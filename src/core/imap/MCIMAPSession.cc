@@ -366,6 +366,7 @@ IMAPSession::IMAPSession()
 
 IMAPSession::~IMAPSession()
 {
+    MC_SAFE_RELEASE(mClientIdentity);
     MC_SAFE_RELEASE(mServerIdentity);
     MC_SAFE_RELEASE(mHostname);
     MC_SAFE_RELEASE(mUsername);
@@ -2532,6 +2533,9 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchKind kind, String * se
     
     expr = NULL;
     switch (kind) {
+        case IMAPSearchKindAll:
+        expr = IMAPSearchExpression::searchAll();
+        break;
         case IMAPSearchKindFrom:
         expr = IMAPSearchExpression::searchFrom(searchString);
         break;
@@ -2554,6 +2558,9 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchKind kind, String * se
 static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpression * expression)
 {
 	switch (expression->kind()) {
+        case IMAPSearchKindAll: {
+            return mailimap_search_key_new_all();
+        }
         case IMAPSearchKindFrom:
         {
             return mailimap_search_key_new_from(strdup(expression->value()->UTF8Characters()));
@@ -3410,7 +3417,7 @@ String * IMAPSession::plainTextRendering(IMAPMessage * message, String * folder,
     return plainTextString;
 }
 
-String * IMAPSession::plainTextBodyRendering(IMAPMessage * message, String * folder, ErrorCode * pError)
+String * IMAPSession::plainTextBodyRendering(IMAPMessage * message, String * folder, bool stripWhitespace, ErrorCode * pError)
 {
     String * htmlBodyString = htmlBodyRendering(message, folder, pError);
     
@@ -3420,14 +3427,16 @@ String * IMAPSession::plainTextBodyRendering(IMAPMessage * message, String * fol
     
     String * plainTextBodyString = htmlBodyString->flattenHTML();
     
-    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\t"), MCSTR(" "));
-    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\n"), MCSTR(" "));
-    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\v"), MCSTR(" "));
-    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\f"), MCSTR(" "));
-    plainTextBodyString->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
-    
-    while (plainTextBodyString->replaceOccurrencesOfString(MCSTR("  "), MCSTR(" ")) > 0) {
-        /* do nothing */
+    if (stripWhitespace) {
+        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\t"), MCSTR(" "));
+        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\n"), MCSTR(" "));
+        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\v"), MCSTR(" "));
+        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\f"), MCSTR(" "));
+        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
+        
+        while (plainTextBodyString->replaceOccurrencesOfString(MCSTR("  "), MCSTR(" ")) > 0) {
+            /* do nothing */
+        }
     }
     
     return plainTextBodyString;
@@ -3459,7 +3468,8 @@ bool IMAPSession::enableFeature(String * feature)
     r = mailimap_enable(mImap, caps, &result);
     if (r != MAILIMAP_NO_ERROR)
         return false;
-
+    
+    mailimap_capability_data_free(caps);
     mailimap_capability_data_free(result);
     
     return true;

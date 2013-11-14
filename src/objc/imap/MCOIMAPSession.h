@@ -611,18 +611,46 @@
 
 /**
  Returns an operation to render the plain text body of a message.
- All end of line will be removed and white spaces cleaned up.
+ All end of line will be removed and white spaces cleaned up if requested.
  This method can be used to generate the summary of the message.
  
     MCOIMAPMessageRenderingOperation * op = [session plainTextBodyRenderingOperationWithMessage:msg
-                                                                                         folder:@"INBOX"];
+                                                                                         folder:@"INBOX"
+                                                                                stripWhitespace:YES];
  
     [op start:^(NSString * htmlString, NSError * error) {
         ...
     }];
  */
 - (MCOIMAPMessageRenderingOperation *) plainTextBodyRenderingOperationWithMessage:(MCOIMAPMessage *)message
+                                                                           folder:(NSString *)folder
+                                                                  stripWhitespace:(BOOL)stripWhitespace;
+
+/**
+ Returns an operation to render the plain text body of a message.
+ All end of line will be removed and white spaces cleaned up.
+ This method can be used to generate the summary of the message.
+ 
+ MCOIMAPMessageRenderingOperation * op = [session plainTextBodyRenderingOperationWithMessage:msg
+ folder:@"INBOX"];
+ 
+ [op start:^(NSString * htmlString, NSError * error) {
+ ...
+ }];
+ */
+- (MCOIMAPMessageRenderingOperation *) plainTextBodyRenderingOperationWithMessage:(MCOIMAPMessage *)message
                                                                            folder:(NSString *)folder;
+
+/**
+ Returns an operation to disconnect the session.
+ It will disconnect all the sockets created by the session.
+ 
+    MCOIMAPOperation * op = [session disconnectOperation];
+    [op start:^(NSError * error) {
+       ...
+    }];
+ */
+- (MCOIMAPOperation *) disconnectOperation;
 
 @end
 

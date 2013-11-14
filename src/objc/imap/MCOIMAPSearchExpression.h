@@ -16,6 +16,16 @@
 #import <MailCore/MCOConstants.h>
 
 @interface MCOIMAPSearchExpression : NSObject
+
+/** 
+ Creates a search expression that returns all UIDS for the mailbox
+
+ Example:
+    
+    MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchAll]
+*/
++ (MCOIMAPSearchExpression *) searchAll;
+
 /**
  Creates a search expression that matches the sender of an email.
 
