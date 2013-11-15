@@ -87,9 +87,9 @@
     return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchHeader([header mco_mcString], [value mco_mcString]));
 }
 
-+ (MCOIMAPSearchExpression *) searchGmailThreadId:(uint64_t)number
++ (MCOIMAPSearchExpression *) searchGmailThreadID:(uint64_t)number
 {
-    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchGmailThreadId(number));
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchGmailThreadID(number));
 }
 
 + (MCOIMAPSearchExpression *) searchAnd:(MCOIMAPSearchExpression *)expression other:(MCOIMAPSearchExpression *)other

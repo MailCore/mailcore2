@@ -27,7 +27,7 @@ namespace mailcore {
 		static IMAPSearchExpression * searchSubject(String * value);
 		static IMAPSearchExpression * searchContent(String * value);
 		static IMAPSearchExpression * searchHeader(String * header, String * value);
-		static IMAPSearchExpression * searchGmailThreadId(uint64_t number);
+		static IMAPSearchExpression * searchGmailThreadID(uint64_t number);
 		static IMAPSearchExpression * searchAnd(IMAPSearchExpression * left, IMAPSearchExpression * right);
 		static IMAPSearchExpression * searchOr(IMAPSearchExpression * left, IMAPSearchExpression * right);
         

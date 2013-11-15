@@ -59,7 +59,7 @@ String * IMAPSearchExpression::description()
         case IMAPSearchKindHeader:
         return String::stringWithUTF8Format("<%s:%p Header %s %s>", MCUTF8(className()), this,
             MCUTF8(mHeader->description()), MCUTF8(mValue->description()));
-        case IMAPSearchKindGmailThreadId:
+        case IMAPSearchKindGmailThreadID:
         return String::stringWithUTF8Format("<%s:%p X-GM-THRID %llu>", MCUTF8(className()), this,
              mLongNumber);
         case IMAPSearchKindOr:
@@ -124,10 +124,10 @@ IMAPSearchExpression * IMAPSearchExpression::searchHeader(String * header, Strin
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
-IMAPSearchExpression * IMAPSearchExpression::searchGmailThreadId(uint64_t number)
+IMAPSearchExpression * IMAPSearchExpression::searchGmailThreadID(uint64_t number)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
-    expr->mKind = IMAPSearchKindGmailThreadId;
+    expr->mKind = IMAPSearchKindGmailThreadID;
     expr->mLongNumber = number;
     return (IMAPSearchExpression *) expr->autorelease();
 }

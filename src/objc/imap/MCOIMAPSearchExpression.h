@@ -76,9 +76,9 @@
  
  Example:
  
- MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchGmailThredId:aThreadId]
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchGmailThreadID:aThreadID]
  */
-+ (MCOIMAPSearchExpression *) searchGmailThreadId:(uint64_t)number;
++ (MCOIMAPSearchExpression *) searchGmailThreadID:(uint64_t)number;
 
 /**
  Creates a search expression that's a disjunction of two search expressions.
