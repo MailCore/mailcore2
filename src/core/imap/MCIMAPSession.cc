@@ -2596,7 +2596,7 @@ static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpr
         }
         case IMAPSearchKindGmailThreadID:
         {
-            return mailimap_search_key_xgmthrid_new(expression->longNumber());
+            return mailimap_search_key_new_xgmthrid(expression->longNumber());
         }
         case IMAPSearchKindOr:
         {
