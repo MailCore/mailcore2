@@ -4,11 +4,12 @@ using namespace mailcore;
 
 void IMAPSearchExpression::init()
 {
-	mKind = IMAPSearchKindNone;
-	mHeader = NULL;
-	mValue = NULL;
-	mLeftExpression = NULL;
-	mRightExpression = NULL;
+    mKind = IMAPSearchKindNone;
+    mHeader = NULL;
+    mValue = NULL;
+    mLongNumber = 0;
+    mLeftExpression = NULL;
+    mRightExpression = NULL;
 }
 
 IMAPSearchExpression::IMAPSearchExpression()
@@ -19,7 +20,8 @@ IMAPSearchExpression::IMAPSearchExpression()
 IMAPSearchExpression::IMAPSearchExpression(IMAPSearchExpression * other)
 {
     init();
-	mKind = other->mKind;
+    mKind = other->mKind;
+    mLongNumber = other->mLongNumber;
     MC_SAFE_REPLACE_COPY(String, mHeader, other->mHeader);
     MC_SAFE_REPLACE_COPY(String, mValue, other->mValue);
     MC_SAFE_REPLACE_COPY(IMAPSearchExpression, mLeftExpression, other->mLeftExpression);
@@ -57,6 +59,9 @@ String * IMAPSearchExpression::description()
         case IMAPSearchKindHeader:
         return String::stringWithUTF8Format("<%s:%p Header %s %s>", MCUTF8(className()), this,
             MCUTF8(mHeader->description()), MCUTF8(mValue->description()));
+        case IMAPSearchKindGmailThreadID:
+        return String::stringWithUTF8Format("<%s:%p X-GM-THRID %llu>", MCUTF8(className()), this,
+             mLongNumber);
         case IMAPSearchKindOr:
         return String::stringWithUTF8Format("<%s:%p Or %s %s>", MCUTF8(className()), this,
             MCUTF8(mLeftExpression->description()), MCUTF8(mRightExpression->description()));
@@ -119,6 +124,14 @@ IMAPSearchExpression * IMAPSearchExpression::searchHeader(String * header, Strin
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
+IMAPSearchExpression * IMAPSearchExpression::searchGmailThreadID(uint64_t number)
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindGmailThreadID;
+    expr->mLongNumber = number;
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
 IMAPSearchExpression * IMAPSearchExpression::searchAnd(IMAPSearchExpression * left, IMAPSearchExpression * right)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
@@ -150,6 +163,11 @@ String * IMAPSearchExpression::header()
 String * IMAPSearchExpression::value()
 {
     return mValue;
+}
+
+uint64_t IMAPSearchExpression::longNumber()
+{
+    return mLongNumber;
 }
 
 IMAPSearchExpression * IMAPSearchExpression::leftExpression()

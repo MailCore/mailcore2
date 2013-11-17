@@ -72,6 +72,15 @@
 + (MCOIMAPSearchExpression *) searchHeader:(NSString *)header value:(NSString *)value;
 
 /**
+ Creates a search expression that matches emails with the given gmail thread id
+ 
+ Example:
+ 
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchGmailThreadID:aThreadID]
+ */
++ (MCOIMAPSearchExpression *) searchGmailThreadID:(uint64_t)number;
+
+/**
  Creates a search expression that's a disjunction of two search expressions.
 
  Example:
