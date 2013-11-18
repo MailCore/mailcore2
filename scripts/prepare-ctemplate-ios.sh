@@ -76,7 +76,8 @@ ARCH=arm
 for MARCH in $MARCHS; do
   echo build for $MARCH
   echo "$logdir/ctemplate-build.log"
-  export CFLAGS="-arch ${MARCH} -isysroot $sysroot -miphoneos-version-min=$sdkversion"
+  export CPPFLAGS="-arch ${MARCH} -isysroot $sysroot -miphoneos-version-min=$sdkversion"
+  export CFLAGS="$CPPFLAGS"
   export CXXFLAGS="$CFLAGS -stdlib=libstdc++ -std=gnu++11"
   export LDFLAGS="-lstdc++ -stdlib=libstdc++"
   
@@ -106,7 +107,8 @@ MARCHS="i386 x86_64"
 for MARCH in $MARCHS; do
   echo build for $MARCH
   echo "$logdir/ctemplate-build.log"
-  export CFLAGS="-arch ${MARCH} -isysroot $sysroot -miphoneos-version-min=$sdkversion"
+  export CPPFLAGS="-arch ${MARCH} -isysroot $sysroot -miphoneos-version-min=$sdkversion"
+  export CFLAGS="$CPPFLAGS"
   export CXXFLAGS="$CFLAGS -stdlib=libstdc++ -std=gnu++11"
   export LDFLAGS="-lstdc++ -stdlib=libstdc++"
   
