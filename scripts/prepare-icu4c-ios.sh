@@ -74,16 +74,19 @@ cd ..
 TOOLCHAIN=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
 export CC=$TOOLCHAIN/clang
 export CXX=$TOOLCHAIN/clang++
-export LDLAGS="-lc++ -isysroot $sysrootpath"
+export SYSROOTPATH="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk"
+export CPPFLAGS="-isysroot $SYSROOTPATH"
+export CFLAGS="$CPPFLAGS"
+export LDLAGS="-lc++ -isysroot $SYSROOTPATH"
 
 echo build x86_64
 MARCH=x86_64
 mkdir -p "$tmpdir/crossbuild/"
 cp -R "$srcdir" "$tmpdir/crossbuild/icu4c-$MARCH"
 cd "$tmpdir/crossbuild/icu4c-$MARCH"
-"icu/source/configure" --enable-static --disable-shared --with-data-packaging=archive >> "$logdir/icu4c-build.log"
-make >> "$logdir/icu4c-build.log"
-make install "prefix=$tmpdir/crossbuild/icu4c-$MARCH" >> "$logdir/icu4c-build.log"
+"icu/source/configure" --enable-static --disable-shared --with-data-packaging=archive # >> "$logdir/icu4c-build.log"
+make # >> "$logdir/icu4c-build.log"
+make install "prefix=$tmpdir/crossbuild/icu4c-$MARCH" # >> "$logdir/icu4c-build.log"
 
 ARCH=arm
 if xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
@@ -101,9 +104,10 @@ sysroot="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/
 
 cd "$srcdir/icu/source"
 for MARCH in $MARCHS; do
-  export CFLAGS="-arch ${MARCH} -isysroot ${sysroot} -DUCONFIG_NO_FILE_IO=1 -miphoneos-version-min=$sdkversion"
-  export CXXFLAGS="$CFLAGS -stdlib=libstdc++ -std=gnu++11"
-  export LDFLAGS="-lstdc++ -stdlib=libstdc++"
+    export CPPFLAGS="-arch ${MARCH} -isysroot ${sysroot} -DUCONFIG_NO_FILE_IO=1 -miphoneos-version-min=$sdkversion"
+    export CFLAGS="$CPPFLAGS"
+    export CXXFLAGS="$CFLAGS -stdlib=libstdc++ -std=gnu++11"
+    export LDFLAGS="-lstdc++ -stdlib=libstdc++  -isysroot ${sysroot}"
 
   echo building $MARCH
   
@@ -126,7 +130,8 @@ MARCHS="x86_64 i386"
 
 cd "$srcdir/icu/source"
 for MARCH in $MARCHS; do
-  export CFLAGS="-arch ${MARCH} -isysroot ${sysroot} -DUCONFIG_NO_FILE_IO=1 -miphoneos-version-min=$sdkversion"
+  export CPPFLAGS="-arch ${MARCH} -isysroot ${sysroot} -DUCONFIG_NO_FILE_IO=1 -miphoneos-version-min=$sdkversion"
+  export CFLAGS="$CPPFLAGS"
   export CXXFLAGS="$CFLAGS -stdlib=libstdc++ -std=gnu++11"
   export LDFLAGS="-lstdc++ -stdlib=libstdc++"
 

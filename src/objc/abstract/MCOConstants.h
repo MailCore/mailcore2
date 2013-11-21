@@ -170,6 +170,8 @@ typedef enum {
     MCOIMAPSearchKindContent,
     /** Match headers of the message.*/
     MCOIMAPSearchKindHeader,
+    /** Match X-GM-THRID.*/
+    MCOIMAPSearchGmailThreadID,
     /** Or expresssion.*/
     MCOIMAPSearchKindOr,
     /** And expression.*/
