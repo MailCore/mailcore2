@@ -168,8 +168,12 @@ namespace mailcore {
         IMAPSearchKindSubject,
         IMAPSearchKindContent,
         IMAPSearchKindHeader,
-        IMAPSearchKindGmailThreadID,
+        IMAPSearchKindRead,
         IMAPSearchKindUnread,
+        IMAPSearchKindBeforeDate,
+        IMAPSearchKindOnDate,
+        IMAPSearchKindSinceDate,
+        IMAPSearchKindGmailThreadID,
         IMAPSearchKindOr,
         IMAPSearchKindAnd,
     };
