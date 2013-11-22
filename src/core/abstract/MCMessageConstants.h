@@ -169,6 +169,7 @@ namespace mailcore {
         IMAPSearchKindContent,
         IMAPSearchKindHeader,
         IMAPSearchKindGmailThreadID,
+        IMAPSearchKindUnread,
         IMAPSearchKindOr,
         IMAPSearchKindAnd,
     };
