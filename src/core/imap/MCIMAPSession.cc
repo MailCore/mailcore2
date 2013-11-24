@@ -2598,15 +2598,33 @@ static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpr
         {
             time_t date = expression->longNumber();
             tm * timeinfo = localtime(&date);
-            return mailimap_search_key_new_before(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
+            return mailimap_search_key_new_sentbefore(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
         }
         case IMAPSearchKindOnDate:
         {
             time_t date = expression->longNumber();
             tm * timeinfo = localtime(&date);
-            return mailimap_search_key_new_on(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
+            return mailimap_search_key_new_senton(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
         }
         case IMAPSearchKindSinceDate:
+        {
+            time_t date = expression->longNumber();
+            tm * timeinfo = localtime(&date);
+            return mailimap_search_key_new_sentsince(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
+        }
+        case IMAPSearchKindBeforeRecievedDate:
+        {
+            time_t date = expression->longNumber();
+            tm * timeinfo = localtime(&date);
+            return mailimap_search_key_new_before(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
+        }
+        case IMAPSearchKindOnRecievedDate:
+        {
+            time_t date = expression->longNumber();
+            tm * timeinfo = localtime(&date);
+            return mailimap_search_key_new_on(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
+        }
+        case IMAPSearchKindSinceRecievedDate:
         {
             time_t date = expression->longNumber();
             tm * timeinfo = localtime(&date);
@@ -2630,6 +2648,78 @@ static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpr
             return mailimap_search_key_new(MAILIMAP_SEARCH_KEY_UNSEEN, 
                                            NULL, NULL, NULL, NULL, NULL, 
                                            NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, 0, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, 0, NULL, NULL, NULL);
+        }
+        case IMAPSearchKindFlagged:
+        {
+            return mailimap_search_key_new(MAILIMAP_SEARCH_KEY_FLAGGED, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, 0, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, 0, NULL, NULL, NULL);
+        }
+        case IMAPSearchKindUnflagged:
+        {
+            return mailimap_search_key_new(MAILIMAP_SEARCH_KEY_UNFLAGGED, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, 0, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, 0, NULL, NULL, NULL);
+        }
+        case IMAPSearchKindAnswered:
+        {
+            return mailimap_search_key_new(MAILIMAP_SEARCH_KEY_ANSWERED, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, 0, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, 0, NULL, NULL, NULL);
+        }
+        case IMAPSearchKindUnanswered:
+        {
+            return mailimap_search_key_new(MAILIMAP_SEARCH_KEY_UNANSWERED, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, 0, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, 0, NULL, NULL, NULL);
+        }
+        case IMAPSearchKindDraft:
+        {
+            return mailimap_search_key_new(MAILIMAP_SEARCH_KEY_DRAFT, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, 0, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, 0, NULL, NULL, NULL);
+        }
+        case IMAPSearchKindUndraft:
+        {
+            return mailimap_search_key_new(MAILIMAP_SEARCH_KEY_UNDRAFT, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, 0, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, 0, NULL, NULL, NULL);
+        }
+        case IMAPSearchKindDeleted:
+        {
+            return mailimap_search_key_new(MAILIMAP_SEARCH_KEY_DELETED, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, 0, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, 0, NULL, NULL, NULL);
+        }
+        case IMAPSearchKindSpam:
+        {
+            return mailimap_search_key_new(MAILIMAP_SEARCH_KEY_KEYWORD, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           strdup("Junk"), NULL, NULL, NULL, NULL, 
                                            NULL, NULL, NULL, NULL, 0, 
                                            NULL, NULL, NULL, NULL, NULL, 
                                            NULL, 0, NULL, NULL, NULL);
