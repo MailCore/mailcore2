@@ -198,7 +198,7 @@ IMAPSearchExpression * IMAPSearchExpression::searchBeforeDate(time_t date)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
     expr->mKind = IMAPSearchKindBeforeDate;
-    expr->mDateNumber = date;
+    expr->mDate = date;
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
@@ -206,7 +206,7 @@ IMAPSearchExpression * IMAPSearchExpression::searchOnDate(time_t date)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
     expr->mKind = IMAPSearchKindOnDate;
-    expr->mDateNumber = date;
+    expr->mDate = date;
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
@@ -214,7 +214,7 @@ IMAPSearchExpression * IMAPSearchExpression::searchSinceDate(time_t date)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
     expr->mKind = IMAPSearchKindSinceDate;
-    expr->mDateNumber = date;
+    expr->mDate = date;
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
@@ -222,14 +222,14 @@ IMAPSearchExpression * IMAPSearchExpression::searchBeforeReceivedDate(time_t dat
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
     expr->mKind = IMAPSearchKindBeforeReceivedDate;
-    expr->mDateNumber = date;
+    expr->mDate = date;
     return (IMAPSearchExpression *) expr->autorelease();
 }
 IMAPSearchExpression * IMAPSearchExpression::searchOnReceivedDate(time_t date)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
     expr->mKind = IMAPSearchKindOnReceivedDate;
-    expr->mDateNumber = date;
+    expr->mDate = date;
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
@@ -237,7 +237,7 @@ IMAPSearchExpression * IMAPSearchExpression::searchSinceReceivedDate(time_t date
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
     expr->mKind = IMAPSearchKindSinceReceivedDate;
-    expr->mDateNumber = date;
+    expr->mDate = date;
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
@@ -289,7 +289,7 @@ uint64_t IMAPSearchExpression::longNumber()
 
 time_t IMAPSearchExpression::date()
 {
-    return mDateNumber;
+    return mDate;
 }
 
 IMAPSearchExpression * IMAPSearchExpression::leftExpression()
