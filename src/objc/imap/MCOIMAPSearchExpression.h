@@ -76,7 +76,7 @@
  
  Example:
  
- MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchHeader:@"List-Id" value:@"shoes"]
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchRead]
  **/
 + (MCOIMAPSearchExpression *) searchRead;
 
@@ -85,7 +85,7 @@
  
  Example:
  
- MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchHeader:@"List-Id" value:@"shoes"]
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchUnread]
  **/
 + (MCOIMAPSearchExpression *) searchUnread;
 
@@ -94,7 +94,7 @@
  
  Example:
  
- MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchHeader:@"List-Id" value:@"shoes"]
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchFlagged]
  **/
 + (MCOIMAPSearchExpression *) searchFlagged;
 
@@ -103,7 +103,7 @@
  
  Example:
  
- MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchHeader:@"List-Id" value:@"shoes"]
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchUnflagged]
  **/
 + (MCOIMAPSearchExpression *) searchUnflagged;
 
@@ -112,7 +112,7 @@
  
  Example:
  
- MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchHeader:@"List-Id" value:@"shoes"]
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchAnswered]
  **/
 + (MCOIMAPSearchExpression *) searchAnswered;
 
@@ -121,7 +121,7 @@
  
  Example:
  
- MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchHeader:@"List-Id" value:@"shoes"]
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchUnanswered]
  **/
 + (MCOIMAPSearchExpression *) searchUnanswered;
 
@@ -130,7 +130,7 @@
  
  Example:
  
- MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchHeader:@"List-Id" value:@"shoes"]
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchDraft]
  **/
 + (MCOIMAPSearchExpression *) searchDraft;
 
@@ -139,7 +139,7 @@
  
  Example:
  
- MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchHeader:@"List-Id" value:@"shoes"]
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchUndraft]
  **/
 + (MCOIMAPSearchExpression *) searchUndraft;
 
@@ -148,7 +148,7 @@
  
  Example:
  
- MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchHeader:@"List-Id" value:@"shoes"]
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchDeleted]
  **/
 + (MCOIMAPSearchExpression *) searchDeleted;
 
@@ -157,7 +157,7 @@
  
  Example:
  
- MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchHeader:@"List-Id" value:@"shoes"]
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchSpam]
  **/
 + (MCOIMAPSearchExpression *) searchSpam;
 
