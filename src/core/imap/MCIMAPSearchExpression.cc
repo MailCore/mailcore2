@@ -198,7 +198,7 @@ IMAPSearchExpression * IMAPSearchExpression::searchBeforeDate(time_t date)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
     expr->mKind = IMAPSearchKindBeforeDate;
-    expr->mLongNumber = date;
+    expr->mDateNumber = date;
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
@@ -206,7 +206,7 @@ IMAPSearchExpression * IMAPSearchExpression::searchOnDate(time_t date)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
     expr->mKind = IMAPSearchKindOnDate;
-    expr->mLongNumber = date;
+    expr->mDateNumber = date;
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
@@ -214,7 +214,7 @@ IMAPSearchExpression * IMAPSearchExpression::searchSinceDate(time_t date)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
     expr->mKind = IMAPSearchKindSinceDate;
-    expr->mLongNumber = date;
+    expr->mDateNumber = date;
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
@@ -222,14 +222,14 @@ IMAPSearchExpression * IMAPSearchExpression::searchBeforeRecievedDate(time_t dat
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
     expr->mKind = IMAPSearchKindBeforeRecievedDate;
-    expr->mLongNumber = date;
+    expr->mDateNumber = date;
     return (IMAPSearchExpression *) expr->autorelease();
 }
 IMAPSearchExpression * IMAPSearchExpression::searchOnRecievedDate(time_t date)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
     expr->mKind = IMAPSearchKindOnRecievedDate;
-    expr->mLongNumber = date;
+    expr->mDateNumber = date;
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
@@ -237,7 +237,7 @@ IMAPSearchExpression * IMAPSearchExpression::searchSinceReciviedDate(time_t date
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
     expr->mKind = IMAPSearchKindSinceRecievedDate;
-    expr->mLongNumber = date;
+    expr->mDateNumber = date;
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
@@ -285,6 +285,11 @@ String * IMAPSearchExpression::value()
 uint64_t IMAPSearchExpression::longNumber()
 {
     return mLongNumber;
+}
+
+time_t IMAPSearchExpression::dateNumber()
+{
+    return mDateNumber;
 }
 
 IMAPSearchExpression * IMAPSearchExpression::leftExpression()

@@ -18,6 +18,7 @@ namespace mailcore {
         virtual String * header();
         virtual String * value();
         virtual uint64_t longNumber();
+        virtual time_t dateNumber();
         virtual IMAPSearchExpression * leftExpression();
         virtual IMAPSearchExpression * rightExpression();
         
@@ -57,6 +58,7 @@ namespace mailcore {
         String * mHeader;
         String * mValue;
         uint64_t mLongNumber;
+        time_t mDateNumber;
         IMAPSearchExpression * mLeftExpression;
         IMAPSearchExpression * mRightExpression;
         void init();

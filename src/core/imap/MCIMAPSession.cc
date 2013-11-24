@@ -2596,37 +2596,37 @@ static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpr
         }
         case IMAPSearchKindBeforeDate:
         {
-            time_t date = expression->longNumber();
+            time_t date = expression->dateNumber();
             tm * timeinfo = localtime(&date);
             return mailimap_search_key_new_sentbefore(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
         }
         case IMAPSearchKindOnDate:
         {
-            time_t date = expression->longNumber();
+            time_t date = expression->dateNumber();
             tm * timeinfo = localtime(&date);
             return mailimap_search_key_new_senton(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
         }
         case IMAPSearchKindSinceDate:
         {
-            time_t date = expression->longNumber();
+            time_t date = expression->dateNumber();
             tm * timeinfo = localtime(&date);
             return mailimap_search_key_new_sentsince(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
         }
         case IMAPSearchKindBeforeRecievedDate:
         {
-            time_t date = expression->longNumber();
+            time_t date = expression->dateNumber();
             tm * timeinfo = localtime(&date);
             return mailimap_search_key_new_before(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
         }
         case IMAPSearchKindOnRecievedDate:
         {
-            time_t date = expression->longNumber();
+            time_t date = expression->dateNumber();
             tm * timeinfo = localtime(&date);
             return mailimap_search_key_new_on(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
         }
         case IMAPSearchKindSinceRecievedDate:
         {
-            time_t date = expression->longNumber();
+            time_t date = expression->dateNumber();
             tm * timeinfo = localtime(&date);
             return mailimap_search_key_new_since(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
         }
