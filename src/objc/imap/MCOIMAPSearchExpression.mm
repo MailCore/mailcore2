@@ -152,19 +152,19 @@
     return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchSinceDate((time_t) [date timeIntervalSince1970]));
 }
 
-+ (MCOIMAPSearchExpression *) searchBeforeRecievedDate:(NSDate *)date
++ (MCOIMAPSearchExpression *) searchBeforeReceivedDate:(NSDate *)date
 {
-    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchBeforeRecievedDate((time_t) [date timeIntervalSince1970]));
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchBeforeReceivedDate((time_t) [date timeIntervalSince1970]));
 }
 
-+ (MCOIMAPSearchExpression *) searchOnRecievedDate:(NSDate *)date
++ (MCOIMAPSearchExpression *) searchOnReceivedDate:(NSDate *)date
 {
-    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchOnRecievedDate((time_t) [date timeIntervalSince1970]));
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchOnReceivedDate((time_t) [date timeIntervalSince1970]));
 }
 
-+ (MCOIMAPSearchExpression *) searchSinceReciviedDate:(NSDate *)date
++ (MCOIMAPSearchExpression *) searchSinceReceivedDate:(NSDate *)date
 {
-    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchSinceReciviedDate((time_t) [date timeIntervalSince1970]));
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchSinceReceivedDate((time_t) [date timeIntervalSince1970]));
 }
 
 + (MCOIMAPSearchExpression *) searchGmailThreadID:(uint64_t)number

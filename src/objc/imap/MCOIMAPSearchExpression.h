@@ -192,34 +192,34 @@
 + (MCOIMAPSearchExpression *) searchSinceDate:(NSDate *)date;
 
 /**
- Creates a search expression that matches messages recieved before a date.
+ Creates a search expression that matches messages received before a date.
  
  Example:
  
  NSDate *yesterday = [NSDate dateWithTimeIntervalSinceNow:-(60.0 * 60.0 * 24.0)];
- MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchBeforeRecievedDate:yesterday]
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchBeforeReceivedDate:yesterday]
  **/
-+ (MCOIMAPSearchExpression *) searchBeforeRecievedDate:(NSDate *)date;
++ (MCOIMAPSearchExpression *) searchBeforeReceivedDate:(NSDate *)date;
 
 /**
- Creates a search expression that matches messages recieved on a date.
+ Creates a search expression that matches messages received on a date.
  
  Example:
  
  NSDate *now = [NSDate date];
- MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchOnRecievedDate:now]
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchOnReceivedDate:now]
  **/
-+ (MCOIMAPSearchExpression *) searchOnRecievedDate:(NSDate *)date;
++ (MCOIMAPSearchExpression *) searchOnReceivedDate:(NSDate *)date;
 
 /**
- Creates a search expression that matches messages recieved since a date.
+ Creates a search expression that matches messages received since a date.
  
  Example:
  
  NSDate *yesterday = [NSDate dateWithTimeIntervalSinceNow:-(60.0 * 60.0 * 24.0)];
- MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchSinceReciviedDate:yesterday]
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchSinceReceivedDate:yesterday]
  **/
-+ (MCOIMAPSearchExpression *) searchSinceReciviedDate:(NSDate *)date;
++ (MCOIMAPSearchExpression *) searchSinceReceivedDate:(NSDate *)date;
 
 /**
  Creates a search expression that matches emails with the given gmail thread id

@@ -218,25 +218,25 @@ IMAPSearchExpression * IMAPSearchExpression::searchSinceDate(time_t date)
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
-IMAPSearchExpression * IMAPSearchExpression::searchBeforeRecievedDate(time_t date)
+IMAPSearchExpression * IMAPSearchExpression::searchBeforeReceivedDate(time_t date)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
-    expr->mKind = IMAPSearchKindBeforeRecievedDate;
+    expr->mKind = IMAPSearchKindBeforeReceivedDate;
     expr->mDateNumber = date;
     return (IMAPSearchExpression *) expr->autorelease();
 }
-IMAPSearchExpression * IMAPSearchExpression::searchOnRecievedDate(time_t date)
+IMAPSearchExpression * IMAPSearchExpression::searchOnReceivedDate(time_t date)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
-    expr->mKind = IMAPSearchKindOnRecievedDate;
+    expr->mKind = IMAPSearchKindOnReceivedDate;
     expr->mDateNumber = date;
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
-IMAPSearchExpression * IMAPSearchExpression::searchSinceReciviedDate(time_t date)
+IMAPSearchExpression * IMAPSearchExpression::searchSinceReceivedDate(time_t date)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
-    expr->mKind = IMAPSearchKindSinceRecievedDate;
+    expr->mKind = IMAPSearchKindSinceReceivedDate;
     expr->mDateNumber = date;
     return (IMAPSearchExpression *) expr->autorelease();
 }
@@ -287,7 +287,7 @@ uint64_t IMAPSearchExpression::longNumber()
     return mLongNumber;
 }
 
-time_t IMAPSearchExpression::dateNumber()
+time_t IMAPSearchExpression::date()
 {
     return mDateNumber;
 }
