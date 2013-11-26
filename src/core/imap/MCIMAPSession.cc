@@ -1926,7 +1926,13 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
             struct mailimap_extension_data * ext_data;
             
             ext_data = att_item->att_data.att_extension_data;
-            if (ext_data->ext_extension == &mailimap_extension_xgmlabels) {
+            if (ext_data->ext_extension == &mailimap_extension_condstore) {
+                struct mailimap_condstore_fetch_mod_resp * fetch_data;
+                
+                fetch_data = (struct mailimap_condstore_fetch_mod_resp *) ext_data->ext_data;
+                msg->setModSeqValue(fetch_data->cs_modseq_value);
+            }
+            else if (ext_data->ext_extension == &mailimap_extension_xgmlabels) {
                 struct mailimap_msg_att_xgmlabels * cLabels;
                 Array * labels;
                 clistiter * cur;
