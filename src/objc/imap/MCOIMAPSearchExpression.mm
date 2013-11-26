@@ -87,6 +87,86 @@
     return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchHeader([header mco_mcString], [value mco_mcString]));
 }
 
++ (MCOIMAPSearchExpression *) searchRead
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchRead());
+}
+
++ (MCOIMAPSearchExpression *) searchUnread
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchUnread());
+}
+
++ (MCOIMAPSearchExpression *) searchFlagged
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchFlagged());
+}
+
++ (MCOIMAPSearchExpression *) searchUnflagged
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchUnflagged());
+}
+
++ (MCOIMAPSearchExpression *) searchAnswered
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchAnswered());
+}
+
++ (MCOIMAPSearchExpression *) searchUnanswered
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchUnanswered());
+}
+
++ (MCOIMAPSearchExpression *) searchDraft
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchDraft());
+}
+
++ (MCOIMAPSearchExpression *) searchUndraft
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchUndraft());
+}
+
++ (MCOIMAPSearchExpression *) searchDeleted
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchDeleted());
+}
+
++ (MCOIMAPSearchExpression *) searchSpam
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchSpam());
+}
+
++ (MCOIMAPSearchExpression *) searchBeforeDate:(NSDate *)date
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchBeforeDate((time_t) [date timeIntervalSince1970]));
+}
+
++ (MCOIMAPSearchExpression *) searchOnDate:(NSDate *)date
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchOnDate((time_t) [date timeIntervalSince1970]));
+}
+
++ (MCOIMAPSearchExpression *) searchSinceDate:(NSDate *)date
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchSinceDate((time_t) [date timeIntervalSince1970]));
+}
+
++ (MCOIMAPSearchExpression *) searchBeforeReceivedDate:(NSDate *)date
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchBeforeReceivedDate((time_t) [date timeIntervalSince1970]));
+}
+
++ (MCOIMAPSearchExpression *) searchOnReceivedDate:(NSDate *)date
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchOnReceivedDate((time_t) [date timeIntervalSince1970]));
+}
+
++ (MCOIMAPSearchExpression *) searchSinceReceivedDate:(NSDate *)date
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchSinceReceivedDate((time_t) [date timeIntervalSince1970]));
+}
+
 + (MCOIMAPSearchExpression *) searchGmailThreadID:(uint64_t)number
 {
     return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchGmailThreadID(number));

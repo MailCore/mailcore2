@@ -27,10 +27,10 @@
 using namespace mailcore;
 
 enum {
-	STATE_DISCONNECTED,
-	STATE_CONNECTED,
-	STATE_LOGGEDIN,
-	STATE_SELECTED,
+    STATE_DISCONNECTED,
+    STATE_CONNECTED,
+    STATE_LOGGEDIN,
+    STATE_SELECTED,
 };
 
 String * mailcore::IMAPNamespacePersonal = NULL;
@@ -44,8 +44,8 @@ static void initialize()
 {
     AutoreleasePool * pool = new AutoreleasePool();
     IMAPNamespacePersonal = (String *) MCSTR("IMAPNamespacePersonal")->retain();
-	IMAPNamespaceOther = (String *) MCSTR("IMAPNamespaceOther")->retain();
-	IMAPNamespaceShared = (String *) MCSTR("IMAPNamespaceShared")->retain();
+    IMAPNamespaceOther = (String *) MCSTR("IMAPNamespaceOther")->retain();
+    IMAPNamespaceShared = (String *) MCSTR("IMAPNamespaceShared")->retain();
     
     pool->release();
 }
@@ -220,29 +220,29 @@ static struct mailimap_set * setFromArray(Array * array)
     unsigned int lastValue = 0;
     struct mailimap_set * imap_set;
     
-	array = array->sortedArray(compareValuesUnsignedLong, NULL);
+    array = array->sortedArray(compareValuesUnsignedLong, NULL);
     imap_set = mailimap_set_new_empty();
-	
-	while (currentIndex < array->count()) {
+    
+    while (currentIndex < array->count()) {
         currentValue = (unsigned int) ((Value *) array->objectAtIndex(currentIndex))->unsignedLongValue();
         if (currentFirst == 0) {
             currentFirst = currentValue;
         }
         
         if ((lastValue != 0) && (currentValue != lastValue + 1)) {
-			mailimap_set_add_interval(imap_set, currentFirst, lastValue);
-			currentFirst = 0;
-			lastValue = 0;
+            mailimap_set_add_interval(imap_set, currentFirst, lastValue);
+            currentFirst = 0;
+            lastValue = 0;
         }
         else {
             lastValue = currentValue;
             currentIndex ++;
         }
     }
-	if (currentFirst != 0) {
-		mailimap_set_add_interval(imap_set, currentFirst, lastValue);
-	}
-	
+    if (currentFirst != 0) {
+        mailimap_set_add_interval(imap_set, currentFirst, lastValue);
+    }
+    
     return imap_set;
 }
 
@@ -480,8 +480,8 @@ bool IMAPSession::isVoIPEnabled()
 
 static bool hasError(int errorCode)
 {
-	return ((errorCode != MAILIMAP_NO_ERROR) && (errorCode != MAILIMAP_NO_ERROR_AUTHENTICATED) &&
-			(errorCode != MAILIMAP_NO_ERROR_NON_AUTHENTICATED));
+    return ((errorCode != MAILIMAP_NO_ERROR) && (errorCode != MAILIMAP_NO_ERROR_AUTHENTICATED) &&
+            (errorCode != MAILIMAP_NO_ERROR_NON_AUTHENTICATED));
 }
 
 bool IMAPSession::checkCertificate()
@@ -531,9 +531,9 @@ static void logger(mailimap * imap, int log_type, const char * buffer, size_t si
 
 void IMAPSession::setup()
 {
-	MCAssert(mImap == NULL);
-	
-	mImap = mailimap_new(0, NULL);
+    MCAssert(mImap == NULL);
+    
+    mImap = mailimap_new(0, NULL);
     mailimap_set_timeout(mImap, timeout());
     mailimap_set_progress_callback(mImap, body_progress, IMAPSession::items_progress, this);
     mailimap_set_logger(mImap, logger, this);
@@ -549,28 +549,28 @@ void IMAPSession::unsetup()
     mCanIdle = false;
     UNLOCK();
     
-	if (imap != NULL) {
+    if (imap != NULL) {
         if (imap->imap_stream != NULL) {
             mailstream_close(imap->imap_stream);
             imap->imap_stream = NULL;
         }
-		mailimap_free(imap);
-		imap = NULL;
-	}
+        mailimap_free(imap);
+        imap = NULL;
+    }
     
     mState = STATE_DISCONNECTED;
 }
 
 void IMAPSession::connect(ErrorCode * pError)
 {
-	int r;
-	
+    int r;
+    
     setup();
-	
-	MCLog("connect %s", MCUTF8DESC(this));
-	
-	MCAssert(mState == STATE_DISCONNECTED);
-	
+    
+    MCLog("connect %s", MCUTF8DESC(this));
+    
+    MCAssert(mState == STATE_DISCONNECTED);
+    
     switch (mConnectionType) {
         case ConnectionTypeStartTLS:
         MCLog("STARTTLS connect");
@@ -615,7 +615,7 @@ void IMAPSession::connect(ErrorCode * pError)
         }
         break;
     }
-	
+    
     mailstream_low * low;
     String * identifierString;
     char * identifier;
@@ -630,7 +630,7 @@ void IMAPSession::connect(ErrorCode * pError)
         mYahooServer = (mWelcomeString->locationOfString(MCSTR("yahoo.com")) != -1);
     }
     
-	mState = STATE_CONNECTED;
+    mState = STATE_CONNECTED;
     
     if (isAutomaticConfigurationEnabled()) {
         if ((mImap->imap_connection_info != NULL) && (mImap->imap_connection_info->imap_capability != NULL)) {
@@ -647,7 +647,7 @@ void IMAPSession::connect(ErrorCode * pError)
     }
     
     * pError = ErrorNone;
-	MCLog("connect ok");
+    MCLog("connect ok");
     return;
     
 close:
@@ -685,12 +685,12 @@ void IMAPSession::loginIfNeeded(ErrorCode * pError)
 
 void IMAPSession::login(ErrorCode * pError)
 {
-	int r;
-	
-	MCLog("login");
-	
-	MCAssert(mState == STATE_CONNECTED);
-	
+    int r;
+    
+    MCLog("login");
+    
+    MCAssert(mState == STATE_CONNECTED);
+    
     if (mImap->imap_connection_info != NULL) {
         if (mImap->imap_connection_info->imap_capability != NULL) {
             mailimap_capability_data_free(mImap->imap_connection_info->imap_capability);
@@ -709,13 +709,13 @@ void IMAPSession::login(ErrorCode * pError)
         utf8password = "";
     }
     
-	switch (mAuthType) {
+    switch (mAuthType) {
         case 0:
-		default:
-			r = mailimap_login(mImap, utf8username, utf8password);
-			break;
-			
-		case AuthTypeSASLCRAMMD5:
+        default:
+            r = mailimap_login(mImap, utf8username, utf8password);
+            break;
+            
+        case AuthTypeSASLCRAMMD5:
             r = mailimap_authenticate(mImap, "CRAM-MD5",
                                       MCUTF8(mHostname),
                                       NULL,
@@ -723,7 +723,7 @@ void IMAPSession::login(ErrorCode * pError)
                                       utf8username, utf8username,
                                       utf8password, NULL);
             break;
-			
+            
         case AuthTypeSASLPlain:
             r = mailimap_authenticate(mImap, "PLAIN",
                                       MCUTF8(mHostname),
@@ -732,19 +732,19 @@ void IMAPSession::login(ErrorCode * pError)
                                       utf8username, utf8username,
                                       utf8password, NULL);
             break;
-			
-		case AuthTypeSASLGSSAPI:
-			// needs to be tested
-			r = mailimap_authenticate(mImap, "GSSAPI",
+            
+        case AuthTypeSASLGSSAPI:
+            // needs to be tested
+            r = mailimap_authenticate(mImap, "GSSAPI",
                                       MCUTF8(mHostname),
                                       NULL,
                                       NULL,
                                       utf8username, utf8username,
                                       utf8password, NULL /* realm */);
-			break;
-			
-		case AuthTypeSASLDIGESTMD5:
-			r = mailimap_authenticate(mImap, "DIGEST-MD5",
+            break;
+            
+        case AuthTypeSASLDIGESTMD5:
+            r = mailimap_authenticate(mImap, "DIGEST-MD5",
                                       MCUTF8(mHostname),
                                       NULL,
                                       NULL,
@@ -769,7 +769,7 @@ void IMAPSession::login(ErrorCode * pError)
                                       utf8username, utf8username,
                                       utf8password, NULL);
             break;
-			
+            
         case AuthTypeSASLNTLM:
             r = mailimap_authenticate(mImap, "NTLM",
                                       MCUTF8(mHostname),
@@ -778,7 +778,7 @@ void IMAPSession::login(ErrorCode * pError)
                                       utf8username, utf8username,
                                       utf8password, NULL/* realm */);
             break;
-			
+            
         case AuthTypeSASLKerberosV4:
             r = mailimap_authenticate(mImap, "KERBEROS_V4",
                                       MCUTF8(mHostname),
@@ -791,7 +791,7 @@ void IMAPSession::login(ErrorCode * pError)
         case AuthTypeXOAuth2:
             r = mailimap_oauth2_authenticate(mImap, utf8username, MCUTF8(mOAuth2Token));
             break;
-	}
+    }
     if (r == MAILIMAP_ERROR_STREAM) {
         mShouldDisconnect = true;
         * pError = ErrorConnection;
@@ -832,7 +832,7 @@ void IMAPSession::login(ErrorCode * pError)
         return;
     }
     
-	mState = STATE_LOGGEDIN;
+    mState = STATE_LOGGEDIN;
     
     if (isAutomaticConfigurationEnabled()) {
         if ((mImap->imap_connection_info != NULL) && (mImap->imap_connection_info->imap_capability != NULL)) {
@@ -910,7 +910,7 @@ void IMAPSession::login(ErrorCode * pError)
     mAutomaticConfigurationDone = true;
     
     * pError = ErrorNone;
-	MCLog("login ok");
+    MCLog("login ok");
 }
 
 void IMAPSession::selectIfNeeded(String * folder, ErrorCode * pError)
@@ -1202,9 +1202,9 @@ static Array * resultsWithError(int r, clist * list, ErrorCode * pError)
 {
     clistiter * cur;
     Array * result;
-	
+    
     result = Array::array();
-	if (r == MAILIMAP_ERROR_STREAM) {
+    if (r == MAILIMAP_ERROR_STREAM) {
         * pError = ErrorConnection;
         return NULL;
     }
@@ -1215,8 +1215,8 @@ static Array * resultsWithError(int r, clist * list, ErrorCode * pError)
     else if (hasError(r)) {
         * pError = ErrorNonExistantFolder;
         return NULL;
-	}
-	
+    }
+    
     for(cur = clist_begin(list) ; cur != NULL ; cur = cur->next) {
         struct mailimap_mailbox_list * mb_list;
         IMAPFolderFlag flags;
@@ -1239,16 +1239,16 @@ static Array * resultsWithError(int r, clist * list, ErrorCode * pError)
         }
         folder->setDelimiter(mb_list->mb_delimiter);
         folder->setFlags(flags);
-		
+        
         result->addObject(folder);
         
         folder->release();
     }
     
-	mailimap_list_result_free(list);
-	
+    mailimap_list_result_free(list);
+    
     * pError = ErrorNone;
-	return result;
+    return result;
 }
 
 // Deprecated
@@ -1266,7 +1266,7 @@ char IMAPSession::fetchDelimiterIfNeeded(char defaultDelimiter, ErrorCode * pErr
     folders = resultsWithError(r, imap_folders, pError);
     if (* pError == ErrorConnection)
         mShouldDisconnect = true;
-	if (* pError != ErrorNone)
+    if (* pError != ErrorNone)
         return 0;
     
     if (folders->count() > 0) {
@@ -1287,9 +1287,9 @@ Array * /* IMAPFolder */ IMAPSession::fetchSubscribedFolders(ErrorCode * pError)
     int r;
     clist * imap_folders;
     
-	MCLog("fetch subscribed");
+    MCLog("fetch subscribed");
     loginIfNeeded(pError);
-	if (* pError != ErrorNone)
+    if (* pError != ErrorNone)
         return NULL;
     
     if (mDelimiter == 0) {
@@ -1314,8 +1314,8 @@ Array * /* IMAPFolder */ IMAPSession::fetchSubscribedFolders(ErrorCode * pError)
         }
     }
     
-	r = mailimap_lsub(mImap, MCUTF8(prefix), "*", &imap_folders);
-	MCLog("fetch subscribed %u", r);
+    r = mailimap_lsub(mImap, MCUTF8(prefix), "*", &imap_folders);
+    MCLog("fetch subscribed %u", r);
     Array * result = resultsWithError(r, imap_folders, pError);
     if (* pError == ErrorConnection)
         mShouldDisconnect = true;
@@ -1327,10 +1327,10 @@ Array * /* IMAPFolder */ IMAPSession::fetchAllFolders(ErrorCode * pError)
     int r;
     clist * imap_folders;
     
-	loginIfNeeded(pError);
-	if (* pError != ErrorNone)
+    loginIfNeeded(pError);
+    if (* pError != ErrorNone)
         return NULL;
-	
+    
     if (mDelimiter == 0) {
         char delimiter;
         
@@ -1388,11 +1388,11 @@ void IMAPSession::renameFolder(String * folder, String * otherName, ErrorCode * 
     int r;
     
     selectIfNeeded(MCSTR("INBOX"), pError);
-	if (* pError != ErrorNone)
+    if (* pError != ErrorNone)
         return;
     
     r = mailimap_rename(mImap, MCUTF8(folder), MCUTF8(otherName));
-	if (r == MAILIMAP_ERROR_STREAM) {
+    if (r == MAILIMAP_ERROR_STREAM) {
         mShouldDisconnect = true;
         * pError = ErrorConnection;
         return;
@@ -1404,7 +1404,7 @@ void IMAPSession::renameFolder(String * folder, String * otherName, ErrorCode * 
     else if (hasError(r)) {
         * pError = ErrorRename;
         return;
-	}
+    }
     * pError = ErrorNone;
 }
 
@@ -1413,11 +1413,11 @@ void IMAPSession::deleteFolder(String * folder, ErrorCode * pError)
     int r;
     
     selectIfNeeded(MCSTR("INBOX"), pError);
-	if (* pError != ErrorNone)
+    if (* pError != ErrorNone)
         return;
     
     r = mailimap_delete(mImap, MCUTF8(folder));
-	if (r == MAILIMAP_ERROR_STREAM) {
+    if (r == MAILIMAP_ERROR_STREAM) {
         mShouldDisconnect = true;
         * pError = ErrorConnection;
         return;
@@ -1429,7 +1429,7 @@ void IMAPSession::deleteFolder(String * folder, ErrorCode * pError)
     else if (hasError(r)) {
         * pError = ErrorDelete;
         return;
-	}
+    }
     * pError = ErrorNone;
 }
 
@@ -1438,11 +1438,11 @@ void IMAPSession::createFolder(String * folder, ErrorCode * pError)
     int r;
     
     selectIfNeeded(MCSTR("INBOX"), pError);
-	if (* pError != ErrorNone)
+    if (* pError != ErrorNone)
         return;
     
     r = mailimap_create(mImap, MCUTF8(folder));
-	if (r == MAILIMAP_ERROR_STREAM) {
+    if (r == MAILIMAP_ERROR_STREAM) {
         mShouldDisconnect = true;
         * pError = ErrorConnection;
         return;
@@ -1454,7 +1454,7 @@ void IMAPSession::createFolder(String * folder, ErrorCode * pError)
     else if (hasError(r)) {
         * pError = ErrorCreate;
         return;
-	}
+    }
     
     * pError = ErrorNone;
     subscribeFolder(folder, pError);
@@ -1465,11 +1465,11 @@ void IMAPSession::subscribeFolder(String * folder, ErrorCode * pError)
     int r;
     
     selectIfNeeded(MCSTR("INBOX"), pError);
-	if (* pError != ErrorNone)
+    if (* pError != ErrorNone)
         return;
     
     r = mailimap_subscribe(mImap, MCUTF8(folder));
-	if (r == MAILIMAP_ERROR_STREAM) {
+    if (r == MAILIMAP_ERROR_STREAM) {
         mShouldDisconnect = true;
         * pError = ErrorConnection;
         return;
@@ -1481,7 +1481,7 @@ void IMAPSession::subscribeFolder(String * folder, ErrorCode * pError)
     else if (hasError(r)) {
         * pError = ErrorSubscribe;
         return;
-	}
+    }
     * pError = ErrorNone;
 }
 
@@ -1490,11 +1490,11 @@ void IMAPSession::unsubscribeFolder(String * folder, ErrorCode * pError)
     int r;
     
     selectIfNeeded(MCSTR("INBOX"), pError);
-	if (* pError != ErrorNone)
+    if (* pError != ErrorNone)
         return;
     
     r = mailimap_unsubscribe(mImap, MCUTF8(folder));
-	if (r == MAILIMAP_ERROR_STREAM) {
+    if (r == MAILIMAP_ERROR_STREAM) {
         mShouldDisconnect = true;
         * pError = ErrorConnection;
         return;
@@ -1506,7 +1506,7 @@ void IMAPSession::unsubscribeFolder(String * folder, ErrorCode * pError)
     else if (hasError(r)) {
         * pError = ErrorSubscribe;
         return;
-	}
+    }
     * pError = ErrorNone;
 }
 
@@ -1516,10 +1516,10 @@ void IMAPSession::appendMessage(String * folder, Data * messageData, MessageFlag
     int r;
     struct mailimap_flag_list * flag_list;
     uint32_t uidvalidity;
-	uint32_t uidresult;
+    uint32_t uidresult;
     
     selectIfNeeded(folder, pError);
-	if (* pError != ErrorNone)
+    if (* pError != ErrorNone)
         return;
     
     mProgressCallback = progressCallback;
@@ -1534,7 +1534,7 @@ void IMAPSession::appendMessage(String * folder, Data * messageData, MessageFlag
     bodyProgress(messageData->length(), messageData->length());
     mProgressCallback = NULL;
     
-	if (r == MAILIMAP_ERROR_STREAM) {
+    if (r == MAILIMAP_ERROR_STREAM) {
         mShouldDisconnect = true;
         * pError = ErrorConnection;
         return;
@@ -1546,14 +1546,14 @@ void IMAPSession::appendMessage(String * folder, Data * messageData, MessageFlag
     else if (hasError(r)) {
         * pError = ErrorAppend;
         return;
-	}
-	
+    }
+    
     * createdUID = uidresult;
     * pError = ErrorNone;
 }
 
 void IMAPSession::copyMessages(String * folder, IndexSet * uidSet, String * destFolder,
-	 IndexSet ** pDestUIDs, ErrorCode * pError)
+     IndexSet ** pDestUIDs, ErrorCode * pError)
 {
     int r;
     struct mailimap_set * set;
@@ -1625,11 +1625,11 @@ void IMAPSession::expunge(String * folder, ErrorCode * pError)
     int r;
     
     selectIfNeeded(folder, pError);
-	if (* pError != ErrorNone)
+    if (* pError != ErrorNone)
         return;
     
     r = mailimap_expunge(mImap);
-	if (r == MAILIMAP_ERROR_STREAM) {
+    if (r == MAILIMAP_ERROR_STREAM) {
         mShouldDisconnect = true;
         * pError = ErrorConnection;
         return;
@@ -1641,71 +1641,71 @@ void IMAPSession::expunge(String * folder, ErrorCode * pError)
     else if (hasError(r)) {
         * pError = ErrorExpunge;
         return;
-	}
+    }
     * pError = ErrorNone;
 }
 
 static int
 fetch_imap(mailimap * imap, uint32_t uid,
-		   struct mailimap_fetch_type * fetch_type,
-		   char ** result, size_t * result_len)
+           struct mailimap_fetch_type * fetch_type,
+           char ** result, size_t * result_len)
 {
-	int r;
-	struct mailimap_msg_att * msg_att;
-	struct mailimap_msg_att_item * msg_att_item;
-	clist * fetch_result;
-	struct mailimap_set * set;
-	char * text;
-	size_t text_length;
-	clistiter * cur;
-	
-	set = mailimap_set_new_single(uid);
-	r = mailimap_uid_fetch(imap, set, fetch_type, &fetch_result);
-	
-	mailimap_set_free(set);
-	
-	switch (r) {
-		case MAILIMAP_NO_ERROR:
-			break;
-		default:
-			return r;
-	}
-	
-	if (clist_begin(fetch_result) == NULL) {
-		mailimap_fetch_list_free(fetch_result);
-		return MAILIMAP_ERROR_FETCH;
-	}
-	
-	msg_att = (struct mailimap_msg_att *) clist_begin(fetch_result)->data;
-	
-	text = NULL;
-	text_length = 0;
-	
-	for(cur = clist_begin(msg_att->att_list) ; cur != NULL ;
-		cur = clist_next(cur)) {
-		msg_att_item = (struct mailimap_msg_att_item *) clist_content(cur);
-		
-		if (msg_att_item->att_type == MAILIMAP_MSG_ATT_ITEM_STATIC) {
-			
-			if (msg_att_item->att_data.att_static->att_type ==
-				MAILIMAP_MSG_ATT_BODY_SECTION) {
-				text = msg_att_item->att_data.att_static->att_data.att_body_section->sec_body_part;
-				msg_att_item->att_data.att_static->att_data.att_body_section->sec_body_part = NULL;
-				text_length =
-				msg_att_item->att_data.att_static->att_data.att_body_section->sec_length;
-			}
-		}
-	}
-	
-	mailimap_fetch_list_free(fetch_result);
-	
-	if (text == NULL)
-		return MAILIMAP_ERROR_FETCH;
-	
-	* result = text;
-	* result_len = text_length;
-	
-	return MAILIMAP_NO_ERROR;
+    int r;
+    struct mailimap_msg_att * msg_att;
+    struct mailimap_msg_att_item * msg_att_item;
+    clist * fetch_result;
+    struct mailimap_set * set;
+    char * text;
+    size_t text_length;
+    clistiter * cur;
+    
+    set = mailimap_set_new_single(uid);
+    r = mailimap_uid_fetch(imap, set, fetch_type, &fetch_result);
+    
+    mailimap_set_free(set);
+    
+    switch (r) {
+        case MAILIMAP_NO_ERROR:
+            break;
+        default:
+            return r;
+    }
+    
+    if (clist_begin(fetch_result) == NULL) {
+        mailimap_fetch_list_free(fetch_result);
+        return MAILIMAP_ERROR_FETCH;
+    }
+    
+    msg_att = (struct mailimap_msg_att *) clist_begin(fetch_result)->data;
+    
+    text = NULL;
+    text_length = 0;
+    
+    for(cur = clist_begin(msg_att->att_list) ; cur != NULL ;
+        cur = clist_next(cur)) {
+        msg_att_item = (struct mailimap_msg_att_item *) clist_content(cur);
+        
+        if (msg_att_item->att_type == MAILIMAP_MSG_ATT_ITEM_STATIC) {
+            
+            if (msg_att_item->att_data.att_static->att_type ==
+                MAILIMAP_MSG_ATT_BODY_SECTION) {
+                text = msg_att_item->att_data.att_static->att_data.att_body_section->sec_body_part;
+                msg_att_item->att_data.att_static->att_data.att_body_section->sec_body_part = NULL;
+                text_length =
+                msg_att_item->att_data.att_static->att_data.att_body_section->sec_length;
+            }
+        }
+    }
+    
+    mailimap_fetch_list_free(fetch_result);
+    
+    if (text == NULL)
+        return MAILIMAP_ERROR_FETCH;
+    
+    * result = text;
+    * result_len = text_length;
+    
+    return MAILIMAP_NO_ERROR;
 }
 
 HashMap * IMAPSession::fetchMessageNumberUIDMapping(String * folder, uint32_t fromUID, uint32_t toUID,
@@ -1720,7 +1720,7 @@ HashMap * IMAPSession::fetchMessageNumberUIDMapping(String * folder, uint32_t fr
     clistiter * iter;
     
     selectIfNeeded(folder, pError);
-	if (* pError != ErrorNone)
+    if (* pError != ErrorNone)
         return NULL;
     
     result = HashMap::hashMap();
@@ -1734,7 +1734,7 @@ HashMap * IMAPSession::fetchMessageNumberUIDMapping(String * folder, uint32_t fr
     mailimap_fetch_type_free(fetch_type);
     mailimap_set_free(imap_set);
     
-	if (r == MAILIMAP_ERROR_STREAM) {
+    if (r == MAILIMAP_ERROR_STREAM) {
         MCLog("error stream");
         mShouldDisconnect = true;
         * pError = ErrorConnection;
@@ -1749,7 +1749,7 @@ HashMap * IMAPSession::fetchMessageNumberUIDMapping(String * folder, uint32_t fr
         MCLog("error fetch");
         * pError = ErrorFetch;
         return NULL;
-	}
+    }
     
     for(iter = clist_begin(fetch_result) ; iter != NULL ; iter = clist_next(iter)) {
         struct mailimap_msg_att * msg_att;
@@ -1771,10 +1771,10 @@ HashMap * IMAPSession::fetchMessageNumberUIDMapping(String * folder, uint32_t fr
                 }
             }
         }
-		
-		if (uid < fromUID) {
-			uid = 0;
-		}
+        
+        if (uid < fromUID) {
+            uid = 0;
+        }
         
         if (uid != 0) {
             result->setObjectForKey(Value::valueWithUnsignedLongValue(msg_att->att_number),
@@ -1855,7 +1855,7 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
     hasGmailLabels = false;
     hasGmailMessageID = false;
     hasGmailThreadID = false;
-	
+    
     msg = new IMAPMessage();
     
     uid = 0;
@@ -2071,13 +2071,13 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
     fetch_att = mailimap_fetch_att_new_uid();
     mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
     if ((requestKind & IMAPMessagesRequestKindFlags) != 0) {
-		MCLog("request flags");
+        MCLog("request flags");
         fetch_att = mailimap_fetch_att_new_flags();
         mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
         needsFlags = true;
     }
     if ((requestKind & IMAPMessagesRequestKindGmailLabels) != 0) {
-		MCLog("request flags");
+        MCLog("request flags");
         fetch_att = mailimap_fetch_att_new_xgmlabels();
         mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
         needsGmailLabels = true;
@@ -2087,7 +2087,7 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
         mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
         needsGmailThreadID = true;
     }
-	if ((requestKind & IMAPMessagesRequestKindGmailMessageID) != 0) {
+    if ((requestKind & IMAPMessagesRequestKindGmailMessageID) != 0) {
         fetch_att = mailimap_fetch_att_new_xgmmsgid();
         mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
         needsGmailMessageID = true;
@@ -2098,7 +2098,7 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
         struct mailimap_header_list * imap_hdrlist;
         struct mailimap_section * section;
         
-		MCLog("request envelope");
+        MCLog("request envelope");
         
         // most important header
         hdrlist = clist_new();
@@ -2134,7 +2134,7 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
         struct mailimap_header_list * imap_hdrlist;
         struct mailimap_section * section;
         
-		MCLog("request envelope");
+        MCLog("request envelope");
         // envelope
         fetch_att = mailimap_fetch_att_new_envelope();
         mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
@@ -2153,18 +2153,18 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
         mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
         needsHeader = true;
     }
-	if ((requestKind & IMAPMessagesRequestKindStructure) != 0) {
-		// message structure
-		MCLog("request bodystructure");
-		fetch_att = mailimap_fetch_att_new_bodystructure();
+    if ((requestKind & IMAPMessagesRequestKindStructure) != 0) {
+        // message structure
+        MCLog("request bodystructure");
+        fetch_att = mailimap_fetch_att_new_bodystructure();
         mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
         needsBody = true;
-	}
-	if ((requestKind & IMAPMessagesRequestKindInternalDate) != 0) {
-		// internal date
-		fetch_att = mailimap_fetch_att_new_internaldate();
+    }
+    if ((requestKind & IMAPMessagesRequestKindInternalDate) != 0) {
+        // internal date
+        fetch_att = mailimap_fetch_att_new_internaldate();
         mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
-	}
+    }
     if ((requestKind & IMAPMessagesRequestKindExtraHeaders) != 0) {
         // custom header request
         clist * hdrlist;
@@ -2255,7 +2255,7 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
     
     mailimap_set_msg_att_handler(mImap, NULL, NULL);
     
-	if (r == MAILIMAP_ERROR_STREAM) {
+    if (r == MAILIMAP_ERROR_STREAM) {
         MCLog("error stream");
         mShouldDisconnect = true;
         * pError = ErrorConnection;
@@ -2270,7 +2270,7 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
         MCLog("error fetch");
         * pError = ErrorFetch;
         return NULL;
-	}
+    }
     
     IMAPSyncResult * result;
     result = new IMAPSyncResult();
@@ -2351,42 +2351,42 @@ Array * IMAPSession::fetchMessagesByNumberWithExtraHeaders(String * folder, IMAP
 }
 
 static int fetch_rfc822(mailimap * session,
-						uint32_t msgid, char ** result)
+                        uint32_t msgid, char ** result)
 {
-	int r;
-	clist * fetch_list;
-	struct mailimap_section * section;
-	struct mailimap_fetch_att * fetch_att;
-	struct mailimap_fetch_type * fetch_type;
-	struct mailimap_set * set;
-	struct mailimap_msg_att * msg_att;
-	struct mailimap_msg_att_item * item;
-	int res;
+    int r;
+    clist * fetch_list;
+    struct mailimap_section * section;
+    struct mailimap_fetch_att * fetch_att;
+    struct mailimap_fetch_type * fetch_type;
+    struct mailimap_set * set;
+    struct mailimap_msg_att * msg_att;
+    struct mailimap_msg_att_item * item;
+    int res;
     clistiter * cur;
-	
-	section = mailimap_section_new(NULL);
-	fetch_att = mailimap_fetch_att_new_body_peek_section(section);
-	fetch_type = mailimap_fetch_type_new_fetch_att(fetch_att);
-	
-	set = mailimap_set_new_single(msgid);
-	
-	r = mailimap_uid_fetch(session, set, fetch_type, &fetch_list);
-	
-	mailimap_set_free(set);
-	mailimap_fetch_type_free(fetch_type);
-	
-	if (r != MAILIMAP_NO_ERROR) {
-		res = r;
-		goto err;
-	}
-	
-	if (clist_isempty(fetch_list)) {
-		res = MAILIMAP_ERROR_FETCH;
-		goto free;
-	}
-	
-	msg_att = (struct mailimap_msg_att *) clist_begin(fetch_list)->data;
-	
+    
+    section = mailimap_section_new(NULL);
+    fetch_att = mailimap_fetch_att_new_body_peek_section(section);
+    fetch_type = mailimap_fetch_type_new_fetch_att(fetch_att);
+    
+    set = mailimap_set_new_single(msgid);
+    
+    r = mailimap_uid_fetch(session, set, fetch_type, &fetch_list);
+    
+    mailimap_set_free(set);
+    mailimap_fetch_type_free(fetch_type);
+    
+    if (r != MAILIMAP_NO_ERROR) {
+        res = r;
+        goto err;
+    }
+    
+    if (clist_isempty(fetch_list)) {
+        res = MAILIMAP_ERROR_FETCH;
+        goto free;
+    }
+    
+    msg_att = (struct mailimap_msg_att *) clist_begin(fetch_list)->data;
+    
     for(cur = clist_begin(msg_att->att_list) ; cur != NULL ; cur = clist_next(cur)) {
         item = (struct mailimap_msg_att_item *) clist_content(cur);
         
@@ -2403,17 +2403,17 @@ static int fetch_rfc822(mailimap * session,
         
         return MAILIMAP_NO_ERROR;
     }
-	
+    
     res = MAILIMAP_ERROR_FETCH;
-	
+    
 free:
-	mailimap_fetch_list_free(fetch_list);
+    mailimap_fetch_list_free(fetch_list);
 err:
-	return res;
+    return res;
 }
 
 Data * IMAPSession::fetchMessageByUID(String * folder, uint32_t uid,
-	IMAPProgressCallback * progressCallback, ErrorCode * pError)
+    IMAPProgressCallback * progressCallback, ErrorCode * pError)
 {
     char * rfc822;
     int r;
@@ -2469,48 +2469,48 @@ Data * IMAPSession::fetchMessageByUID(String * folder, uint32_t uid,
 Data * IMAPSession::fetchMessageAttachmentByUID(String * folder, uint32_t uid, String * partID,
     Encoding encoding, IMAPProgressCallback * progressCallback, ErrorCode * pError)
 {
-	struct mailimap_fetch_type * fetch_type;
+    struct mailimap_fetch_type * fetch_type;
     struct mailimap_fetch_att * fetch_att;
     struct mailimap_section * section;
-	struct mailimap_section_part * section_part;
-	clist * sec_list;
-	Array * partIDArray;
-	int r;
-	char * text;
-	size_t text_length;
-	Data * data;
-	
+    struct mailimap_section_part * section_part;
+    clist * sec_list;
+    Array * partIDArray;
+    int r;
+    char * text;
+    size_t text_length;
+    Data * data;
+    
     selectIfNeeded(folder, pError);
-	if (* pError != ErrorNone)
+    if (* pError != ErrorNone)
         return NULL;
-	
+    
     mProgressItemsCount = 0;
     mProgressCallback = progressCallback;
     bodyProgress(0, 0);
     
     partIDArray = partID->componentsSeparatedByString(MCSTR("."));
-	sec_list = clist_new();
+    sec_list = clist_new();
     for(unsigned int i = 0 ; i < partIDArray->count() ; i ++) {
-		uint32_t * value;
+        uint32_t * value;
         String * element;
-		
+        
         element = (String *) partIDArray->objectAtIndex(i);
-		value = (uint32_t *) malloc(sizeof(* value));
-		* value = element->intValue();
-		clist_append(sec_list, value);
-	}
-	section_part = mailimap_section_part_new(sec_list);
-	section = mailimap_section_new_part(section_part);
-	fetch_att = mailimap_fetch_att_new_body_peek_section(section);
-	fetch_type = mailimap_fetch_type_new_fetch_att(fetch_att);
-	
-	r = fetch_imap(mImap, uid, fetch_type, &text, &text_length);
-	mailimap_fetch_type_free(fetch_type);
-	
+        value = (uint32_t *) malloc(sizeof(* value));
+        * value = element->intValue();
+        clist_append(sec_list, value);
+    }
+    section_part = mailimap_section_part_new(sec_list);
+    section = mailimap_section_new_part(section_part);
+    fetch_att = mailimap_fetch_att_new_body_peek_section(section);
+    fetch_type = mailimap_fetch_type_new_fetch_att(fetch_att);
+    
+    r = fetch_imap(mImap, uid, fetch_type, &text, &text_length);
+    mailimap_fetch_type_free(fetch_type);
+    
     mProgressCallback = NULL;
     
     MCLog("had error : %i", r);
-	if (r == MAILIMAP_ERROR_STREAM) {
+    if (r == MAILIMAP_ERROR_STREAM) {
         mShouldDisconnect = true;
         * pError = ErrorConnection;
         return NULL;
@@ -2522,15 +2522,15 @@ Data * IMAPSession::fetchMessageAttachmentByUID(String * folder, uint32_t uid, S
     else if (hasError(r)) {
         * pError = ErrorFetch;
         return NULL;
-	}
-	
+    }
+    
     data = Data::dataWithBytes(text, (unsigned int) text_length);
     data = data->decodedDataUsingEncoding(encoding);
-	
-	mailimap_nstring_free(text);
+    
+    mailimap_nstring_free(text);
     * pError = ErrorNone;
-	
-	return data;
+    
+    return data;
 }
 
 IndexSet * IMAPSession::search(String * folder, IMAPSearchKind kind, String * searchString, ErrorCode * pError)
@@ -2563,7 +2563,7 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchKind kind, String * se
 
 static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpression * expression)
 {
-	switch (expression->kind()) {
+    switch (expression->kind()) {
         case IMAPSearchKindAll: {
             return mailimap_search_key_new_all();
         }
@@ -2600,9 +2600,135 @@ static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpr
         {
             return mailimap_search_key_new_header(strdup(expression->header()->UTF8Characters()), strdup(expression->value()->UTF8Characters()));
         }
+        case IMAPSearchKindBeforeDate:
+        {
+            time_t date = expression->date();
+            tm * timeinfo = localtime(&date);
+            return mailimap_search_key_new_sentbefore(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
+        }
+        case IMAPSearchKindOnDate:
+        {
+            time_t date = expression->date();
+            tm * timeinfo = localtime(&date);
+            return mailimap_search_key_new_senton(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
+        }
+        case IMAPSearchKindSinceDate:
+        {
+            time_t date = expression->date();
+            tm * timeinfo = localtime(&date);
+            return mailimap_search_key_new_sentsince(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
+        }
+        case IMAPSearchKindBeforeReceivedDate:
+        {
+            time_t date = expression->date();
+            tm * timeinfo = localtime(&date);
+            return mailimap_search_key_new_before(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
+        }
+        case IMAPSearchKindOnReceivedDate:
+        {
+            time_t date = expression->date();
+            tm * timeinfo = localtime(&date);
+            return mailimap_search_key_new_on(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
+        }
+        case IMAPSearchKindSinceReceivedDate:
+        {
+            time_t date = expression->date();
+            tm * timeinfo = localtime(&date);
+            return mailimap_search_key_new_since(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
+        }
         case IMAPSearchKindGmailThreadID:
         {
             return mailimap_search_key_new_xgmthrid(expression->longNumber());
+        } 
+        case IMAPSearchKindRead:
+        {
+            return mailimap_search_key_new(MAILIMAP_SEARCH_KEY_SEEN, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, 0, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, 0, NULL, NULL, NULL);
+        }
+        case IMAPSearchKindUnread:
+        {
+            return mailimap_search_key_new(MAILIMAP_SEARCH_KEY_UNSEEN, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, 0, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, 0, NULL, NULL, NULL);
+        }
+        case IMAPSearchKindFlagged:
+        {
+            return mailimap_search_key_new(MAILIMAP_SEARCH_KEY_FLAGGED, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, 0, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, 0, NULL, NULL, NULL);
+        }
+        case IMAPSearchKindUnflagged:
+        {
+            return mailimap_search_key_new(MAILIMAP_SEARCH_KEY_UNFLAGGED, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, 0, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, 0, NULL, NULL, NULL);
+        }
+        case IMAPSearchKindAnswered:
+        {
+            return mailimap_search_key_new(MAILIMAP_SEARCH_KEY_ANSWERED, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, 0, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, 0, NULL, NULL, NULL);
+        }
+        case IMAPSearchKindUnanswered:
+        {
+            return mailimap_search_key_new(MAILIMAP_SEARCH_KEY_UNANSWERED, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, 0, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, 0, NULL, NULL, NULL);
+        }
+        case IMAPSearchKindDraft:
+        {
+            return mailimap_search_key_new(MAILIMAP_SEARCH_KEY_DRAFT, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, 0, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, 0, NULL, NULL, NULL);
+        }
+        case IMAPSearchKindUndraft:
+        {
+            return mailimap_search_key_new(MAILIMAP_SEARCH_KEY_UNDRAFT, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, 0, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, 0, NULL, NULL, NULL);
+        }
+        case IMAPSearchKindDeleted:
+        {
+            return mailimap_search_key_new(MAILIMAP_SEARCH_KEY_DELETED, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, 0, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, 0, NULL, NULL, NULL);
+        }
+        case IMAPSearchKindSpam:
+        {
+            return mailimap_search_key_new(MAILIMAP_SEARCH_KEY_KEYWORD, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           strdup("Junk"), NULL, NULL, NULL, NULL, 
+                                           NULL, NULL, NULL, NULL, 0, 
+                                           NULL, NULL, NULL, NULL, NULL, 
+                                           NULL, 0, NULL, NULL, NULL);
         }
         case IMAPSearchKindOr:
         {
@@ -2628,10 +2754,10 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchExpression * expressio
     
     key = searchKeyFromSearchExpression(expression);
     selectIfNeeded(folder, pError);
-	if (* pError != ErrorNone)
+    if (* pError != ErrorNone)
         return NULL;
 
-	clist * result_list = NULL;
+    clist * result_list = NULL;
     
     const char * charset = "utf-8";
     if (mYahooServer) {
@@ -2640,7 +2766,7 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchExpression * expressio
     int r = mailimap_uid_search(mImap, charset, key, &result_list);
     mailimap_search_key_free(key);
     MCLog("had error : %i", r);
-	if (r == MAILIMAP_ERROR_STREAM) {
+    if (r == MAILIMAP_ERROR_STREAM) {
         mShouldDisconnect = true;
         * pError = ErrorConnection;
         return NULL;
@@ -2652,7 +2778,7 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchExpression * expressio
     else if (hasError(r)) {
         * pError = ErrorFetch;
         return NULL;
-	}
+    }
 
     IndexSet * result = IndexSet::indexSet();
     for(clistiter * cur = clist_begin(result_list) ; cur != NULL ; cur = clist_next(cur))  {
@@ -2669,7 +2795,7 @@ void IMAPSession::getQuota(uint32_t *usage, uint32_t *limit, ErrorCode * pError)
     mailimap_quota_complete_data *quota_data;
     
     int r = mailimap_quota_getquotaroot(mImap, "INBOX", &quota_data);
-	if (r == MAILIMAP_ERROR_STREAM) {
+    if (r == MAILIMAP_ERROR_STREAM) {
         mShouldDisconnect = true;
         * pError = ErrorConnection;
         return;
@@ -2681,7 +2807,7 @@ void IMAPSession::getQuota(uint32_t *usage, uint32_t *limit, ErrorCode * pError)
     else if (hasError(r)) {
         * pError = ErrorFetch;
         return;
-	}
+    }
     for(clistiter * cur = clist_begin(quota_data->quota_list); cur != NULL; cur = clist_next(cur)) {
         mailimap_quota_quota_data *quota = (mailimap_quota_quota_data*)clist_content(cur);
         for (clistiter *cur2 = clist_begin(quota->quota_list); cur2 != NULL; cur2 = clist_next(cur2)) {
@@ -2713,7 +2839,7 @@ void IMAPSession::idle(String * folder, uint32_t lastKnownUID, ErrorCode * pErro
     
     // connection thread
     selectIfNeeded(folder, pError);
-	if (* pError != ErrorNone)
+    if (* pError != ErrorNone)
         return;
     
     if (lastKnownUID != 0) {
@@ -2735,7 +2861,7 @@ void IMAPSession::idle(String * folder, uint32_t lastKnownUID, ErrorCode * pErro
     }
     
     r = mailimap_idle(mImap);
-	if (r == MAILIMAP_ERROR_STREAM) {
+    if (r == MAILIMAP_ERROR_STREAM) {
         mShouldDisconnect = true;
         * pError = ErrorConnection;
         return;
@@ -2747,7 +2873,7 @@ void IMAPSession::idle(String * folder, uint32_t lastKnownUID, ErrorCode * pErro
     else if (hasError(r)) {
         * pError = ErrorIdle;
         return;
-	}
+    }
     
     if (!mImap->imap_selection_info->sel_has_exists && !mImap->imap_selection_info->sel_has_recent) {
         int r;
@@ -2777,7 +2903,7 @@ void IMAPSession::idle(String * folder, uint32_t lastKnownUID, ErrorCode * pErro
     }
     
     r = mailimap_idle_done(mImap);
-	if (r == MAILIMAP_ERROR_STREAM) {
+    if (r == MAILIMAP_ERROR_STREAM) {
         mShouldDisconnect = true;
         * pError = ErrorConnection;
         return;
@@ -2789,7 +2915,7 @@ void IMAPSession::idle(String * folder, uint32_t lastKnownUID, ErrorCode * pErro
     else if (hasError(r)) {
         * pError = ErrorIdle;
         return;
-	}
+    }
     * pError = ErrorNone;
 }
 
@@ -2841,7 +2967,7 @@ IMAPIdentity * IMAPSession::identity(IMAPIdentity * clientIdentity, ErrorCode * 
     struct mailimap_id_params_list * server_identification;
     r = mailimap_id(mImap, client_identification, &server_identification);
     mailimap_id_params_list_free(client_identification);
-	if (r == MAILIMAP_ERROR_STREAM) {
+    if (r == MAILIMAP_ERROR_STREAM) {
         mShouldDisconnect = true;
         * pError = ErrorConnection;
         return NULL;
@@ -2853,7 +2979,7 @@ IMAPIdentity * IMAPSession::identity(IMAPIdentity * clientIdentity, ErrorCode * 
     else if (hasError(r)) {
         * pError = ErrorIdentity;
         return NULL;
-	}
+    }
 
     IMAPIdentity * result = new IMAPIdentity();
     
@@ -2921,13 +3047,13 @@ HashMap * IMAPSession::fetchNamespace(ErrorCode * pError)
     struct mailimap_namespace_data * namespace_data;
     int r;
     
-	loginIfNeeded(pError);
+    loginIfNeeded(pError);
     if (* pError != ErrorNone)
         return NULL;
     
     result = HashMap::hashMap();
     r = mailimap_namespace(mImap, &namespace_data);
-	if (r == MAILIMAP_ERROR_STREAM) {
+    if (r == MAILIMAP_ERROR_STREAM) {
         mShouldDisconnect = true;
         * pError = ErrorConnection;
         return NULL;
@@ -2939,7 +3065,7 @@ HashMap * IMAPSession::fetchNamespace(ErrorCode * pError)
     else if (hasError(r)) {
         * pError = ErrorNamespace;
         return NULL;
-	}
+    }
     
     IMAPNamespace * ns;
     
@@ -3219,7 +3345,7 @@ IndexSet * IMAPSession::capability(ErrorCode * pError)
         return NULL;
     
     r = mailimap_capability(mImap, &cap);
-	if (r == MAILIMAP_ERROR_STREAM) {
+    if (r == MAILIMAP_ERROR_STREAM) {
         mShouldDisconnect = true;
         * pError = ErrorConnection;
         return NULL;
@@ -3231,7 +3357,7 @@ IndexSet * IMAPSession::capability(ErrorCode * pError)
     else if (hasError(r)) {
         * pError = ErrorCapability;
         return NULL;
-	}
+    }
     
     mailimap_capability_data_free(cap);
     
@@ -3349,7 +3475,7 @@ bool IMAPSession::isIdentityEnabled()
 
 bool IMAPSession::isXOAuthEnabled()
 {
-	return mXOauth2Enabled;
+    return mXOauth2Enabled;
 }
 
 bool IMAPSession::isNamespaceEnabled()
