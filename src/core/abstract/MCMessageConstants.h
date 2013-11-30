@@ -184,6 +184,8 @@ namespace mailcore {
         IMAPSearchKindBeforeReceivedDate,
         IMAPSearchKindOnReceivedDate,
         IMAPSearchKindSinceReceivedDate,
+        IMAPSearchKindSizeLarger,
+        IMAPSearchKindSizeSmaller,
         IMAPSearchKindGmailThreadID,
         IMAPSearchKindOr,
         IMAPSearchKindAnd,
