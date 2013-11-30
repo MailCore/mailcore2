@@ -18,6 +18,7 @@ namespace mailcore {
         virtual String * header();
         virtual String * value();
         virtual uint64_t longNumber();
+        virtual uint32_t number();
         virtual time_t date();
         virtual IMAPSearchExpression * leftExpression();
         virtual IMAPSearchExpression * rightExpression();
@@ -44,7 +45,9 @@ namespace mailcore {
         static IMAPSearchExpression * searchBeforeReceivedDate(time_t date);
         static IMAPSearchExpression * searchOnReceivedDate(time_t date);
         static IMAPSearchExpression * searchSinceReceivedDate(time_t date);
-        static IMAPSearchExpression * searchGmailThreadID(uint64_t number);
+        static IMAPSearchExpression * searchSizeLarger(uint32_t number);
+        static IMAPSearchExpression * searchSizeSmaller(uint32_t size);
+        static IMAPSearchExpression * searchGmailThreadID(uint64_t size);
         static IMAPSearchExpression * searchAnd(IMAPSearchExpression * left, IMAPSearchExpression * right);
         static IMAPSearchExpression * searchOr(IMAPSearchExpression * left, IMAPSearchExpression * right);
         
@@ -58,6 +61,7 @@ namespace mailcore {
         String * mHeader;
         String * mValue;
         uint64_t mLongNumber;
+        uint32_t mNumber;
         time_t mDate;
         IMAPSearchExpression * mLeftExpression;
         IMAPSearchExpression * mRightExpression;

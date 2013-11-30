@@ -222,6 +222,26 @@
 + (MCOIMAPSearchExpression *) searchSinceReceivedDate:(NSDate *)date;
 
 /**
+ Creates a search expression that matches messages larger than a given size in bytes.
+ 
+ Example:
+ 
+ uint32_t minSize = 1024 * 10; // 10 KB
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchSizeLargerThan:minSize]
+ **/
++ (MCOIMAPSearchExpression *) searchSizeLargerThan:(uint32_t)size;
+
+/**
+ Creates a search expression that matches messages smaller than a given size in bytes.
+ 
+ Example:
+ 
+ uint32_t maxSize = 1024 * 10; // 10 KB
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchSizeSmallerThan:maxSize]
+ **/
++ (MCOIMAPSearchExpression *) searchSizeSmallerThan:(uint32_t)size;
+
+/**
  Creates a search expression that matches emails with the given gmail thread id
  
  Example:

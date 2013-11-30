@@ -2730,6 +2730,14 @@ static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpr
                                            NULL, NULL, NULL, NULL, NULL, 
                                            NULL, 0, NULL, NULL, NULL);
         }
+        case IMAPSearchKindSizeLarger:
+        {
+            return mailimap_search_key_new_larger(expression->number());
+        }
+        case IMAPSearchKindSizeSmaller:
+        {
+            return mailimap_search_key_new_smaller(expression->number());
+        }
         case IMAPSearchKindOr:
         {
             return mailimap_search_key_new_or(searchKeyFromSearchExpression(expression->leftExpression()), searchKeyFromSearchExpression(expression->rightExpression()));
