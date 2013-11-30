@@ -75,6 +75,17 @@ void IMAPMessage::setUid(uint32_t uid)
     mUid = uid;
 }
 
+uint32_t IMAPMessage::size()
+{
+    return mSize;
+}
+
+void IMAPMessage::setSize(uint32_t size)
+{
+    mSize = size;
+    
+}
+
 void IMAPMessage::setFlags(MessageFlag flags)
 {
     mFlags = flags;
@@ -213,6 +224,7 @@ HashMap * IMAPMessage::serializable()
     HashMap * result = AbstractMessage::serializable();
     result->setObjectForKey(MCSTR("modSeqValue"), String::stringWithUTF8Format("%llu", (long long unsigned) modSeqValue()));
     result->setObjectForKey(MCSTR("uid"), String::stringWithUTF8Format("%lu", (long unsigned) uid()));
+    result->setObjectForKey(MCSTR("size"), String::stringWithUTF8Format("%lu", (long unsigned) uid()));
     result->setObjectForKey(MCSTR("flags"), String::stringWithUTF8Format("%u", (unsigned) flags()));
     result->setObjectForKey(MCSTR("originalFlags"), String::stringWithUTF8Format("%u", (unsigned) originalFlags()));
     result->setObjectForKey(MCSTR("mainPart"), mMainPart->serializable());
@@ -238,6 +250,10 @@ void IMAPMessage::importSerializable(HashMap * serializable)
     String * uid = (String *) serializable->objectForKey(MCSTR("uid"));
     if (uid != NULL) {
         setUid((uint32_t) uid->unsignedLongValue());
+    }
+    String * size = (String *) serializable->objectForKey(MCSTR("size"));
+    if (size != NULL) {
+        setSize((uint32_t) size->unsignedLongValue());
     }
     String * flags = (String *) serializable->objectForKey(MCSTR("flags"));
     if (flags != NULL) {
