@@ -57,7 +57,6 @@ namespace mailcore {
         unsigned int mAllocated;
         void allocate(unsigned int length);
         void reset();
-        static String * normalizeCharset(String * charset);
         String * charsetWithFilteredHTMLWithoutHint(bool filterHTML);
         
     };

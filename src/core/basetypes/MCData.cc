@@ -5,12 +5,17 @@
 #include <sys/stat.h>
 #include <unicode/ucsdet.h>
 #include <libetpan/libetpan.h>
+#include <iconv.h>
+#if __APPLE__
+#include <CoreFoundation/CoreFoundation.h>
+#endif
 
 #include "MCString.h"
 #include "MCHash.h"
 #include "MCUtils.h"
 #include "MCHashMap.h"
 #include "MCBase64.h"
+#include "MCSet.h"
 
 #define DEFAULT_CHARSET "iso-8859-1"
 
@@ -144,7 +149,7 @@ String * Data::stringWithDetectedCharset()
     return result;
 }
 
-String * Data::normalizeCharset(String * charset)
+static String * normalizeCharset(String * charset)
 {
     if ((charset->caseInsensitiveCompare(MCSTR("iso-2022-jp")) == 0) ||
     (charset->caseInsensitiveCompare(MCSTR("iso-2022-jp-2")) == 0)) {
@@ -175,10 +180,76 @@ String * Data::stringWithCharset(const char * charset)
     return (String *) result->autorelease();
 }
 
+static bool isHintCharsetValid(String * hintCharset)
+{
+    return true;
+    static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+    static Set * knownCharset = NULL;
+    
+    pthread_mutex_lock(&lock);
+    if (knownCharset == nil) {
+        knownCharset = new Set();
+        knownCharset->addObject(MCSTR("utf-8"));
+        knownCharset->addObject(MCSTR("utf-16be"));
+        knownCharset->addObject(MCSTR("utf-16le"));
+        knownCharset->addObject(MCSTR("utf-32be"));
+        knownCharset->addObject(MCSTR("utf-32le"));
+        
+        knownCharset->addObject(MCSTR("shift_jis"));
+        knownCharset->addObject(MCSTR("iso-2022-jp"));
+        knownCharset->addObject(MCSTR("iso-2022-jp-2"));
+        knownCharset->addObject(MCSTR("iso-2022-cn"));
+        knownCharset->addObject(MCSTR("iso-2022-kr"));
+        
+        knownCharset->addObject(MCSTR("gb18030"));
+        knownCharset->addObject(MCSTR("big5"));
+        knownCharset->addObject(MCSTR("euc-jp"));
+        knownCharset->addObject(MCSTR("euc-kr"));
+        knownCharset->addObject(MCSTR("iso-8859-1"));
+        knownCharset->addObject(MCSTR("iso-8859-2"));
+        knownCharset->addObject(MCSTR("iso-8859-5"));
+        knownCharset->addObject(MCSTR("iso-8859-6"));
+        knownCharset->addObject(MCSTR("iso-8859-7"));
+        knownCharset->addObject(MCSTR("iso-8859-8"));
+        knownCharset->addObject(MCSTR("iso-8859-9"));
+        knownCharset->addObject(MCSTR("windows-1251"));
+        knownCharset->addObject(MCSTR("windows-1256"));
+        knownCharset->addObject(MCSTR("koi8-r"));
+    }
+    pthread_mutex_unlock(&lock);
+    
+    if (hintCharset != NULL) {
+        hintCharset = normalizeCharset(hintCharset);
+        
+        if (hintCharset->isEqual(MCSTR("tis-620"))) {
+            return true;
+        }
+        else if (hintCharset->isEqual(MCSTR("koi8-r"))) {
+            return true;
+        }
+        else if (hintCharset->isEqual(MCSTR("euc-kr"))) {
+            return true;
+        }
+        else if (hintCharset->isEqual(MCSTR("windows-1256"))) {
+            return true;
+        }
+        
+        if (!knownCharset->containsObject(hintCharset)) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
 String * Data::stringWithDetectedCharset(String * hintCharset, bool isHTML)
 {
 	String * result;
     String * charset;
+    
+    if (isHintCharsetValid(hintCharset)) {
+        hintCharset = NULL;
+    }
     
     if (hintCharset == NULL) {
         charset = charsetWithFilteredHTML(isHTML);
@@ -562,6 +633,185 @@ void Data::importSerializable(HashMap * serializable)
     setData(((String *) (serializable->objectForKey(MCSTR("data"))))->decodedBase64Data());
 }
 
+#if __APPLE__
+static CFStringEncoding encodingFromCString(const char * charset)
+{
+    CFStringEncoding encoding;
+    CFStringRef charsetString;
+    CFDataRef charsetData;
+    
+    charsetData = CFDataCreate(NULL, (const UInt8 *) charset, strlen(charset));
+    charsetString = CFStringCreateFromExternalRepresentation(NULL, charsetData, kCFStringEncodingUTF8);
+    encoding = CFStringConvertIANACharSetNameToEncoding(charsetString);
+    CFRelease(charsetString);
+    CFRelease(charsetData);
+    
+    return encoding;
+}
+
+static size_t lepIConvInternal(iconv_t cd,
+                               const char **inbuf, size_t *inbytesleft,
+                               char **outbuf, size_t *outbytesleft,
+                               char **inrepls, const char *outrepl)
+{
+    size_t ret = 0, ret1;
+    char *ib = (char *) *inbuf;
+    size_t ibl = *inbytesleft;
+    char *ob = *outbuf;
+    size_t obl = *outbytesleft;
+
+    for (;;)
+    {
+        ret1 = iconv (cd, &ib, &ibl, &ob, &obl);
+        if (ret1 != (size_t)-1)
+            ret += ret1;
+        if (ibl && obl && errno == EILSEQ)
+        {
+            if (inrepls)
+            {
+                /* Try replacing the input */
+                char **t;
+                for (t = inrepls; *t; t++)
+                {
+                    char *ib1 = *t;
+                    size_t ibl1 = strlen (*t);
+                    char *ob1 = ob;
+                    size_t obl1 = obl;
+                    iconv (cd, &ib1, &ibl1, &ob1, &obl1);
+                    if (!ibl1)
+                    {
+                        ++ib, --ibl;
+                        ob = ob1, obl = obl1;
+                        ++ret;
+                        break;
+                    }
+                }
+                if (*t)
+                    continue;
+            }
+            if (outrepl)
+            {
+                /* Try replacing the output */
+                size_t n = strlen (outrepl);
+                if (n <= obl)
+                {
+                    memcpy (ob, outrepl, n);
+                    ++ib, --ibl;
+                    ob += n, obl -= n;
+                    ++ret;
+                    continue;
+                }
+            }
+        }
+        *inbuf = ib, *inbytesleft = ibl;
+        *outbuf = ob, *outbytesleft = obl;
+        return ret;
+    }
+}
+
+static int lepIConv(const char * tocode, const char * fromcode,
+                    const char * str, size_t length,
+                    char * result, size_t * result_len)
+
+{
+    size_t out_size;
+    size_t old_out_size;
+    iconv_t conv;
+    char * p_result;
+    int res;
+    size_t r;
+
+    conv = iconv_open(tocode, fromcode);
+    if (conv == (iconv_t) -1) {
+        res = MAIL_CHARCONV_ERROR_UNKNOWN_CHARSET;
+        goto err;
+    }
+
+    out_size = length * 6;
+    old_out_size = out_size;
+    p_result = result;
+
+    r = lepIConvInternal(conv, &str, &length,
+                         &p_result, &out_size, NULL, "?");
+    if (r == (size_t) -1) {
+        res = MAIL_CHARCONV_ERROR_CONV;
+        goto close_iconv;
+    }
+    
+    iconv_close(conv);
+    
+    * result_len = old_out_size - out_size;
+    * p_result = '\0';
+
+    return MAIL_CHARCONV_NO_ERROR;
+    
+close_iconv:
+    iconv_close(conv);
+err:
+    return res;
+}
+
+static int lepCFConv(const char * tocode, const char * fromcode,
+                     const char * str, size_t length,
+                     char * result, size_t * result_len)
+{
+    CFDataRef data;
+    CFStringRef resultString;
+    CFStringEncoding fromEncoding;
+    CFStringEncoding toEncoding;
+    CFDataRef resultData;
+
+    fromEncoding = encodingFromCString(fromcode);
+    toEncoding = encodingFromCString(tocode);
+    if (fromEncoding == kCFStringEncodingInvalidId)
+        return MAIL_CHARCONV_ERROR_UNKNOWN_CHARSET;
+    if (toEncoding == kCFStringEncodingInvalidId)
+        return MAIL_CHARCONV_ERROR_UNKNOWN_CHARSET;
+
+    data = CFDataCreate(NULL, (const UInt8 *) str, length);
+    resultString = CFStringCreateFromExternalRepresentation(NULL, data, fromEncoding);
+    if (resultString == NULL) {
+        CFRelease(data);
+        return MAIL_CHARCONV_ERROR_CONV;
+    }
+
+    resultData = CFStringCreateExternalRepresentation(NULL, resultString, toEncoding, (UInt8) '?');
+
+    unsigned int len;
+    len = (unsigned int) CFDataGetLength(resultData);
+    CFDataGetBytes(resultData, CFRangeMake(0, len), (UInt8 *) result);
+    * result_len = len;
+    result[len] = 0;
+    
+    CFRelease(resultData);
+    CFRelease(resultString);
+    CFRelease(data);
+    
+    return MAIL_CHARCONV_NO_ERROR;
+}
+
+static int lepMixedConv(const char * tocode, const char * fromcode,
+                        const char * str, size_t length,
+                        char * result, size_t * result_len)
+{
+    int r;
+    
+    if (strcasecmp(fromcode, "iso-2022-jp-2") == 0) {
+        r = lepCFConv(tocode, fromcode, str, length,
+                      result, result_len);
+        if (r == MAIL_CHARCONV_NO_ERROR)
+            return r;
+    }
+    
+    r = lepIConv(tocode, fromcode, str, length,
+                 result, result_len);
+    if (r == MAIL_CHARCONV_NO_ERROR)
+        return r;
+    
+    return r;
+}
+#endif
+
 static void * createObject()
 {
     return new Data();
@@ -571,4 +821,7 @@ __attribute__((constructor))
 static void initialize()
 {
     Object::registerObjectConstructor("mailcore::Data", &createObject);
+#if __APPLE__
+    extended_charconv = lepMixedConv;
+#endif
 }
