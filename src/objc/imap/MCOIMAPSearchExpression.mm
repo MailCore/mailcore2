@@ -167,6 +167,16 @@
     return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchSinceReceivedDate((time_t) [date timeIntervalSince1970]));
 }
 
++ (MCOIMAPSearchExpression *) searchSizeLargerThan:(uint32_t)size
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchSizeLarger(size));
+}
+
++ (MCOIMAPSearchExpression *) searchSizeSmallerThan:(uint32_t)size
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchSizeSmaller(size));
+}
+
 + (MCOIMAPSearchExpression *) searchGmailThreadID:(uint64_t)number
 {
     return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchGmailThreadID(number));
