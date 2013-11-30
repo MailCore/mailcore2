@@ -124,6 +124,123 @@ IMAPSearchExpression * IMAPSearchExpression::searchHeader(String * header, Strin
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
+IMAPSearchExpression * IMAPSearchExpression::searchRead()
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindRead;
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchUnread()
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindUnread;
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchFlagged()
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindFlagged;
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchUnflagged()
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindUnflagged;
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchAnswered()
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindAnswered;
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchUnanswered()
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindUnanswered;
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchDraft()
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindDraft;
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchUndraft()
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindUndraft;
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchDeleted()
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindDeleted;
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchSpam()
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindSpam;
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchBeforeDate(time_t date)
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindBeforeDate;
+    expr->mDate = date;
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchOnDate(time_t date)
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindOnDate;
+    expr->mDate = date;
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchSinceDate(time_t date)
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindSinceDate;
+    expr->mDate = date;
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchBeforeReceivedDate(time_t date)
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindBeforeReceivedDate;
+    expr->mDate = date;
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+IMAPSearchExpression * IMAPSearchExpression::searchOnReceivedDate(time_t date)
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindOnReceivedDate;
+    expr->mDate = date;
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchSinceReceivedDate(time_t date)
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindSinceReceivedDate;
+    expr->mDate = date;
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
 IMAPSearchExpression * IMAPSearchExpression::searchGmailThreadID(uint64_t number)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
@@ -168,6 +285,11 @@ String * IMAPSearchExpression::value()
 uint64_t IMAPSearchExpression::longNumber()
 {
     return mLongNumber;
+}
+
+time_t IMAPSearchExpression::date()
+{
+    return mDate;
 }
 
 IMAPSearchExpression * IMAPSearchExpression::leftExpression()
