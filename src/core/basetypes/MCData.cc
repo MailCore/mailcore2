@@ -182,7 +182,6 @@ String * Data::stringWithCharset(const char * charset)
 
 static bool isHintCharsetValid(String * hintCharset)
 {
-    return true;
     static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
     static Set * knownCharset = NULL;
     
