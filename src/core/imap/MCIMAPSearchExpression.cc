@@ -241,6 +241,22 @@ IMAPSearchExpression * IMAPSearchExpression::searchSinceReceivedDate(time_t date
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
+IMAPSearchExpression * IMAPSearchExpression::searchSizeLarger(uint32_t size)
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindSizeLarger;
+    expr->mLongNumber = size;
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchSizeSmaller(uint32_t size)
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindSizeSmaller;
+    expr->mLongNumber = size;
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
 IMAPSearchExpression * IMAPSearchExpression::searchGmailThreadID(uint64_t number)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
