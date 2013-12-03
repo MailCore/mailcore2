@@ -245,7 +245,7 @@ IMAPSearchExpression * IMAPSearchExpression::searchSizeLarger(uint32_t size)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
     expr->mKind = IMAPSearchKindSizeLarger;
-    expr->mNumber = size;
+    expr->mLongNumber = size;
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
@@ -253,7 +253,7 @@ IMAPSearchExpression * IMAPSearchExpression::searchSizeSmaller(uint32_t size)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
     expr->mKind = IMAPSearchKindSizeSmaller;
-    expr->mNumber = size;
+    expr->mLongNumber = size;
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
@@ -301,11 +301,6 @@ String * IMAPSearchExpression::value()
 uint64_t IMAPSearchExpression::longNumber()
 {
     return mLongNumber;
-}
-
-uint32_t IMAPSearchExpression::number()
-{
-    return mNumber;
 }
 
 time_t IMAPSearchExpression::date()

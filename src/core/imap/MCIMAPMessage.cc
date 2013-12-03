@@ -83,7 +83,6 @@ uint32_t IMAPMessage::size()
 void IMAPMessage::setSize(uint32_t size)
 {
     mSize = size;
-    
 }
 
 void IMAPMessage::setFlags(MessageFlag flags)

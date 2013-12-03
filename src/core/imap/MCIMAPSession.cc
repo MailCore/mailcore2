@@ -2741,11 +2741,11 @@ static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpr
         }
         case IMAPSearchKindSizeLarger:
         {
-            return mailimap_search_key_new_larger(expression->number());
+            return mailimap_search_key_new_larger( (uint32_t) expression->longNumber());
         }
         case IMAPSearchKindSizeSmaller:
         {
-            return mailimap_search_key_new_smaller(expression->number());
+            return mailimap_search_key_new_smaller( (uint32_t) expression->longNumber());
         }
         case IMAPSearchKindOr:
         {
