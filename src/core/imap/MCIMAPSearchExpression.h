@@ -19,15 +19,22 @@ namespace mailcore {
         virtual String * value();
         virtual uint64_t longNumber();
         virtual time_t date();
+        virtual IndexSet * uids();
+
+        
         virtual IMAPSearchExpression * leftExpression();
         virtual IMAPSearchExpression * rightExpression();
         
         static IMAPSearchExpression * searchAll();
         static IMAPSearchExpression * searchFrom(String * value);
+        static IMAPSearchExpression * searchTo(String *value);
+        static IMAPSearchExpression * searchCC(String *value);
+        static IMAPSearchExpression * searchBCC(String *value);
         static IMAPSearchExpression * searchRecipient(String * value);
         static IMAPSearchExpression * searchSubject(String * value);
         static IMAPSearchExpression * searchContent(String * value);
         static IMAPSearchExpression * searchHeader(String * header, String * value);
+        static IMAPSearchExpression * searchUids(IndexSet * uids);
         static IMAPSearchExpression * searchRead();
         static IMAPSearchExpression * searchUnread();
         static IMAPSearchExpression * searchFlagged();
@@ -61,6 +68,7 @@ namespace mailcore {
         String * mValue;
         uint64_t mLongNumber;
         time_t mDate;
+        IndexSet *mUids;
         IMAPSearchExpression * mLeftExpression;
         IMAPSearchExpression * mRightExpression;
         void init();

@@ -8,6 +8,7 @@ void IMAPSearchExpression::init()
     mHeader = NULL;
     mValue = NULL;
     mLongNumber = 0;
+    mUids  = NULL;
     mLeftExpression = NULL;
     mRightExpression = NULL;
 }
@@ -24,6 +25,8 @@ IMAPSearchExpression::IMAPSearchExpression(IMAPSearchExpression * other)
     mLongNumber = other->mLongNumber;
     MC_SAFE_REPLACE_COPY(String, mHeader, other->mHeader);
     MC_SAFE_REPLACE_COPY(String, mValue, other->mValue);
+    MC_SAFE_REPLACE_COPY(IndexSet, mUids, other->mUids);
+    
     MC_SAFE_REPLACE_COPY(IMAPSearchExpression, mLeftExpression, other->mLeftExpression);
     MC_SAFE_REPLACE_COPY(IMAPSearchExpression, mRightExpression, other->mRightExpression);
 }
@@ -32,6 +35,7 @@ IMAPSearchExpression::~IMAPSearchExpression()
 {
     MC_SAFE_RELEASE(mHeader);
 	MC_SAFE_RELEASE(mValue);
+    MC_SAFE_RELEASE(mUids);
 	MC_SAFE_RELEASE(mLeftExpression);
 	MC_SAFE_RELEASE(mRightExpression);
 }
@@ -47,12 +51,24 @@ String * IMAPSearchExpression::description()
         case IMAPSearchKindFrom:
         return String::stringWithUTF8Format("<%s:%p From %s>", MCUTF8(className()), this,
             MCUTF8(mValue->description()));
+        case IMAPSearchKindTo:
+        return String::stringWithUTF8Format("<%s:%p To %s>", MCUTF8(className()), this,
+            MCUTF8(mValue->description()));
+        case IMAPSearchKindCC:
+        return String::stringWithUTF8Format("<%s:%p CC %s>", MCUTF8(className()), this,
+            MCUTF8(mValue->description()));
+        case IMAPSearchKindBCC:
+        return String::stringWithUTF8Format("<%s:%p BCC %s>", MCUTF8(className()), this,
+            MCUTF8(mValue->description()));
         case IMAPSearchKindRecipient:
         return String::stringWithUTF8Format("<%s:%p Recipient %s>", MCUTF8(className()), this,
             MCUTF8(mValue->description()));
         case IMAPSearchKindSubject:
         return String::stringWithUTF8Format("<%s:%p Subject %s>", MCUTF8(className()), this,
             MCUTF8(mValue->description()));
+        case IMAPSearchKindUids:
+            return String::stringWithUTF8Format("<%s:%p Uids %s>", MCUTF8(className()), this,
+                                                MCUTF8(mUids->description()));
         case IMAPSearchKindContent:
         return String::stringWithUTF8Format("<%s:%p Content %s>", MCUTF8(className()), this,
             MCUTF8(mValue->description()));
@@ -80,6 +96,30 @@ IMAPSearchExpression * IMAPSearchExpression::searchFrom(String * value)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
     expr->mKind = IMAPSearchKindFrom;
+    MC_SAFE_REPLACE_COPY(String, expr->mValue, value);
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchTo(String * value)
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindTo;
+    MC_SAFE_REPLACE_COPY(String, expr->mValue, value);
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchCC(String * value)
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindCC;
+    MC_SAFE_REPLACE_COPY(String, expr->mValue, value);
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
+IMAPSearchExpression * IMAPSearchExpression::searchBCC(String * value)
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindBCC;
     MC_SAFE_REPLACE_COPY(String, expr->mValue, value);
     return (IMAPSearchExpression *) expr->autorelease();
 }
@@ -114,6 +154,15 @@ IMAPSearchExpression * IMAPSearchExpression::searchContent(String * value)
     MC_SAFE_REPLACE_COPY(String, expr->mValue, value);
     return (IMAPSearchExpression *) expr->autorelease();
 }
+
+IMAPSearchExpression * IMAPSearchExpression::searchUids(IndexSet * uids)
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindUids;
+    MC_SAFE_REPLACE_COPY(IndexSet,expr->mUids, uids);
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
 
 IMAPSearchExpression * IMAPSearchExpression::searchHeader(String * header, String * value)
 {
@@ -306,6 +355,11 @@ uint64_t IMAPSearchExpression::longNumber()
 time_t IMAPSearchExpression::date()
 {
     return mDate;
+}
+
+IndexSet * IMAPSearchExpression::uids()
+{
+    return mUids;
 }
 
 IMAPSearchExpression * IMAPSearchExpression::leftExpression()

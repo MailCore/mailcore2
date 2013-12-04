@@ -165,12 +165,20 @@ typedef enum {
     MCOIMAPSearchKindNone,
     /** Match sender.*/
     MCOIMAPSearchKindFrom,
+    /** Match to */
+    MCOIMAPSearchKindTo,
+    /** Match CC: */
+    MCOIMAPSearchKindCC,
+    /** Match BCC: */
+    MCOIMAPSearchKindBCC,
     /** Match recipient.*/
     MCOIMAPSearchKindRecipient,
     /** Match subject.*/
     MCOIMAPSearchKindSubject,
     /** Match content of the message.*/
     MCOIMAPSearchKindContent,
+    /** Match uids */
+    MCOIMAPSearchKindUids,
     /** Match headers of the message.*/
     MCOIMAPSearchKindHeader,
     /** Match X-GM-THRID.*/

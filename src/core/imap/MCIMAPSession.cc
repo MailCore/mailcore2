@@ -2554,6 +2554,15 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchKind kind, String * se
         case IMAPSearchKindFrom:
         expr = IMAPSearchExpression::searchFrom(searchString);
         break;
+        case IMAPSearchKindTo:
+        expr = IMAPSearchExpression::searchTo(searchString);
+        break;
+        case IMAPSearchKindCC:
+        expr = IMAPSearchExpression::searchCC(searchString);
+        break;
+        case IMAPSearchKindBCC:
+        expr = IMAPSearchExpression::searchBCC(searchString);
+        break;
         case IMAPSearchKindRecipient:
         expr = IMAPSearchExpression::searchRecipient(searchString);
         break;
@@ -2580,6 +2589,15 @@ static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpr
         {
             return mailimap_search_key_new_from(strdup(expression->value()->UTF8Characters()));
         }
+        case IMAPSearchKindTo: {
+            return mailimap_search_key_new_to(strdup(expression->value()->UTF8Characters()));
+        }
+        case IMAPSearchKindCC: {
+            return mailimap_search_key_new_cc(strdup(expression->value()->UTF8Characters()));
+        }
+        case IMAPSearchKindBCC: {
+            return mailimap_search_key_new_bcc(strdup(expression->value()->UTF8Characters()));
+        }
         case IMAPSearchKindRecipient:
         {
             struct mailimap_search_key * to_search;
@@ -2605,6 +2623,8 @@ static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpr
         {
             return mailimap_search_key_new_text(strdup(expression->value()->UTF8Characters()));
         }
+        case IMAPSearchKindUids:
+            return mailimap_search_key_new_uid(setFromIndexSet(expression->uids()));
         case IMAPSearchKindHeader:
         {
             return mailimap_search_key_new_header(strdup(expression->header()->UTF8Characters()), strdup(expression->value()->UTF8Characters()));

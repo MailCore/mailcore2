@@ -67,6 +67,20 @@
     return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchFrom([value mco_mcString]));
 }
 
++ (MCOIMAPSearchExpression *) searchTo:(NSString *)value
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchTo([value mco_mcString]));
+}
+
++ (MCOIMAPSearchExpression *) searchCC:(NSString *)value
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchCC([value mco_mcString]));
+}
+
++ (MCOIMAPSearchExpression *) searchBCC:(NSString *)value
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchBCC([value mco_mcString]));
+}
 + (MCOIMAPSearchExpression *) searchRecipient:(NSString *)value
 {
     return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchRecipient([value mco_mcString]));
@@ -82,6 +96,10 @@
     return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchContent([value mco_mcString]));
 }
 
++ (MCOIMAPSearchExpression *) searchUids:(MCOIndexSet *) uids
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchUids(MCO_FROM_OBJC(mailcore::IndexSet, uids)));
+}
 + (MCOIMAPSearchExpression *) searchHeader:(NSString *)header value:(NSString *)value
 {
     return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchHeader([header mco_mcString], [value mco_mcString]));
