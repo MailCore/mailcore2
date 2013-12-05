@@ -34,7 +34,7 @@ namespace mailcore {
         static IMAPSearchExpression * searchSubject(String * value);
         static IMAPSearchExpression * searchContent(String * value);
         static IMAPSearchExpression * searchHeader(String * header, String * value);
-        static IMAPSearchExpression * searchUids(IndexSet * uids);
+        static IMAPSearchExpression * searchUIDs(IndexSet * uids);
         static IMAPSearchExpression * searchRead();
         static IMAPSearchExpression * searchUnread();
         static IMAPSearchExpression * searchFlagged();

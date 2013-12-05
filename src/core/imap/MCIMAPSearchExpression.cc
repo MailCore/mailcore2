@@ -66,8 +66,8 @@ String * IMAPSearchExpression::description()
         case IMAPSearchKindSubject:
         return String::stringWithUTF8Format("<%s:%p Subject %s>", MCUTF8(className()), this,
             MCUTF8(mValue->description()));
-        case IMAPSearchKindUids:
-            return String::stringWithUTF8Format("<%s:%p Uids %s>", MCUTF8(className()), this,
+        case IMAPSearchKindUIDs:
+            return String::stringWithUTF8Format("<%s:%p UIDs %s>", MCUTF8(className()), this,
                                                 MCUTF8(mUids->description()));
         case IMAPSearchKindContent:
         return String::stringWithUTF8Format("<%s:%p Content %s>", MCUTF8(className()), this,
@@ -155,10 +155,10 @@ IMAPSearchExpression * IMAPSearchExpression::searchContent(String * value)
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
-IMAPSearchExpression * IMAPSearchExpression::searchUids(IndexSet * uids)
+IMAPSearchExpression * IMAPSearchExpression::searchUIDs(IndexSet * uids)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
-    expr->mKind = IMAPSearchKindUids;
+    expr->mKind = IMAPSearchKindUIDs;
     MC_SAFE_REPLACE_COPY(IndexSet,expr->mUids, uids);
     return (IMAPSearchExpression *) expr->autorelease();
 }

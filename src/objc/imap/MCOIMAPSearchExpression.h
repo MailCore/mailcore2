@@ -97,7 +97,7 @@
  
  MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchUids:uids]
  **/
-+ (MCOIMAPSearchExpression *) searchUids:(MCOIndexSet *) uids;
++ (MCOIMAPSearchExpression *) searchUIDs:(MCOIndexSet *) uids;
 
 /**
  Creates a search expression that matches the content of a specific header.

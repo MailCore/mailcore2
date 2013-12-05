@@ -96,9 +96,9 @@
     return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchContent([value mco_mcString]));
 }
 
-+ (MCOIMAPSearchExpression *) searchUids:(MCOIndexSet *) uids
++ (MCOIMAPSearchExpression *) searchUIDs:(MCOIndexSet *) uids
 {
-    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchUids(MCO_FROM_OBJC(mailcore::IndexSet, uids)));
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchUIDs(MCO_FROM_OBJC(mailcore::IndexSet, uids)));
 }
 + (MCOIMAPSearchExpression *) searchHeader:(NSString *)header value:(NSString *)value
 {
