@@ -69,6 +69,7 @@ namespace mailcore {
         IMAPMessagesRequestKindGmailMessageID = 1 << 7,
         IMAPMessagesRequestKindGmailThreadID  = 1 << 8,
         IMAPMessagesRequestKindExtraHeaders  = 1 << 9,
+        IMAPMessagesRequestKindSize          = 1 << 10,
     };
 
     enum IMAPFetchRequestType {
@@ -184,6 +185,8 @@ namespace mailcore {
         IMAPSearchKindBeforeReceivedDate,
         IMAPSearchKindOnReceivedDate,
         IMAPSearchKindSinceReceivedDate,
+        IMAPSearchKindSizeLarger,
+        IMAPSearchKindSizeSmaller,
         IMAPSearchKindGmailThreadID,
         IMAPSearchKindOr,
         IMAPSearchKindAnd,

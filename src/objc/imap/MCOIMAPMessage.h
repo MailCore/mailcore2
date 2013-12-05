@@ -34,6 +34,9 @@
 /** IMAP UID of the message. */
 @property (nonatomic, assign) uint32_t uid;
 
+/* Size of the entire message */
+@property (nonatomic, assign) uint32_t size;
+
 /** Flags of the message, like if it is deleted, read, starred etc */
 @property (nonatomic, assign) MCOMessageFlag flags;
 

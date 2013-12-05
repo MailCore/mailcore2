@@ -142,6 +142,9 @@ typedef enum {
     MCOIMAPMessagesRequestKindGmailThreadID  = 1 << 8,
     /** Extra Headers.*/
     MCOIMAPMessagesRequestKindExtraHeaders   = 1 << 9,
+    /* Request size of message */
+    MCOIMAPMessagesRequestKindSize           = 1 << 10,
+
 } MCOIMAPMessagesRequestKind;
 
 /** It defines the behavior of the STORE flags request.*/
