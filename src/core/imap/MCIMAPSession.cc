@@ -2549,32 +2549,48 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchKind kind, String * se
     expr = NULL;
     switch (kind) {
         case IMAPSearchKindAll:
-        expr = IMAPSearchExpression::searchAll();
-        break;
+        {
+            expr = IMAPSearchExpression::searchAll();
+            break;
+        }
         case IMAPSearchKindFrom:
-        expr = IMAPSearchExpression::searchFrom(searchString);
-        break;
+        {
+            expr = IMAPSearchExpression::searchFrom(searchString);
+            break;
+        }
         case IMAPSearchKindTo:
-        expr = IMAPSearchExpression::searchTo(searchString);
-        break;
+        {
+            expr = IMAPSearchExpression::searchTo(searchString);
+            break;
+        }
         case IMAPSearchKindCC:
-        expr = IMAPSearchExpression::searchCC(searchString);
-        break;
+        {
+            expr = IMAPSearchExpression::searchCC(searchString);
+            break;
+        }
         case IMAPSearchKindBCC:
-        expr = IMAPSearchExpression::searchBCC(searchString);
-        break;
+        {
+            expr = IMAPSearchExpression::searchBCC(searchString);
+            break;
+        }
         case IMAPSearchKindRecipient:
-        expr = IMAPSearchExpression::searchRecipient(searchString);
-        break;
+        {
+            expr = IMAPSearchExpression::searchRecipient(searchString);
+            break;
+        }
         case IMAPSearchKindSubject:
-        expr = IMAPSearchExpression::searchSubject(searchString);
-        break;
+        {    expr = IMAPSearchExpression::searchSubject(searchString);
+            break;
+        }
         case IMAPSearchKindContent:
-        expr = IMAPSearchExpression::searchContent(searchString);
-        break;
+        {   expr = IMAPSearchExpression::searchContent(searchString);
+            break;
+        }
         default:
-        MCAssert(0);
-        break;
+        {
+            MCAssert(0);
+            break;
+        }
     }
     return search(folder, expr, pError);
 }
@@ -2582,20 +2598,24 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchKind kind, String * se
 static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpression * expression)
 {
     switch (expression->kind()) {
-        case IMAPSearchKindAll: {
+        case IMAPSearchKindAll:
+        {
             return mailimap_search_key_new_all();
         }
         case IMAPSearchKindFrom:
         {
             return mailimap_search_key_new_from(strdup(expression->value()->UTF8Characters()));
         }
-        case IMAPSearchKindTo: {
+        case IMAPSearchKindTo:
+        {
             return mailimap_search_key_new_to(strdup(expression->value()->UTF8Characters()));
         }
-        case IMAPSearchKindCC: {
+        case IMAPSearchKindCC:
+        {
             return mailimap_search_key_new_cc(strdup(expression->value()->UTF8Characters()));
         }
-        case IMAPSearchKindBCC: {
+        case IMAPSearchKindBCC:
+        {
             return mailimap_search_key_new_bcc(strdup(expression->value()->UTF8Characters()));
         }
         case IMAPSearchKindRecipient:
@@ -2624,7 +2644,9 @@ static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpr
             return mailimap_search_key_new_text(strdup(expression->value()->UTF8Characters()));
         }
         case IMAPSearchKindUIDs:
+        {
             return mailimap_search_key_new_uid(setFromIndexSet(expression->uids()));
+        }
         case IMAPSearchKindHeader:
         {
             return mailimap_search_key_new_header(strdup(expression->header()->UTF8Characters()), strdup(expression->value()->UTF8Characters()));

@@ -26,7 +26,6 @@ IMAPSearchExpression::IMAPSearchExpression(IMAPSearchExpression * other)
     MC_SAFE_REPLACE_COPY(String, mHeader, other->mHeader);
     MC_SAFE_REPLACE_COPY(String, mValue, other->mValue);
     MC_SAFE_REPLACE_COPY(IndexSet, mUids, other->mUids);
-    
     MC_SAFE_REPLACE_COPY(IMAPSearchExpression, mLeftExpression, other->mLeftExpression);
     MC_SAFE_REPLACE_COPY(IMAPSearchExpression, mRightExpression, other->mRightExpression);
 }
@@ -34,10 +33,10 @@ IMAPSearchExpression::IMAPSearchExpression(IMAPSearchExpression * other)
 IMAPSearchExpression::~IMAPSearchExpression()
 {
     MC_SAFE_RELEASE(mHeader);
-	MC_SAFE_RELEASE(mValue);
+    MC_SAFE_RELEASE(mValue);
     MC_SAFE_RELEASE(mUids);
-	MC_SAFE_RELEASE(mLeftExpression);
-	MC_SAFE_RELEASE(mRightExpression);
+    MC_SAFE_RELEASE(mLeftExpression);
+    MC_SAFE_RELEASE(mRightExpression);
 }
 
 String * IMAPSearchExpression::description()
@@ -159,7 +158,7 @@ IMAPSearchExpression * IMAPSearchExpression::searchUIDs(IndexSet * uids)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
     expr->mKind = IMAPSearchKindUIDs;
-    MC_SAFE_REPLACE_COPY(IndexSet,expr->mUids, uids);
+    MC_SAFE_REPLACE_COPY(IndexSet, expr->mUids, uids);
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
