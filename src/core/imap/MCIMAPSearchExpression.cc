@@ -9,7 +9,6 @@ void IMAPSearchExpression::init()
     mValue = NULL;
     mLongNumber = 0;
     mUids  = NULL;
-    mDate  = 0;
     mLeftExpression = NULL;
     mRightExpression = NULL;
 }
@@ -24,7 +23,6 @@ IMAPSearchExpression::IMAPSearchExpression(IMAPSearchExpression * other)
     init();
     mKind = other->mKind;
     mLongNumber = other->mLongNumber;
-    mDate = other->mDate;
     MC_SAFE_REPLACE_COPY(String, mHeader, other->mHeader);
     MC_SAFE_REPLACE_COPY(String, mValue, other->mValue);
     MC_SAFE_REPLACE_COPY(IndexSet, mUids, other->mUids);
@@ -248,7 +246,7 @@ IMAPSearchExpression * IMAPSearchExpression::searchBeforeDate(time_t date)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
     expr->mKind = IMAPSearchKindBeforeDate;
-    expr->mDate = date;
+    expr->mLongNumber = (uint64_t) date;
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
@@ -256,7 +254,7 @@ IMAPSearchExpression * IMAPSearchExpression::searchOnDate(time_t date)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
     expr->mKind = IMAPSearchKindOnDate;
-    expr->mDate = date;
+    expr->mLongNumber = (uint64_t) date;
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
@@ -264,7 +262,7 @@ IMAPSearchExpression * IMAPSearchExpression::searchSinceDate(time_t date)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
     expr->mKind = IMAPSearchKindSinceDate;
-    expr->mDate = date;
+    expr->mLongNumber = (uint64_t) date;
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
@@ -272,14 +270,14 @@ IMAPSearchExpression * IMAPSearchExpression::searchBeforeReceivedDate(time_t dat
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
     expr->mKind = IMAPSearchKindBeforeReceivedDate;
-    expr->mDate = date;
+    expr->mLongNumber = (uint64_t) date;
     return (IMAPSearchExpression *) expr->autorelease();
 }
 IMAPSearchExpression * IMAPSearchExpression::searchOnReceivedDate(time_t date)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
     expr->mKind = IMAPSearchKindOnReceivedDate;
-    expr->mDate = date;
+    expr->mLongNumber = (uint64_t) date;
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
@@ -287,7 +285,7 @@ IMAPSearchExpression * IMAPSearchExpression::searchSinceReceivedDate(time_t date
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
     expr->mKind = IMAPSearchKindSinceReceivedDate;
-    expr->mDate = date;
+    expr->mLongNumber = (uint64_t) date;
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
@@ -355,7 +353,7 @@ uint64_t IMAPSearchExpression::longNumber()
 
 time_t IMAPSearchExpression::date()
 {
-    return mDate;
+    return (time_t) mLongNumber;
 }
 
 IndexSet * IMAPSearchExpression::uids()

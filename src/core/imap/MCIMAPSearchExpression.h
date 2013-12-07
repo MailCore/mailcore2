@@ -67,7 +67,6 @@ namespace mailcore {
         String * mHeader;
         String * mValue;
         uint64_t mLongNumber;
-        time_t mDate;
         IndexSet * mUids;
         IMAPSearchExpression * mLeftExpression;
         IMAPSearchExpression * mRightExpression;
