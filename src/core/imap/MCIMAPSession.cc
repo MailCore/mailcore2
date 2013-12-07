@@ -2579,11 +2579,13 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchKind kind, String * se
             break;
         }
         case IMAPSearchKindSubject:
-        {    expr = IMAPSearchExpression::searchSubject(searchString);
+        {
+            expr = IMAPSearchExpression::searchSubject(searchString);
             break;
         }
         case IMAPSearchKindContent:
-        {   expr = IMAPSearchExpression::searchContent(searchString);
+        {
+            expr = IMAPSearchExpression::searchContent(searchString);
             break;
         }
         default:
