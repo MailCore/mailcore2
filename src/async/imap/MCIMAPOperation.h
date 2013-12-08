@@ -50,7 +50,7 @@ namespace mailcore {
         ErrorCode mError;
         
     private:
-		virtual void bodyProgress(IMAPSession * session, unsigned int current, unsigned int maximum);
+        virtual void bodyProgress(IMAPSession * session, unsigned int current, unsigned int maximum);
         virtual void bodyProgressOnMainThread(void * context);
         virtual void itemsProgress(IMAPSession * session, unsigned int current, unsigned int maximum);
         virtual void itemsProgressOnMainThread(void * context);

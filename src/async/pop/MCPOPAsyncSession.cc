@@ -59,6 +59,7 @@ namespace mailcore {
     private:
         POPAsyncSession * mSession;
     };
+    
 }
 
 POPAsyncSession::POPAsyncSession()

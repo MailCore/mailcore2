@@ -184,6 +184,7 @@ namespace mailcore {
         virtual IMAPAsyncConnection * matchingSessionForFolder(String * folder);
         virtual IMAPAsyncConnection * availableSession();
     };
+    
 }
 
 #endif

@@ -8,16 +8,17 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-	
-	class Multipart : public AbstractMultipart {
-	public:
-		Multipart();
-		virtual ~Multipart();
-		
+    
+    class Multipart : public AbstractMultipart {
+    public:
+        Multipart();
+        virtual ~Multipart();
+        
     public: // subclass behavior
-		Multipart(Multipart * other);
-		virtual Object * copy();
-	};
+        Multipart(Multipart * other);
+        virtual Object * copy();
+    };
+    
 }
 
 #endif

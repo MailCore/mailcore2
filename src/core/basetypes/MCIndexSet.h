@@ -18,40 +18,40 @@
 
 namespace mailcore {
     
-	class IndexSet : public Object {
-	public:
-		IndexSet();
-		IndexSet(IndexSet * o);
-		
-		static IndexSet * indexSet();
+    class IndexSet : public Object {
+    public:
+        IndexSet();
+        IndexSet(IndexSet * o);
+        
+        static IndexSet * indexSet();
         static IndexSet * indexSetWithRange(Range range);
         static IndexSet * indexSetWithIndex(uint64_t idx);
         
-		virtual unsigned int count();
-		virtual void addIndex(uint64_t idx);
-		virtual void removeIndex(uint64_t idx);
-		virtual bool containsIndex(uint64_t idx);
+        virtual unsigned int count();
+        virtual void addIndex(uint64_t idx);
+        virtual void removeIndex(uint64_t idx);
+        virtual bool containsIndex(uint64_t idx);
         
-		virtual void addRange(Range range);
+        virtual void addRange(Range range);
         virtual void removeRange(Range range);
-		virtual void intersectsRange(Range range);
+        virtual void intersectsRange(Range range);
         
         virtual Range * allRanges();
         virtual unsigned int rangesCount();
-		virtual void removeAllIndexes();
+        virtual void removeAllIndexes();
         
     public: // subclass behavior
-		virtual ~IndexSet();
-		virtual String * description();
-		virtual Object * copy();
-		virtual HashMap * serializable();
+        virtual ~IndexSet();
+        virtual String * description();
+        virtual Object * copy();
+        virtual HashMap * serializable();
         virtual void importSerializable(HashMap * serializable);
         
-	private:
-		Range * mRanges;
+    private:
+        Range * mRanges;
         unsigned int mCount;
         unsigned int mAllocated;
-		void init();
+        void init();
         int rangeIndexForIndex(uint64_t idx);
         int rangeIndexForIndexWithBounds(uint64_t idx, unsigned int left, unsigned int right);
         void addRangeIndex(unsigned int rangeIndex);
@@ -62,8 +62,8 @@ namespace mailcore {
         int leftRangeIndexForIndexWithBounds(uint64_t idx, unsigned int left, unsigned int right);
         void mergeRanges(unsigned int rangeIndex);
         void tryToMergeAdjacentRanges(unsigned int rangeIndex);
-	};
-
+    };
+    
 }
 
 #endif

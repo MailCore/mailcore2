@@ -31,6 +31,7 @@ namespace mailcore {
         Array * mParts;
         void init();
     };
+    
 }
 
 #endif

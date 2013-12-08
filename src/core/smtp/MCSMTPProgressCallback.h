@@ -5,13 +5,14 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-
-	class SMTPSession;
-
-	class SMTPProgressCallback {
-	public:
-		virtual void bodyProgress(SMTPSession * session, unsigned int current, unsigned int maximum) {};
-	};
+    
+    class SMTPSession;
+    
+    class SMTPProgressCallback {
+    public:
+        virtual void bodyProgress(SMTPSession * session, unsigned int current, unsigned int maximum) {};
+    };
+    
 }
 
 #endif

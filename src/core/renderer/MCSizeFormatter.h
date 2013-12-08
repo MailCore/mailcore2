@@ -14,6 +14,7 @@
 #ifdef __cplusplus
 
 namespace mailcore {
+    
     class String;
     
     class SizeFormatter : public Object {

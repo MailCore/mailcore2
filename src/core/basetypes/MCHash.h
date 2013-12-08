@@ -5,9 +5,9 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-
+    
     unsigned int hashCompute(const char * key, unsigned int len);
-
+    
 }
 
 #endif

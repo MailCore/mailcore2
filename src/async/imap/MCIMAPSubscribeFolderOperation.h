@@ -31,6 +31,7 @@ namespace mailcore {
         bool mUnsubscribeEnabled;
         
     };
+    
 }
 
 #endif

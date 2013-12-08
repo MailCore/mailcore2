@@ -14,7 +14,7 @@
 #define nativeType mailcore::IMAPFolderStatus
 
 @implementation MCOIMAPFolderStatus {
-	mailcore::IMAPFolderStatus * _nativeStatus;
+    mailcore::IMAPFolderStatus * _nativeStatus;
 }
 
 + (void) load

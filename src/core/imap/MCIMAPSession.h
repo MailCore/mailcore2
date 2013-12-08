@@ -258,6 +258,7 @@ namespace mailcore {
         bool enableFeature(String * feature);
         void enableFeatures();
     };
+    
 }
 
 #endif

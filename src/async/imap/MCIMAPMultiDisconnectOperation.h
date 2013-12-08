@@ -33,6 +33,7 @@ namespace mailcore {
         Array * _operations;
         unsigned int _count;
     };
+    
 }
 
 #endif

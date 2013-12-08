@@ -38,6 +38,7 @@ namespace mailcore {
         String * mDestFolder;
         IndexSet * mDestUids;
     };
+    
 }
 
 #endif

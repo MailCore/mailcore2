@@ -6,15 +6,15 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-
+    
     class AbstractPart;
     class MessageHeader;
-
+    
     class AbstractMessage : public Object {
     public:
         AbstractMessage();
         virtual ~AbstractMessage();
-
+        
         virtual MessageHeader * header();
         virtual void setHeader(MessageHeader * header);
         
@@ -36,6 +36,7 @@ namespace mailcore {
         void init();
         
     };
+    
 }
 
 #endif

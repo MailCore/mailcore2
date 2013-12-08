@@ -16,7 +16,7 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-
+    
     class SMTPNoopOperation : public SMTPOperation {
     public:
         SMTPNoopOperation();

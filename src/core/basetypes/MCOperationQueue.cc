@@ -15,8 +15,8 @@ using namespace mailcore;
 
 OperationQueue::OperationQueue()
 {
-	mOperations = new Array();
-	mStarted = false;
+    mOperations = new Array();
+    mStarted = false;
     pthread_mutex_init(&mLock, NULL);
     mWaiting = false;
     mOperationSem = mailsem_new();

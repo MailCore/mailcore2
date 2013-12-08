@@ -5,13 +5,14 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-
-	class POPSession;
-
-	class POPProgressCallback {
-	public:
-		virtual void bodyProgress(POPSession * session, unsigned int current, unsigned int maximum) {};
-	};
+    
+    class POPSession;
+    
+    class POPProgressCallback {
+    public:
+        virtual void bodyProgress(POPSession * session, unsigned int current, unsigned int maximum) {};
+    };
+    
 }
 
 #endif

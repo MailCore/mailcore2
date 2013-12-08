@@ -12,7 +12,7 @@ using namespace mailcore;
 void IMAPPart::init()
 {
     mPartID = NULL;
-	mEncoding = Encoding8Bit;
+    mEncoding = Encoding8Bit;
     mSize = 0;
 }
 
@@ -25,7 +25,7 @@ IMAPPart::IMAPPart(IMAPPart * other) : AbstractPart(other)
 {
     init();
     MC_SAFE_REPLACE_COPY(String, mPartID, other->mPartID);
-	mEncoding = other->mEncoding;
+    mEncoding = other->mEncoding;
     mSize = other->mSize;
 }
 
@@ -71,13 +71,13 @@ Encoding IMAPPart::encoding()
 
 unsigned int IMAPPart::decodedSize()
 {
-	switch (mEncoding) {
-		case MAILIMAP_BODY_FLD_ENC_BASE64:
+    switch (mEncoding) {
+        case MAILIMAP_BODY_FLD_ENC_BASE64:
             return mSize * 3 / 4;
             
         default:
             return mSize;
-	}
+    }
 }
 
 AbstractPart * IMAPPart::attachmentWithIMAPBody(struct mailimap_body * body)
@@ -86,7 +86,7 @@ AbstractPart * IMAPPart::attachmentWithIMAPBody(struct mailimap_body * body)
     AbstractPart * result;
     
     partID = NULL;
-	if (body->bd_type == MAILIMAP_BODY_1PART) {
+    if (body->bd_type == MAILIMAP_BODY_1PART) {
         partID = MCSTR("1");
     }
     result = attachmentWithIMAPBodyInternal(body, partID);
@@ -97,55 +97,55 @@ AbstractPart * IMAPPart::attachmentWithIMAPBody(struct mailimap_body * body)
 
 AbstractPart * IMAPPart::attachmentWithIMAPBodyInternal(struct mailimap_body * body, String * partID)
 {
-	switch (body->bd_type) {
-		case MAILIMAP_BODY_1PART:
+    switch (body->bd_type) {
+        case MAILIMAP_BODY_1PART:
         return attachmentWithIMAPBody1Part(body->bd_data.bd_body_1part, partID);
-		case MAILIMAP_BODY_MPART:
+        case MAILIMAP_BODY_MPART:
         return attachmentWithIMAPBodyMultipart(body->bd_data.bd_body_mpart, partID);
-	}
-	
+    }
+    
     return NULL;
 }
 
 AbstractPart * IMAPPart::attachmentWithIMAPBody1Part(struct mailimap_body_type_1part * body_1part,
     String * partID)
 {
-	switch (body_1part->bd_type) {
-		case MAILIMAP_BODY_TYPE_1PART_BASIC:
-		{
-			IMAPPart * attachment;
+    switch (body_1part->bd_type) {
+        case MAILIMAP_BODY_TYPE_1PART_BASIC:
+        {
+            IMAPPart * attachment;
             
-			attachment = attachmentWithIMAPBody1PartBasic(body_1part->bd_data.bd_type_basic,
+            attachment = attachmentWithIMAPBody1PartBasic(body_1part->bd_data.bd_type_basic,
                 body_1part->bd_ext_1part);
             attachment->setPartID(partID);
             return attachment;
-		}
-		case MAILIMAP_BODY_TYPE_1PART_MSG:
-		{
-			return attachmentWithIMAPBody1PartMessage(body_1part->bd_data.bd_type_msg,
+        }
+        case MAILIMAP_BODY_TYPE_1PART_MSG:
+        {
+            return attachmentWithIMAPBody1PartMessage(body_1part->bd_data.bd_type_msg,
                 body_1part->bd_ext_1part, partID);
-		}
-		case MAILIMAP_BODY_TYPE_1PART_TEXT:
-		{
-			IMAPPart * attachment;
-			
-			attachment = attachmentWithIMAPBody1PartText(body_1part->bd_data.bd_type_text,
+        }
+        case MAILIMAP_BODY_TYPE_1PART_TEXT:
+        {
+            IMAPPart * attachment;
+            
+            attachment = attachmentWithIMAPBody1PartText(body_1part->bd_data.bd_type_text,
                 body_1part->bd_ext_1part);
             attachment->setPartID(partID);
             MCLog("attachment %s", MCUTF8(partID));
             return attachment;
-		}
-	}
-	
-	return NULL;
+        }
+    }
+    
+    return NULL;
 }
 
 IMAPMessagePart * IMAPPart::attachmentWithIMAPBody1PartMessage(struct mailimap_body_type_msg * message,
     struct mailimap_body_ext_1part * extension,
     String * partID)
 {
-	IMAPMessagePart * attachment;
-	AbstractPart * subAttachment;
+    IMAPMessagePart * attachment;
+    AbstractPart * subAttachment;
     String * nextPartID;
     
     nextPartID = NULL;
@@ -157,7 +157,7 @@ IMAPMessagePart * IMAPPart::attachmentWithIMAPBody1PartMessage(struct mailimap_b
         // mpart
         nextPartID = partID;
     }
-	
+    
     attachment = new IMAPMessagePart();
     attachment->setPartID(partID);
     attachment->header()->importIMAPEnvelope(message->bd_envelope);
@@ -197,47 +197,47 @@ void IMAPPart::importIMAPFields(struct mailimap_body_fields * fields,
 IMAPPart * IMAPPart::attachmentWithIMAPBody1PartBasic(struct mailimap_body_type_basic * basic,
     struct mailimap_body_ext_1part * extension)
 {
-	IMAPPart * attachment;
-	String * mimeType;
-	
-	attachment = new IMAPPart();
+    IMAPPart * attachment;
+    String * mimeType;
+    
+    attachment = new IMAPPart();
     attachment->importIMAPFields(basic->bd_fields, extension);
     
     mimeType = NULL;
-	switch (basic->bd_media_basic->med_type) {
-		case MAILIMAP_MEDIA_BASIC_APPLICATION:
+    switch (basic->bd_media_basic->med_type) {
+        case MAILIMAP_MEDIA_BASIC_APPLICATION:
         mimeType = String::stringWithUTF8Format("application/%s", basic->bd_media_basic->med_subtype);
         break;
-		case MAILIMAP_MEDIA_BASIC_AUDIO:
+        case MAILIMAP_MEDIA_BASIC_AUDIO:
         mimeType = String::stringWithUTF8Format("audio/%s", basic->bd_media_basic->med_subtype);
         break;
-		case MAILIMAP_MEDIA_BASIC_IMAGE:
+        case MAILIMAP_MEDIA_BASIC_IMAGE:
         mimeType = String::stringWithUTF8Format("image/%s", basic->bd_media_basic->med_subtype);
         break;
-		case MAILIMAP_MEDIA_BASIC_MESSAGE:
+        case MAILIMAP_MEDIA_BASIC_MESSAGE:
         mimeType = String::stringWithUTF8Format("message/%s", basic->bd_media_basic->med_subtype);
         break;
-		case MAILIMAP_MEDIA_BASIC_VIDEO:
+        case MAILIMAP_MEDIA_BASIC_VIDEO:
         mimeType = String::stringWithUTF8Format("video/%s", basic->bd_media_basic->med_subtype);
         break;
-		case MAILIMAP_MEDIA_BASIC_OTHER:
+        case MAILIMAP_MEDIA_BASIC_OTHER:
         mimeType = String::stringWithUTF8Format("%s/%s", basic->bd_media_basic->med_basic_type, basic->bd_media_basic->med_subtype);
         break;
-	}
+    }
     attachment->setMimeType(mimeType);
-	
+    
     return (IMAPPart *) attachment->autorelease();
 }
 
 IMAPPart * IMAPPart::attachmentWithIMAPBody1PartText(struct mailimap_body_type_text * text,
     struct mailimap_body_ext_1part * extension)
 {
-	IMAPPart * attachment;
-	
-	attachment = new IMAPPart();
+    IMAPPart * attachment;
+    
+    attachment = new IMAPPart();
     attachment->importIMAPFields(text->bd_fields, extension);
-	attachment->setMimeType(String::stringWithUTF8Format("text/%s", text->bd_media_text));
-	
+    attachment->setMimeType(String::stringWithUTF8Format("text/%s", text->bd_media_text));
+    
     return (IMAPPart *) attachment->autorelease();
 }
 

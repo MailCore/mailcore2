@@ -7,12 +7,12 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-
+    
     class Address : public Object {
     public:
         Address();
         virtual ~Address();
-
+        
         static Address * addressWithDisplayName(String * displayName, String * mailbox);
         static Address * addressWithMailbox(String * mailbox);
         static Address * addressWithRFC822String(String * RFC822String);
@@ -26,10 +26,10 @@ namespace mailcore {
         
         virtual void setDisplayName(String * displayName);
         virtual String * displayName();
-
+        
         virtual void setMailbox(String * address);
         virtual String * mailbox();
-
+        
         virtual String * RFC822String();
         virtual String * nonEncodedRFC822String();
         
@@ -57,7 +57,7 @@ namespace mailcore {
         String * mMailbox;
         void init();
     };
-
+    
 }
 
 #endif

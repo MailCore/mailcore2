@@ -8,9 +8,9 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-
+    
     class String;
-
+    
     class Data : public Object {
     public:
         Data();

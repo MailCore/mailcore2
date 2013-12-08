@@ -43,7 +43,8 @@
 using namespace mailcore;
 
 namespace mailcore {
-    class IMAPOperationQueueCallback  : public Object, public OperationQueueCallback {
+    
+    class IMAPOperationQueueCallback : public Object, public OperationQueueCallback {
     public:
         IMAPOperationQueueCallback(IMAPAsyncConnection * connection) {
             mConnection = connection;
@@ -86,6 +87,7 @@ namespace mailcore {
     private:
         IMAPAsyncConnection * mConnection;
     };
+    
 }
 
 IMAPAsyncConnection::IMAPAsyncConnection()

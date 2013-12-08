@@ -53,6 +53,7 @@ namespace mailcore {
         uint64_t mModSequenceValue;
         
     };
+    
 }
 
 #endif

@@ -12,9 +12,8 @@ namespace mailcore {
     class POPMessageInfo;
     class POPProgressCallback;
     class MessageHeader;
-
+    
     class POPSession : public Object {
-        
     public:
         POPSession();
         virtual ~POPSession();
