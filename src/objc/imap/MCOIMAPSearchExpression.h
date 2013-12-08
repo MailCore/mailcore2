@@ -14,6 +14,7 @@
 
 #import <Foundation/Foundation.h>
 #import <MailCore/MCOConstants.h>
+#import <MailCore/MCOIndexSet.h>
 
 @interface MCOIMAPSearchExpression : NSObject
 
@@ -37,12 +38,39 @@
 
 /**
  Creates a search expression that matches any recipient of an email.
+ 
+ Example:
+ 
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchRecipient:@"ngan@etpan.org"]
+ **/
++ (MCOIMAPSearchExpression *) searchRecipient:(NSString *)value;
+
+/**
+ Creates a search expression that matches on the receiver (to) of an email. Useful to check whether the mail is directly addressed to the receiver.
 
  Example:
 
-    MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchRecipient:@"ngan@etpan.org"]
+    MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchTo:@"ngan@etpan.org"]
 **/
-+ (MCOIMAPSearchExpression *) searchRecipient:(NSString *)value;
++ (MCOIMAPSearchExpression *) searchTo:(NSString *)value;
+
+/**
+ Creates a search expression that matches on the cc of an email. Useful to check whether the mail is addressed to the receiver as cc.
+ 
+ Example:
+ 
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchCc:@"ngan@etpan.org"]
+ **/
++ (MCOIMAPSearchExpression *) searchCc:(NSString *)value;
+
+/**
+ Creates a search expression that matches on the bcc field of an email. Useful to check whether the mail is addressed to the receiver as bcc.
+ 
+ Example:
+ 
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchBcc:@"ngan@etpan.org"]
+ **/
++ (MCOIMAPSearchExpression *) searchBcc:(NSString *)value;
 
 /*
  Creates a search expression that matches the subject of an email.
@@ -61,6 +89,15 @@
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchContent:@"meeting"]
 */
 + (MCOIMAPSearchExpression *) searchContent:(NSString *)value;
+
+/**
+ Creates a search expression that matches the uids specified.
+ 
+ Example:
+ 
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchUids:uids]
+ **/
++ (MCOIMAPSearchExpression *) searchUIDs:(MCOIndexSet *) uids;
 
 /**
  Creates a search expression that matches the content of a specific header.
