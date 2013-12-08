@@ -166,9 +166,9 @@ namespace mailcore {
         IMAPSearchKindNone,
         IMAPSearchKindFrom,
         IMAPSearchKindTo,
-        IMAPSearchKindCC,
-        IMAPSearchKindBCC,
-        IMAPSearchKindRecipient,   // Recipient is the combination of To, CC and BCC
+        IMAPSearchKindCc,
+        IMAPSearchKindBcc,
+        IMAPSearchKindRecipient,   // Recipient is the combination of To, Cc and Bcc
         IMAPSearchKindSubject,
         IMAPSearchKindContent,
         IMAPSearchKindUIDs,

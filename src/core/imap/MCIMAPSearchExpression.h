@@ -28,8 +28,8 @@ namespace mailcore {
         static IMAPSearchExpression * searchAll();
         static IMAPSearchExpression * searchFrom(String * value);
         static IMAPSearchExpression * searchTo(String *value);
-        static IMAPSearchExpression * searchCC(String *value);
-        static IMAPSearchExpression * searchBCC(String *value);
+        static IMAPSearchExpression * searchCc(String *value);
+        static IMAPSearchExpression * searchBcc(String *value);
         static IMAPSearchExpression * searchRecipient(String * value);
         static IMAPSearchExpression * searchSubject(String * value);
         static IMAPSearchExpression * searchContent(String * value);

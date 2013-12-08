@@ -72,14 +72,14 @@
     return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchTo([value mco_mcString]));
 }
 
-+ (MCOIMAPSearchExpression *) searchCC:(NSString *)value
++ (MCOIMAPSearchExpression *) searchCc:(NSString *)value
 {
-    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchCC([value mco_mcString]));
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchCc([value mco_mcString]));
 }
 
-+ (MCOIMAPSearchExpression *) searchBCC:(NSString *)value
++ (MCOIMAPSearchExpression *) searchBcc:(NSString *)value
 {
-    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchBCC([value mco_mcString]));
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchBcc([value mco_mcString]));
 }
 + (MCOIMAPSearchExpression *) searchRecipient:(NSString *)value
 {

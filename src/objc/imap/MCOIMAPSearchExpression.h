@@ -59,18 +59,18 @@
  
  Example:
  
- MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchCC:@"ngan@etpan.org"]
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchCc:@"ngan@etpan.org"]
  **/
-+ (MCOIMAPSearchExpression *) searchCC:(NSString *)value;
++ (MCOIMAPSearchExpression *) searchCc:(NSString *)value;
 
 /**
  Creates a search expression that matches on the bcc field of an email. Useful to check whether the mail is addressed to the receiver as bcc.
  
  Example:
  
- MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchBCC:@"ngan@etpan.org"]
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchBcc:@"ngan@etpan.org"]
  **/
-+ (MCOIMAPSearchExpression *) searchBCC:(NSString *)value;
++ (MCOIMAPSearchExpression *) searchBcc:(NSString *)value;
 
 /*
  Creates a search expression that matches the subject of an email.

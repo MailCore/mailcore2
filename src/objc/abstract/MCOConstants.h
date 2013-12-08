@@ -168,9 +168,9 @@ typedef enum {
     /** Match to */
     MCOIMAPSearchKindTo,
     /** Match CC: */
-    MCOIMAPSearchKindCC,
+    MCOIMAPSearchKindCc,
     /** Match BCC: */
-    MCOIMAPSearchKindBCC,
+    MCOIMAPSearchKindBcc,
     /** Match recipient.*/
     MCOIMAPSearchKindRecipient,
     /** Match subject.*/

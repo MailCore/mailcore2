@@ -53,11 +53,11 @@ String * IMAPSearchExpression::description()
         case IMAPSearchKindTo:
         return String::stringWithUTF8Format("<%s:%p To %s>", MCUTF8(className()), this,
             MCUTF8(mValue->description()));
-        case IMAPSearchKindCC:
-        return String::stringWithUTF8Format("<%s:%p CC %s>", MCUTF8(className()), this,
+        case IMAPSearchKindCc:
+        return String::stringWithUTF8Format("<%s:%p Cc %s>", MCUTF8(className()), this,
             MCUTF8(mValue->description()));
-        case IMAPSearchKindBCC:
-        return String::stringWithUTF8Format("<%s:%p BCC %s>", MCUTF8(className()), this,
+        case IMAPSearchKindBcc:
+        return String::stringWithUTF8Format("<%s:%p Bcc %s>", MCUTF8(className()), this,
             MCUTF8(mValue->description()));
         case IMAPSearchKindRecipient:
         return String::stringWithUTF8Format("<%s:%p Recipient %s>", MCUTF8(className()), this,
@@ -107,18 +107,18 @@ IMAPSearchExpression * IMAPSearchExpression::searchTo(String * value)
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
-IMAPSearchExpression * IMAPSearchExpression::searchCC(String * value)
+IMAPSearchExpression * IMAPSearchExpression::searchCc(String * value)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
-    expr->mKind = IMAPSearchKindCC;
+    expr->mKind = IMAPSearchKindCc;
     MC_SAFE_REPLACE_COPY(String, expr->mValue, value);
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
-IMAPSearchExpression * IMAPSearchExpression::searchBCC(String * value)
+IMAPSearchExpression * IMAPSearchExpression::searchBcc(String * value)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
-    expr->mKind = IMAPSearchKindBCC;
+    expr->mKind = IMAPSearchKindBcc;
     MC_SAFE_REPLACE_COPY(String, expr->mValue, value);
     return (IMAPSearchExpression *) expr->autorelease();
 }
