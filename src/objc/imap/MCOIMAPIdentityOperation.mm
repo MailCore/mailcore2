@@ -46,9 +46,9 @@ typedef void (^CompletionType)(NSError *error, NSDictionary * serverIdentity);
 
 - (void) cancel
 {
-  [_completionBlock release];
-  _completionBlock = nil;
-  [super cancel];
+    [_completionBlock release];
+    _completionBlock = nil;
+    [super cancel];
 }
 
 - (void) operationCompleted

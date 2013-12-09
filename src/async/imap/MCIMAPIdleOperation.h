@@ -35,6 +35,7 @@ namespace mailcore {
         void prepare();
         void unprepare();
     };
+    
 }
 
 #endif

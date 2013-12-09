@@ -204,7 +204,7 @@ void DateFormatter::prepare()
 #if USE_COREFOUNDATION
     if (mAppleDateFormatter != NULL)
         return;
-
+    
     CFStringRef localeIdentifier = NULL;
     CFLocaleRef localeRef = NULL;
     if (mLocale != NULL) {

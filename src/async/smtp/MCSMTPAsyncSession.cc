@@ -11,6 +11,7 @@
 using namespace mailcore;
 
 namespace mailcore {
+    
     class SMTPOperationQueueCallback  : public Object, public OperationQueueCallback {
     public:
         SMTPOperationQueueCallback(SMTPAsyncSession * session) {
@@ -50,6 +51,7 @@ namespace mailcore {
     private:
         SMTPAsyncSession * mSession;
     };
+    
 }
 
 SMTPAsyncSession::SMTPAsyncSession()

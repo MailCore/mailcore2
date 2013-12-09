@@ -31,6 +31,7 @@ namespace mailcore {
         String * mOtherName;
         
     };
+    
 }
 
 #endif

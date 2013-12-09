@@ -32,13 +32,14 @@ namespace mailcore {
         
     public: // subclass behavior
         virtual void main();
-
+        
     private:
         Data * mMessageData;
         MessageFlag mFlags;
         uint32_t mCreatedUID;
         
     };
+    
 }
 
 #endif

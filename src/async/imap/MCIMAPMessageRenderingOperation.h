@@ -40,6 +40,7 @@ namespace mailcore {
         IMAPMessage * mMessage;
         
     };
+    
 }
 
 #endif

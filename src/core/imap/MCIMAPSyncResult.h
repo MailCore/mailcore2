@@ -15,12 +15,12 @@
 #ifdef __cplusplus
 
 namespace mailcore {
- 
+    
     class IMAPSyncResult : public Object {
-	public:
-		IMAPSyncResult();
-		virtual ~IMAPSyncResult();
-		
+    public:
+        IMAPSyncResult();
+        virtual ~IMAPSyncResult();
+        
         virtual void setModifiedOrAddedMessages(Array * /* IMAPMessage */ messages);
         virtual Array * /* IMAPMessage */ modifiedOrAddedMessages();
         

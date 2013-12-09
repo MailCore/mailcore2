@@ -14,15 +14,15 @@ static ErrorCode addFile(zipFile file, String * path);
 
 ErrorCode mailcore::CreateZipFileFromFolder(String * zipFilename, String * path)
 {
-	zipFile file = zipOpen(zipFilename->fileSystemRepresentation(), APPEND_STATUS_CREATE);
-	if (file == NULL) {
+    zipFile file = zipOpen(zipFilename->fileSystemRepresentation(), APPEND_STATUS_CREATE);
+    if (file == NULL) {
         return ErrorFile;
-	}
+    }
     
     addFile(file, path);
     
-	int err = zipClose(file, NULL);
-	if (err != ZIP_OK) {
+    int err = zipClose(file, NULL);
+    if (err != ZIP_OK) {
         return ErrorFile;
     }
     
@@ -64,17 +64,17 @@ static ErrorCode addFile(zipFile file, String * path)
     time(&clock);
     
     struct tm timevalue;
-	zip_fileinfo zi;
+    zip_fileinfo zi;
     gmtime_r(&clock, &timevalue);
-	zi.tmz_date.tm_sec = timevalue.tm_sec;
-	zi.tmz_date.tm_min = timevalue.tm_min;
-	zi.tmz_date.tm_hour = timevalue.tm_hour;
-	zi.tmz_date.tm_mday = timevalue.tm_mday;
-	zi.tmz_date.tm_mon = timevalue.tm_mon;
-	zi.tmz_date.tm_year = timevalue.tm_year;
-	zi.internal_fa = 0;
-	zi.external_fa = 0;
-	zi.dosDate = 0;
+    zi.tmz_date.tm_sec = timevalue.tm_sec;
+    zi.tmz_date.tm_min = timevalue.tm_min;
+    zi.tmz_date.tm_hour = timevalue.tm_hour;
+    zi.tmz_date.tm_mday = timevalue.tm_mday;
+    zi.tmz_date.tm_mon = timevalue.tm_mon;
+    zi.tmz_date.tm_year = timevalue.tm_year;
+    zi.internal_fa = 0;
+    zi.external_fa = 0;
+    zi.dosDate = 0;
     
     err = zipOpenNewFileInZip3(file, path->lastPathComponent()->fileSystemRepresentation(),
         &zi, NULL, 0, NULL, 0, NULL,
@@ -113,7 +113,7 @@ static ErrorCode addFile(zipFile file, String * path)
     
     fclose(f);
     
-	err = zipCloseFileInZip(file);
+    err = zipCloseFileInZip(file);
     if (err != ZIP_OK) {
         return ErrorFile;
     }

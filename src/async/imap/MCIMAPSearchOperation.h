@@ -46,6 +46,7 @@ namespace mailcore {
         IndexSet * mUids;
         
     };
+    
 }
 
 #endif

@@ -16,9 +16,8 @@ namespace mailcore {
     
     class Data;
     class String;
-
+    
     class JSONParser : public Object {
-        
     public:
         JSONParser();
         virtual ~JSONParser();

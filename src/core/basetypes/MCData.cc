@@ -243,7 +243,7 @@ static bool isHintCharsetValid(String * hintCharset)
 
 String * Data::stringWithDetectedCharset(String * hintCharset, bool isHTML)
 {
-	String * result;
+    String * result;
     String * charset;
     
     if (isHintCharsetValid(hintCharset)) {
@@ -307,7 +307,7 @@ String * Data::stringWithDetectedCharset(String * hintCharset, bool isHTML)
         result = MCSTR("");
     }
     
-	return result;
+    return result;
 }
 
 String * Data::charsetWithFilteredHTMLWithoutHint(bool filterHTML)

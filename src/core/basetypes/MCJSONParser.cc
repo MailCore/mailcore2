@@ -68,31 +68,31 @@ Object * JSONParser::result()
 bool JSONParser::parse()
 {
     skipBlank();
-	if (parseDictionary())
-		return true;
-	if (parseArray())
-		return true;
+    if (parseDictionary())
+        return true;
+    if (parseArray())
+        return true;
     if (parseBoolean())
         return true;
     if (parseNull())
         return true;
-	if (parseFloat())
-		return true;
-	if (parseString())
-		return true;
-	
-	return false;
+    if (parseFloat())
+        return true;
+    if (parseString())
+        return true;
+    
+    return false;
 }
 
 bool JSONParser::isEndOfExpression()
 {
-	if (mPosition == mContent->length())
-		return true;
-	
-	if (mContent->characterAtIndex(mPosition) == ';')
-		return true;
-	
-	return false;
+    if (mPosition == mContent->length())
+        return true;
+    
+    if (mContent->characterAtIndex(mPosition) == ';')
+        return true;
+    
+    return false;
 }
 
 void JSONParser::skipBlank()
@@ -120,98 +120,98 @@ unsigned int JSONParser::skipBlank(unsigned int position)
 
 bool JSONParser::parseDictionary()
 {
-	int position;
-	HashMap * dict;
-	
-	position = mPosition;
-	
-	if (!scanCharacter('{', position)) {
-		return false;
-	}
-	position ++;
+    int position;
+    HashMap * dict;
+    
+    position = mPosition;
+    
+    if (!scanCharacter('{', position)) {
+        return false;
+    }
+    position ++;
     position = skipBlank(position);
     
-	dict = HashMap::hashMap();
-	
-	if (scanCharacter('}', position)) {
-		position ++;
-	}
-	else {
-		while (1) {
-			JSONParser * keyParser;
-			JSONParser * valueParser;
-			String * key;
-			Object * value;
-			
-			if (position >= mContent->length())
-				return false;
-			
-			key = NULL;
-			keyParser = new JSONParser();
+    dict = HashMap::hashMap();
+    
+    if (scanCharacter('}', position)) {
+        position ++;
+    }
+    else {
+        while (1) {
+            JSONParser * keyParser;
+            JSONParser * valueParser;
+            String * key;
+            Object * value;
+            
+            if (position >= mContent->length())
+                return false;
+            
+            key = NULL;
+            keyParser = new JSONParser();
             keyParser->autorelease();
             keyParser->setContent(mContent);
             keyParser->setPosition(position);
-			if (!keyParser->parse())
-				return false;
-			
-			if (!keyParser->result()->className()->isEqual(MCSTR("mailcore::String")))
-				return false;
-			
-			key = (String *) keyParser->result();
-			position = keyParser->position();
-			
-            position = skipBlank(position);
+            if (!keyParser->parse())
+                return false;
             
-			if (!scanCharacter(':', position))
-				return false;
-			position ++;
+            if (!keyParser->result()->className()->isEqual(MCSTR("mailcore::String")))
+                return false;
+            
+            key = (String *) keyParser->result();
+            position = keyParser->position();
             
             position = skipBlank(position);
-			
-			value = NULL;
-			valueParser = new JSONParser();
+            
+            if (!scanCharacter(':', position))
+                return false;
+            position ++;
+            
+            position = skipBlank(position);
+            
+            value = NULL;
+            valueParser = new JSONParser();
             valueParser->autorelease();
             valueParser->setContent(mContent);
             valueParser->setPosition(position);
-			if (!valueParser->parse())
-				return false;
-			
-			value = valueParser->result();
-			position = valueParser->position();
-			
+            if (!valueParser->parse())
+                return false;
+            
+            value = valueParser->result();
+            position = valueParser->position();
+            
             dict->setObjectForKey(key, value);
-			
-			position = skipBlank(position);
-			
-			if (scanCharacter(',', position)) {
-				position ++;
+            
+            position = skipBlank(position);
+            
+            if (scanCharacter(',', position)) {
+                position ++;
                 position = skipBlank(position);
-			}
-			else if (scanCharacter('}', position)) {
-				position ++;
-				break;
-			}
-			else {
-				return false;
-			}
-		}
-	}
-	
-	mResult = dict->retain();
-	mPosition = position;
-	
-	return true;
+            }
+            else if (scanCharacter('}', position)) {
+                position ++;
+                break;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+    
+    mResult = dict->retain();
+    mPosition = position;
+    
+    return true;
 }
 
 bool JSONParser::scanCharacter(UChar ch, unsigned int position)
 {
-	if (position >= mContent->length())
-		return false;
-	
-	if (mContent->characterAtIndex(position) != ch)
-		return false;
-	
-	return true;
+    if (position >= mContent->length())
+        return false;
+    
+    if (mContent->characterAtIndex(position) != ch)
+        return false;
+    
+    return true;
 }
 
 bool JSONParser::scanKeyword(String * str, unsigned int position)
@@ -225,83 +225,83 @@ bool JSONParser::scanKeyword(String * str, unsigned int position)
     pool = new AutoreleasePool();
     
     result = false;
-	if (mContent->substringWithRange(RangeMake(position, str->length()))->isEqual(str))
-		result = true;
+    if (mContent->substringWithRange(RangeMake(position, str->length()))->isEqual(str))
+        result = true;
     pool->release();
     
-	return result;
+    return result;
 }
 
 bool JSONParser::parseArray()
 {
-	int position;
-	Array * array;
-	
-	position = mPosition;
-	
-	if (!scanCharacter('[', position)) {
-		return false;
-	}
-	position ++;
+    int position;
+    Array * array;
+    
+    position = mPosition;
+    
+    if (!scanCharacter('[', position)) {
+        return false;
+    }
+    position ++;
     position = skipBlank(position);
-	
-	array = Array::array();
-	
-	if (scanCharacter(']', position)) {
-		position ++;
-	}
-	else {
-		while (1) {
-			JSONParser * valueParser;
-			Object * value;
-			
-			if (position >= mContent->length())
-				return false;
-			
-			value = NULL;
-			valueParser = new JSONParser();
+    
+    array = Array::array();
+    
+    if (scanCharacter(']', position)) {
+        position ++;
+    }
+    else {
+        while (1) {
+            JSONParser * valueParser;
+            Object * value;
+            
+            if (position >= mContent->length())
+                return false;
+            
+            value = NULL;
+            valueParser = new JSONParser();
             valueParser->setContent(mContent);
             valueParser->setPosition(position);
             valueParser->autorelease();
-			if (!valueParser->parse())
-				return false;
-			
-			value = valueParser->result();
-			
-			position = valueParser->position();
-			array->addObject(value);
-			
-			position = skipBlank(position);
-			
-			if (scanCharacter(',', position)) {
-				position ++;
+            if (!valueParser->parse())
+                return false;
+            
+            value = valueParser->result();
+            
+            position = valueParser->position();
+            array->addObject(value);
+            
+            position = skipBlank(position);
+            
+            if (scanCharacter(',', position)) {
+                position ++;
                 position = skipBlank(position);
-			}
-			else if (scanCharacter(']', position)) {
-				position ++;
-				break;
-			}
-			else {
-				return false;
-			}
-		}
-	}
-	
-	mResult = array->retain();
-	mPosition = position;
-	
-	return true;
+            }
+            else if (scanCharacter(']', position)) {
+                position ++;
+                break;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+    
+    mResult = array->retain();
+    mPosition = position;
+    
+    return true;
 }
 
 static inline int hexToInt(UChar inCharacter)
 {
-	if (inCharacter >= '0' && inCharacter <= '9') {
+    if (inCharacter >= '0' && inCharacter <= '9') {
         return inCharacter - '0';
     }
-	else if (inCharacter >= 'a' && inCharacter <= 'f') {
+    else if (inCharacter >= 'a' && inCharacter <= 'f') {
         return inCharacter - 'a' + 10;
     }
-	else if (inCharacter >= 'A' && inCharacter <= 'F') {
+    else if (inCharacter >= 'A' && inCharacter <= 'F') {
         return inCharacter - 'A' + 10;
     }
     else {
@@ -311,251 +311,251 @@ static inline int hexToInt(UChar inCharacter)
 
 bool JSONParser::parseString()
 {
-	unsigned int position;
-	String * str;
+    unsigned int position;
+    String * str;
     bool doubleQuote = false;
     bool startString;
     bool endOfString;
-	
-	position = mPosition;
-	
-	startString = false;
-	if (scanCharacter('\"', position)) {
-		doubleQuote = true;
-		startString = true;
-	}
-	else if (scanCharacter('\'', position)) {
-		startString = true;
-	}
-	
-	if (!startString)
-		return false;
-	
-	position ++;
-	
-	str = String::string();
-	
+    
+    position = mPosition;
+    
+    startString = false;
+    if (scanCharacter('\"', position)) {
+        doubleQuote = true;
+        startString = true;
+    }
+    else if (scanCharacter('\'', position)) {
+        startString = true;
+    }
+    
+    if (!startString)
+        return false;
+    
+    position ++;
+    
+    str = String::string();
+    
     endOfString = false;
-	while (1) {
-		UChar ch;
-		
-		if (position >= mContent->length())
-			return false;
-		
-		ch = mContent->characterAtIndex(position);
-		switch (ch) {
-			case '\\':
-			{
-				position ++;
-				
-				if (position >= mContent->length())
-					return false;
-				
-				ch = mContent->characterAtIndex(position);
-				switch (ch) {
-					case '0':
-					case '1':
-					case '2':
-					case '3':
-					case '4':
-					case '5':
-					case '6':
-					case '7': {
-						UChar char_value;
-						unsigned int count;
+    while (1) {
+        UChar ch;
+        
+        if (position >= mContent->length())
+            return false;
+        
+        ch = mContent->characterAtIndex(position);
+        switch (ch) {
+            case '\\':
+            {
+                position ++;
+                
+                if (position >= mContent->length())
+                    return false;
+                
+                ch = mContent->characterAtIndex(position);
+                switch (ch) {
+                    case '0':
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7': {
+                        UChar char_value;
+                        unsigned int count;
                         
                         count = 0;
-						char_value = 0;
-						while ((ch >= '0') && (ch <= '7')) {
-							int value;
-							
-							value = hexToInt(ch);
-							if (value == -1)
-								break;
-							
-							char_value = char_value * 8 + value;
+                        char_value = 0;
+                        while ((ch >= '0') && (ch <= '7')) {
+                            int value;
+                            
+                            value = hexToInt(ch);
+                            if (value == -1)
+                                break;
+                            
+                            char_value = char_value * 8 + value;
                             count ++;
-							position ++;
+                            position ++;
                             if (count >= 3)
                                 break;
-							if (position >= mContent->length())
-								break;
-							ch = mContent->characterAtIndex(position);
-						}
+                            if (position >= mContent->length())
+                                break;
+                            ch = mContent->characterAtIndex(position);
+                        }
                         UChar characters[2];
                         characters[0] = char_value;
                         characters[1] = 0;
                         str->appendCharactersLength(characters, 1);
-						break;
-					}
-					case 'b':
-						str->appendString(MCSTR("\b"));
-						position ++;
-						break;
-					case 't':
-						str->appendString(MCSTR("\t"));
-						position ++;
-						break;
-					case 'n':
-						str->appendString(MCSTR("\n"));
-						position ++;
-						break;
-					case 'r':
-						str->appendString(MCSTR("\r"));
-						position ++;
-						break;
-					case 'f':
-						str->appendString(MCSTR("\f"));
-						position ++;
-						break;
-					case 'v':
-						str->appendString(MCSTR("\v"));
-						position ++;
-						break;
-					case '\"':
-						str->appendString(MCSTR("\""));
-						position ++;
-						break;
-					case '\'':
-						str->appendString(MCSTR("\'"));
-						position ++;
-						break;
-					case '\\':
-						str->appendString(MCSTR("\\"));
-						position ++;
-						break;
-					case '/':
-						str->appendString(MCSTR("/"));
-						position ++;
-						break;
-					case 'u': {
-						unsigned int i;
-						UChar char_value;
-						
-						position ++;
-						char_value = 0;
-						for(i = 0 ; i < 4 ; i ++) {
-							int value;
-							
-							if (position >= mContent->length())
-								return false;
-							ch = mContent->characterAtIndex(position);
-							value = hexToInt(ch);
-							if (value == -1)
-								break;
-							
-							char_value = char_value * 16 + value;
-							position ++;
-						}
-						
+                        break;
+                    }
+                    case 'b':
+                        str->appendString(MCSTR("\b"));
+                        position ++;
+                        break;
+                    case 't':
+                        str->appendString(MCSTR("\t"));
+                        position ++;
+                        break;
+                    case 'n':
+                        str->appendString(MCSTR("\n"));
+                        position ++;
+                        break;
+                    case 'r':
+                        str->appendString(MCSTR("\r"));
+                        position ++;
+                        break;
+                    case 'f':
+                        str->appendString(MCSTR("\f"));
+                        position ++;
+                        break;
+                    case 'v':
+                        str->appendString(MCSTR("\v"));
+                        position ++;
+                        break;
+                    case '\"':
+                        str->appendString(MCSTR("\""));
+                        position ++;
+                        break;
+                    case '\'':
+                        str->appendString(MCSTR("\'"));
+                        position ++;
+                        break;
+                    case '\\':
+                        str->appendString(MCSTR("\\"));
+                        position ++;
+                        break;
+                    case '/':
+                        str->appendString(MCSTR("/"));
+                        position ++;
+                        break;
+                    case 'u': {
+                        unsigned int i;
+                        UChar char_value;
+                        
+                        position ++;
+                        char_value = 0;
+                        for(i = 0 ; i < 4 ; i ++) {
+                            int value;
+                            
+                            if (position >= mContent->length())
+                                return false;
+                            ch = mContent->characterAtIndex(position);
+                            value = hexToInt(ch);
+                            if (value == -1)
+                                break;
+                            
+                            char_value = char_value * 16 + value;
+                            position ++;
+                        }
+                        
                         UChar characters[2];
                         characters[0] = char_value;
                         characters[1] = 0;
                         str->appendCharactersLength(characters, 1);
-						
-						break;
-					}
-					case 'x': {
-						unsigned int i;
-						UChar char_value;
-						
-						position ++;
-						char_value = 0;
-						for(i = 0 ; i < 2 ; i ++) {
-							int value;
-							
-							if (position >= mContent->length())
-								return false;
-							ch = mContent->characterAtIndex(position);
-							value = hexToInt(ch);
-							if (value == -1)
-								break;
-							
-							char_value = char_value * 16 + value;
-							position ++;
-						}
-						
+                        
+                        break;
+                    }
+                    case 'x': {
+                        unsigned int i;
+                        UChar char_value;
+                        
+                        position ++;
+                        char_value = 0;
+                        for(i = 0 ; i < 2 ; i ++) {
+                            int value;
+                            
+                            if (position >= mContent->length())
+                                return false;
+                            ch = mContent->characterAtIndex(position);
+                            value = hexToInt(ch);
+                            if (value == -1)
+                                break;
+                            
+                            char_value = char_value * 16 + value;
+                            position ++;
+                        }
+                        
                         UChar characters[2];
                         characters[0] = char_value;
                         characters[1] = 0;
                         str->appendCharactersLength(characters, 1);
-						
-						break;
-					}
-					default: {
+                        
+                        break;
+                    }
+                    default: {
                         UChar characters[3];
                         characters[0] = '\\';
                         characters[1] = ch;
                         characters[2] = 0;
                         str->appendCharactersLength(characters, 2);
                         
-						position ++;
-						break;
+                        position ++;
+                        break;
                     }
-				}
-				break;
-			}
-				
-			case '\'':
-				position ++;
-				if (!doubleQuote)
-					endOfString = true;
+                }
+                break;
+            }
+                
+            case '\'':
+                position ++;
+                if (!doubleQuote)
+                    endOfString = true;
                 else
                     str->appendString(MCSTR("\'"));
-				break;
-			case '\"':
-				position ++;
-				if (doubleQuote)
-					endOfString = true;
+                break;
+            case '\"':
+                position ++;
+                if (doubleQuote)
+                    endOfString = true;
                 else
                     str->appendString(MCSTR("\""));
-				break;
-			default: {
-				position ++;
+                break;
+            default: {
+                position ++;
                 UChar characters[2];
                 characters[0] = ch;
                 characters[1] = 0;
                 str->appendCharactersLength(characters, 1);
-				break;
+                break;
             }
-		}
-		
-		if (endOfString)
-			break;
-	}
-	
-	mResult = str->retain();
-	mPosition = position;
+        }
+        
+        if (endOfString)
+            break;
+    }
+    
+    mResult = str->retain();
+    mPosition = position;
     
     return true;
 }
 
 bool JSONParser::parseBoolean()
 {
-	if (scanKeyword(MCSTR("true"), mPosition)) {
-		mPosition += MCSTR("true")->length();
-		mResult = Value::valueWithBoolValue(true)->retain();;
-		return true;
-	}
-	
-	if (scanKeyword(MCSTR("false"), mPosition)) {
-		mPosition += MCSTR("false")->length();
-		mResult = Value::valueWithBoolValue(false)->retain();;
-		return true;
-	}
-	
-	return false;
+    if (scanKeyword(MCSTR("true"), mPosition)) {
+        mPosition += MCSTR("true")->length();
+        mResult = Value::valueWithBoolValue(true)->retain();;
+        return true;
+    }
+    
+    if (scanKeyword(MCSTR("false"), mPosition)) {
+        mPosition += MCSTR("false")->length();
+        mResult = Value::valueWithBoolValue(false)->retain();;
+        return true;
+    }
+    
+    return false;
 }
 
 bool JSONParser::parseNull()
 {
-	if (scanKeyword(MCSTR("null"), mPosition)) {
-		mPosition += MCSTR("null")->length();
-		mResult = Null::null()->retain();
-		return true;
-	}
-	
-	return false;
+    if (scanKeyword(MCSTR("null"), mPosition)) {
+        mPosition += MCSTR("null")->length();
+        mResult = Null::null()->retain();
+        return true;
+    }
+    
+    return false;
 }
 
 bool JSONParser::parseFloat()
@@ -596,31 +596,31 @@ bool JSONParser::parseFloat()
 
 Object * JSONParser::objectFromData(Data * data)
 {
-	String * str = NULL;
-	Object * result;
-	
-	str = String::stringWithData(data, "utf-8");
-	if (str == NULL)
-		return NULL;
-	
-	result = objectFromString(str);
-	
-	return result;
+    String * str = NULL;
+    Object * result;
+    
+    str = String::stringWithData(data, "utf-8");
+    if (str == NULL)
+        return NULL;
+    
+    result = objectFromString(str);
+    
+    return result;
 }
 
 Object * JSONParser::objectFromString(String * str)
 {
-	Object * result;
-	JSONParser * parser;
-	
-	parser = new JSONParser();
+    Object * result;
+    JSONParser * parser;
+    
+    parser = new JSONParser();
     parser->setContent(str);
-	parser->parse();
-	result = parser->result();
+    parser->parse();
+    result = parser->result();
     result->retain()->autorelease();
     parser->release();
-	
-	return result;
+    
+    return result;
 }
 
 Data * JSONParser::dataFromObject(Object * object)
@@ -697,16 +697,16 @@ String * JSONParser::JSStringFromString(String * str)
                 case ';':
                 case '|':
                 case '~':
-				case '\'': {
+                case '\'': {
                     UChar characters[2];
                     characters[0] = ch;
                     characters[1] = 0;
                     result->appendCharactersLength(characters, 1);
                     break;
                 }
-				case '"':
-				case '/':
-				case '\\': {
+                case '"':
+                case '/':
+                case '\\': {
                     UChar characters[3];
                     characters[0] = '\\';
                     characters[1] = ch;

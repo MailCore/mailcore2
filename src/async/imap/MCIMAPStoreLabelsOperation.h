@@ -39,6 +39,7 @@ namespace mailcore {
         Array * /* String */ mLabels;
         
     };
+    
 }
 
 #endif

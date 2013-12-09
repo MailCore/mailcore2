@@ -260,5 +260,5 @@ bool HTMLRendererTemplateCallback::canPreviewPart(AbstractPart * part)
 
 bool HTMLRendererTemplateCallback::shouldShowPart(AbstractPart * part)
 {
-	return true;
+    return true;
 }

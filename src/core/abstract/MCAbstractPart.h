@@ -8,9 +8,9 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-
+    
     class AbstractMessage;
-
+    
     class AbstractPart : public Object {
     public:
         AbstractPart();
@@ -36,10 +36,10 @@ namespace mailcore {
         
         virtual String * contentLocation();
         virtual void setContentLocation(String * contentLocation);
-
+        
         virtual String * contentDescription();
         virtual void setContentDescription(String * contentDescription);
-
+        
         virtual bool isInlineAttachment();
         virtual void setInlineAttachment(bool inlineAttachment);
         

@@ -25,7 +25,7 @@ String * HTMLCleaner::cleanHTML(String * input)
     TidyBuffer errbuf;
     TidyBuffer docbuf;
     int rc;
-
+    
     TidyDoc tdoc = tidyCreate();
     tidyBufInit(&output);
     tidyBufInit(&errbuf);

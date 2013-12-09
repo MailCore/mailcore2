@@ -8,14 +8,14 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-	
+    
     class MessageBuilder;
     class SMTPOperation;
     class SMTPSession;
     class Address;
     class SMTPOperationQueueCallback;
     class SMTPConnectionLogger;
-
+    
     class SMTPAsyncSession : public Object {
     public:
         SMTPAsyncSession();
@@ -67,7 +67,7 @@ namespace mailcore {
         virtual void tryAutomaticDisconnect();
         virtual void logConnection(ConnectionLogType logType, Data * buffer);
         
-        private:
+    private:
         SMTPSession * mSession;
         OperationQueue * mQueue;
         SMTPOperationQueueCallback * mQueueCallback;

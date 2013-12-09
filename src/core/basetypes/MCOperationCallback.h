@@ -5,14 +5,14 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-	
-	class Operation;
-	
-	class OperationCallback {
-	public:
-		virtual void operationFinished(Operation * op) {}
-	};
-	
+    
+    class Operation;
+    
+    class OperationCallback {
+    public:
+        virtual void operationFinished(Operation * op) {}
+    };
+    
 }
 
 #endif

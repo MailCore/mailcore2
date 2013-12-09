@@ -31,6 +31,7 @@ namespace mailcore {
         HashMap * mNamespaces;
         
     };
+    
 }
 
 #endif

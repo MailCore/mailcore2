@@ -47,9 +47,9 @@ typedef void (^CompletionType)(NSError *error, MCOIndexSet * destUids);
 
 - (void) cancel
 {
-  [_completionBlock release];
-  _completionBlock = nil;
-  [super cancel];
+    [_completionBlock release];
+    _completionBlock = nil;
+    [super cancel];
 }
 
 - (void) operationCompleted

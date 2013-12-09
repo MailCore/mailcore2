@@ -12,7 +12,7 @@ namespace mailcore {
     class Address;
     class SMTPProgressCallback;
     class MessageBuilder;
-
+    
     class SMTPSession : public Object {
     public:
         SMTPSession();
@@ -20,27 +20,27 @@ namespace mailcore {
         
         virtual void setHostname(String * hostname);
         virtual String * hostname();
-
+        
         virtual void setPort(unsigned int port);
         virtual unsigned int port();
-
+        
         virtual void setUsername(String * username);
         virtual String * username();
-
+        
         virtual void setPassword(String * password);
         virtual String * password();
-
+        
         // To authenticate using OAuth2, username and oauth2token should be set.
         // auth type to use is AuthTypeOAuth2.
         virtual void setOAuth2Token(String * token);
         virtual String * OAuth2Token();
-
+        
         virtual void setAuthType(AuthType authType);
         virtual AuthType authType();
-
+        
         virtual void setConnectionType(ConnectionType connectionType);
         virtual ConnectionType connectionType();
-
+        
         virtual void setTimeout(time_t timeout);
         virtual time_t timeout();
         

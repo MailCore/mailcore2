@@ -48,18 +48,18 @@ Address * Address::addressWithMailbox(String * mailbox)
 Address * Address::addressWithIMFMailbox(struct mailimf_mailbox * mailbox)
 {
     Address * address;
-	
+    
     address = new Address();
-	if (mailbox->mb_display_name != NULL) {
+    if (mailbox->mb_display_name != NULL) {
         address->setDisplayName(String::stringByDecodingMIMEHeaderValue(mailbox->mb_display_name));
-	}
-	if (mailbox->mb_addr_spec != NULL) {
-		address->setMailbox(String::stringWithUTF8Characters(mailbox->mb_addr_spec));
-	}
+    }
+    if (mailbox->mb_addr_spec != NULL) {
+        address->setMailbox(String::stringWithUTF8Characters(mailbox->mb_addr_spec));
+    }
     if (address->mailbox() == NULL) {
         address->setMailbox(String::string());
     }
-	
+    
     return (Address *) address->autorelease();
 }
 
@@ -129,18 +129,18 @@ Address * Address::addressWithRFC822String(String * RFC822String)
 Address * Address::addressWithNonEncodedIMFMailbox(struct mailimf_mailbox * mailbox)
 {
     Address * address;
-	
+    
     address = new Address();
-	if (mailbox->mb_display_name != NULL) {
+    if (mailbox->mb_display_name != NULL) {
         address->setDisplayName(String::stringWithUTF8Characters(mailbox->mb_display_name));
-	}
-	if (mailbox->mb_addr_spec != NULL) {
-		address->setMailbox(String::stringWithUTF8Characters(mailbox->mb_addr_spec));
-	}
+    }
+    if (mailbox->mb_addr_spec != NULL) {
+        address->setMailbox(String::stringWithUTF8Characters(mailbox->mb_addr_spec));
+    }
     if (address->mailbox() == NULL) {
         address->setMailbox(String::string());
     }
-	
+    
     return (Address *) address->autorelease();
 }
 
@@ -166,44 +166,44 @@ Address * Address::addressWithNonEncodedRFC822String(String * nonEncodedRFC822St
 
 Array * Address::addressesWithRFC822String(String * string)
 {
-	const char * utf8String;
-	size_t currentIndex;
-	struct mailimf_address_list * addr_list;
-	Array * result;
-	int r;
-	
+    const char * utf8String;
+    size_t currentIndex;
+    struct mailimf_address_list * addr_list;
+    Array * result;
+    int r;
+    
     utf8String = string->UTF8Characters();
     currentIndex = 0;
-	
-	r = mailimf_address_list_parse(utf8String, strlen(utf8String), &currentIndex, &addr_list);
+    
+    r = mailimf_address_list_parse(utf8String, strlen(utf8String), &currentIndex, &addr_list);
     if (r != MAILIMF_NO_ERROR)
         return NULL;
-	
-	result = lep_address_list_from_lep_addr(addr_list, 1);
-	mailimf_address_list_free(addr_list);
-	
-	return result;
+    
+    result = lep_address_list_from_lep_addr(addr_list, 1);
+    mailimf_address_list_free(addr_list);
+    
+    return result;
 }
 
 Array * Address::addressesWithNonEncodedRFC822String(String * string)
 {
-	const char * utf8String;
-	size_t currentIndex;
-	struct mailimf_address_list * addr_list;
-	Array * result;
-	int r;
-	
+    const char * utf8String;
+    size_t currentIndex;
+    struct mailimf_address_list * addr_list;
+    Array * result;
+    int r;
+    
     utf8String = string->UTF8Characters();
     currentIndex = 0;
-	
-	r = mailimf_address_list_parse(utf8String, strlen(utf8String), &currentIndex, &addr_list);
+    
+    r = mailimf_address_list_parse(utf8String, strlen(utf8String), &currentIndex, &addr_list);
     if (r != MAILIMF_NO_ERROR)
         return NULL;
-	
-	result = lep_address_list_from_lep_addr(addr_list, 0);
-	mailimf_address_list_free(addr_list);
-	
-	return result;
+    
+    result = lep_address_list_from_lep_addr(addr_list, 0);
+    mailimf_address_list_free(addr_list);
+    
+    return result;
 }
 
 String * Address::RFC822StringForAddresses(Array * addresses)
@@ -328,36 +328,36 @@ String * Address::mailbox()
 
 struct mailimf_address * Address::createIMFAddress()
 {
-	struct mailimf_mailbox * mailbox;
-	struct mailimf_address * result;
-	
+    struct mailimf_mailbox * mailbox;
+    struct mailimf_address * result;
+    
     mailbox = createIMFMailbox();
-	result = mailimf_address_new(MAILIMF_ADDRESS_MAILBOX, mailbox, NULL);
-	
-	return result;
+    result = mailimf_address_new(MAILIMF_ADDRESS_MAILBOX, mailbox, NULL);
+    
+    return result;
 }
 
 struct mailimf_mailbox * Address::createIMFMailbox()
 {
-	struct mailimf_mailbox * result;
-	char * display_name;
-	char * addr_spec;
-	
-	display_name = NULL;
-	if (displayName() != NULL) {
+    struct mailimf_mailbox * result;
+    char * display_name;
+    char * addr_spec;
+    
+    display_name = NULL;
+    if (displayName() != NULL) {
         if (displayName()->length() > 0) {
             Data * data;
-
+            
             data = displayName()->encodedAddressDisplayNameValue();
             if (data->bytes() != NULL) {
                 display_name = strdup(data->bytes());
             }
         }
     }
-	addr_spec = strdup(mailbox()->UTF8Characters());
-	result = mailimf_mailbox_new(display_name, addr_spec);
-	
-	return result;
+    addr_spec = strdup(mailbox()->UTF8Characters());
+    result = mailimf_mailbox_new(display_name, addr_spec);
+    
+    return result;
 }
 
 String * Address::RFC822String()
@@ -370,7 +370,7 @@ String * Address::RFC822String()
     String * result;
     
     mb = createIMFMailbox();
-
+    
     list = clist_new();
     clist_append(list, mb);
     mb_list = mailimf_mailbox_list_new(list);
@@ -395,11 +395,11 @@ String * Address::nonEncodedRFC822String()
     struct mailimf_mailbox_list * mb_list;
     clist * list;
     String * result;
-	char * display_name;
-	char * addr_spec;
-	
-	display_name = NULL;
-	if (displayName() != NULL) {
+    char * display_name;
+    char * addr_spec;
+    
+    display_name = NULL;
+    if (displayName() != NULL) {
         if (displayName()->length() > 0) {
             display_name = strdup(displayName()->UTF8Characters());
         }
@@ -430,68 +430,68 @@ String * Address::nonEncodedRFC822String()
 
 static Array * lep_address_list_from_lep_mailbox(struct mailimf_mailbox_list * mb_list, int encoded)
 {
-	Array * result;
-	clistiter * cur;
-	
-	result = Array::array();
-	for(cur = clist_begin(mb_list->mb_list) ; cur != NULL ; cur = clist_next(cur)) {
-		struct mailimf_mailbox * mb;
-		Address * address;
-		
-		mb = (mailimf_mailbox *) clist_content(cur);
-		if (encoded) {
-			address = Address::addressWithIMFMailbox(mb);
-		}
-		else {
-			address = Address::addressWithNonEncodedIMFMailbox(mb);
-		}
-		result->addObject(address);
-	}
-	
-	return result;
+    Array * result;
+    clistiter * cur;
+    
+    result = Array::array();
+    for(cur = clist_begin(mb_list->mb_list) ; cur != NULL ; cur = clist_next(cur)) {
+        struct mailimf_mailbox * mb;
+        Address * address;
+        
+        mb = (mailimf_mailbox *) clist_content(cur);
+        if (encoded) {
+            address = Address::addressWithIMFMailbox(mb);
+        }
+        else {
+            address = Address::addressWithNonEncodedIMFMailbox(mb);
+        }
+        result->addObject(address);
+    }
+    
+    return result;
 }
 
 static Array * lep_address_list_from_lep_addr(struct mailimf_address_list * addr_list, int encoded)
 {
-	Array * result;
-	clistiter * cur;
-	
-	result = Array::array();
-	
-	for(cur = clist_begin(addr_list->ad_list) ; cur != NULL ;
-		cur = clist_next(cur)) {
-		struct mailimf_address * addr;
-		
-		addr =  (mailimf_address *) clist_content(cur);
-		switch (addr->ad_type) {
-			case MAILIMF_ADDRESS_MAILBOX:
-			{
-				Address * address;
-				
-				if (encoded) {
-					address = Address::addressWithIMFMailbox(addr->ad_data.ad_mailbox);
-				}
-				else {
-					address = Address::addressWithNonEncodedIMFMailbox(addr->ad_data.ad_mailbox);
-				}
-				result->addObject(address);
-				break;
-			}
-				
-			case MAILIMF_ADDRESS_GROUP:
-			{
-				if (addr->ad_data.ad_group->grp_mb_list != NULL) {
-					Array * subArray;
-					
-					subArray = lep_address_list_from_lep_mailbox(addr->ad_data.ad_group->grp_mb_list, encoded);
-					result->addObjectsFromArray(subArray);
-				}
-				break;
-			}
-		}
-	}
-	
-	return result;
+    Array * result;
+    clistiter * cur;
+    
+    result = Array::array();
+    
+    for(cur = clist_begin(addr_list->ad_list) ; cur != NULL ;
+        cur = clist_next(cur)) {
+        struct mailimf_address * addr;
+        
+        addr =  (mailimf_address *) clist_content(cur);
+        switch (addr->ad_type) {
+            case MAILIMF_ADDRESS_MAILBOX:
+            {
+                Address * address;
+                
+                if (encoded) {
+                    address = Address::addressWithIMFMailbox(addr->ad_data.ad_mailbox);
+                }
+                else {
+                    address = Address::addressWithNonEncodedIMFMailbox(addr->ad_data.ad_mailbox);
+                }
+                result->addObject(address);
+                break;
+            }
+                
+            case MAILIMF_ADDRESS_GROUP:
+            {
+                if (addr->ad_data.ad_group->grp_mb_list != NULL) {
+                    Array * subArray;
+                    
+                    subArray = lep_address_list_from_lep_mailbox(addr->ad_data.ad_group->grp_mb_list, encoded);
+                    result->addObjectsFromArray(subArray);
+                }
+                break;
+            }
+        }
+    }
+    
+    return result;
 }
 
 static void * createObject()
