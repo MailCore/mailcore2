@@ -8,24 +8,24 @@
 #define MC_SAFE_COPY(o) ((o) != NULL ? (o)->copy() : NULL)
 
 #define MC_SAFE_RELEASE(o) \
-	do { \
-		if ((o) != NULL) { \
-			(o)->release(); \
-			(o) = NULL; \
-		} \
-	} while (0)
+    do { \
+        if ((o) != NULL) { \
+            (o)->release(); \
+            (o) = NULL; \
+        } \
+    } while (0)
 
 #define MC_SAFE_REPLACE_RETAIN(type, mField, value) \
-	do { \
-		MC_SAFE_RELEASE(mField); \
-		mField = (type *) MC_SAFE_RETAIN(value); \
-	} while (0)
+    do { \
+        MC_SAFE_RELEASE(mField); \
+        mField = (type *) MC_SAFE_RETAIN(value); \
+    } while (0)
 
 #define MC_SAFE_REPLACE_COPY(type, mField, value) \
-	do { \
-		MC_SAFE_RELEASE(mField); \
-		mField = (type *) MC_SAFE_COPY(value); \
-	} while (0)
+    do { \
+        MC_SAFE_RELEASE(mField); \
+        mField = (type *) MC_SAFE_COPY(value); \
+    } while (0)
 
 #define MCSTR(str) mailcore::String::uniquedStringWithUTF8Characters("" str "")
 

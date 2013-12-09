@@ -50,9 +50,9 @@ typedef void (^CompletionType)(NSError *error, uint32_t createdUID);
 
 - (void) cancel
 {
-  [_completionBlock release];
-  _completionBlock = nil;
-  [super cancel];
+    [_completionBlock release];
+    _completionBlock = nil;
+    [super cancel];
 }
 
 - (void) operationCompleted

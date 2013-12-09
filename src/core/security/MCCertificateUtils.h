@@ -13,9 +13,9 @@
 #include <MailCore/MCString.h>
 
 namespace mailcore {
-
+    
     bool checkCertificate(mailstream * stream, String * hostname);
-
+    
 }
 
 #endif

@@ -82,7 +82,7 @@ void SMTPOperation::bodyProgressOnMainThread(void * ctx)
         release();
         return;
     }
-
+    
     struct progressContext * context = (struct progressContext *) ctx;
     if (mSmtpCallback != NULL) {
         mSmtpCallback->bodyProgress(this, context->current, context->maximum);

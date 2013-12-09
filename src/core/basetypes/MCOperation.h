@@ -12,9 +12,9 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-
+    
     class OperationCallback;
-
+    
     class Operation : public Object {
     public:
         Operation();
@@ -33,14 +33,14 @@ namespace mailcore {
         
         // Will be called on main thread.
         virtual void afterMain();
-
+        
         virtual void start();
         
 #ifdef __APPLE__
         virtual void setCallbackDispatchQueue(dispatch_queue_t callbackDispatchQueue);
         virtual dispatch_queue_t callbackDispatchQueue();
 #endif
-
+        
     private:
         OperationCallback * mCallback;
         bool mCancelled;
@@ -48,7 +48,7 @@ namespace mailcore {
 #ifdef __APPLE__
         dispatch_queue_t mCallbackDispatchQueue;
 #endif
-
+        
     };
     
 }

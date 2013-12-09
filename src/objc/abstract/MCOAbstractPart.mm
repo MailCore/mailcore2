@@ -85,6 +85,6 @@ MCO_OBJC_SYNTHESIZE_BOOL(setInlineAttachment, isInlineAttachment)
 
 - (NSString *) decodedStringForData:(NSData *)data
 {
-	return [NSString mco_stringWithMCString:MCO_NATIVE_INSTANCE->decodedStringForData([data mco_mcData])];
+    return [NSString mco_stringWithMCString:MCO_NATIVE_INSTANCE->decodedStringForData([data mco_mcData])];
 }
 @end

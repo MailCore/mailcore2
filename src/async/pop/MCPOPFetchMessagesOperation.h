@@ -15,6 +15,7 @@
 #ifdef __cplusplus
 
 namespace mailcore {
+    
     class POPFetchMessagesOperation : public POPOperation {
     public:
         POPFetchMessagesOperation();
@@ -28,6 +29,7 @@ namespace mailcore {
     private:
         Array * /* POPMessageInfo */ mMessages;
     };
+    
 }
 
 #endif

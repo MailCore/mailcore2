@@ -20,15 +20,15 @@ enum {
 
 void POPSession::init()
 {
-	mHostname = NULL;
-	mPort = 0;
-	mUsername = NULL;
-	mPassword = NULL;
-	mAuthType = AuthTypeSASLNone;
-	mConnectionType = ConnectionTypeClear;
+    mHostname = NULL;
+    mPort = 0;
+    mUsername = NULL;
+    mPassword = NULL;
+    mAuthType = AuthTypeSASLNone;
+    mConnectionType = ConnectionTypeClear;
     mCheckCertificateEnabled = true;
     mTimeout = 30;
-	
+    
     mPop = NULL;
     mCapabilities = POPCapabilityNone;
     mProgressCallback = NULL;
@@ -171,21 +171,21 @@ static void logger(mailpop3 * pop3, int log_type, const char * buffer, size_t si
 
 void POPSession::setup()
 {
-	mPop = mailpop3_new(0, NULL);
+    mPop = mailpop3_new(0, NULL);
     mailpop3_set_progress_callback(mPop, POPSession::body_progress, this);
     mailpop3_set_logger(mPop, logger, this);
 }
 
 void POPSession::unsetup()
 {
-	if (mPop != NULL) {
+    if (mPop != NULL) {
         if (mPop->pop3_stream != NULL) {
             mailstream_close(mPop->pop3_stream);
             mPop->pop3_stream = NULL;
         }
-		mailpop3_free(mPop);
-		mPop = NULL;
-	}
+        mailpop3_free(mPop);
+        mPop = NULL;
+    }
 }
 
 void POPSession::connectIfNeeded(ErrorCode * pError)
@@ -316,10 +316,10 @@ void POPSession::login(ErrorCode * pError)
             * pError = ErrorAuthentication;
             return;
         }
-
+            
         r = mailpop3_pass(mPop, utf8password);
         break;
-
+            
         case AuthTypeSASLCRAMMD5:
         r = mailpop3_auth(mPop, "CRAM-MD5",
             MCUTF8(hostname()),
@@ -328,7 +328,7 @@ void POPSession::login(ErrorCode * pError)
             utf8username, utf8username,
             utf8password, NULL);
         break;
-
+            
         case AuthTypeSASLPlain:
         r = mailpop3_auth(mPop, "PLAIN",
             MCUTF8(hostname()),
@@ -337,7 +337,7 @@ void POPSession::login(ErrorCode * pError)
             utf8username, utf8username,
             utf8password, NULL);
         break;
-
+            
         case AuthTypeSASLGSSAPI:
             // needs to be tested
         r = mailpop3_auth(mPop, "GSSAPI",
@@ -347,7 +347,7 @@ void POPSession::login(ErrorCode * pError)
             utf8username, utf8username,
             utf8password, NULL /* realm */);
         break;
-
+            
         case AuthTypeSASLDIGESTMD5:
         r = mailpop3_auth(mPop, "DIGEST-MD5",
             MCUTF8(hostname()),
@@ -356,7 +356,7 @@ void POPSession::login(ErrorCode * pError)
             utf8username, utf8username,
             utf8password, NULL);
         break;
-
+            
         case AuthTypeSASLLogin:
         r = mailpop3_auth(mPop, "LOGIN",
             MCUTF8(hostname()),
@@ -365,7 +365,7 @@ void POPSession::login(ErrorCode * pError)
             utf8username, utf8username,
             utf8password, NULL);
         break;
-
+            
         case AuthTypeSASLSRP:
         r = mailpop3_auth(mPop, "SRP",
             MCUTF8(hostname()),
@@ -374,7 +374,7 @@ void POPSession::login(ErrorCode * pError)
             utf8username, utf8username,
             utf8password, NULL);
         break;
-
+            
         case AuthTypeSASLNTLM:
         r = mailpop3_auth(mPop, "NTLM",
             MCUTF8(hostname()),
@@ -383,7 +383,7 @@ void POPSession::login(ErrorCode * pError)
             utf8username, utf8username,
             utf8password, NULL /* realm */);
         break;
-
+            
         case AuthTypeSASLKerberosV4:
         r = mailpop3_auth(mPop, "KERBEROS_V4",
             MCUTF8(hostname()),
@@ -401,7 +401,7 @@ void POPSession::login(ErrorCode * pError)
         * pError = ErrorAuthentication;
         return;
     }
-
+    
     mState = STATE_LOGGEDIN;
     * pError = ErrorNone;
 }
@@ -425,16 +425,16 @@ Array * POPSession::fetchMessages(ErrorCode * pError)
         * pError = ErrorFetchMessageList;
         return NULL;
     }
-
+    
     Array * result = Array::array();
     for(unsigned int i = 0 ; i < carray_count(msg_list) ; i ++) {
         struct mailpop3_msg_info * msg_info;
         String * uid;
-
+        
         msg_info = (struct mailpop3_msg_info *) carray_get(msg_list, i);
         if (msg_info->msg_uidl == NULL)
             continue;
-
+        
         uid = String::stringWithUTF8Characters(msg_info->msg_uidl);
         
         POPMessageInfo * info = new POPMessageInfo();

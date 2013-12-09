@@ -16,7 +16,7 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-
+    
     class SMTPAsyncSession;
     class SMTPOperationCallback;
     

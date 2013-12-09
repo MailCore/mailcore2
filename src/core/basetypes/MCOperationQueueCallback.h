@@ -10,14 +10,15 @@
 #define __MAILCORE_OPERATIONQUEUECALLBACK_H_
 
 namespace mailcore {
-	
-	class OperationQueue;
     
-	class OperationQueueCallback {
+    class OperationQueue;
+    
+    class OperationQueueCallback {
     public:
         virtual void queueStartRunning() {}
         virtual void queueStoppedRunning() {}
     };
+    
 }
 
 #endif

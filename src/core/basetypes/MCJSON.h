@@ -19,7 +19,7 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-
+    
     class Null;
     
     class JSON {

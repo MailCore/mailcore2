@@ -14,27 +14,27 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-	class MailProvider;
-	
-	class MailProvidersManager : public Object {
+    
+    class MailProvider;
+    
+    class MailProvidersManager : public Object {
+    public:
+        static MailProvidersManager * sharedManager();
         
-	public:
-		static MailProvidersManager * sharedManager();
-		
-		virtual MailProvider * providerForEmail(String * email);
-		virtual MailProvider * providerForMX(String * hostname);
-		virtual MailProvider * providerForIdentifier(String * identifier);
-		
-		virtual void registerProvidersWithFilename(String * filename);
-		
-	private:
-		MailProvidersManager();
-		void registerProviders(HashMap * providers);
-		
-		HashMap * mProviders;
-		
-		void init();
-	};
+        virtual MailProvider * providerForEmail(String * email);
+        virtual MailProvider * providerForMX(String * hostname);
+        virtual MailProvider * providerForIdentifier(String * identifier);
+        
+        virtual void registerProvidersWithFilename(String * filename);
+        
+    private:
+        MailProvidersManager();
+        void registerProviders(HashMap * providers);
+        
+        HashMap * mProviders;
+        
+        void init();
+    };
 }
 
 #endif

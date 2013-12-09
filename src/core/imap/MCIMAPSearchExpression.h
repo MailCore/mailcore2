@@ -8,7 +8,7 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-
+    
     class IMAPSearchExpression : public Object {
     public:
         IMAPSearchExpression();
@@ -20,7 +20,7 @@ namespace mailcore {
         virtual uint64_t longNumber();
         virtual time_t date();
         virtual IndexSet * uids();
-
+        
         
         virtual IMAPSearchExpression * leftExpression();
         virtual IMAPSearchExpression * rightExpression();

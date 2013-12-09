@@ -26,6 +26,7 @@ namespace mailcore {
         String * mPartID;
         void init();
     };
+    
 }
 
 #endif

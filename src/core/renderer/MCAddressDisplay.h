@@ -16,7 +16,6 @@
 namespace mailcore {
     
     class AddressDisplay {
-        
     public:
         static String * displayStringForAddress(Address * address);
         static String * shortDisplayStringForAddress(Address * address);

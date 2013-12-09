@@ -24,6 +24,7 @@ namespace mailcore {
     public: // subclass behavior
         virtual void main();
     };
+    
 }
 
 #endif

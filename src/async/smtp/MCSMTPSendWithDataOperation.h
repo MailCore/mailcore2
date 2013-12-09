@@ -17,7 +17,7 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-
+    
     class SMTPSendWithDataOperation : public SMTPOperation {
     public:
         SMTPSendWithDataOperation();
@@ -41,6 +41,7 @@ namespace mailcore {
         Address * mFrom;
         
     };
+    
 }
 
 #endif

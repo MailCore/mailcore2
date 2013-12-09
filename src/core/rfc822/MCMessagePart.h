@@ -8,16 +8,17 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-	
-	class MessagePart : public AbstractMessagePart {
-	public:
-		MessagePart();
-		virtual ~MessagePart();
+    
+    class MessagePart : public AbstractMessagePart {
+    public:
+        MessagePart();
+        virtual ~MessagePart();
         
     public: // subclass behavior
-		MessagePart(MessagePart * other);
-		virtual Object * copy();
-	};
+        MessagePart(MessagePart * other);
+        virtual Object * copy();
+    };
+    
 }
 
 #endif

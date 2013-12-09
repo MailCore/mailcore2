@@ -19,6 +19,7 @@ namespace mailcore {
         Object * value;
         HashMapCell * next;
     };
+    
 }
 
 #define CHASH_DEFAULTSIZE 13
@@ -164,11 +165,11 @@ void HashMap::removeObjectForKey(Object * key)
 {
     unsigned int func, indx;
     HashMapIter * iter, * old;
-
+    
     func = key->hash();;
     indx = func % mAllocated;
-
-  /* look for the key in existing cells */
+    
+    /* look for the key in existing cells */
     old = NULL;
     iter = (HashMapIter *) mCells[indx];
     while (iter) {
@@ -194,9 +195,9 @@ Object * HashMap::objectForKey(Object * key)
 {
     unsigned int func;
     HashMapIter * iter;
-
+    
     func = key->hash();
-
+    
     /* look for the key in existing cells */
     iter = (HashMapIter *) mCells[func % mAllocated];
     while (iter) {

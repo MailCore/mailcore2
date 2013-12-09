@@ -32,10 +32,10 @@ namespace mailcore {
     
     class DateFormatter : public Object {
     public:
-		DateFormatter();
-		virtual ~DateFormatter();
-		
-		static DateFormatter * dateFormatter();
+        DateFormatter();
+        virtual ~DateFormatter();
+        
+        static DateFormatter * dateFormatter();
         
         virtual void setDateStyle(DateFormatStyle style);
         virtual DateFormatStyle dateStyle();

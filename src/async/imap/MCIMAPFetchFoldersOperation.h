@@ -37,6 +37,7 @@ namespace mailcore {
         Array * mFolders;
         
     };
+    
 }
 
 #endif
