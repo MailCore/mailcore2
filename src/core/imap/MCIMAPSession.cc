@@ -2657,37 +2657,37 @@ static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpr
         {
             time_t date = expression->date();
             tm * timeinfo = localtime(&date);
-            return mailimap_search_key_new_sentbefore(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
+            return mailimap_search_key_new_sentbefore(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon+1, timeinfo->tm_year+1900));
         }
         case IMAPSearchKindOnDate:
         {
             time_t date = expression->date();
             tm * timeinfo = localtime(&date);
-            return mailimap_search_key_new_senton(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
+            return mailimap_search_key_new_senton(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon+1, timeinfo->tm_year+1900));
         }
         case IMAPSearchKindSinceDate:
         {
             time_t date = expression->date();
             tm * timeinfo = localtime(&date);
-            return mailimap_search_key_new_sentsince(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
+            return mailimap_search_key_new_sentsince(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon+1, timeinfo->tm_year+1900));
         }
         case IMAPSearchKindBeforeReceivedDate:
         {
             time_t date = expression->date();
             tm * timeinfo = localtime(&date);
-            return mailimap_search_key_new_before(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
+            return mailimap_search_key_new_before(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon+1, timeinfo->tm_year+1900));
         }
         case IMAPSearchKindOnReceivedDate:
         {
             time_t date = expression->date();
             tm * timeinfo = localtime(&date);
-            return mailimap_search_key_new_on(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
+            return mailimap_search_key_new_on(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon+1, timeinfo->tm_year+1900));
         }
         case IMAPSearchKindSinceReceivedDate:
         {
             time_t date = expression->date();
             tm * timeinfo = localtime(&date);
-            return mailimap_search_key_new_since(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
+            return mailimap_search_key_new_since(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon+1, timeinfo->tm_year+1900));
         }
         case IMAPSearchKindGmailThreadID:
         {
