@@ -131,6 +131,7 @@ static MessageFlag flag_from_lep(struct mailimap_flag * flag)
     return MessageFlagNone;
 }
 
+#if 0
 static MessageFlag flags_from_lep(struct mailimap_flag_list * flag_list)
 {
     MessageFlag flags;
@@ -146,6 +147,7 @@ static MessageFlag flags_from_lep(struct mailimap_flag_list * flag_list)
     
     return flags;
 }
+#endif
 
 static MessageFlag flags_from_lep_att_dynamic(struct mailimap_msg_att_dynamic * att_dynamic)
 {
@@ -174,6 +176,7 @@ static MessageFlag flags_from_lep_att_dynamic(struct mailimap_msg_att_dynamic * 
 
 #pragma mark set conversion
 
+#if 0
 static Array * arrayFromSet(struct mailimap_set * imap_set)
 {
     Array * result;
@@ -245,6 +248,8 @@ static struct mailimap_set * setFromArray(Array * array)
     
     return imap_set;
 }
+
+#endif
 
 static clist * splitSet(struct mailimap_set * set, unsigned int splitCount)
 {
