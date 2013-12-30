@@ -2791,7 +2791,7 @@ static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpr
         {
             return mailimap_search_key_new_smaller( (uint32_t) expression->longNumber());
         }
-        case IMAPSearchKindGmailRAW:
+        case IMAPSearchKindGmailRaw:
         {
             return mailimap_search_key_new_xgmraw(strdup(expression->value()->UTF8Characters()));
         }

@@ -313,10 +313,10 @@ IMAPSearchExpression * IMAPSearchExpression::searchGmailThreadID(uint64_t number
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
-IMAPSearchExpression * IMAPSearchExpression::searchGmailRAW(String * searchExpr)
+IMAPSearchExpression * IMAPSearchExpression::searchGmailRaw(String * searchExpr)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
-    expr->mKind = IMAPSearchKindGmailRAW;
+    expr->mKind = IMAPSearchKindGmailRaw;
     expr->mValue = searchExpr;
     return (IMAPSearchExpression *) expr->autorelease();
 }
