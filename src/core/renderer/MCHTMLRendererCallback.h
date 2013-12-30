@@ -21,6 +21,9 @@ namespace mailcore {
     
     class HTMLRendererIMAPCallback {
     public:
+        HTMLRendererIMAPCallback() {}
+        virtual ~HTMLRendererIMAPCallback() {}
+        
         virtual Data * dataForIMAPPart(String * folder, IMAPPart * part) { return NULL; }
         virtual void prefetchAttachmentIMAPPart(String * folder, IMAPPart * part) {}
         virtual void prefetchImageIMAPPart(String * folder, IMAPPart * part) {}

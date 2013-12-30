@@ -30,6 +30,10 @@ public:
         mOperation = op;
     }
     
+    virtual ~MCOSMTPSendOperationCallback()
+    {
+    }
+    
     virtual void bodyProgress(mailcore::SMTPOperation * session, unsigned int current, unsigned int maximum) {
         [mOperation bodyProgress:current maximum:maximum];
     }
