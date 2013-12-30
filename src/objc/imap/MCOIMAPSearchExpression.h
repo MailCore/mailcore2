@@ -288,6 +288,17 @@
 + (MCOIMAPSearchExpression *) searchGmailThreadID:(uint64_t)number;
 
 /**
+ Creates a search expression that gets emails that match a gmail raw search
+ expression.
+ 
+ Example:
+ 
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchGmailRaw:@"from:bill has:attachment filename:cal meeting schedule"]
+ */
++ (MCOIMAPSearchExpression *) searchGmailRaw:(NSString *)expr;
+
+
+/**
  Creates a search expression that's a disjunction of two search expressions.
 
  Example:
