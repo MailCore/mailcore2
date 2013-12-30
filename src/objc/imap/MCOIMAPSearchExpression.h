@@ -288,6 +288,17 @@
 + (MCOIMAPSearchExpression *) searchGmailThreadID:(uint64_t)number;
 
 /**
+ Creates a search expression that gets emails that match a gmail RAW search
+ expression.
+ 
+ Example:
+ 
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchGmailRAW:@"has:attachment in:unread"]
+ */
++ (MCOIMAPSearchExpression *) searchGmailRAW:(NSString *)expr;
+
+
+/**
  Creates a search expression that's a disjunction of two search expressions.
 
  Example:
