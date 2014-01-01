@@ -71,7 +71,7 @@ String * IMAPNamespace::mainPrefix()
 char IMAPNamespace::mainDelimiter()
 {
     if (mItems->count() == 0)
-        return NULL;
+        return (char) '\0';
     
     return mainItem()->delimiter();
 }
