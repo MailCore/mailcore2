@@ -263,14 +263,14 @@ String * Data::stringWithDetectedCharset(String * hintCharset, bool isHTML)
     
     charset = normalizeCharset(charset);
     
-    /*
+    // Remove whitespace at the end of the string to fix conversion.
     if (charset->isEqual(MCSTR("iso-2022-jp-2"))) {
         const char * theBytes;
         Data * data;
         
         theBytes = bytes();
         data = this;
-        if (length() > 0) {
+        if (length() >= 2) {
             unsigned int idx;
             
             idx = length();
@@ -291,8 +291,7 @@ String * Data::stringWithDetectedCharset(String * hintCharset, bool isHTML)
         
         return result;
     }
-     */
-    
+
     result = stringWithCharset(charset->UTF8Characters());
     if (result == NULL) {
         result = stringWithCharset("iso-8859-1");
