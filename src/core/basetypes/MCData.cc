@@ -186,7 +186,7 @@ static bool isHintCharsetValid(String * hintCharset)
     static Set * knownCharset = NULL;
     
     pthread_mutex_lock(&lock);
-    if (knownCharset == nil) {
+    if (knownCharset == NULL) {
         knownCharset = new Set();
         knownCharset->addObject(MCSTR("utf-8"));
         knownCharset->addObject(MCSTR("utf-16be"));

@@ -9,8 +9,6 @@ Operation::Operation()
     pthread_mutex_init(&mLock, NULL);
 #if __APPLE__
     mCallbackDispatchQueue = dispatch_get_main_queue();
-#else
-    mCallbackDispatchQueue = NULL;
 #endif
 }
 
@@ -61,6 +59,7 @@ void Operation::start()
 {
 }
 
+#if __APPLE__
 void Operation::setCallbackDispatchQueue(dispatch_queue_t callbackDispatchQueue)
 {
     mCallbackDispatchQueue = callbackDispatchQueue;
@@ -70,3 +69,4 @@ dispatch_queue_t Operation::callbackDispatchQueue()
 {
     return mCallbackDispatchQueue;
 }
+#endif
