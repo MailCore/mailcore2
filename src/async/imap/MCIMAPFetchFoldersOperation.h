@@ -32,7 +32,6 @@ namespace mailcore {
         virtual void main();
         
     private:
-        String * /* IMAPFolder */ mFolder;
         bool mFetchSubscribedEnabled;
         Array * mFolders;
         
