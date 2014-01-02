@@ -131,24 +131,6 @@ static MessageFlag flag_from_lep(struct mailimap_flag * flag)
     return MessageFlagNone;
 }
 
-#if 0
-static MessageFlag flags_from_lep(struct mailimap_flag_list * flag_list)
-{
-    MessageFlag flags;
-    clistiter * iter;
-    
-    flags = MessageFlagNone;
-    for(iter = clist_begin(flag_list->fl_list) ;iter != NULL ; iter = clist_next(iter)) {
-        struct mailimap_flag * flag;
-        
-        flag = (struct mailimap_flag *) clist_content(iter);
-        flags = (MessageFlag) (flags | flag_from_lep(flag));
-    }
-    
-    return flags;
-}
-#endif
-
 static MessageFlag flags_from_lep_att_dynamic(struct mailimap_msg_att_dynamic * att_dynamic)
 {
     MessageFlag flags;
