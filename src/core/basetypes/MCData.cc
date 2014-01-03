@@ -188,32 +188,23 @@ static bool isHintCharsetValid(String * hintCharset)
     pthread_mutex_lock(&lock);
     if (knownCharset == NULL) {
         knownCharset = new Set();
-        knownCharset->addObject(MCSTR("utf-8"));
-        knownCharset->addObject(MCSTR("utf-16be"));
-        knownCharset->addObject(MCSTR("utf-16le"));
-        knownCharset->addObject(MCSTR("utf-32be"));
-        knownCharset->addObject(MCSTR("utf-32le"));
         
-        knownCharset->addObject(MCSTR("shift_jis"));
-        knownCharset->addObject(MCSTR("iso-2022-jp"));
-        knownCharset->addObject(MCSTR("iso-2022-jp-2"));
-        knownCharset->addObject(MCSTR("iso-2022-cn"));
-        knownCharset->addObject(MCSTR("iso-2022-kr"));
+        UCharsetDetector * detector;
+        UEnumeration * iterator;
+        UErrorCode err = U_ZERO_ERROR;
         
-        knownCharset->addObject(MCSTR("gb18030"));
-        knownCharset->addObject(MCSTR("big5"));
-        knownCharset->addObject(MCSTR("euc-jp"));
-        knownCharset->addObject(MCSTR("euc-kr"));
-        knownCharset->addObject(MCSTR("iso-8859-1"));
-        knownCharset->addObject(MCSTR("iso-8859-2"));
-        knownCharset->addObject(MCSTR("iso-8859-5"));
-        knownCharset->addObject(MCSTR("iso-8859-6"));
-        knownCharset->addObject(MCSTR("iso-8859-7"));
-        knownCharset->addObject(MCSTR("iso-8859-8"));
-        knownCharset->addObject(MCSTR("iso-8859-9"));
-        knownCharset->addObject(MCSTR("windows-1251"));
-        knownCharset->addObject(MCSTR("windows-1256"));
-        knownCharset->addObject(MCSTR("koi8-r"));
+        detector = ucsdet_open(&err);
+        iterator = ucsdet_getAllDetectableCharsets(detector, &err);
+        while (1) {
+            const char * validCharset = uenum_next(iterator, NULL, &err);
+            if (err != U_ZERO_ERROR)
+                break;
+            if (validCharset == NULL)
+                break;
+            knownCharset->addObject(String::stringWithUTF8Characters(validCharset));
+        }
+        uenum_close(iterator);
+        ucsdet_close(detector);
     }
     pthread_mutex_unlock(&lock);
     
@@ -246,7 +237,7 @@ String * Data::stringWithDetectedCharset(String * hintCharset, bool isHTML)
     String * result;
     String * charset;
     
-    if (isHintCharsetValid(hintCharset)) {
+    if (!isHintCharsetValid(hintCharset)) {
         hintCharset = NULL;
     }
     
