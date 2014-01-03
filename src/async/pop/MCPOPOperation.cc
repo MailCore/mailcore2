@@ -75,7 +75,7 @@ void POPOperation::bodyProgress(POPSession * session, unsigned int current, unsi
     context->maximum = maximum;
     
     retain();
-    performMethodOnMainThread((Object::Method) &POPOperation::bodyProgressOnMainThread, context);
+    performMethodOnCallbackThread((Object::Method) &POPOperation::bodyProgressOnMainThread, context);
 }
 
 void POPOperation::bodyProgressOnMainThread(void * ctx)

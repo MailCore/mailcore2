@@ -122,7 +122,7 @@ void OperationQueue::performOnCallbackThread(Operation * op, Method method, void
     if (queue == NULL) {
         queue = dispatch_get_main_queue();
     }
-    performMethodOnDispatchQueue(method, context, op->callbackDispatchQueue(), waitUntilDone);
+    performMethodOnDispatchQueue(method, context, queue, waitUntilDone);
 #else
     performMethodOnMainThread(method, context, waitUntilDone);
 #endif

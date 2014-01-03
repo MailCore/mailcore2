@@ -40,6 +40,7 @@ namespace mailcore {
         virtual void setCallbackDispatchQueue(dispatch_queue_t callbackDispatchQueue);
         virtual dispatch_queue_t callbackDispatchQueue();
 #endif
+        void performMethodOnCallbackThread(Method method, void * context, bool waitUntilDone = false);
         
     private:
         OperationCallback * mCallback;

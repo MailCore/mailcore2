@@ -73,7 +73,7 @@ void SMTPOperation::bodyProgress(SMTPSession * session, unsigned int current, un
     context->maximum = maximum;
     
     retain();
-    performMethodOnMainThread((Object::Method) &SMTPOperation::bodyProgressOnMainThread, context);
+    performMethodOnCallbackThread((Object::Method) &SMTPOperation::bodyProgressOnMainThread, context);
 }
 
 void SMTPOperation::bodyProgressOnMainThread(void * ctx)

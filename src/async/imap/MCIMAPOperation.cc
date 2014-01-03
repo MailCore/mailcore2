@@ -93,7 +93,7 @@ void IMAPOperation::bodyProgress(IMAPSession * session, unsigned int current, un
     context->current = current;
     context->maximum = maximum;
     retain();
-    performMethodOnMainThread((Object::Method) &IMAPOperation::bodyProgressOnMainThread, context, true);
+    performMethodOnCallbackThread((Object::Method) &IMAPOperation::bodyProgressOnMainThread, context, true);
 }
 
 void IMAPOperation::bodyProgressOnMainThread(void * ctx)
@@ -120,7 +120,7 @@ void IMAPOperation::itemsProgress(IMAPSession * session, unsigned int current, u
     context->current = current;
     context->maximum = maximum;
     retain();
-    performMethodOnMainThread((Object::Method) &IMAPOperation::itemsProgressOnMainThread, context, true);
+    performMethodOnCallbackThread((Object::Method) &IMAPOperation::itemsProgressOnMainThread, context, true);
 }
 
 void IMAPOperation::itemsProgressOnMainThread(void * ctx)

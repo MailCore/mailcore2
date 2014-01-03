@@ -70,3 +70,16 @@ dispatch_queue_t Operation::callbackDispatchQueue()
     return mCallbackDispatchQueue;
 }
 #endif
+
+void Operation::performMethodOnCallbackThread(Method method, void * context, bool waitUntilDone)
+{
+#if __APPLE__
+    dispatch_queue_t queue = mCallbackDispatchQueue;
+    if (queue == NULL) {
+        queue = dispatch_get_main_queue();
+    }
+    performMethodOnDispatchQueue(method, context, queue, waitUntilDone);
+#else
+    performMethodOnMainThread(method, context, waitUntilDone);
+#endif
+}
