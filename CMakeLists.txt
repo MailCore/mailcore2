@@ -7,4 +7,6 @@ IF(APPLE)
 ENDIF()
 
 add_subdirectory (src)
-add_subdirectory (tests)
+IF(APPLE)
+  add_subdirectory (tests)
+ENDIF()
