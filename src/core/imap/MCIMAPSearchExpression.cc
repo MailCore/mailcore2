@@ -317,7 +317,7 @@ IMAPSearchExpression * IMAPSearchExpression::searchGmailRaw(String * searchExpr)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();
     expr->mKind = IMAPSearchKindGmailRaw;
-    expr->mValue = searchExpr;
+    MC_SAFE_REPLACE_COPY(String, expr->mValue, searchExpr);
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
