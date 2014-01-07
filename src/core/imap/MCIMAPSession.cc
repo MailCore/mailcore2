@@ -1540,7 +1540,7 @@ void IMAPSession::appendMessage(String * folder, Data * messageData, MessageFlag
 }
 
 void IMAPSession::copyMessages(String * folder, IndexSet * uidSet, String * destFolder,
-     IndexSet ** pDestUIDs, ErrorCode * pError)
+     HashMap ** pUidMapping, ErrorCode * pError)
 {
     int r;
     struct mailimap_set * set;
@@ -1549,6 +1549,7 @@ void IMAPSession::copyMessages(String * folder, IndexSet * uidSet, String * dest
     uint32_t uidvalidity;
     clist * setList;
     IndexSet * uidSetResult;
+    HashMap * uidMapping = NULL;
 
     selectIfNeeded(folder, pError);
     if (* pError != ErrorNone)
@@ -1583,16 +1584,51 @@ void IMAPSession::copyMessages(String * folder, IndexSet * uidSet, String * dest
             goto release;
         }
 
+        if ((src_uid != NULL) && (dest_uid != NULL)) {
+            if (uidMapping == NULL) {
+                uidMapping = HashMap::hashMap();
+            }
+            
+            clistiter * src_cur = clist_begin(src_uid->set_list);
+            clistiter * dest_cur = clist_begin(dest_uid->set_list);
+            while ((src_cur != NULL) && (dest_cur != NULL)) {
+                struct mailimap_set_item * src_item = (struct mailimap_set_item *) clist_content(src_cur);
+                struct mailimap_set_item * dest_item = (struct mailimap_set_item *) clist_content(dest_cur);
+                uint32_t src_min_value = src_item->set_first;
+                uint32_t src_max_value = src_item->set_last;
+                uint32_t dest_min_value = dest_item->set_first;
+                uint32_t dest_max_value = dest_item->set_last;
+                if (src_min_value > src_max_value) {
+                    src_min_value = src_item->set_last;
+                    src_max_value = src_item->set_first;
+                }
+                if (dest_min_value > dest_max_value) {
+                    dest_min_value = dest_item->set_last;
+                    dest_max_value = dest_item->set_first;
+                }
+                uint32_t src_current_uid = src_min_value;
+                uint32_t dest_current_uid = dest_min_value;
+                while (src_current_uid <= src_max_value) {
+                    uidMapping->setObjectForKey(Value::valueWithLongLongValue(src_current_uid), Value::valueWithLongLongValue(dest_current_uid));
+                    src_current_uid ++;
+                    dest_current_uid ++;
+                }
+                src_cur = clist_next(src_cur);
+                dest_cur = clist_next(dest_cur);
+            }
+        }
+        
         if (src_uid != NULL) {
             mailimap_set_free(src_uid);
         }
 
         if (dest_uid != NULL) {
-            uidSetResult = indexSetFromSet(dest_uid);
             mailimap_set_free(dest_uid);
         }
     }
-    * pDestUIDs = uidSetResult;
+    if (pUidMapping != NULL) {
+        * pUidMapping = uidMapping;
+    }
     * pError = ErrorNone;
 
     release:

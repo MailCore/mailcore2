@@ -28,7 +28,7 @@ namespace mailcore {
         virtual IndexSet * uids();
         
         // Result.
-        virtual IndexSet * destUids();
+        virtual HashMap * uidMapping();
         
     public: // subclass behavior
         virtual void main();
@@ -36,7 +36,7 @@ namespace mailcore {
     private:
         IndexSet * mUids;
         String * mDestFolder;
-        IndexSet * mDestUids;
+        HashMap * mUidMapping;
     };
     
 }
