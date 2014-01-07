@@ -158,7 +158,6 @@ static MessageFlag flags_from_lep_att_dynamic(struct mailimap_msg_att_dynamic * 
 
 #pragma mark set conversion
 
-#if 0
 static Array * arrayFromSet(struct mailimap_set * imap_set)
 {
     Array * result;
@@ -181,6 +180,7 @@ static Array * arrayFromSet(struct mailimap_set * imap_set)
     return result;
 }
 
+#if 0
 static int compareValuesUnsignedLong(void * value1, void * value2, void * context)
 {
     Value * concreteValue1 = (Value *) value1;
@@ -1589,35 +1589,14 @@ void IMAPSession::copyMessages(String * folder, IndexSet * uidSet, String * dest
                 uidMapping = HashMap::hashMap();
             }
             
-            clistiter * src_cur = clist_begin(src_uid->set_list);
-            clistiter * dest_cur = clist_begin(dest_uid->set_list);
-            while ((src_cur != NULL) && (dest_cur != NULL)) {
-                struct mailimap_set_item * src_item = (struct mailimap_set_item *) clist_content(src_cur);
-                struct mailimap_set_item * dest_item = (struct mailimap_set_item *) clist_content(dest_cur);
-                uint32_t src_min_value = src_item->set_first;
-                uint32_t src_max_value = src_item->set_last;
-                uint32_t dest_min_value = dest_item->set_first;
-                uint32_t dest_max_value = dest_item->set_last;
-                if (src_min_value > src_max_value) {
-                    src_min_value = src_item->set_last;
-                    src_max_value = src_item->set_first;
-                }
-                if (dest_min_value > dest_max_value) {
-                    dest_min_value = dest_item->set_last;
-                    dest_max_value = dest_item->set_first;
-                }
-                uint32_t src_current_uid = src_min_value;
-                uint32_t dest_current_uid = dest_min_value;
-                while (src_current_uid <= src_max_value) {
-                    uidMapping->setObjectForKey(Value::valueWithLongLongValue(src_current_uid), Value::valueWithLongLongValue(dest_current_uid));
-                    src_current_uid ++;
-                    dest_current_uid ++;
-                }
-                src_cur = clist_next(src_cur);
-                dest_cur = clist_next(dest_cur);
+            Array * srcUidsArray = arrayFromSet(src_uid);
+            Array * destUidsArray = arrayFromSet(dest_uid);
+
+            for(int i = 0 ; i < srcUidsArray->count() && i < destUidsArray->count() ; i ++) {
+                uidMapping->setObjectForKey(srcUidsArray->objectAtIndex(i), destUidsArray->objectAtIndex(i));
             }
         }
-        
+
         if (src_uid != NULL) {
             mailimap_set_free(src_uid);
         }
