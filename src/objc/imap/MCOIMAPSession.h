@@ -104,7 +104,8 @@
  Sets logger callback. The network traffic will be sent to this block.
  
  [session setConnectionLogger:^(void * connectionID, MCOConnectionLogType type, NSData * data) {
-    ...
+    NSLog(@"%@", [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
+    // ...
  }];
 */
 @property (nonatomic, copy) MCOConnectionLogger connectionLogger;
