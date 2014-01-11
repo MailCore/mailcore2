@@ -179,40 +179,40 @@ void AbstractPart::setInlineAttachment(bool inlineAttachment)
 void AbstractPart::importIMAPFields(struct mailimap_body_fields * fields,
     struct mailimap_body_ext_1part * extension)
 {
-	if (fields->bd_parameter != NULL) {
-		clistiter * cur;
-		
-		for(cur = clist_begin(fields->bd_parameter->pa_list) ; cur != NULL ;
-			cur = clist_next(cur)) {
-			struct mailimap_single_body_fld_param * imap_param;
-			
-			imap_param = (struct mailimap_single_body_fld_param *) clist_content(cur);
-			
-			if (strcasecmp(imap_param->pa_name, "name") == 0) {
+    if (fields->bd_parameter != NULL) {
+        clistiter * cur;
+        
+        for(cur = clist_begin(fields->bd_parameter->pa_list) ; cur != NULL ;
+            cur = clist_next(cur)) {
+            struct mailimap_single_body_fld_param * imap_param;
+            
+            imap_param = (struct mailimap_single_body_fld_param *) clist_content(cur);
+            
+            if (strcasecmp(imap_param->pa_name, "name") == 0) {
                 setFilename(String::stringByDecodingMIMEHeaderValue(imap_param->pa_value));
-			}
-			else if (strcasecmp(imap_param->pa_name, "charset") == 0) {
+            }
+            else if (strcasecmp(imap_param->pa_name, "charset") == 0) {
                 setCharset(String::stringByDecodingMIMEHeaderValue(imap_param->pa_value));
-			}
-		}
-	}
+            }
+        }
+    }
     if (fields->bd_id != NULL) {
-		char * contentid;
-		size_t cur_token;
-		int r;
-		
-		cur_token = 0;
-		r = mailimf_msg_id_parse(fields->bd_id, strlen(fields->bd_id),
+        char * contentid;
+        size_t cur_token;
+        int r;
+        
+        cur_token = 0;
+        r = mailimf_msg_id_parse(fields->bd_id, strlen(fields->bd_id),
             &cur_token, &contentid);
-		if (r == MAILIMF_NO_ERROR) {
-			// msg id
+        if (r == MAILIMF_NO_ERROR) {
+            // msg id
             setContentID(String::stringWithUTF8Characters(contentid));
             free(contentid);
-		}
+        }
     }
     if (fields->bd_description != NULL) {
         setContentDescription(String::stringWithUTF8Characters(fields->bd_description));
-	}
+    }
     
     if (extension != NULL) {
         if (extension->bd_disposition != NULL) {
@@ -264,15 +264,15 @@ AbstractPart * AbstractPart::partForUniqueID(String * uniqueID)
 
 String * AbstractPart::decodedStringForData(Data * data)
 {
-	String *lowerMimeType = mMimeType ? mMimeType->lowercaseString() : NULL;
-	
-	if (lowerMimeType && lowerMimeType->hasPrefix(MCSTR("text/"))) {
-		bool isHTML = lowerMimeType->isEqual(MCSTR("text/html"));
-		return data->stringWithDetectedCharset(mCharset, isHTML);
-	}
-	else {
-		return NULL;
-	}
+    String *lowerMimeType = mMimeType ? mMimeType->lowercaseString() : NULL;
+    
+    if (lowerMimeType && lowerMimeType->hasPrefix(MCSTR("text/"))) {
+        bool isHTML = lowerMimeType->isEqual(MCSTR("text/html"));
+        return data->stringWithDetectedCharset(mCharset, isHTML);
+    }
+    else {
+        return NULL;
+    }
 }
 
 void AbstractPart::applyUniquePartID()

@@ -8,6 +8,7 @@
 
 #include "MCDateFormatter.h"
 #include <stdlib.h>
+#define U_DISABLE_RENAMING 1
 #include <unicode/udat.h>
 
 #if defined(__APPLE__)
@@ -204,7 +205,7 @@ void DateFormatter::prepare()
 #if USE_COREFOUNDATION
     if (mAppleDateFormatter != NULL)
         return;
-
+    
     CFStringRef localeIdentifier = NULL;
     CFLocaleRef localeRef = NULL;
     if (mLocale != NULL) {

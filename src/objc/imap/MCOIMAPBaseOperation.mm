@@ -21,6 +21,10 @@ public:
         mOperation = op;
     }
     
+    virtual ~MCOIMAPBaseOperationIMAPCallback()
+    {
+    }
+    
     virtual void bodyProgress(mailcore::IMAPOperation * session, unsigned int current, unsigned int maximum) {
         [mOperation bodyProgress:current maximum:maximum];
     }

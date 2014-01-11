@@ -30,7 +30,7 @@
    error code available in `MCOConstants.h`, `destUids` will be nil
 */
 
-- (void) start:(void (^)(NSError * error, MCOIndexSet * destUids))completionBlock;
+- (void) start:(void (^)(NSError * error, NSDictionary * uidMapping))completionBlock;
 
 @end
 

@@ -21,6 +21,9 @@ namespace mailcore {
     
     class HTMLRendererIMAPCallback {
     public:
+        HTMLRendererIMAPCallback() {}
+        virtual ~HTMLRendererIMAPCallback() {}
+        
         virtual Data * dataForIMAPPart(String * folder, IMAPPart * part) { return NULL; }
         virtual void prefetchAttachmentIMAPPart(String * folder, IMAPPart * part) {}
         virtual void prefetchImageIMAPPart(String * folder, IMAPPart * part) {}
@@ -41,14 +44,14 @@ namespace mailcore {
         virtual String * templateForEmbeddedMessage(AbstractMessagePart * part);
         virtual String * templateForEmbeddedMessageHeader(MessageHeader * header);
         virtual String * templateForAttachmentSeparator();
-		
+        
         // Can be used to filter some HTML tags.
         virtual String * filterHTMLForPart(String * html);
         
         // Can be used to hide quoted text.
         virtual String * filterHTMLForMessage(String * html);
     };
-
+    
 }
 
 #endif

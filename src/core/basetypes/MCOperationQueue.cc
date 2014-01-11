@@ -15,8 +15,8 @@ using namespace mailcore;
 
 OperationQueue::OperationQueue()
 {
-	mOperations = new Array();
-	mStarted = false;
+    mOperations = new Array();
+    mStarted = false;
     pthread_mutex_init(&mLock, NULL);
     mWaiting = false;
     mOperationSem = mailsem_new();
@@ -122,7 +122,7 @@ void OperationQueue::performOnCallbackThread(Operation * op, Method method, void
     if (queue == NULL) {
         queue = dispatch_get_main_queue();
     }
-    performMethodOnDispatchQueue(method, context, op->callbackDispatchQueue(), waitUntilDone);
+    performMethodOnDispatchQueue(method, context, queue, waitUntilDone);
 #else
     performMethodOnMainThread(method, context, waitUntilDone);
 #endif

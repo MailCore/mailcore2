@@ -73,7 +73,7 @@ void IMAPFolderInfoOperation::main()
     mModSequenceValue = session()->session()->modSequenceValue();
     mMessageCount = session()->session()->lastFolderMessageCount();
     mFirstUnseenUid = session()->session()->firstUnseenUid();
-
+    
     setError(error);
 }
 

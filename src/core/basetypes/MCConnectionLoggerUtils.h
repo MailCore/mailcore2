@@ -12,7 +12,7 @@
 #include <MailCore/MCConnectionLogger.h>
 
 namespace mailcore {
-
+    
     ConnectionLogType getConnectionType(int log_type);
     bool isBufferFromLogType(int log_type);
     

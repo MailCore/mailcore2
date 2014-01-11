@@ -14,12 +14,13 @@
 
 namespace mailcore {
     
-	class SMTPOperation;
+    class SMTPOperation;
     
-	class SMTPOperationCallback {
-	public:
-		virtual void bodyProgress(SMTPOperation * session, unsigned int current, unsigned int maximum) {};
-	};
+    class SMTPOperationCallback {
+    public:
+        virtual void bodyProgress(SMTPOperation * session, unsigned int current, unsigned int maximum) {};
+    };
+    
 }
 
 #endif

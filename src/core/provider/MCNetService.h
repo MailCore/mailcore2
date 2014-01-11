@@ -15,6 +15,7 @@
 #ifdef __cplusplus
 
 namespace mailcore {
+    
     class NetService : public Object {
     
     public:
@@ -49,6 +50,7 @@ namespace mailcore {
         void init();
         void fillWithInfo(HashMap * info);
     };
+    
 }
 
 #endif

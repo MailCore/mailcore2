@@ -131,22 +131,6 @@ static MessageFlag flag_from_lep(struct mailimap_flag * flag)
     return MessageFlagNone;
 }
 
-static MessageFlag flags_from_lep(struct mailimap_flag_list * flag_list)
-{
-    MessageFlag flags;
-    clistiter * iter;
-    
-    flags = MessageFlagNone;
-    for(iter = clist_begin(flag_list->fl_list) ;iter != NULL ; iter = clist_next(iter)) {
-        struct mailimap_flag * flag;
-        
-        flag = (struct mailimap_flag *) clist_content(iter);
-        flags = (MessageFlag) (flags | flag_from_lep(flag));
-    }
-    
-    return flags;
-}
-
 static MessageFlag flags_from_lep_att_dynamic(struct mailimap_msg_att_dynamic * att_dynamic)
 {
     MessageFlag flags;
@@ -196,6 +180,7 @@ static Array * arrayFromSet(struct mailimap_set * imap_set)
     return result;
 }
 
+#if 0
 static int compareValuesUnsignedLong(void * value1, void * value2, void * context)
 {
     Value * concreteValue1 = (Value *) value1;
@@ -245,6 +230,8 @@ static struct mailimap_set * setFromArray(Array * array)
     
     return imap_set;
 }
+
+#endif
 
 static clist * splitSet(struct mailimap_set * set, unsigned int splitCount)
 {
@@ -1553,7 +1540,7 @@ void IMAPSession::appendMessage(String * folder, Data * messageData, MessageFlag
 }
 
 void IMAPSession::copyMessages(String * folder, IndexSet * uidSet, String * destFolder,
-     IndexSet ** pDestUIDs, ErrorCode * pError)
+     HashMap ** pUidMapping, ErrorCode * pError)
 {
     int r;
     struct mailimap_set * set;
@@ -1562,6 +1549,7 @@ void IMAPSession::copyMessages(String * folder, IndexSet * uidSet, String * dest
     uint32_t uidvalidity;
     clist * setList;
     IndexSet * uidSetResult;
+    HashMap * uidMapping = NULL;
 
     selectIfNeeded(folder, pError);
     if (* pError != ErrorNone)
@@ -1596,16 +1584,30 @@ void IMAPSession::copyMessages(String * folder, IndexSet * uidSet, String * dest
             goto release;
         }
 
+        if ((src_uid != NULL) && (dest_uid != NULL)) {
+            if (uidMapping == NULL) {
+                uidMapping = HashMap::hashMap();
+            }
+            
+            Array * srcUidsArray = arrayFromSet(src_uid);
+            Array * destUidsArray = arrayFromSet(dest_uid);
+
+            for(int i = 0 ; i < srcUidsArray->count() && i < destUidsArray->count() ; i ++) {
+                uidMapping->setObjectForKey(srcUidsArray->objectAtIndex(i), destUidsArray->objectAtIndex(i));
+            }
+        }
+
         if (src_uid != NULL) {
             mailimap_set_free(src_uid);
         }
 
         if (dest_uid != NULL) {
-            uidSetResult = indexSetFromSet(dest_uid);
             mailimap_set_free(dest_uid);
         }
     }
-    * pDestUIDs = uidSetResult;
+    if (pUidMapping != NULL) {
+        * pUidMapping = uidMapping;
+    }
     * pError = ErrorNone;
 
     release:
@@ -2068,7 +2070,7 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
     needsGmailLabels = false;
     needsGmailMessageID = false;
     needsGmailThreadID = false;
-
+    
     fetch_type = mailimap_fetch_type_new_fetch_att_list_empty();
     fetch_att = mailimap_fetch_att_new_uid();
     mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
@@ -2657,37 +2659,37 @@ static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpr
         {
             time_t date = expression->date();
             tm * timeinfo = localtime(&date);
-            return mailimap_search_key_new_sentbefore(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
+            return mailimap_search_key_new_sentbefore(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon+1, timeinfo->tm_year+1900));
         }
         case IMAPSearchKindOnDate:
         {
             time_t date = expression->date();
             tm * timeinfo = localtime(&date);
-            return mailimap_search_key_new_senton(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
+            return mailimap_search_key_new_senton(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon+1, timeinfo->tm_year+1900));
         }
         case IMAPSearchKindSinceDate:
         {
             time_t date = expression->date();
             tm * timeinfo = localtime(&date);
-            return mailimap_search_key_new_sentsince(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
+            return mailimap_search_key_new_sentsince(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon+1, timeinfo->tm_year+1900));
         }
         case IMAPSearchKindBeforeReceivedDate:
         {
             time_t date = expression->date();
             tm * timeinfo = localtime(&date);
-            return mailimap_search_key_new_before(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
+            return mailimap_search_key_new_before(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon+1, timeinfo->tm_year+1900));
         }
         case IMAPSearchKindOnReceivedDate:
         {
             time_t date = expression->date();
             tm * timeinfo = localtime(&date);
-            return mailimap_search_key_new_on(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
+            return mailimap_search_key_new_on(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon+1, timeinfo->tm_year+1900));
         }
         case IMAPSearchKindSinceReceivedDate:
         {
             time_t date = expression->date();
             tm * timeinfo = localtime(&date);
-            return mailimap_search_key_new_since(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year));
+            return mailimap_search_key_new_since(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon+1, timeinfo->tm_year+1900));
         }
         case IMAPSearchKindGmailThreadID:
         {
@@ -2790,6 +2792,10 @@ static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpr
         case IMAPSearchKindSizeSmaller:
         {
             return mailimap_search_key_new_smaller( (uint32_t) expression->longNumber());
+        }
+        case IMAPSearchKindGmailRaw:
+        {
+            return mailimap_search_key_new_xgmraw(strdup(expression->value()->UTF8Characters()));
         }
         case IMAPSearchKindOr:
         {

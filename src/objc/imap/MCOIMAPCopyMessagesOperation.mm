@@ -39,7 +39,7 @@ typedef void (^CompletionType)(NSError *error, MCOIndexSet * destUids);
     [super dealloc];
 }
 
-- (void) start:(void (^)(NSError *error, MCOIndexSet * destUids))completionBlock
+- (void) start:(void (^)(NSError *error, NSDictionary * uidMapping))completionBlock
 {
     _completionBlock = [completionBlock copy];
     [self start];
@@ -47,9 +47,9 @@ typedef void (^CompletionType)(NSError *error, MCOIndexSet * destUids);
 
 - (void) cancel
 {
-  [_completionBlock release];
-  _completionBlock = nil;
-  [super cancel];
+    [_completionBlock release];
+    _completionBlock = nil;
+    [super cancel];
 }
 
 - (void) operationCompleted
@@ -59,7 +59,7 @@ typedef void (^CompletionType)(NSError *error, MCOIndexSet * destUids);
     
     nativeType *op = MCO_NATIVE_INSTANCE;
     if (op->error() == mailcore::ErrorNone) {
-        _completionBlock(nil, MCO_TO_OBJC(op->destUids()));
+        _completionBlock(nil, MCO_TO_OBJC(op->uidMapping()));
     }
     else {
         _completionBlock([NSError mco_errorWithErrorCode:op->error()], 0);

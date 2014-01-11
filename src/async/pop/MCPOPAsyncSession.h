@@ -85,6 +85,7 @@ namespace mailcore {
         virtual POPSession * session();
         virtual void logConnection(ConnectionLogType logType, Data * buffer);
     };
+    
 }
 
 #endif

@@ -41,7 +41,7 @@ namespace mailcore {
         POPOperationCallback * mPopCallback;
         ErrorCode mError;
     private:
-		virtual void bodyProgress(POPSession * session, unsigned int current, unsigned int maximum);
+        virtual void bodyProgress(POPSession * session, unsigned int current, unsigned int maximum);
         virtual void bodyProgressOnMainThread(void * context);
         
     };

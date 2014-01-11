@@ -36,7 +36,7 @@
     if (filename) {
         mailcore::MailProvidersManager::sharedManager()->registerProvidersWithFilename(filename.mco_mcString);
     }
-	
+    
     return self;
 }
 

@@ -14,12 +14,6 @@
 
 using namespace mailcore;
 
-static Object * objectFromData(Data * data);
-static Object * objectFromString(String * str);
-
-static Data * dataFromObject(Object * object);
-static String * stringFromObject(Object * object);
-
 String * JSON::objectToJSONString(Object * object)
 {
     return JSONParser::stringFromObject(object);

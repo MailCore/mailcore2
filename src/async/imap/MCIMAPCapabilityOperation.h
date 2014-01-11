@@ -30,6 +30,7 @@ namespace mailcore {
     private:
         IndexSet * mCapabilities;
     };
+    
 }
 
 #endif

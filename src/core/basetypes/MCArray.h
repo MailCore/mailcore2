@@ -9,9 +9,9 @@
 typedef struct carray_s carray;
 
 namespace mailcore {
-
+    
     class String;
-
+    
     class Array : public Object {
     public:
         Array();
@@ -19,7 +19,7 @@ namespace mailcore {
         
         static Array * array();
         static Array * arrayWithObject(Object * obj);
-
+        
         virtual unsigned int count();
         virtual void addObject(Object * obj);
         virtual void removeObjectAtIndex(unsigned int idx);
@@ -48,7 +48,7 @@ namespace mailcore {
         carray * mArray;
         void init();
     };
-
+    
 }
 
 #endif

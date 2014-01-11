@@ -25,7 +25,7 @@ namespace mailcore {
         
         virtual uint32_t size();
         virtual void setSize(uint32_t size);
-
+        
         virtual void setFlags(MessageFlag flags);
         virtual MessageFlag flags();
         
@@ -43,7 +43,7 @@ namespace mailcore {
         
         virtual void setGmailMessageID(uint64_t msgID);
         virtual uint64_t gmailMessageID();
-        		
+                
         virtual void setGmailThreadID(uint64_t threadID);
         virtual uint64_t gmailThreadID();
         
@@ -67,7 +67,7 @@ namespace mailcore {
         uint64_t mModSeqValue;
         uint32_t mUid;
         uint32_t mSize;
-
+        
         MessageFlag mFlags;
         MessageFlag mOriginalFlags;
         AbstractPart * mMainPart;

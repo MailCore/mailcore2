@@ -178,6 +178,7 @@ namespace mailcore {
         virtual bool isQueueRunning();
         virtual void setQueueRunning(bool running);
     };
+    
 }
 
 #endif

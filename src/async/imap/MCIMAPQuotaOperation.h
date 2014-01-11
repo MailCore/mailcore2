@@ -32,6 +32,7 @@ namespace mailcore {
         uint32_t mLimit;
         uint32_t mUsage;
     };
+    
 }
 
 #endif

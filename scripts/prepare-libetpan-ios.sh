@@ -12,7 +12,7 @@ else
 fi	
 
 url="https://github.com/dinhviethoa/libetpan.git"
-rev=23f1554f21fac3aadede8281b79828ca92268755
+rev=b9de519082830cfc92bceb587e8060a28735b121
 
 pushd `dirname $0` > /dev/null
 scriptpath=`pwd`

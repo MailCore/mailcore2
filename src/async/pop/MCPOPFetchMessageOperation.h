@@ -33,6 +33,7 @@ namespace mailcore {
         Data * mData;
         
     };
+    
 }
 
 #endif

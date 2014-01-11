@@ -82,8 +82,8 @@ namespace mailcore {
         virtual void appendMessage(String * folder, Data * messageData, MessageFlag flags,
                                    IMAPProgressCallback * progressCallback, uint32_t * createdUID, ErrorCode * pError);
         
-        virtual void copyMessages(String * folder, IndexSet * uidSet, String * destFolder,
-                                  IndexSet ** pDestUIDs, ErrorCode * pError);
+        void copyMessages(String * folder, IndexSet * uidSet, String * destFolder,
+                          HashMap ** pUidMapping, ErrorCode * pError);
         
         virtual void expunge(String * folder, ErrorCode * pError);
         
@@ -258,6 +258,7 @@ namespace mailcore {
         bool enableFeature(String * feature);
         void enableFeatures();
     };
+    
 }
 
 #endif

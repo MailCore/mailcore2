@@ -18,7 +18,7 @@
 #import "NSObject+MCO.h"
 
 @implementation MCOMailProvider {
-	mailcore::MailProvider * _provider;
+    mailcore::MailProvider * _provider;
 }
 
 #define nativeType mailcore::MailProvider
@@ -41,22 +41,22 @@
 
 - (id) initWithInfo:(NSDictionary *)info
 {
-	self = [super init];
-	
-	_provider = mailcore::MailProvider::providerWithInfo([info mco_mcHashMap]);
+    self = [super init];
+    
+    _provider = mailcore::MailProvider::providerWithInfo([info mco_mcHashMap]);
     _provider->retain();
-	
-	return self;
+    
+    return self;
 }
 
 - (id) initWithMCProvider:(mailcore::MailProvider *)provider
 {
-	self = [super init];
-	
-	_provider = provider;
+    self = [super init];
+    
+    _provider = provider;
     _provider->retain();
-	
-	return self;
+    
+    return self;
 }
 
 MCO_OBJC_SYNTHESIZE_STRING(setIdentifier, identifier);
@@ -78,12 +78,12 @@ MCO_OBJC_SYNTHESIZE_STRING(setIdentifier, identifier);
 
 - (BOOL) matchEmail:(NSString *)email
 {
-	return _provider->matchEmail(email.mco_mcString);
+    return _provider->matchEmail(email.mco_mcString);
 }
 
 - (BOOL) matchMX:(NSString *)hostname
 {
-	return _provider->matchMX(hostname.mco_mcString);
+    return _provider->matchMX(hostname.mco_mcString);
 }
 
 - (NSString *) sentMailFolderPath
@@ -123,7 +123,7 @@ MCO_OBJC_SYNTHESIZE_STRING(setIdentifier, identifier);
 
 - (BOOL) isMainFolder:(NSString *)folderPath prefix:(NSString *)prefix
 {
-	return _provider->isMainFolder(folderPath.mco_mcString, prefix.mco_mcString);
+    return _provider->isMainFolder(folderPath.mco_mcString, prefix.mco_mcString);
 }
 
 @end

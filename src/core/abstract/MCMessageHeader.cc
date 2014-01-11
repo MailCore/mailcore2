@@ -616,7 +616,7 @@ static time_t timestamp_from_imap_date(struct mailimap_date_time * date_time)
 
 static int tmcomp(struct tm * atmp, struct tm * btmp)
 {
-    register int    result;
+    int    result;
     
     if ((result = (atmp->tm_year - btmp->tm_year)) == 0 &&
         (result = (atmp->tm_mon - btmp->tm_mon)) == 0 &&
@@ -629,9 +629,9 @@ static int tmcomp(struct tm * atmp, struct tm * btmp)
 
 static time_t mkgmtime(struct tm * tmp)
 {
-    register int            dir;
-    register int            bits;
-    register int            saved_seconds;
+    int            dir;
+    int            bits;
+    int            saved_seconds;
     time_t                t;
     struct tm            yourtm, mytm;
     

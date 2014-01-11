@@ -1,6 +1,23 @@
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 IF(APPLE)
-  set(CMAKE_CXX_FLAGS "-std=c++11 -stdlib=libc++")
+  set(dir "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk")
+  IF(EXISTS "${dir}" AND IS_DIRECTORY "${dir}")
+    set(SDKROOT "${dir}")
+  ELSE()
+    set(dir "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk")
+    IF(EXISTS "${dir}" AND IS_DIRECTORY "${dir}")
+      set(SDKROOT "${dir}")
+    ENDIF()
+  ENDIF()
+  
+  IF(NOT SDKROOT)
+    message(FATAL_ERROR "ERROR: Could not find Mac OSX SDK 10.8 or 10.9")
+  ELSE()
+    message(STATUS "Found Mac OSX SDK: ${SDKROOT}")
+  ENDIF()
+  
+  set(CMAKE_CXX_FLAGS "-std=c++11 -stdlib=libc++ -isysroot ${SDKROOT}")
+  set(CMAKE_C_FLAGS "-isysroot ${SDKROOT}")
 ELSE()
   set(CMAKE_CXX_FLAGS "-std=gnu++0x")
 ENDIF()
@@ -19,11 +36,13 @@ IF(APPLE)
     ${CMAKE_CURRENT_SOURCE_DIR}/../Externals/libetpan/include
     /usr/include/tidy
     /usr/include/libxml2
+    ${SDKROOT}/usr/include
+    ${SDKROOT}/usr/include/tidy
+    ${SDKROOT}/usr/include/libxml2
   )
   
   set(additional_lib_searchpath
     ${CMAKE_CURRENT_SOURCE_DIR}/../Externals/ctemplate/lib
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Externals/icu4c/lib
     ${CMAKE_CURRENT_SOURCE_DIR}/../Externals/libetpan/lib
   )
   
@@ -54,10 +73,17 @@ find_path(ICU4C_INCLUDE_DIR
   NAMES unicode/utf8.h
   PATHS ${additional_includes}
 )
-find_library(ICU4C_LIBRARY
-  NAMES icuuc
-  PATHS ${additional_lib_searchpath}
-)
+if(APPLE)
+  find_library(ICU4C_LIBRARY
+    NAMES icucore
+    PATHS ${additional_lib_searchpath}
+  )
+else()
+  find_library(ICU4C_LIBRARY
+    NAMES icuuc
+    PATHS ${additional_lib_searchpath}
+  )
+endif()
 
 if(NOT ICU4C_INCLUDE_DIR OR NOT ICU4C_LIBRARY)
   message(FATAL_ERROR "ERROR: Could not find icu4c")

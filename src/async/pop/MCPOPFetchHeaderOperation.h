@@ -36,6 +36,7 @@ namespace mailcore {
         MessageHeader * mHeader;
         
     };
+    
 }
 
 #endif

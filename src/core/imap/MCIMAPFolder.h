@@ -8,33 +8,33 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-	
-	class IMAPFolder : public Object {
-	public:
-		IMAPFolder();
-		virtual ~IMAPFolder();
-		
-		virtual void setPath(String * path);
-		virtual String * path();
-		
-		virtual void setDelimiter(char delimiter);
-		virtual char delimiter();
-		
-		virtual void setFlags(IMAPFolderFlag flags);
-		virtual IMAPFolderFlag flags();
+    
+    class IMAPFolder : public Object {
+    public:
+        IMAPFolder();
+        virtual ~IMAPFolder();
+        
+        virtual void setPath(String * path);
+        virtual String * path();
+        
+        virtual void setDelimiter(char delimiter);
+        virtual char delimiter();
+        
+        virtual void setFlags(IMAPFolderFlag flags);
+        virtual IMAPFolderFlag flags();
         
     public: // subclass behavior
-		IMAPFolder(IMAPFolder * other);
-		virtual Object * copy();
-		virtual String * description();
+        IMAPFolder(IMAPFolder * other);
+        virtual Object * copy();
+        virtual String * description();
         
-	private:
-		String * mPath;
-		char mDelimiter;
-		IMAPFolderFlag mFlags;
-		void init();
-	};
-	
+    private:
+        String * mPath;
+        char mDelimiter;
+        IMAPFolderFlag mFlags;
+        void init();
+    };
+    
 }
 
 #endif

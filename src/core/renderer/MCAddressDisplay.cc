@@ -31,12 +31,12 @@ String * AddressDisplay::shortDisplayStringForAddress(Address * address)
 String * AddressDisplay::veryShortDisplayStringForAddress(Address * address)
 {
     if ((address->displayName() != NULL) && (address->displayName()->length() > 0)) {
-		Array * components;
-		String * senderName;
+        Array * components;
+        String * senderName;
         
-		senderName = address->displayName();
+        senderName = address->displayName();
         senderName = (String *) senderName->copy()->autorelease();
-		
+        
         senderName->replaceOccurrencesOfString(MCSTR(","), MCSTR(" "));
         senderName->replaceOccurrencesOfString(MCSTR("'"), MCSTR(" "));
         senderName->replaceOccurrencesOfString(MCSTR("\""), MCSTR(" "));
@@ -45,10 +45,10 @@ String * AddressDisplay::veryShortDisplayStringForAddress(Address * address)
             return MCLOCALIZEDSTRING(MCSTR("invalid"));
         }
         return (String *) components->objectAtIndex(0);
-	}
+    }
     else if (address->mailbox()) {
-		return address->mailbox();
-	}
+        return address->mailbox();
+    }
     else {
         return MCLOCALIZEDSTRING(MCSTR("invalid"));
     }
@@ -56,7 +56,7 @@ String * AddressDisplay::veryShortDisplayStringForAddress(Address * address)
 
 String * AddressDisplay::displayStringForAddresses(Array * addresses)
 {
-	return Address::nonEncodedRFC822StringForAddresses(addresses);
+    return Address::nonEncodedRFC822StringForAddresses(addresses);
 }
 
 String * AddressDisplay::shortDisplayStringForAddresses(Array * addresses)

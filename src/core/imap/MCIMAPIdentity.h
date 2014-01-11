@@ -15,37 +15,37 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-	
-	class IMAPIdentity : public Object {
-	public:
+    
+    class IMAPIdentity : public Object {
+    public:
         
-		IMAPIdentity();
-		virtual ~IMAPIdentity();
+        IMAPIdentity();
+        virtual ~IMAPIdentity();
         
-		virtual void setVendor(String * vendor);
-		virtual String * vendor();
+        virtual void setVendor(String * vendor);
+        virtual String * vendor();
         
-		virtual void setName(String * name);
-		virtual String * name();
+        virtual void setName(String * name);
+        virtual String * name();
         
-		virtual void setVersion(String * version);
-		virtual String * version();
+        virtual void setVersion(String * version);
+        virtual String * version();
         
         virtual Array * allInfoKeys();
         virtual String * infoForKey(String * key);
         virtual void setInfoForKey(String * key, String * value);
         
     public: // subclass behavior
-		IMAPIdentity(IMAPIdentity * identity);
-		virtual Object * copy();
-		virtual String * description();
+        IMAPIdentity(IMAPIdentity * identity);
+        virtual Object * copy();
+        virtual String * description();
         
-	private:
+    private:
         HashMap * mValues;
         
-		void init();
-	};
-	
+        void init();
+    };
+    
 }
 
 #endif

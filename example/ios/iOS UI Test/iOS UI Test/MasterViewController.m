@@ -352,7 +352,8 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 	
 	SettingsViewController *settingsViewController = [[SettingsViewController alloc] initWithNibName:nil bundle:nil];
 	settingsViewController.delegate = self;
-	[self presentViewController:settingsViewController animated:YES completion:nil];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
+	[self presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)settingsViewControllerFinished:(SettingsViewController *)viewController {

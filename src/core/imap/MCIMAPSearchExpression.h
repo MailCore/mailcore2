@@ -8,7 +8,7 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-
+    
     class IMAPSearchExpression : public Object {
     public:
         IMAPSearchExpression();
@@ -20,7 +20,7 @@ namespace mailcore {
         virtual uint64_t longNumber();
         virtual time_t date();
         virtual IndexSet * uids();
-
+        
         
         virtual IMAPSearchExpression * leftExpression();
         virtual IMAPSearchExpression * rightExpression();
@@ -54,6 +54,7 @@ namespace mailcore {
         static IMAPSearchExpression * searchSizeLarger(uint32_t size);
         static IMAPSearchExpression * searchSizeSmaller(uint32_t size);
         static IMAPSearchExpression * searchGmailThreadID(uint64_t number);
+        static IMAPSearchExpression * searchGmailRaw(String * expr);
         static IMAPSearchExpression * searchAnd(IMAPSearchExpression * left, IMAPSearchExpression * right);
         static IMAPSearchExpression * searchOr(IMAPSearchExpression * left, IMAPSearchExpression * right);
         

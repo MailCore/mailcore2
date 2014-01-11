@@ -14,17 +14,17 @@
     virtual mcType * getter();
 
 namespace mailcore {
-
+    
     extern bool zombieEnabled;
     
     class String;
     class HashMap;
-
+    
     class Object {
     public:
         Object();
         virtual ~Object();
-
+        
         virtual int retainCount();
         virtual Object * retain();
         virtual void release();

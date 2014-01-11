@@ -17,7 +17,9 @@
 /** Returns whether the operation is cancelled.*/
 @property (readonly) BOOL isCancelled;
 
-/** The queue this operation dispatches the callback on.  Defaults to the main queue.*/
+/** The queue this operation dispatches the callback on.  Defaults to the main queue.
+ This property should be used only if there's performance issue creating or calling the callback
+ in the main thread. */
 @property (nonatomic, assign) dispatch_queue_t callbackDispatchQueue;
 
 /** This methods is called on the main thread when the asynchronous operation is finished.

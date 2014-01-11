@@ -4,8 +4,8 @@ using namespace mailcore;
 
 void POPMessageInfo::init()
 {
-	mIndex = 0;
-	mSize = 0;
+    mIndex = 0;
+    mSize = 0;
     mUid = NULL;
 }
 

@@ -37,6 +37,7 @@ namespace mailcore {
         IMAPIdentity * mServerIdentity;
         
     };
+    
 }
 
 #endif
