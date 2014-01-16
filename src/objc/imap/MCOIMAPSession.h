@@ -268,8 +268,8 @@
      MCOIMAPCopyMessagesOperation * op = [session copyMessagesOperationWithFolder:@"INBOX"
                                                                              uids:[MCIndexSet indexSetWithIndex:456]
                                                                        destFolder:@"Cocoa"];
-     [op start:^(NSError * error, MCOIndexSet * destUids) {
-          NSLog(@"copied to folder with UID %@", destUids);
+     [op start:^(NSError * error, NSDictionary * uidMapping) {
+          NSLog(@"copied to folder with UID mapping %@", uidMapping);
      }];
 */
 - (MCOIMAPCopyMessagesOperation *)copyMessagesOperationWithFolder:(NSString *)folder
