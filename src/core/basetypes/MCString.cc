@@ -2,7 +2,6 @@
 
 #include <string.h>
 #include <stdlib.h>
-#define U_DISABLE_RENAMING 1
 #include <unicode/ustring.h>
 #include <unicode/ucnv.h>
 #include <unicode/utypes.h>

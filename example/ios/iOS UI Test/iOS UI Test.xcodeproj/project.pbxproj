@@ -532,7 +532,9 @@
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
 					"-letpan-ios",
-					"-licucore",
+					"-licudata",
+					"-licui18n",
+					"-licuuc",
 					"-lxml2",
 					"-lsasl2",
 					"-liconv",
@@ -556,7 +558,9 @@
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
 					"-letpan-ios",
-					"-licucore",
+					"-licudata",
+					"-licui18n",
+					"-licuuc",
 					"-lxml2",
 					"-lsasl2",
 					"-liconv",

@@ -3000,7 +3000,7 @@
 				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(IOS_HEADERS_SEARCH_PATHS)";
 				"HEADER_SEARCH_PATHS[sdk=macosx*]" = "$(OSX_HEADERS_SEARCH_PATHS)";
 				IOS_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-ios/include\" \"$(SRCROOT)/../Externals/icu4c-ios/include\" \"$(SRCROOT)/../Externals/ctemplate-ios/include\" \"$(SRCROOT)/../Externals/tidy-html5-ios/include/tidy\" /usr/include/libxml2";
-				IOS_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-ios/lib\" \"$(SRCROOT)/../Externals/ctemplate-ios/lib\" \"$(SRCROOT)/../Externals/libsasl-ios/lib\" \"$(SRCROOT)/../Externals/tidy-html5-ios/lib\"";
+				IOS_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-ios/lib\" \"$(SRCROOT)/../Externals/icu4c-ios/lib\" \"$(SRCROOT)/../Externals/ctemplate-ios/lib\" \"$(SRCROOT)/../Externals/libsasl-ios/lib\" \"$(SRCROOT)/../Externals/tidy-html5-ios/lib\"";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../Externals/libetpan/lib\"",
 					"\"$(SRCROOT)/../Externals/icu4c/lib\"",
@@ -3012,7 +3012,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				OSX_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan/include\" \"$(SRCROOT)/../Externals/icu4c/include\" \"$(SRCROOT)/../Externals/ctemplate/include\" /usr/include/tidy /usr/include/libxml2";
-				OSX_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan/lib\" \"$(SRCROOT)/../Externals/ctemplate/lib\"";
+				OSX_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan/lib\" \"$(SRCROOT)/../Externals/icu4c/lib\" \"$(SRCROOT)/../Externals/ctemplate/lib\"";
 			};
 			name = Debug;
 		};
@@ -3048,7 +3048,7 @@
 				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(IOS_HEADERS_SEARCH_PATHS)";
 				"HEADER_SEARCH_PATHS[sdk=macosx*]" = "$(OSX_HEADERS_SEARCH_PATHS)";
 				IOS_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-ios/include\" \"$(SRCROOT)/../Externals/icu4c-ios/include\" \"$(SRCROOT)/../Externals/ctemplate-ios/include\" \"$(SRCROOT)/../Externals/tidy-html5-ios/include/tidy\" /usr/include/libxml2";
-				IOS_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-ios/lib\" \"$(SRCROOT)/../Externals/ctemplate-ios/lib\" \"$(SRCROOT)/../Externals/libsasl-ios/lib\" \"$(SRCROOT)/../Externals/tidy-html5-ios/lib\"";
+				IOS_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-ios/lib\" \"$(SRCROOT)/../Externals/icu4c-ios/lib\" \"$(SRCROOT)/../Externals/ctemplate-ios/lib\" \"$(SRCROOT)/../Externals/libsasl-ios/lib\" \"$(SRCROOT)/../Externals/tidy-html5-ios/lib\"";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../Externals/libetpan/lib\"",
 					"\"$(SRCROOT)/../Externals/icu4c/lib\"",
@@ -3059,7 +3059,7 @@
 				"LIBRARY_SEARCH_PATHS[sdk=macosx*]" = "$(OSX_LIBRARY_SEARCH_PATHS)";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OSX_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan/include\" \"$(SRCROOT)/../Externals/icu4c/include\" \"$(SRCROOT)/../Externals/ctemplate/include\" /usr/include/tidy /usr/include/libxml2";
-				OSX_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan/lib\" \"$(SRCROOT)/../Externals/ctemplate/lib\"";
+				OSX_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan/lib\" \"$(SRCROOT)/../Externals/icu4c/lib\" \"$(SRCROOT)/../Externals/ctemplate/lib\"";
 			};
 			name = Release;
 		};
@@ -3121,7 +3121,9 @@
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
 					"-letpan-ios",
-					"-licucore",
+					"-licudata",
+					"-licui18n",
+					"-licuuc",
 					"-lxml2",
 					"-lsasl2",
 					"-liconv",
@@ -3155,7 +3157,9 @@
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
 					"-letpan-ios",
-					"-licucore",
+					"-licudata",
+					"-licui18n",
+					"-licuuc",
 					"-lxml2",
 					"-lsasl2",
 					"-liconv",
@@ -3216,7 +3220,9 @@
 				OTHER_LDFLAGS = (
 					"-lctemplate",
 					"-letpan",
-					"-licucore",
+					"-licudata",
+					"-licui18n",
+					"-licuuc",
 					"-lxml2",
 					"-lssl",
 					"-lcrypto",
@@ -3246,7 +3252,9 @@
 				OTHER_LDFLAGS = (
 					"-lctemplate",
 					"-letpan",
-					"-licucore",
+					"-licudata",
+					"-licui18n",
+					"-licuuc",
 					"-lxml2",
 					"-lssl",
 					"-lcrypto",

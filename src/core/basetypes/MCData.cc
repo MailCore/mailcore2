@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
-#define U_DISABLE_RENAMING 1
 #include <unicode/ucsdet.h>
 #include <libetpan/libetpan.h>
 #include <iconv.h>
