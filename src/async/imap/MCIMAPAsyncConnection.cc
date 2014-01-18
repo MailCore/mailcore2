@@ -105,6 +105,7 @@ IMAPAsyncConnection::IMAPAsyncConnection()
     mInternalLogger = new IMAPConnectionLogger(this);
     mAutomaticConfigurationEnabled = true;
     mQueueRunning = false;
+    mScheduledAutomaticDisconnect = false;
 }
 
 IMAPAsyncConnection::~IMAPAsyncConnection()
@@ -562,14 +563,28 @@ void IMAPAsyncConnection::tryAutomaticDisconnect()
         return;
     }
     
-    cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
+    bool scheduledAutomaticDisconnect = mScheduledAutomaticDisconnect;
+    if (scheduledAutomaticDisconnect) {
+        cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
+    }
+    
+    mOwner->retain();
+    mScheduledAutomaticDisconnect = true;
     performMethodAfterDelay((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, 30);
+    
+    if (scheduledAutomaticDisconnect) {
+        mOwner->release();
+    }
 }
 
 void IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay(void * context)
 {
+    mScheduledAutomaticDisconnect = false;
+    
     IMAPOperation * op = disconnectOperation();
     op->start();
+    
+    mOwner->release();
 }
 
 void IMAPAsyncConnection::queueStartRunning()

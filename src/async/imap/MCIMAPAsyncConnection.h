@@ -151,6 +151,7 @@ namespace mailcore {
         pthread_mutex_t mConnectionLoggerLock;
         bool mAutomaticConfigurationEnabled;
         bool mQueueRunning;
+        bool mScheduledAutomaticDisconnect;
         
         virtual void tryAutomaticDisconnectAfterDelay(void * context);
         virtual IMAPMessageRenderingOperation * renderingOperation(IMAPMessage * message,
