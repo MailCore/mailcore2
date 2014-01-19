@@ -4,9 +4,6 @@
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCMessageConstants.h>
-#if __APPLE__
-#include <dispatch/dispatch.h>
-#endif
 
 #ifdef __cplusplus
 

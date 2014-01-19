@@ -110,7 +110,7 @@
 */
 @property (nonatomic, copy) MCOConnectionLogger connectionLogger;
 
-/** This property give some hints to MCOIMAPSession about where it's called from.
+/** This property provides some hints to MCOIMAPSession about where it's called from.
  It will make MCOIMAPSession safe. It will also set all the callbacks of operations to run on this given queue.
  Defaults to the main queue.
  This property should be used only if there's performance issue using MCOIMAPSession in the main thread. */
