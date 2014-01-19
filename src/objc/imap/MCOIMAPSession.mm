@@ -105,6 +105,7 @@ MCO_OBJC_SYNTHESIZE_BOOL(setCheckCertificateEnabled, isCheckCertificateEnabled)
 MCO_OBJC_SYNTHESIZE_BOOL(setVoIPEnabled, isVoIPEnabled)
 MCO_OBJC_SYNTHESIZE_SCALAR(BOOL, BOOL, setAllowsFolderConcurrentAccessEnabled, allowsFolderConcurrentAccessEnabled)
 MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, maximumConnections)
+MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue, dispatchQueue);
 
 - (void) setDefaultNamespace:(MCOIMAPNamespace *)defaultNamespace
 {

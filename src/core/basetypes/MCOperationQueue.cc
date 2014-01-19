@@ -25,6 +25,9 @@ OperationQueue::OperationQueue()
     mWaitingFinishedSem = mailsem_new();
     mQuitting = false;
     mCallback = NULL;
+#if __APPLE__
+    mDispatchQueue = dispatch_get_main_queue();
+#endif
 }
 
 OperationQueue::~OperationQueue()
@@ -78,7 +81,11 @@ void OperationQueue::runOperations()
             mailsem_up(mStopSem);
             
             retain(); // (2)
+#if __APPLE__
+            performMethodOnDispatchQueue((Object::Method) &OperationQueue::stoppedOnMainThread, NULL, mDispatchQueue, true);
+#else
             performMethodOnMainThread((Object::Method) &OperationQueue::stoppedOnMainThread, NULL, true);
+#endif
             
             pool->release();
             break;
@@ -107,7 +114,11 @@ void OperationQueue::runOperations()
         if (needsCheckRunning) {
             retain(); // (1)
             MCLog("check running %p", this);
+#if __APPLE__
+            performMethodOnDispatchQueue((Object::Method) &OperationQueue::checkRunningOnMainThread, this, mDispatchQueue);
+#else
             performMethodOnMainThread((Object::Method) &OperationQueue::checkRunningOnMainThread, this);
+#endif
         }
         
         pool->release();
@@ -237,5 +248,17 @@ void OperationQueue::waitUntilAllOperationsAreFinished()
         sem_wait(&mWaitingFinishedSem);
     }
     mWaiting = false;
+}
+#endif
+
+#if __APPLE__
+void OperationQueue::setDispatchQueue(dispatch_queue_t dispatchQueue)
+{
+    mDispatchQueue = dispatchQueue;
+}
+
+dispatch_queue_t OperationQueue::dispatchQueue()
+{
+    return mDispatchQueue;
 }
 #endif

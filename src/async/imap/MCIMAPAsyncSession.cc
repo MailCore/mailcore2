@@ -42,6 +42,9 @@ IMAPAsyncSession::IMAPAsyncSession()
     mServerIdentity = new IMAPIdentity();
     mClientIdentity = new IMAPIdentity();
     mOperationQueueCallback = NULL;
+#if __APPLE__
+    mDispatchQueue = dispatch_get_main_queue();
+#endif
 }
 
 IMAPAsyncSession::~IMAPAsyncSession()
@@ -215,6 +218,7 @@ IMAPAsyncConnection * IMAPAsyncSession::session()
     session->setVoIPEnabled(mVoIPEnabled);
     session->setDefaultNamespace(mDefaultNamespace);
     session->setClientIdentity(mClientIdentity);
+    session->setDispatchQueue(mDispatchQueue);
 #if 0 // should be implemented properly
     if (mAutomaticConfigurationDone) {
         session->setAutomaticConfigurationEnabled(false);
@@ -578,3 +582,15 @@ void IMAPAsyncSession::operationRunningStateChanged()
         }
     }
 }
+
+#if __APPLE__
+void IMAPAsyncSession::setDispatchQueue(dispatch_queue_t dispatchQueue)
+{
+    mDispatchQueue = dispatchQueue;
+}
+
+dispatch_queue_t IMAPAsyncSession::dispatchQueue()
+{
+    return mDispatchQueue;
+}
+#endif

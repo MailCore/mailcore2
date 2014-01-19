@@ -712,3 +712,15 @@ void IMAPAsyncConnection::setQueueRunning(bool running)
 {
     mQueueRunning = running;
 }
+
+#if __APPLE__
+void IMAPAsyncConnection::setDispatchQueue(dispatch_queue_t dispatchQueue)
+{
+    mQueue->setDispatchQueue(dispatchQueue);
+}
+
+dispatch_queue_t IMAPAsyncConnection::dispatchQueue()
+{
+    return mQueue->dispatchQueue();
+}
+#endif

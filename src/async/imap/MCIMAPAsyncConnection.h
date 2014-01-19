@@ -4,6 +4,9 @@
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCMessageConstants.h>
+#if __APPLE__
+#include <dispatch/dispatch.h>
+#endif
 
 #ifdef __cplusplus
 
@@ -80,6 +83,11 @@ namespace mailcore {
         
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
+        
+#ifdef __APPLE__
+        virtual void setDispatchQueue(dispatch_queue_t dispatchQueue);
+        virtual dispatch_queue_t dispatchQueue();
+#endif
         
         virtual IMAPFolderInfoOperation * folderInfoOperation(String * folder);
         virtual IMAPFolderStatusOperation * folderStatusOperation(String * folder);

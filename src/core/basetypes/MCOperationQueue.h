@@ -27,6 +27,11 @@ namespace mailcore {
         virtual void setCallback(OperationQueueCallback * callback);
         virtual OperationQueueCallback * callback();
         
+#ifdef __APPLE__
+        virtual void setDispatchQueue(dispatch_queue_t dispatchQueue);
+        virtual dispatch_queue_t dispatchQueue();
+#endif
+        
     private:
         Array * mOperations;
         pthread_t mThreadID;
@@ -39,6 +44,9 @@ namespace mailcore {
         struct mailsem * mWaitingFinishedSem;
         bool mQuitting;
         OperationQueueCallback * mCallback;
+#if __APPLE__
+        dispatch_queue_t mDispatchQueue;
+#endif
         
         void startThread();
         static void runOperationsOnThread(OperationQueue * queue);
