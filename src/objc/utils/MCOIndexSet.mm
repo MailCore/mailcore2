@@ -127,6 +127,21 @@ MCO_SYNTHESIZE_NSCODING
     _indexSet->intersectsRange(MCORangeToMCRange(range));
 }
 
+- (void) addIndexSet:(MCOIndexSet *)indexSet
+{
+    _indexSet->addIndexSet(indexSet->_indexSet);
+}
+
+- (void) removeIndexSet:(MCOIndexSet *)indexSet
+{
+    _indexSet->removeIndexSet(indexSet->_indexSet);
+}
+
+- (void) intersectsIndexSet:(MCOIndexSet *)indexSet
+{
+    _indexSet->intersectsIndexSet(indexSet->_indexSet);
+}
+
 - (MCORange *) allRanges
 {
     return (MCORange *) _indexSet->allRanges();
