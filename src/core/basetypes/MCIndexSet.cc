@@ -396,6 +396,34 @@ void IndexSet::importSerializable(HashMap * serializable)
     }
 }
 
+void IndexSet::addIndexSet(IndexSet * indexSet)
+{
+    for(unsigned int i = 0 ; i < indexSet->count() ; i ++) {
+        addRange(indexSet->allRanges()[i]);
+    }
+}
+
+void IndexSet::removeIndexSet(IndexSet * indexSet)
+{
+    for(unsigned int i = 0 ; i < indexSet->count() ; i ++) {
+        removeRange(indexSet->allRanges()[i]);
+    }
+}
+
+void IndexSet::intersectsIndexSet(IndexSet * indexSet)
+{
+    IndexSet * result = new IndexSet();
+    for(unsigned int i = 0 ; i < indexSet->count() ; i ++) {
+        IndexSet * rangeIntersect = (IndexSet *) copy();
+        rangeIntersect->intersectsRange(indexSet->allRanges()[i]);
+        result->addIndexSet(rangeIntersect);
+        rangeIntersect->release();
+    }
+    removeAllIndexes();
+    addIndexSet(result);
+    result->release();
+}
+
 static void * createObject()
 {
     return new IndexSet();
