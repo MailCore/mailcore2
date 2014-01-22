@@ -43,8 +43,7 @@ namespace mailcore {
         IMAPFolderFlagJunk = IMAPFolderFlagSpam,
         IMAPFolderFlagFlagged = IMAPFolderFlagStarred,
         IMAPFolderFlagFolderTypeMask = IMAPFolderFlagInbox | IMAPFolderFlagSentMail | IMAPFolderFlagStarred | IMAPFolderFlagAllMail |
-          IMAPFolderFlagTrash| IMAPFolderFlagDrafts | IMAPFolderFlagSpam | IMAPFolderFlagImportant | IMAPFolderFlagArchive;
-        
+          IMAPFolderFlagTrash| IMAPFolderFlagDrafts | IMAPFolderFlagSpam | IMAPFolderFlagImportant | IMAPFolderFlagArchive,
     };
     
     enum MessageFlag {
