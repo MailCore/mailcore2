@@ -42,6 +42,9 @@ namespace mailcore {
         IMAPFolderFlagAll = IMAPFolderFlagAllMail,
         IMAPFolderFlagJunk = IMAPFolderFlagSpam,
         IMAPFolderFlagFlagged = IMAPFolderFlagStarred,
+        IMAPFolderFlagFolderTypeMask = IMAPFolderFlagInbox | IMAPFolderFlagSentMail | IMAPFolderFlagStarred | IMAPFolderFlagAllMail |
+          IMAPFolderFlagTrash| IMAPFolderFlagDrafts | IMAPFolderFlagSpam | IMAPFolderFlagImportant | IMAPFolderFlagArchive;
+        
     };
     
     enum MessageFlag {

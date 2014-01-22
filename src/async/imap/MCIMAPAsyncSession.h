@@ -100,6 +100,7 @@ namespace mailcore {
         
         virtual IMAPIdentity * serverIdentity();
         virtual IMAPIdentity * clientIdentity();
+        virtual String * gmailUserDisplayName();
         
         virtual IMAPFolderInfoOperation * folderInfoOperation(String * folder);
         virtual IMAPFolderStatusOperation * folderStatusOperation(String * folder);
@@ -186,6 +187,7 @@ namespace mailcore {
 #if __APPLE__
         dispatch_queue_t mDispatchQueue;
 #endif
+        String * mGmailUserDisplayName;
         
         virtual IMAPAsyncConnection * sessionForFolder(String * folder, bool urgent = false);
         virtual IMAPAsyncConnection * session();

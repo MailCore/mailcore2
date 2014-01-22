@@ -127,6 +127,11 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
     return MCO_OBJC_BRIDGE_GET(serverIdentity);
 }
 
+- (NSString *) gmailUserDisplayName
+{
+    return MCO_TO_OBJC(_session->gmailUserDisplayName());
+}
+
 - (void) setConnectionLogger:(MCOConnectionLogger)connectionLogger
 {
     [_connectionLogger release];

@@ -89,6 +89,9 @@
 /** The identity of the IMAP server. */
 @property (nonatomic, strong, readonly) MCOIMAPIdentity * serverIdentity;
 
+/** Display name of the Gmail user. It will be nil if it's not a Gmail server. */
+@property (nonatomic, copy, readonly) NSString * gmailUserDisplayName;
+
 /**
  When set to YES, the session is allowed open to open several connections to the same folder.
  @warning Some older IMAP servers don't like this

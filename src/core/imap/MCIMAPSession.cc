@@ -320,6 +320,7 @@ void IMAPSession::init()
     mIdentityEnabled = false;
     mNamespaceEnabled = false;
     mCompressionEnabled = false;
+    mIsGmail = false;
     mWelcomeString = NULL;
     mNeedsMboxMailWorkaround = false;
     mDefaultNamespace = NULL;
@@ -344,6 +345,8 @@ void IMAPSession::init()
     mAutomaticConfigurationEnabled = true;
     mAutomaticConfigurationDone = false;
     mShouldDisconnect = false;
+    mLoginResponse = NULL;
+    mGmailUserDisplayName = NULL;
 }
 
 IMAPSession::IMAPSession()
@@ -353,6 +356,8 @@ IMAPSession::IMAPSession()
 
 IMAPSession::~IMAPSession()
 {
+    MC_SAFE_RELEASE(mGmailUserDisplayName);
+    MC_SAFE_RELEASE(mLoginResponse);
     MC_SAFE_RELEASE(mClientIdentity);
     MC_SAFE_RELEASE(mServerIdentity);
     MC_SAFE_RELEASE(mHostname);
@@ -818,6 +823,23 @@ void IMAPSession::login(ErrorCode * pError)
         }
         return;
     }
+    
+    String * loginResponse = MCSTR("");
+    if (mIsGmail) {
+        if (mImap->imap_response != NULL) {
+            loginResponse = String::stringWithUTF8Characters(mImap->imap_response);
+            
+            int location = loginResponse->locationOfString(MCSTR(" authenticated (Success)"));
+            if (location != -1) {
+                String * emailAndName = loginResponse->substringToIndex(location);
+                location = emailAndName->locationOfString(MCSTR(" "));
+                MC_SAFE_RELEASE(mGmailUserDisplayName);
+                mGmailUserDisplayName = emailAndName->substringFromIndex(location + 1);
+                mGmailUserDisplayName->retain();
+            }
+        }
+    }
+    MC_SAFE_REPLACE_COPY(String, mLoginResponse, loginResponse);
     
     mState = STATE_LOGGEDIN;
     
@@ -3494,6 +3516,7 @@ void IMAPSession::applyCapabilities(IndexSet * capabilities)
     }
     if (capabilities->containsIndex(IMAPCapabilityGmail)) {
         mXListEnabled = false;
+        mIsGmail = true;
     }
     if (capabilities->containsIndex(IMAPCapabilityIdle)) {
         mIdleEnabled = true;
@@ -3725,4 +3748,9 @@ bool IMAPSession::isAutomaticConfigurationDone()
 void IMAPSession::resetAutomaticConfigurationDone()
 {
     mAutomaticConfigurationDone = false;
+}
+
+String * IMAPSession::gmailUserDisplayName()
+{
+    return mGmailUserDisplayName;
 }

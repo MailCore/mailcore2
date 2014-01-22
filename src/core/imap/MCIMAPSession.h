@@ -163,6 +163,8 @@ namespace mailcore {
         virtual bool isNamespaceEnabled();
         virtual bool isCompressionEnabled();
         
+        virtual String * gmailUserDisplayName();
+        
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
         
@@ -219,6 +221,7 @@ namespace mailcore {
         bool mXOauth2Enabled;
         bool mNamespaceEnabled;
         bool mCompressionEnabled;
+        bool mIsGmail;
         String * mWelcomeString;
         bool mNeedsMboxMailWorkaround;
         uint32_t mUIDValidity;
@@ -240,6 +243,9 @@ namespace mailcore {
         bool mAutomaticConfigurationEnabled;
         bool mAutomaticConfigurationDone;
         bool mShouldDisconnect;
+        
+        String * mLoginResponse;
+        String * mGmailUserDisplayName;
         
         void init();
         void bodyProgress(unsigned int current, unsigned int maximum);

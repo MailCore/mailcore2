@@ -45,10 +45,12 @@ IMAPAsyncSession::IMAPAsyncSession()
 #if __APPLE__
     mDispatchQueue = dispatch_get_main_queue();
 #endif
+    mGmailUserDisplayName = NULL;
 }
 
 IMAPAsyncSession::~IMAPAsyncSession()
 {
+    MC_SAFE_RELEASE(mGmailUserDisplayName);
     MC_SAFE_RELEASE(mServerIdentity);
     MC_SAFE_RELEASE(mClientIdentity);
     MC_SAFE_RELEASE(mSessions);
@@ -197,6 +199,11 @@ IMAPIdentity * IMAPAsyncSession::serverIdentity()
 IMAPIdentity * IMAPAsyncSession::clientIdentity()
 {
     return mClientIdentity;
+}
+
+String * IMAPAsyncSession::gmailUserDisplayName()
+{
+    return mGmailUserDisplayName;
 }
 
 IMAPAsyncConnection * IMAPAsyncSession::session()
@@ -540,6 +547,7 @@ IMAPMessageRenderingOperation * IMAPAsyncSession::plainTextBodyRenderingOperatio
 void IMAPAsyncSession::automaticConfigurationDone(IMAPSession * session)
 {
     MC_SAFE_REPLACE_COPY(IMAPIdentity, mServerIdentity, session->serverIdentity());
+    MC_SAFE_REPLACE_COPY(String, mGmailUserDisplayName, session->gmailUserDisplayName());
     setDefaultNamespace(session->defaultNamespace());
     mAutomaticConfigurationDone = true;
 }

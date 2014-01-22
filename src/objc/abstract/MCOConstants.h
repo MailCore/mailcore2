@@ -72,6 +72,9 @@ typedef enum {
     MCOIMAPFolderFlagJunk        = MCOIMAPFolderFlagSpam,
     /** \Flagged: When the folder contains all the flagged emails.*/
     MCOIMAPFolderFlagFlagged     = MCOIMAPFolderFlagStarred,
+    /** Mask to identify the folder */
+    MCOIMAPFolderFlagFolderTypeMask = MCOIMAPFolderFlagInbox | MCOIMAPFolderFlagSentMail | MCOIMAPFolderFlagStarred | MCOIMAPFolderFlagAllMail |
+      MCOIMAPFolderFlagTrash| MCOIMAPFolderFlagDrafts | MCOIMAPFolderFlagSpam | MCOIMAPFolderFlagImportant | MCOIMAPFolderFlagArchive,
 } MCOIMAPFolderFlag;
 
 /** It's the flags of a message.*/
