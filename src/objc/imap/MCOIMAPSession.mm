@@ -339,11 +339,13 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
                                                 uids:(MCOIndexSet *)uids
                                                 kind:(MCOIMAPStoreFlagsRequestKind)kind
                                                flags:(MCOMessageFlag)flags
+                                         customFlags:(NSArray *)customFlags
 {
     IMAPOperation * coreOp = MCO_NATIVE_INSTANCE->storeFlagsOperation([folder mco_mcString],
                                                                       MCO_FROM_OBJC(IndexSet, uids),
                                                                       (IMAPStoreFlagsRequestKind) kind,
-                                                                      (MessageFlag) flags);
+                                                                      (MessageFlag) flags,
+                                                                      MCO_FROM_OBJC(Array, customFlags));
     return OPAQUE_OPERATION(coreOp);
 }
 
