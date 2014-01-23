@@ -3,6 +3,7 @@
 #include <libetpan/libetpan.h>
 #include <string.h>
 #include <stdlib.h>
+#include <iostream>
 
 #include "MCIMAPSearchExpression.h"
 #include "MCIMAPFolder.h"
@@ -154,6 +155,38 @@ static MessageFlag flags_from_lep_att_dynamic(struct mailimap_msg_att_dynamic * 
     }
     
     return flags;
+}
+
+static Array * custom_flags_from_lep_att_dynamic(struct mailimap_msg_att_dynamic * att_dynamic)
+{
+    Array * result;
+    clistiter * iter;
+    
+    if (att_dynamic->att_list == NULL)
+        return NULL;
+    
+    result = Array::array();
+    for(iter = clist_begin(att_dynamic->att_list) ;iter != NULL ; iter = clist_next(iter)) {
+        struct mailimap_flag_fetch * flag_fetch;
+        struct mailimap_flag * flag;
+        
+        flag_fetch = (struct mailimap_flag_fetch *) clist_content(iter);
+        if (flag_fetch->fl_type != MAILIMAP_FLAG_FETCH_OTHER) {
+            continue;
+        }
+        
+        flag = flag_fetch->fl_flag;
+        if (flag->fl_type == MAILIMAP_FLAG_KEYWORD) {
+            String * customFlag;
+            std::cout << "Found a custom flag with keyword " << flag->fl_data.fl_keyword;
+            
+            customFlag = String::stringWithUTF8Characters(flag->fl_data.fl_keyword);
+            result->addObject(customFlag);
+            std::cout << "The custom flag string is " << customFlag;
+        }
+    }
+    
+    return result;
 }
 
 #pragma mark set conversion
@@ -1898,6 +1931,10 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
             msg->setFlags(flags);
             msg->setOriginalFlags(flags);
             hasFlags = true;
+            
+            Array * customFlags;
+            customFlags = custom_flags_from_lep_att_dynamic(att_item->att_data.att_dyn);
+            msg->setCustomFlags(customFlags);
         }
         else if (att_item->att_type == MAILIMAP_MSG_ATT_ITEM_STATIC) {
             struct mailimap_msg_att_static * att_static;
