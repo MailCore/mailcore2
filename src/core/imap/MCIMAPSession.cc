@@ -3,7 +3,6 @@
 #include <libetpan/libetpan.h>
 #include <string.h>
 #include <stdlib.h>
-#include <iostream>
 
 #include "MCIMAPSearchExpression.h"
 #include "MCIMAPFolder.h"
@@ -178,11 +177,9 @@ static Array * custom_flags_from_lep_att_dynamic(struct mailimap_msg_att_dynamic
         flag = flag_fetch->fl_flag;
         if (flag->fl_type == MAILIMAP_FLAG_KEYWORD) {
             String * customFlag;
-            std::cout << "Found a custom flag with keyword " << flag->fl_data.fl_keyword;
             
             customFlag = String::stringWithUTF8Characters(flag->fl_data.fl_keyword);
             result->addObject(customFlag);
-            std::cout << "The custom flag string is " << customFlag;
         }
     }
     
@@ -3222,7 +3219,7 @@ HashMap * IMAPSession::fetchNamespace(ErrorCode * pError)
     return result;
 }
 
-void IMAPSession::storeFlags(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, ErrorCode * pError)
+void IMAPSession::storeFlags(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, Array * customFlags, ErrorCode * pError)
 {
     struct mailimap_set * imap_set;
     struct mailimap_store_att_flags * store_att_flags;
@@ -3272,28 +3269,12 @@ void IMAPSession::storeFlags(String * folder, IndexSet * uids, IMAPStoreFlagsReq
         f = mailimap_flag_new_draft();
         mailimap_flag_list_add(flag_list, f);
     }
-    if ((flags & MessageFlagMDNSent) != 0) {
+    
+    for (unsigned int i = 0 ; i < customFlags->count() ; i ++) {
         struct mailimap_flag * f;
-
-        f = mailimap_flag_new_flag_keyword(strdup("$MDNSent"));
-        mailimap_flag_list_add(flag_list, f);
-    }
-    if ((flags & MessageFlagForwarded) != 0) {
-        struct mailimap_flag * f;
-
-        f = mailimap_flag_new_flag_keyword(strdup("$Forwarded"));
-        mailimap_flag_list_add(flag_list, f);
-    }
-    if ((flags & MessageFlagSubmitPending) != 0) {
-        struct mailimap_flag * f;
-
-        f = mailimap_flag_new_flag_keyword(strdup("$SubmitPending"));
-        mailimap_flag_list_add(flag_list, f);
-    }
-    if ((flags & MessageFlagSubmitted) != 0) {
-        struct mailimap_flag * f;
-
-        f = mailimap_flag_new_flag_keyword(strdup("$Submitted"));
+        String * customFlag = (String *) customFlags->objectAtIndex(i);
+        
+        f = mailimap_flag_new_flag_keyword(strdup(customFlag->UTF8Characters()));
         mailimap_flag_list_add(flag_list, f);
     }
 

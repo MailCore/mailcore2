@@ -293,7 +293,8 @@
      MCOIMAPOperation * op = [session storeFlagsOperationWithFolder:@"INBOX"
                                                                uids:[MCOIndexSet indexSetWithIndex:456]
                                                                kind:MCOIMAPStoreFlagsRequestKindAdd
-                                                              flags:MCOMessageFlagSeen];
+                                                              flags:MCOMessageFlagSeen]
+                                                        customFlags:@["$Forwarded"];
      [op start:^(NSError * error) {
           ...
      }];
@@ -301,7 +302,8 @@
 - (MCOIMAPOperation *) storeFlagsOperationWithFolder:(NSString *)folder
                                                 uids:(MCOIndexSet *)uids
                                                 kind:(MCOIMAPStoreFlagsRequestKind)kind
-                                               flags:(MCOMessageFlag)flags;
+                                               flags:(MCOMessageFlag)flags
+                                         customFlags:(NSArray *)customFlags;
 /**
  Returns an operation to change labels of messages. Intended for Gmail
 

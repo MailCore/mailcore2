@@ -47,6 +47,7 @@ IMAPMessage::~IMAPMessage()
 {
     MC_SAFE_RELEASE(mMainPart);
     MC_SAFE_RELEASE(mGmailLabels);
+    MC_SAFE_RELEASE(mCustomFlags);
 }
 
 Object * IMAPMessage::copy()
