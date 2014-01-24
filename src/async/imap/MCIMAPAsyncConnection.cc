@@ -420,7 +420,19 @@ IMAPFetchContentOperation * IMAPAsyncConnection::fetchMessageAttachmentByUIDOper
     return op;
 }
 
-IMAPOperation * IMAPAsyncConnection::storeFlagsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, Array * customFlags)
+IMAPOperation * IMAPAsyncConnection::storeFlagsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags)
+{
+    IMAPStoreFlagsOperation * op = new IMAPStoreFlagsOperation();
+    op->setSession(this);
+    op->setFolder(folder);
+    op->setUids(uids);
+    op->setKind(kind);
+    op->setFlags(flags);
+    op->autorelease();
+    return op;
+}
+
+IMAPOperation * IMAPAsyncConnection::storeAllFlagsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, Array * customFlags)
 {
     IMAPStoreFlagsOperation * op = new IMAPStoreFlagsOperation();
     op->setSession(this);

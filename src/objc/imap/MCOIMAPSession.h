@@ -293,13 +293,30 @@
      MCOIMAPOperation * op = [session storeFlagsOperationWithFolder:@"INBOX"
                                                                uids:[MCOIndexSet indexSetWithIndex:456]
                                                                kind:MCOIMAPStoreFlagsRequestKindAdd
-                                                              flags:MCOMessageFlagSeen]
-                                                        customFlags:@["$Forwarded"];
+                                                              flags:MCOMessageFlagSeen];
      [op start:^(NSError * error) {
           ...
      }];
 */
 - (MCOIMAPOperation *) storeFlagsOperationWithFolder:(NSString *)folder
+                                                uids:(MCOIndexSet *)uids
+                                                kind:(MCOIMAPStoreFlagsRequestKind)kind
+                                               flags:(MCOMessageFlag)flags;
+/**
+ Returns an operation to change flags of messages.
+ 
+ For example: Adds the seen flag to the message with UID 456.
+ 
+     MCOIMAPOperation * op = [session storeFlagsOperationWithFolder:@"INBOX"
+                                                               uids:[MCOIndexSet indexSetWithIndex:456]
+                                                               kind:MCOIMAPStoreFlagsRequestKindAdd
+                                                              flags:MCOMessageFlagSeen
+                                                        customFlags:@["$Forwarded"]];
+     [op start:^(NSError * error) {
+         ...
+     }];
+ */
+- (MCOIMAPOperation *) storeAllFlagsOperationWithFolder:(NSString *)folder
                                                 uids:(MCOIndexSet *)uids
                                                 kind:(MCOIMAPStoreFlagsRequestKind)kind
                                                flags:(MCOMessageFlag)flags

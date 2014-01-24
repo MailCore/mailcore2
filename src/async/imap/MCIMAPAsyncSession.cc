@@ -418,10 +418,16 @@ IMAPFetchContentOperation * IMAPAsyncSession::fetchMessageAttachmentByUIDOperati
     return session->fetchMessageAttachmentByUIDOperation(folder, uid, partID, encoding);
 }
 
-IMAPOperation * IMAPAsyncSession::storeFlagsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, Array * customFlags)
+IMAPOperation * IMAPAsyncSession::storeFlagsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags)
 {
     IMAPAsyncConnection * session = sessionForFolder(folder);
-    return session->storeFlagsOperation(folder, uids, kind, flags, customFlags);
+    return session->storeFlagsOperation(folder, uids, kind, flags);
+}
+
+IMAPOperation * IMAPAsyncSession::storeAllFlagsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, Array * customFlags)
+{
+    IMAPAsyncConnection * session = sessionForFolder(folder);
+    return session->storeAllFlagsOperation(folder, uids, kind, flags, customFlags);
 }
 
 IMAPOperation * IMAPAsyncSession::storeLabelsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, Array * labels)
