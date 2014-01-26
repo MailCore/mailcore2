@@ -41,7 +41,6 @@ namespace mailcore {
         IMAPStoreFlagsRequestKind mKind;
         MessageFlag mFlags;
         Array * mCustomFlags;
-        
     };
     
 }

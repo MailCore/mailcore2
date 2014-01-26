@@ -244,9 +244,18 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
                                                         messageData:(NSData *)messageData
                                                               flags:(MCOMessageFlag)flags
 {
+    return [self appendMessageOperationWithFolder:folder messageData:messageData flags:flags customFlags:NULL];
+}
+
+- (MCOIMAPAppendMessageOperation *)appendMessageOperationWithFolder:(NSString *)folder
+                                                        messageData:(NSData *)messageData
+                                                              flags:(MCOMessageFlag)flags
+                                                        customFlags:(NSArray *)customFlags
+{
     IMAPAppendMessageOperation * coreOp = MCO_NATIVE_INSTANCE->appendMessageOperation([folder mco_mcString],
                                                                                       [messageData mco_mcData],
-                                                                                      (MessageFlag) flags);
+                                                                                      (MessageFlag) flags,
+                                                                                      MCO_FROM_OBJC(Array, customFlags));
     return MCO_TO_OBJC_OP(coreOp);
 }
 
@@ -340,20 +349,16 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
                                                 kind:(MCOIMAPStoreFlagsRequestKind)kind
                                                flags:(MCOMessageFlag)flags
 {
-    IMAPOperation * coreOp = MCO_NATIVE_INSTANCE->storeFlagsOperation([folder mco_mcString],
-                                                                      MCO_FROM_OBJC(IndexSet, uids),
-                                                                      (IMAPStoreFlagsRequestKind) kind,
-                                                                      (MessageFlag) flags);
-    return OPAQUE_OPERATION(coreOp);
+    return [self storeFlagsOperationWithFolder:folder uids:uids kind:kind flags:flags customFlags:NULL];
 }
 
-- (MCOIMAPOperation *) storeAllFlagsOperationWithFolder:(NSString *)folder
+- (MCOIMAPOperation *) storeFlagsOperationWithFolder:(NSString *)folder
                                                 uids:(MCOIndexSet *)uids
                                                 kind:(MCOIMAPStoreFlagsRequestKind)kind
                                                flags:(MCOMessageFlag)flags
                                          customFlags:(NSArray *)customFlags
 {
-    IMAPOperation * coreOp = MCO_NATIVE_INSTANCE->storeAllFlagsOperation([folder mco_mcString],
+    IMAPOperation * coreOp = MCO_NATIVE_INSTANCE->storeFlagsOperation([folder mco_mcString],
                                                                       MCO_FROM_OBJC(IndexSet, uids),
                                                                       (IMAPStoreFlagsRequestKind) kind,
                                                                       (MessageFlag) flags,

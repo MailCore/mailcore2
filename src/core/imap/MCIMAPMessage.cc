@@ -239,7 +239,9 @@ HashMap * IMAPMessage::serializable()
     result->setObjectForKey(MCSTR("size"), String::stringWithUTF8Format("%lu", (long unsigned) uid()));
     result->setObjectForKey(MCSTR("flags"), String::stringWithUTF8Format("%u", (unsigned) flags()));
     result->setObjectForKey(MCSTR("originalFlags"), String::stringWithUTF8Format("%u", (unsigned) originalFlags()));
-    result->setObjectForKey(MCSTR("customFlags"), customFlags());
+    if (customFlags() != NULL) {
+        result->setObjectForKey(MCSTR("customFlags"), customFlags());
+    }
     result->setObjectForKey(MCSTR("mainPart"), mMainPart->serializable());
     if (gmailLabels() != NULL) {
         result->setObjectForKey(MCSTR("gmailLabels"), gmailLabels());

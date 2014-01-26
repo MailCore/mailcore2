@@ -327,13 +327,14 @@ IMAPOperation * IMAPAsyncConnection::unsubscribeFolderOperation(String * folder)
     return op;
 }
 
-IMAPAppendMessageOperation * IMAPAsyncConnection::appendMessageOperation(String * folder, Data * messageData, MessageFlag flags)
+IMAPAppendMessageOperation * IMAPAsyncConnection::appendMessageOperation(String * folder, Data * messageData, MessageFlag flags, Array * customFlags)
 {
     IMAPAppendMessageOperation * op = new IMAPAppendMessageOperation();
     op->setSession(this);
     op->setFolder(folder);
     op->setMessageData(messageData);
     op->setFlags(flags);
+    op->setCustomFlags(customFlags);
     op->autorelease();
     return op;
 }
@@ -420,19 +421,7 @@ IMAPFetchContentOperation * IMAPAsyncConnection::fetchMessageAttachmentByUIDOper
     return op;
 }
 
-IMAPOperation * IMAPAsyncConnection::storeFlagsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags)
-{
-    IMAPStoreFlagsOperation * op = new IMAPStoreFlagsOperation();
-    op->setSession(this);
-    op->setFolder(folder);
-    op->setUids(uids);
-    op->setKind(kind);
-    op->setFlags(flags);
-    op->autorelease();
-    return op;
-}
-
-IMAPOperation * IMAPAsyncConnection::storeAllFlagsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, Array * customFlags)
+IMAPOperation * IMAPAsyncConnection::storeFlagsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, Array * customFlags)
 {
     IMAPStoreFlagsOperation * op = new IMAPStoreFlagsOperation();
     op->setSession(this);

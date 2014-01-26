@@ -70,6 +70,6 @@ Array * IMAPStoreFlagsOperation::customFlags()
 void IMAPStoreFlagsOperation::main()
 {
     ErrorCode error;
-    session()->session()->storeFlags(folder(), mUids, mKind, mFlags, mCustomFlags, &error);
+    session()->session()->storeFlagsAndCustomFlags(folder(), mUids, mKind, mFlags, mCustomFlags, &error);
     setError(error);
 }
