@@ -272,6 +272,21 @@
                                                               flags:(MCOMessageFlag)flags;
 
 /**
+ Returns an operation to add a message with custom flags to a folder.
+ 
+     MCOIMAPOperation * op = [session appendMessageOperationWithFolder:@"Sent Mail" messageData:rfc822Data flags:MCOMessageFlagNone customFlags:@[@"$CNS-Greeting-On"]];
+     [op start:^(NSError * error, uint32_t createdUID) {
+       if (error == nil) {
+         NSLog(@"created message with UID %lu", (unsigned long) createdUID);
+       }
+     }];
+ */
+- (MCOIMAPAppendMessageOperation *)appendMessageOperationWithFolder:(NSString *)folder
+                                                        messageData:(NSData *)messageData
+                                                              flags:(MCOMessageFlag)flags
+                                                        customFlags:(NSArray *)customFlags;
+
+/**
  Returns an operation to copy messages to a folder.
 
      MCOIMAPCopyMessagesOperation * op = [session copyMessagesOperationWithFolder:@"INBOX"
@@ -302,6 +317,25 @@
                                                 uids:(MCOIndexSet *)uids
                                                 kind:(MCOIMAPStoreFlagsRequestKind)kind
                                                flags:(MCOMessageFlag)flags;
+/**
+ Returns an operation to change flags and custom flags of messages.
+ 
+ For example: Adds the seen flag and $CNS-Greeting-On flag to the message with UID 456.
+ 
+     MCOIMAPOperation * op = [session storeFlagsOperationWithFolder:@"INBOX"
+                                                               uids:[MCOIndexSet indexSetWithIndex:456]
+                                                               kind:MCOIMAPStoreFlagsRequestKindAdd
+                                                              flags:MCOMessageFlagSeen
+                                                        customFlags:@["$CNS-Greeting-On"]];
+     [op start:^(NSError * error) {
+         ...
+     }];
+ */
+- (MCOIMAPOperation *) storeFlagsOperationWithFolder:(NSString *)folder
+                                                uids:(MCOIndexSet *)uids
+                                                kind:(MCOIMAPStoreFlagsRequestKind)kind
+                                               flags:(MCOMessageFlag)flags
+                                         customFlags:(NSArray *)customFlags;
 /**
  Returns an operation to change labels of messages. Intended for Gmail
 

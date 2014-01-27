@@ -28,6 +28,9 @@ namespace mailcore {
         virtual void setFlags(MessageFlag flags);
         virtual MessageFlag flags();
         
+        virtual void setCustomFlags(Array * customFlags);
+        virtual Array * customFlags();
+        
         virtual uint32_t createdUID();
         
     public: // subclass behavior
@@ -36,6 +39,7 @@ namespace mailcore {
     private:
         Data * mMessageData;
         MessageFlag mFlags;
+        Array * mCustomFlags;
         uint32_t mCreatedUID;
         
     };

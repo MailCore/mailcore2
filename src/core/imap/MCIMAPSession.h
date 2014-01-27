@@ -81,6 +81,8 @@ namespace mailcore {
         
         virtual void appendMessage(String * folder, Data * messageData, MessageFlag flags,
                                    IMAPProgressCallback * progressCallback, uint32_t * createdUID, ErrorCode * pError);
+        virtual void appendMessageWithCustomFlags(String * folder, Data * messageData, MessageFlag flags, Array * customFlags,
+                                   IMAPProgressCallback * progressCallback, uint32_t * createdUID, ErrorCode * pError);
         
         void copyMessages(String * folder, IndexSet * uidSet, String * destFolder,
                           HashMap ** pUidMapping, ErrorCode * pError);
@@ -120,8 +122,9 @@ namespace mailcore {
                                                                    IndexSet * uids, uint64_t modseq,
                                                                    IMAPProgressCallback * progressCallback,
                                                                    Array * extraHeaders, ErrorCode * pError);
-
+        
         virtual void storeFlags(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, ErrorCode * pError);
+        virtual void storeFlagsAndCustomFlags(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, Array * customFlags, ErrorCode * pError);
         virtual void storeLabels(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, Array * labels, ErrorCode * pError);
         
         virtual IndexSet * search(String * folder, IMAPSearchKind kind, String * searchString, ErrorCode * pError);

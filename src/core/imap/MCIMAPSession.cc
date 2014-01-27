@@ -133,11 +133,11 @@ static MessageFlag flag_from_lep(struct mailimap_flag * flag)
 
 static MessageFlag flags_from_lep_att_dynamic(struct mailimap_msg_att_dynamic * att_dynamic)
 {
-    MessageFlag flags;
-    clistiter * iter;
-    
     if (att_dynamic->att_list == NULL)
         return MessageFlagNone;
+    
+    MessageFlag flags;
+    clistiter * iter;
     
     flags = MessageFlagNone;
     for(iter = clist_begin(att_dynamic->att_list) ;iter != NULL ; iter = clist_next(iter)) {
@@ -154,6 +154,37 @@ static MessageFlag flags_from_lep_att_dynamic(struct mailimap_msg_att_dynamic * 
     }
     
     return flags;
+}
+
+static Array * custom_flags_from_lep_att_dynamic(struct mailimap_msg_att_dynamic * att_dynamic)
+{
+    if (att_dynamic->att_list == NULL)
+        return NULL;
+    
+    Array * result;
+    clistiter * iter;
+    
+    result = Array::array();
+    for (iter = clist_begin(att_dynamic->att_list); iter != NULL; iter = clist_next(iter)) {
+        struct mailimap_flag_fetch * flag_fetch;
+        struct mailimap_flag * flag;
+        
+        flag_fetch = (struct mailimap_flag_fetch *) clist_content(iter);
+        if (flag_fetch->fl_type != MAILIMAP_FLAG_FETCH_OTHER) {
+            continue;
+        }
+        
+        flag = flag_fetch->fl_flag;
+        if (flag->fl_type == MAILIMAP_FLAG_KEYWORD) {
+            if (strcmp(flag->fl_data.fl_keyword, "$MDNSent") != 0 && strcmp(flag->fl_data.fl_keyword, "$Forwarded") != 0 && strcmp(flag->fl_data.fl_keyword, "$SubmitPending") != 0 && strcmp(flag->fl_data.fl_keyword, "$Submitted") != 0) {
+                String * customFlag;
+                customFlag = String::stringWithUTF8Characters(flag->fl_data.fl_keyword);
+                result->addObject(customFlag);
+            }
+        }
+    }
+    
+    return result;
 }
 
 #pragma mark set conversion
@@ -1522,6 +1553,12 @@ void IMAPSession::unsubscribeFolder(String * folder, ErrorCode * pError)
 void IMAPSession::appendMessage(String * folder, Data * messageData, MessageFlag flags,
     IMAPProgressCallback * progressCallback, uint32_t * createdUID, ErrorCode * pError)
 {
+    this->appendMessageWithCustomFlags(folder, messageData, flags, NULL, progressCallback, createdUID, pError);
+}
+
+void IMAPSession::appendMessageWithCustomFlags(String * folder, Data * messageData, MessageFlag flags, Array * customFlags,
+    IMAPProgressCallback * progressCallback, uint32_t * createdUID, ErrorCode * pError)
+{
     int r;
     struct mailimap_flag_list * flag_list;
     uint32_t uidvalidity;
@@ -1536,6 +1573,15 @@ void IMAPSession::appendMessage(String * folder, Data * messageData, MessageFlag
     
     flag_list = NULL;
     flag_list = flags_to_lep(flags);
+    if (customFlags != NULL) {
+        for (unsigned int i = 0 ; i < customFlags->count() ; i ++) {
+            struct mailimap_flag * f;
+            String * customFlag = (String *) customFlags->objectAtIndex(i);
+            
+            f = mailimap_flag_new_flag_keyword(strdup(customFlag->UTF8Characters()));
+            mailimap_flag_list_add(flag_list, f);
+        }
+    }
     r = mailimap_uidplus_append(mImap, MCUTF8(folder), flag_list, NULL, messageData->bytes(), messageData->length(),
         &uidvalidity, &uidresult);
     mailimap_flag_list_free(flag_list);
@@ -1898,6 +1944,10 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
             msg->setFlags(flags);
             msg->setOriginalFlags(flags);
             hasFlags = true;
+            
+            Array * customFlags;
+            customFlags = custom_flags_from_lep_att_dynamic(att_item->att_data.att_dyn);
+            msg->setCustomFlags(customFlags);
         }
         else if (att_item->att_type == MAILIMAP_MSG_ATT_ITEM_STATIC) {
             struct mailimap_msg_att_static * att_static;
@@ -3187,6 +3237,11 @@ HashMap * IMAPSession::fetchNamespace(ErrorCode * pError)
 
 void IMAPSession::storeFlags(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, ErrorCode * pError)
 {
+    this->storeFlagsAndCustomFlags(folder, uids, kind, flags, NULL, pError);
+}
+
+void IMAPSession::storeFlagsAndCustomFlags(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, Array * customFlags, ErrorCode * pError)
+{
     struct mailimap_set * imap_set;
     struct mailimap_store_att_flags * store_att_flags;
     struct mailimap_flag_list * flag_list;
@@ -3255,9 +3310,19 @@ void IMAPSession::storeFlags(String * folder, IndexSet * uids, IMAPStoreFlagsReq
     }
     if ((flags & MessageFlagSubmitted) != 0) {
         struct mailimap_flag * f;
-
+        
         f = mailimap_flag_new_flag_keyword(strdup("$Submitted"));
         mailimap_flag_list_add(flag_list, f);
+    }
+    
+    if (customFlags != NULL) {
+        for (unsigned int i = 0 ; i < customFlags->count() ; i ++) {
+            struct mailimap_flag * f;
+            String * customFlag = (String *) customFlags->objectAtIndex(i);
+            
+            f = mailimap_flag_new_flag_keyword(strdup(customFlag->UTF8Characters()));
+            mailimap_flag_list_add(flag_list, f);
+        }
     }
 
     store_att_flags = NULL;

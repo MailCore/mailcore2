@@ -366,10 +366,10 @@ IMAPOperation * IMAPAsyncSession::unsubscribeFolderOperation(String * folder)
     return session->unsubscribeFolderOperation(folder);
 }
 
-IMAPAppendMessageOperation * IMAPAsyncSession::appendMessageOperation(String * folder, Data * messageData, MessageFlag flags)
+IMAPAppendMessageOperation * IMAPAsyncSession::appendMessageOperation(String * folder, Data * messageData, MessageFlag flags, Array * customFlags)
 {
     IMAPAsyncConnection * session = sessionForFolder(folder);
-    return session->appendMessageOperation(folder, messageData, flags);
+    return session->appendMessageOperation(folder, messageData, flags, customFlags);
 }
 
 IMAPCopyMessagesOperation * IMAPAsyncSession::copyMessagesOperation(String * folder, IndexSet * uids, String * destFolder)
@@ -418,10 +418,10 @@ IMAPFetchContentOperation * IMAPAsyncSession::fetchMessageAttachmentByUIDOperati
     return session->fetchMessageAttachmentByUIDOperation(folder, uid, partID, encoding);
 }
 
-IMAPOperation * IMAPAsyncSession::storeFlagsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags)
+IMAPOperation * IMAPAsyncSession::storeFlagsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, Array * customFlags)
 {
     IMAPAsyncConnection * session = sessionForFolder(folder);
-    return session->storeFlagsOperation(folder, uids, kind, flags);
+    return session->storeFlagsOperation(folder, uids, kind, flags, customFlags);
 }
 
 IMAPOperation * IMAPAsyncSession::storeLabelsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, Array * labels)
