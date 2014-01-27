@@ -156,15 +156,19 @@ static MessageFlag flags_from_lep_att_dynamic(struct mailimap_msg_att_dynamic * 
     return flags;
 }
 
+static bool isKnownCustomFlag(const char * keyword)
+{
+    return !(strcmp(keyword, "$MDNSent") != 0 && strcmp(keyword, "$Forwarded") != 0 && strcmp(keyword, "$SubmitPending") != 0 && strcmp(keyword, "$Submitted") != 0);
+}
+
 static Array * custom_flags_from_lep_att_dynamic(struct mailimap_msg_att_dynamic * att_dynamic)
 {
     if (att_dynamic->att_list == NULL)
         return NULL;
     
-    Array * result;
     clistiter * iter;
+    bool hasCustomFlags = false;
     
-    result = Array::array();
     for (iter = clist_begin(att_dynamic->att_list); iter != NULL; iter = clist_next(iter)) {
         struct mailimap_flag_fetch * flag_fetch;
         struct mailimap_flag * flag;
@@ -176,7 +180,28 @@ static Array * custom_flags_from_lep_att_dynamic(struct mailimap_msg_att_dynamic
         
         flag = flag_fetch->fl_flag;
         if (flag->fl_type == MAILIMAP_FLAG_KEYWORD) {
-            if (strcmp(flag->fl_data.fl_keyword, "$MDNSent") != 0 && strcmp(flag->fl_data.fl_keyword, "$Forwarded") != 0 && strcmp(flag->fl_data.fl_keyword, "$SubmitPending") != 0 && strcmp(flag->fl_data.fl_keyword, "$Submitted") != 0) {
+            if (!isKnownCustomFlag(flag->fl_data.fl_keyword)) {
+                hasCustomFlags = true;
+            }
+        }
+    }
+    
+    if (!hasCustomFlags)
+        return NULL;
+    
+    Array * result = Array::array();
+    for (iter = clist_begin(att_dynamic->att_list); iter != NULL; iter = clist_next(iter)) {
+        struct mailimap_flag_fetch * flag_fetch;
+        struct mailimap_flag * flag;
+        
+        flag_fetch = (struct mailimap_flag_fetch *) clist_content(iter);
+        if (flag_fetch->fl_type != MAILIMAP_FLAG_FETCH_OTHER) {
+            continue;
+        }
+        
+        flag = flag_fetch->fl_flag;
+        if (flag->fl_type == MAILIMAP_FLAG_KEYWORD) {
+            if (!isKnownCustomFlag(flag->fl_data.fl_keyword)) {
                 String * customFlag;
                 customFlag = String::stringWithUTF8Characters(flag->fl_data.fl_keyword);
                 result->addObject(customFlag);
