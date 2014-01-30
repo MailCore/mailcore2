@@ -89,7 +89,7 @@
 
 - (NSArray *) prefixes
 {
-    return MCO_OBJC_BRIDGE_GET(mainPrefix);
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->prefixes());
 }
 
 - (NSString *) pathForComponents:(NSArray *)components
