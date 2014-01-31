@@ -15,6 +15,7 @@
 #import "NSDictionary+MCO.h"
 #import "NSArray+MCO.h"
 #import "NSValue+MCO.h"
+#import "NSSet+MCO.h"
 
 #include "MCBaseTypes.h"
 #include "MCUtils.h"
@@ -95,6 +96,9 @@ static Class classWithTypeInfo(const std::type_info * info)
     else if (objectType == typeid(mailcore::Array).hash_code()) {
         return [NSArray mco_arrayWithMCArray:(mailcore::Array *) object];
     }
+    else if (objectType == typeid(mailcore::Set).hash_code()) {
+        return [NSSet mco_setWithMCSet:(mailcore::Set *) object];
+    }
     else {
         Class aClass = classWithTypeInfo(&typeid(* object));
         MCAssert(aClass != nil);
@@ -123,6 +127,9 @@ static Class classWithTypeInfo(const std::type_info * info)
     }
     else if ([self isKindOfClass:[NSDictionary class]]) {
         return [(NSDictionary *) self mco_mcHashMap];
+    }
+    else if ([self isKindOfClass:[NSSet class]]) {
+        return [(NSSet *) self mco_mcSet];
     }
     else {
         MCAssert(0);
