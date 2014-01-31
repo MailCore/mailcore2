@@ -398,14 +398,14 @@ void IndexSet::importSerializable(HashMap * serializable)
 
 void IndexSet::addIndexSet(IndexSet * indexSet)
 {
-    for(unsigned int i = 0 ; i < indexSet->count() ; i ++) {
+    for(unsigned int i = 0 ; i < indexSet->rangesCount() ; i ++) {
         addRange(indexSet->allRanges()[i]);
     }
 }
 
 void IndexSet::removeIndexSet(IndexSet * indexSet)
 {
-    for(unsigned int i = 0 ; i < indexSet->count() ; i ++) {
+    for(unsigned int i = 0 ; i < indexSet->rangesCount() ; i ++) {
         removeRange(indexSet->allRanges()[i]);
     }
 }
@@ -413,7 +413,7 @@ void IndexSet::removeIndexSet(IndexSet * indexSet)
 void IndexSet::intersectsIndexSet(IndexSet * indexSet)
 {
     IndexSet * result = new IndexSet();
-    for(unsigned int i = 0 ; i < indexSet->count() ; i ++) {
+    for(unsigned int i = 0 ; i < indexSet->rangesCount() ; i ++) {
         IndexSet * rangeIntersect = (IndexSet *) copy();
         rangeIntersect->intersectsRange(indexSet->allRanges()[i]);
         result->addIndexSet(rangeIntersect);
