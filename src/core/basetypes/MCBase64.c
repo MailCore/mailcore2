@@ -31,6 +31,7 @@ char * MCEncodeBase64(const char * in, int len)
     char * output, * tmp;
     unsigned char oval;
     int out_len;
+    const unsigned char * uin = (const unsigned char *) in;
     
     out_len = ((len + 2) / 3 * 4) + 1;
     
@@ -43,19 +44,19 @@ char * MCEncodeBase64(const char * in, int len)
     
     tmp = output;
     while (len >= 3) {
-        *tmp++ = basis_64[in[0] >> 2];
-        *tmp++ = basis_64[((in[0] << 4) & 0x30) | (in[1] >> 4)];
-        *tmp++ = basis_64[((in[1] << 2) & 0x3c) | (in[2] >> 6)];
-        *tmp++ = basis_64[in[2] & 0x3f];
-        in += 3;
+        *tmp++ = basis_64[uin[0] >> 2];
+        *tmp++ = basis_64[((uin[0] << 4) & 0x30) | (uin[1] >> 4)];
+        *tmp++ = basis_64[((uin[1] << 2) & 0x3c) | (uin[2] >> 6)];
+        *tmp++ = basis_64[uin[2] & 0x3f];
+        uin += 3;
         len -= 3;
     }
     if (len > 0) {
-        *tmp++ = basis_64[in[0] >> 2];
-        oval = (in[0] << 4) & 0x30;
-        if (len > 1) oval |= in[1] >> 4;
+        *tmp++ = basis_64[uin[0] >> 2];
+        oval = (uin[0] << 4) & 0x30;
+        if (len > 1) oval |= uin[1] >> 4;
         *tmp++ = basis_64[oval];
-        *tmp++ = (len < 2) ? '=' : basis_64[(in[1] << 2) & 0x3c];
+        *tmp++ = (len < 2) ? '=' : basis_64[(uin[1] << 2) & 0x3c];
         *tmp++ = '=';
     }
     
