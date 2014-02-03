@@ -8,7 +8,7 @@
 
 #ifndef __MAILCORE_MCOIMAPCAPABILITYOPERATION_H_
 
-#define __MAILCORE_MCOIMAPCAPBILITYOPERATION_H_
+#define __MAILCORE_MCOIMAPCAPABILITYOPERATION_H_
 
 /** 
  This class implements an operation to query for IMAP capabilities, 
