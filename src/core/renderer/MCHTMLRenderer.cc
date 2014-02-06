@@ -266,8 +266,9 @@ static String * htmlForAbstractSinglePart(AbstractPart * part, htmlRendererConte
                 return NULL;
             
             String * str = data->stringWithDetectedCharset(charset, false);
+            str = str->htmlMessageContent();
             context->firstRendered = true;
-            return str->htmlEncodedString();
+            return str;
         }
         else if (mimeType->isEqual(MCSTR("text/html"))) {
             String * charset = part->charset();
