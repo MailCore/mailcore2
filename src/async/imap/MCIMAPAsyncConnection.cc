@@ -105,6 +105,7 @@ IMAPAsyncConnection::IMAPAsyncConnection()
     mInternalLogger = new IMAPConnectionLogger(this);
     mAutomaticConfigurationEnabled = true;
     mQueueRunning = false;
+    mScheduledAutomaticDisconnect = false;
 }
 
 IMAPAsyncConnection::~IMAPAsyncConnection()
@@ -326,13 +327,14 @@ IMAPOperation * IMAPAsyncConnection::unsubscribeFolderOperation(String * folder)
     return op;
 }
 
-IMAPAppendMessageOperation * IMAPAsyncConnection::appendMessageOperation(String * folder, Data * messageData, MessageFlag flags)
+IMAPAppendMessageOperation * IMAPAsyncConnection::appendMessageOperation(String * folder, Data * messageData, MessageFlag flags, Array * customFlags)
 {
     IMAPAppendMessageOperation * op = new IMAPAppendMessageOperation();
     op->setSession(this);
     op->setFolder(folder);
     op->setMessageData(messageData);
     op->setFlags(flags);
+    op->setCustomFlags(customFlags);
     op->autorelease();
     return op;
 }
@@ -419,7 +421,7 @@ IMAPFetchContentOperation * IMAPAsyncConnection::fetchMessageAttachmentByUIDOper
     return op;
 }
 
-IMAPOperation * IMAPAsyncConnection::storeFlagsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags)
+IMAPOperation * IMAPAsyncConnection::storeFlagsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, Array * customFlags)
 {
     IMAPStoreFlagsOperation * op = new IMAPStoreFlagsOperation();
     op->setSession(this);
@@ -427,6 +429,7 @@ IMAPOperation * IMAPAsyncConnection::storeFlagsOperation(String * folder, IndexS
     op->setUids(uids);
     op->setKind(kind);
     op->setFlags(flags);
+    op->setCustomFlags(customFlags);
     op->autorelease();
     return op;
 }
@@ -562,14 +565,28 @@ void IMAPAsyncConnection::tryAutomaticDisconnect()
         return;
     }
     
-    cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
+    bool scheduledAutomaticDisconnect = mScheduledAutomaticDisconnect;
+    if (scheduledAutomaticDisconnect) {
+        cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
+    }
+    
+    mOwner->retain();
+    mScheduledAutomaticDisconnect = true;
     performMethodAfterDelay((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, 30);
+    
+    if (scheduledAutomaticDisconnect) {
+        mOwner->release();
+    }
 }
 
 void IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay(void * context)
 {
+    mScheduledAutomaticDisconnect = false;
+    
     IMAPOperation * op = disconnectOperation();
     op->start();
+    
+    mOwner->release();
 }
 
 void IMAPAsyncConnection::queueStartRunning()
@@ -697,3 +714,15 @@ void IMAPAsyncConnection::setQueueRunning(bool running)
 {
     mQueueRunning = running;
 }
+
+#if __APPLE__
+void IMAPAsyncConnection::setDispatchQueue(dispatch_queue_t dispatchQueue)
+{
+    mQueue->setDispatchQueue(dispatchQueue);
+}
+
+dispatch_queue_t IMAPAsyncConnection::dispatchQueue()
+{
+    return mQueue->dispatchQueue();
+}
+#endif

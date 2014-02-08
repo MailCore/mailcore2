@@ -32,6 +32,7 @@ namespace mailcore {
         
         virtual void addObjectsFromArray(Array * array);
         virtual Object * lastObject();
+        virtual void removeLastObject();
         virtual bool containsObject(Object * obj);
         
         virtual Array * sortedArray(int (* compare)(void * a, void * b, void * context), void * context);

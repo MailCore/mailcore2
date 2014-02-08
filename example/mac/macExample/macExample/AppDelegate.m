@@ -156,10 +156,8 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 	
 		[self willChangeValueForKey:@"loggingIn"];
                 
-        [self.checkOp release];
-        _checkOp = nil;
-        [self.session release];
-        _session = nil;
+        self.checkOp = nil;
+        self.session = nil;
 		
 		[self didChangeValueForKey:@"loggingIn"];
 		

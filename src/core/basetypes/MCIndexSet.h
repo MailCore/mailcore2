@@ -36,6 +36,10 @@ namespace mailcore {
         virtual void removeRange(Range range);
         virtual void intersectsRange(Range range);
         
+        virtual void addIndexSet(IndexSet * indexSet);
+        virtual void removeIndexSet(IndexSet * indexSet);
+        virtual void intersectsIndexSet(IndexSet * indexSet);
+        
         virtual Range * allRanges();
         virtual unsigned int rangesCount();
         virtual void removeAllIndexes();

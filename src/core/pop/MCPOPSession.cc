@@ -439,6 +439,7 @@ Array * POPSession::fetchMessages(ErrorCode * pError)
         
         POPMessageInfo * info = new POPMessageInfo();
         info->setUid(uid);
+        info->setSize(msg_info->msg_size);
         info->setIndex(msg_info->msg_index);
         result->addObject(info);
         info->release();

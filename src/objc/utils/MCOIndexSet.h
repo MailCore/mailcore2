@@ -48,6 +48,15 @@
 /** Removes all integers that are not in the given range.*/
 - (void) intersectsRange:(MCORange)range;
 
+/** Adds all indexes from an other index set to the index set.*/
+- (void) addIndexSet:(MCOIndexSet *)indexSet;
+
+/** Remove all indexes from an other index set from the index set.*/
+- (void) removeIndexSet:(MCOIndexSet *)indexSet;
+
+/** Removes all integers that are not in the given index set.*/
+- (void) intersectsIndexSet:(MCOIndexSet *)indexSet;
+
 /** Returns all the ranges of ths index set.*/
 - (MCORange *) allRanges;
 

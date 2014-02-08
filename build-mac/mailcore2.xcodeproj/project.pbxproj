@@ -124,6 +124,8 @@
 		C63D316317C92D8300A4D993 /* MCOIMAPIdentity.mm in Sources */ = {isa = PBXBuildFile; fileRef = C63D316117C92D8300A4D993 /* MCOIMAPIdentity.mm */; };
 		C63D316617C997B400A4D993 /* MCOIMAPIdentity.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63D316017C92D8300A4D993 /* MCOIMAPIdentity.h */; };
 		C63D316717C997BA00A4D993 /* MCOIMAPIdentity.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63D316017C92D8300A4D993 /* MCOIMAPIdentity.h */; };
+		C643F492189A3D59007EA2F7 /* NSSet+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = C643F491189A3D59007EA2F7 /* NSSet+MCO.mm */; };
+		C643F493189A3D59007EA2F7 /* NSSet+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = C643F491189A3D59007EA2F7 /* NSSet+MCO.mm */; };
 		C64BB22116E34DCB000DB34C /* MCIMAPSyncResult.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64BB21F16E34DCA000DB34C /* MCIMAPSyncResult.cc */; };
 		C64BB22B16E5C0A4000DB34C /* MCIMAPCapabilityOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64BB22916E5C0A3000DB34C /* MCIMAPCapabilityOperation.cc */; };
 		C64BB22E16E5C1EE000DB34C /* MCIndexSet.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64BB22C16E5C1EE000DB34C /* MCIndexSet.cc */; };
@@ -1250,6 +1252,8 @@
 		C63D315B17C9155C00A4D993 /* MCIMAPIdentity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPIdentity.h; sourceTree = "<group>"; };
 		C63D316017C92D8300A4D993 /* MCOIMAPIdentity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPIdentity.h; sourceTree = "<group>"; };
 		C63D316117C92D8300A4D993 /* MCOIMAPIdentity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOIMAPIdentity.mm; sourceTree = "<group>"; };
+		C643F490189A3D59007EA2F7 /* NSSet+MCO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+MCO.h"; sourceTree = "<group>"; };
+		C643F491189A3D59007EA2F7 /* NSSet+MCO.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSSet+MCO.mm"; sourceTree = "<group>"; };
 		C64BB21F16E34DCA000DB34C /* MCIMAPSyncResult.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPSyncResult.cc; sourceTree = "<group>"; };
 		C64BB22016E34DCB000DB34C /* MCIMAPSyncResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPSyncResult.h; sourceTree = "<group>"; };
 		C64BB22916E5C0A3000DB34C /* MCIMAPCapabilityOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPCapabilityOperation.cc; sourceTree = "<group>"; };
@@ -2195,6 +2199,8 @@
 				C6CCC5C816FFE54F0077A5FC /* MCORange.h */,
 				C69BA85917DEFCCB00D601B7 /* NSIndexSet+MCO.h */,
 				C69BA85A17DEFCCB00D601B7 /* NSIndexSet+MCO.m */,
+				C643F490189A3D59007EA2F7 /* NSSet+MCO.h */,
+				C643F491189A3D59007EA2F7 /* NSSet+MCO.mm */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -2613,6 +2619,7 @@
 				C64EA81D16A29DC500778456 /* MCIMAPFetchContentOperation.cc in Sources */,
 				C64EA82016A29E4100778456 /* MCIMAPStoreFlagsOperation.cc in Sources */,
 				C64EA82316A29E5300778456 /* MCIMAPStoreLabelsOperation.cc in Sources */,
+				C643F492189A3D59007EA2F7 /* NSSet+MCO.mm in Sources */,
 				C64EA82616A29EE500778456 /* MCIMAPSearchOperation.cc in Sources */,
 				C6E665BD1796500C0063F2CF /* zip.c in Sources */,
 				C64EA82916A29F2200778456 /* MCIMAPIdleOperation.cc in Sources */,
@@ -2818,6 +2825,7 @@
 				C6BA2BCE1705F4E6003F0E9E /* MCIMAPFetchContentOperation.cc in Sources */,
 				C6BA2BCF1705F4E6003F0E9E /* MCIMAPStoreFlagsOperation.cc in Sources */,
 				C6BA2BD01705F4E6003F0E9E /* MCIMAPStoreLabelsOperation.cc in Sources */,
+				C643F493189A3D59007EA2F7 /* NSSet+MCO.mm in Sources */,
 				C6BA2BD11705F4E6003F0E9E /* MCIMAPSearchOperation.cc in Sources */,
 				C6E665BE1796500C0063F2CF /* zip.c in Sources */,
 				C6BA2BD21705F4E6003F0E9E /* MCIMAPIdleOperation.cc in Sources */,
@@ -3000,7 +3008,7 @@
 				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(IOS_HEADERS_SEARCH_PATHS)";
 				"HEADER_SEARCH_PATHS[sdk=macosx*]" = "$(OSX_HEADERS_SEARCH_PATHS)";
 				IOS_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-ios/include\" \"$(SRCROOT)/../Externals/icu4c-ios/include\" \"$(SRCROOT)/../Externals/ctemplate-ios/include\" \"$(SRCROOT)/../Externals/tidy-html5-ios/include/tidy\" /usr/include/libxml2";
-				IOS_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-ios/lib\" \"$(SRCROOT)/../Externals/ctemplate-ios/lib\" \"$(SRCROOT)/../Externals/libsasl-ios/lib\" \"$(SRCROOT)/../Externals/tidy-html5-ios/lib\"";
+				IOS_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-ios/lib\" \"$(SRCROOT)/../Externals/icu4c-ios/lib\" \"$(SRCROOT)/../Externals/ctemplate-ios/lib\" \"$(SRCROOT)/../Externals/libsasl-ios/lib\" \"$(SRCROOT)/../Externals/tidy-html5-ios/lib\"";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../Externals/libetpan/lib\"",
 					"\"$(SRCROOT)/../Externals/icu4c/lib\"",
@@ -3012,7 +3020,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				OSX_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan/include\" \"$(SRCROOT)/../Externals/icu4c/include\" \"$(SRCROOT)/../Externals/ctemplate/include\" /usr/include/tidy /usr/include/libxml2";
-				OSX_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan/lib\" \"$(SRCROOT)/../Externals/ctemplate/lib\"";
+				OSX_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan/lib\" \"$(SRCROOT)/../Externals/icu4c/lib\" \"$(SRCROOT)/../Externals/ctemplate/lib\"";
 			};
 			name = Debug;
 		};
@@ -3048,7 +3056,7 @@
 				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(IOS_HEADERS_SEARCH_PATHS)";
 				"HEADER_SEARCH_PATHS[sdk=macosx*]" = "$(OSX_HEADERS_SEARCH_PATHS)";
 				IOS_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-ios/include\" \"$(SRCROOT)/../Externals/icu4c-ios/include\" \"$(SRCROOT)/../Externals/ctemplate-ios/include\" \"$(SRCROOT)/../Externals/tidy-html5-ios/include/tidy\" /usr/include/libxml2";
-				IOS_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-ios/lib\" \"$(SRCROOT)/../Externals/ctemplate-ios/lib\" \"$(SRCROOT)/../Externals/libsasl-ios/lib\" \"$(SRCROOT)/../Externals/tidy-html5-ios/lib\"";
+				IOS_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-ios/lib\" \"$(SRCROOT)/../Externals/icu4c-ios/lib\" \"$(SRCROOT)/../Externals/ctemplate-ios/lib\" \"$(SRCROOT)/../Externals/libsasl-ios/lib\" \"$(SRCROOT)/../Externals/tidy-html5-ios/lib\"";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../Externals/libetpan/lib\"",
 					"\"$(SRCROOT)/../Externals/icu4c/lib\"",
@@ -3059,7 +3067,7 @@
 				"LIBRARY_SEARCH_PATHS[sdk=macosx*]" = "$(OSX_LIBRARY_SEARCH_PATHS)";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OSX_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan/include\" \"$(SRCROOT)/../Externals/icu4c/include\" \"$(SRCROOT)/../Externals/ctemplate/include\" /usr/include/tidy /usr/include/libxml2";
-				OSX_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan/lib\" \"$(SRCROOT)/../Externals/ctemplate/lib\"";
+				OSX_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan/lib\" \"$(SRCROOT)/../Externals/icu4c/lib\" \"$(SRCROOT)/../Externals/ctemplate/lib\"";
 			};
 			name = Release;
 		};
@@ -3121,7 +3129,9 @@
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
 					"-letpan-ios",
-					"-licucore",
+					"-licudata",
+					"-licui18n",
+					"-licuuc",
 					"-lxml2",
 					"-lsasl2",
 					"-liconv",
@@ -3155,7 +3165,9 @@
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
 					"-letpan-ios",
-					"-licucore",
+					"-licudata",
+					"-licui18n",
+					"-licuuc",
 					"-lxml2",
 					"-lsasl2",
 					"-liconv",
@@ -3216,7 +3228,9 @@
 				OTHER_LDFLAGS = (
 					"-lctemplate",
 					"-letpan",
-					"-licucore",
+					"-licudata",
+					"-licui18n",
+					"-licuuc",
 					"-lxml2",
 					"-lssl",
 					"-lcrypto",
@@ -3246,7 +3260,9 @@
 				OTHER_LDFLAGS = (
 					"-lctemplate",
 					"-letpan",
-					"-licucore",
+					"-licudata",
+					"-licui18n",
+					"-licuuc",
 					"-lxml2",
 					"-lssl",
 					"-lcrypto",

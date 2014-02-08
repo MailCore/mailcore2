@@ -105,6 +105,7 @@ MCO_OBJC_SYNTHESIZE_BOOL(setCheckCertificateEnabled, isCheckCertificateEnabled)
 MCO_OBJC_SYNTHESIZE_BOOL(setVoIPEnabled, isVoIPEnabled)
 MCO_OBJC_SYNTHESIZE_SCALAR(BOOL, BOOL, setAllowsFolderConcurrentAccessEnabled, allowsFolderConcurrentAccessEnabled)
 MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, maximumConnections)
+MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue, dispatchQueue);
 
 - (void) setDefaultNamespace:(MCOIMAPNamespace *)defaultNamespace
 {
@@ -124,6 +125,11 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
 - (MCOIMAPIdentity *) serverIdentity
 {
     return MCO_OBJC_BRIDGE_GET(serverIdentity);
+}
+
+- (NSString *) gmailUserDisplayName
+{
+    return MCO_TO_OBJC(_session->gmailUserDisplayName());
 }
 
 - (void) setConnectionLogger:(MCOConnectionLogger)connectionLogger
@@ -238,9 +244,18 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
                                                         messageData:(NSData *)messageData
                                                               flags:(MCOMessageFlag)flags
 {
+    return [self appendMessageOperationWithFolder:folder messageData:messageData flags:flags customFlags:NULL];
+}
+
+- (MCOIMAPAppendMessageOperation *)appendMessageOperationWithFolder:(NSString *)folder
+                                                        messageData:(NSData *)messageData
+                                                              flags:(MCOMessageFlag)flags
+                                                        customFlags:(NSArray *)customFlags
+{
     IMAPAppendMessageOperation * coreOp = MCO_NATIVE_INSTANCE->appendMessageOperation([folder mco_mcString],
                                                                                       [messageData mco_mcData],
-                                                                                      (MessageFlag) flags);
+                                                                                      (MessageFlag) flags,
+                                                                                      MCO_FROM_OBJC(Array, customFlags));
     return MCO_TO_OBJC_OP(coreOp);
 }
 
@@ -334,10 +349,20 @@ MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, ma
                                                 kind:(MCOIMAPStoreFlagsRequestKind)kind
                                                flags:(MCOMessageFlag)flags
 {
+    return [self storeFlagsOperationWithFolder:folder uids:uids kind:kind flags:flags customFlags:NULL];
+}
+
+- (MCOIMAPOperation *) storeFlagsOperationWithFolder:(NSString *)folder
+                                                uids:(MCOIndexSet *)uids
+                                                kind:(MCOIMAPStoreFlagsRequestKind)kind
+                                               flags:(MCOMessageFlag)flags
+                                         customFlags:(NSArray *)customFlags
+{
     IMAPOperation * coreOp = MCO_NATIVE_INSTANCE->storeFlagsOperation([folder mco_mcString],
                                                                       MCO_FROM_OBJC(IndexSet, uids),
                                                                       (IMAPStoreFlagsRequestKind) kind,
-                                                                      (MessageFlag) flags);
+                                                                      (MessageFlag) flags,
+                                                                      MCO_FROM_OBJC(Array, customFlags));
     return OPAQUE_OPERATION(coreOp);
 }
 

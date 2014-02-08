@@ -9,9 +9,6 @@
 #include "MCIMAPOperation.h"
 
 #include <stdlib.h>
-#if __APPLE__
-#include <dispatch/dispatch.h>
-#endif
 
 #include "MCIMAPAsyncSession.h"
 #include "MCIMAPSession.h"
@@ -37,6 +34,16 @@ IMAPOperation::~IMAPOperation()
 void IMAPOperation::setSession(IMAPAsyncConnection * session)
 {
     MC_SAFE_REPLACE_RETAIN(IMAPAsyncConnection, mSession, session);
+#if __APPLE__
+    dispatch_queue_t queue;
+    if (session != NULL) {
+        queue = session->dispatchQueue();
+    }
+    else {
+        queue = dispatch_get_main_queue();
+    }
+    setCallbackDispatchQueue(queue);
+#endif
 }
 
 IMAPAsyncConnection * IMAPOperation::session()

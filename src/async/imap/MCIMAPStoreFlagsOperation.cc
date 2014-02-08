@@ -18,11 +18,13 @@ IMAPStoreFlagsOperation::IMAPStoreFlagsOperation()
     mUids = NULL;
     mKind = IMAPStoreFlagsRequestKindAdd;
     mFlags = MessageFlagNone;
+    mCustomFlags = NULL;
 }
 
 IMAPStoreFlagsOperation::~IMAPStoreFlagsOperation()
 {
     MC_SAFE_RELEASE(mUids);
+    MC_SAFE_RELEASE(mCustomFlags);
 }
 
 void IMAPStoreFlagsOperation::setUids(IndexSet * uids)
@@ -55,9 +57,19 @@ MessageFlag IMAPStoreFlagsOperation::flags()
     return mFlags;
 }
 
+void IMAPStoreFlagsOperation::setCustomFlags(Array * customFlags)
+{
+    MC_SAFE_REPLACE_RETAIN(Array, mCustomFlags, customFlags);
+}
+
+Array * IMAPStoreFlagsOperation::customFlags()
+{
+    return mCustomFlags;
+}
+
 void IMAPStoreFlagsOperation::main()
 {
     ErrorCode error;
-    session()->session()->storeFlags(folder(), mUids, mKind, mFlags, &error);
+    session()->session()->storeFlagsAndCustomFlags(folder(), mUids, mKind, mFlags, mCustomFlags, &error);
     setError(error);
 }

@@ -5,10 +5,6 @@
 #include <pthread.h>
 #include <MailCore/MCObject.h>
 
-#if __APPLE__
-#include <dispatch/dispatch.h>
-#endif
-
 #ifdef __cplusplus
 
 namespace mailcore {

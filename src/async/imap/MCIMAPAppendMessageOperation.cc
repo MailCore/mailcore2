@@ -17,12 +17,14 @@ IMAPAppendMessageOperation::IMAPAppendMessageOperation()
 {
     mMessageData = NULL;
     mFlags = MessageFlagNone;
+    mCustomFlags = NULL;
     mCreatedUID = 0;
 }
 
 IMAPAppendMessageOperation::~IMAPAppendMessageOperation()
 {
     MC_SAFE_RELEASE(mMessageData);
+    MC_SAFE_RELEASE(mCustomFlags);
 }
 
 void IMAPAppendMessageOperation::setMessageData(Data * messageData)
@@ -45,6 +47,16 @@ MessageFlag IMAPAppendMessageOperation::flags()
     return mFlags;
 }
 
+void IMAPAppendMessageOperation::setCustomFlags(Array * customFlags)
+{
+    MC_SAFE_REPLACE_COPY(Array, mCustomFlags, customFlags);
+}
+
+Array * IMAPAppendMessageOperation::customFlags()
+{
+    return customFlags();
+}
+
 uint32_t IMAPAppendMessageOperation::createdUID()
 {
     return mCreatedUID;
@@ -53,7 +65,7 @@ uint32_t IMAPAppendMessageOperation::createdUID()
 void IMAPAppendMessageOperation::main()
 {
     ErrorCode error;
-    session()->session()->appendMessage(folder(), mMessageData, mFlags, this, &mCreatedUID, &error);
+    session()->session()->appendMessageWithCustomFlags(folder(), mMessageData, mFlags, mCustomFlags, this, &mCreatedUID, &error);
     setError(error);
 }
 

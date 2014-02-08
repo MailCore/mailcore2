@@ -62,6 +62,12 @@ See MCOConnectionType for more information.*/
  */
 @property (nonatomic, copy) MCOConnectionLogger connectionLogger;
 
+/** This property provides some hints to MCOPOPSession about where it's called from.
+ It will make MCOPOPSession safe. It will also set all the callbacks of operations to run on this given queue.
+ Defaults to the main queue.
+ This property should be used only if there's performance issue using MCOPOPSession in the main thread. */
+@property (nonatomic, assign) dispatch_queue_t dispatchQueue;
+
 /** @name Operations */
 
 /**

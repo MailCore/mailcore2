@@ -57,6 +57,11 @@ namespace mailcore {
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
         
+#ifdef __APPLE__
+        virtual void setDispatchQueue(dispatch_queue_t dispatchQueue);
+        virtual dispatch_queue_t dispatchQueue();
+#endif
+        
         virtual POPFetchMessagesOperation * fetchMessagesOperation();
         
         virtual POPFetchHeaderOperation * fetchHeaderOperation(unsigned int index);
