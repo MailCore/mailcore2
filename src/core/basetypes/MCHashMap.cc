@@ -312,7 +312,7 @@ void HashMap::importSerializable(HashMap * serializable)
         else {
             key = Object::objectWithSerializable((HashMap *) serializedKey);
         }
-        Object * value = Object::objectWithSerializable((HashMap *) keys->objectAtIndex(i));
+        Object * value = Object::objectWithSerializable((HashMap *) values->objectAtIndex(i));
         setObjectForKey(key, value);
     }
 }
