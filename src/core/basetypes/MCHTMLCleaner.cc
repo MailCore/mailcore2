@@ -34,6 +34,7 @@ String * HTMLCleaner::cleanHTML(String * input)
     Data * data = input->dataUsingEncoding("utf-8");
     tidyBufAppend(&docbuf, data->bytes(), data->length());
     
+    tidyOptSetBool(tdoc, TidyDropEmptyElems, no);
     tidyOptSetBool(tdoc, TidyXhtmlOut, yes);
     tidySetCharEncoding(tdoc, "utf8");
     tidyOptSetBool(tdoc, TidyForceOutput, yes);
