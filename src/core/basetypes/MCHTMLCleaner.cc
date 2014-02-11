@@ -17,6 +17,10 @@
 #include "MCUtils.h"
 #include "MCLog.h"
 
+#if __APPLE__
+#include <TargetConditionals.h>
+#endif
+
 using namespace mailcore;
 
 String * HTMLCleaner::cleanHTML(String * input)
@@ -34,7 +38,10 @@ String * HTMLCleaner::cleanHTML(String * input)
     Data * data = input->dataUsingEncoding("utf-8");
     tidyBufAppend(&docbuf, data->bytes(), data->length());
     
+#if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
+    // This option is not available on the Mac.
     tidyOptSetBool(tdoc, TidyDropEmptyElems, no);
+#endif
     tidyOptSetBool(tdoc, TidyXhtmlOut, yes);
     tidySetCharEncoding(tdoc, "utf8");
     tidyOptSetBool(tdoc, TidyForceOutput, yes);
