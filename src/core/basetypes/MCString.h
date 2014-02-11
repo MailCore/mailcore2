@@ -108,6 +108,7 @@ namespace mailcore {
         
         virtual String * htmlEncodedString();
         virtual String * cleanedHTMLString();
+        virtual String * htmlMessageContent();
         
         virtual Data * decodedBase64Data();
         

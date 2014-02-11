@@ -26,6 +26,7 @@
 #include "MCValue.h"
 #include "MCHTMLCleaner.h"
 #include "MCBase64.h"
+#include "MCIterator.h"
 
 using namespace mailcore;
 
@@ -1744,7 +1745,7 @@ String * String::flattenHTMLAndShowBlockquoteAndLink(bool showBlockquote, bool s
     String * result = String::string();
     xmlSAXHandler handler;
     bzero(&handler, sizeof(xmlSAXHandler));
-    handler.characters = &charactersParsed;
+    handler.characters = charactersParsed;
     handler.startElement = elementStarted;
     handler.endElement = elementEnded;
     handler.comment = commentParsed;
@@ -2114,6 +2115,86 @@ String * String::htmlEncodedString()
 String * String::cleanedHTMLString()
 {
     return HTMLCleaner::cleanHTML(this);
+}
+
+String * String::htmlMessageContent()
+{
+    String * str = this;
+    
+    Array * lines = str->componentsSeparatedByString(MCSTR("\n"));
+    
+    while (1) {
+        if (lines->count() == 0) {
+            break;
+        }
+        
+        if (((String *) lines->lastObject())->length() > 0) {
+            break;
+        }
+        
+        lines->removeLastObject();
+    }
+    
+    String * localString;
+    int state;
+    localString = String::string();
+    
+    String * quoted = NULL;
+    state = 0;
+    mc_foreacharray(String, line, lines) {
+        if (state == 0) {
+            if (line->hasPrefix(MCSTR(">"))) {
+                state = 1;
+                quoted = new String();
+                int i = 1;
+                while (i < line->length()) {
+                    if (line->characterAtIndex(i) != ' ') {
+                        break;
+                    }
+                    i ++;
+                }
+                quoted->appendString(line->substringFromIndex(i));
+                quoted->appendString(MCSTR("\n"));
+            }
+            else {
+                localString->appendString(line->htmlEncodedString());
+                localString->appendString(MCSTR("<br/>"));
+            }
+        }
+        else if (state == 1) {
+            if (line->hasPrefix(MCSTR(">"))) {
+                int i = 1;
+                while (i < line->length()) {
+                    if (line->characterAtIndex(i) != ' ') {
+                        break;
+                    }
+                    i ++;
+                }
+                quoted->appendString(line->substringFromIndex(i));
+                quoted->appendString(MCSTR("\n"));
+            }
+            else {
+                if (quoted != NULL) {
+                    localString->appendString(MCSTR("<blockquote type=\"cite\">"));
+                    localString->appendString(quoted->htmlMessageContent());
+                    localString->appendString(MCSTR("</blockquote>"));
+                    MC_SAFE_RELEASE(quoted);
+                    state = 0;
+                }
+                localString->appendString(line->htmlEncodedString());
+                localString->appendString(MCSTR("<br/>"));
+            }
+        }
+    }
+    
+    if (quoted != nil) {
+        localString->appendString(MCSTR("<blockquote type=\"cite\">"));
+        localString->appendString(quoted);
+        localString->appendString(MCSTR("</blockquote>"));
+        MC_SAFE_RELEASE(quoted);
+    }
+    
+    return localString;
 }
 
 bool String::isEqualCaseInsensitive(String * otherString)

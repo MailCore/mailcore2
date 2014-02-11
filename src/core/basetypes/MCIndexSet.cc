@@ -277,6 +277,9 @@ void IndexSet::removeRange(Range range)
     int left = -1;
     int right = -1;
     int leftRangeIndex = leftRangeIndexForIndex(range.location);
+    if (leftRangeIndex >= mCount) {
+        leftRangeIndex = mCount - 1;
+    }
     for(int i = leftRangeIndex ; i < mCount ; i ++) {
         if (RangeHasIntersection(mRanges[i], range)) {
             IndexSet * indexSet = RangeRemoveRange(mRanges[i], range);

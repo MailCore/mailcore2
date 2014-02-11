@@ -180,6 +180,11 @@ Object * Array::lastObject()
     return objectAtIndex(count() - 1);
 }
 
+void Array::removeLastObject()
+{
+    removeObjectAtIndex(count() - 1);
+}
+
 bool Array::containsObject(Object * obj)
 {
     return (indexOfObject(obj) != -1);
