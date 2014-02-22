@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCOPERATION_H_
+#ifndef MAILCORE_MCOPERATION_H
 
-#define __MAILCORE_MCOPERATION_H_
+#define MAILCORE_MCOPERATION_H
 
 #include <pthread.h>
 #include <MailCore/MCObject.h>

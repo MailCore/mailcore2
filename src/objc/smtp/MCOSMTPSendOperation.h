@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOSMTPSENDOPERATION_H_
+#ifndef MAILCORE_MCOSMTPSENDOPERATION_H
 
-#define __MAILCORE_MCOSMTPSENDOPERATION_H_
+#define MAILCORE_MCOSMTPSENDOPERATION_H
 
 #import <MailCore/MCOSMTPOperation.h>
 

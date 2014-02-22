@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOADDRESS_H_
+#ifndef MAILCORE_MCOADDRESS_H
 
-#define __MAILCORE_MCOADDRESS_H_
+#define MAILCORE_MCOADDRESS_H
 
 #import <Foundation/Foundation.h>
 

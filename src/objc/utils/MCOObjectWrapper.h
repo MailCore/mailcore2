@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOOBJECTWRAPPER_H_
+#ifndef MAILCORE_MCOOBJECTWRAPPER_H
 
-#define __MAILCORE_MCOOBJECTWRAPPER_H_
+#define MAILCORE_MCOOBJECTWRAPPER_H
 
 #import <Foundation/Foundation.h>
 

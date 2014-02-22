@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCICUTYPES_H_
-#define __MAILCORE_MCICUTYPES_H_
+#ifndef MAILCORE_MCICUTYPES_H
+
+#define MAILCORE_MCICUTYPES_H
 
 #if defined(__CHAR16_TYPE__)
 typedef __CHAR16_TYPE__ UChar;

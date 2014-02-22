@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCLOG_H_
+#ifndef MAILCORE_MCLOG_H
 
-#define __MAILCORE_MCLOG_H_
+#define MAILCORE_MCLOG_H
 
 #include <stdio.h>
 

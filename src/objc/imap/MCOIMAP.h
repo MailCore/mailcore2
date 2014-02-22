@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOIMAP_H_
+#ifndef MAILCORE_MCOIMAP_H
 
-#define __MAILCORE_MCOIMAP_H_
+#define MAILCORE_MCOIMAP_H
 
 #import <MailCore/MCOIMAPSession.h>
 #import <MailCore/MCOIMAPOperation.h>

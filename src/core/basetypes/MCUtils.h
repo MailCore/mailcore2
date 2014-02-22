@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCUTILS_H
+#ifndef MAILCORE_MCUTILS_H
 
-#define __MAILCORE_MCUTILS_H
+#define MAILCORE_MCUTILS_H
 
 #ifdef __cplusplus
 

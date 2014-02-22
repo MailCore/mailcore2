@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_TEST_ALL_H_
-#define __MAILCORE_TEST_ALL_H_
+#ifndef MAILCORE_TEST_ALL_H
+
+#define MAILCORE_TEST_ALL_H
 
 #include <MailCore/MailCore.h>
 

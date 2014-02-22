@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCARRAY_H_
+#ifndef MAILCORE_MCARRAY_H
 
-#define __MAILCORE_MCARRAY_H_
+#define MAILCORE_MCARRAY_H
 
 #include <MailCore/MCObject.h>
 

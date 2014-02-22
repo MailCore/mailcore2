@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCIMAP_H_
+#ifndef MAILCORE_MCIMAP_H
 
-#define __MAILCORE_MCIMAP_H_
+#define MAILCORE_MCIMAP_H
 
 #include <MailCore/MCIMAPFolder.h>
 #include <MailCore/MCIMAPMessage.h>

@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOIMAPIDENTITYOPERATION_H_
+#ifndef MAILCORE_MCOIMAPIDENTITYOPERATION_H
 
-#define __MAILCORE_MCOIMAPIDENTITYOPERATION_H_
+#define MAILCORE_MCOIMAPIDENTITYOPERATION_H
 
 /** 
  This class implements an operation to get the servers identification info or

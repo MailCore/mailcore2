@@ -8,9 +8,9 @@
 
 #import <MailCore/MCOIMAPBaseOperation.h>
 
-#ifndef __MAILCORE_MCOCOPYMESSAGESOPERATION_H_
+#ifndef MAILCORE_MCOCOPYMESSAGESOPERATION_H
 
-#define __MAILCORE_MCOCOPYMESSAGESOPERATION_H_
+#define MAILCORE_MCOCOPYMESSAGESOPERATION_H
 
 /** Implements an operation for copying messages between folders */
 

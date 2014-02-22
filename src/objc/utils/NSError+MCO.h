@@ -2,9 +2,9 @@
 //  Created by mronge on 1/31/13.
 //
 
-#ifndef __MAILCORE_NSERROR_MCO_H_
+#ifndef MAILCORE_NSERROR_MCO_H
 
-#define __MAILCORE_NSERROR_MCO_H_
+#define MAILCORE_NSERROR_MCO_H
 
 #import <Foundation/Foundation.h>
 

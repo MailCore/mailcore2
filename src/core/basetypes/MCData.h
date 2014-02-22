@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCDATA_H_
+#ifndef MAILCORE_MCDATA_H
 
-#define __MAILCORE_MCDATA_H_
+#define MAILCORE_MCDATA_H
 
 #include <MailCore/MCObject.h>
 #include <MailCore/MCMessageConstants.h>

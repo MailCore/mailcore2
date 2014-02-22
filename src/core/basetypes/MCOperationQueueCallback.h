@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_OPERATIONQUEUECALLBACK_H_
-#define __MAILCORE_OPERATIONQUEUECALLBACK_H_
+#ifndef MAILCORE_OPERATIONQUEUECALLBACK_H
+#define MAILCORE_OPERATIONQUEUECALLBACK_H
 
 namespace mailcore {
     

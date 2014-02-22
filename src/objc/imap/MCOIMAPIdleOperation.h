@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOIMAPIDLEOPERATION_H_
+#ifndef MAILCORE_MCOIMAPIDLEOPERATION_H
 
-#define __MAILCORE_MCOIMAPIDLEOPERATION_H_
+#define MAILCORE_MCOIMAPIDLEOPERATION_H
 
 /** 
  This class implements an IMAP IDLE. IDLE is used to keep a connection

@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOIMAPSEARCHEXPRESSION_H_
+#ifndef MAILCORE_MCOIMAPSEARCHEXPRESSION_H
 
-#define __MAILCORE_MCOIMAPSEARCHEXPRESSION_H_
+#define MAILCORE_MCOIMAPSEARCHEXPRESSION_H
 
 /** Used to construct an IMAP search query */
 

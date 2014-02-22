@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCPARSEDMESSAGE_H_
+#ifndef MAILCORE_MCPARSEDMESSAGE_H
 
-#define __MAILCORE_MCPARSEDMESSAGE_H_
+#define MAILCORE_MCPARSEDMESSAGE_H
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCAbstractMessage.h>

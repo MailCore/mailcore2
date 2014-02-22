@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOUTILS_H_
+#ifndef MAILCORE_MCOUTILS_H
 
-#define __MAILCORE_MCOUTILS_H_
+#define MAILCORE_MCOUTILS_H
 
 #import <MailCore/MCOObjectWrapper.h>
 #import <MailCore/NSData+MCO.h>

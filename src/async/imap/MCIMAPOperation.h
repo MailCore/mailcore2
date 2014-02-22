@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCIMAPOPERATION_H_
+#ifndef MAILCORE_MCIMAPOPERATION_H
 
-#define __MAILCORE_MCIMAPOPERATION_H_
+#define MAILCORE_MCIMAPOPERATION_H
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCIMAPProgressCallback.h>

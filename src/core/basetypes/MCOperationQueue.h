@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCOPERATIONQUEUE_H_
+#ifndef MAILCORE_MCOPERATIONQUEUE_H
 
-#define __MAILCORE_MCOPERATIONQUEUE_H_
+#define MAILCORE_MCOPERATIONQUEUE_H
 
 #include <pthread.h>
 #include <semaphore.h>

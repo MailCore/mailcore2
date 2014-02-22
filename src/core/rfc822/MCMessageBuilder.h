@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCMESSAGEBUILDER_H_
+#ifndef MAILCORE_MCMESSAGEBUILDER_H
 
-#define __MAILCORE_MCMESSAGEBUILDER_H_
+#define MAILCORE_MCMESSAGEBUILDER_H
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCAbstractMessage.h>

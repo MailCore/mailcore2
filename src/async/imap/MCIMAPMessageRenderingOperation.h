@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCIMAPMessageRenderingOperation_H_
+#ifndef MAILCORE_MCIMAPMessageRenderingOperation_H
 
-#define __MAILCORE_MCIMAPMessageRenderingOperation_H_
+#define MAILCORE_MCIMAPMessageRenderingOperation_H
 
 #include <MailCore/MCIMAPOperation.h>
 #include <MailCore/MCIMAPMessage.h>

@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOIMAPSESSION_H_
+#ifndef MAILCORE_MCOIMAPSESSION_H
 
-#define __MAILCORE_MCOIMAPSESSION_H_
+#define MAILCORE_MCOIMAPSESSION_H
 
 #import <Foundation/Foundation.h>
 #import <MailCore/MCOConstants.h>
