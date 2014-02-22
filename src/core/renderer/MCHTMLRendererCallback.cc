@@ -154,7 +154,7 @@ mailcore::HashMap * HTMLRendererTemplateCallback::templateValuesForPart(mailcore
     
     if (part->className()->isEqual(MCSTR("mailcore::IMAPPart"))) {
         mailcore::IMAPPart * imapPart = (mailcore::IMAPPart *) part;
-        mailcore::String * value = mailcore::SizeFormatter::stringWithSize(imapPart->size());
+        mailcore::String * value = mailcore::SizeFormatter::stringWithSize(imapPart->decodedSize());
         result->setObjectForKey(MCSTR("SIZE"), value);
         result->setObjectForKey(MCSTR("HASSIZE"), mailcore::HashMap::hashMap());
     }
