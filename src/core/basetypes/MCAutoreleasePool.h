@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCAUTORELEASEPOOL_H_
+#ifndef MAILCORE_MCAUTORELEASEPOOL_H
 
-#define __MAILCORE_MCAUTORELEASEPOOL_H_
+#define MAILCORE_MCAUTORELEASEPOOL_H
 
 #include <MailCore/MCObject.h>
 #include <pthread.h>

@@ -1,4 +1,4 @@
-#ifndef __MAILCORE_MCZIP_H_
+#ifndef MAILCORE_MCZIP_H
 
 #ifdef __cplusplus
 

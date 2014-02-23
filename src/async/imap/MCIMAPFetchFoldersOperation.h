@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCIMAPFETCHFOLDERSOPERATION_H_
+#ifndef MAILCORE_MCIMAPFETCHFOLDERSOPERATION_H
 
-#define __MAILCORE_MCIMAPFETCHFOLDERSOPERATION_H_
+#define MAILCORE_MCIMAPFETCHFOLDERSOPERATION_H
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCIMAPOperation.h>

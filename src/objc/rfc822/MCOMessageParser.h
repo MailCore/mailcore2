@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOMESSAGEPARSER_H_
+#ifndef MAILCORE_MCOMESSAGEPARSER_H
 
-#define __MAILCORE_MCOMESSAGEPARSER_H_
+#define MAILCORE_MCOMESSAGEPARSER_H
 
 /**
  This class implements a parsed message.

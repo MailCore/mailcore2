@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOIMAPMULTIPART_H_
+#ifndef MAILCORE_MCOIMAPMULTIPART_H
 
-#define __MAILCORE_MCOIMAPMULTIPART_H_
+#define MAILCORE_MCOIMAPMULTIPART_H
 
 /** Represents the a multipart retrieved from IMAP */
 

@@ -333,10 +333,8 @@ Range * IndexSet::allRanges()
 
 void IndexSet::removeAllIndexes()
 {
-    if (mRanges != NULL) {
-        delete[] mRanges;
-        mRanges = NULL;
-    }
+    delete[] mRanges;
+    mRanges = NULL;
     mAllocated = 0;
     mCount = 0;
 }

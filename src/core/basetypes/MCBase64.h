@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCBASE64_H_
-#define __MAILCORE_MCBASE64_H_
+#ifndef MAILCORE_MCBASE64_H
+
+#define MAILCORE_MCBASE64_H
 
 #ifdef __cplusplus
 extern "C" {

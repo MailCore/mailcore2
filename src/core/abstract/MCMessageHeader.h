@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCMESSAGEHEADER_H_
+#ifndef MAILCORE_MCMESSAGEHEADER_H
 
-#define __MAILCORE_MCMESSAGEHEADER_H_
+#define MAILCORE_MCMESSAGEHEADER_H
 
 #include <MailCore/MCBaseTypes.h>
 #include <time.h>

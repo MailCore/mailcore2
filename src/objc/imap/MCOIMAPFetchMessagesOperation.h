@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOIMAPFETCHMESSAGESOPERATION_H_
+#ifndef MAILCORE_MCOIMAPFETCHMESSAGESOPERATION_H
 
-#define __MAILCORE_MCOIMAPFETCHMESSAGESOPERATION_H_
+#define MAILCORE_MCOIMAPFETCHMESSAGESOPERATION_H
 
 #import <MailCore/MCOIMAPBaseOperation.h>
 #import <MailCore/MCOConstants.h>

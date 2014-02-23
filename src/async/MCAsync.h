@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCASYNC_H_
+#ifndef MAILCORE_MCASYNC_H
 
-#define __MAILCORE_MCASYNC_H_
+#define MAILCORE_MCASYNC_H
 
 #include <MailCore/MCAsyncSMTP.h>
 #include <MailCore/MCAsyncIMAP.h>

@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCOBJECT_H_
+#ifndef MAILCORE_MCOBJECT_H
 
-#define __MAILCORE_MCOBJECT_H_
+#define MAILCORE_MCOBJECT_H
 
 #include <pthread.h>
 #if __APPLE__

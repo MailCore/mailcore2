@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCADDRESS_H_
+#ifndef MAILCORE_MCADDRESS_H
 
-#define __MAILCORE_MCADDRESS_H_
+#define MAILCORE_MCADDRESS_H
 
 #include <MailCore/MCBaseTypes.h>
 

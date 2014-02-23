@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCIMAPAPPENDMESSAGEOPERATION_H_
+#ifndef MAILCORE_MCIMAPAPPENDMESSAGEOPERATION_H
 
-#define __MAILCORE_MCIMAPAPPENDMESSAGEOPERATION_H_
+#define MAILCORE_MCIMAPAPPENDMESSAGEOPERATION_H
 
 #include <MailCore/MCIMAPOperation.h>
 #include <MailCore/MCMessageConstants.h>

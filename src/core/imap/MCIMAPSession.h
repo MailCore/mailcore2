@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCIMAPSESSION_H
+#ifndef MAILCORE_MCIMAPSESSION_H
 
-#define __MAILCORE_MCIMAPSESSION_H
+#define MAILCORE_MCIMAPSESSION_H
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCMessageConstants.h>

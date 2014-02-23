@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCVALUE_H_
+#ifndef MAILCORE_MCVALUE_H
 
-#define __MAILCORE_MCVALUE_H_
+#define MAILCORE_MCVALUE_H
 
 #include <MailCore/MCObject.h>
 

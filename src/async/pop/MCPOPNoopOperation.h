@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCPOPNOOPOPERATION_H_
-#define __MAILCORE_MCPOPNOOPOPERATION_H_
+#ifndef MAILCORE_MCPOPNOOPOPERATION_H
+
+#define MAILCORE_MCPOPNOOPOPERATION_H
 
 #include <MailCore/MCPOPOperation.h>
 

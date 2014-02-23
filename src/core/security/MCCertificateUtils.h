@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCCERTIFICATEUTILS_H_
-#define __MAILCORE_MCCERTIFICATEUTILS_H_
+#ifndef MAILCORE_MCCERTIFICATEUTILS_H
+
+#define MAILCORE_MCCERTIFICATEUTILS_H
 
 #include <libetpan/libetpan.h>
 #include <MailCore/MCString.h>

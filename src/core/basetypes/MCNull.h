@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCNULL_H_
-#define __MAILCORE_MCNULL_H_
+#ifndef MAILCORE_MCNULL_H
+
+#define MAILCORE_MCNULL_H
 
 #include <MailCore/MCObject.h>
 

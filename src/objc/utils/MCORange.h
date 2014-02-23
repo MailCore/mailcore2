@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCORANGE_H_
+#ifndef MAILCORE_MCORANGE_H
 
-#define __MAILCORE_MCORANGE_H_
+#define MAILCORE_MCORANGE_H
 
 #import <Foundation/Foundation.h>
 

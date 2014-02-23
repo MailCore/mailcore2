@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 __MyCompanyName__. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOOPERATION_H_
+#ifndef MAILCORE_MCOOPERATION_H
 
-#define __MAILCORE_MCOOPERATION_H_
+#define MAILCORE_MCOOPERATION_H
 
 #import <Foundation/Foundation.h>
 

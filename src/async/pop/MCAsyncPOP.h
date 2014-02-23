@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCASYNCPOP_H_
+#ifndef MAILCORE_MCASYNCPOP_H
 
-#define __MAILCORE_MCASYNCPOP_H_
+#define MAILCORE_MCASYNCPOP_H
 
 #include <MailCore/MCPOPAsyncSession.h>
 #include <MailCore/MCPOPOperation.h>

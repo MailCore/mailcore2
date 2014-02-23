@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOMESSAGEHEADER_H_
+#ifndef MAILCORE_MCOMESSAGEHEADER_H
 
-#define __MAILCORE_MCOMESSAGEHEADER_H_
+#define MAILCORE_MCOMESSAGEHEADER_H
 
 #import <Foundation/Foundation.h>
 

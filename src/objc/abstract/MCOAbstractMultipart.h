@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOABSTRACTMULTIPART_H_
+#ifndef MAILCORE_MCOABSTRACTMULTIPART_H
 
-#define __MAILCORE_MCOABSTRACTMULTIPART_H_
+#define MAILCORE_MCOABSTRACTMULTIPART_H
 
 #import <Foundation/Foundation.h>
 #import <MailCore/MCOAbstractPart.h>

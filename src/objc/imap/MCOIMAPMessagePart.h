@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOIMAPMESSAGEPART_H_
+#ifndef MAILCORE_MCOIMAPMESSAGEPART_H
 
-#define __MAILCORE_MCOIMAPMESSAGEPART_H_
+#define MAILCORE_MCOIMAPMESSAGEPART_H
 
 /** Represents a message part. */
 

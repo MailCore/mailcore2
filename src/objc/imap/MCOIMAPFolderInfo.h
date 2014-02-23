@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOIMAPFOLDERINFO_H_
+#ifndef MAILCORE_MCOIMAPFOLDERINFO_H
 
-#define __MAILCORE_MCOIMAPFOLDERINFO_H_
+#define MAILCORE_MCOIMAPFOLDERINFO_H
 
 #import <Foundation/Foundation.h>
 

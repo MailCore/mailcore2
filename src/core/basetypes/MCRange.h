@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCRANGE_H_
+#ifndef MAILCORE_MCRANGE_H
 
-#define __MAILCORE_MCRANGE_H_
+#define MAILCORE_MCRANGE_H
 
 #ifdef __cplusplus
 
