@@ -87,6 +87,18 @@
 /** Returns a header that can be used as a base for a forward message.*/
 - (MCOMessageHeader *) forwardHeader;
 
+/** Set a custom header. */
+- (void) setExtraHeader:(NSString *)name value:(NSString *)value;
+
+/** Remove a custom header. */
+- (void) removeExtraHeader:(NSString *)name;
+
+/** Returns the value of a custom header. */
+- (NSString *) extraHeaderValueForName:(NSString *)name;
+
+/** Returns the names of the custom headers. */
+- (NSArray *) allExtraHeadersNames;
+
 @end
 
 #endif
