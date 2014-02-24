@@ -6,6 +6,7 @@ Operation::Operation()
 {
     mCallback = NULL;
     mCancelled = false;
+    mShouldRunWhenCancelled = false;
     pthread_mutex_init(&mLock, NULL);
 #if __APPLE__
     mCallbackDispatchQueue = dispatch_get_main_queue();
@@ -41,6 +42,16 @@ bool Operation::isCancelled()
     pthread_mutex_unlock(&mLock);
     
     return value;
+}
+
+bool Operation::shouldRunWhenCancelled()
+{
+    return mShouldRunWhenCancelled;
+}
+
+void Operation::setShouldRunWhenCancelled(bool shouldRunWhenCancelled)
+{
+    mShouldRunWhenCancelled = shouldRunWhenCancelled;
 }
 
 void Operation::beforeMain()

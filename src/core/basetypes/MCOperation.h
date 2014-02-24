@@ -38,9 +38,13 @@ namespace mailcore {
 #endif
         void performMethodOnCallbackThread(Method method, void * context, bool waitUntilDone = false);
         
+        virtual bool shouldRunWhenCancelled();
+        virtual void setShouldRunWhenCancelled(bool shouldRunWhenCancelled);
+        
     private:
         OperationCallback * mCallback;
         bool mCancelled;
+        bool mShouldRunWhenCancelled;
         pthread_mutex_t mLock;
 #ifdef __APPLE__
         dispatch_queue_t mCallbackDispatchQueue;

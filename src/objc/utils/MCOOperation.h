@@ -17,6 +17,9 @@
 /** Returns whether the operation is cancelled.*/
 @property (readonly) BOOL isCancelled;
 
+/** Returns whether the operation should run even if it's cancelled.*/
+@property (nonatomic, assign) BOOL shouldRunWhenCancelled;
+
 /** The queue this operation dispatches the callback on.  Defaults to the main queue.
  This property should be used only if there's performance issue creating or calling the callback
  in the main thread. */
@@ -28,7 +31,6 @@
 
 /** Cancel the operation.*/
 - (void) cancel;
-
 
 @end
 
