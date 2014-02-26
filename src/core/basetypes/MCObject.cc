@@ -296,7 +296,7 @@ struct cancellableBlock {
     bool cancelled;
 };
 
-void Object::performMethodOnDispatchQueueAfterDelay(Method method, void * context, void * targetDispatchQueue, bool delay)
+void Object::performMethodOnDispatchQueueAfterDelay(Method method, void * context, void * targetDispatchQueue, double delay)
 {
     initDelayedPerform();
     
