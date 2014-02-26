@@ -58,16 +58,16 @@
 @property (nonatomic, copy) NSString * userAgent;
 
 /** Adds a custom header.*/
-- (void)addHeaderValue:(NSString *)value forName:(NSString *)name;
+- (void) setExtraHeaderValue:(NSString *)value forName:(NSString *)name;
 
 /** Remove a given custom header.*/
-- (void)removeHeaderForName:(NSString *)name;
+- (void) removeExtraHeaderForName:(NSString *)name;
 
 /** Returns the value of a given custom header.*/
-- (NSString *)headerValueForName:(NSString *)name;
+- (NSString *) extraHeaderValueForName:(NSString *)name;
 
 /** Returns an array with the names of all custom headers.*/
-- (NSArray * /* NSString */)allHeadersNames;
+- (NSArray * /* NSString */) allExtraHeadersNames;
 
 /** Extracted subject (also remove square brackets).*/
 - (NSString *) extractedSubject;
@@ -86,18 +86,6 @@
 
 /** Returns a header that can be used as a base for a forward message.*/
 - (MCOMessageHeader *) forwardHeader;
-
-/** Set a custom header. */
-- (void) setExtraHeader:(NSString *)name value:(NSString *)value;
-
-/** Remove a custom header. */
-- (void) removeExtraHeader:(NSString *)name;
-
-/** Returns the value of a custom header. */
-- (NSString *) extraHeaderValueForName:(NSString *)name;
-
-/** Returns the names of the custom headers. */
-- (NSArray *) allExtraHeadersNames;
 
 @end
 
