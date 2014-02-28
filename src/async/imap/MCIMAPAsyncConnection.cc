@@ -576,7 +576,7 @@ void IMAPAsyncConnection::tryAutomaticDisconnect()
     
     mOwner->retain();
     mScheduledAutomaticDisconnect = true;
-    performMethodOnDispatchQueueAfterDelay((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue(), 15);
+    performMethodOnDispatchQueueAfterDelay((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue(), 30);
     
     if (scheduledAutomaticDisconnect) {
         mOwner->release();
