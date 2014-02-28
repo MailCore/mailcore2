@@ -110,7 +110,7 @@ IMAPAsyncConnection::IMAPAsyncConnection()
 
 IMAPAsyncConnection::~IMAPAsyncConnection()
 {
-    cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
+    cancelDelayedPerformMethodOnDispatchQueue((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue());
     pthread_mutex_destroy(&mConnectionLoggerLock);
     MC_SAFE_RELEASE(mInternalLogger);
     MC_SAFE_RELEASE(mQueueCallback);
@@ -554,7 +554,11 @@ unsigned int IMAPAsyncConnection::operationsCount()
 
 void IMAPAsyncConnection::runOperation(IMAPOperation * operation)
 {
-    cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
+    if (mScheduledAutomaticDisconnect) {
+        cancelDelayedPerformMethodOnDispatchQueue((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue());
+        mOwner->release();
+        mScheduledAutomaticDisconnect = false;
+    }
     mQueue->addOperation(operation);
 }
 
@@ -567,12 +571,12 @@ void IMAPAsyncConnection::tryAutomaticDisconnect()
     
     bool scheduledAutomaticDisconnect = mScheduledAutomaticDisconnect;
     if (scheduledAutomaticDisconnect) {
-        cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
+        cancelDelayedPerformMethodOnDispatchQueue((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue());
     }
     
     mOwner->retain();
     mScheduledAutomaticDisconnect = true;
-    performMethodAfterDelay((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, 30);
+    performMethodOnDispatchQueueAfterDelay((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue(), 15);
     
     if (scheduledAutomaticDisconnect) {
         mOwner->release();

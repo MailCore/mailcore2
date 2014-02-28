@@ -7,6 +7,9 @@
 #include <sys/time.h>
 #include <pthread.h>
 #include <unistd.h>
+#if __APPLE__
+#include <execinfo.h>
+#endif
 
 static pid_t sPid = -1;
 int MCLogEnabled = 0;
@@ -77,4 +80,21 @@ static void logInternalv(FILE * file,
     }
     vfprintf(file, format, argp);
     fprintf(file, "\n");
+    
+    if (dumpStack) {
+#if __APPLE__
+        void * frame[128];
+        int frameCount;
+        int i;
+    
+        fprintf(file, "    ");
+        frameCount = backtrace(frame, 128);
+        for(i = 0 ; i < frameCount ; i ++) {
+            fprintf(file, " %p", frame[i]);
+        }
+        fprintf(file, "\n");
+#endif
+        // TODO: other platforms implemented needed.
+    }
+        
 }

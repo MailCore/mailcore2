@@ -154,6 +154,7 @@ static void removeFromPerformHash(Object * obj, Object::Method method, void * co
 #if __APPLE__
     queueIdentifier = (String *) dispatch_queue_get_specific((dispatch_queue_t) targetDispatchQueue, "MCDispatchQueueID");
 #endif
+    memset(&keyData, 0, sizeof(keyData));
     keyData.dispatchQueueIdentifier = queueIdentifier;
     keyData.obj = obj;
     keyData.context = context;
@@ -184,6 +185,7 @@ static void addToPerformHash(Object * obj, Object::Method method, void * context
         dispatch_queue_set_specific((dispatch_queue_t) targetDispatchQueue, "MCDispatchQueueID", queueIdentifier, queueIdentifierDestructor);
     }
 #endif
+    memset(&keyData, 0, sizeof(keyData));
     keyData.dispatchQueueIdentifier = queueIdentifier;
     keyData.obj = obj;
     keyData.context = context;
@@ -209,6 +211,7 @@ static void * getFromPerformHash(Object * obj, Object::Method method, void * con
     if (queueIdentifier == NULL)
         return NULL;
 #endif
+    memset(&keyData, 0, sizeof(keyData));
     keyData.dispatchQueueIdentifier = queueIdentifier;
     keyData.obj = obj;
     keyData.context = context;
@@ -318,7 +321,9 @@ void Object::performMethodOnDispatchQueueAfterDelay(Method method, void * contex
     addToPerformHash(this, method, context, targetDispatchQueue, (void *) dupCancelableBlock);
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC));
     dispatch_after(popTime, (dispatch_queue_t) targetDispatchQueue, ^(void) {
-        removeFromPerformHash(this, method, context, targetDispatchQueue);
+        if (!cancelled) {
+            removeFromPerformHash(this, method, context, targetDispatchQueue);
+        }
         dupCancelableBlock(false);
         Block_release(dupCancelableBlock);
         release();
@@ -329,8 +334,9 @@ void Object::cancelDelayedPerformMethodOnDispatchQueue(Method method, void * con
 {
     initDelayedPerform();
     void (^dupCancelableBlock)(bool cancel) = (void (^)(bool)) getFromPerformHash(this, method, context, targetDispatchQueue);
-    if (dupCancelableBlock == NULL)
+    if (dupCancelableBlock == NULL) {
         return;
+    }
     removeFromPerformHash(this, method, context, targetDispatchQueue);
     dupCancelableBlock(true);
 }

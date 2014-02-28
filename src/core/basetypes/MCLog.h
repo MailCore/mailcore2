@@ -5,7 +5,8 @@
 #include <stdio.h>
 
 #define MCLog(...) MCLogInternal(NULL, __FILE__, __LINE__, 0, __VA_ARGS__)
-    
+#define MCLogStack(...) MCLogInternal(NULL, __FILE__, __LINE__, 1, __VA_ARGS__)
+
 extern int MCLogEnabled;
     
 #ifndef __printflike
