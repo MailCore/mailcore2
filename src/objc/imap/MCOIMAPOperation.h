@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOIMAPOPERATION_H_
+#ifndef MAILCORE_MCOIMAPOPERATION_H
 
-#define __MAILCORE_MCOIMAPOPERATION_H_
+#define MAILCORE_MCOIMAPOPERATION_H
 
 /** This class implements a generic IMAP operation */
 

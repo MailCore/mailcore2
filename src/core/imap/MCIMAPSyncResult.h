@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCIMAPSYNCRESULT_H_
+#ifndef MAILCORE_MCIMAPSYNCRESULT_H
 
-#define __MAILCORE_MCIMAPSYNCRESULT_H_
+#define MAILCORE_MCIMAPSYNCRESULT_H
 
 #include <MailCore/MCBaseTypes.h>
 

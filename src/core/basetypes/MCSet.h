@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_CSET_H_
+#ifndef MAILCORE_CSET_H
 
-#define __MAILCORE_CSET_H_
+#define MAILCORE_CSET_H
 
 #include <MailCore/MCObject.h>
 

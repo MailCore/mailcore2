@@ -120,16 +120,16 @@ set(core_files
 # Includes for build
 
 set(core_includes
-  ${CMAKE_CURRENT_SOURCE_DIR}/core
-  ${CMAKE_CURRENT_SOURCE_DIR}/core/abstract
-  ${CMAKE_CURRENT_SOURCE_DIR}/core/basetypes
-  ${CMAKE_CURRENT_SOURCE_DIR}/core/imap
-  ${CMAKE_CURRENT_SOURCE_DIR}/core/pop
-  ${CMAKE_CURRENT_SOURCE_DIR}/core/provider
-  ${CMAKE_CURRENT_SOURCE_DIR}/core/renderer
-  ${CMAKE_CURRENT_SOURCE_DIR}/core/rfc822
-  ${CMAKE_CURRENT_SOURCE_DIR}/core/security
-  ${CMAKE_CURRENT_SOURCE_DIR}/core/smtp
-  ${CMAKE_CURRENT_SOURCE_DIR}/core/zip
-  ${CMAKE_CURRENT_SOURCE_DIR}/core/zip/MiniZip
+  "${CMAKE_CURRENT_SOURCE_DIR}/core"
+  "${CMAKE_CURRENT_SOURCE_DIR}/core/abstract"
+  "${CMAKE_CURRENT_SOURCE_DIR}/core/basetypes"
+  "${CMAKE_CURRENT_SOURCE_DIR}/core/imap"
+  "${CMAKE_CURRENT_SOURCE_DIR}/core/pop"
+  "${CMAKE_CURRENT_SOURCE_DIR}/core/provider"
+  "${CMAKE_CURRENT_SOURCE_DIR}/core/renderer"
+  "${CMAKE_CURRENT_SOURCE_DIR}/core/rfc822"
+  "${CMAKE_CURRENT_SOURCE_DIR}/core/security"
+  "${CMAKE_CURRENT_SOURCE_DIR}/core/smtp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/core/zip"
+  "${CMAKE_CURRENT_SOURCE_DIR}/core/zip/MiniZip"
 )

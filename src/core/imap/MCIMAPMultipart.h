@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCIMAPMULTIPART_H
+#ifndef MAILCORE_MCIMAPMULTIPART_H
 
-#define __MAILCORE_MCIMAPMULTIPART_H
+#define MAILCORE_MCIMAPMULTIPART_H
 
 #include <MailCore/MCAbstractMultipart.h>
 

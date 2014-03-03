@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOIMAPBASEOPERATION_H_
+#ifndef MAILCORE_MCOIMAPBASEOPERATION_H
 
-#define __MAILCORE_MCOIMAPBASEOPERATION_H_
+#define MAILCORE_MCOIMAPBASEOPERATION_H
 
 /** Represents a generic IMAP operation with methods that are called with progress updates */
 

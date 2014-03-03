@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCATTACHMENT_H_
+#ifndef MAILCORE_MCATTACHMENT_H
 
-#define __MAILCORE_MCATTACHMENT_H_
+#define MAILCORE_MCATTACHMENT_H
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCAbstractPart.h>

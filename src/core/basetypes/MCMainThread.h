@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCMAINTHREAD_H
+#ifndef MAILCORE_MCMAINTHREAD_H
 
-#define __MAILCORE_MCMAINTHREAD_H
+#define MAILCORE_MCMAINTHREAD_H
 
 #ifdef __cplusplus
 

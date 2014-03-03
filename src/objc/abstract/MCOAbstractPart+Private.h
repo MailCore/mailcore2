@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOABSTRACTPART_PRIVATE_H_
+#ifndef MAILCORE_MCOABSTRACTPART_PRIVATE_H
 
-#define __MAILCORE_MCOABSTRACTPART_PRIVATE_H_
+#define MAILCORE_MCOABSTRACTPART_PRIVATE_H
 
 #include <MailCore/MCOAbstractPart.h>
 

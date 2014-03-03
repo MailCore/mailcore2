@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCPOPOPERATIONCALLBACK_H_
+#ifndef MAILCORE_MCPOPOPERATIONCALLBACK_H
 
-#define __MAILCORE_MCPOPOPERATIONCALLBACK_H_
+#define MAILCORE_MCPOPOPERATIONCALLBACK_H
 
 #ifdef __cplusplus
 

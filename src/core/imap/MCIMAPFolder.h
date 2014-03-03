@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCIMAPFOLDER_H
+#ifndef MAILCORE_MCIMAPFOLDER_H
 
-#define __MAILCORE_MCIMAPFOLDER_H
+#define MAILCORE_MCIMAPFOLDER_H
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCMessageConstants.h>

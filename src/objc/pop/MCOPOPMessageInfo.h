@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOPOPMESSAGEINFO_H_
+#ifndef MAILCORE_MCOPOPMESSAGEINFO_H
 
-#define __MAILCORE_MCOPOPMESSAGEINFO_H_
+#define MAILCORE_MCOPOPMESSAGEINFO_H
 
 #import <Foundation/Foundation.h>
 

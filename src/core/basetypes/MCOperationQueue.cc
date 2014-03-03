@@ -93,7 +93,9 @@ void OperationQueue::runOperations()
 
         performOnCallbackThread(op, (Object::Method) &OperationQueue::beforeMain, op, true);
         
-        op->main();
+        if (!op->isCancelled() || op->shouldRunWhenCancelled()) {
+            op->main();
+        }
         
         op->retain()->autorelease();
         

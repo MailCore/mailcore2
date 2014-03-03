@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCRFC822_H
+#ifndef MAILCORE_MCRFC822_H
 
-#define __MAILCORE_MCRFC822_H
+#define MAILCORE_MCRFC822_H
 
 #include <MailCore/MCAttachment.h>
 #include <MailCore/MCMessageBuilder.h>

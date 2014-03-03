@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCIMAPIDLEOPERATION_H_
+#ifndef MAILCORE_MCIMAPIDLEOPERATION_H
 
-#define __MAILCORE_MCIMAPIDLEOPERATION_H_
+#define MAILCORE_MCIMAPIDLEOPERATION_H
 
 #include <MailCore/MCIMAPOperation.h>
 

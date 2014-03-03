@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCCORE_H_
-#define __MAILCORE_MCCORE_H_
+#ifndef MAILCORE_MCCORE_H
+
+#define MAILCORE_MCCORE_H
 
 #include <MailCore/MCAbstract.h>
 #include <MailCore/MCBaseTypes.h>

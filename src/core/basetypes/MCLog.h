@@ -1,11 +1,12 @@
-#ifndef __MAILCORE_MCLOG_H_
+#ifndef MAILCORE_MCLOG_H
 
-#define __MAILCORE_MCLOG_H_
+#define MAILCORE_MCLOG_H
 
 #include <stdio.h>
 
 #define MCLog(...) MCLogInternal(NULL, __FILE__, __LINE__, 0, __VA_ARGS__)
-    
+#define MCLogStack(...) MCLogInternal(NULL, __FILE__, __LINE__, 1, __VA_ARGS__)
+
 extern int MCLogEnabled;
     
 #ifndef __printflike

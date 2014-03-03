@@ -82,6 +82,7 @@ public:
 }
 
 MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setCallbackDispatchQueue, callbackDispatchQueue);
+MCO_OBJC_SYNTHESIZE_SCALAR(BOOL, bool, setShouldRunWhenCancelled, shouldRunWhenCancelled);
 
 - (void) cancel
 {

@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCORFC822_H_
+#ifndef MAILCORE_MCORFC822_H
 
-#define __MAILCORE_MCORFC822_H_
+#define MAILCORE_MCORFC822_H
 
 #import <MailCore/MCOAttachment.h>
 #import <MailCore/MCOMessageBuilder.h>

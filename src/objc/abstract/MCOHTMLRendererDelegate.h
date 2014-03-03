@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOHTMLRENDERERDELEGATE_H_
+#ifndef MAILCORE_MCOHTMLRENDERERDELEGATE_H
 
-#define __MAILCORE_MCOHTMLRENDERERDELEGATE_H_
+#define MAILCORE_MCOHTMLRENDERERDELEGATE_H
 
 #import <Foundation/Foundation.h>
 

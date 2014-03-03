@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOPOPFETCHHEADEROPERATION_H_
+#ifndef MAILCORE_MCOPOPFETCHHEADEROPERATION_H
 
-#define __MAILCORE_MCOPOPFETCHHEADEROPERATION_H_
+#define MAILCORE_MCOPOPFETCHHEADEROPERATION_H
 
 #import <Foundation/Foundation.h>
 #import <MailCore/MCOPOPOperation.h>

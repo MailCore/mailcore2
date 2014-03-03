@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCSMTPASYNCSESSION_H
+#ifndef MAILCORE_MCSMTPASYNCSESSION_H
 
-#define __MAILCORE_MCSMTPASYNCSESSION_H
+#define MAILCORE_MCSMTPASYNCSESSION_H
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCMessageConstants.h>

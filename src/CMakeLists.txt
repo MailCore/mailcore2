@@ -14,17 +14,17 @@ include(LibFindMacros)
 
 IF(APPLE)
   set(additional_includes
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Externals/ctemplate/include
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Externals/icu4c/include
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Externals/libetpan/include
+    "${CMAKE_CURRENT_SOURCE_DIR}/../Externals/ctemplate/include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../Externals/icu4c/include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../Externals/libetpan/include"
     /usr/include/tidy
     /usr/include/libxml2
   )
   
   set(additional_lib_searchpath
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Externals/ctemplate/lib
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Externals/icu4c/lib
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Externals/libetpan/lib
+    "${CMAKE_CURRENT_SOURCE_DIR}/../Externals/ctemplate/lib"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../Externals/icu4c/lib"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../Externals/libetpan/lib"
   )
   
   execute_process(COMMAND "${CMAKE_CURRENT_SOURCE_DIR}/../scripts/prepare.sh"
@@ -167,10 +167,10 @@ file(COPY
   ${public_headers}
 
   DESTINATION
-  ${CMAKE_CURRENT_BINARY_DIR}/include/MailCore
+  "${CMAKE_CURRENT_BINARY_DIR}/include/MailCore"
 )
 
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/include
+include_directories("${CMAKE_CURRENT_BINARY_DIR}/include"
   ${async_includes}
   ${core_includes}
   ${objc_includes}

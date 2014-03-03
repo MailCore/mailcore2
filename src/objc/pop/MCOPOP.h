@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOPOP_H_
+#ifndef MAILCORE_MCOPOP_H_
 
-#define __MAILCORE_MCOPOP_H_
+#define MAILCORE_MCOPOP_H
 
 #import <MailCore/MCOPOPSession.h>
 #import <MailCore/MCOPOPOperation.h>

@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOMESSAGEHEADER_H_
+#ifndef MAILCORE_MCOMESSAGEHEADER_H
 
-#define __MAILCORE_MCOMESSAGEHEADER_H_
+#define MAILCORE_MCOMESSAGEHEADER_H
 
 #import <Foundation/Foundation.h>
 
@@ -58,16 +58,16 @@
 @property (nonatomic, copy) NSString * userAgent;
 
 /** Adds a custom header.*/
-- (void)addHeaderValue:(NSString *)value forName:(NSString *)name;
+- (void) setExtraHeaderValue:(NSString *)value forName:(NSString *)name;
 
 /** Remove a given custom header.*/
-- (void)removeHeaderForName:(NSString *)name;
+- (void) removeExtraHeaderForName:(NSString *)name;
 
 /** Returns the value of a given custom header.*/
-- (NSString *)headerValueForName:(NSString *)name;
+- (NSString *) extraHeaderValueForName:(NSString *)name;
 
 /** Returns an array with the names of all custom headers.*/
-- (NSArray * /* NSString */)allHeadersNames;
+- (NSArray * /* NSString */) allExtraHeadersNames;
 
 /** Extracted subject (also remove square brackets).*/
 - (NSString *) extractedSubject;

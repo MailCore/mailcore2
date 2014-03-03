@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOIMAPNAMESPACE_H_
+#ifndef MAILCORE_MCOIMAPNAMESPACE_H
 
-#define __MAILCORE_MCOIMAPNAMESPACE_H_
+#define MAILCORE_MCOIMAPNAMESPACE_H
 
 /** Represents an IMAP namespace */
 
