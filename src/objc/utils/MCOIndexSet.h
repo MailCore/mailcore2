@@ -16,7 +16,7 @@
 
 /** similar to NSMutableIndexSet but supports int64_t*/
 
-@interface MCOIndexSet : NSObject <NSCopying>
+@interface MCOIndexSet : NSObject <NSCopying, NSCoding>
 
 /** Creates an empty index set.*/
 + (MCOIndexSet *) indexSet;
