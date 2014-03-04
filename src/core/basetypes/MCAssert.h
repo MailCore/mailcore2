@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCASSERT_H_
+#ifndef MAILCORE_MCASSERT_H
 
-#define __MAILCORE_MCASSERT_H_
+#define MAILCORE_MCASSERT_H
 
 #define MCAssert(cond) MCAssertInternal(__FILE__, __LINE__, cond, #cond)
 

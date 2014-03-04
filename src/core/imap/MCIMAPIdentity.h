@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCIMAPIDENTITY_H
+#ifndef MAILCORE_MCIMAPIDENTITY_H
 
-#define __MAILCORE_MCIMAPIDENTITY_H
+#define MAILCORE_MCIMAPIDENTITY_H
 
 #include <MailCore/MCBaseTypes.h>
 

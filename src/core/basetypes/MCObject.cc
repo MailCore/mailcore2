@@ -5,6 +5,7 @@
 #include <cxxabi.h>
 #include <libetpan/libetpan.h>
 #include <string.h>
+#include <Block.h>
 
 #include "MCAutoreleasePool.h"
 #include "MCString.h"
@@ -139,10 +140,91 @@ static void initDelayedPerform()
 }
 
 struct mainThreadCallKeyData {
+    Object * dispatchQueueIdentifier;
     Object * obj;
     void * context;
     Object::Method method;
 };
+
+static void removeFromPerformHash(Object * obj, Object::Method method, void * context, void * targetDispatchQueue)
+{
+    chashdatum key;
+    struct mainThreadCallKeyData keyData;
+    Object * queueIdentifier = NULL;
+#if __APPLE__
+    queueIdentifier = (String *) dispatch_queue_get_specific((dispatch_queue_t) targetDispatchQueue, "MCDispatchQueueID");
+#endif
+    memset(&keyData, 0, sizeof(keyData));
+    keyData.dispatchQueueIdentifier = queueIdentifier;
+    keyData.obj = obj;
+    keyData.context = context;
+    keyData.method = method;
+    key.data = &keyData;
+    key.len = sizeof(keyData);
+    
+    chash_delete(delayedPerformHash, (chashdatum *) &key, NULL);
+}
+
+static void queueIdentifierDestructor(void * identifier)
+{
+    Object * obj = (Object *) identifier;
+    MC_SAFE_RELEASE(obj);
+}
+
+static void addToPerformHash(Object * obj, Object::Method method, void * context, void * targetDispatchQueue,
+                             void * performValue)
+{
+    chashdatum key;
+    chashdatum value;
+    struct mainThreadCallKeyData keyData;
+    Object * queueIdentifier = NULL;
+#if __APPLE__
+    queueIdentifier = (String *) dispatch_queue_get_specific((dispatch_queue_t) targetDispatchQueue, "MCDispatchQueueID");
+    if (queueIdentifier == NULL) {
+        queueIdentifier = new Object();
+        dispatch_queue_set_specific((dispatch_queue_t) targetDispatchQueue, "MCDispatchQueueID", queueIdentifier, queueIdentifierDestructor);
+    }
+#endif
+    memset(&keyData, 0, sizeof(keyData));
+    keyData.dispatchQueueIdentifier = queueIdentifier;
+    keyData.obj = obj;
+    keyData.context = context;
+    keyData.method = method;
+    key.data = &keyData;
+    key.len = sizeof(keyData);
+    value.data = performValue;
+    value.len = 0;
+    chash_set(delayedPerformHash, &key, &value, NULL);
+}
+
+static void * getFromPerformHash(Object * obj, Object::Method method, void * context, void * targetDispatchQueue)
+{
+    chashdatum key;
+    chashdatum value;
+    struct mainThreadCallKeyData keyData;
+    int r;
+    
+    Object * queueIdentifier = NULL;
+#if __APPLE__
+    MCAssert(targetDispatchQueue != NULL);
+    queueIdentifier = (String *) dispatch_queue_get_specific((dispatch_queue_t) targetDispatchQueue, "MCDispatchQueueID");
+    if (queueIdentifier == NULL)
+        return NULL;
+#endif
+    memset(&keyData, 0, sizeof(keyData));
+    keyData.dispatchQueueIdentifier = queueIdentifier;
+    keyData.obj = obj;
+    keyData.context = context;
+    keyData.method = method;
+    key.data = &keyData;
+    key.len = sizeof(keyData);
+    
+    r = chash_get(delayedPerformHash, &key, &value);
+    if (r < 0)
+        return NULL;
+    
+    return value.data;
+}
 
 static void performOnMainThread(void * info)
 {
@@ -173,15 +255,7 @@ static void performAfterDelay(void * info)
     context = data->context;
     method = data->method;
     
-    chashdatum key;
-    struct mainThreadCallKeyData keyData;
-    keyData.obj = obj;
-    keyData.context = context;
-    keyData.method = method;
-    key.data = &keyData;
-    key.len = sizeof(keyData);
-    chash_delete(delayedPerformHash, &key, NULL);
-    
+    removeFromPerformHash(obj, method, context, NULL);
     (obj->*method)(context);
     
     free(data);
@@ -219,10 +293,60 @@ void Object::performMethodOnDispatchQueue(Method method, void * context, void * 
         });
     }
 }
+
+struct cancellableBlock {
+    void (^block)(void);
+    bool cancelled;
+};
+
+void Object::performMethodOnDispatchQueueAfterDelay(Method method, void * context, void * targetDispatchQueue, double delay)
+{
+    initDelayedPerform();
+    
+    __block bool cancelled = false;
+    
+    void (^cancelableBlock)(bool cancel) = ^(bool cancel) {
+        if (cancel) {
+            cancelled = true;
+            return;
+        }
+        if (!cancelled) {
+            (this->*method)(context);
+        }
+    };
+    
+    void (^dupCancelableBlock)(bool cancel) = Block_copy(cancelableBlock);
+    
+    retain();
+    addToPerformHash(this, method, context, targetDispatchQueue, (void *) dupCancelableBlock);
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC));
+    dispatch_after(popTime, (dispatch_queue_t) targetDispatchQueue, ^(void) {
+        if (!cancelled) {
+            removeFromPerformHash(this, method, context, targetDispatchQueue);
+        }
+        dupCancelableBlock(false);
+        Block_release(dupCancelableBlock);
+        release();
+    });
+}
+
+void Object::cancelDelayedPerformMethodOnDispatchQueue(Method method, void * context, void * targetDispatchQueue)
+{
+    initDelayedPerform();
+    void (^dupCancelableBlock)(bool cancel) = (void (^)(bool)) getFromPerformHash(this, method, context, targetDispatchQueue);
+    if (dupCancelableBlock == NULL) {
+        return;
+    }
+    removeFromPerformHash(this, method, context, targetDispatchQueue);
+    dupCancelableBlock(true);
+}
 #endif
 
 void Object::performMethodAfterDelay(Method method, void * context, double delay)
 {
+#if __APPLE__
+    performMethodOnDispatchQueueAfterDelay(method, context, dispatch_get_main_queue(), delay);
+#else
     initDelayedPerform();
     
     struct mainThreadCallData * data;
@@ -232,41 +356,25 @@ void Object::performMethodAfterDelay(Method method, void * context, double delay
     data->context = context;
     data->method = method;
     data->caller = callAfterDelay(performAfterDelay, data, delay);
-    
-    chashdatum key;
-    chashdatum value;
-    struct mainThreadCallKeyData keyData;
-    keyData.obj = this;
-    keyData.context = context;
-    keyData.method = method;
-    key.data = &keyData;
-    key.len = sizeof(keyData);
-    value.data = (void *) data;
-    value.len = 0;
-    chash_set(delayedPerformHash, &key, &value, NULL);
+    addToPerformHash(this, method, context, NULL, data);
+#endif
 }
 
 void Object::cancelDelayedPerformMethod(Method method, void * context)
 {
+#if __APPLE__
+    cancelDelayedPerformMethodOnDispatchQueue(method, context, dispatch_get_main_queue());
+#else
     initDelayedPerform();
     
-    int r;
-    chashdatum key;
-    chashdatum value;
-    struct mainThreadCallKeyData keyData;
-    keyData.obj = this;
-    keyData.context = context;
-    keyData.method = method;
-    key.data = &keyData;
-    key.len = sizeof(keyData);
-    r = chash_get(delayedPerformHash, &key, &value);
-    if (r < 0)
+    struct mainThreadCallData * data = getFromPerformHash(this, method, context, NULL);
+    if (data == NULL)
         return;
     
-    chash_delete(delayedPerformHash, &key, NULL);
-    struct mainThreadCallData * data = (struct mainThreadCallData *) value.data;
+    removeFromPerformHash(this, method, context, NULL);
     cancelDelayedCall(data->caller);
     free(data);
+#endif
 }
 
 HashMap * Object::serializable()

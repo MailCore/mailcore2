@@ -54,7 +54,7 @@ void IMAPIdleOperation::main()
         return;
     }
     
-    performMethodOnMainThread((Object::Method) &IMAPIdleOperation::prepare, NULL, true);
+    performMethodOnCallbackThread((Object::Method) &IMAPIdleOperation::prepare, NULL, true);
     
     if (!mSetupSuccess) {
         return;
@@ -63,7 +63,7 @@ void IMAPIdleOperation::main()
     session()->session()->idle(folder(), mLastKnownUid, &error);
     setError(error);
     
-    performMethodOnMainThread((Object::Method) &IMAPIdleOperation::unprepare, NULL, true);
+    performMethodOnCallbackThread((Object::Method) &IMAPIdleOperation::unprepare, NULL, true);
 }
 
 void IMAPIdleOperation::interruptIdle()

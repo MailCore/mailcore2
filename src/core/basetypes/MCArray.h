@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCARRAY_H_
+#ifndef MAILCORE_MCARRAY_H
 
-#define __MAILCORE_MCARRAY_H_
+#define MAILCORE_MCARRAY_H
 
 #include <MailCore/MCObject.h>
 
@@ -32,6 +32,7 @@ namespace mailcore {
         
         virtual void addObjectsFromArray(Array * array);
         virtual Object * lastObject();
+        virtual void removeLastObject();
         virtual bool containsObject(Object * obj);
         
         virtual Array * sortedArray(int (* compare)(void * a, void * b, void * context), void * context);

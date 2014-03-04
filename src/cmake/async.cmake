@@ -61,8 +61,8 @@ set(async_files
 # Includes for build
 
 set(async_includes
-  ${CMAKE_CURRENT_SOURCE_DIR}/async
-  ${CMAKE_CURRENT_SOURCE_DIR}/async/imap
-  ${CMAKE_CURRENT_SOURCE_DIR}/async/pop
-  ${CMAKE_CURRENT_SOURCE_DIR}/async/smtp
+  "${CMAKE_CURRENT_SOURCE_DIR}/async"
+  "${CMAKE_CURRENT_SOURCE_DIR}/async/imap"
+  "${CMAKE_CURRENT_SOURCE_DIR}/async/pop"
+  "${CMAKE_CURRENT_SOURCE_DIR}/async/smtp"
 )

@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCINDEXSET_H_
+#ifndef MAILCORE_MCINDEXSET_H
 
-#define __MAILCORE_MCINDEXSET_H_
+#define MAILCORE_MCINDEXSET_H
 
 #include <MailCore/MCObject.h>
 #include <MailCore/MCRange.h>
@@ -35,6 +35,10 @@ namespace mailcore {
         virtual void addRange(Range range);
         virtual void removeRange(Range range);
         virtual void intersectsRange(Range range);
+        
+        virtual void addIndexSet(IndexSet * indexSet);
+        virtual void removeIndexSet(IndexSet * indexSet);
+        virtual void intersectsIndexSet(IndexSet * indexSet);
         
         virtual Range * allRanges();
         virtual unsigned int rangesCount();

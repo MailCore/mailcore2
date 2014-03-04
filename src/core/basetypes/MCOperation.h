@@ -1,13 +1,9 @@
-#ifndef __MAILCORE_MCOPERATION_H_
+#ifndef MAILCORE_MCOPERATION_H
 
-#define __MAILCORE_MCOPERATION_H_
+#define MAILCORE_MCOPERATION_H
 
 #include <pthread.h>
 #include <MailCore/MCObject.h>
-
-#if __APPLE__
-#include <dispatch/dispatch.h>
-#endif
 
 #ifdef __cplusplus
 
@@ -40,10 +36,15 @@ namespace mailcore {
         virtual void setCallbackDispatchQueue(dispatch_queue_t callbackDispatchQueue);
         virtual dispatch_queue_t callbackDispatchQueue();
 #endif
+        void performMethodOnCallbackThread(Method method, void * context, bool waitUntilDone = false);
+        
+        virtual bool shouldRunWhenCancelled();
+        virtual void setShouldRunWhenCancelled(bool shouldRunWhenCancelled);
         
     private:
         OperationCallback * mCallback;
         bool mCancelled;
+        bool mShouldRunWhenCancelled;
         pthread_mutex_t mLock;
 #ifdef __APPLE__
         dispatch_queue_t mCallbackDispatchQueue;

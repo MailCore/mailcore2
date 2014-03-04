@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCPROVIDER_H_
-#define __MAILCORE_MCPROVIDER_H_
+#ifndef MAILCORE_MCPROVIDER_H
+
+#define MAILCORE_MCPROVIDER_H
 
 #include <MailCore/MCMailProvidersManager.h>
 #include <MailCore/MCMailProvider.h>

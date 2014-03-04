@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCLIBETPANTYPES_H_
-#define __MAILCORE_MCLIBETPANTYPES_H_
+#ifndef MAILCORE_MCLIBETPANTYPES_H
+
+#define MAILCORE_MCLIBETPANTYPES_H
 
 #ifdef __cplusplus
 extern "C" {

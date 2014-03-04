@@ -272,3 +272,15 @@ void SMTPAsyncSession::logConnection(ConnectionLogType logType, Data * buffer)
     }
     pthread_mutex_unlock(&mConnectionLoggerLock);
 }
+
+#if __APPLE__
+void SMTPAsyncSession::setDispatchQueue(dispatch_queue_t dispatchQueue)
+{
+    mQueue->setDispatchQueue(dispatchQueue);
+}
+
+dispatch_queue_t SMTPAsyncSession::dispatchQueue()
+{
+    return mQueue->dispatchQueue();
+}
+#endif

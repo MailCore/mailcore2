@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_ITERATOR_H_
-#define __MAILCORE_ITERATOR_H_
+#ifndef MAILCORE_ITERATOR_H
+
+#define MAILCORE_ITERATOR_H
 
 #include <MailCore/MCArray.h>
 #include <MailCore/MCHashMap.h>

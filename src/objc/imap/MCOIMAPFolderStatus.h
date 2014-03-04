@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOIMAPFOLDERSTATUS_H_
+#ifndef MAILCORE_MCOIMAPFOLDERSTATUS_H
 
-#define __MAILCORE_MCOIMAPFOLDERSTATUS_H_
+#define MAILCORE_MCOIMAPFOLDERSTATUS_H
 
 #import <Foundation/Foundation.h>
 

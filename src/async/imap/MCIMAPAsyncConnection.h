@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCIMAPASYNCCONNECTION_H
+#ifndef MAILCORE_MCIMAPASYNCCONNECTION_H
 
-#define __MAILCORE_MCIMAPASYNCCONNECTION_H
+#define MAILCORE_MCIMAPASYNCCONNECTION_H
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCMessageConstants.h>
@@ -81,6 +81,11 @@ namespace mailcore {
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
         
+#ifdef __APPLE__
+        virtual void setDispatchQueue(dispatch_queue_t dispatchQueue);
+        virtual dispatch_queue_t dispatchQueue();
+#endif
+        
         virtual IMAPFolderInfoOperation * folderInfoOperation(String * folder);
         virtual IMAPFolderStatusOperation * folderStatusOperation(String * folder);
         
@@ -94,7 +99,7 @@ namespace mailcore {
         virtual IMAPOperation * subscribeFolderOperation(String * folder);
         virtual IMAPOperation * unsubscribeFolderOperation(String * folder);
         
-        virtual IMAPAppendMessageOperation * appendMessageOperation(String * folder, Data * messageData, MessageFlag flags);
+        virtual IMAPAppendMessageOperation * appendMessageOperation(String * folder, Data * messageData, MessageFlag flags, Array * customFlags);
         
         virtual IMAPCopyMessagesOperation * copyMessagesOperation(String * folder, IndexSet * uids, String * destFolder);
         
@@ -111,7 +116,7 @@ namespace mailcore {
         virtual IMAPFetchContentOperation * fetchMessageAttachmentByUIDOperation(String * folder, uint32_t uid, String * partID,
                                                                                  Encoding encoding);
         
-        virtual IMAPOperation * storeFlagsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags);
+        virtual IMAPOperation * storeFlagsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, Array * customFlags);
         virtual IMAPOperation * storeLabelsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, Array * labels);
         
         virtual IMAPSearchOperation * searchOperation(String * folder, IMAPSearchKind kind, String * searchString);
@@ -151,6 +156,7 @@ namespace mailcore {
         pthread_mutex_t mConnectionLoggerLock;
         bool mAutomaticConfigurationEnabled;
         bool mQueueRunning;
+        bool mScheduledAutomaticDisconnect;
         
         virtual void tryAutomaticDisconnectAfterDelay(void * context);
         virtual IMAPMessageRenderingOperation * renderingOperation(IMAPMessage * message,

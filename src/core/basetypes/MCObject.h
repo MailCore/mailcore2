@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCOBJECT_H_
+#ifndef MAILCORE_MCOBJECT_H
 
-#define __MAILCORE_MCOBJECT_H_
+#define MAILCORE_MCOBJECT_H
 
 #include <pthread.h>
 #if __APPLE__
@@ -43,10 +43,12 @@ namespace mailcore {
         typedef void (Object::*Method) (void *);
         virtual void performMethod(Method method, void * context);
         virtual void performMethodOnMainThread(Method method, void * context, bool waitUntilDone = false);
+        virtual void performMethodAfterDelay(Method method, void * context, double delay);
 #if __APPLE__
         virtual void performMethodOnDispatchQueue(Method method, void * context, void * targetDispatchQueue, bool waitUntilDone = false);
+        virtual void performMethodOnDispatchQueueAfterDelay(Method method, void * context, void * targetDispatchQueue, double delay);
+        virtual void cancelDelayedPerformMethodOnDispatchQueue(Method method, void * context, void * targetDispatchQueue);
 #endif
-        virtual void performMethodAfterDelay(Method method, void * context, double delay);
         virtual void cancelDelayedPerformMethod(Method method, void * context);
         
         // serialization utils

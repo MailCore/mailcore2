@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOATTACHMENT_H_
+#ifndef MAILCORE_MCOATTACHMENT_H
 
-#define __MAILCORE_MCOATTACHMENT_H_
+#define MAILCORE_MCOATTACHMENT_H
 
 #import <MailCore/MCOAbstractPart.h>
 

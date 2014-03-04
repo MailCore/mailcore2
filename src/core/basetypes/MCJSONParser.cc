@@ -47,7 +47,7 @@ String * JSONParser::content()
 
 void JSONParser::setContent(String * content)
 {
-    MC_SAFE_REPLACE_COPY(String, mContent, content);
+    MC_SAFE_REPLACE_RETAIN(String, mContent, content);
 }
 
 unsigned int JSONParser::position()

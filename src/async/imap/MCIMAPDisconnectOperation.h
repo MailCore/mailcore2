@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCIMAPDISCONNECTOPERATION_H_
-#define __MAILCORE_MCIMAPDISCONNECTOPERATION_H_
+#ifndef MAILCORE_MCIMAPDISCONNECTOPERATION_H
+
+#define MAILCORE_MCIMAPDISCONNECTOPERATION_H
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCAbstract.h>

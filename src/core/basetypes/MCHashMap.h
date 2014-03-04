@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCHASHMAP_H_
+#ifndef MAILCORE_MCHASHMAP_H
 
-#define __MAILCORE_MCHASHMAP_H_
+#define MAILCORE_MCHASHMAP_H
 
 #include <MailCore/MCObject.h>
 

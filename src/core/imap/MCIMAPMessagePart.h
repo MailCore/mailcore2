@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_IMAPMESSAGEPART_H_
+#ifndef MAILCORE_IMAPMESSAGEPART_H
 
-#define __MAILCORE_IMAPMESSAGEPART_H_
+#define MAILCORE_IMAPMESSAGEPART_H
 
 #include <MailCore/MCAbstractMessagePart.h>
 

@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOIMAPSEARCHEXPRESSION_H_
+#ifndef MAILCORE_MCOIMAPSEARCHEXPRESSION_H
 
-#define __MAILCORE_MCOIMAPSEARCHEXPRESSION_H_
+#define MAILCORE_MCOIMAPSEARCHEXPRESSION_H
 
 /** Used to construct an IMAP search query */
 
@@ -286,6 +286,17 @@
  MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchGmailThreadID:aThreadID]
  */
 + (MCOIMAPSearchExpression *) searchGmailThreadID:(uint64_t)number;
+
+/**
+ Creates a search expression that gets emails that match a gmail raw search
+ expression.
+ 
+ Example:
+ 
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchGmailRaw:@"from:bill has:attachment filename:cal meeting schedule"]
+ */
++ (MCOIMAPSearchExpression *) searchGmailRaw:(NSString *)expr;
+
 
 /**
  Creates a search expression that's a disjunction of two search expressions.

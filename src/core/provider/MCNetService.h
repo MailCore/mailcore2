@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCNETSERVICE_H_
-#define __MAILCORE_MCNETSERVICE_H_
+#ifndef MAILCORE_MCNETSERVICE_H
+
+#define MAILCORE_MCNETSERVICE_H
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCMessageConstants.h>

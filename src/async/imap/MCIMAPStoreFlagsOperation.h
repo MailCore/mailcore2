@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCIMAPSTOREFLAGSOPERATION_H_
+#ifndef MAILCORE_MCIMAPSTOREFLAGSOPERATION_H
 
-#define __MAILCORE_MCIMAPSTOREFLAGSOPERATION_H_
+#define MAILCORE_MCIMAPSTOREFLAGSOPERATION_H
 
 #include <MailCore/MCIMAPOperation.h>
 
@@ -30,6 +30,9 @@ namespace mailcore {
         virtual void setFlags(MessageFlag flags);
         virtual MessageFlag flags();
         
+        virtual void setCustomFlags(Array * customFlags);
+        virtual Array * customFlags();
+        
     public: // subclass behavior
         virtual void main();
         
@@ -37,7 +40,7 @@ namespace mailcore {
         IndexSet * mUids;
         IMAPStoreFlagsRequestKind mKind;
         MessageFlag mFlags;
-        
+        Array * mCustomFlags;
     };
     
 }

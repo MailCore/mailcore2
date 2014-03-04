@@ -17,12 +17,12 @@ IMAPCopyMessagesOperation::IMAPCopyMessagesOperation()
 {
     mUids = NULL;
     mDestFolder = NULL;
-    mDestUids = NULL;
+    mUidMapping = NULL;
 }
 
 IMAPCopyMessagesOperation::~IMAPCopyMessagesOperation()
 {
-    MC_SAFE_RELEASE(mDestUids);
+    MC_SAFE_RELEASE(mUidMapping);
     MC_SAFE_RELEASE(mUids);
     MC_SAFE_RELEASE(mDestFolder);
 }
@@ -37,9 +37,9 @@ IndexSet * IMAPCopyMessagesOperation::uids()
     return mUids;
 }
 
-IndexSet * IMAPCopyMessagesOperation::destUids()
+HashMap * IMAPCopyMessagesOperation::uidMapping()
 {
-    return mDestUids;
+    return mUidMapping;
 }
 
 void IMAPCopyMessagesOperation::setDestFolder(String * destFolder)
@@ -55,7 +55,7 @@ String * IMAPCopyMessagesOperation::destFolder()
 void IMAPCopyMessagesOperation::main()
 {
     ErrorCode error;
-    session()->session()->copyMessages(folder(), mUids, mDestFolder, &mDestUids, &error);
-    MC_SAFE_RETAIN(mDestUids);
+    session()->session()->copyMessages(folder(), mUids, mDestFolder, &mUidMapping, &error);
+    MC_SAFE_RETAIN(mUidMapping);
     setError(error);
 }

@@ -23,7 +23,8 @@
         },
         "domain-match":[
             "me\\.com",
-            "mac\\.com"
+            "mac\\.com",
+            "icloud\\.com"
         ],
         "mailboxes":{
             "drafts":"Drafts",

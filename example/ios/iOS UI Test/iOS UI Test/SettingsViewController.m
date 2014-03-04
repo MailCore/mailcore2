@@ -30,7 +30,14 @@ NSString * const OAuthEnabledKey = @"OAuth2Enabled";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor underPageBackgroundColor];
+    self.title = @"Settings";
+    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                target:self
+                                                                                action:@selector(done:)];
+    self.navigationItem.rightBarButtonItem = doneButton;
+    
+    self.view.backgroundColor = [UIColor lightGrayColor];
     self.emailTextField.text = [[NSUserDefaults standardUserDefaults] stringForKey:UsernameKey];
     self.passwordTextField.text = [[FXKeychain defaultKeychain] objectForKey:PasswordKey];
     self.hostnameTextField.text = [[NSUserDefaults standardUserDefaults] stringForKey:HostnameKey];

@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCABSTRACT_H
+#ifndef MAILCORE_MCABSTRACT_H
 
-#define __MAILCORE_MCABSTRACT_H
+#define MAILCORE_MCABSTRACT_H
 
 #include <MailCore/MCAbstractMessage.h>
 #include <MailCore/MCAbstractMessagePart.h>

@@ -103,11 +103,11 @@ ENDIF()
 # Includes for build
 
 set(objc_includes
-  ${CMAKE_CURRENT_SOURCE_DIR}/objc
-  ${CMAKE_CURRENT_SOURCE_DIR}/objc/abstract
-  ${CMAKE_CURRENT_SOURCE_DIR}/objc/imap
-  ${CMAKE_CURRENT_SOURCE_DIR}/objc/pop
-  ${CMAKE_CURRENT_SOURCE_DIR}/objc/rfc822
-  ${CMAKE_CURRENT_SOURCE_DIR}/objc/smtp
-  ${CMAKE_CURRENT_SOURCE_DIR}/objc/utils
+  "${CMAKE_CURRENT_SOURCE_DIR}/objc"
+  "${CMAKE_CURRENT_SOURCE_DIR}/objc/abstract"
+  "${CMAKE_CURRENT_SOURCE_DIR}/objc/imap"
+  "${CMAKE_CURRENT_SOURCE_DIR}/objc/pop"
+  "${CMAKE_CURRENT_SOURCE_DIR}/objc/rfc822"
+  "${CMAKE_CURRENT_SOURCE_DIR}/objc/smtp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/objc/utils"
 )

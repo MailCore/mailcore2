@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCIMAPSESSION_H
+#ifndef MAILCORE_MCIMAPSESSION_H
 
-#define __MAILCORE_MCIMAPSESSION_H
+#define MAILCORE_MCIMAPSESSION_H
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCMessageConstants.h>
@@ -81,9 +81,11 @@ namespace mailcore {
         
         virtual void appendMessage(String * folder, Data * messageData, MessageFlag flags,
                                    IMAPProgressCallback * progressCallback, uint32_t * createdUID, ErrorCode * pError);
+        virtual void appendMessageWithCustomFlags(String * folder, Data * messageData, MessageFlag flags, Array * customFlags,
+                                   IMAPProgressCallback * progressCallback, uint32_t * createdUID, ErrorCode * pError);
         
-        virtual void copyMessages(String * folder, IndexSet * uidSet, String * destFolder,
-                                  IndexSet ** pDestUIDs, ErrorCode * pError);
+        void copyMessages(String * folder, IndexSet * uidSet, String * destFolder,
+                          HashMap ** pUidMapping, ErrorCode * pError);
         
         virtual void expunge(String * folder, ErrorCode * pError);
         
@@ -120,8 +122,9 @@ namespace mailcore {
                                                                    IndexSet * uids, uint64_t modseq,
                                                                    IMAPProgressCallback * progressCallback,
                                                                    Array * extraHeaders, ErrorCode * pError);
-
+        
         virtual void storeFlags(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, ErrorCode * pError);
+        virtual void storeFlagsAndCustomFlags(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, Array * customFlags, ErrorCode * pError);
         virtual void storeLabels(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, Array * labels, ErrorCode * pError);
         
         virtual IndexSet * search(String * folder, IMAPSearchKind kind, String * searchString, ErrorCode * pError);
@@ -162,6 +165,8 @@ namespace mailcore {
         virtual bool isXOAuthEnabled();
         virtual bool isNamespaceEnabled();
         virtual bool isCompressionEnabled();
+        
+        virtual String * gmailUserDisplayName();
         
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
@@ -219,6 +224,7 @@ namespace mailcore {
         bool mXOauth2Enabled;
         bool mNamespaceEnabled;
         bool mCompressionEnabled;
+        bool mIsGmail;
         String * mWelcomeString;
         bool mNeedsMboxMailWorkaround;
         uint32_t mUIDValidity;
@@ -240,6 +246,9 @@ namespace mailcore {
         bool mAutomaticConfigurationEnabled;
         bool mAutomaticConfigurationDone;
         bool mShouldDisconnect;
+        
+        String * mLoginResponse;
+        String * mGmailUserDisplayName;
         
         void init();
         void bodyProgress(unsigned int current, unsigned int maximum);

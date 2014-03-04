@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCPOPASYNCSESSION_H_
+#ifndef MAILCORE_MCPOPASYNCSESSION_H
 
-#define __MAILCORE_MCPOPASYNCSESSION_H_
+#define MAILCORE_MCPOPASYNCSESSION_H
 
 #include <MailCore/MCBaseTypes.h>
 
@@ -56,6 +56,11 @@ namespace mailcore {
         
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
+        
+#ifdef __APPLE__
+        virtual void setDispatchQueue(dispatch_queue_t dispatchQueue);
+        virtual dispatch_queue_t dispatchQueue();
+#endif
         
         virtual POPFetchMessagesOperation * fetchMessagesOperation();
         

@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_IMAP_MESSAGE_H_
+#ifndef MAILCORE_IMAP_MESSAGE_H
 
-#define __MAILCORE_IMAP_MESSAGE_H_
+#define MAILCORE_IMAP_MESSAGE_H
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCAbstractMessage.h>
@@ -31,6 +31,9 @@ namespace mailcore {
         
         virtual void setOriginalFlags(MessageFlag flags);
         virtual MessageFlag originalFlags();
+        
+        virtual void setCustomFlags(Array * customFlags);
+        virtual Array * customFlags();
         
         virtual uint64_t modSeqValue();
         virtual void setModSeqValue(uint64_t uid);
@@ -70,6 +73,7 @@ namespace mailcore {
         
         MessageFlag mFlags;
         MessageFlag mOriginalFlags;
+        Array * /* String */ mCustomFlags;
         AbstractPart * mMainPart;
         Array * /* String */ mGmailLabels;
         uint64_t mGmailMessageID;

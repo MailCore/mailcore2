@@ -1,6 +1,6 @@
-#ifndef __MAILCORE_MCSMTPASYNCSESSION_H
+#ifndef MAILCORE_MCSMTPASYNCSESSION_H
 
-#define __MAILCORE_MCSMTPASYNCSESSION_H
+#define MAILCORE_MCSMTPASYNCSESSION_H
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCMessageConstants.h>
@@ -53,6 +53,11 @@ namespace mailcore {
         
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
+        
+#ifdef __APPLE__
+        virtual void setDispatchQueue(dispatch_queue_t dispatchQueue);
+        virtual dispatch_queue_t dispatchQueue();
+#endif
         
         virtual SMTPOperation * sendMessageOperation(Data * messageData);
         virtual SMTPOperation * sendMessageOperation(Address * from, Array * recipients,

@@ -105,11 +105,12 @@ IMAPAsyncConnection::IMAPAsyncConnection()
     mInternalLogger = new IMAPConnectionLogger(this);
     mAutomaticConfigurationEnabled = true;
     mQueueRunning = false;
+    mScheduledAutomaticDisconnect = false;
 }
 
 IMAPAsyncConnection::~IMAPAsyncConnection()
 {
-    cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
+    cancelDelayedPerformMethodOnDispatchQueue((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue());
     pthread_mutex_destroy(&mConnectionLoggerLock);
     MC_SAFE_RELEASE(mInternalLogger);
     MC_SAFE_RELEASE(mQueueCallback);
@@ -326,13 +327,14 @@ IMAPOperation * IMAPAsyncConnection::unsubscribeFolderOperation(String * folder)
     return op;
 }
 
-IMAPAppendMessageOperation * IMAPAsyncConnection::appendMessageOperation(String * folder, Data * messageData, MessageFlag flags)
+IMAPAppendMessageOperation * IMAPAsyncConnection::appendMessageOperation(String * folder, Data * messageData, MessageFlag flags, Array * customFlags)
 {
     IMAPAppendMessageOperation * op = new IMAPAppendMessageOperation();
     op->setSession(this);
     op->setFolder(folder);
     op->setMessageData(messageData);
     op->setFlags(flags);
+    op->setCustomFlags(customFlags);
     op->autorelease();
     return op;
 }
@@ -419,7 +421,7 @@ IMAPFetchContentOperation * IMAPAsyncConnection::fetchMessageAttachmentByUIDOper
     return op;
 }
 
-IMAPOperation * IMAPAsyncConnection::storeFlagsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags)
+IMAPOperation * IMAPAsyncConnection::storeFlagsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, Array * customFlags)
 {
     IMAPStoreFlagsOperation * op = new IMAPStoreFlagsOperation();
     op->setSession(this);
@@ -427,6 +429,7 @@ IMAPOperation * IMAPAsyncConnection::storeFlagsOperation(String * folder, IndexS
     op->setUids(uids);
     op->setKind(kind);
     op->setFlags(flags);
+    op->setCustomFlags(customFlags);
     op->autorelease();
     return op;
 }
@@ -551,7 +554,11 @@ unsigned int IMAPAsyncConnection::operationsCount()
 
 void IMAPAsyncConnection::runOperation(IMAPOperation * operation)
 {
-    cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
+    if (mScheduledAutomaticDisconnect) {
+        cancelDelayedPerformMethodOnDispatchQueue((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue());
+        mOwner->release();
+        mScheduledAutomaticDisconnect = false;
+    }
     mQueue->addOperation(operation);
 }
 
@@ -562,14 +569,28 @@ void IMAPAsyncConnection::tryAutomaticDisconnect()
         return;
     }
     
-    cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
-    performMethodAfterDelay((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, 30);
+    bool scheduledAutomaticDisconnect = mScheduledAutomaticDisconnect;
+    if (scheduledAutomaticDisconnect) {
+        cancelDelayedPerformMethodOnDispatchQueue((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue());
+    }
+    
+    mOwner->retain();
+    mScheduledAutomaticDisconnect = true;
+    performMethodOnDispatchQueueAfterDelay((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue(), 30);
+    
+    if (scheduledAutomaticDisconnect) {
+        mOwner->release();
+    }
 }
 
 void IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay(void * context)
 {
+    mScheduledAutomaticDisconnect = false;
+    
     IMAPOperation * op = disconnectOperation();
     op->start();
+    
+    mOwner->release();
 }
 
 void IMAPAsyncConnection::queueStartRunning()
@@ -697,3 +718,15 @@ void IMAPAsyncConnection::setQueueRunning(bool running)
 {
     mQueueRunning = running;
 }
+
+#if __APPLE__
+void IMAPAsyncConnection::setDispatchQueue(dispatch_queue_t dispatchQueue)
+{
+    mQueue->setDispatchQueue(dispatchQueue);
+}
+
+dispatch_queue_t IMAPAsyncConnection::dispatchQueue()
+{
+    return mQueue->dispatchQueue();
+}
+#endif

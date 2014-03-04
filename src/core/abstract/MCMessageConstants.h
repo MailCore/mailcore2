@@ -1,5 +1,6 @@
-#ifndef __MAILCORE_MCMESSAGECONSTANTS_H_
-#define __MAILCORE_MCMESSAGECONSTANTS_H_
+#ifndef MAILCORE_MCMESSAGECONSTANTS_H
+
+#define MAILCORE_MCMESSAGECONSTANTS_H
 
 #ifdef __cplusplus
 
@@ -42,6 +43,8 @@ namespace mailcore {
         IMAPFolderFlagAll = IMAPFolderFlagAllMail,
         IMAPFolderFlagJunk = IMAPFolderFlagSpam,
         IMAPFolderFlagFlagged = IMAPFolderFlagStarred,
+        IMAPFolderFlagFolderTypeMask = IMAPFolderFlagInbox | IMAPFolderFlagSentMail | IMAPFolderFlagStarred | IMAPFolderFlagAllMail |
+          IMAPFolderFlagTrash| IMAPFolderFlagDrafts | IMAPFolderFlagSpam | IMAPFolderFlagImportant | IMAPFolderFlagArchive,
     };
     
     enum MessageFlag {
@@ -192,6 +195,7 @@ namespace mailcore {
         IMAPSearchKindSizeLarger,
         IMAPSearchKindSizeSmaller,
         IMAPSearchKindGmailThreadID,
+        IMAPSearchKindGmailRaw,
         IMAPSearchKindOr,
         IMAPSearchKindAnd,
     };

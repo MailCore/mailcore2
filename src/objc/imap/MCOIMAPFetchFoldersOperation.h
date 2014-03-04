@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef __MAILCORE_MCOIMAPFETCHFOLDERSOPERATION_H_
+#ifndef MAILCORE_MCOIMAPFETCHFOLDERSOPERATION_H
 
-#define __MAILCORE_MCOIMAPFETCHFOLDERSOPERATION_H_
+#define MAILCORE_MCOIMAPFETCHFOLDERSOPERATION_H
 
 /** This class implements an operation to fetch a list of folders. */
 

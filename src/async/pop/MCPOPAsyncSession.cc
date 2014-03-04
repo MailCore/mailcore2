@@ -261,3 +261,15 @@ void POPAsyncSession::logConnection(ConnectionLogType logType, Data * buffer)
     }
     pthread_mutex_unlock(&mConnectionLoggerLock);
 }
+
+#if __APPLE__
+void POPAsyncSession::setDispatchQueue(dispatch_queue_t dispatchQueue)
+{
+    mQueue->setDispatchQueue(dispatchQueue);
+}
+
+dispatch_queue_t POPAsyncSession::dispatchQueue()
+{
+    return mQueue->dispatchQueue();
+}
+#endif
