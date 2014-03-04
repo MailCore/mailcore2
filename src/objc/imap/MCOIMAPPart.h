@@ -16,7 +16,7 @@
 
 /** Represents a single IMAP message part */
 
-@interface MCOIMAPPart : MCOAbstractPart
+@interface MCOIMAPPart : MCOAbstractPart <NSCoding>
 
 /** A part identifier looks like 1.2.1 */
 @property (nonatomic, copy) NSString * partID;
