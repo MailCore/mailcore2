@@ -2906,6 +2906,11 @@ static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpr
             clist_append(list, searchKeyFromSearchExpression(expression->rightExpression()));
             return mailimap_search_key_new_multiple(list);
         }
+        case IMAPSearchKindNot:
+        {
+            return mailimap_search_key_new_not(searchKeyFromSearchExpression(expression->leftExpression()));
+        }
+
         default:
         MCAssert(0);
         return NULL;

@@ -320,6 +320,18 @@
 */
 + (MCOIMAPSearchExpression *) searchOr:(MCOIMAPSearchExpression *)expression other:(MCOIMAPSearchExpression *)other;
 
+/**
+ Creates a search expression that matches when the argument is not matched.
+ 
+ Example:
+ 
+ MCOIMAPSearchExpression * exprSubject = [MCOIMAPSearchExpression searchSubject:@"airline"]
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchNot:exprSubject];
+ The expression will match when the subject does not contain the word airline
+ 
+ */
++ (MCOIMAPSearchExpression *) searchNot:(MCOIMAPSearchExpression *)expression;
+
 @end
 
 #endif
