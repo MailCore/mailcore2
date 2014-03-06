@@ -217,4 +217,10 @@
     return MCO_TO_OBJC(result);
 }
 
++ (MCOIMAPSearchExpression *) searchNot:(MCOIMAPSearchExpression *)expression
+{
+    mailcore::IMAPSearchExpression * result = mailcore::IMAPSearchExpression::searchNot(expression->_nativeExpr);
+    return MCO_TO_OBJC(result);
+}
+
 @end

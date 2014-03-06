@@ -339,6 +339,14 @@ IMAPSearchExpression * IMAPSearchExpression::searchOr(IMAPSearchExpression * lef
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
+IMAPSearchExpression * IMAPSearchExpression::searchNot(IMAPSearchExpression * notExpr)
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindNot;
+    MC_SAFE_REPLACE_RETAIN(IMAPSearchExpression, expr->mLeftExpression, notExpr);
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
 IMAPSearchKind IMAPSearchExpression::kind()
 {
     return mKind;
