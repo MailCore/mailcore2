@@ -5,8 +5,37 @@
 #include "MCIMAPMessagePart.h"
 #include "MCIMAPMultipart.h"
 #include "MCHTMLRenderer.h"
+#include "MCHTMLRendererCallback.h"
 
 using namespace mailcore;
+
+/* Makes an array of text/plain and text/html parts we need to render a message body */
+class HTMLRendererIMAPCollectorCallback : public HTMLRendererIMAPCallback {
+public:
+    HTMLRendererIMAPCollectorCallback()
+    {
+        mRequiredParts = Array::array();
+    }
+    
+    ~HTMLRendererIMAPCollectorCallback()
+    {
+        MC_SAFE_RELEASE(mRequiredParts);
+    }
+    
+    virtual Data * dataForIMAPPart(String * folder, IMAPPart * part)
+    {
+        mRequiredParts->addObject(part);
+        return NULL;
+    }
+    
+    Array * getRequiredParts()
+    {
+        return mRequiredParts;
+    }
+    
+private:
+    Array *mRequiredParts;
+};
 
 static AbstractPart * partForPartIDInPart(AbstractPart * part, String * partID);
 static AbstractPart * partForPartIDInMultipart(AbstractMultipart * part, String * partID);
@@ -229,6 +258,16 @@ String * IMAPMessage::htmlRendering(String * folder,
                                     HTMLRendererTemplateCallback * htmlCallback)
 {
     return HTMLRenderer::htmlForIMAPMessage(folder, this, dataCallback, htmlCallback);
+}
+
+Array * IMAPMessage::requiredRenderingParts()
+{
+    HTMLRendererIMAPCollectorCallback collector;
+    htmlRendering(NULL, &collector, NULL);
+    
+    Array *requiredParts = collector.getRequiredParts();
+    requiredParts->retain();
+    return (Array *)requiredParts->autorelease();
 }
 
 HashMap * IMAPMessage::serializable()
