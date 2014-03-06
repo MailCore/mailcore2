@@ -14,7 +14,9 @@
 #else
 #include <openssl/bio.h>
 #include <openssl/x509.h>
+#include <openssl/x509_vfy.h>
 #include <openssl/pem.h>
+#include <openssl/err.h>
 #endif
 
 #include "MCLog.h"
@@ -83,17 +85,15 @@ err:
     return result;
 #else
     bool result = false;
-    X509 *fCert = NULL;
-    MMAPString *fstr = NULL;
-    BIO *fBio = NULL;
-    X509_STORE *store = NULL;
-    X509_STORE_CTX *storectx = NULL;
-    STACK *certificates = NULL;
+    X509_STORE * store = NULL;
+    X509_STORE_CTX * storectx = NULL;
+    STACK_OF(X509) * certificates = NULL;
+    int status;
     
     carray * cCerts = mailstream_get_certificate_chain(stream);
     if (cCerts == NULL) {
         fprintf(stderr, "warning: No certificate chain retrieved");
-        goto free_certs;
+        goto err;
     }
     
     store = X509_STORE_new();
@@ -101,43 +101,43 @@ err:
         goto free_certs;
     }
     
-    X509_STORE_set_default_paths(store);
+    status = X509_STORE_set_default_paths(store);
+    if (status != 1) {
+        printf("Error loading the system-wide CA certificates");
+    }
+    
+    certificates = sk_X509_new_null();
+    for(unsigned int i = 0 ; i < carray_count(cCerts) ; i ++) {
+        MMAPString * str;
+        str = (MMAPString *) carray_get(cCerts, i);
+        BIO *bio = BIO_new_mem_buf((void *) str->str, str->len);
+        X509 *certificate = d2i_X509_bio(bio, NULL);
+        BIO_free(bio);
+        if (!sk_X509_push(certificates, certificate)) {
+            goto free_certs;
+        }
+    }
     
     storectx = X509_STORE_CTX_new();
     if (storectx == NULL) {
         goto free_certs;
     }
     
-    fstr = (MMAPString *) carray_get(cCerts, 0);
-    fBio = BIO_new_mem_buf((void *) fstr->str, strlen(fstr->str));
-    fCert = PEM_read_bio_X509(fBio, NULL, 0, NULL);
-    if (fCert == NULL) {
+    status = X509_STORE_CTX_init(storectx, store, sk_X509_value(certificates, 0), certificates);
+    if (status != 1) {
         goto free_certs;
     }
     
-    certificates = (STACK *)sk_new(NULL);
-    for(unsigned int i = 1 ; i < carray_count(cCerts) ; i ++) {
-        MMAPString * str;
-        str = (MMAPString *) carray_get(cCerts, i);
-        BIO *bio = BIO_new_mem_buf((void *) fstr->str, fstr->len);
-        X509 *certificate = PEM_read_bio_X509(bio, NULL, 0, NULL);
-        sk_X509_push((STACK_OF(X509) *) certificates, certificate);
-        BIO_free(bio);
+    status = X509_verify_cert(storectx);
+    if (status == 1) {
+        result = true;
     }
-    
-    if (X509_STORE_CTX_init(storectx, store, fCert, certificates) != 1) {
-        goto free_certs;
-    }
-    
-    result = X509_verify_cert(storectx);
     
     free_certs:
-        X509_STORE_free(store);
-        X509_STORE_CTX_free(storectx);
         mailstream_certificate_chain_free(cCerts);
-        sk_X509_free((STACK_OF(X509) *) certificates);
-        X509_free(fCert);
-        BIO_free(fBio);
+        sk_X509_pop_free((STACK_OF(X509) *) certificates, X509_free);
+        X509_STORE_CTX_free(storectx);
+        X509_STORE_free(store);
     err:
         return result;
 #endif
