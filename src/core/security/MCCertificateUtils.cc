@@ -133,13 +133,12 @@ err:
         result = true;
     }
     
-    free_certs:
-        mailstream_certificate_chain_free(cCerts);
-        sk_X509_pop_free((STACK_OF(X509) *) certificates, X509_free);
-        X509_STORE_CTX_free(storectx);
-        X509_STORE_free(store);
-    err:
-        return result;
+free_certs:
+    mailstream_certificate_chain_free(cCerts);
+    sk_X509_pop_free((STACK_OF(X509) *) certificates, X509_free);
+    X509_STORE_CTX_free(storectx);
+    X509_STORE_free(store);
+err:
+    return result;
 #endif
-    return true;
 }
