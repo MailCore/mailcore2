@@ -190,6 +190,8 @@ typedef enum {
     MCOIMAPSearchKindOr,
     /** And expression.*/
     MCOIMAPSearchKindAnd,
+    /** Not expression.*/
+    MCOIMAPSearchKindNot,
 } MCOIMAPSearchKind;
 
 /** Keys for the namespace dictionary.*/
