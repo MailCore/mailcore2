@@ -267,7 +267,7 @@ Array * IMAPMessage::requiredRenderingParts()
     
     Array *requiredParts = collector.getRequiredParts();
     requiredParts->retain();
-    return (Array *)requiredParts->autorelease();
+    return requiredParts;
 }
 
 HashMap * IMAPMessage::serializable()
