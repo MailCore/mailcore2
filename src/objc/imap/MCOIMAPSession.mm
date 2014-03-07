@@ -168,6 +168,11 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
     return _operationQueueRunningChangeBlock;
 }
 
+- (void)cancelAllOperation
+{
+    MCO_NATIVE_INSTANCE->cancelAllOperations();
+}
+
 #pragma mark - Operations
 
 #define MCO_TO_OBJC_OP(op) [self _objcOperationFromNativeOp:op];

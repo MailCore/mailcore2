@@ -167,6 +167,7 @@ namespace mailcore {
         virtual void runOperation(IMAPOperation * operation);
         virtual IMAPSession * session();
         
+        virtual void cancelAllOperations();
         virtual unsigned int operationsCount();
         
         virtual void setLastFolder(String * folder);

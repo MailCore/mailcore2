@@ -567,6 +567,14 @@ bool IMAPAsyncSession::isOperationQueueRunning()
     return mQueueRunning;
 }
 
+void IMAPAsyncSession::cancelAllOperations()
+{
+    for(unsigned int i = 0 ; i < mSessions->count() ; i ++) {
+        IMAPAsyncConnection * currentSession = (IMAPAsyncConnection *) mSessions->objectAtIndex(i);
+        currentSession->cancelAllOperations();
+    }
+}
+
 void IMAPAsyncSession::operationRunningStateChanged()
 {
     bool isRunning = false;

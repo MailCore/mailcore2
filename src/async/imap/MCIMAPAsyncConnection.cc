@@ -552,6 +552,11 @@ unsigned int IMAPAsyncConnection::operationsCount()
     return mQueue->count();
 }
 
+void IMAPAsyncConnection::cancelAllOperations()
+{
+    mQueue->cancelAllOperations();
+}
+
 void IMAPAsyncConnection::runOperation(IMAPOperation * operation)
 {
     if (mScheduledAutomaticDisconnect) {
