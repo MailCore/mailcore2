@@ -110,6 +110,9 @@ err:
     for(unsigned int i = 0 ; i < carray_count(cCerts) ; i ++) {
         MMAPString * str;
         str = (MMAPString *) carray_get(cCerts, i);
+        if (str == NULL) {
+            goto free_certs;
+        }
         BIO *bio = BIO_new_mem_buf((void *) str->str, str->len);
         X509 *certificate = d2i_X509_bio(bio, NULL);
         BIO_free(bio);
@@ -136,8 +139,12 @@ err:
 free_certs:
     mailstream_certificate_chain_free(cCerts);
     sk_X509_pop_free((STACK_OF(X509) *) certificates, X509_free);
-    X509_STORE_CTX_free(storectx);
-    X509_STORE_free(store);
+    if (storectx != NULL) {
+        X509_STORE_CTX_free(storectx);
+    }
+    if (store != NULL) {
+        X509_STORE_free(store);
+    }
 err:
     return result;
 #endif
