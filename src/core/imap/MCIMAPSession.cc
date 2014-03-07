@@ -1295,7 +1295,7 @@ static Array * resultsWithError(int r, clist * list, ErrorCode * pError)
             flags = (IMAPFolderFlag) imap_mailbox_flags_to_flags(mb_list->mb_flag);
         
         folder = new IMAPFolder();
-        path = String::stringWithUTF8Characters(mb_list->mb_name);
+        path = String::stringWithUTF7Characters(mb_list->mb_name);
         if (path->uppercaseString()->isEqual(MCSTR("INBOX"))) {
             folder->setPath(MCSTR("INBOX"));
         }
