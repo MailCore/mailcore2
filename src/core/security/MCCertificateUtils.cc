@@ -138,7 +138,9 @@ err:
     
 free_certs:
     mailstream_certificate_chain_free(cCerts);
-    sk_X509_pop_free((STACK_OF(X509) *) certificates, X509_free);
+    if (certificates != NULL) {
+        sk_X509_pop_free((STACK_OF(X509) *) certificates, X509_free);
+    }
     if (storectx != NULL) {
         X509_STORE_CTX_free(storectx);
     }
