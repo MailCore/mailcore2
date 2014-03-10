@@ -21,6 +21,7 @@ namespace mailcore {
         virtual ~OperationQueue();
         
         virtual void addOperation(Operation * op);
+        virtual void cancelAllOperations();
         
         virtual unsigned int count();
         
