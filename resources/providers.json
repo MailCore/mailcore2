@@ -66,15 +66,15 @@
                 }
             ]
         },
-        "mx":[
-            "mx1.sub3.homie.mail.dreamhost.com",
-            "mx2.sub3.homie.mail.dreamhost.com",
-            "mx1.sub4.homie.mail.dreamhost.com",
-            "mx2.sub4.homie.mail.dreamhost.com",
-            "mx1.sub5.homie.mail.dreamhost.com",
-            "mx2.sub5.homie.mail.dreamhost.com",
-            "mx1.balanced.homie.mail.dreamhost.com",
-            "mx2.balanced.homie.mail.dreamhost.com"
+        "mx-match":[
+            "mx1\\.sub3\\.homie\\.mail\\.dreamhost\\.com",
+            "mx2\\.sub3\\.homie\\.mail\\.dreamhost\\.com",
+            "mx1\\.sub4\\.homie\\.mail\\.dreamhost\\.com",
+            "mx2\\.sub4\\.homie\\.mail\\.dreamhost\\.com",
+            "mx1\\.sub5\\.homie\\.mail\\.dreamhost\\.com",
+            "mx2\\.sub5\\.homie\\.mail\\.dreamhost\\.com",
+            "mx1\\.balanced\\.homie\\.mail\\.dreamhost\\.com",
+            "mx2\\.balanced\\.homie\\.mail\\.dreamhost\\.com"
         ],
         "mailboxes":{
             "drafts":"Drafts",
@@ -318,12 +318,12 @@
                 }
             ]
         },
-        "mx":[
-            "aspmx2.googlemail.com",
-            "aspmx.l.google.com",
-            "aspmx3.googlemail.com",
-            "alt1.aspmx.l.google.com",
-            "alt2.aspmx.l.google.com"
+        "mx-match":[
+            "aspmx2\\.googlemail\\.com",
+            "aspmx\\.l\\.google\\.com",
+            "aspmx3\\.googlemail\\.com",
+            "alt1\\.aspmx\\.l\\.google\\.com",
+            "alt2\\.aspmx\\.l\\.google\\.com"
         ],
         "domain-match":[
             "googlemail\\.com",
@@ -634,9 +634,9 @@
                 }
             ]
         },
-        "mx":[
-            "mx1.emailsrvr.com",
-            "mx2.emailsrvr.com"
+        "mx-match":[
+            "mx1\\.emailsrvr\\.com",
+            "mx2\\.emailsrvr\\.com"
         ],
         "mailboxes":{
             "drafts":"Drafts",
@@ -710,12 +710,12 @@
                 }
             ]
         },
-        "mx":[
-            "mx0.ovh.net",
-            "mx1.ovh.net",
-            "mx2.ovh.net",
-            "mx3.ovh.net",
-            "mx4.ovh.net"
+        "mx-match":[
+            "mx0\\.ovh\\.net",
+            "mx1\\.ovh\\.net",
+            "mx2\\.ovh\\.net",
+            "mx3\\.ovh\\.net",
+            "mx4\\.ovh\\.net"
         ],
         "mailboxes":{
             "drafts":"Drafts",
@@ -769,6 +769,9 @@
                 }
             ]
         },
+        "mx-match":[
+            ".*\\.mail\\.outlook\\.com"
+        ],
         "domain-match":[
             "outlook\\.com",
             "outlook\\.com\\.ar",

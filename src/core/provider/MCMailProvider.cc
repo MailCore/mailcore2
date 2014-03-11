@@ -22,7 +22,7 @@ void MailProvider::init()
     mSmtpServices = new Array();
     mPopServices = new Array();
     mDomainMatch = new Array();
-    mMxSet = new Set();
+    mMxMatch = new Array();
     mMailboxPaths = NULL;
 }
 
@@ -39,7 +39,7 @@ MailProvider::MailProvider(MailProvider * other)
     MC_SAFE_REPLACE_COPY(Array, mSmtpServices, other->mSmtpServices);
     MC_SAFE_REPLACE_COPY(Array, mPopServices, other->mPopServices);
     MC_SAFE_REPLACE_COPY(Array, mDomainMatch, other->mDomainMatch);
-    MC_SAFE_REPLACE_COPY(Set, mMxSet, other->mMxSet);
+    MC_SAFE_REPLACE_COPY(Array, mMxMatch, other->mMxMatch);
     MC_SAFE_REPLACE_COPY(HashMap, mMailboxPaths, other->mMailboxPaths);
 }
 
@@ -48,7 +48,7 @@ MailProvider::~MailProvider()
     MC_SAFE_RELEASE(mImapServices);
     MC_SAFE_RELEASE(mSmtpServices);
     MC_SAFE_RELEASE(mPopServices);
-    MC_SAFE_RELEASE(mMxSet);
+    MC_SAFE_RELEASE(mMxMatch);
     MC_SAFE_RELEASE(mDomainMatch);
     MC_SAFE_RELEASE(mMailboxPaths);
     MC_SAFE_RELEASE(mIdentifier);
@@ -68,7 +68,6 @@ void MailProvider::fillWithInfo(HashMap * info)
     Array * smtpInfos;
     Array * popInfos;
     HashMap * serverInfo;
-    Array * mxs;
     
     MC_SAFE_RELEASE(mDomainMatch);
     if (info->objectForKey(MCSTR("domain-match")) != NULL) {
@@ -78,10 +77,9 @@ void MailProvider::fillWithInfo(HashMap * info)
     if (info->objectForKey(MCSTR("mailboxes")) != NULL) {
         mMailboxPaths = (HashMap *) info->objectForKey(MCSTR("mailboxes"))->retain();
     }
-    mxs = (Array *) info->objectForKey(MCSTR("mx"));
-    mMxSet->removeAllObjects();
-    mc_foreacharray(String, mx, mxs) {
-        mMxSet->addObject(mx->lowercaseString());
+    MC_SAFE_RELEASE(mMxMatch);
+    if (info->objectForKey(MCSTR("mx-match")) != NULL) {
+        mMxMatch = (Array *) info->objectForKey(MCSTR("mx-match"))->retain();
     }
     
     serverInfo = (HashMap *) info->objectForKey(MCSTR("servers"));
@@ -149,23 +147,9 @@ bool MailProvider::matchEmail(String * email)
     
     domain = (String *) components->lastObject();
     cDomain = domain->UTF8Characters();
-    	
+    
     mc_foreacharray(String, match, mDomainMatch) {
-        regex_t r;
-        bool matched;
-        
-        match = String::stringWithUTF8Format("^%s$", match->UTF8Characters());
-        if (regcomp(&r, match->UTF8Characters(), REG_EXTENDED | REG_ICASE | REG_NOSUB) != 0)
-            continue;
-        
-        matched = false;
-        if (regexec(&r, cDomain, 0, NULL, 0) == 0) {
-            matched = true;
-        }
-        
-        regfree(&r);
-        
-        if (matched)
+        if(MailProvider::matchDomain(match, cDomain))
             return true;
     }
     
@@ -174,7 +158,36 @@ bool MailProvider::matchEmail(String * email)
 
 bool MailProvider::matchMX(String * hostname)
 {
-    return mMxSet->containsObject(hostname->lowercaseString());
+    const char * cMx = hostname->UTF8Characters();
+    
+    mc_foreacharray(String, match, mMxMatch) {
+        if(MailProvider::matchDomain(match, cMx))
+            return true;
+    }
+    
+    return false;
+}
+
+bool MailProvider::matchDomain(String * match, const char * cDomain)
+{
+    regex_t r;
+    bool matched;
+    
+    match = String::stringWithUTF8Format("^%s$", match->UTF8Characters());
+    if (regcomp(&r, match->UTF8Characters(), REG_EXTENDED | REG_ICASE | REG_NOSUB) != 0)
+        return false;
+    
+    matched = false;
+    if (regexec(&r, cDomain, 0, NULL, 0) == 0) {
+        matched = true;
+    }
+    
+    regfree(&r);
+    
+    if (matched)
+        return true;
+    
+    return false;
 }
 
 String * MailProvider::sentMailFolderPath()
@@ -232,7 +245,7 @@ bool MailProvider::isMainFolder(String * folderPath, String * prefix)
 }
 
 String * MailProvider::description()
-{       
+{
     return String::stringWithUTF8Format("<%s:%p, %s>", className()->UTF8Characters(), this, MCUTF8(mIdentifier));
 }
 
