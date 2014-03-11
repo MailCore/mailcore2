@@ -146,10 +146,9 @@ bool MailProvider::matchEmail(String * email)
         return false;
     
     domain = (String *) components->lastObject();
-    cDomain = domain->UTF8Characters();
-    
+
     mc_foreacharray(String, match, mDomainMatch) {
-        if(MailProvider::matchDomain(match, cDomain))
+        if (MailProvider::matchDomain(match, domain))
             return true;
     }
     
@@ -158,21 +157,21 @@ bool MailProvider::matchEmail(String * email)
 
 bool MailProvider::matchMX(String * hostname)
 {
-    const char * cMx = hostname->UTF8Characters();
-    
     mc_foreacharray(String, match, mMxMatch) {
-        if(MailProvider::matchDomain(match, cMx))
+        if (MailProvider::matchDomain(match, hostname))
             return true;
     }
     
     return false;
 }
 
-bool MailProvider::matchDomain(String * match, const char * cDomain)
+bool MailProvider::matchDomain(String * match, String * domain)
 {
+    const char * cDomain;
     regex_t r;
     bool matched;
     
+    cDomain = domain->UTF8Characters();
     match = String::stringWithUTF8Format("^%s$", match->UTF8Characters());
     if (regcomp(&r, match->UTF8Characters(), REG_EXTENDED | REG_ICASE | REG_NOSUB) != 0)
         return false;
