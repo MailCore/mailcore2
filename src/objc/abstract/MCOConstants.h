@@ -184,8 +184,48 @@ typedef enum {
     MCOIMAPSearchKindUids,
     /** Match headers of the message.*/
     MCOIMAPSearchKindHeader,
+    /** Match messages that are read.*/
+    MCOIMAPSearchKindRead,
+    /** Match messages that are not read.*/
+    MCOIMAPSearchKindUnread,
+    /** Match messages that are flagged.*/
+    MCOIMAPSearchKindFlagged,
+    /** Match messages that are not flagged.*/
+    MCOIMAPSearchKindUnflagged,
+    /** Match messages that are answered.*/
+    MCOIMAPSearchKindAnswered,
+    /** Match messages that are not answered.*/
+    MCOIMAPSearchKindUnanswered,
+    /** Match messages that are a drafts.*/
+    MCOIMAPSearchKindDraft,
+    /** Match messages that are not drafts.*/
+    MCOIMAPSearchKindUndraft,
+    /** Match messages that are deleted.*/
+    MCOIMAPSearchKindDeleted,
+    /** Match messages that are spam.*/
+    MCOIMAPSearchKindSpam,
+    /** Match messages before the given date.*/
+    MCOIMAPSearchKindBeforeDate,
+    /** Match messages on the given date.*/
+    MCOIMAPSearchKindOnDate,
+    /** Match messages after the given date.*/
+    MCOIMAPSearchKindSinceDate,
+    /** Match messages before the given received date.*/
+    MCOIMAPSearchKindBeforeReceivedDate,
+    /** Match messages on the given received date.*/
+    MCOIMAPSearchKindOnReceivedDate,
+    /** Match messages after the given received date.*/
+    MCOIMAPSearchKindSinceReceivedDate,
+    /** Match messages that are larger than the given size in bytes.*/
+    MCOIMAPSearchKindSizeLarger,
+    /** Match messages that are smaller than the given size in bytes.*/
+    MCOIMAPSearchKindSizeSmaller,
     /** Match X-GM-THRID.*/
     MCOIMAPSearchGmailThreadID,
+    /** Match X-GM-MSGID.*/
+    MCOIMAPSearchGmailMessageID,
+    /** Match X-GM-RAW.*/
+    MCOIMAPSearchGmailRaw,
     /** Or expresssion.*/
     MCOIMAPSearchKindOr,
     /** And expression.*/
