@@ -28,6 +28,7 @@ namespace mailcore {
         static String * stringWithUTF8Format(const char * format, ...);
         static String * stringWithVUTF8Format(const char * format, va_list ap);
         static String * stringWithUTF8Characters(const char * UTF8Characters);
+        static String * stringWithUTF7Characters(const char * UTF7Characters);
         static String * stringWithCharacters(const UChar * characters);
         static String * stringWithCharacters(const UChar * characters, unsigned int length);
         static String * stringWithData(Data * data, const char * charset = NULL);

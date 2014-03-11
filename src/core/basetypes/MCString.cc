@@ -793,6 +793,12 @@ String * String::stringWithUTF8Characters(const char * UTF8Characters)
     return (String *) result->autorelease();
 }
 
+String * String::stringWithUTF7Characters(const char * UTF7Characters)
+{
+    String * result =  new String(UTF7Characters, (unsigned int) strlen(UTF7Characters), "mutf-7");
+    return (String *) result->autorelease();
+}
+
 String * String::stringWithCharacters(const UChar * characters)
 {
     String * result = new String(characters);
