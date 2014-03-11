@@ -63,7 +63,7 @@ namespace mailcore {
         Array * /* NetService */ mPopServices;
         HashMap * mMailboxPaths;
         
-        virtual bool matchDomain(String * match, const char * cDomain);
+        virtual bool matchDomain(String * match, String * domain);
         void init();
     };
     
