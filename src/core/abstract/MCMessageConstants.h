@@ -195,6 +195,7 @@ namespace mailcore {
         IMAPSearchKindSizeLarger,
         IMAPSearchKindSizeSmaller,
         IMAPSearchKindGmailThreadID,
+        IMAPSearchKindGmailMessageID,
         IMAPSearchKindGmailRaw,
         IMAPSearchKindOr,
         IMAPSearchKindAnd,
