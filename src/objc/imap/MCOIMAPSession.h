@@ -141,7 +141,7 @@
 /**
  Cancel all operations
  */
-- (void)cancelAllOperation;
+- (void) cancelAllOperations;
 
 /** @name Folder Operations */
 

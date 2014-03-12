@@ -52,12 +52,9 @@ void OperationQueue::addOperation(Operation * op)
 void OperationQueue::cancelAllOperations()
 {
     pthread_mutex_lock(&mLock);
-    for (int i=0 ; i<mOperations->count(); i++)
-    {
+    for (unsigned int i = 0 ; i < mOperations->count() ; i ++) {
         Operation * op = (Operation *) mOperations->objectAtIndex(i);
-        if (op!=NULL) {
-            op->cancel();
-        }
+        op->cancel();
     }
     pthread_mutex_unlock(&mLock);
 }
