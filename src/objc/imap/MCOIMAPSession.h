@@ -138,6 +138,11 @@
 */
 @property (nonatomic, copy) MCOOperationQueueRunningChangeBlock operationQueueRunningChangeBlock;
 
+/**
+ Cancel all operations
+ */
+- (void) cancelAllOperations;
+
 /** @name Folder Operations */
 
 /**

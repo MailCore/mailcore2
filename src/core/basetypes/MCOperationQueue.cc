@@ -49,6 +49,16 @@ void OperationQueue::addOperation(Operation * op)
     startThread();
 }
 
+void OperationQueue::cancelAllOperations()
+{
+    pthread_mutex_lock(&mLock);
+    for (unsigned int i = 0 ; i < mOperations->count() ; i ++) {
+        Operation * op = (Operation *) mOperations->objectAtIndex(i);
+        op->cancel();
+    }
+    pthread_mutex_unlock(&mLock);
+}
+
 void OperationQueue::runOperationsOnThread(OperationQueue * queue)
 {
     queue->runOperations();
