@@ -148,8 +148,9 @@ bool MailProvider::matchEmail(String * email)
     domain = (String *) components->lastObject();
 
     mc_foreacharray(String, match, mDomainMatch) {
-        if (MailProvider::matchDomain(match, domain))
+        if (matchDomain(match, domain)){
             return true;
+        }
     }
     
     return false;
@@ -158,8 +159,9 @@ bool MailProvider::matchEmail(String * email)
 bool MailProvider::matchMX(String * hostname)
 {
     mc_foreacharray(String, match, mMxMatch) {
-        if (MailProvider::matchDomain(match, hostname))
+        if (matchDomain(match, hostname)){
             return true;
+        }
     }
     
     return false;
