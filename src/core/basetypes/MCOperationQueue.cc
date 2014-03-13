@@ -125,7 +125,7 @@ void OperationQueue::runOperations()
         
         if (needsCheckRunning) {
             retain(); // (1)
-            MCLog("check running %p", this);
+            //MCLog("check running %p", this);
 #if __APPLE__
             performMethodOnDispatchQueue((Object::Method) &OperationQueue::checkRunningOnMainThread, this, mDispatchQueue);
 #else
