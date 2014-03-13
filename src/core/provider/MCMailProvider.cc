@@ -171,24 +171,23 @@ bool MailProvider::matchDomain(String * match, String * domain)
 {
     const char * cDomain;
     regex_t r;
-    bool matched;
-    
+    bool matched;  
+
     cDomain = domain->UTF8Characters();
     match = String::stringWithUTF8Format("^%s$", match->UTF8Characters());
-    if (regcomp(&r, match->UTF8Characters(), REG_EXTENDED | REG_ICASE | REG_NOSUB) != 0)
-        return false;
-    
     matched = false;
+
+    if (regcomp(&r, match->UTF8Characters(), REG_EXTENDED | REG_ICASE | REG_NOSUB) != 0){
+        return matched;
+    }
+
     if (regexec(&r, cDomain, 0, NULL, 0) == 0) {
         matched = true;
     }
-    
+
     regfree(&r);
-    
-    if (matched)
-        return true;
-    
-    return false;
+
+    return matched;
 }
 
 String * MailProvider::sentMailFolderPath()
