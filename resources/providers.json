@@ -711,11 +711,7 @@
             ]
         },
         "mx-match":[
-            "mx0\\.ovh\\.net",
-            "mx1\\.ovh\\.net",
-            "mx2\\.ovh\\.net",
-            "mx3\\.ovh\\.net",
-            "mx4\\.ovh\\.net"
+            "mx\\d\\.ovh\\.net"
         ],
         "mailboxes":{
             "drafts":"Drafts",
