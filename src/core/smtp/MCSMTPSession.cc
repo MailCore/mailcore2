@@ -400,7 +400,8 @@ void SMTPSession::login(ErrorCode * pError)
 {
     int r;
 
-    if ((authType() != AuthTypeXOAuth2) && ((username() == NULL) || (password() == NULL))) {
+    if ((authType() != AuthTypeXOAuth2) && (authType() != AuthTypeXOAuth2Outlook) &&
+        ((username() == NULL) || (password() == NULL))) {
         mState = STATE_LOGGEDIN;
         * pError = ErrorNone;
         return;
