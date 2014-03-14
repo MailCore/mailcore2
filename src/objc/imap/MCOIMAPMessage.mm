@@ -57,11 +57,6 @@ MCO_OBJC_SYNTHESIZE_SCALAR(uint64_t, uint64_t, setGmailMessageID, gmailMessageID
     return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->partForPartID([partID mco_mcString]));
 }
 
-- (NSArray *) requiredRenderingParts
-{
-    return MCO_OBJC_BRIDGE_GET(requiredRenderingParts);
-}
-
 - (NSString *) htmlRenderingWithFolder:(NSString *)folder
                               delegate:(id <MCOHTMLRendererIMAPDelegate>)delegate
 {

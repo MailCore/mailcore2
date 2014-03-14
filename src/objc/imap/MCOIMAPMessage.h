@@ -68,12 +68,6 @@
 - (MCOAbstractPart *) partForPartID:(NSString *)partID;
 
 /**
- Returns parts required to render the message as plain text or html.
- This does not include inline images and attachments, but only the text content
-*/
-- (NSArray *) requiredRenderingParts;
-
-/**
  HTML rendering of the message to be displayed in a web view.
  The delegate should implement at least
  [MCOAbstractMessage:dataForIMAPPart:folder:]

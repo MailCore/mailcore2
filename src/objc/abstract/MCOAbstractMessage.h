@@ -38,6 +38,12 @@
  It will return an array of MCOAttachment for MCOMessageBuilder. */
 - (NSArray * /* MCOAbstractPart */) htmlInlineAttachments;
 
+/**
+ Returns parts required to render the message as plain text or html.
+ This does not include inline images and attachments, but only the text content
+ */
+- (NSArray *) requiredPartsForRendering;
+
 @end
 
 #endif

@@ -59,8 +59,6 @@ namespace mailcore {
                                        HTMLRendererIMAPCallback * dataCallback,
                                        HTMLRendererTemplateCallback * htmlCallback = NULL);
         
-        virtual Array * /* AbstractPart */ requiredRenderingParts();
-        
     public: // subclass behavior
         IMAPMessage(IMAPMessage * other);
         virtual Object * copy();
