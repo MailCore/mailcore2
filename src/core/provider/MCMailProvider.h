@@ -57,12 +57,13 @@ namespace mailcore {
     private:
         String * mIdentifier;
         Array * /* String */ mDomainMatch;
+        Array * /* String */ mMxMatch;
         Array * /* NetService */ mImapServices;
         Array * /* NetService */ mSmtpServices;
         Array * /* NetService */ mPopServices;
         HashMap * mMailboxPaths;
-        Set * mMxSet;
         
+        virtual bool matchDomain(String * match, String * domain);
         void init();
     };
     
