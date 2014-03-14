@@ -65,5 +65,9 @@
 	return [NSString mco_stringWithMCString:[self mco_mcString]->cleanedHTMLString()];
 }
 
+- (NSString *) mco_strippedWhitespace
+{
+    return [NSString mco_stringWithMCString:[self mco_mcString]->stripWhitespace()];
+}
 
 @end

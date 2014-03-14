@@ -1795,6 +1795,24 @@ String * String::flattenHTML()
     return flattenHTMLAndShowBlockquote(true);
 }
 
+String * String::stripWhitespace()
+{
+    String *str = (String *)copy();
+    
+    str->replaceOccurrencesOfString(MCSTR("\t"), MCSTR(" "));
+    str->replaceOccurrencesOfString(MCSTR("\n"), MCSTR(" "));
+    str->replaceOccurrencesOfString(MCSTR("\v"), MCSTR(" "));
+    str->replaceOccurrencesOfString(MCSTR("\f"), MCSTR(" "));
+    str->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
+    
+    while (str->replaceOccurrencesOfString(MCSTR("  "), MCSTR(" ")) > 0) {
+        /* do nothing */
+    }
+    
+    return str;
+}
+
+
 bool String::hasSuffix(String * suffix)
 {
     if (mLength >= suffix->mLength) {
