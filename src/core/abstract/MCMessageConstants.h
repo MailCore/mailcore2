@@ -23,6 +23,7 @@ namespace mailcore {
         AuthTypeSASLNTLM          = 1 << 6,
         AuthTypeSASLKerberosV4    = 1 << 7,
         AuthTypeXOAuth2           = 1 << 8,
+        AuthTypeXOAuth2Outlook    = 1 << 9,
     };
     
     enum IMAPFolderFlag {
@@ -195,9 +196,11 @@ namespace mailcore {
         IMAPSearchKindSizeLarger,
         IMAPSearchKindSizeSmaller,
         IMAPSearchKindGmailThreadID,
+        IMAPSearchKindGmailMessageID,
         IMAPSearchKindGmailRaw,
         IMAPSearchKindOr,
         IMAPSearchKindAnd,
+        IMAPSearchKindNot,
     };
     
     enum ErrorCode {

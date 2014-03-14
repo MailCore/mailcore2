@@ -200,6 +200,11 @@
     return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchGmailThreadID(number));
 }
 
++ (MCOIMAPSearchExpression *) searchGmailMessageID:(uint64_t)number
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchGmailMessageID(number));
+}
+
 + (MCOIMAPSearchExpression *) searchGmailRaw:(NSString *)expr
 {
     return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchGmailRaw([expr mco_mcString]));
@@ -214,6 +219,12 @@
 + (MCOIMAPSearchExpression *) searchOr:(MCOIMAPSearchExpression *)expression other:(MCOIMAPSearchExpression *)other
 {
     mailcore::IMAPSearchExpression * result = mailcore::IMAPSearchExpression::searchOr(expression->_nativeExpr, other->_nativeExpr);
+    return MCO_TO_OBJC(result);
+}
+
++ (MCOIMAPSearchExpression *) searchNot:(MCOIMAPSearchExpression *)expression
+{
+    mailcore::IMAPSearchExpression * result = mailcore::IMAPSearchExpression::searchNot(expression->_nativeExpr);
     return MCO_TO_OBJC(result);
 }
 

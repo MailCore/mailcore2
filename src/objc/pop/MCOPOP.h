@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
-#ifndef MAILCORE_MCOPOP_H_
+#ifndef MAILCORE_MCOPOP_H
 
 #define MAILCORE_MCOPOP_H
 

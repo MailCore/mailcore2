@@ -45,7 +45,7 @@ Set * Set::setWithArray(Array * objects)
 String * Set::description()
 {
     String * result = String::string();
-    result->appendUTF8Format("<%s:%p ", className(), this);
+    result->appendUTF8Format("<%s:%p ", MCUTF8(className()), this);
     result->appendString(mHash->allKeys()->description());
     result->appendUTF8Characters(">");
     return result;

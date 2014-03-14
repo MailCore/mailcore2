@@ -54,9 +54,12 @@ namespace mailcore {
         static IMAPSearchExpression * searchSizeLarger(uint32_t size);
         static IMAPSearchExpression * searchSizeSmaller(uint32_t size);
         static IMAPSearchExpression * searchGmailThreadID(uint64_t number);
+        static IMAPSearchExpression * searchGmailMessageID(uint64_t number);
         static IMAPSearchExpression * searchGmailRaw(String * expr);
         static IMAPSearchExpression * searchAnd(IMAPSearchExpression * left, IMAPSearchExpression * right);
         static IMAPSearchExpression * searchOr(IMAPSearchExpression * left, IMAPSearchExpression * right);
+        static IMAPSearchExpression * searchNot(IMAPSearchExpression * notExpr);
+        
         
     public: // subclass behavior
         IMAPSearchExpression(IMAPSearchExpression * other);

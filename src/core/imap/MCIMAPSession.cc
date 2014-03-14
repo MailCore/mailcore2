@@ -837,6 +837,7 @@ void IMAPSession::login(ErrorCode * pError)
             break;
             
         case AuthTypeXOAuth2:
+        case AuthTypeXOAuth2Outlook:
             r = mailimap_oauth2_authenticate(mImap, utf8username, MCUTF8(mOAuth2Token));
             break;
     }
@@ -2791,7 +2792,11 @@ static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpr
         case IMAPSearchKindGmailThreadID:
         {
             return mailimap_search_key_new_xgmthrid(expression->longNumber());
-        } 
+        }
+        case IMAPSearchKindGmailMessageID:
+        {
+            return mailimap_search_key_new_xgmmsgid(expression->longNumber());
+        }
         case IMAPSearchKindRead:
         {
             return mailimap_search_key_new(MAILIMAP_SEARCH_KEY_SEEN, 
@@ -2906,6 +2911,11 @@ static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpr
             clist_append(list, searchKeyFromSearchExpression(expression->rightExpression()));
             return mailimap_search_key_new_multiple(list);
         }
+        case IMAPSearchKindNot:
+        {
+            return mailimap_search_key_new_not(searchKeyFromSearchExpression(expression->leftExpression()));
+        }
+
         default:
         MCAssert(0);
         return NULL;
