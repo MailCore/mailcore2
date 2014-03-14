@@ -837,6 +837,7 @@ void IMAPSession::login(ErrorCode * pError)
             break;
             
         case AuthTypeXOAuth2:
+        case AuthTypeXOAuth2Outlook:
             r = mailimap_oauth2_authenticate(mImap, utf8username, MCUTF8(mOAuth2Token));
             break;
     }
