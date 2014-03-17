@@ -24,9 +24,10 @@ public:
     HTMLRendererIMAPDummyCallback()
     {
         mRequiredParts = Array::array();
+        mRequiredParts->retain();
     }
     
-    ~HTMLRendererIMAPDummyCallback()
+    virtual ~HTMLRendererIMAPDummyCallback()
     {
         MC_SAFE_RELEASE(mRequiredParts);
     }
@@ -38,7 +39,7 @@ public:
         return Data::data();
     }
     
-    Array * getRequiredParts()
+    Array * requiredParts()
     {
         return mRequiredParts;
     }
@@ -65,7 +66,6 @@ struct htmlRendererContext {
     bool hasTextPart;
     Array * relatedAttachments;
     Array * attachments;
-    Array * requiredParts;
 };
 
 class DefaultTemplateCallback : public Object, public HTMLRendererTemplateCallback {
@@ -538,8 +538,7 @@ Array * HTMLRenderer::requiredPartsForRendering(AbstractMessage * message)
     HTMLRendererIMAPDummyCallback * dataCallback = new HTMLRendererIMAPDummyCallback();
     String * ignoredResult = htmlForAbstractMessage(NULL, message, dataCallback, NULL, NULL, NULL);
     
-    Array *requiredParts = dataCallback->getRequiredParts();
-    requiredParts->retain();
+    Array *requiredParts = dataCallback->requiredParts();
     
     delete dataCallback;
     dataCallback = NULL;
