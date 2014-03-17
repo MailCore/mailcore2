@@ -17,8 +17,33 @@
 using namespace mailcore;
 
 class HTMLRendererIMAPDummyCallback : public HTMLRendererIMAPCallback {
+private:
+    Array *mRequiredParts;
+    
 public:
-    virtual Data * dataForIMAPPart(String * folder, IMAPPart * part) { return Data::data(); }
+    HTMLRendererIMAPDummyCallback()
+    {
+        mRequiredParts = Array::array();
+        mRequiredParts->retain();
+    }
+    
+    virtual ~HTMLRendererIMAPDummyCallback()
+    {
+        MC_SAFE_RELEASE(mRequiredParts);
+    }
+    
+    
+    virtual Data * dataForIMAPPart(String * folder, IMAPPart * part)
+    {
+        mRequiredParts->addObject(part);
+        return Data::data();
+    }
+    
+    Array * requiredParts()
+    {
+        return mRequiredParts;
+    }
+
 };
 
 enum {
@@ -173,8 +198,6 @@ static String * htmlForAbstractMessage(String * folder, AbstractMessage * messag
     htmlRendererContext context;
     context.dataCallback = dataCallback;
     context.htmlCallback = htmlCallback;
-    context.relatedAttachments = NULL;
-    context.attachments = NULL;
     context.firstRendered = 0;
     context.folder = folder;
     context.state = RENDER_STATE_NONE;
@@ -508,4 +531,17 @@ Array * HTMLRenderer::htmlInlineAttachmentsForMessage(AbstractMessage * message)
     dataCallback = NULL;
     (void) ignoredResult; // remove unused variable warning.
     return htmlInlineAttachments;
+}
+
+Array * HTMLRenderer::requiredPartsForRendering(AbstractMessage * message)
+{
+    HTMLRendererIMAPDummyCallback * dataCallback = new HTMLRendererIMAPDummyCallback();
+    String * ignoredResult = htmlForAbstractMessage(NULL, message, dataCallback, NULL, NULL, NULL);
+    
+    Array *requiredParts = dataCallback->requiredParts();
+    
+    delete dataCallback;
+    dataCallback = NULL;
+    (void) ignoredResult; // remove unused variable warning.
+    return requiredParts;
 }

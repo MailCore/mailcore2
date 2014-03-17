@@ -5,6 +5,7 @@
 #include "MCIMAPMessagePart.h"
 #include "MCIMAPMultipart.h"
 #include "MCHTMLRenderer.h"
+#include "MCHTMLRendererCallback.h"
 
 using namespace mailcore;
 

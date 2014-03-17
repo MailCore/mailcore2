@@ -80,6 +80,11 @@ Array * AbstractMessage::htmlInlineAttachments()
     return HTMLRenderer::htmlInlineAttachmentsForMessage(this);
 }
 
+Array * AbstractMessage::requiredPartsForRendering()
+{
+    return HTMLRenderer::requiredPartsForRendering(this);
+}
+
 HashMap * AbstractMessage::serializable()
 {
     HashMap * result = Object::serializable();

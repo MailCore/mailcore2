@@ -86,6 +86,8 @@ namespace mailcore {
         virtual String * flattenHTMLAndShowBlockquote(bool showBlockquote);
         virtual String * flattenHTMLAndShowBlockquoteAndLink(bool showBlockquote, bool showLink);
         
+        virtual String * stripWhitespace();
+        
         virtual String * lastPathComponent();
         virtual String * pathExtension();
         virtual Data * dataUsingEncoding(const char * charset = NULL);

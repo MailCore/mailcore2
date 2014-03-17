@@ -34,6 +34,7 @@ namespace mailcore {
         
         static Array * /* AbstractPart */ attachmentsForMessage(AbstractMessage * message);
         static Array * /* AbstractPart */ htmlInlineAttachmentsForMessage(AbstractMessage * message);
+        static Array * /* AbstractPart */ requiredPartsForRendering(AbstractMessage * message);
     };
     
 };
