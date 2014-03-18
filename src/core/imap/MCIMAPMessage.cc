@@ -243,7 +243,9 @@ HashMap * IMAPMessage::serializable()
     if (customFlags() != NULL) {
         result->setObjectForKey(MCSTR("customFlags"), customFlags());
     }
-    result->setObjectForKey(MCSTR("mainPart"), mMainPart->serializable());
+    if (mMainPart != NULL) {
+        result->setObjectForKey(MCSTR("mainPart"), mMainPart->serializable());
+    }
     if (gmailLabels() != NULL) {
         result->setObjectForKey(MCSTR("gmailLabels"), gmailLabels());
     }
