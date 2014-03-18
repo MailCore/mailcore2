@@ -437,7 +437,9 @@ static String * htmlForAbstractMultipartRelated(AbstractMultipart * part, htmlRe
     if (context->relatedAttachments != NULL) {
         for(unsigned int i = 1 ; i < part->parts()->count() ; i ++) {
             AbstractPart * otherSubpart = (AbstractPart *) part->parts()->objectAtIndex(i);
-            context->relatedAttachments->addObject(otherSubpart);
+            if (context->relatedAttachments != NULL) {
+                context->relatedAttachments->addObject(otherSubpart);
+            }
         }
     }
     return htmlForAbstractPart(subpart, context);
