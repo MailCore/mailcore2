@@ -198,14 +198,17 @@ static String * htmlForAbstractMessage(String * folder, AbstractMessage * messag
     htmlRendererContext context;
     context.dataCallback = dataCallback;
     context.htmlCallback = htmlCallback;
+    context.relatedAttachments = NULL;
+    context.attachments = NULL;
     context.firstRendered = 0;
     context.folder = folder;
     context.state = RENDER_STATE_NONE;
-    
+
     context.hasMixedTextAndAttachments = false;
     context.pass = 0;
     context.firstAttachment = false;
     context.hasTextPart = false;
+
     htmlForAbstractPart(mainPart, &context);
     
     context.relatedAttachments = relatedAttachments;
