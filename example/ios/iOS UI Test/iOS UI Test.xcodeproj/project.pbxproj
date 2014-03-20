@@ -542,6 +542,7 @@
 					"-ltidy",
 					"-lstdc++",
 					"-lz",
+					"-licucore",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -568,6 +569,7 @@
 					"-ltidy",
 					"-lstdc++",
 					"-lz",
+					"-licucore",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

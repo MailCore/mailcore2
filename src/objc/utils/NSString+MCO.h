@@ -34,6 +34,7 @@ namespace mailcore {
 
 - (NSString *) mco_htmlEncodedString;
 - (NSString *) mco_cleanedHTMLString;
+- (NSString *) mco_strippedWhitespace;
 
 @end
 

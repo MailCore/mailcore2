@@ -85,4 +85,9 @@ MCO_OBJC_SYNTHESIZE(MessageHeader, setHeader, header)
     return MCO_OBJC_BRIDGE_GET(htmlInlineAttachments);
 }
 
+- (NSArray *) requiredPartsForRendering
+{
+    return MCO_OBJC_BRIDGE_GET(requiredPartsForRendering);
+}
+
 @end

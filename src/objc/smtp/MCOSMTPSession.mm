@@ -124,7 +124,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
     return result;
 }
 
-- (MCOOperation *) checkAccountOperationWithFrom:(MCOAddress *)from
+- (MCOSMTPOperation *) checkAccountOperationWithFrom:(MCOAddress *)from
 {
     mailcore::SMTPOperation *coreOp = MCO_NATIVE_INSTANCE->checkAccountOperation(MCO_FROM_OBJC(mailcore::Address, from));
     MCOSMTPOperation * result = [[[MCOSMTPOperation alloc] initWithMCOperation:coreOp] autorelease];

@@ -837,6 +837,7 @@ void IMAPSession::login(ErrorCode * pError)
             break;
             
         case AuthTypeXOAuth2:
+        case AuthTypeXOAuth2Outlook:
             r = mailimap_oauth2_authenticate(mImap, utf8username, MCUTF8(mOAuth2Token));
             break;
     }
@@ -2791,7 +2792,11 @@ static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpr
         case IMAPSearchKindGmailThreadID:
         {
             return mailimap_search_key_new_xgmthrid(expression->longNumber());
-        } 
+        }
+        case IMAPSearchKindGmailMessageID:
+        {
+            return mailimap_search_key_new_xgmmsgid(expression->longNumber());
+        }
         case IMAPSearchKindRead:
         {
             return mailimap_search_key_new(MAILIMAP_SEARCH_KEY_SEEN, 
@@ -3747,17 +3752,8 @@ String * IMAPSession::plainTextBodyRendering(IMAPMessage * message, String * fol
     }
     
     String * plainTextBodyString = htmlBodyString->flattenHTML();
-    
     if (stripWhitespace) {
-        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\t"), MCSTR(" "));
-        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\n"), MCSTR(" "));
-        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\v"), MCSTR(" "));
-        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\f"), MCSTR(" "));
-        plainTextBodyString->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
-        
-        while (plainTextBodyString->replaceOccurrencesOfString(MCSTR("  "), MCSTR(" ")) > 0) {
-            /* do nothing */
-        }
+        return plainTextBodyString->stripWhitespace();
     }
     
     return plainTextBodyString;

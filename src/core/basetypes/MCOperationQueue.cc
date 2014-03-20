@@ -49,6 +49,16 @@ void OperationQueue::addOperation(Operation * op)
     startThread();
 }
 
+void OperationQueue::cancelAllOperations()
+{
+    pthread_mutex_lock(&mLock);
+    for (unsigned int i = 0 ; i < mOperations->count() ; i ++) {
+        Operation * op = (Operation *) mOperations->objectAtIndex(i);
+        op->cancel();
+    }
+    pthread_mutex_unlock(&mLock);
+}
+
 void OperationQueue::runOperationsOnThread(OperationQueue * queue)
 {
     queue->runOperations();
@@ -115,7 +125,7 @@ void OperationQueue::runOperations()
         
         if (needsCheckRunning) {
             retain(); // (1)
-            MCLog("check running %p", this);
+            //MCLog("check running %p", this);
 #if __APPLE__
             performMethodOnDispatchQueue((Object::Method) &OperationQueue::checkRunningOnMainThread, this, mDispatchQueue);
 #else

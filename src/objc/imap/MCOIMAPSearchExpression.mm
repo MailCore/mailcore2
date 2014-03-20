@@ -200,6 +200,11 @@
     return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchGmailThreadID(number));
 }
 
++ (MCOIMAPSearchExpression *) searchGmailMessageID:(uint64_t)number
+{
+    return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchGmailMessageID(number));
+}
+
 + (MCOIMAPSearchExpression *) searchGmailRaw:(NSString *)expr
 {
     return MCO_TO_OBJC(mailcore::IMAPSearchExpression::searchGmailRaw([expr mco_mcString]));

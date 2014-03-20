@@ -287,6 +287,16 @@
  */
 + (MCOIMAPSearchExpression *) searchGmailThreadID:(uint64_t)number;
 
+
+/**
+ Creates a search expression that matches emails with the given gmail message id
+ 
+ Example:
+ 
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchGmailMessageID:aMessageID]
+ */
++ (MCOIMAPSearchExpression *) searchGmailMessageID:(uint64_t)number;
+
 /**
  Creates a search expression that gets emails that match a gmail raw search
  expression.

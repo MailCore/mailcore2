@@ -3138,6 +3138,7 @@
 					"-all_load",
 					"-ltidy",
 					"-lz",
+					"-licucore",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -3174,6 +3175,7 @@
 					"-all_load",
 					"-ltidy",
 					"-lz",
+					"-licucore",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -3239,6 +3241,7 @@
 					"-all_load",
 					"-ltidy",
 					"-lz",
+					"-licucore",
 				);
 				PRODUCT_NAME = MailCore;
 				SDKROOT = macosx;
@@ -3271,6 +3274,7 @@
 					"-all_load",
 					"-ltidy",
 					"-lz",
+					"-licucore",
 				);
 				PRODUCT_NAME = MailCore;
 				SDKROOT = macosx;

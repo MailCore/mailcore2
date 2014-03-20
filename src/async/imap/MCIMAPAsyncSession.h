@@ -97,6 +97,7 @@ namespace mailcore {
         virtual void setOperationQueueCallback(OperationQueueCallback * callback);
         virtual OperationQueueCallback * operationQueueCallback();
         virtual bool isOperationQueueRunning();
+        virtual void cancelAllOperations();
         
         virtual IMAPIdentity * serverIdentity();
         virtual IMAPIdentity * clientIdentity();
