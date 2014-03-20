@@ -1,7 +1,7 @@
 #!/bin/sh
 
-url="https://github.com/MailCore/mailcore2-deps"
-url_prefix="$url/raw/master"
+url="https://raw.githubusercontent.com/MailCore/mailcore2-deps"
+url_prefix="$url/master"
 
 if test x$1 != xskipprebuilt ; then
   file_timestamp=0
