@@ -400,7 +400,8 @@ void SMTPSession::login(ErrorCode * pError)
 {
     int r;
 
-    if ((authType() != AuthTypeXOAuth2) && ((username() == NULL) || (password() == NULL))) {
+    if ((authType() != AuthTypeXOAuth2) && (authType() != AuthTypeXOAuth2Outlook) &&
+        ((username() == NULL) || (password() == NULL))) {
         mState = STATE_LOGGEDIN;
         * pError = ErrorNone;
         return;
@@ -523,6 +524,15 @@ void SMTPSession::login(ErrorCode * pError)
                 utf8Username = "";
             }
             r = mailsmtp_oauth2_authenticate(mSmtp, utf8Username, MCUTF8(mOAuth2Token));
+            break;
+        }
+        
+        case AuthTypeXOAuth2Outlook: {
+            const char * utf8Username = MCUTF8(mUsername);
+            if (utf8Username == NULL) {
+                utf8Username = "";
+            }
+            r = mailsmtp_oauth2_outlook_authenticate(mSmtp, utf8Username, MCUTF8(mOAuth2Token));
             break;
         }
     }

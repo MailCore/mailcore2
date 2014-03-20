@@ -35,6 +35,8 @@ typedef enum {
     MCOAuthTypeSASLKerberosV4    = 1 << 7,
     /** OAuth2 authentication.*/
     MCOAuthTypeXOAuth2           = 1 << 8,
+    /** OAuth2 authentication on outlook.com.*/
+    MCOAuthTypeXOAuth2Outlook    = 1 << 9,
 } MCOAuthType;
 
 /** It's the IMAP flags of the folder.*/

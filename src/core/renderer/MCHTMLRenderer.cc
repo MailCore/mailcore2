@@ -17,8 +17,33 @@
 using namespace mailcore;
 
 class HTMLRendererIMAPDummyCallback : public HTMLRendererIMAPCallback {
+private:
+    Array *mRequiredParts;
+    
 public:
-    virtual Data * dataForIMAPPart(String * folder, IMAPPart * part) { return Data::data(); }
+    HTMLRendererIMAPDummyCallback()
+    {
+        mRequiredParts = Array::array();
+        mRequiredParts->retain();
+    }
+    
+    virtual ~HTMLRendererIMAPDummyCallback()
+    {
+        MC_SAFE_RELEASE(mRequiredParts);
+    }
+    
+    
+    virtual Data * dataForIMAPPart(String * folder, IMAPPart * part)
+    {
+        mRequiredParts->addObject(part);
+        return Data::data();
+    }
+    
+    Array * requiredParts()
+    {
+        return mRequiredParts;
+    }
+
 };
 
 enum {
@@ -178,11 +203,12 @@ static String * htmlForAbstractMessage(String * folder, AbstractMessage * messag
     context.firstRendered = 0;
     context.folder = folder;
     context.state = RENDER_STATE_NONE;
-    
+
     context.hasMixedTextAndAttachments = false;
     context.pass = 0;
     context.firstAttachment = false;
     context.hasTextPart = false;
+
     htmlForAbstractPart(mainPart, &context);
     
     context.relatedAttachments = relatedAttachments;
@@ -414,7 +440,9 @@ static String * htmlForAbstractMultipartRelated(AbstractMultipart * part, htmlRe
     if (context->relatedAttachments != NULL) {
         for(unsigned int i = 1 ; i < part->parts()->count() ; i ++) {
             AbstractPart * otherSubpart = (AbstractPart *) part->parts()->objectAtIndex(i);
-            context->relatedAttachments->addObject(otherSubpart);
+            if (context->relatedAttachments != NULL) {
+                context->relatedAttachments->addObject(otherSubpart);
+            }
         }
     }
     return htmlForAbstractPart(subpart, context);
@@ -508,4 +536,17 @@ Array * HTMLRenderer::htmlInlineAttachmentsForMessage(AbstractMessage * message)
     dataCallback = NULL;
     (void) ignoredResult; // remove unused variable warning.
     return htmlInlineAttachments;
+}
+
+Array * HTMLRenderer::requiredPartsForRendering(AbstractMessage * message)
+{
+    HTMLRendererIMAPDummyCallback * dataCallback = new HTMLRendererIMAPDummyCallback();
+    String * ignoredResult = htmlForAbstractMessage(NULL, message, dataCallback, NULL, NULL, NULL);
+    
+    Array *requiredParts = dataCallback->requiredParts();
+    
+    delete dataCallback;
+    dataCallback = NULL;
+    (void) ignoredResult; // remove unused variable warning.
+    return requiredParts;
 }

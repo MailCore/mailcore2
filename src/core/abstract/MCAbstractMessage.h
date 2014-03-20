@@ -24,6 +24,7 @@ namespace mailcore {
         
         virtual Array * /* AbstractPart */ attachments();
         virtual Array * /* AbstractPart */ htmlInlineAttachments();
+        virtual Array * /* AbstractPart */ requiredPartsForRendering();
         
     public: //subclass behavior
         AbstractMessage(AbstractMessage * other);
