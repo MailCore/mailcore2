@@ -17,10 +17,12 @@ IMAPIdleOperation::IMAPIdleOperation()
 {
     mLastKnownUid = 0;
     mSetupSuccess = false;
+    pthread_mutex_init(&mLock, NULL);
 }
 
 IMAPIdleOperation::~IMAPIdleOperation()
 {
+    pthread_mutex_destroy(&mLock);
 }
 
 void IMAPIdleOperation::setLastKnownUID(uint32_t uid)
@@ -47,6 +49,13 @@ void IMAPIdleOperation::unprepare()
 
 void IMAPIdleOperation::main()
 {
+    pthread_mutex_lock(&mLock);
+    bool interrupted = mInterrupted;
+    pthread_mutex_unlock(&mLock);
+    if (interrupted) {
+        return;
+    }
+    
     ErrorCode error;
     session()->session()->selectIfNeeded(folder(), &error);
     if (error != ErrorNone) {
@@ -68,6 +77,9 @@ void IMAPIdleOperation::main()
 
 void IMAPIdleOperation::interruptIdle()
 {
+    pthread_mutex_lock(&mLock);
+    mInterrupted = true;
+    pthread_mutex_unlock(&mLock);
     if (mSetupSuccess) {
         session()->session()->interruptIdle();
     }

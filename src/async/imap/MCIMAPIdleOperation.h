@@ -32,6 +32,8 @@ namespace mailcore {
     private:
         uint32_t mLastKnownUid;
         bool mSetupSuccess;
+        bool mInterrupted;
+        pthread_mutex_t mLock;
         void prepare();
         void unprepare();
     };
