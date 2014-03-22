@@ -17,6 +17,7 @@ IMAPIdleOperation::IMAPIdleOperation()
 {
     mLastKnownUid = 0;
     mSetupSuccess = false;
+    mInterrupted = false;
     pthread_mutex_init(&mLock, NULL);
 }
 
