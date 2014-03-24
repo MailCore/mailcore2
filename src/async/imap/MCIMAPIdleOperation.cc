@@ -48,12 +48,17 @@ void IMAPIdleOperation::unprepare()
     }
 }
 
-void IMAPIdleOperation::main()
-{
+bool IMAPIdleOperation::isInterrupted() {
     pthread_mutex_lock(&mLock);
     bool interrupted = mInterrupted;
     pthread_mutex_unlock(&mLock);
-    if (interrupted) {
+    
+    return interrupted;
+}
+
+void IMAPIdleOperation::main()
+{
+    if (isInterrupted()) {
         return;
     }
     
@@ -64,6 +69,10 @@ void IMAPIdleOperation::main()
         return;
     }
     
+    if (isInterrupted()) {
+        return;
+    }
+
     performMethodOnCallbackThread((Object::Method) &IMAPIdleOperation::prepare, NULL, true);
     
     if (!mSetupSuccess) {
