@@ -36,6 +36,7 @@ namespace mailcore {
         pthread_mutex_t mLock;
         void prepare();
         void unprepare();
+        bool isInterrupted();
     };
     
 }
