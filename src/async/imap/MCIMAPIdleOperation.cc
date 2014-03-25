@@ -38,6 +38,11 @@ uint32_t IMAPIdleOperation::lastKnownUID()
 
 void IMAPIdleOperation::prepare()
 {
+    if (isInterrupted()) {
+        mSetupSuccess = false;
+        return;
+    }
+
     mSetupSuccess = session()->session()->setupIdle();
 }
 
@@ -69,10 +74,6 @@ void IMAPIdleOperation::main()
         return;
     }
     
-    if (isInterrupted()) {
-        return;
-    }
-
     performMethodOnCallbackThread((Object::Method) &IMAPIdleOperation::prepare, NULL, true);
     
     if (!mSetupSuccess) {
