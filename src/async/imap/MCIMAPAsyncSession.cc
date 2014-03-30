@@ -50,6 +50,11 @@ IMAPAsyncSession::IMAPAsyncSession()
 
 IMAPAsyncSession::~IMAPAsyncSession()
 {
+#if __APPLE__
+    if (mDispatchQueue != NULL) {
+        dispatch_release(mDispatchQueue);
+    }
+#endif
     MC_SAFE_RELEASE(mGmailUserDisplayName);
     MC_SAFE_RELEASE(mServerIdentity);
     MC_SAFE_RELEASE(mClientIdentity);
@@ -602,7 +607,13 @@ void IMAPAsyncSession::operationRunningStateChanged()
 #if __APPLE__
 void IMAPAsyncSession::setDispatchQueue(dispatch_queue_t dispatchQueue)
 {
+    if (mDispatchQueue != NULL) {
+        dispatch_release(mDispatchQueue);
+    }
     mDispatchQueue = dispatchQueue;
+    if (mDispatchQueue != NULL) {
+        dispatch_retain(mDispatchQueue);
+    }
 }
 
 dispatch_queue_t IMAPAsyncSession::dispatchQueue()
