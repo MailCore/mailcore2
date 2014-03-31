@@ -306,7 +306,7 @@ IMAPAsyncConnection * IMAPAsyncSession::matchingSessionForFolder(String * folder
     for(unsigned int i = 0 ; i < mSessions->count() ; i ++) {
         IMAPAsyncConnection * currentSession = (IMAPAsyncConnection *) mSessions->objectAtIndex(i);
         if (currentSession->lastFolder() != NULL) {
-            if (currentSession->lastFolder()->compare(folder)) {
+            if (currentSession->lastFolder()->isEqual(folder)) {
                 return currentSession;
             }
         }
