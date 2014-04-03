@@ -277,6 +277,11 @@
                 }
             ]
         },
+        "mx-match":[
+                    "mta5\\.am0\\.yahoodns\\.net",
+                    "mta6\\.am0\\.yahoodns\\.net",
+                    "mta7\\.am0\\.yahoodns\\.net"
+        ],
         "domain-match":[
             "yahoo\\..*",
             "ymail\\.com",
