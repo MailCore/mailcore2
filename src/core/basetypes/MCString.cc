@@ -1278,7 +1278,10 @@ void String::deleteCharactersInRange(Range range)
     if (range.location > mLength)
         return;
     
-    if (range.location + range.length > mLength) {
+    if (range.length > mLength) {
+        range.length = mLength - range.location;
+    }
+    else if (range.location + range.length > mLength) {
         range.length = mLength - range.location;
     }
     
