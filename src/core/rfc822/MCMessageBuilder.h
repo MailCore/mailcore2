@@ -16,6 +16,9 @@ namespace mailcore {
     public:
         MessageBuilder();
         virtual ~MessageBuilder();
+
+        virtual AbstractPart *mainPart();
+        virtual void setMainPart(AbstractPart *mainPart);
         
         virtual void setHTMLBody(String * htmlBody);
         virtual String * htmlBody();
@@ -52,6 +55,7 @@ namespace mailcore {
         virtual Object * copy();
         
     private:
+        AbstractPart *mMainPart;
         String * mHTMLBody;
         String * mTextBody;
         Array * /* Attachment */ mAttachments;
@@ -59,6 +63,7 @@ namespace mailcore {
         String * mBoundaryPrefix;
         void init();
         Data * dataAndFilterBcc(bool filterBcc);
+        AbstractPart *generateMainPart();
     };
     
 };

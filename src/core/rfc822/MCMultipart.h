@@ -13,12 +13,22 @@ namespace mailcore {
     public:
         Multipart();
         virtual ~Multipart();
+
+        // Used when building messages
+        // When boundary needs to be prefixed (to go through spam filters).
+        virtual void setBoundaryPrefix(String * boundaryPrefix);
+        virtual String * boundaryPrefix();
         
     public: // subclass behavior
         Multipart(Multipart * other);
         virtual Object * copy();
+        virtual struct mailmime * mime();
+
+    private:
+        String *mBoundaryPrefix;
+        void init();
     };
-    
+
 }
 
 #endif

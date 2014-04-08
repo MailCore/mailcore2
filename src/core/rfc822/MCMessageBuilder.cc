@@ -2,6 +2,8 @@
 
 #include "MCMessageHeader.h"
 #include "MCAttachment.h"
+#include "MCMultipart.h"
+#include "MCMessagePart.h"
 #include "MCMessageParser.h"
 
 #include <stdlib.h>
@@ -479,6 +481,7 @@ static char * generate_boundary(const char * boundary_prefix)
 
 void MessageBuilder::init()
 {
+    mMainPart = NULL;
     mHTMLBody = NULL;
     mTextBody = NULL;
     mAttachments = NULL;
@@ -503,6 +506,7 @@ MessageBuilder::MessageBuilder(MessageBuilder * other) : AbstractMessage(other)
 
 MessageBuilder::~MessageBuilder()
 {
+    MC_SAFE_RELEASE(mMainPart);
     MC_SAFE_RELEASE(mHTMLBody);
     MC_SAFE_RELEASE(mTextBody);
     MC_SAFE_RELEASE(mAttachments);
@@ -546,6 +550,22 @@ String * MessageBuilder::description()
 Object * MessageBuilder::copy()
 {
     return new MessageBuilder(this);
+}
+
+AbstractPart * MessageBuilder::mainPart()
+{
+    if (mMainPart == NULL) {
+        mMainPart = generateMainPart();
+        MC_SAFE_RETAIN(mMainPart);
+    }
+
+    return mMainPart;
+}
+
+void MessageBuilder::setMainPart(mailcore::AbstractPart *mainPart) {
+    MC_SAFE_RELEASE(mMainPart);
+    mMainPart = mainPart;
+    MC_SAFE_RETAIN(mMainPart);
 }
 
 void MessageBuilder::setHTMLBody(String * htmlBody)
@@ -614,86 +634,110 @@ String * MessageBuilder::boundaryPrefix()
     return mBoundaryPrefix;
 }
 
-Data * MessageBuilder::dataAndFilterBcc(bool filterBcc)
+AbstractPart * MessageBuilder::generateMainPart()
 {
-    Data * data;
-    MMAPString * str;
-    int col;
-
-    struct mailmime * htmlPart;
-    struct mailmime * textPart;
-    struct mailmime * altPart;
-    struct mailmime * mainPart;
+    AbstractPart * htmlPart;
+    AbstractPart * plainTextPart;
+    Multipart * altPart;
+    AbstractPart * textBodyPart;
+    AbstractPart * mainPart;
 
     htmlPart = NULL;
-    textPart = NULL;
+    plainTextPart = NULL;
     altPart = NULL;
+    textBodyPart = NULL;
     mainPart = NULL;
 
     if (htmlBody() != NULL) {
         Attachment * htmlAttachment;
 
         htmlAttachment = Attachment::attachmentWithHTMLString(htmlBody());
-        htmlPart = multipart_related_from_attachments(htmlAttachment, mRelatedAttachments,
-            MCUTF8(mBoundaryPrefix));
+
+        if ((relatedAttachments() != NULL) && (relatedAttachments()->count() > 0)) {
+            Array *parts;
+
+            htmlPart = new Multipart();
+            htmlPart->setPartType(PartTypeMultipartRelated);
+            htmlPart->setMimeType(MCSTR("multipart/related"));
+            ((Multipart *)htmlPart)->setBoundaryPrefix(boundaryPrefix());
+
+            parts = Array::arrayWithObject(htmlAttachment);
+            parts->addObjectsFromArray(relatedAttachments());
+            ((Multipart *)htmlPart)->setParts(parts);
+        } else {
+            htmlPart = htmlAttachment;
+        }
     }
 
     if (textBody() != NULL) {
-        Attachment * textAttachment;
-
-        textAttachment = Attachment::attachmentWithText(textBody());
-        textPart = mime_from_attachment(textAttachment);
+        plainTextPart = Attachment::attachmentWithText(textBody());
     }
     else if (htmlBody() != NULL) {
-        Attachment * textAttachment;
 
-        textAttachment = Attachment::attachmentWithText(htmlBody()->flattenHTML());
-        textPart = mime_from_attachment(textAttachment);
+        plainTextPart = Attachment::attachmentWithText(htmlBody()->flattenHTML());
     }
 
-    if ((textPart != NULL) && (htmlPart != NULL)) {
-        altPart = get_multipart_alternative(MCUTF8(mBoundaryPrefix));
-        mailmime_smart_add_part(altPart, textPart);
-        mailmime_smart_add_part(altPart, htmlPart);
-        mainPart = altPart;
+    if ((plainTextPart != NULL) && (htmlPart != NULL)) {
+        Array *parts;
+
+        altPart = new Multipart();
+        altPart->setPartType(PartTypeMultipartAlternative);
+        altPart->setMimeType(MCSTR("multipart/alternative"));
+        altPart->setBoundaryPrefix(boundaryPrefix());
+        parts = Array::arrayWithObject(plainTextPart);
+        parts->addObject(htmlPart);
+        altPart->setParts(parts);
+
+        textBodyPart = altPart;
     }
-    else if (textPart != NULL) {
-        mainPart = textPart;
+    else if (plainTextPart != NULL) {
+        textBodyPart = plainTextPart;
     }
     else if (htmlPart != NULL) {
-        mainPart = htmlPart;
+        textBodyPart = htmlPart;
     }
 
-    struct mailimf_fields * fields;
-    unsigned int i;
-    struct mailmime * mime;
+    if ((attachments() != NULL) && (attachments()->count() > 0)) {
+        Array *parts;
 
-    fields = header()->createIMFFieldsAndFilterBcc(filterBcc);
+        mainPart = new Multipart();
+        mainPart->setPartType(PartTypeMultipartMixed);
+        mainPart->setMimeType(MCSTR("multipart/mixed"));
+        ((Multipart *)mainPart)->setBoundaryPrefix(boundaryPrefix());
 
-    mime = mailmime_new_message_data(NULL);
-    mailmime_set_imf_fields(mime, fields);
-
-    if (mainPart != NULL) {
-        add_attachment(mime, mainPart, MCUTF8(mBoundaryPrefix));
+        parts = Array::arrayWithObject(textBodyPart);
+        parts->addObjectsFromArray(attachments());
+        ((Multipart *)mainPart)->setParts(parts);
+    }
+    else {
+        mainPart = textBodyPart;
     }
 
-    if (attachments() != NULL) {
-        for(i = 0 ; i < attachments()->count() ; i ++) {
-            Attachment * attachment;
-            struct mailmime * submime;
+    return mainPart;
+}
 
-            attachment = (Attachment *) attachments()->objectAtIndex(i);
-            submime = mime_from_attachment(attachment);
-            add_attachment(mime, submime, MCUTF8(mBoundaryPrefix));
-        }
-    }
-    
+Data * MessageBuilder::dataAndFilterBcc(bool filterBcc)
+{
+    MessagePart * part;
+    struct mailmime *mime_;
+    Data * data;
+    MMAPString * str;
+    int col;
+
+    part = new MessagePart();
+    part->setMainPart(mainPart());
+    part->setHeader(header());
+
+    mime_ = part->mime();
+
     str = mmap_string_new("");
     col = 0;
-    mailmime_write_mem(str, &col, mime);
+    mailmime_write_mem(str, &col, mime_);
     data = Data::dataWithBytes(str->str, (unsigned int) str->len);
     mmap_string_free(str);
-    mailmime_free(mime);
+    mailmime_free(mime_);
+
+    part->release();
 
     return data;
 }

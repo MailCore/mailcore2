@@ -566,3 +566,107 @@ MessagePart * Attachment::attachmentWithMessageMIME(struct mailmime * mime)
     
     return (MessagePart *) attachment->autorelease();
 }
+
+#define MIME_ENCODED_STR(str) (str != NULL ? str->encodedMIMEHeaderValue()->bytes() : NULL)
+
+struct mailmime * Attachment::mime()
+{
+    struct mailmime *mime;
+    struct mailmime_fields * mime_fields;
+    struct mailmime_mechanism * encoding;
+    struct mailmime_disposition * disposition;
+    struct mailmime_content * content;
+    struct mailmime_parameter * param;
+    Data *data_;
+    char *text;
+    size_t length;
+    int encoding_type;
+    int disposition_type;
+    char * dup_filename;
+    char * dup_content_id;
+    char * dup_content_description;
+    int is_text;
+
+    data_ = data();
+    if (data_ == NULL)
+    {
+        data_ = Data::data();
+    }
+
+    text = data_->bytes();
+    length = data_->length();
+
+    dup_filename = NULL;
+    if (filename() != NULL)
+    {
+        dup_filename = strdup(MIME_ENCODED_STR(filename()));
+    }
+
+    is_text = 0;
+    encoding_type = MAILMIME_MECHANISM_BASE64;
+    disposition_type = MAILMIME_DISPOSITION_TYPE_ATTACHMENT;
+    if (isInlineAttachment())
+    {
+        if (mimeType()->lowercaseString()->isEqual(MCSTR("text/plain")))
+        {
+            bool needsQuotedPrintable;
+
+            needsQuotedPrintable = false;
+            for(size_t i = 0 ; i < length ; i ++) {
+                if ((text[i] & (1 << 7)) != 0) {
+                    needsQuotedPrintable = true;
+                }
+            }
+            
+            encoding_type = MAILMIME_MECHANISM_7BIT;
+            if (needsQuotedPrintable) {
+                encoding_type = MAILMIME_MECHANISM_QUOTED_PRINTABLE;
+            }
+
+            is_text = 1;
+
+        }
+        else if (mimeType()->lowercaseString()->hasPrefix(MCSTR("text/"))) {
+            encoding_type = MAILMIME_MECHANISM_QUOTED_PRINTABLE;
+            is_text = 1;
+        }
+        else {
+        }
+
+        disposition_type = MAILMIME_DISPOSITION_TYPE_INLINE;
+    }
+
+    disposition = mailmime_disposition_new_with_data(disposition_type, dup_filename, NULL, NULL, NULL, (size_t) -1);
+    encoding = mailmime_mechanism_new(encoding_type, NULL);
+
+    dup_content_id = NULL;
+    if (contentID() != NULL)
+    {
+        dup_content_id = strdup(MCUTF8(contentID()));
+    }
+
+    dup_content_description = NULL;
+    if (contentDescription() != NULL)
+    {
+        dup_content_description = strdup(MIME_ENCODED_STR(contentDescription()));
+    }
+    mime_fields = mailmime_fields_new_with_data(encoding, dup_content_id, dup_content_description, disposition, NULL);
+
+    content = mailmime_content_new_with_str(MCUTF8(mimeType()));
+
+    if (is_text == 1) {
+
+        if (charset() == NULL) {
+            param = mailmime_param_new_with_data((char *) "charset", (char *) "utf-8");
+        }
+        else {
+            param = mailmime_param_new_with_data((char *) "charset", (char *) MCUTF8(charset()));
+        }
+        clist_append(content->ct_parameters, param);
+    }
+
+    mime = mailmime_new(MAILMIME_SINGLE, NULL, 0, mime_fields, content, NULL, NULL, NULL, NULL, NULL, NULL);
+    mailmime_set_body_text(mime, (char *) text, length);
+
+    return mime;
+}

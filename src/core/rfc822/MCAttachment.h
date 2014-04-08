@@ -33,6 +33,7 @@ namespace mailcore {
         Attachment(Attachment * other);
         virtual String * description();
         virtual Object * copy();
+        virtual struct mailmime * mime();
         
     public: // private
         static AbstractPart * attachmentsWithMIME(struct mailmime * mime);

@@ -47,18 +47,19 @@ namespace mailcore {
         virtual AbstractPart * partForUniqueID(String * uniqueID);
         
         virtual String * decodedStringForData(Data * data);
-        
+
     public: // subclass behavior
         AbstractPart(AbstractPart * other);
         virtual String * description();
         virtual Object * copy();
         virtual HashMap * serializable();
         virtual void importSerializable(HashMap * serializable);
-        
+
     public: // private
         virtual void importIMAPFields(struct mailimap_body_fields * fields,
                                       struct mailimap_body_ext_1part * extension);
         virtual void applyUniquePartID();
+        virtual struct mailmime *mime();
         
     private:
         String * mUniqueID;
