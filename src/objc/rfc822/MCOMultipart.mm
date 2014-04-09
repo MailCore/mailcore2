@@ -28,7 +28,7 @@
     return [[[self alloc] initWithMCPart:attachment] autorelease];
 }
 
-- (instancetype)init {
+- (id)init {
     mailcore::Multipart * multipart = new mailcore::Multipart();
     self = [super initWithMCPart:multipart];
     MC_SAFE_RELEASE(multipart);
