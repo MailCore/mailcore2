@@ -25,7 +25,7 @@ for (; NULL != (__variable = (type *) mailcore::ArrayIteratorNext(&__variable##_
 #define mc_foreacharrayIndex(__index, type, __variable, __array) \
 type * __variable; \
 mailcore::ArrayIterator __variable##__iterator = mailcore::ArrayIteratorInit(__array); \
-for (unsigned int __index = 0; NULL != (__variable = mailcore::ArrayIteratorNext(&__variable##__iterator)); __index++)
+for (unsigned int __index = 0; NULL != (__variable = (type *) mailcore::ArrayIteratorNext(&__variable##__iterator)); __index++)
 
 #define mc_foreachhashmapKey(keyType, __key, __hashmap) \
 keyType * __key; \
