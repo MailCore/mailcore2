@@ -3,4 +3,4 @@ set -e
 
 brew update
 #brew install xctool
-#brew install cmake
+brew install cmake
