@@ -173,7 +173,7 @@ pre {\
 		void (^replaceImages)(NSError *error) = ^(NSError *error) {
 			NSData * downloadedData = [[self delegate] MCOMessageView:self dataForPartWithUniqueID:partUniqueID];
 			NSData * previewData = [[self delegate] MCOMessageView:self previewForData:downloadedData isHTMLInlineImage:[MCOCIDURLProtocol isCID:url]];
-			NSString * filename = [NSString stringWithFormat:@"%u", downloadedData.hash];
+			NSString * filename = [NSString stringWithFormat:@"%u", (unsigned int) downloadedData.hash];
 			NSURL * cacheURL = [self _cacheJPEGImageData:previewData withFilename:filename];
 			
 			NSDictionary * args = @{ @"URLKey": urlString, @"LocalPathKey": cacheURL.absoluteString };
