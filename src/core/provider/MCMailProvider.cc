@@ -139,7 +139,6 @@ bool MailProvider::matchEmail(String * email)
 {
     Array * components;
     String * domain;
-    const char * cDomain;
     
     components = email->componentsSeparatedByString(MCSTR("@"));
     if (components->count() < 2)

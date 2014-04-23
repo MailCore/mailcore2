@@ -32,6 +32,11 @@ OperationQueue::OperationQueue()
 
 OperationQueue::~OperationQueue()
 {
+#if __APPLE__
+    if (mDispatchQueue != NULL) {
+        dispatch_release(mDispatchQueue);
+    }
+#endif
     MC_SAFE_RELEASE(mOperations);
     pthread_mutex_destroy(&mLock);
     mailsem_free(mOperationSem);
@@ -266,7 +271,13 @@ void OperationQueue::waitUntilAllOperationsAreFinished()
 #if __APPLE__
 void OperationQueue::setDispatchQueue(dispatch_queue_t dispatchQueue)
 {
+    if (mDispatchQueue != NULL) {
+        dispatch_release(mDispatchQueue);
+    }
     mDispatchQueue = dispatchQueue;
+    if (mDispatchQueue != NULL) {
+        dispatch_retain(mDispatchQueue);
+    }
 }
 
 dispatch_queue_t OperationQueue::dispatchQueue()

@@ -1138,7 +1138,16 @@ void String::appendBytes(const char * bytes, unsigned int length, const char * c
     if (cfStr != NULL) {
         CFDataRef data = CFStringCreateExternalRepresentation(NULL, cfStr, kCFStringEncodingUTF16LE, '_');
         if (data != NULL) {
-            appendCharactersLength((const UChar *) CFDataGetBytePtr(data), (unsigned int) CFDataGetLength(data) / 2);
+            UChar * fixedData = (UChar *) malloc(CFDataGetLength(data));
+            memcpy(fixedData, CFDataGetBytePtr(data), CFDataGetLength(data));
+            unsigned int length = (unsigned int) CFDataGetLength(data) / 2;
+            for(int32_t i = 0 ; i < length ; i ++) {
+                if (fixedData[i] == 0) {
+                    fixedData[i] = ' ';
+                }
+            }
+            appendCharactersLength(fixedData, length);
+            free(fixedData);
             CFRelease(data);
         }
         CFRelease(cfStr);
@@ -1269,7 +1278,10 @@ void String::deleteCharactersInRange(Range range)
     if (range.location > mLength)
         return;
     
-    if (range.location + range.length > mLength) {
+    if (range.length > mLength) {
+        range.length = mLength - range.location;
+    }
+    else if (range.location + range.length > mLength) {
         range.length = mLength - range.location;
     }
     

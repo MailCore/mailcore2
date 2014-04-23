@@ -117,7 +117,7 @@
  It will make MCOIMAPSession safe. It will also set all the callbacks of operations to run on this given queue.
  Defaults to the main queue.
  This property should be used only if there's performance issue using MCOIMAPSession in the main thread. */
-@property (nonatomic, assign) dispatch_queue_t dispatchQueue;
+@property (nonatomic, retain) dispatch_queue_t dispatchQueue;
 
 /**
  The value will be YES when asynchronous operations are running, else it will return NO.

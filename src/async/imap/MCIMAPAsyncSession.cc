@@ -50,6 +50,11 @@ IMAPAsyncSession::IMAPAsyncSession()
 
 IMAPAsyncSession::~IMAPAsyncSession()
 {
+#if __APPLE__
+    if (mDispatchQueue != NULL) {
+        dispatch_release(mDispatchQueue);
+    }
+#endif
     MC_SAFE_RELEASE(mGmailUserDisplayName);
     MC_SAFE_RELEASE(mServerIdentity);
     MC_SAFE_RELEASE(mClientIdentity);
@@ -301,7 +306,7 @@ IMAPAsyncConnection * IMAPAsyncSession::matchingSessionForFolder(String * folder
     for(unsigned int i = 0 ; i < mSessions->count() ; i ++) {
         IMAPAsyncConnection * currentSession = (IMAPAsyncConnection *) mSessions->objectAtIndex(i);
         if (currentSession->lastFolder() != NULL) {
-            if (currentSession->lastFolder()->compare(folder)) {
+            if (currentSession->lastFolder()->isEqual(folder)) {
                 return currentSession;
             }
         }
@@ -602,7 +607,13 @@ void IMAPAsyncSession::operationRunningStateChanged()
 #if __APPLE__
 void IMAPAsyncSession::setDispatchQueue(dispatch_queue_t dispatchQueue)
 {
+    if (mDispatchQueue != NULL) {
+        dispatch_release(mDispatchQueue);
+    }
     mDispatchQueue = dispatchQueue;
+    if (mDispatchQueue != NULL) {
+        dispatch_retain(mDispatchQueue);
+    }
 }
 
 dispatch_queue_t IMAPAsyncSession::dispatchQueue()

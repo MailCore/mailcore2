@@ -36,6 +36,7 @@ namespace mailcore {
         virtual bool containsObject(Object * obj);
         
         virtual Array * sortedArray(int (* compare)(void * a, void * b, void * context), void * context);
+        virtual void sortArray(int (* compare)(void * a, void * b, void * context), void * context);
         virtual String * componentsJoinedByString(String * delimiter);
         
     public: // subclass behavior
