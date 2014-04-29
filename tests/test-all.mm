@@ -74,6 +74,48 @@ static mailcore::Data * testMessageBuilder()
     msg->release();
     msg2->release();
     
+    mailcore::MessageBuilder * msg3 = new mailcore::MessageBuilder();
+    msg3->header()->setFrom(mailcore::Address::addressWithDisplayName(displayName, email));
+    mailcore::Array * to3 = new mailcore::Array();
+    to3->addObject(mailcore::Address::addressWithDisplayName(MCSTR("Foo Bar"), MCSTR("foobar@to-recipient.org")));
+    msg3->header()->setTo(to3);
+    to3->release();
+    msg3->header()->setSubject(MCSTR("my custom message"));
+
+    mailcore::Multipart * rootPart = new mailcore::Multipart();
+    rootPart->setMimeType(MCSTR("multipart/alternative"));
+    rootPart->setPartType(mailcore::PartTypeMultipartAlternative);
+
+    mailcore::Array * subparts = new mailcore::Array();
+
+    mailcore::Attachment * subPart1 = new mailcore::Attachment();
+    subPart1->setPartType(mailcore::PartTypeSingle);
+    subPart1->setMimeType(MCSTR("text/plain"));
+    subPart1->setInlineAttachment(true);
+    subPart1->setData(MCSTR("foo: bar")->dataUsingEncoding("utf-8"));
+
+    subparts->addObject(subPart1);
+
+    mailcore::Attachment * subPart2 = new mailcore::Attachment();
+    subPart2->setPartType(mailcore::PartTypeSingle);
+    subPart2->setMimeType(MCSTR("application/x-custom"));
+    subPart1->setInlineAttachment(true);
+    subPart2->setData(MCSTR("{\"foo\": \"bar\"}")->dataUsingEncoding("utf-8"));
+
+    subparts->addObject(subPart2);
+
+    rootPart->setParts(subparts);
+
+    subparts->release();
+
+    msg3->setMainPart(rootPart);
+
+    mailcore::Data * data3 = msg3->data();
+
+    MCLog("%s", data3->bytes());
+
+    msg3->release();
+
     return data;
 }
 

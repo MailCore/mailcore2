@@ -17,6 +17,8 @@ namespace mailcore {
     public: // subclass behavior
         MessagePart(MessagePart * other);
         virtual Object * copy();
+        virtual struct mailmime * mime();
+
     };
     
 }

@@ -30,6 +30,7 @@
 */
 
 @class MCOAttachment;
+@class MCOAbstractPart;
 @protocol MCOHTMLRendererDelegate;
 
 @interface MCOMessageBuilder : MCOAbstractMessage <NSCopying>
@@ -48,6 +49,9 @@
 
 /** Prefix for the boundary identifier. Default value is nil.*/
 @property (nonatomic, copy) NSString * boundaryPrefix;
+
+/** Allows for an arbitrary MIME tree */
+@property (nonatomic, strong) MCOAbstractPart *mainPart;
 
 /** Add an attachment.*/
 - (void) addAttachment:(MCOAttachment *)attachment;

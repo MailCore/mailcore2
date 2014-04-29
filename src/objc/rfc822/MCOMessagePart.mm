@@ -28,4 +28,11 @@
     return [[[self alloc] initWithMCPart:part] autorelease];
 }
 
+- (id)init {
+    mailcore::MessagePart *messagePart = new mailcore::MessagePart();
+    self = [super initWithMCPart:messagePart];
+    MC_SAFE_RELEASE(messagePart);
+    return self;
+}
+
 @end

@@ -302,6 +302,10 @@ void AbstractPart::applyUniquePartID()
     queue->release();
 }
 
+struct mailmime * AbstractPart::mime() {
+    return NULL;
+}
+
 HashMap * AbstractPart::serializable()
 {
     HashMap * result = Object::serializable();

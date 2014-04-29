@@ -13,6 +13,7 @@
 #import "MCOUtils.h"
 #import "MCOAbstractMessage+Private.h"
 #import "MCOAbstractMessageRendererCallback.h"
+#import "MCOAbstractPart.h"
 
 @implementation MCOMessageBuilder
 
@@ -50,6 +51,14 @@ MCO_OBJC_SYNTHESIZE_STRING(setTextBody, textBody)
 MCO_OBJC_SYNTHESIZE_ARRAY(setAttachments, attachments)
 MCO_OBJC_SYNTHESIZE_ARRAY(setRelatedAttachments, relatedAttachments)
 MCO_OBJC_SYNTHESIZE_STRING(setBoundaryPrefix, boundaryPrefix)
+
+- (MCOAbstractPart *)mainPart {
+    return MCO_OBJC_BRIDGE_GET(mainPart);
+}
+
+- (void)setMainPart:(MCOAbstractPart *)mainPart {
+    MCO_NATIVE_INSTANCE->setMainPart(MCO_FROM_OBJC(mailcore::AbstractPart, mainPart));
+}
 
 - (void) addAttachment:(MCOAttachment *)attachment
 {
