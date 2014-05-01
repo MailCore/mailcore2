@@ -1127,6 +1127,7 @@ Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool
     Set * addedAddresses;
     Array * toField;
     Array * ccField;
+    bool containsSender;
     
     toField = NULL;
     ccField = NULL;
@@ -1135,9 +1136,21 @@ Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool
     hasCc = false;
     addedAddresses = new Set();
     
-    if (senderEmails != NULL &&
-        (senderEmails->containsObject(from()->mailbox()->lowercaseString()) ||
-        senderEmails->containsObject(sender()->mailbox()->lowercaseString()))) {
+    containsSender = false;
+    if (senderEmails != NULL) {
+      if (from() != NULL) {
+        if (senderEmails->containsObject(from()->mailbox()->lowercaseString())) {
+          containsSender = true;
+        }
+      }
+      if (sender() != NULL) {
+        if (senderEmails->containsObject(sender()->mailbox()->lowercaseString())) {
+          containsSender = true;
+        }
+      }
+    }
+    
+    if (containsSender) {
         Array * recipient;
         
         recipient = new Array();
@@ -1147,16 +1160,14 @@ Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool
                 if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
                     continue;
                 }
-                if (address->mailbox()->isEqualCaseInsensitive(from()->mailbox())) {
+                if ((from() != NULL) && address->mailbox()->isEqualCaseInsensitive(from()->mailbox())) {
                     recipient->addObjectsFromArray(replyTo());
-                    for(unsigned int j = 0 ; j < to()->count() ; j ++) {
-                        Address * address = (Address *) replyTo()->objectAtIndex(j);
-                        if (addedAddresses->containsObject(address->mailbox()->lowercaseString())) {
+                    for(unsigned int j = 0 ; j < replyTo()->count() ; j ++) {
+                        Address * rtAddress = (Address *) replyTo()->objectAtIndex(j);
+                        if (addedAddresses->containsObject(rtAddress->mailbox()->lowercaseString())) {
                             continue;
                         }
-                        if (address->mailbox() == NULL)
-                            continue;
-                        addedAddresses->addObject(address->mailbox()->lowercaseString());
+                        addedAddresses->addObject(rtAddress->mailbox()->lowercaseString());
                     }
                 }
                 else {
