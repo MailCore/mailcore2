@@ -963,10 +963,12 @@ void IMAPSession::login(ErrorCode * pError)
         if (isIdentityEnabled()) {
             IMAPIdentity * serverIdentity = identity(clientIdentity(), pError);
             if (* pError != ErrorNone) {
+                // Ignore identity errors
                 MCLog("fetch identity failed");
-                return;
             }
-            MC_SAFE_REPLACE_RETAIN(IMAPIdentity, mServerIdentity, serverIdentity);
+            else {
+                MC_SAFE_REPLACE_RETAIN(IMAPIdentity, mServerIdentity, serverIdentity);
+            }
         }
     }
     else {
