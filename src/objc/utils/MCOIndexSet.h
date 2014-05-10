@@ -14,7 +14,7 @@
 
 #import <MailCore/MCORange.h>
 
-/** similar to NSMutableIndexSet but supports int64_t*/
+/** similar to NSMutableIndexSet but supports int64_t.  MCORange has a location (uint64_t) and length (uint64_t). */
 
 @interface MCOIndexSet : NSObject <NSCopying, NSCoding>
 
