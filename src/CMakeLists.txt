@@ -29,6 +29,10 @@ IF(APPLE)
   
   execute_process(COMMAND "${CMAKE_CURRENT_SOURCE_DIR}/../scripts/prepare.sh"
     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../scripts")
+ELSE()
+  set(additional_includes
+    /usr/include/libxml2
+  )
 ENDIF()
 
 # detect ctemplate
