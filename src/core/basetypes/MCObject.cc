@@ -369,7 +369,7 @@ void Object::cancelDelayedPerformMethod(Method method, void * context)
 #else
     initDelayedPerform();
     
-    struct mainThreadCallData * data = getFromPerformHash(this, method, context, NULL);
+    struct mainThreadCallData * data = (struct mainThreadCallData *) getFromPerformHash(this, method, context, NULL);
     if (data == NULL)
         return;
     

@@ -49,7 +49,7 @@ while (HashMapIteratorNext(&__key##__value##__iterator, (Object **) &__key, (Obj
 
 #define mc_foreachindexset(__variable, __indexset) \
 int64_t __variable; \
-mailcore::ArrayIterator __variable##__iterator = mailcore::IndexSetIteratorInit(__array); \
+mailcore::IndexSetIterator __variable##__iterator = mailcore::IndexSetIteratorInit(__indexset); \
 for (; __variable = IndexSetIteratorValue(&__variable##__iterator), IndexSetIteratorIsValid(&__variable##__iterator) ; mailcore::IndexSetIteratorNext(&__variable##__iterator))
 
 namespace mailcore {
