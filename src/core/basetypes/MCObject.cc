@@ -5,7 +5,9 @@
 #include <cxxabi.h>
 #include <libetpan/libetpan.h>
 #include <string.h>
+#if __APPLE__
 #include <Block.h>
+#endif
 
 #include "MCAutoreleasePool.h"
 #include "MCString.h"
