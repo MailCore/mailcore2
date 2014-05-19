@@ -2217,7 +2217,7 @@ String * String::htmlMessageContent()
         }
     }
     
-    if (quoted != nil) {
+    if (quoted != NULL) {
         localString->appendString(MCSTR("<blockquote type=\"cite\">"));
         localString->appendString(quoted);
         localString->appendString(MCSTR("</blockquote>"));
