@@ -110,7 +110,11 @@ IMAPAsyncConnection::IMAPAsyncConnection()
 
 IMAPAsyncConnection::~IMAPAsyncConnection()
 {
+#if __APPLE__
     cancelDelayedPerformMethodOnDispatchQueue((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue());
+#else
+    cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
+#endif
     pthread_mutex_destroy(&mConnectionLoggerLock);
     MC_SAFE_RELEASE(mInternalLogger);
     MC_SAFE_RELEASE(mQueueCallback);
@@ -560,7 +564,11 @@ void IMAPAsyncConnection::cancelAllOperations()
 void IMAPAsyncConnection::runOperation(IMAPOperation * operation)
 {
     if (mScheduledAutomaticDisconnect) {
+#if __APPLE__
         cancelDelayedPerformMethodOnDispatchQueue((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue());
+#else
+        cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
+#endif
         mOwner->release();
         mScheduledAutomaticDisconnect = false;
     }
