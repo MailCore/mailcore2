@@ -576,12 +576,20 @@ void IMAPAsyncConnection::tryAutomaticDisconnect()
     
     bool scheduledAutomaticDisconnect = mScheduledAutomaticDisconnect;
     if (scheduledAutomaticDisconnect) {
+#if __APPLE__
         cancelDelayedPerformMethodOnDispatchQueue((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue());
+#else
+        cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
+#endif
     }
     
     mOwner->retain();
     mScheduledAutomaticDisconnect = true;
+#if __APPLE__
     performMethodOnDispatchQueueAfterDelay((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue(), 30);
+#else
+    performMethodAfterDelay((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, 30);
+#endif
     
     if (scheduledAutomaticDisconnect) {
         mOwner->release();
