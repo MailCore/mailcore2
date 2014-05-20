@@ -50,7 +50,7 @@ while (HashMapIteratorNext(&__key##__value##__iterator, (Object **) &__key, (Obj
 #define mc_foreachindexset(__variable, __indexset) \
 int64_t __variable; \
 mailcore::IndexSetIterator __variable##__iterator = mailcore::IndexSetIteratorInit(__indexset); \
-for (; __variable = IndexSetIteratorValue(&__variable##__iterator), IndexSetIteratorIsValid(&__variable##__iterator) ; mailcore::IndexSetIteratorNext(&__variable##__iterator))
+for (; (__variable = IndexSetIteratorValue(&__variable##__iterator)), IndexSetIteratorIsValid(&__variable##__iterator) ; mailcore::IndexSetIteratorNext(&__variable##__iterator))
 
 namespace mailcore {
     
@@ -83,7 +83,7 @@ namespace mailcore {
     static inline bool IndexSetIteratorNext(IndexSetIterator * iterator)
     {
         iterator->index ++;
-        if (iterator->index >= iterator->currentRange->length) {
+        if (iterator->index > iterator->currentRange->length) {
             // switch to an other range
             iterator->index = 0;
             iterator->rangeIndex ++;
@@ -92,6 +92,7 @@ namespace mailcore {
                 return false;
             }
             else {
+                iterator->currentRange = &iterator->indexSet->allRanges()[iterator->rangeIndex];
                 return true;
             }
         }
