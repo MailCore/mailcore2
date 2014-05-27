@@ -2219,7 +2219,7 @@ String * String::htmlMessageContent()
     
     if (quoted != NULL) {
         localString->appendString(MCSTR("<blockquote type=\"cite\">"));
-        localString->appendString(quoted);
+        localString->appendString(quoted->htmlMessageContent());
         localString->appendString(MCSTR("</blockquote>"));
         MC_SAFE_RELEASE(quoted);
     }
