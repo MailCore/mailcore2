@@ -32,7 +32,7 @@
 
 /** Creates an address with a non-MIME-encoded RFC822 string.
 
-    Example: [MCOAddress addressWithRFC822String:@"DINH Viêt Hoà <hoa@etpan.org>"]*/
+    Example: [MCOAddress addressWithNonEncodedRFC822String:@"DINH Viêt Hoà <hoa@etpan.org>"]*/
 + (MCOAddress *) addressWithNonEncodedRFC822String:(NSString *)nonEncodedRFC822String;
 
 /** 
