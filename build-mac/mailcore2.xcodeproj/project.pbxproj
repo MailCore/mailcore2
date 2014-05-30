@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		277E0C6E1939263B0004D043 /* MCPerfEvent.cc in Sources */ = {isa = PBXBuildFile; fileRef = 277E0C6C1939263B0004D043 /* MCPerfEvent.cc */; };
+		277E0C6F1939263B0004D043 /* MCPerfEvent.cc in Sources */ = {isa = PBXBuildFile; fileRef = 277E0C6C1939263B0004D043 /* MCPerfEvent.cc */; };
 		4B3C1BDE17ABF309008BBF4C /* MCOIMAPQuotaOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C1BDD17ABF307008BBF4C /* MCOIMAPQuotaOperation.mm */; };
 		4B3C1BE117ABF4BC008BBF4C /* MCIMAPQuotaOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C1BDF17ABF4BB008BBF4C /* MCIMAPQuotaOperation.cc */; };
 		4B3C1BE217ABFF7C008BBF4C /* MCOIMAPQuotaOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4B3C1BDC17ABF306008BBF4C /* MCOIMAPQuotaOperation.h */; };
@@ -1169,6 +1171,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		277E0C6C1939263B0004D043 /* MCPerfEvent.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MCPerfEvent.cc; path = perf/MCPerfEvent.cc; sourceTree = "<group>"; };
+		277E0C6D1939263B0004D043 /* MCPerfEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPerfEvent.h; path = perf/MCPerfEvent.h; sourceTree = "<group>"; };
 		4B3C1BDC17ABF306008BBF4C /* MCOIMAPQuotaOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPQuotaOperation.h; sourceTree = "<group>"; };
 		4B3C1BDD17ABF307008BBF4C /* MCOIMAPQuotaOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOIMAPQuotaOperation.mm; sourceTree = "<group>"; };
 		4B3C1BDF17ABF4BB008BBF4C /* MCIMAPQuotaOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPQuotaOperation.cc; sourceTree = "<group>"; };
@@ -1657,6 +1661,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		277E0C671939247B0004D043 /* perf */ = {
+			isa = PBXGroup;
+			children = (
+				277E0C6C1939263B0004D043 /* MCPerfEvent.cc */,
+				277E0C6D1939263B0004D043 /* MCPerfEvent.h */,
+			);
+			name = perf;
+			sourceTree = "<group>";
+		};
 		84AF9E72172DACC900E60AA3 /* provider */ = {
 			isa = PBXGroup;
 			children = (
@@ -1917,6 +1930,7 @@
 		C64EA691169E847800778456 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				277E0C671939247B0004D043 /* perf */,
 				C6F7B19C17A1C11F00BE78BB /* security */,
 				C6E665A91796500B0063F2CF /* zip */,
 				C64EA692169E847800778456 /* abstract */,
@@ -2634,6 +2648,7 @@
 				C62C6EF516A7C6EA00737497 /* MCPOPFetchMessageOperation.cc in Sources */,
 				C62C6EF816A7C6F500737497 /* MCPOPDeleteMessagesOperation.cc in Sources */,
 				C62C6EFB16A7C94000737497 /* MCPOPOperation.cc in Sources */,
+				277E0C6E1939263B0004D043 /* MCPerfEvent.cc in Sources */,
 				C62C6F0616A7E54500737497 /* MCPOPFetchMessagesOperation.cc in Sources */,
 				C62C6F0A16A8F58000737497 /* MCIMAPAsyncSession.cc in Sources */,
 				C6D42C1D16AE03D6002BB4F9 /* NSData+MCO.mm in Sources */,
@@ -2840,6 +2855,7 @@
 				C6BA2BD91705F4E6003F0E9E /* MCPOPFetchMessageOperation.cc in Sources */,
 				C6BA2BDA1705F4E6003F0E9E /* MCPOPDeleteMessagesOperation.cc in Sources */,
 				C6BA2BDB1705F4E6003F0E9E /* MCPOPOperation.cc in Sources */,
+				277E0C6F1939263B0004D043 /* MCPerfEvent.cc in Sources */,
 				C6BA2BDC1705F4E6003F0E9E /* MCPOPFetchMessagesOperation.cc in Sources */,
 				C6BA2BDD1705F4E6003F0E9E /* MCIMAPAsyncSession.cc in Sources */,
 				C6BA2BDE1705F4E6003F0E9E /* NSData+MCO.mm in Sources */,

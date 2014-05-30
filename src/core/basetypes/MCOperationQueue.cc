@@ -10,6 +10,7 @@
 #include "MCArray.h"
 #include "MCLog.h"
 #include "MCAutoreleasePool.h"
+#include "MCPerfEvent.h"
 
 using namespace mailcore;
 
@@ -72,6 +73,9 @@ void OperationQueue::runOperationsOnThread(OperationQueue * queue)
 void OperationQueue::runOperations()
 {
     MCLog("start thread");
+    
+    TRACE_PERF;
+    
     mailsem_up(mStartSem);
     
     while (true) {
