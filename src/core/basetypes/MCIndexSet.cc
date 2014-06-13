@@ -372,7 +372,7 @@ void IndexSet::intersectsRange(Range range)
     }
     else {
         removeRange(RangeMake(0, range.location - 1));
-        removeRange(RangeMake(right, UINT64_MAX));
+        removeRange(RangeMake(right + 1, UINT64_MAX));
     }
 }
 
