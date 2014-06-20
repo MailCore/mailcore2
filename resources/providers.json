@@ -371,7 +371,7 @@
             "gmail\\.com"
         ],
         "mailboxes":{
-            "sentmail":"[Gmail]/Sent",
+            "sentmail":"[Gmail]/Sent Mail",
             "allmail":"[Gmail]/All Mail",
             "starred":"[Gmail]/Starred",
             "trash":"[Gmail]/Trash",
