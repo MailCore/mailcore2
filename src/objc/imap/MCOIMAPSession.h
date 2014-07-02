@@ -158,6 +158,8 @@
 */
 
 - (MCOIMAPFolderInfoOperation *) folderInfoOperation:(NSString *)folder;
+- (MCOIMAPFolderInfoOperation *) folderInfoOperation:(NSString *)folder
+                                              urgent:(BOOL)urgent;
 
 /**
  Returns an operation that retrieves folder status (like UIDNext - Unseen -)
@@ -171,6 +173,8 @@
  */
 
 - (MCOIMAPFolderStatusOperation *) folderStatusOperation:(NSString *)folder;
+- (MCOIMAPFolderStatusOperation *) folderStatusOperation:(NSString *)folder
+                                                  urgent:(BOOL)urgent;
 
 /**
  Returns an operation that gets the list of subscribed folders.
@@ -376,6 +380,10 @@
 - (MCOIMAPFetchMessagesOperation *) fetchMessagesByUIDOperationWithFolder:(NSString *)folder
                                                               requestKind:(MCOIMAPMessagesRequestKind)requestKind
                                                                      uids:(MCOIndexSet *)uids;
+- (MCOIMAPFetchMessagesOperation *) fetchMessagesByUIDOperationWithFolder:(NSString *)folder
+                                                              requestKind:(MCOIMAPMessagesRequestKind)requestKind
+                                                                     uids:(MCOIndexSet *)uids
+                                                                   urgent:(BOOL)urgent;
 
 /**
  Returns an operation to fetch messages by (sequence) number.
@@ -402,6 +410,10 @@
 - (MCOIMAPFetchMessagesOperation *) fetchMessagesByNumberOperationWithFolder:(NSString *)folder
                                                                  requestKind:(MCOIMAPMessagesRequestKind)requestKind
                                                                      numbers:(MCOIndexSet *)numbers;
+- (MCOIMAPFetchMessagesOperation *) fetchMessagesByNumberOperationWithFolder:(NSString *)folder
+                                                                 requestKind:(MCOIMAPMessagesRequestKind)requestKind
+                                                                     numbers:(MCOIndexSet *)numbers
+                                                                      urgent:(BOOL)urgent;
 
 /**
  Returns an operation to sync the last changes related to the given message list given a modSeq.

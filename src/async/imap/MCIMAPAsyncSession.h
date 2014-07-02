@@ -103,8 +103,8 @@ namespace mailcore {
         virtual IMAPIdentity * clientIdentity();
         virtual String * gmailUserDisplayName();
         
-        virtual IMAPFolderInfoOperation * folderInfoOperation(String * folder);
-        virtual IMAPFolderStatusOperation * folderStatusOperation(String * folder);
+        virtual IMAPFolderInfoOperation * folderInfoOperation(String * folder, bool urgent = false);
+        virtual IMAPFolderStatusOperation * folderStatusOperation(String * folder, bool urgent = false);
         
         virtual IMAPFetchFoldersOperation * fetchSubscribedFoldersOperation();
         virtual IMAPFetchFoldersOperation * fetchAllFoldersOperation();
@@ -123,9 +123,9 @@ namespace mailcore {
         virtual IMAPOperation * expungeOperation(String * folder);
         
         virtual IMAPFetchMessagesOperation * fetchMessagesByUIDOperation(String * folder, IMAPMessagesRequestKind requestKind,
-                                                                         IndexSet * indexes);
+                                                                         IndexSet * indexes, bool urgent = false);
         virtual IMAPFetchMessagesOperation * fetchMessagesByNumberOperation(String * folder, IMAPMessagesRequestKind requestKind,
-                                                                            IndexSet * indexes);
+                                                                            IndexSet * indexes, bool urgent = false);
         virtual IMAPFetchMessagesOperation * syncMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
                                                                IndexSet * indexes, uint64_t modSeq);
         

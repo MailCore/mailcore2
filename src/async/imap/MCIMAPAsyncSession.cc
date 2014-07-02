@@ -319,15 +319,15 @@ IMAPAsyncConnection * IMAPAsyncSession::matchingSessionForFolder(String * folder
     return availableSession();
 }
 
-IMAPFolderInfoOperation * IMAPAsyncSession::folderInfoOperation(String * folder)
+IMAPFolderInfoOperation * IMAPAsyncSession::folderInfoOperation(String * folder, bool urgent)
 {
-    IMAPAsyncConnection * session = sessionForFolder(folder);
+    IMAPAsyncConnection * session = sessionForFolder(folder, urgent);
     return session->folderInfoOperation(folder);
 }
 
-IMAPFolderStatusOperation * IMAPAsyncSession::folderStatusOperation(String * folder)
+IMAPFolderStatusOperation * IMAPAsyncSession::folderStatusOperation(String * folder, bool urgent)
 {
-    IMAPAsyncConnection * session = sessionForFolder(folder);
+    IMAPAsyncConnection * session = sessionForFolder(folder, urgent);
     return session->folderStatusOperation(folder);
 }
 
@@ -392,16 +392,16 @@ IMAPOperation * IMAPAsyncSession::expungeOperation(String * folder)
 }
 
 IMAPFetchMessagesOperation * IMAPAsyncSession::fetchMessagesByUIDOperation(String * folder, IMAPMessagesRequestKind requestKind,
-                                                                           IndexSet * uids)
+                                                                           IndexSet * uids, bool urgent)
 {
-    IMAPAsyncConnection * session = sessionForFolder(folder);
+    IMAPAsyncConnection * session = sessionForFolder(folder, urgent);
     return session->fetchMessagesByUIDOperation(folder, requestKind, uids);
 }
 
 IMAPFetchMessagesOperation * IMAPAsyncSession::fetchMessagesByNumberOperation(String * folder, IMAPMessagesRequestKind requestKind,
-                                                                              IndexSet * numbers)
+                                                                              IndexSet * numbers, bool urgent)
 {
-    IMAPAsyncConnection * session = sessionForFolder(folder);
+    IMAPAsyncConnection * session = sessionForFolder(folder, urgent);
     return session->fetchMessagesByNumberOperation(folder, requestKind, numbers);
 }
 
