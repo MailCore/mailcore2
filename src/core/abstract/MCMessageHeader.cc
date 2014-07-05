@@ -1076,6 +1076,9 @@ void MessageHeader::importIMAPEnvelope(struct mailimap_envelope * env)
             mailimf_msg_id_free(msgid);
         }
     }
+    else {
+        setMessageID(NULL);
+    }
 }
 
 void MessageHeader::importIMAPReferences(Data * data)
