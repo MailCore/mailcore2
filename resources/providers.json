@@ -840,7 +840,22 @@
             "outlook\\.es",
             "outlook\\.co\\.th",
             "outlook\\.com\\.tr",
-            "outlook\\.com\\.vn"
+            "outlook\\.com\\.vn",
+            "hotmail\\.com",
+            "hotmail\\.co\\.uk",
+            "hotmail\\.fr",
+            "hotmail\\.de",
+            "hotmail\\.be",
+            "hotmail\\.com\\.ar",
+            "hotmail\\.es",
+            "hotmail\\.com\\.mx",
+            "hotmail\\.com",
+            "live\\.com",
+            "live\\.fr",
+            "live\\.de",
+            "live\\.be",
+            "live\\.com\\.ar",
+            "live\\.com\\.mx"
         ],
         "mailboxes":{
             "drafts":"Drafts",
