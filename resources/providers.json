@@ -919,5 +919,42 @@
             "sentmail": "Sent",
             "trash": "Trash"
         }
+    },
+    "mailru": {
+        "servers": {
+            "imap": [
+                     {
+                     "port": 143,
+                     "hostname": "imap.mail.ru",
+                     "starttls": true
+                     },
+                     {
+                     "port": 993,
+                     "hostname": "imap.mail.ru",
+                     "ssl": true
+                     }
+                     ],
+            "smtp": [
+                     {
+                     "port": 465,
+                     "hostname": "smtp.mail.ru",
+                     "ssl": true
+                     }
+                     ]
+            
+        },
+        "domain-match": [
+                         "mail\\.ru",
+                         "inbox\\.ru",
+                         "list\\.ru",
+                         "bk\\.ru",
+                         "mail\\.ua"
+                         ],
+        "mailboxes": {
+            "drafts": "Черновики",
+            "spam": "Спам",
+            "sentmail": "Отправленные",
+            "trash": "Корзина"
+        }
     }
 }
