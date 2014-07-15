@@ -22,7 +22,7 @@ version='51_1'
 build_version="$version~2"
 url="http://download.icu-project.org/files/icu4c/$versionfolder/icu4c-$version-src.tgz"
 package_filename="icu4c-$version-src.tgz"
-sysrootpath="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk"
+sysrootpath="`xcode-select -p`/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk"
 enable_icu_data=0
 
 pushd `dirname $0` > /dev/null
@@ -77,10 +77,10 @@ cd icu
 patch -p1 < "$scriptpath/icu4c-ios.patch"
 cd ..
 
-TOOLCHAIN=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+TOOLCHAIN=`xcode-select -p`/Toolchains/XcodeDefault.xctoolchain/usr/bin
 export CC=$TOOLCHAIN/clang
 export CXX=$TOOLCHAIN/clang++
-export SYSROOTPATH="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk"
+export SYSROOTPATH="`xcode-select -p`/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk"
 export CPPFLAGS="-isysroot $SYSROOTPATH"
 export CFLAGS="$CPPFLAGS"
 export LDLAGS="-lc++ -isysroot $SYSROOTPATH"
@@ -100,20 +100,22 @@ if xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
     MARCHS="armv7 armv7s arm64"
 elif xcodebuild -showsdks|grep iphoneos6.1 >/dev/null ; then
     MARCHS="armv7 armv7s"
+elif xcodebuild -showsdks|grep iphoneos8.0 >/dev/null ; then
+    MARCHS="armv7 armv7s arm64"
 else
     echo SDK not found
     exit 1
 fi	
 
 iphonesdk="iphoneos$sdkversion"
-sysroot="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$sdkversion.sdk"
+sysroot="`xcode-select -p`/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$sdkversion.sdk"
 
 cd "$srcdir/icu/source"
 for MARCH in $MARCHS; do
     export CPPFLAGS="-arch ${MARCH} -isysroot ${sysroot} -DUCONFIG_NO_FILE_IO=1 -miphoneos-version-min=$sdkversion"
     export CFLAGS="$CPPFLAGS"
-    export CXXFLAGS="$CFLAGS -stdlib=libstdc++ -std=gnu++11"
-    export LDFLAGS="-lstdc++ -stdlib=libstdc++  -isysroot ${sysroot}"
+    export CXXFLAGS="$CFLAGS -stdlib=libc++ -std=gnu++11"
+    export LDFLAGS="-lstdc++ -stdlib=libc++  -isysroot ${sysroot}"
 
   echo building $MARCH
   
@@ -129,7 +131,7 @@ for MARCH in $MARCHS; do
 done
 
 sdk="iphonesimulator$sdkversion"
-sysroot="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator$sdkversion.sdk"
+sysroot="`xcode-select -p`/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator$sdkversion.sdk"
 
 ARCH=i386
 MARCHS="x86_64 i386"
@@ -138,8 +140,8 @@ cd "$srcdir/icu/source"
 for MARCH in $MARCHS; do
   export CPPFLAGS="-arch ${MARCH} -isysroot ${sysroot} -DUCONFIG_NO_FILE_IO=1 -miphoneos-version-min=$sdkversion"
   export CFLAGS="$CPPFLAGS"
-  export CXXFLAGS="$CFLAGS -stdlib=libstdc++ -std=gnu++11"
-  export LDFLAGS="-lstdc++ -stdlib=libstdc++"
+  export CXXFLAGS="$CFLAGS -stdlib=libc++ -std=gnu++11"
+  export LDFLAGS="-lstdc++ -stdlib=libc++"
 
   echo building $MARCH
   
