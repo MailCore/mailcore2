@@ -80,7 +80,11 @@
  It will make MCOSMTPSession safe. It will also set all the callbacks of operations to run on this given queue.
  Defaults to the main queue.
  This property should be used only if there's performance issue using MCOSMTPSession in the main thread. */
+#if OS_OBJECT_USE_OBJC
 @property (nonatomic, retain) dispatch_queue_t dispatchQueue;
+#else
+@property (nonatomic, assign) dispatch_queue_t dispatchQueue;
+#endif
 
 /** @name Operations */
 
