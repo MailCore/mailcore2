@@ -36,6 +36,12 @@ uint32_t IMAPQuotaOperation::usage()
 void IMAPQuotaOperation::main()
 {
     ErrorCode error;
+    session()->session()->loginIfNeeded(&error);
+    if (error != ErrorNone) {
+        setError(error);
+        return;
+    }
+    
     session()->session()->getQuota(&mUsage, &mLimit, &error);
     setError(error);
 }

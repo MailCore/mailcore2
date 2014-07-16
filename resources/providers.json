@@ -840,7 +840,22 @@
             "outlook\\.es",
             "outlook\\.co\\.th",
             "outlook\\.com\\.tr",
-            "outlook\\.com\\.vn"
+            "outlook\\.com\\.vn",
+            "hotmail\\.com",
+            "hotmail\\.co\\.uk",
+            "hotmail\\.fr",
+            "hotmail\\.de",
+            "hotmail\\.be",
+            "hotmail\\.com\\.ar",
+            "hotmail\\.es",
+            "hotmail\\.com\\.mx",
+            "hotmail\\.com",
+            "live\\.com",
+            "live\\.fr",
+            "live\\.de",
+            "live\\.be",
+            "live\\.com\\.ar",
+            "live\\.com\\.mx"
         ],
         "mailboxes":{
             "drafts":"Drafts",
@@ -903,6 +918,43 @@
             "spam": "Spam",
             "sentmail": "Sent",
             "trash": "Trash"
+        }
+    },
+    "mailru": {
+        "servers": {
+            "imap": [
+                     {
+                     "port": 143,
+                     "hostname": "imap.mail.ru",
+                     "starttls": true
+                     },
+                     {
+                     "port": 993,
+                     "hostname": "imap.mail.ru",
+                     "ssl": true
+                     }
+                     ],
+            "smtp": [
+                     {
+                     "port": 465,
+                     "hostname": "smtp.mail.ru",
+                     "ssl": true
+                     }
+                     ]
+            
+        },
+        "domain-match": [
+                         "mail\\.ru",
+                         "inbox\\.ru",
+                         "list\\.ru",
+                         "bk\\.ru",
+                         "mail\\.ua"
+                         ],
+        "mailboxes": {
+            "drafts": "Черновики",
+            "spam": "Спам",
+            "sentmail": "Отправленные",
+            "trash": "Корзина"
         }
     }
 }

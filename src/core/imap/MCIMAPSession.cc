@@ -3607,6 +3607,10 @@ void IMAPSession::capabilitySetWithSessionState(IndexSet * capabilities)
     if (mailimap_has_compress_deflate(mImap)) {
         capabilities->addIndex(IMAPCapabilityCompressDeflate);
     }
+    if (mailimap_has_extension(mImap, (char *)"CHILDREN")) {
+        capabilities->addIndex(IMAPCapabilityChildren);
+    }
+
     applyCapabilities(capabilities);
 }
 
