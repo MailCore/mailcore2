@@ -212,7 +212,6 @@ static int sortCompare(Object ** pa, Object ** pb, struct sortData * data)
 
 Array * Array::sortedArray(int (* compare)(void * a, void * b, void * context), void * context)
 {
-    struct sortData data;
     Array * result = (Array *) this->copy()->autorelease();
     result->sortArray(compare, context);
     return result;

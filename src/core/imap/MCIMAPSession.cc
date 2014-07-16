@@ -23,6 +23,7 @@
 #include "MCHTMLBodyRendererTemplateCallback.h"
 #include "MCCertificateUtils.h"
 #include "MCIMAPIdentity.h"
+#include "MCLibetpan.h"
 
 using namespace mailcore;
 
@@ -1589,6 +1590,12 @@ void IMAPSession::appendMessage(String * folder, Data * messageData, MessageFlag
 void IMAPSession::appendMessageWithCustomFlags(String * folder, Data * messageData, MessageFlag flags, Array * customFlags,
     IMAPProgressCallback * progressCallback, uint32_t * createdUID, ErrorCode * pError)
 {
+    this->appendMessageWithCustomFlagsAndDate(folder, messageData, flags, NULL, (time_t) -1, progressCallback, createdUID, pError);
+}
+
+void IMAPSession::appendMessageWithCustomFlagsAndDate(String * folder, Data * messageData, MessageFlag flags, Array * customFlags, time_t date,
+                                                      IMAPProgressCallback * progressCallback, uint32_t * createdUID, ErrorCode * pError)
+{
     int r;
     struct mailimap_flag_list * flag_list;
     uint32_t uidvalidity;
@@ -1612,8 +1619,15 @@ void IMAPSession::appendMessageWithCustomFlags(String * folder, Data * messageDa
             mailimap_flag_list_add(flag_list, f);
         }
     }
-    r = mailimap_uidplus_append(mImap, MCUTF8(folder), flag_list, NULL, messageData->bytes(), messageData->length(),
+    struct mailimap_date_time * imap_date = NULL;
+    if (date != (time_t) -1) {
+        imap_date = imapDateFromTimestamp(date);
+    }
+    r = mailimap_uidplus_append(mImap, MCUTF8(folder), flag_list, imap_date, messageData->bytes(), messageData->length(),
         &uidvalidity, &uidresult);
+    if (imap_date != NULL) {
+        mailimap_date_time_free(imap_date);
+    }
     mailimap_flag_list_free(flag_list);
     
     bodyProgress(messageData->length(), messageData->length());

@@ -17,6 +17,8 @@
 
 @interface MCOIMAPAppendMessageOperation : MCOIMAPBaseOperation
 
+@property (nonatomic, assign) time_t date;
+
 /** 
  This block will be called as bytes are sent
 */
