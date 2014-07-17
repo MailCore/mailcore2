@@ -2,18 +2,13 @@
 
 #include "MCAddress.h"
 #include "MCIterator.h"
+#include "MCLibetpan.h"
 
 #include <string.h>
 #include <unistd.h>
 #include <libetpan/libetpan.h>
 
 using namespace mailcore;
-
-static time_t timestamp_from_date(struct mailimf_date_time * date_time);
-static struct mailimf_date_time * get_date_from_timestamp(time_t timeval);
-static time_t timestamp_from_imap_date(struct mailimap_date_time * date_time);
-static time_t mkgmtime(struct tm * tmp);
-static int tmcomp(struct tm * atmp, struct tm * btmp);
 
 static struct mailimf_address_list * lep_address_list_from_array(Array * addresses);
 static struct mailimf_mailbox_list * lep_mailbox_list_from_array(Array * addresses);
@@ -63,6 +58,7 @@ void MessageHeader::init(bool generateDate, bool generateMessageID)
     mDate = (time_t) -1;
     mReceivedDate = (time_t) -1;
     mExtraHeaders = NULL;
+    mlcExtraHeaders = NULL;
     
     if (generateDate) {
         time_t date;
@@ -114,6 +110,7 @@ MessageHeader::~MessageHeader()
     MC_SAFE_RELEASE(mReplyTo);
     MC_SAFE_RELEASE(mSubject);
     MC_SAFE_RELEASE(mExtraHeaders);
+    MC_SAFE_RELEASE(mlcExtraHeaders);
 }
 
 String * MessageHeader::description()
@@ -298,6 +295,13 @@ String * MessageHeader::userAgent()
 void MessageHeader::setExtraHeaders(HashMap * headers)
 {
     MC_SAFE_REPLACE_COPY(HashMap, mExtraHeaders, headers);
+    MC_SAFE_RELEASE(mlcExtraHeaders);
+    if (mExtraHeaders != NULL) {
+        mlcExtraHeaders = new HashMap();
+        mc_foreachhashmapKeyAndValue(String, key, String, value, mExtraHeaders) {
+            mlcExtraHeaders->setObjectForKey(key->lowercaseString(), value);
+        }
+    }
 }
 
 Array * MessageHeader::allExtraHeadersNames()
@@ -309,13 +313,18 @@ Array * MessageHeader::allExtraHeadersNames()
 
 void MessageHeader::setExtraHeader(String * name, String * object)
 {
-    if (mExtraHeaders == NULL)
+    if (mExtraHeaders == NULL) {
         mExtraHeaders = new HashMap();
+    }
+    if (mlcExtraHeaders == NULL) {
+        mlcExtraHeaders = new HashMap();
+    }
     if (object == NULL) {
         removeExtraHeader(name);
         return;
     }
     mExtraHeaders->setObjectForKey(name, object);
+    mlcExtraHeaders->setObjectForKey(name->lowercaseString(), object);
 }
 
 void MessageHeader::removeExtraHeader(String * name)
@@ -323,13 +332,14 @@ void MessageHeader::removeExtraHeader(String * name)
     if (mExtraHeaders == NULL)
         return;
     mExtraHeaders->removeObjectForKey(name);
+    mlcExtraHeaders->removeObjectForKey(name);
 }
 
 String * MessageHeader::extraHeaderValueForName(String * name)
 {
-    if (mExtraHeaders == NULL)
+    if (mlcExtraHeaders == NULL)
         return NULL;
-    return (String *) mExtraHeaders->objectForKey(name);
+    return (String *) mlcExtraHeaders->objectForKey(name->lowercaseString());
 }
 
 String * MessageHeader::extractedSubject()
@@ -373,7 +383,7 @@ void MessageHeader::importIMFFields(struct mailimf_fields * fields)
     
     if (single_fields.fld_orig_date != NULL) {
         time_t timestamp;
-        timestamp = timestamp_from_date(single_fields.fld_orig_date->dt_date_time);
+        timestamp = timestampFromDate(single_fields.fld_orig_date->dt_date_time);
         setDate(timestamp);
         setReceivedDate(timestamp);
         //MCLog("%lu %lu", (unsigned long) timestamp, date());
@@ -506,169 +516,6 @@ void MessageHeader::importIMFFields(struct mailimf_fields * fields)
             setExtraHeader(fieldNameStr, fieldValueStr);
         }
     }
-}
-
-static time_t timestamp_from_date(struct mailimf_date_time * date_time)
-{
-    struct tm tmval;
-    time_t timeval;
-    int zone_min;
-    int zone_hour;
-    
-    tmval.tm_sec  = date_time->dt_sec;
-    tmval.tm_min  = date_time->dt_min;
-    tmval.tm_hour = date_time->dt_hour;
-    tmval.tm_mday = date_time->dt_day;
-    tmval.tm_mon  = date_time->dt_month - 1;
-    if (date_time->dt_year < 1000) {
-        // workaround when century is not given in year
-        tmval.tm_year = date_time->dt_year + 2000 - 1900;
-    }
-    else {
-        tmval.tm_year = date_time->dt_year - 1900;
-    }
-    
-    timeval = mkgmtime(&tmval);
-    
-    if (date_time->dt_zone >= 0) {
-        zone_hour = date_time->dt_zone / 100;
-        zone_min = date_time->dt_zone % 100;
-    }
-    else {
-        zone_hour = -((- date_time->dt_zone) / 100);
-        zone_min = -((- date_time->dt_zone) % 100);
-    }
-    timeval -= zone_hour * 3600 + zone_min * 60;
-    
-    return timeval;
-}
-
-static struct mailimf_date_time * get_date_from_timestamp(time_t timeval)
-{
-    struct tm gmt;
-    struct tm lt;
-    int off;
-    struct mailimf_date_time * date_time;
-    int sign;
-    int hour;
-    int min;
-    
-    gmtime_r(&timeval, &gmt);
-    localtime_r(&timeval, &lt);
-    
-    off = (int) ((mkgmtime(&lt) - mkgmtime(&gmt)) / 60);
-    if (off < 0) {
-        sign = -1;
-    }
-    else {
-        sign = 1;
-    }
-    off = off * sign;
-    min = off % 60;
-    hour = off / 60;
-    off = hour * 100 + min;
-    off = off * sign;
-    
-    date_time = mailimf_date_time_new(lt.tm_mday, lt.tm_mon + 1,
-                                      lt.tm_year + 1900,
-                                      lt.tm_hour, lt.tm_min, lt.tm_sec,
-                                      off);
-    
-    return date_time;
-}
-
-static time_t timestamp_from_imap_date(struct mailimap_date_time * date_time)
-{
-    struct tm tmval;
-    time_t timeval;
-    int zone_min;
-    int zone_hour;
-    
-    tmval.tm_sec  = date_time->dt_sec;
-    tmval.tm_min  = date_time->dt_min;
-    tmval.tm_hour = date_time->dt_hour;
-    tmval.tm_mday = date_time->dt_day;
-    tmval.tm_mon  = date_time->dt_month - 1;
-    if (date_time->dt_year < 1000) {
-        // workaround when century is not given in year
-        tmval.tm_year = date_time->dt_year + 2000 - 1900;
-    }
-    else {
-        tmval.tm_year = date_time->dt_year - 1900;
-    }
-    
-    timeval = mkgmtime(&tmval);
-    
-    if (date_time->dt_zone >= 0) {
-        zone_hour = date_time->dt_zone / 100;
-        zone_min = date_time->dt_zone % 100;
-    }
-    else {
-        zone_hour = -((- date_time->dt_zone) / 100);
-        zone_min = -((- date_time->dt_zone) % 100);
-    }
-    timeval -= zone_hour * 3600 + zone_min * 60;
-    
-    return timeval;
-}
-
-#define INVALID_TIMESTAMP    (-1)
-
-static int tmcomp(struct tm * atmp, struct tm * btmp)
-{
-    int    result;
-    
-    if ((result = (atmp->tm_year - btmp->tm_year)) == 0 &&
-        (result = (atmp->tm_mon - btmp->tm_mon)) == 0 &&
-        (result = (atmp->tm_mday - btmp->tm_mday)) == 0 &&
-        (result = (atmp->tm_hour - btmp->tm_hour)) == 0 &&
-        (result = (atmp->tm_min - btmp->tm_min)) == 0)
-        result = atmp->tm_sec - btmp->tm_sec;
-    return result;
-}
-
-static time_t mkgmtime(struct tm * tmp)
-{
-    int            dir;
-    int            bits;
-    int            saved_seconds;
-    time_t                t;
-    struct tm            yourtm, mytm;
-    
-    yourtm = *tmp;
-    saved_seconds = yourtm.tm_sec;
-    yourtm.tm_sec = 0;
-    /*
-     ** Calculate the number of magnitude bits in a time_t
-     ** (this works regardless of whether time_t is
-     ** signed or unsigned, though lint complains if unsigned).
-     */
-    for (bits = 0, t = 1; t > 0; ++bits, t <<= 1)
-        ;
-    /*
-     ** If time_t is signed, then 0 is the median value,
-     ** if time_t is unsigned, then 1 << bits is median.
-     */
-    if(bits > 40) bits = 40;
-    t = (t < 0) ? 0 : ((time_t) 1 << bits);
-    for ( ; ; ) {
-        gmtime_r(&t, &mytm);
-        dir = tmcomp(&mytm, &yourtm);
-        if (dir != 0) {
-            if (bits-- < 0) {
-                return INVALID_TIMESTAMP;
-            }
-            if (bits < 0)
-                --t;
-            else if (dir > 0)
-                t -= (time_t) 1 << bits;
-            else    t += (time_t) 1 << bits;
-            continue;
-        }
-        break;
-    }
-    t += saved_seconds;
-    return t;
 }
 
 #pragma mark RFC 2822 mailbox conversion
@@ -836,7 +683,7 @@ struct mailimf_fields * MessageHeader::createIMFFieldsAndFilterBcc(bool filterBc
     imfDate = NULL;
     if (date() != (time_t) -1) {
         //MCLog("%lu", date());
-        imfDate = get_date_from_timestamp(date());
+        imfDate = dateFromTimestamp(date());
     }
     imfFrom = NULL;
     if (from() != NULL) {
@@ -937,7 +784,7 @@ void MessageHeader::importIMAPEnvelope(struct mailimap_envelope * env)
             time_t timestamp;
 
             // date
-            timestamp = timestamp_from_date(date_time);
+            timestamp = timestampFromDate(date_time);
             setDate(timestamp);
             setReceivedDate(timestamp);
             mailimf_date_time_free(date_time);
@@ -949,7 +796,7 @@ void MessageHeader::importIMAPEnvelope(struct mailimap_envelope * env)
             if (r == MAILIMAP_NO_ERROR) {
                 time_t timestamp;
 
-                timestamp = timestamp_from_imap_date(imap_date);
+                timestamp = timestampFromIMAPDate(imap_date);
                 setDate(timestamp);
                 setReceivedDate(timestamp);
                 mailimap_date_time_free(imap_date);
@@ -1117,7 +964,7 @@ void MessageHeader::importIMAPReferences(Data * data)
 
 void MessageHeader::importIMAPInternalDate(struct mailimap_date_time * date)
 {
-    setReceivedDate(timestamp_from_imap_date(date));
+    setReceivedDate(timestampFromIMAPDate(date));
 }
 
 Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool includeCc, Array * senderEmails)

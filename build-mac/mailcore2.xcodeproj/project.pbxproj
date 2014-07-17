@@ -59,7 +59,6 @@
 		9EF9AB24175F409D0027FA3B /* MCIMAPFolderStatusOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9EF9AB0E175F30C20027FA3B /* MCIMAPFolderStatusOperation.h */; };
 		9EF9AB25175F40C70027FA3B /* MCIMAPFolderStatusOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9EF9AB0E175F30C20027FA3B /* MCIMAPFolderStatusOperation.h */; };
 		BD63713B177DFF080094121B /* MCLibetpan.cc in Sources */ = {isa = PBXBuildFile; fileRef = BD637139177DFF080094121B /* MCLibetpan.cc */; };
-		BD63713C177DFF080094121B /* MCLibetpan.cc in Sources */ = {isa = PBXBuildFile; fileRef = BD637139177DFF080094121B /* MCLibetpan.cc */; };
 		C07AD5D7FD82F8ACAB576231 /* NSError+MCO.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C07AD44B013BB42A240B4F04 /* NSError+MCO.h */; };
 		C07AD99B2E2054C684DB8FF6 /* NSError+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = C07ADFE43E22B38EFF23ADB5 /* NSError+MCO.mm */; };
 		C07ADC28B83E7959BF114D46 /* MCOIMAPSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = C07AD057D3C8FBDC7AC95733 /* MCOIMAPSession.mm */; };
@@ -67,6 +66,7 @@
 		C608167617759968001F1018 /* MCSMTPDisconnectOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C608167317759967001F1018 /* MCSMTPDisconnectOperation.cc */; };
 		C608167B177635D2001F1018 /* MCIMAPDisconnectOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C6081679177635D2001F1018 /* MCIMAPDisconnectOperation.cc */; };
 		C608167C177635D2001F1018 /* MCIMAPDisconnectOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C6081679177635D2001F1018 /* MCIMAPDisconnectOperation.cc */; };
+		C61CC25819765763004A28D3 /* MCLibetpan.cc in Sources */ = {isa = PBXBuildFile; fileRef = BD637139177DFF080094121B /* MCLibetpan.cc */; };
 		C623C58616FD6A50001BBEFC /* MCOConstants.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB26D16FD63F6000DB34C /* MCOConstants.h */; };
 		C623C58716FD6A61001BBEFC /* MCOOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB25716FD3BC2000DB34C /* MCOOperation.h */; };
 		C623C58816FD6DF6001BBEFC /* NSValue+MCO.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB25016FC2846000DB34C /* NSValue+MCO.h */; };
@@ -2799,6 +2799,7 @@
 				C6BA2BAB1705F4E6003F0E9E /* MCMainThread.mm in Sources */,
 				C6BA2BAC1705F4E6003F0E9E /* MCOperation.cc in Sources */,
 				C6BA2BAD1705F4E6003F0E9E /* MCOperationQueue.cc in Sources */,
+				C61CC25819765763004A28D3 /* MCLibetpan.cc in Sources */,
 				C6BA2BAE1705F4E6003F0E9E /* MCIMAPFolder.cc in Sources */,
 				C6BA2BAF1705F4E6003F0E9E /* MCIMAPMessage.cc in Sources */,
 				C6BA2BB01705F4E6003F0E9E /* MCIMAPMessagePart.cc in Sources */,
@@ -2951,7 +2952,6 @@
 				9EF9AB1A175F36600027FA3B /* MCOIMAPFolderStatusOperation.mm in Sources */,
 				9E774D8A1767C7F60065EB9B /* MCIMAPFolderStatus.cc in Sources */,
 				DAD28C8C1783CFFC00F2BB8F /* MCHTMLBodyRendererTemplateCallback.cc in Sources */,
-				BD63713C177DFF080094121B /* MCLibetpan.cc in Sources */,
 				DAACAD5217886807000B4517 /* MCHTMLRendererIMAPDataCallback.cc in Sources */,
 				DA89896E178A47D200F6D90A /* MCOIMAPMessageRenderingOperation.mm in Sources */,
 				4B3C1BE317ABFF91008BBF4C /* MCOIMAPQuotaOperation.mm in Sources */,
