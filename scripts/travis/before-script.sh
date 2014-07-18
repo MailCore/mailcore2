@@ -3,7 +3,7 @@ set -e
 
 if test x"`uname`" = xDarwin ; then
   brew update
-  brew install cmake
+#  brew install cmake
 elif test x"`uname`" = xLinux ; then
   git clone --depth=1 https://github.com/dinhviethoa/libetpan
   cd libetpan
