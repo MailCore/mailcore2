@@ -162,9 +162,11 @@ namespace mailcore {
         bool mScheduledAutomaticDisconnect;
         
         virtual void tryAutomaticDisconnectAfterDelay(void * context);
+#if 0
         virtual IMAPMessageRenderingOperation * renderingOperation(IMAPMessage * message,
                                                                    String * folder,
                                                                    IMAPMessageRenderingType type);
+#endif
         
     public: // private
         virtual void runOperation(IMAPOperation * operation);

@@ -29,6 +29,9 @@ namespace mailcore {
         virtual void setMainSession(IMAPAsyncSession * session);
         virtual IMAPAsyncSession * mainSession();
 
+        virtual void setSession(IMAPAsyncConnection * session);
+        virtual IMAPAsyncConnection * session();
+        
         virtual void setFolder(String * folder);
         virtual String * folder();
         
@@ -54,9 +57,6 @@ namespace mailcore {
         IMAPOperationCallback * mImapCallback;
         ErrorCode mError;
         bool mUrgent;
-        
-        virtual void setSession(IMAPAsyncConnection * session);
-        virtual IMAPAsyncConnection * session();
         
     private:
         virtual void bodyProgress(IMAPSession * session, unsigned int current, unsigned int maximum);
