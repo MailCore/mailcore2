@@ -1669,6 +1669,7 @@ void IMAPSession::copyMessages(String * folder, IndexSet * uidSet, String * dest
 
     set = setFromIndexSet(uidSet);
     if (clist_count(set->set_list) == 0) {
+        mailimap_set_free(set);
         return;
     }
 
@@ -2447,8 +2448,10 @@ Array * IMAPSession::fetchMessagesByUIDWithExtraHeaders(String * folder, IMAPMes
     struct mailimap_set * imapset = setFromIndexSet(uids);
     IMAPSyncResult * syncResult = fetchMessages(folder, requestKind, true, imapset, 0, NULL, 0,
                                                 progressCallback, extraHeaders, pError);
-    if (syncResult == NULL)
+    if (syncResult == NULL) {
+        mailimap_set_free(imapset);
         return NULL;
+    }
     Array * result = syncResult->modifiedOrAddedMessages();
     result->retain()->autorelease();
     mailimap_set_free(imapset);
@@ -2469,8 +2472,10 @@ Array * IMAPSession::fetchMessagesByNumberWithExtraHeaders(String * folder, IMAP
     struct mailimap_set * imapset = setFromIndexSet(numbers);
     IMAPSyncResult * syncResult = fetchMessages(folder, requestKind, false, imapset, 0, NULL, 0,
                                                 progressCallback, extraHeaders, pError);
-    if (syncResult == NULL)
+    if (syncResult == NULL) {
+        mailimap_set_free(imapset);
         return NULL;
+    }
     Array * result = syncResult->modifiedOrAddedMessages();
     result->retain()->autorelease();
     mailimap_set_free(imapset);
@@ -3307,6 +3312,7 @@ void IMAPSession::storeFlagsAndCustomFlags(String * folder, IndexSet * uids, IMA
 
     imap_set = setFromIndexSet(uids);
     if (clist_count(imap_set->set_list) == 0) {
+        mailimap_set_free(imap_set);
         return;
     }
 
@@ -3438,6 +3444,7 @@ void IMAPSession::storeLabels(String * folder, IndexSet * uids, IMAPStoreFlagsRe
 
     imap_set = setFromIndexSet(uids);
     if (clist_count(imap_set->set_list) == 0) {
+        mailimap_set_free(imap_set);
         return;
     }
 
