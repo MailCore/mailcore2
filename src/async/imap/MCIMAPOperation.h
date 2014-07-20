@@ -18,6 +18,7 @@
 namespace mailcore {
     
     class IMAPAsyncConnection;
+    class IMAPAsyncSession;
     class IMAPOperationCallback;
     
     class IMAPOperation : public Operation, public IMAPProgressCallback {
@@ -25,11 +26,14 @@ namespace mailcore {
         IMAPOperation();
         virtual ~IMAPOperation();
         
-        virtual void setSession(IMAPAsyncConnection * session);
-        virtual IMAPAsyncConnection * session();
-        
+        virtual void setMainSession(IMAPAsyncSession * session);
+        virtual IMAPAsyncSession * mainSession();
+
         virtual void setFolder(String * folder);
         virtual String * folder();
+        
+        virtual void setUrgent(bool urgent);
+        virtual bool isUrgent();
         
         virtual void setImapCallback(IMAPOperationCallback * callback);
         virtual IMAPOperationCallback * imapCallback();
@@ -44,10 +48,15 @@ namespace mailcore {
         virtual ErrorCode error();
         
     private:
+        IMAPAsyncSession * mMainSession;
         IMAPAsyncConnection * mSession;
         String * mFolder;
         IMAPOperationCallback * mImapCallback;
         ErrorCode mError;
+        bool mUrgent;
+        
+        virtual void setSession(IMAPAsyncConnection * session);
+        virtual IMAPAsyncConnection * session();
         
     private:
         virtual void bodyProgress(IMAPSession * session, unsigned int current, unsigned int maximum);

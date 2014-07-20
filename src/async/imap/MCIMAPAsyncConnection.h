@@ -86,6 +86,7 @@ namespace mailcore {
         virtual dispatch_queue_t dispatchQueue();
 #endif
         
+#if 0
         virtual IMAPFolderInfoOperation * folderInfoOperation(String * folder);
         virtual IMAPFolderStatusOperation * folderStatusOperation(String * folder);
         
@@ -130,18 +131,20 @@ namespace mailcore {
         
         virtual IMAPOperation * connectOperation();
         virtual IMAPOperation * checkAccountOperation();
-        virtual IMAPOperation * disconnectOperation();
         
         virtual IMAPOperation * noopOperation();
         
         virtual IMAPCapabilityOperation * capabilityOperation();
         virtual IMAPQuotaOperation * quotaOperation();
+#endif
+        virtual IMAPOperation * disconnectOperation();
         
+#if 0
         virtual IMAPMessageRenderingOperation * htmlRenderingOperation(IMAPMessage * message, String * folder);
         virtual IMAPMessageRenderingOperation * htmlBodyRenderingOperation(IMAPMessage * message, String * folder);
         virtual IMAPMessageRenderingOperation * plainTextRenderingOperation(IMAPMessage * message, String * folder);
         virtual IMAPMessageRenderingOperation * plainTextBodyRenderingOperation(IMAPMessage * message, String * folder, bool stripWhitespace);
-        
+#endif
         
     private:
         IMAPSession * mSession;
