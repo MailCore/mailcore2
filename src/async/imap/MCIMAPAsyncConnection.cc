@@ -102,6 +102,7 @@ IMAPAsyncConnection::IMAPAsyncConnection()
     mOwner = NULL;
     mConnectionLogger = NULL;
     pthread_mutex_init(&mConnectionLoggerLock, NULL);
+    pthread_mutex_init(&mLastFolderLock, NULL);
     mInternalLogger = new IMAPConnectionLogger(this);
     mAutomaticConfigurationEnabled = true;
     mQueueRunning = false;
@@ -116,6 +117,7 @@ IMAPAsyncConnection::~IMAPAsyncConnection()
     cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
 #endif
     pthread_mutex_destroy(&mConnectionLoggerLock);
+    pthread_mutex_destroy(&mLastFolderLock);
     MC_SAFE_RELEASE(mInternalLogger);
     MC_SAFE_RELEASE(mQueueCallback);
     MC_SAFE_RELEASE(mLastFolder);
@@ -628,12 +630,25 @@ void IMAPAsyncConnection::queueStoppedRunning()
 
 void IMAPAsyncConnection::setLastFolder(String * folder)
 {
+    pthread_mutex_lock(&mLastFolderLock);
     MC_SAFE_REPLACE_COPY(String, mLastFolder, folder);
+    pthread_mutex_unlock(&mLastFolderLock);
 }
 
 String * IMAPAsyncConnection::lastFolder()
 {
-    return mLastFolder;
+    String * result;
+    
+    pthread_mutex_lock(&mLastFolderLock);
+    if (mLastFolder == NULL) {
+        result = NULL;
+    }
+    else {
+        result = (String *)mLastFolder->retain()->autorelease();
+    }
+    pthread_mutex_unlock(&mLastFolderLock);
+    
+    return result;
 }
 
 void IMAPAsyncConnection::setOwner(IMAPAsyncSession * owner)
