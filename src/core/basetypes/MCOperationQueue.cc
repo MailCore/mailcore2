@@ -28,6 +28,7 @@ OperationQueue::OperationQueue()
 #if __APPLE__
     mDispatchQueue = dispatch_get_main_queue();
 #endif
+    _pendingCheckRunning = false;
 }
 
 OperationQueue::~OperationQueue()
@@ -175,12 +176,19 @@ void OperationQueue::callbackOnMainThread(Operation * op)
 
 void OperationQueue::checkRunningOnMainThread(void * context)
 {
-    cancelDelayedPerformMethod((Object::Method) &OperationQueue::checkRunningAfterDelay, NULL);
+    retain(); // (4)
+    if (_pendingCheckRunning) {
+        cancelDelayedPerformMethod((Object::Method) &OperationQueue::checkRunningAfterDelay, NULL);
+        release(); // (4)
+    }
+    _pendingCheckRunning = true;
     performMethodAfterDelay((Object::Method) &OperationQueue::checkRunningAfterDelay, NULL, 1);
+    release(); // (1)
 }
 
 void OperationQueue::checkRunningAfterDelay(void * context)
 {
+    _pendingCheckRunning = false;
     pthread_mutex_lock(&mLock);
     if (!mQuitting) {
         if (mOperations->count() == 0) {
@@ -194,7 +202,7 @@ void OperationQueue::checkRunningAfterDelay(void * context)
     // Number of operations can't be changed because it runs on main thread.
     // And addOperation() should also be called from main thread.
     
-    release(); // (1)
+    release(); // (4)
 }
 
 void OperationQueue::stoppedOnMainThread(void * context)
