@@ -154,6 +154,7 @@ namespace mailcore {
         ConnectionLogger * mConnectionLogger;
         IMAPConnectionLogger * mInternalLogger;
         pthread_mutex_t mConnectionLoggerLock;
+        pthread_mutex_t mLastFolderLock;
         bool mAutomaticConfigurationEnabled;
         bool mQueueRunning;
         bool mScheduledAutomaticDisconnect;

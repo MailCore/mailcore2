@@ -343,6 +343,37 @@ void testObjC()
 }
 
 
+void testSessionForFolderInMultiThreads()
+{
+    MCOIMAPSession *imapSession = [[MCOIMAPSession new] autorelease];
+    imapSession.maximumConnections = 2;
+    
+    dispatch_semaphore_t semaphore1 = dispatch_semaphore_create(0);
+    dispatch_semaphore_t semaphore2 = dispatch_semaphore_create(0);
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        for (int i = 0; i < 10000; i++) {
+            [imapSession folderStatusOperation:@"INBOX"];
+        }
+        
+        dispatch_semaphore_signal(semaphore1);
+    });
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        for (int i = 0; i < 10000; i++) {
+            [imapSession folderStatusOperation:@"TRASH"];
+        }
+
+        dispatch_semaphore_signal(semaphore2);
+    });
+    
+    dispatch_semaphore_wait(semaphore1, DISPATCH_TIME_FOREVER);
+    dispatch_semaphore_wait(semaphore2, DISPATCH_TIME_FOREVER);
+    dispatch_release(semaphore1);
+    dispatch_release(semaphore2);
+}
+
+
 void testAll()
 {
     mailcore::setICUDataDirectory(MCSTR("/usr/local/share/icu"));
@@ -367,6 +398,7 @@ void testAll()
 	//testAttachments();
 	//testProviders();
     //testObjC();
+    //testSessionForFolderInMultiThreads();
     
     MCLog("pool release");
     pool->release();
