@@ -956,5 +956,67 @@
             "sentmail": "Отправленные",
             "trash": "Корзина"
         }
+    },
+        "comcast": {
+    	"servers": {
+    		"pop": [{
+    			"port": 995,
+    			"hostname": "mail.comcast.net",
+    			"ssl": true
+    		}, {
+    			"port": 110,
+    			"hostname": "mail.comcast.net",
+    			"ssl": true
+    		}],
+    		"smtp": [{
+    			"port": 587,
+    			"hostname": "smtp.comcast.net",
+    			"starttls": true
+    		}, {
+    			"port": 465,
+    			"hostname": "smtp.comcast.net",
+    			"ssl": true
+    		}]
+    	},
+    	"mx-match": [
+    		"mx1\\.comcast\\.net",
+    		"mx2\\.comcast\\.net"
+    	]
+    },
+    "verizon": {
+    	"servers": {
+    		"pop": [{
+    			"port": 995,
+    			"hostname": "pop.verizon.net",
+    			"ssl": true
+    		}],
+    		"smtp": [{
+    			"port": 465,
+    			"hostname": "smtp.verizon.net",
+    			"ssl": true
+    		}]
+
+    	},
+    	"mx-match": [
+    		"relay\\.verizon\\.net"
+    	]
+    },
+    "rcn": {
+    	"servers": {
+    		"pop": [{
+    			"port": 110,
+    			"hostname": "pop.rcn.com",
+    			"ssl": true
+    		}],
+    		"smtp": [{
+    			"port": 25,
+    			"hostname": "smtp.rcn.com",
+    			"ssl": true
+    		}]
+
+    	},
+    	"mx-match": [
+    		"mx\\.rcn\\.com"
+    	]
     }
 }
