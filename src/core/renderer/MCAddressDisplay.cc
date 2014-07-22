@@ -47,7 +47,11 @@ String * AddressDisplay::veryShortDisplayStringForAddress(Address * address)
         return (String *) components->objectAtIndex(0);
     }
     else if (address->mailbox()) {
-        return address->mailbox();
+        Array * components = address->mailbox()->componentsSeparatedByString(MCSTR("@"));
+        if (components->count() == 0) {
+            return MCSTR("");
+        }
+        return (String *) components->objectAtIndex(0);
     }
     else {
         return MCLOCALIZEDSTRING(MCSTR("invalid"));

@@ -78,4 +78,6 @@ typedef void (^CompletionType)(NSError *error, uint32_t createdUID);
     }
 }
 
+MCO_OBJC_SYNTHESIZE_SCALAR(time_t, time_t, setDate, date)
+
 @end

@@ -15,6 +15,11 @@ Operation::Operation()
 
 Operation::~Operation()
 {
+#if __APPLE__
+    if (mCallbackDispatchQueue != NULL) {
+        dispatch_release(mCallbackDispatchQueue);
+    }
+#endif
     pthread_mutex_destroy(&mLock);
 }
 
@@ -73,7 +78,13 @@ void Operation::start()
 #if __APPLE__
 void Operation::setCallbackDispatchQueue(dispatch_queue_t callbackDispatchQueue)
 {
+    if (mCallbackDispatchQueue != NULL) {
+        dispatch_release(mCallbackDispatchQueue);
+    }
     mCallbackDispatchQueue = callbackDispatchQueue;
+    if (mCallbackDispatchQueue != NULL) {
+        dispatch_retain(mCallbackDispatchQueue);
+    }
 }
 
 dispatch_queue_t Operation::callbackDispatchQueue()

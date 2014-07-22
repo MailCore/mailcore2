@@ -83,6 +83,8 @@ namespace mailcore {
                                    IMAPProgressCallback * progressCallback, uint32_t * createdUID, ErrorCode * pError);
         virtual void appendMessageWithCustomFlags(String * folder, Data * messageData, MessageFlag flags, Array * customFlags,
                                    IMAPProgressCallback * progressCallback, uint32_t * createdUID, ErrorCode * pError);
+        virtual void appendMessageWithCustomFlagsAndDate(String * folder, Data * messageData, MessageFlag flags, Array * customFlags, time_t date,
+                                                         IMAPProgressCallback * progressCallback, uint32_t * createdUID, ErrorCode * pError);
         
         void copyMessages(String * folder, IndexSet * uidSet, String * destFolder,
                           HashMap ** pUidMapping, ErrorCode * pError);

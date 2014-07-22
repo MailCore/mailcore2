@@ -21,6 +21,9 @@
 
 + (NSArray *) mco_arrayWithMCArray:(mailcore::Array *)array
 {
+    if (array == NULL) {
+        return nil;
+    }
     NSMutableArray * result = [NSMutableArray array];
     for(unsigned int i = 0 ; i < array->count() ; i ++) {
         [result addObject:[NSObject mco_objectWithMCObject:array->objectAtIndex(i)]];

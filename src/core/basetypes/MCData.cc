@@ -283,6 +283,9 @@ String * Data::stringWithDetectedCharset(String * hintCharset, bool isHTML)
         if (result == NULL) {
             result = data->stringWithCharset("iso-2022-jp");
         }
+        if (result == NULL) {
+            result = MCSTR("");
+        }
         
         return result;
     }

@@ -580,6 +580,9 @@ Array * MessageBuilder::attachments()
 
 void MessageBuilder::addAttachment(Attachment * attachment)
 {
+    if (attachment == NULL) {
+        return;
+    }
     if (mAttachments == NULL) {
         mAttachments = new Array();
     }
@@ -598,6 +601,9 @@ Array * MessageBuilder::relatedAttachments()
 
 void MessageBuilder::addRelatedAttachment(Attachment * attachment)
 {
+    if (attachment == NULL) {
+        return;
+    }
     if (mRelatedAttachments == NULL) {
         mRelatedAttachments = new Array();
     }

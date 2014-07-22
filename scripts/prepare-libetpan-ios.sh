@@ -1,6 +1,9 @@
 #!/bin/sh
 
-if xcodebuild -showsdks|grep iphoneos7.1 >/dev/null ; then
+if xcodebuild -showsdks|grep iphoneos8.0 >/dev/null ; then
+	sdkversion=8.0
+    devicearchs="armv7 armv7s arm64"
+elif xcodebuild -showsdks|grep iphoneos7.1 >/dev/null ; then
 	sdkversion=7.1
     devicearchs="armv7 armv7s arm64"
 elif xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
@@ -15,7 +18,7 @@ else
 fi	
 
 url="https://github.com/dinhviethoa/libetpan.git"
-rev=f1307f3bb156b28629efe2c8339b522af58898f5
+rev=01b3b3b83d2b8651c0279018d4e48061509494eb
 
 pushd `dirname $0` > /dev/null
 scriptpath=`pwd`

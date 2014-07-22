@@ -23,6 +23,7 @@
 #include "MCHTMLBodyRendererTemplateCallback.h"
 #include "MCCertificateUtils.h"
 #include "MCIMAPIdentity.h"
+#include "MCLibetpan.h"
 
 using namespace mailcore;
 
@@ -963,10 +964,12 @@ void IMAPSession::login(ErrorCode * pError)
         if (isIdentityEnabled()) {
             IMAPIdentity * serverIdentity = identity(clientIdentity(), pError);
             if (* pError != ErrorNone) {
+                // Ignore identity errors
                 MCLog("fetch identity failed");
-                return;
             }
-            MC_SAFE_REPLACE_RETAIN(IMAPIdentity, mServerIdentity, serverIdentity);
+            else {
+                MC_SAFE_REPLACE_RETAIN(IMAPIdentity, mServerIdentity, serverIdentity);
+            }
         }
     }
     else {
@@ -1431,19 +1434,21 @@ Array * /* IMAPFolder */ IMAPSession::fetchAllFolders(ErrorCode * pError)
     if (* pError == ErrorConnection)
         mShouldDisconnect = true;
     
-    bool hasInbox = false;
-    mc_foreacharray(IMAPFolder, folder, result) {
-        if (folder->path()->isEqual(MCSTR("INBOX"))) {
-            hasInbox = true;
+    if (result != NULL) {
+        bool hasInbox = false;
+        mc_foreacharray(IMAPFolder, folder, result) {
+            if (folder->path()->isEqual(MCSTR("INBOX"))) {
+                hasInbox = true;
+            }
         }
-    }
-    
-    if (!hasInbox) {
-        r = mailimap_list(mImap, "", "INBOX", &imap_folders);
-        Array * inboxResult = resultsWithError(r, imap_folders, pError);
-        if (* pError == ErrorConnection)
-            mShouldDisconnect = true;
-        result->addObjectsFromArray(inboxResult);
+
+        if (!hasInbox) {
+            r = mailimap_list(mImap, "", "INBOX", &imap_folders);
+            Array * inboxResult = resultsWithError(r, imap_folders, pError);
+            if (* pError == ErrorConnection)
+                mShouldDisconnect = true;
+            result->addObjectsFromArray(inboxResult);
+        }
     }
     
     return result;
@@ -1585,6 +1590,12 @@ void IMAPSession::appendMessage(String * folder, Data * messageData, MessageFlag
 void IMAPSession::appendMessageWithCustomFlags(String * folder, Data * messageData, MessageFlag flags, Array * customFlags,
     IMAPProgressCallback * progressCallback, uint32_t * createdUID, ErrorCode * pError)
 {
+    this->appendMessageWithCustomFlagsAndDate(folder, messageData, flags, NULL, (time_t) -1, progressCallback, createdUID, pError);
+}
+
+void IMAPSession::appendMessageWithCustomFlagsAndDate(String * folder, Data * messageData, MessageFlag flags, Array * customFlags, time_t date,
+                                                      IMAPProgressCallback * progressCallback, uint32_t * createdUID, ErrorCode * pError)
+{
     int r;
     struct mailimap_flag_list * flag_list;
     uint32_t uidvalidity;
@@ -1608,8 +1619,15 @@ void IMAPSession::appendMessageWithCustomFlags(String * folder, Data * messageDa
             mailimap_flag_list_add(flag_list, f);
         }
     }
-    r = mailimap_uidplus_append(mImap, MCUTF8(folder), flag_list, NULL, messageData->bytes(), messageData->length(),
+    struct mailimap_date_time * imap_date = NULL;
+    if (date != (time_t) -1) {
+        imap_date = imapDateFromTimestamp(date);
+    }
+    r = mailimap_uidplus_append(mImap, MCUTF8(folder), flag_list, imap_date, messageData->bytes(), messageData->length(),
         &uidvalidity, &uidresult);
+    if (imap_date != NULL) {
+        mailimap_date_time_free(imap_date);
+    }
     mailimap_flag_list_free(flag_list);
     
     bodyProgress(messageData->length(), messageData->length());
@@ -1651,6 +1669,7 @@ void IMAPSession::copyMessages(String * folder, IndexSet * uidSet, String * dest
 
     set = setFromIndexSet(uidSet);
     if (clist_count(set->set_list) == 0) {
+        mailimap_set_free(set);
         return;
     }
 
@@ -2429,8 +2448,10 @@ Array * IMAPSession::fetchMessagesByUIDWithExtraHeaders(String * folder, IMAPMes
     struct mailimap_set * imapset = setFromIndexSet(uids);
     IMAPSyncResult * syncResult = fetchMessages(folder, requestKind, true, imapset, 0, NULL, 0,
                                                 progressCallback, extraHeaders, pError);
-    if (syncResult == NULL)
+    if (syncResult == NULL) {
+        mailimap_set_free(imapset);
         return NULL;
+    }
     Array * result = syncResult->modifiedOrAddedMessages();
     result->retain()->autorelease();
     mailimap_set_free(imapset);
@@ -2451,8 +2472,10 @@ Array * IMAPSession::fetchMessagesByNumberWithExtraHeaders(String * folder, IMAP
     struct mailimap_set * imapset = setFromIndexSet(numbers);
     IMAPSyncResult * syncResult = fetchMessages(folder, requestKind, false, imapset, 0, NULL, 0,
                                                 progressCallback, extraHeaders, pError);
-    if (syncResult == NULL)
+    if (syncResult == NULL) {
+        mailimap_set_free(imapset);
         return NULL;
+    }
     Array * result = syncResult->modifiedOrAddedMessages();
     result->retain()->autorelease();
     mailimap_set_free(imapset);
@@ -3289,6 +3312,7 @@ void IMAPSession::storeFlagsAndCustomFlags(String * folder, IndexSet * uids, IMA
 
     imap_set = setFromIndexSet(uids);
     if (clist_count(imap_set->set_list) == 0) {
+        mailimap_set_free(imap_set);
         return;
     }
 
@@ -3420,6 +3444,7 @@ void IMAPSession::storeLabels(String * folder, IndexSet * uids, IMAPStoreFlagsRe
 
     imap_set = setFromIndexSet(uids);
     if (clist_count(imap_set->set_list) == 0) {
+        mailimap_set_free(imap_set);
         return;
     }
 
@@ -3603,6 +3628,10 @@ void IMAPSession::capabilitySetWithSessionState(IndexSet * capabilities)
     if (mailimap_has_compress_deflate(mImap)) {
         capabilities->addIndex(IMAPCapabilityCompressDeflate);
     }
+    if (mailimap_has_extension(mImap, (char *)"CHILDREN")) {
+        capabilities->addIndex(IMAPCapabilityChildren);
+    }
+
     applyCapabilities(capabilities);
 }
 

@@ -53,15 +53,24 @@ bool mailcore::checkCertificate(mailstream * stream, String * hostname)
         CFRelease(cert);
     }
     
+    static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+    
+    // The below API calls are not thread safe. We're making sure not to call the concurrently.
+    pthread_mutex_lock(&lock);
+    
     status = SecTrustCreateWithCertificates(certificates, policy, &trust);
     if (status != noErr) {
+        pthread_mutex_unlock(&lock);
         goto free_certs;
     }
     
     status = SecTrustEvaluate(trust, &trustResult);
     if (status != noErr) {
+        pthread_mutex_unlock(&lock);
         goto free_certs;
     }
+    
+    pthread_mutex_unlock(&lock);
     
     switch (trustResult) {
         case kSecTrustResultUnspecified:

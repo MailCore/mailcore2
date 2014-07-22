@@ -57,6 +57,12 @@
 /** Email user agent name: X-Mailer header.*/
 @property (nonatomic, copy) NSString * userAgent;
 
+/** Returns a header created from RFC 822 data.*/
++ (MCOMessageHeader *) headerWithData:(NSData *)data;
+
+/** Initialize a header with RFC 822 data.*/
+- (id) initWithData:(NSData *)data;
+
 /** Adds a custom header.*/
 - (void) setExtraHeaderValue:(NSString *)value forName:(NSString *)name;
 

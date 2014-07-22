@@ -12,6 +12,7 @@
 
 #include <MailCore/MCArray.h>
 #include <MailCore/MCHashMap.h>
+#include <MailCore/MCIndexSet.h>
 #include <MailCore/MCAutoreleasePool.h>
 #include <string.h>
 
@@ -25,7 +26,7 @@ for (; NULL != (__variable = (type *) mailcore::ArrayIteratorNext(&__variable##_
 #define mc_foreacharrayIndex(__index, type, __variable, __array) \
 type * __variable; \
 mailcore::ArrayIterator __variable##__iterator = mailcore::ArrayIteratorInit(__array); \
-for (unsigned int __index = 0; NULL != (__variable = mailcore::ArrayIteratorNext(&__variable##__iterator)); __index++)
+for (unsigned int __index = 0; NULL != (__variable = (type *) mailcore::ArrayIteratorNext(&__variable##__iterator)); __index++)
 
 #define mc_foreachhashmapKey(keyType, __key, __hashmap) \
 keyType * __key; \
@@ -46,7 +47,59 @@ HashMapIterator __key##__value##__iterator = HashMapIteratorInit(__hashmap, true
 while (HashMapIteratorRun(&__key##__value##__iterator)) \
 while (HashMapIteratorNext(&__key##__value##__iterator, (Object **) &__key, (Object **) &__value))
 
+#define mc_foreachindexset(__variable, __indexset) \
+int64_t __variable; \
+mailcore::IndexSetIterator __variable##__iterator = mailcore::IndexSetIteratorInit(__indexset); \
+for (; (__variable = IndexSetIteratorValue(&__variable##__iterator)), IndexSetIteratorIsValid(&__variable##__iterator) ; mailcore::IndexSetIteratorNext(&__variable##__iterator))
+
 namespace mailcore {
+    
+    struct IndexSetIterator {
+        unsigned int rangeIndex;
+        unsigned int index;
+        Range * currentRange;
+        IndexSet * indexSet;
+    };
+    
+    static inline IndexSetIterator IndexSetIteratorInit(IndexSet * indexSet)
+    {
+        IndexSetIterator iterator = { 0, 0, NULL, indexSet };
+        if (indexSet->rangesCount() >= 1) {
+            iterator.currentRange = &indexSet->allRanges()[0];
+        }
+        return iterator;
+    }
+    
+    static inline bool IndexSetIteratorIsValid(IndexSetIterator * iterator)
+    {
+        return iterator->currentRange != NULL;
+    }
+    
+    static inline int64_t IndexSetIteratorValue(IndexSetIterator * iterator)
+    {
+        return iterator->currentRange == NULL ? -1 : iterator->currentRange->location + iterator->index;
+    }
+    
+    static inline bool IndexSetIteratorNext(IndexSetIterator * iterator)
+    {
+        iterator->index ++;
+        if (iterator->index > iterator->currentRange->length) {
+            // switch to an other range
+            iterator->index = 0;
+            iterator->rangeIndex ++;
+            if (iterator->rangeIndex >= iterator->indexSet->rangesCount()) {
+                iterator->currentRange = NULL;
+                return false;
+            }
+            else {
+                iterator->currentRange = &iterator->indexSet->allRanges()[iterator->rangeIndex];
+                return true;
+            }
+        }
+        else {
+            return true;
+        }
+    }
     
     struct ArrayIterator {
         unsigned index;

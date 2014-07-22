@@ -148,7 +148,7 @@ int IndexSet::leftRangeIndexForIndexWithBounds(uint64_t idx, unsigned int left, 
     Range middleRange = mRanges[middle];
     
     if (left == right) {
-        if (idx <= middleRange.location) {
+        if (idx <= RangeRightBound(middleRange)) {
             return left;
         }
         else {
@@ -156,7 +156,7 @@ int IndexSet::leftRangeIndexForIndexWithBounds(uint64_t idx, unsigned int left, 
         }
     }
     
-    if (idx <= middleRange.location) {
+    if (idx <= RangeRightBound(middleRange)) {
         return leftRangeIndexForIndexWithBounds(idx, left, middle);
     }
     else {
@@ -372,7 +372,7 @@ void IndexSet::intersectsRange(Range range)
     }
     else {
         removeRange(RangeMake(0, range.location - 1));
-        removeRange(RangeMake(right, UINT64_MAX));
+        removeRange(RangeMake(right + 1, UINT64_MAX));
     }
 }
 

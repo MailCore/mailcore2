@@ -18,6 +18,7 @@ IMAPAppendMessageOperation::IMAPAppendMessageOperation()
     mMessageData = NULL;
     mFlags = MessageFlagNone;
     mCustomFlags = NULL;
+    mDate = (time_t) -1;
     mCreatedUID = 0;
 }
 
@@ -57,6 +58,16 @@ Array * IMAPAppendMessageOperation::customFlags()
     return customFlags();
 }
 
+void IMAPAppendMessageOperation::setDate(time_t date)
+{
+    mDate = date;
+}
+
+time_t IMAPAppendMessageOperation::date()
+{
+    return mDate;
+}
+
 uint32_t IMAPAppendMessageOperation::createdUID()
 {
     return mCreatedUID;
@@ -65,7 +76,7 @@ uint32_t IMAPAppendMessageOperation::createdUID()
 void IMAPAppendMessageOperation::main()
 {
     ErrorCode error;
-    session()->session()->appendMessageWithCustomFlags(folder(), mMessageData, mFlags, mCustomFlags, this, &mCreatedUID, &error);
+    session()->session()->appendMessageWithCustomFlagsAndDate(folder(), mMessageData, mFlags, mCustomFlags, mDate, this, &mCreatedUID, &error);
     setError(error);
 }
 

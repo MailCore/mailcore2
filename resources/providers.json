@@ -255,6 +255,34 @@
             "trash":"Trash"
         }
     },
+    "yahoo.co.jp":{
+        "servers":{
+            "imap":[
+                {
+                    "port":993,
+                    "hostname":"imap.mail.yahoo.co.jp",
+                    "ssl":true
+                }
+            ],
+            "smtp":[
+                {
+                    "port":465,
+                    "hostname":"smtp.mail.yahoo.co.jp",
+                    "ssl":true
+                }
+            ]
+        },
+        "domain-match":[
+            "yahoo\\.co\\.jp"
+        ],
+        "mailboxes":{
+            "drafts":"Draft",
+            "allmail":"Archive",
+            "spam":"Bulk Mail",
+            "sentmail":"Sent",
+            "trash":"Trash"
+        }
+    },
     "yahoo":{
         "servers":{
             "imap":[
@@ -287,6 +315,9 @@
             "ymail\\.com",
             "rocketmail\\.com",
             "xtra\\.co\\.nz"
+        ],
+        "domain-exclude":[
+            "yahoo\\.co\\.jp"
         ],
         "mailboxes":{
             "drafts":"Draft",
@@ -340,7 +371,7 @@
             "gmail\\.com"
         ],
         "mailboxes":{
-            "sentmail":"[Gmail]/Sent",
+            "sentmail":"[Gmail]/Sent Mail",
             "allmail":"[Gmail]/All Mail",
             "starred":"[Gmail]/Starred",
             "trash":"[Gmail]/Trash",
@@ -809,7 +840,22 @@
             "outlook\\.es",
             "outlook\\.co\\.th",
             "outlook\\.com\\.tr",
-            "outlook\\.com\\.vn"
+            "outlook\\.com\\.vn",
+            "hotmail\\.com",
+            "hotmail\\.co\\.uk",
+            "hotmail\\.fr",
+            "hotmail\\.de",
+            "hotmail\\.be",
+            "hotmail\\.com\\.ar",
+            "hotmail\\.es",
+            "hotmail\\.com\\.mx",
+            "hotmail\\.com",
+            "live\\.com",
+            "live\\.fr",
+            "live\\.de",
+            "live\\.be",
+            "live\\.com\\.ar",
+            "live\\.com\\.mx"
         ],
         "mailboxes":{
             "drafts":"Drafts",
@@ -872,6 +918,43 @@
             "spam": "Spam",
             "sentmail": "Sent",
             "trash": "Trash"
+        }
+    },
+    "mailru": {
+        "servers": {
+            "imap": [
+                     {
+                     "port": 143,
+                     "hostname": "imap.mail.ru",
+                     "starttls": true
+                     },
+                     {
+                     "port": 993,
+                     "hostname": "imap.mail.ru",
+                     "ssl": true
+                     }
+                     ],
+            "smtp": [
+                     {
+                     "port": 465,
+                     "hostname": "smtp.mail.ru",
+                     "ssl": true
+                     }
+                     ]
+            
+        },
+        "domain-match": [
+                         "mail\\.ru",
+                         "inbox\\.ru",
+                         "list\\.ru",
+                         "bk\\.ru",
+                         "mail\\.ua"
+                         ],
+        "mailboxes": {
+            "drafts": "Черновики",
+            "spam": "Спам",
+            "sentmail": "Отправленные",
+            "trash": "Корзина"
         }
     }
 }

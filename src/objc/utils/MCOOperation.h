@@ -23,7 +23,11 @@
 /** The queue this operation dispatches the callback on.  Defaults to the main queue.
  This property should be used only if there's performance issue creating or calling the callback
  in the main thread. */
+#if OS_OBJECT_USE_OBJC
+@property (nonatomic, retain) dispatch_queue_t callbackDispatchQueue;
+#else
 @property (nonatomic, assign) dispatch_queue_t callbackDispatchQueue;
+#endif
 
 /** This methods is called on the main thread when the asynchronous operation is finished.
  Needs to be overriden by subclasses.*/

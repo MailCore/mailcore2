@@ -50,6 +50,11 @@ IMAPAsyncSession::IMAPAsyncSession()
 
 IMAPAsyncSession::~IMAPAsyncSession()
 {
+#if __APPLE__
+    if (mDispatchQueue != NULL) {
+        dispatch_release(mDispatchQueue);
+    }
+#endif
     MC_SAFE_RELEASE(mGmailUserDisplayName);
     MC_SAFE_RELEASE(mServerIdentity);
     MC_SAFE_RELEASE(mClientIdentity);
@@ -225,7 +230,9 @@ IMAPAsyncConnection * IMAPAsyncSession::session()
     session->setVoIPEnabled(mVoIPEnabled);
     session->setDefaultNamespace(mDefaultNamespace);
     session->setClientIdentity(mClientIdentity);
+#if __APPLE__
     session->setDispatchQueue(mDispatchQueue);
+#endif
 #if 0 // should be implemented properly
     if (mAutomaticConfigurationDone) {
         session->setAutomaticConfigurationEnabled(false);
@@ -301,7 +308,7 @@ IMAPAsyncConnection * IMAPAsyncSession::matchingSessionForFolder(String * folder
     for(unsigned int i = 0 ; i < mSessions->count() ; i ++) {
         IMAPAsyncConnection * currentSession = (IMAPAsyncConnection *) mSessions->objectAtIndex(i);
         if (currentSession->lastFolder() != NULL) {
-            if (currentSession->lastFolder()->compare(folder)) {
+            if (currentSession->lastFolder()->isEqual(folder)) {
                 return currentSession;
             }
         }
@@ -326,43 +333,43 @@ IMAPFolderStatusOperation * IMAPAsyncSession::folderStatusOperation(String * fol
 
 IMAPFetchFoldersOperation * IMAPAsyncSession::fetchSubscribedFoldersOperation()
 {
-    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
+    IMAPAsyncConnection * session = sessionForFolder(NULL);
     return session->fetchSubscribedFoldersOperation();
 }
 
 IMAPFetchFoldersOperation * IMAPAsyncSession::fetchAllFoldersOperation()
 {
-    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
+    IMAPAsyncConnection * session = sessionForFolder(NULL);
     return session->fetchAllFoldersOperation();
 }
 
 IMAPOperation * IMAPAsyncSession::renameFolderOperation(String * folder, String * otherName)
 {
-    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
+    IMAPAsyncConnection * session = sessionForFolder(NULL);
     return session->renameFolderOperation(folder, otherName);
 }
 
 IMAPOperation * IMAPAsyncSession::deleteFolderOperation(String * folder)
 {
-    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
+    IMAPAsyncConnection * session = sessionForFolder(NULL);
     return session->deleteFolderOperation(folder);
 }
 
 IMAPOperation * IMAPAsyncSession::createFolderOperation(String * folder)
 {
-    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
+    IMAPAsyncConnection * session = sessionForFolder(NULL);
     return session->createFolderOperation(folder);
 }
 
 IMAPOperation * IMAPAsyncSession::subscribeFolderOperation(String * folder)
 {
-    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
+    IMAPAsyncConnection * session = sessionForFolder(NULL);
     return session->subscribeFolderOperation(folder);
 }
 
 IMAPOperation * IMAPAsyncSession::unsubscribeFolderOperation(String * folder)
 {
-    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
+    IMAPAsyncConnection * session = sessionForFolder(NULL);
     return session->unsubscribeFolderOperation(folder);
 }
 
@@ -450,43 +457,43 @@ IMAPIdleOperation * IMAPAsyncSession::idleOperation(String * folder, uint32_t la
 
 IMAPFetchNamespaceOperation * IMAPAsyncSession::fetchNamespaceOperation()
 {
-    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
+    IMAPAsyncConnection * session = sessionForFolder(NULL);
     return session->fetchNamespaceOperation();
 }
 
 IMAPIdentityOperation * IMAPAsyncSession::identityOperation(IMAPIdentity * identity)
 {
-    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
+    IMAPAsyncConnection * session = sessionForFolder(NULL);
     return session->identityOperation(identity);
 }
 
 IMAPOperation * IMAPAsyncSession::connectOperation()
 {
-    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
+    IMAPAsyncConnection * session = sessionForFolder(NULL);
     return session->connectOperation();
 }
 
 IMAPOperation * IMAPAsyncSession::checkAccountOperation()
 {
-    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
+    IMAPAsyncConnection * session = sessionForFolder(NULL);
     return session->checkAccountOperation();
 }
 
 IMAPCapabilityOperation * IMAPAsyncSession::capabilityOperation()
 {
-    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
+    IMAPAsyncConnection * session = sessionForFolder(NULL);
     return session->capabilityOperation();
 }
 
 IMAPQuotaOperation * IMAPAsyncSession::quotaOperation()
 {
-    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
+    IMAPAsyncConnection * session = sessionForFolder(NULL);
     return session->quotaOperation();
 }
 
 IMAPOperation * IMAPAsyncSession::noopOperation()
 {
-    IMAPAsyncConnection * session = sessionForFolder(MCSTR("INBOX"));
+    IMAPAsyncConnection * session = sessionForFolder(NULL);
     return session->noopOperation();
 }
 
@@ -602,7 +609,13 @@ void IMAPAsyncSession::operationRunningStateChanged()
 #if __APPLE__
 void IMAPAsyncSession::setDispatchQueue(dispatch_queue_t dispatchQueue)
 {
+    if (mDispatchQueue != NULL) {
+        dispatch_release(mDispatchQueue);
+    }
     mDispatchQueue = dispatchQueue;
+    if (mDispatchQueue != NULL) {
+        dispatch_retain(mDispatchQueue);
+    }
 }
 
 dispatch_queue_t IMAPAsyncSession::dispatchQueue()

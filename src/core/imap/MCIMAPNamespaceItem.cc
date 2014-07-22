@@ -65,9 +65,16 @@ String * IMAPNamespaceItem::pathForComponents(Array * components)
 {
     String * path;
     String * prefix;
+    String * separator;
     
     components = encodedComponents(components);
-    path = components->componentsJoinedByString(String::stringWithUTF8Format("%c", mDelimiter));
+    if (mDelimiter == 0) {
+        separator = MCSTR("");
+    }
+    else {
+        separator = String::stringWithUTF8Format("%c", mDelimiter);
+    }
+    path = components->componentsJoinedByString(separator);
     
     prefix = mPrefix;
     if (prefix->length() > 0) {
@@ -84,6 +91,9 @@ Array * IMAPNamespaceItem::componentsForPath(String * path)
     
     if (path->hasPrefix(mPrefix)) {
         path = path->substringFromIndex(mPrefix->length());
+    }
+    if (mDelimiter == 0) {
+        return Array::arrayWithObject(path);
     }
     components = path->componentsSeparatedByString(String::stringWithUTF8Format("%c", mDelimiter));
     components = decodedComponents(components);

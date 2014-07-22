@@ -67,6 +67,18 @@
     return self;
 }
 
++ (MCOMessageHeader *) headerWithData:(NSData *)data
+{
+    return [[[MCOMessageHeader alloc] initWithData:data] autorelease];
+}
+
+- (id) initWithData:(NSData *)data
+{
+    self = [self init];
+    [self importHeadersData:data];
+    return self;
+}
+
 MCO_SYNTHESIZE_NSCODING
 
 - (void) dealloc

@@ -29,12 +29,17 @@ void IMAPMultiDisconnectOperation::addOperation(IMAPOperation * op)
 void IMAPMultiDisconnectOperation::start()
 {
     if (_operations->count() == 0) {
-        callback()->operationFinished(this);
+        if (callback() != NULL) {
+            callback()->operationFinished(this);
+        }
         return;
     }
     
+    retain();
     mc_foreacharray(IMAPOperation, op, _operations) {
+#if __APPLE__
         op->setCallbackDispatchQueue(this->callbackDispatchQueue());
+#endif
         op->setCallback(this);
         op->start();
     }
@@ -44,7 +49,10 @@ void IMAPMultiDisconnectOperation::operationFinished(Operation * op)
 {
     _count ++;
     if (_count == _operations->count()) {
-        callback()->operationFinished(this);
+        if (callback() != NULL) {
+            callback()->operationFinished(this);
+        }
+        release();
     }
 }
 
