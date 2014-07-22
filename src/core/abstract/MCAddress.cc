@@ -84,7 +84,7 @@ Address * Address::addressWithIMAPAddress(struct mailimap_address * imap_addr)
         else {
             addr = imap_addr->ad_mailbox_name;
         }
-        mailbox = String::stringWithUTF8Characters(addr);
+        mailbox = String::stringByDecodingMIMEHeaderValue(addr);
         if (mailbox == NULL) {
             mailbox = MCSTR("");
         }
