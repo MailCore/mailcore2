@@ -106,8 +106,10 @@ ErrorCode IMAPOperation::error()
 
 void IMAPOperation::start()
 {
-    IMAPAsyncConnection * connection = mMainSession->sessionForFolder(mFolder, mUrgent);
-    setSession(connection);
+    if (session() == NULL) {
+        IMAPAsyncConnection * connection = mMainSession->sessionForFolder(mFolder, mUrgent);
+        setSession(connection);
+    }
     mSession->runOperation(this);
 }
 
