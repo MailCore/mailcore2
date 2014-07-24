@@ -43,6 +43,8 @@ String * HTMLCleaner::cleanHTML(String * input)
     tidyOptSetBool(tdoc, TidyDropEmptyElems, no);
 #endif
     tidyOptSetBool(tdoc, TidyXhtmlOut, yes);
+    tidyOptSetInt(tdoc, TidyDoctypeMode, TidyDoctypeUser);
+    
     tidyOptSetBool(tdoc, TidyMark, no);
     tidySetCharEncoding(tdoc, "utf8");
     tidyOptSetBool(tdoc, TidyForceOutput, yes);

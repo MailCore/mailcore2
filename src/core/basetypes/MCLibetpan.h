@@ -10,6 +10,16 @@
 
 #define MAILCORE_MCLIBETPAN_H
 
-// No API in this file.
+#include <time.h>
+#include <libetpan/libetpan.h>
+
+namespace mailcore {
+
+    time_t timestampFromDate(struct mailimf_date_time * date_time);
+    time_t timestampFromIMAPDate(struct mailimap_date_time * date_time);
+    struct mailimf_date_time * dateFromTimestamp(time_t timeval);
+    struct mailimap_date_time * imapDateFromTimestamp(time_t timeval);
+    
+}
 
 #endif
