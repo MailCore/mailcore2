@@ -14,7 +14,7 @@
 
 @class MCOAbstractMessage;
 
-typedef enum {
+typedef NS_ENUM(NSInteger, MCOPartType) {
     // Used for a single part.
     // The part will be a MCOAbstractPart.
     MCOPartTypeSingle,
@@ -35,7 +35,7 @@ typedef enum {
     // Used for a multipart, multipart/alternative.
     // The part will be a MCOAbstractMultipart.
     MCOPartTypeMultipartAlternative,
-} MCOPartType;
+};
 
 @interface MCOAbstractPart : NSObject <NSCopying>
 
