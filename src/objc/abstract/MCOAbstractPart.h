@@ -35,6 +35,11 @@ typedef enum {
     // Used for a multipart, multipart/alternative.
     // The part will be a MCOAbstractMultipart.
     MCOPartTypeMultipartAlternative,
+    
+    // Used for a signed message, multipart/signed.
+    // The part will be a MCOAbstractMultipart.
+    MCOPartTypeMultipartSigned,
+    
 } MCOPartType;
 
 @interface MCOAbstractPart : NSObject <NSCopying>

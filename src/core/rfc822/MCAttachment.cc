@@ -341,6 +341,14 @@ AbstractPart * Attachment::attachmentsWithMIMEWithMain(struct mailmime * mime, b
                 fillMultipartSubAttachments(attachment, mime);
                 return (Multipart *) attachment->autorelease();
             }
+            else if ((mime->mm_content_type != NULL) && (mime->mm_content_type->ct_subtype != NULL) &&
+                     (strcasecmp(mime->mm_content_type->ct_subtype, "signed") == 0)) {
+                Multipart * attachment;
+                attachment = new Multipart();
+                attachment->setPartType(PartTypeMultipartSigned);
+                fillMultipartSubAttachments(attachment, mime);
+                return (Multipart *) attachment->autorelease();
+            }
             else {
                 Multipart * attachment;
                 attachment = new Multipart();

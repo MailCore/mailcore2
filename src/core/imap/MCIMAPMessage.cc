@@ -185,6 +185,7 @@ static AbstractPart * partForPartIDInPart(AbstractPart * part, String * partID)
         case mailcore::PartTypeMultipartMixed:
         case mailcore::PartTypeMultipartRelated:
         case mailcore::PartTypeMultipartAlternative:
+        case mailcore::PartTypeMultipartSigned:
             if (partID->isEqual(((IMAPMultipart *) part)->partID())) {
                 return part;
             }

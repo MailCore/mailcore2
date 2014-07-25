@@ -294,6 +294,7 @@ void AbstractPart::applyUniquePartID()
             case PartTypeMultipartMixed:
             case PartTypeMultipartRelated:
             case PartTypeMultipartAlternative:
+            case PartTypeMultipartSigned:
                 queue->addObjectsFromArray(((AbstractMultipart *) part)->parts());
                 break;
         }
@@ -348,6 +349,9 @@ HashMap * AbstractPart::serializable()
         case PartTypeMultipartAlternative:
             partTypeStr = MCSTR("multipart/alternative");
             break;
+        case PartTypeMultipartSigned:
+            partTypeStr = MCSTR("multipart/signed");
+            break;
     }
     result->setObjectForKey(MCSTR("partType"), partTypeStr);
     
@@ -385,6 +389,9 @@ void AbstractPart::importSerializable(HashMap * serializable)
         }
         else if (value->isEqual(MCSTR("multipart/alternative"))) {
             setPartType(PartTypeMultipartAlternative);
+        }
+        else if (value->isEqual(MCSTR("multipart/signed"))) {
+            setPartType(PartTypeMultipartSigned);
         }
     }
 }

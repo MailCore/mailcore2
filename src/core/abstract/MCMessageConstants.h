@@ -255,6 +255,7 @@ namespace mailcore {
         PartTypeMultipartMixed,
         PartTypeMultipartRelated,
         PartTypeMultipartAlternative,
+        PartTypeMultipartSigned,
     };
     
     // Private type - It should not be used directly.
