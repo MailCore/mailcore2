@@ -194,13 +194,23 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
 
 - (MCOIMAPFolderInfoOperation *) folderInfoOperation:(NSString *)folder
 {
-    IMAPFolderInfoOperation * coreOp = MCO_NATIVE_INSTANCE->folderInfoOperation([folder mco_mcString]);
+    return [self folderInfoOperation:folder urgent:NO];
+}
+
+- (MCOIMAPFolderInfoOperation *) folderInfoOperation:(NSString *)folder urgent:(BOOL)urgent
+{
+    IMAPFolderInfoOperation * coreOp = MCO_NATIVE_INSTANCE->folderInfoOperation([folder mco_mcString], urgent);
     return MCO_TO_OBJC_OP(coreOp);
 }
 
 - (MCOIMAPFolderStatusOperation *) folderStatusOperation:(NSString *)folder
 {
-    IMAPFolderStatusOperation * coreOp = MCO_NATIVE_INSTANCE->folderStatusOperation([folder mco_mcString]);
+    return [self folderStatusOperation:folder urgent:NO];
+}
+
+- (MCOIMAPFolderStatusOperation *) folderStatusOperation:(NSString *)folder urgent:(BOOL)urgent
+{
+    IMAPFolderStatusOperation * coreOp = MCO_NATIVE_INSTANCE->folderStatusOperation([folder mco_mcString], urgent);
     return MCO_TO_OBJC_OP(coreOp);
 }
 
@@ -285,9 +295,21 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
                                                               requestKind:(MCOIMAPMessagesRequestKind)requestKind
                                                                      uids:(MCOIndexSet *)uids
 {
+    return [self fetchMessagesByUIDOperationWithFolder:folder
+                                           requestKind:requestKind
+                                                  uids:uids
+                                                urgent:NO];
+}
+
+- (MCOIMAPFetchMessagesOperation *) fetchMessagesByUIDOperationWithFolder:(NSString *)folder
+                                                              requestKind:(MCOIMAPMessagesRequestKind)requestKind
+                                                                     uids:(MCOIndexSet *)uids
+                                                                   urgent:(BOOL)urgent
+{
     IMAPFetchMessagesOperation * coreOp = MCO_NATIVE_INSTANCE->fetchMessagesByUIDOperation([folder mco_mcString],
                                                                                            (IMAPMessagesRequestKind) requestKind,
-                                                                                           MCO_FROM_OBJC(IndexSet, uids));
+                                                                                           MCO_FROM_OBJC(IndexSet, uids),
+                                                                                           urgent);
     return MCO_TO_OBJC_OP(coreOp);
 }
 
@@ -295,9 +317,21 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
                                                                  requestKind:(MCOIMAPMessagesRequestKind)requestKind
                                                                      numbers:(MCOIndexSet *)numbers
 {
+    return [self fetchMessagesByNumberOperationWithFolder:folder
+                                              requestKind:requestKind
+                                                  numbers:numbers
+                                                   urgent:NO];
+}
+
+- (MCOIMAPFetchMessagesOperation *) fetchMessagesByNumberOperationWithFolder:(NSString *)folder
+                                                                 requestKind:(MCOIMAPMessagesRequestKind)requestKind
+                                                                     numbers:(MCOIndexSet *)numbers
+                                                                      urgent:(BOOL)urgent
+{
     IMAPFetchMessagesOperation * coreOp = MCO_NATIVE_INSTANCE->fetchMessagesByNumberOperation([folder mco_mcString],
                                                                                               (IMAPMessagesRequestKind) requestKind,
-                                                                                              MCO_FROM_OBJC(IndexSet, numbers));
+                                                                                              MCO_FROM_OBJC(IndexSet, numbers),
+                                                                                              urgent);
     return MCO_TO_OBJC_OP(coreOp);
 }
 

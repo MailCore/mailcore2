@@ -164,6 +164,15 @@
 - (MCOIMAPFolderInfoOperation *) folderInfoOperation:(NSString *)folder;
 
 /**
+ Returns an operation that retrieves folder metadata (like UIDNext)
+ @param urgent is set to YES, an additional connection to the same folder might be opened to fetch the content.
+ 
+ */
+
+- (MCOIMAPFolderInfoOperation *) folderInfoOperation:(NSString *)folder
+                                              urgent:(BOOL)urgent;
+
+/**
  Returns an operation that retrieves folder status (like UIDNext - Unseen -)
  
     MCOIMAPFolderStatusOperation * op = [session folderStatusOperation:@"INBOX"];
@@ -175,6 +184,14 @@
  */
 
 - (MCOIMAPFolderStatusOperation *) folderStatusOperation:(NSString *)folder;
+
+/**
+ Returns an operation that retrieves folder status (like UIDNext - Unseen -)
+  @param urgent is set to YES, an additional connection to the same folder might be opened to fetch the content.
+ */
+
+- (MCOIMAPFolderStatusOperation *) folderStatusOperation:(NSString *)folder
+                                                  urgent:(BOOL)urgent;
 
 /**
  Returns an operation that gets the list of subscribed folders.
@@ -380,6 +397,15 @@
 - (MCOIMAPFetchMessagesOperation *) fetchMessagesByUIDOperationWithFolder:(NSString *)folder
                                                               requestKind:(MCOIMAPMessagesRequestKind)requestKind
                                                                      uids:(MCOIndexSet *)uids;
+/**
+ Returns an operation to fetch messages by UID.
+ @param urgent is set to YES, an additional connection to the same folder might be opened to fetch the content.
+*/
+
+- (MCOIMAPFetchMessagesOperation *) fetchMessagesByUIDOperationWithFolder:(NSString *)folder
+                                                              requestKind:(MCOIMAPMessagesRequestKind)requestKind
+                                                                     uids:(MCOIndexSet *)uids
+                                                                   urgent:(BOOL)urgent;
 
 /**
  Returns an operation to fetch messages by (sequence) number.
@@ -406,6 +432,15 @@
 - (MCOIMAPFetchMessagesOperation *) fetchMessagesByNumberOperationWithFolder:(NSString *)folder
                                                                  requestKind:(MCOIMAPMessagesRequestKind)requestKind
                                                                      numbers:(MCOIndexSet *)numbers;
+/**
+ Returns an operation to fetch messages by (sequence) number.
+ @param urgent is set to YES, an additional connection to the same folder might be opened to fetch the content.
+*/
+
+- (MCOIMAPFetchMessagesOperation *) fetchMessagesByNumberOperationWithFolder:(NSString *)folder
+                                                                 requestKind:(MCOIMAPMessagesRequestKind)requestKind
+                                                                     numbers:(MCOIndexSet *)numbers
+                                                                      urgent:(BOOL)urgent;
 
 /**
  Returns an operation to sync the last changes related to the given message list given a modSeq.
