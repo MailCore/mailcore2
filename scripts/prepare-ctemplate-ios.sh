@@ -49,7 +49,7 @@ else
 	cd ctemplate
 fi
 version=`git rev-parse HEAD | cut -c1-10`
-build_version="$version~1"
+build_version="$version~2"
 
 if test -f "$resultdir/ctemplate-ios-$build_version.zip" ; then
 	echo install from cache
