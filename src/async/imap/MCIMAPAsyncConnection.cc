@@ -249,6 +249,7 @@ IMAPIdentity * IMAPAsyncConnection::clientIdentity()
     return mClientIdentity;
 }
 
+#if 0
 IMAPFolderInfoOperation * IMAPAsyncConnection::folderInfoOperation(String * folder)
 {
     IMAPFolderInfoOperation * op = new IMAPFolderInfoOperation();
@@ -537,6 +538,7 @@ IMAPQuotaOperation * IMAPAsyncConnection::quotaOperation()
     op->autorelease();
     return op;
 }
+#endif
 
 IMAPOperation * IMAPAsyncConnection::disconnectOperation()
 {
@@ -679,6 +681,7 @@ void IMAPAsyncConnection::logConnection(ConnectionLogType logType, Data * buffer
     pthread_mutex_unlock(&mConnectionLoggerLock);
 }
 
+#if 0
 IMAPMessageRenderingOperation * IMAPAsyncConnection::renderingOperation(IMAPMessage * message,
                                                                         String * folder,
                                                                         IMAPMessageRenderingType type)
@@ -718,6 +721,7 @@ IMAPMessageRenderingOperation * IMAPAsyncConnection::plainTextBodyRenderingOpera
                               stripWhitespace ? IMAPMessageRenderingTypePlainTextBodyAndStripWhitespace :
                                                 IMAPMessageRenderingTypePlainTextBody);
 }
+#endif
 
 void IMAPAsyncConnection::setAutomaticConfigurationEnabled(bool enabled)
 {

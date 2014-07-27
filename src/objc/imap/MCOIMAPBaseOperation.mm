@@ -13,6 +13,7 @@
 
 #import "MCAsyncIMAP.h"
 #import "MCOIMAPSession.h"
+#import "NSObject+MCO.h"
 
 class MCOIMAPBaseOperationIMAPCallback : public mailcore::IMAPOperationCallback {
 public:
@@ -41,6 +42,10 @@ private:
     MCOIMAPBaseOperationIMAPCallback * _imapCallback;
     MCOIMAPSession * _session;
 }
+
+#define nativeType mailcore::IMAPOperation
+
+MCO_OBJC_SYNTHESIZE_SCALAR(BOOL, bool, setUrgent, isUrgent)
 
 - (id) initWithMCOperation:(mailcore::Operation *)op
 {
