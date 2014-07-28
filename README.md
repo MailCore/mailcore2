@@ -33,8 +33,8 @@ MailCore 2 provides a simple and asynchronous Objective-C API to work with the e
     * Add `libMailCore-ios.a`
     * Add `CFNetwork.framework`
 	* Add `Security.framework`
-    * Set 'Other Linker Flags': `-lctemplate-ios -letpan-ios -licudata -licui18n -licuuc -lxml2 -lsasl2 -liconv -ltidy -lz` `-licucore -lstdc++ -stdlib=libstdc++ -ObjC`
-    * Make sure to use GNU C++ standard library.  In Build Settings, locate 'C++ Standard Library', and select `libstdc++`.
+    * Set 'Other Linker Flags': `-lctemplate-ios -letpan-ios -licudata -licui18n -licuuc -lxml2 -lsasl2 -liconv -ltidy -lz` `-licucore -lc++ -stdlib=libc++ -ObjC`
+    * Make sure to use LLVM C++ standard library.  Open Build Settings, scroll down to 'C++ Standard Library', and select `libc++`.
     * In Build Phases, add a Target Dependency of `static mailcore2 ios`.
 6. Profit.
 
