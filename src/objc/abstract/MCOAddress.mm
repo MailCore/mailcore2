@@ -159,6 +159,22 @@ MCO_OBJC_SYNTHESIZE_STRING(setMailbox, mailbox)
     return MCO_OBJC_BRIDGE_GET(nonEncodedRFC822String);
 }
 
+- (NSUInteger) hash
+{
+    return [[self displayName] hash] ^ [[self mailbox] hash];
+}
+
+- (BOOL) isEqual:(id)object
+{
+    if (![object isKindOfClass:[MCOAddress class]]) {
+        return NO;
+    }
+
+    MCOAddress * other = object;
+    return [[self displayName] isEqualToString:[other displayName]] &&
+        [[self mailbox] isEqualToString:[other mailbox]];
+}
+
 @end
 
 @implementation NSArray (MCOAddress)
