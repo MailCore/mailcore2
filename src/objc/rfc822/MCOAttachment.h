@@ -41,7 +41,19 @@
 
 /** Returns string representation according to charset*/
 - (NSString *) decodedString;
- 
+
+/** Adds a custom parameter.*/
+- (void) setExtraParameterValue:(NSString *)value forName:(NSString *)name;
+
+/** Remove a given custom parameter.*/
+- (void) removeExtraParameterForName:(NSString *)name;
+
+/** Returns the value of a given custom parameter.*/
+- (NSString *) extraParameterValueForName:(NSString *)name;
+
+/** Returns an array with the names of all custom headers.*/
+- (NSArray * /* NSString */) allExtraParametersNames;
+
 @end
 
 #endif

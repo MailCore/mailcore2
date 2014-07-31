@@ -211,6 +211,8 @@ Attachment * Attachment::attachmentWithText(String * text)
 void Attachment::init()
 {
     mData = NULL;
+    mExtraParameters = NULL;
+    mlcExtraParameters = NULL;
     setMimeType(MCSTR("application/octet-stream"));
 }
 
@@ -223,11 +225,14 @@ Attachment::Attachment(Attachment * other) : AbstractPart(other)
 {
     init();
     MC_SAFE_REPLACE_RETAIN(Data, mData, other->mData);
+    setExtraParameters(other->mExtraParameters);
 }
 
 Attachment::~Attachment()
 {
     MC_SAFE_RELEASE(mData);
+    MC_SAFE_RELEASE(mExtraParameters);
+    MC_SAFE_RELEASE(mlcExtraParameters);
 }
 
 String * Attachment::description()
@@ -255,6 +260,11 @@ String * Attachment::description()
     }
     else {
         result->appendUTF8Format("no data\n");
+    }
+    if (mExtraParameters != NULL) {
+        mc_foreachhashmapKeyAndValue(String, header, String, value, mExtraParameters) {
+            result->appendUTF8Format("%s: %s\n", header->UTF8Characters(), value->UTF8Characters());
+        }
     }
     result->appendUTF8Format(">");
     
@@ -286,6 +296,55 @@ String * Attachment::decodedString()
     }
 }
 
+void Attachment::setExtraParameters(HashMap * parameters)
+{
+    MC_SAFE_REPLACE_COPY(HashMap, mExtraParameters, parameters);
+    MC_SAFE_RELEASE(mlcExtraParameters);
+    if (mExtraParameters != NULL) {
+        mlcExtraParameters = new HashMap();
+        mc_foreachhashmapKeyAndValue(String, key, String, value, mExtraParameters) {
+            mlcExtraParameters->setObjectForKey(key->lowercaseString(), value);
+        }
+    }
+}
+
+Array * Attachment::allExtraParametersNames()
+{
+    if (mExtraParameters == NULL)
+        return Array::array();
+    return mExtraParameters->allKeys();
+}
+
+void Attachment::setExtraParameter(String * name, String * object)
+{
+    if (mExtraParameters == NULL) {
+        mExtraParameters = new HashMap();
+    }
+    if (mlcExtraParameters == NULL) {
+        mlcExtraParameters = new HashMap();
+    }
+    if (object == NULL) {
+        removeExtraParameter(name);
+        return;
+    }
+    mExtraParameters->setObjectForKey(name, object);
+    mlcExtraParameters->setObjectForKey(name->lowercaseString(), object);
+}
+
+void Attachment::removeExtraParameter(String * name)
+{
+    if (mExtraParameters == NULL)
+        return;
+    mExtraParameters->removeObjectForKey(name);
+    mlcExtraParameters->removeObjectForKey(name);
+}
+
+String * Attachment::extraParameterValueForName(String * name)
+{
+    if (mlcExtraParameters == NULL)
+        return NULL;
+    return (String *) mlcExtraParameters->objectForKey(name->lowercaseString());
+}
 
 AbstractPart * Attachment::attachmentsWithMIME(struct mailmime * mime)
 {
@@ -495,6 +554,7 @@ Attachment * Attachment::attachmentWithSingleMIME(struct mailmime * mime)
     char * description;
     char * loc;
     Encoding encoding;
+    clist * ct_parameters;
     
     MCAssert(mime->mm_type == MAILMIME_SINGLE);
     
@@ -523,6 +583,7 @@ Attachment * Attachment::attachmentWithSingleMIME(struct mailmime * mime)
     content_id = single_fields.fld_id;
     description = single_fields.fld_description;
     loc = single_fields.fld_location;
+    ct_parameters = single_fields.fld_content->ct_parameters;
     
     if (filename != NULL) {
         result->setFilename(String::stringByDecodingMIMEHeaderValue(filename));
@@ -543,6 +604,18 @@ Attachment * Attachment::attachmentWithSingleMIME(struct mailmime * mime)
         result->setContentLocation(String::stringWithUTF8Characters(loc));
     }
     
+    if (ct_parameters != NULL) {
+        clistiter * iter = clist_begin(ct_parameters);
+        struct mailmime_parameter * param;
+        while (iter != NULL) {
+            param = (struct mailmime_parameter *) clist_content(iter);
+            if (param != NULL) {
+                result->setExtraParameter(String::stringWithUTF8Characters(param->pa_name), String::stringWithUTF8Characters(param->pa_value));
+            }
+            iter = clist_next(iter);
+        }
+    }
+   
     if (single_fields.fld_disposition != NULL) {
         if (single_fields.fld_disposition->dsp_type != NULL) {
             if (single_fields.fld_disposition->dsp_type->dsp_type == MAILMIME_DISPOSITION_TYPE_INLINE) {

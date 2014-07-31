@@ -134,7 +134,7 @@ err:
 
 static struct mailmime * get_text_part(const char * mime_type, const char * charset, const char * content_id,
                                 const char * description,
-                                const char * text, size_t length, int encoding_type)
+                                const char * text, size_t length, int encoding_type, Array * extraParameters)
 {
     struct mailmime_fields * mime_fields;
     struct mailmime * mime;
@@ -165,6 +165,11 @@ static struct mailmime * get_text_part(const char * mime_type, const char * char
         param = mailmime_param_new_with_data((char *) "charset", (char *) charset);
     }
     clist_append(content->ct_parameters, param);
+    
+    mc_foreacharray(Value, extraParam, extraParameters) {
+        clist_append(content->ct_parameters, extraParam->pointerValue());
+    }
+    
     mime = part_new_empty(content, mime_fields, NULL, 1);
     mailmime_set_body_text(mime, (char *) text, length);
     
@@ -173,7 +178,7 @@ static struct mailmime * get_text_part(const char * mime_type, const char * char
 
 static struct mailmime * get_plain_text_part(const char * mime_type, const char * charset, const char * content_id,
                                       const char * description,
-                                      const char * text, size_t length)
+                                      const char * text, size_t length, Array * extraParameters)
 {
     bool needsQuotedPrintable;
     int mechanism;
@@ -189,20 +194,20 @@ static struct mailmime * get_plain_text_part(const char * mime_type, const char 
     if (needsQuotedPrintable) {
         mechanism = MAILMIME_MECHANISM_QUOTED_PRINTABLE;
     }
-    return get_text_part(mime_type, charset, content_id, description, text, length, mechanism);
+    return get_text_part(mime_type, charset, content_id, description, text, length, mechanism, extraParameters);
 }
 
 static struct mailmime * get_other_text_part(const char * mime_type, const char * charset, const char * content_id,
                                       const char * description,
-                                      const char * text, size_t length)
+                                      const char * text, size_t length, Array * extraParameters)
 {
-    return get_text_part(mime_type, charset, content_id, description, text, length, MAILMIME_MECHANISM_QUOTED_PRINTABLE);
+    return get_text_part(mime_type, charset, content_id, description, text, length, MAILMIME_MECHANISM_QUOTED_PRINTABLE, extraParameters);
 }
 
 static struct mailmime * get_file_part(const char * filename, const char * mime_type, int is_inline,
                                        const char * content_id,
                                        const char * content_description,
-                                       const char * text, size_t length)
+                                       const char * text, size_t length, Array * extraParameters)
 {
     char * disposition_name;
     int encoding_type;
@@ -238,6 +243,11 @@ static struct mailmime * get_file_part(const char * filename, const char * mime_
         dup_content_description = strdup(content_description);
     mime_fields = mailmime_fields_new_with_data(encoding,
                                                 dup_content_id, dup_content_description, disposition, NULL);
+    
+    mc_foreacharray(Value, extraParam, extraParameters) {
+        clist_append(content->ct_parameters, extraParam->pointerValue());
+    }
+    
     mime = part_new_empty(content, mime_fields, NULL, 1);
     mailmime_set_body_text(mime, (char *) text, length);
     
@@ -245,6 +255,22 @@ static struct mailmime * get_file_part(const char * filename, const char * mime_
 }
 
 #define MIME_ENCODED_STR(str) (str != NULL ? str->encodedMIMEHeaderValue()->bytes() : NULL)
+
+static Array * extraParameters_from_attachment(Attachment * att)
+{
+    Array * extraParamters = new Array();
+    struct mailmime_parameter * param;
+    Value * paramValue;
+    
+    mc_foreacharray(String, name, att->allExtraParametersNames()) {
+        String * value = att->extraParameterValueForName(name);
+        param = mailmime_param_new_with_data((char *)name->UTF8Characters(), (char *)value->UTF8Characters());
+        paramValue = Value::valueWithPointerValue(param);
+        extraParamters->addObject(paramValue);
+    }
+
+    return (Array *)extraParamters->autorelease();
+}
 
 static struct mailmime * mime_from_attachment(Attachment * att)
 {
@@ -266,20 +292,23 @@ static struct mailmime * mime_from_attachment(Attachment * att)
         mime = get_plain_text_part(MCUTF8(att->mimeType()), MCUTF8(att->charset()),
             MCUTF8(att->contentID()),
             MIME_ENCODED_STR(att->contentDescription()),
-            data->bytes(), data->length());
+            data->bytes(), data->length(),
+            extraParameters_from_attachment(att));
     }
     else if (att->isInlineAttachment() && att->mimeType()->lowercaseString()->hasPrefix(MCSTR("text/"))) {
         mime = get_other_text_part(MCUTF8(att->mimeType()), MCUTF8(att->charset()),
             MCUTF8(att->contentID()),
             MIME_ENCODED_STR(att->contentDescription()),
-            data->bytes(), data->length());
+            data->bytes(), data->length(),
+            extraParameters_from_attachment(att));
     }
     else {
         mime = get_file_part(MIME_ENCODED_STR(att->filename()),
             MCUTF8(att->mimeType()), att->isInlineAttachment(),
             MCUTF8(att->contentID()),
             MIME_ENCODED_STR(att->contentDescription()),
-            data->bytes(), data->length());
+            data->bytes(), data->length(),
+            extraParameters_from_attachment(att));
     }
     return mime;
 }

@@ -90,4 +90,23 @@ MCO_OBJC_SYNTHESIZE_DATA(setData, data)
 	return [NSString mco_stringWithMCString:result];
 }
 
+- (void) setExtraParameterValue:(NSString *)value forName:(NSString *)name
+{
+    MCO_NATIVE_INSTANCE->setExtraParameter(MCO_FROM_OBJC(mailcore::String, name), MCO_FROM_OBJC(mailcore::String, value));
+}
+
+- (NSString *) extraParameterValueForName:(NSString *)name
+{
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->extraParameterValueForName((MCO_FROM_OBJC(mailcore::String, name))));
+}
+- (void) removeExtraParameterForName:(NSString *)name
+{
+    MCO_NATIVE_INSTANCE->removeExtraParameter(MCO_FROM_OBJC(mailcore::String, name));
+}
+
+- (NSArray * /* NSString */) allExtraParametersNames
+{
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->allExtraParametersNames());
+}
+
 @end
