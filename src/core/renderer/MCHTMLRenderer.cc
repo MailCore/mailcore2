@@ -415,7 +415,11 @@ String * htmlForAbstractMultipartAlternative(AbstractMultipart * part, htmlRende
     }
 
     String * result = String::string();
-    result->appendString(htmlForAbstractPart(preferredAlternative, context));
+    String * abstractPart = htmlForAbstractPart(preferredAlternative, context);
+    
+    if(abstractPart != NULL) {
+        result->appendString(abstractPart);
+    }
     if (calendar != NULL) {
         result->appendString(htmlForAbstractPart(calendar, context));
     }
