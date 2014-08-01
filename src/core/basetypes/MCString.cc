@@ -761,6 +761,9 @@ String * String::string()
 
 String * String::stringWithData(Data * data, const char * charset)
 {
+    if (data == NULL) {
+        return String::string();
+    }
     String * result = NULL;
     result = new String(data->bytes(), data->length(), charset);
     result->autorelease();
@@ -807,6 +810,9 @@ String * String::stringWithCharacters(const UChar * characters, unsigned int len
 
 void String::appendCharactersLength(const UChar * unicodeCharacters, unsigned int length)
 {
+    if (unicodeCharacters == NULL) {
+        return;
+    }
     allocate(mLength + length);
     u_strncpy(&mUnicodeChars[mLength], unicodeCharacters, length);
     mLength += length;
@@ -815,6 +821,9 @@ void String::appendCharactersLength(const UChar * unicodeCharacters, unsigned in
 
 void String::appendString(String * otherString)
 {
+    if (otherString == NULL) {
+        return;
+    }
     appendCharactersLength(otherString->unicodeCharacters(), otherString->length());
 }
 
@@ -831,8 +840,9 @@ void String::appendUTF8Format(const char * format, ...)
 
 void String::appendUTF8CharactersLength(const char * UTF8Characters, unsigned int length)
 {
-    if (UTF8Characters == NULL)
+    if (UTF8Characters == NULL) {
         return;
+    }
     
     UChar * dest;
     int32_t destLength;
@@ -1124,6 +1134,10 @@ String * String::uppercaseString()
 
 void String::appendBytes(const char * bytes, unsigned int length, const char * charset)
 {
+    if (bytes == NULL) {
+        return;
+    }
+
 #if __APPLE__
     CFStringEncoding encoding;
     if (strcasecmp(charset, "mutf-7") == 0) {

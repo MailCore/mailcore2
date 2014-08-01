@@ -162,6 +162,7 @@ namespace mailcore {
     public: // private
         virtual void automaticConfigurationDone(IMAPSession * session);
         virtual void operationRunningStateChanged();
+        virtual IMAPAsyncConnection * sessionForFolder(String * folder, bool urgent = false);
         
     private:
         Array * mSessions;
@@ -190,10 +191,12 @@ namespace mailcore {
 #endif
         String * mGmailUserDisplayName;
         
-        virtual IMAPAsyncConnection * sessionForFolder(String * folder, bool urgent = false);
         virtual IMAPAsyncConnection * session();
         virtual IMAPAsyncConnection * matchingSessionForFolder(String * folder);
         virtual IMAPAsyncConnection * availableSession();
+        virtual IMAPMessageRenderingOperation * renderingOperation(IMAPMessage * message,
+                                                                   String * folder,
+                                                                   IMAPMessageRenderingType type);
     };
     
 }

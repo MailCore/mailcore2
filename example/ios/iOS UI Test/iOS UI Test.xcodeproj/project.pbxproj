@@ -471,7 +471,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -501,7 +501,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -525,7 +525,7 @@
 		AB9EAE29170368F000D750C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_CXX_LIBRARY = "libc++";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOS UI Test/iOS UI Test-Prefix.pch";
 				INFOPLIST_FILE = "iOS UI Test/iOS UI Test-Info.plist";
@@ -540,7 +540,7 @@
 					"-liconv",
 					"-all_load",
 					"-ltidy",
-					"-lstdc++",
+					"-lc++",
 					"-lz",
 					"-licucore",
 				);
@@ -552,7 +552,7 @@
 		AB9EAE2A170368F000D750C7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_CXX_LIBRARY = "libc++";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOS UI Test/iOS UI Test-Prefix.pch";
 				INFOPLIST_FILE = "iOS UI Test/iOS UI Test-Info.plist";
@@ -567,7 +567,7 @@
 					"-liconv",
 					"-all_load",
 					"-ltidy",
-					"-lstdc++",
+					"-lc++",
 					"-lz",
 					"-licucore",
 				);
