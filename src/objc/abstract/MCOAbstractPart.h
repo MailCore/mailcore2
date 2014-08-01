@@ -35,6 +35,10 @@ typedef NS_ENUM(NSInteger, MCOPartType) {
     // Used for a multipart, multipart/alternative.
     // The part will be a MCOAbstractMultipart.
     MCOPartTypeMultipartAlternative,
+    
+    // Used for a signed message, multipart/signed.
+    // The part will be a MCOAbstractMultipart.
+    MCOPartTypeMultipartSigned,
 };
 
 @interface MCOAbstractPart : NSObject <NSCopying>

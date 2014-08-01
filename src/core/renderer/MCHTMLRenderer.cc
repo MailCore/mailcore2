@@ -147,6 +147,7 @@ static bool partContainsMimeType(AbstractPart * part, String * mimeType)
         case PartTypeMultipartMixed:
         case PartTypeMultipartRelated:
         case PartTypeMultipartAlternative:
+        case PartTypeMultipartSigned:
             return multipartContainsMimeType((AbstractMultipart *) part, mimeType);
         default:
             return false;
@@ -254,6 +255,8 @@ static String * htmlForAbstractPart(AbstractPart * part, htmlRendererContext * c
             return htmlForAbstractMultipartRelated((AbstractMultipart *) part, context);
         case PartTypeMultipartAlternative:
             return htmlForAbstractMultipartAlternative((AbstractMultipart *) part, context);
+        case PartTypeMultipartSigned:
+            return htmlForAbstractMultipartMixed((AbstractMultipart *) part, context);
         default:
             MCAssert(0);
     }

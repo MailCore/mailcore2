@@ -57,6 +57,9 @@ String * AbstractMultipart::description()
         case PartTypeMultipartAlternative:
         partTypeName = "alternative";
         break;
+        case PartTypeMultipartSigned:
+        partTypeName = "signed";
+        break;
     }
     
     result->appendUTF8Format("<%s:%p %s %s>",
