@@ -90,23 +90,23 @@ MCO_OBJC_SYNTHESIZE_DATA(setData, data)
 	return [NSString mco_stringWithMCString:result];
 }
 
-- (void) setExtraParameterValue:(NSString *)value forName:(NSString *)name
+- (void) setContentTypeParameterValue:(NSString *)value forName:(NSString *)name
 {
-    MCO_NATIVE_INSTANCE->setExtraParameter(MCO_FROM_OBJC(mailcore::String, name), MCO_FROM_OBJC(mailcore::String, value));
+    MCO_NATIVE_INSTANCE->setContentTypeParameter(MCO_FROM_OBJC(mailcore::String, name), MCO_FROM_OBJC(mailcore::String, value));
 }
 
-- (NSString *) extraParameterValueForName:(NSString *)name
+- (NSString *) contentTypeParameterValueForName:(NSString *)name
 {
-    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->extraParameterValueForName((MCO_FROM_OBJC(mailcore::String, name))));
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->contentTypeParameterValueForName((MCO_FROM_OBJC(mailcore::String, name))));
 }
-- (void) removeExtraParameterForName:(NSString *)name
+- (void) removeContentTypeParameterForName:(NSString *)name
 {
-    MCO_NATIVE_INSTANCE->removeExtraParameter(MCO_FROM_OBJC(mailcore::String, name));
+    MCO_NATIVE_INSTANCE->removeContentTypeParameter(MCO_FROM_OBJC(mailcore::String, name));
 }
 
-- (NSArray * /* NSString */) allExtraParametersNames
+- (NSArray * /* NSString */) allContentTypeParametersNames
 {
-    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->allExtraParametersNames());
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->allContentTypeParametersNames());
 }
 
 @end

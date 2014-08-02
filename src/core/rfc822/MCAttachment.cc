@@ -211,8 +211,8 @@ Attachment * Attachment::attachmentWithText(String * text)
 void Attachment::init()
 {
     mData = NULL;
-    mExtraParameters = NULL;
-    mlcExtraParameters = NULL;
+    mContentTypeParameters = NULL;
+    mlcContentTypeParameters = NULL;
     setMimeType(MCSTR("application/octet-stream"));
 }
 
@@ -225,14 +225,14 @@ Attachment::Attachment(Attachment * other) : AbstractPart(other)
 {
     init();
     MC_SAFE_REPLACE_RETAIN(Data, mData, other->mData);
-    setExtraParameters(other->mExtraParameters);
+    setContentTypeParameters(other->mContentTypeParameters);
 }
 
 Attachment::~Attachment()
 {
     MC_SAFE_RELEASE(mData);
-    MC_SAFE_RELEASE(mExtraParameters);
-    MC_SAFE_RELEASE(mlcExtraParameters);
+    MC_SAFE_RELEASE(mContentTypeParameters);
+    MC_SAFE_RELEASE(mlcContentTypeParameters);
 }
 
 String * Attachment::description()
@@ -261,9 +261,9 @@ String * Attachment::description()
     else {
         result->appendUTF8Format("no data\n");
     }
-    if (mExtraParameters != NULL) {
-        mc_foreachhashmapKeyAndValue(String, header, String, value, mExtraParameters) {
-            result->appendUTF8Format("%s: %s\n", header->UTF8Characters(), value->UTF8Characters());
+    if (mContentTypeParameters != NULL) {
+        mc_foreachhashmapKeyAndValue(String, key, String, value, mContentTypeParameters) {
+            result->appendUTF8Format("%s: %s\n", key->UTF8Characters(), value->UTF8Characters());
         }
     }
     result->appendUTF8Format(">");
@@ -296,54 +296,54 @@ String * Attachment::decodedString()
     }
 }
 
-void Attachment::setExtraParameters(HashMap * parameters)
+void Attachment::setContentTypeParameters(HashMap * parameters)
 {
-    MC_SAFE_REPLACE_COPY(HashMap, mExtraParameters, parameters);
-    MC_SAFE_RELEASE(mlcExtraParameters);
-    if (mExtraParameters != NULL) {
-        mlcExtraParameters = new HashMap();
-        mc_foreachhashmapKeyAndValue(String, key, String, value, mExtraParameters) {
-            mlcExtraParameters->setObjectForKey(key->lowercaseString(), value);
+    MC_SAFE_REPLACE_COPY(HashMap, mContentTypeParameters, parameters);
+    MC_SAFE_RELEASE(mlcContentTypeParameters);
+    if (mContentTypeParameters != NULL) {
+        mlcContentTypeParameters = new HashMap();
+        mc_foreachhashmapKeyAndValue(String, key, String, value, mContentTypeParameters) {
+            mlcContentTypeParameters->setObjectForKey(key->lowercaseString(), value);
         }
     }
 }
 
-Array * Attachment::allExtraParametersNames()
+Array * Attachment::allContentTypeParametersNames()
 {
-    if (mExtraParameters == NULL)
+    if (mContentTypeParameters == NULL)
         return Array::array();
-    return mExtraParameters->allKeys();
+    return mContentTypeParameters->allKeys();
 }
 
-void Attachment::setExtraParameter(String * name, String * object)
+void Attachment::setContentTypeParameter(String * name, String * object)
 {
-    if (mExtraParameters == NULL) {
-        mExtraParameters = new HashMap();
+    if (mContentTypeParameters == NULL) {
+        mContentTypeParameters = new HashMap();
     }
-    if (mlcExtraParameters == NULL) {
-        mlcExtraParameters = new HashMap();
+    if (mlcContentTypeParameters == NULL) {
+        mlcContentTypeParameters = new HashMap();
     }
     if (object == NULL) {
-        removeExtraParameter(name);
+        removeContentTypeParameter(name);
         return;
     }
-    mExtraParameters->setObjectForKey(name, object);
-    mlcExtraParameters->setObjectForKey(name->lowercaseString(), object);
+    mContentTypeParameters->setObjectForKey(name, object);
+    mlcContentTypeParameters->setObjectForKey(name->lowercaseString(), object);
 }
 
-void Attachment::removeExtraParameter(String * name)
+void Attachment::removeContentTypeParameter(String * name)
 {
-    if (mExtraParameters == NULL)
+    if (mContentTypeParameters == NULL)
         return;
-    mExtraParameters->removeObjectForKey(name);
-    mlcExtraParameters->removeObjectForKey(name);
+    mContentTypeParameters->removeObjectForKey(name);
+    mlcContentTypeParameters->removeObjectForKey(name);
 }
 
-String * Attachment::extraParameterValueForName(String * name)
+String * Attachment::contentTypeParameterValueForName(String * name)
 {
-    if (mlcExtraParameters == NULL)
+    if (mlcContentTypeParameters == NULL)
         return NULL;
-    return (String *) mlcExtraParameters->objectForKey(name->lowercaseString());
+    return (String *) mlcContentTypeParameters->objectForKey(name->lowercaseString());
 }
 
 AbstractPart * Attachment::attachmentsWithMIME(struct mailmime * mime)
@@ -610,7 +610,7 @@ Attachment * Attachment::attachmentWithSingleMIME(struct mailmime * mime)
         while (iter != NULL) {
             param = (struct mailmime_parameter *) clist_content(iter);
             if (param != NULL) {
-                result->setExtraParameter(String::stringWithUTF8Characters(param->pa_name), String::stringWithUTF8Characters(param->pa_value));
+                result->setContentTypeParameter(String::stringWithUTF8Characters(param->pa_name), String::stringWithUTF8Characters(param->pa_value));
             }
             iter = clist_next(iter);
         }

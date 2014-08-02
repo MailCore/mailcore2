@@ -42,17 +42,17 @@
 /** Returns string representation according to charset*/
 - (NSString *) decodedString;
 
-/** Adds a custom parameter.*/
-- (void) setExtraParameterValue:(NSString *)value forName:(NSString *)name;
+/** Adds a content type parameter.*/
+- (void) setContentTypeParameterValue:(NSString *)value forName:(NSString *)name;
 
-/** Remove a given custom parameter.*/
-- (void) removeExtraParameterForName:(NSString *)name;
+/** Remove a given content type parameter.*/
+- (void) removeContentTypeParameterForName:(NSString *)name;
 
-/** Returns the value of a given custom parameter.*/
-- (NSString *) extraParameterValueForName:(NSString *)name;
+/** Returns the value of a given content type parameter.*/
+- (NSString *) contentTypeParameterValueForName:(NSString *)name;
 
-/** Returns an array with the names of all custom headers.*/
-- (NSArray * /* NSString */) allExtraParametersNames;
+/** Returns an array with the names of all content type parameters.*/
+- (NSArray * /* NSString */) allContentTypeParametersNames;
 
 @end
 
