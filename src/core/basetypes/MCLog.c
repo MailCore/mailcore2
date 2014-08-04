@@ -7,6 +7,8 @@
 #include <sys/time.h>
 #include <pthread.h>
 #include <unistd.h>
+#import <syslog.h>
+
 #if __APPLE__
 #include <execinfo.h>
 #endif
@@ -61,6 +63,9 @@ static void logInternalv(FILE * file,
     gettimeofday(&tv, NULL);
     localtime_r(&tv.tv_sec, &tm_value);
     fprintf(file, "%04u-%02u-%02u %02u:%02u:%02u.%03u ", tm_value.tm_year + 1900, tm_value.tm_mon + 1, tm_value.tm_mday, tm_value.tm_hour, tm_value.tm_min, tm_value.tm_sec, (int) (tv.tv_usec / 1000));
+    
+    syslog(LOG_ERR, "%04u-%02u-%02u %02u:%02u:%02u.%03u ",tm_value.tm_year + 1900, tm_value.tm_mon + 1, tm_value.tm_mday, tm_value.tm_hour, tm_value.tm_min, tm_value.tm_sec, (int) (tv.tv_usec / 1000));
+    vsyslog(LOG_ERR, format, argp);
 
 #ifdef __MACH__   
     if (pthread_main_np()) {
