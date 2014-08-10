@@ -2187,6 +2187,7 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
     needsGmailLabels = false;
     needsGmailMessageID = false;
     needsGmailThreadID = false;
+    clist * hdrlist = clist_new();
     
     fetch_type = mailimap_fetch_type_new_fetch_att_list_empty();
     fetch_att = mailimap_fetch_att_new_uid();
@@ -2214,15 +2215,11 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
         needsGmailMessageID = true;
     }
     if ((requestKind & IMAPMessagesRequestKindFullHeaders) != 0) {
-        clist * hdrlist;
         char * header;
-        struct mailimap_header_list * imap_hdrlist;
-        struct mailimap_section * section;
         
         MCLog("request envelope");
         
         // most important header
-        hdrlist = clist_new();
         header = strdup("Date");
         clist_append(hdrlist, header);
         header = strdup("Subject");
@@ -2243,17 +2240,9 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
         clist_append(hdrlist, header);
         header = strdup("In-Reply-To");
         clist_append(hdrlist, header);
-        imap_hdrlist = mailimap_header_list_new(hdrlist);
-        section = mailimap_section_new_header_fields(imap_hdrlist);
-        fetch_att = mailimap_fetch_att_new_body_peek_section(section);
-        mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
-        needsHeader = true;
     }
     if ((requestKind & IMAPMessagesRequestKindHeaders) != 0) {
-        clist * hdrlist;
         char * header;
-        struct mailimap_header_list * imap_hdrlist;
-        struct mailimap_section * section;
         
         MCLog("request envelope");
         // envelope
@@ -2261,18 +2250,12 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
         mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
         
         // references header
-        hdrlist = clist_new();
         header = strdup("References");
         clist_append(hdrlist, header);
         if ((requestKind & IMAPMessagesRequestKindHeaderSubject) != 0) {
             header = strdup("Subject");
             clist_append(hdrlist, header);
         }
-        imap_hdrlist = mailimap_header_list_new(hdrlist);
-        section = mailimap_section_new_header_fields(imap_hdrlist);
-        fetch_att = mailimap_fetch_att_new_body_peek_section(section);
-        mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
-        needsHeader = true;
     }
     if ((requestKind & IMAPMessagesRequestKindSize) != 0) {
         // message structure
@@ -2295,25 +2278,29 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
     }
     if ((requestKind & IMAPMessagesRequestKindExtraHeaders) != 0) {
         // custom header request
-        clist * hdrlist;
         char * header;
-        struct mailimap_header_list * imap_hdrlist;
-        struct mailimap_section * section;
         
         if (extraHeaders && extraHeaders->count() > 0) {
-            hdrlist = clist_new();
             for (unsigned int i = 0; i < extraHeaders->count(); i++) {
-                String *headerString = (String *)extraHeaders->objectAtIndex(i);
+                String * headerString = (String *)extraHeaders->objectAtIndex(i);
                 header = strdup(headerString->UTF8Characters());
                 clist_append(hdrlist, header);
             }
-            
-            imap_hdrlist = mailimap_header_list_new(hdrlist);
-            section = mailimap_section_new_header_fields(imap_hdrlist);
-            fetch_att = mailimap_fetch_att_new_body_peek_section(section);
-            mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
-            needsHeader = true;
         }
+    }
+    
+    if (clist_begin(hdrlist) != NULL) {
+        struct mailimap_header_list * imap_hdrlist;
+        struct mailimap_section * section;
+        
+        imap_hdrlist = mailimap_header_list_new(hdrlist);
+        section = mailimap_section_new_header_fields(imap_hdrlist);
+        fetch_att = mailimap_fetch_att_new_body_peek_section(section);
+        mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
+        needsHeader = true;
+    }
+    else {
+        clist_free(hdrlist);
     }
     
     struct msg_att_handler_data msg_att_data;
