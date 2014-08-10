@@ -3316,7 +3316,7 @@ void IMAPSession::storeFlagsAndCustomFlags(String * folder, IndexSet * uids, IMA
         return;
     }
 
-    setList = splitSet(imap_set, 10);
+    setList = splitSet(imap_set, 50);
 
     flag_list = mailimap_flag_list_new_empty();
     if ((flags & MessageFlagSeen) != 0) {
