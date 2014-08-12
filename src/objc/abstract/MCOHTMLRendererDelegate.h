@@ -84,6 +84,8 @@ If not, the attachment template will be used.*/
  This delegate method returns the template for the header of an embedded message.*/
 - (NSString *) MCOAbstractMessage_templateForAttachmentSeparator:(MCOAbstractMessage *)msg;
 
+- (NSString *) MCOAbstractMessage:(MCOAbstractMessage *)msg cleanHTMLForPart:(NSString *)html;
+
 /** @name Filters
    
  The following methods will filter the HTML content and may apply some filters to
