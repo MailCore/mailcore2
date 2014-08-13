@@ -88,7 +88,7 @@ See MCOConnectionType for more information.*/
      [op start:^(NSError * error, MCOMessageHeader * header) {
           // header is the parsed header of the message.
      }];
-*/  
+*/
 - (MCOPOPFetchHeaderOperation *) fetchHeaderOperationWithIndex:(unsigned int)index;
 
 /**
