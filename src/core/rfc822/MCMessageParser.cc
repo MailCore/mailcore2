@@ -30,6 +30,25 @@ void MessageParser::init()
 MessageParser::MessageParser(Data * data)
 {
     init();
+    
+    const char * start = NULL;
+    unsigned int length = 0;
+    if (data->length() > 5) {
+        if (strncmp(data->bytes(), "From ", 5) == 0) {
+            start = data->bytes();
+            for(unsigned int i = 0 ; i < data->length() ; i ++) {
+                if (start[i] == '\n') {
+                    start = start + i + 1;
+                    length = data->length() - (i + 1);
+                    break;
+                }
+            }
+        }
+    }
+    if (start != NULL) {
+        data = Data::dataWithBytes(start, length);
+    }
+    
     mData = (Data *) data->retain();
     
     mailmessage * msg;

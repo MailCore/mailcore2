@@ -1,8 +1,11 @@
 #!/bin/sh
 
-if xcodebuild -showsdks|grep iphoneos7.1 >/dev/null ; then
-	sdkversion=7.1
+if xcodebuild -showsdks|grep iphoneos8.0 >/dev/null ; then
+	sdkversion=8.0
     devicearchs="armv7 armv7s arm64"	 
+elif xcodebuild -showsdks|grep iphoneos7.1 >/dev/null ; then
+    	sdkversion=7.1
+        devicearchs="armv7 armv7s arm64"	 
 elif xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
 	sdkversion=7.0
     devicearchs="armv7 armv7s arm64"	 

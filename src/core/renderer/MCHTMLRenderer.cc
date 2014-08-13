@@ -147,6 +147,7 @@ static bool partContainsMimeType(AbstractPart * part, String * mimeType)
         case PartTypeMultipartMixed:
         case PartTypeMultipartRelated:
         case PartTypeMultipartAlternative:
+        case PartTypeMultipartSigned:
             return multipartContainsMimeType((AbstractMultipart *) part, mimeType);
         default:
             return false;
@@ -254,6 +255,8 @@ static String * htmlForAbstractPart(AbstractPart * part, htmlRendererContext * c
             return htmlForAbstractMultipartRelated((AbstractMultipart *) part, context);
         case PartTypeMultipartAlternative:
             return htmlForAbstractMultipartAlternative((AbstractMultipart *) part, context);
+        case PartTypeMultipartSigned:
+            return htmlForAbstractMultipartMixed((AbstractMultipart *) part, context);
         default:
             MCAssert(0);
     }
@@ -404,8 +407,27 @@ String * htmlForAbstractMultipartAlternative(AbstractMultipart * part, htmlRende
     AbstractPart * preferredAlternative = preferredPartInMultipartAlternative(part);
     if (preferredAlternative == NULL)
         return MCSTR("");
+
+    // Exchange sends calendar invitation as alternative part. We need to extract it.
+    AbstractPart * calendar = NULL;
+    for(unsigned int i = 0 ; i < part->parts()->count() ; i ++) {
+        AbstractPart * subpart = (AbstractPart *) part->parts()->objectAtIndex(i);
+        if (partContainsMimeType(subpart, MCSTR("text/calendar"))) {
+            calendar = subpart;
+        }
+    }
+
+    String * html = htmlForAbstractPart(preferredAlternative, context);
+    if (html == NULL) {
+        return NULL;
+    }
     
-    return htmlForAbstractPart(preferredAlternative, context);
+    String * result = String::string();
+    result->appendString(html);
+    if (calendar != NULL) {
+        result->appendString(htmlForAbstractPart(calendar, context));
+    }
+    return result;
 }
 
 static String * htmlForAbstractMultipartMixed(AbstractMultipart * part, htmlRendererContext * context)

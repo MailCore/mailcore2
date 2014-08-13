@@ -59,6 +59,9 @@ namespace mailcore {
         MessageFlagForwarded     = 1 << 6,
         MessageFlagSubmitPending = 1 << 7,
         MessageFlagSubmitted     = 1 << 8,
+        MessageFlagMaskAll = MessageFlagSeen | MessageFlagAnswered | MessageFlagFlagged |
+        MessageFlagDeleted | MessageFlagDraft | MessageFlagMDNSent | MessageFlagForwarded |
+        MessageFlagSubmitPending | MessageFlagSubmitted,
     } ;
     
     enum IMAPMessagesRequestKind {
@@ -252,6 +255,7 @@ namespace mailcore {
         PartTypeMultipartMixed,
         PartTypeMultipartRelated,
         PartTypeMultipartAlternative,
+        PartTypeMultipartSigned,
     };
     
     // Private type - It should not be used directly.

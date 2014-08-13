@@ -19,6 +19,8 @@ typedef void (^MCOIMAPBaseOperationItemProgressBlock)(unsigned int current);
 
 @interface MCOIMAPBaseOperation : MCOOperation
 
+@property (nonatomic, assign, getter=isUrgent) BOOL urgent;
+
 /* Can be overriden by subclasses */
 
 /* 

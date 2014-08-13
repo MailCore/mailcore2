@@ -2,7 +2,10 @@
 
 url="https://github.com/dinhviethoa/ctemplate"
 
-if xcodebuild -showsdks|grep iphoneos7.1 >/dev/null ; then
+if xcodebuild -showsdks|grep iphoneos8.0 >/dev/null ; then
+	sdkversion=8.0
+    MARCHS="armv7 armv7s arm64"
+elif xcodebuild -showsdks|grep iphoneos7.1 >/dev/null ; then
 	sdkversion=7.1
     MARCHS="armv7 armv7s arm64"
 elif xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
@@ -46,7 +49,7 @@ else
 	cd ctemplate
 fi
 version=`git rev-parse HEAD | cut -c1-10`
-build_version="$version~1"
+build_version="$version~2"
 
 if test -f "$resultdir/ctemplate-ios-$build_version.zip" ; then
 	echo install from cache
@@ -68,12 +71,12 @@ cp -R "$builddir/downloads/ctemplate" "$srcdir/ctemplate"
 echo building ctemplate
 cd "$srcdir/ctemplate"
 
-TOOLCHAIN=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+TOOLCHAIN=`xcode-select -p`/Toolchains/XcodeDefault.xctoolchain/usr/bin
 export CC=$TOOLCHAIN/clang
 export CXX=$TOOLCHAIN/clang++
 
 sdk="iphoneos$sdkversion"
-sysroot="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$sdkversion.sdk"
+sysroot="`xcode-select -p`/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$sdkversion.sdk"
 
 ARCH=arm
 for MARCH in $MARCHS; do
@@ -81,8 +84,8 @@ for MARCH in $MARCHS; do
   echo "$logdir/ctemplate-build.log"
   export CPPFLAGS="-arch ${MARCH} -isysroot $sysroot -miphoneos-version-min=$sdkversion"
   export CFLAGS="$CPPFLAGS"
-  export CXXFLAGS="$CFLAGS -stdlib=libstdc++ -std=gnu++11"
-  export LDFLAGS="-lstdc++ -stdlib=libstdc++"
+  export CXXFLAGS="$CFLAGS -stdlib=libc++"
+  export LDFLAGS="-lstdc++ -stdlib=libc++"
   
   ./configure --host=${ARCH} --disable-shared --disable-dependency-tracking >> "$logdir/ctemplate-build.log"
   make >> "$logdir/ctemplate-build.log"
@@ -102,7 +105,7 @@ for MARCH in $MARCHS; do
 done
 
 sdk="iphonesimulator$sdkversion"
-sysroot="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator$sdkversion.sdk"
+sysroot="`xcode-select -p`/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator$sdkversion.sdk"
 
 ARCH=i386
 MARCHS="i386 x86_64"
@@ -112,8 +115,8 @@ for MARCH in $MARCHS; do
   echo "$logdir/ctemplate-build.log"
   export CPPFLAGS="-arch ${MARCH} -isysroot $sysroot -miphoneos-version-min=$sdkversion"
   export CFLAGS="$CPPFLAGS"
-  export CXXFLAGS="$CFLAGS -stdlib=libstdc++ -std=gnu++11"
-  export LDFLAGS="-lstdc++ -stdlib=libstdc++"
+  export CXXFLAGS="$CFLAGS -stdlib=libc++"
+  export LDFLAGS="-lstdc++ -stdlib=libc++"
   
   ./configure --host=${MARCH} --disable-shared --disable-dependency-tracking >> "$logdir/ctemplate-build.log"
   make >> "$logdir/ctemplate-build.log"

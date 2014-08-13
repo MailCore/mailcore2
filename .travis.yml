@@ -1,3 +1,6 @@
-language: objective-c
+os:
+  - osx
+  - linux
+language: c++
 before_script: scripts/travis/before-script.sh
 script: scripts/travis/script.sh

@@ -57,6 +57,7 @@ namespace mailcore {
     private:
         String * mIdentifier;
         Array * /* String */ mDomainMatch;
+        Array * /* String */ mDomainExclude;
         Array * /* String */ mMxMatch;
         Array * /* NetService */ mImapServices;
         Array * /* NetService */ mSmtpServices;

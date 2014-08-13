@@ -29,6 +29,11 @@ namespace mailcore {
         virtual Data * data();
         virtual String * decodedString();
         
+        virtual void setContentTypeParameter(String * name, String * value);
+        virtual void removeContentTypeParameter(String * name);
+        virtual String * contentTypeParameterValueForName(String *name);
+        virtual Array * allContentTypeParametersNames();
+        
     public: // subclass behavior
         Attachment(Attachment * other);
         virtual String * description();
@@ -39,6 +44,8 @@ namespace mailcore {
         
     private:
         Data * mData;
+        HashMap * mContentTypeParameters;
+        HashMap * mlcContentTypeParameters;
         void init();
         static void fillMultipartSubAttachments(AbstractMultipart * multipart, struct mailmime * mime);
         static AbstractPart * attachmentsWithMIMEWithMain(struct mailmime * mime, bool isMain);
@@ -46,6 +53,7 @@ namespace mailcore {
         static MessagePart * attachmentWithMessageMIME(struct mailmime * mime);
         static Encoding encodingForMIMEEncoding(struct mailmime_mechanism * mechanism, int defaultMimeEncoding);
         static HashMap * readMimeTypesFile(String * filename);
+        void setContentTypeParameters(HashMap * parameters);
     };
     
 }

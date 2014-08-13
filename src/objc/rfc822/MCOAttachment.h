@@ -41,7 +41,19 @@
 
 /** Returns string representation according to charset*/
 - (NSString *) decodedString;
- 
+
+/** Adds a content type parameter.*/
+- (void) setContentTypeParameterValue:(NSString *)value forName:(NSString *)name;
+
+/** Remove a given content type parameter.*/
+- (void) removeContentTypeParameterForName:(NSString *)name;
+
+/** Returns the value of a given content type parameter.*/
+- (NSString *) contentTypeParameterValueForName:(NSString *)name;
+
+/** Returns an array with the names of all content type parameters.*/
+- (NSArray * /* NSString */) allContentTypeParametersNames;
+
 @end
 
 #endif

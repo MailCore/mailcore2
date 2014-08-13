@@ -48,6 +48,7 @@ namespace mailcore {
 #if __APPLE__
         dispatch_queue_t mDispatchQueue;
 #endif
+        bool _pendingCheckRunning;
         
         void startThread();
         static void runOperationsOnThread(OperationQueue * queue);
