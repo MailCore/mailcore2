@@ -32,7 +32,33 @@ NNTPGroupInfo::~NNTPGroupInfo()
 {
 }
 
+String * NNTPGroupInfo::description()
+{
+    return String::stringWithUTF8Format("<%s:%p> Group name: %s; Message count: %u",
+                                        MCUTF8(className()), this, MCUTF8(mName), mMessageCount);
+}
+
 Object * NNTPGroupInfo::copy()
 {
     return new NNTPGroupInfo(this);
+}
+
+void NNTPGroupInfo::setName(String * name) 
+{
+    MC_SAFE_REPLACE_COPY(String, mName, name);
+}
+
+String * NNTPGroupInfo::name()
+{
+    return mName;
+}
+
+void NNTPGroupInfo::setMessageCount(uint32_t messageCount)
+{
+    mMessageCount = messageCount;
+}
+
+uint32_t NNTPGroupInfo::messageCount()
+{
+    return mMessageCount;
 }
