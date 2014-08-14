@@ -33,6 +33,7 @@ public:
     virtual mailcore::String * templateForEmbeddedMessage(mailcore::AbstractMessagePart * part);
     virtual mailcore::String * templateForEmbeddedMessageHeader(mailcore::MessageHeader * header);
     virtual mailcore::String * templateForAttachmentSeparator();
+    virtual mailcore::String * cleanHTMLForPart(mailcore::String * html);
     virtual mailcore::String * filterHTMLForPart(mailcore::String * html);
     virtual mailcore::String * filterHTMLForMessage(mailcore::String * html);
     

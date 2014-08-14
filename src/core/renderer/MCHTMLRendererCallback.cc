@@ -248,6 +248,11 @@ mailcore::String * HTMLRendererTemplateCallback::filterHTMLForMessage(mailcore::
     return html;
 }
 
+mailcore::String * HTMLRendererTemplateCallback::cleanHTMLForPart(mailcore::String * html)
+{
+    return html->cleanedHTMLString();
+}
+
 mailcore::String * HTMLRendererTemplateCallback::filterHTMLForPart(mailcore::String * html)
 {
     return html;
