@@ -1,12 +1,12 @@
 //
-//  MCONNTPFetchMessagesOperation.m
+//  MCONNTPFetchArticlesOperation.m
 //  mailcore2
 //
 //  Created by Robert Widmann on 8/13/14.
 //  Copyright (c) 2014 MailCore. All rights reserved.
 //
 
-#import "MCONNTPFetchMessagesOperation.h"
+#import "MCONNTPFetchArticlesOperation.h"
 
 #include "MCAsyncNNTP.h"
 
@@ -15,11 +15,11 @@
 
 typedef void (^CompletionType)(NSError *error, NSArray * messages);
 
-@implementation MCONNTPFetchMessagesOperation {
+@implementation MCONNTPFetchArticlesOperation {
     CompletionType _completionBlock;
 }
 
-#define nativeType mailcore::NNTPFetchMessagesOperation
+#define nativeType mailcore::MCNNTPFetchArticlesOperation
 
 + (void) load
 {

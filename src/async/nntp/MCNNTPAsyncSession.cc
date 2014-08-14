@@ -10,8 +10,8 @@
 
 #include "MCNNTP.h"
 #include "MCNNTPFetchHeaderOperation.h"
-#include "MCNNTPFetchMessageOperation.h"
-#include "MCNNTPFetchMessagesOperation.h"
+#include "MCNNTPFetchArticleOperation.h"
+#include "MCNNTPFetchArticlesOperation.h"
 #include "MCNNTPListNewsgroupsOperation.h"
 #include "MCNNTPCheckAccountOperation.h"
 #include "MCNNTPDisconnectOperation.h"
@@ -153,32 +153,18 @@ bool NNTPAsyncSession::isCheckCertificateEnabled()
     return mSession->isCheckCertificateEnabled();
 }
 
-NNTPFetchMessagesOperation * NNTPAsyncSession::fetchMessagesOperation(String * group)
+MCNNTPFetchArticlesOperation * NNTPAsyncSession::fetchArticlesOperation(String * group)
 {
-    NNTPFetchMessagesOperation * op = new NNTPFetchMessagesOperation();
+    MCNNTPFetchArticlesOperation * op = new MCNNTPFetchArticlesOperation();
     op->setSession(this);
     op->setGroupName(group);
     op->autorelease();
     return op;
 }
 
-NNTPFetchHeaderOperation * NNTPAsyncSession::fetchHeaderOperation(unsigned int index)
+NNTPFetchHeaderOperation * NNTPAsyncSession::fetchHeaderOperation(String * groupName, unsigned int index)
 {
     NNTPFetchHeaderOperation * op = new NNTPFetchHeaderOperation();
-    op->setSession(this);
-    op->setMessageIndex(index);
-    op->autorelease();
-    return op;
-}
-
-NNTPFetchHeaderOperation * NNTPAsyncSession::fetchHeaderOperation(NNTPMessageInfo * msg) 
-{
-    return fetchHeaderOperation(msg->index());
-}
-
-NNTPFetchMessageOperation * NNTPAsyncSession::fetchArticleOperation(String * groupName, unsigned int index)
-{
-    NNTPFetchMessageOperation * op = new NNTPFetchMessageOperation();
     op->setSession(this);
     op->setGroupName(groupName);
     op->setMessageIndex(index);
@@ -186,7 +172,22 @@ NNTPFetchMessageOperation * NNTPAsyncSession::fetchArticleOperation(String * gro
     return op;
 }
 
-NNTPFetchMessageOperation * NNTPAsyncSession::fetchArticleOperation(String *groupName, NNTPMessageInfo * msg)
+NNTPFetchHeaderOperation * NNTPAsyncSession::fetchHeaderOperation(String * groupName, NNTPMessageInfo * msg) 
+{
+    return fetchHeaderOperation(groupName, msg->index());
+}
+
+NNTPFetchArticleOperation * NNTPAsyncSession::fetchArticleOperation(String * groupName, unsigned int index)
+{
+    NNTPFetchArticleOperation * op = new NNTPFetchArticleOperation();
+    op->setSession(this);
+    op->setGroupName(groupName);
+    op->setMessageIndex(index);
+    op->autorelease();
+    return op;
+}
+
+NNTPFetchArticleOperation * NNTPAsyncSession::fetchArticleOperation(String *groupName, NNTPMessageInfo * msg)
 {
     return fetchArticleOperation(groupName, msg->index());
 }

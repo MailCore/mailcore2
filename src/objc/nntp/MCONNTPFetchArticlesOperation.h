@@ -1,5 +1,5 @@
 //
-//  MCONNTPFetchMessagesOperation.h
+//  MCONNTPFetchArticlesOperation.h
 //  mailcore2
 //
 //  Created by Robert Widmann on 8/13/14.
@@ -15,7 +15,7 @@
 
 /** This is an asynchronous operation that will fetch the list of a messages on the NNTP3 account. */
 
-@interface MCONNTPFetchMessagesOperation : MCONNTPOperation
+@interface MCONNTPFetchArticlesOperation : MCONNTPOperation
 
 /** 
  Starts the asynchronous fetch operation.

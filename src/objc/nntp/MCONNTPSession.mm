@@ -13,7 +13,7 @@
 #import "MCOUtils.h"
 #import "MCONNTPOperation.h"
 #import "MCOOperation+Private.h"
-#import "MCONNTPFetchMessagesOperation.h"
+#import "MCONNTPFetchArticlesOperation.h"
 #import "MCONNTPOperation+Private.h"
 
 using namespace mailcore;
@@ -121,21 +121,21 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
     return result;
 }
 
-- (MCONNTPFetchMessagesOperation *) fetchMessagesOperation:(NSString *)group
+- (MCONNTPFetchArticlesOperation *) fetchArticlesOperation:(NSString *)group
 {
-    mailcore::NNTPFetchMessagesOperation * coreOp = MCO_NATIVE_INSTANCE->fetchMessagesOperation(MCO_FROM_OBJC(mailcore::String, group));
+    mailcore::MCNNTPFetchArticlesOperation * coreOp = MCO_NATIVE_INSTANCE->fetchArticlesOperation(MCO_FROM_OBJC(mailcore::String, group));
     return MCO_TO_OBJC_OP(coreOp);
 }
 
-- (MCONNTPFetchHeaderOperation *) fetchHeaderOperationWithIndex:(unsigned int)index
+- (MCONNTPFetchHeaderOperation *) fetchHeaderOperationWithIndex:(unsigned int)index inGroup:(NSString *)group
 {
-    mailcore::NNTPFetchHeaderOperation * coreOp = MCO_NATIVE_INSTANCE->fetchHeaderOperation(index);
+    mailcore::NNTPFetchHeaderOperation * coreOp = MCO_NATIVE_INSTANCE->fetchHeaderOperation(MCO_FROM_OBJC(mailcore::String, group), index);
     return MCO_TO_OBJC_OP(coreOp);
 }
 
-- (MCONNTPFetchMessageOperation *) fetchArticleOperationWithIndex:(unsigned int)index inGroup:(NSString *)group
+- (MCONNTPFetchArticleOperation *) fetchArticleOperationWithIndex:(unsigned int)index inGroup:(NSString *)group
 {
-    mailcore::NNTPFetchMessageOperation * coreOp = MCO_NATIVE_INSTANCE->fetchArticleOperation(MCO_FROM_OBJC(mailcore::String, group), index);
+    mailcore::NNTPFetchArticleOperation * coreOp = MCO_NATIVE_INSTANCE->fetchArticleOperation(MCO_FROM_OBJC(mailcore::String, group), index);
     return MCO_TO_OBJC_OP(coreOp);
 }
 

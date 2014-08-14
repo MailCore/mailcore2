@@ -48,8 +48,8 @@ namespace mailcore {
         virtual Array * /* NNTPGroupInfo */ listAllNewsgroups(ErrorCode * pError);
         virtual Array * listSubscribedNewsgroups(ErrorCode * pError);
         
-        virtual MessageHeader * fetchHeader(unsigned int index, ErrorCode * pError);
-        virtual MessageHeader * fetchHeader(NNTPMessageInfo * msg, ErrorCode * pError);
+        virtual MessageHeader * fetchHeader(String *groupName, unsigned int index, ErrorCode * pError);
+        virtual MessageHeader * fetchHeader(String *groupName, NNTPMessageInfo * msg, ErrorCode * pError);
         
         virtual Array * /* NNTPMessageInfo */ fetchArticles(String * groupname, ErrorCode * pError);
         

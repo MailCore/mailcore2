@@ -1,5 +1,5 @@
 //
-//  MCONNTPFetchMessageOperation.h
+//  MCONNTPFetchArticleOperation.h
 //  mailcore2
 //
 //  Created by Robert Widmann on 8/13/14.
@@ -17,7 +17,7 @@
 
 typedef void (^MCONNTPOperationProgressBlock)(unsigned int current, unsigned int maximum);
 
-@interface MCONNTPFetchMessageOperation : MCONNTPOperation
+@interface MCONNTPFetchArticleOperation : MCONNTPOperation
 
 /** This block will be called as data is downloaded from the network */
 @property (nonatomic, copy) MCONNTPOperationProgressBlock progress;

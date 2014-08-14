@@ -1,53 +1,53 @@
 //
-//  MCNNTPFetchMessagesOperation.cpp
+//  MCMCNNTPFetchArticlesOperation.cpp
 //  mailcore2
 //
 //  Created by Robert Widmann on 8/13/14.
 //  Copyright (c) 2014 MailCore. All rights reserved.
 //
 
-#include "MCNNTPFetchMessageOperation.h"
+#include "MCNNTPFetchArticleOperation.h"
 
 #include "MCNNTPAsyncSession.h"
 #include "MCNNTPSession.h"
 
 using namespace mailcore;
 
-NNTPFetchMessageOperation::NNTPFetchMessageOperation()
+NNTPFetchArticleOperation::NNTPFetchArticleOperation()
 {
     mMessageIndex = 0;
     mData = NULL;
 }
 
-NNTPFetchMessageOperation::~NNTPFetchMessageOperation()
+NNTPFetchArticleOperation::~NNTPFetchArticleOperation()
 {
     MC_SAFE_RELEASE(mData);
 }
 
-void NNTPFetchMessageOperation::setGroupName(String * groupName) {
+void NNTPFetchArticleOperation::setGroupName(String * groupName) {
     MC_SAFE_REPLACE_COPY(String, mGroupName, groupName);
 }
 
-String * NNTPFetchMessageOperation::groupName() {
+String * NNTPFetchArticleOperation::groupName() {
     return mGroupName;
 }
 
-void NNTPFetchMessageOperation::setMessageIndex(unsigned int messageIndex)
+void NNTPFetchArticleOperation::setMessageIndex(unsigned int messageIndex)
 {
     mMessageIndex = messageIndex;
 }
 
-unsigned int NNTPFetchMessageOperation::messageIndex()
+unsigned int NNTPFetchArticleOperation::messageIndex()
 {
     return mMessageIndex;
 }
 
-Data * NNTPFetchMessageOperation::data()
+Data * NNTPFetchArticleOperation::data()
 {
     return mData;
 }
 
-void NNTPFetchMessageOperation::main()
+void NNTPFetchArticleOperation::main()
 {
     ErrorCode error;
     mData = session()->session()->fetchArticle(mGroupName, mMessageIndex, this, &error);

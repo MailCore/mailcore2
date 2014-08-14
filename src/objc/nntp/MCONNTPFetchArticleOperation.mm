@@ -1,35 +1,35 @@
 //
-//  MCONNTPFetchMessageOperation.m
+//  MCONNTPFetchArticleOperation.m
 //  mailcore2
 //
 //  Created by Robert Widmann on 8/13/14.
 //  Copyright (c) 2014 MailCore. All rights reserved.
 //
 
-#import "MCONNTPFetchMessageOperation.h"
+#import "MCONNTPFetchArticleOperation.h"
 
 #import "MCAsyncNNTP.h"
 
 #import "MCOUtils.h"
 #import "MCOOperation+Private.h"
 
-#define nativeType mailcore::NNTPFetchMessageOperation
+#define nativeType mailcore::NNTPFetchArticleOperation
 
 typedef void (^CompletionType)(NSError *error, NSData * messageData);
 
-@interface MCONNTPFetchMessageOperation ()
+@interface MCONNTPFetchArticleOperation ()
 
 - (void) bodyProgress:(unsigned int)current maximum:(unsigned int)maximum;
 
 @end
 
-class MCONNTPFetchMessageOperationCallback : public mailcore::NNTPOperationCallback {
+class MCONNTPFetchArticleOperationCallback : public mailcore::NNTPOperationCallback {
 public:
-    MCONNTPFetchMessageOperationCallback(MCONNTPFetchMessageOperation * op)
+    MCONNTPFetchArticleOperationCallback(MCONNTPFetchArticleOperation * op)
     {
         mOperation = op;
     }
-    virtual ~MCONNTPFetchMessageOperationCallback()
+    virtual ~MCONNTPFetchArticleOperationCallback()
     {
     }
     
@@ -38,12 +38,12 @@ public:
     }
     
 private:
-    MCONNTPFetchMessageOperation * mOperation;
+    MCONNTPFetchArticleOperation * mOperation;
 };
 
-@implementation MCONNTPFetchMessageOperation {
+@implementation MCONNTPFetchArticleOperation {
     CompletionType _completionBlock;
-    MCONNTPFetchMessageOperationCallback * _popCallback;
+    MCONNTPFetchArticleOperationCallback * _popCallback;
     MCONNTPOperationProgressBlock _progress;
 }
 
@@ -64,7 +64,7 @@ private:
 {
     self = [super initWithMCOperation:op];
     
-    _popCallback = new MCONNTPFetchMessageOperationCallback(self);
+    _popCallback = new MCONNTPFetchArticleOperationCallback(self);
     ((mailcore::NNTPOperation *) op)->setNNTPCallback(_popCallback);
     
     return self;

@@ -1,5 +1,5 @@
 //
-//  MCNNTPFetchMessagesOperation.h
+//  MCMCNNTPFetchArticlesOperation.h
 //  mailcore2
 //
 //  Created by Robert Widmann on 8/13/14.
@@ -15,10 +15,10 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-    class NNTPFetchMessageOperation : public NNTPOperation {
+    class NNTPFetchArticleOperation : public NNTPOperation {
     public:
-        NNTPFetchMessageOperation();
-        virtual ~NNTPFetchMessageOperation();
+        NNTPFetchArticleOperation();
+        virtual ~NNTPFetchArticleOperation();
         
         virtual void setGroupName(String * groupName);
         virtual String * groupName();

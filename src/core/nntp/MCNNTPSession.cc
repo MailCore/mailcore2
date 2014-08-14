@@ -401,7 +401,7 @@ Array * NNTPSession::listSubscribedNewsgroups(ErrorCode * pError)
     return result;
 }
 
-MessageHeader * NNTPSession::fetchHeader(unsigned int index, ErrorCode * pError) 
+MessageHeader * NNTPSession::fetchHeader(String *groupName, unsigned int index, ErrorCode * pError) 
 {
     int r;
     char * content;
@@ -409,8 +409,14 @@ MessageHeader * NNTPSession::fetchHeader(unsigned int index, ErrorCode * pError)
     
     MCLog("fetch header at index %u", index);
     loginIfNeeded(pError);
-    if (* pError != ErrorNone)
+    if (* pError != ErrorNone) {
         return NULL;
+    }
+    
+    selectGroup(groupName, pError);
+    if (* pError != ErrorNone) {
+        return NULL;
+    }
     
     r = newsnntp_head(mNNTP, index, &content, &content_len);
     if (r != NEWSNNTP_NO_ERROR) {
@@ -431,9 +437,9 @@ MessageHeader * NNTPSession::fetchHeader(unsigned int index, ErrorCode * pError)
     return result;
 }
 
-MessageHeader * NNTPSession::fetchHeader(NNTPMessageInfo * msg, ErrorCode * pError) 
+MessageHeader * NNTPSession::fetchHeader(String *groupName, NNTPMessageInfo * msg, ErrorCode * pError) 
 {
-    return fetchHeader(msg->index(), pError);
+    return fetchHeader(groupName, msg->index(), pError);
 }
 
 Data * NNTPSession::fetchArticle(String *groupName, unsigned int index, NNTPProgressCallback * callback, ErrorCode * pError) 

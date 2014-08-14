@@ -13,11 +13,10 @@
 #include <MailCore/MCONNTPSession.h>
 #include <MailCore/MCONNTPOperation.h>
 #include <MailCore/MCONNTPFetchHeaderOperation.h>
-#include <MailCore/MCONNTPFetchMessageOperation.h>
-#include <MailCore/MCONNTPFetchMessagesOperation.h>
+#include <MailCore/MCONNTPFetchArticleOperation.h>
+#include <MailCore/MCONNTPFetchArticlesOperation.h>
 #include <MailCore/MCONNTPListNewsgroupsOperation.h>
 #include <MailCore/MCONNTPMessageInfo.h>
 #include <MailCore/MCONNTPGroupInfo.h>
-#include <MailCore/MCONNTPOperationCallback.h>
 
 #endif

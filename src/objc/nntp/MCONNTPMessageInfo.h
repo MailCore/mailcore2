@@ -12,7 +12,7 @@
 
 #import <Foundation/Foundation.h>
 
-/** This is information of a message fetched by MCONNTPFetchMessagesOperation.*/
+/** This is information of a message fetched by MCONNTPFetchArticlesOperation.*/
 
 @interface MCONNTPMessageInfo : NSObject <NSCopying>
 

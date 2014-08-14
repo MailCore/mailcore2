@@ -23,6 +23,9 @@ namespace mailcore {
         NNTPFetchHeaderOperation();
         virtual ~NNTPFetchHeaderOperation();
         
+        virtual void setGroupName(String * groupName);
+        virtual String * groupName();
+        
         virtual void setMessageIndex(unsigned int messageIndex);
         virtual unsigned int messageIndex();
         
@@ -32,6 +35,7 @@ namespace mailcore {
         virtual void main();
         
     private:
+        String * mGroupName;
         unsigned int mMessageIndex;
         MessageHeader * mHeader;
         

@@ -16,9 +16,9 @@
 
 #import <MailCore/MCOConstants.h>
 
-@class MCONNTPFetchMessagesOperation;
+@class MCONNTPFetchArticlesOperation;
 @class MCONNTPFetchHeaderOperation;
-@class MCONNTPFetchMessageOperation;
+@class MCONNTPFetchArticleOperation;
 @class MCONNTPListNewsgroupsOperation;
 @class MCONNTPOperation;
 
@@ -68,33 +68,33 @@
 /**
  Returns an operation that will fetch the list of messages.
  
- MCONNTPFetchMessagesOperation * op = [session fetchMessagesOperation];
+ MCONNTPFetchArticlesOperation * op = [session fetchMessagesOperation];
  [op start:^(NSError * error, NSArray * messages) {
  // messages is an array of MCONNTPMessageInfo
  // [info index] can be used as reference for a given message in the other operations.
  }];
  */
-- (MCONNTPFetchMessagesOperation *) fetchMessagesOperation:(NSString *)group;
+- (MCONNTPFetchArticlesOperation *) fetchArticlesOperation:(NSString *)group;
 
 /**
  Returns an operation that will fetch the header of the given message.
  
- MCONNTPFetchHeaderOperation * op = [session fetchHeaderOperationWithIndex:idx];
+ MCONNTPFetchHeaderOperation * op = [session fetchHeaderOperationWithIndex:idx inGroup:@"Group"];
  [op start:^(NSError * error, MCOMessageHeader * header) {
  // header is the parsed header of the message.
  }];
  */
-- (MCONNTPFetchHeaderOperation *) fetchHeaderOperationWithIndex:(unsigned int)index;
+- (MCONNTPFetchHeaderOperation *) fetchHeaderOperationWithIndex:(unsigned int)index inGroup:(NSString *)group;
 
 /**
  Returns an operation that will fetch the content of the given message.
  
- MCONNTPFetchMessageOperation * op = [session fetchMessageOperationWithIndex:idx inGroup:@"Group"];
+ MCONNTPFetchArticleOperation * op = [session fetchMessageOperationWithIndex:idx inGroup:@"Group"];
  [op start:^(NSError * error, NSData * messageData) {
  // messageData is the RFC 822 formatted message data.
  }];
  */
-- (MCONNTPFetchMessageOperation *) fetchArticleOperationWithIndex:(unsigned int)index inGroup:(NSString *)group;
+- (MCONNTPFetchArticleOperation *) fetchArticleOperationWithIndex:(unsigned int)index inGroup:(NSString *)group;
 
 /**
  Returns an operation that will list all available newsgroups.

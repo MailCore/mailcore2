@@ -13,8 +13,8 @@
 #include <MailCore/MCNNTPAsyncSession.h>
 #include <MailCore/MCNNTPOperation.h>
 #include <MailCore/MCNNTPFetchHeaderOperation.h>
-#include <MailCore/MCNNTPFetchMessageOperation.h>
-#include <MailCore/MCNNTPFetchMessagesOperation.h>
+#include <MailCore/MCNNTPFetchArticleOperation.h>
+#include <MailCore/MCNNTPFetchArticlesOperation.h>
 #include <MailCore/MCNNTPListNewsgroupsOperation.h>
 #include <MailCore/MCNNTPOperationCallback.h>
 

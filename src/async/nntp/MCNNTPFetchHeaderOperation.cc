@@ -25,6 +25,14 @@ NNTPFetchHeaderOperation::~NNTPFetchHeaderOperation()
     MC_SAFE_RELEASE(mHeader);
 }
 
+void NNTPFetchHeaderOperation::setGroupName(String * groupName) {
+    MC_SAFE_REPLACE_COPY(String, mGroupName, groupName);
+}
+
+String * NNTPFetchHeaderOperation::groupName() {
+    return mGroupName;
+}
+
 void NNTPFetchHeaderOperation::setMessageIndex(unsigned int messageIndex)
 {
     mMessageIndex = messageIndex;
@@ -43,7 +51,7 @@ MessageHeader * NNTPFetchHeaderOperation::header()
 void NNTPFetchHeaderOperation::main()
 {
     ErrorCode error;
-    mHeader = session()->session()->fetchHeader(mMessageIndex, &error);
+    mHeader = session()->session()->fetchHeader(mGroupName, mMessageIndex, &error);
     if (mHeader != NULL) {
         mHeader->retain();
     }
