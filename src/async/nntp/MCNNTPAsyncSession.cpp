@@ -171,13 +171,24 @@ NNTPFetchHeaderOperation * NNTPAsyncSession::fetchHeaderOperation(unsigned int i
     return op;
 }
 
-NNTPFetchMessageOperation * NNTPAsyncSession::fetchMessageOperation(unsigned int index)
+NNTPFetchHeaderOperation * NNTPAsyncSession::fetchHeaderOperation(NNTPMessageInfo * msg) 
+{
+    return fetchHeaderOperation(msg->index());
+}
+
+NNTPFetchMessageOperation * NNTPAsyncSession::fetchArticleOperation(String * groupName, unsigned int index)
 {
     NNTPFetchMessageOperation * op = new NNTPFetchMessageOperation();
     op->setSession(this);
+    op->setGroupName(groupName);
     op->setMessageIndex(index);
     op->autorelease();
     return op;
+}
+
+NNTPFetchMessageOperation * NNTPAsyncSession::fetchArticleOperation(String *groupName, NNTPMessageInfo * msg)
+{
+    return fetchArticleOperation(groupName, msg->index());
 }
 
 

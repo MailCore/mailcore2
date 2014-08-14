@@ -43,7 +43,7 @@ Array * NNTPFetchMessagesOperation::messages()
 void NNTPFetchMessagesOperation::main()
 {
     ErrorCode error;
-    mMessages = session()->session()->fetchMessages(mGroupName, &error);
+    mMessages = session()->session()->fetchArticles(mGroupName, &error);
     setError(error);
     MC_SAFE_RETAIN(mMessages);
 }

@@ -51,15 +51,14 @@ namespace mailcore {
         virtual MessageHeader * fetchHeader(unsigned int index, ErrorCode * pError);
         virtual MessageHeader * fetchHeader(NNTPMessageInfo * msg, ErrorCode * pError);
         
-        virtual Array * /* NNTPMessageInfo */ fetchMessages(String * groupname, ErrorCode * pError);
+        virtual Array * /* NNTPMessageInfo */ fetchArticles(String * groupname, ErrorCode * pError);
         
-        Data * fetchMessage(unsigned int index, NNTPProgressCallback * callback, ErrorCode * pError);
-        Data * fetchMessage(NNTPMessageInfo * msg, NNTPProgressCallback * callback, ErrorCode * pError);
+        Data * fetchArticle(String *groupName, unsigned int index, NNTPProgressCallback * callback, ErrorCode * pError);
+        Data * fetchArticle(String *groupName, NNTPMessageInfo * msg, NNTPProgressCallback * callback, ErrorCode * pError);
         
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
         
-        virtual void select(String * folder, ErrorCode * pError);
     private:
         String * mHostname;
         unsigned int mPort;
@@ -82,6 +81,7 @@ namespace mailcore {
         void loginIfNeeded(ErrorCode * pError);
         void readerIfNeeded(ErrorCode * pError);
         void listIfNeeded(ErrorCode * pError);
+        void selectGroup(String * folder, ErrorCode * pError);
     };
 	
 }

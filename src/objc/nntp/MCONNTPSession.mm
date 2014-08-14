@@ -133,9 +133,9 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
     return MCO_TO_OBJC_OP(coreOp);
 }
 
-- (MCONNTPFetchMessageOperation *) fetchMessageOperationWithIndex:(unsigned int)index;
+- (MCONNTPFetchMessageOperation *) fetchArticleOperationWithIndex:(unsigned int)index inGroup:(NSString *)group
 {
-    mailcore::NNTPFetchMessageOperation * coreOp = MCO_NATIVE_INSTANCE->fetchMessageOperation(index);
+    mailcore::NNTPFetchMessageOperation * coreOp = MCO_NATIVE_INSTANCE->fetchArticleOperation(MCO_FROM_OBJC(mailcore::String, group), index);
     return MCO_TO_OBJC_OP(coreOp);
 }
 

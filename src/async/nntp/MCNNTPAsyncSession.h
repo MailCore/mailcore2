@@ -9,6 +9,7 @@
 namespace mailcore {
     
     class NNTPOperation;
+    class NNTPMessageInfo;
     class NNTPSession;
     class NNTPFetchHeaderOperation;
     class NNTPFetchMessageOperation;
@@ -54,8 +55,10 @@ namespace mailcore {
         virtual NNTPFetchMessagesOperation * fetchMessagesOperation(String * group);
         
         virtual NNTPFetchHeaderOperation * fetchHeaderOperation(unsigned int index);
+        virtual NNTPFetchHeaderOperation * fetchHeaderOperation(NNTPMessageInfo * msg);
         
-        virtual NNTPFetchMessageOperation * fetchMessageOperation(unsigned int index);
+        virtual NNTPFetchMessageOperation * fetchArticleOperation(String *groupName, unsigned int index);
+        virtual NNTPFetchMessageOperation * fetchArticleOperation(String *groupName, NNTPMessageInfo * msg);
         
         virtual NNTPListNewsgroupsOperation * listAllNewsgroupsOperation();
         virtual NNTPListNewsgroupsOperation * listSubscribedNewsgroupsOperation();

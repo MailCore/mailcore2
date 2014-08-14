@@ -89,19 +89,18 @@
 /**
  Returns an operation that will fetch the content of the given message.
  
- MCONNTPFetchMessageOperation * op = [session fetchMessageOperationWithIndex:idx];
+ MCONNTPFetchMessageOperation * op = [session fetchMessageOperationWithIndex:idx inGroup:@"Group"];
  [op start:^(NSError * error, NSData * messageData) {
  // messageData is the RFC 822 formatted message data.
  }];
  */
-- (MCONNTPFetchMessageOperation *) fetchMessageOperationWithIndex:(unsigned int)index;
+- (MCONNTPFetchMessageOperation *) fetchArticleOperationWithIndex:(unsigned int)index inGroup:(NSString *)group;
 
 /**
  Returns an operation that will list all available newsgroups.
  
  MCONNTPListNewsgroupsOperation * op = [session listAllNewsgroupsOperation];
- [op start:^(NSError * error, NSData * messageData) {
- // messageData is the RFC 822 formatted message data.
+ [op start:^(NSError * error, NSArray * subscribedGroups) {
  }];
  */
 - (MCONNTPListNewsgroupsOperation *) listAllNewsgroupsOperation;
@@ -109,9 +108,8 @@
 /**
  Returns an operation that will list all newsgroups subscribed to by the user.
  
- MCONNTPListNewsgroupsOperation * op = [session listAllNewsgroupsOperation];
- [op start:^(NSError * error, NSData * messageData) {
- // messageData is the RFC 822 formatted message data.
+ MCONNTPListNewsgroupsOperation * op = [session listSubscribedNewsgroupsOperation];
+ [op start:^(NSError * error, NSArray * subscribedGroups) {
  }];
  */
 - (MCONNTPListNewsgroupsOperation *) listSubscribedNewsgroupsOperation;

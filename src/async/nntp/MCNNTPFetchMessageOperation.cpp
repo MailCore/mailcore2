@@ -24,6 +24,14 @@ NNTPFetchMessageOperation::~NNTPFetchMessageOperation()
     MC_SAFE_RELEASE(mData);
 }
 
+void NNTPFetchMessageOperation::setGroupName(String * groupName) {
+    MC_SAFE_REPLACE_COPY(String, mGroupName, groupName);
+}
+
+String * NNTPFetchMessageOperation::groupName() {
+    return mGroupName;
+}
+
 void NNTPFetchMessageOperation::setMessageIndex(unsigned int messageIndex)
 {
     mMessageIndex = messageIndex;
@@ -42,7 +50,7 @@ Data * NNTPFetchMessageOperation::data()
 void NNTPFetchMessageOperation::main()
 {
     ErrorCode error;
-    mData = session()->session()->fetchMessage(mMessageIndex, this, &error);
+    mData = session()->session()->fetchArticle(mGroupName, mMessageIndex, this, &error);
     MC_SAFE_RETAIN(mData);
     setError(error);
 }

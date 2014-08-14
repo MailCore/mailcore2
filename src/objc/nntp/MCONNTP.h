@@ -10,7 +10,7 @@
 
 #define MAILCORE_MCONNTP_H
 
-#include <MailCore/MCONNTPAsyncSession.h>
+#include <MailCore/MCONNTPSession.h>
 #include <MailCore/MCONNTPOperation.h>
 #include <MailCore/MCONNTPFetchHeaderOperation.h>
 #include <MailCore/MCONNTPFetchMessageOperation.h>

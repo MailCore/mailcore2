@@ -19,6 +19,12 @@
 		8416A99E17F284F400B3C7DA /* MCOSMTPNoopOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8416A99C17F284F400B3C7DA /* MCOSMTPNoopOperation.mm */; };
 		8416A9A117F2871D00B3C7DA /* MCOIMAPNoopOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8416A9A017F2871D00B3C7DA /* MCOIMAPNoopOperation.mm */; };
 		8416A9A217F2871D00B3C7DA /* MCOIMAPNoopOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8416A9A017F2871D00B3C7DA /* MCOIMAPNoopOperation.mm */; };
+		84391342199C3AA800FEFCDD /* MCONNTPListNewsgroupsOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84D73789199C0260005124E5 /* MCONNTPListNewsgroupsOperation.h */; };
+		84391343199C3AAA00FEFCDD /* MCONNTPListNewsgroupsOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84D73789199C0260005124E5 /* MCONNTPListNewsgroupsOperation.h */; };
+		84391344199C3AB200FEFCDD /* MCONNTPDisconnectOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84D7378D199C02A8005124E5 /* MCONNTPDisconnectOperation.h */; };
+		84391345199C3AB400FEFCDD /* MCONNTPDisconnectOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84D7378D199C02A8005124E5 /* MCONNTPDisconnectOperation.h */; };
+		84391346199C3ABB00FEFCDD /* MCONNTPGroupInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84D73791199C0511005124E5 /* MCONNTPGroupInfo.h */; };
+		84391347199C3ABD00FEFCDD /* MCONNTPGroupInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84D73791199C0511005124E5 /* MCONNTPGroupInfo.h */; };
 		849189A118C93FB7002063A3 /* MCNNTPSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8491899F18C93FB7002063A3 /* MCNNTPSession.cpp */; };
 		849189A218C93FB7002063A3 /* MCNNTPSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8491899F18C93FB7002063A3 /* MCNNTPSession.cpp */; };
 		849189A318C94023002063A3 /* MCNNTP.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8491899C18C93F92002063A3 /* MCNNTP.h */; };
@@ -877,9 +883,12 @@
 				84E65535199BE2C300EC8CC4 /* MCNNTPGroupInfo.h in CopyFiles */,
 				943F1AA017D9736100F0C798 /* MCIMAPConnectOperation.h in CopyFiles */,
 				4BE4029217B548D900ECC5E4 /* MCIMAPQuotaOperation.h in CopyFiles */,
+				84391342199C3AA800FEFCDD /* MCONNTPListNewsgroupsOperation.h in CopyFiles */,
 				4BE4029117B548B900ECC5E4 /* MCOIMAPQuotaOperation.h in CopyFiles */,
 				84D7374C199BFB9C005124E5 /* MCNNTPFetchHeaderOperation.h in CopyFiles */,
+				84391345199C3AB400FEFCDD /* MCONNTPDisconnectOperation.h in CopyFiles */,
 				C69BA85E17DEFD9F00D601B7 /* NSIndexSet+MCO.h in CopyFiles */,
+				84391346199C3ABB00FEFCDD /* MCONNTPGroupInfo.h in CopyFiles */,
 				84D7373A199BF81D005124E5 /* MCNNTPOperation.h in CopyFiles */,
 				84D73753199BFBE6005124E5 /* MCNNTPCheckAccountOperation.h in CopyFiles */,
 				84D73748199BFACA005124E5 /* MCNNTPAsyncSession.h in CopyFiles */,
@@ -1099,8 +1108,11 @@
 				84D73785199C0117005124E5 /* MCONNTPFetchHeaderOperation.h in CopyFiles */,
 				84D73739199BF81A005124E5 /* MCNNTPOperation.h in CopyFiles */,
 				84D73787199C011A005124E5 /* MCONNTPFetchMessagesOperation.h in CopyFiles */,
+				84391344199C3AB200FEFCDD /* MCONNTPDisconnectOperation.h in CopyFiles */,
+				84391343199C3AAA00FEFCDD /* MCONNTPListNewsgroupsOperation.h in CopyFiles */,
 				84D73788199C011C005124E5 /* MCONNTPMessageInfo.h in CopyFiles */,
 				84D73786199C0118005124E5 /* MCONNTPFetchMessageOperation.h in CopyFiles */,
+				84391347199C3ABD00FEFCDD /* MCONNTPGroupInfo.h in CopyFiles */,
 				84D73749199BFACF005124E5 /* MCNNTPAsyncSession.h in CopyFiles */,
 				84D73752199BFBE3005124E5 /* MCNNTPCheckAccountOperation.h in CopyFiles */,
 				4B3C1BE217ABFF7C008BBF4C /* MCOIMAPQuotaOperation.h in CopyFiles */,

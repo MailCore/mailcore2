@@ -436,7 +436,7 @@ MessageHeader * NNTPSession::fetchHeader(NNTPMessageInfo * msg, ErrorCode * pErr
     return fetchHeader(msg->index(), pError);
 }
 
-Data * NNTPSession::fetchMessage(unsigned int index, NNTPProgressCallback * callback, ErrorCode * pError) 
+Data * NNTPSession::fetchArticle(String *groupName, unsigned int index, NNTPProgressCallback * callback, ErrorCode * pError) 
 {
     int r;
     char * content;
@@ -445,8 +445,14 @@ Data * NNTPSession::fetchMessage(unsigned int index, NNTPProgressCallback * call
     MCLog("fetch article at index %u", index);
     
     loginIfNeeded(pError);
-    if (* pError != ErrorNone)
+    if (* pError != ErrorNone) {
         return NULL;
+    }
+    
+    selectGroup(groupName, pError);
+    if (* pError != ErrorNone) {
+        return NULL;
+    }
     
     r = newsnntp_article(mNNTP, index, &content, &content_len);
     if (r == NEWSNNTP_ERROR_STREAM) {
@@ -466,22 +472,22 @@ Data * NNTPSession::fetchMessage(unsigned int index, NNTPProgressCallback * call
     return result;
 }
 
-Data * NNTPSession::fetchMessage(NNTPMessageInfo * msg, NNTPProgressCallback * callback, ErrorCode * pError) 
+Data * NNTPSession::fetchArticle(String *groupName, NNTPMessageInfo * msg, NNTPProgressCallback * callback, ErrorCode * pError) 
 {
-    return fetchMessage(msg->index(), callback, pError);
+    return fetchArticle(groupName, msg->index(), callback, pError);
 }
 
-Array * NNTPSession::fetchMessages(String * groupname, ErrorCode * pError) 
+Array * NNTPSession::fetchArticles(String * groupName, ErrorCode * pError) 
 {
     int r;
     clist * msg_list;
     
-    select(groupname, pError);
+    selectGroup(groupName, pError);
     if (* pError != ErrorNone) {
         return NULL;
     }
     
-    r = newsnntp_listgroup(mNNTP, groupname->UTF8Characters(), &msg_list);
+    r = newsnntp_listgroup(mNNTP, groupName->UTF8Characters(), &msg_list);
     if (r == MAILPOP3_ERROR_STREAM) {
         * pError = ErrorConnection;
         return NULL;
@@ -514,7 +520,7 @@ Array * NNTPSession::fetchMessages(String * groupname, ErrorCode * pError)
     return result;
 }
 
-void NNTPSession::select(String * folder, ErrorCode * pError) 
+void NNTPSession::selectGroup(String * folder, ErrorCode * pError) 
 {
     int r;
     struct newsnntp_group_info * info;
