@@ -52,10 +52,22 @@ set(async_smtp_files
   async/smtp/MCSMTPNoopOperation.cc
 )
 
+set(async_nntp_files
+  async/nntp/MCNNTPAsyncSession.cc
+  async/nntp/MCNNTPCheckAccountOperation.cc
+  async/nntp/MCNNTPDisconnectOperation.cc
+  async/nntp/MCNNTPFetchArticleOperation.cc
+  async/nntp/MCNNTPFetchArticlesOperation.cc
+  async/nntp/MCNNTPFetchHeaderOperation.cc
+  async/nntp/MCNNTPListNewsgroupsOperation.cc
+  async/nntp/MCNNTPOperation.cc
+)
+
 set(async_files
   ${async_imap_files}
   ${async_pop_files}
   ${async_smtp_files}
+  ${async_nntp_files}
 )
 
 # Includes for build
@@ -65,4 +77,5 @@ set(async_includes
   "${CMAKE_CURRENT_SOURCE_DIR}/async/imap"
   "${CMAKE_CURRENT_SOURCE_DIR}/async/pop"
   "${CMAKE_CURRENT_SOURCE_DIR}/async/smtp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/async/nntp"
 )
