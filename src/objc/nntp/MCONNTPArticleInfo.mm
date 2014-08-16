@@ -1,23 +1,23 @@
 //
-//  MCONNTPMessageInfo.m
+//  MCONNTPArticleInfo.m
 //  mailcore2
 //
 //  Created by Robert Widmann on 8/13/14.
 //  Copyright (c) 2014 MailCore. All rights reserved.
 //
 
-#import "MCONNTPMessageInfo.h"
+#import "MCONNTPArticleInfo.h"
 
 #include "MCAsyncNNTP.h"
 #include "MCNNTP.h"
 
 #import "MCOUtils.h"
 
-@implementation MCONNTPMessageInfo {
-    mailcore::NNTPMessageInfo * _nativeInfo;
+@implementation MCONNTPArticleInfo {
+    mailcore::NNTPArticleInfo * _nativeInfo;
 }
 
-#define nativeType mailcore::NNTPMessageInfo
+#define nativeType mailcore::NNTPArticleInfo
 
 + (void) load
 {
@@ -34,8 +34,8 @@
 
 + (NSObject *) mco_objectWithMCObject:(mailcore::Object *)object
 {
-    mailcore::NNTPMessageInfo * folder = (mailcore::NNTPMessageInfo *) object;
-    return [[[self alloc] initWithMCNNTPMessageInfo:folder] autorelease];
+    mailcore::NNTPArticleInfo * folder = (mailcore::NNTPArticleInfo *) object;
+    return [[[self alloc] initWithMCNNTPArticleInfo:folder] autorelease];
 }
 
 - (mailcore::Object *) mco_mcObject
@@ -48,7 +48,7 @@
     return MCO_OBJC_BRIDGE_GET(description);
 }
 
-- (id) initWithMCNNTPMessageInfo:(mailcore::NNTPMessageInfo *)info
+- (id) initWithMCNNTPArticleInfo:(mailcore::NNTPArticleInfo *)info
 {
     self = [super init];
     

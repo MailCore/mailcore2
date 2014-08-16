@@ -22,12 +22,12 @@
  
  @param completionBlock Called when the operation is finished.
  
- - On success `error` will be nil and `messages` will be an array of MCONNTPMessageInfo
+ - On success `error` will be nil and `messages` will be an array of MCONNTPArticleInfo
  
  - On failure, `error` will be set with `MCOErrorDomain` as domain and an 
  error code available in MCOConstants.h, `messages` will be null
  */
-- (void) start:(void (^)(NSError * error, NSArray * /* MCONNTPMessageInfo */ messages))completionBlock;
+- (void) start:(void (^)(NSError * error, NSArray * /* MCONNTPArticleInfo */ messages))completionBlock;
 
 @end
 

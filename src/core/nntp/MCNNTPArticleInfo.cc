@@ -1,23 +1,29 @@
 //
-//  MCNNTPMessageInfo.cpp
+//  MCNNTPArticleInfo.cpp
 //  mailcore2
 //
 //  Created by Robert Widmann on 3/6/14.
 //  Copyright (c) 2014 MailCore. All rights reserved.
 //
 
-#include "MCNNTPMessageInfo.h"
+#include "MCNNTPArticleInfo.h"
 
 using namespace mailcore;
 
-void NNTPMessageInfo::init()
+
+void NNTPArticleInfo::init()
 {
     mIndex = 0;
     mSize = 0;
     mUid = NULL;
 }
 
-NNTPMessageInfo::NNTPMessageInfo(NNTPMessageInfo * other)
+NNTPArticleInfo::NNTPArticleInfo()
+{
+    init();
+}
+
+NNTPArticleInfo::NNTPArticleInfo(NNTPArticleInfo * other)
 {
     init();
     mIndex = other->mIndex;
@@ -25,48 +31,48 @@ NNTPMessageInfo::NNTPMessageInfo(NNTPMessageInfo * other)
     MC_SAFE_REPLACE_COPY(String, mUid, other->mUid);
 }
 
-NNTPMessageInfo::~NNTPMessageInfo()
+NNTPArticleInfo::~NNTPArticleInfo()
 {
     MC_SAFE_RELEASE(mUid);
 }
 
-String * NNTPMessageInfo::description()
+String * NNTPArticleInfo::description()
 {
     return String::stringWithUTF8Format("<%s:%p %u %s %u>",
                                         MCUTF8(className()), this, mIndex, MCUTF8(mUid), mSize);
 }
 
-Object * NNTPMessageInfo::copy()
+Object * NNTPArticleInfo::copy()
 {
-    return new NNTPMessageInfo(this);
+    return new NNTPArticleInfo(this);
 }
 
-void NNTPMessageInfo::setIndex(unsigned int index)
+void NNTPArticleInfo::setIndex(unsigned int index)
 {
     mIndex = index;
 }
 
-unsigned int NNTPMessageInfo::index()
+unsigned int NNTPArticleInfo::index()
 {
     return mIndex;
 }
 
-void NNTPMessageInfo::setSize(unsigned int size)
+void NNTPArticleInfo::setSize(unsigned int size)
 {
     mSize = size;
 }
 
-unsigned int NNTPMessageInfo::size()
+unsigned int NNTPArticleInfo::size()
 {
     return mSize;
 }
 
-void NNTPMessageInfo::setUid(String * uid)
+void NNTPArticleInfo::setUid(String * uid)
 {
     MC_SAFE_REPLACE_COPY(String, mUid, uid);
 }
 
-String * NNTPMessageInfo::uid()
+String * NNTPArticleInfo::uid()
 {
     return mUid;
 }

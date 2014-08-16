@@ -11,7 +11,7 @@
 #include <string.h>
 #include <libetpan/libetpan.h>
 
-#include "MCNNTPMessageInfo.h"
+#include "MCNNTPArticleInfo.h"
 #include "MCNNTPGroupInfo.h"
 #include "MCMessageHeader.h"
 #include "MCConnectionLoggerUtils.h"
@@ -175,8 +175,9 @@ void NNTPSession::unsetup()
 void NNTPSession::loginIfNeeded(ErrorCode * pError)
 {
     connectIfNeeded(pError);
-    if (* pError != ErrorNone)
+    if (* pError != ErrorNone) {
         return;
+    }
     
     if (mState == STATE_CONNECTED) {
         login(pError);
@@ -203,38 +204,30 @@ void NNTPSession::readerIfNeeded(ErrorCode * pError)
 void NNTPSession::login(ErrorCode * pError)
 {
     int r;
-    const char * utf8username;
-    const char * utf8password;
-    
-    utf8username = MCUTF8(username());
-    utf8password = MCUTF8(password());
-    if (utf8username == NULL) {
-        utf8username = "";
+
+    if (mUsername != NULL) {
+        r = newsnntp_authinfo_username(mNNTP, mUsername->UTF8Characters());
+        if (r == NEWSNNTP_ERROR_STREAM) {
+            * pError = ErrorConnection;
+            return;
+        }
+        else if (r != NEWSNNTP_NO_ERROR) {
+            * pError = ErrorAuthentication;
+            return;
+        }
     }
-    if (utf8password == NULL) {
-        utf8password = "";
+    if (mPassword != NULL) {
+        r = newsnntp_authinfo_password(mNNTP, mPassword->UTF8Characters());
+        if (r == NEWSNNTP_ERROR_STREAM) {
+            * pError = ErrorConnection;
+            return;
+        }
+        else if (r != NEWSNNTP_NO_ERROR) {
+            * pError = ErrorAuthentication;
+            return;
+        }
     }
-    
-    r = newsnntp_authinfo_username(mNNTP, utf8username);
-    if (r == NEWSNNTP_ERROR_STREAM) {
-        * pError = ErrorConnection;
-        return;
-    }
-    else if (r != NEWSNNTP_NO_ERROR) {
-        * pError = ErrorAuthentication;
-        return;
-    }
-    
-    r = newsnntp_authinfo_password(mNNTP, utf8password);
-    if (r == NEWSNNTP_ERROR_STREAM) {
-        * pError = ErrorConnection;
-        return;
-    }
-    else if (r != NEWSNNTP_NO_ERROR) {
-        * pError = ErrorAuthentication;
-        return;
-    }
-    
+
     mState = STATE_LOGGEDIN;
     * pError = ErrorNone;
 }
@@ -388,7 +381,8 @@ Array * NNTPSession::listSubscribedNewsgroups(ErrorCode * pError)
         
         grp_info = (struct newsnntp_group_info *) clist_content(iter);
         
-        name = String::stringWithUTF8Characters(grp_info->grp_name);
+        name = String::stringWithUTF8Characters(strdup(grp_info->grp_name));
+        name->retain();
         
         NNTPGroupInfo * info = new NNTPGroupInfo();
         info->setName(name);
@@ -437,7 +431,7 @@ MessageHeader * NNTPSession::fetchHeader(String *groupName, unsigned int index, 
     return result;
 }
 
-MessageHeader * NNTPSession::fetchHeader(String *groupName, NNTPMessageInfo * msg, ErrorCode * pError) 
+MessageHeader * NNTPSession::fetchHeader(String *groupName, NNTPArticleInfo * msg, ErrorCode * pError) 
 {
     return fetchHeader(groupName, msg->index(), pError);
 }
@@ -478,7 +472,7 @@ Data * NNTPSession::fetchArticle(String *groupName, unsigned int index, NNTPProg
     return result;
 }
 
-Data * NNTPSession::fetchArticle(String *groupName, NNTPMessageInfo * msg, NNTPProgressCallback * callback, ErrorCode * pError) 
+Data * NNTPSession::fetchArticle(String *groupName, NNTPArticleInfo * msg, NNTPProgressCallback * callback, ErrorCode * pError) 
 {
     return fetchArticle(groupName, msg->index(), callback, pError);
 }
@@ -494,11 +488,11 @@ Array * NNTPSession::fetchArticles(String * groupName, ErrorCode * pError)
     }
     
     r = newsnntp_listgroup(mNNTP, groupName->UTF8Characters(), &msg_list);
-    if (r == MAILPOP3_ERROR_STREAM) {
+    if (r == NEWSNNTP_ERROR_STREAM) {
         * pError = ErrorConnection;
         return NULL;
     }
-    else if (r != MAILPOP3_NO_ERROR) {
+    else if (r != NEWSNNTP_NO_ERROR) {
         * pError = ErrorFetchMessageList;
         return NULL;
     }
@@ -513,7 +507,7 @@ Array * NNTPSession::fetchArticles(String * groupName, ErrorCode * pError)
             continue;
         }
         
-        NNTPMessageInfo * info = new NNTPMessageInfo();
+        NNTPArticleInfo * info = new NNTPArticleInfo();
         info->setIndex(*msg_info);
         result->addObject(info);
         info->release();

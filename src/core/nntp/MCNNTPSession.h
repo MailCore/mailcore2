@@ -8,7 +8,7 @@
 
 namespace mailcore {
     
-    class NNTPMessageInfo;
+    class NNTPArticleInfo;
     class NNTPProgressCallback;
     class MessageHeader;
     
@@ -49,12 +49,12 @@ namespace mailcore {
         virtual Array * listSubscribedNewsgroups(ErrorCode * pError);
         
         virtual MessageHeader * fetchHeader(String *groupName, unsigned int index, ErrorCode * pError);
-        virtual MessageHeader * fetchHeader(String *groupName, NNTPMessageInfo * msg, ErrorCode * pError);
+        virtual MessageHeader * fetchHeader(String *groupName, NNTPArticleInfo * msg, ErrorCode * pError);
         
-        virtual Array * /* NNTPMessageInfo */ fetchArticles(String * groupname, ErrorCode * pError);
+        virtual Array * /* NNTPArticleInfo */ fetchArticles(String * groupname, ErrorCode * pError);
         
         Data * fetchArticle(String *groupName, unsigned int index, NNTPProgressCallback * callback, ErrorCode * pError);
-        Data * fetchArticle(String *groupName, NNTPMessageInfo * msg, NNTPProgressCallback * callback, ErrorCode * pError);
+        Data * fetchArticle(String *groupName, NNTPArticleInfo * msg, NNTPProgressCallback * callback, ErrorCode * pError);
         
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();

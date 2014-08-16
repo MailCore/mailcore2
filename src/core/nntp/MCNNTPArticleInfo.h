@@ -1,6 +1,6 @@
-#ifndef MAILCORE_MCNNTPMESSAGEINFO_H
+#ifndef MAILCORE_MCNNTPARTICLEINFO_H
 
-#define MAILCORE_MCNNTPMESSAGEINFO_H
+#define MAILCORE_MCNNTPARTICLEINFO_H
 
 #include <MailCore/MCBaseTypes.h>
 
@@ -8,10 +8,10 @@
 
 namespace mailcore {
     
-    class NNTPMessageInfo : public Object {
+    class NNTPArticleInfo : public Object {
     public:
-        NNTPMessageInfo();
-        virtual ~NNTPMessageInfo();
+        NNTPArticleInfo();
+        virtual ~NNTPArticleInfo();
         
         virtual void setIndex(unsigned int index);
         virtual unsigned int index();
@@ -23,7 +23,7 @@ namespace mailcore {
         virtual String * uid();
         
     public: // subclass behavior
-        NNTPMessageInfo(NNTPMessageInfo * other);
+        NNTPArticleInfo(NNTPArticleInfo * other);
         virtual String * description();
         virtual Object * copy();
         

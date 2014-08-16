@@ -24,14 +24,14 @@ namespace mailcore {
         virtual void setGroupName(String * groupName);
         virtual String * groupName();
         
-        virtual Array * /* NNTPMessageInfo */ messages();
+        virtual Array * /* NNTPArticleInfo */ messages();
         
     public: // subclass behavior
         virtual void main();
         
     private:
         String * mGroupName;
-        Array * /* NNTPMessageInfo */ mMessages;
+        Array * /* NNTPArticleInfo */ mMessages;
     };
     
 }

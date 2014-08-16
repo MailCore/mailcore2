@@ -70,7 +70,7 @@
  
  MCONNTPFetchArticlesOperation * op = [session fetchMessagesOperation];
  [op start:^(NSError * error, NSArray * messages) {
- // messages is an array of MCONNTPMessageInfo
+ // messages is an array of MCONNTPArticleInfo
  // [info index] can be used as reference for a given message in the other operations.
  }];
  */
