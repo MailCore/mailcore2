@@ -62,7 +62,6 @@ core/smtp/MCSMTP.h
 core/smtp/MCSMTPProgressCallback.h
 core/smtp/MCSMTPSession.h
 core/nntp/MCNNTP.h
-core/nntp/MCNNTPArticleInfo.h
 core/nntp/MCNNTPGroupInfo.h
 core/nntp/MCNNTPProgressCallback.h
 core/nntp/MCNNTPSession.h
