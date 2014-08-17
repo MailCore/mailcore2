@@ -13,7 +13,7 @@
 #import "MCOOperation+Private.h"
 #import "MCOUtils.h"
 
-typedef void (^CompletionType)(NSError *error, NSArray * messages);
+typedef void (^CompletionType)(NSError *error, MCOIndexSet * articles);
 
 @implementation MCONNTPFetchArticlesOperation {
     CompletionType _completionBlock;
@@ -38,7 +38,7 @@ typedef void (^CompletionType)(NSError *error, NSArray * messages);
     [super dealloc];
 }
 
-- (void) start:(void (^)(NSError *error, NSArray * messages))completionBlock
+- (void) start:(void (^)(NSError *error, MCOIndexSet * articles))completionBlock
 {
     _completionBlock = [completionBlock copy];
     [self start];
@@ -58,7 +58,7 @@ typedef void (^CompletionType)(NSError *error, NSArray * messages);
     
     nativeType *op = MCO_NATIVE_INSTANCE;
     if (op->error() == mailcore::ErrorNone) {
-        _completionBlock(nil, MCO_TO_OBJC(op->messages()));
+        _completionBlock(nil, MCO_TO_OBJC(op->articles()));
     } else {
         _completionBlock([NSError mco_errorWithErrorCode:op->error()], nil);
     }

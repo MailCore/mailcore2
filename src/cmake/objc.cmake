@@ -75,7 +75,6 @@ set(objc_smtp_files
 )
 
 set(objc_nntp_files
-  objc/nntp/MCONNTPArticleInfo.mm
   objc/nntp/MCONNTPDisconnectOperation.mm
   objc/nntp/MCONNTPFetchArticleOperation.mm
   objc/nntp/MCONNTPFetchArticlesOperation.mm

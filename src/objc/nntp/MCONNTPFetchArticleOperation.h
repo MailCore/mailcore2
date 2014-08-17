@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 MailCore. All rights reserved.
 //
 
-#ifndef MAILCORE_MCONNTPFETCHMESSAGEOPERATION_H
+#ifndef MAILCORE_MCONNTPFETCHARTICLEOPERATION_H
 
-#define MAILCORE_MCONNTPFETCHMESSAGEOPERATION_H
+#define MAILCORE_MCONNTPFETCHARTICLEOPERATION_H
 
 #import <Foundation/Foundation.h>
 #import <MailCore/MCONNTPOperation.h>

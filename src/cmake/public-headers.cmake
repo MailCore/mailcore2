@@ -185,7 +185,6 @@ objc/smtp/MCOSMTPSession.h
 objc/smtp/MCOSMTPSendOperation.h
 objc/smtp/MCOSMTPOperation.h
 objc/nntp/MCONNTP.h
-objc/nntp/MCONNTPArticleInfo.h
 objc/nntp/MCONNTPDisconnectOperation.h
 objc/nntp/MCONNTPFetchArticleOperation.h
 objc/nntp/MCONNTPFetchArticleOperation.mm

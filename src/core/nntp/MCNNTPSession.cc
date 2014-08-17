@@ -11,7 +11,6 @@
 #include <string.h>
 #include <libetpan/libetpan.h>
 
-#include "MCNNTPArticleInfo.h"
 #include "MCNNTPGroupInfo.h"
 #include "MCMessageHeader.h"
 #include "MCConnectionLoggerUtils.h"
@@ -431,11 +430,6 @@ MessageHeader * NNTPSession::fetchHeader(String *groupName, unsigned int index, 
     return result;
 }
 
-MessageHeader * NNTPSession::fetchHeader(String *groupName, NNTPArticleInfo * msg, ErrorCode * pError) 
-{
-    return fetchHeader(groupName, msg->index(), pError);
-}
-
 Data * NNTPSession::fetchArticle(String *groupName, unsigned int index, NNTPProgressCallback * callback, ErrorCode * pError) 
 {
     int r;
@@ -472,12 +466,7 @@ Data * NNTPSession::fetchArticle(String *groupName, unsigned int index, NNTPProg
     return result;
 }
 
-Data * NNTPSession::fetchArticle(String *groupName, NNTPArticleInfo * msg, NNTPProgressCallback * callback, ErrorCode * pError) 
-{
-    return fetchArticle(groupName, msg->index(), callback, pError);
-}
-
-Array * NNTPSession::fetchArticles(String * groupName, ErrorCode * pError) 
+IndexSet * NNTPSession::fetchArticles(String * groupName, ErrorCode * pError) 
 {
     int r;
     clist * msg_list;
@@ -497,7 +486,7 @@ Array * NNTPSession::fetchArticles(String * groupName, ErrorCode * pError)
         return NULL;
     }
     
-    Array * result = Array::array();
+    IndexSet * result = new IndexSet();
     clistiter * iter;
     for(iter = clist_begin(msg_list) ;iter != NULL ; iter = clist_next(iter)) {
         uint32_t *msg_info;
@@ -507,10 +496,7 @@ Array * NNTPSession::fetchArticles(String * groupName, ErrorCode * pError)
             continue;
         }
         
-        NNTPArticleInfo * info = new NNTPArticleInfo();
-        info->setIndex(*msg_info);
-        result->addObject(info);
-        info->release();
+        result->addIndex(*msg_info);
     }
     
     newsnntp_listgroup_free(msg_list);

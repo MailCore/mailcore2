@@ -66,12 +66,10 @@
 /** @name Operations */
 
 /**
- Returns an operation that will fetch the list of messages.
+ Returns an operation that will fetch the list of article numbers.
  
- MCONNTPFetchArticlesOperation * op = [session fetchMessagesOperation];
- [op start:^(NSError * error, NSArray * messages) {
- // messages is an array of MCONNTPArticleInfo
- // [info index] can be used as reference for a given message in the other operations.
+ MCONNTPFetchArticlesOperation * op = [session fetchArticlesOperation];
+ [op start:^(NSError * error, MCOIndexSet * articles) {
  }];
  */
 - (MCONNTPFetchArticlesOperation *) fetchArticlesOperation:(NSString *)group;
@@ -89,7 +87,7 @@
 /**
  Returns an operation that will fetch the content of the given message.
  
- MCONNTPFetchArticleOperation * op = [session fetchMessageOperationWithIndex:idx inGroup:@"Group"];
+ MCONNTPFetchArticleOperation * op = [session fetchArticleOperationWithIndex:idx inGroup:@"Group"];
  [op start:^(NSError * error, NSData * messageData) {
  // messageData is the RFC 822 formatted message data.
  }];

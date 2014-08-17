@@ -172,11 +172,6 @@ NNTPFetchHeaderOperation * NNTPAsyncSession::fetchHeaderOperation(String * group
     return op;
 }
 
-NNTPFetchHeaderOperation * NNTPAsyncSession::fetchHeaderOperation(String * groupName, NNTPArticleInfo * msg) 
-{
-    return fetchHeaderOperation(groupName, msg->index());
-}
-
 NNTPFetchArticleOperation * NNTPAsyncSession::fetchArticleOperation(String * groupName, unsigned int index)
 {
     NNTPFetchArticleOperation * op = new NNTPFetchArticleOperation();
@@ -186,12 +181,6 @@ NNTPFetchArticleOperation * NNTPAsyncSession::fetchArticleOperation(String * gro
     op->autorelease();
     return op;
 }
-
-NNTPFetchArticleOperation * NNTPAsyncSession::fetchArticleOperation(String *groupName, NNTPArticleInfo * msg)
-{
-    return fetchArticleOperation(groupName, msg->index());
-}
-
 
 NNTPListNewsgroupsOperation * NNTPAsyncSession::listAllNewsgroupsOperation()
 {

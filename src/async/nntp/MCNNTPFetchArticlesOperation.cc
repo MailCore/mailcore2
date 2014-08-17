@@ -16,13 +16,13 @@ using namespace mailcore;
 MCNNTPFetchArticlesOperation::MCNNTPFetchArticlesOperation()
 {
     mGroupName = NULL;
-    mMessages = NULL;
+    mArticles = NULL;
 }
 
 MCNNTPFetchArticlesOperation::~MCNNTPFetchArticlesOperation()
 {
     MC_SAFE_RELEASE(mGroupName);
-    MC_SAFE_RELEASE(mMessages);
+    MC_SAFE_RELEASE(mArticles);
 }
 
 void MCNNTPFetchArticlesOperation::setGroupName(String * groupname)
@@ -35,15 +35,15 @@ String * MCNNTPFetchArticlesOperation::groupName()
     return mGroupName;
 }
 
-Array * MCNNTPFetchArticlesOperation::messages()
+IndexSet * MCNNTPFetchArticlesOperation::articles()
 {
-    return mMessages;
+    return mArticles;
 }
 
 void MCNNTPFetchArticlesOperation::main()
 {
     ErrorCode error;
-    mMessages = session()->session()->fetchArticles(mGroupName, &error);
+    mArticles = session()->session()->fetchArticles(mGroupName, &error);
     setError(error);
-    MC_SAFE_RETAIN(mMessages);
+    MC_SAFE_RETAIN(mArticles);
 }

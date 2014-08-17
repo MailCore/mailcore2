@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 MailCore. All rights reserved.
 //
 
-#ifndef MAILCORE_MCNNTPFETCHMESSAGESOPERATION_H
+#ifndef MAILCORE_MCNNTPFETCHARTICLESOPERATION_H
 
-#define MAILCORE_MCNNTPFETCHMESSAGESOPERATION_H
+#define MAILCORE_MCNNTPFETCHARTICLESOPERATION_H
 
 #include <MailCore/MCNNTPOperation.h>
 
@@ -24,14 +24,14 @@ namespace mailcore {
         virtual void setGroupName(String * groupName);
         virtual String * groupName();
         
-        virtual Array * /* NNTPArticleInfo */ messages();
+        virtual IndexSet * articles();
         
     public: // subclass behavior
         virtual void main();
         
     private:
         String * mGroupName;
-        Array * /* NNTPArticleInfo */ mMessages;
+        IndexSet * mArticles;
     };
     
 }

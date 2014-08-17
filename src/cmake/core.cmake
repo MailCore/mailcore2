@@ -65,7 +65,6 @@ set(pop_files
 )
 
 set(nntp_files
-  core/nntp/MCNNTPArticleInfo.cc
   core/nntp/MCNNTPGroupInfo.cc
   core/nntp/MCNNTPSession.cc
 )

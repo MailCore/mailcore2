@@ -30,8 +30,6 @@
 		849189A218C93FB7002063A3 /* MCNNTPSession.cc in Sources */ = {isa = PBXBuildFile; fileRef = 8491899F18C93FB7002063A3 /* MCNNTPSession.cc */; };
 		849189A318C94023002063A3 /* MCNNTP.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8491899C18C93F92002063A3 /* MCNNTP.h */; };
 		849189A418C94023002063A3 /* MCNNTPSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 849189A018C93FB7002063A3 /* MCNNTPSession.h */; };
-		849189A718C9477F002063A3 /* MCNNTPArticleInfo.cc in Sources */ = {isa = PBXBuildFile; fileRef = 849189A518C9477F002063A3 /* MCNNTPArticleInfo.cc */; };
-		849189A818C9477F002063A3 /* MCNNTPArticleInfo.cc in Sources */ = {isa = PBXBuildFile; fileRef = 849189A518C9477F002063A3 /* MCNNTPArticleInfo.cc */; };
 		849189AB18C94986002063A3 /* MCNNTPGroupInfo.cc in Sources */ = {isa = PBXBuildFile; fileRef = 849189A918C94986002063A3 /* MCNNTPGroupInfo.cc */; };
 		849189AC18C94986002063A3 /* MCNNTPGroupInfo.cc in Sources */ = {isa = PBXBuildFile; fileRef = 849189A918C94986002063A3 /* MCNNTPGroupInfo.cc */; };
 		849F53D817F28443002D417F /* MCOPOPNoopOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84B639EF17F282B4003B5BA2 /* MCOPOPNoopOperation.h */; };
@@ -97,8 +95,6 @@
 		84D73772199C007E005124E5 /* MCONNTPFetchArticleOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84D73770199C007E005124E5 /* MCONNTPFetchArticleOperation.mm */; };
 		84D73775199C00AB005124E5 /* MCONNTPFetchArticlesOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84D73774199C00AB005124E5 /* MCONNTPFetchArticlesOperation.mm */; };
 		84D73776199C00AB005124E5 /* MCONNTPFetchArticlesOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84D73774199C00AB005124E5 /* MCONNTPFetchArticlesOperation.mm */; };
-		84D73779199C00C9005124E5 /* MCONNTPArticleInfo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84D73778199C00C9005124E5 /* MCONNTPArticleInfo.mm */; };
-		84D7377A199C00C9005124E5 /* MCONNTPArticleInfo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84D73778199C00C9005124E5 /* MCONNTPArticleInfo.mm */; };
 		84D7377B199C00F5005124E5 /* MCONNTP.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84D73761199BFF80005124E5 /* MCONNTP.h */; };
 		84D7377C199C00F7005124E5 /* MCONNTP.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84D73761199BFF80005124E5 /* MCONNTP.h */; };
 		84D7377D199C00FE005124E5 /* MCONNTPSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84D73762199BFFC7005124E5 /* MCONNTPSession.h */; };
@@ -107,20 +103,16 @@
 		84D73780199C0107005124E5 /* MCONNTPFetchHeaderOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84D7376B199C005A005124E5 /* MCONNTPFetchHeaderOperation.h */; };
 		84D73781199C010A005124E5 /* MCONNTPFetchArticleOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84D7376F199C007E005124E5 /* MCONNTPFetchArticleOperation.h */; };
 		84D73782199C010B005124E5 /* MCONNTPFetchArticlesOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84D73773199C00AB005124E5 /* MCONNTPFetchArticlesOperation.h */; };
-		84D73783199C010C005124E5 /* MCONNTPArticleInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84D73777199C00C9005124E5 /* MCONNTPArticleInfo.h */; };
 		84D73784199C0114005124E5 /* MCONNTPOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84D73766199BFFFC005124E5 /* MCONNTPOperation.h */; };
 		84D73785199C0117005124E5 /* MCONNTPFetchHeaderOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84D7376B199C005A005124E5 /* MCONNTPFetchHeaderOperation.h */; };
 		84D73786199C0118005124E5 /* MCONNTPFetchArticleOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84D7376F199C007E005124E5 /* MCONNTPFetchArticleOperation.h */; };
 		84D73787199C011A005124E5 /* MCONNTPFetchArticlesOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84D73773199C00AB005124E5 /* MCONNTPFetchArticlesOperation.h */; };
-		84D73788199C011C005124E5 /* MCONNTPArticleInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84D73777199C00C9005124E5 /* MCONNTPArticleInfo.h */; };
 		84D7378B199C0260005124E5 /* MCONNTPListNewsgroupsOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84D7378A199C0260005124E5 /* MCONNTPListNewsgroupsOperation.mm */; };
 		84D7378C199C0260005124E5 /* MCONNTPListNewsgroupsOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84D7378A199C0260005124E5 /* MCONNTPListNewsgroupsOperation.mm */; };
 		84D7378F199C02A8005124E5 /* MCONNTPDisconnectOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84D7378E199C02A8005124E5 /* MCONNTPDisconnectOperation.mm */; };
 		84D73790199C02A8005124E5 /* MCONNTPDisconnectOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84D7378E199C02A8005124E5 /* MCONNTPDisconnectOperation.mm */; };
 		84D73793199C0511005124E5 /* MCONNTPGroupInfo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84D73792199C0511005124E5 /* MCONNTPGroupInfo.mm */; };
 		84D73794199C0511005124E5 /* MCONNTPGroupInfo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84D73792199C0511005124E5 /* MCONNTPGroupInfo.mm */; };
-		84E65531199BE10F00EC8CC4 /* MCNNTPArticleInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 849189A618C9477F002063A3 /* MCNNTPArticleInfo.h */; };
-		84E65532199BE11800EC8CC4 /* MCNNTPArticleInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 849189A618C9477F002063A3 /* MCNNTPArticleInfo.h */; };
 		84E65533199BE15500EC8CC4 /* MCNNTPSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 849189A018C93FB7002063A3 /* MCNNTPSession.h */; };
 		84E65534199BE2BF00EC8CC4 /* MCNNTPGroupInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 849189AA18C94986002063A3 /* MCNNTPGroupInfo.h */; };
 		84E65535199BE2C300EC8CC4 /* MCNNTPGroupInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 849189AA18C94986002063A3 /* MCNNTPGroupInfo.h */; };
@@ -873,7 +865,6 @@
 			files = (
 				849189A318C94023002063A3 /* MCNNTP.h in CopyFiles */,
 				849189A418C94023002063A3 /* MCNNTPSession.h in CopyFiles */,
-				84E65531199BE10F00EC8CC4 /* MCNNTPArticleInfo.h in CopyFiles */,
 				84B639F317F2839C003B5BA2 /* MCOPOPNoopOperation.h in CopyFiles */,
 				84B639F417F2839C003B5BA2 /* MCIMAPNoopOperation.h in CopyFiles */,
 				84D7377B199C00F5005124E5 /* MCONNTP.h in CopyFiles */,
@@ -942,7 +933,6 @@
 				C6F61FA0170187B80073032E /* MCOIMAPFolderInfoOperation.h in CopyFiles */,
 				C6F61FA4170187C30073032E /* MCOIMAPFetchMessagesOperation.h in CopyFiles */,
 				84D73781199C010A005124E5 /* MCONNTPFetchArticleOperation.h in CopyFiles */,
-				84D73783199C010C005124E5 /* MCONNTPArticleInfo.h in CopyFiles */,
 				84D73782199C010B005124E5 /* MCONNTPFetchArticlesOperation.h in CopyFiles */,
 				C6F61FA3170187BD0073032E /* MCOIMAPCopyMessagesOperation.h in CopyFiles */,
 				C6D6F95A171E5D60006F5B28 /* MCJSON.h in CopyFiles */,
@@ -1096,7 +1086,6 @@
 			files = (
 				849F53D817F28443002D417F /* MCOPOPNoopOperation.h in CopyFiles */,
 				849F53D917F28443002D417F /* MCIMAPNoopOperation.h in CopyFiles */,
-				84E65532199BE11800EC8CC4 /* MCNNTPArticleInfo.h in CopyFiles */,
 				849F53DA17F28443002D417F /* MCPOPNoopOperation.h in CopyFiles */,
 				849F53DB17F28443002D417F /* MCSMTPNoopOperation.h in CopyFiles */,
 				84915BB8199C4B0400EDDED9 /* MCNNTP.h in CopyFiles */,
@@ -1112,7 +1101,6 @@
 				84D73787199C011A005124E5 /* MCONNTPFetchArticlesOperation.h in CopyFiles */,
 				84391344199C3AB200FEFCDD /* MCONNTPDisconnectOperation.h in CopyFiles */,
 				84391343199C3AAA00FEFCDD /* MCONNTPListNewsgroupsOperation.h in CopyFiles */,
-				84D73788199C011C005124E5 /* MCONNTPArticleInfo.h in CopyFiles */,
 				84D73786199C0118005124E5 /* MCONNTPFetchArticleOperation.h in CopyFiles */,
 				84391347199C3ABD00FEFCDD /* MCONNTPGroupInfo.h in CopyFiles */,
 				84D73749199BFACF005124E5 /* MCNNTPAsyncSession.h in CopyFiles */,
@@ -1316,8 +1304,6 @@
 		8491899C18C93F92002063A3 /* MCNNTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCNNTP.h; path = nntp/MCNNTP.h; sourceTree = "<group>"; };
 		8491899F18C93FB7002063A3 /* MCNNTPSession.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MCNNTPSession.cc; path = nntp/MCNNTPSession.cc; sourceTree = "<group>"; };
 		849189A018C93FB7002063A3 /* MCNNTPSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCNNTPSession.h; path = nntp/MCNNTPSession.h; sourceTree = "<group>"; };
-		849189A518C9477F002063A3 /* MCNNTPArticleInfo.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MCNNTPArticleInfo.cc; path = nntp/MCNNTPArticleInfo.cc; sourceTree = "<group>"; };
-		849189A618C9477F002063A3 /* MCNNTPArticleInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCNNTPArticleInfo.h; path = nntp/MCNNTPArticleInfo.h; sourceTree = "<group>"; };
 		849189A918C94986002063A3 /* MCNNTPGroupInfo.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MCNNTPGroupInfo.cc; path = nntp/MCNNTPGroupInfo.cc; sourceTree = "<group>"; };
 		849189AA18C94986002063A3 /* MCNNTPGroupInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCNNTPGroupInfo.h; path = nntp/MCNNTPGroupInfo.h; sourceTree = "<group>"; };
 		84AF9E7D172DBAF600E60AA3 /* providers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = providers.json; path = ../resources/providers.json; sourceTree = "<group>"; };
@@ -1360,8 +1346,6 @@
 		84D73770199C007E005124E5 /* MCONNTPFetchArticleOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCONNTPFetchArticleOperation.mm; sourceTree = "<group>"; };
 		84D73773199C00AB005124E5 /* MCONNTPFetchArticlesOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCONNTPFetchArticlesOperation.h; sourceTree = "<group>"; };
 		84D73774199C00AB005124E5 /* MCONNTPFetchArticlesOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCONNTPFetchArticlesOperation.mm; sourceTree = "<group>"; };
-		84D73777199C00C9005124E5 /* MCONNTPArticleInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCONNTPArticleInfo.h; sourceTree = "<group>"; };
-		84D73778199C00C9005124E5 /* MCONNTPArticleInfo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCONNTPArticleInfo.mm; sourceTree = "<group>"; };
 		84D73789199C0260005124E5 /* MCONNTPListNewsgroupsOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCONNTPListNewsgroupsOperation.h; sourceTree = "<group>"; };
 		84D7378A199C0260005124E5 /* MCONNTPListNewsgroupsOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCONNTPListNewsgroupsOperation.mm; sourceTree = "<group>"; };
 		84D7378D199C02A8005124E5 /* MCONNTPDisconnectOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCONNTPDisconnectOperation.h; sourceTree = "<group>"; };
@@ -1843,8 +1827,6 @@
 			isa = PBXGroup;
 			children = (
 				8491899C18C93F92002063A3 /* MCNNTP.h */,
-				849189A518C9477F002063A3 /* MCNNTPArticleInfo.cc */,
-				849189A618C9477F002063A3 /* MCNNTPArticleInfo.h */,
 				849189A918C94986002063A3 /* MCNNTPGroupInfo.cc */,
 				849189AA18C94986002063A3 /* MCNNTPGroupInfo.h */,
 				84D73732199BF754005124E5 /* MCNNTPProgressCallback.h */,
@@ -1926,8 +1908,6 @@
 				84D73774199C00AB005124E5 /* MCONNTPFetchArticlesOperation.mm */,
 				84D7378D199C02A8005124E5 /* MCONNTPDisconnectOperation.h */,
 				84D7378E199C02A8005124E5 /* MCONNTPDisconnectOperation.mm */,
-				84D73777199C00C9005124E5 /* MCONNTPArticleInfo.h */,
-				84D73778199C00C9005124E5 /* MCONNTPArticleInfo.mm */,
 				84D73791199C0511005124E5 /* MCONNTPGroupInfo.h */,
 				84D73792199C0511005124E5 /* MCONNTPGroupInfo.mm */,
 			);
@@ -2833,7 +2813,6 @@
 				C64EA71D169E847800778456 /* MCOperation.cc in Sources */,
 				C64EA720169E847800778456 /* MCOperationQueue.cc in Sources */,
 				C64EA723169E847800778456 /* MCIMAPFolder.cc in Sources */,
-				84D73779199C00C9005124E5 /* MCONNTPArticleInfo.mm in Sources */,
 				C64EA725169E847800778456 /* MCIMAPMessage.cc in Sources */,
 				C64EA727169E847800778456 /* MCIMAPMessagePart.cc in Sources */,
 				84D73775199C00AB005124E5 /* MCONNTPFetchArticlesOperation.mm in Sources */,
@@ -2957,7 +2936,6 @@
 				C6F61F8717016AD60073032E /* MCOIMAPFetchContentOperation.mm in Sources */,
 				C6F61F8A17016AE60073032E /* MCOIMAPSearchOperation.mm in Sources */,
 				C6F61F8D17016AFB0073032E /* MCOIMAPIdleOperation.mm in Sources */,
-				849189A718C9477F002063A3 /* MCNNTPArticleInfo.cc in Sources */,
 				C6F61F9017016B0A0073032E /* MCOIMAPFetchNamespaceOperation.mm in Sources */,
 				C6F61F9317016B250073032E /* MCOIMAPIdentityOperation.mm in Sources */,
 				C6F61F9617016B310073032E /* MCOIMAPCapabilityOperation.mm in Sources */,
@@ -3059,7 +3037,6 @@
 				C6BA2BAC1705F4E6003F0E9E /* MCOperation.cc in Sources */,
 				C6BA2BAD1705F4E6003F0E9E /* MCOperationQueue.cc in Sources */,
 				C6BA2BAE1705F4E6003F0E9E /* MCIMAPFolder.cc in Sources */,
-				84D7377A199C00C9005124E5 /* MCONNTPArticleInfo.mm in Sources */,
 				C6BA2BAF1705F4E6003F0E9E /* MCIMAPMessage.cc in Sources */,
 				C6BA2BB01705F4E6003F0E9E /* MCIMAPMessagePart.cc in Sources */,
 				84D73776199C00AB005124E5 /* MCONNTPFetchArticlesOperation.mm in Sources */,
@@ -3183,7 +3160,6 @@
 				C6BA2C0C1705F4E6003F0E9E /* MCOIMAPFetchContentOperation.mm in Sources */,
 				C6BA2C0D1705F4E6003F0E9E /* MCOIMAPSearchOperation.mm in Sources */,
 				C6BA2C0E1705F4E6003F0E9E /* MCOIMAPIdleOperation.mm in Sources */,
-				849189A818C9477F002063A3 /* MCNNTPArticleInfo.cc in Sources */,
 				C6BA2C0F1705F4E6003F0E9E /* MCOIMAPFetchNamespaceOperation.mm in Sources */,
 				C6BA2C101705F4E6003F0E9E /* MCOIMAPIdentityOperation.mm in Sources */,
 				C6BA2C111705F4E6003F0E9E /* MCOIMAPCapabilityOperation.mm in Sources */,
