@@ -13,5 +13,6 @@
 #include <MailCore/MCAsyncSMTP.h>
 #include <MailCore/MCAsyncIMAP.h>
 #include <MailCore/MCAsyncPOP.h>
+#include <MailCore/MCAsyncNNTP.h>
 
 #endif

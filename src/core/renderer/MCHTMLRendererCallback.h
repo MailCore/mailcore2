@@ -45,6 +45,8 @@ namespace mailcore {
         virtual String * templateForEmbeddedMessageHeader(MessageHeader * header);
         virtual String * templateForAttachmentSeparator();
         
+        virtual String * cleanHTMLForPart(String * html);
+
         // Can be used to filter some HTML tags.
         virtual String * filterHTMLForPart(String * html);
         

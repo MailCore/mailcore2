@@ -14,6 +14,7 @@
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCIMAP.h>
 #include <MailCore/MCPOP.h>
+#include <MailCore/MCNNTP.h>
 #include <MailCore/MCRFC822.h>
 #include <MailCore/MCSMTP.h>
 #include <MailCore/MCRenderer.h>

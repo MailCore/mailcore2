@@ -146,6 +146,18 @@ String * MCOAbstractMessageRendererCallback::templateForAttachmentSeparator()
     return result;
 }
 
+String * MCOAbstractMessageRendererCallback::cleanHTMLForPart(String * html)
+{
+    String * result = NULL;
+    if ([mRendererDelegate respondsToSelector:@selector(MCOAbstractMessage:cleanHTMLForPart:)]) {
+        result = MCO_FROM_OBJC(String, [mRendererDelegate MCOAbstractMessage:mMessage cleanHTMLForPart:MCO_TO_OBJC(html)]);
+    }
+    if (result == NULL) {
+        result = HTMLRendererTemplateCallback::cleanHTMLForPart(html);
+    }
+    return result;
+}
+
 String * MCOAbstractMessageRendererCallback::filterHTMLForPart(String * html)
 {
     String * result = NULL;

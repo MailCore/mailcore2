@@ -37,6 +37,7 @@ extern "C" {
     struct mailimap_envelope;
     typedef struct mailpop3 mailpop3;
     typedef struct mailsmtp mailsmtp;
+    typedef struct newsnntp newsnntp;
     struct mailsem;
 #ifdef __cplusplus
 }

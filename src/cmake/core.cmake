@@ -64,6 +64,11 @@ set(pop_files
   core/pop/MCPOPSession.cc
 )
 
+set(nntp_files
+  core/nntp/MCNNTPGroupInfo.cc
+  core/nntp/MCNNTPSession.cc
+)
+
 set(provider_files
   core/provider/MCMailProvider.cc
   core/provider/MCMailProvidersManager.cc
@@ -110,6 +115,7 @@ set(core_files
   ${abstract_files}
   ${imap_files}
   ${pop_files}
+  ${nntp_files}
   ${renderer_files}
   ${rfc822_files}
   ${security_files}
@@ -125,6 +131,7 @@ set(core_includes
   "${CMAKE_CURRENT_SOURCE_DIR}/core/basetypes"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/imap"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/pop"
+  "${CMAKE_CURRENT_SOURCE_DIR}/core/nntp"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/provider"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/renderer"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/rfc822"

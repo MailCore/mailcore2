@@ -19,17 +19,17 @@ static mailcore::String * displayName = NULL;
 static mailcore::String * email = NULL;
 
 class TestOperation : public mailcore::Operation {
-	void main()
-	{
-		MCLog("coin %p", this);
-	}
+    void main()
+    {
+        MCLog("coin %p", this);
+    }
 };
 
 class TestCallback : public mailcore::Object, public mailcore::OperationCallback {
-	virtual void operationFinished(mailcore::Operation * op)
-	{
-		MCLog("callback coin %p %p %s", this, op, MCUTF8DESC(this));
-	}
+    virtual void operationFinished(mailcore::Operation * op)
+    {
+        MCLog("callback coin %p %p %s", this, op, MCUTF8DESC(this));
+    }
 };
 
 static mailcore::Data * testMessageBuilder()
@@ -146,15 +146,35 @@ static void testPOP()
     session->release();
 }
 
+static void testNNTP()
+{
+    mailcore::NNTPSession * session;
+    mailcore::ErrorCode error;
+    
+    session = new mailcore::NNTPSession();
+    session->setHostname(MCSTR("news.gmane.org."));
+    session->setPort(119);
+//    session->setUsername(email);
+//    session->setPassword(password);
+    session->setConnectionType(mailcore::ConnectionTypeClear);
+    
+    session->checkAccount(&error);
+    mailcore::Array * messages = session->listAllNewsgroups(&error);
+    MCLog("%s", MCUTF8DESC(messages));
+    
+    session->release();
+
+}
+
 static void testOperationQueue()
 {
     mailcore::OperationQueue * queue = new mailcore::OperationQueue();
     
-	TestCallback * callback = new TestCallback();
-	
+    TestCallback * callback = new TestCallback();
+
     for(unsigned int i = 0 ; i < 100 ; i ++) {
         mailcore::Operation * op = new TestOperation();
-		op->setCallback(callback);
+        op->setCallback(callback);
         queue->addOperation(op);
         op->release();
     }
@@ -165,14 +185,14 @@ static void testOperationQueue()
 }
 
 class TestSMTPCallback : public mailcore::Object, public mailcore::OperationCallback, public mailcore::SMTPOperationCallback {
-	virtual void operationFinished(mailcore::Operation * op)
-	{
-		MCLog("callback %s %s", MCUTF8DESC(op), MCUTF8DESC(this));
-	}
+    virtual void operationFinished(mailcore::Operation * op)
+    {
+        MCLog("callback %s %s", MCUTF8DESC(op), MCUTF8DESC(this));
+    }
     
     virtual void bodyProgress(mailcore::SMTPOperation * op, unsigned int current, unsigned int maximum)
     {
-		MCLog("progress %s %s %i/%i", MCUTF8DESC(op), MCUTF8DESC(this), current, maximum);
+        MCLog("progress %s %s %i/%i", MCUTF8DESC(op), MCUTF8DESC(this), current, maximum);
     }
 };
 
@@ -200,20 +220,20 @@ static void testAsyncSMTP(mailcore::Data * data)
 }
 
 class TestIMAPCallback : public mailcore::Object, public mailcore::OperationCallback, public mailcore::IMAPOperationCallback {
-	virtual void operationFinished(mailcore::Operation * op)
-	{
+    virtual void operationFinished(mailcore::Operation * op)
+    {
         mailcore::IMAPFetchMessagesOperation * fetchOp = (mailcore::IMAPFetchMessagesOperation *) op;
-		//MCLog("callback %s %s %s", MCUTF8DESC(op), MCUTF8DESC(fetchOp->messages()), MCUTF8DESC(this));
-	}
+        //MCLog("callback %s %s %s", MCUTF8DESC(op), MCUTF8DESC(fetchOp->messages()), MCUTF8DESC(this));
+    }
     
     virtual void bodyProgress(mailcore::IMAPOperation * op, unsigned int current, unsigned int maximum)
     {
-		MCLog("progress %s %s %i/%i", MCUTF8DESC(op), MCUTF8DESC(this), current, maximum);
+        MCLog("progress %s %s %i/%i", MCUTF8DESC(op), MCUTF8DESC(this), current, maximum);
     }
     
     virtual void itemProgress(mailcore::IMAPOperation * op, unsigned int current, unsigned int maximum)
     {
-		MCLog("item progress %s %s %i/%i", MCUTF8DESC(op), MCUTF8DESC(this), current, maximum);
+        MCLog("item progress %s %s %i/%i", MCUTF8DESC(op), MCUTF8DESC(this), current, maximum);
     }
 };
 
@@ -244,15 +264,15 @@ static void testAsyncIMAP()
 }
 
 class TestPOPCallback : public mailcore::Object, public mailcore::OperationCallback, public mailcore::POPOperationCallback {
-	virtual void operationFinished(mailcore::Operation * op)
-	{
+    virtual void operationFinished(mailcore::Operation * op)
+    {
         mailcore::POPFetchMessagesOperation * fetchOp = (mailcore::POPFetchMessagesOperation *) op;
-		MCLog("callback %s %s", MCUTF8DESC(fetchOp->messages()), MCUTF8DESC(this));
-	}
+        MCLog("callback %s %s", MCUTF8DESC(fetchOp->messages()), MCUTF8DESC(this));
+    }
     
     virtual void bodyProgress(mailcore::IMAPOperation * op, unsigned int current, unsigned int maximum)
     {
-		MCLog("progress %s %s %i/%i", MCUTF8DESC(op), MCUTF8DESC(this), current, maximum);
+        MCLog("progress %s %s %i/%i", MCUTF8DESC(op), MCUTF8DESC(this), current, maximum);
     }
 };
 
@@ -281,30 +301,30 @@ static void testAsyncPOP()
 
 static void testAddresses()
 {
-	mailcore::Address *addr = mailcore::Address::addressWithNonEncodedRFC822String(MCSTR("DINH Viêt Hoà <hoa@etpan.org>"));
+    mailcore::Address *addr = mailcore::Address::addressWithNonEncodedRFC822String(MCSTR("DINH Viêt Hoà <hoa@etpan.org>"));
     MCLog("%s %s", MCUTF8DESC(addr->nonEncodedRFC822String()), MCUTF8DESC(addr->RFC822String()));
-	
-	mailcore::Array *addresses = mailcore::Address::addressesWithNonEncodedRFC822String(MCSTR("My Email1 <email1@gmail.com>, DINH Viêt Hoà <hoa@etpan.org>,\"Email3, My\" <my.email@gmail.com>"));
+    
+    mailcore::Array *addresses = mailcore::Address::addressesWithNonEncodedRFC822String(MCSTR("My Email1 <email1@gmail.com>, DINH Viêt Hoà <hoa@etpan.org>,\"Email3, My\" <my.email@gmail.com>"));
     MCLog("%s", MCUTF8DESC(addresses));
-	mailcore::String *str = mailcore::Address::nonEncodedRFC822StringForAddresses(addresses);
+    mailcore::String *str = mailcore::Address::nonEncodedRFC822StringForAddresses(addresses);
     MCLog("%s", MCUTF8DESC(str));
-	str = mailcore::Address::RFC822StringForAddresses(addresses);
+    str = mailcore::Address::RFC822StringForAddresses(addresses);
     MCLog("%s", MCUTF8DESC(str));
 }
 
 static void testProviders() {
-	NSString *filename =  [[NSBundle bundleForClass:[MCOMessageBuilder class]] pathForResource:@"providers" ofType:@"json"];
-	mailcore::MailProvidersManager::sharedManager()->registerProvidersWithFilename(filename.mco_mcString);
-	
-	NSLog(@"Providers: %s", MCUTF8DESC(mailcore::MailProvidersManager::sharedManager()->providerForEmail(MCSTR("email1@gmail.com"))));
+    NSString *filename =  [[NSBundle bundleForClass:[MCOMessageBuilder class]] pathForResource:@"providers" ofType:@"json"];
+    mailcore::MailProvidersManager::sharedManager()->registerProvidersWithFilename(filename.mco_mcString);
+    
+    NSLog(@"Providers: %s", MCUTF8DESC(mailcore::MailProvidersManager::sharedManager()->providerForEmail(MCSTR("email1@gmail.com"))));
 }
 
 static void testAttachments()
 {
-	mailcore::Attachment *attachment = mailcore::Attachment::attachmentWithText(MCSTR("Hello World"));
-	attachment->setCharset(NULL);
-	mailcore::String * str = attachment->decodedString();
-	MCLog("%s", MCUTF8DESC(str));
+    mailcore::Attachment *attachment = mailcore::Attachment::attachmentWithText(MCSTR("Hello World"));
+    attachment->setCharset(NULL);
+    mailcore::String * str = attachment->decodedString();
+    MCLog("%s", MCUTF8DESC(str));
 }
 
 void testObjC()
@@ -346,7 +366,7 @@ void testObjC()
 void testAll()
 {
     mailcore::setICUDataDirectory(MCSTR("/usr/local/share/icu"));
-	
+    
     email = MCSTR("email@gmail.com");
     password = MCSTR("MyP4ssw0rd");
     displayName = MCSTR("My Email");
@@ -360,12 +380,13 @@ void testAll()
     //testSMTP(data);
     //testIMAP();
     //testPOP();
+    //testNNTP();
     //testAsyncSMTP(data);
     //testAsyncIMAP();
     //testAsyncPOP();
     //testAddresses();
-	//testAttachments();
-	//testProviders();
+    //testAttachments();
+    //testProviders();
     //testObjC();
     
     MCLog("pool release");
