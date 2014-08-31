@@ -57,7 +57,7 @@ static NSString * MCOLocalizedDescriptionTable[] = {
     }
     
     NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
-    if (code < MCOErrorCodeCount) {
+    if ((NSInteger) code < MCOErrorCodeCount) {
         NSString * localizedString = NSLocalizedStringFromTable(MCOLocalizedDescriptionTable[code], @"description of errors of mailcore", @"MailCore");
         [userInfo setObject:localizedString forKey:NSLocalizedDescriptionKey];
     }
