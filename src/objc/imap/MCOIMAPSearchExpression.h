@@ -91,6 +91,15 @@
 + (MCOIMAPSearchExpression *) searchContent:(NSString *)value;
 
 /**
+ Creates a search expression that matches the body of an email.
+ 
+ Example:
+ 
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchBody:@"building"]
+ */
++ (MCOIMAPSearchExpression *) searchBody:(NSString *)value;
+
+/**
  Creates a search expression that matches the uids specified.
  
  Example:

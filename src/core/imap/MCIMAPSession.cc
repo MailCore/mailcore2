@@ -2755,6 +2755,10 @@ static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpr
         {
             return mailimap_search_key_new_text(strdup(expression->value()->UTF8Characters()));
         }
+        case IMAPSearchKindBody:
+        {
+            return mailimap_search_key_new_body(strdup(expression->value()->UTF8Characters()));
+        }
         case IMAPSearchKindUIDs:
         {
             return mailimap_search_key_new_uid(setFromIndexSet(expression->uids()));
