@@ -26,6 +26,7 @@ namespace mailcore {
         virtual uint64_t modSequenceValue();
         virtual int messageCount();
         virtual uint32_t firstUnseenUid();
+        virtual bool allowsNewPermanentFlags();
         
     public: // subclass behavior
         virtual void main();
@@ -37,7 +38,8 @@ namespace mailcore {
         uint64_t mModSequenceValue;
         int mMessageCount;
         uint32_t mFirstUnseenUid;
-        
+        bool mAllowsNewPermanentFlags;
+      
     };
 
 }

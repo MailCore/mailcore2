@@ -20,6 +20,7 @@ IMAPFolderInfoOperation::IMAPFolderInfoOperation()
     mMessageCount = 0;
     mModSequenceValue = 0;
     mFirstUnseenUid = 0;
+    mAllowsNewPermanentFlags = false;
 }
 
 IMAPFolderInfoOperation::~IMAPFolderInfoOperation()
@@ -51,6 +52,11 @@ uint32_t IMAPFolderInfoOperation::firstUnseenUid()
     return mFirstUnseenUid;
 }
 
+bool IMAPFolderInfoOperation::allowsNewPermanentFlags()
+{
+    return mAllowsNewPermanentFlags;
+}
+
 void IMAPFolderInfoOperation::main()
 {
     ErrorCode error;
@@ -73,7 +79,8 @@ void IMAPFolderInfoOperation::main()
     mModSequenceValue = session()->session()->modSequenceValue();
     mMessageCount = session()->session()->lastFolderMessageCount();
     mFirstUnseenUid = session()->session()->firstUnseenUid();
-    
+    mAllowsNewPermanentFlags = session()->session()->allowsNewPermanentFlags();
+  
     setError(error);
 }
 

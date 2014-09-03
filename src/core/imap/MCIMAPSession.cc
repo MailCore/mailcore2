@@ -1077,7 +1077,20 @@ void IMAPSession::select(String * folder, ErrorCode * pError)
             mFirstUnseenUid = 0;
         }
         
-        
+        if (mImap->imap_selection_info->sel_perm_flags) {
+          clistiter * cur;
+
+          struct mailimap_flag_perm * perm_flag;
+          for(cur = clist_end(mImap->imap_selection_info->sel_perm_flags) ; cur != NULL ;
+              cur = clist_previous(cur)) {
+            perm_flag = (struct mailimap_flag_perm *)clist_content(cur);
+            mAllowsNewPermanentFlags = perm_flag->fl_type == MAILIMAP_FLAG_PERM_ALL;
+            if (mAllowsNewPermanentFlags) {
+              break;
+            }
+          }
+        }
+      
         mModSequenceValue = get_mod_sequence_value(mImap);
     }
 
@@ -3692,6 +3705,10 @@ bool IMAPSession::isNamespaceEnabled()
 bool IMAPSession::isCompressionEnabled()
 {
     return mCompressionEnabled;
+}
+
+bool IMAPSession::allowsNewPermanentFlags() {
+    return mAllowsNewPermanentFlags;
 }
 
 bool IMAPSession::isDisconnected()

@@ -167,7 +167,8 @@ namespace mailcore {
         virtual bool isXOAuthEnabled();
         virtual bool isNamespaceEnabled();
         virtual bool isCompressionEnabled();
-        
+        virtual bool allowsNewPermanentFlags(); 
+      
         virtual String * gmailUserDisplayName();
         
         virtual void setConnectionLogger(ConnectionLogger * logger);
@@ -227,6 +228,7 @@ namespace mailcore {
         bool mNamespaceEnabled;
         bool mCompressionEnabled;
         bool mIsGmail;
+        bool mAllowsNewPermanentFlags;
         String * mWelcomeString;
         bool mNeedsMboxMailWorkaround;
         uint32_t mUIDValidity;
