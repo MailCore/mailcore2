@@ -180,9 +180,9 @@ typedef NS_ENUM(NSInteger, MCOIMAPSearchKind) {
     MCOIMAPSearchKindRecipient,
     /** Match subject.*/
     MCOIMAPSearchKindSubject,
-    /** Match content of the message.*/
+    /** Match content of the message, including the headers.*/
     MCOIMAPSearchKindContent,
-    /** Match body of the message.*/
+    /** Match content of the message, excluding the headers.*/
     MCOIMAPSearchKindBody,
     /** Match uids */
     MCOIMAPSearchKindUids,

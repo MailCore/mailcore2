@@ -82,7 +82,7 @@
 + (MCOIMAPSearchExpression *) searchSubject:(NSString *)value;
 
 /**
- Creates a search expression that matches the content of an email.
+ Creates a search expression that matches the content of an email, including the headers.
 
  Example:
 
@@ -91,7 +91,7 @@
 + (MCOIMAPSearchExpression *) searchContent:(NSString *)value;
 
 /**
- Creates a search expression that matches the body of an email.
+ Creates a search expression that matches the content of an email, excluding the headers.
  
  Example:
  
