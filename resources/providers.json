@@ -1,5 +1,43 @@
 {
-	"zoho":{
+    "mail":{
+        "servers":{
+            "imap":[
+                    {
+                    "port": 993,
+                    "hostname":"imap.mail.com",
+                    "ssl":true
+                    }
+                    ],
+            "pop":[
+                   {
+                   "port": 995,
+                   "hostname":"pop.mail.com",
+                   "ssl":true
+                   }
+                   ],
+            "smtp":[
+                    {
+                    "port":587,
+                    "hostname":"smtp.mail.com",
+                    "ssl":true
+                    },
+                    {
+                    "port":465,
+                    "hostname":"smtp.mail.com",
+                    "ssl":true
+                    },
+                    {
+                    "port":25,
+                    "hostname":"smtp.mail.com",
+                    "ssl":true
+                    }
+                    ]
+        },
+        "domain-match":[
+                        "mail\\.com"
+                        ]
+    },
+    "zoho":{
         "servers":{
             "imap":[
                    {
