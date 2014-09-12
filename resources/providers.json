@@ -1,5 +1,38 @@
 {
-	"juno":{
+	"zoho":{
+        "servers":{
+            "imap":[
+                   {
+                   "port": 993,
+                   "hostname":"imap.zoho.com",
+                   "ssl":true
+                   }
+                   ],
+            "pop":[
+                   {
+                   "port": 995,
+                   "hostname":"pop.zoho.com",
+                   "ssl":true
+                   }
+                   ],
+            "smtp":[
+                    {
+                    "port":465,
+                    "hostname":"smtp.zoho.com",
+                    "ssl":true
+                    },
+                    {
+                    "port":587,
+                    "hostname":"smtp.zoho.com",
+                    "starttls":true
+                    }
+                    ]
+        },
+        "domain-match":[
+                        "zoho\\.com"
+                        ]
+    },
+    "juno":{
         "servers":{
             "pop":[
                     {
