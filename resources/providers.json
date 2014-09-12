@@ -1,4 +1,25 @@
 {
+	"juno":{
+        "servers":{
+            "pop":[
+                    {
+					"port": 995,
+                    "hostname":"pop.juno.com",
+                    "ssl":true
+                    }
+                    ],
+            "smtp":[
+                    {
+                    "port":465,
+                    "hostname":"smtp.juno.com",
+                    "starttls":true
+                    }
+                    ]
+        },
+        "domain-match":[
+                        "juno\\.com"
+                        ]
+    },
     "mobileme":{
         "servers":{
             "imap":[
