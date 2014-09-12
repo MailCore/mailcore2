@@ -1,4 +1,42 @@
 {
+    "hushmail":{
+        "servers":{
+            "imap":[
+                    {
+                    "port": 993,
+                    "hostname":"imap.hushmail.com",
+                    "ssl":true
+                    }
+                    ],
+            "pop":[
+                   {
+                   "port": 995,
+                   "hostname":"pop.hushmail.com",
+                   "ssl":true
+                   }
+                   ],
+            "smtp":[
+                    {
+                    "port":587,
+                    "hostname":"smtp.hushmail.com",
+                    "ssl":true
+                    },
+                    {
+                    "port":465,
+                    "hostname":"smtp.hushmail.com",
+                    "ssl":true
+                    },
+                    {
+                    "port":25,
+                    "hostname":"smtp.hushmail.com",
+                    "starttls":true
+                    }
+                    ]
+        },
+        "domain-match":[
+                        "hushmail\\.com"
+                        ]
+    },
     "mail":{
         "servers":{
             "imap":[
