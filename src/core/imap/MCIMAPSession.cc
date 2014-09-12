@@ -378,6 +378,7 @@ void IMAPSession::init()
     mNamespaceEnabled = false;
     mCompressionEnabled = false;
     mIsGmail = false;
+    mAllowsNewPermanentFlags = false;
     mWelcomeString = NULL;
     mNeedsMboxMailWorkaround = false;
     mDefaultNamespace = NULL;
