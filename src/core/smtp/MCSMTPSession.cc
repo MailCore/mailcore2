@@ -323,7 +323,7 @@ void SMTPSession::connect(ErrorCode * pError)
             
         default:
             r = mailsmtp_socket_connect(mSmtp, MCUTF8(hostname()), port());
-            if (r != MAILIMAP_NO_ERROR) {
+            if (r != MAILSMTP_NO_ERROR) {
                 * pError = ErrorConnection;
                 goto close;
             }

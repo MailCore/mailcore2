@@ -241,7 +241,7 @@ void POPSession::connect(ErrorCode * pError)
 
         default:
         r = mailpop3_socket_connect(mPop, MCUTF8(hostname()), port());
-        if (r != MAILIMAP_NO_ERROR) {
+        if (r != MAILPOP3_NO_ERROR) {
             * pError = ErrorConnection;
             return;
         }
