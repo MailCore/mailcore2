@@ -3,7 +3,7 @@
         "servers":{
             "pop":[
                     {
-					"port": 995,
+		    "port": 995,
                     "hostname":"pop.juno.com",
                     "ssl":true
                     }
