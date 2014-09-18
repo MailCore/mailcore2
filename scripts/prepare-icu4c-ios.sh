@@ -95,7 +95,10 @@ make # >> "$logdir/icu4c-build.log"
 make install "prefix=$tmpdir/crossbuild/icu4c-$MARCH" # >> "$logdir/icu4c-build.log"
 
 ARCH=arm
-if xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
+if xcodebuild -showsdks|grep iphoneos7.1 >/dev/null ; then
+    sdkversion=7.1
+    MARCHS="armv7 armv7s arm64"
+elif xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
     sdkversion=7.0
     MARCHS="armv7 armv7s arm64"
 elif xcodebuild -showsdks|grep iphoneos6.1 >/dev/null ; then
