@@ -25,6 +25,8 @@ AbstractPart::AbstractPart(AbstractPart * other)
     setContentID(other->mContentID);
     setContentLocation(other->mContentLocation);
     setContentDescription(other->mContentDescription);
+    setTransferEncoding(other->mTransferEncoding);
+    setDisposition(other->mDisposition);
     setInlineAttachment(other->mInlineAttachment);
     setPartType(other->mPartType);
 }
@@ -39,6 +41,8 @@ void AbstractPart::init()
     mContentLocation = NULL;
     mContentDescription = NULL;
     mInlineAttachment = false;
+    mTransferEncoding = NULL;
+    mDisposition = NULL;
     mPartType = PartTypeSingle;
 }
 
@@ -51,6 +55,8 @@ AbstractPart::~AbstractPart()
     MC_SAFE_RELEASE(mContentID);
     MC_SAFE_RELEASE(mContentLocation);
     MC_SAFE_RELEASE(mContentDescription);
+    MC_SAFE_RELEASE(mTransferEncoding);
+    MC_SAFE_RELEASE(mDisposition);
 }
 
 String * AbstractPart::description()
@@ -75,6 +81,13 @@ String * AbstractPart::description()
     if (mContentDescription != NULL) {
         result->appendUTF8Format("content-description: %s\n", mContentDescription->UTF8Characters());
     }
+	if (mTransferEncoding != NULL) {
+		result->appendUTF8Format("content-transfer-encoding: %s\n", mTransferEncoding->UTF8Characters());
+	}
+	if (mDisposition != NULL) {
+		result->appendUTF8Format("content-disposition: %s\n", mDisposition->UTF8Characters());
+	}
+	
     result->appendUTF8Format("inline: %i\n", mInlineAttachment);
     result->appendUTF8Format(">");
     
@@ -174,6 +187,26 @@ bool AbstractPart::isInlineAttachment()
 void AbstractPart::setInlineAttachment(bool inlineAttachment)
 {
     mInlineAttachment = inlineAttachment;
+}
+
+String * AbstractPart::transferEncoding()
+{
+	return mTransferEncoding;
+}
+
+void AbstractPart::setTransferEncoding(String *transferEncoding)
+{
+	MC_SAFE_REPLACE_COPY(String, mTransferEncoding, transferEncoding);
+}
+
+String * AbstractPart::disposition()
+{
+	return mDisposition;
+}
+
+void AbstractPart::setDisposition(String *disposition)
+{
+	MC_SAFE_REPLACE_COPY(String, mDisposition, disposition);
 }
 
 void AbstractPart::importIMAPFields(struct mailimap_body_fields * fields,
@@ -294,6 +327,7 @@ void AbstractPart::applyUniquePartID()
             case PartTypeMultipartMixed:
             case PartTypeMultipartRelated:
             case PartTypeMultipartAlternative:
+			case PartTypeMultipartEncrypted:
             case PartTypeMultipartSigned:
                 queue->addObjectsFromArray(((AbstractMultipart *) part)->parts());
                 break;
@@ -328,6 +362,12 @@ HashMap * AbstractPart::serializable()
     if (contentDescription() != NULL) {
         result->setObjectForKey(MCSTR("contentDescription"), contentDescription());
     }
+	if (transferEncoding() != NULL) {
+        result->setObjectForKey(MCSTR("contentTransferEncoding"), transferEncoding());
+    }
+	if (disposition() != NULL) {
+        result->setObjectForKey(MCSTR("contentDisposition"), disposition());
+    }
     if (mInlineAttachment) {
         result->setObjectForKey(MCSTR("inlineAttachment"), MCSTR("1"));
     }
@@ -349,6 +389,9 @@ HashMap * AbstractPart::serializable()
         case PartTypeMultipartAlternative:
             partTypeStr = MCSTR("multipart/alternative");
             break;
+		case PartTypeMultipartEncrypted:
+            partTypeStr = MCSTR("multipart/encrypted");
+			
         case PartTypeMultipartSigned:
             partTypeStr = MCSTR("multipart/signed");
             break;
@@ -367,6 +410,9 @@ void AbstractPart::importSerializable(HashMap * serializable)
     setContentID((String *) serializable->objectForKey(MCSTR("contentID")));
     setContentLocation((String *) serializable->objectForKey(MCSTR("contentLocation")));
     setContentDescription((String *) serializable->objectForKey(MCSTR("contentDescription")));
+	setTransferEncoding((String *) serializable->objectForKey(MCSTR("contentTransferEncoding")));
+	setDisposition((String *) serializable->objectForKey(MCSTR("contentDisposition")));
+
     String * value = (String *) serializable->objectForKey(MCSTR("inlineAttachment"));
     if (value != NULL) {
         if (value->intValue()) {
@@ -390,6 +436,9 @@ void AbstractPart::importSerializable(HashMap * serializable)
         else if (value->isEqual(MCSTR("multipart/alternative"))) {
             setPartType(PartTypeMultipartAlternative);
         }
+		else if (value->isEqual(MCSTR("multipart/encrypted"))) {
+            setPartType(PartTypeMultipartEncrypted);
+		}
         else if (value->isEqual(MCSTR("multipart/signed"))) {
             setPartType(PartTypeMultipartSigned);
         }

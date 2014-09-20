@@ -42,6 +42,8 @@
 /** Returns string representation according to charset*/
 - (NSString *) decodedString;
 
++ (NSString *) decodedMIMEHeaderValue:(char *)mimestr;
+
 /** Adds a content type parameter.*/
 - (void) setContentTypeParameterValue:(NSString *)value forName:(NSString *)name;
 

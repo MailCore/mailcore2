@@ -4,19 +4,19 @@
             "imap":[
                 {
                     "port":993,
-                    "hostname":"mail.me.com",
+                    "hostname":"imap.mail.me.com",
                     "ssl":true
                 },
                 {
                     "port":143,
-                    "hostname":"mail.me.com",
+                    "hostname":"smtp.mail.me.com",
                     "starttls":true
                 }
             ],
             "smtp":[
                 {
                     "port":587,
-                    "hostname":"smtp.me.com",
+                    "hostname":"smtp.mail.me.com",
                     "starttls":true
                 }
             ]

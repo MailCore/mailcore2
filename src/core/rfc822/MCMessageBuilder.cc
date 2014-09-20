@@ -3,11 +3,14 @@
 #include "MCMessageHeader.h"
 #include "MCAttachment.h"
 #include "MCMessageParser.h"
+#include "MCString.h"
 
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
 #include <libetpan/libetpan.h>
+#include <libetpan/clist.h>
+#include <libetpan/mailmime_disposition.h>
 
 using namespace mailcore;
 
@@ -39,6 +42,7 @@ static struct mailmime * get_multipart_related(const char * boundary_prefix)
 
 static int add_attachment(struct mailmime * mime,
     struct mailmime * mime_sub,
+    const char *explicit_content,
     const char * boundary_prefix)
 {
     struct mailmime * saved_sub;
@@ -87,8 +91,11 @@ static int add_attachment(struct mailmime * mime,
     saved_sub = mime->mm_data.mm_message.mm_msg_mime;
     
     /* create a multipart */
-    
+    if (explicit_content)
+		mp = part_multiple_new(explicit_content, boundary_prefix);
+	else
     mp = part_multiple_new("multipart/mixed", boundary_prefix);
+	
     if (mp == NULL) {
         res = MAILIMF_ERROR_MEMORY;
         goto err;
@@ -206,11 +213,14 @@ static struct mailmime * get_other_text_part(const char * mime_type, const char 
 static struct mailmime * get_file_part(const char * filename, const char * mime_type, int is_inline,
                                        const char * content_id,
                                        const char * content_description,
-                                       const char * text, size_t length, clist * contentTypeParameters)
+									   int explicit_encoding,
+									   const char *explicit_disposition,
+                                       const char * text, size_t length,
+                                       clist * contentTypeParameters)
 {
     char * disposition_name;
     int encoding_type;
-    struct mailmime_disposition * disposition;
+    struct mailmime_disposition * disposition = NULL;
     struct mailmime_mechanism * encoding;
     struct mailmime_content * content;
     struct mailmime * mime;
@@ -222,6 +232,15 @@ static struct mailmime * get_file_part(const char * filename, const char * mime_
     if (filename != NULL) {
         disposition_name = strdup(filename);
     }
+	if (explicit_disposition != NULL) {
+		size_t idx = 0;
+		int r = mailmime_disposition_parse(explicit_disposition, strlen(explicit_disposition),
+										   &idx, &disposition);
+		if (r != 0)
+			disposition = NULL;
+
+	}
+	if (disposition == NULL) {
     if (is_inline) {
         disposition = mailmime_disposition_new_with_data(MAILMIME_DISPOSITION_TYPE_INLINE,
                                                          disposition_name, NULL, NULL, NULL, (size_t) -1);
@@ -230,8 +249,11 @@ static struct mailmime * get_file_part(const char * filename, const char * mime_
         disposition = mailmime_disposition_new_with_data(MAILMIME_DISPOSITION_TYPE_ATTACHMENT,
                                                          disposition_name, NULL, NULL, NULL, (size_t) -1);
     }
+	}
     content = mailmime_content_new_with_str(mime_type);
-    
+    if (explicit_encoding > 0)
+		encoding_type = explicit_encoding;
+	else
     encoding_type = MAILMIME_MECHANISM_BASE64;
     encoding = mailmime_mechanism_new(encoding_type, NULL);
     dup_content_id = NULL;
@@ -254,7 +276,6 @@ static struct mailmime * get_file_part(const char * filename, const char * mime_
 }
 
 #define MIME_ENCODED_STR(str) (str != NULL ? str->encodedMIMEHeaderValue()->bytes() : NULL)
-
 static clist * content_type_parameters_from_attachment(Attachment * att)
 {
     clist * contentTypeParameters = NULL;
@@ -282,6 +303,30 @@ static struct mailmime * mime_from_attachment(Attachment * att)
     if (data == NULL) {
         data = Data::data();
     }
+	int explicit_encoding = -1;
+	char *explicit_disp = NULL;
+	
+	if (att->transferEncoding()) {
+		int type = MAILMIME_MECHANISM_ERROR;
+		
+		if (att->transferEncoding()->lowercaseString()->isEqual(MCSTR("7bit"))) {
+			type = MAILMIME_MECHANISM_7BIT;
+		} else if (att->transferEncoding()->lowercaseString()->isEqual(MCSTR("8bit"))) {
+			type = MAILMIME_MECHANISM_8BIT;
+		} else if (att->transferEncoding()->lowercaseString()->isEqual(MCSTR("binary"))) {
+			type = MAILMIME_MECHANISM_BINARY;
+		} else if (att->transferEncoding()->lowercaseString()->isEqual(MCSTR("quoted-printable"))) {
+			type = MAILMIME_MECHANISM_QUOTED_PRINTABLE;
+		} else if (att->transferEncoding()->lowercaseString()->isEqual(MCSTR("base64"))) {
+			type = MAILMIME_MECHANISM_BASE64;
+		} /* TODO: TOKEN */
+		explicit_encoding = type;
+	}
+	if (att->disposition() != NULL) {
+		/* override the content-disposition */
+		explicit_disp = (char *)att->disposition()->UTF8Characters();
+	}
+
     if (att->mimeType()->lowercaseString()->isEqual(MCSTR("message/rfc822"))) {
         size_t indx = 0;
         r = mailmime_parse(data->bytes(), data->length(), &indx, &mime);
@@ -291,29 +336,32 @@ static struct mailmime * mime_from_attachment(Attachment * att)
     else {
         clist * contentTypeParameters = content_type_parameters_from_attachment(att);
         if (att->isInlineAttachment() && att->mimeType()->lowercaseString()->isEqual(MCSTR("text/plain"))) {
-            mime = get_plain_text_part(MCUTF8(att->mimeType()), MCUTF8(att->charset()),
+			if (explicit_encoding != -1)
+				mime = get_text_part(MCUTF8(att->mimeType()), MCUTF8(att->charset()),
                                        MCUTF8(att->contentID()),
                                        MIME_ENCODED_STR(att->contentDescription()),
-                                       data->bytes(), data->length(),
+									 data->bytes(), data->length(), explicit_encoding,
                                        contentTypeParameters);
+			else
+				mime = get_plain_text_part(MCUTF8(att->mimeType()), MCUTF8(att->charset()),
+										   MCUTF8(att->contentID()),
+										   MIME_ENCODED_STR(att->contentDescription()),
+										   data->bytes(), data->length(), contentTypeParameters);
         }
         else if (att->isInlineAttachment() && att->mimeType()->lowercaseString()->hasPrefix(MCSTR("text/"))) {
             mime = get_other_text_part(MCUTF8(att->mimeType()), MCUTF8(att->charset()),
                                        MCUTF8(att->contentID()),
                                        MIME_ENCODED_STR(att->contentDescription()),
-                                       data->bytes(), data->length(),
-                                       contentTypeParameters);
-        }
-        else {
+            data->bytes(), data->length(), contentTypeParameters);
+		} else {
             mime = get_file_part(MIME_ENCODED_STR(att->filename()),
                                  MCUTF8(att->mimeType()), att->isInlineAttachment(),
                                  MCUTF8(att->contentID()),
                                  MIME_ENCODED_STR(att->contentDescription()),
+								 explicit_encoding,
+								 explicit_disp,
                                  data->bytes(), data->length(),
                                  contentTypeParameters);
-        }
-        if (contentTypeParameters != NULL) {
-            clist_free(contentTypeParameters);
         }
     }
     return mime;
@@ -329,14 +377,14 @@ static struct mailmime * multipart_related_from_attachments(Attachment * htmlAtt
         mime = get_multipart_related(boundary_prefix);
         
         submime = mime_from_attachment(htmlAttachment);
-        add_attachment(mime, submime, boundary_prefix);
+        add_attachment(mime, submime, NULL, boundary_prefix);
         
         for(unsigned int i = 0 ; i < attachments->count() ; i ++) {
             Attachment * attachment;
             
             attachment = (Attachment *) attachments->objectAtIndex(i);
             submime = mime_from_attachment(attachment);
-            add_attachment(mime, submime, boundary_prefix);
+            add_attachment(mime, submime, NULL, boundary_prefix);
         }
         
         return mime;
@@ -519,6 +567,7 @@ void MessageBuilder::init()
     mAttachments = NULL;
     mRelatedAttachments = NULL;
     mBoundaryPrefix = NULL;
+	mContentType = NULL;
 }
     
 MessageBuilder::MessageBuilder()
@@ -534,6 +583,7 @@ MessageBuilder::MessageBuilder(MessageBuilder * other) : AbstractMessage(other)
     setAttachments(other->mAttachments);
     setRelatedAttachments(other->mRelatedAttachments);
     MC_SAFE_REPLACE_COPY(String, mBoundaryPrefix, other->mBoundaryPrefix);
+	MC_SAFE_REPLACE_COPY(String, mContentType, other->mContentType);
 }
 
 MessageBuilder::~MessageBuilder()
@@ -543,6 +593,7 @@ MessageBuilder::~MessageBuilder()
     MC_SAFE_RELEASE(mAttachments);
     MC_SAFE_RELEASE(mRelatedAttachments);
     MC_SAFE_RELEASE(mBoundaryPrefix);
+	MC_SAFE_RELEASE(mContentType);
 }
     
 String * MessageBuilder::description()
@@ -655,6 +706,77 @@ String * MessageBuilder::boundaryPrefix()
     return mBoundaryPrefix;
 }
 
+void MessageBuilder::setContentType(String * mpContentType)
+{
+    MC_SAFE_REPLACE_COPY(String, mContentType, mpContentType);
+}
+
+String * MessageBuilder::contentType()
+{
+    return mContentType;
+}
+
+String *MessageBuilder::renderAttachment(Attachment *attachment)
+{
+	struct mailmime * mime;
+    MMAPString * str;
+    int col;
+	String *mimestr;
+	
+	mime = mime_from_attachment(attachment);
+	
+	str = mmap_string_new("");
+    col = 0;
+	mmap_string_append (str, "Content-Type: ");
+	mailmime_content_type_write_mem(str, &col, mime->mm_content_type);
+	mmap_string_append (str, "\r\n");
+	mailmime_fields_write_mem(str, &col, mime->mm_mime_fields);
+	mmap_string_append (str, "\r\n");
+    mailmime_write_mem(str, &col, mime);
+    Data *data = Data::dataWithBytes(str->str, (unsigned int) str->len);
+	
+    mmap_string_free(str);
+    mailmime_free(mime);
+
+	mimestr = String::stringWithData(data);
+
+	return mimestr;
+}
+
+String *MessageBuilder::renderBody()
+{
+	struct mailmime * mime;
+    MMAPString * str;
+    int col, i;
+	Data *data;
+
+    mime = mailmime_new_message_data(NULL);
+	
+	char *ctstr = NULL;
+	if (mContentType)
+		ctstr = (char *)mContentType->UTF8Characters();
+	
+    if (attachments() != NULL) {
+        for(i = 0 ; i < attachments()->count() ; i ++) {
+            Attachment * attachment;
+            struct mailmime * submime;
+			
+            attachment = (Attachment *) attachments()->objectAtIndex(i);
+            submime = mime_from_attachment(attachment);
+            add_attachment(mime, submime, ctstr, MCUTF8(mBoundaryPrefix));
+        }
+    }
+    
+    str = mmap_string_new("");
+    col = 0;
+    mailmime_write_mem(str, &col, mime);
+    data = Data::dataWithBytes(str->str, (unsigned int) str->len);
+    mmap_string_free(str);
+    mailmime_free(mime);
+	
+	return String::stringWithData(data);
+}
+
 Data * MessageBuilder::dataAndFilterBcc(bool filterBcc)
 {
     Data * data;
@@ -714,8 +836,12 @@ Data * MessageBuilder::dataAndFilterBcc(bool filterBcc)
     mime = mailmime_new_message_data(NULL);
     mailmime_set_imf_fields(mime, fields);
 
+	char *ctstr = NULL;
+	if (mContentType)
+		ctstr = (char *)mContentType->UTF8Characters();
+	
     if (mainPart != NULL) {
-        add_attachment(mime, mainPart, MCUTF8(mBoundaryPrefix));
+        add_attachment(mime, mainPart, NULL, MCUTF8(mBoundaryPrefix));
     }
 
     if (attachments() != NULL) {
@@ -725,7 +851,7 @@ Data * MessageBuilder::dataAndFilterBcc(bool filterBcc)
 
             attachment = (Attachment *) attachments()->objectAtIndex(i);
             submime = mime_from_attachment(attachment);
-            add_attachment(mime, submime, MCUTF8(mBoundaryPrefix));
+            add_attachment(mime, submime, ctstr, MCUTF8(mBoundaryPrefix));
         }
     }
     

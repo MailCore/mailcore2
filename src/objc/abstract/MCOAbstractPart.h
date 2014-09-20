@@ -36,6 +36,10 @@ typedef NS_ENUM(NSInteger, MCOPartType) {
     // The part will be a MCOAbstractMultipart.
     MCOPartTypeMultipartAlternative,
     
+	// Used for multipart/encrypted messages (RFC 3156)
+	// The part will be a MCOAbstractMultipart
+	MCOPartTypeMultipartEncrypted,
+
     // Used for a signed message, multipart/signed.
     // The part will be a MCOAbstractMultipart.
     MCOPartTypeMultipartSigned,
@@ -44,7 +48,7 @@ typedef NS_ENUM(NSInteger, MCOPartType) {
 @interface MCOAbstractPart : NSObject <NSCopying>
 
 /** Returns type of the part (single / message part / multipart/mixed,
- multipart/related, multipart/alternative). See MCOPartType.*/
+ multipart/related, multipart/alternative,  multipart/encrypted). See MCOPartType.*/
 @property (nonatomic, assign) MCOPartType partType;
 
 /** Returns filename of the part.*/
@@ -69,6 +73,12 @@ typedef NS_ENUM(NSInteger, MCOPartType) {
 
 /** Returns the value of the Content-Description field of the part.*/
 @property (nonatomic, copy) NSString * contentDescription;
+
+/** Returns the value of the Content-Transfer-Encoding field of the part.*/
+@property (nonatomic, copy) NSString * transferEncoding;
+
+/** Returns the value of the Content-Disposition field of the part.*/
+@property (nonatomic, copy) NSString * disposition;
 
 /** Returns whether the part is an explicit inline attachment.*/
 @property (nonatomic, assign, getter=isInlineAttachment) BOOL inlineAttachment;

@@ -43,6 +43,12 @@ namespace mailcore {
         virtual bool isInlineAttachment();
         virtual void setInlineAttachment(bool inlineAttachment);
         
+		virtual String * transferEncoding();
+        virtual void setTransferEncoding(String *transferEncoding);
+		
+		virtual String * disposition();
+        virtual void setDisposition(String *disposition);
+
         virtual AbstractPart * partForContentID(String * contentID);
         virtual AbstractPart * partForUniqueID(String * uniqueID);
         
@@ -68,6 +74,9 @@ namespace mailcore {
         String * mContentID;
         String * mContentLocation;
         String * mContentDescription;
+		String * mTransferEncoding;
+		String * mDisposition;
+
         bool mInlineAttachment;
         PartType mPartType;
         void init();
