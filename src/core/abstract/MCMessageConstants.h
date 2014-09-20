@@ -256,7 +256,7 @@ namespace mailcore {
         PartTypeMultipartMixed,
         PartTypeMultipartRelated,
         PartTypeMultipartAlternative,
-		PartTypeMultipartEncrypted
+	PartTypeMultipartEncrypted,
         PartTypeMultipartSigned,
     };
     
