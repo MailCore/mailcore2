@@ -71,6 +71,8 @@ MCO_OBJC_SYNTHESIZE_STRING(setUniqueID, uniqueID)
 MCO_OBJC_SYNTHESIZE_STRING(setContentID, contentID)
 MCO_OBJC_SYNTHESIZE_STRING(setContentLocation, contentLocation)
 MCO_OBJC_SYNTHESIZE_STRING(setContentDescription, contentDescription)
+MCO_OBJC_SYNTHESIZE_STRING(setTransferEncoding, transferEncoding)
+MCO_OBJC_SYNTHESIZE_STRING(setDisposition, disposition)
 MCO_OBJC_SYNTHESIZE_BOOL(setInlineAttachment, isInlineAttachment)
 
 - (MCOAbstractPart *) partForContentID:(NSString *)contentID

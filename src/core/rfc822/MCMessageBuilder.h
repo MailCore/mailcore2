@@ -38,6 +38,10 @@ namespace mailcore {
         virtual void setBoundaryPrefix(String * boundaryPrefix);
         virtual String * boundaryPrefix();
         
+		// Explicity set the multipart message type (for RFC 3156)
+        virtual void setContentType(String * mpContentType);
+        virtual String * contentType();
+
         virtual Data * data();
         
         virtual String * htmlRendering(HTMLRendererTemplateCallback * htmlCallback = NULL);
@@ -46,6 +50,9 @@ namespace mailcore {
         virtual String * plainTextRendering();
         virtual String * plainTextBodyRendering(bool stripWhitespace);
         
+		virtual String *renderAttachment(Attachment *attachment);
+		virtual String *renderBody();
+
     public: // subclass behavior
         MessageBuilder(MessageBuilder * other);
         virtual String * description();
@@ -57,8 +64,10 @@ namespace mailcore {
         Array * /* Attachment */ mAttachments;
         Array * /* Attachment */ mRelatedAttachments;
         String * mBoundaryPrefix;
+		String * mContentType;
         void init();
         Data * dataAndFilterBcc(bool filterBcc);
+		int translate_encode(Encoding encode);
     };
     
 };

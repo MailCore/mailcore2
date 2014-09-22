@@ -57,6 +57,9 @@ String * AbstractMultipart::description()
         case PartTypeMultipartAlternative:
         partTypeName = "alternative";
         break;
+		case PartTypeMultipartEncrypted:
+			partTypeName = "encrypted";
+			break;
         case PartTypeMultipartSigned:
         partTypeName = "signed";
         break;

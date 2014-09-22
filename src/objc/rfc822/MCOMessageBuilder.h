@@ -49,6 +49,9 @@
 /** Prefix for the boundary identifier. Default value is nil.*/
 @property (nonatomic, copy) NSString * boundaryPrefix;
 
+/** Override the content type. Default value is nil.*/
+@property (nonatomic, copy) NSString * contentType;
+
 /** Add an attachment.*/
 - (void) addAttachment:(MCOAttachment *)attachment;
 
@@ -74,6 +77,9 @@
 /** Text rendering of the body of the message. All end of line will be removed and white spaces cleaned up if requested.
  This method can be used to generate the summary of the message.*/
 - (NSString *) plainTextBodyRenderingAndStripWhitespace:(BOOL)stripWhitespace;
+
+- (NSString *) renderAttachment:(MCOAttachment *)attachment;
+- (NSString *) renderBody;
 
 @end
 

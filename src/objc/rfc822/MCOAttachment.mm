@@ -90,6 +90,12 @@ MCO_OBJC_SYNTHESIZE_DATA(setData, data)
 	return [NSString mco_stringWithMCString:result];
 }
 
++ (NSString *) decodedMIMEHeaderValue:(char *)mimestr
+{
+	mailcore::String *mcstr = mailcore::String::stringByDecodingMIMEHeaderValue(mimestr);
+	return MCO_TO_OBJC(mcstr);
+}
+
 - (void) setContentTypeParameterValue:(NSString *)value forName:(NSString *)name
 {
     MCO_NATIVE_INSTANCE->setContentTypeParameter(MCO_FROM_OBJC(mailcore::String, name), MCO_FROM_OBJC(mailcore::String, value));

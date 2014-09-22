@@ -1,5 +1,5 @@
 #include "MCAttachment.h"
-
+#include "MCData.h"
 #include "MCMultipart.h"
 #include "MCMessagePart.h"
 #include "MCMessageHeader.h"
@@ -157,11 +157,11 @@ Attachment * Attachment::attachmentWithData(String * filename, Data * data)
     String * mimeType;
     
     attachment = new Attachment();
+	if (filename) {
     mimeType = Attachment::mimeTypeForFilename(filename);
     if (mimeType != NULL) {
         attachment->setMimeType(mimeType);
     }
-    if (filename != NULL) {
         attachment->setFilename(filename->lastPathComponent());
     }
     attachment->setData(data);
@@ -204,7 +204,6 @@ Attachment * Attachment::attachmentWithText(String * text)
     attachment->setMimeType(MCSTR("text/plain"));
     data = text->dataUsingEncoding("utf-8");
     attachment->setData(data);
-    
     return (Attachment *) attachment->autorelease();
 }
 
@@ -512,6 +511,27 @@ get_composite_type(struct mailmime_composite_type * composite_type)
     return NULL;
 }
 
+static const char *
+get_encoding_type(struct mailmime_mechanism *enc)
+{
+	switch (enc->enc_type) {
+		case MAILMIME_MECHANISM_7BIT:
+			return "7bit";
+		case MAILMIME_MECHANISM_8BIT:
+			return "8bit";
+		case MAILMIME_MECHANISM_BINARY:
+			return "binary";
+		case MAILMIME_MECHANISM_BASE64:
+			return "base64";
+		case MAILMIME_MECHANISM_QUOTED_PRINTABLE:
+			return "quoted-printable";
+		case MAILMIME_MECHANISM_TOKEN:
+			return "token";
+		default:
+			return NULL;
+	}
+}
+
 static char * get_content_type_str(struct mailmime_content * content)
 {
     const char * str;
@@ -570,8 +590,14 @@ Attachment * Attachment::attachmentWithSingleMIME(struct mailmime * mime)
     result->setUniqueID(mailcore::String::uuidString());
     
     data = mime->mm_data.mm_single;
+	if (data->dt_type == MAILMIME_DATA_TEXT) {
     bytes = data->dt_data.dt_text.dt_data;
     length = data->dt_data.dt_text.dt_length;
+	} else {
+		Data *d = Data::dataWithContentsOfFile(String::stringWithUTF8Characters(data->dt_data.dt_filename));
+		bytes = d->bytes();
+		length = d->length();
+	}
     
     mailmime_single_fields_init(&single_fields, mime->mm_mime_fields, mime->mm_content_type);
     
@@ -611,6 +637,10 @@ Attachment * Attachment::attachmentWithSingleMIME(struct mailmime * mime)
     if (loc != NULL) {
         result->setContentLocation(String::stringWithUTF8Characters(loc));
     }
+    if (single_fields.fld_encoding) {
+		str = (char *)get_encoding_type(single_fields.fld_encoding);
+		result->setTransferEncoding(String::stringWithUTF8Characters(str));
+	}
     
     if (ct_parameters != NULL) {
         clistiter * iter = clist_begin(ct_parameters);
@@ -647,3 +677,4 @@ MessagePart * Attachment::attachmentWithMessageMIME(struct mailmime * mime)
     
     return (MessagePart *) attachment->autorelease();
 }
+

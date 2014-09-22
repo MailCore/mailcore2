@@ -25,7 +25,7 @@
 
 - (id)init
 {
-    mailcore::MessageBuilder * message = new mailcore::MessageBuilder();
+    mailcore::MessageBuilder *message = new mailcore::MessageBuilder();
     self = [super initWithMCMessage:message];
     MC_SAFE_RELEASE(message);
     return self;
@@ -50,6 +50,7 @@ MCO_OBJC_SYNTHESIZE_STRING(setTextBody, textBody)
 MCO_OBJC_SYNTHESIZE_ARRAY(setAttachments, attachments)
 MCO_OBJC_SYNTHESIZE_ARRAY(setRelatedAttachments, relatedAttachments)
 MCO_OBJC_SYNTHESIZE_STRING(setBoundaryPrefix, boundaryPrefix)
+MCO_OBJC_SYNTHESIZE_STRING(setContentType, contentType)
 
 - (void) addAttachment:(MCOAttachment *)attachment
 {
@@ -93,6 +94,16 @@ MCO_OBJC_SYNTHESIZE_STRING(setBoundaryPrefix, boundaryPrefix)
 - (NSString *) plainTextBodyRenderingAndStripWhitespace:(BOOL)stripWhitespace
 {
     return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->plainTextBodyRendering(stripWhitespace));
+}
+
+- (NSString *) renderAttachment:(MCOAttachment *)attachment
+{
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->renderAttachment(MCO_FROM_OBJC(mailcore::Attachment, attachment)));
+}
+
+- (NSString *) renderBody
+{
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->renderBody());
 }
 
 @end
