@@ -87,4 +87,24 @@ MCO_OBJC_SYNTHESIZE_BOOL(setInlineAttachment, isInlineAttachment)
 {
     return [NSString mco_stringWithMCString:MCO_NATIVE_INSTANCE->decodedStringForData([data mco_mcData])];
 }
+
+- (void) setContentTypeParameterValue:(NSString *)value forName:(NSString *)name
+{
+    MCO_NATIVE_INSTANCE->setContentTypeParameter(MCO_FROM_OBJC(mailcore::String, name), MCO_FROM_OBJC(mailcore::String, value));
+}
+
+- (NSString *) contentTypeParameterValueForName:(NSString *)name
+{
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->contentTypeParameterValueForName((MCO_FROM_OBJC(mailcore::String, name))));
+}
+- (void) removeContentTypeParameterForName:(NSString *)name
+{
+    MCO_NATIVE_INSTANCE->removeContentTypeParameter(MCO_FROM_OBJC(mailcore::String, name));
+}
+
+- (NSArray * /* NSString */) allContentTypeParametersNames
+{
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->allContentTypeParametersNames());
+}
+
 @end

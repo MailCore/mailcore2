@@ -48,6 +48,12 @@ namespace mailcore {
         
         virtual String * decodedStringForData(Data * data);
         
+        void setContentTypeParameters(HashMap * parameters);
+        Array * allContentTypeParametersNames();
+        void setContentTypeParameter(String * name, String * object);
+        void removeContentTypeParameter(String * name);
+        String * contentTypeParameterValueForName(String * name);
+        
     public: // subclass behavior
         AbstractPart(AbstractPart * other);
         virtual String * description();
@@ -70,6 +76,7 @@ namespace mailcore {
         String * mContentDescription;
         bool mInlineAttachment;
         PartType mPartType;
+        HashMap * mContentTypeParameters;
         void init();
     };
     
