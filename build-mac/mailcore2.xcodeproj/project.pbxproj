@@ -12,7 +12,6 @@
 		27780C3619CF9CD100C77E44 /* providers.json in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E7D172DBAF600E60AA3 /* providers.json */; };
 		27780C3D19CF9D9800C77E44 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27780C3C19CF9D9800C77E44 /* CFNetwork.framework */; };
 		27780C3E19CF9DDF00C77E44 /* libMailCore-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6BA2C191705F4E6003F0E9E /* libMailCore-ios.a */; };
-		27780D3519CFA19500C77E44 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 27780D3419CFA19500C77E44 /* libstdc++.dylib */; };
 		27780D3619CFA32900C77E44 /* MCOFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = C6BD28A8170BDB6B00A91AC1 /* MCOFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		27780D3719CFA32900C77E44 /* MCOPOP.h in Headers */ = {isa = PBXBuildFile; fileRef = C6A81BFB170781BC00882C15 /* MCOPOP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		27780D3819CFA32900C77E44 /* MCOPOPSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C6A81BD41706903500882C15 /* MCOPOPSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1810,8 +1809,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		27780C3A19CF9CD100C77E44 /* mailcore osx copy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "mailcore osx copy.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		27780C3B19CF9CD200C77E44 /* framework-ios-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "framework-ios-Info.plist"; path = "/Users/yuklai/Projects/HHLabs/mailcore2/build-mac/framework-ios-Info.plist"; sourceTree = "<absolute>"; };
+		27780C3A19CF9CD100C77E44 /* MailCore-ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "MailCore-ios.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27780C3C19CF9D9800C77E44 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.0.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
 		27780D3419CFA19500C77E44 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.0.sdk/usr/lib/libstdc++.dylib"; sourceTree = DEVELOPER_DIR; };
 		4B3C1BDC17ABF306008BBF4C /* MCOIMAPQuotaOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPQuotaOperation.h; sourceTree = "<group>"; };
@@ -2297,7 +2295,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27780D3519CFA19500C77E44 /* libstdc++.dylib in Frameworks */,
 				27780C3E19CF9DDF00C77E44 /* libMailCore-ios.a in Frameworks */,
 				27780C3D19CF9D9800C77E44 /* CFNetwork.framework in Frameworks */,
 				27780C3219CF9CD100C77E44 /* Security.framework in Frameworks */,
@@ -2535,7 +2532,7 @@
 				C6BA2C191705F4E6003F0E9E /* libMailCore-ios.a */,
 				C6A81B911706840C00882C15 /* test-ios.app */,
 				C6BD288D170BD71100A91AC1 /* MailCore.framework */,
-				27780C3A19CF9CD100C77E44 /* mailcore osx copy.framework */,
+				27780C3A19CF9CD100C77E44 /* MailCore-ios.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2912,7 +2909,6 @@
 		C6BD28A1170BD78E00A91AC1 /* mailcore-framework */ = {
 			isa = PBXGroup;
 			children = (
-				27780C3B19CF9CD200C77E44 /* framework-ios-Info.plist */,
 				84AF9E7D172DBAF600E60AA3 /* providers.json */,
 				C6BD28A2170BD79D00A91AC1 /* framework-Info.plist */,
 				C6BD28A8170BDB6B00A91AC1 /* MCOFramework.h */,
@@ -3657,7 +3653,7 @@
 			);
 			name = "mailcore ios";
 			productName = "mailcore framework";
-			productReference = 27780C3A19CF9CD100C77E44 /* mailcore osx copy.framework */;
+			productReference = 27780C3A19CF9CD100C77E44 /* MailCore-ios.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		C64EA536169E772200778456 /* static mailcore2 osx */ = {
@@ -4356,11 +4352,12 @@
 		27780C3819CF9CD100C77E44 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "framework-ios-Info.plist";
+				INFOPLIST_FILE = "framework-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
@@ -4374,11 +4371,9 @@
 					"-ltidy",
 					"-lz",
 					"-licucore",
-					"-lc++",
-					"-stdlib=libc++",
 					"-ObjC",
 				);
-				PRODUCT_NAME = "mailcore osx copy";
+				PRODUCT_NAME = "MailCore-ios";
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -4387,11 +4382,12 @@
 		27780C3919CF9CD100C77E44 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "framework-ios-Info.plist";
+				INFOPLIST_FILE = "framework-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
@@ -4405,11 +4401,9 @@
 					"-ltidy",
 					"-lz",
 					"-licucore",
-					"-lc++",
-					"-stdlib=libc++",
 					"-ObjC",
 				);
-				PRODUCT_NAME = "mailcore osx copy";
+				PRODUCT_NAME = "MailCore-ios";
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = framework;
 			};
