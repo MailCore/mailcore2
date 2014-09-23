@@ -58,6 +58,9 @@
 /** RFC 822 formatted message.*/
 - (NSData *) data;
 
+/** RFC 822 formatted message for encryption.*/
+- (NSData *) dataForEncryption;
+
 /** HTML rendering of the message to be displayed in a web view. The delegate can be nil.*/
 - (NSString *) htmlRenderingWithDelegate:(id <MCOHTMLRendererDelegate>)delegate;
 

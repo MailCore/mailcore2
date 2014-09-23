@@ -177,15 +177,21 @@ static struct mailmime * get_text_part(const char * mime_type, const char * char
 
 static struct mailmime * get_plain_text_part(const char * mime_type, const char * charset, const char * content_id,
                                       const char * description,
-                                      const char * text, size_t length, clist * contentTypeParameters)
+                                      const char * text, size_t length, clist * contentTypeParameters, bool forEncryption)
 {
     bool needsQuotedPrintable;
     int mechanism;
     
     needsQuotedPrintable = false;
-    for(size_t i = 0 ; i < length ; i ++) {
-        if ((text[i] & (1 << 7)) != 0) {
-            needsQuotedPrintable = true;
+    if (forEncryption) {
+        needsQuotedPrintable = true;
+    }
+    if (!needsQuotedPrintable) {
+        for(size_t i = 0 ; i < length ; i ++) {
+            if ((text[i] & (1 << 7)) != 0) {
+                needsQuotedPrintable = true;
+                break;
+            }
         }
     }
     
@@ -272,7 +278,7 @@ static clist * content_type_parameters_from_attachment(Attachment * att)
     return contentTypeParameters;
 }
 
-static struct mailmime * mime_from_attachment(Attachment * att)
+static struct mailmime * mime_from_attachment(Attachment * att, bool forEncryption)
 {
     struct mailmime * mime;
     Data * data;
@@ -295,7 +301,8 @@ static struct mailmime * mime_from_attachment(Attachment * att)
                                        MCUTF8(att->contentID()),
                                        MIME_ENCODED_STR(att->contentDescription()),
                                        data->bytes(), data->length(),
-                                       contentTypeParameters);
+                                       contentTypeParameters,
+                                       forEncryption);
         }
         else if (att->isInlineAttachment() && att->mimeType()->lowercaseString()->hasPrefix(MCSTR("text/"))) {
             mime = get_other_text_part(MCUTF8(att->mimeType()), MCUTF8(att->charset()),
@@ -320,7 +327,7 @@ static struct mailmime * mime_from_attachment(Attachment * att)
 }
 
 static struct mailmime * multipart_related_from_attachments(Attachment * htmlAttachment,
-    Array * attachments, const char * boundary_prefix)
+    Array * attachments, const char * boundary_prefix, bool forEncryption)
 {
     if ((attachments != NULL) && (attachments->count() > 0)) {
         struct mailmime * submime;
@@ -328,14 +335,14 @@ static struct mailmime * multipart_related_from_attachments(Attachment * htmlAtt
         
         mime = get_multipart_related(boundary_prefix);
         
-        submime = mime_from_attachment(htmlAttachment);
+        submime = mime_from_attachment(htmlAttachment, forEncryption);
         add_attachment(mime, submime, boundary_prefix);
         
         for(unsigned int i = 0 ; i < attachments->count() ; i ++) {
             Attachment * attachment;
             
             attachment = (Attachment *) attachments->objectAtIndex(i);
-            submime = mime_from_attachment(attachment);
+            submime = mime_from_attachment(attachment, forEncryption);
             add_attachment(mime, submime, boundary_prefix);
         }
         
@@ -344,7 +351,7 @@ static struct mailmime * multipart_related_from_attachments(Attachment * htmlAtt
     else {
         struct mailmime * mime;
         
-        mime = mime_from_attachment(htmlAttachment);
+        mime = mime_from_attachment(htmlAttachment, forEncryption);
         
         return mime;
     }
@@ -655,7 +662,7 @@ String * MessageBuilder::boundaryPrefix()
     return mBoundaryPrefix;
 }
 
-Data * MessageBuilder::dataAndFilterBcc(bool filterBcc)
+Data * MessageBuilder::dataAndFilterBccAndForEncryption(bool filterBcc, bool forEncryption)
 {
     Data * data;
     MMAPString * str;
@@ -676,20 +683,20 @@ Data * MessageBuilder::dataAndFilterBcc(bool filterBcc)
 
         htmlAttachment = Attachment::attachmentWithHTMLString(htmlBody());
         htmlPart = multipart_related_from_attachments(htmlAttachment, mRelatedAttachments,
-            MCUTF8(mBoundaryPrefix));
+            MCUTF8(mBoundaryPrefix), forEncryption);
     }
 
     if (textBody() != NULL) {
         Attachment * textAttachment;
 
         textAttachment = Attachment::attachmentWithText(textBody());
-        textPart = mime_from_attachment(textAttachment);
+        textPart = mime_from_attachment(textAttachment, forEncryption);
     }
     else if (htmlBody() != NULL) {
         Attachment * textAttachment;
 
         textAttachment = Attachment::attachmentWithText(htmlBody()->flattenHTML());
-        textPart = mime_from_attachment(textAttachment);
+        textPart = mime_from_attachment(textAttachment, forEncryption);
     }
 
     if ((textPart != NULL) && (htmlPart != NULL)) {
@@ -724,7 +731,7 @@ Data * MessageBuilder::dataAndFilterBcc(bool filterBcc)
             struct mailmime * submime;
 
             attachment = (Attachment *) attachments()->objectAtIndex(i);
-            submime = mime_from_attachment(attachment);
+            submime = mime_from_attachment(attachment, forEncryption);
             add_attachment(mime, submime, MCUTF8(mBoundaryPrefix));
         }
     }
@@ -741,7 +748,12 @@ Data * MessageBuilder::dataAndFilterBcc(bool filterBcc)
 
 Data * MessageBuilder::data()
 {
-    return dataAndFilterBcc(false);
+    return dataAndFilterBccAndForEncryption(false, false);
+}
+
+Data * MessageBuilder::dataForEncryption()
+{
+    return dataAndFilterBccAndForEncryption(false, true);
 }
 
 String * MessageBuilder::htmlRendering(HTMLRendererTemplateCallback * htmlCallback)

@@ -87,6 +87,9 @@ HashMap * Attachment::readMimeTypesFile(String * filename)
 
 String * Attachment::mimeTypeForFilename(String * filename)
 {
+    if (filename == NULL) {
+        return NULL;
+    }
     static HashMap * mimeTypes = NULL;
     static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
     pthread_mutex_lock(&lock);

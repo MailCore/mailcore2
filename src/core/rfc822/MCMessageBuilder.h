@@ -39,6 +39,7 @@ namespace mailcore {
         virtual String * boundaryPrefix();
         
         virtual Data * data();
+        virtual Data * dataForEncryption();
         
         virtual String * htmlRendering(HTMLRendererTemplateCallback * htmlCallback = NULL);
         virtual String * htmlBodyRendering();
@@ -58,7 +59,7 @@ namespace mailcore {
         Array * /* Attachment */ mRelatedAttachments;
         String * mBoundaryPrefix;
         void init();
-        Data * dataAndFilterBcc(bool filterBcc);
+        Data * dataAndFilterBccAndForEncryption(bool filterBcc, bool forEncryption);
     };
     
 };
