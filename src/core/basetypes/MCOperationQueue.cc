@@ -178,11 +178,21 @@ void OperationQueue::checkRunningOnMainThread(void * context)
 {
     retain(); // (4)
     if (_pendingCheckRunning) {
+#if __APPLE__
+        cancelDelayedPerformMethodOnDispatchQueue((Object::Method) &OperationQueue::checkRunningAfterDelay, NULL, mDispatchQueue);
+#else
         cancelDelayedPerformMethod((Object::Method) &OperationQueue::checkRunningAfterDelay, NULL);
+#endif
         release(); // (4)
     }
     _pendingCheckRunning = true;
+    
+#if __APPLE__
+    performMethodOnDispatchQueueAfterDelay((Object::Method) &OperationQueue::checkRunningAfterDelay, NULL, mDispatchQueue, 1);
+#else
     performMethodAfterDelay((Object::Method) &OperationQueue::checkRunningAfterDelay, NULL, 1);
+#endif
+
     release(); // (1)
 }
 
