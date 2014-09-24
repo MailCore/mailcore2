@@ -100,4 +100,14 @@ MCO_OBJC_SYNTHESIZE_STRING(setBoundaryPrefix, boundaryPrefix)
     return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->plainTextBodyRendering(stripWhitespace));
 }
 
+- (NSData *) openPGPSignedMessageDataWithSignatureData:(NSData *)signature
+{
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->openPGPSignedMessageDataWithSignatureData(MCO_FROM_OBJC(mailcore::Data, signature)));
+}
+
+- (NSData *) openPGPEncryptedMessageDataWithEncryptedData:(NSData *)encryptedData
+{
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->openPGPEncryptedMessageDataWithEncryptedData(MCO_FROM_OBJC(mailcore::Data, encryptedData)));
+}
+
 @end

@@ -47,6 +47,9 @@ namespace mailcore {
         virtual String * plainTextRendering();
         virtual String * plainTextBodyRendering(bool stripWhitespace);
         
+        virtual Data * openPGPSignedMessageDataWithSignatureData(Data * signature);
+        virtual Data * openPGPEncryptedMessageDataWithEncryptedData(Data * encryptedData);
+        
     public: // subclass behavior
         MessageBuilder(MessageBuilder * other);
         virtual String * description();
@@ -60,6 +63,7 @@ namespace mailcore {
         String * mBoundaryPrefix;
         void init();
         Data * dataAndFilterBccAndForEncryption(bool filterBcc, bool forEncryption);
+        struct mailmime * mimeAndFilterBccAndForEncryption(bool filterBcc, bool forEncryption);
     };
     
 };
