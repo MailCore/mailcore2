@@ -539,7 +539,7 @@ vanishedMessages will be set only for servers that support QRESYNC. See [RFC5162
 
      MCOIMAPIdentity * identity = [MCOIMAPIdentity identityWithVendor:@"Mozilla" name:@"Thunderbird" version:@"17.0.5"];
      MCOIMAPIdentityOperation * op = [session identityOperationWithClientIdentity:identity];
-     [op start:^(NSError * error, MCOIMAPIdentity * serverIdentity) {
+     [op start:^(NSError * error, NSDictionary * serverIdentity) {
           ...
      }];
 */
