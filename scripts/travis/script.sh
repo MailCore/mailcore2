@@ -15,11 +15,11 @@ if test x"`uname`" = xDarwin ; then
   xctool -project build-mac/mailcore2.xcodeproj -sdk iphonesimulator8.0 -scheme "test-ios" build ARCHS="i386 x86_64"
 
   echo Building library for Mac
-  xctool -project build-mac/mailcore2.xcodeproj -sdk macosx10.8 -scheme "static mailcore2 osx" build
+  xctool -project build-mac/mailcore2.xcodeproj -sdk macosx10.9 -scheme "static mailcore2 osx" build
   echo Building framework for Mac
-  xctool -project build-mac/mailcore2.xcodeproj -sdk macosx10.8 -scheme "mailcore osx" build
+  xctool -project build-mac/mailcore2.xcodeproj -sdk macosx10.9 -scheme "mailcore osx" build
   echo Link test for Mac
-  xctool -project build-mac/mailcore2.xcodeproj -sdk macosx10.8 -scheme "tests" build
+  xctool -project build-mac/mailcore2.xcodeproj -sdk macosx10.9 -scheme "tests" build
 fi
 
 echo Testing CMake build
