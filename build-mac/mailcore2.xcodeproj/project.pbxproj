@@ -4513,7 +4513,6 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = MailCore;
 				SDKROOT = macosx;
 			};
@@ -4524,7 +4523,6 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = MailCore;
 				SDKROOT = macosx;
 			};
