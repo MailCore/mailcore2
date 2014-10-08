@@ -72,7 +72,7 @@ if test x$? != x0 ; then
   exit 1
 fi
 sdk="iphonesimulator$sdkversion"
-simarchs="i386"
+simarchs="i386 x86_64"
 echo building $sdk
 xcodebuild -project mailcore2.xcodeproj -sdk $sdk -target "static mailcore2 ios" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$simarchs"
 if test x$? != x0 ; then

@@ -48,6 +48,7 @@ static NSString * MCOLocalizedDescriptionTable[] = {
     @"A sender is required to send message",                                          /** MCOErrorNoSender */
     @"A recipient is required to send message",                                       /** MCOErrorNoRecipient */
     @"An error occured while performing a No-Op operation.",                          /** MCOErrorNoop */
+    @"An application specific password is required",                                  /** MCOErrorGmailApplicationSpecificPasswordRequired */
 };
 
 @implementation NSError (MCO)

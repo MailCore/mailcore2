@@ -67,6 +67,7 @@ private:
 - (void)dealloc {
     MC_SAFE_RELEASE(_loggerBridge);
     [_connectionLogger release];
+    _session->setConnectionLogger(NULL);
     _session->release();
     [super dealloc];
 }

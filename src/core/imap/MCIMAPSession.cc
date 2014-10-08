@@ -871,6 +871,9 @@ void IMAPSession::login(ErrorCode * pError)
         else if (response->locationOfString(MCSTR("Maximum number of connections")) != -1) {
             * pError = ErrorGmailTooManySimultaneousConnections;
         }
+        else if (response->locationOfString(MCSTR("Application-specific password required")) != -1) {
+            * pError = ErrorGmailApplicationSpecificPasswordRequired;
+        }
         else if (response->locationOfString(MCSTR("http://me.com/move")) != -1) {
             * pError = ErrorMobileMeMoved;
         }
