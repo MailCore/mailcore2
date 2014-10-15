@@ -16,7 +16,7 @@ if test x$1 != xskipprebuilt ; then
   fi
   if test $age -gt 0 ; then
     networkerror=no
-    curl -3 -s -L "$content_prefix/prebuilt.list" > prebuilt.list.tmp
+    curl -ssl -s -L "$content_prefix/prebuilt.list" > prebuilt.list.tmp
     if test x$? != x0 ; then
       networkerror=yes
     fi
