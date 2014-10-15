@@ -4,6 +4,12 @@ set -e
 echo Operating system:
 uname
 
+mkdir -p Externals/prebuilt
+cd Externals/prebuilt
+git clone --depth=1 https://github.com/MailCore/mailcore2-deps
+cd ../..
+cp Externals/prebuilt/prebuilt.list scripts/prebuilt.list
+
 if test x"`uname`" = xDarwin ; then
   echo Building library for iPhoneOS
   xctool -project build-mac/mailcore2.xcodeproj -sdk iphoneos8.0 -scheme "static mailcore2 ios" build ARCHS="armv7 armv7s arm64"
