@@ -225,6 +225,11 @@ void OperationQueue::stoppedOnMainThread(void * context)
         mCallback->queueStoppedRunning();
     }
     
+    if (mOperations->count() > 0) {
+        //Operations have been added while thread was quitting, so restart automatically
+        startThread();
+    }
+
     release(); // (2)
 
     release(); // (3)
