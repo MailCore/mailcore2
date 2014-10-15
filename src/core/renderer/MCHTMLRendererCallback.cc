@@ -144,7 +144,7 @@ mailcore::HashMap * HTMLRendererTemplateCallback::templateValuesForPart(mailcore
     mailcore::HashMap * result = mailcore::HashMap::hashMap();
     mailcore::String * filename = NULL;
     
-    if (part->filename() != NULL) {
+    if (part->filename() != NULL && part->filename()->length() != 0) {
         filename = part->filename()->lastPathComponent();
     }
     
