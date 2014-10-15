@@ -9,6 +9,7 @@ cd Externals/prebuilt
 git clone --depth=1 https://github.com/MailCore/mailcore2-deps
 cd ../..
 cp Externals/prebuilt/mailcore2-deps/prebuilt.list scripts/prebuilt.list
+mkdir -p Externals/builds/builds
 rsync --exclude=.git -av Externals/prebuilt/mailcore2-deps/ Externals/builds/builds/
 
 if test x"`uname`" = xDarwin ; then
