@@ -16,6 +16,7 @@ using namespace mailcore;
 IMAPFetchContentOperation::IMAPFetchContentOperation()
 {
     mUid = 0;
+    mNumber = 0;
     mPartID = NULL;
     mEncoding = Encoding7Bit;
     mData = NULL;
@@ -35,6 +36,16 @@ void IMAPFetchContentOperation::setUid(uint32_t uid)
 uint32_t IMAPFetchContentOperation::uid()
 {
     return mUid;
+}
+
+void IMAPFetchContentOperation::setNumber(uint32_t value)
+{
+    mNumber = value;
+}
+
+uint32_t IMAPFetchContentOperation::number()
+{
+    return mNumber;
 }
 
 void IMAPFetchContentOperation::setPartID(String * partID)
@@ -65,11 +76,21 @@ Data * IMAPFetchContentOperation::data()
 void IMAPFetchContentOperation::main()
 {
     ErrorCode error;
-    if (mPartID != NULL) {
-        mData = session()->session()->fetchMessageAttachmentByUID(folder(), mUid, mPartID, mEncoding, this, &error);
+    if (mUid != 0) {
+        if (mPartID != NULL) {
+            mData = session()->session()->fetchMessageAttachmentByUID(folder(), mUid, mPartID, mEncoding, this, &error);
+        }
+        else {
+            mData = session()->session()->fetchMessageByUID(folder(), mUid, this, &error);
+        }
     }
     else {
-        mData = session()->session()->fetchMessageByUID(folder(), mUid, this, &error);
+        if (mPartID != NULL) {
+            mData = session()->session()->fetchMessageAttachmentByNumber(folder(), mNumber, mPartID, mEncoding, this, &error);
+        }
+        else {
+            mData = session()->session()->fetchMessageByNumber(folder(), mNumber, this, &error);
+        }
     }
     MC_SAFE_RETAIN(mData);
     setError(error);

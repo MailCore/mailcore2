@@ -326,6 +326,25 @@
                                                 uids:(MCOIndexSet *)uids
                                                 kind:(MCOIMAPStoreFlagsRequestKind)kind
                                                flags:(MCOMessageFlag)flags;
+
+/**
+ Returns an operation to change flags of messages, using IMAP sequence number.
+ 
+ For example: Adds the seen flag to the message with the sequence number number 42.
+ 
+     MCOIMAPOperation * op = [session storeFlagsOperationWithFolder:@"INBOX"
+                                                            numbers:[MCOIndexSet indexSetWithIndex:42]
+                                                               kind:MCOIMAPStoreFlagsRequestKindAdd
+                                                              flags:MCOMessageFlagSeen];
+     [op start:^(NSError * error) {
+          ...
+     }];
+ */
+- (MCOIMAPOperation *) storeFlagsOperationWithFolder:(NSString *)folder
+                                             numbers:(MCOIndexSet *)uinumbersds
+                                                kind:(MCOIMAPStoreFlagsRequestKind)kind
+                                               flags:(MCOMessageFlag)flags;
+
 /**
  Returns an operation to change flags and custom flags of messages.
  
@@ -345,15 +364,55 @@
                                                 kind:(MCOIMAPStoreFlagsRequestKind)kind
                                                flags:(MCOMessageFlag)flags
                                          customFlags:(NSArray *)customFlags;
+
+
+/**
+ Returns an operation to change flags and custom flags of messages, using IMAP sequence number.
+ 
+ For example: Adds the seen flag and $CNS-Greeting-On flag to the message with the sequence number 42.
+ 
+     MCOIMAPOperation * op = [session storeFlagsOperationWithFolder:@"INBOX"
+                                                            numbers:[MCOIndexSet indexSetWithIndex:42]
+                                                               kind:MCOIMAPStoreFlagsRequestKindAdd
+                                                              flags:MCOMessageFlagSeen
+                                                        customFlags:@["$CNS-Greeting-On"]];
+     [op start:^(NSError * error) {
+         ...
+     }];
+ */
+- (MCOIMAPOperation *) storeFlagsOperationWithFolder:(NSString *)folder
+                                             numbers:(MCOIndexSet *)numbers
+                                                kind:(MCOIMAPStoreFlagsRequestKind)kind
+                                               flags:(MCOMessageFlag)flags
+                                         customFlags:(NSArray *)customFlags;
+
+/**
+ Returns an operation to change labels of messages. Intended for Gmail
+
+ For example: Adds the label "Home" flag to the message with UID 42.
+
+     MCOIMAPOperation * op = [session storeLabelsOperationWithFolder:@"INBOX"
+                                                             numbers:[MCOIndexSet indexSetWithIndex:42]
+                                                                kind:MCOIMAPStoreFlagsRequestKindAdd
+                                                              labels:[NSArray arrayWithObject:@"Home"]];
+     [op start:^(NSError * error) {
+          ...
+     }];
+*/
+- (MCOIMAPOperation *) storeLabelsOperationWithFolder:(NSString *)folder
+                                              numbers:(MCOIndexSet *)numbers
+                                                 kind:(MCOIMAPStoreFlagsRequestKind)kind
+                                               labels:(NSArray *)labels;
+
 /**
  Returns an operation to change labels of messages. Intended for Gmail
 
  For example: Adds the label "Home" flag to the message with UID 456.
 
-     MCOIMAPOperation * op = [session storeFlagsOperationWithFolder:@"INBOX"
-                                                               uids:[MCOIndexSet indexSetWithIndex:456]
-                                                               kind:MCOIMAPStoreFlagsRequestKindAdd
-                                                             labels:[NSArray arrayWithObject:@"Home"]];
+     MCOIMAPOperation * op = [session storeLabelsOperationWithFolder:@"INBOX"
+                                                                uids:[MCOIndexSet indexSetWithIndex:456]
+                                                                kind:MCOIMAPStoreFlagsRequestKindAdd
+                                                              labels:[NSArray arrayWithObject:@"Home"]];
      [op start:^(NSError * error) {
           ...
      }];
@@ -379,7 +438,23 @@
 */
 - (MCOIMAPFetchMessagesOperation *) fetchMessagesByUIDOperationWithFolder:(NSString *)folder
                                                               requestKind:(MCOIMAPMessagesRequestKind)requestKind
-                                                                     uids:(MCOIndexSet *)uids;
+                                                                     uids:(MCOIndexSet *)uids DEPRECATED_ATTRIBUTE;
+
+/**
+ Returns an operation to fetch messages by UID.
+
+     MCOIMAPFetchMessagesOperation * op = [session fetchMessagesOperationWithFolder:@"INBOX"
+                                                                        requestKind:MCOIMAPMessagesRequestKindHeaders | MCOIMAPMessagesRequestKindStructure
+                                                                               uids:MCORangeMake(1, UINT64_MAX)];
+     [op start:^(NSError * error, NSArray * messages, MCOIndexSet * vanishedMessages) {
+        for(MCOIMAPMessage * msg in messages) {
+          NSLog(@"%lu: %@", [msg uid], [msg header]);
+        }
+     }];
+*/
+- (MCOIMAPFetchMessagesOperation *) fetchMessagesOperationWithFolder:(NSString *)folder
+                                                         requestKind:(MCOIMAPMessagesRequestKind)requestKind
+                                                                uids:(MCOIndexSet *)uids;
 
 /**
  Returns an operation to fetch messages by (sequence) number.
@@ -425,7 +500,27 @@ vanishedMessages will be set only for servers that support QRESYNC. See [RFC5162
 - (MCOIMAPFetchMessagesOperation *) syncMessagesByUIDWithFolder:(NSString *)folder
                                                     requestKind:(MCOIMAPMessagesRequestKind)requestKind
                                                            uids:(MCOIndexSet *)uids
-                                                         modSeq:(uint64_t)modSeq;
+                                                         modSeq:(uint64_t)modSeq DEPRECATED_ATTRIBUTE;
+
+/**
+ Returns an operation to sync the last changes related to the given message list given a modSeq.
+
+     MCOIMAPFetchMessagesOperation * op = [session syncMessagesWithFolder:@"INBOX"
+                                                              requestKind:MCOIMAPMessagesRequestKindUID
+                                                                     uids:MCORangeMake(1, UINT64_MAX)
+                                                                   modSeq:lastModSeq];
+     [op start:^(NSError * error, NSArray * messages, MCOIndexSet * vanishedMessages) {
+       NSLog(@"added or modified messages: %@", messages);
+       NSLog(@"deleted messages: %@", vanishedMessages);
+     }];
+
+@warn *Important*: This is only for servers that support Conditional Store. See [RFC4551](http://tools.ietf.org/html/rfc4551)
+vanishedMessages will be set only for servers that support QRESYNC. See [RFC5162](http://tools.ietf.org/html/rfc5162)
+*/
+- (MCOIMAPFetchMessagesOperation *) syncMessagesWithFolder:(NSString *)folder
+                                              requestKind:(MCOIMAPMessagesRequestKind)requestKind
+                                                     uids:(MCOIndexSet *)uids
+                                                   modSeq:(uint64_t)modSeq;
 
 /**
  Returns an operation to fetch the content of a message.
@@ -439,7 +534,7 @@ vanishedMessages will be set only for servers that support QRESYNC. See [RFC5162
 */
 - (MCOIMAPFetchContentOperation *) fetchMessageByUIDOperationWithFolder:(NSString *)folder
                                                                     uid:(uint32_t)uid
-                                                                 urgent:(BOOL)urgent;
+                                                                 urgent:(BOOL)urgent DEPRECATED_ATTRIBUTE;
 
 /**
  Returns an operation to fetch the content of a message.
@@ -451,7 +546,59 @@ vanishedMessages will be set only for servers that support QRESYNC. See [RFC5162
      }];
 */
 - (MCOIMAPFetchContentOperation *) fetchMessageByUIDOperationWithFolder:(NSString *)folder
-                                                                    uid:(uint32_t)uid;
+                                                                    uid:(uint32_t)uid DEPRECATED_ATTRIBUTE;
+
+/**
+ Returns an operation to fetch the content of a message.
+ @param urgent is set to YES, an additional connection to the same folder might be opened to fetch the content.
+
+     MCOIMAPFetchContentOperation * op = [session fetchMessageOperationWithFolder:@"INBOX" uid:456 urgent:NO];
+     [op start:^(NSError * error, NSData * messageData) {
+        MCOMessageParser * parser = [MCOMessageParser messageParserWithData:messageData]
+        ...
+     }];
+ */
+- (MCOIMAPFetchContentOperation *) fetchMessageOperationWithFolder:(NSString *)folder
+                                                               uid:(uint32_t)uid
+                                                            urgent:(BOOL)urgent;
+
+/**
+ Returns an operation to fetch the content of a message.
+
+     MCOIMAPFetchContentOperation * op = [session fetchMessageOperationWithFolder:@"INBOX" uid:456];
+     [op start:^(NSError * error, NSData * messageData) {
+        MCOMessageParser * parser = [MCOMessageParser messageParserWithData:messageData]
+        ...
+     }];
+ */
+- (MCOIMAPFetchContentOperation *) fetchMessageOperationWithFolder:(NSString *)folder
+                                                               uid:(uint32_t)uid;
+
+/**
+ Returns an operation to fetch the content of a message, using IMAP sequence number.
+ @param urgent is set to YES, an additional connection to the same folder might be opened to fetch the content.
+
+     MCOIMAPFetchContentOperation * op = [session fetchMessageOperationWithFolder:@"INBOX" number:42 urgent:NO];
+     [op start:^(NSError * error, NSData * messageData) {
+        MCOMessageParser * parser = [MCOMessageParser messageParserWithData:messageData]
+        ...
+     }];
+*/
+- (MCOIMAPFetchContentOperation *) fetchMessageOperationWithFolder:(NSString *)folder
+                                                            number:(uint32_t)number
+                                                            urgent:(BOOL)urgent;
+
+/**
+ Returns an operation to fetch the content of a message, using IMAP sequence number.
+
+     MCOIMAPFetchContentOperation * op = [session fetchMessageOperationWithFolder:@"INBOX" number:42];
+     [op start:^(NSError * error, NSData * messageData) {
+        MCOMessageParser * parser = [MCOMessageParser messageParserWithData:messageData]
+        ...
+     }];
+*/
+- (MCOIMAPFetchContentOperation *) fetchMessageOperationWithFolder:(NSString *)folder
+                                                             number:(uint32_t)number;
 
 /** @name Fetching Attachment Operations */
 
@@ -472,7 +619,7 @@ vanishedMessages will be set only for servers that support QRESYNC. See [RFC5162
                                                                               uid:(uint32_t)uid
                                                                            partID:(NSString *)partID
                                                                          encoding:(MCOEncoding)encoding
-                                                                           urgent:(BOOL)urgent;
+                                                                           urgent:(BOOL)urgent DEPRECATED_ATTRIBUTE;
 
 /**
   Returns an operation to fetch an attachment.
@@ -500,7 +647,101 @@ vanishedMessages will be set only for servers that support QRESYNC. See [RFC5162
 - (MCOIMAPFetchContentOperation *) fetchMessageAttachmentByUIDOperationWithFolder:(NSString *)folder
                                                                               uid:(uint32_t)uid
                                                                            partID:(NSString *)partID
-                                                                         encoding:(MCOEncoding)encoding;
+                                                                         encoding:(MCOEncoding)encoding DEPRECATED_ATTRIBUTE;
+
+/**
+ Returns an operation to fetch an attachment.
+ @param  urgent is set to YES, an additional connection to the same folder might be opened to fetch the content.
+
+     MCOIMAPFetchContentOperation * op = [session fetchMessageAttachmentOperationWithFolder:@"INBOX"
+                                                                                             uid:456
+                                                                                          partID:@"1.2"
+                                                                                        encoding:MCOEncodingBase64
+                                                                                          urgent:YES];
+     [op start:^(NSError * error, NSData * partData) {
+        ...
+     }];
+*/
+- (MCOIMAPFetchContentOperation *) fetchMessageAttachmentOperationWithFolder:(NSString *)folder
+                                                                         uid:(uint32_t)uid
+                                                                      partID:(NSString *)partID
+                                                                    encoding:(MCOEncoding)encoding
+                                                                      urgent:(BOOL)urgent;
+
+/**
+  Returns an operation to fetch an attachment.
+
+  Example 1:
+
+     MCOIMAPFetchContentOperation * op = [session fetchMessageAttachmentOperationWithFolder:@"INBOX"
+                                                                                        uid:456
+                                                                                     partID:@"1.2"
+                                                                                   encoding:MCOEncodingBase64];
+     [op start:^(NSError * error, NSData * partData) {
+        ...
+     }];
+  
+  Example 2:
+
+     MCOIMAPFetchContentOperation * op = [session fetchMessageAttachmentOperationWithFolder:@"INBOX"
+                                                                                        uid:[message uid]
+                                                                                     partID:[part partID]
+                                                                                   encoding:[part encoding]];
+     [op start:^(NSError * error, NSData * partData) {
+        ...
+     }];
+*/
+- (MCOIMAPFetchContentOperation *) fetchMessageAttachmentOperationWithFolder:(NSString *)folder
+                                                                         uid:(uint32_t)uid
+                                                                      partID:(NSString *)partID
+                                                                    encoding:(MCOEncoding)encoding;
+
+/**
+ Returns an operation to fetch an attachment.
+ @param  urgent is set to YES, an additional connection to the same folder might be opened to fetch the content.
+
+     MCOIMAPFetchContentOperation * op = [session fetchMessageAttachmentOperationWithFolder:@"INBOX"
+                                                                                             uid:456
+                                                                                          partID:@"1.2"
+                                                                                        encoding:MCOEncodingBase64
+                                                                                          urgent:YES];
+     [op start:^(NSError * error, NSData * partData) {
+        ...
+     }];
+*/
+- (MCOIMAPFetchContentOperation *) fetchMessageAttachmentOperationWithFolder:(NSString *)folder
+                                                                      number:(uint32_t)number
+                                                                      partID:(NSString *)partID
+                                                                    encoding:(MCOEncoding)encoding
+                                                                      urgent:(BOOL)urgent;
+
+/**
+  Returns an operation to fetch an attachment.
+
+  Example 1:
+
+     MCOIMAPFetchContentOperation * op = [session fetchMessageAttachmentOperationWithFolder:@"INBOX"
+                                                                                     number:42
+                                                                                     partID:@"1.2"
+                                                                                   encoding:MCOEncodingBase64];
+     [op start:^(NSError * error, NSData * partData) {
+        ...
+     }];
+  
+  Example 2:
+
+     MCOIMAPFetchContentOperation * op = [session fetchMessageAttachmentOperationWithFolder:@"INBOX"
+                                                                                     number:[message sequenceNumber]
+                                                                                     partID:[part partID]
+                                                                                   encoding:[part encoding]];
+     [op start:^(NSError * error, NSData * partData) {
+        ...
+     }];
+*/
+- (MCOIMAPFetchContentOperation *) fetchMessageAttachmentOperationWithFolder:(NSString *)folder
+                                                                      number:(uint32_t)number
+                                                                      partID:(NSString *)partID
+                                                                    encoding:(MCOEncoding)encoding;
 
 /** @name General IMAP Actions */
 

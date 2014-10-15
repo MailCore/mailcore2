@@ -133,8 +133,14 @@ namespace mailcore {
         virtual IMAPFetchContentOperation * fetchMessageAttachmentByUIDOperation(String * folder, uint32_t uid, String * partID,
                                                                                  Encoding encoding, bool urgent = false);
         
-        virtual IMAPOperation * storeFlagsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, Array * customFlags = NULL);
-        virtual IMAPOperation * storeLabelsOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, Array * labels);
+        virtual IMAPFetchContentOperation * fetchMessageByNumberOperation(String * folder, uint32_t number, bool urgent = false);
+        virtual IMAPFetchContentOperation * fetchMessageAttachmentByNumberOperation(String * folder, uint32_t number, String * partID,
+                                                                                    Encoding encoding, bool urgent = false);
+        
+        virtual IMAPOperation * storeFlagsByUIDOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, Array * customFlags = NULL);
+        virtual IMAPOperation * storeFlagsByNumberOperation(String * folder, IndexSet * numbers, IMAPStoreFlagsRequestKind kind, MessageFlag flags, Array * customFlags = NULL);
+        virtual IMAPOperation * storeLabelsByUIDOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, Array * labels);
+        virtual IMAPOperation * storeLabelsByNumberOperation(String * folder, IndexSet * numbers, IMAPStoreFlagsRequestKind kind, Array * labels);
         
         virtual IMAPSearchOperation * searchOperation(String * folder, IMAPSearchKind kind, String * searchString);
         virtual IMAPSearchOperation * searchOperation(String * folder, IMAPSearchExpression * expression);

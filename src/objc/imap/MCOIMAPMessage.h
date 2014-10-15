@@ -34,6 +34,10 @@
 /** IMAP UID of the message. */
 @property (nonatomic, assign) uint32_t uid;
 
+/** IMAP sequence number of the message.
+ @warning *Important*: This property won't be serialized. */
+@property (nonatomic, assign) uint32_t sequenceNumber;
+
 /* Size of the entire message */
 @property (nonatomic, assign) uint32_t size;
 

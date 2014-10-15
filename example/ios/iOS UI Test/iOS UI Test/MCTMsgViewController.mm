@@ -50,7 +50,7 @@
     }
     else {
         [_messageView setMessage:NULL];
-        MCOIMAPFetchContentOperation * op = [_session fetchMessageByUIDOperationWithFolder:_folder uid:[_message uid]];
+        MCOIMAPFetchContentOperation * op = [_session fetchMessageOperationWithFolder:_folder uid:[_message uid]];
         [_ops addObject:op];
         [op start:^(NSError * error, NSData * data) {
             if ([error code] != MCOErrorNone) {
@@ -99,7 +99,7 @@
     
     [_pending addObject:partUniqueID];
     
-    MCOIMAPFetchContentOperation * op = [_session fetchMessageAttachmentByUIDOperationWithFolder:folder uid:[_message uid] partID:[part partID] encoding:[part encoding]];
+    MCOIMAPFetchContentOperation * op = [_session fetchMessageAttachmentOperationWithFolder:folder uid:[_message uid] partID:[part partID] encoding:[part encoding]];
     [_ops addObject:op];
     [op start:^(NSError * error, NSData * data) {
         if ([error code] != MCOErrorNone) {
