@@ -341,7 +341,7 @@
      }];
  */
 - (MCOIMAPOperation *) storeFlagsOperationWithFolder:(NSString *)folder
-                                             numbers:(MCOIndexSet *)uinumbersds
+                                             numbers:(MCOIndexSet *)numbers
                                                 kind:(MCOIMAPStoreFlagsRequestKind)kind
                                                flags:(MCOMessageFlag)flags;
 
