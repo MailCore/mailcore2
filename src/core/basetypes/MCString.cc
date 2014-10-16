@@ -1860,6 +1860,8 @@ bool String::hasPrefix(String * prefix)
 String * String::lastPathComponent()
 {
     // TODO: Improve Windows compatibility.
+    if (mUnicodeChars == NULL)
+        return MCSTR("");
     UChar * component = u_strrchr(mUnicodeChars, '/');
     if (component == NULL)
         return (String *) this->copy()->autorelease();
