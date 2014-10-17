@@ -1949,6 +1949,7 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
     if (mapping != NULL) {
         uid = (uint32_t) ((Value *) mapping->objectForKey(Value::valueWithUnsignedLongValue(msg_att->att_number)))->longLongValue();
     }
+    msg->setSequenceNumber(msg_att->att_number);
     for(item_iter = clist_begin(msg_att->att_list) ; item_iter != NULL ; item_iter = clist_next(item_iter)) {
         struct mailimap_msg_att_item * att_item;
         
