@@ -2,6 +2,7 @@ Externals
 
 example/ios/iOS UI Test/DerivedData
 scripts/prebuilt.list
+scripts/prebuilt.list.tmp
 
 # Xcode
 .DS_Store
