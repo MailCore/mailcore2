@@ -121,9 +121,9 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
     return result;
 }
 
-- (MCONNTPFetchArticlesOperation *) fetchArticlesOperation:(NSString *)group
+- (MCONNTPFetchArticlesOperation *) fetchAllArticlesOperation:(NSString *)group
 {
-    mailcore::MCNNTPFetchArticlesOperation * coreOp = MCO_NATIVE_INSTANCE->fetchArticlesOperation(MCO_FROM_OBJC(mailcore::String, group));
+    mailcore::MCNNTPFetchArticlesOperation * coreOp = MCO_NATIVE_INSTANCE->fetchAllArticlesOperation(MCO_FROM_OBJC(mailcore::String, group));
     return MCO_TO_OBJC_OP(coreOp);
 }
 

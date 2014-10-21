@@ -43,7 +43,7 @@ IndexSet * MCNNTPFetchArticlesOperation::articles()
 void MCNNTPFetchArticlesOperation::main()
 {
     ErrorCode error;
-    mArticles = session()->session()->fetchArticles(mGroupName, &error);
+    mArticles = session()->session()->fetchAllArticles(mGroupName, &error);
     setError(error);
     MC_SAFE_RETAIN(mArticles);
 }

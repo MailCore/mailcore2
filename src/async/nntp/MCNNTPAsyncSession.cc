@@ -153,7 +153,7 @@ bool NNTPAsyncSession::isCheckCertificateEnabled()
     return mSession->isCheckCertificateEnabled();
 }
 
-MCNNTPFetchArticlesOperation * NNTPAsyncSession::fetchArticlesOperation(String * group)
+MCNNTPFetchArticlesOperation * NNTPAsyncSession::fetchAllArticlesOperation(String * group)
 {
     MCNNTPFetchArticlesOperation * op = new MCNNTPFetchArticlesOperation();
     op->setSession(this);

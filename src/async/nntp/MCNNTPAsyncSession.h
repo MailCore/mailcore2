@@ -51,7 +51,7 @@ namespace mailcore {
         virtual dispatch_queue_t dispatchQueue();
 #endif
         
-        virtual MCNNTPFetchArticlesOperation * fetchArticlesOperation(String * group);
+        virtual MCNNTPFetchArticlesOperation * fetchAllArticlesOperation(String * group);
         
         virtual NNTPFetchHeaderOperation * fetchHeaderOperation(String * groupName, unsigned int index);
         

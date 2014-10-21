@@ -466,7 +466,7 @@ Data * NNTPSession::fetchArticle(String *groupName, unsigned int index, NNTPProg
     return result;
 }
 
-IndexSet * NNTPSession::fetchArticles(String * groupName, ErrorCode * pError) 
+IndexSet * NNTPSession::fetchAllArticles(String * groupName, ErrorCode * pError) 
 {
     int r;
     clist * msg_list;
@@ -504,6 +504,38 @@ IndexSet * NNTPSession::fetchArticles(String * groupName, ErrorCode * pError)
     mState = STATE_LISTED;
     
     return result;
+}
+
+Array * NNTPSession::fetchOverArticlesInRange(Range range, String * groupName, ErrorCode * pError)
+{
+    int r;
+    clist * msg_list;
+    
+    selectGroup(groupName, pError);
+    if (* pError != ErrorNone) {
+        return NULL;
+    }
+    r = newsnntp_xover_range(mNNTP, range.location, range.location + range.length, &msg_list);
+    if (r == NEWSNNTP_ERROR_STREAM) {
+        * pError = ErrorConnection;
+        return NULL;
+    }
+    else if (r != NEWSNNTP_NO_ERROR) {
+        * pError = ErrorFetchMessageList;
+        return NULL;
+    }
+    
+    clistiter * iter;
+    for(iter = clist_begin(msg_list) ;iter != NULL ; iter = clist_next(iter)) {
+        struct newsnntp_xover_resp_item * item;
+        
+        item = clist_content(cur);
+        if (!msg_info) {
+            continue;
+        }
+        
+        result->addIndex(*msg_info);
+    }
 }
 
 void NNTPSession::selectGroup(String * folder, ErrorCode * pError) 

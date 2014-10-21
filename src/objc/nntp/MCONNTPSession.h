@@ -68,11 +68,11 @@
 /**
  Returns an operation that will fetch the list of article numbers.
  
- MCONNTPFetchArticlesOperation * op = [session fetchArticlesOperation];
+ MCONNTPFetchArticlesOperation * op = [session fetchAllArticlesOperation];
  [op start:^(NSError * error, MCOIndexSet * articles) {
  }];
  */
-- (MCONNTPFetchArticlesOperation *) fetchArticlesOperation:(NSString *)group;
+- (MCONNTPFetchArticlesOperation *) fetchAllArticlesOperation:(NSString *)group;
 
 /**
  Returns an operation that will fetch the header of the given message.
