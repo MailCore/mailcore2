@@ -66,6 +66,11 @@ MCO_OBJC_SYNTHESIZE_STRING(setBoundaryPrefix, boundaryPrefix)
     return MCO_OBJC_BRIDGE_GET(data);
 }
 
+- (NSData *) dataForEncryption
+{
+    return MCO_OBJC_BRIDGE_GET(dataForEncryption);
+}
+
 - (NSString *) htmlRenderingWithDelegate:(id <MCOHTMLRendererDelegate>)delegate
 {
     MCOAbstractMessageRendererCallback * htmlRenderCallback = new MCOAbstractMessageRendererCallback(self, delegate, NULL);
@@ -93,6 +98,16 @@ MCO_OBJC_SYNTHESIZE_STRING(setBoundaryPrefix, boundaryPrefix)
 - (NSString *) plainTextBodyRenderingAndStripWhitespace:(BOOL)stripWhitespace
 {
     return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->plainTextBodyRendering(stripWhitespace));
+}
+
+- (NSData *) openPGPSignedMessageDataWithSignatureData:(NSData *)signature
+{
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->openPGPSignedMessageDataWithSignatureData(MCO_FROM_OBJC(mailcore::Data, signature)));
+}
+
+- (NSData *) openPGPEncryptedMessageDataWithEncryptedData:(NSData *)encryptedData
+{
+    return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->openPGPEncryptedMessageDataWithEncryptedData(MCO_FROM_OBJC(mailcore::Data, encryptedData)));
 }
 
 @end

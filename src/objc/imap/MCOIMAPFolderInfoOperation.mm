@@ -65,6 +65,7 @@ typedef void (^CompletionType)(NSError *error, MCOIMAPFolderInfo *info);
         [info setModSequenceValue:MCO_NATIVE_INSTANCE->modSequenceValue()];
         [info setMessageCount:MCO_NATIVE_INSTANCE->messageCount()];
         [info setFirstUnseenUid:MCO_NATIVE_INSTANCE->firstUnseenUid()];
+        [info setAllowsNewPermanentFlags:MCO_NATIVE_INSTANCE->allowsNewPermanentFlags()];
         
         _completionBlock(nil, info);
     }

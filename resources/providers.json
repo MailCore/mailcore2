@@ -1,22 +1,152 @@
 {
+    "hushmail":{
+        "servers":{
+            "imap":[
+                    {
+                    "port": 993,
+                    "hostname":"imap.hushmail.com",
+                    "ssl":true
+                    }
+                    ],
+            "pop":[
+                   {
+                   "port": 995,
+                   "hostname":"pop.hushmail.com",
+                   "ssl":true
+                   }
+                   ],
+            "smtp":[
+                    {
+                    "port":587,
+                    "hostname":"smtp.hushmail.com",
+                    "ssl":true
+                    },
+                    {
+                    "port":465,
+                    "hostname":"smtp.hushmail.com",
+                    "ssl":true
+                    },
+                    {
+                    "port":25,
+                    "hostname":"smtp.hushmail.com",
+                    "starttls":true
+                    }
+                    ]
+        },
+        "domain-match":[
+                        "hushmail\\.com"
+                        ]
+    },
+    "mail":{
+        "servers":{
+            "imap":[
+                    {
+                    "port": 993,
+                    "hostname":"imap.mail.com",
+                    "ssl":true
+                    }
+                    ],
+            "pop":[
+                   {
+                   "port": 995,
+                   "hostname":"pop.mail.com",
+                   "ssl":true
+                   }
+                   ],
+            "smtp":[
+                    {
+                    "port":587,
+                    "hostname":"smtp.mail.com",
+                    "ssl":true
+                    },
+                    {
+                    "port":465,
+                    "hostname":"smtp.mail.com",
+                    "ssl":true
+                    },
+                    {
+                    "port":25,
+                    "hostname":"smtp.mail.com",
+                    "ssl":true
+                    }
+                    ]
+        },
+        "domain-match":[
+                        "mail\\.com"
+                        ]
+    },
+    "zoho":{
+        "servers":{
+            "imap":[
+                   {
+                   "port": 993,
+                   "hostname":"imap.zoho.com",
+                   "ssl":true
+                   }
+                   ],
+            "pop":[
+                   {
+                   "port": 995,
+                   "hostname":"pop.zoho.com",
+                   "ssl":true
+                   }
+                   ],
+            "smtp":[
+                    {
+                    "port":465,
+                    "hostname":"smtp.zoho.com",
+                    "ssl":true
+                    },
+                    {
+                    "port":587,
+                    "hostname":"smtp.zoho.com",
+                    "starttls":true
+                    }
+                    ]
+        },
+        "domain-match":[
+                        "zoho\\.com"
+                        ]
+    },
+    "juno":{
+        "servers":{
+            "pop":[
+                    {
+		    "port": 995,
+                    "hostname":"pop.juno.com",
+                    "ssl":true
+                    }
+                    ],
+            "smtp":[
+                    {
+                    "port":465,
+                    "hostname":"smtp.juno.com",
+                    "starttls":true
+                    }
+                    ]
+        },
+        "domain-match":[
+                        "juno\\.com"
+                        ]
+    },
     "mobileme":{
         "servers":{
             "imap":[
                 {
                     "port":993,
-                    "hostname":"mail.me.com",
+                    "hostname":"imap.mail.me.com",
                     "ssl":true
                 },
                 {
                     "port":143,
-                    "hostname":"mail.me.com",
+                    "hostname":"imap.mail.me.com",
                     "starttls":true
                 }
             ],
             "smtp":[
                 {
                     "port":587,
-                    "hostname":"smtp.me.com",
+                    "hostname":"smtp.mail.me.com",
                     "starttls":true
                 }
             ]
@@ -955,6 +1085,34 @@
             "spam": "Спам",
             "sentmail": "Отправленные",
             "trash": "Корзина"
+        }
+    },
+    "yandex": {
+        "servers": {
+            "imap": [
+                     {
+                     "port": 993,
+                     "hostname": "imap.yandex.ru",
+                     "ssl": true
+                     }
+                     ],
+            "smtp": [
+                     {
+                     "port": 465,
+                     "hostname": "smtp.yandex.ru",
+                     "ssl": true
+                     }
+                     ]
+            
+        },
+        "domain-match": [
+                         "yandex\\.ru"
+                         ],
+        "mailboxes": {
+            "drafts": "Черновики",
+            "spam": "Спам",
+            "sentmail": "Отправленные",
+            "trash": "Удалённые"
         }
     },
         "comcast": {

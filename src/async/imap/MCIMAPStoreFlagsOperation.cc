@@ -16,6 +16,7 @@ using namespace mailcore;
 IMAPStoreFlagsOperation::IMAPStoreFlagsOperation()
 {
     mUids = NULL;
+    mNumbers = NULL;
     mKind = IMAPStoreFlagsRequestKindAdd;
     mFlags = MessageFlagNone;
     mCustomFlags = NULL;
@@ -23,6 +24,7 @@ IMAPStoreFlagsOperation::IMAPStoreFlagsOperation()
 
 IMAPStoreFlagsOperation::~IMAPStoreFlagsOperation()
 {
+    MC_SAFE_RELEASE(mNumbers);
     MC_SAFE_RELEASE(mUids);
     MC_SAFE_RELEASE(mCustomFlags);
 }
@@ -35,6 +37,16 @@ void IMAPStoreFlagsOperation::setUids(IndexSet * uids)
 IndexSet * IMAPStoreFlagsOperation::uids()
 {
     return mUids;
+}
+
+void IMAPStoreFlagsOperation::setNumbers(IndexSet * numbers)
+{
+    MC_SAFE_REPLACE_RETAIN(IndexSet, mNumbers, numbers);
+}
+
+IndexSet * IMAPStoreFlagsOperation::numbers()
+{
+    return mNumbers;
 }
 
 void IMAPStoreFlagsOperation::setKind(IMAPStoreFlagsRequestKind kind)
@@ -70,6 +82,11 @@ Array * IMAPStoreFlagsOperation::customFlags()
 void IMAPStoreFlagsOperation::main()
 {
     ErrorCode error;
-    session()->session()->storeFlagsAndCustomFlags(folder(), mUids, mKind, mFlags, mCustomFlags, &error);
+    if (mUids != NULL) {
+        session()->session()->storeFlagsAndCustomFlagsByUID(folder(), mUids, mKind, mFlags, mCustomFlags, &error);
+    }
+    else {
+        session()->session()->storeFlagsAndCustomFlagsByNumber(folder(), mNumbers, mKind, mFlags, mCustomFlags, &error);
+    }
     setError(error);
 }

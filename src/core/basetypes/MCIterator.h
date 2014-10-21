@@ -32,13 +32,13 @@ for (unsigned int __index = 0; NULL != (__variable = (type *) mailcore::ArrayIte
 keyType * __key; \
 HashMapIterator __key##__iterator = HashMapIteratorInit(__hashmap, true, false); \
 while (HashMapIteratorRun(&__key##__iterator)) \
-while (HashMapIteratorNext(&__key##__iterator, &__key, NULL))
+while (HashMapIteratorNext(&__key##__iterator, (Object **) &__key, (Object **) NULL))
 
 #define mc_foreachhashmapValue(valueType, __value, __hashmap) \
 valueType * __value; \
 HashMapIterator __value##__iterator = HashMapIteratorInit(__hashmap, false, true); \
 while (HashMapIteratorRun(&__value##__iterator)) \
-while (HashMapIteratorNext(&__value##__iterator, NULL, (Object **) &__value))
+while (HashMapIteratorNext(&__value##__iterator, (Object **) NULL, (Object **) &__value))
 
 #define mc_foreachhashmapKeyAndValue(keyType, __key, valueType, __value, __hashmap) \
 keyType * __key; \

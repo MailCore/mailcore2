@@ -1355,17 +1355,8 @@ static void charactersParsed(void * context,
     }
     String * modifiedString;
     modifiedString = new String((const char *) ch, len);
-    modifiedString->replaceOccurrencesOfString(MCSTR("\n"), MCSTR(" "));
-    modifiedString->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
-    modifiedString->replaceOccurrencesOfString(MCSTR("\t"), MCSTR(" "));
-    
-    UChar specialCh[2];
-    specialCh[0] = 133;
-    specialCh[1] = 0;
-    modifiedString->replaceOccurrencesOfString(String::stringWithCharacters(specialCh), MCSTR(" "));
-
-    while (modifiedString->replaceOccurrencesOfString(MCSTR("  "), MCSTR(" ")) > 0) {
-    }
+    modifiedString->autorelease();
+    modifiedString = modifiedString->stripWhitespace();
 
     if (modifiedString->length() > 0) {
         if (state->lastCharIsWhitespace) {
@@ -1413,7 +1404,6 @@ static void charactersParsed(void * context,
             state->hasText = true;
         }
     }
-    modifiedString->release();
 }
 
 /* GCS: custom error function to ignore errors */
@@ -1830,6 +1820,13 @@ String * String::stripWhitespace()
     str->replaceOccurrencesOfString(MCSTR("\v"), MCSTR(" "));
     str->replaceOccurrencesOfString(MCSTR("\f"), MCSTR(" "));
     str->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
+    UChar ch[2];
+    ch[0] = 160;
+    ch[1] = 0;
+    str->replaceOccurrencesOfString(String::stringWithCharacters(ch), MCSTR(" "));
+    ch[0] = 133;
+    ch[1] = 0;
+    str->replaceOccurrencesOfString(String::stringWithCharacters(ch), MCSTR(" "));
     
     while (str->replaceOccurrencesOfString(MCSTR("  "), MCSTR(" ")) > 0) {
         /* do nothing */
@@ -1863,6 +1860,8 @@ bool String::hasPrefix(String * prefix)
 String * String::lastPathComponent()
 {
     // TODO: Improve Windows compatibility.
+    if (mUnicodeChars == NULL)
+        return MCSTR("");
     UChar * component = u_strrchr(mUnicodeChars, '/');
     if (component == NULL)
         return (String *) this->copy()->autorelease();

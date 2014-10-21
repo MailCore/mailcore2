@@ -48,6 +48,7 @@ static NSString * MCOLocalizedDescriptionTable[] = {
     @"A sender is required to send message",                                          /** MCOErrorNoSender */
     @"A recipient is required to send message",                                       /** MCOErrorNoRecipient */
     @"An error occured while performing a No-Op operation.",                          /** MCOErrorNoop */
+    @"An application specific password is required",                                  /** MCOErrorGmailApplicationSpecificPasswordRequired */
 };
 
 @implementation NSError (MCO)
@@ -57,7 +58,7 @@ static NSString * MCOLocalizedDescriptionTable[] = {
     }
     
     NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
-    if (code < MCOErrorCodeCount) {
+    if ((NSInteger) code < MCOErrorCodeCount) {
         NSString * localizedString = NSLocalizedStringFromTable(MCOLocalizedDescriptionTable[code], @"description of errors of mailcore", @"MailCore");
         [userInfo setObject:localizedString forKey:NSLocalizedDescriptionKey];
     }

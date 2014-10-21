@@ -223,6 +223,7 @@ class TestIMAPCallback : public mailcore::Object, public mailcore::OperationCall
     virtual void operationFinished(mailcore::Operation * op)
     {
         mailcore::IMAPFetchMessagesOperation * fetchOp = (mailcore::IMAPFetchMessagesOperation *) op;
+        (void) (fetchOp);
         //MCLog("callback %s %s %s", MCUTF8DESC(op), MCUTF8DESC(fetchOp->messages()), MCUTF8DESC(this));
     }
     

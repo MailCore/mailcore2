@@ -130,6 +130,7 @@ struct mainThreadCallData {
 
 static pthread_once_t delayedPerformOnce = PTHREAD_ONCE_INIT;
 static chash * delayedPerformHash = NULL;
+static pthread_mutex_t delayedPerformLock = PTHREAD_MUTEX_INITIALIZER;
 
 static void reallyInitDelayedPerform()
 {
@@ -164,7 +165,9 @@ static void removeFromPerformHash(Object * obj, Object::Method method, void * co
     key.data = &keyData;
     key.len = sizeof(keyData);
     
+    pthread_mutex_lock(&delayedPerformLock);
     chash_delete(delayedPerformHash, (chashdatum *) &key, NULL);
+    pthread_mutex_unlock(&delayedPerformLock);
 }
 
 static void queueIdentifierDestructor(void * identifier)
@@ -196,7 +199,9 @@ static void addToPerformHash(Object * obj, Object::Method method, void * context
     key.len = sizeof(keyData);
     value.data = performValue;
     value.len = 0;
+    pthread_mutex_lock(&delayedPerformLock);
     chash_set(delayedPerformHash, &key, &value, NULL);
+    pthread_mutex_unlock(&delayedPerformLock);
 }
 
 static void * getFromPerformHash(Object * obj, Object::Method method, void * context, void * targetDispatchQueue)
@@ -221,7 +226,9 @@ static void * getFromPerformHash(Object * obj, Object::Method method, void * con
     key.data = &keyData;
     key.len = sizeof(keyData);
     
+    pthread_mutex_lock(&delayedPerformLock);
     r = chash_get(delayedPerformHash, &key, &value);
+    pthread_mutex_unlock(&delayedPerformLock);
     if (r < 0)
         return NULL;
     

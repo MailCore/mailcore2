@@ -180,8 +180,10 @@ typedef NS_ENUM(NSInteger, MCOIMAPSearchKind) {
     MCOIMAPSearchKindRecipient,
     /** Match subject.*/
     MCOIMAPSearchKindSubject,
-    /** Match content of the message.*/
+    /** Match content of the message, including the headers.*/
     MCOIMAPSearchKindContent,
+    /** Match content of the message, excluding the headers.*/
+    MCOIMAPSearchKindBody,
     /** Match uids */
     MCOIMAPSearchKindUids,
     /** Match headers of the message.*/
@@ -400,6 +402,9 @@ typedef NS_ENUM(NSInteger, MCOErrorCode) {
     MCOErrorNoRecipient,
     /** IMAP: Error when a noop operation fails.*/
     MCOErrorNoop,
+    /** IMAP: Error when the password has been entered but second factor
+     authentication is enabled: an application specific password is required. */
+    MCOErrorGmailApplicationSpecificPasswordRequired,
     /** The count of all errors */
     MCOErrorCodeCount,
 };

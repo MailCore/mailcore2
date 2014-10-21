@@ -1,11 +1,14 @@
 #!/bin/sh
 
-if xcodebuild -showsdks|grep iphoneos8.0 >/dev/null ; then
+if xcodebuild -showsdks|grep iphoneos8.1 >/dev/null ; then
+    sdkversion=8.1
+    archs="armv7 armv7s arm64 i386 x86_64"
+elif xcodebuild -showsdks|grep iphoneos8.0 >/dev/null ; then
     sdkversion=8.0
     archs="armv7 armv7s arm64 i386 x86_64"
 elif xcodebuild -showsdks|grep iphoneos7.1 >/dev/null ; then
-        sdkversion=7.1
-        archs="armv7 armv7s arm64 i386 x86_64"
+    sdkversion=7.1
+    archs="armv7 armv7s arm64 i386 x86_64"
 elif xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
     sdkversion=7.0
     archs="armv7 armv7s arm64 i386 x86_64"
@@ -95,13 +98,20 @@ make # >> "$logdir/icu4c-build.log"
 make install "prefix=$tmpdir/crossbuild/icu4c-$MARCH" # >> "$logdir/icu4c-build.log"
 
 ARCH=arm
-if xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
+if xcodebuild -showsdks|grep iphoneos8.1 >/dev/null ; then
+	sdkversion=8.1
+    MARCHS="armv7 armv7s arm64"
+elif xcodebuild -showsdks|grep iphoneos8.0 >/dev/null ; then
+    sdkversion=8.0
+	MARCHS="armv7 armv7s arm64"
+elif xcodebuild -showsdks|grep iphoneos7.1 >/dev/null ; then
+    sdkversion=7.1
+    MARCHS="armv7 armv7s arm64"
+elif xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
     sdkversion=7.0
     MARCHS="armv7 armv7s arm64"
 elif xcodebuild -showsdks|grep iphoneos6.1 >/dev/null ; then
     MARCHS="armv7 armv7s"
-elif xcodebuild -showsdks|grep iphoneos8.0 >/dev/null ; then
-    MARCHS="armv7 armv7s arm64"
 else
     echo SDK not found
     exit 1

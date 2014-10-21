@@ -16,12 +16,14 @@ using namespace mailcore;
 IMAPStoreLabelsOperation::IMAPStoreLabelsOperation()
 {
     mUids = NULL;
+    mNumbers = NULL;
     mKind = IMAPStoreFlagsRequestKindAdd;
     mLabels = NULL;
 }
 
 IMAPStoreLabelsOperation::~IMAPStoreLabelsOperation()
 {
+    MC_SAFE_RELEASE(mNumbers);
     MC_SAFE_RELEASE(mUids);
     MC_SAFE_RELEASE(mLabels);
 }
@@ -34,6 +36,16 @@ void IMAPStoreLabelsOperation::setUids(IndexSet * uids)
 IndexSet * IMAPStoreLabelsOperation::uids()
 {
     return mUids;
+}
+
+void IMAPStoreLabelsOperation::setNumbers(IndexSet * numbers)
+{
+    MC_SAFE_REPLACE_RETAIN(IndexSet, mNumbers, numbers);
+}
+
+IndexSet * IMAPStoreLabelsOperation::numbers()
+{
+    return mNumbers;
 }
 
 void IMAPStoreLabelsOperation::setKind(IMAPStoreFlagsRequestKind kind)
@@ -59,7 +71,12 @@ Array * IMAPStoreLabelsOperation::labels()
 void IMAPStoreLabelsOperation::main()
 {
     ErrorCode error;
-    session()->session()->storeLabels(folder(), mUids, mKind, mLabels, &error);
+    if (mUids != NULL) {
+        session()->session()->storeLabelsByUID(folder(), mUids, mKind, mLabels, &error);
+    }
+    else {
+        session()->session()->storeLabelsByNumber(folder(), mUids, mKind, mLabels, &error);
+    }
     setError(error);
 }
 
