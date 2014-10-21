@@ -82,6 +82,7 @@ set(objc_nntp_files
   objc/nntp/MCONNTPGroupInfo.mm
   objc/nntp/MCONNTPListNewsgroupsOperation.mm
   objc/nntp/MCONNTPFetchOverviewOperation.mm
+  objc/nntp/MCONNTPFetchServerTimeOperation.mm
   objc/nntp/MCONNTPOperation.mm
   objc/nntp/MCONNTPSession.mm	
 )

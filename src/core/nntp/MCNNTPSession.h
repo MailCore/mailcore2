@@ -49,13 +49,13 @@ namespace mailcore {
         
         virtual MessageHeader * fetchHeader(String * groupName, unsigned int index, ErrorCode * pError);
         virtual Array /*MessageHeader*/ * fetchOverArticlesInRange(Range range, String * groupname, ErrorCode * pError);
-
+        
         virtual IndexSet * fetchAllArticles(String * groupname, ErrorCode * pError);
                 
         virtual Data * fetchArticle(String *groupName, unsigned int index, NNTPProgressCallback * callback, ErrorCode * pError);
         virtual Data * fetchArticleByMessageID(String * groupname, String * messageID, ErrorCode * pError);
         
-        virtual time_t fetchServerClock(ErrorCode * pError);
+        virtual time_t fetchServerClockTime(ErrorCode * pError);
         
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();

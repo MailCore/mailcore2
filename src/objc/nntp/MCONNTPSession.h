@@ -21,6 +21,7 @@
 @class MCONNTPFetchArticleOperation;
 @class MCONNTPListNewsgroupsOperation;
 @class MCONNTPFetchOverviewOperation;
+@class MCONNTPFetchServerTimeOperation;
 @class MCONNTPOperation;
 @class MCOIndexSet;
 
@@ -115,6 +116,15 @@
  }];
  */
 - (MCONNTPFetchArticleOperation *) fetchArticleOperationWithMessageID:(NSString *)messageID inGroup:(NSString *)group;
+
+/**
+ Returns an operation that will fetch the server's date and time.
+ 
+ MCONNTPFetchArticleOperation * op = [session fetchServerTimeOperation];
+ [op start:^(NSError * error, NSDate * serverTime) {
+ }];
+ */
+- (MCONNTPFetchServerTimeOperation *) fetchServerTimeOperation;
 
 /**
  Returns an operation that will list all available newsgroups.

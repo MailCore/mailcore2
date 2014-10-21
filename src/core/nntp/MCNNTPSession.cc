@@ -507,7 +507,7 @@ Data * NNTPSession::fetchArticleByMessageID(String * groupName, String * message
     return result;
 }
 
-time_t NNTPSession::fetchServerClock(ErrorCode * pError) {
+time_t NNTPSession::fetchServerClockTime(ErrorCode * pError) {
     int r;
     struct tm time;
     time_t result;

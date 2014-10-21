@@ -15,6 +15,7 @@
 #include "MCNNTPListNewsgroupsOperation.h"
 #include "MCNNTPFetchOverviewOperation.h"
 #include "MCNNTPCheckAccountOperation.h"
+#include "MCNNTPFetchServerTimeOperation.h"
 #include "MCNNTPDisconnectOperation.h"
 #include "MCOperationQueueCallback.h"
 #include "MCConnectionLogger.h"
@@ -199,6 +200,14 @@ NNTPFetchOverviewOperation * NNTPAsyncSession::fetchOverviewOperationWithIndexes
     op->setSession(this);
     op->setGroupName(groupName);
     op->setIndexes(indexes);
+    op->autorelease();
+    return op;
+}
+
+NNTPFetchServerTimeOperation * NNTPAsyncSession::fetchServerTimeOperation()
+{
+    NNTPFetchServerTimeOperation * op = new NNTPFetchServerTimeOperation();
+    op->setSession(this);
     op->autorelease();
     return op;
 }

@@ -150,6 +150,11 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
     return MCO_TO_OBJC_OP(coreOp);
 }
 
+- (MCONNTPFetchServerTimeOperation *) fetchServerTimeOperation {
+    mailcore::NNTPFetchServerTimeOperation * coreOp = MCO_NATIVE_INSTANCE->fetchServerTimeOperation();
+    return MCO_TO_OBJC_OP(coreOp);
+}
+
 - (MCONNTPListNewsgroupsOperation *) listAllNewsgroupsOperation {
     mailcore::NNTPListNewsgroupsOperation * coreOp = MCO_NATIVE_INSTANCE->listAllNewsgroupsOperation();
     return MCO_TO_OBJC_OP(coreOp);

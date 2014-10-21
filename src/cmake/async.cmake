@@ -61,6 +61,7 @@ set(async_nntp_files
   async/nntp/MCNNTPFetchHeaderOperation.cc
   async/nntp/MCNNTPListNewsgroupsOperation.cc
   async/nntp/MCNNTPFetchOverviewOperation.cc
+  async/nntp/MCNNTPFetchServerTimeOperation.cc
   async/nntp/MCNNTPOperation.cc
 )
 

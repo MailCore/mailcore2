@@ -566,6 +566,14 @@
 		84CFA98A19F7168400FE35D2 /* MCNNTPFetchOverviewOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CFA98619F7159700FE35D2 /* MCNNTPFetchOverviewOperation.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		84CFA98B19F716EE00FE35D2 /* MCONNTPFetchOverviewOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CFA98119F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		84CFA98C19F716EF00FE35D2 /* MCONNTPFetchOverviewOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CFA98119F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84CFA98F19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA98D19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp */; };
+		84CFA99019F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA98D19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp */; };
+		84CFA99119F725AF00FE35D2 /* MCNNTPFetchServerTimeOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CFA98E19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		84CFA99219F725B000FE35D2 /* MCNNTPFetchServerTimeOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CFA98E19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84CFA99519F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA99419F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.mm */; };
+		84CFA99619F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA99419F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.mm */; };
+		84CFA99719F725D300FE35D2 /* MCONNTPFetchServerTimeOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CFA99319F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		84CFA99819F725D400FE35D2 /* MCONNTPFetchServerTimeOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CFA99319F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84D7372C199BF66C005124E5 /* MCNNTPAsyncSession.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84D7372A199BF66C005124E5 /* MCNNTPAsyncSession.cc */; };
 		84D7372D199BF66C005124E5 /* MCNNTPAsyncSession.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84D7372A199BF66C005124E5 /* MCNNTPAsyncSession.cc */; };
 		84D73730199BF704005124E5 /* MCNNTPOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84D7372E199BF704005124E5 /* MCNNTPOperation.cc */; };
@@ -1846,6 +1854,10 @@
 		84CFA98219F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCONNTPFetchOverviewOperation.mm; sourceTree = "<group>"; };
 		84CFA98519F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCNNTPFetchOverviewOperation.cc; sourceTree = "<group>"; };
 		84CFA98619F7159700FE35D2 /* MCNNTPFetchOverviewOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNNTPFetchOverviewOperation.h; sourceTree = "<group>"; };
+		84CFA98D19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCNNTPFetchServerTimeOperation.cpp; sourceTree = "<group>"; };
+		84CFA98E19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNNTPFetchServerTimeOperation.h; sourceTree = "<group>"; };
+		84CFA99319F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCONNTPFetchServerTimeOperation.h; sourceTree = "<group>"; };
+		84CFA99419F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCONNTPFetchServerTimeOperation.mm; sourceTree = "<group>"; };
 		84D73729199BF63F005124E5 /* MCAsyncNNTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCAsyncNNTP.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		84D7372A199BF66C005124E5 /* MCNNTPAsyncSession.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = MCNNTPAsyncSession.cc; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		84D7372B199BF66C005124E5 /* MCNNTPAsyncSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNNTPAsyncSession.h; sourceTree = "<group>"; };
@@ -2421,6 +2433,8 @@
 				84CFA98619F7159700FE35D2 /* MCNNTPFetchOverviewOperation.h */,
 				84D73740199BF963005124E5 /* MCNNTPFetchArticlesOperation.cc */,
 				84D73741199BF963005124E5 /* MCNNTPFetchArticlesOperation.h */,
+				84CFA98D19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp */,
+				84CFA98E19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.h */,
 				84D73744199BFA8C005124E5 /* MCNNTPCheckAccountOperation.cc */,
 				84D73745199BFA8C005124E5 /* MCNNTPCheckAccountOperation.h */,
 				84D73756199BFC8A005124E5 /* MCNNTPDisconnectOperation.cc */,
@@ -2451,6 +2465,8 @@
 				84CFA98219F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.mm */,
 				84D73773199C00AB005124E5 /* MCONNTPFetchArticlesOperation.h */,
 				84D73774199C00AB005124E5 /* MCONNTPFetchArticlesOperation.mm */,
+				84CFA99319F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.h */,
+				84CFA99419F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.mm */,
 				84D7378D199C02A8005124E5 /* MCONNTPDisconnectOperation.h */,
 				84D7378E199C02A8005124E5 /* MCONNTPDisconnectOperation.mm */,
 				84D73791199C0511005124E5 /* MCONNTPGroupInfo.h */,
@@ -3233,8 +3249,10 @@
 				27780E8919CFA3FA00C77E44 /* NSIndexSet+MCO.h in Headers */,
 				27780E8A19CFA3FA00C77E44 /* NSSet+MCO.h in Headers */,
 				27780E8B19CFA3FA00C77E44 /* MCOMailProvider.h in Headers */,
+				84CFA99119F725AF00FE35D2 /* MCNNTPFetchServerTimeOperation.h in Headers */,
 				27780E8C19CFA3FA00C77E44 /* MCOMailProvidersManager.h in Headers */,
 				27780E8D19CFA3FA00C77E44 /* MCONetService.h in Headers */,
+				84CFA99719F725D300FE35D2 /* MCONNTPFetchServerTimeOperation.h in Headers */,
 				27780E8E19CFA3FA00C77E44 /* MCOProvider.h in Headers */,
 				27780E8F19CFA3FA00C77E44 /* MCObjC.h in Headers */,
 				27780E9019CFA3FA00C77E44 /* MCAsyncIMAP.h in Headers */,
@@ -3494,8 +3512,10 @@
 				27780D9519CFA32E00C77E44 /* MCOMailProvider.h in Headers */,
 				27780D9619CFA32E00C77E44 /* MCOMailProvidersManager.h in Headers */,
 				27780D9719CFA32F00C77E44 /* MCONetService.h in Headers */,
+				84CFA99219F725B000FE35D2 /* MCNNTPFetchServerTimeOperation.h in Headers */,
 				27780D9819CFA32F00C77E44 /* MCOProvider.h in Headers */,
 				27780D9919CFA32F00C77E44 /* MCObjC.h in Headers */,
+				84CFA99819F725D400FE35D2 /* MCONNTPFetchServerTimeOperation.h in Headers */,
 				27780D9A19CFA32F00C77E44 /* MCAsyncIMAP.h in Headers */,
 				27780D9B19CFA32F00C77E44 /* MCIMAPAsyncConnection.h in Headers */,
 				27780D9C19CFA32F00C77E44 /* MCIMAPAsyncSession.h in Headers */,
@@ -3942,6 +3962,7 @@
 				C64EA727169E847800778456 /* MCIMAPMessagePart.cc in Sources */,
 				84D73775199C00AB005124E5 /* MCONNTPFetchArticlesOperation.mm in Sources */,
 				C64EA729169E847800778456 /* MCIMAPMultipart.cc in Sources */,
+				84CFA99519F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.mm in Sources */,
 				C64EA72B169E847800778456 /* MCIMAPNamespace.cc in Sources */,
 				C64EA72D169E847800778456 /* MCIMAPNamespaceItem.cc in Sources */,
 				C64EA72F169E847800778456 /* MCIMAPPart.cc in Sources */,
@@ -4021,6 +4042,7 @@
 				C63CD68116BDCDD400DB18F1 /* MCHTMLRenderer.cc in Sources */,
 				C63CD68216BDCDD400DB18F1 /* MCSizeFormatter.cc in Sources */,
 				C63CD68616BE148B00DB18F1 /* MCHTMLRendererCallback.cc in Sources */,
+				84CFA98F19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp in Sources */,
 				C63CD69116BE566E00DB18F1 /* MCHTMLCleaner.cc in Sources */,
 				C64BB22116E34DCB000DB34C /* MCIMAPSyncResult.cc in Sources */,
 				C64BB22B16E5C0A4000DB34C /* MCIMAPCapabilityOperation.cc in Sources */,
@@ -4168,6 +4190,7 @@
 				C6BA2BAF1705F4E6003F0E9E /* MCIMAPMessage.cc in Sources */,
 				C6BA2BB01705F4E6003F0E9E /* MCIMAPMessagePart.cc in Sources */,
 				84D73776199C00AB005124E5 /* MCONNTPFetchArticlesOperation.mm in Sources */,
+				84CFA99619F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.mm in Sources */,
 				C6BA2BB11705F4E6003F0E9E /* MCIMAPMultipart.cc in Sources */,
 				C6BA2BB21705F4E6003F0E9E /* MCIMAPNamespace.cc in Sources */,
 				C6BA2BB31705F4E6003F0E9E /* MCIMAPNamespaceItem.cc in Sources */,
@@ -4247,6 +4270,7 @@
 				C6BA2BE81705F4E6003F0E9E /* MCDateFormatter.cc in Sources */,
 				C6BA2BE91705F4E6003F0E9E /* MCHTMLRenderer.cc in Sources */,
 				C6BA2BEA1705F4E6003F0E9E /* MCSizeFormatter.cc in Sources */,
+				84CFA99019F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp in Sources */,
 				C6BA2BEB1705F4E6003F0E9E /* MCHTMLRendererCallback.cc in Sources */,
 				C6BA2BEC1705F4E6003F0E9E /* MCHTMLCleaner.cc in Sources */,
 				C6BA2BED1705F4E6003F0E9E /* MCIMAPSyncResult.cc in Sources */,
