@@ -58,7 +58,7 @@
      MCOIMAPMessagesRequestKindInternalDate | MCOIMAPMessagesRequestKindHeaderSubject |
      MCOIMAPMessagesRequestKindFlags);
     
-    _op = [_session fetchMessagesByUIDOperationWithFolder:FOLDER requestKind:requestKind uids:[MCOIndexSet indexSetWithRange:MCORangeMake(1, UINT64_MAX)]];
+    _op = [_session fetchMessagesOperationWithFolder:FOLDER requestKind:requestKind uids:[MCOIndexSet indexSetWithRange:MCORangeMake(1, UINT64_MAX)]];
     [_op setProgress:^(unsigned int current){
         //NSLog(@"progress: %u", current);
     }];

@@ -58,6 +58,24 @@
 /** RFC 822 formatted message.*/
 - (NSData *) data;
 
+/** RFC 822 formatted message for encryption.*/
+- (NSData *) dataForEncryption;
+
+/**
+ Returns an OpenPGP signed message with a given signature.
+ The signature needs to be computed on the data returned by -dataForEncryption
+ before calling this method.
+ You could use http://www.netpgp.com to generate it.
+ */
+- (NSData *) openPGPSignedMessageDataWithSignatureData:(NSData *)signature;
+
+/**
+ Returns an OpenPGP encrypted message with a given encrypted data.
+ The encrypted data needs to be computed before calling this method.
+ You could use http://www.netpgp.com to generate it.
+ */
+- (NSData *) openPGPEncryptedMessageDataWithEncryptedData:(NSData *)encryptedData;
+
 /** HTML rendering of the message to be displayed in a web view. The delegate can be nil.*/
 - (NSString *) htmlRenderingWithDelegate:(id <MCOHTMLRendererDelegate>)delegate;
 

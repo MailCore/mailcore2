@@ -82,13 +82,22 @@
 + (MCOIMAPSearchExpression *) searchSubject:(NSString *)value;
 
 /**
- Creates a search expression that matches the content of an email.
+ Creates a search expression that matches the content of an email, including the headers.
 
  Example:
 
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchContent:@"meeting"]
 */
 + (MCOIMAPSearchExpression *) searchContent:(NSString *)value;
+
+/**
+ Creates a search expression that matches the content of an email, excluding the headers.
+ 
+ Example:
+ 
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchBody:@"building"]
+ */
++ (MCOIMAPSearchExpression *) searchBody:(NSString *)value;
 
 /**
  Creates a search expression that matches the uids specified.

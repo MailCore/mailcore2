@@ -16,6 +16,7 @@ static AbstractPart * partForPartIDInMessagePart(AbstractMessagePart * part, Str
 void IMAPMessage::init()
 {
     mUid = 0;
+    mSequenceNumber = 0;
     mFlags = MessageFlagNone;
     mOriginalFlags = MessageFlagNone;
     mCustomFlags = NULL;
@@ -35,6 +36,7 @@ IMAPMessage::IMAPMessage(IMAPMessage * other) : AbstractMessage(other)
 {
     init();
     setUid(other->uid());
+    setSequenceNumber(other->sequenceNumber());
     setFlags(other->flags());
     setOriginalFlags(other->originalFlags());
     setCustomFlags(other->customFlags());
@@ -59,7 +61,7 @@ Object * IMAPMessage::copy()
 String * IMAPMessage::description()
 {
     String * result = String::string();
-    result->appendUTF8Format("<%s:%p %u\n", className()->UTF8Characters(), this, (unsigned int) uid());
+    result->appendUTF8Format("<%s:%p %u %u\n", className()->UTF8Characters(), this, (unsigned int) uid(), (unsigned int) sequenceNumber());
     result->appendString(header()->description());
     if (mainPart() != NULL) {
         result->appendString(mainPart()->description());
@@ -77,6 +79,16 @@ uint32_t IMAPMessage::uid()
 void IMAPMessage::setUid(uint32_t uid)
 {
     mUid = uid;
+}
+
+uint32_t IMAPMessage::sequenceNumber()
+{
+    return mSequenceNumber;
+}
+
+void IMAPMessage::setSequenceNumber(uint32_t value)
+{
+    mSequenceNumber = value;
 }
 
 uint32_t IMAPMessage::size()
@@ -235,6 +247,7 @@ String * IMAPMessage::htmlRendering(String * folder,
 
 HashMap * IMAPMessage::serializable()
 {
+    // sequenceNumber is not serialized.
     HashMap * result = AbstractMessage::serializable();
     result->setObjectForKey(MCSTR("modSeqValue"), String::stringWithUTF8Format("%llu", (long long unsigned) modSeqValue()));
     result->setObjectForKey(MCSTR("uid"), String::stringWithUTF8Format("%lu", (long unsigned) uid()));
@@ -261,6 +274,7 @@ HashMap * IMAPMessage::serializable()
 
 void IMAPMessage::importSerializable(HashMap * serializable)
 {
+    // sequenceNumber is not serialized.
     AbstractMessage::importSerializable(serializable);
     String * modSeq = (String *) serializable->objectForKey(MCSTR("modSeqValue"));
     if (modSeq != NULL) {

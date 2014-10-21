@@ -39,6 +39,7 @@ namespace mailcore {
         virtual String * boundaryPrefix();
         
         virtual Data * data();
+        virtual Data * dataForEncryption();
         
         virtual String * htmlRendering(HTMLRendererTemplateCallback * htmlCallback = NULL);
         virtual String * htmlBodyRendering();
@@ -46,10 +47,17 @@ namespace mailcore {
         virtual String * plainTextRendering();
         virtual String * plainTextBodyRendering(bool stripWhitespace);
         
+        virtual Data * openPGPSignedMessageDataWithSignatureData(Data * signature);
+        virtual Data * openPGPEncryptedMessageDataWithEncryptedData(Data * encryptedData);
+        
     public: // subclass behavior
         MessageBuilder(MessageBuilder * other);
         virtual String * description();
         virtual Object * copy();
+        
+    public: // private
+        virtual String * nextBoundary();
+        virtual void resetBoundaries();
         
     private:
         String * mHTMLBody;
@@ -58,7 +66,10 @@ namespace mailcore {
         Array * /* Attachment */ mRelatedAttachments;
         String * mBoundaryPrefix;
         void init();
-        Data * dataAndFilterBcc(bool filterBcc);
+        Data * dataAndFilterBccAndForEncryption(bool filterBcc, bool forEncryption);
+        struct mailmime * mimeAndFilterBccAndForEncryption(bool filterBcc, bool forEncryption);
+        Array * mBoundaries;
+        unsigned int mCurrentBoundaryIndex;
     };
     
 };

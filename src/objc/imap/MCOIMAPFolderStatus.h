@@ -32,7 +32,7 @@
 @property (nonatomic, assign) uint32_t messageCount;
 
 /** Highest modification sequence value for this folder. See CONDSTORE RFC 4551. */
-@property (nonatomic, assign) uint64_t setHighestModSeqValue;
+@property (nonatomic, assign) uint64_t highestModSeqValue;
 
 @end
 

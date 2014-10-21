@@ -2,7 +2,10 @@
 
 url="https://github.com/dinhviethoa/ctemplate"
 
-if xcodebuild -showsdks|grep iphoneos8.0 >/dev/null ; then
+if xcodebuild -showsdks|grep iphoneos8.1 >/dev/null ; then
+	sdkversion=8.1
+    MARCHS="armv7 armv7s arm64"
+elif xcodebuild -showsdks|grep iphoneos8.0 >/dev/null ; then
 	sdkversion=8.0
     MARCHS="armv7 armv7s arm64"
 elif xcodebuild -showsdks|grep iphoneos7.1 >/dev/null ; then

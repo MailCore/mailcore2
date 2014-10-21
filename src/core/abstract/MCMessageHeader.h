@@ -99,7 +99,6 @@ namespace mailcore {
         time_t mDate;
         time_t mReceivedDate;
         HashMap * mExtraHeaders;
-        HashMap * mlcExtraHeaders;
         void init(bool generateDate, bool generateMessageID);
         void setExtraHeaders(HashMap *headers);
         Array * recipientWithReplyAll(bool replyAll, bool includeTo, bool includeCc, Array * senderEmails);

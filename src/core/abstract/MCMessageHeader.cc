@@ -62,7 +62,6 @@ void MessageHeader::init(bool generateDate, bool generateMessageID)
     mDate = (time_t) -1;
     mReceivedDate = (time_t) -1;
     mExtraHeaders = NULL;
-    mlcExtraHeaders = NULL;
     
     if (generateDate) {
         time_t date;
@@ -116,7 +115,6 @@ MessageHeader::~MessageHeader()
     MC_SAFE_RELEASE(mReplyTo);
     MC_SAFE_RELEASE(mSubject);
     MC_SAFE_RELEASE(mExtraHeaders);
-    MC_SAFE_RELEASE(mlcExtraHeaders);
 }
 
 String * MessageHeader::description()
@@ -307,13 +305,6 @@ String * MessageHeader::userAgent()
 void MessageHeader::setExtraHeaders(HashMap * headers)
 {
     MC_SAFE_REPLACE_COPY(HashMap, mExtraHeaders, headers);
-    MC_SAFE_RELEASE(mlcExtraHeaders);
-    if (mExtraHeaders != NULL) {
-        mlcExtraHeaders = new HashMap();
-        mc_foreachhashmapKeyAndValue(String, key, String, value, mExtraHeaders) {
-            mlcExtraHeaders->setObjectForKey(key->lowercaseString(), value);
-        }
-    }
 }
 
 Array * MessageHeader::allExtraHeadersNames()
@@ -328,30 +319,30 @@ void MessageHeader::setExtraHeader(String * name, String * object)
     if (mExtraHeaders == NULL) {
         mExtraHeaders = new HashMap();
     }
-    if (mlcExtraHeaders == NULL) {
-        mlcExtraHeaders = new HashMap();
-    }
-    if (object == NULL) {
-        removeExtraHeader(name);
-        return;
-    }
+    removeExtraHeader(name);
     mExtraHeaders->setObjectForKey(name, object);
-    mlcExtraHeaders->setObjectForKey(name->lowercaseString(), object);
 }
 
 void MessageHeader::removeExtraHeader(String * name)
 {
     if (mExtraHeaders == NULL)
         return;
-    mExtraHeaders->removeObjectForKey(name);
-    mlcExtraHeaders->removeObjectForKey(name);
+    mc_foreachhashmapKey(String, key, mExtraHeaders) {
+        if (key->isEqualCaseInsensitive(name)) {
+            mExtraHeaders->removeObjectForKey(key);
+            break;
+        }
+    }
 }
 
 String * MessageHeader::extraHeaderValueForName(String * name)
 {
-    if (mlcExtraHeaders == NULL)
-        return NULL;
-    return (String *) mlcExtraHeaders->objectForKey(name->lowercaseString());
+    mc_foreachhashmapKey(String, key, mExtraHeaders) {
+        if (key->isEqualCaseInsensitive(name)) {
+            return (String *) mExtraHeaders->objectForKey(key);
+        }
+    }
+    return NULL;
 }
 
 String * MessageHeader::extractedSubject()

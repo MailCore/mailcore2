@@ -2,6 +2,7 @@
 
 url="https://github.com/MailCore/mailcore2-deps"
 url_prefix="$url/raw/master"
+content_prefix="https://raw.githubusercontent.com/MailCore/mailcore2-deps/master"
 
 if test x$1 != xskipprebuilt ; then
   file_timestamp=0
@@ -15,8 +16,7 @@ if test x$1 != xskipprebuilt ; then
   fi
   if test $age -gt 0 ; then
     networkerror=no
-    #echo "$url_prefix/prebuilt.list"
-    curl -3 -s -L "$url_prefix/prebuilt.list" > prebuilt.list.tmp
+    curl -s -L "$content_prefix/prebuilt.list" > prebuilt.list.tmp
     if test x$? != x0 ; then
       networkerror=yes
     fi

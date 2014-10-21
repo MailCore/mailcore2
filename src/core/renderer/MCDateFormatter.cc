@@ -216,6 +216,12 @@ void DateFormatter::prepare()
         localeRef = CFLocaleCopyCurrent();
     }
     mAppleDateFormatter = CFDateFormatterCreate(NULL, localeRef, toAppleStyle(mDateStyle), toAppleStyle(mTimeStyle));
+    if (mDateFormat != NULL) {
+        CFStringRef dateFormatCFString = CFStringCreateWithCharacters(NULL, (const UniChar *) mDateFormat->unicodeCharacters(),
+                                                                      mDateFormat->length());
+        CFDateFormatterSetFormat((CFDateFormatterRef) mAppleDateFormatter, dateFormatCFString);
+        CFRelease(dateFormatCFString);
+    }
     if (localeIdentifier != NULL) {
         CFRelease(localeIdentifier);
     }

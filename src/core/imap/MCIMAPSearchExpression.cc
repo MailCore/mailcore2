@@ -154,6 +154,14 @@ IMAPSearchExpression * IMAPSearchExpression::searchContent(String * value)
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
+IMAPSearchExpression * IMAPSearchExpression::searchBody(String * value)
+{
+    IMAPSearchExpression * expr = new IMAPSearchExpression();
+    expr->mKind = IMAPSearchKindBody;
+    MC_SAFE_REPLACE_COPY(String, expr->mValue, value);
+    return (IMAPSearchExpression *) expr->autorelease();
+}
+
 IMAPSearchExpression * IMAPSearchExpression::searchUIDs(IndexSet * uids)
 {
     IMAPSearchExpression * expr = new IMAPSearchExpression();

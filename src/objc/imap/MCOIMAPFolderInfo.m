@@ -14,6 +14,7 @@
     uint64_t _modSequenceValue;
     int _messageCount;
     uint32_t _firstUnseenUid;
+    BOOL _allowsNewPermanentFlags;
 }
 
 @synthesize uidNext = _uidNext;
@@ -21,6 +22,7 @@
 @synthesize modSequenceValue = _modSequenceValue;
 @synthesize messageCount = _messageCount;
 @synthesize firstUnseenUid = _firstUnseenUid;
+@synthesize allowsNewPermanentFlags = _allowsNewPermanentFlags;
 
 + (MCOIMAPFolderInfo *) info
 {
