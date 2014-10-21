@@ -13,6 +13,7 @@
 #include "MCNNTPFetchArticleOperation.h"
 #include "MCNNTPFetchArticlesOperation.h"
 #include "MCNNTPListNewsgroupsOperation.h"
+#include "MCNNTPFetchOverviewOperation.h"
 #include "MCNNTPCheckAccountOperation.h"
 #include "MCNNTPDisconnectOperation.h"
 #include "MCOperationQueueCallback.h"
@@ -153,9 +154,9 @@ bool NNTPAsyncSession::isCheckCertificateEnabled()
     return mSession->isCheckCertificateEnabled();
 }
 
-MCNNTPFetchArticlesOperation * NNTPAsyncSession::fetchAllArticlesOperation(String * group)
+NNTPFetchArticlesOperation * NNTPAsyncSession::fetchAllArticlesOperation(String * group)
 {
-    MCNNTPFetchArticlesOperation * op = new MCNNTPFetchArticlesOperation();
+    NNTPFetchArticlesOperation * op = new NNTPFetchArticlesOperation();
     op->setSession(this);
     op->setGroupName(group);
     op->autorelease();
@@ -178,6 +179,26 @@ NNTPFetchArticleOperation * NNTPAsyncSession::fetchArticleOperation(String * gro
     op->setSession(this);
     op->setGroupName(groupName);
     op->setMessageIndex(index);
+    op->autorelease();
+    return op;
+}
+
+NNTPFetchArticleOperation * NNTPAsyncSession::fetchArticleByMessageIDOperation(String *groupName, String *messageID)
+{
+    NNTPFetchArticleOperation * op = new NNTPFetchArticleOperation();
+    op->setSession(this);
+    op->setGroupName(groupName);
+    op->setMessageID(messageID);
+    op->autorelease();
+    return op;
+}
+
+NNTPFetchOverviewOperation * NNTPAsyncSession::fetchOverviewOperationWithIndexes(String * groupName, IndexSet * indexes)
+{
+    NNTPFetchOverviewOperation * op = new NNTPFetchOverviewOperation();
+    op->setSession(this);
+    op->setGroupName(groupName);
+    op->setIndexes(indexes);
     op->autorelease();
     return op;
 }

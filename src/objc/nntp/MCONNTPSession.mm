@@ -124,7 +124,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
 
 - (MCONNTPFetchArticlesOperation *) fetchAllArticlesOperation:(NSString *)group
 {
-    mailcore::MCNNTPFetchArticlesOperation * coreOp = MCO_NATIVE_INSTANCE->fetchAllArticlesOperation(MCO_FROM_OBJC(mailcore::String, group));
+    mailcore::NNTPFetchArticlesOperation * coreOp = MCO_NATIVE_INSTANCE->fetchAllArticlesOperation(MCO_FROM_OBJC(mailcore::String, group));
     return MCO_TO_OBJC_OP(coreOp);
 }
 
@@ -137,6 +137,16 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
 - (MCONNTPFetchArticleOperation *) fetchArticleOperationWithIndex:(unsigned int)index inGroup:(NSString *)group
 {
     mailcore::NNTPFetchArticleOperation * coreOp = MCO_NATIVE_INSTANCE->fetchArticleOperation(MCO_FROM_OBJC(mailcore::String, group), index);
+    return MCO_TO_OBJC_OP(coreOp);
+}
+
+- (MCONNTPFetchArticleOperation *) fetchArticleOperationWithMessageID:(NSString *)messageID inGroup:(NSString *)group {
+    mailcore::NNTPFetchArticleOperation * coreOp = MCO_NATIVE_INSTANCE->fetchArticleByMessageIDOperation(MCO_FROM_OBJC(mailcore::String, group), MCO_FROM_OBJC(mailcore::String, messageID));
+    return MCO_TO_OBJC_OP(coreOp);
+}
+
+- (MCONNTPFetchOverviewOperation *)fetchOverviewOperationWithIndexes:(MCOIndexSet *)indexes inGroup:(NSString *)group {
+    mailcore::NNTPFetchOverviewOperation * coreOp = MCO_NATIVE_INSTANCE->fetchOverviewOperationWithIndexes(MCO_FROM_OBJC(mailcore::String, group), MCO_FROM_OBJC(mailcore::IndexSet, indexes));
     return MCO_TO_OBJC_OP(coreOp);
 }
 

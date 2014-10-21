@@ -21,6 +21,8 @@
 
 using namespace mailcore;
 
+static int xover_resp_to_fields(struct newsnntp_xover_resp_item * item, struct mailimf_fields ** result);
+
 enum {
     STATE_DISCONNECTED,
     STATE_CONNECTED,
@@ -466,6 +468,72 @@ Data * NNTPSession::fetchArticle(String *groupName, unsigned int index, NNTPProg
     return result;
 }
 
+Data * NNTPSession::fetchArticleByMessageID(String * groupName, String * messageID, ErrorCode * pError)
+{
+    int r;
+    char * msgID;
+    char * content;
+    size_t content_len;
+    
+    MCLog("fetch article at message-id %s", messageID->UTF8Characters());
+    
+    loginIfNeeded(pError);
+    if (* pError != ErrorNone) {
+        return NULL;
+    }
+    
+    selectGroup(groupName, pError);
+    if (* pError != ErrorNone) {
+        return NULL;
+    }
+    
+    msgID = strdup(messageID->UTF8Characters());
+    
+    r = newsnntp_article_by_message_id(mNNTP, msgID, &content, &content_len);
+    if (r == NEWSNNTP_ERROR_STREAM) {
+        * pError = ErrorConnection;
+        return NULL;
+    }
+    else if (r != NEWSNNTP_NO_ERROR) {
+        * pError = ErrorFetchMessageList;
+        return NULL;
+    }
+    
+    Data * result;
+    result = Data::dataWithBytes(content, (unsigned int) content_len);
+    newsnntp_article_free(content);
+    * pError = ErrorNone;
+    
+    return result;
+}
+
+time_t NNTPSession::fetchServerClock(ErrorCode * pError) {
+    int r;
+    struct tm time;
+    time_t result;
+    
+    loginIfNeeded(pError);
+    if (* pError != ErrorNone) {
+        return NULL;
+    }
+    
+    r = newsnntp_date(mNNTP, &time);
+    
+    if (r == NEWSNNTP_ERROR_STREAM) {
+        * pError = ErrorConnection;
+        return NULL;
+    }
+    else if (r != NEWSNNTP_NO_ERROR) {
+        * pError = ErrorBadResponse;
+        return NULL;
+    }
+    
+    result = timegm(&time);
+    * pError = ErrorNone;
+    
+    return result;
+}
+
 IndexSet * NNTPSession::fetchAllArticles(String * groupName, ErrorCode * pError) 
 {
     int r;
@@ -515,7 +583,7 @@ Array * NNTPSession::fetchOverArticlesInRange(Range range, String * groupName, E
     if (* pError != ErrorNone) {
         return NULL;
     }
-    r = newsnntp_xover_range(mNNTP, range.location, range.location + range.length, &msg_list);
+    r = newsnntp_xover_range(mNNTP, (uint32_t) range.location, (uint32_t) (range.location + range.length), &msg_list);
     if (r == NEWSNNTP_ERROR_STREAM) {
         * pError = ErrorConnection;
         return NULL;
@@ -525,17 +593,30 @@ Array * NNTPSession::fetchOverArticlesInRange(Range range, String * groupName, E
         return NULL;
     }
     
+    Array * result = Array::array();
     clistiter * iter;
     for(iter = clist_begin(msg_list) ;iter != NULL ; iter = clist_next(iter)) {
         struct newsnntp_xover_resp_item * item;
+        struct mailimf_fields * fields = NULL;
         
-        item = clist_content(cur);
-        if (!msg_info) {
+        item = (struct newsnntp_xover_resp_item *) clist_content(iter);
+        if (!item) {
             continue;
         }
         
-        result->addIndex(*msg_info);
+        r = xover_resp_to_fields(item, &fields);
+        if (r == MAIL_NO_ERROR) {
+            MessageHeader * header = new MessageHeader();
+            header->importIMFFields(fields);
+            result->addObject(header);
+            header->release();
+        }
     }
+    
+    newsnntp_xover_resp_list_free(msg_list);
+    * pError = ErrorNone;
+    
+    return result;
 }
 
 void NNTPSession::selectGroup(String * folder, ErrorCode * pError) 
@@ -576,4 +657,242 @@ void NNTPSession::setConnectionLogger(ConnectionLogger * logger)
 ConnectionLogger * NNTPSession::connectionLogger()
 {
     return mConnectionLogger;
+}
+
+// Taken from nntp/nntpdriver.c
+static int xover_resp_to_fields(struct newsnntp_xover_resp_item * item, struct mailimf_fields ** result)
+{
+    size_t cur_token;
+    clist * list;
+    struct mailimf_fields * fields;
+    int r;
+    
+    list = clist_new();
+    if (list == NULL) {
+        r = MAIL_ERROR_MEMORY;
+        goto err;
+    }
+    
+    if (item->ovr_subject != NULL) {
+        char * subject_str;
+        struct mailimf_subject * subject;
+        struct mailimf_field * field;
+        
+        subject_str = strdup(item->ovr_subject);
+        if (subject_str == NULL) {
+            r = MAIL_ERROR_MEMORY;
+            goto free_list;
+        }
+        
+        subject = mailimf_subject_new(subject_str);
+        if (subject == NULL) {
+            free(subject_str);
+            r = MAIL_ERROR_MEMORY;
+            goto free_list;
+        }
+        
+        field = mailimf_field_new(MAILIMF_FIELD_SUBJECT,
+                                  NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                  NULL, NULL, NULL,
+                                  NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                  NULL, subject, NULL, NULL, NULL);
+        if (field == NULL) {
+            mailimf_subject_free(subject);
+            r = MAIL_ERROR_MEMORY;
+            goto free_list;
+        }
+        
+        r = clist_append(list, field);
+        if (r < 0) {
+            mailimf_field_free(field);
+            r = MAIL_ERROR_MEMORY;
+            goto free_list;
+        }
+    }
+    
+    if (item->ovr_author != NULL) {
+        struct mailimf_mailbox_list * mb_list;
+        struct mailimf_from * from;
+        struct mailimf_field * field;
+        
+        cur_token = 0;
+        r = mailimf_mailbox_list_parse(item->ovr_author, strlen(item->ovr_author),
+                                       &cur_token, &mb_list);
+        switch (r) {
+            case MAILIMF_NO_ERROR:
+                from = mailimf_from_new(mb_list);
+                if (from == NULL) {
+                    mailimf_mailbox_list_free(mb_list);
+                    r = MAIL_ERROR_MEMORY;
+                    goto free_list;
+                }
+                
+                field = mailimf_field_new(MAILIMF_FIELD_FROM,
+                                          NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                          NULL, NULL, from,
+                                          NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                          NULL, NULL, NULL, NULL, NULL);
+                if (field == NULL) {
+                    mailimf_from_free(from);
+                    r = MAIL_ERROR_MEMORY;
+                    goto free_list;
+                }
+                
+                r = clist_append(list, field);
+                if (r < 0) {
+                    mailimf_field_free(field);
+                    r = MAIL_ERROR_MEMORY;
+                    goto free_list;
+                }
+                break;
+                
+            case MAILIMF_ERROR_PARSE:
+                break;
+                
+            default:
+                goto free_list;
+        }
+    }
+    
+    if (item->ovr_date != NULL) {
+        struct mailimf_date_time * date_time;
+        struct mailimf_orig_date * orig_date;
+        struct mailimf_field * field;
+        
+        cur_token = 0;
+        r = mailimf_date_time_parse(item->ovr_date, strlen(item->ovr_date),
+                                    &cur_token, &date_time);
+        switch (r) {
+            case MAILIMF_NO_ERROR:
+                orig_date = mailimf_orig_date_new(date_time);
+                if (orig_date == NULL) {
+                    mailimf_date_time_free(date_time);
+                    r = MAIL_ERROR_MEMORY;
+                    goto free_list;
+                }
+                
+                field = mailimf_field_new(MAILIMF_FIELD_ORIG_DATE,
+                                          NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                          NULL, orig_date, NULL,
+                                          NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                          NULL, NULL, NULL, NULL, NULL);
+                if (field == NULL) {
+                    mailimf_orig_date_free(orig_date);
+                    r = MAIL_ERROR_MEMORY;
+                    goto free_list;
+                }
+                
+                r = clist_append(list, field);
+                if (r < 0) {
+                    mailimf_field_free(field);
+                    r = MAIL_ERROR_MEMORY;
+                    goto free_list;
+                }
+                break;
+                
+            case MAILIMF_ERROR_PARSE:
+                break;
+                
+            default:
+                goto free_list;
+        }
+    }
+    
+    if (item->ovr_message_id != NULL)  {
+        char * msgid_str;
+        struct mailimf_message_id * msgid;
+        struct mailimf_field * field;
+        
+        cur_token = 0;
+        r = mailimf_msg_id_parse(item->ovr_message_id, strlen(item->ovr_message_id),
+                                 &cur_token, &msgid_str);
+        
+        switch (r) {
+            case MAILIMF_NO_ERROR:
+                msgid = mailimf_message_id_new(msgid_str);
+                if (msgid == NULL) {
+                    mailimf_msg_id_free(msgid_str);
+                    r = MAIL_ERROR_MEMORY;
+                    goto free_list;
+                }
+                
+                field = mailimf_field_new(MAILIMF_FIELD_MESSAGE_ID,
+                                          NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                          NULL, NULL, NULL,
+                                          NULL, NULL, NULL, NULL, NULL, msgid, NULL,
+                                          NULL, NULL, NULL, NULL, NULL);
+                
+                r = clist_append(list, field);
+                if (r < 0) {
+                    mailimf_field_free(field);
+                    r = MAIL_ERROR_MEMORY;
+                    goto free_list;
+                }
+                break;
+                
+            case MAILIMF_ERROR_PARSE:
+                break;
+                
+            default:
+                goto free_list;
+        }
+    }
+    
+    if (item->ovr_references != NULL) {
+        clist * msgid_list;
+        struct mailimf_references * references;
+        struct mailimf_field * field;
+        
+        cur_token = 0;
+        
+        r = mailimf_msg_id_list_parse(item->ovr_references, strlen(item->ovr_references),
+                                      &cur_token, &msgid_list);
+        
+        switch (r) {
+            case MAILIMF_NO_ERROR:
+                references = mailimf_references_new(msgid_list);
+                if (references == NULL) {
+                    clist_foreach(msgid_list,
+                                  (clist_func) mailimf_msg_id_free, NULL);
+                    clist_free(msgid_list);
+                    r = MAIL_ERROR_MEMORY;
+                    goto free_list;
+                }
+                
+                field = mailimf_field_new(MAILIMF_FIELD_REFERENCES,
+                                          NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                          NULL, NULL, NULL,
+                                          NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                          references, NULL, NULL, NULL, NULL);
+                
+                r = clist_append(list, field);
+                if (r < 0) {
+                    mailimf_field_free(field);
+                    r = MAIL_ERROR_MEMORY;
+                    goto free_list;
+                }
+                
+            case MAILIMF_ERROR_PARSE:
+                break;
+                
+            default:
+                goto free_list;
+        }
+    }
+    
+    fields = mailimf_fields_new(list);
+    if (fields == NULL) {
+        r = MAIL_ERROR_MEMORY;
+        goto free_list;
+    }
+    
+    * result = fields;
+    
+    return MAIL_NO_ERROR;
+    
+free_list:
+    clist_foreach(list, (clist_func) mailimf_field_free, NULL);
+    clist_free(list);
+err:
+    return r;
 }

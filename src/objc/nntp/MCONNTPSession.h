@@ -20,7 +20,9 @@
 @class MCONNTPFetchHeaderOperation;
 @class MCONNTPFetchArticleOperation;
 @class MCONNTPListNewsgroupsOperation;
+@class MCONNTPFetchOverviewOperation;
 @class MCONNTPOperation;
+@class MCOIndexSet;
 
 /** This class implements asynchronous access to the NNTP protocol.*/
 
@@ -85,6 +87,16 @@
 - (MCONNTPFetchHeaderOperation *) fetchHeaderOperationWithIndex:(unsigned int)index inGroup:(NSString *)group;
 
 /**
+ Returns an operation that will fetch an overview (headers) for a set of messages.
+ 
+ MCONNTPFetchHeaderOperation * op = [session fetchOverviewOperationWithIndexes:indexes inGroup:@"Group"];
+ [op start:^(NSError * error, NSArray * headers) {
+ // headers are the parsed headers of each part of the overview.
+ }];
+ */
+- (MCONNTPFetchOverviewOperation *)fetchOverviewOperationWithIndexes:(MCOIndexSet *)indexes inGroup:(NSString *)group;
+
+/**
  Returns an operation that will fetch the content of the given message.
  
  MCONNTPFetchArticleOperation * op = [session fetchArticleOperationWithIndex:idx inGroup:@"Group"];
@@ -93,6 +105,16 @@
  }];
  */
 - (MCONNTPFetchArticleOperation *) fetchArticleOperationWithIndex:(unsigned int)index inGroup:(NSString *)group;
+
+/**
+ Returns an operation that will fetch the content of a message with the given messageID.
+ 
+ MCONNTPFetchArticleOperation * op = [session fetchArticleOperationWithMessageID:@"<26>" inGroup:@"Group"];
+ [op start:^(NSError * error, NSData * messageData) {
+ // messageData is the RFC 822 formatted message data.
+ }];
+ */
+- (MCONNTPFetchArticleOperation *) fetchArticleOperationWithMessageID:(NSString *)messageID inGroup:(NSString *)group;
 
 /**
  Returns an operation that will list all available newsgroups.
