@@ -2969,7 +2969,14 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchExpression * expressio
     if (mYahooServer) {
         charset = NULL;
     }
-    int r = mailimap_uid_search(mImap, charset, key, &result_list);
+    
+    int r;
+    if (mIsGmail) {
+        r = mailimap_uid_search_literalplus(mImap, charset, key, &result_list);
+    }
+    else {
+        r = mailimap_uid_search(mImap, charset, key, &result_list);
+    }
     mailimap_search_key_free(key);
     MCLog("had error : %i", r);
     if (r == MAILIMAP_ERROR_STREAM) {
