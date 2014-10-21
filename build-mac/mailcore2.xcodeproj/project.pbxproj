@@ -558,6 +558,14 @@
 		84B639F417F2839C003B5BA2 /* MCIMAPNoopOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84B639EC17F280F3003B5BA2 /* MCIMAPNoopOperation.h */; };
 		84B639F517F2839C003B5BA2 /* MCPOPNoopOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84B639E717F27EBD003B5BA2 /* MCPOPNoopOperation.h */; };
 		84B639F617F2839C003B5BA2 /* MCSMTPNoopOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84B639E217F279BB003B5BA2 /* MCSMTPNoopOperation.h */; };
+		84CFA98319F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA98219F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.mm */; };
+		84CFA98419F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA98219F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.mm */; };
+		84CFA98719F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA98519F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cc */; };
+		84CFA98819F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA98519F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cc */; };
+		84CFA98919F7168300FE35D2 /* MCNNTPFetchOverviewOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CFA98619F7159700FE35D2 /* MCNNTPFetchOverviewOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84CFA98A19F7168400FE35D2 /* MCNNTPFetchOverviewOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CFA98619F7159700FE35D2 /* MCNNTPFetchOverviewOperation.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		84CFA98B19F716EE00FE35D2 /* MCONNTPFetchOverviewOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CFA98119F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		84CFA98C19F716EF00FE35D2 /* MCONNTPFetchOverviewOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CFA98119F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84D7372C199BF66C005124E5 /* MCNNTPAsyncSession.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84D7372A199BF66C005124E5 /* MCNNTPAsyncSession.cc */; };
 		84D7372D199BF66C005124E5 /* MCNNTPAsyncSession.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84D7372A199BF66C005124E5 /* MCNNTPAsyncSession.cc */; };
 		84D73730199BF704005124E5 /* MCNNTPOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84D7372E199BF704005124E5 /* MCNNTPOperation.cc */; };
@@ -1834,19 +1842,23 @@
 		84B639EC17F280F3003B5BA2 /* MCIMAPNoopOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPNoopOperation.h; sourceTree = "<group>"; };
 		84B639EF17F282B4003B5BA2 /* MCOPOPNoopOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOPOPNoopOperation.h; sourceTree = "<group>"; };
 		84B639F017F282B4003B5BA2 /* MCOPOPNoopOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOPOPNoopOperation.mm; sourceTree = "<group>"; };
-		84D73729199BF63F005124E5 /* MCAsyncNNTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAsyncNNTP.h; sourceTree = "<group>"; };
-		84D7372A199BF66C005124E5 /* MCNNTPAsyncSession.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCNNTPAsyncSession.cc; sourceTree = "<group>"; };
+		84CFA98119F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCONNTPFetchOverviewOperation.h; sourceTree = "<group>"; };
+		84CFA98219F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCONNTPFetchOverviewOperation.mm; sourceTree = "<group>"; };
+		84CFA98519F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCNNTPFetchOverviewOperation.cc; sourceTree = "<group>"; };
+		84CFA98619F7159700FE35D2 /* MCNNTPFetchOverviewOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNNTPFetchOverviewOperation.h; sourceTree = "<group>"; };
+		84D73729199BF63F005124E5 /* MCAsyncNNTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCAsyncNNTP.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		84D7372A199BF66C005124E5 /* MCNNTPAsyncSession.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = MCNNTPAsyncSession.cc; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		84D7372B199BF66C005124E5 /* MCNNTPAsyncSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNNTPAsyncSession.h; sourceTree = "<group>"; };
 		84D7372E199BF704005124E5 /* MCNNTPOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCNNTPOperation.cc; sourceTree = "<group>"; };
 		84D7372F199BF704005124E5 /* MCNNTPOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNNTPOperation.h; sourceTree = "<group>"; };
 		84D73732199BF754005124E5 /* MCNNTPProgressCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCNNTPProgressCallback.h; path = nntp/MCNNTPProgressCallback.h; sourceTree = "<group>"; };
 		84D73735199BF7F2005124E5 /* MCNNTPFetchHeaderOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCNNTPFetchHeaderOperation.cc; sourceTree = "<group>"; };
 		84D73736199BF7F2005124E5 /* MCNNTPFetchHeaderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNNTPFetchHeaderOperation.h; sourceTree = "<group>"; };
-		84D7373B199BF83B005124E5 /* MCNNTPFetchArticleOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCNNTPFetchArticleOperation.cc; sourceTree = "<group>"; };
-		84D7373C199BF83B005124E5 /* MCNNTPFetchArticleOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNNTPFetchArticleOperation.h; sourceTree = "<group>"; };
+		84D7373B199BF83B005124E5 /* MCNNTPFetchArticleOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = MCNNTPFetchArticleOperation.cc; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		84D7373C199BF83B005124E5 /* MCNNTPFetchArticleOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCNNTPFetchArticleOperation.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		84D7373F199BF887005124E5 /* MCNNTPOperationCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNNTPOperationCallback.h; sourceTree = "<group>"; };
-		84D73740199BF963005124E5 /* MCNNTPFetchArticlesOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCNNTPFetchArticlesOperation.cc; sourceTree = "<group>"; };
-		84D73741199BF963005124E5 /* MCNNTPFetchArticlesOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNNTPFetchArticlesOperation.h; sourceTree = "<group>"; };
+		84D73740199BF963005124E5 /* MCNNTPFetchArticlesOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = MCNNTPFetchArticlesOperation.cc; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		84D73741199BF963005124E5 /* MCNNTPFetchArticlesOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCNNTPFetchArticlesOperation.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		84D73744199BFA8C005124E5 /* MCNNTPCheckAccountOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCNNTPCheckAccountOperation.cc; sourceTree = "<group>"; };
 		84D73745199BFA8C005124E5 /* MCNNTPCheckAccountOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNNTPCheckAccountOperation.h; sourceTree = "<group>"; };
 		84D73756199BFC8A005124E5 /* MCNNTPDisconnectOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCNNTPDisconnectOperation.cc; sourceTree = "<group>"; };
@@ -1855,7 +1867,7 @@
 		84D7375B199BFDCA005124E5 /* MCNNTPListNewsgroupsOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNNTPListNewsgroupsOperation.h; sourceTree = "<group>"; };
 		84D73761199BFF80005124E5 /* MCONNTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCONNTP.h; sourceTree = "<group>"; };
 		84D73762199BFFC7005124E5 /* MCONNTPSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCONNTPSession.h; sourceTree = "<group>"; };
-		84D73763199BFFC7005124E5 /* MCONNTPSession.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCONNTPSession.mm; sourceTree = "<group>"; };
+		84D73763199BFFC7005124E5 /* MCONNTPSession.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = MCONNTPSession.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		84D73766199BFFFC005124E5 /* MCONNTPOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCONNTPOperation.h; sourceTree = "<group>"; };
 		84D73767199BFFFC005124E5 /* MCONNTPOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCONNTPOperation.mm; sourceTree = "<group>"; };
 		84D7376A199C0014005124E5 /* MCONNTPOperation+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MCONNTPOperation+Private.h"; sourceTree = "<group>"; };
@@ -1864,7 +1876,7 @@
 		84D7376F199C007E005124E5 /* MCONNTPFetchArticleOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCONNTPFetchArticleOperation.h; sourceTree = "<group>"; };
 		84D73770199C007E005124E5 /* MCONNTPFetchArticleOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCONNTPFetchArticleOperation.mm; sourceTree = "<group>"; };
 		84D73773199C00AB005124E5 /* MCONNTPFetchArticlesOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCONNTPFetchArticlesOperation.h; sourceTree = "<group>"; };
-		84D73774199C00AB005124E5 /* MCONNTPFetchArticlesOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCONNTPFetchArticlesOperation.mm; sourceTree = "<group>"; };
+		84D73774199C00AB005124E5 /* MCONNTPFetchArticlesOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = MCONNTPFetchArticlesOperation.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		84D73789199C0260005124E5 /* MCONNTPListNewsgroupsOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCONNTPListNewsgroupsOperation.h; sourceTree = "<group>"; };
 		84D7378A199C0260005124E5 /* MCONNTPListNewsgroupsOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCONNTPListNewsgroupsOperation.mm; sourceTree = "<group>"; };
 		84D7378D199C02A8005124E5 /* MCONNTPDisconnectOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCONNTPDisconnectOperation.h; sourceTree = "<group>"; };
@@ -2405,6 +2417,8 @@
 				84D7373C199BF83B005124E5 /* MCNNTPFetchArticleOperation.h */,
 				84D7375A199BFDCA005124E5 /* MCNNTPListNewsgroupsOperation.cc */,
 				84D7375B199BFDCA005124E5 /* MCNNTPListNewsgroupsOperation.h */,
+				84CFA98519F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cc */,
+				84CFA98619F7159700FE35D2 /* MCNNTPFetchOverviewOperation.h */,
 				84D73740199BF963005124E5 /* MCNNTPFetchArticlesOperation.cc */,
 				84D73741199BF963005124E5 /* MCNNTPFetchArticlesOperation.h */,
 				84D73744199BFA8C005124E5 /* MCNNTPCheckAccountOperation.cc */,
@@ -2433,6 +2447,8 @@
 				84D73770199C007E005124E5 /* MCONNTPFetchArticleOperation.mm */,
 				84D73789199C0260005124E5 /* MCONNTPListNewsgroupsOperation.h */,
 				84D7378A199C0260005124E5 /* MCONNTPListNewsgroupsOperation.mm */,
+				84CFA98119F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.h */,
+				84CFA98219F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.mm */,
 				84D73773199C00AB005124E5 /* MCONNTPFetchArticlesOperation.h */,
 				84D73774199C00AB005124E5 /* MCONNTPFetchArticlesOperation.mm */,
 				84D7378D199C02A8005124E5 /* MCONNTPDisconnectOperation.h */,
@@ -3143,6 +3159,7 @@
 				27780E3819CFA3F500C77E44 /* MCOPOPFetchMessageOperation.h in Headers */,
 				27780E3919CFA3F500C77E44 /* MCOPOPFetchMessagesOperation.h in Headers */,
 				27780E3A19CFA3F500C77E44 /* MCOPOPNoopOperation.h in Headers */,
+				84CFA98B19F716EE00FE35D2 /* MCONNTPFetchOverviewOperation.h in Headers */,
 				27780E3B19CFA3F500C77E44 /* MCOPOPMessageInfo.h in Headers */,
 				27780E3C19CFA3F500C77E44 /* MCOSMTP.h in Headers */,
 				27780E3D19CFA3F500C77E44 /* MCOSMTPSession.h in Headers */,
@@ -3167,6 +3184,7 @@
 				27780E5519CFA3F600C77E44 /* MCOConstants.h in Headers */,
 				27780E5619CFA3F600C77E44 /* MCOMessageHeader.h in Headers */,
 				27780E5819CFA3F600C77E44 /* MCOHTMLRendererDelegate.h in Headers */,
+				84CFA98A19F7168400FE35D2 /* MCNNTPFetchOverviewOperation.h in Headers */,
 				27780E5919CFA3F600C77E44 /* MCOHTMLRendererIMAPDelegate.h in Headers */,
 				27780E5A19CFA3F600C77E44 /* MCOAbstractMessageRendererCallback.h in Headers */,
 				27780E5B19CFA3F600C77E44 /* MCOIMAP.h in Headers */,
@@ -3402,6 +3420,7 @@
 				27780D4419CFA32900C77E44 /* MCOSMTPOperation.h in Headers */,
 				27780D4619CFA32900C77E44 /* MCONNTP.h in Headers */,
 				27780D4719CFA32900C77E44 /* MCONNTPSession.h in Headers */,
+				84CFA98C19F716EF00FE35D2 /* MCONNTPFetchOverviewOperation.h in Headers */,
 				27780D4819CFA32900C77E44 /* MCONNTPOperation.h in Headers */,
 				27780D4A19CFA32900C77E44 /* MCONNTPFetchHeaderOperation.h in Headers */,
 				27780D4B19CFA32900C77E44 /* MCONNTPFetchArticleOperation.h in Headers */,
@@ -3426,6 +3445,7 @@
 				27780D6219CFA32A00C77E44 /* MCOIMAPMessage.h in Headers */,
 				27780D6319CFA32A00C77E44 /* MCOIMAPMessagePart.h in Headers */,
 				27780D6419CFA32A00C77E44 /* MCOIMAPMultipart.h in Headers */,
+				84CFA98919F7168300FE35D2 /* MCNNTPFetchOverviewOperation.h in Headers */,
 				27780D6519CFA32A00C77E44 /* MCOIMAPNamespace.h in Headers */,
 				27780D6619CFA32A00C77E44 /* MCOIMAPNamespaceItem.h in Headers */,
 				27780D6719CFA32A00C77E44 /* MCOIMAPPart.h in Headers */,
@@ -3902,6 +3922,7 @@
 				C64EA704169E847800778456 /* MCArray.cc in Sources */,
 				C6E665B51796500B0063F2CF /* MCZip.cc in Sources */,
 				84B639E317F279BB003B5BA2 /* MCSMTPNoopOperation.cc in Sources */,
+				84CFA98319F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.mm in Sources */,
 				C64EA706169E847800778456 /* MCAssert.c in Sources */,
 				84D73793199C0511005124E5 /* MCONNTPGroupInfo.mm in Sources */,
 				C64EA708169E847800778456 /* MCData.cc in Sources */,
@@ -4066,6 +4087,7 @@
 				C6D6F954171E5CB8006F5B28 /* MCMD5.cc in Sources */,
 				C6D6F956171E5CB8006F5B28 /* MCNull.cc in Sources */,
 				C6D6F967171FCF9F006F5B28 /* MCJSONParser.cc in Sources */,
+				84CFA98719F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cc in Sources */,
 				84D73768199BFFFC005124E5 /* MCONNTPOperation.mm in Sources */,
 				C668E2C71735C8D500A2BB47 /* MCObjectMac.mm in Sources */,
 				C668E2CC1735CB8900A2BB47 /* MCAutoreleasePoolMac.mm in Sources */,
@@ -4126,6 +4148,7 @@
 				C6BA2BA01705F4E6003F0E9E /* MCArray.cc in Sources */,
 				C6E665B61796500B0063F2CF /* MCZip.cc in Sources */,
 				84B639E417F279BB003B5BA2 /* MCSMTPNoopOperation.cc in Sources */,
+				84CFA98419F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.mm in Sources */,
 				C6BA2BA11705F4E6003F0E9E /* MCAssert.c in Sources */,
 				84D73794199C0511005124E5 /* MCONNTPGroupInfo.mm in Sources */,
 				C6BA2BA21705F4E6003F0E9E /* MCData.cc in Sources */,
@@ -4290,6 +4313,7 @@
 				C6D6F7FA171E595D006F5B28 /* MCJSON.cc in Sources */,
 				C6D6F955171E5CB8006F5B28 /* MCMD5.cc in Sources */,
 				C6D6F957171E5CB8006F5B28 /* MCNull.cc in Sources */,
+				84CFA98819F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cc in Sources */,
 				C6D6F968171FCF9F006F5B28 /* MCJSONParser.cc in Sources */,
 				84D73769199BFFFC005124E5 /* MCONNTPOperation.mm in Sources */,
 				C668E2C81735C8D500A2BB47 /* MCObjectMac.mm in Sources */,

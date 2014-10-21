@@ -19,7 +19,7 @@ typedef void (^CompletionType)(NSError *error, MCOIndexSet * articles);
     CompletionType _completionBlock;
 }
 
-#define nativeType mailcore::MCNNTPFetchArticlesOperation
+#define nativeType mailcore::NNTPFetchArticlesOperation
 
 + (void) load
 {

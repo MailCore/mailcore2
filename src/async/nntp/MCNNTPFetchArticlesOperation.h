@@ -16,10 +16,10 @@
 
 namespace mailcore {
     
-    class MCNNTPFetchArticlesOperation : public NNTPOperation {
+    class NNTPFetchArticlesOperation : public NNTPOperation {
     public:
-        MCNNTPFetchArticlesOperation();
-        virtual ~MCNNTPFetchArticlesOperation();
+        NNTPFetchArticlesOperation();
+        virtual ~NNTPFetchArticlesOperation();
         
         virtual void setGroupName(String * groupName);
         virtual String * groupName();

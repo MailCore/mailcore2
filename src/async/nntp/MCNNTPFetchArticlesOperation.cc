@@ -13,34 +13,34 @@
 
 using namespace mailcore;
 
-MCNNTPFetchArticlesOperation::MCNNTPFetchArticlesOperation()
+NNTPFetchArticlesOperation::NNTPFetchArticlesOperation()
 {
     mGroupName = NULL;
     mArticles = NULL;
 }
 
-MCNNTPFetchArticlesOperation::~MCNNTPFetchArticlesOperation()
+NNTPFetchArticlesOperation::~NNTPFetchArticlesOperation()
 {
     MC_SAFE_RELEASE(mGroupName);
     MC_SAFE_RELEASE(mArticles);
 }
 
-void MCNNTPFetchArticlesOperation::setGroupName(String * groupname)
+void NNTPFetchArticlesOperation::setGroupName(String * groupname)
 {
     MC_SAFE_REPLACE_COPY(String, mGroupName, groupname);
 }
 
-String * MCNNTPFetchArticlesOperation::groupName()
+String * NNTPFetchArticlesOperation::groupName()
 {
     return mGroupName;
 }
 
-IndexSet * MCNNTPFetchArticlesOperation::articles()
+IndexSet * NNTPFetchArticlesOperation::articles()
 {
     return mArticles;
 }
 
-void MCNNTPFetchArticlesOperation::main()
+void NNTPFetchArticlesOperation::main()
 {
     ErrorCode error;
     mArticles = session()->session()->fetchAllArticles(mGroupName, &error);

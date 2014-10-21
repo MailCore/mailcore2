@@ -16,6 +16,7 @@
 #include <MailCore/MCONNTPFetchArticleOperation.h>
 #include <MailCore/MCONNTPFetchArticlesOperation.h>
 #include <MailCore/MCONNTPListNewsgroupsOperation.h>
+#include <MailCore/MCONNTPFetchOverviewOperation.h>
 #include <MailCore/MCONNTPGroupInfo.h>
 
 #endif

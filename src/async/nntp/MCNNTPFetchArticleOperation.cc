@@ -32,6 +32,14 @@ String * NNTPFetchArticleOperation::groupName() {
     return mGroupName;
 }
 
+void NNTPFetchArticleOperation::setMessageID(String * groupName) {
+    MC_SAFE_REPLACE_COPY(String, mMessageID, groupName);
+}
+
+String * NNTPFetchArticleOperation::messageID() {
+    return mMessageID;
+}
+
 void NNTPFetchArticleOperation::setMessageIndex(unsigned int messageIndex)
 {
     mMessageIndex = messageIndex;
@@ -50,7 +58,11 @@ Data * NNTPFetchArticleOperation::data()
 void NNTPFetchArticleOperation::main()
 {
     ErrorCode error;
-    mData = session()->session()->fetchArticle(mGroupName, mMessageIndex, this, &error);
+    if (mMessageID == NULL) {
+        mData = session()->session()->fetchArticle(mGroupName, mMessageIndex, this, &error);
+    } else {
+        mData = session()->session()->fetchArticleByMessageID(mGroupName, mMessageID, &error);
+    }
     MC_SAFE_RETAIN(mData);
     setError(error);
 }
