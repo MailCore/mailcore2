@@ -359,7 +359,7 @@ Array * NNTPSession::listAllNewsgroups(ErrorCode * pError)
     return result;
 }
 
-Array * NNTPSession::listSubscribedNewsgroups(ErrorCode * pError)
+Array * NNTPSession::listDefaultNewsgroups(ErrorCode * pError)
 {
     int r;
     clist * subd_groups;

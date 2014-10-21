@@ -45,7 +45,7 @@ namespace mailcore {
         virtual void checkAccount(ErrorCode * pError);
         
         virtual Array * /* NNTPGroupInfo */ listAllNewsgroups(ErrorCode * pError);
-        virtual Array * listSubscribedNewsgroups(ErrorCode * pError);
+        virtual Array * listDefaultNewsgroups(ErrorCode * pError);
         
         virtual MessageHeader * fetchHeader(String *groupName, unsigned int index, ErrorCode * pError);
         

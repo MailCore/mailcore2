@@ -104,13 +104,13 @@
 - (MCONNTPListNewsgroupsOperation *) listAllNewsgroupsOperation;
 
 /**
- Returns an operation that will list all newsgroups subscribed to by the user.
+ Returns an operation that will list server-suggested default newsgroups.
  
- MCONNTPListNewsgroupsOperation * op = [session listSubscribedNewsgroupsOperation];
- [op start:^(NSError * error, NSArray * subscribedGroups) {
+ MCONNTPListNewsgroupsOperation * op = [session listDefaultNewsgroupsOperation];
+ [op start:^(NSError * error, NSArray * defaultGroups) {
  }];
  */
-- (MCONNTPListNewsgroupsOperation *) listSubscribedNewsgroupsOperation;
+- (MCONNTPListNewsgroupsOperation *) listDefaultNewsgroupsOperation;
 
 /**
  Returns an operation that will disconnect the session.

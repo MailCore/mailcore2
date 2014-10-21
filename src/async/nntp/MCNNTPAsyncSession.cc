@@ -191,7 +191,7 @@ NNTPListNewsgroupsOperation * NNTPAsyncSession::listAllNewsgroupsOperation()
     return op;
 }
 
-NNTPListNewsgroupsOperation * NNTPAsyncSession::listSubscribedNewsgroupsOperation()
+NNTPListNewsgroupsOperation * NNTPAsyncSession::listDefaultNewsgroupsOperation()
 {
     NNTPListNewsgroupsOperation * op = new NNTPListNewsgroupsOperation();
     op->setSession(this);

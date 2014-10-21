@@ -145,8 +145,8 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
     return MCO_TO_OBJC_OP(coreOp);
 }
 
-- (MCONNTPListNewsgroupsOperation *) listSubscribedNewsgroupsOperation {
-    mailcore::NNTPListNewsgroupsOperation * coreOp = MCO_NATIVE_INSTANCE->listSubscribedNewsgroupsOperation();
+- (MCONNTPListNewsgroupsOperation *) listDefaultNewsgroupsOperation {
+    mailcore::NNTPListNewsgroupsOperation * coreOp = MCO_NATIVE_INSTANCE->listDefaultNewsgroupsOperation();
     return MCO_TO_OBJC_OP(coreOp);
 }
 

@@ -58,7 +58,7 @@ namespace mailcore {
         virtual NNTPFetchArticleOperation * fetchArticleOperation(String *groupName, unsigned int index);
         
         virtual NNTPListNewsgroupsOperation * listAllNewsgroupsOperation();
-        virtual NNTPListNewsgroupsOperation * listSubscribedNewsgroupsOperation();
+        virtual NNTPListNewsgroupsOperation * listDefaultNewsgroupsOperation();
         
         virtual NNTPOperation * disconnectOperation();
         
