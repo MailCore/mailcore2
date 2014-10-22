@@ -1,0 +1,1975 @@
+Path: flop.mcom.com!news.Stanford.EDU!camis.Stanford.EDU!macmod
+From: Info-Mac-Request@sumex-aim.stanford.edu (The Info-Mac Moderators)
+Newsgroups: comp.sys.mac.digest
+Subject: Info-Mac Digest V13 #50
+Followup-To: comp.sys.mac.digest
+Date: 26 Apr 1995 16:07:02 GMT
+Organization: The Info-Mac Network
+Lines: 1958
+Approved: info-mac@sumex-aim.stanford.edu
+Distribution: world
+Message-ID: <3nlr36$t2p@nntp.Stanford.EDU>
+Reply-To: Info-Mac@sumex-aim.stanford.edu
+NNTP-Posting-Host: camis.stanford.edu
+Mime-Version: 1.0
+Content-Type: multipart/mixed; boundary="Info-Mac-Digest"
+Originator: macmod@camis.Stanford.EDU
+
+--Info-Mac-Digest
+
+
+Info-Mac Digest             Wed, 26 Apr 95       Volume 13 : Issue 50
+
+Today's Topics:
+
+      [!] HTML directory
+      [!] Yep -- we're moving files again
+      [*] AddressBook Updater
+      [*] ART Music 3.2.1c; converts Finale EPS files
+      [*] Audio Strip GH 1.2; CD Playing Control Strip Modules
+      [*] CD Database (FileMaker Pro Database for Compact Discs)
+      [*] ChangeVer 1.0.1; for CodeWarrior version conversion
+      [*] Comet 3.1.1, Cornell's MacTCP-based Telnet/TN3270 client
+      [*] Core Collection 1.7; a collection of XCMDs
+      [*] Digital Money Developer's Kit
+      [*] DropURL 1.0; dispatches URLs to appropriate clients
+      [*] eXpress v1.1.0; access to the Process menu
+      [*] Fat Free 1.2; removes PPC code
+      [*] First Lessons In Math v1.7
+      [*] Golf Picture
+      [*] Good Times Virus Hoax FAQ
+      [*] GraficConverter; agraphics utility
+      [*] Hermes II 3.5; BBS software
+      [*] HomeMaker 1.0b8 - WWW Personal Home Page Tool
+      [*] Hot Spot 1.0.1; a tile-placing game
+      [*] Interactive Museum Tour; North Carolina Museum of Natural Sciences
+      [*] John's WordPerfect Glossary Macros
+      [*] Mac*Chat#72/24-Apr-95
+      [*] MacTravesty; a text utility
+      [*] Maczine #3--a wonderful e-zine
+      [*] Marathon_FAQ_2.5
+      [*] MGSW Library; a Pascal library
+      [*] namecleaner; cleans up file names
+      [*] NET/Mac2.3.51; a TCP/IP communications utility
+      [*] nu2.0clockfix; a Norton's Utilities patcher
+      [*] O_Pfhortuna1.2; a Marathon map
+      [*] Oligo Analyzer 1.0 - DNA Oligonucleotide sequence reader and analysis
+      program.
+      [*] OptiMeme version 2.0.2 updater, a virtual memory utility
+      [*] Personal Log v2.0 beta 1 PPC
+      [*] Phatclock; a clock
+      [*] psych interactive stress buster
+      [*] Realmz 2.0 to 2.0.1 updater
+      [*] Resolution XFCN
+      [*] Scorpio 1.0.1P; a word processor
+      [*] SerialSpeed 230 Version 1.2; enhances serial speed
+      [*] Shakespeare Stack --- Comedy_of_Errors-v.1.0.sea.hqx
+      [*] SMILE the splattering; a frustration reduction tool
+      [*] Sparkle 2.3.4 A mac-look-and-feel MPEG and QT player and converter
+      [*] STEREO STORM STRTUP SND
+      [*] TappyType 2.01; noises for your keyboard
+      [*] The Talking Multiples Teacher v1.2
+      [*] TidBITS#274/24-Apr-95
+      [*] Update of DateView; a Newton app
+      [*] Wagner's Eudora prefs 1.1 submission
+      [*] WordPerfect 3.1 PPC Demo - Award Winning Word Processor
+      [*] WordPerfect3 to PageMaker 5 Import Filter
+      (Q) PPP modem connect speed?
+      (Q) Problem with Eudora
+      (Q) Single Key for Spanish characters in MSWord 5.1
+      (Q) SLIP and PPP software
+      [A] CD Inject?
+      [R] Shutdown problem with 7.5.1
+      Apollo 1.1x Query
+      CD-ROM eject buttons (2 msgs)
+      FAT Code Strippers
+      Hard Drive Problem
+      hierarchical apple menu (2 msgs)
+      Info-Mac Digest V13 #48
+      Mac and Solaris not liking each other?
+      MacLink Plus 8 (A)
+      MacX problems.
+      minicad user group
+      PS Text Viewer
+      Q: How to tranfer user data between 2 stand-alone macs ??
+      Software Distributors
+      Syquest drives at wonderful prices (Q)
+      sys 7.5 upgrade
+      System 7.5.x Rant
+      System 7.5 patch
+      What's wrong with System 7.5 Update ?
+
+The Info-Mac Network operates by the volunteer efforts of:
+Bill Lipa, Gordon Watts, Liam Breck, Igor Livshits, Adam C. Engst
+
+The Info-Mac Archive is available at 50 public and private sites around
+the world.  For the site list, request it by mail (address below), or try:
+  gopher://sumex-aim.stanford.edu/info-mac/help/mirror-list.txt
+Also accessible by ftp.  Help files and indexes are also in info-mac/help/.
+
+Mail administrative queries and info to info-mac-request@sumex-aim.stanford.edu
+Mail articles for publication in the digest to  info-mac@sumex-aim.stanford.edu
+Mail files for inclusion in the archives to     macgifts@sumex-aim.stanford.edu
+
+To submit a file greater than 800K, or to avoid submitting by (and
+segmenting for) email, send email describing the file to
+backmod@sumex-aim.stanford.edu and upload it to:
+  ftp://daemon.ncsa.uiuc.edu/Incoming
+As with emailed submissions, non-text files must be binhexed.
+
+----------------------------------------------------------------------
+
+--Info-Mac-Digest
+Content-Type: multipart/digest; boundary="----------------------------"
+Content-Disposition: attachment; filename="Info-Mac Digest V13 #50"
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 15:10:37 -0700
+From: ace@tidbits.com (Adam C. Engst)
+Subject: [!] HTML directory
+
+Hi folks,
+
+Rolling stones gather no moss, and we had some moss growing in the /text
+directory. Igor just created a new directory for BBEdit related files in
+/text, and I've just created a new directory in /text for HTML-related
+files. Since many people probably relate HTML to the Web, I've made a link
+to /comm as well.
+
+new: text/html/
+new: text/HTML now points to text/html/
+new: comm/html now points to text/html/
+new: comm/HTML now points to text/html/
+
+cheers ... -Adam
+
+--
+Adam C. Engst, TidBITS Editor -- ace@tidbits.com -- info@tidbits.com
+Info-Mac Moderator -- Apple Internet Users/Providers Assistant List Mom
+
+------------------------------
+
+Date: Wed, 26 Apr 1995 10:03:54 -0500
+From: igorl@uiuc.edu (Igor Livshits)
+Subject: [!] Yep -- we're moving files again
+
+Hi, again,
+
+We decided that the HyperCard directory really belongs under Development as
+it mostly contains external functions and procedures that may be accessed
+>From within a development environment. The migration of card/ to dev/card/
+will take a few days as it is a large directory.
+
+old: card/ is moving to dev/card/
+old: HyperCard will be removed
+new: dev/card/
+new: dev/HyperCard now points to dev/card/
+
+
+Also, we are changing our policy about non-Macintosh periodicals: We will
+only keep the latest issue, and these may be found in the info/nms/
+directory. We have plans to incorporate more disk into the archive. At that
+time, we will consider archiving back issues, as we have done until now.
+
+Cheers, Igor
+igorl@uiuc.edu
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 13:26:42 -0500
+From: "Scott E. Lasley" <lasley@umdsp.umd.edu>
+Subject: [*] AddressBook Updater
+
+here is an updater for the application Address Book by Jim Leitch that i
+downloaded from Compuserve.  please note that i am not the author of Address
+Book nor this updater.  tech support and registration for Address Book is
+handled by Victor Kennedy: pegasus@astral.magic.ca or on eworld:VictorK.
+
+>From the ReadMe by Mr. Leitch:
+This patch will bring Address Book 3.7.0 created Mar 8, 1995 up to version
+3.7.0p7
+A few corrections have been made and a couple of bugs fixed. Other releases of
+3.7.0 with p1 to p6 suffixes will not be accepted by the patch.
+
+scott lasley@umdsp.umd.edu
+
+[Archived as /info-mac/app/address-book-370p7-updt.hqx; 77K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:43:40 -0500
+From: herzo005@gold.tc.umn.edu (Tim Herzog, Two Bits Worth)
+Subject: [*] ART Music 3.2.1c; converts Finale EPS files
+
+ART Music is a translator that converts Finale EPS files to Illustrator
+format, so you can edit a page of music just like a graphic (add color,
+other graphics, move notes, etc.).  Version 3.2.1c is now compatible with
+Finale 3.2.1 for PowerMac and Finale Allegro, and adds drag & drop support
+and native execution on the PowerMac.
+
+Timothy Herzog               Two Bits Worth, Inc.
+herzo005@gold.tc.umn.edu     +1 (612) 227-2920
+
+[Archived as /info-mac/cmp/art-music-321c.hqx; 182K]
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 13:26:09 -0500
+From: grhowes@students.wisc.edu (Glenn R. Howes)
+Subject: [*] Audio Strip GH 1.2; CD Playing Control Strip Modules
+
+Control Strip modules which implement the controls and displays of
+an audio CD player. Play, pause, stop, sound level, eject are free.
+Display time, fast forward, fast reverse, next track, previous track
+are available for a $10 crippleware fee. An Omni module supports
+such functions as auto-play, auto-eject, replay, and play track
+programs.
+
+New:
+  Plays track programs entered with the AppleCD Audio Player.
+  A variety of cosmetic bug fixes and enhancements.
+
+--glenn howes
+grhowes@students.wisc.edu
+
+[Archived as /info-mac/snd/util/audio-strip-gh-12-strip.hqx; 115K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:43:50 -0500
+From: Benjamin Goldstein <FQM6448@vx.cis.umn.edu>
+Subject: [*] CD Database (FileMaker Pro Database for Compact Discs)
+
+The CD Catalog is a simple yet powerful database to catalog your Compact
+Discs.
+It was made with FileMaker Pro version 2.1, you need the program to use it.
+Not only may you search and print lists of your CD collection; but you can
+generate reports and lists for specific categories of CDs, such as only your
+CDs that are Soundtracks or are longer than 65 minutes.
+
+It includes:
+
+- An easy method of entry. Including fields for Artist/Album/Record Label/
+Catalog #/Year of Release/SPARS Code (AAD etc.)/Classification (Rock etc.)
+/Song/Song Time and a Comments field.
+- Several (6) predesigned printable layouts.
+- A layout by song
+- A report layout that gives you lots of detailed info about your CD's:
+such as the average/minimum/ and maximum time/year/and number of songs as
+well as lots of other useless information (There are about 65 summary fields)
+
+Changes since 1.2
+- Track numbers for each song! A number comes up whenever you enter a track.
+  Track numbers are also added to many of the print layouts.
+- Smart sorting. Now you can enter "The Who" in the artist field and when you
+  click on sort by artist it will put "The Who" in the "W" section, not the "T"
+  section. This also work with album titles.
+
+[Archived as /info-mac/app/cd-database-13-fmpro.hqx; 133K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:43:20 -0500
+From: figuiere@deneb.inrets.fr (Hubert FIGUIERE)
+Subject: [*] ChangeVer 1.0.1; for CodeWarrior version conversion
+
+Here is the latest version of ChangeVer, a simple utility for CodeWarrior
+user. It allows compiling C/C++ project created with CW4 under the DR3
+compiler. This is a maintenance version and should replace any other version
+elsewhere in the archive.
+
+Hubert FIGUIERE - Stagiaire at INRETS, Arcueil, France - figuiere@inrets.fr
+figuiere@leserveur.com
+
+[Archived as /info-mac/dev/change-ver-101.hqx; 11K]
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 13:26:31 -0500
+From: ace@tidbits.com (Adam C. Engst)
+Subject: [*] Comet 3.1.1, Cornell's MacTCP-based Telnet/TN3270 client
+
+Here's the latest external release of Cornell's terminal emulator. It's a
+StuffIt archive containing all the software and resources needed for sites
+other than Cornell to use Comet. Included is Comet documentation in Viewer
+form. This documentation was developed for use at Cornell, but should be
+useful as a quasi-tutorial for other sites.
+
+[Archived as /info-mac/comm/tcp/comet-311.hqx; 1044K]
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 13:26:36 -0500
+From: JOHN.SUDDERTH%4207PO@x400gw.msfc.nasa.gov
+Subject: [*] Core Collection 1.7; a collection of XCMDs
+
+40 externals: BootVolume, BumpDate, ChangeCreator, ChangeType, CompareDate,
+CopyFile, CreatePath, DeleteFile, DeleteFolder, DoesExist, EjectDisk,
+FolderContents, FolderIsShared, FolderPath, GetAppPath, GetComment,
+GetDefaultFile, GetEOF, GetFileName, GetFolder, GetInfoBox, GetManager,
+GetSetup, GetString, GetTypeCount, GetVersion, IsAppleShare, IsVirtualOn,
+LockFile, LockName, Mount, ProgressBar, PutDefaultFile, ReadWritePrefs,
+RenameFile, SetComment, SetVisible, StripList, Unmount, Volumes.
+
+Tested with System 7.5 and HyperCard 2.2. Update free to registered users.
+
+[Archived as /info-mac/dev/card/core-collection-17-xcmd.hqx; 63K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:43:23 -0500
+From: "Klein Matthew" <klein_matthew@GSB.Stanford.EDU>
+Subject: [*] Digital Money Developer's Kit
+
+Permission is granted to include in your CD-ROM. This file is for your
+Development folder. Thank you.
+
+AutoPay (tm) is a small module that software developers can integrate into
+their programs. It allows computer users to pay for software electronically
+by modem. If the user does not have a modem, AutoPay allows the user to pay
+by phone, using a toll-free number, or by mail.
+
+There are no up-front charges for using AutoPay in your software. Instead
+Digital Money, Inc. charges a small fee for each transaction. You do not need
+your own credit card merchant account. Digital Money, Inc. runs the 24-hour
+dial-in network, the 24-hour voice operator lines, and a mail-processing
+center for handling all customer payments.
+
+This is a fully functional Developer's Kit, not a demo! It contains complete
+documentation. If you are interested in the Windows version, please contact
+Digital Money, Inc. at (415) 833-0200.
+
+[Archived as /info-mac/dev/src/digital-money-sdk.hqx; 704K]
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 13:26:33 -0500
+From: peterm@jolt.mpx.com.au (Peter Marks)
+Subject: [*] DropURL 1.0; dispatches URLs to appropriate clients
+
+DropURL lets you store your favorite URLs as little text files. They work
+rather like aliases.
+
+DropURL is a simple droplet application accepts a text file dropped on to
+it and uses Internet Config to determine the helper application you have
+set for each URL type.
+
+It attempts to locate or launch the helper application and then sends it the
+standard GURL AppleEvent containing the URL in the text file.
+
+You can drop multiple files, but only the first line (up to the return) of
+each one is processed. Therefore you can safely put notes in the lines
+following
+the URL line.
+
+If you change the creator of the text file (a utility is included) to
+'GURL' then opening the URL file will get the URL. Thus URLs can be added
+to your Apple Menu for example.
+
+Requires Internet Config and System 7.
+
+Have fun.
+
+Peter
+peterm@jolt.mpx.com.au
+
+[Archived as /info-mac/comm/tcp/drop-url-10.hqx; 42K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:42:45 -0500
+From: do485@cwru.edu (Stephen Maas)
+Subject: [*] eXpress v1.1.0; access to the Process menu
+
+Description:  eXpress enables you to pop-up the Process menu (the "System
+7"
+	      menu) anywhere on the screen by holding down the control key and
+	      clicking. It takes 300 bytes of RAM and requires System 7.x.
+	      Guaranteed to save you miles of mouse movement.
+History:      Version 1.1.0 fixes a bug in version 1.0.0 that rendered
+	      windowshade, popchar, and many other programs useless. It also
+	      adds a few new features.
+Contact:      Stephen E. Maas / (612) 457-5478 / do485@cwru.edu
+
+[Archived as /info-mac/gui/express-110.hqx; 23K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:43:43 -0500
+From: figuiere@deneb.inrets.fr (Hubert FIGUIERE)
+Subject: [*] Fat Free 1.2; removes PPC code
+
+This is the latest version of Fat Free. It removes PowerPC code from fat
+application to spare disk-storage...
+Fat Free 1.2 allows now "unfated" applications to be run on a PowerMac in
+emulation (thus it is not recommended for performance considerations).
+Also adds help and interface...
+
+Hubert FIGUIERE - Stagiaire at INRETS, Arcueil, France - figuiere@inrets.fr
+figuiere@leserveur.com
+
+[Archived as /info-mac/cfg/fat-free-12.hqx; 21K]
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 13:26:45 -0500
+From: dbagno@magnet.com (David Bagno)
+Subject: [*] First Lessons In Math v1.7
+
+=46irst Lessons In Math introduces children 3 years old and up to
+numbers and concepts in math.  This program is published by Pointware
+Corporation =81 of California.
+
+Children will Learn:
+
+1- The look and sound of numbers
+2- Counting sequentially up and down
+3- The quantitative value of the numbers 1 through 10
+5- Calculate the number of objects in a set
+5- Adding with two sets of objects
+6- Subtracting with two sets of objects
+7- Real numeric addition and subtraction equations
+
+[Archived as /info-mac/app/edu/first-lessons-in-math-17.hqx; 343K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:42:51 -0500
+From: pedrojr@mail.utexas.edu (Pedro Terroba Jr.)
+Subject: [*] Golf Picture
+
+This is a picture I made using Photoshop and Bryce.  Please post this
+anywhere you can.
+
+Thanks PJT
+Pedro Terroba Jr
+Pedrojr@mail.utexas.edu
+
+[Archived as /info-mac/grf/golf.hqx; 125K]
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 13:25:53 -0500
+From: lesjones@usit.net (Leslie Jones)
+Subject: [*] Good Times Virus Hoax FAQ
+
+The Good Times email virus is a hoax! There is no such virus!
+
+This file answers frequently asked questions (FAQs) about the hoax, and has
+pointers to sources of anti-viral software and information on the Internet,
+and describes some other common Internet hoaxes.
+
+[Archived as /info-mac/vir/good-times-virus-hoax-faq.txt; 25K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:42:54 -0500
+From: Stefan Brix <s.brix@tu-bs.de>
+Subject: [*] GraficConverter; agraphics utility
+
+Hi folks!
+
+... and another new set of versions of "GraficConverter"!
+
+Version 2.1.2
+%Jbug in save file formats fixed (appeared only with plug-ins)
+%Jcolor problem with XIMGs fixed
+%Jexport of RLE compressed BMPs added
+%JFIRST FAT VERSION
+
+Again, I will explicitly express that I am NOT the author (though I will try
+to help anybody, who asks me).
+
+You can contact him via email: thorsten_lemke@pe.maus.de (no mail >16K).
+
+Tschuess / bye,  Stefan
+s.brix@tu-bs.de
+
+[Archived as /info-mac/grf/util/graphic-converter-212.hqx; 1144K]
+[Archived as /info-mac/grf/util/graphic-converter-212-fr.hqx; 1134K]
+[Archived as /info-mac/grf/util/graphic-converter-212-de.hqx; 1166K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:43:37 -0500
+From: lance@hermes.wucc.edu (Lance Perkins)
+Subject: [*] Hermes II 3.5; BBS software
+
+Newest version of Hermes II BBS.
+
+Lance
+
+[Archived as /info-mac/comm/bbs/hermes-ii-35-updt.hqx; 361K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:42:35 -0500
+From: bdodge@ucsvax.sdsu.edu (Bernie Dodge)
+Subject: [*] HomeMaker 1.0b8 - WWW Personal Home Page Tool
+
+HomeMaker is a HyperCard stack that prompts the user to fill in information
+appropriate for a personal home page. It then adds html tags to the info
+and produces a text file ready to be posted on a webserver.
+
+What's new in this version? Netscape enhancements that don't affect
+non-Netscape browsers:
+
+1) Better layout. When viewed in Netscape, the user's picture is placed off
+to the right which allows more text to appear on the first screen.
+2) Variable text size. The first letter in each <H1> and <H2> heading is
+made larger.
+3) Colors. Users can choose a background color and text color. HomeMaker
+calculates the necessary hexadecimal RGB triplet and plugs it into the
+<BODY> tag.
+
+Freeware.
+
+Bernie Dodge
+http://edweb.sdsu.edu/edweb_folder/people/bdodge/bdodge.html
+
+[Archived as /info-mac/text/html/home-maker-10b8-hc.hqx; 47K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:43:03 -0500
+From: f8dy@netaxs.com
+Subject: [*] Hot Spot 1.0.1; a tile-placing game
+
+Hot Spot is an infuriating tile-placing game, loosely based on all
+the other tile-placing games.  Requires a 640 x 480 or larger monitor,
+but works in all color depths (including black and white).  System 7.0 or
+later.  Copyright (c) 1995, Mark Pilgrim.  Shareware, $15.
+
+Version 1.0.1 fixes a small bug with the tile pouch and a minor
+incompatibility with Quadras.
+
+[Archived as /info-mac/game/hot-spot-101.hqx; 376K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:42:42 -0500
+From: jfish@mdminc.pdial.interpath.net (Joseph Fish)
+Subject: [*] Interactive Museum Tour; North Carolina Museum of Natural Sciences
+
+Interactive tour of the North Carolina Museum of Natural Sciences in
+Raleigh, NC.
+
+Requires 640x480 256 color Macintosh
+
+Joseph Fish
+Multi Digital Media, Inc.
+
+[Archived as /info-mac/info/nms/nc-museum-of-nat-sci-tour.hqx; 1062K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:42:25 -0500
+From: jcr2@cornell.edu (John Rethorst)
+Subject: [*] John's WordPerfect Glossary Macros
+
+Hi,
+
+These macros provide an easy and elegant glossary feature for WordPerfect
+3.x for the Macintosh. Up to 26 glossary entries are available. A menu the
+width of your screen shows you as much of each entry as will fit. Click on
+the entry or type its identifying letter to place the text in your
+document. Free.
+
+Thanks,
+John Rethorst
+
+[Archived as /info-mac/text/johns-glossary-macros-wp.hqx; 18K]
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 13:26:12 -0500
+From: xxltony@crash.cts.com (Tony Lindsey)
+Subject: [*] Mac*Chat#72/24-Apr-95
+
+Welcome to Mac*Chat, the free, weekly electronic newsletter biased
+   toward Mac users who are production-oriented professionals.  Other
+   Mac users may find many, many items of interest as well.  I'd enjoy
+   hearing your feedback and suggestions.  Unfortunately, due to the
+   massive numbers of messages I get every day, I can't guarantee
+  a personal reply.
+
+  Tony Lindsey, <xxltony@cts.com>.
+  http://www.cts.com/‾xxltony
+
+Topics:
+Highlights Of This Issue
+Editor's Notes
+Let's Go Back To The Old Newsletter Format!
+Deadline Change
+So, What's With All This HTML Stuff?
+HTML Lesson Testimonial
+More Creative News
+Screen-Capturing Software
+Another Hyphenation Tip
+Terryfic Tips: Spring Forward
+A Plea For Help Against Anti-Mac Bigots
+Technical Section Starts... Here
+Fetch Correction
+Cool Sites For Web-Page Creators
+PPP Floater Is Keen!
+
+[Archived as /info-mac/per/chat/mac-chat-072-etx.txt; 24K]
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 13:25:56 -0500
+From: anbhg@maja.mas.malmo.se (Bertil Holmberg)
+Subject: [*] MacTravesty; a text utility
+
+Hi!
+
+MacTravesty is a small program that analyses a text file and lists all the
+character groups contained in the text. A new pseudorandom text based on the
+language specific character frequencies can then be generated.
+
+Sincerely, Bertil
+
+[Archived as /info-mac/text/mac-travesty.hqx; 34K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:42:39 -0500
+From: ghirard@micronet.it (Aaron Ghirardelli)
+Subject: [*] Maczine #3--a wonderful e-zine
+
+Hello,
+here is the third issue of Maczine, the first italian e-zine dedicated to
+the shareware world of Macintosh.
+It is made with DocMaker so you will need anything to view it. It has
+reviews of the most important shareware programs!
+
+Please, take it, enjoy it and then let me know if you like it.
+
+Thank you...
+
+Aaron Ghirardelli
+E-mail:ghirard@micronet.it
+
+[Archived as /info-mac/per/maczine-003.hqx; 536K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:43:13 -0500
+From: Aapo.Puskala@Helsinki.FI (Aapo Puskala)
+Subject: [*] Marathon_FAQ_2.5
+
+...Aapo
+Aapo Puskala, Aapo.Puskala@Helsinki.FI ** http://www.helsinki.fi/‾puskala/
+
+[Archived as /info-mac/game/com/marathon-faq-25.hqx; 303K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:43:26 -0500
+From: Miguel Frias <l41467@ci.ist.utl.pt>
+Subject: [*] MGSW Library; a Pascal library
+
+Hi, just to send the new version of MGSW Library for Pascal programmers.
+Hope it gets there OK.
+
+Thanks,
+Miguel.
+
+[Archived as /info-mac/dev/src/migo-software-library-p.hqx; 45K]
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 13:26:21 -0500
+From: dmitry reznikov <dimmy@cc.huji.ac.il>
+Subject: [*] namecleaner; cleans up file names
+
+NameCleaner is a utility to clean up messy file names. It can:
+% Give files with definable DOS extensions corresponding Macintosh
+Type/Creator codes and name suffixes.
+% Remove non-viewable characters, RsmartSen quotes, and pad out punctuation
+marks (with exclusions).
+% Perform automatic capitalisation for words of different lengths, and apply a
+dictionary for special cases.
+% Find and replace any definable phrase with a corresponding phrase.
+% Append information (size, date and type) about individual files and apply a
+dictionary for type phrases.
+% Truncate Macintosh names for DOS and give files with definable Type Codes
+corresponding DOS Extensions.
+
+[Archived as /info-mac/disk/name-cleaner-101.hqx; 72K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:43:30 -0500
+From: adam@iag.tno.nl (Adam van Gaalen PA2AGA)
+Subject: [*] NET/Mac2.3.51; a TCP/IP communications utility
+
+					  The Netherlands, April 24, 1995.
+Hello dear reader,
+
+Today I distributed NET_Mac2.3.51.sea.hqx...
+
+For those who don't know NET/Mac...   NET/Mac is the application that
+supports TCP/IP over packet-radio, which means, that hamradio operators
+can use NET/Mac for their wireless TCP/IP network...
+
+In this version of NET/Mac I implemented the following:
+
+- Allow variable length ping-packets
+- Defaultbuttons are FAT buttons now
+- Fix some typo's in the sourcecode
+- Make sure expired smtp-timers restart at 0
+- Minor mod for the 'rdate' command
+- Minor mod to the 'ping' console output
+- Mods to fix a mail-delivery problem
+- Some mods for the new 'timer task'
+- Try to execute 'perform' commands at hh:mm:00 exactly
+- When sessions are open at Quit-time, ask Quit-permission
+
+Adam PA2AGA  (e-mail: adam@iag.tno.nl  )
+	     (    or: pa2aga@iag.tno.nl  for letters only, NO BIG files here)
+
+[Archived as /info-mac/comm/tcp/radio-net-mac-2351.hqx; 371K]
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 13:26:26 -0500
+From: David Johnson <johnson@wrs.com>
+Subject: [*] nu2.0clockfix; a Norton's Utilities patcher
+
+This is the ResCompare patcher that will patch any Norton Utils 2.0 so
+that it won't give the annoying "clock not set correctly" and this
+requires no ResEdit.
+
+--DAVE (johnson@wrs.com)
+
+[Archived as /info-mac/disk/nortons-20-clock-patch.hqx; 26K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:43:16 -0500
+From: dcrowder@is.net (Daniel Crowder)
+Subject: [*] O_Pfhortuna1.2; a Marathon map
+
+I uploaded a Marathon map to your ftp site.
+Thanks.
+
+DCrowder@is.net
+
+[Archived as /info-mac/game/com/o-pfhortuna-12.hqx; 19K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:42:37 -0500
+From: jcuozzo@OPAL.TUFTS.EDU (John Cuozzo)
+Subject: [*] Oligo Analyzer 1.0 - DNA Oligonucleotide sequence reader and
+analysis program.
+
+John W. Cuozzo
+jcuozzo@opal.tufts.edu
+
+	Oligo Analyzer is a fully functional oligonucleotide analysis
+program which will calculate the molecular weight and the predicted melting
+temp. of your oligo and provide a breakdown of the number of each
+nucleotide.  O.A. can also read your oligo sequences back to you, in either
+a male (mine) or female (my wife's) voice.  O.A. will print out your
+oligo's in a format suitable for ordering or for storing in your notebook.
+You can also save your sequences as O.A. files for later perusal.
+
+	Please put O.A. 1.0 in the Science-Math directory.  This file was
+checked with Disinfectant 3.5 and is virus-free.  This binary may be
+included in the CD-ROM.
+
+[Archived as /info-mac/sci/oligo-analyzer.hqx; 115K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:43:47 -0500
+From: Robert Thornton <rwt@DRYCAS.CLUB.CC.CMU.EDU>
+Subject: [*] OptiMeme version 2.0.2 updater, a virtual memory utility
+
+Updates to v2.0.2 previous versions of OptiMem RAM Charger v2. Includes
+several improvements.
+
+REQUIRED: An original OptiMem RAM Charger distribution disk and serial ID
+are needed to use this updater.
+
+Hardware Requirement: Any Mac Running System 7
+
+Contact:
+Jump Development Group
+jumpdevgrp@aol.com
+
+-Robert Thornton
+Jump Development Group
+
+[Archived as /info-mac/cfg/opti-mem-202-updt.hqx; 155K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:43:53 -0500
+From: kamprath@earthlink.net (Michael F. Kamprath)
+Subject: [*] Personal Log v2.0 beta 1 PPC
+
+Personal Log allows you to keep a collection of notes in a single,
+easy-to-use file.  You can password protect this file, search it's entries,
+and even "speak" the entries (if you have Speech Manager" installed).
+Unlike other "note taking" programs, Personal Log's interface is very
+simple and easy to use, yet provides powerful and flexible note taking
+services.
+
+Personal Log v2.0 is a major improvement over all previous versions.  As
+you can already see, one of the major changes is the ability to insert
+objects, such as pictures, sounds, and file aliases, into a document.  This
+new feature is provided by a new text engine called WASTE, which is made by
+Marco Piovanelli.  Along with the ability to insert objects, this new text
+engine allows you to edit text files that are larger than 32K,  a famous
+limitation of Apple's SimpleText.  With all these new features in the text
+engine, it may surprise you that text files created by WASTE are still
+compatible with Apple's Text Edit text engine (and thus SimpleText and
+previous versions of Personal Log), though Text Edit will not recognize any
+inserted objects nor will it edit files greater than 32K in size.
+
+[Archived as /info-mac/app/personal-log-201b1.hqx; 322K]
+[Archived as /info-mac/app/personal-log-201b1-ppc.hqx; 358K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:43:56 -0500
+From: danw@best.com (Dan Waylonis)
+Subject: [*] Phatclock; a clock
+
+Phatclock is a simple, free, configurable clock application.  Enjoy.
+
+Dan
+danw@minervasys.com
+
+[Archived as /info-mac/app/phat-clock.hqx; 17K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:42:56 -0500
+From: jfish@mdminc.pdial.interpath.net (Joseph Fish)
+Subject: [*] psych interactive stress buster
+
+psych=81 an interactive stress buster!
+
+Over 500 possible combinations of moving colors and pictures to either
+sooth or derange your mind. Read the Read Me file included.
+
+Requires 640x480 256 color Macintosh
+
+Joseph Fish
+Multi Digital Media, Inc.
+
+[Archived as /info-mac/grf/util/psych.hqx; 1071K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:43:06 -0500
+From: Jim Foley <foley@nucleus.msae.wisc.edu>
+Subject: [*] Realmz 2.0 to 2.0.1 updater
+
+The following file is a patch from 2.0 to 2.0.1.
+
+Any questions concerning this submission can be made to
+foley@cae.wisc.edu
+
+[Archived as /info-mac/game/realmz-20-to-201-updt.hqx; 163K]
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 13:26:38 -0500
+From: tjk111@psu.edu (Thomas Kishel)
+Subject: [*] Resolution XFCN
+
+This archive contains an XFCN for SuperCard, HyperCard, et cetera.
+A SuperCard project and a ResEdit resource file are included.
+
+This XFCN returns the bit depth of the current main monitor,
+that is, the one with the menubar. Source code included.
+
+Freeware.
+
+Thomas Kishel      "You have forgotten more than I will ever know."
+tjk111@psu.edu
+
+[Archived as /info-mac/card/resolution-xfcn.hqx; 20K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:42:28 -0500
+From: Sean A Kennedy <skennedy@acsu.buffalo.edu>
+Subject: [*] Scorpio 1.0.1P; a word processor
+
+Here is a new shareware wordprocessor I pick up.  I have heard that a
+lot of people on the internet have been looking for it, as it has
+recently been mentioned in MacWorld.  It is cheap, and the registered
+version comes with a spell checker.
+
+-sean
+
+[Archived as /info-mac/text/scorpio-101p.hqx; 331K]
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 13:26:28 -0500
+From: dschwarz@netcom.com (Dan Schwarz)
+Subject: [*] SerialSpeed 230 Version 1.2; enhances serial speed
+
+SerialSpeed 230 is a control panel that allows Power Macintosh and Macintosh
+AV computers to use their serial ports at 115Kbps or 230Kbps with any
+software that normally uses the serial ports at 57.6Kbps.
+
+Version 1.2 Enhancements:
+
+*       Now supports MacPPP and other previously-incompatible programs.
+
+*       Option to disable serial driver checking at startup (this should
+	make life easier for folks who use "ASFU Fixer" and other INITs
+	that open the seial ports at startup time.
+
+*       Updated documentation and FAQ as usual...
+
+Hope you like it!
+
+[Archived as /info-mac/comm/serial-speed-230-12.hqx; 169K]
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 13:26:17 -0500
+From: zimm@alumni.caltech.edu (Mark Zimmermann)
+Subject: [*] Shakespeare Stack --- Comedy_of_Errors-v.1.0.sea.hqx
+
+A new Shakespeare Stack, "Comedy_of_Errors-v.1.0.sea.hqx", is appended
+below ... free software under the GNU GPL (requires HyperCard 2.x) ...
+the complete text of the play "The Comedy of Errors", arranged and
+formatted with glossary and other features for the convenience of
+students and scholars (and anybody else who just wants to read a very
+funny story, the classic multiple-mistaken-identity romp)...
+
+Best
+
+[Archived as /info-mac/info/nms/comedy-of-errors-10.hqx; 81K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:43:10 -0500
+From: jmelan <jmelan@bu.edu>
+Subject: [*] SMILE the splattering; a frustration reduction tool
+
+In this program you get to hurt and mangle an annoying Smilely face in a
+creative variety of ways. It is extremely satisfying if a little
+demented.
+
+The text included with the Download reads:
+3Feeling violent? Do you like blood and guts action? You MUST DOWNLOAD
+this slick, beautifully rendered, fully animated program! Smile: The
+Splattering 1.1 is the perfect place for you to work off your
+aggressions. If the smiley face doesn't make you want to beat him silly I
+don't know what will. Stick him in a blender, splat him with a hammer,
+zap him with a laser,  chew his face off with a flesh eating virus and
+MORE. This Demo lets you sample some of the many features of that could
+be yours if you register. This program features a completely interactive
+animated cartoon complete with dialogue. The graphics are stunning,
+professional and satisfying. Smile: The splattering is a program like no
+other. You WILL love it!
+ShareWare $12
+This Version (1.1) corrects the minor, rare, yet irritating white box
+error.
+
+Not intended for very young children.
+
+*Have a nice day!*2
+
+Don9t forget to bop him in the eye!
+
+[Archived as /info-mac/game/smile-the-splattering.hqx; 1078K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:43:00 -0500
+From: Maynard James Handley <maynard@elwing.otago.ac.nz>
+Subject: [*] Sparkle 2.3.4 A mac-look-and-feel MPEG and QT player and converter
+
+Sparkle plays MPEGs, PICTs and QT movies and converts between them. It is
+multifinder friendly and, with enough memory, will open multiple
+documents at once.
+
+Maynard Handley
+maynard@elwing.otago.ac.nz
+
+[Archived as /info-mac/grf/util/sparkle-234.hqx; 1131K]
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 13:26:03 -0500
+From: clix@icon.net (Jeffrey M. Click)
+Subject: [*] STEREO STORM STRTUP SND
+
+Here's a great sound in stereo for Macs!  It's designed for a startup sound
+and needs no extra software to work.  Instructions are included.
+
+[Archived as /info-mac/snd/stereo-storm.hqx; 299K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:42:49 -0500
+From: Colin Klipsch <klipsch@geosim.cs.vt.edu>
+Subject: [*] TappyType 2.01; noises for your keyboard
+
+TappyType is a Control Panel extension that allows your Mac to make
+typewriter noises in response to your keypresses.  It requires System
+7.0 to work.  Features include:
+
+  * Typewriter sounds for the spacebar, carriage return, page up
+    and down, and ordinary keys.
+
+  * A special keystroke that allows you to turn TapppyType on and off
+    at any point, without opening the Control Panel.
+
+  * A list of active applications, to which TappyType will limit itself
+    when making noises.  You might enjoy the typewriter sound effects
+    while using your favorite word processor or text editor, but
+    probably not elsewhere.
+
+TappyType may be used and distributed without charge, though not sold
+for profit.  See the included docmentation for details.
+
+Enjoy...
+
+Colin Klipsch
+klipsch@geosim.cs.vt.edu
+
+[Archived as /info-mac/gui/tappy-type-201-cdev.hqx; 104K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:43:59 -0500
+From: dbagno@magnet.com (David Bagno)
+Subject: [*] The Talking Multiples Teacher v1.2
+
+ This program has resulted from the frustration of trying to tutor a
+gifted second grader in the study of the multiplication tables using
+traditional methods and software programs.  I noticed that kids innately
+count the multiples on their hands and rely heavily on their audible
+sensors.   I was inspired to believe that if kids received this type of
+musical association in the learning process of the multiplication tables,
+that they would learn them faster and have more enthusiasm about it.   The
+"Talking Multiples Teacher" accomplishes exactly this.    It imitates the
+rhyme or song / chant that kids naturally associate with the times tables.
+
+[Archived as /info-mac/app/edu/talking-multiples-12.hqx; 422K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 21:41:39 -0700
+From: ace@tidbits.com (Adam C. Engst)
+Subject: [*] TidBITS#274/24-Apr-95
+
+TidBITS#274/24-Apr-95
+
+This week's issue begins with news about Apple's strong second quarter,
+future Macs at Disney's EPCOT Center, new Microsoft-related anti-trust
+news, and more. We continue with an report from the Third International
+World-Wide Web Conference, thoughts about the appropriate use of computers
+in the form of a book review of Cliff Stoll's "Silicon Snake Oil," and a
+look at how to access the Internet via CompuServe's PPP services.
+
+Topics:
+    MailBITS/24-Apr-95
+    Third International World-Wide Web Conference
+    Shedding Skin - Thoughts on "Silicon Snake Oil"
+    CompuServe as a PPP Internet Provider
+    Reviews/24-Apr-95
+
+[Archived as /info-mac/per/tb/tidbits-274.etx; 29K]
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 13:26:14 -0500
+From: wkearney@access.digex.net (Bill Kearney)
+Subject: [*] Update of DateView; a Newton app
+
+It appears that the archive file containing DateView is missing the package
+file.  This, of course, renders the file a bit useless.  I've attached the
+most recent version of DateView to this message.  Simply replace the old
+file with this new one.
+
+Thanks and sorry for the mistake,
+
+Bill Kearney
+wkearney@access.digex.net
+
+[Archived as /info-mac/nwt/app/date-view-demo.hqx; 19K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:43:33 -0500
+From: wlt@mercurio.uc.pt (Wagner Luis Truppel)
+Subject: [*] Wagner's Eudora prefs 1.1 submission
+
+Greetings,
+
+this is the submission of the latest version of Wagner's Eudora prefs. It now
+comprises two files which differ only in the fact that one of them allows you
+to
+change the quote characters for reply and forward messages, while the other
+doesn't. Use only one at a time.
+
+The one that lets you change the quote characters only accepts single-character
+strings, due to a limitation of Eudora itself. The other file has these quote
+chars hard-wired as " * " and " ** ", respectively, but you can use ResEdit or
+other resource editor to change them, if you'd like other multiple-char strings
+instead.
+
+PLEASE read the Readme file and don't hesitate to send me email with
+suggestions, questions, praise, or even flames.
+
+The two files and the Readme have been checked for viruses with Disinfectant
+3.6, put together in a folder, compressed into a self-extracting archive, and
+then bin-hexed.
+
+Enjoy.
+
+[Archived as /info-mac/comm/tcp/mail/wagners-eudora-prefs-11.hqx; 16K]
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 18:42:32 -0500
+From: Spencer Low <spencerl@crl.com>
+Subject: [*] WordPerfect 3.1 PPC Demo - Award Winning Word Processor
+
+This is a demo of WordPerfect 3.1 for Power Macintosh. This demo will not
+save. It will print 2 pages of a document with a watermark that says "DEMO".
+For more information contact WordPerfect (The Novell Applications Group)
+at 800-321-4566 (orders) or 800-451-5151 (general information). More
+demos can be found at ftp://ftp.wordperfect.com/pub/
+
+Spencer <spencerl@crl.com>
+(Not connected with Novell)
+
+[Archived as /info-mac/text/wordperfect-31-ppc-demo.hqx; 1926K]
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 13:25:59 -0500
+From: jcr2@cornell.edu (John Rethorst)
+Subject: [*] WordPerfect3 to PageMaker 5 Import Filter
+
+Hi,
+
+Here's an import filter from WordPerfect 3x to PageMaker 5. Included
+documentation lists the fairly complete formatting it supports. Written by
+Adobe, but I saw it on ftp.wordperfect.com.
+
+Thanks,
+John Rethorst
+
+[Archived as /info-mac/text/wordperfect3-filter-pm5.hqx; 67K]
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 15:55:35 -0400
+From: anthony@noc.tor.hookup.net (Jeff Anthony)
+Subject: (Q) PPP modem connect speed?
+
+I've a USRobotics 28.8 modem (v.34) on a PPP account. My connect software
+(MacPPP v2.0.1) doesn't display the connect speed. I suspect it's regularly
+less than 28.8. Does anyone know of a monitor, utility, or another reliable
+version of PPP to perform this function?     TIA - Jeff
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 10:32:26 -0400
+From: leo@ramsey.cs.laurentian.ca (Leo G. Leduc)
+Subject: (Q) Problem with Eudora
+
+I have a problem checking my email using Eudora 1.5.1. Upon issuing the
+request under File -> Check Mail, I obtain the following message within
+Eudora:
+
+	There has been an error transferring your mail. I said:
+
+		Pass
+
+	and then the POP server said:
+
+	-ERR Password supplied for "leo" is incorrect.
+
+		Sorry
+
+I find this error message surprising in that my password is correct!  Also,
+sending mail to the POP works very well.
+
+I'm using MacTCP on a LC630 running System 7.5 with the recent update.  The
+Mac is hard wired to the network via Ethernet.
+
+I would appreciate any help.
+
+Thanks in advance.
+
+
+Leo G. Leduc
+leo@ramsey.cs.laurentian.ca
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 14:48:26 -0700
+From: lipman@loc3.tandem.com (lipman_peter)
+Subject: (Q) Single Key for Spanish characters in MSWord 5.1
+
+Is it possible to coerce MSWord into allowing me to define a single key
+shortcut, e.g., F5, <ctrl>a, or <cmd><opt>a to produce the a with the
+accent above it which is normally produced with the two character
+sequence "<opt>e" followed by "a"?  Not surprisingly, I wish to do
+this for a, e, i, o, u, and I want the corresponding shortcuts for n
+with tilde above and for the inverted ! and ?.
+
+I played around a bit with Glossary entries which seems to be the sum
+total of the "macro" capability.  I tried many approaches, but totally
+failed to figure out how to make a glossary entry (like the default
+ones for day and date) that would insert in the current font/style (at
+the insert point) instead of the font it was created with.  The
+default glossary entries are an existence proof that this can be
+done; what is the trick?
+
+Assuming the above can be solved, I know I can put a glossary entry on
+the "Work" menu, and I know I can assign shortcuts to "commands" that
+don't have them.  Can I assign a shortcut to one of these glossary
+items on the Work Menu?
+
+I tried a simple KeyQuencer macro (my first attempt at using
+KeyQuencer) to see if that would provide a solution.  I simply hooked
+up a shortcut key to send the decimal equivalent of the key I wanted.
+This works EVERYWHERE but MSWord.
+
+I have heard repeatedly that MicroSoft always does things differently,
+so nothing standard ever works the way you would expect.  These
+character codes (and probably all codes above 127) cause MSWord to
+beep and ignore them UNLESS you have the "insert symbol" dialogue
+active in which case they work perfectly.  I could not convince
+KeyQuencer to send the two key-board events (in the X-windows sense of
+key events) that actually form the character; it won't send <opt>e to
+the program; only the "e" shows up.  I can easily imagine the reasons
+why this doesn't work.
+
+I bet that I can get KeyQuencer to cause MSWord to use a glossary
+entry.  But for that to be useful, I still have to determine how to
+get the "use glossary entry" to insert the characters in the
+font/styles that are current at the insertion point.
+
+By the way, with no fiddling around whatsoever, ClarisWorks did this
+fine with their Macro capability.
+
+Thanks for any help you can offer.
+
+Peter
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 15:56:56 -0700 (PDT)
+From: Paul Brians <brians@wsunix.wsu.edu>
+Subject: (Q) SLIP and PPP software
+
+Our campus has just established SLIP and PPP services. But the help desk
+says it has not yet identified Macintosh software that can take advantage
+of it reliably. They claim that SLIP requires true multitasking which the
+Mac lacks. They also say that there is no free or shareware for either
+SLIP or PPP.
+
+I know most of this is a crock because I read of people using these sorts
+of connections all the time, here in the Digest. So what do you actual
+users recommend?
+
+The dial-up port offers speeds up to 28800 baud and V.34. My new Supra
+modem supports both. I'm using the free version of Microphone Lite that
+came with the modem at the moment; I don't have any other software that
+supports 28800 baud.
+
+Paul Brians, Department of English, Washington State University
+brians@wsunix.wsu.edu
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 15:37:14 -0700
+From: wchen@darwin.bio.uci.edu
+Subject: [A] CD Inject?
+
+>Ugh! I can't
+>squeeze my fat little finger between the keyboard and the tray to INject
+>the CD.
+
+Dirk, all you have to do is lightly push the tray in a bit and it should
+close by itself.
+
+
+Wayne Chen
+wchen@darwin.bio.uci.edu
+
+------------------------------
+
+Date: Wed, 26 Apr 1995 10:48:51 +0300
+From: Timo.Turunen@fmi.fi (Timo Turunen)
+Subject: [R] Shutdown problem with 7.5.1
+
+> >     This may have been discussed before, but I don't recall seeing it.  =
+I
+> >     have a IIcx that I recently upgraded to system 7.5.  All was well
+> >     until I added the 1.0 Update.  Now when I go to shutdown, I get a
+> >     "Finder" error and a "Restart" button in the dia log box.... it won'=
+t
+> >     let me shut down!  Any suggestions?
+>
+> I encountered the same shutdown crash after I'd upgraded a IIsi and a Quad=
+ra
+> 700 to 7.5.1.
+
+I had the same problem with Quadra 700. I used  no-shut-butt-09 (available f=
+rom
+/info-mac/cfg/ ) for disabling the new "power off" feature of the Power key =
+and
+the problem disappeared.
+
+-----
+timo.turunen@fmi.fi
+
+------------------------------
+
+Date: Wed, 26 Apr 95 12:42:09 JST
+From: nagata@kurims.kyoto-u.ac.jp (Mark Nagata)
+Subject: Apollo 1.1x Query
+
+In Info-Mac Digest, Volume 13, Issue 49,
+Joe Holly/MacHolly Land (macholly@eworld.com, MacHolly@aol.com) wrote:
+
+> ... posting regarding Apollo 1.12. I
+> was just wondering how, after using it for a while, you feel about
+> this software. Are you still enamored? ...
+>
+> I have attempted to set it up on my machine - an old Mac IIx with a
+> DayStar accelerator, running System 7.1, and as few extensions as
+> possible - but have had to disable it because of conflicts.
+>
+
+Apollo 1.12 had a conflict with 'Control Strip' and '4th Dimension'.
+The conflict was fixed in the current version, Apollo 1.13.
+
+Try the current version, available at:
+info-mac/gui/apollo-113.hqx; 562K.
+
+
+The archive is compressed twice, for some reason.  But don't worry,
+it will expand fine.  :)
+
+(By the way, I am sure that the author has released it in a Compact Pro
+sea, but, it now seems that (almost) all of the recent uploads to the
+info-mac archives are automatically re-compressed into StuffIt archives...
+I wonder why.)
+
+
+Joe Holly continues:
+> ... weird happenings (CPs being stripped of their
+> icons, etc., etc.) accompanied the introduction, not so much of
+> Apollo but Eagle, its associated extension.
+>
+I guess he means that Eagle loses its icon after he Rebuilds the Desktop.
+This is normal.  Eagle is an 'appe', a background-only application that
+is launched _before_ Finder is launched, at startup.  That means, that
+Eagle is already running ('file busy'), when Finder rebuilds the Desktop,
+and thus Finder fails to get the icon information from the 'Eagle' file.
+
+A simple workaround:   Boot 'Extensions Off' whenever you Rebuild the
+Desktop!   (Boot the machine with the Shift key pressed, and as soon as
+you see the 'Extensions Off' message on the startup screen, release the
+Shift key and press Command-Option.)
+
+(Oh, if you _must_ run Easy Open and/or AutoDoubler, then some special
+procedure would be necessary, by the way.)
+
+
+> This machine has always been very touchy about software attempting to
+> modify the Open or Save boxes, (Boomerang, Super Boomerang, Norton's
+> Directory Assistance, and Default Folder were disasters, for instance).
+>
+Hmm... maybe your accelerator could be the problem.  I'm not sure.
+
+
+> I'd like to hear some comments about what should be a wonderful piece of
+> software, but which...
+>
+I am perfectly happy with Apollo 1.13, and it is coexisting
+peacefully/wonderfully on my machine, together with
+OtherMenu/About/KeyQuencer/SuperBoomerang/NowMenus/etc.   :-)
+
+Cheers,
+
+Mark
+--
+Mark Nagata
+nagata@kurims.kyoto-u.ac.jp
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 07:50:20 -0700
+From: pgor@netcom.com (Paul Goracke)
+Subject: CD-ROM eject buttons
+
+Resubmitted for signature purposes:
+
+
+> Steven L. Scott wrote:
+>
+> Dirk Thompson wrote:
+> . . .
+> >Ugh! I can't
+> >squeeze my fat little finger between the keyboard and the tray to INject
+> >the CD. Talk about ANTI-ergonomic -- it's downright annoying!
+>
+> >Anyway, I was wondering if anyone could come up with a ResEdit hack that
+> >let the software eject button on the AppleCD Audio Player inject a CD
+>too?
+> >A function key would be even better (but not one under the tray, please).
+> >Any ideas?
+>
+> You do not have to use the button on the CD player to close the tray -
+> just push the tray in; it will close by itself once you move it half an
+> inch or so.
+
+By doing this, you will guarantee yourself a trip to the repair shop in the
+not-too-distant future. Strain is put on parts of the tray that will
+eventually break, resulting in a tray that doesn't retract all the way, and
+requiring a replacement of the tray. When I worked in an audio repair shop,
+there were two types of cd player problems - dirty lenses and broken trays.
+
+Oh yeah, use the open/close button on your audio cd player at home, too. At
+least they're put in a better location than the Apple ones.
+
+pg
+
+Paul Goracke
+pgor@netcom.com
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 07:50:23 -0700
+From: pgor@netcom.com (Paul Goracke)
+Subject: CD-ROM eject buttons
+
+Resubmitted for signature purposes:
+
+
+Steve Scott replied:
+
+> Paul,
+>
+> I must take exception to your suggestion that this method of closing the
+> CD ROM tray (or, for that matter the tray on most audio CD players), ie,
+> pushing on the try SLIGHTLY, to close it will damage the tray. Most audio
+> CD players as well as the CD player in current Macs are made to be closed
+> with the open/close button OR pushing gently on the tray. I am not
+> talking about forcing here - it only takes a gentle push to start the tray
+> and it closes BY ITSELF. In fact, the instruction manual with most CD
+> players (and my Mac - Page 18, #4 of the current Apple CD 300i Plus
+>manual)
+> offers both of these methods as proper ways to close the tray.
+>
+> To be sure, the CD tray is at its most vulnerable when open and to use
+> force or to push it other than straight could, indeed, cause problems.
+>But,
+> I have two audio CD players and three Macs with CD players and have used
+> both methods interchangably (is that a word?!) over the years and have
+> had no problems.
+
+At the risk of sounding like a flame (which is not what I intend), you must
+have a somewhat different 300i Plus than I. Mine requires a _firm_ push
+before it moves (yes, I just tried it). It also is rather wobbly, making it
+difficult to push it _straight_ in.
+
+I don't think this needs to be argued further. I just thought people should
+be aware of the possible problems with this method of closing the CD tray.
+That accomplished, I feel any further discussion should be taken to private
+email. Anyone else interested can mail me too.
+
+Like Dirk Thompson originally requested, I would much prefer a software
+solution. It shouldn't be hard - if you can software eject, you should be
+able to software inject.
+
+pg
+
+Paul Goracke
+pgor@netcom.com
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 15:50:22 -0700
+From: kroemer@apex.ece.ucsb.edu (Herb Kroemer) (Herb Kroemer)
+Subject: FAT Code Strippers
+
+There are several applications that can strip code from fat binaries to
+convert them to 68K versions or to PPC versions, or both. I have used three
+of them (FatFree, Stripper, and the command line in PlainText). They seem
+to work, but I feel very uneasy about them, and I suspect there are others
+who feel the same way. Could someone explain to us how those applications
+know which code to strip (and -- more important -- which to leave alone).
+How reliable is that process?
+
+I will summarize on the net any answers sent to me directly and not sent to
+the net.
+
+Thanks!
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 20:46:28 -0400
+From: IceDoc@aol.com
+Subject: Hard Drive Problem
+
+I have a 500 MB internal Apple HD that I cannot access, mount, test,
+initialize or even format!!  It was formatted (and partioned) with FWB 5
+months ago, and last week I tried the newest Apple HD SC program (7.3.2) to
+TEST the drive - not update it nor initialize or format it.  In the middle of
+the test my system (7.5.1) crashed, and I did a hard reboot.  Since then I
+cannot access the drive - FWB or other SCSI software cannot get any info off
+the drive except the name (Seagate) and the Model number (3600N).  These
+programs cannot mount the drive, update drivers, replace drivers, initialize
+the drive or even reformat it!!!  A local computer repair center examined the
+drive and does NOT think it is a logic board problem, but that maybe my
+"Master Boot Record" is damaged.  Although the data on the drive has some
+value (but is not worth $2000 to recover it), I really want to be able to
+reformat the drive.  Does anyone know of a program that could FORCE write a
+driver onto the disk (also, where on the disk the driver is usually written)
+so I could at least mount the drive and recover some of the data or reformat
+the entire disk.  Please help, and send any requests for additional info to
+IceDoc@aol.com.  Please also email any responses if possible to me since my
+access the the InfoMac Digest is difficult.
+Thanks,
+Joe
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 15:35:33 -0700
+From: lipman@loc3.tandem.com (lipman_peter)
+Subject: hierarchical apple menu
+
+In Info-Mac #49, Pascal Huguet said:
+
+> Make yourself a <big> favor : trash apple menu options cdev ASAP. Not
+> only does it slow down dramatically the whole system, during startup
+> and session time, with or without aliases to your disks, but it seems
+> to be a major source of crashes. Use menuchoice instead. And enjoy
+> full hierarchical menus of your root disks if you wish. As you say,
+> you may be amazed.
+
+> And if you want to run even more fast, trash also easy open. I'm not a
+> guru, and just report what I experienced with 7.5 and 7.5.1. I believe
+> these extensions are activated each time you open or change a file. In
+> this regard, apple menu options is a complete disaster especially when
+> you use the "recent" submenus.
+
+I too profess to be no guru, so this is a request for confirmation
+>From others on the net:
+
+I do not think I am seeing the performance impact that others claim
+>From the hierarchical Apple menu.  The difference in boot time for my
+Performa 6115CD (6100/60) with and without the Apple Menu options
+control panel is about 8-10 seconds out of approximately 1 minute 10
+seconds (10-15%).  I did not put an alias to my hard disk in the Apple Menu,
+but I did put an alias to my System Folder there.
+
+I DO NOT have any of the "Recent ..." options checked, and absolutely
+agree that this option almost certainly causes all opens to go through
+addtional overhead.  I cannot come up with an equivalent obvious
+reason why there should be runtime overhead from the hierarchical menu
+options when you do not allow it to keep track of recent files.  Can
+anyone more familiar with the internals of the MacOS suggest why this
+might cause degraded performance?
+
+I would hate to see people throw out the good parts with the bad just
+because we failed to identify and isolate the real cause of the
+slowdown.
+
+In the mean time I personally am going to take Pascal's well
+intentioned advice and check out menuchoice to see if I think it does
+a better job and incurs less overhead.
+
+Peter
+
+--
+Peter Lipman
+    Email: lipman@loc3.tandem.com   (preferred)
+	   lipman_peter@tandem.com
+    Phone: (408)285-6065
+
+
+------------------------------
+
+Date: Wed, 26 Apr 1995 00:33:23 +0200
+From: huguet@dialup.francenet.fr (Pascal Huguet)
+Subject: hierarchical apple menu
+
+>> Make yourself a <big> favor : trash apple menu options cdev ASAP. Not
+>> only does it slow down dramatically the whole system, during startup
+>> and session time, with or without aliases to your disks, but it seems
+>> to be a major source of crashes. Use menuchoice instead. And enjoy
+>> full hierarchical menus of your root disks if you wish.
+
+>I do not think I am seeing the performance impact that others claim
+>from the hierarchical Apple menu.  The difference in boot time for my
+>Performa 6115CD (6100/60) with and without the Apple Menu options
+>control panel is about 8-10 seconds out of approximately 1 minute 10
+>seconds (10-15%).  I did not put an alias to my hard disk in the Apple Menu,
+>but I did put an alias to my System Folder there.
+
+>[.../...]
+
+>I would hate to see people throw out the good parts with the bad just
+>because we failed to identify and isolate the real cause of the
+>slowdown.
+
+This is the question : should the mac users blindly trust a system
+extension is reliable because it comes with the official Apple label? I
+think we must stop to do it, especially with sys 7.5 and newer. In other
+words, I strongly believe AMO belongs to the bad ones. There are others :
+SCSI manager 4.3, general control panel, stickies (but who cares about this
+one)...
+More details in <http://www.macintouch.com/‾ricford/>
+
+Overall performance is quite difficult to handle, and the speed
+improvements I noted without AMO may be not objective. But I spent already
+too much time (monthes) trying to make the system work without crashing,
+I'm not ready to spend hours with a stopwatch to get an analysis which may
+not be reproducible elsewhere. On the other hand, if you want to do it, I
+am interested in your results.
+
+The reason why I advised to kill AMO is mainly safety. If you didn't have
+any crash scrolling down the apple menu, menus shifting off the menu bar,
+and your disks spinning madly each time you unmount a volume, you're
+luckier than I was.
+
+
+---
+Pascal Huguet <huguet@dialup.francenet.fr>
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 11:37:44 +0200
+From: huguet@dialup.francenet.fr (Pascal Huguet)
+Subject: Info-Mac Digest V13 #48
+
+In article <3n839r$roj@nntp.Stanford.EDU> (Info-Mac Digest V13 #48),
+hdewolf@fss.fokker.nl (Hans de Wolf) wrote:
+
+> Utilities like PC Exchange and AccessPC contain a function which maps the
+> MS-DOS
+> file name extension to Macintosh file types/creators, according to rules
+> specified by the user.
+>
+> These packages work fine for floppies, but not for CD-ROMs, or files
+> transferred
+> over a network.
+
+By the way, does anybody know what's the use for the options of the
+Exchange PC cedv supplied with sys 7.5? Standard documentation is rather
+laconic about it. It seems to allow loading of SCSI drivers, but for what
+purpose?
+
+---
+Pascal Huguet <huguet@dialup.francenet.fr>
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 14:56:17 -0500 (CDT)
+From: Darek Brzeski <darek@nolsun1.nol.net>
+Subject: Mac and Solaris not liking each other?
+
+Throughout all of last week I had hell of a time PPPing with Macs into  a
+Sparc 20 running SunOs 5.4 and Popper 2.1 (pop 3 protocol).  On the Mac
+side I am using MacTCP 2.06, Mac PPP 201 , Eudora 151 and NCSA Telnet 2.7.
+The problem is that Eudora will establish conection but will hang while
+picking any new messages, telneting in I am able to establish a
+connection but the telnet session ceases to respond after the login.
+Name resolution works perfectly so I am able to use fetch as well as
+telnet and pop to access all other flavors of Unix out there.  I tried
+changing shells as well as profiles and login files to specify both vt100
+and vt220 emulation without  getting any  differnet results.
+If you have any idea what the source of this problem might be please let me
+know.
+Cheers!
+
+Darek Brzeski
+darek@nol.net
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 18:17:16 +0200
+From: cbuser@ezinfo.vmsmail.ethz.ch (Christian F. Buser)
+Subject: MacLink Plus 8 (A)
+
+michaels@techunix.technion.ac.il (Michael Silverstein) wrote:
+
+>I ordered MacLinkPlus in February and received MacLinkPlus 7.5.
+>Someone mentioned that MacLinkPlus 8.0 is out and has been out for some
+>time.
+>
+>Can anyone tell me what the latest version of MacLinkPlus is and when it
+>was released?
+
+Michael,
+
+I got MacLink Plus 8 bundled with Apple's System 7.5 on CD. Included was a
+registration card and an offer to order a printed manual for US$ 10 + s/h,
+total cost was approx. US$ 15 until it arrived here in Switzerland.
+
+Probably, MacLink Plus is also available separately, but I think it might
+be cheaper just to get it bundled with System 7.5.
+
+Best wishes, Christian.
+
+PS - did you solve your FileGuard problem ?
+
+------------------------------
+
+Date: 25 Apr 1995 16:21:22 -0400
+From: jkriens@cc.bellcore.com (kriens,john)
+Subject: MacX problems.
+
+I've been trying to get MacX 1.1.7 up and running on my Quadra 650 running
+system 7.5.1.  I'm having a problem though.  Whenever I try to select the Hosts
+button from the Commands window, not only do I not get the MacTCP Connection
+Tool window that the manual indicates should open to let me select a host, but
+the Commands window spontaneously closes, too.  As you can probably guess, this
+problem pretty much keeps me from using MacX.
+
+I suspect that the problem might be with my version of MacTCP Tool (I have
+version 1.2, dated Oct. 2, 1992).  I'm also running MacTCP version 2.0.6x.
+Is there a newer version of MacTCP Tool?  Could I be experiencing some other
+conflict?  Help!
+
+Thanks in advance.
+
+-John Kriens
+jkriens@cc.bellcore.com
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 11:09:00 -0500
+From: mdinman@umr.edu (Michael D. Inman) (by way of mdinman@umr.edu (Michael D.
+Inman))
+Subject: minicad user group
+
+There is a new minicad html users group as wel as a e-mail listserv
+for those who have and use a software package named minicad+.
+the URL is=           http://www.rollanet.com/‾minicad
+the listserv is=  listserv@rollanet.org  [no subject] text [subscribe
+minicad <your name, not email name>]
+
+for further information contact Michael Inman <mdinman@umr.edu>
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 23:34:19 -0400
+From: CarolynMB@aol.com
+Subject: PS Text Viewer
+
+Hello All,
+
+I am looking for a postscript text viewer utility. The creator of the files
+that I need to translate suggests "Ghostscript". A search through AOL's
+archives has lead to nothing that is useful.
+
+I have tried to open the files using Word 5.1A and Photoshop 2.0.1 (it opens
+PS files) but it seems as if my PS files may be damaged. In the mean time,
+while I try to download a better copy, or an html version, please help! Does
+anyone know where I might find "Ghostscript"? Or, What else do any of you
+suggest? I am looking for a readily downloadable shareware or "lite"
+commercial utility.
+
+Thanks in advance!
+Carolyn M. Barry
+
+------------------------------
+
+Date: Wed, 26 Apr 1995 06:12:26 GMT
+From: kalpanak@sue.econ.su.oz.au (Kalpana K)
+Subject: Q: How to tranfer user data between 2 stand-alone macs ??
+
+Can someone please tell me what is the easiest way to transfer data
+
+>From a :       Macintosh SE 30
+
+to a    :       Power Macintosh 6100/66
+
+
+Both are stand-alone machines not hooked up to any network. They
+do not have any ethernet cards in them.
+
+What sort of cable would I require and what software is to be used ?
+
+Any advice much appreciated.
+
+Cheers
+
+Kalpana
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 15:35:20 LOCAL
+From: jbeaton@bud.peinet.pe.ca
+Subject: Software Distributors
+
+I have a co-worker  who is looking for a dealer for MacIntosh software in her
+area - Prince Edward Island, Canada.
+In specific, she is looking for MSWord.  Please e-mail her if you can help
+<mccardle@cycor.ca>
+Thanks,  she's kind of swamped with her work & didn't have time to post.
+Judy
+
+------------------------------
+
+Date: Sun, 23 Apr 1995 15:28:52 +0100
+From: lana@cisi.unito.it (maurizio lana)
+Subject: Syquest drives at wonderful prices (Q)
+
+MacUser of March, page 180:
+Super Micro (Torrance, CA) ad:
+
+Syquest 105 ext. with cartridge, cable, terminator, software: 242 US$.
+
+The price is incredibly low, is the top best. Before buying confidently I
+would like to know if anyone has any bad news about this small firm.
+
+Please, you that answer my query: CC: your message directly to me; and many
+thanks to everyone.
+
+Maurizio
+
+Maurizio Lana  -  CISI Universita'di Torino
+Via S. Ottavio 20, Torino - Italy
+fax 39 11 8991648
+
+------------------------------
+
+Date: Wed, 26 Apr 1995 16:13:57 +0000
+From: M.R.Zamani@liverpool.ac.uk
+Subject: sys 7.5 upgrade
+
+Dear Sir,
+I would appreciate if you provide me with the internet addresses, preferrable
+in
+the UK,
+where I can obtain the system 7.5 upgrade to 7.5.1. I have been trying the
+ftp.apple.com
+site, but it is so busy that I never can transfer the file before the
+connection
+is cut off.
+
+Yours sincerely,
+
+
+Reza Zamani
+Dept. HACB
+University of Liverpool
+PO Box147
+Liverpool L69 3 BX
+UK
+
+------------------------------
+
+Date: Tue, 25 Apr 1995 11:15:14 CDT
+From: "Bruce A. Bromberek" <brombere@cems.umn.edu>
+Subject: System 7.5.x Rant
+
+I just read Joe Holly's post and couldn't agree more.
+
+<snip>
+After having just caught up on six weeks of Info-Macs and other
+readings, it sounds like System 7.5.1 is just not much better than that which
+it purports to replace. I think I may wait until the next one (MF II).
+<snip>
+
+I tried 7.5 and hated life.  I was thinking of giving 7.5.1 a try until
+I heard about an easter egg 7.5 involving a breakout game hidden in the
+OS that displays the developers names.  Nice to know they have time to write
+cute little code that does nothing but no time to port more of the MacOS
+to powerPC native. It really makes me want to hold my head up high and say
+"It's been over a year and my OS is still not native - but it will be
+Real Soon Now."  I expect that kind of lag time with Microsoft (Win96 comming
+Real Soon Now), but I would have thought Apple to be more concerned -
+especialy since the clones are in the game now.  If PowerPC and Macintosh are
+the way of the future then why isn't Apple running at full tilt to get
+everyone there.  Just one more thing that makes it harder and harder to
+defend Apple from the criticism of the pro-Windozw crowd.
+
+My rant is now finshed and I yield the soapbox.
+
+--
+Bruce Bromberek - brombere@cems.umn.edu - U of MN - ChE & Mat Sci
+My words. My views. My opinions.  Mine , all mine!
+
+------------------------------
+
+Date: Mon, 24 Apr 1995 19:18:42 +0100 (BST)
+From: RGALL@macollamh.ucd.ie
+Subject: System 7.5 patch
+
+Hello kind people...
+Does anyone know if there is now a patch for system 7.5 and if there is where
+might I find it?
+I find 7.5 quite buggy and most of my extensions seem to be incompatible, but
+I'm not sure if the *patch* was just a rumour I heard.
+
+Thanks
+Ruth Gallagher
+rgall@macollamh.ucd.ie
+
+------------------------------
+
+Date: Wed, 26 Apr 1995 00:21:28 +0200
+From: cbuser@ezinfo.vmsmail.ethz.ch (Christian F. Buser)
+Subject: What's wrong with System 7.5 Update ?
+
+I have tried to install the System 7.5 Update on my Centris 650, but
+without success. Installation itself is no problem, but when I restart,
+everything hangs.
+
+Here's what I've done in more detail:
+
+- Copied the working 7.5 system software (International English version)
+to my second harddisk
+
+- Selected the external disk in the "startup device" control panel
+
+- Installed the update to the external disk
+
+- hit the "Restart" button
+
+... the system comes up (with the new logo, all extensions are loading),
+alerts me that my last shutdown wasn't as expected - and hangs. A
+"pumping, empty dialog box" appears.
+
+- Restarted again with the external disk switched off (so that the Mac
+uses the internal drive for startup)
+
+- Mounted the external drive, deleted the system folder on the external
+drive, installed clean 7.5 from the CD
+
+- did a new update
+
+- Restarted - same result as above.
+
+Thus my question:
+- What's wrong with the Update, or
+- What's wrong with my Computer
+
+Any hints welcome.
+
+Greetings, Christian.
+
+--------------------------------
+
+--Info-Mac-Digest--
+
+End of Info-Mac Digest
+******************************

@@ -1,0 +1,73 @@
+Message-ID: <31C105ED.41C6adfas@netscape.com>
+Date: Thu, 13 Jun 1996 23:25:49 -0700
+From: Jamie Zawinski <jwz@netscape.com>
+Subject: uuencoded images
+
+here comes one.gif...
+begin 644 one.gif
+M1TE&.#=AI``H`/```/___P```"P`````I``H```"_H2/J<OM#Z.<M-J+L]Z¥
+M^P^&XDB6YHFFZLJV[@O'¥DS7]HWGNA/T?K"3_'I!D*¥(^1F4R,VQR7@BI%`+
+MM;J¥`IA8BK;ZW1*[WG%VS.4>A@MV6YV`KZ5,N3@LNQ[90[/X'$?D=@?X!M1`
+MM3=(R'BC1P=YV!@Y)_E7J(#7>">9V.E7¥VCI^5E:>8JYB1KE1[JJ.B,ZU=HZ
+M:XKIF@D:.$I[FTHC^_HU2'G69_FJV¥M<B8PCG)H[W1QAQVF;#:P3O6FLN@B+
+MN`N<*PX-:CYIIFZ;/+X+9WYMTSV/]FW8R1/?7WV¥)H<]7¥[Z'%OT[$$=8@0+
+MDHN1T(W$-.Q*)70VP:"^,T/AZ)%Q@NS=QY$5'I$¥>:$?RI49DSUD"9.7QY@T
+8:]J¥B3.GSIT¥>_K¥"32HT*%$BQXH```[
+`
+end
+here comes two.gif...
+begin 644 two.gif
+M1TE&.#=AF@`P`/```/___P```"P`````F@`P```"_H2/J<OM#Z.<M-J+L]Z¥
+M^P^&XDB6YHFFZLJV[@O'¥DS7]HWG^L[W_@¥,"H>!HC%`/"J50X:Q"7@:I-$B
+M5$$56@_9[97KU2:RT2^"#$2>PV7S-'Q¥>^-C>ATM9S?PR^K3GJ?60O87MR18
+M)7?G-[>%AZ67!R8(5QAI0DAEI]E(V;DV&?'H%_JVYHF8DHG8]:GX2@H;ZS#*
+M27FZN+**6SK%.VO[NW<)[,C*-CJRVSM[ZEI¥F+J0+&5XG)HLLBS;JM9MRCQ!
+M;87TEQM^LMT<+,N(34P+S¥1XWIZ.7'G=^SV=W2]]QYNZ9BC4¥8NU29XF4?"@
+M_4-W[YV^?=$$'G+FSQXD1E"0R&7T<-%=H)&P.H6<!##@O'X<_S5T@Q$03)B9
+K9MI,5.?F3'PZ;9[L"32HT*%$BQH]BC2ITJ5,FSI]"C6JU*E4JUJ-4```.YB9
+`
+end
+here comes three.gif...
+begin 644 three.gif
+M1TE&.#=AJ``S`/```/___P```"P`````J``S```"_H2/J<OM#Z.<M-J+L]Z¥
+M^P^&XDB6YHFFZLJV[@O'¥DS7]HWG^L[W_@¥,"H?$HO&(K`26S,"P"8T"H$D'
+MLW@U9*?+P[:J^`:[7K+6>4:#PV:A.IU0B]=PXIM[E[?I]32Z6;:')SAX%TBX
+M,!?HAP`(V/@(J4@B=D45]496V455-QF'6-C)B.=IEO49LGFZU<JJ!PNY"/$9
+M^86*.¥NE>[(J^=OG&MM7^E#;=LM*;(D<"N++>PM<3)ULR':]W'QM3>U=`JW-
+M;?MZ*&4<VLUK?HGI_!'NK3Z?^<YP7)^?B)AJ$J]>;<¥H8A/P3?M&<-V*?]MT
+M`01E#UN#AXHB2<K62V!#9H>:A%EI%<%@-'X@24U1P5"?GW/N¥EG¥B)$BR8&8
+M4M0LM#)G,%@W#]%R![$CKI<^L6%<TY*/THD:ESH%Q>:IU%VRIDKM:36KUJU<
+>NWK]"C:LV+%DRYH]BS:MVK5LV[I]"S>NW*X%```[
+`
+end
+here comes four.gif...
+begin 644 four.gif
+M1TE&.#=AF@`Y`/```/___P```"P`````F@`Y```"_H2/J<OM#Z.<M-J+L]Z¥
+M^P^&XDB6YHFFZLJV[@O'¥DS7]HWG^L[W_@¥,"H?$HO&(3`(#S&9@Z(Q&E8;F
+MT9K`*K5$[H%)!7B%XVJXO`0CGN*SNHIU?L=31=TN;WC9^+TV+V8%..+W-"7%
+M%PB7&&@(&/?6M¥;8Z!C)A0E)^5'(]_CV!RJ:.*I7FG6Z.$FJ-AA2N!JK.MLX
+MYWD9N2J%RAC*^CMG`FLK:T9,ZUO,>¥R,C`NL,DQ;VY?JB¥B0N5R<"9TB33VM
+M*?L¥L;?-W*U¥`J[NW.N*MG"^GMPL+])>_KYNNSF?2Q*W?=/8Y7+'KU*S:E],
+M_1OH;1"^5P<)AD.D:9<_47P3%4H¥9,]@G9%Y[H3:>&?10XP/4OI[U]$(QH=A
+MH%2L225@0)Q=X/',J?&GT*%$BQH]BC2ITJ5,FSI]"C6JU*E4JUJ]BC6KUJU<
+)NWK]"M9I`0`[
+`
+end
+and here comes some random binhex data:
+(This file must be converted with BinHex 4.0)
+
+:$N&PG'8J4@4TG'pb)')a!&0838YA58a%!3!!""[!!!#pikD(!!!f!&0838[rrrr
+r!!!!!!!!!!S!""[!!!!f!!!!!!!!!!!!!!!!"J!!$M`!!!!H!!!lJ`!!1(m!!!!
+!!!!!!!!!30N!!!!!!!8!!"!!!!!!!!!!!!!!!!!!!!!!!!!!!K#!!!)3J!!#%)!
+!-Ei"*-Ti$DS!@b!!!I3"*-`F!K)![#!!64)"*-Td$2m!CL!!$ZB!!!!!$3-!ML!
+!*S)!!!!!$33!RL!!'T3!!!!!$k!!FL!!%TJ!!!!!$k%!IL!!%'!!!!!!&%a[Gf9
+bC@3JFQ9dGA*Z)'&bFQph#NjPH(3J3A*bEhF+8(*PGL""FR*[Ga&6G'&MDb"*EQC
+[)&*d)&4bD3G)3b")C@a`#d0XEh0PFL"-EfpV#8jPGdKKEQ4XC3T)8'p`9A"0C@j
+e#d4TFh"[Ff9%CA0M#e0SEhG#B@aXEfpZ$dK08Q9YEhCP3Q&XE'p[EJp0EhCP4'9
+cBe4[8f0bBA!58f&fC84PFf0"Fe*PFfpeFQ0P#N9iG'9ZC%4PFf-'8f9KFQ0S&90
+dB@jNBA*N)%9fC@jd)&0eDA4PF`P0CA*RC8&PG'9dA3:
+That's the end of the binhex data, but beware, it's truncated (it
+started out as a 43k file, but I ripped out all but the first and
+last few lines.)
+
+END!

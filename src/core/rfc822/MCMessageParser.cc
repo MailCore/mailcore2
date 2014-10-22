@@ -103,6 +103,15 @@ String * MessageParser::description()
     return result;
 }
 
+HashMap * MessageParser::serializable()
+{
+    HashMap * result = AbstractMessage::serializable();
+    if (mMainPart != NULL) {
+        result->setObjectForKey(MCSTR("mainPart"), mMainPart->serializable());
+    }
+    return result;
+}
+
 Object * MessageParser::copy()
 {
     return new MessageParser(this);

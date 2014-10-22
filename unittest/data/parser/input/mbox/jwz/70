@@ -1,0 +1,124 @@
+X-Mozilla-Status: 0001
+Message-ID: <31B0F5D1.41C6@netscape.com>
+Date: Sat, 01 Jun 1996 19:00:49 -0700
+From: Jamie Zawinski <jwz@netscape.com>
+Organization: Netscape Communications Corporation, Mozilla Division
+X-Mailer: Mozilla 2.0 (X11; U; IRIX 5.3 IP22)
+MIME-Version: 1.0
+To: Jamie Zawinski <jwz@netscape.com>
+Subject: multipart/alternative 2
+Content-Type: multipart/mixed; boundary="------------outer"
+
+This is a multi-part message in MIME format.
+
+--------------outer
+
+Here comes some multipart/alternative junk.  It's kinda small.
+
+--------------outer
+Content-Type: multipart/alternative; boundary="------------167E2781446B"
+
+--------------167E2781446B
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
+Content-Disposition: inline
+
+They're paying me to write songs about things I steal from them.
+
+Life is good.
+
+--------------167E2781446B
+Content-Type: text/richtext; charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
+Content-Disposition: inline
+
+They're <BOLD>paying</BOLD> me to write songs about <ITALIC>things 
+I <BOLD>steal</BOLD> from them.</ITALIC>
+
+<BIGGER>Life is <BIGGER>good.</BIGGER></BIGGER>
+
+--------------167E2781446B
+Content-Type: text/enriched; charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
+Content-Disposition: inline
+
+They're
+<BOLD>paying</BOLD> 
+me to write songs about 
+<ITALIC>things I 
+ <BOLD>steal</BOLD>
+from them.</ITALIC>
+
+
+<BIGGER>Life is 
+<BIGGER>good.</BIGGER></BIGGER>
+
+--------------167E2781446B
+Content-Type: text/html; charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
+Content-Disposition: inline
+
+They're <B>paying</B> me to write songs about <I>things I <B>steal</B>
+from them.</I>
+<P><FONT SIZE="+1">Life is <FONT COLOR="red" SIZE="+2">good.</FONT></FONT>
+
+--------------167E2781446B
+Content-Type: text/something-you-dont-know; charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
+Content-Disposition: inline
+
+WakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakka
+WakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakka
+WakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakka
+WakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakka
+WakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakka
+WakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakkaWakka.
+
+--------------167E2781446B--
+--------------outer
+
+Here's some more text/plain after the multipart/alternative.
+
+And coming up next is another multipart/alternative, with a nested
+multipart/alternative inside of it.
+
+--------------outer
+Content-Type: multipart/alternative; boundary=M1
+
+--M1
+Content-Type: text/plain
+
+This is M1 text/plain; you shouldn't be seeing this.
+
+--M1
+Content-Type: multipart/alternative; boundary=M2
+
+--M2
+Content-Type: text/plain
+
+This is M2 text/plain; you shouldn't be seeing this.
+
+--M2
+Content-Type: text/html
+
+This is M2 text/html; you <B>should</B> see this.
+
+--M2
+Content-Type: text/x-barf
+
+This is M2 text/x-barf; you shouldn't be seeing this.
+
+--M2--
+
+--M1
+Content-type: application/spankme
+Content-Description: you shouldn't be seeing this either
+
+blah blah blah
+
+--M1--
+--------------outer
+
+The end.
+
+--------------outer--

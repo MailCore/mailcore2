@@ -1,0 +1,60 @@
+Return-Path: raph@callisto.hip.berkeley.edu
+Received: from maleman.mcom.com (maleman.mcom.com [198.93.92.3]) by urchin.netscape.com (8.6.12/8.6.9) with ESMTP id EAA18301; Thu, 25 Apr 1996 04:30:51 -0700
+Received: from ns.netscape.com (ns.netscape.com.mcom.com [198.95.251.10]) by maleman.mcom.com (8.6.9/8.6.9) with ESMTP id EAA01168; Thu, 25 Apr 1996 04:29:58 -0700
+Received: from RSA.COM (RSA.COM [192.80.211.33]) by ns.netscape.com (8.7.3/8.7.3) with SMTP id EAA17575; Thu, 25 Apr 1996 04:29:05 -0700 (PDT)
+Received: from callisto.HIP.Berkeley.EDU by RSA.COM with SMTP
+	id AA26475; Thu, 25 Apr 96 04:25:34 PDT
+Received: (from raph@localhost) by callisto.hip.berkeley.edu (8.6.12/8.6.12) id DAA00979 for smime-dev@rsa.com; Thu, 25 Apr 1996 03:26:57 -0700
+Date: Thu, 25 Apr 1996 03:26:57 -0700
+From: Raph Levien <raph@callisto.hip.berkeley.edu>
+Message-Id: <199604251026.DAA00979@callisto.hip.berkeley.edu>
+To: smime-dev@RSA.COM
+Subject: Multipart/signed message format
+Mime-Version: 1.0
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+   micalg=rsa-md5; boundary="7oU2Ma36WUas7M"
+X-Mozilla-Status: 0005
+Content-Length: 1784
+
+--7oU2Ma36WUas7M
+
+Dear S/MIME developers,
+
+   I believe that this is a valid S/MIME multipart/signed message. The
+implementation is still quite experimental, so as yet I have no way of
+verifying that it is, in fact valid. The code is quite similar to my
+PGP/MIME and MOSS multipart/signed implementations, so there's reason
+to believe it works, but, then again, a lot can go wrong.
+
+   If anyone can verify this message or tell me where I went wrong, it
+would be much appreciated.
+
+   By the way, there's a minor nit to pick in the S/MIME message
+format document. After clearly (and correctly) calling out the fact
+that MIME parameters including slashes need to be quoted, the example
+of the multipart/signed at the end of the document is lacking quotes.
+
+   Also, when the spec is finalized, it would be nice if the examples
+had valid PKCS data :-)
+
+Raph (who really needs to get some sleep after staying up past 4am)
+
+--7oU2Ma36WUas7M
+Content-Type: application/x-pkcs7-signature
+Content-Transfer-Encoding: base64
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExDjAMBggqhkiG9w0CBQUAMAsGCSqGSIb3DQEH
+AaCAMIIBQjCB7AIRAN8ws2vZH70kgc/aYPAb7EswDQYJKoZIhvcNAQECBQAwJTEj
+MCEGCSqGSIb3DQEJARYUcmFwaEBjcy5iZXJrZWxleS5lZHUwHhcNOTYwNDI1MDQ1
+OTMxWhcNOTcwNDI1MDQ1OTMxWjAlMSMwIQYJKoZIhvcNAQkBFhRyYXBoQGNzLmJl
+cmtlbGV5LmVkdTBaMAoGBFUIAQECAgIIA0wAMEkCQgC//PdZ46JmErS4tgZaI0rq
+sHFosshkiNyqT5pVmcS8Aym2JBTtpZOL2oiZDWswBL21Hitxu3Mb2Wa3XNLFhT4y
+xwIDAQABMA0GCSqGSIb3DQEBAgUAA0IAfkFzTSTLNoGvOF36wiQpsQ7oRmG8y/U/
+bjjoyVVtAHYikVTYQ3nPN/v8E84psDJu5mkSt9h2fa6c36nHMlEDAoMAADGAMIGf
+AgEBMDowJTEjMCEGCSqGSIb3DQEJARYUcmFwaEBjcy5iZXJrZWxleS5lZHUCEQDf
+MLNr2R+9JIHP2mDwG+xLMAwGCCqGSIb3DQIFBQAwDQYJKoZIhvcNAQEBBQAEQSUh
+EF1KhpoFv1g5O/pOCaEploY8j6UmuR76CJf/6IS+2FPjH1o4Fkxqxzs2/MOp24Dr
+leU63btqDC77W9cZ1lsCAAAAAAAAAAA=
+
+--7oU2Ma36WUas7M--
+

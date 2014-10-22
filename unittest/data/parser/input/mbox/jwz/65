@@ -1,0 +1,244 @@
+Return-Path: <paf@nada.kth.se>
+Received: from thumper.bellcore.com by greenbush.bellcore.com (4.1/4.7)
+	id <AA10675> for nsb; Sun, 15 Nov 92 09:19:09 EST
+Received: from joker.nada.kth.se by thumper.bellcore.com (4.1/4.7)
+	id <AA06029> for nsb@greenbush; Sun, 15 Nov 92 09:19:05 EST
+Received: by joker.nada.kth.se (5.61-bind 1.4+ida/nada-mx-1.0)
+	id AA02359; Sun, 15 Nov 92 15:18:55 +0100
+Date: Sun, 15 Nov 1992 15:09:59 +0100 (MET)
+From: Patrik F¥dltstr¥vm <paf@nada.kth.se>
+Subject: MIME letter with ISO-8859-1
+To: Brad Huntting <huntting@advtech.uswest.com>
+Cc: info-metamail@thumper.bellcore.com, mh-mime@dbc.mtview.ca.us
+Message-Id: <Pine.3.80.9211151559.B2317-e100000@joker.nada.kth.se>
+Mime-Version: 1.0
+Content-Type: TEXT/PLAIN; charset=ISO-8859-1
+Content-Transfer-Encoding: QUOTED-PRINTABLE
+
+At last I think I have got pine working correctly again, so I'll
+make a new attemt to send the complete character set ISO-8859-1
+in a MIME letter in Quoted-Printable.
+
+I'm sorry for the delay...
+
+N.B. Because of a bug in Pine, which is in the part that parses headers,
+     the From: and Reply-To: header fields can contain strange combinations
+     of ¥ and | because I have some eight bit characters in my GECOS field
+     in /etc/passwd. Pine doesn't handle that. So please, check the To:
+     address if you reply to this mail.
+
+     With regards, Patrik F=E4ltstr=F6m
+                         ^
+                         |
+                         ----This is how my swedish name is spelled!
+                             Correct for the first time in Email history
+
+
+:=09=09=09=09(Latin-1-character set)
+:
+:This is the table for the 8bit character set ISO 8859-1,
+:also called "Latin Alphabet No 1".
+:
+:Hex Okt  Dec Tkn Namn
+:=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+:
+:=09C0-part (0x00 - 0x1F), is not in ISO 8859-1
+:
+0x20 0040  32 ' ' Space
+0x21 0041  33 '!' Exclamation mark
+0x22 0042  34 '"' Quotation mark
+0x23 0043  35 '#' Number sign
+0x24 0044  36 '$' Dollar sign
+0x25 0045  37 '%' Percent sign
+0x26 0046  38 '&' Ampersand
+0x27 0047  39 ''' Apostrophe
+0x28 0050  40 '(' Left parenthesis
+0x29 0051  41 ')' Right parenthesis
+0x2A 0052  42 '*' Asterisk
+0x2B 0053  43 '+' Plus sign
+0x2C 0054  44 ',' Comma
+0x2D 0055  45 '-' Hyphen-minus
+0x2E 0056  46 '.' Full stop
+0x2F 0057  47 '/' Solidus
+0x30 0060  48 '0' Digit zero
+0x31 0061  49 '1' Digit one
+0x32 0062  50 '2' Digit two
+0x33 0063  51 '3' Digit three
+0x34 0064  52 '4' Digit four
+0x35 0065  53 '5' Digit five
+0x36 0066  54 '6' Digit six
+0x37 0067  55 '7' Digit seven
+0x38 0070  56 '8' Digit eight
+0x39 0071  57 '9' Digit nine
+0x3A 0072  58 ':' Colon
+0x3B 0073  59 ';' Semicolon
+0x3C 0074  60 '<' Less-than sign
+0x3D 0075  61 '=3D' Equals sign
+0x3E 0076  62 '>' Greater-than sign
+0x3F 0077  63 '?' Question mark
+0x40 0100  64 '@' Commercial at
+0x41 0101  65 'A' Latin capital letter a
+0x42 0102  66 'B' Latin capital letter b
+0x43 0103  67 'C' Latin capital letter c
+0x44 0104  68 'D' Latin capital letter d
+0x45 0105  69 'E' Latin capital letter e
+0x46 0106  70 'F' Latin capital letter f
+0x47 0107  71 'G' Latin capital letter g
+0x48 0110  72 'H' Latin capital letter h
+0x49 0111  73 'I' Latin capital letter i
+0x4A 0112  74 'J' Latin capital letter j
+0x4B 0113  75 'K' Latin capital letter k
+0x4C 0114  76 'L' Latin capital letter l
+0x4D 0115  77 'M' Latin capital letter m
+0x4E 0116  78 'N' Latin capital letter n
+0x4F 0117  79 'O' Latin capital letter o
+0x50 0120  80 'P' Latin capital letter p
+0x51 0121  81 'Q' Latin capital letter q
+0x52 0122  82 'R' Latin capital letter r
+0x53 0123  83 'S' Latin capital letter s
+0x54 0124  84 'T' Latin capital letter t
+0x55 0125  85 'U' Latin capital letter u
+0x56 0126  86 'V' Latin capital letter v
+0x57 0127  87 'W' Latin capital letter w
+0x58 0130  88 'X' Latin capital letter x
+0x59 0131  89 'Y' Latin capital letter y
+0x5A 0132  90 'Z' Latin capital letter z
+0x5B 0133  91 '[' Left square bracket
+0x5C 0134  92 '¥' Reverse solidus
+0x5D 0135  93 ']' Right square bracket
+0x5E 0136  94 '^' Circumflex accent
+0x5F 0137  95 '_' Low line
+0x60 0140  96 '`' Grave accent
+0x61 0141  97 'a' Latin small letter a
+0x62 0142  98 'b' Latin small letter b
+0x63 0143  99 'c' Latin small letter c
+0x64 0144 100 'd' Latin small letter d
+0x65 0145 101 'e' Latin small letter e
+0x66 0146 102 'f' Latin small letter f
+0x67 0147 103 'g' Latin small letter g
+0x68 0150 104 'h' Latin small letter h
+0x69 0151 105 'i' Latin small letter i
+0x6A 0152 106 'j' Latin small letter j
+0x6B 0153 107 'k' Latin small letter k
+0x6C 0154 108 'l' Latin small letter l
+0x6D 0155 109 'm' Latin small letter m
+0x6E 0156 110 'n' Latin small letter n
+0x6F 0157 111 'o' Latin small letter o
+0x70 0160 112 'p' Latin small letter p
+0x71 0161 113 'q' Latin small letter q
+0x72 0162 114 'r' Latin small letter r
+0x73 0163 115 's' Latin small letter s
+0x74 0164 116 't' Latin small letter t
+0x75 0165 117 'u' Latin small letter u
+0x76 0166 118 'v' Latin small letter v
+0x77 0167 119 'w' Latin small letter w
+0x78 0170 120 'x' Latin small letter x
+0x79 0171 121 'y' Latin small letter y
+0x7A 0172 122 'z' Latin small letter z
+0x7B 0173 123 '{' Left curly bracket
+0x7C 0174 124 '|' Vertical line
+0x7D 0175 125 '}' Right curly bracket
+0x7E 0176 126 '‾' Tilde
+0x7F 0177 127 '=7F' Delete
+:
+:=09C1-part (0x80 - 0x9F), is not in ISO 8859-1
+:
+0xA0 0240 160 '=A0' No-break space
+0xA1 0241 161 '=A1' Inverted exclamation mark
+0xA2 0242 162 '=A2' Cent sign
+0xA3 0243 163 '=A3' Pound sign
+0xA4 0244 164 '=A4' Currency sign
+0xA5 0245 165 '=A5' Yen sign
+0xA6 0246 166 '=A6' Broken bar
+0xA7 0247 167 '=A7' Section sign
+0xA8 0250 168 '=A8' Diaeresis
+0xA9 0251 169 '=A9' Copyright sign
+0xAA 0252 170 '=AA' Feminine ordinal indicator
+0xAB 0253 171 '=AB' Left-pointing double angle quotation mark
+0xAC 0254 172 '=AC' Not sign
+0xAD 0255 173 '=AD' Soft hyphen
+0xAE 0256 174 '=AE' Registered sign
+0xAF 0257 175 '=AF' Macron
+0xB0 0260 176 '=B0' Degree sign
+0xB1 0261 177 '=B1' Plus-minus sign
+0xB2 0262 178 '=B2' Superscript two
+0xB3 0263 179 '=B3' Superscript three
+0xB4 0264 180 '=B4' Acute accent
+0xB5 0265 181 '=B5' Micro sign
+0xB6 0266 182 '=B6' Pilcrow sign
+0xB7 0267 183 '=B7' Middle dot
+0xB8 0270 184 '=B8' Cedilla
+0xB9 0271 185 '=B9' Superscript one
+0xBA 0272 186 '=BA' Masculine ordinal indicator
+0xBB 0273 187 '=BB' Right-pointing double angle quotation mark
+0xBC 0274 188 '=BC' Vulgar fraction one quarter
+0xBD 0275 189 '=BD' Vulgar fraction one half
+0xBE 0276 190 '=BE' Vulgar fraction three quarters
+0xBF 0277 191 '=BF' Inverted question mark
+0xC0 0300 192 '=C0' Latin capital letter a with grave
+0xC1 0301 193 '=C1' Latin capital letter a with acute
+0xC2 0302 194 '=C2' Latin capital letter a with circumflex
+0xC3 0303 195 '=C3' Latin capital letter a with tilde
+0xC4 0304 196 '=C4' Latin capital letter a with diaeresis
+0xC5 0305 197 '=C5' Latin capital letter a with ring above
+0xC6 0306 198 '=C6' Latin capital letter ae
+0xC7 0307 199 '=C7' Latin capital letter c with cedilla
+0xC8 0310 200 '=C8' Latin capital letter e with grave
+0xC9 0311 201 '=C9' Latin capital letter e with acute
+0xCA 0312 202 '=CA' Latin capital letter e with circumflex
+0xCB 0313 203 '=CB' Latin capital letter e with diaeresis
+0xCC 0314 204 '=CC' Latin capital letter i with grave
+0xCD 0315 205 '=CD' Latin capital letter i with acute
+0xCE 0316 206 '=CE' Latin capital letter i with circumflex
+0xCF 0317 207 '=CF' Latin capital letter i with diaeresis
+0xD0 0320 208 '=D0' Latin capital letter eth (Icelandic)
+0xD1 0321 209 '=D1' Latin capital letter n with tilde
+0xD2 0322 210 '=D2' Latin capital letter o with grave
+0xD3 0323 211 '=D3' Latin capital letter o with acute
+0xD4 0324 212 '=D4' Latin capital letter o with circumflex
+0xD5 0325 213 '=D5' Latin capital letter o with tilde
+0xD6 0326 214 '=D6' Latin capital letter o with diaeresis
+0xD7 0327 215 '=D7' Multiplication sign
+0xD8 0330 216 '=D8' Latin capital letter o with stroke
+0xD9 0331 217 '=D9' Latin capital letter u with grave
+0xDA 0332 218 '=DA' Latin capital letter u with acute
+0xDB 0333 219 '=DB' Latin capital letter u with circumflex
+0xDC 0334 220 '=DC' Latin capital letter u with diaeresis
+0xDD 0335 221 '=DD' Latin capital letter y with acute
+0xDE 0336 222 '=DE' Latin capital letter thorn (Icelandic)
+0xDF 0337 223 '=DF' Latin small letter sharp s (German)
+0xE0 0340 224 '=E0' Latin small letter a with grave
+0xE1 0341 225 '=E1' Latin small letter a with acute
+0xE2 0342 226 '=E2' Latin small letter a with circumflex
+0xE3 0343 227 '=E3' Latin small letter a with tilde
+0xE4 0344 228 '=E4' Latin small letter a with diaeresis
+0xE5 0345 229 '=E5' Latin small letter a with ring above
+0xE6 0346 230 '=E6' Latin small letter ae
+0xE7 0347 231 '=E7' Latin small letter c with cedilla
+0xE8 0350 232 '=E8' Latin small letter e with grave
+0xE9 0351 233 '=E9' Latin small letter e with acute
+0xEA 0352 234 '=EA' Latin small letter e with circumflex
+0xEB 0353 235 '=EB' Latin small letter e with diaeresis
+0xEC 0354 236 '=EC' Latin small letter i with grave
+0xED 0355 237 '=ED' Latin small letter i with acute
+0xEE 0356 238 '=EE' Latin small letter i with circumflex
+0xEF 0357 239 '=EF' Latin small letter i with diaeresis
+0xF0 0360 240 '=F0' Latin small letter eth (Icelandic)
+0xF1 0361 241 '=F1' Latin small letter n with tilde
+0xF2 0362 242 '=F2' Latin small letter o with grave
+0xF3 0363 243 '=F3' Latin small letter o with acute
+0xF4 0364 244 '=F4' Latin small letter o with circumflex
+0xF5 0365 245 '=F5' Latin small letter o with tilde
+0xF6 0366 246 '=F6' Latin small letter o with diaeresis
+0xF7 0367 247 '=F7' Division sign
+0xF8 0370 248 '=F8' Latin small letter o with stroke
+0xF9 0371 249 '=F9' Latin small letter u with grave
+0xFA 0372 250 '=FA' Latin small letter u with acute
+0xFB 0373 251 '=FB' Latin small letter u with circumflex
+0xFC 0374 252 '=FC' Latin small letter u with diaeresis
+0xFD 0375 253 '=FD' Latin small letter y with acute
+0xFE 0376 254 '=FE' Latin small letter thorn (Icelandic)
+0xFF 0377 255 '=FF' Latin small letter y with diaeresis
+
+
+

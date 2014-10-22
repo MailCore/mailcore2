@@ -1,0 +1,124 @@
+Return-Path: owner-mhtml@SEGATE.SUNET.SE
+Received: from maleman.mcom.com (maleman.mcom.com [198.93.92.3]) by urchin.mcom.com (8.7.5/8.7.3) with SMTP id JAA29055 for <jwz@urchin.mcom.com>; Fri, 27 Sep 1996 09:44:42 -0700 (PDT)
+Received: from ns.netscape.com (ns.netscape.com.mcom.com [198.95.251.10]) by maleman.mcom.com (8.6.9/8.6.9) with ESMTP id JAA01328; Fri, 27 Sep 1996 09:43:26 -0700
+Received: from SEGATE.SUNET.SE (segate.sunet.se [192.36.125.6]) by ns.netscape.com (8.7.3/8.7.3) with ESMTP id JAA28293; Fri, 27 Sep 1996 09:42:21 -0700 (PDT)
+Received: from segate.sunet.se by SEGATE.SUNET.SE (LSMTP for OpenVMS v1.1a) with SMTP id <15.651C283F@SEGATE.SUNET.SE>; Fri, 27 Sep 1996 18:44:36 +0100
+Received: from SEGATE.SUNET.SE by SEGATE.SUNET.SE (LISTSERV release 1.8c) with
+          NJE id 12302 for MHTML@SEGATE.SUNET.SE; Fri, 27 Sep 1996 18:44:32
+          +0200
+Received: from nugget.scr.atm.com (206.100.186.2) by SEGATE.SUNET.SE (LSMTP for
+          OpenVMS v1.1a) with SMTP id <10.616A9AEA@SEGATE.SUNET.SE>; Fri, 27
+          Sep 1996 18:44:30 +0100
+Received: from mailman.scr.atm.com (mailman.scr.atm.com [206.100.186.54]) by
+          nugget.scr.atm.com (8.6.12/8.6.9) with ESMTP id JAA21526; Fri, 27 Sep
+          1996 09:50:59 -0700
+From: izzy@nugget.scr.atm.com (Dr. Mark K. Joseph)
+To: lewisg@Exchange.Microsoft.com
+Cc: mhtml@SEGATE.SUNET.SE
+Date: Fri, 27 Sep 1996 09:36:54 -0700
+MIME-Version: 1.0
+Message-ID: <19960927163654.izzy@scr.atm.com>
+In-Reply-To: <MHTML%96092703403599@SEGATE.SUNET.SE>
+Subject: RE: problem with relative urls and applets
+X-Mailer: Emissary V2.03, by Attachmate Corp.
+Content-Type: multipart/mixed;
+              boundary="=_27tW56g.bO1996u.N16d000A.r09Y.36:0008d3"
+Content-Transfer-Encoding: 7bit
+Sender: owner-mhtml@SEGATE.SUNET.SE
+X-UIDL: 9f218600f41793d7a03f4710763907fb
+X-Mozilla-Status: 0011
+Content-Length: 4879
+
+--=_27tW56g.bO1996u.N16d000A.r09Y.36:0008d3
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+
+On Thu, 26 Sep 1996 18:30:27 -0700
+"Lewis Geer (Exchange)" <lewisg@Exchange.Microsoft.com> wrote:
+
+>Section 7:
+>New Text:
+>When the sending MUA sends objects that reference each other within an
+>email message, the sending MUA SHOULD attempt to use the Content-ID
+>method (as defined in section 8.3).  This will avoid problems the
+>receiving MUA will have in parsing non-typed fields (such as PARAM
+>fields in OBJECT tags) that are contained in the html.  In the case
+>where the email message contains MICs, it may be necessary for the
+>sending MUA to use the Content-Location method (as defined in section
+>8.2) in order for the receiving MUA to be able to verify the MICS, as
+>well as to verify the message against its WWW counterpoint.
+>
+
+I for one agree with this change.  MICs aside the "cid:" approach
+is much easier to implement (speaking from experience).
+
+--=_27tW56g.bO1996u.N16d000A.r09Y.36:0008d3
+Content-Type: application/vcard
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline; filename="MJOSEPH.VCF"
+Content-Description: The Sender's Signature
+
+BEGIN:VCARD
+NOTE: vCard Format: Version 2.0(Spec-4/29/96)
+REV:1996-09-17T21:00:23Z
+N:Joseph;Mark
+EmissaryA.FN:Mark K. Joseph, Ph.D.
+MAILER:Emissary 2.01
+EMAIL;work;pref;internet:izzy@scr.atm.com
+TEL;WORK;PREF;MSG:(408) 471 - 3016
+TEL;WORK;FAX:(408) 471 - 3010
+TEL;HOME;FAX;MSG:(408) 475 - 8805
+TZ:-0800
+ORG:Attachmate Corporation;Internet Products Group
+TITLE:Software Architect
+LOGO;BASE64;gif:
+R0lGODlhuQAwAPcAAP///+/v7+fn597e3tbW1s7OzsbGxr29va2traWlpZycnJSUlIyMjISEhHt7
+e3Nzc2tra2NjY1paWlJSUkpKSkJCQjk5OTExMSkpKSEhIRgYGBAQEAgICOfe1oR7c2NaUjEpIe/n
+3s7Gva2lnIyEe0pCOaWcjJyUhL2tjFpSQox7WntrShgQANbGnM69lMa1jO/WlJSEWta9e8ata3tr
+Qq2UUqWMSpR7OYRrKTkpAKWchIR7Y+/erefWpa2ca6WUY4x7SpyEQsalSr2cQmNSIbWUOYxzKaWE
+KYRrIZx7Ie+9KUo5CGtSCMaUAKV7AFpCAP/33u/nzt7WvdbOtb21nK2ljJSMc4yEa//vvXtzWnNr
+UmtjSufWnL2te//nnFJKMe/WhEpCKaWUWufOe861Y8atWoRzOXNjMe/OY9a1SqWMOffOUjEpEMal
+Oe/GQpR7KVpKGL2cMd61Oee9MffGMdatKa2MIc6lIe+9Ib2UGMacGO+9GMacENalEJRzCLWMCK2E
+CN6tCNalAIxrAGtSAEo5AMa9nLWla9a9Y72lUvfWY3trMbWcQnNjKefGUu/OUt69SufGSpyEMda1
+Qt69QqWMMc6tOffOQta1OZyEKcalMe/GOc6tMb2cKd61KVpKEL2cIe/GKYxzGNatIbWUGN61GFJC
+CK2MENatEO+9EL2UCM6lCO+9COe1CO+9AOe1AN6tAL2UALWMAJx7AJRzAHNaAN7Wtb21lK2lhP/v
+rYR7UufWjM69c8a1a/fee2NaMe/Wc5yMSvfec6WUSufOY9a9Uox7McatQu/OSoRzKa2UKe/GIYxz
+EOe9GN61EIRrCN61CNatAM6lAIRrAHtjACkhAP/3zu/nvdbOpbWthN7OhNbGe7WlWs69Y1JKIXNj
+GL21hKWca/fnjN7Oc0I5CMbGvf//797ezsbGtbW1pefnzpSUhEpKQtbWvcbGrb29pYSEc2trWpSU
+e1paSnt7Y1JSQmNjSkJCMVpaQiEhGEJCKTk5IRgYCBAQAAgIAAAAACwAAAAAuQAwAAAI/wABCBxI
+sKDBgwgTKlzIsKHDhxAjSpxIsaLFixgzatzIsaPHjyBDihxJsqTJkyhTqlzJsqXLlzBjypxJs6bN
+hxH+6dyZ4WbBnTt93gQK1CDRfz+Jljx604JSmAGO6kSQtChBpiSx1qzw9OUEqf82VA16tatIrTS5
+Wn0JVudYt2XXnjU706nckwcIRm1LFcCBA0cN/BV89C8BvQ3U6qygICECu/8qpHuLFEDOfxkaDxz8
+N4DABzovFCA4QO2FvgULRMgAdIKBzQcuEB1ccMDXxYc35h0ou21l38ArCATse0JBB20jDDxaQKpn
+AEQNIDgqFsAGqQRB+24MfOAAvh+B//8WD1b4dPEPBl73XZ08XKLIpVZYT12gYt/ffQtUAPxCx/w7
+OcAAUdy5d5RwBgp0W3DQuVeggWAJBKF+zaHHUW9kaYVWg3Jp+NRRFzRAX1AGijUhWArwB5R/AAiA
+1X2VSUjUAAKNGGNGWHl4F1oO9NjjbhwGddlOxskIVDog1shUfUHu5N9eQElwQANUUhkXWZDBBUCF
+OwHZZJEYcamTBvYRxYCRZC1HV0EHQIAdWgpUIKecKnaolFbErRXfTsIZlM6CVsE4EIyc5ZnmRawB
+1RcBOdK1YQE2vrkmZVe6hRaeRPVZp34AZBnjhBpd+qGjZkUa4YZGmbWkql0ZQJQFTXL/Kiia5GV0
+nnvpbagVjDxhaOmkld64qp1rGRpZW77C5amaCWJkqn66dpUkrUjBmamoRWGbprGe/uMAs2TBOBoA
+yWYF6lEZ/EXtAwaIqWWslhHVE7WbvjvsoVq52h24yhK1wV+3hkbQnHNiFDCubVG7WGACJTvetffa
+eyerxYr3HHYA8PorUBkI4O4/CWSskwMVfAeRjf8eIJjKkWr8MMTufUZerhSTWLOWxrocIQB7KmVs
+wvbxnIEGNzJ0lGYE1fuPixhrXMGAYNlIo8i+sajtxvi2mqnDQMcKl9JoCeeAbUUrpDRCR0XQc5qJ
+AiWcdvA1Wd2WbQF5dbU3x5gzuVIV/1CvcgAcrGUAzwI+UHqa9SkUAhBU4MC4DSFAsgOoxcQABRM0
+8NxFB0x+plCghy766KSXbvrpqKeuukQBSOBjj40V4MDcEfno5egkz7u6QhfQ+E96iv+DAUVRTb2Q
+t0tBftAGfSpu0QFgzkRVcwJ9Dt1otwMwQPYE5aTXc7cXTSP3r5E2nEEFeEk9Qs0hDQGbBuVGAPg/
+Za48QR4TtJsBm/slkPEYkU1BpmMdAQokKgGYXULCMpCcRCAC0wFSTspXgAxUQDa7Kd76AKAA1igA
+OQ3wDlIu+L8NZKB8RtFdQTawgIyh5joGuMBXBgAaxQFGQoYDQAa+9Q/rCTAD3gNAAP9A4xnk4ch5
+1smAfxrwqcYQbYFIi8oCAmCy5RgOORMIwG7Wx5WBNIdy0NncP3ynu39ULjtlq1F1XCWQkP3DOBi4
+gHL+AbkBCcSCy2lMVAYygQT8gwPQ6VNPQJaxjfwjN2pSUvX+cQANIDFpN4rKty5Au3/0DzNX0eM/
+kAYd/4CGj/9IxwYMt0GDdPEgS1NQjAYkgAZxUFjpgc77RCajskjokiGknUWC6EVLSihxaUwKQb4i
+Ib/tBylTKyUB4yXEY0roAZp5V8N8eRDkDGw5ywleT77juwlArjJVhE5jZLMApG0SAHa8SgNiiSNd
+ZmADAyCAA1j0SioOD23shM6ZviOqgefIZm6UJAhyCnAB0ABSQn3a5Li8dwDD/Y6eRukTQbFpmUre
+8TfpCNkrf7kcB5Bpk8/hD0Ih2sP7VYQCPYpeAwaggAvcTkRnHIgAIrBO1ISwRRnYnANyuNKffKsB
+KlUPAFfjJQ18SyGXyeLAXEqaozagldaBaiCZ1z853XFzC+jLDn9y09159Xj9s8gAIPrVshYkJ2GV
+yHcCQFazupUjBwDgW+dK17qWNSAAOw==
+
+URL:http://www.atm.com
+LABEL;WORK;PARCEL;POSTAL;DOM;QUOTED-PRINTABLE:140 Du Bois Street, Suite C=0A=
+Santa Cruz, CA 95060
+EMAIL;home;internet:markjoseph@dhnet.com
+EmissaryA.URL:http://www.dhnet.com
+END:VCARD
+
+--=_27tW56g.bO1996u.N16d000A.r09Y.36:0008d3--
+

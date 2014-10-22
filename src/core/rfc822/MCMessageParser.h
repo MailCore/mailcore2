@@ -37,6 +37,8 @@ namespace mailcore {
         virtual AbstractPart * partForContentID(String * contentID);
         virtual AbstractPart * partForUniqueID(String * uniqueID);
         
+        virtual HashMap * serializable();
+        
     private:
         Data * mData;
         AbstractPart * mMainPart;

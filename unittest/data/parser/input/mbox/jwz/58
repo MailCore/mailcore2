@@ -1,0 +1,65 @@
+Path: tera.mcom.com!news.Stanford.EDU!bloom-beacon.mit.edu!news.mathworks.com!nntp.primenet.com!uunet!inXS.uu.net!voskovec.radio.cz!visla.utia.cas.cz!vs
+From: =?ISO-8859-2?Q?Vladim=EDr_Solnick=FD?= <vs@utia.cas.cz>
+Newsgroups: comp.mail.mime
+Subject: Re: Sending a Hebrew message with sendmail
+Date: Sat, 13 Jul 1996 16:58:55 +0200
+Organization: Institute of Information Theory and Automation (UTIA AV CR)
+Lines: 35
+Message-ID: <Pine.HPP.3.94.1.960713165148.28138A-100000@visla.utia.cas.cz>
+References: <4s36v9$gi0@news.NetVision.net.il>
+Reply-To: =?ISO-8859-2?Q?Bc=2E_Vladim=EDr_Solnick=FD?= <vs@utia.cas.cz>
+NNTP-Posting-Host: visla.utia.cas.cz
+Mime-Version: 1.0
+Content-Type: TEXT/PLAIN; charset=ISO-8859-2
+Content-Transfer-Encoding: 8BIT
+To: Shlomi Fish <shlomi@Medusa.Cortext.co.il>
+In-Reply-To: <4s36v9$gi0@news.NetVision.net.il>
+X-Postal-Address: =?ISO-8859-2?Q?=DATIA_AV_=C8R=3B_Pod_vod=E1renskou_v=EC=BE=ED?=
+ =?ISO-8859-2?Q?_4=3B_182_08__Praha_8-Libe=F2=3B_Czech_Rep?=
+ =?ISO-8859-2?Q?ublic?=
+Organizace: =?ISO-8859-2?Q?=DAstav_teorie_informace_a_automatizace_AV_=C8?=
+ =?ISO-8859-2?Q?R_=28=DATIA=29?=
+Return-Receipt-To: vs+delivery@utia.cas.cz
+Transport-Options: /delivery /return
+Acknowledge-To: vs+delivery@utia.cas.cz
+X-Confirm-Delivery-To: vs+delivery@utia.cas.cz
+Read-Receipt-To: vs+reading@utia.cas.cz
+X-Chameleon-Return-To: vs+reading@utia.cas.cz
+X-Confirm-Reading-To: vs+reading@utia.cas.cz
+Disposition-Notification-To: vs+disposition@utia.cas.cz
+
+On 11 Jul 1996, Shlomi Fish wrote:
+
+> I'm trying to write a CGI script (or any other program for that matter) that
+> sends a Hebrew message by calling sendmail. Sendmail refuses to send it once
+> I finished piping it to it. Here's the header of the message (think that I
+> write it on the keyboard after running sendmail):
+> 
+> From: nobody@medusa.cortext.co.il
+> To: shlomi@medusa
+> Subject: My Subject
+> MIME-Version: 1.0
+> Content-Type: text/plain; charset=ISO-8859-8
+> Content-Transfer-Encoding: Base64
+> 
+> < The message's body encoded in Base64 >
+
+Message seems to look good. What parameters do you use on sendmail's
+command line? -t for taking the addresses of recepients from the headers
+of the message? And what is the error message? Also, have you tried -v
+flag to turn sendmail into verbose mode to tell you more (and running it
+interactively)?
+
+I hope some of these suggestions may help.
+
+V. S.
+
+P. S.  If you have an 8BITMIME sendmail (Berkeley 8.7.*), you may try it
+in that mode and use Content-Transfer-Encoding: 8bit and put Hebrew in
+8-bit. Sendmail itself encode the data if the recepient is not able to
+protect them from corruption.
+
+Vladimír Solnický, ÚTIA AV ÈR, Pod vodárenskou vì¾í 4,
+182 08 Praha 8-Libeò, +42 2 6605/2364, telefax: +42 2 6884677,
+vs@utia.cas.cz, http://www.utia.cas.cz/user_data/vs/vs-home-cz.html
+

@@ -1,0 +1,64 @@
+Path: flop.mcom.com!news.Stanford.EDU!bloom-beacon.mit.edu!gatech!swrinde!pipex!sunic!sunic.sunet.se!news.uni-c.dk!news.daimi.aau.dk!imv.aau.dk!ratatosk.imv.aau.dk!user
+From: lassehp@imv.aau.dk (Lasse =?ISO-8859-1?Q?Hiller=F8e?= Petersen)
+Newsgroups: comp.mail.mime,comp.mail.sendmail,comp.unix.aux
+Subject: SOLVED: MIME linewrap => A/UX Sendmail 8.6.9 discarding after CRLF.CRLF
+Date: Sun, 07 May 1995 15:21:33 +0200
+Organization: Information & Media Science
+Lines: 49
+Message-ID: <lassehp-0705951521330001@ratatosk.imv.aau.dk>
+References: <lassehp-0405951834530001@ratatosk.imv.aau.dk>
+NNTP-Posting-Host: ratatosk.imv.aau.dk
+Mime-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
+Xref: flop.mcom.com comp.mail.mime:5999 comp.mail.sendmail:20460 comp.unix.aux:21837
+
+In mail, "Kari E. Hurtta" <Kari.Hurtta@fmi.fi> wrote:
+>lassehp@imv.aau.dk (Lasse Hillerøe Petersen) writes in 
+>comp.mail.{mime.sendmail}:
+>
+>[ Hmm. Why kermit refuses to show 'ø' -- instead it shows 'o' :-) ]
+
+Oh! (or Øh!) :-)
+
+>Are you sure that problem _isn't_ local -mailer (ie.
+>the mailer that is called in sendmail.cf's Mlocal -line -- It is usually
+>/bin/mail) ?
+
+No. I wasn't even aware that sendmail did not take care of the actual delivery!
+
+I am no Unix wizard, and just took over the responsibility for this system
+from a guy who wasn't exactly a wizard either. Apparently I have been
+completely off track; however it is amazing that you are the first to
+point that out. Others have lead me into the wilderness, saying for
+example that it is a problem with my SMTP client.
+
+When I asked about this in comp.unix.aux last year (we were using 5.65
+back then), Jim Jagielski told me:
+>Well, it's not "well known" but it _is_ a bug in sendmail 5.64 and 5.65...
+>
+>smail and sendmail 8.?.? don't suffer from this..
+
+We have been running A/UX sendmail almost straight out of the box here. So
+when Apple released 8.6.9, we thought everything would be fine. Apparently
+Apple delivers something that is not exactly in a working condition, now
+why didn't we expect that?
+
+>Please check it first. 
+>
+>It is probable that usage of /bin/mail don't match mailer flags what is
+>tell to sendmail in Mlocal -line.
+
+That will be it!
+
+I cannot thank you enough for being so crystal clear about this!
+
+This followup is cross-posted to comp.unix.aux, as there are probably more
+A/UX systems running straight out of the box with this problem waiting to
+strike without warning.
+
+--
+Lasse Hillerøe Petersen     ! "If others had not been foolish,
+Systems Administrator       !  we would be so!"
+Information & Media Science !                -William Blake
+Aarhus University, DENMARK  !

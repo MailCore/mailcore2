@@ -1,0 +1,23 @@
+From: fejj@gnome.org
+To: fejj@gnome.org
+Date: Fri, 23 Aug 2002 2:32:53 -0400
+Subject: this'll probably break a lot of mime parsers
+X-Test-Header:
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="x"
+
+--x
+Content-Type: multipart/mixed; boundary="xy"
+
+--xy
+Content-Type: multipart/mixed; boundary="xyz"
+
+--xyz
+Content-Type: text/plain
+
+Hello world.
+
+multipart/mixed; boundary="x"
+  multipart/mixed; boundary="xy"
+     multipart/mixed; boundary="xyz"
+        text/plain                         <-- You are here.
