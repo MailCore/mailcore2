@@ -56,12 +56,12 @@ void NNTPFetchOverviewOperation::main()
     mArticles = Array::array();
     for(unsigned int i = 0 ; i < mIndexes->rangesCount() ; i ++) {
         Range range = mIndexes->allRanges()[i];
+        Array * articles = session()->session()->fetchOverArticlesInRange(range, mGroupName, &error);
         if (error != ErrorNone) {
             setError(error);
-            mArticles->removeAllObjects();
             return;
         }
-        mArticles->addObjectsFromArray(session()->session()->fetchOverArticlesInRange(range, mGroupName, &error));
+        mArticles->addObjectsFromArray(articles);
     }
     
     setError(error);

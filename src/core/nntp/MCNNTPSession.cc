@@ -403,10 +403,6 @@ MessageHeader * NNTPSession::fetchHeader(String *groupName, unsigned int index, 
     size_t content_len;
     
     MCLog("fetch header at index %u", index);
-    loginIfNeeded(pError);
-    if (* pError != ErrorNone) {
-        return NULL;
-    }
     
     selectGroup(groupName, pError);
     if (* pError != ErrorNone) {
@@ -440,11 +436,6 @@ Data * NNTPSession::fetchArticle(String *groupName, unsigned int index, NNTPProg
     
     MCLog("fetch article at index %u", index);
     
-    loginIfNeeded(pError);
-    if (* pError != ErrorNone) {
-        return NULL;
-    }
-    
     selectGroup(groupName, pError);
     if (* pError != ErrorNone) {
         return NULL;
@@ -477,11 +468,6 @@ Data * NNTPSession::fetchArticleByMessageID(String * groupName, String * message
     
     MCLog("fetch article at message-id %s", messageID->UTF8Characters());
     
-    loginIfNeeded(pError);
-    if (* pError != ErrorNone) {
-        return NULL;
-    }
-    
     selectGroup(groupName, pError);
     if (* pError != ErrorNone) {
         return NULL;
@@ -507,7 +493,7 @@ Data * NNTPSession::fetchArticleByMessageID(String * groupName, String * message
     return result;
 }
 
-time_t NNTPSession::fetchServerClockTime(ErrorCode * pError) {
+time_t NNTPSession::fetchServerDate(ErrorCode * pError) {
     int r;
     struct tm time;
     time_t result;
@@ -524,7 +510,7 @@ time_t NNTPSession::fetchServerClockTime(ErrorCode * pError) {
         return NULL;
     }
     else if (r != NEWSNNTP_NO_ERROR) {
-        * pError = ErrorBadResponse;
+        * pError = ErrorServerDate;
         return NULL;
     }
     
@@ -623,6 +609,11 @@ void NNTPSession::selectGroup(String * folder, ErrorCode * pError)
 {
     int r;
     struct newsnntp_group_info * info;
+    
+    loginIfNeeded(pError);
+    if (* pError != ErrorNone) {
+        return;
+    }
     
     readerIfNeeded(pError);
     if (* pError != ErrorNone) {
