@@ -178,18 +178,18 @@
         mailcore::MessageParser * mcParser = MCO_FROM_OBJC(mailcore::MessageParser, parser);
         NSDictionary * result = MCO_TO_OBJC(mcParser->serializable());
         
+//        mailcore::String * jsonString = mailcore::JSON::objectToJSONString(mcParser->serializable());
+//        NSString * str = MCO_TO_OBJC(jsonString);
+//        NSString * resultPath = [@"/Users/hoa/mc2-results" stringByAppendingPathComponent:name];
+//        NSString * directory = [resultPath stringByDeletingLastPathComponent];
+//        [[NSFileManager defaultManager] createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:NULL];
+//        [str writeToFile:resultPath atomically:YES encoding:NSUTF8StringEncoding error:NULL];
+        
         path = [_parserOutputPath stringByAppendingPathComponent:name];
         NSData * expectedData = [NSData dataWithContentsOfFile:path];
         NSDictionary * expectedResult = [NSJSONSerialization JSONObjectWithData:expectedData options:0 error:NULL];
         
         XCTAssertEqualObjects(result, expectedResult, @"file %@", name);
-        
-        //mailcore::String * jsonString = mailcore::JSON::objectToJSONString(mcParser->serializable());
-        //NSString * str = MCO_TO_OBJC(jsonString);
-        //NSString * resultPath = [@"/Users/hoa/mc2-results" stringByAppendingPathComponent:name];
-        //NSString * directory = [resultPath stringByDeletingLastPathComponent];
-        //[[NSFileManager defaultManager] createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:NULL];
-        //[str writeToFile:resultPath atomically:YES encoding:NSUTF8StringEncoding error:NULL];
     }
 }
 
