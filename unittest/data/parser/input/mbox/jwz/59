@@ -1,0 +1,519 @@
+Return-Path: montulli@mozilla.com
+Received: from strumpet.mcom.com (strumpet.mcom.com [205.217.236.99]) by urchin.netscape.com (8.6.12/8.6.9) with ESMTP id LAA15536 for <jwz@urchin.mcom.com>; Tue, 14 May 1996 11:00:09 -0700
+Received: from strumpet (strumpet.mcom.com [205.217.236.99]) by strumpet.mcom.com (8.6.10/8.6.9) with SMTP id KAA17557 for <jwz>; Tue, 14 May 1996 10:59:05 -0700
+Sender: montulli@strumpet.mcom.com
+Message-ID: <3198C9E7.3F54@mozilla.com>
+Date: Tue, 14 May 1996 10:59:03 -0700
+From: Lou Montulli <montulli@mozilla.com>
+Organization: Mozilla World Headquarters
+X-Mailer: Mozilla 3.0b4 (X11; U; IRIX 5.3 IP22)
+MIME-Version: 1.0
+To: jwz@strumpet.mcom.com
+Subject: [Fwd: Netsurfer Digest: Vol. 02, #14 (HTML)]
+Content-Type: multipart/mixed; boundary="------------FF6ABD31DF"
+
+This is a multi-part message in MIME format.
+
+--------------FF6ABD31DF
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+Do you have any idea why relative links in mail documents
+are not working?  Notice that they all resolve to:
+file:#target instead of mailbox:message#target.
+
+I can look into it but I thought you might know why
+offhand.
+
+I'm seeing the problem in akbar.
+
+:lou
+-- 
+Lou Montulli                 http://www.netscape.com/people/montulli/
+       Netscape Communications Corp.
+
+--------------FF6ABD31DF
+Content-Type: message/rfc822
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+Received: from maleman.mcom.com (maleman.mcom.com [198.93.92.3]) by strumpet.mcom.com (8.6.10/8.6.9) with ESMTP id JAA13279 for <montulli@strumpet.mcom.com>; Tue, 14 May 1996 09:20:18 -0700
+From: editor-bounce@netsurf.com
+Received: from ns.netscape.com (ns.netscape.com.mcom.com [198.95.251.10]) by maleman.mcom.com (8.6.9/8.6.9) with ESMTP id JAA15549 for <montulli@strumpet.mcom.com>; Tue, 14 May 1996 09:20:15 -0700
+Received: from zocalo.net ([157.22.1.7]) by ns.netscape.com (8.7.3/8.7.3) with ESMTP id JAA16386 for <montulli@strumpet.mcom.com>; Tue, 14 May 1996 09:19:19 -0700 (PDT)
+Received: (from shrike@localhost) by zocalo.net (8.7.3/8.7.3) id JAA02498 for montulli@strumpet.mcom.com; Tue, 14 May 1996 09:20:12 -0700 (PDT)
+Date: Tue, 14 May 1996 09:20:12 -0700 (PDT)
+Message-Id: <199605141620.JAA02498@zocalo.net>
+X-Authentication-Warning: zocalo.net: shrike set sender to editor-bounce@netsurf.com using -f
+Subject: Netsurfer Digest: Vol. 02, #14 (HTML)
+Mime-Version: 1.0
+Content-Type: text/html
+Precedence: bulk
+Apparently-To: <montulli@strumpet.mcom.com>
+
+<HTML>
+<HEAD>
+<TITLE> Netsurfer Digest 02.14 </TITLE>
+<LINK REV="made" HREF="mailto:editor@netsurf.com">
+</HEAD>        
+<BODY>        
+<P>        
+<H1>NETSURFER DIGEST</H1>      
+Thursday, May 09, 1996 - Volume 02, Issue 14
+<HR>        
+<I>"More Signal, Less Noise"</I>        
+<P>  
+<H3>OUR SPONSORS: <A HREF="http://www.netsurf.com/nsm/latest.mktplace.html">
+Netsurfer Marketplace</A></H3>
+<P>
+
+<H3><A HREF="#SS">SURFING SITES</A></H3>
+<DL>
+ <DT>   <A HREF="#SS1">Netscape Navigator 3.0 Beta Available</A>
+ <DT>   <A HREF="#SS2">Mommy Dearest</A>
+ <DT>   <A HREF="#SS3">You Are Here... and Wanna Get There</A>
+ <DT>   <A HREF="#SS4">Pop Alt.Culture on the Web</A>
+ <DT>   <A HREF="#SS5">Tune in, Turn on, Click Here</A>
+ <DT>   <A HREF="#SS6">Sprinkle's Wrinkle</A>
+ <DT>   <A HREF="#SS7">Net-veau Riche</A>
+ <DT>   <A HREF="#SS8">Grand Slam Bus Tour</A>
+ <DT>   <A HREF="#SS9">Right This Way to Hollywood and Vine</A>
+ <DT>   <A HREF="#SS10">Coming Attractions</A>
+ <DT>   <A HREF="#SS11">Click It Again, Sam</A>
+ <DT>   <A HREF="#SS12">Das Personal Undersea Transportation System</A>
+ <DT>   <A HREF="#SS13">Welcome Wagon for Internet Newcomers</A>
+ <DT>   <A HREF="#SS14">Yahooligans</A>
+ </DL>
+<H3><A HREF="#OT">ONLINE TRAVEL</A></H3>
+<DL>
+ <DT>   <A HREF="#OT1">Munich Found</A>
+ <DT>   <A HREF="#OT2">On the Road Out West</A>
+ <DT>   <A HREF="#OT3">Cannes Can't, So They Do</A>
+ <DT>   <A HREF="#OT4">Up Yonder</A>
+ <DT>   <A HREF="#OT5">Craving Haggis, Whiskey, or Your Clan?</A>
+ <DT>   <A HREF="#OT6">Web Voyeurism Comes to Antarctica</A>
+ </DL>
+<H3><A HREF="#FJ">FLOTSAM & JETSAM</A></H3>
+<DL>
+ <DT>   <A HREF="#FJ1">Who's Who in the World of Chess</A>
+ <DT>   <A HREF="#FJ2">E-Lists</A>
+ <DT>   <A HREF="#FJ3">Submit Your URL to SubmitAll</A>
+ <DT>   <A HREF="#FJ4">The Mother of All Hotlists</A>
+ <DT>   <A HREF="#FJ5">Videophone Directory</A>
+ <DT>   <A HREF="#FJ6">On Your Marks, Get Set, Click</A>
+ <DT>   <A HREF="#FJ7">Site for Brokers, Investors, and Other Serious Money-Heads</A>
+ <DT>   <A HREF="#FJ8">Catalogue Mania</A>
+ </DL>
+<H3><A HREF="#SW">SOFTWARE</A></H3>
+<DL>
+ <DT>   <A HREF="#SW1">Thanks, ZD</A>
+</DL>
+<H3><A HREF="#CI">CONTACT INFORMATION</A></H3>
+<H3><A HREF="#CR">CREDITS</A></H3>
+<P>
+<H2><A NAME="SS">SURFING SITES</A></H2>
+<HR>
+<I>The best places to netsurf this week</I>
+<P>
+<B><A NAME="SS1">NETSCAPE NAVIGATOR 3.0 BETA AVAILABLE</A></B>
+<P>
+The Netscape juggernaut rolls on. Users now have access to groupware
+features like Internet telephony, a "whiteboard" that enables users to view
+and edit graphic images in real-time, an integrated VRML viewer, and
+built-in audio and video viewers (fewer separate plug-ins for this).
+Developers get something called LiveConnect, which lets them script and
+link all sorts of live content (Java, plug-ins), more Java features, and
+(surprise, surprise) new HTML tags. Administrators get a set of tools to
+help configure Netscape across networks. The built-in View Source is
+pretty, too. Take a look at the press release for more details. Download:
+<A HREF="http://www.netscape.com/comprod/mirror/client_download.html">"http://www.netscape.com/comprod/mirror/client_download.html"</A> PR:
+<A HREF="http://www.netscape.com/newsref/pr/newsrelease129.html">"http://www.netscape.com/newsref/pr/newsrelease129.html"</A>
+<P>
+<B><A NAME="SS2">MOMMY DEAREST</A></B>
+<P>
+We could say this is the mother of all mother sites, but we won't. The
+Family Planet Mother's Day Gateway lets you tell all about the best, worst,
+and funniest things your mother has ever done. Even better, read the
+contributions of others. If you're irresponsible and haven't yet bought a
+Mother's Day card, the Gateway supplies free e-cards. There's even a
+section where moms list their desired gifts. If you are a mom yourself,
+there are a few relevant columns and a section devoted to the mommy wars -
+working moms versus stay-at-homes. Come now, can't we all play nice?
+<A HREF="http://family.starwave.com/seasonal/mothers/">"http://family.starwave.com/seasonal/mothers/"</A>
+<P>
+<B><A NAME="SS3">YOU ARE HERE... AND WANNA GET THERE</A></B>
+<P>
+MapQuest is one of the coolest applications to hit the Web. Surprisingly,
+it is also one of the most useful. Pick a place - any place. Well, make it
+an American place. Type the address into MapQuest and it returns a complete
+graphical full-color map that marks your requested location. Use the
+buttons to zoom in or out through levels of magnification from national to
+a local street map. If you're traveling afar, you can even get driving
+directions. For extra pleasure, check out the mega-cool Java and ActiveX
+versions of the Atlas. This is a free service but registering lets you save
+maps on file and store your map-viewing preferences. Plus, they gave us a
+hat at Spring Internet World last week. <A HREF="http://www.mapquest.com/">"http://www.mapquest.com/"</A>
+<P>
+<B><A NAME="SS4">POP ALT.CULTURE ON THE WEB</A></B>
+<P>
+This site promotes itself as "a swimming pool among the wading pools on the
+Web" and it's not too far off the mark. Alt.culture, the Net version of the
+book touted as an encyclopedia of '90s youth culture, is virtually drowning
+in information. The hottest thing about this page is the Auto-Pilot, which
+lets you get blip-verts of any of the 900+ articles. We shot through an
+in-depth analysis of the voguing phenomenum, the V-chip, and biocular
+dysphobia (VR-related health problem). Worth slipping into your floaties
+and taking a dip. <A HREF="http://www.altculture.com/">"http://www.altculture.com/"</A>
+<P>
+<B><A NAME="SS5">TUNE IN, TURN ON, CLICK HERE</A></B>
+<P>
+A cross between celebrity worship and a venue for counter-cultural
+information, Tim Leary's home page is literally a photographic tour of his
+home. Travel into different rooms for glimpses of the art gallery, photo
+archives, and library (featuring an HTML version of "The Psychedelic
+Experience"). Much of the site is incomplete but the established framework
+is clever and surprisingly slick for a site of this nature. Tim, as many
+are aware, is slowly dying of cancer. You'll find health updates here along
+with precise counts of his pharmaceutical (legal and illegal) intake.
+Search deeper for the Leary Biscuit recipe (Ritz crackers, brie,
+marijuana...). Sort of a Nixon Library for the rest of us, this site may be
+worth tracking if the content grows. <A HREF="http://www.leary.com/">"http://www.leary.com/"</A>
+<P>
+<B><A NAME="SS6">SPRINKLE'S WRINKLE</A></B>
+<P>
+Annie Sprinkle - performance artist, photographer, sexual activist, former
+porn actress - has a Web page that touts her very special brand of female
+sexual celebration. Here you'll find helpful information on cervical
+self-examination, some very specific massage techniques, and perhaps a few
+new ideas about sex and sexuality. The highlight - or nadir, if you feel
+that way - is a look at her cervix through a speculum.
+<A HREF="http://www.infi.net/‾heck/sprinkleshow.html">"http://www.infi.net/‾heck/sprinkleshow.html"</A>
+<P>
+<B><A NAME="SS7">NET-VEAU RICHE</A></B>
+<P>
+Some of the wealthiest geeks on the Net have made millions off their
+technopassion. Hence, Net Millionaires, where you can watch their net
+worths rise and fall by the minute, based on current stock prices. This
+site cleverly melds market quotes with stock records to provide the
+relevant information. As you might guess, Netscape chairman Jim Clark is a
+billionaire. Alan Meckler, of Mecklermedia fame, is only in the low eight
+digits. Pity there's no privacy anymore.... By the way, investors may find
+the too-brief "Historical Analysis" listing useful. All this site needs,
+perhaps, is a chat room where you could trade tidbits with columnists
+waiting for the rise or fall. <A HREF="http://www.pulver.com:80/million/">"http://www.pulver.com:80/million/"</A>
+<P>
+<B><A NAME="SS8">GRAND SLAM BUS TOUR</A></B>
+<P>
+No, it's not KISS - it's das Bus and it's making a tour of every Denny's
+known to mankind. Okay, maybe not EVERY Denny's, but a whole bunch of them,
+anyway. Turning an early childhood love into an adult obsession, Jason
+Pfaff keeps a running journal of his Denny's visits with the pertinant info
+available such as what they ate, who accompanied them, and - most
+importantly - what free stuff they got or stole and whether or not there
+was the requisite Weird Al Yankovic look-alike employee. It's not Kerouac,
+but what do you expect for $1.99?
+<A HREF="http://entropy.muc.muohio.edu/‾p7a77/densec/intro.html">"http://entropy.muc.muohio.edu/‾p7a77/densec/intro.html"</A>
+<P>
+<B><A NAME="SS9">RIGHT THIS WAY TO HOLLYWOOD AND VINE</A></B>
+<P>
+It's flashy! Splashy! And just a little bit trashy! Capitol Records invites
+you to visit "Hollywood and Vine", an impressive corner of the WWW inspired
+by the famous Tinseltown intersection, which also happens to be in the
+general vicinity of Capitol Records' headquarters. Ripe with funky,
+postcard-like graphics, Hollywood and Vine is the ultimate tourist trap in
+the realm of music and entertainment. Stop by the Leaning Tower Travel
+Center for an overview. Check out upcoming music tour dates. Reminisce over
+hits of the '70s. Send a friend a digital postcard. Bet you're wishing you
+were here already. <A HREF="http://hollywoodandvine.com/">"http://hollywoodandvine.com/"</A>
+<P>
+<B><A NAME="SS10">COMING ATTRACTIONS</A></B>
+<P>
+Most Hollywood studios have flashy presences on the Net. To keep up with
+their new releases, you'd have to spend a lot of time surfing. Here's an
+alternative that centralizes links to movie trailers all over the Web. It
+ain't fancy but it's complete, with lists organized by studio. There are
+also sections for foreign film studios, TV shows, and music videos. Even
+before trailers become available, check out the upcoming movie list for
+films in production or even pre-production stages. The "Hot Trailer Pick
+Awards" highlights selected film sites of the week. You may be begging for
+a cable modem after downloading some of the 6 MB whoppers. Curiosity has
+its costs. <A HREF="http://lyre.mit.edu/‾deering/tpark.html">"http://lyre.mit.edu/‾deering/tpark.html"</A>
+<P>
+<B><A NAME="SS11">CLICK IT AGAIN, SAM</A></B>
+<P>
+You probably already know about this movielicious site, but to compete with
+commercial databases, the Internet Movie Database (IMDb), maintained by 18
+people around the world, has established itself as a company - that is,
+gone pro. Thank goodness its Web services will remain free, because the
+database lists over 70,000 movies, including classics and current releases,
+Hollywood and other films, along with biographies and background. If you
+like, IMDb will notify you by e-mail of updates to this massive and
+ever-growing resource. Every film student should link to it. US:
+<A HREF="http://us.imdb.com/">"http://us.imdb.com/"</A> UK: <A HREF="http://uk.imdb.com/">"http://uk.imdb.com/"</A>
+<P>
+<B><A NAME="SS12">DAS PERSONAL UNDERSEA TRANSPORTATION SYSTEM</A></B>
+<P>
+Yearning for something other than the weekend yacht? US Submarines (USS)
+offers several models of personal luxury submarines. The prices for such
+goodies are steep, and even USS admits that the personal submarine concept
+may seem a tad silly to the unenlightened. So, in addition to illustrations
+and descriptions of the models, USS will also let you have $50,000 if you
+happen to know anyone who can and eventually does purchase one of their
+luxury subs. Start checking that address file. Credit USS for an
+entertaining site and an idea that might shake a few cobwebs out of your
+brain. After all, as the company says about its 188-foot, five-stateroom
+Seattle 1000, "After one dive in Seattle, a simple megayacht will never
+again suffice." That goes without saying. <A HREF="http://www.cnw.com/‾ussubs/">"http://www.cnw.com/‾ussubs/"</A>
+<P>
+<B><A NAME="SS13">WELCOME WAGON FOR INTERNET NEWCOMERS</A></B>
+<P>
+Are you a stranger in the brave new wired world? Eager to graduate from
+newbie status and subject yourself to flames, spams, and fingers? If you
+answered at least one yes and/or you don't have a clue as to what newbie,
+flame, spam, or finger means, here's the perfect site for you. "Learn the
+Net: the Essential Internet Online" guides you through Camp Internet.
+You'll explore the mysteries of getting connected, memorize proper
+netiquette, check out e-mail and newsgroups, and even learn how to create
+your own home page. Yes, that is Larry Magid waving his little cyberhand.
+<A HREF="http://www.paradesa.com/teionline/home/home.html">"http://www.paradesa.com/teionline/home/home.html"</A>
+<P>
+<B><A NAME="SS14">YAHOOLIGANS</A></B>
+<P>
+Yahoo's site for 8 to 14-year-olds lives up to its devilishly clever name,
+delivering links kids should find intriguing. Factor in Yahooligans'
+rejection of sites that are "sleazy, slimy, snarly, paranoid, hateful,
+hideous, harmful, pornographic or prejudiced" (there goes, what, a quarter
+of the Web?) and you end up with a safe haven for junior surfers.
+Otherwise, Yahooligans follows the lead of its older sibling, with new
+sites, cool sites, and random sites just a click away, along with a helpful
+breakdown of categories (check out Homework Answers in the School Bell
+category). Club Yahooligans offers e-mail notices of cool sites, special
+offers, and other nebulous coolness for anyone willing to fill out a form
+apparently devised by someone from marketing. <A HREF="http://www.yahooligans.com/">"http://www.yahooligans.com/"</A>
+<P>
+<P>
+<H2><A NAME="OT">ONLINE TRAVEL</A></H2>
+<HR>
+<I>Click your mouse and see the world</I>
+<P>
+<B><A NAME="OT1">MUNICH FOUND</A></B>
+<P>
+Such is the name of a page we're glad we came upon. This Bavarian bounty
+looks good and is bursting with high-quality content. Munich Found, the
+cybercompanion to a paper edition, isn't just an online tourist pamphlet,
+but is an intelligent look at the town and issues of import in Germany.
+Articles in the April issue looked at the establishment of an urban car ban
+to create a pedestrian zone, lingering effects of the Holocaust, and dating
+in Germany. The latter warns that you could find yourself with "the well
+mannered work horse who schedules spontanaeity in his Filofax." News
+articles, a "what's on" list, and classifieds are typical for this kind of
+page, but atypically interesting in style and perception.
+<A HREF="http://www.MunichFound.de/">"http://www.MunichFound.de/"</A>
+<P>
+<B><A NAME="OT2">ON THE ROAD OUT WEST</A></B>
+<P>
+Out West Online is the latest homespun spin on Out West Newspaper, the
+9-year-old effort of Chuck and Rodica Woodbury on their journey down
+western America's roads in a 24-foot motorhome/newsroom. This ongoing
+quarterly travelogue of 100% bona fide American corn ranges across the
+story of Hi Jolly and the US Camel Military Corps, to a garlic-loving ghost
+in Bodie, Calif., and onto e-mail roadfood testimonials (including a hot
+tip about the biscuits 'n' gravy at a diner in Dayton, Nev.), all peppered
+with some genuinely useful info on various sites and activities west of the
+Rockies. Check out the rocky mountain oyster "Testicle Festival" in Rock
+Creek, Mont. virtually if you can't face it in the flesh.
+<A HREF="http://www.outwestnewspaper.com/">"http://www.outwestnewspaper.com/"</A>
+<P>
+<B><A NAME="OT3">CANNES CAN'T, SO THEY DO</A></B>
+<P>
+"They" are Film Scouts, and their coverage of the currently rolling Cannes
+Film Festival embarasses the official site. The Film Scouts page has press
+conference notes, a guide to Cannes, and an exclusive Philip Glass
+composition. Bone up on your Riviera French at the Language Lab. As for
+substance, reviews, interviews, and awards are promised. If you feel
+compelled, there's even a link to the official Cannes site. Netsurfer'll
+send someone to the festival next year. C'est pratiquement signe.
+<A HREF="http://www.filmscouts.com/festivals/cannes96/index.html">"http://www.filmscouts.com/festivals/cannes96/index.html"</A>
+<P>
+<B><A NAME="OT4">UP YONDER</A></B>
+<P>
+The Alaska Internet Travel Guide is 525 pages of information on visitng
+America's largest state. From accomodations to adventures it's listed here,
+with hundreds, maybe thousands, of links to each company's photos, package
+rates, and e-mail forms. Want to hunt musk oxen on Nunivak Island? Or is a
+narrated floatplane flightseeing trip over the Juneau Icefield more your
+style? Find it, plan it, and in some cases, reserve it in mere minutes.
+Who'd have thought the most untamed state would have the most advanced
+travel Web site? <A HREF="http://www.alaskaone.com/travel/">"http://www.alaskaone.com/travel/"</A>
+<P>
+<B><A NAME="OT5">CRAVING HAGGIS, WHISKEY, OR YOUR CLAN?</A></B>
+<P>
+The Rampant Scotland Index home page promises to provide "all Scotland on
+your computer screen" and they almost deliver - you can't taste the haggis
+or whiskey. Whether you want to visit Scotland, learn more about it, or
+just take a virtual tour, this site's 500 links cover everything Scottish.
+Prospective tourists will appreciate the where-to-go, what-to-see, and
+where-to-stay info, while those enamored of Scottish culture can delve into
+the intricacies of clans and tartans, music and dance, Gaels and Celts, and
+more. Also featured are links to Scottish business and economy, food and
+drink, and newspapers and magazines.
+<A HREF="http://users.colloquium.co.uk/‾scott_awa/index.htm">"http://users.colloquium.co.uk/‾scott_awa/index.htm"</A>
+<P>
+<B><A NAME="OT6">WEB VOYEURISM COMES TO ANTARCTICA</A></B>
+<P>
+Yet another ever-vigilant video camera is wired into the Web. This time,
+instead of being in the bottom of a fish tank, it's at the bottom of the
+planet - Mawson Station, Antarctica. Unfortunately, the sun does not appear
+a whole lot these days, leading to crisp pictures of, well, not much. There
+is a link to the midday picture, but truth be told, there's not that much
+to see. For diversions the jaded or unadventurous might want to check
+Mawson's weather and gloat that you're here and not there, and those in
+need of a change of scenery and climate can zip over to the Australian
+Antarctic Division's home page and check out the tourist flights and
+employment opportunities at the bottom of the world.
+<A HREF="http://www.antdiv.gov.au/aad/exop/sfo/mawson/video.html">"http://www.antdiv.gov.au/aad/exop/sfo/mawson/video.html"</A>
+<P>
+<P>
+<H2><A NAME="FJ">FLOTSAM & JETSAM</A></H2>
+<HR>
+<I>Random acts of online reality</I>
+<P>
+<B><A NAME="FJ1">WHO'S WHO IN THE WORLD OF CHESS</A></B>
+<P>
+This World Chess Champions site provides all the right moves for chess
+players and spectators alike. From Morphy to Fisher to Kasparov, you'll
+find a plethora of biographies, plenty of photos, historical documents, and
+a great database of chess resources. Check it out for yourself. (We just
+had to say that.) <A HREF="http://www.qnet.fi/mathiasen/matyson.html-ssi">"http://www.qnet.fi/mathiasen/matyson.html-ssi"</A>
+<P>
+<B><A NAME="FJ2">E-LISTS</A></B>
+<P>
+It is so horrifyingly easy to fill your days with e-mail. Check out the
+searchable Publicly Accessible Mailing Lists (PAML) and E-Mail Discussion
+Groups/Lists (EMDG/L) for a few thousand mailing lists on any topic you
+want. PAML: <A HREF="http://www.neosoft.com/internet/paml/bysubj.html">"http://www.neosoft.com/internet/paml/bysubj.html"</A> EMDG/L:
+<A HREF="http://www.webcom.com/impulse/list.html">"http://www.webcom.com/impulse/list.html"</A>
+<P>
+<B><A NAME="FJ3">SUBMIT YOUR URL TO SUBMITALL</A></B>
+<P>
+So you've created a page and it's time to link your URL to search sites and
+directory services. SubmitAll is a single point for submitting to 27
+different sites for free. Later, you can submit to more without having to
+re-enter all the info because it's keyed to a unique ID. Neat.
+<A HREF="http://www.hometeam.com/tools/submital.htm">"http://www.hometeam.com/tools/submital.htm"</A>
+<P>
+<B><A NAME="FJ4">THE MOTHER OF ALL HOTLISTS</A></B>
+<P>
+Among gadzillions of websites, there are few tried and true that keep us
+coming back. In one page, "Hot Sheet" collects, and organizes by category,
+about 300 useful sites. A great starting point for Net newbies.
+<A HREF="http://www.tstimpreso.com/hotsheet/">"http://www.tstimpreso.com/hotsheet/"</A>
+<P>
+<B><A NAME="FJ5">VIDEOPHONE DIRECTORY</A></B>
+<P>
+Connectix, makers of VideoPhone, and Four11, the largest Net white pages
+directory, have created a free searchable database that enables Videophone
+users to directly locate each other over the Web. Find the name, then click
+to establish a videocall. <A HREF="http://www.four11.com/">"http://www.four11.com/"</A>
+<P>
+<B><A NAME="FJ6">ON YOUR MARKS, GET SET, CLICK</A></B>
+<P>
+Here are some trivia about the Olympics, courtesy of the Olympic Factbook
+and Olympics Quiz, a selection from the Factbook published in association
+with the US Olympic Committee. Bone up for conversation at your next
+cocktail or swimming party. <A HREF="http://www.thomson.com/olympics.html">"http://www.thomson.com/olympics.html"</A>
+<P>
+<B><A NAME="FJ7">SITE FOR BROKERS, INVESTORS, AND OTHER SERIOUS MONEY-HEADS</A></B>
+<P>
+A complicated, intricate and restrictive site is now available for serious
+money hounds. If you have the bandwidth, a frames-capable browser, a
+platform for Java, and a serious interest in fancy forecasts, then see
+<A HREF="http://www.hhconductor.com/">"http://www.hhconductor.com/"</A>
+<P>
+<B><A NAME="FJ8">CATALOGUE MANIA</A></B>
+<P>
+You can search for and request sample issues of thousands of print media
+and catalogues listed at Media Finder. They currently list over 10,000
+publications in over 265 subject areas. <A HREF="http://www.mediafinder.com/">"http://www.mediafinder.com/"</A>
+<P>
+<P>
+<H2><A NAME="SW">SOFTWARE</A></H2>
+<HR>
+<I>Online related software notices and mini-reviews</I>
+<P>
+<B><A NAME="SW1">THANKS, ZD</A></B>
+<P>
+You expect a lot from Ziff-Davis, and from the ZD Net Software Library you
+get 10,000 points of light. The 1996 PC Magazine Shareware Awards Finalist
+page is a gem in itself. "Editors' Picks", which includes thumbnail reviews
+and ratings of current shareware, awards, and "Top Downloads", is a great
+place to start. Internet and publishing tools, browsers, e-mail and news
+readers, helper and communication apps, tutorials - ZD provides a treasure
+trove for netters, newbies, Windows freaks, and Webaholics. What a gorgeous
+triumph in design for Netscape users! What a joy to find so much useful
+software in one place! Thank you, thank you, thank you!
+<A HREF="http://www.zdnet.com/zdi/software/">"http://www.zdnet.com/zdi/software/"</A>
+<P>
+<H2><a name="CI">CONTACT INFORMATION</a></H2>
+<HR>
+<P>
+Netsurfer Digest Home Page: <a href="http://www.netsurf.com/nsd/index.html">http://www.netsurf.com/nsd/index.html</a><BR>
+Netsurfer Digest FTP Site: <a href="ftp://ftp.netsurf.com/pub/nsd/">ftp://ftp.netsurf.com/pub/nsd/</a>
+<P>
+Subscribe WWW form:         <a href="http://www.netsurf.com/nsd/subscribe.html">http://www.netsurf.com/nsd/subscribe.html</A><BR>
+Subscribe E-mail:           <a href="mailto:nsdigest-request@netsurf.com">nsdigest-request@netsurf.com</A><BR>
+Include one of the following commands in the <B>BODY</B> of the
+message:<BR>
+HTML Format version:        <B>subscribe nsdigest-html</B><BR>
+Plain ASCII version:        <B>subscribe nsdigest-text</B><BR>
+<P>
+Submission of Newsworthy Items:     <a href="mailto:pressrm@netsurf.com">pressrm@netsurf.com</A><BR>
+Letters to the Editor:              <a href="mailto:editor@netsurf.com">editor@netsurf.com</A><BR>
+Advertiser and Sponsor inquiries to: <a href="mailto:sales@netsurf.com">sales@netsurf.com</A>
+<P>
+Netsurfer Communications: <a href="http://www.netsurf.com/">http://www.netsurf.com/</A><BR>
+General Information: <a href="mailto:info@netsurf.com">info@netsurf.com</A>
+<P>
+<H2><a name="CR">CREDITS</a></H2>
+<HR>
+<H3>Publisher</H3>
+<UL>
+   <LI>Arthur Bebak
+</UL>
+<H3>Editor</H3>
+<UL>
+<LI>Lawrence Nyveen
+</UL>
+<H3>Production Manager</H3>
+<UL>
+<LI>Bill Woodcock
+</UL>
+<H3>Writers and Netsurfers</H3>
+<UL>
+<LI>Peter Barnes
+<LI>Kirsty Brooks
+<LI>Joanne Eglash
+<LI>Lisa Hamilton
+<LI>Caroll Houser
+<LI>Rebecca Kuchar
+<LI>Jay Mills
+<LI>Kenneth Schulze
+<LI>Richard Wagner
+<LI>James Weissman
+</UL>
+<H3>Netsurfer Communications, Inc.</H3>
+<UL>
+<LI><B>President:</B> Arthur Bebak
+<LI><B>Vice President:</B> S. M. Lieu 
+</UL>
+<HR>
+<P>
+<I>NETSURFER DIGEST</I> &copy; 1996 Netsurfer Communications, Inc.
+All rights reserved. <BR>
+<I>NETSURFER DIGEST</I> is a trademark of Netsurfer Communications, Inc.
+</BODY>
+</HTML>
+
+
+--------------FF6ABD31DF--
+

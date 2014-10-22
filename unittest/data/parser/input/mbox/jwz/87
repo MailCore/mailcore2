@@ -1,0 +1,67 @@
+Path: tera.mcom.com!news-mail-gateway
+From: markm@voicenet.com (Mark M.)
+Newsgroups: mcom.list.cypherpunks
+Subject: Re: Layman's explanation for limits on escrowed encryption ...
+Date: 27 May 1996 18:19:51 -0700
+Organization: Local Mail/News Gateway
+Lines: 51
+Sender: daemon@tera.mcom.com
+Approved: usenet@netscape.com
+Message-ID: <Pine.LNX.3.93.960527203358.1163A-100000@gak>
+References: <01I53K6SDN348Y4Z90@mbcl.rutgers.edu>
+NNTP-Posting-Host: tera.mcom.com
+Mime-Version: 1.0
+Content-Type: multipart/signed; boundary="axb+h+IbI/zv+u";
+   protocol="application/pgp-signature"; micalg=pgp-md5
+
+This message is in PGP/MIME format, according to the Internet Draft
+draft-elkins-pem-pgp-03.txt. For more information, see:
+http://www.c2.org/‾raph/pgpmime.html
+
+(Actually, trailing whitespace is not treated specially,
+so it is a proposal that may be adopted in the 04 draft.)
+
+--axb+h+IbI/zv+u
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, 24 May 1996, E. ALLEN SMITH wrote:
+
+> =09Hmm.... what were the normal key-length recommendations again? This
+> appears to imply that the NSA can break at least 64-bit, and probably 80-=
+bit,
+> encryption. How does this translate into public key lengths? E.g., how ma=
+ny
+> normal bits is a 1024-bit PGP key equivalent to?
+> =09-Allen
+
+The normal key-length recommendation was 96 bits.  64 bits and 80 bits are
+equivalent to 512 bits and 768 bits respectively.  I would guess that a
+1024-bit key is about as strong as an 96-bit key.  The first two numbers are
+from _Applied Cryptography_; my estimate is an extrapolation from the data =
+in
+AC.
+
+-- Mark
+
+=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D=
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D
+markm@voicenet.com              | finger -l for PGP key 0xe3bf2169
+http://www.voicenet.com/‾markm/ | d61734f2800486ae6f79bfeb70f95348
+((2b) || !(2b))                 | Old key now used only for signatures
+"The concept of normalcy is just a conspiracy of the majority" -me
+
+
+--axb+h+IbI/zv+u
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP MESSAGE-----
+Version: 2.6.3
+
+iQCVAwUBMapL+LZc+sv5siulAQGbpwQAoP7X0GCvZeG1F50uv4xQkGXb0SH/gD6P
+LHQPb+DfdazDsHi7Ru7mbYR3yUO+hrnR8tjQiAoMN/8Efu0ISsIcaGRekD4Bp04u
+JEPFZo6LznUyFj23XlJ7VhCjQnRNlCaAslMFHx5EeI/GWevYABf4zDhwCJeN4Lp5
+vT6L9N214G0=
+=zkS8
+-----END PGP MESSAGE-----
+
+--axb+h+IbI/zv+u--

@@ -1,0 +1,108 @@
+Return-Path: <nsb>
+Received: by greenbush.bellcore.com (4.1/4.7)
+	id <AA06406> for nsb; Wed, 11 Mar 92 16:27:44 EST
+Received: from Messages.8.5.N.CUILIB.3.45.SNAP.NOT.LINKED.greenbush.galaxy.sun4.41
+          via MS.5.6.greenbush.galaxy.sun4_41;
+          Wed, 11 Mar 1992 16:27:37 -0500 (EST)
+Message-Id: <Edjbh9O0M2YtQL5uct@thumper.bellcore.com>
+Date: Wed, 11 Mar 1992 16:27:37 -0500 (EST)
+From: Nathaniel Borenstein <nsb>
+X-Andrew-Message-Size: 555+2
+Mime-Version: 1.0
+Content-Type: multipart/alternative; 
+	boundary="Interpart.Boundary.Qdjbh920M2Yt4L5uUD"
+To: ietf-822@dimacs.rutgers.edu, info-metamail
+Subject: Barbershop MIME
+Cc: John Lamb <lamb>, Michael Littman <mlittman>, "David A. Braun" <braun>
+References: <QdjbYVC0M2Yt4L5stL@thumper.bellcore.com>
+
+> THIS IS A MESSAGE IN 'MIME' FORMAT.  Your mail reader does not support MIME.
+> Please read the first section, which is plain text, and ignore the rest.
+
+--Interpart.Boundary.Qdjbh920M2Yt4L5uUD
+Content-type: text/plain; charset=US-ASCII
+
+Those of you not running MIME-compliant mail readers won't get a lot out
+of this, nor will those without ftp access to the Internet, but for the
+lucky few....
+
+Here are the infamous Telephone Chords, the world's premier (=only) 
+all-Bellcore barbershop quartet, singing about MIME.  Note that because
+the "message/external-body" MIME construct is used, this whole message
+is only about 3000 bytes -- at least, until you start reading it.  :-)
+[An Andrew ToolKit view (mailobjv) was included here, but could not be
+displayed.][An Andrew ToolKit view (mailobjv) was included here, but
+could not be displayed.]  Left to right: 
+                            John Lamb, bass 
+                         David Braun, baritone 
+                         Michael Littman, lead 
+                      Nathaniel Borenstein, tenor 
+
+--Interpart.Boundary.Qdjbh920M2Yt4L5uUD
+Content-Type: multipart/mixed; 
+	boundary="Alternative.Boundary.Qdjbh920M2YtQL5uQz"
+
+--Alternative.Boundary.Qdjbh920M2YtQL5uQz
+Content-type: text/richtext; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Those of you not running MIME-compliant mail readers won't get a lot out of 
+this, nor will those without ftp access to the Internet, but for the lucky 
+few....
+<nl>
+<nl>Here are the infamous <bold>Telephone Chords</bold>, the world's premier 
+(=3Donly)  all-Bellcore barbershop quartet, singing about <bold>MIME</bold>.  
+Note that because the "message/external-body" MIME construct is used, this 
+whole message is only about 3000 bytes -- at least, until you start reading 
+it.  :-)
+<nl> 
+
+--Alternative.Boundary.Qdjbh920M2YtQL5uQz
+Content-type: message/external-body;
+	access-type="anon-ftp";
+	site="thumper.bellcore.com";
+	directory="pub/nsb";
+	name="quartet.au"
+Content-Description:  Let Me Sing You Email (audio)
+
+Content-type: audio/basic
+
+
+
+
+--Alternative.Boundary.Qdjbh920M2YtQL5uQz
+Content-type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+
+=
+
+--Alternative.Boundary.Qdjbh920M2YtQL5uQz
+Content-type: message/external-body;
+	access-type="anon-ftp";
+	site="thumper.bellcore.com";
+	directory="pub/nsb";
+	name="quartet.gif"
+Content-Description:  The Telephone Chords, A Moment Immortalized
+
+Content-type: image/gif
+
+
+
+
+--Alternative.Boundary.Qdjbh920M2YtQL5uQz
+Content-type: text/richtext; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+<nl> 
+  Left to right: 
+<nl><center>John Lamb, <italic>bass</italic> 
+<nl>David Braun, <italic>baritone</italic> 
+<nl>Michael Littman, <italic>lead</italic> 
+<nl>Nathaniel Borenstein, <italic>tenor</italic> </center>
+<nl>
+
+--Alternative.Boundary.Qdjbh920M2YtQL5uQz--
+
+--Interpart.Boundary.Qdjbh920M2Yt4L5uUD--
+

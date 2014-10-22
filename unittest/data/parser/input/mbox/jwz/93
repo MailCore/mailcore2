@@ -1,0 +1,315 @@
+Return-Path: <wjh+@andrew.cmu.edu>
+Received: from thumper.bellcore.com by greenbush.bellcore.com (4.1/4.7)
+	id <AA01494> for nsb; Wed, 10 Jun 92 14:51:18 EDT
+Received: from andrew.cmu.edu by thumper.bellcore.com (4.1/4.7)
+	id <AA12255> for nsb@greenbush; Wed, 10 Jun 92 14:51:13 EDT
+Received: by andrew.cmu.edu (5.54/3.15) id <AA11951> for nsb@thumper.bellcore.com; Wed, 10 Jun 92 14:51:11 EDT
+Received: via switchmail; Wed, 10 Jun 1992 14:51:08 -0400 (EDT)
+Received: from shaler.andrew.cmu.edu via qmail
+          ID </afs/andrew.cmu.edu/service/mailqs/q000/QF.8eBYukW00Vs44ZKGdg>;
+          Wed, 10 Jun 1992 14:49:20 -0400 (EDT)
+Received: from shaler.andrew.cmu.edu via qmail
+          ID </afs/andrew.cmu.edu/usr13/wjh/.Outgoing/QF.IeBYuii00Vs4INk0AA>;
+          Wed, 10 Jun 1992 14:49:18 -0400 (EDT)
+Received: from Messages.8.5.N.CUILIB.3.45.SNAP.NOT.LINKED.shaler.andrew.cmu.edu.rs.aix31
+          via MS.5.6.shaler.andrew.cmu.edu.rs_aix31;
+          Wed, 10 Jun 1992 14:49:18 -0400 (EDT)
+Resent-Message-Id: <ceBYuie00Vs4ANk04J@andrew.cmu.edu>
+Resent-Date: Wed, 10 Jun 1992 14:49:18 -0400 (EDT)
+Resent-From: Fred Hansen <wjh+@andrew.cmu.edu>
+Resent-To: gk5g+@andrew.cmu.edu, nsb+@andrew.cmu.edu
+Return-Path: <mcinerny+@andrew.cmu.edu>
+Message-Id: <MeBYTrq00hYx4uHkwL@andrew.cmu.edu>
+Date: Wed, 10 Jun 1992 14:20:39 -0400 (EDT)
+From: "Michael J. McInerny" <mcinerny+@andrew.cmu.edu>
+X-Andrew-Message-Size: 762+8
+Mime-Version: 1.0
+Content-Type: multipart/alternative; 
+	boundary="Interpart.Boundary.8eBYTr200hYx4uHkoz"
+To: Fred Hansen <wjh+@andrew.cmu.edu>
+Subject: Re: icons
+Cc: dave@expo.lcs.mit.edu
+In-Reply-To: <0eBXzMC00Vs4QNk9oL@andrew.cmu.edu>
+References: <9206101740.AA07174@kanga.lcs.mit.edu>
+	<0eBXzMC00Vs4QNk9oL@andrew.cmu.edu>
+
+> THIS IS A MESSAGE IN 'MIME' FORMAT.  Your mail reader does not support MIME.
+> Please read the first section, which is plain text, and ignore the rest.
+
+--Interpart.Boundary.8eBYTr200hYx4uHkoz
+Content-type: text/plain; charset=US-ASCII
+
+I'm sending this message in MIME-format.  I hope that's okay.  If not
+let me know.  Do you have AFS access?  If so, look in
+/afs/andrew.cmu.edu/usr5/mcinerny/lib/bitmaps/*.icon for the X bitmaps
+which correspond to the following icons.
+
+Excerpts from mail: 10-Jun-92 Fwd: icons Fred Hansen (1066+0)
+
+> Hi, sorry to disturb you.  I have an Andrew question.  Are there 
+> a good set of icons to use with the various clients like ez,
+> typescript, etc?
+
+  [An Andrew ToolKit view (a raster image) was included here, but could
+                      not be displayed.]typescript
+
+  [An Andrew ToolKit view (a raster image) was included here, but could
+                      not be displayed.]pipescript
+
+  [An Andrew ToolKit view (a raster image) was included here, but could
+                         not be displayed.]help
+
+  [An Andrew ToolKit view (a raster image) was included here, but could
+                    not be displayed.]alternate help 
+                              (information)
+  [An Andrew ToolKit view (a raster image) was included here, but could
+                       not be displayed.]messages
+
+  [An Andrew ToolKit view (a raster image) was included here, but could
+                  not be displayed.]terminal emulation
+
+
+Don't have one for ez--I like my ez windows small (I use TWM).  I also
+run 'messages -w', which is why my messages icon is small too.
+
+Actually, I suppose I could use my ``kitchen-sink'' icon for ez:
+  [An Andrew ToolKit view (a raster image) was included here, but could
+                           not be displayed.]
+-Michael [An Andrew ToolKit view (a raster image) was included here, but
+could not be displayed.] McInerny
+
+--Interpart.Boundary.8eBYTr200hYx4uHkoz
+Content-Type: multipart/mixed; 
+	boundary="Alternative.Boundary.8eBYTr200hYxIuHkkf"
+
+--Alternative.Boundary.8eBYTr200hYxIuHkkf
+Content-type: text/richtext; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+I'm sending this message in MIME-format.  I hope that's okay.  If not let me k=
+now.  Do you have AFS access?  If so, look in /afs/andrew.cmu.edu/usr5/mcinern=
+y/lib/bitmaps/*.icon for the X bitmaps which correspond to the following icons=
+.<nl>
+<nl>
+<bold><excerpt>Excerpts from mail: 10-Jun-92 Fwd: icons Fred Hansen (1066+0)</=
+excerpt></bold><nl>
+<nl>
+<excerpt>Hi, sorry to disturb you.  I have an Andrew question.  Are there <nl>=
+
+a good set of icons to use with the various clients like ez,<nl>
+typescript, etc?<nl>
+</excerpt><center><nl>
+</center>=
+
+--Alternative.Boundary.8eBYTr200hYxIuHkkf
+Content-type: image/x-xwd
+Content-Transfer-Encoding: base64
+
+AAAAawAAAAcAAAACAAAAAQAAAEAAAABAAAAAAAAAAAEAAAAIAAAAAQAAAAgAAAABAAAACAAA
+AAAAAAAAAAAAAAAAAAAAAAABAAAAAgAAAAIAAABAAAAAQAAAAAAAAAAAAAAAAHJhc3RlcgAA
+AAAAAAAAAAAAVsgAAAAB////////mKwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB///wAAAAAAEAA
+BAAAAAAAXucEAAAAAABAAAQAAAAAAFcsBAAAAAAAQAAHgAAAAABMc4SAAAAAAEAABIAAAAAA
+TmMEgAAAAABAAASAAAAAAE5wBIAAAAAAQAAEgAAAAAPctsT8AAAABEAABR4AAAAJ///+OQAA
+ABAAAAA5AAAAIAAAAHkAAABAAAAAvwAAAH////9+AAAAQAAAAqwAAACMYxjDVAAAAJKUpSas
+AAABFrWtZVQAAAEMYxjKqAAAAmMYxg1QAAAClKUpCrAAAAS1rWsVYAAABGMYxhrAAAAJjGMY
+NUAAAApSlKQqgAAAEta1rFUAAAARjGMYagAAADAAAADUAAAAP////6wAAAAgAAAA2AAAACqq
+qqqwAAAAIAAAAOAAAAA1VVVVoAAAACAAAADAAAAAP////4AAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+
+--Alternative.Boundary.8eBYTr200hYxIuHkkf
+Content-type: text/richtext; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+<center>=
+<nl>
+typescript<nl>
+<nl>
+</center>=
+
+--Alternative.Boundary.8eBYTr200hYxIuHkkf
+Content-type: image/x-xwd
+Content-Transfer-Encoding: base64
+
+AAAAawAAAAcAAAACAAAAAQAAAEAAAABAAAAAAAAAAAEAAAAIAAAAAQAAAAgAAAABAAAACAAA
+AAAAAAAAAAAAAAAAAAAAAAABAAAAAgAAAAIAAABAAAAAQAAAAAAAAAAAAAAAAHJhc3RlcgAA
+AAAAAAAAAAAAVsgAAAAB////////mKwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAA///wAAAAFf8AAA/6gAAqAQAACAVAESoBAAAIBUiyqgEAAAgFVZKqAQAACAVUkqoBAAA
+IBVS5K1UAAAqtScAqq1QBXVVAABX/qgqv+oAAAAD8FfAAAAAAAAQrAAAAAAAABAUAAAAAAAA
+ECwAAAAAAAAQFAAAAAAAABAsAAAAAAAAEBQAAAAAAAAQLAAAAAAAABAUAAAAAAAAECwAAAAA
+AAAQFAAAAAAAAAgoAAAAAAAAD/gAAAAAAAAIGAAAAAAAAAgoAAAAAAAACBgAAAAAAAAIKAAA
+AAAAAAgYAAAAAAAACCgAAAAAAAAIGAAAAAAAAAgoAAAAAAAAB/AAAAAAAAAICAAAAAAAAAfw
+AAAAAAAACAgAAAAAAAAH8AAAAAAAAAAAAAAAAAAAAIAAAAAAAAABQAAAAAAAAAFAAAAAAAAA
+AUAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAIAAAAAAAAABgAAAAAAAAACAAAAAAAAAAIAAAAAA
+AAABwAAAAAAAAAAAAAAAAAAAAIAAAAAAAAABQAAAAAAAAAFAAAAAAAAAAUAAAAAAAAAAgAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+
+--Alternative.Boundary.8eBYTr200hYxIuHkkf
+Content-type: text/richtext; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+<center>=
+<nl>
+pipescript<nl>
+<nl>
+</center>=
+
+--Alternative.Boundary.8eBYTr200hYxIuHkkf
+Content-type: image/x-xwd
+Content-Transfer-Encoding: base64
+
+AAAAawAAAAcAAAACAAAAAQAAAEAAAABAAAAAAAAAAAEAAAAIAAAAAQAAAAgAAAABAAAACAAA
+AAAAAAAAAAAAAAAAAAAAAAABAAAAAgAAAAIAAABAAAAAQAAAAAAAAAAAAAAAAHJhc3RlcgAA
+AAAAAAAAAAAAVsgAAAAB////////mKwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP+AAAA
+AAAAAgIAAAAAAAACAgAAAAAAAAIDwAAAAAAAAgPAAAAAAAACA8AAAAAAAAIDwAAAAAAAAgPA
+AAAAAAACA8AAAAAAAAIDwAAAAAAAAgPAAAAAAB/+A//AAAAAEAAAAEAAAAAQJehwQAAAABAl
+CEh4AAAAED3IcHgAAAAQJQhAeAAAABAl70B4AAAAEAAAAHgAAAAf/gP/+AAAAAP+A//4AAAA
+A/4D//gAAAAD/gP/+AAAAAACA8AAAAAAAAIDwAAAAAAAAgPAAAAAAAACA8AAAAAAAAIDwAAA
+AAAAAgPAAAAAAAACA8AAAAAAAAP/wAAAAAAAAP/AAAAAAAAA/8AAAAAAAAD/wAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+
+--Alternative.Boundary.8eBYTr200hYxIuHkkf
+Content-type: text/richtext; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+<center>=
+<nl>
+help<nl>
+<nl>
+</center>=
+
+--Alternative.Boundary.8eBYTr200hYxIuHkkf
+Content-type: image/x-xwd
+Content-Transfer-Encoding: base64
+
+AAAAawAAAAcAAAACAAAAAQAAABAAAAAQAAAAAAAAAAEAAAAIAAAAAQAAAAgAAAABAAAAAgAA
+AAAAAAAAAAAAAAAAAAAAAAABAAAAAgAAAAIAAAAQAAAAEAAAAAAAAAAAAAAAAHJhc3RlcgAA
+AAAAAAAAAAAAVsgAAAAB////////mKwDwA/wPjw+PH5+f/7+f/x//H/8f3x+fH48XDw8D3AD
+wA==
+
+--Alternative.Boundary.8eBYTr200hYxIuHkkf
+Content-type: text/richtext; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+<center>=
+<nl>
+alternate help <nl>
+(information)<nl>
+</center>=
+
+--Alternative.Boundary.8eBYTr200hYxIuHkkf
+Content-type: image/x-xwd
+Content-Transfer-Encoding: base64
+
+AAAAawAAAAcAAAACAAAAAQAAABAAAAAQAAAAAAAAAAEAAAAIAAAAAQAAAAgAAAABAAAAAgAA
+AAAAAAAAAAAAAAAAAAAAAAABAAAAAgAAAAIAAAAQAAAAEAAAAAAAAAAAAAAAAHJhc3RlcgAA
+AAAAAAAAAAAAVsgAAAAB////////mKwAAAAA//yALLgXgC+Hh4AHh4eAB///P/8//wAAAAAA
+AA==
+
+--Alternative.Boundary.8eBYTr200hYxIuHkkf
+Content-type: text/richtext; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+<center>=
+<nl>
+messages<nl>
+<nl>
+</center>=
+
+--Alternative.Boundary.8eBYTr200hYxIuHkkf
+Content-type: image/x-xwd
+Content-Transfer-Encoding: base64
+
+AAAAawAAAAcAAAACAAAAAQAAABAAAAAQAAAAAAAAAAEAAAAIAAAAAQAAAAgAAAABAAAAAgAA
+AAAAAAAAAAAAAAAAAAAAAAABAAAAAgAAAAIAAAAQAAAAEAAAAAAAAAAAAAAAAHJhc3RlcgAA
+AAAAAAAAAAAAVsgAAAAB////////mKwAAA/wGBwVShKpFUkSqRgZP/kgCWqp1VKqpH/4AAAA
+AA==
+
+--Alternative.Boundary.8eBYTr200hYxIuHkkf
+Content-type: text/richtext; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+<center>=
+<nl>
+terminal emulation<nl>
+<nl>
+</center><nl>
+Don't have one for ez--I like my ez windows small (I use TWM).  I also run 'me=
+ssages -w', which is why my messages icon is small too.<nl>
+<nl>
+Actually, I suppose I could use my ``kitchen-sink'' icon for ez:<nl>
+<center>=
+</center>=
+
+--Alternative.Boundary.8eBYTr200hYxIuHkkf
+Content-type: image/x-xwd
+Content-Transfer-Encoding: base64
+
+AAAAawAAAAcAAAACAAAAAQAAAEAAAABAAAAAAAAAAAEAAAAIAAAAAQAAAAgAAAABAAAACAAA
+AAAAAAAAAAAAAAAAAAAAAAABAAAAAgAAAAIAAABAAAAAQAAAAAAAAAAAAAAAAHJhc3RlcgAA
+AAAAAAAAAAAAVsgAAAAB////////mKwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwAAA
+AAAAAAQgAAAAAAAACaAAAAAAAAAJkAAAAAAAAA+QAAAAAAAACZAAAAAAAAAPkAAAAAAAAACQ
+AAAAAAAAYJAYAAAAAAygkygAAAAAE9iU9gAAAAANpJNpAAAAD/JdnJd//wAQA4GY4AADABAA
+AfgAAAMAI//88///BwBFVVIEAACNAEoAAg6qqwsAjqqsGgABFQEaAAQ3VVYrATdVWCoABDUC
+agAQVqqsagRX//Cr/+jWBKoAINYAEKwJVABBrAAhWBKsDoNYByKwE1gegqgPQ1AmsA8FUAeG
+oEP//AP//g1AQAAAAAAACsCAAAAAAAAVgP///////+sAgAAAAAAANQCqqqqqqqqqAIAAAAAA
+ADQA1VVVVVVVaACAAAAAAAA4AP////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+
+--Alternative.Boundary.8eBYTr200hYxIuHkkf
+Content-type: text/richtext; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+<center>=
+<nl>
+</center><nl>
+-Michael =
+
+--Alternative.Boundary.8eBYTr200hYxIuHkkf
+Content-type: image/x-xwd
+Content-Transfer-Encoding: base64
+
+AAAAawAAAAcAAAACAAAAAQAAAFoAAABrAAAAAAAAAAEAAAAIAAAAAQAAAAgAAAABAAAADAAA
+AAAAAAAAAAAAAAAAAAAAAAABAAAAAgAAAAIAAABaAAAAawAAAAAAAAAAAAAAAHJhc3RlcgAA
+AAAAAAAAAAAAVsgAAAAB////////mKwAAAD//////+AAAD8AAAP///////gAAD8AAA//////
+//4AAD8AAD////////8AAD8AAH////////+AAD8AAP/////////AAD8AAf/////////wAD8A
+A//////////4AD8AB//////////8AD8AD//////////+AD8AP//////////+AD8AP///////
+////AD8Af///////////gD8Af///////////gD8A////////////wD8A////////////wD8B
+////////////4D8D////////////4D8H////////////8D8H////////////8D8H////////
+////8D8H////////////+D8H////////////+D8P/////////////D8P/////////////D8P
+/////////////D8f/////////////D8f/////////////j8f/////////////j8f////////
+/////j8//////////////j9//////////////j9//////////////z9//////////////z9/
+/////////////79//////////////79//////////////79/////z////////79/////n///
+//////9/////u6f///////9/////v8f///////9/////v8b///////9//////8b///////9/
+/////8////////9//////M3///////9f/9//+I3///////8f/8/38Y////////8f/8/38R//
+/////78X/8/3+B///////78D/4/38B///////78T/9+DwD/wEf///z8R/54BwBsAAB///D8N
+/5ADABAAIEf/7D8M/4Af+AAE/+f//D8Mf4A//kANumX/+D8If4A5oWAfPnh/8D8If4B54DAw
+HPh/8D8IP4AB4AAwACB/8D8IP8AAAAAwACB/4D8IH4AAAAAwgEB94D8AD4AAAAA4HgBw4D8E
+A8AAAAA4AABwwD8EA4AAAAA4AABwwD8AA4AAAAA4AABxwD8AA4AAAAAYAABxwD8BAcAAAAAY
+AADzgD8BAYAAAAAcAAB/gD8AgcAAAAAcAAB+AD8AQcAAAAAcAAB8AD8AP8AAAAAeAAB8AD8A
+D8AAAAAPgAB4AD8AAeAAAAANgAD4AD8AAXAAAgAFgAHwAD8AAGgAAgAFgAHwAD8AAGgAAQAN
+gAPgAD8AAHYAAPAfAgfgAD8AADUDACx8AI/AAD8AAHQIAA/wMF/AAD8AADAAAAPAOEfAAD8A
+ADAAAAAAOAeAAD8AABABwAAAPAWAAD8AABgAeAAA8AIAAD8AAAgAd8AfcAoAAD8AAAwAMD/w
+YAIAAD8AAAYAGAAA4BwAAD8AAAIADgABwCwAAD8AAAMAB4AHwDAAAD8AAACAAfA/gHAAAD8A
+AABAAA/bAMAAAD8AAABAAAAAAcAAAD8AAAAEAAAAAYAAAD8AAAAcAAAAA4AAAD8AAAAMAAAA
+AwAAAD8AAAAGAAAAAwAAAD8AAAADAAAABgAAAD8AAAABAAAADgAAAD8AAAABgAAADAAAAD8A
+AAAAAAAAGAAAAD8AAAAAQAAAEAAAAD8AAAAAIAAAMAAAAD8AAAAAIAAAYAAAAD8AAAAAEAAA
+wAAAAD8AAAAADAADgAAAAD8AAAAABwAHAAAAAD8AAAAAAeYcAAAAAD8AAAAAAP/4AAAAAD8A
+AAAAAAAAAAAAAD8=
+
+--Alternative.Boundary.8eBYTr200hYxIuHkkf
+Content-type: text/richtext; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+ McInerny
+
+--Alternative.Boundary.8eBYTr200hYxIuHkkf--
+
+--Interpart.Boundary.8eBYTr200hYx4uHkoz--
+

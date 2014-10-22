@@ -1,0 +1,52 @@
+Path: flop.mcom.com!news.Stanford.EDU!bloom-beacon.mit.edu!news.kei.com!hookup!lll-winken.llnl.gov!uwm.edu!cs.utexas.edu!swrinde!gatech!paladin.american.edu!auvm!CASACCIA.ENEA.IT!GAZZIANO_S
+Comments: Gated by NETNEWS@AUVM.AMERICAN.EDU
+Newsgroups: comp.soft-sys.sas
+MIME-version: 1.0
+Content-type: MESSAGE/RFC822
+Message-ID: <01HPSYRPA1IAERWENE@ECA401.CASACCIA.ENEA.IT>
+Date: Wed, 26 Apr 1995 18:22:47 +0001
+Reply-To: GAZZIANO_S@CASACCIA.ENEA.IT
+Sender: "SAS(r) Discussion" <SAS-L%VTVM1.BITNET@VTBIT.CC.VT.EDU>
+From: Stefano Gazziano <GAZZIANO_S@CASACCIA.ENEA.IT>
+Subject: work space
+Comments: To: sas-l@vtbit.cc.vt.edu
+Lines: 37
+
+Return-path: <GAZZIANO_S@casaccia.enea.it>
+Received: from ECA401.CASACCIA.ENEA.IT by ECA401.CASACCIA.ENEA.IT
+ (PMDF V4.3-7 #3856) id <01HPSWPQHFQ8ERWELB@ECA401.CASACCIA.ENEA.IT>; Wed,
+ 26 Apr 1995 17:31:53 +1
+Date: Wed, 26 Apr 1995 17:25:38 +0001
+From: GAZZIANO_S@casaccia.enea.it
+Subject: work file space
+To: sas-l@uga.ucc.uga.edu
+Cc: gazziano_s@casaccia.enea.it
+Message-id: <01HPSWRQOS4IERWELB@ECA401.CASACCIA.ENEA.IT>
+MIME-version: 1.0
+Content-type: TEXT/PLAIN; CHARSET=US-ASCII
+
+
+Dear sasl ers
+
+I got ERROR WRITING THE HOST SORT FILE, POSSIBLY OUT OF DISK SPACE
+
+wner running a large data crunching job in batch mode, it goes automatically
+ every morning and retrieves data fron RDB on 6.08 under VMS VAX.
+
+I did check the disk space and actually the disk is full. So hat, well, it's an
+ industrial plan vax and noone can touch the disk, if it's almost full, qwell,
+ so be it. Then the question is :
+
+is there a way to submit a sas job under vms from the system startup (located on
+ the system disk) but redirecting ALL working areas on another disk ?
+
+I tried all trivial solutions available under the system options of SAS, but it
+ seems that SAS will always use some disk space on the system disk nevertheless.
+
+Is there a safe way to run SAS on a vax with the system disk full ?
+
+Thank you in advance.
+
+Stefano Gazziano
+
+SAS consultant in Rome Italy.

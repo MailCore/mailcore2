@@ -1,0 +1,22 @@
+From: fejj@gnome.org
+To: fejj@gnome.org
+Date: Fri, 23 Aug 2002 2:32:53 -0400
+Subject: this'll probably break even more mime parsers
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="x"
+
+--x
+Content-Type: multipart/mixed; boundary="x"
+
+--x
+Content-Type: multipart/mixed; boundary="x"
+
+--x
+Content-Type: text/plain
+
+Hello world.
+
+multipart/mixed; boundary="x"
+  multipart/mixed; boundary="x"
+     multipart/mixed; boundary="x"
+        text/plain                         <-- You are here.

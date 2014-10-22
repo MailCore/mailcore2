@@ -1,0 +1,63 @@
+Return-Path: <jwz@netscape.com>
+Received: from gruntle ([205.217.227.10]) by dredd.mcom.com
+          (Netscape Mail Server v2.02) with SMTP id AAA4040
+          for <jwz@netscape.com>; Fri, 7 Mar 1997 02:50:37 -0800
+Sender: jwz@netscape.com (Jamie Zawinski)
+Message-ID: <331FF2FF.FF6@netscape.com>
+Date: Fri, 07 Mar 1997 02:50:39 -0800
+From: Jamie Zawinski <jwz@netscape.com>
+Organization: Netscape Communications Corporation, Mozilla Division
+X-Mailer: Mozilla 3.01 (X11; U; IRIX 6.2 IP22)
+MIME-Version: 1.0
+To: Jamie Zawinski <jwz@netscape.com>
+Subject: forwarded encrypted message
+Content-Type: message/rfc822; name="smime18-encrypted.msg"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline; filename="smime18-encrypted.msg"
+X-Mozilla-Status: 0001
+Content-Length: 2812
+
+>From - Fri Dec 13 15:01:21 1996
+Return-Path: <blaker@craswell.com>
+Received: from maleman.mcom.com ([198.93.92.3]) by dredd.mcom.com
+          (Netscape Mail Server v2.02) with SMTP id AAA19742
+          for <jwz@dredd.mcom.com>; Fri, 13 Dec 1996 14:59:31 -0800
+Received: from xwing.netscape.com (xwing.mcom.com [205.218.156.54]) by maleman.mcom.com (8.6.9/8.6.9) with ESMTP id OAA23726 for <jwz@netscape.com>; Fri, 13 Dec 1996 14:58:13 -0800
+Received: from peapod.deming.com (host20.deming.com [206.63.131.20]) by xwing.netscape.com (8.7.6/8.7.3) with SMTP id OAA00270 for <jwz@netscape.com>; Fri, 13 Dec 1996 14:59:27 -0800 (PST)
+Received: by peapod.deming.com from localhost
+    (router,SLmail V2.0); Fri, 13 Dec 1996 15:01:48 Pacific Standard Time
+Received: by peapod.deming.com from seth
+    (206.63.131.30::mail daemon; unverified,SLmail V2.0); Fri, 13 Dec 1996 15:01:02 Pacific Standard Time
+Message-Id: <3.0.32.19961213150855.009172e0@mail.craswell.com>
+X-Sender: blaker@mail.craswell.com
+X-Mailer: Windows Eudora Pro Version 3.0 (32)
+Date: Fri, 13 Dec 1996 15:09:42 -0800
+To: Jamie Zawinski <jwz@netscape.com>
+From: "Blake Ramsdell" <blaker@craswell.com>
+Subject: Re: can you send me an encrypted message?
+MIME-Version: 1.0
+Content-Type: application/x-pkcs7-mime; name="smime.p7m"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7m"
+
+MIAGCSqGSIb3DQEHA6CAMIACAQAxgDCBzAIBADB2MGIxETAPBgNVBAcTCEludGVybmV0MRcw
+FQYDVQQKEw5WZXJpU2lnbiwgSW5jLjE0MDIGA1UECxMrVmVyaVNpZ24gQ2xhc3MgMSBDQSAt
+IEluZGl2aWR1YWwgU3Vic2NyaWJlcgIQKQ/GF/RumodE+WtXiPJmhDANBgkqhkiG9w0BAQEF
+AARAb0tthyav05ce7KBWdlfN1M0R6wLQ2FWPVQynuWo/yHUoo3hiII7j15FXNgnxF7QkY5/p
+mZXg0P2eJ1iYQy1vZDCBzAIBADB2MGIxETAPBgNVBAcTCEludGVybmV0MRcwFQYDVQQKEw5W
+ZXJpU2lnbiwgSW5jLjE0MDIGA1UECxMrVmVyaVNpZ24gQ2xhc3MgMSBDQSAtIEluZGl2aWR1
+YWwgU3Vic2NyaWJlcgIQDOtpec1+JM3EpqAMVqgtjzANBgkqhkiG9w0BAQEFAARAuqnsnz1O
+qEdx7NEMJDEdjccjdEuCM8x2euTYlU/GWNY+s2iKVahbT3/R8E8hp3YfrHd2sjvgy6teTOPO
+ZI2SxwAAMIAGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQIlhWqtbsElaWggASCAjBooYYTWSBz
+7A4l0Aho7mK85zpMyAR0xTKqHXT0zL9XpHbKPAcETaBTh1n7e8aJeQ93ONGAs6tVVlA6bpUN
+F3Q5O+ZuNXOMT83HIKRYEO1l8a+CH7XtUiQWtu/aBt12GQDX475WhPULKEJs7kLS2DwToRX/
+ctwEPNwc6zfsOZoVTQ5HOwisvDZ2QGwa08Psj38SaQ0Y+ryk5FeiAtKQUZ0uuJWI/rRu64yj
+KmVs1DDId18coftA2rv/u2/zABEX8u5ckEkwS7fO7UHv6XMCQ3kqgqIZZE1zIGohfUdtOYYo
+M4eki3QDyovHPxEjBbnmpUw2xDN7/DdxYEZ4CteWurQ+VoP0PUM2qwi6EgM6MpVKg8KzOWdb
+aV51a1oQKtpJJFZqZtFf9SQ4OW6NKXHsJ2AF8W4OQ+ySWQN43wMk8dGJYlPrREqn5RufPg3k
+QM+s4VwTrS2TrU+ELZCYnJFfH+N7tE8ILrFMAteVxtqjat7OJRyDxy0cnBP+oG81Sr0zvbdC
+jUPUDFlrPgFjDrswX1UpkEE2OgKWmfc134AbysJFOuCIze2XqKB96rJvxS76ygzVvrU/4sI1
+6VDlZUEuUPaBUOimFxRk/rqPJDI1M8rNKykw9qsoWQMRnvrODfzo7iVWQ0TQHiwfoBhs6Dvm
+UgrMwopFnzRdSHvT1acSqVfMYWm5nXImvtCuFAavkjDutE9+Y/LLFLBUpAVeu3rwW3wV0Tcv
+9I6Afej0ntfbH9vlRwQIl7MeXMqoBV0AAAAAAAAAAAAA
+

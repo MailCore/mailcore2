@@ -1,0 +1,22 @@
+From: fejj@gnome.org
+To: fejj@gnome.org
+Date: Fri, 23 Aug 2002 2:32:53 -0400
+Subject: if a mime parser can correctly handle this, I'm impressed
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary=""
+
+--
+Content-Type: multipart/mixed; boundary=""
+
+--
+Content-Type: multipart/mixed; boundary=""
+
+--
+Content-Type: text/plain
+
+Hello world.
+
+multipart/mixed; boundary=""
+  multipart/mixed; boundary=""
+     multipart/mixed; boundary=""
+        text/plain                         <-- You are here.

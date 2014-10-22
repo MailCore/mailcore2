@@ -1,0 +1,21 @@
+Date: Sun, 31 Dec 2000 16:00:00 -0800
+From: =?utf-8?Q?Ho=C3=A0?= <dinh.viet.hoa@gmail.com>
+To: Foo Bar <dinh.viet.hoa@gmail.com>
+Message-ID: <MyMessageID123@mail.gmail.com>
+Subject: testMessageBuilder1
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="1"
+
+--1
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+This is a HTML content 
+--1
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+<html><body>This is a HTML content</body></html>
+--1--

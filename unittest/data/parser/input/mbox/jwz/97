@@ -1,0 +1,45 @@
+Return-Path: <secure.bellcore.com!dwm@ctt.bellcore.com>
+Received: from thumper.bellcore.com by greenbush.bellcore.com (4.1/4.7)
+	id <AA28820> for nsb; Fri, 26 Feb 93 00:34:01 EST
+Received: from ctt.ctt.bellcore.com by thumper.bellcore.com (4.1/4.7)
+	id <AA05622> for nsb@greenbush; Fri, 26 Feb 93 00:33:50 EST
+Received: from shadow.secure.bellcore.com by ctt.ctt.bellcore.com (4.1/1.34)
+	id AA24430; Fri, 26 Feb 93 00:33:49 EST
+Received: by shadow.secure.bellcore.com (4.1/SMI-4.1)
+	id AA25246; Fri, 26 Feb 93 00:30:16 EST
+Date: Fri, 26 Feb 93 00:30:16 EST
+From: Don Major <dwm@ctt.bellcore.com>
+Message-Id: <9302260530.AA25246@shadow.secure.bellcore.com>
+To: dwm@ctt.bellcore.com, t-pem@thumper.bellcore.com
+Subject:  Signed PKCS/MIME Message
+Cc: 
+Mime-Version: 1.0
+Content-Type:  application/x-pkcs
+Content-Transfer-Encoding:  base64
+
+MIIE/QYJKoZIhvcNAQcCoIIE7jCCBOoCAQExDjAMBggqhkiG9w0CBQUAMIHMBgkqhkiG9w0B
+BwGggb4EgbtDb25ncmF0dWxhdGlvbnMgISEKCllvdSBoYXZlIGp1c3Qgc3VjY2Vzc2Z1bGx5
+IGRlY29kZWQgYW5kIHJlYWQKdGhpcyBwa2NzL01JTUUgc2lnbmVkIG1lc3NhZ2UuCgpTZW5k
+IGJhY2sgdG8gbWUgYSBzaWduZWQgbWVzc2FnZSwgYW5kIHRoZW4KSSB3aWxsIGJlIGFibGUg
+dG8gc2VuZCB5b3UgZW5jcnlwdGVkIG1haWwuCgpEb24KoIIDOTCCAZcwggFBAgReAAAVMA0G
+CSqGSIb3DQEBAgUAMGkxCzAJBgNVBAYTAlVTMSAwHgYDVQQKExdSU0EgRGF0YSBTZWN1cml0
+eSwgSW5jLjE4MAsGA1UECxMEQmV0YTApBgNVBAsTIkNvbW1lcmNpYWwgQ2VydGlmaWNhdGlv
+biBBdXRob3JpdHkwHhcNOTMwMTA0MjE0MjE3WhcNOTUwMTA0MjE0MjE2WjBBMQswCQYDVQQG
+EwJVUzELMAkGA1UECBMCTkoxJTAjBgNVBAoTHEJlbGwgQ29tbXVuaWNhdGlvbnMgUmVzZWFy
+Y2gwXDANBgkqhkiG9w0BAQEFAANLADBIAkEAugxQOC5x1bTsnq6NScGk4adVkaf+6KExF63z
+/6Nnd66j/HxwILswRTq5f/a8WG4rqlDgxEMxDXWNd5V6PMZROQIDAQABMA0GCSqGSIb3DQEB
+AgUAA0EAMFJady67tVPxfB7p6pi59QxebPWdQfBcq/T5D4FLgNOrDw3MIy8eogCIEuPeRVVF
+Nq8PIwctm970J/Q7yuQe0jCCAZowggFEAgReAAAFMA0GCSqGSIb3DQEBAgUAMEExCzAJBgNV
+BAYTAlVTMQswCQYDVQQIEwJOSjElMCMGA1UEChMcQmVsbCBDb21tdW5pY2F0aW9ucyBSZXNl
+YXJjaDAeFw05MzAyMTIwODAwMDBaFw05NDAyMTMwNzU5NTlaMFUxCzAJBgNVBAYTAlVTMQsw
+CQYDVQQIEwJOSjElMCMGA1UEChMcQmVsbCBDb21tdW5pY2F0aW9ucyBSZXNlYXJjaDESMBAG
+A1UEAxMJRG9uIE1ham9yMHMwDQYJKoZIhvcNAQEBBQADYgAwXwJYXRZrRAyysFKugsEtb98S
++5EjIEclQ+I6iUIEUvRjdGpAu0yjMKJlQtQ9jQvTUFH7HDc9kbM2iDBVBcjt2Crc7yWy54VV
+2TKwELTCr21x+HIEOHea/ajQnQIDAQABMA0GCSqGSIb3DQEBAgUAA0EAN/HcoCUVi8TYJ6XZ
+ng5Qd1Ho4tjmm5aov8sGPCRN4no0xLZLalSlbFr34jE8kdTj2ZsSVPTjbwEeCmFmyvCltjGB
+yDCBxQIBATBJMEExCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJOSjElMCMGA1UEChMcQmVsbCBD
+b21tdW5pY2F0aW9ucyBSZXNlYXJjaAIEXgAABTAMBggqhkiG9w0CBQUAMA0GCSqGSIb3DQEB
+AQUABFgsoNwHi2uaApNsCDjXfagjePROYvwB6XjDkw8aH/ITcWD0exVoflw7XLohV0OMoD+/
+8xWw++YEefDs6t7OFENjYQFaXEYdftoPqpD16HLcqETwGAhtJ+hA
+
+

@@ -1,0 +1,52 @@
+Received: from maleman.mcom.com (maleman.mcom.com [198.93.92.3]) by urchin.netscape.com (8.7.5/8.7.3) with SMTP id CAA25028 for <jwz@urchin.mcom.com>; Mon, 29 Jul 1996 02:26:08 -0700 (PDT)
+Received: from ns.netscape.com (ns.netscape.com.mcom.com [198.95.251.10]) by maleman.mcom.com (8.6.9/8.6.9) with ESMTP id CAA12409 for <jwz@netscape.com>; Mon, 29 Jul 1996 02:24:55 -0700
+Received: from mm1 (mm1.sprynet.com [165.121.1.50]) by ns.netscape.com (8.7.3/8.7.3) with ESMTP id CAA14074 for <jwz@netscape.com>; Mon, 29 Jul 1996 02:24:05 -0700 (PDT)
+Received: by mm1.sprynet.com id <148226-12799>; Mon, 29 Jul 1996 02:21:58 -0700
+From: The Post Office <postmaster@mm1.sprynet.com>
+Subject: email delivery error
+Cc: The Postmaster <postmaster@mm1.sprynet.com>
+MIME-Version: 1.0
+Content-Type: multipart/report; report-type=delivery-status;
+Precedence: junk
+Message-Id: <96Jul29.022158-0700pdt.148226-12799+708@mm1.sprynet.com>
+To: unlisted-recipients:; (no To-header on input)
+Date: Mon, 29 Jul 1996 02:13:08 -0700
+X-UIDL: ee2855c88ed795f63bbcbfd279c80fab
+X-Mozilla-Status: 0001
+Content-Length: 1263
+
+Processing your mail message caused the following errors:
+
+error: err.nosuchuser: newsletter-request@imusic.com
+
+--A41C7.838631588=_/mm1
+Content-Type: message/delivery-status
+
+Reporting-MTA: dns; mm1
+Arrival-Date: Mon, 29 Jul 1996 02:12:50 -0700
+
+Final-Recipient: RFC822; newsletter-request@imusic.com
+Action: failed
+Diagnostic-Code: X-LOCAL; 500 (err.nosuchuser)
+
+--A41C7.838631588=_/mm1
+Content-Type: message/rfc822
+
+Received: from urchin.netscape.com ([198.95.250.59]) by mm1.sprynet.com with ESMTP id <148217-12799>; Mon, 29 Jul 1996 02:12:50 -0700
+Received: from gruntle (gruntle.mcom.com [205.217.230.10]) by urchin.netscape.com (8.7.5/8.7.3) with SMTP id CAA24688 for <newsletter-request@imusic.com>; Mon, 29 Jul 1996 02:04:53 -0700 (PDT)
+Sender: jwz@netscape.com
+Message-ID: <31FC7EB4.41C6@netscape.com>
+Date: Mon, 29 Jul 1996 02:04:52 -0700
+From: Jamie Zawinski <jwz@netscape.com>
+Organization: Netscape Communications Corporation, Mozilla Division
+X-Mailer: Mozilla 3.0b6 (X11; U; IRIX 5.3 IP22)
+MIME-Version: 1.0
+To: newsletter-request@imusic.com
+Subject: unsubscribe
+References: <96Jul29.013736-0700pdt.148116-12799+675@mm1.sprynet.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+unsubscribe
+--A41C7.838631588=_/mm1--
+

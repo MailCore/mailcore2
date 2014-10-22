@@ -130,13 +130,17 @@ String * Attachment::mimeTypeForFilename(String * filename)
 
 Attachment * Attachment::attachmentWithContentsOfFile(String * filename)
 {
+    if (filename == NULL) {
+        return attachmentWithData(NULL, Data::data());
+    }
+    
     const char * cPath = filename->fileSystemRepresentation();
     struct stat statinfo;
     int r;
     
     r = stat(cPath, &statinfo);
     if (r < 0) {
-        return NULL;
+        return attachmentWithData(filename, Data::data());
     }
     
     if (S_ISDIR(statinfo.st_mode)) {

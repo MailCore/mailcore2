@@ -1,0 +1,150 @@
+X-Andrew-Authenticated-As: 4099;greenbush.galaxy;Nathaniel Borenstein
+Received: from Messages.8.1.N.CUILIB.3.45.SNAP.NOT.LINKED.greenbush.galaxy.sun4.41
+          via MS.5.6.greenbush.galaxy.sun4_41;
+          Mon, 27 Jan 1992 10:52:05 -0500 (EST)
+Message-ID: <EdV2eZy0M2Yt5gpZkI@thumper.bellcore.com>
+Date: Mon, 27 Jan 1992 10:52:05 -0500 (EST)
+From: Nathaniel Borenstein <nsb>
+X-Andrew-Message-Size: 287+1
+MIME-Version: 1.0
+Content-Type: multipart/alternative; 
+	boundary="Interpart_Boundary_UdV2eZS0M2YtRgpZcG"
+To: Dave Crocker <dcrocker@mordor.stanford.edu>
+Subject: PS -- Re: RFC-HDR care and feeding
+CC: ietf-822@dimacs.rutgers.edu, paf@comsol.se
+In-Reply-To: <9201250907.AA14565@nada.kth.se>
+References: <9201250907.AA14565@nada.kth.se>
+
+> THIS IS A MULTIPART MESSAGE IN 'MIME' FORMAT.  It may contain enhanced
+> text, graphics, or sounds.  If you are reading this warning, your mail
+> reader does not understand MIME format, and some of what follows may look
+> strange.  However, the plain-text version of the message appears first,
+> and can be viewed with any mail reader.
+
+--Interpart_Boundary_UdV2eZS0M2YtRgpZcG
+
+Actually, I can show you precisely what it looked like, if you can
+display the image:
+
+[An Andrew ToolKit view (mailobjv) was included here, but could not be
+displayed.]
+Note that the implementation currently warns you what character set it
+is using, since it can't really tell if that corresponds to the
+character set expected by your terminal or terminal window....
+
+--Interpart_Boundary_UdV2eZS0M2YtRgpZcG
+Content-Type: multipart/mixed; 
+	boundary="Alternative_Boundary_UdV2eZS0M2YtFgpZZY"
+
+--Alternative_Boundary_UdV2eZS0M2YtFgpZZY
+Content-type: text/plain
+Content-Transfer-Encoding: quoted-printable
+
+Actually, I can show you precisely what it looked like, if you can display the 
+image:
+
+
+
+--Alternative_Boundary_UdV2eZS0M2YtFgpZZY
+Content-type: image/gif
+Content-Description: Metamail Displaying Patrik's Name
+Content-Transfer-Encoding: base64
+
+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
+AAA7
+
+--Alternative_Boundary_UdV2eZS0M2YtFgpZZY
+Content-type: text/plain
+Content-Transfer-Encoding: quoted-printable
+
+
+
+Note that the implementation currently warns you what character set it is 
+using, since it can't really tell if that corresponds to the character set 
+expected by your terminal or terminal window....
+
+
+--Alternative_Boundary_UdV2eZS0M2YtFgpZZY--
+
+--Interpart_Boundary_UdV2eZS0M2YtRgpZcG--

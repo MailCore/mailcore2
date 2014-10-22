@@ -1,0 +1,79 @@
+Return-Path: <danw@ayce.com>
+Received: from maleman.mcom.com ([198.93.92.3]) by dredd.mcom.com
+          (Netscape Mail Server v2.02) with SMTP id AAA10068
+          for <jwz@dredd.mcom.com>; Tue, 15 Apr 1997 05:06:21 -0700
+Received: from xwing.netscape.com (xwing.mcom.com [205.218.156.54]) by maleman.mcom.com (8.6.9/8.6.9) with ESMTP id FAA02788 for <jwz@netscape.com>; Tue, 15 Apr 1997 05:04:58 -0700
+Received: from alpha.iipo.ayce.com (iipo.ayce.com [204.176.152.40]) by xwing.netscape.com (8.7.6/8.7.3) with ESMTP id FAA14103 for <jwz@netscape.com>; Tue, 15 Apr 1997 05:06:19 -0700 (PDT)
+Received: from dan.IIPO.AYCE.COM ([192.168.169.131]) by alpha.iipo.ayce.com
+          (Netscape Mail Server v1.1) with ESMTP id AAA192
+          for <jwz@netscape.com>; Tue, 15 Apr 1997 08:14:19 -0400
+Message-ID: <33536F24.BBDEA09D@ayce.com>
+Date: Tue, 15 Apr 1997 08:05:56 -0400
+From: danw@ayce.com (Dan Werbel)
+Reply-To: danw@ayce.com
+Organization: ayce
+X-Mailer: Mozilla 4.0b3 [en] (Win95; I)
+MIME-Version: 1.0
+To: Jamie Zawinski <jwz@netscape.com>
+Subject: Re: Obtaining other people's certificates
+X-Priority: 3 (Normal)
+References: <33522A52.3AC8BA5A@ayce.com> <3352D2BC.94342FC7@netscape.com>
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature"; micalg=sha1; boundary="------------ms1FB3ACBABA2E8DEE155566A8"
+X-Mozilla-Status: 0015
+Content-Length: 2813
+
+This is a cryptographically signed message in MIME format.
+
+--------------ms1FB3ACBABA2E8DEE155566A8
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+Jamie -
+
+I tried to sign and encrypt this message, but when I did I received the
+following error:
+
+The certificate issuer for this server is not recognized by Netscape.  
+The security certificate may or may not be valid.  Netscape refuses to
+connect to this server.
+
+I also got this error when I tried only to encrypt the message.  However
+with digital signing it seems to work ok.  From the error message, I
+don't know whether the server in error is my mail server, certificate
+server, or a server on your end.  Our mail server is Netscape mail
+server v1.1 and Certificate Server 1.0.
+
+Thanks for the help,
+Dan
+--------------ms1FB3ACBABA2E8DEE155566A8
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+
+MIIFJQYJKoZIhvcNAQcCoIIFFjCCBRICAQExCzAJBgUrDgMCGgUAMAsGCSqGSIb3DQEHAaCC
+BDswggHUMIIBPaADAgECAgEGMA0GCSqGSIb3DQEBBAUAMEoxCzAJBgNVBAYTAlVTMQ8wDQYD
+VQQKEwZDYXNpbm8xDTALBgNVBAsTBElJUE8xGzAZBgNVBAMTEmNlcnQuaWlwby5heWNlLmNv
+bTAeFw05NzA0MTExODMxMjdaFw05OTA0MTExODMxMjdaMCIxCzAJBgNVBAYTAlVTMRMwEQYD
+VQQDEwpEYW4gV2VyYmVsMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAORuX/pu2WBZsRVEAo8a
+gDsFIDMuMSSfHjumCcBIweDYJPIxfOA3df6LHiWm7mHo05xJQMYrikpV0cdTt2w8aKMCAwEA
+AaM2MDQwEQYJYIZIAYb4QgEBBAQDAgCgMB8GA1UdIwQYMBaAFO+SFAaztmWl3qWbjuSr0z+7
+3YQzMA0GCSqGSIb3DQEBBAUAA4GBAJY7LQc/x7QaPVllkWjLCgn48g/ofjPmpYhVau84uNoc
+2uxjxkk7nt7KVHD+JR5q22hZGE3FjDOVX1hf1Brv1ND/TrSNWNqksTPnLhJrksB4jr1nyWdk
+cDdiwAwg/JV6hxDSotWEyQQxuXZcc2/8Uql0MayeQoCfnBddsRJJBCsaMIICXzCCAcigAwIB
+AgIBATANBgkqhkiG9w0BAQQFADBKMQswCQYDVQQGEwJVUzEPMA0GA1UEChMGQ2FzaW5vMQ0w
+CwYDVQQLEwRJSVBPMRswGQYDVQQDExJjZXJ0LmlpcG8uYXljZS5jb20wHhcNOTcwNDExMTc1
+ODE0WhcNOTkwNDExMTc1ODE0WjBKMQswCQYDVQQGEwJVUzEPMA0GA1UEChMGQ2FzaW5vMQ0w
+CwYDVQQLEwRJSVBPMRswGQYDVQQDExJjZXJ0LmlpcG8uYXljZS5jb20wgZ8wDQYJKoZIhvcN
+AQEBBQADgY0AMIGJAoGBAN5RErUTfKDv1dNb5N6aFM8udyzuG1FfJ1pTGdN1ifsbhBsdDrX4
+h4t/ttLoL5oxs0giyWewmfnCBYJaszX/B8LYdbN7uZ/NYbVTQEj/+tP6cfUVt9BUm6kj+hep
+YOXjNYHpyVHhORPXIDpLcIdi9ocSu8Y0bZpc3KChX3JEAehhAgMBAAGjVTBTMBEGCWCGSAGG
++EIBAQQEAwIABDAdBgNVHQ4EFgQU75IUBrO2ZaXepZuO5KvTP7vdhDMwHwYDVR0jBBgwFoAU
+75IUBrO2ZaXepZuO5KvTP7vdhDMwDQYJKoZIhvcNAQEEBQADgYEAmyjzwo6RbPwY4nNrDU+a
+bv0/Qai2GJuapSuiG5cnGG7xF1Lm1aiwmU6NVuoW8QyrQSvh80zNdSQIwjnxqws6NDrAg1VG
+fwpkz2hCBZmpvfie2GedLO/19gO9Myahwr7BsjjAeCJhX+s9iJIWMcLB1auoc8EAq69RsqI1
+ftgNKqYxgbMwgbACAQEwTzBKMQswCQYDVQQGEwJVUzEPMA0GA1UEChMGQ2FzaW5vMQ0wCwYD
+VQQLEwRJSVBPMRswGQYDVQQDExJjZXJ0LmlpcG8uYXljZS5jb20CAQYwCQYFKw4DAhoFADAN
+BgkqhkiG9w0BAQEFAARANKYYXgGR1/JsdTBBpDKE2QSSCiOKnZI1oGAXbyhUlpzXcjevB9J6
+gI03JZ6QJOTp0t2YNPnNtxaIp0YVe2TC/g==
+--------------ms1FB3ACBABA2E8DEE155566A8--
+

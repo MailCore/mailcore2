@@ -1,0 +1,61 @@
+Return-Path: <dag%persoft.UUCP@cs.wisc.edu>
+Received: from thumper.bellcore.com by greenbush.bellcore.com (4.1/4.7)
+	id <AA15154> for nsb; Tue, 17 Mar 92 14:36:55 EST
+Received: from spool.cs.wisc.edu by thumper.bellcore.com (4.1/4.7)
+	id <AA00163> for nsb@greenbush; Tue, 17 Mar 92 14:36:51 EST
+Received: from persoft.UUCP by spool.cs.wisc.edu; Tue, 17 Mar 92 13:36:05 -0600
+Received: by persoft.persoft.com (/¥=-/¥ Smail3.1.18.1 #18.2)
+	id <m0lQjol-00018GC@persoft.persoft.com>; Tue, 17 Mar 92 13:27 CST
+Message-Id: <m0lQjol-00018GC@persoft.persoft.com>
+Date: Tue, 17 Mar 92 13:27 CST
+From: dag@persoft.com (Daniel A. Glasser)
+Mime-Version: 1.0
+To: nsb@thumper.bellcore.com
+Subject: First impressions of metamail release 2
+Cc: dag@gorgon
+Content-Type: text/richtext
+Content-Transfer-Encoding: quoted-printable
+
+So far, I've managed to build all of the images for the new metamail rele=
+ase.
+I've come across the following:
+<nl><indent>For SysVr3.2, the manifest constant R_OK is defined in <lt>sy=
+s/unistd.h>. =
+
+This change is in metamail/mailto.c.
+<nl><nl>
+
+In <bold>ezview/ezview.c</bold>, the <bold>#include <lt>file.h></bold> mu=
+st follow the <bold>#include <lt>sys/types.h></bold>
+in the <bold>#ifdef SYSV</bold> section, so I moved it to below the <bold=
+>#endif</bold> for that bit.
+<nl><nl>
+
+For ISC SysVr3.2, the routine <italic>gethostname()</italic> (required by=
+ <bold>metamail/mailto.c</bold>) is in the
+library <bold>/usr/lib/libinet.a</bold>.  I added a new variable to the r=
+oot and subsidiary
+Makefiles, <bold>LDLIBS</bold>, which trails the other files and librarie=
+s on the cc command
+lines that produce executables.
+<nl></indent><nl><nl>
+
+I will send you context diffs of my changes tonight.  This is my first tr=
+y
+of "mailto", so we'll see if it works.  (I think it may have one of those=
+
+"missing TERMCAP entry" problems that richtext used to suffer from.)
+<nl><nl>
+
+Also, I believe that the copyright notice in some of the files (README)
+is out of date.
+<nl><nl>
+
+I'd send you the diffs now, except that I don't have a cdiff program on
+<bold>persoft.com
+</bold>so I figure I'll send it from
+<italic>gorgon.UUCP
+</italic>where I've got GNU diff.
+<nl><nl>
+					Daniel
+
