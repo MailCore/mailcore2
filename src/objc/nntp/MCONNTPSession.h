@@ -71,7 +71,7 @@
 /**
  Returns an operation that will fetch the list of article numbers.
  
- MCONNTPFetchArticlesOperation * op = [session fetchAllArticlesOperation];
+ MCONNTPFetchArticlesOperation * op = [session fetchAllArticlesOperation:@"comp.lang.c"];
  [op start:^(NSError * error, MCOIndexSet * articles) {
  }];
  */
@@ -80,7 +80,7 @@
 /**
  Returns an operation that will fetch the header of the given message.
  
- MCONNTPFetchHeaderOperation * op = [session fetchHeaderOperationWithIndex:idx inGroup:@"Group"];
+ MCONNTPFetchHeaderOperation * op = [session fetchHeaderOperationWithIndex:idx inGroup:@"comp.lang.c"];
  [op start:^(NSError * error, MCOMessageHeader * header) {
  // header is the parsed header of the message.
  }];
@@ -90,7 +90,7 @@
 /**
  Returns an operation that will fetch an overview (headers) for a set of messages.
  
- MCONNTPFetchHeaderOperation * op = [session fetchOverviewOperationWithIndexes:indexes inGroup:@"Group"];
+ MCONNTPFetchHeaderOperation * op = [session fetchOverviewOperationWithIndexes:indexes inGroup:@"comp.lang.c"];
  [op start:^(NSError * error, NSArray * headers) {
  // headers are the parsed headers of each part of the overview.
  }];
@@ -100,7 +100,7 @@
 /**
  Returns an operation that will fetch the content of the given message.
  
- MCONNTPFetchArticleOperation * op = [session fetchArticleOperationWithIndex:idx inGroup:@"Group"];
+ MCONNTPFetchArticleOperation * op = [session fetchArticleOperationWithIndex:idx inGroup:@"comp.lang.c"];
  [op start:^(NSError * error, NSData * messageData) {
  // messageData is the RFC 822 formatted message data.
  }];
@@ -110,7 +110,7 @@
 /**
  Returns an operation that will fetch the content of a message with the given messageID.
  
- MCONNTPFetchArticleOperation * op = [session fetchArticleOperationWithMessageID:@"<26>" inGroup:@"Group"];
+ MCONNTPFetchArticleOperation * op = [session fetchArticleOperationWithMessageID:@"<MessageID123@mail.google.com>" inGroup:@"comp.lang.c"];
  [op start:^(NSError * error, NSData * messageData) {
  // messageData is the RFC 822 formatted message data.
  }];
@@ -120,11 +120,11 @@
 /**
  Returns an operation that will fetch the server's date and time.
  
- MCONNTPFetchArticleOperation * op = [session fetchServerTimeOperation];
- [op start:^(NSError * error, NSDate * serverTime) {
+ MCONNTPFetchArticleOperation * op = [session fetchServerDateOperation];
+ [op start:^(NSError * error, NSDate * serverDate) {
  }];
  */
-- (MCONNTPFetchServerTimeOperation *) fetchServerTimeOperation;
+- (MCONNTPFetchServerTimeOperation *) fetchServerDateOperation;
 
 /**
  Returns an operation that will list all available newsgroups.

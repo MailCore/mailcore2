@@ -249,7 +249,7 @@ namespace mailcore {
         ErrorNoRecipient,
         ErrorNoop,
         ErrorGmailApplicationSpecificPasswordRequired,
-        ErrorBadResponse,
+        ErrorServerDate,
     };
     
     enum PartType {

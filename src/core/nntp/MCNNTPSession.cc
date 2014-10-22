@@ -368,9 +368,10 @@ Array * NNTPSession::listDefaultNewsgroups(ErrorCode * pError)
     
     MCLog("fetch subscribed");
     loginIfNeeded(pError);
-    if (* pError != ErrorNone)
+    if (* pError != ErrorNone) {
         return NULL;
-
+    }
+    
     r = newsnntp_list_subscriptions(mNNTP, &subd_groups);
     MCLog("fetch subscribed %u", r);
     
@@ -392,9 +393,10 @@ Array * NNTPSession::listDefaultNewsgroups(ErrorCode * pError)
     }
     newsnntp_list_subscriptions_free(subd_groups);
     * pError = ErrorNone;
-
+    
     return result;
 }
+
 
 MessageHeader * NNTPSession::fetchHeader(String *groupName, unsigned int index, ErrorCode * pError) 
 {

@@ -62,7 +62,7 @@ namespace mailcore {
         
         virtual NNTPFetchOverviewOperation * fetchOverviewOperationWithIndexes(String * groupName, IndexSet * indexes);
         
-        virtual NNTPFetchServerTimeOperation * fetchServerTimeOperation();
+        virtual NNTPFetchServerTimeOperation * fetchServerDateOperation();
         
         virtual NNTPListNewsgroupsOperation * listAllNewsgroupsOperation();
         virtual NNTPListNewsgroupsOperation * listDefaultNewsgroupsOperation();

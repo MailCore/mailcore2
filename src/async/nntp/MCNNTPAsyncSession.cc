@@ -204,7 +204,7 @@ NNTPFetchOverviewOperation * NNTPAsyncSession::fetchOverviewOperationWithIndexes
     return op;
 }
 
-NNTPFetchServerTimeOperation * NNTPAsyncSession::fetchServerTimeOperation()
+NNTPFetchServerTimeOperation * NNTPAsyncSession::fetchServerDateOperation()
 {
     NNTPFetchServerTimeOperation * op = new NNTPFetchServerTimeOperation();
     op->setSession(this);

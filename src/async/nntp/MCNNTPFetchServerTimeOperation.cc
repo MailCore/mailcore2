@@ -29,6 +29,6 @@ time_t NNTPFetchServerTimeOperation::time()
 void NNTPFetchServerTimeOperation::main()
 {
     ErrorCode error;
-    mTime = session()->session()->fetchServerClockTime(&error);
+    mTime = session()->session()->fetchServerDate(&error);
     setError(error);
 }

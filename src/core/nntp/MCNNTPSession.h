@@ -45,7 +45,7 @@ namespace mailcore {
         virtual void checkAccount(ErrorCode * pError);
         
         virtual Array * /* NNTPGroupInfo */ listAllNewsgroups(ErrorCode * pError);
-        virtual Array * listDefaultNewsgroups(ErrorCode * pError);
+        virtual Array * /* NNTPGroupInfo */ listDefaultNewsgroups(ErrorCode * pError);
         
         virtual MessageHeader * fetchHeader(String * groupName, unsigned int index, ErrorCode * pError);
         virtual Array /*MessageHeader*/ * fetchOverArticlesInRange(Range range, String * groupname, ErrorCode * pError);
@@ -55,7 +55,7 @@ namespace mailcore {
         virtual Data * fetchArticle(String *groupName, unsigned int index, NNTPProgressCallback * callback, ErrorCode * pError);
         virtual Data * fetchArticleByMessageID(String * groupname, String * messageID, ErrorCode * pError);
         
-        virtual time_t fetchServerClockTime(ErrorCode * pError);
+        virtual time_t fetchServerDate(ErrorCode * pError);
         
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();

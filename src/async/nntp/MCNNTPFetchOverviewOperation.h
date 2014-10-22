@@ -35,7 +35,7 @@ namespace mailcore {
     private:
         IndexSet * mIndexes;
         String * mGroupName;
-        Array * /* NNTPGroupInfo */ mArticles;
+        Array * /* MessageHeader */ mArticles;
     };
     
 }
