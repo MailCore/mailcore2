@@ -8,10 +8,11 @@
 
 #include "MCDateFormatter.h"
 #include <stdlib.h>
-#include <unicode/udat.h>
 
 #if defined(__APPLE__)
 #define USE_COREFOUNDATION 1
+#else
+#include <unicode/udat.h>
 #endif
 
 #if USE_COREFOUNDATION
@@ -37,10 +38,11 @@ DateFormatter::~DateFormatter()
     if (mAppleDateFormatter != NULL) {
         CFRelease(mAppleDateFormatter);
     }
-#endif
+#else
     if (mDateFormatter != NULL) {
         udat_close(mDateFormatter);
     }
+#endif
     MC_SAFE_RELEASE(mDateFormat);
     MC_SAFE_RELEASE(mTimezone);
     MC_SAFE_RELEASE(mLocale);
