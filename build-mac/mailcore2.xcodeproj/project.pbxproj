@@ -566,8 +566,8 @@
 		84CFA98A19F7168400FE35D2 /* MCNNTPFetchOverviewOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CFA98619F7159700FE35D2 /* MCNNTPFetchOverviewOperation.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		84CFA98B19F716EE00FE35D2 /* MCONNTPFetchOverviewOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CFA98119F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		84CFA98C19F716EF00FE35D2 /* MCONNTPFetchOverviewOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CFA98119F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84CFA98F19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA98D19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp */; };
-		84CFA99019F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA98D19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp */; };
+		84CFA98F19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA98D19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cc */; };
+		84CFA99019F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA98D19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cc */; };
 		84CFA99119F725AF00FE35D2 /* MCNNTPFetchServerTimeOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CFA98E19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		84CFA99219F725B000FE35D2 /* MCNNTPFetchServerTimeOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CFA98E19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84CFA99519F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA99419F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.mm */; };
@@ -1854,7 +1854,7 @@
 		84CFA98219F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCONNTPFetchOverviewOperation.mm; sourceTree = "<group>"; };
 		84CFA98519F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCNNTPFetchOverviewOperation.cc; sourceTree = "<group>"; };
 		84CFA98619F7159700FE35D2 /* MCNNTPFetchOverviewOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNNTPFetchOverviewOperation.h; sourceTree = "<group>"; };
-		84CFA98D19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCNNTPFetchServerTimeOperation.cpp; sourceTree = "<group>"; };
+		84CFA98D19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCNNTPFetchServerTimeOperation.cc; sourceTree = "<group>"; };
 		84CFA98E19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNNTPFetchServerTimeOperation.h; sourceTree = "<group>"; };
 		84CFA99319F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCONNTPFetchServerTimeOperation.h; sourceTree = "<group>"; };
 		84CFA99419F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCONNTPFetchServerTimeOperation.mm; sourceTree = "<group>"; };
@@ -2433,7 +2433,7 @@
 				84CFA98619F7159700FE35D2 /* MCNNTPFetchOverviewOperation.h */,
 				84D73740199BF963005124E5 /* MCNNTPFetchArticlesOperation.cc */,
 				84D73741199BF963005124E5 /* MCNNTPFetchArticlesOperation.h */,
-				84CFA98D19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp */,
+				84CFA98D19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cc */,
 				84CFA98E19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.h */,
 				84D73744199BFA8C005124E5 /* MCNNTPCheckAccountOperation.cc */,
 				84D73745199BFA8C005124E5 /* MCNNTPCheckAccountOperation.h */,
@@ -4042,7 +4042,7 @@
 				C63CD68116BDCDD400DB18F1 /* MCHTMLRenderer.cc in Sources */,
 				C63CD68216BDCDD400DB18F1 /* MCSizeFormatter.cc in Sources */,
 				C63CD68616BE148B00DB18F1 /* MCHTMLRendererCallback.cc in Sources */,
-				84CFA98F19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp in Sources */,
+				84CFA98F19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cc in Sources */,
 				C63CD69116BE566E00DB18F1 /* MCHTMLCleaner.cc in Sources */,
 				C64BB22116E34DCB000DB34C /* MCIMAPSyncResult.cc in Sources */,
 				C64BB22B16E5C0A4000DB34C /* MCIMAPCapabilityOperation.cc in Sources */,
@@ -4270,7 +4270,7 @@
 				C6BA2BE81705F4E6003F0E9E /* MCDateFormatter.cc in Sources */,
 				C6BA2BE91705F4E6003F0E9E /* MCHTMLRenderer.cc in Sources */,
 				C6BA2BEA1705F4E6003F0E9E /* MCSizeFormatter.cc in Sources */,
-				84CFA99019F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp in Sources */,
+				84CFA99019F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cc in Sources */,
 				C6BA2BEB1705F4E6003F0E9E /* MCHTMLRendererCallback.cc in Sources */,
 				C6BA2BEC1705F4E6003F0E9E /* MCHTMLCleaner.cc in Sources */,
 				C6BA2BED1705F4E6003F0E9E /* MCIMAPSyncResult.cc in Sources */,
