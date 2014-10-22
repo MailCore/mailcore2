@@ -1,0 +1,1 @@
+{"header":{"from":{"class":"mailcore::Address","mailbox":"jwz"},"date":"978307200","messageID":"MyMessageID123@mail.gmail.com","receivedDate":"978307200","subject":"test of URLs in text\/plain messages","class":"mailcore::MessageHeader"},"class":"mailcore::MessageParser","mainPart":{"partType":"single","uniqueID":"0","mimeType":"text\/plain","class":"mailcore::Attachment"}}

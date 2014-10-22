@@ -110,4 +110,9 @@ MCO_OBJC_SYNTHESIZE_STRING(setBoundaryPrefix, boundaryPrefix)
     return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->openPGPEncryptedMessageDataWithEncryptedData(MCO_FROM_OBJC(mailcore::Data, encryptedData)));
 }
 
+- (void) _setBoundaries:(NSArray *)boundaries
+{
+    MCO_NATIVE_INSTANCE->setBoundaries(MCO_FROM_OBJC(mailcore::Array, boundaries));
+}
+
 @end

@@ -1,0 +1,31 @@
+From: jwz
+Subject: test of URLs in text/plain messages
+
+We search through text/plain messages for URLs and make them clickable.
+Here are some examples.
+
+These should all have links over them:
+
+	http://home.netscape.com and http://home.netscape.com/, (and the
+	comma shouldn't be in the URL) "http://home.netscape.com:80/" 
+	and <https://home.netscape.com> and mailto:jwz as well as
+	mailto:jwz%2Cterry, and mailto:jwz,terry, but note that the final
+	commas shouldn't be in the URLs.
+
+	http://host/some-random-image.map?300,200 should have both numbers
+	inside the link, and http://host/some-random.cgi?3,2,1, should
+	have all three numbers in the link, but not the trailing comma.
+	gopher://host/ blah blah blah.  But http://host,other-junk should
+	stop before the comma, not include other junk in the URL.
+	news:some.group should work.
+
+These should NOT have links over them:
+
+	mailto: shouldn't, since that's useless, as is news:, nor should
+	about: since that's a word that occurs at the end of a sentence a 
+	lot.  http: all by itself shouldn't have a link, neither should 
+	gopher:, and "internal-gopher-binary" is a hackish internal image.
+	news:a shouldn't either, because it's short.
+	internal-external-reconnect sure shouldn't.
+
+Ok!  That should cover it.

@@ -2,18 +2,23 @@
 
 if xcodebuild -showsdks|grep iphoneos8.1 >/dev/null ; then
     sdkversion=8.1
+    devicearchs="armv7 armv7s arm64"
     archs="armv7 armv7s arm64 i386 x86_64"
 elif xcodebuild -showsdks|grep iphoneos8.0 >/dev/null ; then
     sdkversion=8.0
+    devicearchs="armv7 armv7s arm64"
     archs="armv7 armv7s arm64 i386 x86_64"
 elif xcodebuild -showsdks|grep iphoneos7.1 >/dev/null ; then
     sdkversion=7.1
+    devicearchs="armv7 armv7s arm64"
     archs="armv7 armv7s arm64 i386 x86_64"
 elif xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
     sdkversion=7.0
+    devicearchs="armv7 armv7s arm64"
     archs="armv7 armv7s arm64 i386 x86_64"
 elif xcodebuild -showsdks|grep iphoneos6.1 >/dev/null ; then
     sdkversion=6.1
+    devicearchs="armv7 armv7s"
     archs="armv7 armv7s i386"
 else
     echo SDK not found
@@ -43,15 +48,15 @@ resultdir="$builddir/builds"
 tmpdir="$tempbuilddir/tmp"
 
 if test -f "$resultdir/icu4c-ios-$build_version.zip" ; then
-	echo install from cache
-	rm -rf ../Externals/icu4c-ios
-	mkdir -p ../Externals/tmp
-	unzip -q "$resultdir/icu4c-ios-$build_version.zip" -d ../Externals/tmp
-	mv "../Externals/tmp/icu4c-ios-$build_version/icu4c-ios" ../Externals
+  echo install from cache
+  rm -rf ../Externals/icu4c-ios
+  mkdir -p ../Externals/tmp
+  unzip -q "$resultdir/icu4c-ios-$build_version.zip" -d ../Externals/tmp
+  mv "../Externals/tmp/icu4c-ios-$build_version/icu4c-ios" ../Externals
   mkdir -p ../Externals/installed
   ln -sf "$resultdir/icu4c-ios-$build_version.zip" ../Externals/installed
-	rm -rf ../Externals/tmp
-	exit 0
+  rm -rf ../Externals/tmp
+  exit 0
 fi
 
 mkdir -p "$resultdir"
@@ -66,7 +71,7 @@ cd "$srcdir"
 if test -f "$builddir/downloads/$package_filename" ; then
 	cp "$builddir/downloads/$package_filename" .
 else
-	curl -O "$url"
+	curl -L -O "$url"
 	if test x$? != x0 ; then
 		echo fetch of icu4c failed
 		exit 1
@@ -98,24 +103,7 @@ make # >> "$logdir/icu4c-build.log"
 make install "prefix=$tmpdir/crossbuild/icu4c-$MARCH" # >> "$logdir/icu4c-build.log"
 
 ARCH=arm
-if xcodebuild -showsdks|grep iphoneos8.1 >/dev/null ; then
-	sdkversion=8.1
-    MARCHS="armv7 armv7s arm64"
-elif xcodebuild -showsdks|grep iphoneos8.0 >/dev/null ; then
-    sdkversion=8.0
-	MARCHS="armv7 armv7s arm64"
-elif xcodebuild -showsdks|grep iphoneos7.1 >/dev/null ; then
-    sdkversion=7.1
-    MARCHS="armv7 armv7s arm64"
-elif xcodebuild -showsdks|grep iphoneos7.0 >/dev/null ; then
-    sdkversion=7.0
-    MARCHS="armv7 armv7s arm64"
-elif xcodebuild -showsdks|grep iphoneos6.1 >/dev/null ; then
-    MARCHS="armv7 armv7s"
-else
-    echo SDK not found
-    exit 1
-fi	
+MARCHS="$devicearchs"
 
 iphonesdk="iphoneos$sdkversion"
 sysroot="`xcode-select -p`/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$sdkversion.sdk"

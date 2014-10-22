@@ -1,0 +1,2382 @@
+Return-Path: <mrose@dbc.mtview.ca.us>
+Received: from thumper.bellcore.com by greenbush.bellcore.com (4.1/4.7)
+	id <AA18372> for nsb; Tue, 1 Sep 92 21:31:43 EDT
+Received: from dbc.mtview.ca.us (ppp.dbc.mtview.ca.us) by thumper.bellcore.com (4.1/4.7)
+	id <AA17075> for nsb@greenbush; Tue, 1 Sep 92 21:30:38 EDT
+Received: from localhost (localhost.ARPA) by dbc.mtview.ca.us (4.1/3.1.090690)
+	id AA07958; Tue, 1 Sep 92 18:29:38 PDT
+To: mh-mime@dbc.mtview.ca.us
+Subject: I'd like your opinion
+Reply-To: mh-mime@dbc.mtview.ca.us
+Mime-Version: 1.0
+Date: Tue, 01 Sep 1992 18:24:36 -0700
+From: Marshall Rose <mrose@dbc.mtview.ca.us>
+Resent-To: Nathaniel Borenstein <nsb@thumper.bellcore.com>
+Resent-Date: Tue, 01 Sep 1992 18:29:38 -0700
+Resent-From: Marshall Rose <mrose@dbc.mtview.ca.us>
+Content-Type:  multipart/mixed; boundary="FOOFOO"
+Message-ID: <7821.715397074@dbc.mtview.ca.us>
+
+--FOOFOO
+Content-Type: text/plain; charset="us-ascii"
+
+For "The Simple Times", the openly-available SNMP newsletter which I
+edit, there are two editions: a PostScript edition and a MIME edition.
+Both are really MIME messages: the former is just a single
+application/postscript content, the latter is a highly-structured
+multipart/mixed content which contains text/plain at the leaves.
+
+I am planning on adding a third edition, richtext, which will be like
+the text/plain edition, except all the leafs will be text/richtext.
+
+I have a couple of crude scripts which take the LaTeX subset I use and
+produce richtext.  The only problematic area is handling itemize
+environments.  Ideally, I'd like to do a bulleted list, but there really
+isn't a richtext directive for this.  So, I've done a hack.
+
+For those of you that are running Borenstein's richtext viewer (or have
+your own), I'd like you to take a look at the message below and tell me
+what you think of it.  Is it "rich" enough?
+
+Thanks,
+
+/mtr
+
+--FOOFOO
+Content-Type: multipart/mixed; boundary="----- =_baaaaaaaaa1"
+
+
+------- =_baaaaaaaaa1
+Reply-to: The Simple Times <st-editorial@simple-times.org>
+To:       The Simple Times Subscribers <st-editorial@simple-times.org>
+Fcc:      outbox, simple-times/1.3, /etc/lists/simple-times/mime
+Subject:  The Simple Times, volume 1, number 3
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="----- =_aaaaaaaaaa0"
+Content-Description: The Simple Times
+
+------- =_aaaaaaaaaa0
+Content-Type: multipart/mixed; boundary="----- =_aaaaaaaaaa1"
+Content-Description: Issue Information
+
+------- =_aaaaaaaaaa1
+Content-Type: text/richtext; charset="us-ascii"
+Content-Description: Masthead
+Content-Transfer-Encoding: quoted-printable
+
+<bold>The Simple Times</bold>(tm)<nl>
+<nl>
+<center><nl>
+----------------------------------------------------------------------<nl>
+The Bi-Monthly Newsletter of SNMP Technology, Comment, and Events (sm)<nl>
+Volume 1, Number 3                                   July/August, 1992<nl>
+----------------------------------------------------------------------<nl>
+</center>
+
+------- =_aaaaaaaaaa1
+Content-Type: text/richtext; charset="us-ascii"
+Content-Description: READ-ME
+Content-Transfer-Encoding: quoted-printable
+
+<bold>The Simple Times</bold> is an openly-available publication devoted
+to the promotion of the Simple Network Management Protocol (SNMP).
+In each issue,
+<bold>The Simple Times</bold> presents:
+a refereed technical article,
+an industry comment,
+and several featured columns.
+In addition, some issues include brief announcements,
+summaries of recent publications,
+and an activities calendar.
+
+------- =_aaaaaaaaaa1
+Content-Type: text/richtext; charset="us-ascii"
+Content-Description: Disclaimer
+Content-Transfer-Encoding: quoted-printable
+
+<bold>The Simple Times</bold> is openly-available.
+You are free to copy, distribute,
+or cite its contents.
+However,
+any use must credit both the contributor and <bold>The Simple
+Times</bold>.
+(Note that any trademarks appearing herein are the property of their
+respective owners.)
+Further,
+this publication is distributed on an "as is" basis, without warranty.
+Neither the publisher nor any contributor shall have any liability to
+any person or entity with respect to any liability,
+loss,
+or damage caused or alleged to be caused directly or indirectly by the
+information contained in <bold>The Simple Times</bold>.
+<nl><nl>
+<bold>The Simple Times</bold> is available via both electronic-mail and
+hard-copy.
+
+------- =_aaaaaaaaaa1--
+
+------- =_aaaaaaaaaa0
+Content-Type: multipart/mixed; boundary="----- =_aaaaaaaaaa2"
+Content-Description: Issue Contents
+
+------- =_aaaaaaaaaa2
+Content-Type: text/richtext; charset="us-ascii"
+Content-Description: Technical Article
+Content-Transfer-Encoding: quoted-printable
+
+<bold>Technical Article -- <underline>David L. Partain, Linkoping Universi=
+ty</underline></bold>
+<nl><nl>
+<nl>
+In this issue: <italic>An Implementation of SNMP Security</italic>
+<nl><nl>
+<nl>
+In his <italic>Security and Protocols</italic> column in <bold>The Simple =
+Times</bold>,
+Keith McCloghrie discusses SNMP Security.
+In his first two columns,
+he briefly explained the new security mechanisms,
+outlined the protection that these extensions provide,
+and showed how the mechanisms are integrated into SNMP.
+In this issue,
+I report on my implementation of SNMP Security,
+demonstrating that the process is certainly feasible,
+and hopefully encouraging further fielding of SNMP Security software.
+<nl><nl>
+In keeping with the SNMP tradition of ensuring implementation
+experience prior to standardization,
+several implementations of SNMP Security were written while the proposals =
+were
+Internet-Drafts. =
+
+Implementation experience is essential to verify the soundness of the
+technology and to highlight those areas in the specifications which are
+unclear or perhaps not reasonably implementable.
+So, I wrote an implementation as a part of my Master's work under Dr. Jeff=
+rey
+D. Case at the University of Tennessee at Knoxville.
+The implementation is based on the 4BSD/ISODE SNMP package.
+<nl><nl>
+In this article,
+I briefly discuss modifications made to an SNMP implementation to incorpor=
+ate
+the SNMP Security features.
+Further,
+we'll examine the cost of realizing these changes,
+along with improvements made to
+the specifications during the implementation period.
+In this way I
+hope to provide future implementors with modest guidance for
+implementing SNMP Security in a performant and correct fashion.
+<nl><nl>
+The implementation as a whole progressed quickly and without serious
+difficulty.
+The largest portion of the time was spent in understanding
+the software platform and not in the actual coding.
+The methodology I
+chose was straightforward:  I first altered the wrappers in the SNMP
+message and then implemented the party concept from the SNMP administrativ=
+e
+model.
+These two changes essentially implemented noAuth/noPriv.
+I then added the Digest Authentication Protocol,
+the next logical step,
+followed finally by the Symmetric Privacy Protocol.
+<nl><nl>
+<nl>
+<bold>noAuth/noPriv</bold>
+<nl><nl>
+Recall from the original SNMP specification that the PDU is wrapped
+within a <underline>Message</underline>,
+which contains not only the PDU,
+but also the community string and the SNMP version number: =
+
+<nl><nl><indent><smaller><samepage>
+      Message::=3D
+<nl>
+          SEQUENCE {
+<nl>
+              version
+<nl>
+                  INTEGER { version-1(0) },
+<nl>
+<nl><nl>
+              community
+<nl>
+                  OCTET STRING,
+<nl>
+<nl><nl>
+              data
+<nl>
+                  PDUs
+<nl>
+          }
+<nl>
+</samepage></smaller><nl></indent><nl>
+This is the sole
+wrapper.
+SNMP Security's innermost wrapper,
+the <underline>SnmpMgmtCom</underline>
+(SNMP management communication)
+includes the PDU along with the identities of the source and destination
+parties,
+but neither a community string nor a version:
+<nl><nl><indent><smaller><samepage>
+      SnmpMgmtCom ::=3D
+<nl>
+          [1] IMPLICIT SEQUENCE {
+<nl>
+              dstParty
+<nl>
+                  OBJECT IDENTIFIER,
+<nl>
+              srcParty
+<nl>
+                  OBJECT IDENTIFIER,
+<nl>
+              pdu
+<nl>
+                  PDUs
+<nl>
+          }
+<nl>
+</samepage></smaller><nl></indent><nl>
+The <underline>SnmpMgmtCom</underline> is in turn wrapped in a
+<underline>SnmpAuthMsg</underline> (SNMP authenticated message),
+which contains the authentication information
+(<underline>AuthInformation</underline>,
+which is used in an authentication protocol-specific manner),
+and the <underline>SnmpMgmtCom</underline>:
+<nl><nl><indent><smaller><samepage>
+      SnmpAuthMsg ::=3D
+<nl>
+          [1] IMPLICIT SEQUENCE {
+<nl>
+              authInfo
+<nl>
+                  AuthInformation,
+<nl>
+              authData
+<nl>
+                  SnmpMgmtCom
+<nl>
+          }
+<nl>
+</samepage></smaller><nl></indent><nl>
+Finally,
+the <underline>SnmpPrivMsg</underline> (SNMP private message) contains the=
+ identity of
+the destination party and a possibly encrypted serialization of the
+<underline>SnmpAuthMsg</underline>: =
+
+<nl><nl><indent><smaller><samepage>
+      SnmpPrivMsg ::=3D
+<nl>
+          [1] IMPLICIT SEQUENCE {
+<nl>
+              privDst
+<nl>
+                  OBJECT IDENTIFIER,
+<nl>
+              privData[1]
+<nl>
+                  IMPLICIT OCTET STRING
+<nl>
+          }
+<nl>
+</samepage></smaller><nl></indent><nl>
+Thus,
+the first major step is to change from one SNMP wrapper to a wrapper insid=
+e a
+wrapper inside a wrapper.
+<nl><nl>
+The additional change to SNMP for noAuth/noPriv is the implementation
+of the party database.
+Recall that SNMP Security's administrative
+model is based upon the notion of an SNMP party,
+which can be thought of as the identity of a particular protocol entity
+running at a particular network location and in a particular security cont=
+ext.
+Of course,
+a particular protocol entity may operate as any of several parties
+(for example,
+one which uses no authentication and no privacy,
+and one which uses both),
+but each party uniquely identifies that protocol entity.
+This specificity contrasts with the community-based model used in the orig=
+inal
+SNMP,
+and is necessary in order to uniquely identify the source and destination =
+of a
+message.
+An
+implementation of SNMP Security must of course implement a party
+database with all the relevant information for that party.
+There are
+many possible strategies for implementing the party database,
+but care should be taken to provide a stable database which is recoverable=
+,
+i.e.,
+after crashes.
+<nl><nl>
+The cost of implementing only noAuth/noPriv in comparison to the original =
+SNMP
+is apparent.
+Three wrappers cost more in processing speed,
+agent complexity,
+and protocol complexity than a single wrapper.
+While this is true,
+each wrapper serves an essential role in SNMP Security.
+The
+destination party from the <underline>SnmpPrivMsg</underline> determines w=
+hich privacy
+protocol to use,
+as this is based upon the destination.
+The source party in the <underline>SnmpMgmtCom</underline> determines the =
+authentication
+protocol.
+Thus,
+each of the wrappers is necessary,
+despite the additional cost.
+Further,
+the cost of the party database,
+which could become quite large,
+cannot be avoided if SNMP Security is to be used at all.
+<nl><nl>
+<nl>
+<bold>The Digest Authentication Protocol</bold>
+<nl><nl>
+Implementation of authentication involved:
+including the code to generate the MD5 message digest;
+adding clock maintenance;
+and,
+coding the various steps taken to provide incoming and outgoing
+authentication.
+<nl><nl>
+In order to perform the MD5 message digest procedures,
+I extracted the appropriate code from the reference C Programming Language
+implementation in the MD5 specification (RFC 1321).
+The code
+integration required little effort.
+Naturally,
+optimization of the MD5 code for a particular hardware platform is desirab=
+le,
+if at all possible.
+<nl><nl>
+Implementation of the authentication steps required that I first manage
+loosely synchronized party clocks.
+Each SNMP party has its own party clock,
+and any outside parties which communicate with that party must keep their =
+view
+of that party's clock loosely synchronized with its =
+
+true value.
+This is done to protect against message reordering and replay attacks.
+I chose to maintain the party clock as an offset from
+the system clock where the agent was running,
+which eliminated the burden of having to maintain the clock manually.
+<nl><nl>
+The initial specification for the granularity of this clock was 100
+ticks per second.
+Additionally,
+the <italic>nonce</italic>,
+essentially a sequence counter within one clock tick,
+permits (2**32) uniquely identified messages to be sent per clock tick.
+Since it is unlikely that a party would exchange (2**39) messages per
+second,
+the clock granularity was later changed to one tick per second.
+This still allows for (2**32) messages to be sent per second while avoidin=
+g
+clock roll-over for over 100 years for those basing their clocks on a 32-b=
+it
+system clock.
+<nl><nl>
+Since the correct operation of the MD5 message digest generation
+depends upon the private authentication key,
+implementors must take precautions to ensure that the keys with which they=
+ are
+dealing are in fact the required 16 octets.
+The initial MIB specification did not
+include this requirement (although it was stated elsewhere and is now
+in the MIB),
+and it is wise to take great care in ensuring correctness of the keys,
+just as with any value which must be of a specified length.
+This is also true with respect to the length of the private
+key used for the Symmetric Privacy Protocol.
+<nl><nl>
+The cost incurred by the Digest Authentication Protocol lies primarily
+in the cost of the digest generation code.
+A message digest over the
+serialized <underline>SnmpAuthMsg</underline> must be performed for both i=
+ncoming and outgoing
+messages.
+Each implementor would be well advised to optimize this code
+as much as possible for the deployment platform.
+<nl><nl>
+A possible additional cost is incurred if one chooses to serialize the
+<underline>SnmpAuthMsg</underline> twice on outgoing messages.
+The <underline>SnmpAuthMsg</underline> is serialized
+once before the digest is generated with the private authentication key
+in the authDigest field.
+The authDigest field is then replaced with
+the computed digest.
+If the implementor does not wish to alter the
+serialized BER stream in place,
+the <underline>SnmpAuthMsg</underline> must then be serialized again.
+(In the initial implementation,
+I chose the twice-serialized approach.
+In the current implementation,
+serialization occurs exactly once.)
+<nl><nl>
+<bold>The Symmetric Privacy Protocol</bold>
+<nl><nl>
+The final stage of implementation,
+inclusion of the Symmetric Privacy Protocol,
+involved the integration of DES encryption code.
+The export control restrictions with respect to encryption technology,
+prompted the use of a public-domain DES implementation which is readily
+available outside the United States.
+Implementors should ensure that they understand the export and use
+restrictions on the Data Encryption Standard before shipping any SNMP Secu=
+rity
+code.
+(In brief,
+some countries limit the export and/or use of authentication and privacy
+functions.
+Accordingly,
+any implementor or user should seek the advice of counsel.)
+<nl><nl>
+One question,
+which did not arise when working on my implementation,
+dealt with which portion of the serialized
+<underline>SnmpAuthMsg</underline> is to be used for authentication and en=
+cryption.
+Simply put,
+the entire BER tag/length/value stream should be used.
+<nl><nl>
+<bold>Interoperability Testing</bold>
+<nl><nl>
+Upon completion of the implementation,
+interoperability testing was conducted with independent implementations
+written by Jeffrey Case and Keith McCloghrie.
+Interoperation was successful nearly immediately with all combinations of
+authentication and privacy. =
+
+<nl><nl>
+<nl>
+<bold>Performance</bold>
+<nl><nl>
+I conducted several tests with both the SNMP Security implementation and t=
+he
+original SNMP implementation,
+in order to determine the impact on performance.
+Each test consisted of retrieving 18,000 variables
+to estimate the average number of variables retrieved per second
+that could be exchanged between an agent and manager running on the same
+SPARCstation I.
+<nl><nl><indent><smaller><samepage>
+  protocol     vars/sec  %-of 1157  %-of prev
+<nl>
+  =3D=3D=3D=3D=3D=3D=3D=3D     =3D=3D=3D=3D=3D=3D=3D=3D  =3D=3D=3D=3D=3D=3D=
+=3D=3D=3D  =3D=3D=3D=3D=3D=3D=3D=3D=3D
+<nl>
+  1157 (SNMP)    60.97      n/a        n/a
+<nl>
+  noAuth/noPriv  37.97      62%        62%
+<nl>
+  md5/noPriv     32.13      53%        85%
+<nl>
+  md5/des        15.06      25%        47%
+<nl>
+</samepage></smaller><nl></indent><nl>
+Based upon these results,
+it is apparent that there is a significant loss of speed with even
+noAuth/noPriv.
+I attribute this to the additional wrapper processing and the added comple=
+xity
+prior to processing the PDU.
+<nl><nl>
+Furthermore,
+in a given time period,
+the manager will be able to retrieve approximately 85% as many variables w=
+ith
+md5/noPriv as when using noAuth/noPriv.
+This result confirms earlier estimates and appears to be a reasonable pric=
+e
+to pay for authentication.
+<nl><nl>
+Finally,
+as would be expected,
+the use of the Symmetric Privacy Protocol greatly reduces the speed of
+variable retrieval.
+According to these tests,
+only 47% as many variables can be retrieved in a given time period when us=
+ing
+privacy as with md5/noPriv.
+This drops to 40% when compared to noAuth/noPriv.
+There can be little doubt that hardware implementations of DES or highly
+optimized software would speed processing,
+but the degree of speedup is unknown.
+<nl><nl>
+<nl>
+<bold>Conclusions</bold>
+<nl><nl>
+>From my experience in implementing and testing SNMP Security,
+I conclude the following:
+<nl><nl><indent>
+<underline>=3D</underline> The technology proposed by SNMP Security, insof=
+ar as it has been
+tested in the field, is sound and implementable.  The implementation
+process is quite straightforward.  This in itself is valuable
+information.
+<nl><nl>
+<underline>=3D</underline> A critical factor in writing accurate implement=
+ations of SNMP
+Security is the clarity of the specifications.  There can be little
+argument that the security mechanisms make the Simple Network
+Management Protocol significantly less simple.  It is safe to say,
+however, that given the changes that occurred to the documents through
+the implementation process, the clarity of the protocols will lend
+themselves well to accurate implementations.  The specifications for
+SNMP Security as of January 1992 did not have ambiguities which
+produced interoperability problems.  It is essential that this be the
+case, and the interoperation of three independent implementations
+confirmed this to a large degree. =
+
+<nl><nl>
+<underline>=3D</underline> SNMP Security, as stated by Keith McCloghrie in=
+ his column, is "not
+free."  The performance statistics presented earlier demonstrate
+this.  The cost of authentication, and especially privacy, will likely
+mean that noAuth/noPriv will be the most common form of network
+management communication.  However, SNMP Security also provides the
+necessary mechanism for those wishing to manage their networks more
+securely.
+<nl><nl>
+<underline>=3D</underline> The implementation process confirmed the SNMP c=
+ommunity's insistence
+that implementation precede standardization.  Among the improvements,
+the process removed ambiguities in the specification, such as
+redundant terminology for the last authenticated message.  Further,
+implementation demonstrated useful simplifications.  The clock tick of
+one second is one such example.  Finally, experience demonstrated the
+value of possible additions.  For example, Jeffrey Case suggested the
+addition of a <underline>partyMaxMessageSize</underline> object to facilit=
+ate
+determination of the maximum message which can be accepted by a party.
+Such changes to the specifications would have been significantly more
+difficult to include had standardization already begun.
+<nl><nl>
+<underline>=3D</underline> Keith McCloghrie stated in his column in the pr=
+evious issue of
+<bold>The Simple Times</bold> that "an agent implementation which followed=
+ the
+guidelines in the original SNMP protocol specification should be able
+to (effect) SNMP security with additional code but very few changes
+to the existing code."  My implementation experience verifies this
+assertion.  With the exception of wrapper changes and the removal of
+<italic>trivial</italic> authentication mechanisms, coding meant additions=
+ rather
+than changes.
+</indent><nl><nl> =
+
+<nl><nl>
+<nl>
+<bold>Acknowledgements</bold>
+<nl><nl>
+Since working on this implementation,
+it has been incorporated into the 4BSD/ISODE SMP package.
+This software will be openly-available when the SMP specification is made
+available in early July.
+An announcement will be made to the <underline>snmp</underline> mailing li=
+st at that time.
+<nl><nl>
+The MD5 implementation I used is taken from RFC 1321,
+and is hereby identified as "derived from the RSA Data Security, Inc. MD5
+Message-Digest Algorithm".
+
+------- =_aaaaaaaaaa2
+Content-Type: text/richtext; charset="us-ascii"
+Content-Description: Industry Comment
+Content-Transfer-Encoding: quoted-printable
+
+<bold>Industry Comment -- <underline>Marshall T. Rose</underline></bold>
+<nl><nl>
+<nl>
+Welcome to the third issue of <bold>The Simple Times</bold>.
+<nl><nl>
+In this issue,
+the <italic>Industry Comment</italic> presents a perspective on SNMP evolu=
+tion.
+But first,
+some subscription information:
+in his <italic>Interoperability</italic> column in the June 8th issue of
+<italic>Communications Week</italic>,
+Carl Malamud discussed <bold>The Simple Times</bold>.
+In the following two weeks,
+about 200 more people subscribed for electronic distribution.
+The interesting part is that by the morning of June 10th,
+nearly sixty had subscribed -- yes,
+there are clearly a lot of people who read <italic>Communications Week</it=
+alic> as soon
+as it hits their mailbox!
+Thanks to Carl and the usual trickle of subscription requests,
+there are now over 1000 electronic subscribers
+(including several re-distribution lists),
+with nearly 11% receiving the MIME edition.
+<nl><nl>
+<nl>
+<bold>Evolving the Internet-standard Network Management Framework</bold>
+<nl><nl>
+The Internet-standard Network Management Framework has achieved unpreceden=
+ted
+success in providing interoperable solutions to the problem of managing
+networks.
+At the heart of this framework is the Simple Network Management Protocol
+which provides an effective means for monitoring and controlling
+heterogeneous devices.
+Although it was initially standardized in 1988,
+this management framework has been the subject of continuous incremental
+refinement.
+Paramount to this refinement has been the commitment to provide ongoing
+protocol-compatibility,
+so that the management environment evolves gracefully whilst the existing
+investment is protected.
+<nl><nl>
+In March of this year,
+the Internet Engineering Steering Group (IESG) issued a call for proposals=
+ to
+evolve the Internet-standard Network Management Framework.
+A fundamental observation made in this call is the understanding that the
+existing framework provides the foundation for stable and effective networ=
+k
+management of the Internet.
+Further, these management capabilities are used pervasively and continuous=
+ly.
+In other words,
+SNMP is an integral part of the Internet community's installed base.
+<nl><nl>
+At present,
+the Internet-standard Network Management Framework consists of three core
+technologies:
+a notation for describing management information
+(termed the "Structure of Management Information" or SMI),
+a collection of modules which define management information
+(each termed a "Management Information Base" or MIB),
+and,
+the management protocol, SNMP.
+Historically,
+the balance between stability and extensibility has been achieved by allow=
+ing
+only one kind of change:
+new MIB modules may be defined and existing ones may be revised.
+<nl><nl>
+In one response to the IESG's call,
+four people developed the <italic>Simple Management Protocol</italic> (SMP=
+) Framework.
+The SMP specification and four independent,
+interoperable implementations are scheduled for release at the beginning o=
+f
+July.
+(Perhaps before you read this issue of <bold>The Simple Times</bold>.)
+When the deadline nears for the IESG's call for proposals,
+the SMP authors will submit the current revision of the SMP specification =
+for
+consideration.
+<nl><nl>
+Because other proposals may be forthcoming,
+rather than examining the SMP Framework,
+the <italic>Industry Comment</italic> looks at the issues associated with =
+evolving the
+Internet-standard Network Management Framework.
+<nl><nl>
+<nl>
+<bold>Build on Success</bold>
+<nl><nl>
+An essential goal in any evolutionary scheme
+must be to build on the success of the current framework.
+To optimize the likelihood of this,
+it is important that the evolution be based on the same architectural
+principles as its predecessor.
+Although some may argue as to the precise details,
+there are three goals which provided the underlying guidance for the SNMP
+architecture:
+<nl><nl><indent>
+<underline>=3D</underline> the impact of adding network management to mana=
+ged nodes must be
+minimal, reflecting a lowest common denominator;
+<nl><nl>
+<underline>=3D</underline> network management must tend towards universal =
+deployment;
+and,
+<nl><nl>
+<underline>=3D</underline> when all else fails, network management must co=
+ntinue to function,
+if at all possible.
+</indent><nl><nl>
+Historically,
+it is clear that the SNMP philosophy of shifting the burden of management =
+away
+from the managed nodes and towards the management stations,
+has allowed us to tend toward the first two goals.
+Further,
+the minimal communications infrastructure required by the SNMP
+(i.e., a connectionless-mode transport service),
+has allowed us to achieve the third goal.
+<nl><nl>
+A second part of building on the success of the current framework is for a=
+n
+evolutionary scheme to maximize backward-compatibility.
+That is,
+for each change under consideration,
+a careful cost/benefit analysis must be undertaken.
+Whilst the advantages of a feature are often evident,
+the impact on the installed base is often hidden.
+This means that for each change,
+the following questions must receive intense scrutiny:
+<nl><nl><indent>
+<underline>=3D</underline> will the change affect management stations or a=
+gents?
+<nl><nl>
+<underline>=3D</underline> will the change result in a few or a large numb=
+er of modifications?
+<nl><nl>
+<underline>=3D</underline> will those modifications be large or small?
+</indent><nl><nl>
+Obviously,
+to be consistent with the philosophy of the current framework,
+the ideal change is one which has a minimal (or preferably no) impact on
+agents,
+and in which the modifications are well-localized.
+<nl><nl>
+In brief,
+when evaluating any evolutionary scheme,
+independent of its technical details,
+great attention must be given to the meta-issues of consistency and
+compatibility with the current framework.
+<nl><nl>
+<nl>
+<bold>Management Information</bold>
+<nl><nl>
+In February of this year,
+RFC 1303, <italic>A Convention for Describing SNMP-based Agents</italic>,
+was published.
+This describes a notation by which an implementor could document the
+features and limitations of an agent.
+This informational document met with a lot of interest,
+because it enables three different kinds of interactions:
+First,
+within an agent vendor company,
+RFC 1303 provides a means for engineering to concisely describe to marketi=
+ng
+the features of their agent products.
+Second,
+RFC 1303 provides a means for users to evaluate and compare agent products=
+.
+Third,
+RFC 1303 provides a means for management station implementors to customize
+their software to know about different kinds of agents.
+The way this third interaction works is simple:
+the RFC 1303 notation is machine-parseable,
+so an administrator runs a compiler that feeds the definitions into the
+management station.
+Because each kind of agent contains a unique identity code and RFC 1303
+definitions include this information,
+as a part of its operations,
+the management station interrogates the agent and then sees if it has a RF=
+C
+1303 definition which corresponds to the kind of agent it is talking to.
+<nl><nl>
+As a part of evaluating RFC 1303,
+a compiler with an "agent evaluator" back-end was built.
+The algorithm used by the evaluator looks at the RFC 1303 definition of th=
+e
+agent's capabilities,
+assigns a rating from zero to one-hundred which represents the "goodness" =
+of
+the agent implementation.
+The algorithm is limited in that it can evaluate the agent implementation =
+only
+in a generic sense.
+In the prototype,
+when the rating is determined,
+it is displayed to the user and a different audio file is rendered.
+If the rating is zero,
+the message might result in:
+<nl><nl><indent>
+"You have an excellent agent -- not!"
+<nl></indent><nl>
+Similarly,
+a rating of twenty might be several people laughing,
+whilst a rating of forty might result in:
+<nl><nl><indent>
+"Bogus!"
+<nl></indent><nl>
+and a rating of eighty might result in:
+<nl><nl><indent>
+"We can name that tune!"
+<nl></indent><nl>
+(Of course,
+this example of the use of RFC 1303 is purposefully humorous.)
+<nl><nl>
+However,
+RFC 1303 is not without its drawbacks:
+in addition to requiring that implementors and users understand this new
+notation,
+management station implementors must build a compiler for the RFC 1303
+notation and then instrument their software accordingly.
+Further,
+vendors of agent products might resist publication of descriptions of thei=
+r
+agent implementations as this might provide marketing-fodder information t=
+o
+their competitors.
+Another drawback is that RFC 1303 limits its scope to agent implementation=
+s
+and doesn't consider user requirements.
+That is,
+the RFC1303 notation describes the capabilities of an agent,
+but doesn't have a way to describe the capabilities expected of an agent i=
+f it
+is going to operate in a particular user-environment.
+So,
+it would seem that we need both a way of specifying compliance issues in
+addition to agent capabilities.
+If we had notations for describing both kinds of information,
+then one could imagine that,
+in the future,
+one could write a program which could automatically compare both kinds of
+specifications in order to give a rough feeling for how well an agent
+implementation would work in the user's environment.
+<nl><nl>
+<nl>
+<bold>Administrative Framework</bold>
+<nl><nl>
+In terms of authentication and authorization,
+any evolutionary scheme will likely include the work on SNMP Security.
+<nl><nl>
+As Keith McCloghrie has pointed out in his <italic>Security and Protocols<=
+/italic>
+column
+(and as David Partain confirmed in his technical article on
+<italic>An Implementation of SNMP Security</italic>)
+security has both benefits and costs.
+The challenge for implementors is to provide turn-key solutions which hide=
+ the
+details and allow users to get on with the business of managing their netw=
+orks.
+<nl><nl>
+However,
+one should keep in mind that even though the long-awaited SNMP Security
+work is largely consistent with the SNMP philosophy,
+it still needs a small bit of work.
+For example,
+SNMP Security,
+as presently specified,
+mandates ordered delivery for intra-party traffic.
+As Keith McCloghrie points out in his column in this issue:
+ordered delivery is largely unnecessary,
+and perhaps harmful,
+for retrieval operations;
+further,
+ordered delivery for intra-party traffic is inadequate for coordinating
+multiple managers performing modification operations.
+So,
+one might expect some additional work in this area.
+<nl><nl>
+<nl>
+<bold>Management Protocol</bold>
+<nl><nl>
+In terms of the management protocol,
+two issues seem to be at the forefront.
+<nl><nl>
+First,
+SNMP's set-request hasn't seen a great deal of operational use.
+There are probably two reasons:
+one is that some vendors have used the lack of SNMP Security as an excuse =
+to
+avoid implementing the set-request.
+(This is,
+of course,
+specious as most vendors use a TELNET-based mechanism to modify a
+managed node.
+In addition to being no more secure than the original SNMP,
+because TELNET uses TCP,
+during times of network stress it is less likely to be able to control a
+device in comparison to using SNMP's set-request.)
+In addition to the "security" issue,
+when an SNMP set-request fails,
+very limited diagnostic information is returned.
+In brief,
+the management station asks the agent to do something,
+and the agent says:
+<nl><nl><indent>
+"No!"
+<nl></indent><nl>
+What we really need is a richer collection of diagnostics,
+so the management station can determine if the failure is permanent or
+transient in nature,
+in addition to receiving a coarse indication of the cause.
+In other words,
+under any evolutionary scheme,
+it would be a good idea for the agent to be able to say:
+<nl><nl><indent>
+"No, because..."
+<nl></indent><nl>
+Hopefully,
+introduction of SNMP Security and a somewhat richer diagnostic set
+will greatly increase the use of SNMP for modifying the behavior of manage=
+d
+nodes.
+<nl><nl>
+A second protocol issue that must be dealt with is the question of bulk
+retrieval. =
+
+Historically,
+this has been one of the areas of greatest mis-understanding.
+The plain fact is that it is impractical to require an agent to provide
+an arbitrarily large amount of management information in a single transact=
+ion.
+Hence,
+a solution must be based on the notion of incremental retrieval.
+Today,
+there are several strategies,
+all of which make use of SNMP's get-next operator.
+Because of this,
+each strategy,
+regardless of how cleverly it makes use of parallelism and pipelining,
+is limited to retrieving a fixed amount of information in each transaction=
+.
+This would seem to indicate that we need a new SNMP operator for bulk
+retrieval,
+one in which the agent helps to decide how much information is returned in=
+ a
+given transaction.
+However,
+great care must go into the design of such a facility,
+as it must not unduly burden the managed node.
+<nl><nl>
+<nl>
+<bold>The Open Question</bold>
+<nl><nl>
+Finally,
+there is one issue which needs a fair bit of thought.
+Although the Internet-standard Network Management Framework has been very
+successful in allowing us to instrument our managed nodes,
+it has been less successful in providing us with management applications.
+<nl><nl>
+Although there may be many causes for this,
+the one thing which seems clear is that management information is currentl=
+y
+defined strictly on a micro-level.
+That is,
+we produce a lot of MIB modules containing a lot of managed objects;
+but nowhere do we produce documents describing how those objects can be us=
+ed to
+provide for effective management.
+The result is that the majority of management applications are browsers.
+These browsers,
+regardless of the GUI,
+have little management smarts.
+(Steve Waldbusser discussed this situation in his
+<italic>Applications and Directions</italic> column in the previous issue.=
+)
+<nl><nl>
+Achieving this task may be nigh impossible:
+first,
+the actual details are very often specific to individual environments;
+and,
+second,
+the actual details are also highly technical and (at present) not very
+amenable to machine-processing.
+However,
+figuring out a way of doing this may very well be the most helpful thing o=
+f
+all.
+The amusing part is that activity is probably outside the scope of any
+evolutionary scheme!
+
+------- =_aaaaaaaaaa2
+Content-Type: multipart/mixed; boundary="----- =_aaaaaaaaaa3"
+Content-Description: Featured Columns
+
+------- =_aaaaaaaaaa3
+Content-Type: text/richtext; charset="us-ascii"
+Content-Description: Applications and Directions
+Content-Transfer-Encoding: quoted-printable
+
+<bold>Applications and Directions -- <underline>Steven L. Waldbusser</unde=
+rline></bold>
+<nl><nl>
+<nl>
+In this issue: <italic>The Truth About SNMP Performance</italic>
+<nl><nl>
+<nl>
+One of the most frequently repeated concerns about SNMP is that it won't
+perform well or won't scale up to the large networks of the future.
+This is often vocalized as
+"You shouldn't use SNMP because it isn't efficient enough and will clog th=
+e
+network."
+Unfortunately, =
+
+such statements have not been supported by technical rationale or by direc=
+t
+user experience, and this has left consumers very confused.
+There are many large sites using SNMP today to manage networks.
+These sites have direct experience that should ease the uncertainty in thi=
+s
+area. =
+
+<nl><nl>
+There are two areas to be addressed separately:
+<nl><nl><indent>
+<underline>=3D</underline> overall network load for routine monitoring, an=
+d,
+<nl><nl>
+<underline>=3D</underline> efficiency in downloading large amounts of data=
+.
+</indent><nl><nl>
+In addition,
+there are some up and coming advances that will make the situation even
+better.
+<nl><nl>
+<nl>
+<bold>Routine Monitoring</bold>
+<nl><nl>
+Bill Yeager of Stanford University did some tests with SNMP to find out th=
+e
+real story.
+He designed and implemented a test to simulate a worst-case scenario using
+SNMP.
+His results showed that to monitor all the available
+performance and error information on a host at the interface,
+IP and TCP layers every 5 minutes,
+an average of 16 bytes per second were transferred.
+When one scales this up to the monitoring of a large site at which 400
+routers, hubs, and file servers might be monitored,
+one finds that this would use 6400 bytes per second of bandwidth.
+This is equivalent to a half of one percent of an ethernet bandwidth.
+This is clearly not going to cause any performance problems.
+Commercial products are often more optimized and present even less of a lo=
+ad
+on the network.
+It should also be noted that today's monitoring applications typically loo=
+k at
+much less data on each node than tested here -- the results of this test
+would be typical of the increased demands placed by more sophisticated
+applications in the future.
+<nl><nl>
+Carnegie Mellon University also has a large network,
+on which SNMP has proven to scale very well.
+An SNMP monitoring tool monitors more than 200 devices on the Carnegie Mel=
+lon
+network,
+polling each one once every 15 seconds for status information.
+This also uses much less than one percent of an ethernet's bandwidth -- so
+little in fact,
+that a second computer performs the identical task as a backup.
+Both computers spend less than 5% of their processing on these SNMP tasks,
+which shows that high-powered management station hardware is not required.
+<nl><nl>
+<nl>
+<bold>Downloading Large Amounts of Data</bold>
+<nl><nl>
+Another area of concern is the speed at which SNMP can transfer large amou=
+nts
+of data.
+Some MIBs contain tables with many entries that might account for hundreds=
+ of
+kilobytes of data.
+It is important to be able to achieve interactive performance when retriev=
+ing
+this data.
+Because the Remote Network Monitoring (RMON) MIB often stores large amount=
+s of
+utilization and error information about network devices,
+it is important that it can be transferred very efficiently with SNMP.
+When Karen Frisa implemented an RMON MIB agent at Carnegie Mellon,
+and John Chanak developed some RMON MIB tools,
+they had the opportunity to transfer large amounts of information using SN=
+MP.
+For example,
+a host table on a segment of the Carnegie Mellon campus usually grows to m=
+ore
+than 1100 entries.
+It was possible to download this table in roughly 2 seconds.
+Because there were 6 variables per entry being downloaded,
+this resulted in a transfer rate of 3060 variables per second.
+Similarly,
+when downloading packets captured by RMON's filter mechanism,
+780 packet entries were downloaded per second.
+If the packet data alone was downloaded
+(ignoring related data such as length and status),
+the rate rose to 2082 per second.
+In this application,
+enough of each packet was downloaded (64 bytes) to perform a summary decod=
+e.
+These results show dramatically that with SNMP,
+bulk data can be downloaded quite quickly.
+<nl><nl>
+A barrier to the fast download of data is the discovery of previously unkn=
+own
+instances of data.
+Before asking for the value of a variable,
+a management station must know its name.
+The SNMP get-next operator allows the discovery of the names of such
+variables, but unless a sophisticated algorithm is used,
+only one instance may be discovered per packet
+(such a sophisticated algorithm is described in RFC 1187,
+<italic>Bulk Table Retrieval with the SNMP</italic>).
+The RMON MIB was specifically designed to allow another method of discover=
+ing
+instances of data quickly.
+However,
+many other MIBs exist that weren't designed with this in mind.
+It would be desirable to provide a fast and easy mechanism to download dat=
+a
+from any MIB.
+The newly defined Simple Management Protocol (SMP) provides such a mechani=
+sm,
+called the get-bulk operator.
+This operator allows the discovery of many variables per packet,
+speeding the transfer of data and making it more efficient by packing more=
+ in
+every PDU.
+Initial testing shows that this operator will improve on the blazing speed=
+s
+cited above,
+and will also make normal operations more efficient,
+requiring less network load than the tests mentioned previously.
+<nl><nl>
+<nl>
+<bold>On The Horizon</bold>
+<nl><nl>
+These results show that SNMP is quite capable of scaling to the very large
+networks of today as well as the larger ones of tomorrow.
+This scaling can be achieved without overloading critical segments with
+network management traffic.
+When fast interactive performance is required for downloading large amount=
+s of
+data, =
+
+SNMP can do the job when the management station or the MIB has had the sma=
+rts
+built in.
+The new Simple Management Protocol will provide the means for any data to =
+be
+quickly downloaded.
+Don't let marketeers with a hidden agenda steer you away from the integrat=
+ed
+network management possible with SNMP and SMP!
+
+------- =_aaaaaaaaaa3
+Content-Type: text/richtext; charset="us-ascii"
+Content-Description: Ask Dr. SNMP
+Content-Transfer-Encoding: quoted-printable
+
+<bold>Ask Dr. SNMP -- <underline>Jeffrey D. Case</underline></bold>
+<nl><nl>
+<nl>
+Dear <italic>Dr. SNMP</italic>,
+<nl><nl>
+I recently read that the new Simple Management Protocol (SMP) will have a
+mechanism for the efficient retrieval of large amounts of data.
+Will this new mechanism be the one described in RFC 1187,
+<italic>Bulk Table Retrieval with the SNMP</italic>,
+or will it be the one described in the premiere issue of <bold>The Simple =
+Times</bold>?
+Will it be fast and efficient?
+<nl><nl>
+P.S. Will <italic>Dr. SNMP</italic> soon become
+<italic>Dr. SMP</italic>?
+<nl><nl>
+-- <italic>Impatient in Indianapolis</italic>
+<nl><nl>
+<nl>
+Dear <italic>Impatient in Indianapolis</italic>,
+<nl><nl>
+Back on the farm,
+we have a saying:
+<nl><nl><indent>
+"That thing's faster than a scalded dog."
+<nl></indent><nl>
+The answer is yes,
+it will be fast and efficient.
+The new bulk retrieval mechanism uses neither of the mechanisms you ask ab=
+out.
+Instead,
+it uses a new operator,
+called get-bulk,
+which has been optimized to communicate requests for the transfer of large
+quantities of data.
+Responses are communicated via the usual SNMP response mechanism.
+<nl><nl>
+Regarding your postscript,
+SMP really is SNMP.
+But,
+the SMP authors couldn't just call it that,
+because the name "SNMP" belongs to the Internet community.
+The SMP authors tried to be careful to avoid offense by using a different
+name.
+(They were perhaps too sensitive.)
+It is anticipated that,
+over time,
+it will be acceptable to call SMP what it really is,
+SNMP version 2.
+<nl><nl>
+<nl>
+<np>
+Dear <italic>Dr. SNMP</italic>,
+<nl><nl>
+Recently I've been hearing about this new management protocol,
+X.700,
+which is supposed to be well-suited for wide-area network (WAN) management=
+.
+The same people who told me about X.700 also tell me that since SNMP is
+a protocol for managing local-area networks (LANs),
+that I need both protocols for network management.
+<nl><nl>
+-- <italic>Vacillating in Virginia</italic>
+<nl><nl>
+<nl>
+Dear <italic>Vacillating in Virginia</italic>,
+<nl><nl>
+Back on the farm,
+we have a saying:
+<nl><nl><indent>
+"You can give a doggie bone to a pig but it still won't hunt."
+<nl></indent><nl>
+(Dr. SNMP thinks this is right up there with
+"A leopard can't change its spots"
+and
+"A zebra can't change its stripes.")
+<nl><nl>
+What this means is that calling something by a different name won't yield
+fundamental changes in its characteristics and behavior.
+Your question brings four important ideas to mind.
+<nl><nl>
+First,
+there are those who are attempting to avoid the excess baggage
+associated with the name of the OSI management framework,
+anchored by CMIP.
+Consequently,
+they are attempting to use a fresh,
+new name (X.700),
+in order to avoid many of the negative connotations and emotions associate=
+d
+with the "CMIP" label.
+Dr. SNMP is somewhat sympathetic toward the notion of using new names for
+existing protocols.
+However,
+the rationale for using "SMP" instead of "SNMP version 2" is entirely
+different than the motives used in renaming CMIP to X.700:
+SMP really is SNMP,
+with a few problems corrected and a few important enhancements.
+SMP uses the same basic well-engineered framework enjoyed by SNMP but thes=
+e
+minimal changes lead to dramatic results.
+In contrast,
+the X.700 framework really is the CMIP framework,
+albeit without any problems corrected and without any important enhancemen=
+ts.
+The motivations for the name changes are quite different.
+<nl><nl>
+Second,
+Dr. SNMP is less charitable toward the dis-information campaign that seems=
+ to
+be underway.
+This dis-information campaign attempts to position SNMP as a LAN managemen=
+t
+technology.
+The truth is that while SNMP has become popular as a LAN management
+technology,
+the original impetus for the design was the monitoring and control of wide
+area network components,
+especially IP routers.
+SNMP can,
+has,
+and will continue to perform this function in many
+production networks.
+<nl><nl>
+Third,
+the dis-information campaign attempts to position X.700 as a superior WAN
+management technology.
+The truth is that the requirements of WAN management are incompatible with
+the characteristics and performance of connection-oriented transports in t=
+he
+lossy environments frequently encountered in wide area networks.
+In other words,
+CMIP is actually better suited for use in LANs than it is for use in WANs.
+<nl><nl>
+Finally,
+the dis-information campaign appears to be too well organized and orchestr=
+ated
+to be an accident.
+Perhaps the next dis-information you hear will be that you need a differen=
+t
+protocol for manager-to-manager communications than is used for
+manager-to-agent communications.
+<nl><nl>
+It is difficult for Dr. SNMP to see how dissimilar communications technolo=
+gies
+and techniques will be helpful.
+Building translators between these frameworks
+(SNMP and CMIP)
+is a difficult problem that many have underestimated.
+The entity models are different.
+The information models are different.
+The naming mechanisms are different.
+The SMIs are different.
+The protocol operations are different.
+The transport assumptions are different.
+Other than that,
+they both have managers and agents!
+<nl><nl>
+In conclusion,
+you do not need two different protocols for managing LANs and WANs.
+
+------- =_aaaaaaaaaa3
+Content-Type: text/richtext; charset="us-ascii"
+Content-Description: Security and Protocols
+Content-Transfer-Encoding: quoted-printable
+
+<bold>Security and Protocols -- <underline>Keith McCloghrie</underline></b=
+old>
+<nl><nl>
+<nl>
+In previous issues,
+we have looked at the protections provided by SNMP Security and discussed =
+how
+introducing the concept of a SNMP party allows the three primary mechanism=
+s:
+the MD5 message digest algorithm,
+the DES encryption algorithm,
+and loosely synchronized clocks to be integrated into the protocol.
+In this issue,
+we'll discuss some issues involved in implementation and deployment.
+<nl><nl>
+<nl>
+<bold>Using Parties</bold>
+<nl><nl>
+Each SNMP party is unique to the particular SNMP protocol implementation =
+
+where it executes.
+Thus, many parties need to be defined.
+The chosen way to do this is to identify them by OBJECT IDENTIFIERs (OIDs)=
+,
+of which there is an infinite supply!
+This allows anyone to obtain a branch in the OID tree,
+and allocate party OIDs within that branch.
+<nl><nl>
+However,
+to simplify matters, a set of six initial OIDs have been assigned for use
+with each IP address,
+three for local execution at an agent,
+and three for the agent to communicate with
+(i.e., at a manager).
+The three have different settings of authentication and privacy algorithms=
+,
+with an appropriate MIB view and access control parameters defined for eac=
+h.
+The extension of these six to the number actually required in an agent can=
+,
+of course,
+be done through the use of SNMP requests acting on appropriate MIB objects=
+.
+<nl><nl>
+The definitions of new encapsulation schemes for SNMP,
+e.g., over OSI,
+are also defining their own conventions for initial Party OIDs using
+their own addressing schemes.
+Note,
+however,
+that the use of an address as part of an OID is purely administrative,
+as one means of providing uniqueness;
+there is no requirement to have a relationship between protocol stack
+addresses and party identifiers.
+<nl><nl>
+Indeed,
+for agents which need more than six parties,
+the party OIDs for the additional parties would typically not be allocated
+from the <underline>initialPartyId</underline> branch,
+but from some other branch
+(e.g., from a OID subtree within the vendor's tree of the management stati=
+on
+which is being used to create them).
+The only requirement to be met when assigning OIDs is to make them unique
+across the network.
+<nl><nl>
+These initial parties need six secrets.
+As it turns out, all six are the same length.
+Thus, at initial distribution,
+all six secrets can have the same value.
+This does not impair security because all six values should be immediately
+changed by the management station as soon as secure communication begins.
+Changing the secrets thereafter is desirable on a relatively frequent basi=
+s.
+When changed,
+there is no need for humans to be informed of the new values.
+In fact,
+it is better security if humans are not informed.
+Humans are typically lazy,
+and thus are unlikely to change secrets at the desired frequency.
+Thus,
+it is a good practice to have the secrets which are in frequent use change=
+d
+automatically.
+<nl><nl>
+Some parties may be set-up for special use,
+for example:
+for use in emergencies by network fire-fighters who may wish to access an
+agent from wherever they may happen to be at the time.
+The secrets for these parties do not need to be changed periodically,
+but can be left unaltered ready for use at a moment's notice.
+<nl><nl>
+<nl>
+<bold>Using Clocks</bold>
+<nl><nl>
+The clock value for each party must increase with the passage of time,
+even across reboots.
+If these clock values are maintained as offsets from a system clock,
+this is not such an implementation burden as it might appear.
+While it is vital that clock values are never decreased
+(in order to maintain protection against replay),
+speeding them up is explicitly allowed.
+For example,
+in times of network stress,
+a manager can artificially advance its notion of a party's clock so that e=
+ven
+though communication delays may have increased dramatically,
+a message will still be considered authentic when it arrives at an agent. =
+ =
+
+<nl><nl>
+As was discussed in a previous article,
+the use of clocks ensures message timeliness within the limit specified by=
+ the
+lifetime.
+The specifications also include another clock-based mechanism,
+called ordered delivery.
+This mechanism specifies that messages delivered out-of-order be discarded=
+ as
+unauthentic.
+While this has some benefit for set-requests,
+there is potential for this to be harmful when applied to retrieval reques=
+ts.
+As such the inclusion of ordered delivery has been questioned,
+but no one wants to further delay the specifications,
+so these arguments are moot at this time.
+Due to the inclusion of ordered delivery,
+another variable (called the nonce)
+is introduced to distinguish multiple requests generated within one =
+
+tick of the clock
+(i.e., within one second).
+<nl><nl>
+<nl>
+<bold>Using Secrets</bold>
+<nl><nl>
+Both the MD5 authentication and the DES privacy algorithms for a party
+rely on secrets,
+which must be known by both the originator and the recipient.
+If these algorithms are to maintain their level of security,
+then their secrets must remain secret and not be available to would-be
+attackers. =
+
+So,
+they cannot be transmitted over the network in clear text form.
+Strictly speaking,
+this requires the use of encryption.
+However,
+the MIB objects for these secrets do not represent them in clear text,
+but rather as the XOR-encoding of the previous and new values in set-reque=
+sts,
+and as zero-length strings in get-requests.
+Thus it is possible,
+though not strictly conformant to the specification,
+to change secrets without using encryption.
+The more significant security issue for implementations which do not inclu=
+de
+an encryption capability is the setting-up of new parties,
+when the XOR-encoding of the new secret (with the null string) provides no
+protection from eavesdroppers.
+Indeed,
+until two SNMP protocol entities share a secret,
+secure communication across the network is not possible.
+Thus,
+security requires that initial secrets be distributed manually,
+generated perhaps by the management station,
+and entered into the agent as a piece of initial configuration information=
+.
+This enables secure communication,
+so that subsequent distribution of secrets,
+either for new parties or for the regular changing of secrets of existing
+parties
+(which is very desirable from a security standpoint),
+can be done via SNMP access to appropriately secured MIB objects.  =
+
+<nl><nl>
+The inclusion of DES may be problematic for some implementors because
+of export regulations.
+While products incorporating DES can be exported from most countries,
+the inclusion of DES may incur additional complications.
+As such, it is to be expected that some implementors may choose not to inc=
+lude
+DES in their implementations,
+especially since conformance to the specification only requires DES for ac=
+cess
+to party secrets and, as mentioned above,
+the requirement to use DES for such access is most significant when
+establishing new parties,
+as opposed to changing the secrets of existing parties.
+<nl><nl>
+<nl>
+<bold>Specification Status</bold>
+<nl><nl>
+Finally,
+you might be wondering about the status of the specifications.
+The author has it on good authority that these documents will be published
+as RFCs with a status of proposed standard by mid-July.
+
+------- =_aaaaaaaaaa3
+Content-Type: text/richtext; charset="us-ascii"
+Content-Description: Standards
+Content-Transfer-Encoding: quoted-printable
+
+<bold>Standards -- <underline>David T. Perkins</underline></bold>
+<nl><nl>
+<nl>
+In May and June,
+there were no new SNMP-related standards that were approved.
+In the pipeline are the <italic>IP Forwarding Table</italic> MIB and the t=
+hree documents
+defining SNMP Security.
+Only after these documents are published as RFCs with proposed
+standard status will they be included in this column.
+<nl><nl>
+In the previous issue,
+the process which is used in the IETF to develop standards was described.
+In this issue,
+the heritage of the SNMP standards is discussed,
+and in the next issue,
+we'll look at the standards process for IEEE committee 802.
+<nl><nl>
+<nl>
+<bold>Summary of Sources and Internet Standards which they Influenced</bol=
+d>
+<nl><nl>
+>From the International Organization for Standardization (ISO), three
+documents provided some initial influence on the Internet-standard Network
+Management Framework:
+<nl><nl><indent>
+<underline>=3D</underline>     <italic>Abstract Syntax Notation One</itali=
+c> (ASN.1), ISO 8824;
+<nl><nl>
+<underline>=3D</underline>     <italic>Basic Encoding Rules</italic> (BER)=
+, ISO 8825; and,
+<nl><nl>
+<underline>=3D</underline>     <italic>Common Management Information Proto=
+col</italic> (CMIP), ISO 9595/9596.
+</indent><nl><nl>
+The documents produced by IEEE committee 802 has had significant influence=
+ on
+several media-specific MIBs:
+<nl><nl><indent>
+<underline>=3D</underline> <italic>Token-Passing Bus Access Method and Phy=
+sical Layer Specifications</italic>,
+802.4, was used as the input to the working group that produced RFC
+1230, <italic>IEEE 802.4 Token Bus Interface Type MIB</italic>;
+<nl><nl>
+<underline>=3D</underline> <italic>Token Ring Access Method and Physical L=
+ayer Specifications</italic>, 802.5,
+was used as the input to the working group that produced RFC 1231,
+<italic>IEEE 802.5 Token Ring Interface Type MIB</italic>;
+<nl><nl>
+<underline>=3D</underline> <italic>Media Access Control (MAC) Bridges</ita=
+lic>, 802.1d, was used as the input
+to the working group that produced RFC 1286, <italic>Bridge MIB</italic>; =
+and,
+<nl><nl>
+<underline>=3D</underline> <italic>CSMA/CD Access Method and Physical Laye=
+r Specifications</italic>, 802.3,
+and <italic>802.3 Layer Management</italic>, 802.3h, were used as the inpu=
+t to
+the working groups that produced RFC 1284, <italic>Ether-Like Interface Ty=
+pe MIB</italic>,
+and RFC 1271, <italic>Remote LAN Monitoring MIB</italic>.
+</indent><nl><nl>
+Finally,
+from ANSI committee X3T9,
+revision 6.2 of the <italic>FDDI Station Management (SMT)</italic> documen=
+t was used as
+the input to the working group that produced RFC 1285,
+<italic>FDDI Interface Type MIB</italic>.
+<nl><nl>
+>From this,
+it can be seen that IEEE 802 has been a major influence on SNMP standards.
+The IEEE is currently in the process of developing a management protocol,
+named LAN/MAN Management Protocol (LMMP).
+LMMP,
+sometimes termed CMIP over LLC (CMOL),
+is based on CMIP running on top of the IEEE 802 connectionless logical lin=
+k
+control (LLC type 1).
+At present,
+it appears that the LMMP work in IEEE 802 will not be used in the Internet
+standardization process,
+but the management information documented in IEEE 802 will continue to be
+used as input to IETF standards development process.
+<nl><nl>
+This issue has listed the SNMP standards that have been significantly infl=
+uenced
+by documents from other organizations.
+The next issue will present the process that develops the IEEE network
+management standards.
+<nl><nl>
+<nl>
+<bold>Summary of Standards</bold>
+<nl><nl>
+Full Standards:
+<nl><nl><indent>
+<underline>=3D</underline> 1155 - Structure of Management Information (SMI=
+);
+<nl><nl>
+<underline>=3D</underline> 1157 - Simple Network Management Protocol (SNMP=
+); and,
+<nl><nl>
+<underline>=3D</underline> 1213 - Management Information Base (MIB-II).
+</indent><nl><nl>
+Draft Standards:
+<nl><nl><indent>
+<underline>=3D</underline> 1212 - Concise MIB definitions.
+</indent><nl><nl>
+Proposed Standards:
+<nl><nl><indent>
+<underline>=3D</underline> 1229 - Extensions to the generic-interface MIB;
+<nl><nl>
+<underline>=3D</underline> 1230 - IEEE 802.4 Token Bus Interface Type MIB;
+<nl><nl>
+<underline>=3D</underline> 1231 - IEEE 802.5 Token Ring Interface Type MIB=
+;
+<nl><nl>
+<underline>=3D</underline> 1232 - DS1 Interface Type MIB;
+<nl><nl>
+<underline>=3D</underline> 1233 - DS3 Interface Type MIB;
+<nl><nl>
+<underline>=3D</underline> 1239 - Reassignment of experimental MIBs to sta=
+ndard MIBs;
+<nl><nl>
+<underline>=3D</underline> 1243 - AppleTalk MIB;
+<nl><nl>
+<underline>=3D</underline> 1253 - OSPF version 2 MIB;
+<nl><nl>
+<underline>=3D</underline> 1269 - BGP version 3 MIB;
+<nl><nl>
+<underline>=3D</underline> 1271 - Remote LAN Monitoring MIB;
+<nl><nl>
+<underline>=3D</underline> 1284 - Ether-Like Interface Type MIB;
+<nl><nl>
+<underline>=3D</underline> 1285 - FDDI Interface Type MIB;
+<nl><nl>
+<underline>=3D</underline> 1286 - Bridge MIB;
+<nl><nl>
+<underline>=3D</underline> 1289 - DECnet phase IV MIB;
+<nl><nl>
+<underline>=3D</underline> 1304 - SMDS Interface Protocol (SIP) Interface =
+Type MIB;
+<nl><nl>
+<underline>=3D</underline> 1315 - Frame Relay DTE Interface Type MIB;
+<nl><nl>
+<underline>=3D</underline> 1316 - Character Device MIB;
+<nl><nl>
+<underline>=3D</underline> 1317 - RS-232 Interface Type MIB; and,
+<nl><nl>
+<underline>=3D</underline> 1318 - Parallel Printer Interface Type MIB.
+</indent><nl><nl>
+Experimental:
+<nl><nl><indent>
+<underline>=3D</underline> 1187 - Bulk table retrieval with the SNMP;
+<nl><nl>
+<underline>=3D</underline> 1224 - Techniques for managing asynchronously g=
+enerated alerts;
+<nl><nl>
+<underline>=3D</underline> 1227 - SNMP MUX protocol and MIB;
+<nl><nl>
+<underline>=3D</underline> 1228 - SNMP Distributed Program Interface (SNMP=
+-DPI);
+<nl><nl>
+<underline>=3D</underline> 1238 - CLNS MIB;
+<nl><nl>
+<underline>=3D</underline> 1283 - SNMP over OSI; and,
+<nl><nl>
+<underline>=3D</underline> 1298 - SNMP over IPX.
+</indent><nl><nl>
+Informational:
+<nl><nl><indent>
+<underline>=3D</underline> 1147 - A network management tool catalog;
+<nl><nl>
+<underline>=3D</underline> 1215 - A convention for defining traps for use =
+with the SNMP;
+<nl><nl>
+<underline>=3D</underline> 1303 - A convention for describing SNMP-based a=
+gents; and,
+<nl><nl>
+<underline>=3D</underline> 1321 - MD5 message-digest algorithm.
+</indent><nl><nl>
+Historical:
+<nl><nl><indent>
+<underline>=3D</underline> 1156 - Management Information Base (MIB-I).
+</indent><nl><nl>
+
+------- =_aaaaaaaaaa3
+Content-Type: text/richtext; charset="us-ascii"
+Content-Description: Working Group Synopses
+Content-Transfer-Encoding: quoted-printable
+
+<bold>Working Group Synopses -- <underline>Robert L. Stewart</underline></=
+bold>
+<nl><nl>
+<nl>
+Once again the working groups supplied plenty of discussion,
+with the prize going to the SNMP mailing list,
+which doesn't even have a working group.
+Be aware that the following synopses present my condensation of many
+statements by many people.
+Although I try to present the flavor and summary of the discussion as it
+occurred,
+I do not include either direct quotes or attribute,
+nor do I edit for correctness.
+If you want to know who really said what,
+subscribe to the mailing lists.
+There's no substitute for being there.
+<nl><nl>
+<nl>
+<bold>SNMP Mailing List</bold>
+<nl><nl>
+Someone designing a MIB asked the best way to report an absolute time,
+suggesting either the UNIX format,
+<underline>DisplayString</underline>,
+or elapsed <underline>TimeTicks</underline>.
+A respondent pointed out that all three approaches had both good and bad
+points.
+This issue was left unresolved.
+<nl><nl>
+Someone asked about good objects to monitor to detect network congestion.
+One opinion held that monitoring <underline>icmpInSrcQuenchs</underline> a=
+nd
+<underline>icmpOutSrcQuenchs</underline> was a good idea.
+Another respondent noted that SNMP  is not well suited to congestion contr=
+ol
+which requires intelligence in hosts,
+routers,
+and bridges.
+The response that SNMP can monitor congestion got agreement,
+if using <underline>ifOutDiscards</underline> or
+<underline>ifOutOctets</underline>,
+with the caveat that source quench itself is optional and defaults to bein=
+g
+disabled.
+A different respondent said they use the ICMP objects because agents runni=
+ng
+on UNIX often cannot supply <underline>ifOutOctets</underline>.
+<nl><nl>
+Someone asked for a UNIX library for MIB-I,
+MIB-II and private MIBs,
+and wondered if the API could be standardized.
+Someone else suggested built-in SNMP for UNIX,
+e.g.,
+an extensible agent,
+and SNMP and ASN.1 libraries,
+all of which could be produced by an IETF working group.
+A respondent noted that implementation specifications are not consistent w=
+ith
+the IETF mission.
+<nl><nl>
+Some asked if,
+in promiscuous mode,
+should all packets be counted in the MIB-II interfaces table,
+or just those packets addressed locally?
+The Interface Extensions MIB says that its receive address table holds onl=
+y
+the addresses used in non-promiscuous mode.
+So,
+the behavior depends on whether the interface being modeled is a MIB-II
+interface.
+In the case of repeater ports,
+which are not MIB-II interfaces,
+counting is not done;
+but,
+if both a bridge and router are using the same interface,
+and it is thus promiscuous,
+all packets are counted.
+<nl><nl>
+Someone asked how does an NMS determine the maximum message size that an a=
+gent
+can accept,
+and on error,
+should the NMS retry progressively smaller sizes or simply drop to the
+minimum size?
+The recommended procedure is to guess initially,
+and then start decreasing until the  complaints stop.
+Unfortunately,
+a long,
+string-valued,
+variable may make the problem insoluble.
+A followup asked that since the request is usually smaller than response,
+how does an agent know the maximum response size?
+The answer was that the SNMP Security Party MIB includes a maximum message
+size.
+<nl><nl>
+Someone asked if enumerated INTEGERs could be negative,
+even though they may not be zero-valued.
+The answer was that use of negative values appears to be within the letter=
+,
+but not the spirit,
+of the SMI.
+So,
+negative-valued enumerations should not be used.
+<nl><nl>
+There was a fairly long discussion on the parallel processing of incoming =
+SNMP
+requests which produced many warnings for agent implementors.
+<nl><nl>
+Someone asked if order of processing of the variable bindings in a set-req=
+uest
+was important.
+In particular,
+can a manager make any assumption about the order in which processing will
+occur.
+A respondent indicated that the processing must occur "as if simultaneousl=
+y".
+Another respondent observed that there should be no external way to detect=
+ the
+order of processing.
+<nl><nl>
+Someone offered to the public domain a utility to monitor a logfile and
+send SNMP traps under conditions from a regular expression.
+The host is <underline>wuarchive.wustl.edu</underline> and the file is
+<underline>/pub/log2sd.tar.Z</underline>
+<nl><nl>
+There were some questions about EMANATE,
+a technology for multiplexing agents on a single host,
+which was announced in the trade press.
+These questions were referred for off-line discussion as EMANATE is a
+commercial product used as a local-mechanism and is out of customary
+IETF concerns.
+<nl><nl>
+Someone asked for real data on SNMP overhead.
+A respondent indicated that a test using a home-grown tool based on the CM=
+U
+package showed that polling for key objects at reasonable periods of 5 and=
+ 10
+minutes generated negligible Ethernet overhead and very useful information=
+.
+The experimenter concluded that monitoring up to 200 systems this way was =
+not
+intrusive.
+(See this issue's <italic>Applications and Directions</italic> column for =
+further
+discussion.)
+Another respondent suggested traps backed by polling for a "last changed"
+time-stamp,
+carefully designed to avoid fast-changing objects such as normal  message
+counters.
+<nl><nl>
+A message concerning the <italic>Communications Week</italic> story on SMP=
+,
+a proposed new version of SNMP,
+indicated that the SMP specification and four implementations will
+be available before a planned Birds-of-a-Feather (BOF) at the Boston IETF.
+The message then went on to plead for no follow-up questions to the four S=
+MP
+authors as they have a lot of work to do by then.
+The <italic>Communications Week</italic> reporter asked for community reac=
+tions.
+Although there was some concern over previous contributions of the propose=
+rs
+giving their work too much weight,
+the general consensus was that having relatively complete work by competen=
+t
+people was a good starting place for the open process.
+<nl><nl>
+Someone asked how an agent should respond if it does not implement an obje=
+ct
+in a MIB group which is mandatory for the agent's managed node.
+The immediate,
+first reply was that the agent should return noSuchName.
+Then began an interminable,
+thundering flame war,
+replete with denigration of individuals and companies over a topic that ha=
+s
+been discussed much the same way several times over the past four years.
+The "dogmatic architectural purists" maintained the strict position,
+with justification based on the intention to have a stable,
+predictable base for advanced network management applications.
+The "heretical pragmatic iconoclasts" held that returning a static value
+promoted easy compliance and was necessary due to many existing
+implementations that lacked real information and had to interoperate with =
+NMSs
+that treated noSuchName as a serious failure.
+Those of the "Inquisition" called such responses lies and declared such NM=
+Ss
+broken,
+and the "heretics" retreated behind interoperability and marketing pressur=
+e.
+This discussion will no doubt replay itself in the future,
+perhaps at the Boston IETF.
+<nl><nl>
+Someone noted that statistics in the <italic>Internet Monthly Report</ital=
+ic> showed an
+error rate on one network that was 2000 times better than a second network=
+,
+and then asked if this was possible.
+One respondent indicated that the information was probably true but could =
+be
+misleading;
+for example,
+9870 errors on a DS1 could indicate a single burst.
+Another respondent said the numbers were for a single interface,
+not a network,
+and that the "good" interface was an Ethernet,
+while the other interfaces were DS1 circuits.
+A followup asked if a new MIB object was needed to indicate what is =
+
+expected as "normal".
+The responses which followed indicated that the concept of "normal" was
+murky.
+<nl><nl>
+Finally,
+there was a very long discussion about the effect of export restrictions
+on SNMP's new security mechanisms.
+The discussion started with several questions:
+are there any changes in U.S.  export regulations,
+is authentication useful without privacy,
+will public domain implementations have privacy,
+can an implementation be compliant without privacy,
+how will the market react if privacy is omitted,
+why hasn't the press caught on to this situation,
+and can the IAB or IETF help.
+The ensuing discussion was rife with fear, uncertainty, and doubt.
+<nl><nl>
+<nl>
+<bold>Bridge MIB Working Group</bold>
+<nl><nl>
+The working group will meet in Boston to consider changes and elevation to=
+ =
+
+Draft Standard.
+<nl><nl>
+<nl>
+<bold>Chassis MIB Working Group</bold>
+<nl><nl>
+Someone observed that when adding a repeater port to a box that has other
+functions,
+it gets a LOT more complicated,
+e.g.,
+requiring implementation of the Chassis MIB,
+the Repeater MIB (possibly for multiple repeaters),
+and the Party and View MIBs.
+However,
+under such a model,
+how can one identify a particular repeater port given the IP address of th=
+e
+agent.
+The one respondent indicated that a MIB view model would work,
+and that the Party MIB could be useful for this.
+<nl><nl>
+<nl>
+<bold>DECnet Phase IV MIB Working Group</bold>
+<nl><nl>
+A NMS provider asked for an agent to test against,
+but received no public
+responses.
+<nl><nl>
+In response to several questions he had received,
+the editor said there is no counter for multicast bytes sent because it
+was not in Phase IV DECnet;
+however,
+such an object will be added to the list for the next edit.
+The editor also solicited responses from those interested in interoperabil=
+ity
+testing in the Fall.
+<nl><nl>
+Finally,
+although the working group has concluded its charter,
+the mailing list will remain for implementation discussion.
+<nl><nl>
+<nl>
+<bold>Domain Name Service MIB</bold>
+<nl><nl>
+The mailing list received a new DNS MIB draft in PostScript and ASCII form=
+s.
+The new version of the MIB is now almost 50% smaller.
+<nl><nl>
+<nl>
+<bold>Ethernet MIB Working Group</bold>
+<nl><nl>
+The chair asked if the group needs a meeting at the Boston IETF,
+solicited the participation of IEEE 802.3 people in the group,
+and asked if there were any objections to advancing the MIB forward.
+There were no public responses.
+<nl><nl>
+The mailing list has moved to
+<underline><underline>enet_mib@ftp.com</underline></underline>
+<nl><nl>
+<nl>
+<bold>FDDI MIB Working Group</bold>
+<nl><nl>
+Someone asked if the FDDI trap document had been completely dropped.
+The answer,
+as agreed to by the working group,
+was yes.
+<nl><nl>
+<nl>
+<bold>Host MIB Working Group</bold>
+<nl><nl>
+Someone asked if the presentation made at the San Diego IETF could be
+distributed to the mailing list.
+In response,
+a strawman proposal was distributed.
+<nl><nl>
+The working group was officially formed,
+chartered to define "SNMP MIB objects that instrument
+characteristics common to all internet hosts".
+<nl><nl>
+Request Address:
+<underline><underline>hostmib-request@andrew.cmu.edu</underline></underlin=
+e>
+<nl><nl>
+<nl>
+<bold>IP over Large Public Data Networks (IPLPDN) Working Group</bold>
+<nl><nl>
+Questions about IP over X.25 were referred to the X.25 MIB working group.
+<nl><nl>
+Someone seeking information on an ISDN MIB got two responses:
+first,
+a masters student is writing such a MIB as a part of thesis work,
+with the final form due May 14 prior to submission to the IETF;
+and,
+second,
+a company is working on IP over ISDN experiments,
+with results one or two months out.
+<nl><nl>
+The Boston meeting agenda includes the Frame Relay MIB and the X.25 MIB.
+<nl><nl>
+<nl>
+<bold>Multiport Repeater MIB Working Group</bold>
+<nl><nl>
+Someone suggested changing the syntax of
+<underline>rptrPortAdminState</underline> to be consistent with other MIBs=
+.
+As all other standard MIBs are that way,
+the editors agreed.
+A followup asked a similar question about
+<underline>rptrPortAutoPartitionState</underline>.
+The editors agreed,
+if there were no objections from working group.
+There were no public responses.
+<nl><nl>
+For the meeting at the Boston IETF,
+the only agenda item is MAU MIB.
+<nl><nl>
+Someone wanted to know if on-line detection of health or failure could be =
+done
+reliably and with common meaning.
+A respondent indicated that such information is very implementation-specif=
+ic.
+Further discussion brought a proposed wording change,
+pending editor approval.
+<nl><nl>
+A new Internet-Draft is available with all changes.
+<nl><nl>
+<nl>
+<bold>NOCtools Working Group</bold>
+<nl><nl>
+A message sought tools and volunteers to update entries,
+asking that replies be sent to
+<underline><underline>noctools-request@merit.edu</underline></underline>
+<nl><nl>
+<nl>
+<bold>OSPF Working Group</bold>
+<nl><nl>
+For the meeting at the Boston IETF,
+the agenda includes discussion on the MIB and traps.
+<nl><nl>
+<nl>
+<bold>PPP Working Group</bold>
+<nl><nl>
+A solicitation for MIB comments received the response it looks good so far=
+ but
+is still too big.
+<nl><nl>
+Someone asked that since the counter
+<underline>pppLinkPacketTooLongs</underline> counts
+DISCARDED packets longer than MRU,
+should it count packets that are too long but not discarded?
+In response,
+the MIB was changed to include "too long for any reason which results in a
+loss of information or lack of communication".
+If such frames are discarded,
+then their count is also included in <underline>ifInErrors</underline>.
+<nl><nl>
+There was a long and detailed discussion of reusing <underline>ifIndex</un=
+derline> for
+internal PPP layers which included analysis of code and data size.
+Someone argued against filling the MIB-II interfaces table with internal P=
+PP
+details,
+and also noted that counting everything was,
+in general,
+a bad policy.
+There were also objections to optional objects or objects relating to
+unfinished PPP features being required in all MIB implementations.
+<nl><nl>
+Distribution of a new MIB draft elicited comments on various specific obje=
+cts
+and a general objection to the MIB's technique for presenting optional or
+negotiated features.
+The conclusion was to word the MIB so that it doesn't imply a particular
+implementation strategy.
+<nl><nl>
+The editor announced separate documents available as Internet-Drafts for:
+LCP,
+Security,
+IP,
+and Bridging,
+and solicited comments at the Boston IETF.
+<nl><nl>
+<nl>
+<bold>Remote Network Monitoring (RMON) MIB Working Group</bold>
+<nl><nl>
+Someone asked if it is valid to add a new control table entry for either
+invalid or noSuchName entries,
+which is preferred,
+and are there other
+methods?
+A respondent indicated that new entries must be created with createEntry
+status,
+preferably by attempting to set status for a random index.
+A followup objected that a random index won't work in an agent with a smal=
+l,
+fixed table.
+The original respondent noted that the agent should accept any unused inde=
+x
+and map it to internal entries.
+<nl><nl>
+Someone asked for a way to stop data collection but leave results in place=
+.
+A respondent suggested a "freeze" EntryStatus but noted that this is
+inconsistent with concurrent use by multiple managers and prefers a way to
+snapshot.
+<nl><nl>
+Someone asked how possible inconsistencies among interdependent objects sh=
+ould
+be dealt with,
+and went on to suggest various ways to interpret the NMS intent,
+such as order sensitivity.
+This drew the response that agents can't do the NMS job and should ignore
+inconsistencies not prohibited by the MIB specification.
+(It was further noted that SNMP prohibits order sensitivity.)
+<nl><nl>
+A question about RMON extensions for higher level protocols received the r=
+eply
+that such work is scheduled after the Token Ring RMON work completes.
+<nl><nl>
+A long discussion of sensing stations in a token ring reached no clear
+conclusion.
+<nl><nl>
+Someone asked if <underline>historyControlDataSource</underline>,
+(an OID for an interface)
+and <underline>channelIfIndex</underline>
+(an INTEGER for an interface) should be the same.
+A respondent said the two objects are different because the former
+will someday point to other things but the latter may not.
+<nl><nl>
+<nl>
+<bold>SNMP Security Working Group</bold>
+<nl><nl>
+Someone asked that when creating a new MD5 party,
+if a DEFVAL of the empty string could be used for the shared secret.
+The response was that the empty string is appropriate for noAuth parties,
+but is inappropriate for MD5 parties.
+<nl><nl>
+Someone asked about a working group meeting at the Boston IETF.
+After some discussion,
+it was decided to have an implementor's BOF instead.
+<nl><nl>
+Someone asked when a MIB view should be evaluated.
+A respondent noted that is an implementation decision,
+but that it is sensible to evaluate VarBinds as they are processed,
+keeping in mind that evaluation for get-next occurs after the processing,
+not before.
+<nl><nl>
+A late-breaking message said the final Internet-Drafts have been
+approved for standardization by the IAB.
+<nl><nl>
+<nl>
+<bold>X.25 MIB Working Group</bold>
+<nl><nl>
+Someone asked about archives.
+The response is that they are kept on the host <underline>dg-rtp.dg.com</u=
+nderline> in the
+directory <underline>x25mib/</underline>.
+<nl><nl>
+All three documents were reissued with various changes,
+mostly suggested by
+editor,
+and with little group discussion.
+
+------- =_aaaaaaaaaa3--
+
+------- =_aaaaaaaaaa2
+Content-Type: multipart/mixed; boundary="----- =_aaaaaaaaaa4"
+Content-Description: Miscellany
+
+------- =_aaaaaaaaaa4
+Content-Type: text/richtext; charset="us-ascii"
+Content-Description: Activities Calendar
+Content-Transfer-Encoding: quoted-printable
+
+<bold>Activities Calendar</bold>
+<nl><nl>
+<nl><nl><indent>
+<underline>=3D</underline> 24th Meeting of the IETF
+<nl><nl>
+July 13-17, Boston, MA
+<nl><nl>
+For information: +1 703-620-8990
+<nl><nl>
+<underline>=3D</underline> SMP BOF (at the Boston IETF)
+<nl><nl>
+Wednesday, June 15, 7:00-10:00pm
+<nl><nl>
+For information: +1 703-620-8990
+<nl><nl>
+<underline>=3D</underline> 25th Meeting of the IETF
+<nl><nl>
+November 16-20, Washington, DC
+<nl><nl>
+For information: +1 703-620-8990
+</indent><nl><nl>
+
+------- =_aaaaaaaaaa4--
+
+------- =_aaaaaaaaaa2--
+
+------- =_aaaaaaaaaa0
+Content-Type: multipart/mixed; boundary="----- =_aaaaaaaaaa5"
+Content-Description: Administrative Information
+
+------- =_aaaaaaaaaa5
+Content-Type: text/richtext; charset="us-ascii"
+Content-Description: Publication Information
+Content-Transfer-Encoding: quoted-printable
+
+<bold>The Simple Times</bold> is published with a lot of help from the
+SNMP community.
+<nl><nl>
+<nl>
+			      Publication Staff<nl>
+<nl>
+        Coordinating Editor:<nl>
+	    Dr. Marshall T. Rose    Dover Beach Consulting, Inc.<nl>
+<nl>
+        Featured Columnists:<nl>
+             Dr. Jeffrey D. Case    SNMP Research, Inc.<nl>
+                                    University of Tennessee<nl>
+                Keith McCloghrie    Hughes LAN Systems, Inc.<nl>
+                David T. Perkins    SynOptics Communications, Inc.<nl>
+               Robert L. Stewart    Xyplex, Inc.<nl>
+            Steven L. Waldbusser    Carnegie Mellon University<nl>
+<nl>
+<nl>
+                             Contact Information<nl>
+<nl>
+                Postal: The Simple Times<nl>
+                        c/o Dover Beach Consulting, Inc.<nl>
+                        420 Whisman Court<nl>
+                        Mountain View, CA  94043-2112<nl>
+<nl>
+                  Tel:          +1 415-968-1052<nl>
+                  Fax:          +1 415-968-2510<nl>
+               E-mail:          st-editorial@simple-times.org<nl>
+                 ISSN:          1060-6068<nl>
+
+------- =_aaaaaaaaaa5
+Content-Type: text/richtext; charset="us-ascii"
+Content-Description: Submissions
+Content-Transfer-Encoding: quoted-printable
+
+<bold>The Simple Times</bold> solicits high-quality articles of
+technology and comment.
+Technical articles are refereed to ensure that the content is
+marketing-free.
+By definition,
+commentaries reflect opinion and, as such,
+are reviewed only to the extent required to ensure commonly-accepted
+publication norms.
+<nl><nl>
+<bold>The Simple Times</bold> also solicits terse announcements of
+products and services,
+publications,
+and events.
+These contributions are reviewed only to the extent required to ensure
+commonly-accepted publication norms.
+<nl><nl>
+Submissions are accepted only in electronic form.
+A submission consists of ASCII text.
+(Technical articles are also allowed to reference encapsulated
+PostScript figures.)
+Submissions may be sent to the contact address above,
+either via electronic-mail or via magnetic media
+(using either 8mm <italic>tar</italic> tape,
+1/4inch <italic>tar</italic> cartridge-tape,
+or 3-1/2inch MS-DOS floppy-diskette).
+<nl><nl>
+Each submission must include the author's full name,
+title,
+affiliation,
+postal and electronic mail addresses,
+telephone,
+and fax numbers.
+Note that by initiating this process,
+the submitting party agrees to place the contribution into the public
+domain.
+
+------- =_aaaaaaaaaa5
+Content-Type: text/richtext; charset="us-ascii"
+Content-Description: Subscriptions Information
+Content-Transfer-Encoding: quoted-printable
+
+<bold>The Simple Times</bold> is available via electronic-mail in three
+editions:
+<italic>PostScript</italic>,
+<italic>MIME</italic> (the multi-media 822 mail format),
+and
+<italic>richtext</italic> (a simple page description language).
+For more information,
+send a message to
+<nl><nl><ident>
+    st-subscriptions@simple-times.org
+</ident><nl><nl>
+with a <italic>Subject</italic> line of
+<nl><nl><ident>
+    help
+</ident><nl><nl>
+In addition,
+<bold>The Simple Times</bold> has numerous hard-copy distribution
+outlets.
+Contact your favorite SNMP vendor and see if they carry it.
+If not,
+contact the publisher and ask for a list.
+(Communications via e-mail or fax are preferred).
+
+------- =_aaaaaaaaaa5--
+
+------- =_aaaaaaaaaa0--
+
+------- =_baaaaaaaaa1--
+
+--FOOFOO--
+

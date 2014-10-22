@@ -1,0 +1,94 @@
+Return-Path: <blaker@craswell.com>
+Received: from maleman.mcom.com ([198.93.92.3]) by dredd.mcom.com
+          (Netscape Mail Server v2.02) with SMTP id AAA19910
+          for <jwz@dredd.mcom.com>; Fri, 13 Dec 1996 15:00:10 -0800
+Received: from xwing.netscape.com (xwing.mcom.com [205.218.156.54]) by maleman.mcom.com (8.6.9/8.6.9) with ESMTP id OAA23769 for <jwz@netscape.com>; Fri, 13 Dec 1996 14:58:51 -0800
+Received: from peapod.deming.com (host20.deming.com [206.63.131.20]) by xwing.netscape.com (8.7.6/8.7.3) with SMTP id PAA00313 for <jwz@netscape.com>; Fri, 13 Dec 1996 15:00:03 -0800 (PST)
+Received: by peapod.deming.com from localhost
+    (router,SLmail V2.0); Fri, 13 Dec 1996 15:02:27 Pacific Standard Time
+Received: by peapod.deming.com from seth
+    (206.63.131.30::mail daemon; unverified,SLmail V2.0); Fri, 13 Dec 1996 15:02:23 Pacific Standard Time
+Message-Id: <3.0.32.19961213151017.0091ed80@mail.craswell.com>
+X-Sender: blaker@mail.craswell.com
+X-Mailer: Windows Eudora Pro Version 3.0 (32)
+Date: Fri, 13 Dec 1996 15:10:21 -0800
+To: jwz@netscape.com
+From: "Blake Ramsdell" <blaker@craswell.com>
+Subject: Encrypted message
+MIME-Version: 1.0
+Content-Type: multipart/signed; boundary=
+ "---=_=_ 659214770-385040-15143392 _=_=---"; micalg=rsa-sha1; protocol=
+ "application/x-pkcs7-signature"
+X-Mozilla-Status: 0001
+Content-Length: 4392
+
+
+-----=_=_ 659214770-385040-15143392 _=_=---
+Mime-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+
+I sent you an encrypted message that was triple-DES.  Let me know if you
+had any problems with it...
+
+Blake
+-----=_=_ 659214770-385040-15143392 _=_=---
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIAwggUM
+MIIEdaADAgECAhAM62l5zX4kzcSmoAxWqC2PMA0GCSqGSIb3DQEBBAUAMGIxETAPBgNVBAcT
+CEludGVybmV0MRcwFQYDVQQKEw5WZXJpU2lnbiwgSW5jLjE0MDIGA1UECxMrVmVyaVNpZ24g
+Q2xhc3MgMSBDQSAtIEluZGl2aWR1YWwgU3Vic2NyaWJlcjAeFw05NjExMTMwMDAwMDBaFw05
+NjEyMTMyMzU5NTlaMIIBMzERMA8GA1UEBxMISW50ZXJuZXQxFzAVBgNVBAoTDlZlcmlTaWdu
+LCBJbmMuMTQwMgYDVQQLEytWZXJpU2lnbiBDbGFzcyAxIENBIC0gSW5kaXZpZHVhbCBTdWJz
+Y3JpYmVyMUYwRAYDVQQLEz13d3cudmVyaXNpZ24uY29tL3JlcG9zaXRvcnkvQ1BTIEluY29y
+cC4gYnkgUmVmLixMSUFCLkxURChjKTk2MT4wPAYDVQQLEzVEaWdpdGFsIElEIENsYXNzIDEg
+LSBTTUlNRSBEZW1pbmcgU29mdHdhcmUsIEluYy4gQmV0YTEjMCEGA1UEAxMaQmxha2UgNTEy
+IFRlc3RpbmcgUmFtc2RlbGwxIjAgBgkqhkiG9w0BCQEWE2JsYWtlckBjcmFzd2VsbC5jb20w
+XDANBgkqhkiG9w0BAQEFAANLADBIAkEA0q21Atm4nAvUY0I8lrFOjX9BbnR3gFfZu8+jiW87
+snqVeDFARsmmwqyQ1VoHgkSN/atjDHKkT+E/4OK1/up9YQIDAQABo4ICMjCCAi4wCQYDVR0T
+BAIwADCCAh8GA1UdAwSCAhYwggISMIICDjCCAgoGC2CGSAGG+EUBBwEBMIIB+RaCAadUaGlz
+IGNlcnRpZmljYXRlIGluY29ycG9yYXRlcyBieSByZWZlcmVuY2UsIGFuZCBpdHMgdXNlIGlz
+IHN0cmljdGx5IHN1YmplY3QgdG8sIHRoZSBWZXJpU2lnbiBDZXJ0aWZpY2F0aW9uIFByYWN0
+aWNlIFN0YXRlbWVudCAoQ1BTKSwgYXZhaWxhYmxlIGF0OiBodHRwczovL3d3dy52ZXJpc2ln
+bi5jb20vQ1BTOyBieSBFLW1haWwgYXQgQ1BTLXJlcXVlc3RzQHZlcmlzaWduLmNvbTsgb3Ig
+YnkgbWFpbCBhdCBWZXJpU2lnbiwgSW5jLiwgMjU5MyBDb2FzdCBBdmUuLCBNb3VudGFpbiBW
+aWV3LCBDQSA5NDA0MyBVU0EgVGVsLiArMSAoNDE1KSA5NjEtODgzMCBDb3B5cmlnaHQgKGMp
+IDE5OTYgVmVyaVNpZ24sIEluYy4gIEFsbCBSaWdodHMgUmVzZXJ2ZWQuIENFUlRBSU4gV0FS
+UkFOVElFUyBESVNDTEFJTUVEIGFuZCBMSUFCSUxJVFkgTElNSVRFRC6gDgYMYIZIAYb4RQEH
+AQEBoQ4GDGCGSAGG+EUBBwEBAjAsMCoWKGh0dHBzOi8vd3d3LnZlcmlzaWduLmNvbS9yZXBv
+c2l0b3J5L0NQUyAwDQYJKoZIhvcNAQEEBQADgYEAF6Z54NUzRdcCLfac7WDTx88kisX4TpG+
+UXPcTMhNm55pDb88mPMBNhsOTA9SP7OJjCVBvqNcWSopPaz6H2Bd1vowiDi3Lnm3Dw0ntXvp
+WPO1PkUd6/TGpu4ayfpNVAYSxDcjdt4+LSSwLWLsWarAanulHHcoO9ZGm71nm70DubkwggJ5
+MIIB4qADAgECAhA1EaVSkG/n0CmkQBnUEfw+MA0GCSqGSIb3DQEBAgUAMF8xCzAJBgNVBAYT
+AlVTMRcwFQYDVQQKEw5WZXJpU2lnbiwgSW5jLjE3MDUGA1UECxMuQ2xhc3MgMSBQdWJsaWMg
+UHJpbWFyeSBDZXJ0aWZpY2F0aW9uIEF1dGhvcml0eTAeFw05NjA2MjcwMDAwMDBaFw05NzA2
+MjcyMzU5NTlaMGIxETAPBgNVBAcTCEludGVybmV0MRcwFQYDVQQKEw5WZXJpU2lnbiwgSW5j
+LjE0MDIGA1UECxMrVmVyaVNpZ24gQ2xhc3MgMSBDQSAtIEluZGl2aWR1YWwgU3Vic2NyaWJl
+cjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAthSmz03QBQ3YyiPQb6q0KZJjjiz4b5bX
+Lp12SxGxNo1XycP9HMa6/h4IujPKleq+41vNBqi3eR1EKu1z8rFSg2gQcGSR1z5r+fddnRRD
+m26XRZiBR9Ety927ctdMP3Gq4kDyVDm8Fu7PfOy62z9sKrMWsYYSna6TNNW41dD3PqkCAwEA
+AaMzMDEwDwYDVR0TBAgwBgEB/wIBATALBgNVHQ8EBAMCAQYwEQYJYIZIAYb4QgEBBAQDAgIE
+MA0GCSqGSIb3DQEBAgUAA4GBACnlx6AZp28UQoJNIzPXvZg6aXcabIqSJ2vyfAzhxFLg+Jzj
+QK+PsToO90gZdNup+wZOeQNsLwDBqO/pCk2fqx2hQw3JquDvq8xa4tkSDnhgJ3I9SHBqbQEI
+b16CIRTBuCZc4NSpR2R6suw943se/M3ElO5CjrvH+bQF9Ywt/rE6AAChgDCCAScwgZEwDQYJ
+KoZIhvcNAQECBQAwYjERMA8GA1UEBxMISW50ZXJuZXQxFzAVBgNVBAoTDlZlcmlTaWduLCBJ
+bmMuMTQwMgYDVQQLEytWZXJpU2lnbiBDbGFzcyAxIENBIC0gSW5kaXZpZHVhbCBTdWJzY3Jp
+YmVyFw05NjA3MDExNzMwNDBaFw05NzA3MDEwMDAwMDBaMA0GCSqGSIb3DQEBAgUAA4GBABi7
+kOj1/AOwIqgRLVs2LZepWTUgyNG0eWFKPg9ic5MN9HcUJyUmylxHOl2LswFuR768wE17uXNf
+Vlj0+HEQ8Jox+9YvUHA8rFsH/8BNKhk4liN7UE9COVRoe4yCQ9O55QcN0eF5fHR/ZK/OSbFo
+p6gx+WCqSKPaPJJ2OZ+/qozqMIIBJDCBjjANBgkqhkiG9w0BAQIFADBfMQswCQYDVQQGEwJV
+UzEXMBUGA1UEChMOVmVyaVNpZ24sIEluYy4xNzA1BgNVBAsTLkNsYXNzIDEgUHVibGljIFBy
+aW1hcnkgQ2VydGlmaWNhdGlvbiBBdXRob3JpdHkXDTk2MDgxMzAwMzA1OFoXDTk3MDgxMjAw
+MDAwMFowDQYJKoZIhvcNAQECBQADgYEA1dzv/pevULboNwwiRcIOq1XaRQOMyWw/SSFUNu+j
+5rSRjjvmzWTpm0bi/8ct5T5HR9auJmz6Q/pj6x0waXEjshWQh3/VagIcgDsXcdObIDcw4Gpf
+igcOHr577KpFlr3kGVC4ik5oTvzmNscK5So8npwbEXx9NHMXFmh7vMr7jREAADGAMIIBNgIB
+ATB2MGIxETAPBgNVBAcTCEludGVybmV0MRcwFQYDVQQKEw5WZXJpU2lnbiwgSW5jLjE0MDIG
+A1UECxMrVmVyaVNpZ24gQ2xhc3MgMSBDQSAtIEluZGl2aWR1YWwgU3Vic2NyaWJlcgIQDOtp
+ec1+JM3EpqAMVqgtjzAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAc
+BgkqhkiG9w0BCQUxDxcNOTYxMjEzMjMxMDIxWjAjBgkqhkiG9w0BCQQxFgQU2mTOfNT5sj4A
+zx1+sUPxnuPu0BAwDQYJKoZIhvcNAQEBBQAEQE7o3gGllV4G6J4nrUpT8U9Ci5KPPC+WJ9Ot
+UI4zv6C6+7KF4yf7Dbv5PL+EQHY02oDQXvrU4nNkhSefw4gcON4AAAAAAAAAAA==
+-----=_=_ 659214770-385040-15143392 _=_=-----
+

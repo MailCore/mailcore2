@@ -1,0 +1,31 @@
+Return-Path: <repka@netscape.com>
+Received: from c3po.mcom.com ([205.217.237.46]) by dredd.mcom.com
+          (Netscape Mail Server v2.02) with ESMTP id AAA14894
+          for <jwz@dredd.mcom.com>; Thu, 19 Dec 1996 09:38:52 -0800
+Received: from ghoti.mcom.com (ghoti.mcom.com [207.1.147.41]) by c3po.mcom.com (8.7.5/8.7.3) with SMTP id JAA03928 for <jwz@netscape.com>; Thu, 19 Dec 1996 09:38:52 -0800 (PST)
+Received: from ghoti (localhost [127.0.0.1]) by ghoti.mcom.com (940816.SGI.8.6.9/8.6.9) with SMTP id JAA01356 for <jwz@netscape.com>; Thu, 19 Dec 1996 09:38:50 -0800
+Sender: repka@netscape.com
+Message-ID: <32B97DAA.167E@netscape.com>
+Date: Thu, 19 Dec 1996 09:38:50 -0800
+From: Lisa Repka <repka@netscape.com>
+Organization: Netscape Communications Corporation
+X-Mailer: Mozilla 3.0 (X11; U; IRIX 5.3 IP22)
+MIME-Version: 1.0
+To: Jamie Zawinski <jwz@netscape.com>
+Subject: very cool
+Content-Type: application/x-pkcs7-mime; name="smime.p7m"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7m"
+X-Mozilla-Status: 0001
+Content-Length: 661
+
+MIAGCSqGSIb3DQEHA6CAMIACAQAxgc8wgcwCAQAwdjBiMREwDwYDVQQHEwhJbnRlcm5ldDEX
+MBUGA1UEChMOVmVyaVNpZ24sIEluYy4xNDAyBgNVBAsTK1ZlcmlTaWduIENsYXNzIDEgQ0Eg
+LSBJbmRpdmlkdWFsIFN1YnNjcmliZXICECkPxhf0bpqHRPlrV4jyZoQwDQYJKoZIhvcNAQEB
+BQAEQF+IarhYH6F+1SG5osDdiuiaHaiW+hN1qidO1jkmzrPcW+EWBrqz8N04vexYeRd3NTYM
+n1izmFc/P8+c4NxIr+gwgAYJKoZIhvcNAQcBMBQGCCqGSIb3DQMHBAhM6vSiWNR/i6CABEgn
+8VTx1medvABZJ6pdJYupUc7qlYZwIY3NjElAIwlbPwpWj4lt4TXQa+Ir8djF8xmHBOLxSSIn
+EQK1tgT3CAMTeDvxvlvZWhEEQHaLZbk7XHfjoMoTCviNdkmfWC/3O5vfJmFzpBYrY+9lOvFX
+K5QmWq8m680kJCbu8pSxXhxQGUoBV8U6ejvSc+gEMN+GS+LzvW5K04/CtO8cM1tSRcyOmWtt
+oandbdLW+XWD907ylAoiHEXoKDeMCHVNjwQIrTKsMQRLJq0ECOk1Trs4Jm6bAAAAAAAAAAAA
+AA==

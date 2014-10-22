@@ -1,0 +1,87 @@
+Return-Path: owner-smime-dev@RSA.COM
+Received: from maleman.mcom.com (maleman.mcom.com [198.93.92.3]) by urchin.mcom.com (8.7.5/8.7.3) with SMTP id OAA13788; Fri, 18 Oct 1996 14:03:45 -0700 (PDT)
+Received: from ns.netscape.com (ns.netscape.com.mcom.com [198.95.251.10]) by maleman.mcom.com (8.6.9/8.6.9) with ESMTP id OAA27327; Fri, 18 Oct 1996 14:02:29 -0700
+Received: from RSA.COM (chirality.rsa.com [192.80.211.33]) by ns.netscape.com (8.7.3/8.7.3) with SMTP id OAA14916; Fri, 18 Oct 1996 14:01:09 -0700 (PDT)
+Received: by RSA.COM 
+	id AA23994; Fri, 18 Oct 96 13:57:57 PDT
+Message-Id: <c=US%a=_%p=RSA_Data_Securit%l=LOBESTER-961018205746Z-5325@LOBESTER.rsa.com>
+From: Kurt Stammberger <kurt@RSA.COM>
+To: "'set-discuss@commerce.net'" <set-discuss@commerce.net>,
+        "'smime-dev@rsa.com'" <smime-dev@RSA.COM>
+Subject: S/MIME Cert
+Date: Fri, 18 Oct 1996 13:57:46 -0700
+X-Mailer:  Microsoft Exchange Server Internet Mail Connector Version 4.0.993.5
+Mime-Version: 1.0
+Content-Type: multipart/mixed; boundary="---- =_NextPart_000_01BBBCFC.5826AA10"
+Sender: owner-smime-dev@RSA.COM
+Precedence: bulk
+X-UIDL: 4f6d764354ec3f5fa6e9ac0c33439a8c
+X-Mozilla-Status: 0005
+
+This message is in MIME format. Since your mail reader does not understand
+this format, some or all of this message may not be legible.
+
+------ =_NextPart_000_01BBBCFC.5826AA10
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+
+Hi folks.  Here's my new S/MIME certificate.
+ 
+Kurt Stammberger
+RSADSI
+
+
+------ =_NextPart_000_01BBBCFC.5826AA10
+Content-Type: application/octet-stream; name="verisign.p7m"
+Content-Transfer-Encoding: base64
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExADCABgkqhkiG9w0BBwEAAKCAMIIFPzCCBKigAwIBAgIQGolf
+yXUTD1bblRcUY9a/pjANBgkqhkiG9w0BAQQFADBiMREwDwYDVQQHEwhJbnRlcm5ldDEXMBUGA1UE
+ChMOVmVyaVNpZ24sIEluYy4xNDAyBgNVBAsTK1ZlcmlTaWduIENsYXNzIDEgQ0EgLSBJbmRpdmlk
+dWFsIFN1YnNjcmliZXIwHhcNOTYxMDE4MDAwMDAwWhcNOTYxMTE3MjM1OTU5WjCCASIxETAPBgNV
+BAcTCEludGVybmV0MRcwFQYDVQQKEw5WZXJpU2lnbiwgSW5jLjE0MDIGA1UECxMrVmVyaVNpZ24g
+Q2xhc3MgMSBDQSAtIEluZGl2aWR1YWwgU3Vic2NyaWJlcjFGMEQGA1UECxM9d3d3LnZlcmlzaWdu
+LmNvbS9yZXBvc2l0b3J5L0NQUyBJbmNvcnAuIGJ5IFJlZi4sTElBQi5MVEQoYyk5NjE+MDwGA1UE
+CxM1RGlnaXRhbCBJRCBDbGFzcyAxIC0gU01JTUUgRGVtaW5nIFNvZnR3YXJlLCBJbmMuIEJldGEx
+GTAXBgNVBAMTEEt1cnQgU3RhbW1iZXJnZXIxGzAZBgkqhkiG9w0BCQEWDGt1cnRAcnNhLmNvbTCB
+nzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAoIK2vmSr6nCQR1yNKhZLxmQpNZprQnCu4teQLOxb
+Ch6D1PKxokFNXNSO/lFHA2TMytmxRCoftXGzFdrM/1nZQAvB1SyqhIOi4VcstuUAYmKCZfwJL2eV
+MCTeuOs7RqtPSLOfWem2n+UJzDGCbx5aFSKWhoAQu8/ZdrZEvF9BdLcCAwEAAaOCAjIwggIuMAkG
+A1UdEwQCMAAwggIfBgNVHQMEggIWMIICEjCCAg4wggIKBgtghkgBhvhFAQcBATCCAfkWggGnVGhp
+cyBjZXJ0aWZpY2F0ZSBpbmNvcnBvcmF0ZXMgYnkgcmVmZXJlbmNlLCBhbmQgaXRzIHVzZSBpcyBz
+dHJpY3RseSBzdWJqZWN0IHRvLCB0aGUgVmVyaVNpZ24gQ2VydGlmaWNhdGlvbiBQcmFjdGljZSBT
+dGF0ZW1lbnQgKENQUyksIGF2YWlsYWJsZSBhdDogaHR0cHM6Ly93d3cudmVyaXNpZ24uY29tL0NQ
+UzsgYnkgRS1tYWlsIGF0IENQUy1yZXF1ZXN0c0B2ZXJpc2lnbi5jb207IG9yIGJ5IG1haWwgYXQg
+VmVyaVNpZ24sIEluYy4sIDI1OTMgQ29hc3QgQXZlLiwgTW91bnRhaW4gVmlldywgQ0EgOTQwNDMg
+VVNBIFRlbC4gKzEgKDQxNSkgOTYxLTg4MzAgQ29weXJpZ2h0IChjKSAxOTk2IFZlcmlTaWduLCBJ
+bmMuICBBbGwgUmlnaHRzIFJlc2VydmVkLiBDRVJUQUlOIFdBUlJBTlRJRVMgRElTQ0xBSU1FRCBh
+bmQgTElBQklMSVRZIExJTUlURUQuoA4GDGCGSAGG+EUBBwEBAaEOBgxghkgBhvhFAQcBAQIwLDAq
+FihodHRwczovL3d3dy52ZXJpc2lnbi5jb20vcmVwb3NpdG9yeS9DUFMgMA0GCSqGSIb3DQEBBAUA
+A4GBAI9mD8nq3NS9MEN8RST19xH7CCPOwzOdTROX2c6Kgt2gEUv9J4raiM4cNOksd9WnMcG4/Fls
+vSntCbDW4W23CJPFL8YkxeDfvXhUc83602Fg9XJQotbcmlnN/U+ubAJWkrtw8cuWH+YWtK801dbw
+CBbPxmpvBOQ0OG4qZ0BvracpMIICeTCCAeKgAwIBAgIQNRGlUpBv59AppEAZ1BH8PjANBgkqhkiG
+9w0BAQIFADBfMQswCQYDVQQGEwJVUzEXMBUGA1UEChMOVmVyaVNpZ24sIEluYy4xNzA1BgNVBAsT
+LkNsYXNzIDEgUHVibGljIFByaW1hcnkgQ2VydGlmaWNhdGlvbiBBdXRob3JpdHkwHhcNOTYwNjI3
+MDAwMDAwWhcNOTcwNjI3MjM1OTU5WjBiMREwDwYDVQQHEwhJbnRlcm5ldDEXMBUGA1UEChMOVmVy
+aVNpZ24sIEluYy4xNDAyBgNVBAsTK1ZlcmlTaWduIENsYXNzIDEgQ0EgLSBJbmRpdmlkdWFsIFN1
+YnNjcmliZXIwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBALYUps9N0AUN2Moj0G+qtCmSY44s
++G+W1y6ddksRsTaNV8nD/RzGuv4eCLozypXqvuNbzQaot3kdRCrtc/KxUoNoEHBkkdc+a/n3XZ0U
+Q5tul0WYgUfRLcvdu3LXTD9xquJA8lQ5vBbuz3zsuts/bCqzFrGGEp2ukzTVuNXQ9z6pAgMBAAGj
+MzAxMA8GA1UdEwQIMAYBAf8CAQEwCwYDVR0PBAQDAgEGMBEGCWCGSAGG+EIBAQQEAwICBDANBgkq
+hkiG9w0BAQIFAAOBgQAp5cegGadvFEKCTSMz172YOml3GmyKkidr8nwM4cRS4Pic40Cvj7E6DvdI
+GXTbqfsGTnkDbC8Awajv6QpNn6sdoUMNyarg76vMWuLZEg54YCdyPUhwam0BCG9egiEUwbgmXODU
+qUdkerLsPeN7HvzNxJTuQo67x/m0BfWMLf6xOgAAoYAwggEnMIGRMA0GCSqGSIb3DQEBAgUAMGIx
+ETAPBgNVBAcTCEludGVybmV0MRcwFQYDVQQKEw5WZXJpU2lnbiwgSW5jLjE0MDIGA1UECxMrVmVy
+aVNpZ24gQ2xhc3MgMSBDQSAtIEluZGl2aWR1YWwgU3Vic2NyaWJlchcNOTYwNzAxMTczMDQwWhcN
+OTcwNzAxMDAwMDAwWjANBgkqhkiG9w0BAQIFAAOBgQAYu5Do9fwDsCKoES1bNi2XqVk1IMjRtHlh
+Sj4PYnOTDfR3FCclJspcRzpdi7MBbke+vMBNe7lzX1ZY9PhxEPCaMfvWL1BwPKxbB//ATSoZOJYj
+e1BPQjlUaHuMgkPTueUHDdHheXx0f2SvzkmxaKeoMflgqkij2jySdjmfv6qM6jCCASQwgY4wDQYJ
+KoZIhvcNAQECBQAwXzELMAkGA1UEBhMCVVMxFzAVBgNVBAoTDlZlcmlTaWduLCBJbmMuMTcwNQYD
+VQQLEy5DbGFzcyAxIFB1YmxpYyBQcmltYXJ5IENlcnRpZmljYXRpb24gQXV0aG9yaXR5Fw05NjA4
+MTMwMDMwNThaFw05NzA4MTIwMDAwMDBaMA0GCSqGSIb3DQEBAgUAA4GBANXc7/6Xr1C26DcMIkXC
+DqtV2kUDjMlsP0khVDbvo+a0kY475s1k6ZtG4v/HLeU+R0fWriZs+kP6Y+sdMGlxI7IVkId/1WoC
+HIA7F3HTmyA3MOBqX4oHDh6+e+yqRZa95BlQuIpOaE785jbHCuUqPJ6cGxF8fTRzFxZoe7zK+40R
+AAAxgAAAAAAAAAAA
+
+------ =_NextPart_000_01BBBCFC.5826AA10--
+

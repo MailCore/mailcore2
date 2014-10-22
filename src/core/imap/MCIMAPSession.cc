@@ -3172,7 +3172,7 @@ IMAPIdentity * IMAPSession::identity(IMAPIdentity * clientIdentity, ErrorCode * 
         char * dup_value;
         
         dup_name = strdup(key->UTF8Characters());
-        dup_value = strdup(clientIdentity->name()->UTF8Characters());
+        dup_value = strdup(clientIdentity->infoForKey(key)->UTF8Characters());
         mailimap_id_params_list_add_name_value(client_identification, dup_name, dup_value);
     }
 
