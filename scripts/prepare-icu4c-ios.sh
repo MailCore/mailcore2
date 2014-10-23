@@ -1,9 +1,12 @@
 #!/bin/sh
 
+sysrootpath="`xcode-select -p`/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk"
+
 if xcodebuild -showsdks|grep iphoneos8.1 >/dev/null ; then
     sdkversion=8.1
     devicearchs="armv7 armv7s arm64"
     archs="armv7 armv7s arm64 i386 x86_64"
+    sysrootpath="`xcode-select -p`/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk"
 elif xcodebuild -showsdks|grep iphoneos8.0 >/dev/null ; then
     sdkversion=8.0
     devicearchs="armv7 armv7s arm64"
@@ -30,7 +33,6 @@ version='51_1'
 build_version="$version~3"
 url="http://download.icu-project.org/files/icu4c/$versionfolder/icu4c-$version-src.tgz"
 package_filename="icu4c-$version-src.tgz"
-sysrootpath="`xcode-select -p`/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk"
 enable_icu_data=0
 
 pushd `dirname $0` > /dev/null
