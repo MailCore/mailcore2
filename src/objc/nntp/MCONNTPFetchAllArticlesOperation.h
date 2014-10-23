@@ -1,5 +1,5 @@
 //
-//  MCONNTPFetchArticlesOperation.h
+//  MCONNTPFetchAllArticlesOperation.h
 //  mailcore2
 //
 //  Created by Robert Widmann on 8/13/14.
@@ -16,7 +16,7 @@
 @class MCOIndexSet;
 
 /** This is an asynchronous operation that will fetch the list of a messages on the NNTP server. */
-@interface MCONNTPFetchArticlesOperation : MCONNTPOperation
+@interface MCONNTPFetchAllArticlesOperation : MCONNTPOperation
 
 /** 
  Starts the asynchronous fetch operation.

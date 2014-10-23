@@ -16,7 +16,7 @@
 
 #import <MailCore/MCOConstants.h>
 
-@class MCONNTPFetchArticlesOperation;
+@class MCONNTPFetchAllArticlesOperation;
 @class MCONNTPFetchHeaderOperation;
 @class MCONNTPFetchArticleOperation;
 @class MCONNTPListNewsgroupsOperation;
@@ -71,11 +71,11 @@
 /**
  Returns an operation that will fetch the list of article numbers.
  
- MCONNTPFetchArticlesOperation * op = [session fetchAllArticlesOperation:@"comp.lang.c"];
+ MCONNTPFetchAllArticlesOperation * op = [session fetchAllArticlesOperation:@"comp.lang.c"];
  [op start:^(NSError * error, MCOIndexSet * articles) {
  }];
  */
-- (MCONNTPFetchArticlesOperation *) fetchAllArticlesOperation:(NSString *)group;
+- (MCONNTPFetchAllArticlesOperation *) fetchAllArticlesOperation:(NSString *)group;
 
 /**
  Returns an operation that will fetch the header of the given message.

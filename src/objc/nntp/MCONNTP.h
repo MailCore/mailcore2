@@ -14,7 +14,7 @@
 #include <MailCore/MCONNTPOperation.h>
 #include <MailCore/MCONNTPFetchHeaderOperation.h>
 #include <MailCore/MCONNTPFetchArticleOperation.h>
-#include <MailCore/MCONNTPFetchArticlesOperation.h>
+#include <MailCore/MCONNTPFetchAllArticlesOperation.h>
 #include <MailCore/MCONNTPListNewsgroupsOperation.h>
 #include <MailCore/MCONNTPFetchOverviewOperation.h>
 #include <MailCore/MCONNTPFetchServerTimeOperation.h>

@@ -1,5 +1,5 @@
 //
-//  MCMCNNTPFetchArticlesOperation.h
+//  MCNNTPFetchArticleOperation.h
 //  mailcore2
 //
 //  Created by Robert Widmann on 8/13/14.

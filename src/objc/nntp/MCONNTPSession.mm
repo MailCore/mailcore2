@@ -13,7 +13,7 @@
 #import "MCOUtils.h"
 #import "MCONNTPOperation.h"
 #import "MCOOperation+Private.h"
-#import "MCONNTPFetchArticlesOperation.h"
+#import "MCONNTPFetchAllArticlesOperation.h"
 #import "MCONNTPOperation+Private.h"
 
 using namespace mailcore;
@@ -122,9 +122,9 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
     return result;
 }
 
-- (MCONNTPFetchArticlesOperation *) fetchAllArticlesOperation:(NSString *)group
+- (MCONNTPFetchAllArticlesOperation *) fetchAllArticlesOperation:(NSString *)group
 {
-    mailcore::NNTPFetchArticlesOperation * coreOp = MCO_NATIVE_INSTANCE->fetchAllArticlesOperation(MCO_FROM_OBJC(mailcore::String, group));
+    mailcore::NNTPFetchAllArticlesOperation * coreOp = MCO_NATIVE_INSTANCE->fetchAllArticlesOperation(MCO_FROM_OBJC(mailcore::String, group));
     return MCO_TO_OBJC_OP(coreOp);
 }
 

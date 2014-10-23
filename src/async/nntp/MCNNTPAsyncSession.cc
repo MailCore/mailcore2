@@ -11,7 +11,7 @@
 #include "MCNNTP.h"
 #include "MCNNTPFetchHeaderOperation.h"
 #include "MCNNTPFetchArticleOperation.h"
-#include "MCNNTPFetchArticlesOperation.h"
+#include "MCNNTPFetchAllArticlesOperation.h"
 #include "MCNNTPListNewsgroupsOperation.h"
 #include "MCNNTPFetchOverviewOperation.h"
 #include "MCNNTPCheckAccountOperation.h"
@@ -155,9 +155,9 @@ bool NNTPAsyncSession::isCheckCertificateEnabled()
     return mSession->isCheckCertificateEnabled();
 }
 
-NNTPFetchArticlesOperation * NNTPAsyncSession::fetchAllArticlesOperation(String * group)
+NNTPFetchAllArticlesOperation * NNTPAsyncSession::fetchAllArticlesOperation(String * group)
 {
-    NNTPFetchArticlesOperation * op = new NNTPFetchArticlesOperation();
+    NNTPFetchAllArticlesOperation * op = new NNTPFetchAllArticlesOperation();
     op->setSession(this);
     op->setGroupName(group);
     op->autorelease();

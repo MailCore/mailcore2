@@ -12,7 +12,7 @@ namespace mailcore {
     class NNTPSession;
     class NNTPFetchHeaderOperation;
     class NNTPFetchArticleOperation;
-    class NNTPFetchArticlesOperation;
+    class NNTPFetchAllArticlesOperation;
     class NNTPFetchOverviewOperation;
     class NNTPListNewsgroupsOperation;
     class NNTPFetchServerTimeOperation;
@@ -53,7 +53,7 @@ namespace mailcore {
         virtual dispatch_queue_t dispatchQueue();
 #endif
         
-        virtual NNTPFetchArticlesOperation * fetchAllArticlesOperation(String * group);
+        virtual NNTPFetchAllArticlesOperation * fetchAllArticlesOperation(String * group);
         
         virtual NNTPFetchHeaderOperation * fetchHeaderOperation(String * groupName, unsigned int index);
         

@@ -108,7 +108,7 @@ async/nntp/MCNNTPAsyncSession.h
 async/nntp/MCNNTPCheckAccountOperation.h
 async/nntp/MCNNTPDisconnectOperation.h
 async/nntp/MCNNTPFetchArticleOperation.h
-async/nntp/MCNNTPFetchArticlesOperation.h
+async/nntp/MCNNTPFetchAllArticlesOperation.h
 async/nntp/MCNNTPFetchHeaderOperation.h
 async/nntp/MCNNTPListNewsgroupsOperation.h
 async/nntp/MCNNTPFetchOverviewOperation.h
@@ -189,7 +189,7 @@ objc/nntp/MCONNTP.h
 objc/nntp/MCONNTPDisconnectOperation.h
 objc/nntp/MCONNTPFetchArticleOperation.h
 objc/nntp/MCONNTPFetchArticleOperation.mm
-objc/nntp/MCONNTPFetchArticlesOperation.h
+objc/nntp/MCONNTPFetchAllArticlesOperation.h
 objc/nntp/MCONNTPFetchArticlesOperation.mm
 objc/nntp/MCONNTPFetchHeaderOperation.h
 objc/nntp/MCONNTPFetchHeaderOperation.mm

@@ -1,46 +1,46 @@
 //
-//  MCMCNNTPFetchArticlesOperation.cpp
+//  MCNNTPFetchAllArticlesOperation.cpp
 //  mailcore2
 //
 //  Created by Robert Widmann on 8/13/14.
 //  Copyright (c) 2014 MailCore. All rights reserved.
 //
 
-#include "MCNNTPFetchArticlesOperation.h"
+#include "MCNNTPFetchAllArticlesOperation.h"
 
 #include "MCNNTPAsyncSession.h"
 #include "MCNNTPSession.h"
 
 using namespace mailcore;
 
-NNTPFetchArticlesOperation::NNTPFetchArticlesOperation()
+NNTPFetchAllArticlesOperation::NNTPFetchAllArticlesOperation()
 {
     mGroupName = NULL;
     mArticles = NULL;
 }
 
-NNTPFetchArticlesOperation::~NNTPFetchArticlesOperation()
+NNTPFetchAllArticlesOperation::~NNTPFetchAllArticlesOperation()
 {
     MC_SAFE_RELEASE(mGroupName);
     MC_SAFE_RELEASE(mArticles);
 }
 
-void NNTPFetchArticlesOperation::setGroupName(String * groupname)
+void NNTPFetchAllArticlesOperation::setGroupName(String * groupname)
 {
     MC_SAFE_REPLACE_COPY(String, mGroupName, groupname);
 }
 
-String * NNTPFetchArticlesOperation::groupName()
+String * NNTPFetchAllArticlesOperation::groupName()
 {
     return mGroupName;
 }
 
-IndexSet * NNTPFetchArticlesOperation::articles()
+IndexSet * NNTPFetchAllArticlesOperation::articles()
 {
     return mArticles;
 }
 
-void NNTPFetchArticlesOperation::main()
+void NNTPFetchAllArticlesOperation::main()
 {
     ErrorCode error;
     mArticles = session()->session()->fetchAllArticles(mGroupName, &error);

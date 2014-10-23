@@ -1,12 +1,12 @@
 //
-//  MCONNTPFetchArticlesOperation.m
+//  MCONNTPFetchAllArticlesOperation.m
 //  mailcore2
 //
 //  Created by Robert Widmann on 8/13/14.
 //  Copyright (c) 2014 MailCore. All rights reserved.
 //
 
-#import "MCONNTPFetchArticlesOperation.h"
+#import "MCONNTPFetchAllArticlesOperation.h"
 
 #include "MCAsyncNNTP.h"
 
@@ -15,11 +15,11 @@
 
 typedef void (^CompletionType)(NSError *error, MCOIndexSet * articles);
 
-@implementation MCONNTPFetchArticlesOperation {
+@implementation MCONNTPFetchAllArticlesOperation {
     CompletionType _completionBlock;
 }
 
-#define nativeType mailcore::NNTPFetchArticlesOperation
+#define nativeType mailcore::NNTPFetchAllArticlesOperation
 
 + (void) load
 {

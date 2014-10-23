@@ -57,7 +57,7 @@ set(async_nntp_files
   async/nntp/MCNNTPCheckAccountOperation.cc
   async/nntp/MCNNTPDisconnectOperation.cc
   async/nntp/MCNNTPFetchArticleOperation.cc
-  async/nntp/MCNNTPFetchArticlesOperation.cc
+  async/nntp/MCNNTPFetchAllArticlesOperation.cc
   async/nntp/MCNNTPFetchHeaderOperation.cc
   async/nntp/MCNNTPListNewsgroupsOperation.cc
   async/nntp/MCNNTPFetchOverviewOperation.cc
