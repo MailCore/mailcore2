@@ -374,7 +374,19 @@ String * Data::charsetWithFilteredHTMLWithoutHint(bool filterHTML)
     
     return result;
 #else
-#warning need to be implemented
+  String * result = NULL;
+  uchardet_t ud = uchardet_new();
+  int r = uchardet_handle_data(ud, bytes(), length());
+  if (r == 0) {
+    uchardet_data_end(ud);
+    const char * charset = uchardet_get_charset(ud);
+    if (charset[0] != 0) {
+      result = String::stringWithUTF8Characters(charset);
+    }
+  }
+  uchardet_delete(ud);
+  
+  return result;
 #endif
 }
 
