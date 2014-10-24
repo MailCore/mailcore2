@@ -14,8 +14,10 @@
 #include <MailCore/MCNNTPOperation.h>
 #include <MailCore/MCNNTPFetchHeaderOperation.h>
 #include <MailCore/MCNNTPFetchArticleOperation.h>
-#include <MailCore/MCNNTPFetchArticlesOperation.h>
+#include <MailCore/MCNNTPFetchAllArticlesOperation.h>
 #include <MailCore/MCNNTPListNewsgroupsOperation.h>
+#include <MailCore/MCNNTPFetchOverviewOperation.h>
+#include <MailCore/MCNNTPFetchServerTimeOperation.h>
 #include <MailCore/MCNNTPOperationCallback.h>
 
 #endif

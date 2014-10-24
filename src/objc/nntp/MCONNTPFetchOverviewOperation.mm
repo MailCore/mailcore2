@@ -1,25 +1,25 @@
 //
-//  MCONNTPFetchArticlesOperation.m
+//  MCONNTPFetchOverviewOperation.m
 //  mailcore2
 //
-//  Created by Robert Widmann on 8/13/14.
+//  Created by Robert Widmann on 10/21/14.
 //  Copyright (c) 2014 MailCore. All rights reserved.
 //
 
-#import "MCONNTPFetchArticlesOperation.h"
+#import "MCONNTPFetchOverviewOperation.h"
 
 #include "MCAsyncNNTP.h"
 
-#import "MCOOperation+Private.h"
 #import "MCOUtils.h"
+#import "MCOOperation+Private.h"
 
-typedef void (^CompletionType)(NSError *error, MCOIndexSet * articles);
+typedef void (^CompletionType)(NSError *error, NSArray * groups);
 
-@implementation MCONNTPFetchArticlesOperation {
+@implementation MCONNTPFetchOverviewOperation {
     CompletionType _completionBlock;
 }
 
-#define nativeType mailcore::MCNNTPFetchArticlesOperation
+#define nativeType mailcore::NNTPFetchOverviewOperation
 
 + (void) load
 {
@@ -38,7 +38,7 @@ typedef void (^CompletionType)(NSError *error, MCOIndexSet * articles);
     [super dealloc];
 }
 
-- (void) start:(void (^)(NSError *error, MCOIndexSet * articles))completionBlock
+- (void) start:(void (^)(NSError *error, NSArray * groups))completionBlock
 {
     _completionBlock = [completionBlock copy];
     [self start];
@@ -65,6 +65,5 @@ typedef void (^CompletionType)(NSError *error, MCOIndexSet * articles);
     [_completionBlock release];
     _completionBlock = nil;
 }
-
 
 @end
