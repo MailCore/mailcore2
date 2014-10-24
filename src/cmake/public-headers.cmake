@@ -188,11 +188,8 @@ objc/smtp/MCOSMTPOperation.h
 objc/nntp/MCONNTP.h
 objc/nntp/MCONNTPDisconnectOperation.h
 objc/nntp/MCONNTPFetchArticleOperation.h
-objc/nntp/MCONNTPFetchArticleOperation.mm
 objc/nntp/MCONNTPFetchAllArticlesOperation.h
-objc/nntp/MCONNTPFetchArticlesOperation.mm
 objc/nntp/MCONNTPFetchHeaderOperation.h
-objc/nntp/MCONNTPFetchHeaderOperation.mm
 objc/nntp/MCONNTPGroupInfo.h
 objc/nntp/MCONNTPListNewsgroupsOperation.h
 objc/nntp/MCONNTPFetchOverviewOperation.h
