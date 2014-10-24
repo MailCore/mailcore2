@@ -1,0 +1,22 @@
+From: mimekit@example.com
+To: mimekit@example.com
+Subject: test of empty multipart/alternative
+Date: Tue, 12 Nov 2013 09:12:42 -0500
+MIME-Version: 1.0
+Message-ID: <54AD68C9E3B0184CAC6041320424FD1B5B81E74D@localhost.localdomain>
+X-Mailer: Microsoft Office Outlook 12.0
+Content-Type: multipart/mixed;
+	boundary="----=_NextPart_000_003F_01CE98CE.6E826F90"
+
+
+------=_NextPart_000_003F_01CE98CE.6E826F90
+Content-Type: multipart/alternative;
+	boundary="----=_NextPart_001_0040_01CE98CE.6E826F90"
+
+
+------=_NextPart_000_003F_01CE98CE.6E826F90
+Content-Type: text/plain
+
+This part should be on the same level as the multipart/alternative and not a child.
+
+------=_NextPart_000_003F_01CE98CE.6E826F90--

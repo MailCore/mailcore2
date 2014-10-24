@@ -948,3 +948,8 @@ void MessageBuilder::resetBoundaries()
     mBoundaries->removeAllObjects();
 }
 
+void MessageBuilder::setBoundaries(Array * boundaries)
+{
+    resetBoundaries();
+    mBoundaries->addObjectsFromArray(boundaries);
+}

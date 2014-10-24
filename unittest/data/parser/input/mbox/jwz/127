@@ -1,0 +1,92 @@
+Return-Path: owner-smime-dev@RSA.COM
+Received: from maleman.mcom.com (maleman.mcom.com [198.93.92.3]) by urchin.mcom.com (8.7.5/8.7.3) with SMTP id NAA01603; Mon, 9 Sep 1996 13:04:54 -0700 (PDT)
+Received: from ns.netscape.com (ns.netscape.com.mcom.com [198.95.251.10]) by maleman.mcom.com (8.6.9/8.6.9) with ESMTP id NAA29833; Mon, 9 Sep 1996 13:03:35 -0700
+Received: from RSA.COM (chirality.rsa.com [192.80.211.33]) by ns.netscape.com (8.7.3/8.7.3) with SMTP id NAA01808; Mon, 9 Sep 1996 13:02:34 -0700 (PDT)
+Received: by RSA.COM 
+	id AA26187; Mon, 9 Sep 96 12:47:15 PDT
+Message-Id: <01BB9E4D.CA27D8A0@Peter.verisign.com>
+From: Peter Williams <peter@verisign.com>
+To: "'smime-dev@rsa.com'" <smime-dev@RSA.COM>
+Subject: plase help by returning what gets delivered...
+Date: Mon, 9 Sep 1996 12:52:38 -0700
+Mime-Version: 1.0
+Content-Type: multipart/mixed; boundary="---- =_NextPart_000_01BB9E4D.CA434FE0"
+Sender: owner-smime-dev@RSA.COM
+Precedence: bulk
+X-UIDL: db360888b99be53e578173dc6a65a828
+X-Mozilla-Status: 0001
+Content-Length: 2880
+
+
+------ =_NextPart_000_01BB9E4D.CA434FE0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+
+  
+The first two bodypart sent above should be part of a MIME  object.
+One should be type text/html, the second application/octet-stream.
+
+Can anyone who cares send me back the MIME object for
+this message actually delivered to their UA?
+
+Im finding Deming' s excellent  tool to be be  very useful
+for signing attachements of any type, and being
+able to reverify the bodypart content even once the attachement
+is released from the mail system.
+
+Peter.
+ 
+------ =_NextPart_000_01BB9E4D.CA434FE0
+Content-Type: text/html; name="Page1.htm"
+Content-Transfer-Encoding: 7bit
+
+<HTML>
+<HEAD>
+<TITLE>New Page</TITLE>
+</HEAD>
+<BODY>
+
+<OBJECT ID="HTML1" WIDTH=199 HEIGHT=165
+ CLASSID="CLSID:B7FC355E-8CE7-11CF-9754-00AA00C00908">
+    <PARAM NAME="_ExtentX" VALUE="5239">
+    <PARAM NAME="_ExtentY" VALUE="4366">
+    <PARAM NAME="DeferRetrieval" VALUE="0">
+    <PARAM NAME="ElemNotification" VALUE="0">
+    <PARAM NAME="UseDocColors" VALUE="-1">
+    <PARAM NAME="UnderlineLinks" VALUE="-1">
+    <PARAM NAME="Redraw" VALUE="-1">
+    <PARAM NAME="ViewSource" VALUE="0">
+    <PARAM NAME="RetainSource" VALUE="-1">
+    <PARAM NAME="Timeout" VALUE="30">
+    <PARAM NAME="BackImage" VALUE="">
+    <PARAM NAME="BackColor" VALUE="12632256">
+    <PARAM NAME="ForeColor" VALUE="0">
+    <PARAM NAME="LinkColor" VALUE="16711680">
+    <PARAM NAME="VisitedColor" VALUE="16711935">
+</OBJECT>
+
+</BODY>
+</HTML>
+------ =_NextPart_000_01BB9E4D.CA434FE0
+Content-Type: application/x-pkcs7-signature; name="Page1.p7s"
+Content-Transfer-Encoding: base64
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIAwggHOMIIB
+NwIEQAjsMTANBgkqhkiG9w0BAQQFADAuMSwwKgYDVQQDFCNQZXRlciBXaWxsaWFtcyA8cGV0ZXJA
+VmVyaVNpZ24uY29tPjAeFw05NjA3MTYyMTIzMTJaFw05ODA3MTYyMTIzMTFaMC4xLDAqBgNVBAMU
+I1BldGVyIFdpbGxpYW1zIDxwZXRlckBWZXJpU2lnbi5jb20+MIGfMA0GCSqGSIb3DQEBAQUAA4GN
+ADCBiQKBgQC0DQLdneDxs9u+7STPqBls/wZX89tHi4a8r/b629bqaEOoGbamNGPx9LSAjZxItPRG
+2m4tEgY+oe8gYTPnKzPlZJyWmCxD8Cpi3dQF8/8NzKqEtxVEoldvUAdQB77BznGs5s8DC7GYIR89
+aJoyVk1IcxY+YQYj3hN2YWQ4/F5OGwIDAQABMA0GCSqGSIb3DQEBBAUAA4GBAHWOkUF8GfWNS9pA
+bYZXesuYwxZ6FWgnD4A7WeS0ODYIdZ3MfQhYkyiIba/8ex+A8JhazpOsBRM0ydoHpspbWhhwTlah
+/CUNk3V/eZLYpYsiwSTQYKBxuhYIfkaE0mXgAv+ef473du5NaNLIGI5cK7Vmbj9Bh/93K9Serto1
+BtxiAAAxgDCCAWMCAQEwNjAuMSwwKgYDVQQDFCNQZXRlciBXaWxsaWFtcyA8cGV0ZXJAVmVyaVNp
+Z24uY29tPgIEQAjsMTAJBgUrDgMCGgUAoIGIMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJ
+KoZIhvcNAQkFMQ8XDTk2MDkwOTE5NDEzMlowIwYJKoZIhvcNAQkEMRYEFFusg4r4l+lJKA8GOuNP
+xoTBiXuCMCkGCSqGSIb3DQEJDTEcExpTaWduZWQgYnkgU2VjdXJlIE1lc3NlbmdlcjANBgkqhkiG
+9w0BAQEFAASBgLCjKzFaV8bOUloF1T3zjEFTOqSk7/MZoqv3xMwOYo76/81Jl36DBNIcngari3v5
+vIRWDwvw6gRnE4kkx0DGVu/zvXV2EX1BTwx47uLcExR99SilUZbkwf/Q2foBPbKXAVunCZ3SJcPG
+X0GE3m1gBzM2KDEKEKLpvSTzBBpvZNIMAAAAAAAAAAA=
+
+------ =_NextPart_000_01BB9E4D.CA434FE0--
+

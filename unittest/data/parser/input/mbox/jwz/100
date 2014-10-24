@@ -1,0 +1,40 @@
+Return-Path: <nsb>
+Received: by greenbush.bellcore.com (4.1/4.7)
+	id <AA19464> for nsb; Wed, 15 Jan 92 16:24:40 EST
+Date: Wed, 15 Jan 92 16:24:40 EST
+Message-Id: <9201152124.AA19464@greenbush.bellcore.com>
+From: Nathaniel S. Borenstein <nsb@thumper.bellcore.com>
+Subject: An English/Hebrew test
+To: shoshi, mlittman, yacov, kraut, nsb, paul@flash, mo@gizmo, dana,
+        bianchi@flash, abel, sincos
+Content-Type: text/plain; charset=iso-8859-8
+Content-Transfer-Encoding: quoted-printable
+
+I am sending this message to a few people who have established 
+themselves, in the past, as relatively friendly consumers of 
+experimental multimedia mail.  What I'd like to ascertain is how 
+well this latest type of installed mail works in a variety of 
+mail reading environments.
+
+I expect that, in any event, you will have no trouble reading 
+the English part of this message.  The more interesting question 
+is how things like the next line will look to you:
+
+!=ED=E5=EC=F9
+
+If you're running X11 and things are working right, that should 
+have been the Hebrew word "Shalom".   Please let me know if 
+that's not what it looked like to you.  (Non-hebrew readers, please 
+give me your best guess as to whether or not what you saw 
+was Hebrew characters!)
+
+Just for completeness, here's the Hebrew alphabet:
+
+=E0=E1=E2=E3=E4=E5=E6=E7=E8=E9=EA=EB=EC=ED=EE=EF=F0=F1=F2=F3=F4=F5=F6=F7=F8=
+=F9
+
+Unfortunately, composing =E7=E9=F8=E1=F2 is still a serious nuisance, 
+with no good software support at all for the composer, but receipt is 
+always the first step in these things, which are best taken one step 
+at a time.      !=E8=E0=EC, =E8=E0=EC
+

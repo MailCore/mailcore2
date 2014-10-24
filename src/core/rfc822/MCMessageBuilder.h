@@ -58,6 +58,7 @@ namespace mailcore {
     public: // private
         virtual String * nextBoundary();
         virtual void resetBoundaries();
+        virtual void setBoundaries(Array * boundaries);
         
     private:
         String * mHTMLBody;

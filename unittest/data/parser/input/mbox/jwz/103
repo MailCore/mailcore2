@@ -1,0 +1,79 @@
+Return-Path: <rosenqui@krusty.strataware.com>
+Received: from maleman.mcom.com ([198.93.92.3]) by dredd.mcom.com
+          (Netscape Mail Server v2.01) with SMTP id AAA16354;
+          Fri, 8 Nov 1996 11:45:02 -0700
+Received: from xwing.netscape.com (xwing.mcom.com [205.218.156.54]) by maleman.mcom.com (8.6.9/8.6.9) with ESMTP id LAA02061; Fri, 8 Nov 1996 11:43:46 -0800
+Received: from krusty.strataware.com (krusty.strataware.com [199.246.138.42]) by xwing.netscape.com (8.7.6/8.7.3) with ESMTP id LAA26164; Fri, 8 Nov 1996 11:44:58 -0800 (PST)
+Received: (from rosenqui@localhost) by krusty.strataware.com (8.7.1/8.7.1) id OAA29470; Fri, 8 Nov 1996 14:45:18 -0500
+Date: Fri, 8 Nov 1996 14:45:18 -0500
+Message-Id: <199611081945.OAA29470@krusty.strataware.com>
+From: Eric Rosenquist <rosenqui@strataware.com>
+To: Lisa Repka <repka@netscape.com>, Jamie Zawinski <jwz@netscape.com>
+Cc: S/MIME Test Account <smime@strataware.com>,
+        Eric Rosenquist <rosenqui@strataware.com>
+Mime-Version: 1.0
+Subject: My encryption certificate for S/MIME testing
+Content-Type: multipart/mixed; boundary="-ABC"
+X-Mozilla-Status: 0005
+Content-Length: 3409
+
+This is a MIME encoded message.  Decode it with "munpack"
+or any other MIME reading software.  Mpack/munpack is available
+via anonymous FTP in ftp.andrew.cmu.edu:pub/mpack/
+---ABC
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+
+Netscape: here's my encryption certificate for S/MIME testing
+purposes.  Beware that this is an Entrust certificate rather than
+Verisign.  Among other things, this means that I have a separate
+key pair for signing and encryption, so you'll have to use this
+one to encrypt for me and use the certif included with signed
+messages (rather than this one) to verify signatures.
+
+Eric
+---------------------------------------------------------------------
+Eric Rosenquist, Strata Software Limited   http://www.strataware.com/
+mailto:rosenqui@strataware.com   Tel: 613-591-1922  Fax: 613-591-3485
+Quote: I discovered a meal between breakfast and brunch!
+         -- Homer Simpson
+---------------------------------------------------------------------
+---ABC
+Content-Type: application/x-pkcs7-mime; name="eric.p7c"
+Content-Transfer-Encoding: base64
+Content-Disposition: inline; filename="eric.p7c"
+Content-MD5: THv54kLXRGIbbpoHJeNKGA==
+
+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
+eNmVDny/dh6w1pNIAhVyHzEA
+
+---ABC--

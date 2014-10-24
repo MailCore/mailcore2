@@ -1,0 +1,120 @@
+Return-Path: <owner-smime-dev@RSA.COM>
+Received: from maleman.mcom.com ([198.93.92.3]) by dredd.mcom.com
+          (Netscape Mail Server v2.01) with SMTP id AAA27656;
+          Thu, 21 Nov 1996 13:20:43 -0700
+Received: from xwing.netscape.com (xwing.mcom.com [205.218.156.54]) by maleman.mcom.com (8.6.9/8.6.9) with ESMTP id NAA20931; Thu, 21 Nov 1996 13:19:19 -0800
+Received: from RSA.COM (chirality.rsa.com [192.80.211.33]) by xwing.netscape.com (8.7.6/8.7.3) with SMTP id NAA00850; Thu, 21 Nov 1996 13:20:34 -0800 (PST)
+Received: by RSA.COM 
+	id AA02049; Thu, 21 Nov 96 12:11:51 PST
+Date: Thu, 21 Nov 1996 16:10:23 -0500
+Message-Id: <199611212110.QAA14653@krusty.strataware.com>
+From: Eric Rosenquist <rosenqui@strataware.com>
+To: S/MIME Developers <smime-dev@RSA.COM>
+Cc: Eric Rosenquist <rosenqui@strataware.com>,
+        Michel Ranger <rangerm@entrust.com>,
+        Ron Vandergeest <rvander@entrust.com>
+Mime-Version: 1.0
+Subject: My encryption certificate for S/MIME testing
+Content-Type: multipart/mixed; boundary="961121152248_14052"
+Sender: owner-smime-dev@RSA.COM
+Precedence: bulk
+X-Mozilla-Status: 0005
+Content-Length: 5854
+
+This is a MIME encoded message.  Decode it with "munpack"
+or any other MIME reading software.  Mpack/munpack is available
+via anonymous FTP in ftp.andrew.cmu.edu:pub/mpack/
+--961121152248_14052
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+
+Hi everyone.  I'm a consultant working with Nortel on their S/MIME products.
+I've already completed basic interop testing against Deming's Secure
+Messenger and at Blake's suggestion I am about to post a signed message to
+this list for others to use in interop testing.  If you have questions about
+Entrust in general, please visit their web site <http://www.entrust.com>.  If
+you have questions about the forthcoming S/MIME toolkit for Entrust please
+email Michel Ranger <mailto:rangerm@entrust.com> or Ron Vandergeest
+<mailto:rvander@entrust.com>.  E-mail any technical interop-related questions
+directly to me <mailto:rosenqui@strataware.com>.
+
+One big thing you should be aware of with Entrust is that it uses separate
+key pairs for signing and encryption, so you must be careful to distinguish
+between my verification certificate and my signature certificate.  You
+should import *this* certificate into your local database if you want to be
+able to encrypt for me.  For now, signed S/MIME messages created with the
+Entrust toolkit will include both certificates for the originator as well
+as the originator's CA certificate.  Eventually this will be under the
+programmatic control of whatever app is using the toolkit, so it's
+important that you look at the certificate you're importing to make sure
+it's the one you want.  You can tell which one you've got by looking at the
+keyUsage V3 cert extension (object identifier 2.5.29.15).  The encryption
+certificate has the keyEncipherment bit set (bit number 2 or 0x20) and the
+verification certificate has the digitalSignature bit set (bit number 0 or
+0x80).
+
+One other thing that some of you may not have encountered before is that my
+CA is not Verisign.  Included in the P7C (as well as my signed S/MIME
+messages) is my CA's certificate - a self-signed certificate.  You can
+distinguish this form of certificate (a self-signed CA) from a self-signed
+user certificate by looking for the keyCertSign (bit 5) or cRLSign (bit 6)
+bits in the keyUsage extension.  Failing that, you can look for the
+basicConstraints extension to see if the 'cA' BOOLEAN field is present and
+TRUE.
+
+Without further ado, here is my encryption certificate and my CA's
+signature verification certificate.  I'm away all of next week, so if you
+have questions or discover any problems please e-mail me ASAP.  If you
+don't get a reply by the end of Friday I'll try to get back to you as soon
+as possible after Dec. 2nd.
+
+Eric
+---------------------------------------------------------------------
+Eric Rosenquist, Strata Software Limited   http://www.strataware.com/
+mailto:rosenqui@strataware.com   Tel: 613-591-1922  Fax: 613-591-3485
+Quote: I discovered a meal between breakfast and brunch!
+         -- Homer Simpson
+---------------------------------------------------------------------
+--961121152248_14052
+Content-Type: application/x-pkcs7-mime; name="eric.p7c"
+Content-Transfer-Encoding: base64
+Content-Disposition: inline; filename="eric.p7c"
+Content-MD5: uqh4Ulmz/0OvRmRYshEwJQ==
+
+MIIHVgYJKoZIhvcNAQcCoIIHRzCCB0MCAQExADALBgkqhkiG9w0BBwGgggcrMIIDgDCCAumg
+AwIBAgIEMpBhhzANBgkqhkiG9w0BAQQFADBEMQswCQYDVQQGEwJDQTE1MDMGA1UEChMsRW50
+cnVzdCBTL01JTUUgSW50ZXJvcCBEZW1vbnN0cmF0aW9uIE9ubHkgQ0EwHhcNOTYxMTIwMTU1
+MjM1WhcNOTgxMTIwMTU1MjM1WjCBljELMAkGA1UEBhMCQ0ExNTAzBgNVBAoTLEVudHJ1c3Qg
+Uy9NSU1FIEludGVyb3AgRGVtb25zdHJhdGlvbiBPbmx5IENBMVAwEAYDVQQFEwk4NDg1MjMx
+ODIwFgYDVQQDEw9FcmljIFJvc2VucXVpc3QwJAYJKoZIhvcNAQkBFhdyb3NlbnF1aUBzdHJh
+dGF3YXJlLmNvbTBaMA0GCSqGSIb3DQEBAQUAA0kAMEYCQQDGWzna0zhZqRFNLsKp3n1QARcM
+IgTPKNCOhp3P1GULQQy/xyyof8Nhz4k6iO1rgo89SCVYAvq2iMk6jQUmNO3jAgEDo4IBcDCC
+AWwwYAYDVR0ZBFkwVzBVMFMxCzAJBgNVBAYTAkNBMTUwMwYDVQQKEyxFbnRydXN0IFMvTUlN
+RSBJbnRlcm9wIERlbW9uc3RyYXRpb24gT25seSBDQTENMAsGA1UEAxMEQ1JMMTAUBgNVHQEE
+DTALgAk4NDgzMjI5MzcwGAYDVR0CBBEwDwQJODQ4MzIyOTUxAwIFIDANBgNVHQoEBjAEAwIG
+QDAUBgNVHSMEDTALgAk4NDgzMjI5MzcwEgYDVR0OBAsECTg0ODMyMjk1MTALBgNVHQ8EBAMC
+BSAwCQYDVR0TBAIwADBmBgNVHR8EXzBdMFugWaBXpFUwUzELMAkGA1UEBhMCQ0ExNTAzBgNV
+BAoTLEVudHJ1c3QgUy9NSU1FIEludGVyb3AgRGVtb25zdHJhdGlvbiBPbmx5IENBMQ0wCwYD
+VQQDEwRDUkwxMB8GCSqGSIb2fQdBAAQSMBAbCkpBU1BFUiAwLjEDAgbAMA0GCSqGSIb3DQEB
+BAUAA4GBAIk5IGnAWKAIIrM6Iv1ySEz12l6QeOXJB7/DxNGoMXrPWrJMYDF8DNdWSls60ukK
+hUN/5zkQQYDOSbTCsRTh6+aZM+i+tNQEW2T/6QqbCF5XzdDcM/5Tpf09PgMkjWUoOc12fcF8
+FUn8QHGsjMFuge86UprBchakJQBLo2rQT58bMIIDozCCAwygAwIBAgIEMpBheTANBgkqhkiG
+9w0BAQQFADBEMQswCQYDVQQGEwJDQTE1MDMGA1UEChMsRW50cnVzdCBTL01JTUUgSW50ZXJv
+cCBEZW1vbnN0cmF0aW9uIE9ubHkgQ0EwHhcNOTYxMTE4MTMxNTM2WhcNMTYxMTE4MTMxNTM2
+WjBEMQswCQYDVQQGEwJDQTE1MDMGA1UEChMsRW50cnVzdCBTL01JTUUgSW50ZXJvcCBEZW1v
+bnN0cmF0aW9uIE9ubHkgQ0EwgZ0wDQYJKoZIhvcNAQEBBQADgYsAMIGHAoGBAKDpfkhv4sFk
++otmMcegaghJFlAOYIj9giN4qid7wfHZhPuE0pUTC1xIB4ytNaEu5j+jh8lUgcd31a7QcCmI
+Yh8VzR8bCoGjaVBwOsWDshKFTx8iWeJcQ1fhSIofHWS5VbQudjxeJBzuU8pRXwAr3YXzOR6A
+dBbaYZy6PGUYXLgTAgEDo4IBojCCAZ4wYAYDVR0ZBFkwVzBVMFMxCzAJBgNVBAYTAkNBMTUw
+MwYDVQQKEyxFbnRydXN0IFMvTUlNRSBJbnRlcm9wIERlbW9uc3RyYXRpb24gT25seSBDQTEN
+MAsGA1UEAxMEQ1JMMTAUBgNVHQEEDTALgAk4NDgzMjI5MzcwKwYDVR0CBCQwIgQJODQ4MzIy
+OTM3AwICBDARgQ8yMDE2MTExODEzMTUzNlowDQYDVR0KBAYwBAMCB4AwFAYDVR0jBA0wC4AJ
+ODQ4MzIyOTM3MBIGA1UdDgQLBAk4NDgzMjI5MzcwCwYDVR0PBAQDAgEGMBoGA1UdEAQTMBGB
+DzIwMTYxMTE4MTMxNTM2WjAMBgNVHRMEBTADAQH/MGYGA1UdHwRfMF0wW6BZoFekVTBTMQsw
+CQYDVQQGEwJDQTE1MDMGA1UEChMsRW50cnVzdCBTL01JTUUgSW50ZXJvcCBEZW1vbnN0cmF0
+aW9uIE9ubHkgQ0ExDTALBgNVBAMTBENSTDEwHwYJKoZIhvZ9B0EABBIwEBsKSkFTUEVSIDAu
+MQMCBsAwDQYJKoZIhvcNAQEEBQADgYEAWZAeWY0jxvT5nRfzPZDULNebM+GdSNLC+YyPYqeE
+bD7iR09O0Jh0tP2NyISUcWlRullDIYE8by4T6NhZy0MDrvA3alWxaeGgyEWnqa+kuFOgZTjQ
+jc3k4hF1UrhdqK+KfIwz8lhWiDCmSL9IrUFosNwL23rW/pQBm3TZcVCO+nAxAA==
+
+--961121152248_14052--

@@ -1,0 +1,166 @@
+Return-Path: izzy@nugget.scr.atm.com
+Received: from maleman.mcom.com (maleman.mcom.com [198.93.92.3]) by urchin.netscape.com (8.6.12/8.6.9) with ESMTP id JAA03193 for <jwz@urchin.mcom.com>; Mon, 3 Jun 1996 09:48:13 -0700
+From: izzy@nugget.scr.atm.com
+Received: from ns.netscape.com (ns.netscape.com.mcom.com [198.95.251.10]) by maleman.mcom.com (8.6.9/8.6.9) with ESMTP id JAA25021 for <jwz@netscape.com>; Mon, 3 Jun 1996 09:47:05 -0700
+Received: from nugget.scr.atm.com ([206.100.186.2]) by ns.netscape.com (8.7.3/8.7.3) with SMTP id JAA16682 for <jwz@netscape.com>; Mon, 3 Jun 1996 09:47:10 -0700 (PDT)
+Received: from mailman.scr.atm.com (mailman.scr.atm.com [206.100.186.54]) by nugget.scr.atm.com (8.6.12/8.6.9) with ESMTP id JAA29136 for <jwz@netscape.com>; Mon, 3 Jun 1996 09:51:56 -0700
+To: jwz@netscape.com
+Date: Mon, 3 Jun 1996 09:42:32 -0700
+MIME-Version: 1.0
+Message-ID: <19960603164232.izzy@scr.atm.com>
+References: <199605261926.AA283048804@merle.acns.nwu.edu>
+   <19960527225319.izzy@scr.atm.com>
+   <19960528160415.izzy@scr.atm.com>
+   <19960530190556.izzy@scr.atm.com>
+In-Reply-To: <31AEE9BD.59E2@netscape.com>
+Subject: RE[4]: your generated HTML
+Organization: Netscape Communications Corporation, Mozilla Division
+X-Mailer: Emissary V2.00, by Attachmate Corp.
+Content-Type: multipart/related;
+   boundary="=_03tW34g.bO1996u.N16d000A.r06Y.42:0047e7";
+   type="text/html";
+   start-info="X-twg-cidlinking-V1.2"
+Content-Transfer-Encoding: 7bit
+X-Mozilla-Status: 0011
+Content-Length: 6555
+
+
+--=_03tW34g.bO1996u.N16d000A.r06Y.42:0047e7
+Content-Type: text/html; charset="ISO-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<HTML><HEAD>
+  <TITLE>RE[4]: your generated HTML</TITLE>
+  <META NAME=3D"GENERATOR" CONTENT=3D"Emissary 2.0">
+</HEAD><BODY>
+
+<BR>
+<B><TT><FONT SIZE=3D2>&gt;&gt; &gt;2: your fixed-width text is *larger* t=
+han the default size for fixed-</FONT></TT></B><BR>
+<B><TT><FONT SIZE=3D2>&gt;&gt; &gt;   width text, and since the default s=
+ize of my window is 80 fixed-</FONT></TT></B><BR>
+<B><TT><FONT SIZE=3D2>&gt;&gt; &gt;   width columns wide, I actually lose=
+ 2-3 columns off the end of each</FONT></TT></B><BR>
+<B><TT><FONT SIZE=3D2>&gt;&gt; &gt;   of your lines.</FONT></TT></B><BR>
+<B><TT><FONT SIZE=3D2>&gt;&gt; &gt;</FONT></TT></B><BR>
+<B><TT><FONT SIZE=3D2>&gt;&gt; This is really the receivers problem not t=
+he senders.</FONT></TT></B><BR>
+<B><TT><FONT SIZE=3D2>&gt;</FONT></TT></B><BR>
+<B><TT><FONT SIZE=3D2>&gt;Total nonsense.</FONT></TT></B><BR>
+<B><TT><FONT SIZE=3D2>&gt;</FONT></TT></B><BR>
+<TT><FONT COLOR=3D"#ff0000">I do not appreciate your response here!  </FO=
+NT></TT><BR>
+<TT>If you continue with this type of response then I will not be </TT><B=
+R>
+<TT>talking to you again.</TT><P>
+<TT>If you read the MIME spec (NOT THE HTML spec), then you will see that=
+</TT><BR>
+<TT>display (including line length) is the receiver's problem.  </TT><BR>
+<TT>I am talking about Email not the Web.  Just because HTML is sent in a
+</TT><BR>
+<TT>mail message does not change the mail ground rules.</TT><P>
+<TT>If the sender choses to write lines longer than 80 columns then the <=
+/TT><BR>
+<TT>receiving client should be smart enought to display that text without
+loosing anything.</TT><BR>
+<BR>
+<BR>
+<P>
+<B><TT><FONT SIZE=3D2>&gt;By using a "standard" line length but a larger =
+font, you're</FONT></TT></B><BR>
+<B><TT><FONT SIZE=3D2>&gt;guarenteeing that anyone with a "standard" size=
+d window will lose,</FONT></TT></B><BR>
+<B><TT><FONT SIZE=3D2>&gt;unless they ignore your markup.</FONT></TT></B>=
+<BR>
+<B><TT><FONT SIZE=3D2>&gt;</FONT></TT></B><BR>
+<TT>NO I am not.  Only those people with less than capable clients will</=
+TT><BR>
+<TT>lose.  I am tired of having to deal with broken or less featured</TT>=
+<BR>
+<TT>receiving clients.  You could tailor and restrict the HTML you genera=
+te</TT><BR>
+<TT>in Mail, but we will let the user have full control.  If he gets in</=
+TT><BR>
+<TT>trouble then its his problem.  The sending user will learn over time.=
+</TT><P>
+<B><TT><FONT SIZE=3D2>&gt;I'm not saying that the composer shouldn't be a=
+ble to control this</FONT></TT></B><BR>
+<B><TT><FONT SIZE=3D2>&gt;stuff, I'm just saying that the HTML you sent i=
+s ugly.  Those are very</FONT></TT></B><BR>
+<B><TT><FONT SIZE=3D2>&gt;different statements.</FONT></TT></B><BR>
+<B><TT><FONT SIZE=3D2>&gt;</FONT></TT></B><BR>
+<TT>I would think that ugly is a subjective point of view.  You think it =
+is</TT><BR>
+<TT>ugly then fine.  But that is just you and others may not think so.  P=
+lus</TT><BR>
+<TT>its up to the sending user what format he choses.  He could make it l=
+ook</TT><BR>
+<TT>just fine by your standards.</TT><P>
+<B><TT><FONT SIZE=3D2>&gt;tags.  The rest of it is gimickry for its own s=
+ake, and it doesn't</FONT></TT></B><BR>
+<B><TT><FONT SIZE=3D2>&gt;come free.</FONT></TT></B><BR>
+<B><TT><FONT SIZE=3D2>&gt;</FONT></TT></B><BR>
+<TT>I find it very hard to believe that you said this.  There is a bunch<=
+/TT><BR>
+<TT>of stuff that can be done in HTML with images in MAIL that cannot be =
+done</TT><BR>
+<TT>in standard MIME.  "It doesn't come free", what in the world are you<=
+/TT><BR>
+<TT>talking about.  </TT><P>
+<B><TT><FONT SIZE=3D2>    &gt;But hey, you're welcome to generate ugly HT=
+ML in your product.  </FONT></TT></B><BR>
+<B><TT><FONT SIZE=3D2>&gt;I'm sure your users will vote with their feet..=
+.</FONT></TT></B><BR>
+<B><TT><FONT SIZE=3D2>&gt;</FONT></TT></B><BR>
+<TT>Again this is totally uncalled for.  I have tried to hold a conversat=
+ion</TT><BR>
+<TT>with you so that mail readers in general can handle HTML in mail.  Si=
+nce</TT><BR>
+<TT>Netscape has the market share it has I believe that interoperation wi=
+th</TT><BR>
+<TT>you guys is important.  </TT><P>
+<B><TT><FONT SIZE=3D2>&gt;Nobody's telling web page authors that they can=
+'t make their pages look</FONT></TT></B><BR>
+<B><TT><FONT SIZE=3D2>&gt;any way they like.  But as yourself, when's the=
+ last time you saw a web</FONT></TT></B><BR>
+<B><TT><FONT SIZE=3D2>&gt;page that looked like your message?  With fixed=
+-width fonts?  With some</FONT></TT></B><BR>
+<B><TT><FONT SIZE=3D2>&gt;fonts that were so small as to be unreadable?  =
+That looked really bad</FONT></TT></B><BR>
+<B><TT><FONT SIZE=3D2>&gt;if your window wasn't exactly the right size?</=
+FONT></TT></B><BR>
+<B><TT><FONT SIZE=3D2>&gt;</FONT></TT></B><BR>
+<B><TT><FONT SIZE=3D2>&gt;-- </FONT></TT></B><BR>
+<TT>Now this is total nonsense.  Who cares ?  Its all about giving the se=
+nding</TT><BR>
+<TT>user all the control he can get.  If he (me in this case) composes "u=
+gly"</TT><BR>
+<TT>HTML then it is his personal business.  Just as long as the sending u=
+ser</TT><BR>
+<TT>has the tools he needs to construct what he wants.</TT><BR>
+<BR><P align=3Dleft><IMG src=3D"cid:0.19960603164233.izzy@scr.atm.com" al=
+ign=3D"BOTTOM"></BODY></HTML>
+
+--=_03tW34g.bO1996u.N16d000A.r06Y.42:0047e7
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-ID: <0.19960603164233.izzy@scr.atm.com>
+Content-Disposition: inline; filename="SIG.GIF"
+Content-Description: The Sender's Signature
+
+R0lGODlhvgBDAIAAAAAAAP///yH5BAEAAAEALAAAAAC+AEMAQAL+jI+py+0Po5y02ouz3rz7D4YW
+ABzleBqpyCIkycLw84azOjJrtLfLrephagngC6g4ooJBZON2lBFdpSmzWRQ2raaT0+cwrmozLhmq
+hHy71OiaF8XCuQE6+F55U/FJrUfPF3jVBShoeIiYqLjI2Oj4CBlTGDYZiWj3I2KU11MJKfYx9Ya5
+gbbURzjIVueXQTfWytkqKgTa95qWpmZWtYbmBqwHfJsSZ4lzWOgZGotKeYyn3Cw5DW19jZ2tvc3d
+7f0NHi5uaHy6fEzKvCh6uupNVD2UnspcHK+Kn21rUyZ8vuui3R4Kuvgg+bcLVqd58twRrOUmCz1W
+xBhucUZRk6/+XgXbxLIjZZiEgl44BltY0qOOclksXnDpMCMhWBNZiZwzyFTLh1pO+ixp757GoDZV
+rvwoEhDCUp46xhynYdLSqFOfQXU1TegfrSi4jptVlenVsWTLmj2LNq3atWzbun0LN67cuXTrng1b
+xy5ZpyP5fsPL7czLYlD9ggCMNeVDieDgRUM8OODige/s3THc5jDNCV8gP6Y8VOYTz3klc4bYbR81
+0T9Iq4bTmuelHV5x5stsA/TIlR5Rk85n5bec20U1mhjCmyTtp1viOdW5WrdNpC/dVXISzFlwhdJb
+4hoeGiNL76VPN8e8Z9j4iIxZjxp/HgypOCClYWcPk5fM7OWG+t2s2NMZv8HEWnHgFcVLdn1tR9xB
+PyHFXnxXEChJexeBR0uEsK2iGnqtPTgTg9vV1gGDOcE3HUqYpOOgh4NVgyKFmvRGom3zCEdDU/7o
+hdFos1XIY4GxJVOjVXZJVWRX8iXZWDM45shkQnEp9WSOQS55VCNRXjkailx+CWaYYo5JZplyFQAA
+Ow==
+
+--=_03tW34g.bO1996u.N16d000A.r06Y.42:0047e7--
+

@@ -1,0 +1,190 @@
+Return-Path: <jweis@why.bother.com>
+Received: from maleman.mcom.com ([198.93.92.3]) by judge.mcom.com
+          (Netscape Mail Server v2.02) with SMTP id AAA18232
+          for <lord@judge.mcom.com>; Mon, 12 May 1997 23:43:52 -0700
+Received: from xwing.netscape.com (xwing.mcom.com [205.218.156.54]) by maleman.mcom.com (8.6.9/8.6.9) with ESMTP id XAA12406 for <lord@netscape.com>; Mon, 12 May 1997 23:42:26 -0700
+Received: from why.bother.com (why.bother.com [206.83.164.34]) by xwing.netscape.com (8.7.6/8.7.3) with ESMTP id XAA12293 for <lord@netscape.com>; Mon, 12 May 1997 23:43:46 -0700 (PDT)
+Received: from why.bother.com (why.bother.com [206.83.164.34]) by why.bother.com (8.7.6/8.7.3) with SMTP id WAA27001 for <lord@netscape.com>; Mon, 12 May 1997 22:46:45 -0700
+Date: Mon, 12 May 1997 22:46:45 -0700 (PDT)
+From: Jason Lawrence Weisberger <jweis@why.bother.com>
+To: Bob Lord <lord@netscape.com>
+Subject: Re: [Fwd: the one true mail client?]
+In-Reply-To: <3377D934.E7717CD0@netscape.com>
+Message-ID: <Pine.LNX.3.95.970512224621.25674T-311000@why.bother.com>
+MIME-Version: 1.0
+Content-Type: MULTIPART/SIGNED; PROTOCOL="application/x-pkcs7-signature"; MICALG=sha1; BOUNDARY=------------ms7014A498B2DAEA7AB832BC0A
+Content-ID: <Pine.LNX.3.95.970512224621.25674U@why.bother.com>
+X-Status: 
+X-IMAP-Date: 12-May-1997 23:43:53 +0000
+X-UID: 5624
+
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+  Send mail to mime@docserver.cac.washington.edu for more info.
+
+--------------ms7014A498B2DAEA7AB832BC0A
+Content-Type: TEXT/PLAIN; charset=US-ASCII
+
+
+Emacs? You fiend.  My mua is pine.
+
+Jason L. Weisberger
+Chief of Network Operations
+SoftAware, Inc.
+
+--------------ms7014A498B2DAEA7AB832BC0A
+Content-Type: MULTIPART/MIXED; BOUNDARY=------------17C9EB5ADCB1A825510CE07C
+Content-ID: <Pine.LNX.3.95.970512224621.25674V@why.bother.com>
+Content-Description: 
+
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+  Send mail to mime@docserver.cac.washington.edu for more info.
+
+--------------17C9EB5ADCB1A825510CE07C
+Content-Type: TEXT/PLAIN; CHARSET=us-ascii
+Content-ID: <Pine.LNX.3.95.970512224621.25674W@why.bother.com>
+
+Here is another option.  If you want the exact emacs binding, feel free
+to ask Noah.
+
+-Bob
+
+--------------17C9EB5ADCB1A825510CE07C
+Content-Type: MESSAGE/RFC822
+Content-ID: <Pine.LNX.3.95.970512224621.25674X@why.bother.com>
+
+Return-Path: <friedman@netscape.com>
+Received: from netscape.com ([205.217.237.47]) by judge.mcom.com
+          (Netscape Mail Server v2.02) with ESMTP id AAA16893
+          for <lord@judge.mcom.com>; Mon, 12 May 1997 18:52:24 -0700
+Received: from oink.mcom.com (oink.mcom.com [205.217.241.62])
+	by netscape.com (8.8.5/8.8.5) with ESMTP id SAA13528
+	for <lord@netscape.com>; Mon, 12 May 1997 18:52:22 -0700 (PDT)
+Received: (from friedman@localhost)
+	by oink.mcom.com (8.8.5/8.8.5) id SAA20422;
+	Mon, 12 May 1997 18:52:22 -0700 (PDT)
+Date: Mon, 12 May 1997 18:52:22 -0700 (PDT)
+Message-Id: <199705130152.SAA20422@oink.mcom.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+From: friedman@netscape.com (Noah Friedman)
+To: lord@netscape.com
+Subject: Re: the one true mail client?
+Reply-To: friedman@netscape.com
+In-Reply-To: <lord@netscape.com> Mon, 12 May 1997 18:49:12 -0700
+References: <33650DE6.143C8A9C@netscape.com>
+	<337747C1.2C4EB494@netscape.com>
+	<337749C1.EDC1403E@netscape.com>
+	<33779383.F9C729DB@netscape.com>
+	<3377C898.98133783@netscape.com>
+X-Status: 
+X-IMAP-Date: 12-May-1997 18:52:24 +0000
+X-UID: 5585
+
+I read my mime mail in emacs, of course, which does everything other than
+S/MIME signature/encryption/decryption at the moment (but you can do things
+with PGP).
+
+Hooray for competing encryption standards.
+
+--------------17C9EB5ADCB1A825510CE07C
+Content-Type: TEXT/X-VCARD; CHARSET=us-ascii; NAME="vcard.vcf"
+Content-ID: <Pine.LNX.3.95.970512224621.25674Y@why.bother.com>
+Content-Description: Card for Bob Lord
+
+begin:          vcard
+fn:             Bob Lord
+n:              Lord;Bob
+org:            <font size=+2 color=blue>Netscape Communications Corporation</font>
+email;internet: lord@netscape.com
+title:          <font color=red>Manager, Corporate Electronic Security</font>
+note:           <A HREF="http://www.unitedmedia.com/comics/dilbert/"><IMG SRC="http://www.unitedmedia.com/comics/dilbert/images/dnrc_icon.gif"></A>
+x-mozilla-cpt:  ;0
+x-mozilla-html: TRUE
+end:            vcard
+
+
+--------------17C9EB5ADCB1A825510CE07C--
+--------------ms7014A498B2DAEA7AB832BC0A
+Content-Type: APPLICATION/X-PKCS7-SIGNATURE; NAME="smime.p7s"
+Content-Transfer-Encoding: BASE64
+Content-ID: <Pine.LNX.3.95.970512224621.25674Z@why.bother.com>
+Content-Description: S/MIME Cryptographic Signature
+
+MIIPEwYJKoZIhvcNAQcCoIIPBDCCDwACAQExCzAJBgUrDgMCGgUAMAsGCSqGSIb3DQEHAaCC
+DXcwggjBMIIIKqADAgECAhALe5Gu598NtnjQGVkJKt86MA0GCSqGSIb3DQEBAgUAMGIxETAP
+BgNVBAcTCEludGVybmV0MRcwFQYDVQQKEw5WZXJpU2lnbiwgSW5jLjE0MDIGA1UECxMrVmVy
+aVNpZ24gQ2xhc3MgMiBDQSAtIEluZGl2aWR1YWwgU3Vic2NyaWJlcjAeFw05NzA0MjUwMDAw
+MDBaFw05ODA0MjUyMzU5NTlaMIIBDDERMA8GA1UEBxMISW50ZXJuZXQxFzAVBgNVBAoTDlZl
+cmlTaWduLCBJbmMuMTQwMgYDVQQLEytWZXJpU2lnbiBDbGFzcyAyIENBIC0gSW5kaXZpZHVh
+bCBTdWJzY3JpYmVyMUYwRAYDVQQLEz13d3cudmVyaXNpZ24uY29tL3JlcG9zaXRvcnkvQ1BT
+IEluY29ycC4gYnkgUmVmLixMSUFCLkxURChjKTk2MSYwJAYDVQQLEx1EaWdpdGFsIElEIENs
+YXNzIDIgLSBOZXRzY2FwZTEWMBQGA1UEAxMNUm9iZXJ0IEIgTG9yZDEgMB4GCSqGSIb3DQEJ
+ARYRbG9yZEBuZXRzY2FwZS5jb20wXDANBgkqhkiG9w0BAQEFAANLADBIAkEApEHKb5BhUMoT
+nhFKOJeAkTDNj5oY/I6fk0rJaHye9n//95rndwhkpbSAZtsX/kuF9kgHf3isRkhKkpRrd2Mc
+pwIDAQABo4IGDjCCBgowCQYDVR0TBAIwADCCAh8GA1UdAwSCAhYwggISMIICDjCCAgoGC2CG
+SAGG+EUBBwEBMIIB+RaCAadUaGlzIGNlcnRpZmljYXRlIGluY29ycG9yYXRlcyBieSByZWZl
+cmVuY2UsIGFuZCBpdHMgdXNlIGlzIHN0cmljdGx5IHN1YmplY3QgdG8sIHRoZSBWZXJpU2ln
+biBDZXJ0aWZpY2F0aW9uIFByYWN0aWNlIFN0YXRlbWVudCAoQ1BTKSwgYXZhaWxhYmxlIGF0
+OiBodHRwczovL3d3dy52ZXJpc2lnbi5jb20vQ1BTOyBieSBFLW1haWwgYXQgQ1BTLXJlcXVl
+c3RzQHZlcmlzaWduLmNvbTsgb3IgYnkgbWFpbCBhdCBWZXJpU2lnbiwgSW5jLiwgMjU5MyBD
+b2FzdCBBdmUuLCBNb3VudGFpbiBWaWV3LCBDQSA5NDA0MyBVU0EgVGVsLiArMSAoNDE1KSA5
+NjEtODgzMCBDb3B5cmlnaHQgKGMpIDE5OTYgVmVyaVNpZ24sIEluYy4gIEFsbCBSaWdodHMg
+UmVzZXJ2ZWQuIENFUlRBSU4gV0FSUkFOVElFUyBESVNDTEFJTUVEIGFuZCBMSUFCSUxJVFkg
+TElNSVRFRC6gDgYMYIZIAYb4RQEHAQEBoQ4GDGCGSAGG+EUBBwEBAjAsMCoWKGh0dHBzOi8v
+d3d3LnZlcmlzaWduLmNvbS9yZXBvc2l0b3J5L0NQUyAwEQYJYIZIAYb4QgEBBAQDAgeAMDYG
+CWCGSAGG+EIBCAQpFidodHRwczovL3d3dy52ZXJpc2lnbi5jb20vcmVwb3NpdG9yeS9DUFMw
+ggONBglghkgBhvhCAQ0EggN+FoIDelRoaXMgY2VydGlmaWNhdGUgaW5jb3Jwb3JhdGVzIGJ5
+IHJlZmVyZW5jZSwgYW5kIAppdHMgdXNlIGlzIHN0cmljdGx5IHN1YmplY3QgdG8sIHRoZSBW
+ZXJpU2lnbiAKQ2VydGlmaWNhdGlvbiBQcmFjdGljZSBTdGF0ZW1lbnQgKENQUyksIGF2YWls
+YWJsZQppbiB0aGUgVmVyaVNpZ24gcmVwb3NpdG9yeSBhdDogCmh0dHBzOi8vd3d3LnZlcmlz
+aWduLmNvbTsgYnkgRS1tYWlsIGF0CkNQUy1yZXF1ZXN0c0B2ZXJpc2lnbi5jb207IG9yIGJ5
+IG1haWwgYXQgVmVyaVNpZ24sCkluYy4sIDI1OTMgQ29hc3QgQXZlLiwgTW91bnRhaW4gVmll
+dywgQ0EgOTQwNDMgVVNBCgpDb3B5cmlnaHQgKGMpMTk5NiBWZXJpU2lnbiwgSW5jLiAgQWxs
+IFJpZ2h0cyAKUmVzZXJ2ZWQuIAoKV0FSTklORzogVEhFIFVTRSBPRiBUSElTIENFUlRJRklD
+QVRFIElTIFNUUklDVExZClNVQkpFQ1QgVE8gVEhFIFZFUklTSUdOIENFUlRJRklDQVRJT04g
+UFJBQ1RJQ0UKU1RBVEVNRU5ULiAgVEhFIElTU1VJTkcgQVVUSE9SSVRZIERJU0NMQUlNUyBD
+RVJUQUlOCklNUExJRUQgQU5EIEVYUFJFU1MgV0FSUkFOVElFUywgSU5DTFVESU5HIFdBUlJB
+TlRJRVMKT0YgTUVSQ0hBTlRBQklMSVRZIE9SIEZJVE5FU1MgRk9SIEEgUEFSVElDVUxBUgpQ
+VVJQT1NFLCBBTkQgV0lMTCBOT1QgQkUgTElBQkxFIEZPUiBDT05TRVFVRU5USUFMLApQVU5J
+VElWRSwgQU5EIENFUlRBSU4gT1RIRVIgREFNQUdFUy4gU0VFIFRIRSBDUFMKRk9SIERFVEFJ
+TFMuCgpDb250ZW50cyBvZiB0aGUgVmVyaVNpZ24gcmVnaXN0ZXJlZApub252ZXJpZmllZFN1
+YmplY3RBdHRyaWJ1dGVzIGV4dGVuc2lvbiB2YWx1ZSBzaGFsbCAKbm90IGJlIGNvbnNpZGVy
+ZWQgYXMgYWNjdXJhdGUgaW5mb3JtYXRpb24gdmFsaWRhdGVkIApieSB0aGUgSUEuMA0GCSqG
+SIb3DQEBAgUAA4GBAA9j9PTKelSjBBOYBFu8qW7ptzWwnHZ5lcSFBjC6QL5DcU6WoL48F/DS
+zkOmAvw3lZuafIPjUzmW61NV5T+HDAg2/iQ/8h/toZH+c9cXp7gggG40TtUJcLP/Dblp35vt
+qeaKr9fL3vE09LGlybMeTqimoFIRkao+NqQWUWJkvVrcMIICeTCCAeKgAwIBAgIQUNNSlJEv
+edMV4ysxrIVI8DANBgkqhkiG9w0BAQIFADBfMQswCQYDVQQGEwJVUzEXMBUGA1UEChMOVmVy
+aVNpZ24sIEluYy4xNzA1BgNVBAsTLkNsYXNzIDIgUHVibGljIFByaW1hcnkgQ2VydGlmaWNh
+dGlvbiBBdXRob3JpdHkwHhcNOTYwNjI3MDAwMDAwWhcNOTgwNjI3MjM1OTU5WjBiMREwDwYD
+VQQHEwhJbnRlcm5ldDEXMBUGA1UEChMOVmVyaVNpZ24sIEluYy4xNDAyBgNVBAsTK1ZlcmlT
+aWduIENsYXNzIDIgQ0EgLSBJbmRpdmlkdWFsIFN1YnNjcmliZXIwgZ8wDQYJKoZIhvcNAQEB
+BQADgY0AMIGJAoGBALoD7ZzMoZFxgx+byB2eT7R1731MMPOyqjS/mdtGxtSYxx1FDuewxtFZ
+7RIBv/1CgtNn9wnSI4Gp2uTPtSmqopqtWhNJ2VIxUz3a1andsmdxkdAPW3jF3qVBV0jX9PpH
+7knRPW6Q52wj0mZ/4XbxLqDdHcvVIXCIcp5kpm/P7v3fAgMBAAGjMzAxMA8GA1UdEwQIMAYB
+Af8CAQEwCwYDVR0PBAQDAgEGMBEGCWCGSAGG+EIBAQQEAwICBDANBgkqhkiG9w0BAQIFAAOB
+gQAN6OSPQTmZ8ouFAbfodckgYj0dsq43RhipxsLh/k6LwgZbQUbv8sxw0AEqFp5AUak+wBPY
+FljrwLCW/qnQZbM1RsFBCP6IlPSbtgyvYbUZrIGeVCdsNpBTxypskPapJdjkip4YXyd8jdn1
+0TX+OZmd7OjE9vRuXjCXTgiI0JmvnzCCAjEwggGaAgUCowAAATANBgkqhkiG9w0BAQIFADBf
+MQswCQYDVQQGEwJVUzEXMBUGA1UEChMOVmVyaVNpZ24sIEluYy4xNzA1BgNVBAsTLkNsYXNz
+IDIgUHVibGljIFByaW1hcnkgQ2VydGlmaWNhdGlvbiBBdXRob3JpdHkwHhcNOTYwMTI5MDAw
+MDAwWhcNOTkxMjMxMjM1OTU5WjBfMQswCQYDVQQGEwJVUzEXMBUGA1UEChMOVmVyaVNpZ24s
+IEluYy4xNzA1BgNVBAsTLkNsYXNzIDIgUHVibGljIFByaW1hcnkgQ2VydGlmaWNhdGlvbiBB
+dXRob3JpdHkwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBALZai6MNaiODgGvPOYf0IRMz
+Bkwlou1VEpfFp4C5+oPBIKD6LxUNfKFga355LPoGDzqu9htvsdL/LyhSX4N9S8R6t/hmH4BU
+/LfCjllKFFdG0ZqTvkGRA7sVgJNc6+fMCGw/PrNK/P9LbCPVUIImRBmOI8Nx6hkkRwSedb/I
+pgAfAgMBAAEwDQYJKoZIhvcNAQECBQADgYEAe6+kHC/Amw47XPyo5tGWD0hySYXlrxojAOPp
+u4A0bLI/hKg8cnCzTN5z+nyE0pKlADcJwgM0IwO37XaW3D5Phf1YF/QEvuxRHtx629uu6GF4
+2mU4R6wdA3Bt6eO7oEqfQOq823O/Z01dxnwgXOfoogorwgl010z+2+lrAmNdOacxggFkMIIB
+YAIBATB2MGIxETAPBgNVBAcTCEludGVybmV0MRcwFQYDVQQKEw5WZXJpU2lnbiwgSW5jLjE0
+MDIGA1UECxMrVmVyaVNpZ24gQ2xhc3MgMiBDQSAtIEluZGl2aWR1YWwgU3Vic2NyaWJlcgIQ
+C3uRruffDbZ40BlZCSrfOjAJBgUrDgMCGgUAoIGGMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0B
+BwEwIwYJKoZIhvcNAQkEMRYEFMrIHGnj+zJ5IfuCr9YJWThH/KJTMBwGCSqGSIb3DQEJBTEP
+Fw05NzA1MTMwMzAwMDRaMCcGCSqGSIb3DQEJDzEaMBgwBwYFKw4DAgcwDQYIKoZIhvcNAwIC
+ASgwDQYJKoZIhvcNAQEBBQAEQIZc703MN5X6X/uPK7i/ENIbYoGW+x6XRileZ+Ae4JhTDe6P
+8RJFfWhHFwhwXCeFWafsFfy0YCGxEcJUtcuEM2Q=
+--------------ms7014A498B2DAEA7AB832BC0A--
+
+

@@ -1,0 +1,124 @@
+Return-Path: <develop!nextmime@ebony@sblab.att.com>
+Received: from thumper.bellcore.com by greenbush.bellcore.com (4.1/4.7)
+	id <AA17475> for nsb; Fri, 25 Sep 92 21:30:21 EDT
+Received: from att.att.com (att-out.att.com) by thumper.bellcore.com (4.1/4.7)
+	id <AA23256> for nsb@greenbush; Fri, 25 Sep 92 21:30:19 EDT
+From: develop!nextmime@ebony@sblab.att.com
+Received: from ebony by develop (5.59/25-eef)
+	id AA28800; Fri, 25 Sep 92 14:08:15 PDT
+Received: by  ebony  (NeXT-1.0 (From Sendmail 5.52)/NeXT-2.0)
+	id AA00975; Fri, 25 Sep 92 14:13:02 PDT
+Date: Fri, 25 Sep 92 14:13:02 PDT
+Original-From: develop!nextmime@ebony (NeXT MIME Prototype)
+Message-Id: <9209252113.AA00975@ ebony >
+Received: by NeXT Mailer (1.63)
+To: @develop:sblab!att!thumper.bellcore.com!nsb
+Subject: More richtext questions/comments
+Cc: robb@develop
+Mime-Version: 1.0
+Content-Type: multipart/mixed; boundary=tmrob
+Content-Length: 2579   
+
+
+--tmrob
+content-type: text/richtext
+
+
+<Indent>
+
+<IndentRight>
+
+<bigger>
+ Nathaniel, 
+<nl>
+
+<nl>
+I think the biggest problem with point size in the mail I sent you earlier was my own
+<nl>
+misinterpretation of the rtf  "fs" command.  It was not documented in my (sparse)
+<nl>
+RTF documentation but I guessed from context that it was point size.  I've done more
+<nl>
+experimenting since then and concluded that it is consistently twice point size.  So
+<nl>
+instead of a mixture of 12 to 24 point my previous message to you was 24 to 48 point.
+<nl>
+I didn't see it here because I either read it with metamail and no font software, or looped
+<nl>
+it back and read it on the NeXT where everything reversed itself.
+<nl>
+
+<nl>
+It should be fixed here:
+<nl>
+	This is 12 point.
+<nl>
+	
+<bigger>
+ This is 14 point.
+<nl>
+	
+<bigger>
+ This is 16 point.
+<nl>
+
+<nl>
+
+</bigger></bigger>
+ This is back to 12 point.
+<nl>
+
+<nl>
+I do have some followup questions.  Can I close a "bigger" environment with a "smaller"
+<nl>
+and vice-versa?  I was  doing that but for safety's sake I now use, e.g. "/smaller" when
+<nl>
+growing and the current point size is less than 10, but "bigger" when growing and the
+<nl>
+current point size is 10 or greater.  Is this necessary?
+<nl>
+
+<nl>
+I also have a question about external-body messages.  If I have a multipart message it
+<nl>
+would be nice to make the first external-body segment  ftp, with parameters that would
+<nl>
+cause it to essentially mget all the files, so later segments could be local-file.  To do that
+<nl>
+I really want the first ftp call to mget all the files, create a subdirectory on the user's host,
+<nl>
+and put the files into the subdirectory.  One way to do that would be to make the NAME
+<nl>
+on the ftp access type the basename of the directory containing the message and make
+<nl>
+the MODE "directory" or "recursive" or some such.  But it needs to be something well
+<nl>
+defined for all the MIME readers.  Any thoughts on this?
+<nl>
+
+<nl>
+Finally, I'm pursuing the problem where WIN/3b munched my Content-type line.
+<nl>
+I t's Wollongong rather tha attmail, but I haven't heard back yet from Wollongong.
+<nl>
+A "content-length" caption was added in as the content-type line was mangled,
+<nl>
+so I suspect WIN/3b sendmail has its own private interpretation of content-type.
+<nl>
+Until then I've shortened my boundary down to 5 lower case characters so this
+<nl>
+message shouldn't cause the trouble the last one did.
+<nl>
+
+<nl>
+Thanks for your help,
+<nl>
+Marty
+<nl>
+robb@sblab.att.com
+<nl>
+
+</bigger><smaller><smaller><smaller>
+
+--tmrob--
+

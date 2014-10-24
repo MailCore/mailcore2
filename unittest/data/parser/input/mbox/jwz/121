@@ -1,0 +1,23 @@
+Message-ID: <33556759.E69CC032@netscape.com>
+Date: Wed, 16 Apr 1997 16:57:13 -0700
+From: Jamie Zawinski <jwz@netscape.com>
+Organization: Netscape Communications Corporation, Mozilla Division
+X-Mailer: Mozilla 3.02 (X11; U; IRIX 6.2 IP22)
+MIME-Version: 1.0
+To: Jamie Zawinski <jwz@netscape.com>
+Subject: encrypted
+Content-Type: application/x-pkcs7-mime; name="smime.p7m"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7m"
+Content-Description: S/MIME Encrypted Message
+X-Mozilla-Status: 0001
+Content-Length: 523
+
+MIAGCSqGSIb3DQEHA6CAMIACAQAxgc8wgcwCAQAwdjBiMREwDwYDVQQHEwhJbnRlcm5ldDEX
+MBUGA1UEChMOVmVyaVNpZ24sIEluYy4xNDAyBgNVBAsTK1ZlcmlTaWduIENsYXNzIDEgQ0Eg
+LSBJbmRpdmlkdWFsIFN1YnNjcmliZXICECkPxhf0bpqHRPlrV4jyZoQwDQYJKoZIhvcNAQEB
+BQAEQDGfrTzHvgPxsduymPX79aaqV2xKfsutMaqQW+LErXBDwkimBbTq49Id8vycP6SEp6vF
+l5J5qda2KFCYUYXgQd0wgAYJKoZIhvcNAQcBMBoGCCqGSIb3DQMCMA4CAgCgBAjJN/R93qHp
+TaCABEhb2+WRZ2GsIJzegOQzvmq+gwTH2LyDUgonylLXvlWLDYSTMseqErwpgYqxgfo5uapd
+Wn6AtC5HgA5ZAbKAZhRA4Xm8fsZOdc8EEJYfdDGBEbAnDJ7VYP23fyQECB/zPDnCSWqoAAAA
+AAAAAAAAAA==

@@ -1,0 +1,857 @@
+Return-Path: <dnew>
+Received: from nevada.bellcore.com by greenbush.bellcore.com (4.1/4.7)
+	id <AA22702> for nsb; Mon, 8 Jun 92 15:57:08 EDT
+Received: by nevada.bellcore.com (4.1/4.7)
+	id <AA08471> for nsb@greenbush; Mon, 8 Jun 92 15:57:01 EDT
+Received: from Messages.8.5.N.CUILIB.3.45.SNAP.NOT.LINKED.nevada.galaxy.sun4.41
+          via MS.5.6.nevada.galaxy.sun4_41;
+          Mon,  8 Jun 1992 15:56:59 -0400 (EDT)
+Message-Id: <0eAvi=C0M2U=0U4XZI@thumper.bellcore.com>
+Date: Mon,  8 Jun 1992 15:56:59 -0400 (EDT)
+From: Darren New <dnew>
+X-Andrew-Message-Size: 8538+4
+Mime-Version: 1.0
+Content-Type: multipart/alternative; 
+	boundary="Interpart.Boundary.keAvi9O0M2U=AU4XRw"
+To: Nathaniel Borenstein <nsb>
+Subject: Fwd: revised MIME architecture
+References: <9206062231.AA23867@pixel.convex.com>
+
+> THIS IS A MESSAGE IN 'MIME' FORMAT.  Your mail reader does not support MIME.
+> Please read the first section, which is plain text, and ignore the rest.
+
+--Interpart.Boundary.keAvi9O0M2U=AU4XRw
+Content-type: text/plain; charset=US-ASCII
+
+
+I am on the WWW mailing list and got this interesting tidbit of which I
+thought you should be aware...
+      -- Darren
+
+
+
+Return-Path: <new@ee.udel.edu>
+Received: from thumper.bellcore.com by nevada.bellcore.com (4.1/4.7)
+	id <AA08378> for dnew; Mon, 8 Jun 92 15:50:28 EDT
+Received: from udel.edu (louie.udel.edu) by thumper.bellcore.com (4.1/4.7)
+	id <AA01533> for dnew@nevada; Mon, 8 Jun 92 15:50:25 EDT
+Received: from snow-white.ee.udel.edu by louie.udel.edu id ah01113;
+          8 Jun 92 15:45 EDT
+Received: from louie.udel.edu by snow-white.ee.udel.edu id aa01403;
+          8 Jun 92 18:34 GMT
+Received: from CEARN.cern.ch by pucc.Princeton.EDU (IBM VM SMTP V2R2)
+   with BSMTP id 0017; Sat, 06 Jun 92 18:56:24 EDT
+Received: from CEARN by CEARN.cern.ch (Mailer R2.07B) with BSMTP id 7873; Sun,
+ 07 Jun 92 00:35:28 SET
+Received: from dxmint.cern.ch by CEARN.cern.ch (IBM VM SMTP V2R1) with TCP;
+   Sun, 07 Jun 92 00:35:21 SET
+Received: by dxmint.cern.ch (dxcern) (5.57/3.14)
+	id AA02301; Sun, 7 Jun 92 00:34:37 +0200
+Received: from dxmint.cern.ch by  nxoc01.cern.ch  (NeXT-1.0 (From Sendmail
+ 5.52)/NeXT-2.0)
+	id AA08529; Sun, 7 Jun 92 00:34:17 MET DST
+Received: by dxmint.cern.ch (dxcern) (5.57/3.14)
+	id AA02281; Sun, 7 Jun 92 00:32:19 +0200
+Received: from pixel.convex.com by convex.convex.com (5.64/1.35)
+	id AA04364; Sat, 6 Jun 92 17:32:01 -0500
+Received: from localhost by pixel.convex.com (5.64/1.28)
+	id AA23867; Sat, 6 Jun 92 17:31:59 -0500
+Message-Id: <9206062231.AA23867@pixel.convex.com>
+To: www-interest@nxoc01.cern.ch
+Subject: revised MIME architecture
+Mime-Version: 1.0
+Content-Type: multipart/mixed;boundary=cut-here
+Date: Sat, 06 Jun 92 17:31:58 CDT
+From: Dan Connolly <connolly@pixel.convex.com>
+Resent-Date:  Mon, 8 Jun 92 18:34:59 GMT
+Resent-From: new@ee.udel.edu
+Resent-To: dnew@thumper.bellcore.com
+
+In an earlier message, I proposed we make the W3 project
+interoperate with MIME systems. I made the mistake
+of using existing names for formats and types that
+don't yet exist.
+
+I'd like to make a more organized transition to MIME
+interoperability.
+
+First, we define some types for existing web servers
+and documents.
+
+X-HTTP is an access-type for message/external-body body
+parts to access existing W3 servers.
+Additional parameters include host, port, path, and anchor.
+
+X-HTML is a subtype of text for existing W3 documents.
+
+So the next part of this message is an HTML document expressed
+as a MIME external-body message.
+
+
+[An Andrew ToolKit view (mailobjv) was included here, but could not be
+displayed.]Then we address limitations in the existing format with two
+new types:
+
+In order to encapsulate multimedia objects in web nodes,
+we define X-HYPERTEXT to be a subtype of the multipart body type.
+The first part of a multipart/X-HYPERTEXT is the content of the hypertext.
+The other parts are multimedia attachments and links to other documents.
+
+The user agent (WWW client) displays the first part and allows the
+user to choose attachments and/or links. The attachments and links
+will be displayed in addition to or in place of the original content.
+
+Then, in order to formalize the structure of hypertext parts,
+we define X-SGML to be a subtype of text. The body of an X-SGML part must
+be a complete SGML document. The user agent (WWW client) will resolve
+external entities (such as the DTD and the mutlimedia attachments).
+
+So here's a multimedia web node expressed as MIME body part:
+
+
+[An Andrew ToolKit view (mailobjv) was included here, but could not be
+displayed.]
+[An Andrew ToolKit view (mailobjv) was included here, but could not be
+displayed.]
+[An Andrew ToolKit view (mailobjv) was included here, but could not be
+displayed.]And here's the DTD for WEB-NODE documents:
+
+<!-- This DTD was produced by DeveGram on Tue Jun  2 18:58:16 1992 -->
+<!-- and hand-edited by connolly@convex.com -->
+
+<!--     Parameter Entities       -->
+
+<!--      Terminal symbols        -->
+
+<!ENTITY % words "#PCDATA" >
+
+<!--    Non-ELEMENT symbols       -->
+
+<!ENTITY % inline	"%words | A" >
+<!ENTITY % text         "%inline | P | IMAGE" >
+<!ENTITY % heading "H1|H2|H3|H4|H5|H6" >
+
+<!ENTITY lt "<">
+<!ENTITY gt ">">
+<!ENTITY amp "&">
+
+<!ENTITY lt. "<">
+<!ENTITY gt. ">">
+<!ENTITY amp. "&">
+
+<!--     Document structure       -->
+
+<!ELEMENT WEB-NODE	O O  (TITLE, NEXTID?, ISINDEX?, section+, ADDRESS?)>
+
+<!ELEMENT TITLE	- -  (%inline)+>
+<!ELEMENT ADDRESS - - (%text)+>
+
+<!ELEMENT NEXTID - O EMPTY >
+<!ATTLIST NEXTID N NUMBER #IMPLIED>
+
+<!ELEMENT ISINDEX - O EMPTY >
+
+
+<!ELEMENT section O O ((%heading)?,
+			(
+			%text |
+			section |
+			MENU |
+			UL |
+			OL |
+			DIR |
+			DL)+)>
+
+<!ELEMENT (H1|H2|H3|H4|H5|H6)	- -  (%inline) >
+
+<!ELEMENT P	- O  EMPTY -- paragraph SEPARATOR -->
+
+<!ELEMENT IMAGE - O  EMPTY>
+<!ATTLIST IMAGE ATTACHMENT ENTITY #REQUIRED>
+
+<!ELEMENT A	- -  (%inline)+>
+<!ATTLIST A
+	NAME CDATA #IMPLIED
+	HREF ENTITY #IMPLIED
+	TYPE CDATA #IMPLIED --@@-- >
+
+<!ELEMENT MENU	- -  (LI+)>
+
+<!ELEMENT UL	- -  (LI+)>
+
+<!ELEMENT OL	- -  (LI+)>
+
+<!ELEMENT DIR	- -  (LI+)>
+
+<!ELEMENT LI	- O  (%text)+>
+
+<!ELEMENT DL	- -  ((DT, DD)+)>
+
+<!ELEMENT DT	- O  (%inline)+>
+
+<!ELEMENT DD	- O  (%text)+>
+
+And here's a perl script to convert an HTML document
+into a multipart/X-HYPERTEXT MIME body part:
+
+#!/usr/local/bin/perl
+
+$boundary = "attachment";
+print "Content-Type: multipart/X-HYPERTEXT; boundary=$boundary¥n¥n";
+
+print "--$boundary¥n";
+print "Content-Type: text/SGML¥n¥n";
+
+print "<!DOCTYPE WEB-NODE SYSTEM ¥n[¥n";
+
+@html = <>;			# read whole file
+$_ = join('', @html);
+$out = '';
+
+sub fix_anchor{
+    local($name, $href, $type);
+
+    # What exactly is the syntax of an SGML attribute value?
+    while(s/^(¥w+)¥s*=¥s*((¥"[^¥"]*¥")|([^¥s>]+))¥s*//){
+	local($v) = ($3 || $4);
+	local($a) = $1;
+	$href = $v if $a =‾ /^href$/i;
+	$name = $v if $a =‾ /^name$/i;
+	$type = $v if $a =‾ /^type$/i;
+    }
+    s/[^>]*>//;
+
+    $out .= "<A";
+    $out .= " NAME=¥"$name¥"" if $name ne '';
+    $out .= " TYPE=¥"$type¥"" if $type ne '';
+    if($href ne ''){
+	if(!defined($anchor{$href})){
+	    $anchor{$href} = ++$anchor;
+	}
+	$out .= " HREF=" . $anchor{$href};
+    }
+    $out .= ">";
+}
+
+$header = 0;
+$anchor = "UDI000";
+while(/</){
+    $out .= $`;
+    $_ = $';
+    if(s/^A¥s+//i){
+	&fix_anchor;
+    }elsif(s/^NEXTID¥s+(¥d+)¥s*>//){
+	$out .= "<NEXTID N=$1>";
+    }elsif(s/^H(¥d)>//){
+	local($n) = $1;
+	while($n<=$header){ $out .= "</SECTION>"; $header--; }
+	while($n>$header){ $out .= "<SECTION>"; $header++; }
+	$out .= "<H$n>";
+    }else{
+	$out .= '<';
+    }
+}
+
+$out .= $_;
+
+foreach(keys %anchor){
+    local($ent) = $anchor{$_};
+
+    print "<!ENTITY $ent SDATA ¥"$_¥">¥n";
+}
+
+print "]>¥n", $out;
+
+foreach(keys %anchor){
+    local($access_type);
+
+    print "¥n¥n--$boundary¥n";
+    print "Content-id: $_¥n";
+    print "Content-type: message/external-body¥n";
+
+    $access_type = $1 if s/^(¥w+)://;
+
+    if(s/#([^#]+)$//){
+	print "¥t;x-anchor=¥"$1¥"¥n";
+    }
+
+    if($access_type =‾ /file/i){
+	if(&hostport){
+	    &param('access-type', "ANON-FTP");
+	}else{
+	    &param('access-type', 'LOCAL-FILE');
+	}
+	&param('name', $_);
+
+	print "¥nContent-Type: application/octet-stream¥n¥n";
+    }elsif($access_type =‾ /http/i){
+	&param('access-type', 'X-HTTP');
+	&hostport;
+	&unescape;
+	&param('name', $_);
+
+	print "¥nContent-Type: text/X-HTML¥n¥n";
+    }elsif($access_type =‾ /news/i){
+	&param('access-type', 'X-NEWS');
+	&unescape;
+	if(/@/){
+	    &param('message-id', $_);
+	}else{
+	    &param('group', $_);
+	}
+
+	print "¥nContent-Type: message¥n¥n";
+
+    }elsif($access_type =‾ /telnet/i){
+	&param('access-type', 'x-telnet');
+	&unescape;
+	&param('user', $1) if s/^(.*)@//;
+	&param('port', $1) if s/:(.*)$//;
+	&param('site', $_);
+
+	print "¥nContent-Type: X-TELNET¥n¥n";
+
+    }elsif($access_type =‾ /gopher/i){
+	&param('access-type', 'x-gopher');
+	&hostport;
+	&param('type', $1) if s-^/(¥d+)/--;
+	&unescape;
+	&param('selector', $_);
+
+	print "¥nContent-Type: @@@@¥n¥n";
+
+    }elsif($access_type =‾ /wais/i){
+	&param('access-type', 'x-wais');
+	&hostport;
+	if(m-^/-){
+	    &param('type', $1) if s-^/(¥w+)--;
+	    &param('size', $1) if s-^/(¥d+)--;
+	    &unescape;
+	    &param('path', $_);
+	}else{
+	    &unescape;
+	    &param('words', $1) if /¥?(.*)/;
+	}
+
+	$type = "image/$type" if $type =‾ /gif|tiff/i;
+	$type = "application/postscript" if $type =‾ /PS/i;
+
+	print "¥nContent-Type: $type¥n¥n";
+
+    }elsif($access_type eq ""){
+	&param('access-type', 'x-relative');
+	&unescape;
+	&param('name', $_);
+
+	print "¥nContent-Type: message¥n¥n";
+    }else{
+	warn "unknown access type: $access_type in $_";
+    }
+}
+
+print "--$boundary--¥n";
+
+sub unescape{
+    s/%(¥w¥w)/sprintf("%c",hex($1))/ge;
+}
+
+sub param{
+    local($p, $v) = @_;
+    # quote tspecials in parameter values
+    $v = '"'.$v.'"' if $v =‾ m-[¥s()<>@,;:¥¥¥"¥/¥[¥]?¥.=]-;
+    print "¥t;$p=$v¥n";
+}
+
+sub hostport{
+    if(s-//([^:/]+)--){
+	&param('host', $1);
+	&param('port', $1)  if s/:(¥d+)//;
+	1;
+    }else{
+	0;
+    }
+}
+
+
+--Interpart.Boundary.keAvi9O0M2U=AU4XRw
+Content-Type: multipart/mixed; 
+	boundary="Alternative.Boundary.keAvi9O0M2U=8U4XMt"
+
+--Alternative.Boundary.keAvi9O0M2U=8U4XMt
+Content-type: text/richtext; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+<nl>
+I am on the WWW mailing list and got this interesting tidbit of which I though=
+t you should be aware...<nl>
+      -- Darren<nl>
+<nl>
+<nl>
+<smaller><nl>
+Return-Path: <lt>new@ee.udel.edu><nl>
+Received: from thumper.bellcore.com by nevada.bellcore.com (4.1/4.7)<nl>
+	id <lt>AA08378> for dnew; Mon, 8 Jun 92 15:50:28 EDT<nl>
+Received: from udel.edu (louie.udel.edu) by thumper.bellcore.com (4.1/4.7)<nl>=
+
+	id <lt>AA01533> for dnew@nevada; Mon, 8 Jun 92 15:50:25 EDT</smaller><smaller><nl>
+Received: from snow-white.ee.udel.edu by louie.udel.edu id ah01113;<nl>
+          8 Jun 92 15:45 EDT<nl>
+Received: from louie.udel.edu by snow-white.ee.udel.edu id aa01403;<nl>
+          8 Jun 92 18:34 GMT<nl>
+Received: from CEARN.cern.ch by pucc.Princeton.EDU (IBM VM SMTP V2R2)<nl>
+   with BSMTP id 0017; Sat, 06 Jun 92 18:56:24 EDT<nl>
+Received: from CEARN by CEARN.cern.ch (Mailer R2.07B) with BSMTP id 7873; Sun,=
+<nl>
+ 07 Jun 92 00:35:28 SET<nl>
+Received: from dxmint.cern.ch by CEARN.cern.ch (IBM VM SMTP V2R1) with TCP;<nl=
+>
+   Sun, 07 Jun 92 00:35:21 SET<nl>
+Received: by dxmint.cern.ch (dxcern) (5.57/3.14)<nl>
+	id AA02301; Sun, 7 Jun 92 00:34:37 +0200<nl>
+Received: from dxmint.cern.ch by  nxoc01.cern.ch  (NeXT-1.0 (From Sendmail<nl>=
+
+ 5.52)/NeXT-2.0)<nl>
+	id AA08529; Sun, 7 Jun 92 00:34:17 MET DST<nl>
+Received: by dxmint.cern.ch (dxcern) (5.57/3.14)<nl>
+	id AA02281; Sun, 7 Jun 92 00:32:19 +0200<nl>
+Received: from pixel.convex.com by convex.convex.com (5.64/1.35)<nl>
+	id AA04364; Sat, 6 Jun 92 17:32:01 -0500<nl>
+Received: from localhost by pixel.convex.com (5.64/1.28)<nl>
+	id AA23867; Sat, 6 Jun 92 17:31:59 -0500<nl>
+Message-Id: <lt>9206062231.AA23867@pixel.convex.com><nl>
+To: www-interest@nxoc01.cern.ch<nl>
+Subject: revised MIME architecture<nl>
+Mime-Version: 1.0<nl>
+Content-Type: multipart/mixed;boundary=3Dcut-here<nl>
+Date: Sat, 06 Jun 92 17:31:58 CDT<nl>
+From: Dan Connolly <lt>connolly@pixel.convex.com><nl>
+Resent-Date:  Mon, 8 Jun 92 18:34:59 GMT<nl>
+Resent-From: new@ee.udel.edu<nl>
+Resent-To: dnew@thumper.bellcore.com</smaller><nl>
+<nl>
+In an earlier message, I proposed we make the W3 project<nl>
+interoperate with MIME systems. I made the mistake<nl>
+of using existing names for formats and types that<nl>
+don't yet exist.<nl>
+<nl>
+I'd like to make a more organized transition to MIME<nl>
+interoperability.<nl>
+<nl>
+First, we define some types for existing web servers<nl>
+and documents.<nl>
+<nl>
+X-HTTP is an access-type for message/external-body body<nl>
+parts to access existing W3 servers.<nl>
+Additional parameters include host, port, path, and anchor.<nl>
+<nl>
+X-HTML is a subtype of text for existing W3 documents.<nl>
+<nl>
+So the next part of this message is an HTML document expressed<nl>
+as a MIME external-body message.<nl>
+<nl>
+<nl>
+
+--Alternative.Boundary.keAvi9O0M2U=8U4XMt
+Content-type: message/external-body;
+	access-type="X-HTTP";
+	host="info.cern.ch";
+	port="2784";
+	path="/hypertext/WWW/TheProject.html"
+Content-Description: Object of type 'message/external-body;
+
+Content-type: text/X-HTML
+
+
+
+
+--Alternative.Boundary.keAvi9O0M2U=8U4XMt
+Content-type: text/richtext; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+<nl>
+Then we address limitations in the existing format with two<nl>
+new types:<nl>
+<nl>
+In order to encapsulate multimedia objects in web nodes,<nl>
+we define X-HYPERTEXT to be a subtype of the multipart body type.<nl>
+The first part of a multipart/X-HYPERTEXT is the content of the hypertext.<nl>=
+
+The other parts are multimedia attachments and links to other documents.<nl>
+<nl>
+The user agent (WWW client) displays the first part and allows the<nl>
+user to choose attachments and/or links. The attachments and links<nl>
+will be displayed in addition to or in place of the original content.<nl>
+<nl>
+Then, in order to formalize the structure of hypertext parts,<nl>
+we define X-SGML to be a subtype of text. The body of an X-SGML part must<nl>
+be a complete SGML document. The user agent (WWW client) will resolve<nl>
+external entities (such as the DTD and the mutlimedia attachments).<nl>
+<nl>
+So here's a multimedia web node expressed as MIME body part:<nl>
+<nl>
+<nl>
+
+--Alternative.Boundary.keAvi9O0M2U=8U4XMt
+Content-type: text/SGML
+Content-Description: Object of type 'text/SGML
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE WEB-NODE SYSTEM
+[
+<!ENTITY UDI001 SDATA "HTTP://info.cern.ch/hypertext/WWW/TheProject.html"=
+>
+<!ENTITY part3 SDATA "part3">
+]>
+<TITLE>Sample mutlimedia web node</TITLE>
+<SECTION><H1>Old features</H1>
+Here's a link to some info at cern:
+ <A HREF=3DUDI001>cern stuff</A>
+<SECTION><H2>New features</H2>
+Here's a picture: <IMAGE ATTACHMENT=3Dpart3>
+
+
+
+
+--Alternative.Boundary.keAvi9O0M2U=8U4XMt
+Content-type: text/richtext; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+<nl>
+<nl>
+
+--Alternative.Boundary.keAvi9O0M2U=8U4XMt
+Content-type: message/external-body 	;
+	access-type="X-HTTP 	";
+	host="info.cern.ch";
+	name="/hypertext/WWW/TheProject.html"
+Content-Description: Object of type 'message/external-body
+
+Content-Type: text/X-HTML
+
+
+
+--Alternative.Boundary.keAvi9O0M2U=8U4XMt
+Content-type: text/richtext; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+<nl>
+<nl>
+
+--Alternative.Boundary.keAvi9O0M2U=8U4XMt
+Content-type: image/gif
+Content-Description: Object of type 'image/gif
+Content-Transfer-Encoding: base64
+
+R0lGODdhdQAvAIQAAL9/v3+ff39/f/+/f/+ff/9/f3+fv///v39/v//fv/+/v/+fv/9/v7+/
+f7+ff79/f//////f/7/fv7+/v7+fvwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+ACwAAAAAdQAvAAAF/uARHQkkiuMoQmZUnixUvkfNHjKbivM75riEMIa7xYiQXYvH/CVIMuhz
+5gK6nsuabUYawqamcCQJvOGKQZnz9oues9rge/wOy4asWdQpj6r1EWNVRSVKT3RLYXWEbIot
+jjw6J21jZEdaOycleVCTQYc9PXQ0nSMvXC4qg46QPzA4bWdKNXpvtFpPK4g+d4W9vUIKXHk7
+p0m2KSYJV0JrejmNrJp7dkLNwtbLPKmXLc3DUd8JCuTl2MzZh37ariuHnmVAUCZFpndXRi48
+2MvLKdauikWyBsyauXIUFEwgN65cQyFSfHhyZ+RFHlaPSFCEJgtWM45hapUhEWjIpn4N/oUp
+VEBhAAUCAwgsaKCA5sIJFG4qGLOpkx0Vyqz4PHkCVtBOIm040iNxEDeSmnz463dlwoKFORU4
+WKlw5oKtE6Z4wYelip0iZ6GdFIO27TGeOVyFzNiOjj01Upb0c5gym06rDVbhQRrU0MW5i5Ag
+MiJtLq83hfLeeZTr3x9xKJlhU9il54rPSNLY8JkmIxpCtogo4ZiGhpF5RSMXY4oys8FxFFIB
+HC3nSzXVae1AE8721cUaldrClT0pRw/nk9/ppjrB6gCNASNLYmURdOq0trQfOU4GeVBIqV85
++SeqC3aDCgjEPzbxVEd7HefA+u72LO/XZ40CHVyGrOFJMTxd/rENVgoM8E5ZjyTiVizHAFiG
+RcGJIdx+QEGiiEVS4SWRP51dRoICCwxwlR9u5GJcLvRU5OGGMrYSIy0WMreDXVTkJ6IK7EBE
+RUMyOcCDdG8hh9YmErIhmlJoIMaYDq/JlVhHWeiD1xc7bpPNSgkJ0weM2mmkDGmJ/FQljegh
+AxlbUgKyhWXNHPlgkAmkqNUC0WmixYXdGKfknyKxiKFbUe6SRkC2UHRGT2Bcho5VFDjQkgPt
+VTFIJLck8ligH+boKYBbvIYlPCGGs9wU+qRCQaUvvYqpfVxwOlx3WWLnnRngNdYTIrKMtFQW
+JgVV7CEKTUCApcwye4U+AGWjV16H/oYWbJSjMZZtRo29WQsWRFVhEjsrESArrLAaKaQJKFpa
+XVilZYtKKRk1VaFo5GXbh3429lBUbMoksJC7lprrwAMUPGBpOuM4gJO7K42DGT1AFdWhLONI
+AA8MHu7nJKOZKOkGxaxilVPBsCr8KsJ9yVRpdczilFN1yQ4k7pH2CPHuTVigGa9cuHbHcRyP
+WuTCw+mmvLLCCDfoNLqWNoA0sy/Di9SJEryrCtIUNEABROAx2jHQzrkYEooviSnwAklbirAD
+cK+csDkGc02wrEizw0N1FFw1E82VKuQ13z2j5uG8cqiyhdksQV3pV0knXCnCABwMt8IDKDv1
+yefGTfXL/sHgxrnMr5KeU+kJ/Qfjf1Iq2U9nOLBkaeSOU90sAJI33XnblRpAQQAUCHDu6TjJ
+7O7LXb/ssAMzvUwOLl5gzJAxKOnE8OxUK9xsyg4AgPADlTsgQPcBPDCAVo6nW3nllTpggO1J
+TzA7uvQTD6uYLqCoQOzk8L3QMhErHur6Foy2+Q5q7Gtf+QLgAAR072DB413cHvC+CiLMgQAA
+nqXeF7m4tc948nscTqRmDpqhDXtVW96r+gY/k1EtAOH7HaxgKIAHIIB93useBR8APqXNTng6
+lJzjfGcp4B1wfkjcnfzmF0JYTcBrJxPg/CQoK/g9MGEG+F7CPNe98TXwAeUD/iMYPRc8ZgmP
+gb9DIdyKWEXgyfBzn6Pf5wY3Oyh2MH27U58G35i0ytkQbgCoIQQF4L1Aeq+MwXsb7oRnQAo4
+EIu4S5oR4WjF4U0RfrWrIhwrlcGEZfCQ32ug+PwYSB0igIfiCyMiEfa7DKrsbZy8ovvWeMZ0
+MYuIllwhCtu3Sypu8FwMrBwG3Za9B76NgoAU4xdPaUOVCW98fsQiGWdJQ08iIJadFGbc0IjG
+9qXxm7ubpi7f98AsUqBy5oTbI2uITMkdLIuBBKP3Tmk5dhLScq7M4vuaCUMdhg+Z6mQjGGG1
+PsmFz3dunJ3ChIcw4T2SlQzEYOX6Wal+ds+Bf6TA/vu8Vz6GRpOH5fsiIeUpgGdCkGl/dFv5
+3nfKLNqQoeVjX0oxSk7fKSyHNJVVJyf4PoqykX3Q/N4+J+c9kK7vAeMjZPlOGc8dEpKdBzvl
++FoaVXkmbHyT46A8F7rTg17wpuaUXBYP9smLihJ3DwRl+XL3O6YlMosRjar4PGlP8fEwizW0
+5x+dejBBjlQAwEPqU+PJUbSCT56n3KKlxoewiKqskwpzIAQP1lD33bStZbzgR78HPsZWTpB7
+DWQikeq9GkoVqZ1N7D1hyEOGXm6WMFWqDi8HQ3MeM4ZbJSbu5DlUhY21sgAY61zHh9cyltK0
+zcwrakva2uX+0ZVVHaU8/jsaSGYmN4el/aIB/OhMZDbznAEFIjQvV6lhljV86wviTQfpSaYx
+NpFF7SxqmancZlZVnmSdnDq3ODkHCg+90y2lJzXoRQwmDIMMdSA92SdLoJLPrPoEpPscqdLK
+PhW1RWXnXW+KRmO6koKHPKkiiXlK1qZ1h/784hbXy1/wVVim+nzlA8mrxdemNWHr5eFV7dpM
+t57UdkB2p051O1nyNfam2luwVcUYQe2prFI1HKtMNRpZAPzzqmjl6EKv+sca4ni0hy3yiitV
+ADIr9sprbB8pYfjlTt7ze/1cMgTZ7FJWTtbFUrZcA10JZaTqcKzDPCxyUVliPx/WXMtiAHkn
+KchJNbO1sf/87YjLqsXLehmVS0urA0yMSmEyjZQPZOxhF2rovuZWACEAADs=
+
+
+
+--Alternative.Boundary.keAvi9O0M2U=8U4XMt
+Content-type: text/richtext; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+<nl>
+And here's the DTD for WEB-NODE documents:<nl>
+<nl>
+<lt>!-- This DTD was produced by DeveGram on Tue Jun  2 18:58:16 1992 --><nl>
+<lt>!-- and hand-edited by connolly@convex.com --><nl>
+<nl>
+<lt>!--     Parameter Entities       --><nl>
+<nl>
+<lt>!--      Terminal symbols        --><nl>
+<nl>
+<lt>!ENTITY % words "#PCDATA" ><nl>
+<nl>
+<lt>!--    Non-ELEMENT symbols       --><nl>
+<nl>
+<lt>!ENTITY % inline	"%words | A" ><nl>
+<lt>!ENTITY % text         "%inline | P | IMAGE" ><nl>
+<lt>!ENTITY % heading "H1|H2|H3|H4|H5|H6" ><nl>
+<nl>
+<lt>!ENTITY lt "<lt>"><nl>
+<lt>!ENTITY gt ">"><nl>
+<lt>!ENTITY amp "&"><nl>
+<nl>
+<lt>!ENTITY lt. "<lt>"><nl>
+<lt>!ENTITY gt. ">"><nl>
+<lt>!ENTITY amp. "&"><nl>
+<nl>
+<lt>!--     Document structure       --><nl>
+<nl>
+<lt>!ELEMENT WEB-NODE	O O  (TITLE, NEXTID?, ISINDEX?, section+, ADDRESS?)><nl>=
+
+<nl>
+<lt>!ELEMENT TITLE	- -  (%inline)+><nl>
+<lt>!ELEMENT ADDRESS - - (%text)+><nl>
+<nl>
+<lt>!ELEMENT NEXTID - O EMPTY ><nl>
+<lt>!ATTLIST NEXTID N NUMBER #IMPLIED><nl>
+<nl>
+<lt>!ELEMENT ISINDEX - O EMPTY ><nl>
+<nl>
+<nl>
+<lt>!ELEMENT section O O ((%heading)?,<nl>
+			(<nl>
+			%text |<nl>
+			section |<nl>
+			MENU |<nl>
+			UL |<nl>
+			OL |<nl>
+			DIR |<nl>
+			DL)+)><nl>
+<nl>
+<lt>!ELEMENT (H1|H2|H3|H4|H5|H6)	- -  (%inline) ><nl>
+<nl>
+<lt>!ELEMENT P	- O  EMPTY -- paragraph SEPARATOR --><nl>
+<nl>
+<lt>!ELEMENT IMAGE - O  EMPTY><nl>
+<lt>!ATTLIST IMAGE ATTACHMENT ENTITY #REQUIRED><nl>
+<nl>
+<lt>!ELEMENT A	- -  (%inline)+><nl>
+<lt>!ATTLIST A<nl>
+	NAME CDATA #IMPLIED<nl>
+	HREF ENTITY #IMPLIED<nl>
+	TYPE CDATA #IMPLIED --@@-- ><nl>
+<nl>
+<lt>!ELEMENT MENU	- -  (LI+)><nl>
+<nl>
+<lt>!ELEMENT UL	- -  (LI+)><nl>
+<nl>
+<lt>!ELEMENT OL	- -  (LI+)><nl>
+<nl>
+<lt>!ELEMENT DIR	- -  (LI+)><nl>
+<nl>
+<lt>!ELEMENT LI	- O  (%text)+><nl>
+<nl>
+<lt>!ELEMENT DL	- -  ((DT, DD)+)><nl>
+<nl>
+<lt>!ELEMENT DT	- O  (%inline)+><nl>
+<nl>
+<lt>!ELEMENT DD	- O  (%text)+><nl>
+<nl>
+And here's a perl script to convert an HTML document<nl>
+into a multipart/X-HYPERTEXT MIME body part:<nl>
+<nl>
+#!/usr/local/bin/perl<nl>
+<nl>
+$boundary =3D "attachment";<nl>
+print "Content-Type: multipart/X-HYPERTEXT; boundary=3D$boundary¥n¥n";<nl>
+<nl>
+print "--$boundary¥n";<nl>
+print "Content-Type: text/SGML¥n¥n";<nl>
+<nl>
+print "<lt>!DOCTYPE WEB-NODE SYSTEM ¥n[¥n";<nl>
+<nl>
+@html =3D <lt>>;			# read whole file<nl>
+$_ =3D join('', @html);<nl>
+$out =3D '';<nl>
+<nl>
+sub fix_anchor{<nl>
+    local($name, $href, $type);<nl>
+<nl>
+    # What exactly is the syntax of an SGML attribute value?<nl>
+    while(s/^(¥w+)¥s*=3D¥s*((¥"[^¥"]*¥")|([^¥s>]+))¥s*//){<nl>
+	local($v) =3D ($3 || $4);<nl>
+	local($a) =3D $1;<nl>
+	$href =3D $v if $a =3D‾ /^href$/i;<nl>
+	$name =3D $v if $a =3D‾ /^name$/i;<nl>
+	$type =3D $v if $a =3D‾ /^type$/i;<nl>
+    }<nl>
+    s/[^>]*>//;<nl>
+<nl>
+    $out .=3D "<lt>A";<nl>
+    $out .=3D " NAME=3D¥"$name¥"" if $name ne '';<nl>
+    $out .=3D " TYPE=3D¥"$type¥"" if $type ne '';<nl>
+    if($href ne ''){<nl>
+	if(!defined($anchor{$href})){<nl>
+	    $anchor{$href} =3D ++$anchor;<nl>
+	}<nl>
+	$out .=3D " HREF=3D" . $anchor{$href};<nl>
+    }<nl>
+    $out .=3D ">";<nl>
+}<nl>
+<nl>
+$header =3D 0;<nl>
+$anchor =3D "UDI000";<nl>
+while(/<lt>/){<nl>
+    $out .=3D $`;<nl>
+    $_ =3D $';<nl>
+    if(s/^A¥s+//i){<nl>
+	&fix_anchor;<nl>
+    }elsif(s/^NEXTID¥s+(¥d+)¥s*>//){<nl>
+	$out .=3D "<lt>NEXTID N=3D$1>";<nl>
+    }elsif(s/^H(¥d)>//){<nl>
+	local($n) =3D $1;<nl>
+	while($n<lt>=3D$header){ $out .=3D "<lt>/SECTION>"; $header--; }<nl>
+	while($n>$header){ $out .=3D "<lt>SECTION>"; $header++; }<nl>
+	$out .=3D "<lt>H$n>";<nl>
+    }else{<nl>
+	$out .=3D '<lt>';<nl>
+    }<nl>
+}<nl>
+<nl>
+$out .=3D $_;<nl>
+<nl>
+foreach(keys %anchor){<nl>
+    local($ent) =3D $anchor{$_};<nl>
+<nl>
+    print "<lt>!ENTITY $ent SDATA ¥"$_¥">¥n";<nl>
+}<nl>
+<nl>
+print "]>¥n", $out;<nl>
+<nl>
+foreach(keys %anchor){<nl>
+    local($access_type);<nl>
+<nl>
+    print "¥n¥n--$boundary¥n";<nl>
+    print "Content-id: $_¥n";<nl>
+    print "Content-type: message/external-body¥n";<nl>
+<nl>
+    $access_type =3D $1 if s/^(¥w+)://;<nl>
+<nl>
+    if(s/#([^#]+)$//){<nl>
+	print "¥t;x-anchor=3D¥"$1¥"¥n";<nl>
+    }<nl>
+<nl>
+    if($access_type =3D‾ /file/i){<nl>
+	if(&hostport){<nl>
+	    &param('access-type', "ANON-FTP");<nl>
+	}else{<nl>
+	    &param('access-type', 'LOCAL-FILE');<nl>
+	}<nl>
+	&param('name', $_);<nl>
+<nl>
+	print "¥nContent-Type: application/octet-stream¥n¥n";<nl>
+    }elsif($access_type =3D‾ /http/i){<nl>
+	&param('access-type', 'X-HTTP');<nl>
+	&hostport;<nl>
+	&unescape;<nl>
+	&param('name', $_);<nl>
+<nl>
+	print "¥nContent-Type: text/X-HTML¥n¥n";<nl>
+    }elsif($access_type =3D‾ /news/i){<nl>
+	&param('access-type', 'X-NEWS');<nl>
+	&unescape;<nl>
+	if(/@/){<nl>
+	    &param('message-id', $_);<nl>
+	}else{<nl>
+	    &param('group', $_);<nl>
+	}<nl>
+<nl>
+	print "¥nContent-Type: message¥n¥n";<nl>
+<nl>
+    }elsif($access_type =3D‾ /telnet/i){<nl>
+	&param('access-type', 'x-telnet');<nl>
+	&unescape;<nl>
+	&param('user', $1) if s/^(.*)@//;<nl>
+	&param('port', $1) if s/:(.*)$//;<nl>
+	&param('site', $_);<nl>
+<nl>
+	print "¥nContent-Type: X-TELNET¥n¥n";<nl>
+<nl>
+    }elsif($access_type =3D‾ /gopher/i){<nl>
+	&param('access-type', 'x-gopher');<nl>
+	&hostport;<nl>
+	&param('type', $1) if s-^/(¥d+)/--;<nl>
+	&unescape;<nl>
+	&param('selector', $_);<nl>
+<nl>
+	print "¥nContent-Type: @@@@¥n¥n";<nl>
+<nl>
+    }elsif($access_type =3D‾ /wais/i){<nl>
+	&param('access-type', 'x-wais');<nl>
+	&hostport;<nl>
+	if(m-^/-){<nl>
+	    &param('type', $1) if s-^/(¥w+)--;<nl>
+	    &param('size', $1) if s-^/(¥d+)--;<nl>
+	    &unescape;<nl>
+	    &param('path', $_);<nl>
+	}else{<nl>
+	    &unescape;<nl>
+	    &param('words', $1) if /¥?(.*)/;<nl>
+	}<nl>
+<nl>
+	$type =3D "image/$type" if $type =3D‾ /gif|tiff/i;<nl>
+	$type =3D "application/postscript" if $type =3D‾ /PS/i;<nl>
+<nl>
+	print "¥nContent-Type: $type¥n¥n";<nl>
+<nl>
+    }elsif($access_type eq ""){<nl>
+	&param('access-type', 'x-relative');<nl>
+	&unescape;<nl>
+	&param('name', $_);<nl>
+<nl>
+	print "¥nContent-Type: message¥n¥n";<nl>
+    }else{<nl>
+	warn "unknown access type: $access_type in $_";<nl>
+    }<nl>
+}<nl>
+<nl>
+print "--$boundary--¥n";<nl>
+<nl>
+sub unescape{<nl>
+    s/%(¥w¥w)/sprintf("%c",hex($1))/ge;<nl>
+}<nl>
+<nl>
+sub param{<nl>
+    local($p, $v) =3D @_;<nl>
+    # quote tspecials in parameter values<nl>
+    $v =3D '"'.$v.'"' if $v =3D‾ m-[¥s()<lt>>@,;:¥¥¥"¥/¥[¥]?¥.=3D]-;<nl>
+    print "¥t;$p=3D$v¥n";<nl>
+}<nl>
+<nl>
+sub hostport{<nl>
+    if(s-//([^:/]+)--){<nl>
+	&param('host', $1);<nl>
+	&param('port', $1)  if s/:(¥d+)//;<nl>
+	1;<nl>
+    }else{<nl>
+	0;<nl>
+    }<nl>
+}<nl>
+<nl>
+
+--Alternative.Boundary.keAvi9O0M2U=8U4XMt--
+
+--Interpart.Boundary.keAvi9O0M2U=AU4XRw--
+

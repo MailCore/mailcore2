@@ -1,0 +1,37 @@
+Return-Path: <devetzis>
+Received: from dexter.bellcore.com by greenbush.bellcore.com (4.1/4.7)
+	id <AA03207> for nsb; Tue, 16 Jun 92 20:33:33 EDT
+Received: by dexter.bellcore.com (4.1/4.7)
+	id <AA10194> for nsb@greenbush; Tue, 16 Jun 92 20:33:31 EDT
+Date: Tue, 16 Jun 92 20:33:31 EDT
+From: devetzis (Taso N. Devetzis)
+Message-Id: <9206170033.AA10194@dexter.bellcore.com>
+Mime-Version: 1.0
+To: nsb
+Subject: greek mail
+Cc: devetzis
+Content-Type: text/richtext; charset=iso-8859-7
+Content-Transfer-Encoding: quoted-printable
+
+hi nathaniel,
+<nl><nl>
+
+i found some greek fonts on a machine in (of all places) greece
+and hacked mailto-hebrew into mailto-greek (in ‾devetzis/bin).
+<nl><nl>
+
+the fonts are in /u/devetzis/lib/fonts, along with the aliases.
+<nl><nl>
+
+it appears to work, i'll sign my name in greek...
+<nl><nl>
+
+=D4=DC=F3=F3=EF=F2 =CD=F4=E5=E2=E5=F4=E6=DE=F2
+<nl><nl>
+
+<signature>Taso N. Devetzis
+Bellcore, 445 South Street, Room 2P-357, Morristown, NJ, 07962-1910, USA
+Phone: +1 201 829 4764, FAX: +1 201 829 2504
+devetzis@bellcore.com     ...!uunet!bellcore!devetzis
+</signature>=
+

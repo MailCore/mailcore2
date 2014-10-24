@@ -11,9 +11,11 @@
 #include "MCNNTP.h"
 #include "MCNNTPFetchHeaderOperation.h"
 #include "MCNNTPFetchArticleOperation.h"
-#include "MCNNTPFetchArticlesOperation.h"
+#include "MCNNTPFetchAllArticlesOperation.h"
 #include "MCNNTPListNewsgroupsOperation.h"
+#include "MCNNTPFetchOverviewOperation.h"
 #include "MCNNTPCheckAccountOperation.h"
+#include "MCNNTPFetchServerTimeOperation.h"
 #include "MCNNTPDisconnectOperation.h"
 #include "MCOperationQueueCallback.h"
 #include "MCConnectionLogger.h"
@@ -153,9 +155,9 @@ bool NNTPAsyncSession::isCheckCertificateEnabled()
     return mSession->isCheckCertificateEnabled();
 }
 
-MCNNTPFetchArticlesOperation * NNTPAsyncSession::fetchArticlesOperation(String * group)
+NNTPFetchAllArticlesOperation * NNTPAsyncSession::fetchAllArticlesOperation(String * group)
 {
-    MCNNTPFetchArticlesOperation * op = new MCNNTPFetchArticlesOperation();
+    NNTPFetchAllArticlesOperation * op = new NNTPFetchAllArticlesOperation();
     op->setSession(this);
     op->setGroupName(group);
     op->autorelease();
@@ -182,6 +184,34 @@ NNTPFetchArticleOperation * NNTPAsyncSession::fetchArticleOperation(String * gro
     return op;
 }
 
+NNTPFetchArticleOperation * NNTPAsyncSession::fetchArticleByMessageIDOperation(String *groupName, String *messageID)
+{
+    NNTPFetchArticleOperation * op = new NNTPFetchArticleOperation();
+    op->setSession(this);
+    op->setGroupName(groupName);
+    op->setMessageID(messageID);
+    op->autorelease();
+    return op;
+}
+
+NNTPFetchOverviewOperation * NNTPAsyncSession::fetchOverviewOperationWithIndexes(String * groupName, IndexSet * indexes)
+{
+    NNTPFetchOverviewOperation * op = new NNTPFetchOverviewOperation();
+    op->setSession(this);
+    op->setGroupName(groupName);
+    op->setIndexes(indexes);
+    op->autorelease();
+    return op;
+}
+
+NNTPFetchServerTimeOperation * NNTPAsyncSession::fetchServerDateOperation()
+{
+    NNTPFetchServerTimeOperation * op = new NNTPFetchServerTimeOperation();
+    op->setSession(this);
+    op->autorelease();
+    return op;
+}
+
 NNTPListNewsgroupsOperation * NNTPAsyncSession::listAllNewsgroupsOperation()
 {
     NNTPListNewsgroupsOperation * op = new NNTPListNewsgroupsOperation();
@@ -191,7 +221,7 @@ NNTPListNewsgroupsOperation * NNTPAsyncSession::listAllNewsgroupsOperation()
     return op;
 }
 
-NNTPListNewsgroupsOperation * NNTPAsyncSession::listSubscribedNewsgroupsOperation()
+NNTPListNewsgroupsOperation * NNTPAsyncSession::listDefaultNewsgroupsOperation()
 {
     NNTPListNewsgroupsOperation * op = new NNTPListNewsgroupsOperation();
     op->setSession(this);

@@ -12,8 +12,10 @@ namespace mailcore {
     class NNTPSession;
     class NNTPFetchHeaderOperation;
     class NNTPFetchArticleOperation;
-    class MCNNTPFetchArticlesOperation;
+    class NNTPFetchAllArticlesOperation;
+    class NNTPFetchOverviewOperation;
     class NNTPListNewsgroupsOperation;
+    class NNTPFetchServerTimeOperation;
     class NNTPOperationQueueCallback;
     class NNTPConnectionLogger;
     
@@ -51,14 +53,19 @@ namespace mailcore {
         virtual dispatch_queue_t dispatchQueue();
 #endif
         
-        virtual MCNNTPFetchArticlesOperation * fetchArticlesOperation(String * group);
+        virtual NNTPFetchAllArticlesOperation * fetchAllArticlesOperation(String * group);
         
         virtual NNTPFetchHeaderOperation * fetchHeaderOperation(String * groupName, unsigned int index);
         
         virtual NNTPFetchArticleOperation * fetchArticleOperation(String *groupName, unsigned int index);
+        virtual NNTPFetchArticleOperation * fetchArticleByMessageIDOperation(String * groupname, String * messageID);
+        
+        virtual NNTPFetchOverviewOperation * fetchOverviewOperationWithIndexes(String * groupName, IndexSet * indexes);
+        
+        virtual NNTPFetchServerTimeOperation * fetchServerDateOperation();
         
         virtual NNTPListNewsgroupsOperation * listAllNewsgroupsOperation();
-        virtual NNTPListNewsgroupsOperation * listSubscribedNewsgroupsOperation();
+        virtual NNTPListNewsgroupsOperation * listDefaultNewsgroupsOperation();
         
         virtual NNTPOperation * disconnectOperation();
         

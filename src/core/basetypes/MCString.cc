@@ -1832,6 +1832,7 @@ String * String::stripWhitespace()
         /* do nothing */
     }
     
+    str->autorelease();
     return str;
 }
 
