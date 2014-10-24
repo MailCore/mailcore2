@@ -1252,6 +1252,14 @@
 		C6D42C1E16AE03D6002BB4F9 /* NSString+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6D42C1C16AE03D6002BB4F9 /* NSString+MCO.mm */; };
 		C6D42C2A16AE0507002BB4F9 /* NSData+MCO.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6D42C1916AE03D6002BB4F9 /* NSData+MCO.h */; };
 		C6D42C2C16AE0509002BB4F9 /* NSString+MCO.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6D42C1B16AE03D6002BB4F9 /* NSString+MCO.h */; };
+		C6D4FD3119FA9E80001F7E01 /* MCNNTPFetchOverviewOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84CFA98619F7159700FE35D2 /* MCNNTPFetchOverviewOperation.h */; };
+		C6D4FD3219FA9E8D001F7E01 /* MCNNTPFetchOverviewOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84CFA98619F7159700FE35D2 /* MCNNTPFetchOverviewOperation.h */; };
+		C6D4FD3319FA9EB3001F7E01 /* MCONNTPFetchOverviewOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84CFA98119F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.h */; };
+		C6D4FD3419FA9EB6001F7E01 /* MCONNTPFetchOverviewOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84CFA98119F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.h */; };
+		C6D4FD3519FA9F4D001F7E01 /* MCONNTPFetchServerTimeOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84CFA99319F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.h */; };
+		C6D4FD3619FA9F4F001F7E01 /* MCNNTPFetchServerTimeOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84CFA98E19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.h */; };
+		C6D4FD3719FA9F55001F7E01 /* MCNNTPFetchServerTimeOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84CFA98E19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.h */; };
+		C6D4FD3819FA9F57001F7E01 /* MCONNTPFetchServerTimeOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84CFA99319F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.h */; };
 		C6D6F7F9171E595D006F5B28 /* MCJSON.cc in Sources */ = {isa = PBXBuildFile; fileRef = C6D6F7F7171E595D006F5B28 /* MCJSON.cc */; };
 		C6D6F7FA171E595D006F5B28 /* MCJSON.cc in Sources */ = {isa = PBXBuildFile; fileRef = C6D6F7F7171E595D006F5B28 /* MCJSON.cc */; };
 		C6D6F954171E5CB8006F5B28 /* MCMD5.cc in Sources */ = {isa = PBXBuildFile; fileRef = C6D6F950171E5CB8006F5B28 /* MCMD5.cc */; };
@@ -1405,6 +1413,10 @@
 			dstPath = include/MailCore;
 			dstSubfolderSpec = 16;
 			files = (
+				C6D4FD3819FA9F57001F7E01 /* MCONNTPFetchServerTimeOperation.h in CopyFiles */,
+				C6D4FD3719FA9F55001F7E01 /* MCNNTPFetchServerTimeOperation.h in CopyFiles */,
+				C6D4FD3419FA9EB6001F7E01 /* MCONNTPFetchOverviewOperation.h in CopyFiles */,
+				C6D4FD3119FA9E80001F7E01 /* MCNNTPFetchOverviewOperation.h in CopyFiles */,
 				849189A318C94023002063A3 /* MCNNTP.h in CopyFiles */,
 				849189A418C94023002063A3 /* MCNNTPSession.h in CopyFiles */,
 				84B639F317F2839C003B5BA2 /* MCOPOPNoopOperation.h in CopyFiles */,
@@ -1626,6 +1638,10 @@
 			dstPath = include/MailCore;
 			dstSubfolderSpec = 16;
 			files = (
+				C6D4FD3619FA9F4F001F7E01 /* MCNNTPFetchServerTimeOperation.h in CopyFiles */,
+				C6D4FD3519FA9F4D001F7E01 /* MCONNTPFetchServerTimeOperation.h in CopyFiles */,
+				C6D4FD3319FA9EB3001F7E01 /* MCONNTPFetchOverviewOperation.h in CopyFiles */,
+				C6D4FD3219FA9E8D001F7E01 /* MCNNTPFetchOverviewOperation.h in CopyFiles */,
 				849F53D817F28443002D417F /* MCOPOPNoopOperation.h in CopyFiles */,
 				849F53D917F28443002D417F /* MCIMAPNoopOperation.h in CopyFiles */,
 				849F53DA17F28443002D417F /* MCPOPNoopOperation.h in CopyFiles */,
