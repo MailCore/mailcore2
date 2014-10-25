@@ -1,28 +1,25 @@
 //
-//  MCOIMAPFetchContentOperation.m
+//  MCONNTPFetchServerTimeOperation.m
 //  mailcore2
 //
-//  Created by DINH Viêt Hoà on 3/25/13.
-//  Copyright (c) 2013 MailCore. All rights reserved.
+//  Created by Robert Widmann on 10/21/14.
+//  Copyright (c) 2014 MailCore. All rights reserved.
 //
 
-#import "MCOIMAPFetchContentOperation.h"
+#import "MCONNTPFetchServerTimeOperation.h"
 
-#include "MCAsyncIMAP.h"
+#include "MCAsyncNNTP.h"
 
 #import "MCOOperation+Private.h"
 #import "MCOUtils.h"
 
-typedef void (^CompletionType)(NSError *error, NSData * data);
+typedef void (^CompletionType)(NSError *error, NSDate * date);
 
-@implementation MCOIMAPFetchContentOperation {
+@implementation MCONNTPFetchServerTimeOperation {
     CompletionType _completionBlock;
-    MCOIMAPBaseOperationProgressBlock _progress;
 }
 
-@synthesize progress = _progress;
-
-#define nativeType mailcore::IMAPFetchContentOperation
+#define nativeType mailcore::NNTPFetchServerTimeOperation
 
 + (void) load
 {
@@ -37,12 +34,12 @@ typedef void (^CompletionType)(NSError *error, NSData * data);
 
 - (void) dealloc
 {
-    [_progress release];
     [_completionBlock release];
     [super dealloc];
 }
 
-- (void) start:(void (^)(NSError *error, NSData * data))completionBlock {
+- (void) start:(void (^)(NSError *error, NSDate * date))completionBlock
+{
     _completionBlock = [completionBlock copy];
     [self start];
 }
@@ -61,7 +58,7 @@ typedef void (^CompletionType)(NSError *error, NSData * data);
     
     nativeType *op = MCO_NATIVE_INSTANCE;
     if (op->error() == mailcore::ErrorNone) {
-        _completionBlock(nil, (NSData *) op->data()->destructiveNSData());
+        _completionBlock(nil, [NSDate dateWithTimeIntervalSince1970:op->time()]);
     } else {
         _completionBlock([NSError mco_errorWithErrorCode:op->error()], nil);
     }
@@ -69,11 +66,5 @@ typedef void (^CompletionType)(NSError *error, NSData * data);
     _completionBlock = nil;
 }
 
-- (void) bodyProgress:(unsigned int)current maximum:(unsigned int)maximum
-{
-    if (_progress != NULL) {
-        _progress(current, maximum);
-    }
-}
 
 @end

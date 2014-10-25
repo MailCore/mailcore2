@@ -1,6 +1,9 @@
 #include "MCMessageParser.h"
 
 #include <libetpan/libetpan.h>
+#if __APPLE__
+#include <CoreFoundation/CoreFoundation.h>
+#endif
 
 #include "MCAttachment.h"
 #include "MCMessageHeader.h"
@@ -25,48 +28,56 @@ void MessageParser::init()
 {
     mData = NULL;
     mMainPart = NULL;
+#if __APPLE__
+    mNSData = NULL;
+#endif
 }
 
-MessageParser::MessageParser(Data * data)
+void MessageParser::setBytes(char * dataBytes, unsigned int dataLength)
 {
-    init();
-    
     const char * start = NULL;
     unsigned int length = 0;
-    if (data->length() > 5) {
-        if (strncmp(data->bytes(), "From ", 5) == 0) {
-            start = data->bytes();
-            for(unsigned int i = 0 ; i < data->length() ; i ++) {
+    if (dataLength > 5) {
+        if (strncmp(dataBytes, "From ", 5) == 0) {
+            start = dataBytes;
+            for(unsigned int i = 0 ; i < dataLength ; i ++) {
                 if (start[i] == '\n') {
                     start = start + i + 1;
-                    length = data->length() - (i + 1);
+                    length = dataLength - (i + 1);
                     break;
                 }
             }
         }
     }
     if (start != NULL) {
-        data = Data::dataWithBytes(start, length);
+        dataBytes = (char *) start;
+        dataLength = length;
     }
-    
-    mData = (Data *) data->retain();
     
     mailmessage * msg;
     struct mailmime * mime;
     
-    msg = data_message_init(data->bytes(), data->length());
+    msg = data_message_init(dataBytes, dataLength);
     mailmessage_get_bodystructure(msg, &mime);
     mMainPart = (AbstractPart *) Attachment::attachmentsWithMIME(msg->msg_mime)->retain();
     mMainPart->applyUniquePartID();
     
     size_t cur_token = 0;
     struct mailimf_fields * fields;
-    int r = mailimf_envelope_and_optional_fields_parse(data->bytes(), data->length(), &cur_token, &fields);
+    int r = mailimf_envelope_and_optional_fields_parse(dataBytes, dataLength, &cur_token, &fields);
     if (r == MAILIMAP_NO_ERROR) {
         header()->importIMFFields(fields);
         mailimf_fields_free(fields);
     }
     mailmessage_free(msg);
+}
+
+MessageParser::MessageParser(Data * data)
+{
+    init();
+    
+    setBytes(data->bytes(), data->length());
+    mData = (Data *) data->retain();
 }
 
 MessageParser::MessageParser(MessageParser * other) : AbstractMessage(other)
@@ -80,6 +91,11 @@ MessageParser::~MessageParser()
 {
     MC_SAFE_RELEASE(mMainPart);
     MC_SAFE_RELEASE(mData);
+#if __APPLE__
+    if (mNSData != NULL) {
+        CFRelease(mNSData);
+    }
+#endif
 }
 
 AbstractPart * MessageParser::mainPart()
@@ -89,6 +105,11 @@ AbstractPart * MessageParser::mainPart()
 
 Data * MessageParser::data()
 {
+#if __APPLE__
+    if (mNSData != NULL) {
+        return dataFromNSData();
+    }
+#endif
     return mData;
 }
 

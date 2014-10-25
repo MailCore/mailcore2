@@ -16,11 +16,14 @@
 
 #import <MailCore/MCOConstants.h>
 
-@class MCONNTPFetchArticlesOperation;
+@class MCONNTPFetchAllArticlesOperation;
 @class MCONNTPFetchHeaderOperation;
 @class MCONNTPFetchArticleOperation;
 @class MCONNTPListNewsgroupsOperation;
+@class MCONNTPFetchOverviewOperation;
+@class MCONNTPFetchServerTimeOperation;
 @class MCONNTPOperation;
+@class MCOIndexSet;
 
 /** This class implements asynchronous access to the NNTP protocol.*/
 
@@ -68,16 +71,16 @@
 /**
  Returns an operation that will fetch the list of article numbers.
  
- MCONNTPFetchArticlesOperation * op = [session fetchArticlesOperation];
+ MCONNTPFetchAllArticlesOperation * op = [session fetchAllArticlesOperation:@"comp.lang.c"];
  [op start:^(NSError * error, MCOIndexSet * articles) {
  }];
  */
-- (MCONNTPFetchArticlesOperation *) fetchArticlesOperation:(NSString *)group;
+- (MCONNTPFetchAllArticlesOperation *) fetchAllArticlesOperation:(NSString *)group;
 
 /**
  Returns an operation that will fetch the header of the given message.
  
- MCONNTPFetchHeaderOperation * op = [session fetchHeaderOperationWithIndex:idx inGroup:@"Group"];
+ MCONNTPFetchHeaderOperation * op = [session fetchHeaderOperationWithIndex:idx inGroup:@"comp.lang.c"];
  [op start:^(NSError * error, MCOMessageHeader * header) {
  // header is the parsed header of the message.
  }];
@@ -85,14 +88,43 @@
 - (MCONNTPFetchHeaderOperation *) fetchHeaderOperationWithIndex:(unsigned int)index inGroup:(NSString *)group;
 
 /**
+ Returns an operation that will fetch an overview (headers) for a set of messages.
+ 
+ MCONNTPFetchHeaderOperation * op = [session fetchOverviewOperationWithIndexes:indexes inGroup:@"comp.lang.c"];
+ [op start:^(NSError * error, NSArray * headers) {
+ // headers are the parsed headers of each part of the overview.
+ }];
+ */
+- (MCONNTPFetchOverviewOperation *)fetchOverviewOperationWithIndexes:(MCOIndexSet *)indexes inGroup:(NSString *)group;
+
+/**
  Returns an operation that will fetch the content of the given message.
  
- MCONNTPFetchArticleOperation * op = [session fetchArticleOperationWithIndex:idx inGroup:@"Group"];
+ MCONNTPFetchArticleOperation * op = [session fetchArticleOperationWithIndex:idx inGroup:@"comp.lang.c"];
  [op start:^(NSError * error, NSData * messageData) {
  // messageData is the RFC 822 formatted message data.
  }];
  */
 - (MCONNTPFetchArticleOperation *) fetchArticleOperationWithIndex:(unsigned int)index inGroup:(NSString *)group;
+
+/**
+ Returns an operation that will fetch the content of a message with the given messageID.
+ 
+ MCONNTPFetchArticleOperation * op = [session fetchArticleOperationWithMessageID:@"<MessageID123@mail.google.com>" inGroup:@"comp.lang.c"];
+ [op start:^(NSError * error, NSData * messageData) {
+ // messageData is the RFC 822 formatted message data.
+ }];
+ */
+- (MCONNTPFetchArticleOperation *) fetchArticleOperationWithMessageID:(NSString *)messageID inGroup:(NSString *)group;
+
+/**
+ Returns an operation that will fetch the server's date and time.
+ 
+ MCONNTPFetchArticleOperation * op = [session fetchServerDateOperation];
+ [op start:^(NSError * error, NSDate * serverDate) {
+ }];
+ */
+- (MCONNTPFetchServerTimeOperation *) fetchServerDateOperation;
 
 /**
  Returns an operation that will list all available newsgroups.
@@ -104,13 +136,13 @@
 - (MCONNTPListNewsgroupsOperation *) listAllNewsgroupsOperation;
 
 /**
- Returns an operation that will list all newsgroups subscribed to by the user.
+ Returns an operation that will list server-suggested default newsgroups.
  
- MCONNTPListNewsgroupsOperation * op = [session listSubscribedNewsgroupsOperation];
- [op start:^(NSError * error, NSArray * subscribedGroups) {
+ MCONNTPListNewsgroupsOperation * op = [session listDefaultNewsgroupsOperation];
+ [op start:^(NSError * error, NSArray * defaultGroups) {
  }];
  */
-- (MCONNTPListNewsgroupsOperation *) listSubscribedNewsgroupsOperation;
+- (MCONNTPListNewsgroupsOperation *) listDefaultNewsgroupsOperation;
 
 /**
  Returns an operation that will disconnect the session.

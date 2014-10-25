@@ -40,7 +40,7 @@ void NNTPListNewsgroupsOperation::main()
     ErrorCode error;
     
     if (mListsSuscribed) {
-        mGroups = session()->session()->listSubscribedNewsgroups(&error);
+        mGroups = session()->session()->listDefaultNewsgroups(&error);
     } else {
         mGroups = session()->session()->listAllNewsgroups(&error);
     }

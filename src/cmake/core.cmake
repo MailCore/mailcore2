@@ -14,6 +14,8 @@ IF(APPLE)
     core/basetypes/MCAutoreleasePoolMac.mm
     core/basetypes/MCMainThread.mm
     core/basetypes/MCObjectMac.mm
+    core/basetypes/MCDataMac.mm
+    core/rfc822/MCMessageParserMac.mm
   )
 ENDIF()
 
