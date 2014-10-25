@@ -62,6 +62,7 @@ Data::Data(const char * bytes, unsigned int length)
 {
     mBytes = NULL;
     reset();
+    allocate(length);
     appendBytes(bytes, length);
 }
 
