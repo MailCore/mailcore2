@@ -439,10 +439,11 @@ void AbstractPart::removeContentTypeParameter(String * name)
 
 String * AbstractPart::contentTypeParameterValueForName(String * name)
 {
+    String * result = NULL;
     mc_foreachhashmapKey(String, key, mContentTypeParameters) {
         if (key->isEqualCaseInsensitive(name)) {
-            return (String *) mContentTypeParameters->objectForKey(key);
+            result = (String *) mContentTypeParameters->objectForKey(key);
         }
     }
-    return NULL;
+    return result;
 }
