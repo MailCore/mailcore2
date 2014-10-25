@@ -691,7 +691,7 @@ String::String(const UChar * unicodeChars)
     mUnicodeChars = NULL;
     reset();
     if (unicodeChars != NULL) {
-        allocate(u_strlen(unicodeChars));
+        allocate(u_strlen(unicodeChars), true);
     }
     appendCharacters(unicodeChars);
 }
@@ -700,7 +700,7 @@ String::String(const UChar * unicodeChars, unsigned int length)
 {
     mUnicodeChars = NULL;
     reset();
-    allocate(length);
+    allocate(length, true);
     appendCharactersLength(unicodeChars, length);
 }
 
@@ -708,6 +708,7 @@ String::String(const char * UTF8Characters)
 {
     mUnicodeChars = NULL;
     reset();
+    allocate((unsigned int) strlen(UTF8Characters), true);
     appendUTF8Characters(UTF8Characters);
 }
 
@@ -729,7 +730,7 @@ String::String(const char * bytes, unsigned int length, const char * charset)
 {
     mUnicodeChars = NULL;
     reset();
-    allocate(length);
+    allocate(length, true);
     if (charset == NULL) {
         appendUTF8CharactersLength(bytes, length);
     }
@@ -743,17 +744,30 @@ String::~String()
     reset();
 }
 
-void String::allocate(unsigned int length)
+static int isPowerOfTwo (unsigned int x)
+{
+    return ((x != 0) && !(x & (x - 1)));
+}
+
+void String::allocate(unsigned int length, bool force)
 {
     length ++;
-    if (length < mAllocated)
+    if (length <= mAllocated)
         return;
-    
-    if (mAllocated == 0) {
-        mAllocated = 4;
+
+    if (force) {
+        mAllocated = length;
     }
-    while (length > mAllocated) {
-        mAllocated *= 2;
+    else {
+        if (!isPowerOfTwo(mAllocated)) {
+            mAllocated = 0;
+        }
+        if (mAllocated == 0) {
+            mAllocated = 4;
+        }
+        while (length > mAllocated) {
+            mAllocated *= 2;
+        }
     }
     
     mUnicodeChars = (UChar *) realloc(mUnicodeChars, mAllocated * sizeof(* mUnicodeChars));

@@ -62,10 +62,10 @@ namespace mailcore {
         char * mBytes;
         unsigned int mLength;
         unsigned int mAllocated;
-        void allocate(unsigned int length);
+        void allocate(unsigned int length, bool force = false);
         void reset();
         String * charsetWithFilteredHTMLWithoutHint(bool filterHTML);
-        void replaceWithAllocatedBytes(char * bytes, unsigned int length);
+        void takeBytesOwnership(char * bytes, unsigned int length);
         
     };
 
