@@ -403,6 +403,13 @@ String * Data::charsetWithFilteredHTML(bool filterHTML, String * hintCharset)
     return result;
 }
 
+void Data::replaceWithAllocatedBytes(char * bytes, unsigned int length)
+{
+    free(mBytes);
+    mBytes = (char *) bytes;
+    mLength = length;
+}
+
 Data * Data::dataWithContentsOfFile(String * filename)
 {
     int r;
@@ -432,8 +439,8 @@ Data * Data::dataWithContentsOfFile(String * filename)
         return NULL;
     }
     
-    data = Data::dataWithBytes(buf, (unsigned int) stat_buf.st_size);
-    free(buf);
+    data = Data::data();
+    data->replaceWithAllocatedBytes(buf, (unsigned int) stat_buf.st_size);
     
     fclose(f);
     

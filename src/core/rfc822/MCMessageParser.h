@@ -5,6 +5,9 @@
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCAbstractMessage.h>
 #include <MailCore/MCAbstractPart.h>
+#ifdef __OBJC__
+#import <Foundation/Foundation.h>
+#endif
 
 #ifdef __cplusplus
 
@@ -39,11 +42,23 @@ namespace mailcore {
         
         virtual HashMap * serializable();
         
+#ifdef __OBJC__
+    public:
+        static MessageParser * messageParserWithData(NSData * data);
+        MessageParser(NSData * data);
+#endif
+        
     private:
         Data * mData;
         AbstractPart * mMainPart;
         void init();
+#if __APPLE__
+        void * mNSData;
+#endif
         
+    private:
+        void setBytes(char * bytes, unsigned int length);
+        Data * dataFromNSData();
     };
     
 };
