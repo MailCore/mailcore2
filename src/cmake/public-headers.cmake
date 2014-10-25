@@ -86,6 +86,7 @@ async/imap/MCIMAPAppendMessageOperation.h
 async/imap/MCIMAPCopyMessagesOperation.h
 async/imap/MCIMAPFetchMessagesOperation.h
 async/imap/MCIMAPFetchContentOperation.h
+async/imap/MCIMAPFetchParsedContentOperation.h
 async/imap/MCIMAPIdleOperation.h
 async/imap/MCIMAPFolderInfoOperation.h
 async/imap/MCIMAPFolderStatusOperation.h
@@ -160,6 +161,7 @@ objc/imap/MCOIMAPAppendMessageOperation.h
 objc/imap/MCOIMAPCopyMessagesOperation.h
 objc/imap/MCOIMAPFetchMessagesOperation.h
 objc/imap/MCOIMAPFetchContentOperation.h
+objc/imap/MCOIMAPFetchParsedContentOperation.h
 objc/imap/MCOIMAPSearchOperation.h
 objc/imap/MCOIMAPIdleOperation.h
 objc/imap/MCOIMAPFetchNamespaceOperation.h

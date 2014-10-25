@@ -130,7 +130,7 @@ namespace mailcore {
         UChar * mUnicodeChars;
         unsigned int mLength;
         unsigned int mAllocated;
-        void allocate(unsigned int length);
+        void allocate(unsigned int length, bool force = false);
         void reset();
         int compareWithCaseSensitive(String * otherString, bool caseSensitive);
         void appendBytes(const char * bytes, unsigned int length, const char * charset);

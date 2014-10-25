@@ -17,6 +17,7 @@
 #include <MailCore/MCIMAPCopyMessagesOperation.h>
 #include <MailCore/MCIMAPFetchMessagesOperation.h>
 #include <MailCore/MCIMAPFetchContentOperation.h>
+#include <MailCore/MCIMAPFetchParsedContentOperation.h>
 #include <MailCore/MCIMAPIdleOperation.h>
 #include <MailCore/MCIMAPFolderInfoOperation.h>
 #include <MailCore/MCIMAPFolderStatusOperation.h>

@@ -13,6 +13,7 @@ set(async_imap_files
   async/imap/MCIMAPDisconnectOperation.cc
   async/imap/MCIMAPExpungeOperation.cc
   async/imap/MCIMAPFetchContentOperation.cc
+  async/imap/MCIMAPFetchParsedContentOperation.cc
   async/imap/MCIMAPFetchFoldersOperation.cc
   async/imap/MCIMAPFetchMessagesOperation.cc
   async/imap/MCIMAPFetchNamespaceOperation.cc

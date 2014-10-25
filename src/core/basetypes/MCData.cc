@@ -27,17 +27,29 @@
 
 using namespace mailcore;
 
-void Data::allocate(unsigned int length)
+static int isPowerOfTwo (unsigned int x)
 {
-    length ++;
-    if (length < mAllocated)
+    return ((x != 0) && !(x & (x - 1)));
+}
+
+void Data::allocate(unsigned int length, bool force)
+{
+    if (length <= mAllocated)
         return;
-    
-    if (mAllocated == 0) {
-        mAllocated = 4;
+
+    if (force) {
+        mAllocated = length;
     }
-    while (length > mAllocated) {
-        mAllocated *= 2;
+    else {
+        if (!isPowerOfTwo(mAllocated)) {
+            mAllocated = 0;
+        }
+        if (mAllocated == 0) {
+            mAllocated = 4;
+        }
+        while (length > mAllocated) {
+            mAllocated *= 2;
+        }
     }
     
     mBytes = (char *) realloc(mBytes, mAllocated);
@@ -68,7 +80,7 @@ Data::Data(const char * bytes, unsigned int length)
 {
     mBytes = NULL;
     reset();
-    allocate(length);
+    allocate(length, true);
     appendBytes(bytes, length);
 }
 
@@ -76,7 +88,7 @@ Data::Data(int capacity)
 {
     mBytes = NULL;
     reset();
-    allocate(capacity);
+    allocate(capacity, true);
 }
 
 Data::~Data()
@@ -483,7 +495,7 @@ String * Data::charsetWithFilteredHTML(bool filterHTML, String * hintCharset)
 #endif
 }
 
-void Data::replaceWithAllocatedBytes(char * bytes, unsigned int length)
+void Data::takeBytesOwnership(char * bytes, unsigned int length)
 {
     free(mBytes);
     mBytes = (char *) bytes;
@@ -520,7 +532,7 @@ Data * Data::dataWithContentsOfFile(String * filename)
     }
     
     data = Data::data();
-    data->replaceWithAllocatedBytes(buf, (unsigned int) stat_buf.st_size);
+    data->takeBytesOwnership(buf, (unsigned int) stat_buf.st_size);
     
     fclose(f);
     
