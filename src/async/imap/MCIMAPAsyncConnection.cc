@@ -21,7 +21,7 @@
 #include "MCIMAPCopyMessagesOperation.h"
 #include "MCIMAPFetchMessagesOperation.h"
 #include "MCIMAPFetchContentOperation.h"
-#include "MCIMAPFetchContentOperation.h"
+#include "MCIMAPFetchParsedContentOperation.h"
 #include "MCIMAPStoreFlagsOperation.h"
 #include "MCIMAPStoreLabelsOperation.h"
 #include "MCIMAPSearchOperation.h"
@@ -43,51 +43,51 @@
 using namespace mailcore;
 
 namespace mailcore {
-    
+
     class IMAPOperationQueueCallback : public Object, public OperationQueueCallback {
     public:
         IMAPOperationQueueCallback(IMAPAsyncConnection * connection) {
             mConnection = connection;
         }
-        
+
         virtual ~IMAPOperationQueueCallback() {
         }
-        
+
         virtual void queueStartRunning() {
             mConnection->setQueueRunning(true);
             mConnection->owner()->operationRunningStateChanged();
             mConnection->queueStartRunning();
         }
-        
+
         virtual void queueStoppedRunning() {
             mConnection->setQueueRunning(false);
             mConnection->tryAutomaticDisconnect();
             mConnection->owner()->operationRunningStateChanged();
             mConnection->queueStoppedRunning();
         }
-        
+
     private:
         IMAPAsyncConnection * mConnection;
     };
-    
+
     class IMAPConnectionLogger : public Object, public ConnectionLogger {
     public:
         IMAPConnectionLogger(IMAPAsyncConnection * connection) {
             mConnection = connection;
         }
-        
+
         virtual ~IMAPConnectionLogger() {
         }
-        
+
         virtual void log(void * sender, ConnectionLogType logType, Data * buffer)
         {
             mConnection->logConnection(logType, buffer);
         }
-        
+
     private:
         IMAPAsyncConnection * mConnection;
     };
-    
+
 }
 
 IMAPAsyncConnection::IMAPAsyncConnection()
@@ -292,7 +292,7 @@ void IMAPAsyncConnection::tryAutomaticDisconnect()
     if (mSession->isDisconnected()) {
         return;
     }
-    
+
     bool scheduledAutomaticDisconnect = mScheduledAutomaticDisconnect;
     if (scheduledAutomaticDisconnect) {
 #if __APPLE__
@@ -301,7 +301,7 @@ void IMAPAsyncConnection::tryAutomaticDisconnect()
         cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
 #endif
     }
-    
+
     mOwner->retain();
     mScheduledAutomaticDisconnect = true;
 #if __APPLE__
@@ -309,7 +309,7 @@ void IMAPAsyncConnection::tryAutomaticDisconnect()
 #else
     performMethodAfterDelay((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, 30);
 #endif
-    
+
     if (scheduledAutomaticDisconnect) {
         mOwner->release();
     }
@@ -318,10 +318,10 @@ void IMAPAsyncConnection::tryAutomaticDisconnect()
 void IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay(void * context)
 {
     mScheduledAutomaticDisconnect = false;
-    
+
     IMAPOperation * op = disconnectOperation();
     op->start();
-    
+
     mOwner->release();
 }
 
@@ -373,11 +373,11 @@ void IMAPAsyncConnection::setConnectionLogger(ConnectionLogger * logger)
 ConnectionLogger * IMAPAsyncConnection::connectionLogger()
 {
     ConnectionLogger * result;
-    
+
     pthread_mutex_lock(&mConnectionLoggerLock);
     result = mConnectionLogger;
     pthread_mutex_unlock(&mConnectionLoggerLock);
-    
+
     return result;
 }
 

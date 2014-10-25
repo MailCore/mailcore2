@@ -524,6 +524,16 @@
 		4B3C1BE517AC0176008BBF4C /* MCIMAPQuotaOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C1BDF17ABF4BB008BBF4C /* MCIMAPQuotaOperation.cc */; };
 		4BE4029117B548B900ECC5E4 /* MCOIMAPQuotaOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4B3C1BDC17ABF306008BBF4C /* MCOIMAPQuotaOperation.h */; };
 		4BE4029217B548D900ECC5E4 /* MCIMAPQuotaOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4B3C1BE017ABF4BC008BBF4C /* MCIMAPQuotaOperation.h */; };
+		8199FBE919FAEA440040BBC3 /* MCOIMAPFetchParsedContentOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8199FBE719FAEA440040BBC3 /* MCOIMAPFetchParsedContentOperation.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8199FBEA19FAEA440040BBC3 /* MCOIMAPFetchParsedContentOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8199FBE719FAEA440040BBC3 /* MCOIMAPFetchParsedContentOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8199FBEB19FAEA440040BBC3 /* MCOIMAPFetchParsedContentOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8199FBE819FAEA440040BBC3 /* MCOIMAPFetchParsedContentOperation.mm */; };
+		8199FBEC19FAEA440040BBC3 /* MCOIMAPFetchParsedContentOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8199FBE819FAEA440040BBC3 /* MCOIMAPFetchParsedContentOperation.mm */; };
+		8199FBF119FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 8199FBEF19FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.cc */; };
+		8199FBF219FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 8199FBEF19FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.cc */; };
+		8199FBF519FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8199FBF019FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8199FBF619FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8199FBF019FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8199FBF719FAF3AF0040BBC3 /* MCOIMAPFetchParsedContentOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8199FBE719FAEA440040BBC3 /* MCOIMAPFetchParsedContentOperation.h */; };
+		8199FBF819FAF3AF0040BBC3 /* MCIMAPFetchParsedContentOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8199FBF019FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.h */; };
 		8416A99D17F284F400B3C7DA /* MCOSMTPNoopOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8416A99C17F284F400B3C7DA /* MCOSMTPNoopOperation.mm */; };
 		8416A99E17F284F400B3C7DA /* MCOSMTPNoopOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8416A99C17F284F400B3C7DA /* MCOSMTPNoopOperation.mm */; };
 		8416A9A117F2871D00B3C7DA /* MCOIMAPNoopOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8416A9A017F2871D00B3C7DA /* MCOIMAPNoopOperation.mm */; };
@@ -1642,6 +1652,8 @@
 			dstPath = include/MailCore;
 			dstSubfolderSpec = 16;
 			files = (
+				8199FBF719FAF3AF0040BBC3 /* MCOIMAPFetchParsedContentOperation.h in CopyFiles */,
+				8199FBF819FAF3AF0040BBC3 /* MCIMAPFetchParsedContentOperation.h in CopyFiles */,
 				C6D4FD3619FA9F4F001F7E01 /* MCNNTPFetchServerTimeOperation.h in CopyFiles */,
 				C6D4FD3519FA9F4D001F7E01 /* MCONNTPFetchServerTimeOperation.h in CopyFiles */,
 				C6D4FD3319FA9EB3001F7E01 /* MCONNTPFetchOverviewOperation.h in CopyFiles */,
@@ -1862,6 +1874,10 @@
 		4B3C1BDD17ABF307008BBF4C /* MCOIMAPQuotaOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOIMAPQuotaOperation.mm; sourceTree = "<group>"; };
 		4B3C1BDF17ABF4BB008BBF4C /* MCIMAPQuotaOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPQuotaOperation.cc; sourceTree = "<group>"; };
 		4B3C1BE017ABF4BC008BBF4C /* MCIMAPQuotaOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPQuotaOperation.h; sourceTree = "<group>"; };
+		8199FBE719FAEA440040BBC3 /* MCOIMAPFetchParsedContentOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPFetchParsedContentOperation.h; sourceTree = "<group>"; };
+		8199FBE819FAEA440040BBC3 /* MCOIMAPFetchParsedContentOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOIMAPFetchParsedContentOperation.mm; sourceTree = "<group>"; };
+		8199FBEF19FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPFetchParsedContentOperation.cc; sourceTree = "<group>"; };
+		8199FBF019FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPFetchParsedContentOperation.h; sourceTree = "<group>"; };
 		8416A99B17F284F400B3C7DA /* MCOSMTPNoopOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOSMTPNoopOperation.h; sourceTree = "<group>"; };
 		8416A99C17F284F400B3C7DA /* MCOSMTPNoopOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOSMTPNoopOperation.mm; sourceTree = "<group>"; };
 		8416A99F17F2871D00B3C7DA /* MCOIMAPNoopOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPNoopOperation.h; sourceTree = "<group>"; };
@@ -2676,6 +2692,8 @@
 				C64EA81916A29ADB00778456 /* MCIMAPFetchMessagesOperation.h */,
 				C64EA81B16A29DC100778456 /* MCIMAPFetchContentOperation.cc */,
 				C64EA81C16A29DC400778456 /* MCIMAPFetchContentOperation.h */,
+				8199FBEF19FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.cc */,
+				8199FBF019FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.h */,
 				C64EA81E16A29E3D00778456 /* MCIMAPStoreFlagsOperation.cc */,
 				C64EA81F16A29E3F00778456 /* MCIMAPStoreFlagsOperation.h */,
 				C64EA82116A29E4F00778456 /* MCIMAPStoreLabelsOperation.cc */,
@@ -3185,6 +3203,8 @@
 				C6F61F8317016A200073032E /* MCOIMAPFetchMessagesOperation.mm */,
 				C6F61F8517016AD60073032E /* MCOIMAPFetchContentOperation.h */,
 				C6F61F8617016AD60073032E /* MCOIMAPFetchContentOperation.mm */,
+				8199FBE719FAEA440040BBC3 /* MCOIMAPFetchParsedContentOperation.h */,
+				8199FBE819FAEA440040BBC3 /* MCOIMAPFetchParsedContentOperation.mm */,
 				C6F61F8817016AE60073032E /* MCOIMAPSearchOperation.h */,
 				C6F61F8917016AE60073032E /* MCOIMAPSearchOperation.mm */,
 				C6F61F8B17016AFA0073032E /* MCOIMAPIdleOperation.h */,
@@ -3227,6 +3247,7 @@
 				27780E4519CFA3F500C77E44 /* MCONNTPOperation+Private.h in Headers */,
 				27780E4E19CFA3F500C77E44 /* MCOAbstractMessage+Private.h in Headers */,
 				27780E5219CFA3F600C77E44 /* MCOAbstractPart+Private.h in Headers */,
+				8199FBF519FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.h in Headers */,
 				27780E5419CFA3F600C77E44 /* MCOAddress+Private.h in Headers */,
 				27780F2419CFA52800C77E44 /* MCOAttachment.h in Headers */,
 				27780F2519CFA52800C77E44 /* MCOMessageBuilder.h in Headers */,
@@ -3398,6 +3419,7 @@
 				27780ED519CFA40500C77E44 /* MCAbstractMultipart.h in Headers */,
 				27780ED619CFA40600C77E44 /* MCAbstractPart.h in Headers */,
 				27780ED719CFA40600C77E44 /* MCAddress.h in Headers */,
+				8199FBE919FAEA440040BBC3 /* MCOIMAPFetchParsedContentOperation.h in Headers */,
 				27780ED819CFA40600C77E44 /* MCMessageConstants.h in Headers */,
 				27780ED919CFA40600C77E44 /* MCMessageHeader.h in Headers */,
 				27780EDA19CFA40600C77E44 /* MCArray.h in Headers */,
@@ -3490,6 +3512,7 @@
 				27780E2C19CFA39900C77E44 /* MCSMTPSendWithDataOperation.h in Headers */,
 				27780E2D19CFA39900C77E44 /* MCSMTPDisconnectOperation.h in Headers */,
 				27780E2E19CFA39900C77E44 /* MCSMTPNoopOperation.h in Headers */,
+				8199FBF619FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.h in Headers */,
 				27780E2F19CFA39900C77E44 /* MCSMTPOperation.h in Headers */,
 				27780E3019CFA39900C77E44 /* MCSMTPOperationCallback.h in Headers */,
 				27780E3119CFA39900C77E44 /* MCSMTPCheckAccountOperation.h in Headers */,
@@ -3661,6 +3684,7 @@
 				27780DE119CFA33B00C77E44 /* MCConnectionLogger.h in Headers */,
 				27780DE219CFA33B00C77E44 /* MCConnectionLoggerUtils.h in Headers */,
 				27780DE319CFA33B00C77E44 /* MCData.h in Headers */,
+				8199FBEA19FAEA440040BBC3 /* MCOIMAPFetchParsedContentOperation.h in Headers */,
 				27780DE419CFA33C00C77E44 /* MCHash.h in Headers */,
 				27780DE519CFA33C00C77E44 /* MCHashMap.h in Headers */,
 				27780DE619CFA33C00C77E44 /* MCHTMLCleaner.h in Headers */,
@@ -4046,6 +4070,7 @@
 				C6E665B51796500B0063F2CF /* MCZip.cc in Sources */,
 				84B639E317F279BB003B5BA2 /* MCSMTPNoopOperation.cc in Sources */,
 				84CFA98319F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.mm in Sources */,
+				8199FBEB19FAEA440040BBC3 /* MCOIMAPFetchParsedContentOperation.mm in Sources */,
 				C64EA706169E847800778456 /* MCAssert.c in Sources */,
 				84D73793199C0511005124E5 /* MCONNTPGroupInfo.mm in Sources */,
 				C64EA708169E847800778456 /* MCData.cc in Sources */,
@@ -4138,6 +4163,7 @@
 				F87F190C16BB62B00012652F /* MCOIMAPFetchFoldersOperation.mm in Sources */,
 				84B639F117F282B4003B5BA2 /* MCOPOPNoopOperation.mm in Sources */,
 				C6EB30F716B8C9480091F4F1 /* NSDictionary+MCO.mm in Sources */,
+				8199FBF119FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.cc in Sources */,
 				C6EB30FE16B8E50F0091F4F1 /* NSArray+MCO.mm in Sources */,
 				C6EB310116B8E6E60091F4F1 /* NSObject+MCO.mm in Sources */,
 				C63CD67F16BDCDD400DB18F1 /* MCAddressDisplay.cc in Sources */,
@@ -4284,6 +4310,7 @@
 				C6E665B61796500B0063F2CF /* MCZip.cc in Sources */,
 				84B639E417F279BB003B5BA2 /* MCSMTPNoopOperation.cc in Sources */,
 				84CFA98419F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.mm in Sources */,
+				8199FBEC19FAEA440040BBC3 /* MCOIMAPFetchParsedContentOperation.mm in Sources */,
 				C6BA2BA11705F4E6003F0E9E /* MCAssert.c in Sources */,
 				84D73794199C0511005124E5 /* MCONNTPGroupInfo.mm in Sources */,
 				C6BA2BA21705F4E6003F0E9E /* MCData.cc in Sources */,
@@ -4376,6 +4403,7 @@
 				C6BA2BE21705F4E6003F0E9E /* NSError+MCO.mm in Sources */,
 				C6BA2BE31705F4E6003F0E9E /* MCOIMAPFetchFoldersOperation.mm in Sources */,
 				84B639F217F282B4003B5BA2 /* MCOPOPNoopOperation.mm in Sources */,
+				8199FBF219FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.cc in Sources */,
 				C6BA2BE41705F4E6003F0E9E /* NSDictionary+MCO.mm in Sources */,
 				C6BA2BE51705F4E6003F0E9E /* NSArray+MCO.mm in Sources */,
 				C6BA2BE61705F4E6003F0E9E /* NSObject+MCO.mm in Sources */,

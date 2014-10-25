@@ -28,7 +28,7 @@
 #include "MCIMAPCopyMessagesOperation.h"
 #include "MCIMAPFetchMessagesOperation.h"
 #include "MCIMAPFetchContentOperation.h"
-#include "MCIMAPFetchContentOperation.h"
+#include "MCIMAPFetchParsedContentOperation.h"
 #include "MCIMAPStoreFlagsOperation.h"
 #include "MCIMAPStoreLabelsOperation.h"
 #include "MCIMAPSearchOperation.h"
@@ -52,7 +52,7 @@ IMAPAsyncSession::IMAPAsyncSession()
     mSessions = new Array();
     mMaximumConnections = DEFAULT_MAX_CONNECTIONS;
     mAllowsFolderConcurrentAccessEnabled = true;
-    
+
     mHostname = NULL;
     mPort = 0;
     mUsername = NULL;
@@ -244,7 +244,7 @@ IMAPAsyncConnection * IMAPAsyncSession::session()
     session->setConnectionLogger(mConnectionLogger);
     session->setOwner(this);
     session->autorelease();
-    
+
     session->setHostname(mHostname);
     session->setPort(mPort);
     session->setUsername(mUsername);
@@ -265,7 +265,7 @@ IMAPAsyncConnection * IMAPAsyncSession::session()
         session->setAutomaticConfigurationEnabled(false);
     }
 #endif
-    
+
     return session;
 }
 
@@ -283,7 +283,7 @@ IMAPAsyncConnection * IMAPAsyncSession::sessionForFolder(String * folder, bool u
                 return s;
             }
         }
-        
+
         s = matchingSessionForFolder(folder);
         s->setLastFolder(folder);
         return s;
@@ -544,6 +544,28 @@ IMAPFetchContentOperation * IMAPAsyncSession::fetchMessageAttachmentByNumberOper
     op->setNumber(number);
     op->setPartID(partID);
     op->setEncoding(encoding);
+    op->setUrgent(urgent);
+    op->autorelease();
+    return op;
+}
+
+IMAPFetchParsedContentOperation * IMAPAsyncSession::fetchParsedMessageByUIDOperation(String * folder, uint32_t uid, bool urgent)
+{
+    IMAPFetchParsedContentOperation * op = new IMAPFetchParsedContentOperation();
+    op->setMainSession(this);
+    op->setFolder(folder);
+    op->setUid(uid);
+    op->setUrgent(urgent);
+    op->autorelease();
+    return op;
+}
+
+IMAPFetchParsedContentOperation * IMAPAsyncSession::fetchParsedMessageByNumberOperation(String * folder, uint32_t number, bool urgent)
+{
+    IMAPFetchParsedContentOperation * op = new IMAPFetchParsedContentOperation();
+    op->setMainSession(this);
+    op->setFolder(folder);
+    op->setNumber(number);
     op->setUrgent(urgent);
     op->autorelease();
     return op;
