@@ -1262,6 +1262,8 @@
 		C6D4FD3819FA9F57001F7E01 /* MCONNTPFetchServerTimeOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84CFA99319F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.h */; };
 		C6D4FD3F19FB7534001F7E01 /* MCMessageParserMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6D4FD3E19FB7534001F7E01 /* MCMessageParserMac.mm */; };
 		C6D4FD4019FB7786001F7E01 /* MCMessageParserMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6D4FD3E19FB7534001F7E01 /* MCMessageParserMac.mm */; };
+		C6D4FD4319FB7DAA001F7E01 /* MCDataMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6D4FD4219FB7DAA001F7E01 /* MCDataMac.mm */; };
+		C6D4FD4419FB7DB2001F7E01 /* MCDataMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6D4FD4219FB7DAA001F7E01 /* MCDataMac.mm */; };
 		C6D6F7F9171E595D006F5B28 /* MCJSON.cc in Sources */ = {isa = PBXBuildFile; fileRef = C6D6F7F7171E595D006F5B28 /* MCJSON.cc */; };
 		C6D6F7FA171E595D006F5B28 /* MCJSON.cc in Sources */ = {isa = PBXBuildFile; fileRef = C6D6F7F7171E595D006F5B28 /* MCJSON.cc */; };
 		C6D6F954171E5CB8006F5B28 /* MCMD5.cc in Sources */ = {isa = PBXBuildFile; fileRef = C6D6F950171E5CB8006F5B28 /* MCMD5.cc */; };
@@ -2258,6 +2260,7 @@
 		C6D42C1B16AE03D6002BB4F9 /* NSString+MCO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MCO.h"; sourceTree = "<group>"; };
 		C6D42C1C16AE03D6002BB4F9 /* NSString+MCO.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSString+MCO.mm"; sourceTree = "<group>"; };
 		C6D4FD3E19FB7534001F7E01 /* MCMessageParserMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCMessageParserMac.mm; sourceTree = "<group>"; };
+		C6D4FD4219FB7DAA001F7E01 /* MCDataMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCDataMac.mm; sourceTree = "<group>"; };
 		C6D6F7F7171E595D006F5B28 /* MCJSON.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCJSON.cc; sourceTree = "<group>"; };
 		C6D6F7F8171E595D006F5B28 /* MCJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCJSON.h; sourceTree = "<group>"; };
 		C6D6F950171E5CB8006F5B28 /* MCMD5.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCMD5.cc; sourceTree = "<group>"; };
@@ -2809,6 +2812,7 @@
 				C68B2AF617797389005E61EF /* MCConnectionLoggerUtils.h */,
 				C64EA6A9169E847800778456 /* MCData.cc */,
 				C64EA6AA169E847800778456 /* MCData.h */,
+				C6D4FD4219FB7DAA001F7E01 /* MCDataMac.mm */,
 				C64EA6AB169E847800778456 /* MCHash.cc */,
 				C64EA6AC169E847800778456 /* MCHash.h */,
 				C64EA6AD169E847800778456 /* MCHashMap.cc */,
@@ -4150,6 +4154,7 @@
 				C64BB23516EDAA17000DB34C /* MCOAbstractMessage.mm in Sources */,
 				C64BB23916EDAA3F000DB34C /* MCOAbstractMessagePart.mm in Sources */,
 				C64BB23C16EDAAC7000DB34C /* MCOAbstractMultipart.mm in Sources */,
+				C6D4FD4319FB7DAA001F7E01 /* MCDataMac.mm in Sources */,
 				C64BB23F16EDAAE1000DB34C /* MCOAbstractPart.mm in Sources */,
 				C64BB24216EDAAF4000DB34C /* MCOAddress.mm in Sources */,
 				C64BB24516EDAAFE000DB34C /* MCOMessageHeader.mm in Sources */,
@@ -4387,6 +4392,7 @@
 				84D73765199BFFC7005124E5 /* MCONNTPSession.mm in Sources */,
 				C6BA2BF01705F4E6003F0E9E /* MCOAbstractMessage.mm in Sources */,
 				C6BA2BF11705F4E6003F0E9E /* MCOAbstractMessagePart.mm in Sources */,
+				C6D4FD4419FB7DB2001F7E01 /* MCDataMac.mm in Sources */,
 				C6BA2BF21705F4E6003F0E9E /* MCOAbstractMultipart.mm in Sources */,
 				C6BA2BF31705F4E6003F0E9E /* MCOAbstractPart.mm in Sources */,
 				C6BA2BF41705F4E6003F0E9E /* MCOAddress.mm in Sources */,

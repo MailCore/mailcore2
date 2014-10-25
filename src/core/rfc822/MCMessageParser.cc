@@ -105,12 +105,12 @@ AbstractPart * MessageParser::mainPart()
 
 Data * MessageParser::data()
 {
+#if __APPLE__
     if (mNSData != NULL) {
         return dataFromNSData();
     }
-    else {
-        return mData;
-    }
+#endif
+    return mData;
 }
 
 String * MessageParser::description()
