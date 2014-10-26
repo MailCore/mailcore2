@@ -39,7 +39,7 @@
 
 - (id) initWithData:(NSData *)data
 {
-    mailcore::MessageParser * message = new mailcore::MessageParser([data mco_mcData]);
+    mailcore::MessageParser * message = new mailcore::MessageParser((CFDataRef) data);
     self = [super initWithMCMessage:message];
     MC_SAFE_RELEASE(message);
     return self;
