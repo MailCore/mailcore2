@@ -14,7 +14,7 @@
 #import "MCOOperation+Private.h"
 #import "MCOUtils.h"
 
-typedef void (^CompletionType)(NSError *error, NSData * data);
+typedef void (^CompletionType)(NSError *error, MCOMessageParser * parser);
 
 @implementation MCOIMAPFetchParsedContentOperation {
     CompletionType _completionBlock;
