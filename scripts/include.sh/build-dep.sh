@@ -93,7 +93,13 @@ build_git_ios()
     "Release-iphonesimulator/$library" \
       -output "$name-$version/$name/lib/$library"
   for dep in $embedded_deps ; do
-    mv "$srcdir/$name/build-mac/$dep" "$name-$version"
+    if test -d "$srcdir/$name/build-mac/$dep" ; then
+      mv "$srcdir/$name/build-mac/$dep" "$name-$version"
+    elif test -d "$srcdir/$name/Externals/$dep" ; then
+      mv "$srcdir/$name/Externals/$dep" "$name-$version"
+    else
+      echo Dependency $dep not found
+    fi
   done
   echo "$rev"> "$name-$version/git-rev"
   mkdir -p "$resultdir/$name"
@@ -174,7 +180,13 @@ build_git_osx()
   mv Release/include "$name-$version/$name"
   mv "Release/$library" "$name-$version/$name/lib"
   for dep in $embedded_deps ; do
-    mv "$srcdir/$name/build-mac/$dep" "$name-$version"
+    if test -d "$srcdir/$name/build-mac/$dep" ; then
+      mv "$srcdir/$name/build-mac/$dep" "$name-$version"
+    elif test -d "$srcdir/$name/Externals/$dep" ; then
+      mv "$srcdir/$name/Externals/$dep" "$name-$version"
+    else
+      echo Dependency $dep not found
+    fi
   done
   echo "$rev"> "$name-$version/git-rev"
   mkdir -p "$resultdir/$name"
@@ -211,6 +223,6 @@ get_prebuilt_dep()
   curl -O "$url/$name/$name-$version.zip"
   unzip -q "$name-$version.zip"
   rm -rf "$scriptpath/../Externals/$name"
-  mv "$name-$version/$name" "$scriptpath/../Externals"
+  mv "$name-$version"/* "$scriptpath/../Externals"
   rm -rf "$tempbuilddir"
 }
