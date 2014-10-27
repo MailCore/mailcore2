@@ -89,6 +89,37 @@ static int32_t u_memcmp(const UChar * buf1, const UChar * buf2, int32_t count)
 {
     return memcmp(buf1, buf2, count * sizeof(* buf1));
 }
+
+static UChar * u_strchr(const UChar *s, UChar c)
+{
+    if (s == NULL) {
+        return NULL;
+    }
+    const UChar * p = s;
+    while (* p != 0) {
+        if (* p == c) {
+            return (UChar *) p;
+        }
+        p ++;
+    }
+    return NULL;
+}
+
+static UChar * u_strrchr(const UChar *s, UChar c)
+{
+    if (s == NULL) {
+        return NULL;
+    }
+    const UChar * lastOccurrence = NULL;
+    const UChar * p = s;
+    while (* p != 0) {
+        if (* p == c) {
+            lastOccurrence = p;
+        }
+        p ++;
+    }
+    return (UChar *) lastOccurrence;
+}
 #endif
 
 void mailcore::setICUDataDirectory(String * directory)
@@ -896,11 +927,7 @@ void String::appendCharactersLength(const UChar * unicodeCharacters, unsigned in
         return;
     }
     allocate(mLength + length);
-#if DISABLE_ICU
     memcpy(&mUnicodeChars[mLength], unicodeCharacters, length * sizeof(* mUnicodeChars));
-#else
-    u_strncpy(&mUnicodeChars[mLength], unicodeCharacters, length);
-#endif
     mLength += length;
     mUnicodeChars[mLength] = 0;
 }
@@ -1414,14 +1441,10 @@ unsigned int String::replaceOccurrencesOfString(String * occurrence, String * re
     }
     // copy remaining
     if(p) {
-#if DISABLE_ICU
         unsigned int remainingLength = mLength - (unsigned int) (p - mUnicodeChars);
         memcpy(dest_p, p, remainingLength * sizeof(* p));
         dest_p += remainingLength;
         * dest_p = 0;
-#else
-        u_strcpy(dest_p, p);
-#endif
     }
     
     free(mUnicodeChars);
@@ -1449,11 +1472,7 @@ void String::deleteCharactersInRange(Range range)
     }
     
     int32_t count = mLength - (int32_t) (range.location + range.length);
-#if DISABLE_ICU
     memmove(&mUnicodeChars[range.location], &mUnicodeChars[range.location + range.length], count * sizeof(* mUnicodeChars));
-#else
-    u_memmove(&mUnicodeChars[range.location], &mUnicodeChars[range.location + range.length], count);
-#endif
     mLength -= range.length;
     mUnicodeChars[mLength] = 0;
 }
@@ -2016,14 +2035,7 @@ String * String::lastPathComponent()
     // TODO: Improve Windows compatibility.
     if (mUnicodeChars == NULL)
         return MCSTR("");
-#if DISABLE_ICU
-    UChar slash[2];
-    slash[0] = '/';
-    slash[1] = 0;
-    UChar * component = u_strrstr(mUnicodeChars, slash);
-#else
     UChar * component = u_strrchr(mUnicodeChars, '/');
-#endif
     if (component == NULL)
         return (String *) this->copy()->autorelease();
     return String::stringWithCharacters(component + 1);
@@ -2031,14 +2043,7 @@ String * String::lastPathComponent()
 
 String * String::pathExtension()
 {
-#if DISABLE_ICU
-    UChar point[2];
-    point[0] = '.';
-    point[1] = 0;
-    UChar * component = u_strrstr(mUnicodeChars, point);
-#else
     UChar * component = u_strrchr(mUnicodeChars, '.');
-#endif
     if (component == NULL)
         return MCSTR("");
     return String::stringWithCharacters(component + 1);
