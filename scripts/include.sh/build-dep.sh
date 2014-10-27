@@ -92,30 +92,45 @@ build_git_ios()
   fi
   echo finished
 
-  cd "$tmpdir/bin"
-  mkdir -p "$name-$version/$name"
-  mkdir -p "$name-$version/$name/lib"
-  mv Release-iphoneos/include "$name-$version/$name"
-  lipo -create "Release-iphoneos/$library" \
-    "Release-iphonesimulator/$library" \
-      -output "$name-$version/$name/lib/$library"
-  for dep in $embedded_deps ; do
-    if test -d "$srcdir/$name/build-mac/$dep" ; then
-      mv "$srcdir/$name/build-mac/$dep" "$name-$version"
-    elif test -d "$srcdir/$name/Externals/$dep" ; then
-      mv "$srcdir/$name/Externals/$dep" "$name-$version"
-    else
-      echo Dependency $dep not found
-    fi
-  done
-  echo "$rev"> "$name-$version/git-rev"
-  if test x$build_for_external = x1 ; then
-    mkdir -p "$scriptpath/../Externals"
-    cp -R "$name-$version"/* "$scriptpath/../Externals"
-    rm -f "$scriptpath/../Externals/git-rev"
-  else
+  if echo $library|grep '\.framework$'>/dev/null ; then
+    cd "$tmpdir/bin/Release"
+    defaults write "$tmpdir/bin/Release/$library/Resources/Info.plist" "git-rev" "$rev"
     mkdir -p "$resultdir/$name"
-    zip -qry "$resultdir/$name/$name-$version.zip" "$name-$version"
+    zip -qry "$resultdir/$name/$name-$version.zip" "$library"
+  else
+    cd "$tmpdir/bin"
+    mkdir -p "$name-$version/$name"
+    mkdir -p "$name-$version/$name/lib"
+    mv Release-iphoneos/include "$name-$version/$name"
+    lipo -create "Release-iphoneos/$library" \
+      "Release-iphonesimulator/$library" \
+        -output "$name-$version/$name/lib/$library"
+    for dep in $embedded_deps ; do
+      if test -d "$srcdir/$name/build-mac/$dep" ; then
+        mv "$srcdir/$name/build-mac/$dep" "$name-$version"
+      elif test -d "$srcdir/$name/Externals/$dep" ; then
+        mv "$srcdir/$name/Externals/$dep" "$name-$version"
+      else
+        echo Dependency $dep not found
+      fi
+      if test x$flatten_deps=x1 ; then
+        cp -R "$name-$version/$dep"/* "$name-$version/$name"
+        rm -rf "$name-$version/$dep"
+      fi
+    done
+    if test x$flatten_deps=x1 ; then
+      mv "$name-$version/$name"/* "$name-$version"
+      rm -rf "$name-$version/$name"
+    fi
+    echo "$rev"> "$name-$version/git-rev"
+    if test x$build_for_external = x1 ; then
+      mkdir -p "$scriptpath/../Externals"
+      cp -R "$name-$version"/* "$scriptpath/../Externals"
+      rm -f "$scriptpath/../Externals/git-rev"
+    else
+      mkdir -p "$resultdir/$name"
+      zip -qry "$resultdir/$name/$name-$version.zip" "$name-$version"
+    fi
   fi
 
   echo build of $name-$version done
@@ -194,29 +209,44 @@ build_git_osx()
     exit 1
   fi
   echo finished
-
-  cd "$tmpdir/bin"
-  mkdir -p "$name-$version/$name"
-  mkdir -p "$name-$version/$name/lib"
-  mv Release/include "$name-$version/$name"
-  mv "Release/$library" "$name-$version/$name/lib"
-  for dep in $embedded_deps ; do
-    if test -d "$srcdir/$name/build-mac/$dep" ; then
-      mv "$srcdir/$name/build-mac/$dep" "$name-$version"
-    elif test -d "$srcdir/$name/Externals/$dep" ; then
-      mv "$srcdir/$name/Externals/$dep" "$name-$version"
-    else
-      echo Dependency $dep not found
-    fi
-  done
-  echo "$rev"> "$name-$version/git-rev"
-  if test x$build_for_external = x1 ; then
-    mkdir -p "$scriptpath/../Externals"
-    cp -R "$name-$version"/* "$scriptpath/../Externals"
-    rm -f "$scriptpath/../Externals/git-rev"
-  else
+  
+  if echo $library|grep '\.framework$'>/dev/null ; then
+    cd "$tmpdir/bin/Release"
+    defaults write "$tmpdir/bin/Release/$library/Resources/Info.plist" "git-rev" "$rev"
     mkdir -p "$resultdir/$name"
-    zip -qry "$resultdir/$name/$name-$version.zip" "$name-$version"
+    zip -qry "$resultdir/$name/$name-$version.zip" "$library"
+  else
+    cd "$tmpdir/bin"
+    mkdir -p "$name-$version/$name"
+    mkdir -p "$name-$version/$name/lib"
+    mv Release/include "$name-$version/$name"
+    mv "Release/$library" "$name-$version/$name/lib"
+    for dep in $embedded_deps ; do
+      if test -d "$srcdir/$name/build-mac/$dep" ; then
+        mv "$srcdir/$name/build-mac/$dep" "$name-$version"
+      elif test -d "$srcdir/$name/Externals/$dep" ; then
+        mv "$srcdir/$name/Externals/$dep" "$name-$version"
+      else
+        echo Dependency $dep not found
+      fi
+      if test x$flatten_deps=x1 ; then
+        cp -R "$name-$version/$dep"/* "$name-$version/$name"
+        rm -rf "$name-$version/$dep"
+      fi
+    done
+    if test x$flatten_deps=x1 ; then
+      mv "$name-$version/$name"/* "$name-$version"
+      rm -rf "$name-$version/$name"
+    fi
+    echo "$rev"> "$name-$version/git-rev"
+    if test x$build_for_external = x1 ; then
+      mkdir -p "$scriptpath/../Externals"
+      cp -R "$name-$version"/* "$scriptpath/../Externals"
+      rm -f "$scriptpath/../Externals/git-rev"
+    else
+      mkdir -p "$resultdir/$name"
+      zip -qry "$resultdir/$name/$name-$version.zip" "$name-$version"
+    fi
   fi
 
   echo build of $name-$version done
