@@ -59,6 +59,7 @@ build_git_ios()
   cd "$builddir/downloads"
   if test -d "$name" ; then
     cd "$name"
+    git checkout master
     git pull --rebase
   else
     git clone $url "$name"
@@ -72,6 +73,11 @@ build_git_ios()
 
   cp -R "$builddir/downloads/$name" "$srcdir/$name"
   cd "$srcdir/$name"
+  if test "x$branch" != x ; then
+    if ! git checkout -b "$branch" "origin/$branch" ; then
+      git checkout "$branch"
+    fi
+  fi
   git checkout -q $rev
   echo building $name $version - $rev
 
@@ -186,6 +192,7 @@ build_git_osx()
   cd "$builddir/downloads"
   if test -d "$name" ; then
   	cd "$name"
+    git checkout master
   	git pull --rebase
   else
   	git clone $url "$name"
@@ -199,6 +206,11 @@ build_git_osx()
 
   cp -R "$builddir/downloads/$name" "$srcdir/$name"
   cd "$srcdir/$name"
+  if test "x$branch" != x ; then
+    if ! git checkout -b "$branch" "origin/$branch" ; then
+      git checkout "$branch"
+    fi
+  fi
   git checkout -q $rev
   echo building $name $version - $rev
 
