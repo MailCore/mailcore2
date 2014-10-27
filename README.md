@@ -81,4 +81,4 @@ In this sample, we retrieved and printed a list of email headers from an IMAP se
 
 ## License ##
 
-MailCore 2 is BSD License.
+MailCore 2 is BSD-Licensed.
