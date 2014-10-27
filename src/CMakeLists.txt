@@ -69,6 +69,27 @@ else()
   message(STATUS "Found uchardet")
 endif()
 
+if(NOT APPLE)
+  
+  # detect icu
+
+  find_path(ICU4C_INCLUDE_DIR
+    NAMES unicode/utf8.h
+    PATHS ${additional_includes}
+  )
+  find_library(ICU_LIBRARY
+    NAMES icuuc
+    PATHS ${additional_lib_searchpath}
+  )
+
+  if(NOT ICU4C_INCLUDE_DIR OR NOT ICU4C_LIBRARY)
+    message(FATAL_ERROR "ERROR: Could not find icu4c")
+  else()
+    message(STATUS "Found icu4c")
+  endif()
+  
+endif()
+
 # detect libetpan
 
 find_path(LIBETPAN_INCLUDE_DIR

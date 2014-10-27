@@ -1,6 +1,8 @@
 #include "MCString.h"
 
+#if __APPLE__
 #define DISABLE_ICU 1
+#endif
 
 #include <string.h>
 #include <stdlib.h>
