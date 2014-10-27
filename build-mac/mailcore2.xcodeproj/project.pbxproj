@@ -155,6 +155,8 @@
 		9EF9AB23175F406D0027FA3B /* MCOIMAPFolderStatusOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9EF9AB16175F35C60027FA3B /* MCOIMAPFolderStatusOperation.h */; };
 		9EF9AB24175F409D0027FA3B /* MCIMAPFolderStatusOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9EF9AB0E175F30C20027FA3B /* MCIMAPFolderStatusOperation.h */; };
 		9EF9AB25175F40C70027FA3B /* MCIMAPFolderStatusOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9EF9AB0E175F30C20027FA3B /* MCIMAPFolderStatusOperation.h */; };
+		BD49963719FEC6DD000945BC /* ConvertUTF.c in Sources */ = {isa = PBXBuildFile; fileRef = BD49963519FEC6DD000945BC /* ConvertUTF.c */; };
+		BD49963819FEC6DD000945BC /* ConvertUTF.c in Sources */ = {isa = PBXBuildFile; fileRef = BD49963519FEC6DD000945BC /* ConvertUTF.c */; };
 		BD63713B177DFF080094121B /* MCLibetpan.cc in Sources */ = {isa = PBXBuildFile; fileRef = BD637139177DFF080094121B /* MCLibetpan.cc */; };
 		C07AD5D7FD82F8ACAB576231 /* NSError+MCO.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C07AD44B013BB42A240B4F04 /* NSError+MCO.h */; };
 		C07AD99B2E2054C684DB8FF6 /* NSError+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = C07ADFE43E22B38EFF23ADB5 /* NSError+MCO.mm */; };
@@ -1439,6 +1441,8 @@
 		9EF9AB10175F319A0027FA3B /* MCIMAPFolderStatusOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPFolderStatusOperation.cc; sourceTree = "<group>"; };
 		9EF9AB16175F35C60027FA3B /* MCOIMAPFolderStatusOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPFolderStatusOperation.h; sourceTree = "<group>"; };
 		9EF9AB18175F36600027FA3B /* MCOIMAPFolderStatusOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOIMAPFolderStatusOperation.mm; sourceTree = "<group>"; };
+		BD49963519FEC6DD000945BC /* ConvertUTF.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ConvertUTF.c; sourceTree = "<group>"; };
+		BD49963619FEC6DD000945BC /* ConvertUTF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConvertUTF.h; sourceTree = "<group>"; };
 		BD637139177DFF080094121B /* MCLibetpan.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCLibetpan.cc; sourceTree = "<group>"; };
 		BD63713A177DFF080094121B /* MCLibetpan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCLibetpan.h; sourceTree = "<group>"; };
 		C07AD057D3C8FBDC7AC95733 /* MCOIMAPSession.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOIMAPSession.mm; sourceTree = "<group>"; };
@@ -2303,6 +2307,8 @@
 		C64EA6A1169E847800778456 /* basetypes */ = {
 			isa = PBXGroup;
 			children = (
+				BD49963519FEC6DD000945BC /* ConvertUTF.c */,
+				BD49963619FEC6DD000945BC /* ConvertUTF.h */,
 				C64EA6A5169E847800778456 /* MCArray.cc */,
 				C64EA6A6169E847800778456 /* MCArray.h */,
 				C64EA6A7169E847800778456 /* MCAssert.c */,
@@ -3091,6 +3097,7 @@
 				C64EA7FC16A2959800778456 /* MCIMAPFetchFoldersOperation.cc in Sources */,
 				C64EA80216A295E400778456 /* MCIMAPRenameFolderOperation.cc in Sources */,
 				C64EA80516A2997E00778456 /* MCIMAPDeleteFolderOperation.cc in Sources */,
+				BD49963719FEC6DD000945BC /* ConvertUTF.c in Sources */,
 				C63D315C17C9155C00A4D993 /* MCIMAPIdentity.cc in Sources */,
 				84D73742199BF963005124E5 /* MCNNTPFetchAllArticlesOperation.cc in Sources */,
 				C64EA80816A2999A00778456 /* MCIMAPCreateFolderOperation.cc in Sources */,
@@ -3331,6 +3338,7 @@
 				943F1A9E17D96C5500F0C798 /* MCIMAPConnectOperation.cc in Sources */,
 				C6BA2BC51705F4E6003F0E9E /* MCIMAPFetchFoldersOperation.cc in Sources */,
 				C6BA2BC61705F4E6003F0E9E /* MCIMAPRenameFolderOperation.cc in Sources */,
+				BD49963819FEC6DD000945BC /* ConvertUTF.c in Sources */,
 				C6BA2BC71705F4E6003F0E9E /* MCIMAPDeleteFolderOperation.cc in Sources */,
 				C63D315D17C9155C00A4D993 /* MCIMAPIdentity.cc in Sources */,
 				84D73743199BF963005124E5 /* MCNNTPFetchAllArticlesOperation.cc in Sources */,

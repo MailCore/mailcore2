@@ -516,7 +516,7 @@ void MessageHeader::importIMFFields(struct mailimf_fields * fields)
             String * fieldValueStr;
             
             fieldValue = field->fld_data.fld_optional_field->fld_value;
-            fieldValueStr = String::stringWithUTF8Characters(fieldValue);
+            fieldValueStr = String::stringByDecodingMIMEHeaderValue(fieldValue);
             setExtraHeader(fieldNameStr, fieldValueStr);
         }
     }

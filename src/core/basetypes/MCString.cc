@@ -33,6 +33,7 @@
 #include "MCHTMLCleaner.h"
 #include "MCBase64.h"
 #include "MCIterator.h"
+#include "ConvertUTF.h"
 
 using namespace mailcore;
 
@@ -960,17 +961,13 @@ void String::appendUTF8CharactersLength(const char * UTF8Characters, unsigned in
     }
 
 #if DISABLE_ICU
-    CFStringRef cfStr = CFStringCreateWithBytes(NULL, (const UInt8 *) UTF8Characters, length,
-                                                kCFStringEncodingUTF8, false);
-    if (cfStr == NULL) {
-        // Data could not be converted to UTF-8.
-        return;
-    }
-    UniChar * characters = (UniChar *) malloc(sizeof(* characters) * CFStringGetLength(cfStr));
-    CFStringGetCharacters(cfStr, CFRangeMake(0, CFStringGetLength(cfStr)), characters);
-    appendCharactersLength(characters, (unsigned int) CFStringGetLength(cfStr));
-    free(characters);
-    CFRelease(cfStr);
+    const UTF8 * source = (const UTF8 *) UTF8Characters;
+    UTF16 * target = (UTF16 *) malloc(length * sizeof(* target));
+    UTF16 * targetStart = target;
+    ConvertUTF8toUTF16(&source, source + length,
+                       &targetStart, targetStart + length, lenientConversion);
+    appendCharactersLength((UChar *) target, (unsigned int ) (targetStart - target));
+    free(target);
 #else
     UChar * dest;
     int32_t destLength;
@@ -1018,13 +1015,15 @@ const UChar * String::unicodeCharacters()
 const char * String::UTF8Characters()
 {
 #if DISABLE_ICU
-    CFStringRef cfStr = CFStringCreateWithCharactersNoCopy(NULL, mUnicodeChars, mLength, kCFAllocatorNull);
-    char * buffer = (char *) malloc(mLength * 6 + 1);
-    CFIndex usedBufLen;
-    CFStringGetBytes(cfStr, CFRangeMake(0, mLength), kCFStringEncodingUTF8, '?', false, (UInt8 *) buffer, mLength * 6, &usedBufLen);
-    buffer[usedBufLen] = 0;
-    Data * data = Data::dataWithBytes(buffer, (unsigned int) usedBufLen + 1);
-    free(buffer);
+    const UTF16 * source = (const UTF16 *) mUnicodeChars;
+    UTF8 * target = (UTF8 *) malloc(mLength * 6 + 1);
+    UTF8 * targetStart = target;
+    ConvertUTF16toUTF8(&source, source + mLength,
+                       &targetStart, targetStart + mLength * 6 + 1, lenientConversion);
+    unsigned int utf8length = (unsigned int) (targetStart - target);
+    target[utf8length] = 0;
+    Data * data = Data::dataWithBytes((const char *) target, utf8length + 1);
+    free(target);
     
     return data->bytes();
 #else
