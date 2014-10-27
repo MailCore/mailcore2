@@ -43,6 +43,7 @@ set(basetypes_files
   core/basetypes/MCSet.cc
   core/basetypes/MCString.cc
   core/basetypes/MCValue.cc
+  core/basetypes/ConvertUTF.c
   ${basetypes_files_apple}
 )
 
