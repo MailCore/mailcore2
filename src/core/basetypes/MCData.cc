@@ -1,9 +1,15 @@
 #include "MCData.h"
 
+#define USE_UCHARDET 1
+
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
+#if USE_UCHARDET
+#include <uchardet/uchardet.h>
+#else
 #include <unicode/ucsdet.h>
+#endif
 #include <libetpan/libetpan.h>
 #include <iconv.h>
 #if __APPLE__
@@ -202,6 +208,7 @@ static bool isHintCharsetValid(String * hintCharset)
     if (knownCharset == NULL) {
         knownCharset = new Set();
         
+#if !USE_UCHARDET
         UCharsetDetector * detector;
         UEnumeration * iterator;
         UErrorCode err = U_ZERO_ERROR;
@@ -218,6 +225,41 @@ static bool isHintCharsetValid(String * hintCharset)
         }
         uenum_close(iterator);
         ucsdet_close(detector);
+#else
+        const char * charset_list[] = {
+            "Big5",
+            "EUC-JP",
+            "EUC-KR",
+            "x-euc-tw",
+            "gb18030",
+            "ISO-8859-8",
+            "windows-1255",
+            "windows-1252",
+            "Shift_JIS",
+            "UTF-8",
+            "UTF-16",
+            "HZ-GB-2312",
+            "ISO-2022-CN",
+            "ISO-2022-JP",
+            "ISO-2022-KR",
+            "ISO-8859-5"
+            "windows-1251"
+            "KOI8-R"
+            "x-mac-cyrillic"
+            "IBM866"
+            "IBM855"
+            "ISO-8859-7"
+            "windows-1253"
+            "ISO-8859-2"
+            "windows-1250"
+            "TIS-620"
+        };
+        for(unsigned int i = 0 ; i < sizeof(charset_list) / sizeof(charset_list[0]) ; i ++) {
+            String * str = String::stringWithUTF8Characters(charset_list[i]);
+            str = str->lowercaseString();
+            knownCharset->addObject(str);
+        }
+#endif
     }
     pthread_mutex_unlock(&lock);
     
@@ -322,6 +364,7 @@ String * Data::stringWithDetectedCharset(String * hintCharset, bool isHTML)
 
 String * Data::charsetWithFilteredHTMLWithoutHint(bool filterHTML)
 {
+#if !USE_UCHARDET
     UCharsetDetector * detector;
     const UCharsetMatch * match;
     UErrorCode err = U_ZERO_ERROR;
@@ -343,6 +386,21 @@ String * Data::charsetWithFilteredHTMLWithoutHint(bool filterHTML)
     ucsdet_close(detector);
     
     return result;
+#else
+  String * result = NULL;
+  uchardet_t ud = uchardet_new();
+  int r = uchardet_handle_data(ud, bytes(), length());
+  if (r == 0) {
+    uchardet_data_end(ud);
+    const char * charset = uchardet_get_charset(ud);
+    if (charset[0] != 0) {
+      result = String::stringWithUTF8Characters(charset);
+    }
+  }
+  uchardet_delete(ud);
+  
+  return result;
+#endif
 }
 
 String * Data::charsetWithFilteredHTML(bool filterHTML, String * hintCharset)
@@ -350,6 +408,7 @@ String * Data::charsetWithFilteredHTML(bool filterHTML, String * hintCharset)
     if (hintCharset == NULL)
         return charsetWithFilteredHTMLWithoutHint(filterHTML);
     
+#if !USE_UCHARDET
     const UCharsetMatch ** matches;
     int32_t matchesCount;
     UCharsetDetector * detector;
@@ -413,6 +472,27 @@ String * Data::charsetWithFilteredHTML(bool filterHTML, String * hintCharset)
         result = hintCharset;
     
     return result;
+#else
+    String * result;
+    uchardet_t ud = uchardet_new();
+    int r = uchardet_handle_data(ud, bytes(), length());
+    if (r == 0) {
+        uchardet_data_end(ud);
+        const char * charset = uchardet_get_charset(ud);
+        if (charset[0] == 0) {
+            result = hintCharset;
+        }
+        else {
+            result = String::stringWithUTF8Characters(charset);
+        }
+    }
+    else {
+        result = hintCharset;
+    }
+    uchardet_delete(ud);
+    
+    return result;
+#endif
 }
 
 void Data::takeBytesOwnership(char * bytes, unsigned int length)

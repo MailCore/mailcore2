@@ -14,20 +14,20 @@ include(LibFindMacros)
 
 IF(APPLE)
   set(additional_includes
-    "${CMAKE_CURRENT_SOURCE_DIR}/../Externals/ctemplate/include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../Externals/icu4c/include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../Externals/libetpan/include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../Externals/ctemplate-osx/include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../Externals/uchardet-osx/include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../Externals/libetpan-osx/include"
     /usr/include/tidy
     /usr/include/libxml2
   )
   
   set(additional_lib_searchpath
-    "${CMAKE_CURRENT_SOURCE_DIR}/../Externals/ctemplate/lib"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../Externals/icu4c/lib"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../Externals/libetpan/lib"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../Externals/ctemplate-osx/lib"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../Externals/uchardet-osx/lib"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../Externals/libetpan-osx/lib"
   )
   
-  execute_process(COMMAND "${CMAKE_CURRENT_SOURCE_DIR}/../scripts/prepare.sh"
+  execute_process(COMMAND "${CMAKE_CURRENT_SOURCE_DIR}/../scripts/get-mac.sh"
     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../scripts")
 ELSE()
   set(additional_includes
@@ -52,21 +52,42 @@ else()
   message(STATUS "Found ctemplate")
 endif()
 
-# detect icu4c
+# detect uchardet
 
-find_path(ICU4C_INCLUDE_DIR
-  NAMES unicode/utf8.h
+find_path(UCHARDET_INCLUDE_DIR
+  NAMES uchardet/uchardet.h
   PATHS ${additional_includes}
 )
-find_library(ICU4C_LIBRARY
-  NAMES icuuc
+find_library(UCHARDET_LIBRARY
+  NAMES uchardet
   PATHS ${additional_lib_searchpath}
 )
 
-if(NOT ICU4C_INCLUDE_DIR OR NOT ICU4C_LIBRARY)
-  message(FATAL_ERROR "ERROR: Could not find icu4c")
+if(NOT UCHARDET_INCLUDE_DIR OR NOT UCHARDET_LIBRARY)
+  message(FATAL_ERROR "ERROR: Could not find uchardet")
 else()
-  message(STATUS "Found icu4c")
+  message(STATUS "Found uchardet")
+endif()
+
+if(NOT APPLE)
+  
+  # detect icu
+
+  find_path(ICU4C_INCLUDE_DIR
+    NAMES unicode/utf8.h
+    PATHS ${additional_includes}
+  )
+  find_library(ICU4C_LIBRARY
+    NAMES icuuc
+    PATHS ${additional_lib_searchpath}
+  )
+
+  if(NOT ICU4C_INCLUDE_DIR OR NOT ICU4C_LIBRARY)
+    message(FATAL_ERROR "ERROR: Could not find icu4c")
+  else()
+    message(STATUS "Found icu4c")
+  endif()
+  
 endif()
 
 # detect libetpan

@@ -81,6 +81,20 @@
 			remoteGlobalIDString = C6BA2B091705F4E6003F0E9E;
 			remoteInfo = "static mailcore2 ios";
 		};
+		C6181D2E19FDA8EA0088FBBC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB7BA4321713898B00104953 /* mailcore2.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 27780C3A19CF9CD100C77E44;
+			remoteInfo = "mailcore ios";
+		};
+		C6181D3019FDA8EA0088FBBC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB7BA4321713898B00104953 /* mailcore2.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C6B5AE0219F630B3001352A6;
+			remoteInfo = unittest;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -170,6 +184,8 @@
 				AB7BA43F1713898B00104953 /* tests */,
 				AB7BA4411713898B00104953 /* test-ios.app */,
 				AB7BA4431713898B00104953 /* MailCore.framework */,
+				C6181D2F19FDA8EA0088FBBC /* MailCore-ios.framework */,
+				C6181D3119FDA8EA0088FBBC /* unittest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -396,6 +412,20 @@
 			remoteRef = AB7BA4421713898B00104953 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		C6181D2F19FDA8EA0088FBBC /* MailCore-ios.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = "MailCore-ios.framework";
+			remoteRef = C6181D2E19FDA8EA0088FBBC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C6181D3119FDA8EA0088FBBC /* unittest.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = unittest.xctest;
+			remoteRef = C6181D3019FDA8EA0088FBBC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -492,6 +522,13 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/../../../Externals/ctemplate-ios/lib",
+					"$(SRCROOT)/../../../Externals/libetpan-ios/lib",
+					"$(SRCROOT)/../../../Externals/tidy-html5-ios/lib",
+					"$(SRCROOT)/../../../Externals/uchardet-ios/lib",
+					"$(SRCROOT)/../../../Externals/libsasl-ios/lib",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 			};
@@ -515,6 +552,13 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/../../../Externals/ctemplate-ios/lib",
+					"$(SRCROOT)/../../../Externals/libetpan-ios/lib",
+					"$(SRCROOT)/../../../Externals/tidy-html5-ios/lib",
+					"$(SRCROOT)/../../../Externals/uchardet-ios/lib",
+					"$(SRCROOT)/../../../Externals/libsasl-ios/lib",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
@@ -530,11 +574,9 @@
 				GCC_PREFIX_HEADER = "iOS UI Test/iOS UI Test-Prefix.pch";
 				INFOPLIST_FILE = "iOS UI Test/iOS UI Test-Info.plist";
 				OTHER_LDFLAGS = (
+					"-luchardet-ios",
 					"-lctemplate-ios",
 					"-letpan-ios",
-					"-licudata",
-					"-licui18n",
-					"-licuuc",
 					"-lxml2",
 					"-lsasl2",
 					"-liconv",
@@ -542,7 +584,6 @@
 					"-ltidy",
 					"-lc++",
 					"-lz",
-					"-licucore",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -557,11 +598,9 @@
 				GCC_PREFIX_HEADER = "iOS UI Test/iOS UI Test-Prefix.pch";
 				INFOPLIST_FILE = "iOS UI Test/iOS UI Test-Info.plist";
 				OTHER_LDFLAGS = (
+					"-luchardet-ios",
 					"-lctemplate-ios",
 					"-letpan-ios",
-					"-licudata",
-					"-licui18n",
-					"-licuuc",
 					"-lxml2",
 					"-lsasl2",
 					"-liconv",
@@ -569,7 +608,6 @@
 					"-ltidy",
 					"-lc++",
 					"-lz",
-					"-licucore",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

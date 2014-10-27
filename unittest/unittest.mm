@@ -104,8 +104,6 @@
 }
 
 - (void)testMessageBuilder1 {
-    // This is an example of a functional test case.
-    //XCTAssert(YES, @"Pass");
     MCOMessageBuilder * builder = [[MCOMessageBuilder alloc] init];
     [[builder header] setFrom:[MCOAddress addressWithRFC822String:@"Hoà <dinh.viet.hoa@gmail.com>"]];
     [[builder header] setTo:@[[MCOAddress addressWithRFC822String:@"Foo Bar <dinh.viet.hoa@gmail.com>"]]];
@@ -117,7 +115,8 @@
     NSData * expectedData = [NSData dataWithContentsOfFile:path];
     [builder _setBoundaries:@[@"1", @"2", @"3", @"4", @"5"]];
     //[[builder data] writeToFile:@"/Users/hoa/builder1-now.eml" atomically:YES];
-    XCTAssertEqualObjects([builder data], expectedData, @"Pass");
+    XCTAssertEqualObjects([[NSString alloc] initWithData:[builder data] encoding:NSUTF8StringEncoding], [[NSString alloc] initWithData:expectedData encoding:NSUTF8StringEncoding], @"Pass");
+    //XCTAssertEqualObjects([builder data], expectedData, @"Pass");
 }
 
 - (void)testMessageBuilder2 {
@@ -137,7 +136,7 @@
     path = [_builderOutputPath stringByAppendingPathComponent:@"builder2.eml"];
     NSData * expectedData = [NSData dataWithContentsOfFile:path];
     //[[builder data] writeToFile:@"/Users/hoa/builder2-now.eml" atomically:YES];
-    XCTAssertEqualObjects([builder data], expectedData, @"Pass");
+    XCTAssertEqualObjects([[NSString alloc] initWithData:[builder data] encoding:NSUTF8StringEncoding], [[NSString alloc] initWithData:expectedData encoding:NSUTF8StringEncoding], @"Pass");
 }
 
 - (void)testMessageBuilder3 {
@@ -159,7 +158,7 @@
     path = [_builderOutputPath stringByAppendingPathComponent:@"builder3.eml"];
     NSData * expectedData = [NSData dataWithContentsOfFile:path];
     //[[builder data] writeToFile:@"/Users/hoa/builder3-now.eml" atomically:YES];
-    XCTAssertEqualObjects([builder data], expectedData, @"Pass");
+    XCTAssertEqualObjects([[NSString alloc] initWithData:[builder data] encoding:NSUTF8StringEncoding], [[NSString alloc] initWithData:expectedData encoding:NSUTF8StringEncoding], @"Pass");
 }
 
 - (void)testMessageParser {

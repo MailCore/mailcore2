@@ -26,14 +26,14 @@ MailCore 2 provides a simple and asynchronous Objective-C API to work with the e
         - Click the `+` icon and select `MailCore.framework`.
     * Mac static library
         - Go to Build Phases from your build target, and under 'Link Binary With Libraries', add `libMailCore.a` and `Security.framework`.
-        - Set 'Other Linker Flags' under Build Settings: `-lctemplate -letpan -licudata -licui18n -licuuc -lxml2 -lsasl2 -liconv -ltidy -lz` `-licucore -lc++ -stdlib=libc++ -ObjC -lcrypto -lssl`
+        - Set 'Other Linker Flags' under Build Settings: `-luchardet -lctemplate -letpan -lxml2 -lsasl2 -liconv -ltidy -lz` `-lc++ -stdlib=libc++ -ObjC -lcrypto -lssl`
         - Make sure to use LLVM C++ standard library.  In Build Settings, locate 'C++ Standard Library', and select `libc++`.
         - In Build Phases, add a Target Dependency of `static mailcore2 osx`.
 5. **For iOS** - If you're targeting iOS, you have to link against MailCore 2 as a static library:
     * Add `libMailCore-ios.a`
     * Add `CFNetwork.framework`
 	* Add `Security.framework`
-    * Set 'Other Linker Flags': `-lctemplate-ios -letpan-ios -licudata -licui18n -licuuc -lxml2 -lsasl2 -liconv -ltidy -lz` `-licucore -lc++ -stdlib=libc++ -ObjC`
+    * Set 'Other Linker Flags': `-luchardet-ios -lctemplate-ios -letpan-ios -lxml2 -lsasl2 -liconv -ltidy -lz` `-lc++ -stdlib=libc++ -ObjC`
     * Make sure to use LLVM C++ standard library.  Open Build Settings, scroll down to 'C++ Standard Library', and select `libc++`.
     * In Build Phases, add a Target Dependency of `static mailcore2 ios`.
 6. Profit.
@@ -78,3 +78,7 @@ In this sample, we retrieved and printed a list of email headers from an IMAP se
 
 * [Class documentation](http://libmailcore.com/mailcore2/api/index.html)
 * [Wiki](https://github.com/MailCore/mailcore2/wiki)
+
+## License ##
+
+MailCore 2 is BSD-Licensed.
