@@ -30,8 +30,15 @@ build_git_ios()
   versions_path="$scriptpath/deps-versions.plist"
   version="`defaults read "$versions_path" "$name" 2>/dev/null`"
   version="$(($version+1))"
+  if test x$build_for_external = x1 ; then
+    version=0
+  fi
 
-  builddir="$HOME/MailCore-Builds/dependencies"
+  if test x$build_for_external = x1 ; then
+    builddir="$scriptpath/../Externals/tmp/dependencies"
+  else
+    builddir="$HOME/MailCore-Builds/dependencies"
+  fi
   BUILD_TIMESTAMP=`date +'%Y%m%d%H%M%S'`
   tempbuilddir="$builddir/workdir/$BUILD_TIMESTAMP"
   mkdir -p "$tempbuilddir"
@@ -102,8 +109,14 @@ build_git_ios()
     fi
   done
   echo "$rev"> "$name-$version/git-rev"
-  mkdir -p "$resultdir/$name"
-  zip -qry "$resultdir/$name/$name-$version.zip" "$name-$version"
+  if test x$build_for_external = x1 ; then
+    mkdir -p "$scriptpath/../Externals"
+    cp -R "$name-$version"/* "$scriptpath/../Externals"
+    rm -f "$scriptpath/../Externals/git-rev"
+  else
+    mkdir -p "$resultdir/$name"
+    zip -qry "$resultdir/$name/$name-$version.zip" "$name-$version"
+  fi
 
   echo build of $name-$version done
 
@@ -111,9 +124,10 @@ build_git_ios()
 
   echo cleaning
   rm -rf "$tempbuilddir"
-  echo "$tempbuilddir"
 
-  defaults write "$versions_path" "$name" "$version"
+  if test x$build_for_external != x1 ; then
+    defaults write "$versions_path" "$name" "$version"
+  fi
 }
 
 build_git_osx()
@@ -128,8 +142,15 @@ build_git_osx()
   versions_path="$scriptpath/deps-versions.plist"
   version="`defaults read "$versions_path" "$name" 2>/dev/null`"
   version="$(($version+1))"
+  if test x$build_for_external = x1 ; then
+    version=0
+  fi
 
-  builddir="$HOME/MailCore-Builds/dependencies"
+  if test x$build_for_external = x1 ; then
+    builddir="$scriptpath/../Externals/tmp/dependencies"
+  else
+    builddir="$HOME/MailCore-Builds/dependencies"
+  fi
   BUILD_TIMESTAMP=`date +'%Y%m%d%H%M%S'`
   tempbuilddir="$builddir/workdir/$BUILD_TIMESTAMP"
   mkdir -p "$tempbuilddir"
@@ -189,8 +210,14 @@ build_git_osx()
     fi
   done
   echo "$rev"> "$name-$version/git-rev"
-  mkdir -p "$resultdir/$name"
-  zip -qry "$resultdir/$name/$name-$version.zip" "$name-$version"
+  if test x$build_for_external = x1 ; then
+    mkdir -p "$scriptpath/../Externals"
+    cp -R "$name-$version"/* "$scriptpath/../Externals"
+    rm -f "$scriptpath/../Externals/git-rev"
+  else
+    mkdir -p "$resultdir/$name"
+    zip -qry "$resultdir/$name/$name-$version.zip" "$name-$version"
+  fi
 
   echo build of $name-$version done
 
@@ -198,9 +225,10 @@ build_git_osx()
 
   echo cleaning
   rm -rf "$tempbuilddir"
-  echo "$tempbuilddir"
 
-  defaults write "$versions_path" "$name" "$version"
+  if test x$build_for_external != x1 ; then
+    defaults write "$versions_path" "$name" "$version"
+  fi
 }
 
 get_prebuilt_dep()
@@ -210,8 +238,13 @@ get_prebuilt_dep()
   if test "x$name" = x ; then
     return
   fi
-
+  
   versions_path="$scriptpath/deps-versions.plist"
+  if test ! -f "$versions_path" ; then
+    build_for_external=1 "$scriptpath/build-$name.sh"
+    return;
+  fi
+
   version="`defaults read "$versions_path" "$name" 2>/dev/null`"
 
   BUILD_TIMESTAMP=`date +'%Y%m%d%H%M%S'`
@@ -224,5 +257,6 @@ get_prebuilt_dep()
   unzip -q "$name-$version.zip"
   rm -rf "$scriptpath/../Externals/$name"
   mv "$name-$version"/* "$scriptpath/../Externals"
+  rm -f "$scriptpath/../Externals/git-rev"
   rm -rf "$tempbuilddir"
 }
