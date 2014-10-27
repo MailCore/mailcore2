@@ -962,6 +962,10 @@ void String::appendUTF8CharactersLength(const char * UTF8Characters, unsigned in
 #if DISABLE_ICU
     CFStringRef cfStr = CFStringCreateWithBytes(NULL, (const UInt8 *) UTF8Characters, length,
                                                 kCFStringEncodingUTF8, false);
+    if (cfStr == NULL) {
+        // Data could not be converted to UTF-8.
+        return;
+    }
     UniChar * characters = (UniChar *) malloc(sizeof(* characters) * CFStringGetLength(cfStr));
     CFStringGetCharacters(cfStr, CFRangeMake(0, CFStringGetLength(cfStr)), characters);
     appendCharactersLength(characters, (unsigned int) CFStringGetLength(cfStr));
