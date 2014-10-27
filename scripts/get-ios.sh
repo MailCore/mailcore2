@@ -8,8 +8,6 @@ popd > /dev/null
 
 deps="ctemplate-ios libetpan-ios tidy-html5-ios uchardet-ios"
 for dep in $deps ; do
-  if test ! -d "$scriptpath/../Externals/$dep" ; then
-    name="$dep"
-    get_prebuilt_dep
-  fi
+  name="$dep"
+  get_prebuilt_dep
 done

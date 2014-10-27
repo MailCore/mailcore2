@@ -8,8 +8,6 @@ popd > /dev/null
 
 deps="ctemplate-osx libetpan-osx uchardet-osx"
 for dep in $deps ; do
-  if test ! -d "$scriptpath/../Externals/$dep" ; then
-    name="$dep"
-    get_prebuilt_dep
-  fi
+  name="$dep"
+  get_prebuilt_dep
 done

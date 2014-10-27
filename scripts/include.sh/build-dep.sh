@@ -282,12 +282,25 @@ get_prebuilt_dep()
   fi
   
   versions_path="$scriptpath/deps-versions.plist"
+  installed_versions_path="$scriptpath/installed-deps-versions.plist"
   if test ! -f "$versions_path" ; then
     build_for_external=1 "$scriptpath/build-$name.sh"
     return;
   fi
-
+  
+  installed_version="`defaults read "$installed_versions_path" "$name" 2>/dev/null`"
+  if test ! -d "$scriptpath/../Externals/$name" ; then
+    installed_version=
+  fi
+  if test "x$installed_version" = x ; then
+    installed_version="none"
+  fi
   version="`defaults read "$versions_path" "$name" 2>/dev/null`"
+
+  echo $name, installed: $installed_version, required: $version
+  if test "x$installed_version" = "x$version" ; then
+    return
+  fi
 
   BUILD_TIMESTAMP=`date +'%Y%m%d%H%M%S'`
   tempbuilddir="$scriptpath/../Externals/workdir/$BUILD_TIMESTAMP"
@@ -301,4 +314,8 @@ get_prebuilt_dep()
   mv "$name-$version"/* "$scriptpath/../Externals"
   rm -f "$scriptpath/../Externals/git-rev"
   rm -rf "$tempbuilddir"
+  
+  if test -d "$scriptpath/../Externals/$name" ; then
+    defaults write "$installed_versions_path" "$name" "$version"
+  fi
 }
