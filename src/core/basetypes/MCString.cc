@@ -960,7 +960,6 @@ void String::appendUTF8CharactersLength(const char * UTF8Characters, unsigned in
         return;
     }
 
-#if DISABLE_ICU
     const UTF8 * source = (const UTF8 *) UTF8Characters;
     UTF16 * target = (UTF16 *) malloc(length * sizeof(* target));
     UTF16 * targetStart = target;
@@ -968,30 +967,6 @@ void String::appendUTF8CharactersLength(const char * UTF8Characters, unsigned in
                        &targetStart, targetStart + length, lenientConversion);
     appendCharactersLength((UChar *) target, (unsigned int ) (targetStart - target));
     free(target);
-#else
-    UChar * dest;
-    int32_t destLength;
-    int32_t destCapacity;
-    UErrorCode err;
-    
-    err = U_ZERO_ERROR;
-    u_strFromUTF8WithSub(NULL, 0, &destLength, UTF8Characters, length, 0xFFFD, NULL, &err);
-    destCapacity = destLength + 1;
-    dest = (UChar *) malloc(destCapacity * sizeof(* dest));
-    err = U_ZERO_ERROR;
-    u_strFromUTF8WithSub(dest, destCapacity, &destLength, UTF8Characters, length, 0xFFFD, NULL, &err);
-    dest[destLength] = 0;
-    // Fix in case of bad conversion.
-    for(int32_t i = 0 ; i < destLength ; i ++) {
-        if (dest[i] == 0) {
-            dest[i] = ' ';
-        }
-    }
-    
-    appendCharactersLength(dest, destLength);
-    
-    free(dest);
-#endif
 }
 
 void String::appendUTF8Characters(const char * UTF8Characters)
@@ -1014,7 +989,6 @@ const UChar * String::unicodeCharacters()
 
 const char * String::UTF8Characters()
 {
-#if DISABLE_ICU
     const UTF16 * source = (const UTF16 *) mUnicodeChars;
     UTF8 * target = (UTF8 *) malloc(mLength * 6 + 1);
     UTF8 * targetStart = target;
@@ -1026,25 +1000,6 @@ const char * String::UTF8Characters()
     free(target);
     
     return data->bytes();
-#else
-    char * dest;
-    int32_t destLength;
-    int32_t destCapacity;
-    UErrorCode err;
-    
-    err = U_ZERO_ERROR;
-    u_strToUTF8(NULL, 0, &destLength, mUnicodeChars, mLength, &err);
-    destCapacity = destLength + 1;
-    dest = (char *) malloc(destCapacity * sizeof(* dest));
-    err = U_ZERO_ERROR;
-    u_strToUTF8(dest, destCapacity, &destLength, mUnicodeChars, mLength, &err);
-    dest[destLength] = 0;
-    
-    Data * data = Data::dataWithBytes(dest, destLength + 1);
-    free(dest);
-    
-    return data->bytes();
-#endif
 }
 
 unsigned int String::length()
