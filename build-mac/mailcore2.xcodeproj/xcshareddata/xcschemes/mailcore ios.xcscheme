@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "27780C2A19CF9CD100C77E44"
-               BuildableName = "MailCore-ios.framework"
+               BuildableName = "MailCore.framework"
                BlueprintName = "mailcore ios"
                ReferencedContainer = "container:mailcore2.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "27780C2A19CF9CD100C77E44"
-            BuildableName = "MailCore-ios.framework"
+            BuildableName = "MailCore.framework"
             BlueprintName = "mailcore ios"
             ReferencedContainer = "container:mailcore2.xcodeproj">
          </BuildableReference>
@@ -61,7 +61,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "27780C2A19CF9CD100C77E44"
-            BuildableName = "MailCore-ios.framework"
+            BuildableName = "MailCore.framework"
             BlueprintName = "mailcore ios"
             ReferencedContainer = "container:mailcore2.xcodeproj">
          </BuildableReference>

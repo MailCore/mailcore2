@@ -163,6 +163,8 @@
 		C608167617759968001F1018 /* MCSMTPDisconnectOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C608167317759967001F1018 /* MCSMTPDisconnectOperation.cc */; };
 		C608167B177635D2001F1018 /* MCIMAPDisconnectOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C6081679177635D2001F1018 /* MCIMAPDisconnectOperation.cc */; };
 		C608167C177635D2001F1018 /* MCIMAPDisconnectOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C6081679177635D2001F1018 /* MCIMAPDisconnectOperation.cc */; };
+		C6181D3219FE0F8A0088FBBC /* MCOIMAPFetchParsedContentOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8199FBE719FAEA440040BBC3 /* MCOIMAPFetchParsedContentOperation.h */; };
+		C6181D3319FE0F8D0088FBBC /* MCIMAPFetchParsedContentOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8199FBF019FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.h */; };
 		C61CC25819765763004A28D3 /* MCLibetpan.cc in Sources */ = {isa = PBXBuildFile; fileRef = BD637139177DFF080094121B /* MCLibetpan.cc */; };
 		C623C58616FD6A50001BBEFC /* MCOConstants.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB26D16FD63F6000DB34C /* MCOConstants.h */; };
 		C623C58716FD6A61001BBEFC /* MCOOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64BB25716FD3BC2000DB34C /* MCOOperation.h */; };
@@ -911,6 +913,8 @@
 			dstPath = include/MailCore;
 			dstSubfolderSpec = 16;
 			files = (
+				C6181D3319FE0F8D0088FBBC /* MCIMAPFetchParsedContentOperation.h in CopyFiles */,
+				C6181D3219FE0F8A0088FBBC /* MCOIMAPFetchParsedContentOperation.h in CopyFiles */,
 				C6D4FD3819FA9F57001F7E01 /* MCONNTPFetchServerTimeOperation.h in CopyFiles */,
 				C6D4FD3719FA9F55001F7E01 /* MCNNTPFetchServerTimeOperation.h in CopyFiles */,
 				C6D4FD3419FA9EB6001F7E01 /* MCONNTPFetchOverviewOperation.h in CopyFiles */,
