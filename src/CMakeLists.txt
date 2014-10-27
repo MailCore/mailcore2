@@ -77,7 +77,7 @@ if(NOT APPLE)
     NAMES unicode/utf8.h
     PATHS ${additional_includes}
   )
-  find_library(ICU_LIBRARY
+  find_library(ICU4C_LIBRARY
     NAMES icuuc
     PATHS ${additional_lib_searchpath}
   )
