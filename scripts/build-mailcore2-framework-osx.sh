@@ -1,6 +1,6 @@
 #!/bin/sh
 
-pushd "`dirname $0`" > /dev/null
+pushd "`dirname "$0"`" > /dev/null
 scriptpath="`pwd`"
 popd > /dev/null
 
