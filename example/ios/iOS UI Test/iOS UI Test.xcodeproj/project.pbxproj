@@ -415,7 +415,7 @@
 		C6181D2F19FDA8EA0088FBBC /* MailCore-ios.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = "MailCore-ios.framework";
+			path = MailCore.framework;
 			remoteRef = C6181D2E19FDA8EA0088FBBC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -522,13 +522,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/../../../Externals/ctemplate-ios/lib",
-					"$(SRCROOT)/../../../Externals/libetpan-ios/lib",
-					"$(SRCROOT)/../../../Externals/tidy-html5-ios/lib",
-					"$(SRCROOT)/../../../Externals/uchardet-ios/lib",
-					"$(SRCROOT)/../../../Externals/libsasl-ios/lib",
-				);
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 			};
@@ -552,13 +545,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/../../../Externals/ctemplate-ios/lib",
-					"$(SRCROOT)/../../../Externals/libetpan-ios/lib",
-					"$(SRCROOT)/../../../Externals/tidy-html5-ios/lib",
-					"$(SRCROOT)/../../../Externals/uchardet-ios/lib",
-					"$(SRCROOT)/../../../Externals/libsasl-ios/lib",
-				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
