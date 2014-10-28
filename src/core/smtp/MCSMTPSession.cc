@@ -558,6 +558,9 @@ void SMTPSession::checkAccount(Address * from, ErrorCode * pError)
     if (* pError != ErrorNone) {
         return;
     }
+    if (!from) {
+        return;
+    }
     r = mailsmtp_mail(mSmtp, MCUTF8(from->mailbox()));
     if (r == MAILSMTP_ERROR_STREAM) {
         * pError = ErrorConnection;
