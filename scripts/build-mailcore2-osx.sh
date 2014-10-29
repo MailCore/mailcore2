@@ -13,6 +13,6 @@ xcode_target="static mailcore2 osx"
 xcode_project="mailcore2.xcodeproj"
 library="libMailCore.a"
 embedded_deps="ctemplate-osx libetpan-osx uchardet-osx"
-flatten_deps=1
+build_mailcore=1
 
 build_git_osx

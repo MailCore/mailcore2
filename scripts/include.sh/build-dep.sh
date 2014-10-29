@@ -107,7 +107,12 @@ build_git_ios()
     cd "$tmpdir/bin"
     mkdir -p "$name-$version/$name"
     mkdir -p "$name-$version/$name/lib"
-    mv Release-iphoneos/include "$name-$version/$name"
+    if test x$build_mailcore=x1 ; then
+      mkdir -p "$name-$version/$name/include"
+      mv Release-iphoneos/include/MailCore "$name-$version/$name/include"
+    else
+      mv Release-iphoneos/include "$name-$version/$name"
+    fi
     lipo -create "Release-iphoneos/$library" \
       "Release-iphonesimulator/$library" \
         -output "$name-$version/$name/lib/$library"
@@ -119,14 +124,19 @@ build_git_ios()
       else
         echo Dependency $dep not found
       fi
-      if test x$flatten_deps=x1 ; then
-        cp -R "$name-$version/$dep"/* "$name-$version/$name"
+      if test x$build_mailcore=x1 ; then
+        cp -R "$name-$version/$dep/lib" "$name-$version/$name"
         rm -rf "$name-$version/$dep"
       fi
     done
-    if test x$flatten_deps=x1 ; then
-      mv "$name-$version/$name"/* "$name-$version"
+    if test x$build_mailcore=x1 ; then
+      mv "$name-$version/$name/lib" "$name-$version"
+      mv "$name-$version/$name/include" "$name-$version"
       rm -rf "$name-$version/$name"
+      libtool -static -o "$name-$version/$library" "$name-$version/lib"/*.a
+      rm -rf "$name-$version/lib"
+      mkdir -p "$name-$version/lib"
+      mv "$name-$version/$library" "$name-$version/lib"
     fi
     echo "$rev"> "$name-$version/git-rev"
     if test x$build_for_external = x1 ; then
@@ -231,7 +241,12 @@ build_git_osx()
     cd "$tmpdir/bin"
     mkdir -p "$name-$version/$name"
     mkdir -p "$name-$version/$name/lib"
-    mv Release/include "$name-$version/$name"
+    if test x$build_mailcore=x1 ; then
+      mkdir -p "$name-$version/$name/include"
+      mv Release/include/MailCore "$name-$version/$name/include"
+    else
+      mv Release/include "$name-$version/$name"
+    fi
     mv "Release/$library" "$name-$version/$name/lib"
     for dep in $embedded_deps ; do
       if test -d "$srcdir/$name/build-mac/$dep" ; then
@@ -241,14 +256,19 @@ build_git_osx()
       else
         echo Dependency $dep not found
       fi
-      if test x$flatten_deps=x1 ; then
-        cp -R "$name-$version/$dep"/* "$name-$version/$name"
+      if test x$build_mailcore=x1 ; then
+        cp -R "$name-$version/$dep/lib" "$name-$version/$name"
         rm -rf "$name-$version/$dep"
       fi
     done
-    if test x$flatten_deps=x1 ; then
-      mv "$name-$version/$name"/* "$name-$version"
+    if test x$build_mailcore=x1 ; then
+      mv "$name-$version/$name/lib" "$name-$version"
+      mv "$name-$version/$name/include" "$name-$version"
       rm -rf "$name-$version/$name"
+      libtool -static -o "$name-$version/$library" "$name-$version/lib"/*.a
+      rm -rf "$name-$version/lib"
+      mkdir -p "$name-$version/lib"
+      mv "$name-$version/$library" "$name-$version/lib"
     fi
     echo "$rev"> "$name-$version/git-rev"
     if test x$build_for_external = x1 ; then

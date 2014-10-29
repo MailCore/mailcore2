@@ -12,7 +12,7 @@ name="mailcore2-ios"
 xcode_target="static mailcore2 ios"
 xcode_project="mailcore2.xcodeproj"
 library="libMailCore-ios.a"
-embedded_deps="ctemplate-ios libetpan-ios tidy-html5-ios uchardet-ios"
-flatten_deps=1
+embedded_deps="ctemplate-ios libetpan-ios libsasl-ios tidy-html5-ios uchardet-ios"
+build_mailcore=1
 
 build_git_ios
