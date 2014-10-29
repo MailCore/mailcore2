@@ -1,6 +1,7 @@
 #include "MCSMTPAsyncSession.h"
 
 #include "MCSMTPSession.h"
+#include "MCSMTPLoginOperation.h"
 #include "MCSMTPSendWithDataOperation.h"
 #include "MCSMTPCheckAccountOperation.h"
 #include "MCSMTPDisconnectOperation.h"
@@ -204,6 +205,13 @@ void SMTPAsyncSession::tryAutomaticDisconnectAfterDelay(void * context)
     op->setSession(this);
     op->autorelease();
     op->start();
+}
+
+SMTPOperation * SMTPAsyncSession::loginOperation()
+{
+    SMTPLoginOperation * op = new SMTPLoginOperation();
+    op->setSession(this);
+    return (SMTPOperation *) op->autorelease();
 }
 
 SMTPOperation * SMTPAsyncSession::sendMessageOperation(Data * messageData)

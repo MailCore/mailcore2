@@ -49,6 +49,7 @@ set(async_smtp_files
   async/smtp/MCSMTPCheckAccountOperation.cc
   async/smtp/MCSMTPDisconnectOperation.cc
   async/smtp/MCSMTPOperation.cc
+  async/smtp/MCSMTPLoginOperation.cc
   async/smtp/MCSMTPSendWithDataOperation.cc
   async/smtp/MCSMTPNoopOperation.cc
 )

@@ -59,6 +59,7 @@ namespace mailcore {
         virtual dispatch_queue_t dispatchQueue();
 #endif
         
+        virtual SMTPOperation * loginOperation();
         virtual SMTPOperation * sendMessageOperation(Data * messageData);
         virtual SMTPOperation * sendMessageOperation(Address * from, Array * recipients,
                                                      Data * messageData);
