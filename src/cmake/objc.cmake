@@ -69,6 +69,7 @@ set(objc_rfc822_files
 
 set(objc_smtp_files
   objc/smtp/MCOSMTPOperation.mm
+  objc/smtp/MCOSMTPLoginOperation.mm
   objc/smtp/MCOSMTPSendOperation.mm
   objc/smtp/MCOSMTPNoopOperation.mm
   objc/smtp/MCOSMTPSession.mm

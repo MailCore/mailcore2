@@ -11,6 +11,7 @@
 #include "MCAsyncSMTP.h"
 
 #import "MCOUtils.h"
+#import "MCOSMTPLoginOperation.h"
 #import "MCOSMTPSendOperation.h"
 #import "MCOSMTPNoopOperation.h"
 #import "MCOSMTPOperation.h"
@@ -102,6 +103,14 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
 }
 
 #pragma mark - Operations
+
+- (MCOSMTPOperation *) loginOperation
+{
+    mailcore::SMTPOperation * coreOp = MCO_NATIVE_INSTANCE->loginOperation();
+    MCOSMTPLoginOperation * result = [[[MCOSMTPLoginOperation alloc] initWithMCOperation:coreOp] autorelease];
+    [result setSession:self];
+    return result;
+}
 
 - (MCOSMTPSendOperation *) sendOperationWithData:(NSData *)messageData
 {
