@@ -1275,6 +1275,15 @@ void String::appendBytes(const char * bytes, unsigned int length, const char * c
     else {
         CFStringRef encodingName = CFStringCreateWithCString(NULL, charset, kCFStringEncodingUTF8);
         encoding = CFStringConvertIANACharSetNameToEncoding(encodingName);
+        if (encoding == kCFStringEncodingBig5) {
+            encoding = kCFStringEncodingBig5_HKSCS_1999;
+        }
+        if (encoding == kCFStringEncodingGBK_95) {
+            encoding = kCFStringEncodingGB_18030_2000;
+        }
+        if (encoding == kCFStringEncodingGB_2312_80) {
+            encoding = kCFStringEncodingGB_18030_2000;
+        }
         CFRelease(encodingName);
     }
     CFStringRef cfStr = CFStringCreateWithBytes(NULL, (const UInt8 *) bytes, (CFIndex) length, encoding, false);
