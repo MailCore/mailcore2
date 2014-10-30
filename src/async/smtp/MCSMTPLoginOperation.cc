@@ -2,8 +2,8 @@
 //  MCSMTPLoginOperation.cc
 //  mailcore2
 //
-//  Created by Robert Widmann on 9/24/13.
-//  Copyright (c) 2013 MailCore. All rights reserved.
+//  Created by Hironori Yoshida on 10/29/14.
+//  Copyright (c) 2014 MailCore. All rights reserved.
 //
 
 #include "MCSMTPLoginOperation.h"
