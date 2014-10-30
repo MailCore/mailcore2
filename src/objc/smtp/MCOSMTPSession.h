@@ -91,7 +91,7 @@
 /**
  Returns an operation that will perform a login.
  
- MCOPOPOperation * op = [session loginOperation];
+ MCOSMTPOperation * op = [session loginOperation];
  [op start:^(NSError * error) {
  ...
  }];
