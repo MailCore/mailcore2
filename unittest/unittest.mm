@@ -86,6 +86,7 @@
     NSString * _parserPath;
     NSString * _builderOutputPath;
     NSString * _parserOutputPath;
+    NSString * _charsetDetectionPath;
 }
 
 - (void)setUp {
@@ -96,6 +97,7 @@
     _builderOutputPath = [_mainPath stringByAppendingPathComponent:@"builder/output"];
     _parserPath = [_mainPath stringByAppendingPathComponent:@"parser/input"];
     _parserOutputPath = [_mainPath stringByAppendingPathComponent:@"parser/output"];
+    _charsetDetectionPath = [_mainPath stringByAppendingPathComponent:@"charset-detection"];
 }
 
 - (void)tearDown {
@@ -189,6 +191,22 @@
         NSDictionary * expectedResult = [NSJSONSerialization JSONObjectWithData:expectedData options:0 error:NULL];
         
         XCTAssertEqualObjects(result, expectedResult, @"file %@", name);
+    }
+}
+
+- (void)testCharsetDetection {
+    NSArray * list = [[NSFileManager defaultManager] subpathsAtPath:_charsetDetectionPath];
+    for(NSString * name in list) {
+        NSString * path = [_charsetDetectionPath stringByAppendingPathComponent:name];
+        BOOL isDirectory = NO;
+        [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDirectory];
+        if (isDirectory) {
+            continue;
+        }
+        NSData * data = [NSData dataWithContentsOfFile:path];
+        NSString * charset = MCO_TO_OBJC([data mco_mcData]->charsetWithFilteredHTML(false));
+        charset = [charset lowercaseString];
+        XCTAssertEqualObjects([[name lastPathComponent] stringByDeletingPathExtension], charset);
     }
 }
 
