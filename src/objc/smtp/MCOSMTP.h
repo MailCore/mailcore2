@@ -11,7 +11,6 @@
 #define MAILCORE_MCOSMTP_H
 
 #import <MailCore/MCOSMTPSession.h>
-#import <MailCore/MCOSMTPLoginOperation.h>
 #import <MailCore/MCOSMTPSendOperation.h>
 #import <MailCore/MCOSMTPOperation.h>
 

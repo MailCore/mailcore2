@@ -183,7 +183,6 @@ objc/pop/MCOPOPFetchMessagesOperation.h
 objc/pop/MCOPOPMessageInfo.h
 objc/smtp/MCOSMTP.h
 objc/smtp/MCOSMTPSession.h
-objc/smtp/MCOSMTPLoginOperation.h
 objc/smtp/MCOSMTPSendOperation.h
 objc/smtp/MCOSMTPOperation.h
 objc/nntp/MCONNTP.h
