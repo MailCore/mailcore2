@@ -89,6 +89,16 @@
 /** @name Operations */
 
 /**
+ Returns an operation that will perform a login.
+ 
+ MCOSMTPOperation * op = [session loginOperation];
+ [op start:^(NSError * error) {
+ ...
+ }];
+ */
+- (MCOSMTPOperation *) loginOperation;
+
+/**
  Returns an operation that will send the given message through SMTP.
  It will use the recipient set in the message data (To, Cc and Bcc).
  It will also filter out Bcc from the content of the message.
