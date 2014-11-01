@@ -37,6 +37,10 @@
 
 using namespace mailcore;
 
+static String * s_unicode160 = NULL;
+static String * s_unicode133 = NULL;
+static String * s_unicode2028 = NULL;
+
 #if DISABLE_ICU
 static int32_t u_strlen(const UChar *s) {
     if (s == NULL) {
@@ -1961,18 +1965,20 @@ String * String::stripWhitespace()
     str->replaceOccurrencesOfString(MCSTR("\v"), MCSTR(" "));
     str->replaceOccurrencesOfString(MCSTR("\f"), MCSTR(" "));
     str->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
-    UChar ch[2];
-    ch[0] = 160;
-    ch[1] = 0;
-    str->replaceOccurrencesOfString(String::stringWithCharacters(ch), MCSTR(" "));
-    ch[0] = 133;
-    ch[1] = 0;
-    str->replaceOccurrencesOfString(String::stringWithCharacters(ch), MCSTR(" "));
-    
+    str->replaceOccurrencesOfString(s_unicode160, MCSTR(" "));
+    str->replaceOccurrencesOfString(s_unicode133, MCSTR(" "));
+    str->replaceOccurrencesOfString(s_unicode2028, MCSTR(" "));
+
     while (str->replaceOccurrencesOfString(MCSTR("  "), MCSTR(" ")) > 0) {
         /* do nothing */
     }
-    
+    while (str->hasPrefix(MCSTR(" "))) {
+        str->deleteCharactersInRange(RangeMake(0, 1));
+    }
+    while (str->hasSuffix(MCSTR(" "))) {
+        str->deleteCharactersInRange(RangeMake(str->length() - 1, 1));
+    }
+
     str->autorelease();
     return str;
 }
@@ -2418,4 +2424,11 @@ __attribute__((constructor))
 static void initialize()
 {
     Object::registerObjectConstructor("mailcore::String", &createObject);
+
+    UChar chars_160[1] = {160};
+    s_unicode160 = new String(chars_160, 1);
+    UChar chars_133[1] = {133};
+    s_unicode133 = new String(chars_133, 1);
+    UChar chars_2028[1] = {0x2028};
+    s_unicode2028 = new String(chars_2028, 1);
 }
