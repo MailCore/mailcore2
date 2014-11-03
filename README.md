@@ -34,6 +34,12 @@ MailCore 2 provides a simple and asynchronous Objective-C API to work with the e
     * Add `CFNetwork.framework`
 	* Add `Security.framework`
     * Set 'Other Linker Flags': `-luchardet-ios -lctemplate-ios -letpan-ios -lxml2 -lsasl2 -liconv -ltidy -lz` `-lc++ -stdlib=libc++ -ObjC`
+    * Add the following to 'Library Search Paths':
+        * $(SRCROOT)/../mailcore2/Externals/ctemplate-ios/lib
+        * $(SRCROOT)/../mailcore2/Externals/libetpan-ios/lib
+        * $(SRCROOT)/../mailcore2/Externals/tidy-html5-ios/lib
+        * $(SRCROOT)/../mailcore2/Externals/uchardet-ios/lib
+        * $(SRCROOT)/../mailcore2/Externals/libsasl-ios/lib
     * Make sure to use LLVM C++ standard library.  Open Build Settings, scroll down to 'C++ Standard Library', and select `libc++`.
     * In Build Phases, add a Target Dependency of `static mailcore2 ios`.
 6. Profit.
