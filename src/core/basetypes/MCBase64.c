@@ -65,7 +65,7 @@ char * MCEncodeBase64(const char * in, int len)
     return output;
 }
 
-char * MCDecodeBase64(const char * in, int len)
+char * MCDecodeBase64(const char * in, int len, int * p_outlen)
 {
     char * output, * out;
     int i, c1, c2, c3, c4;
@@ -106,6 +106,9 @@ char * MCDecodeBase64(const char * in, int len)
     }
     
     *output = 0;
-    
+    if (p_outlen != NULL) {
+        *p_outlen = (int) (output - out);
+    }
+
     return out;
 }

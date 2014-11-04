@@ -2396,8 +2396,10 @@ bool String::isEqualCaseInsensitive(String * otherString)
 Data * String::decodedBase64Data()
 {
     const char * utf8 = UTF8Characters();
-    char * decoded = MCDecodeBase64(utf8, (unsigned int) strlen(utf8));
-    Data * result = Data::dataWithBytes(decoded, (unsigned int) strlen(decoded));
+    unsigned int encoded_len = (unsigned int) strlen(utf8);
+    int decoded_len = 0;
+    char * decoded = MCDecodeBase64(utf8, encoded_len, &decoded_len);
+    Data * result = Data::dataWithBytes(decoded, decoded_len);
     free(decoded);
     return result;
 }

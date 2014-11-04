@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-extern char * MCDecodeBase64(const char * in, int len);
+extern char * MCDecodeBase64(const char * in, int len, int * p_outlen);
 extern char * MCEncodeBase64(const char * in, int len);
 
 #ifdef __cplusplus
