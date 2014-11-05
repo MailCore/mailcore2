@@ -1,0 +1,174 @@
+Delivered-To: kana.tanuma@gmail.com
+Received: by 10.223.70.193 with SMTP id e1cs109595faj;
+        Tue, 15 Nov 2011 15:09:05 -0800 (PST)
+Received: by 10.68.19.129 with SMTP id f1mr49042553pbe.3.1321398537148;
+        Tue, 15 Nov 2011 15:08:57 -0800 (PST)
+Return-Path: <admin@ml.smile-etc.jp>
+Received: from nm8.bullet.mail.ird.yahoo.com (nm8.bullet.mail.ird.yahoo.com. [77.238.189.23])
+        by mx.google.com with SMTP id q10si32538476pbb.229.2011.11.15.15.08.55;
+        Tue, 15 Nov 2011 15:08:57 -0800 (PST)
+Received-SPF: neutral (google.com: 77.238.189.23 is neither permitted nor denied by domain of admin@ml.smile-etc.jp) client-ip=77.238.189.23;
+Authentication-Results: mx.google.com; spf=neutral (google.com: 77.238.189.23 is neither permitted nor denied by domain of admin@ml.smile-etc.jp) smtp.mail=admin@ml.smile-etc.jp; dkim=pass (test mode) header.i=@yahoo.com
+Received: from [77.238.189.53] by nm8.bullet.mail.ird.yahoo.com with NNFMP; 15 Nov 2011 23:08:53 -0000
+Received: from [212.82.108.112] by tm6.bullet.mail.ird.yahoo.com with NNFMP; 15 Nov 2011 23:08:53 -0000
+Received: from [127.0.0.1] by omp1021.mail.ird.yahoo.com with NNFMP; 15 Nov 2011 23:08:53 -0000
+X-Yahoo-Newman-Property: ymail-3
+X-Yahoo-Newman-Id: 737909.15643.bm@omp1021.mail.ird.yahoo.com
+Received: (qmail 30703 invoked by uid 6007); 15 Nov 2011 23:08:53 -0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s1024; t=1321398533; bh=5Y/HZMtzhL6YdpFNa8sBIOQAcj269g/zCb0jSvnVxjs=; h=X-Yahoo-Forwarded:Return-Path:Received-SPF:X-YMailISG:X-Originating-IP:Authentication-Results:Received:MIME-version:Content-transfer-encoding:Content-type:Received:Received:Date-warning:Date:From:Message-id:Subject:X-MAILNO:X-SENDDATE:X-USERID:To; b=KjWSe05wYxSp9bCXpJuNMAloguyrJsEr5on7PEfQ+2Xwu2XrcxqTI9ovN5MncPYBvMkc0yU+SLgU211yKtEz70YPqam6XyhZj4k39OOWsKBFGAcyejhZJvasJSY7pJN3iv0Dqwj+RmusjIYs66WKxr+zwxsF/3+gMXdTP0RLvuA=
+X-Yahoo-Forwarded: from kana_chika@yahoo.fr to kana.tanuma@gmail.com
+Return-Path: <admin@ml.smile-etc.jp>
+Received-SPF: pass (domain of ml.smile-etc.jp designates 202.211.207.9 as permitted sender)
+ 44OT44K544KS44GU5Yip55So44GE44Gf44Gg44GNCuiqoOOBq.OBguOCiuOB
+ jOOBqOOBhuOBlOOBluOBhOOBvuOBmeOAggoo5pys44Oh44O844Or44Gv44GK
+ 55.l44KJ44Gb44Oh44O844Or44KS5biM5pyb44GV44KM44Gm44GE44KL5pa5
+ 44Gr44GK6YCB44KK44GX44Gm44GE44G.44GZ44CC77yJCi0tLS0tLS0tLS0t
+ LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+ LS0tLS0tLS0tLS0tATABAQEB
+X-YMailISG: w.zG2H0WLDtACkpBYHDuIEtv1fH_Zk1IXQ93ckRkHUDkhFjL
+ gK7fIXIWDgqnJb3MY6nDzlRCl5pQPXe_zslwHlLSHWDz9pZizhB9CIeILfAt
+ 8IscSzjhF1rpq.4hRNq6WOoikAl5QdxMYuBEfy1itQumvicvvMe3B.A4SZZc
+ fopPcDncRtu8LcR593pwWzDUPcpXr.mfL3x13HAO3rqx6_7WLfyQ7wyBJuAA
+ gELx8BslF93eurz_jywIrq.o1GdiOqn29ZlsAPXto_pgQbWlBA_J4FCMcbQw
+ JW7aeKE1xzDh4VZAV.gQ5Sz19UDj0I_t4Rt4QW5uYnaidDXU7AKQpG3.C61C
+ V15o7YntMvu8vL8.60.LCnCkihkpMeyoSL3YFmD3TUHT_Glm.ARrNUf.I5vU
+ 8CIvLzmAqRzkbS11W_bZQ2VLQUS8Bydnt_s8yRMfDyQ72X0LbeL2enzEY_M0
+ ArQ9a5h8z5xZ3Bpkf8oCeiRKJ6Kvt64Pe81X_WgJH3KqyS5_Z2X.ilGLwUhw
+ k0wu2QTzGrVoblpIvecCX7b3LIGNuVubnVmQzqL_SEz5JW2dON11To7KQFWY
+ ltpVK1fVMdciWAOLhUb4NPNqRO9bkZANe3LKf9ZYqh3LOCkCjv00uC.lSdSr
+ R5bsGbha5c8BbFt1TdpLGdryeFuesEa8ch_5SMnaxdBO6OOFOWAq2o6_cXzZ
+ qW6T66png587HFmXBbUmoCEU7c._5y6HNIXctC4fwLrJxK1q8cN7lJMe29HI
+ G6b.XgHMZSFITXSM58i1AqvBKF5BRmeMuQNbtbzsV7IhuNnVtJVSfTNWhYwk
+ KNVwGT5XiCH4W6WYoucfk1uGgEKXc2IHM0Q_h2.HEDEssLDMURxiqQR.TmRw
+ OTt4AoAeLz4zmNWqiS__pD6oALZdAn_7a3oHnoIuVfCI5M7MRNYkqOCuucz8
+ lHuKR0M6G8RxonSiFYsO0y.RuNmLSPEg.Rifhh5UeDr92ksQQ7lnitdn.8aY
+ TdHGlJpl9A_qzF98E51RYyNHgR.60s5mfF6ho5OpgcsOyNU_ThiNsh4M_5fV
+ XHPlmjqOuPEtdN.Te4DD4SH8y2bNyv_naq6UuymGAbN2OPkEwxbefltPOy2i
+ cYt9qBNEh5fQfJn1aDf9MlVdvyycpO_wUVfXIoE_twt727ukdmXpnF4BBeiU
+ _Zui6o2q9YR2WAoM
+X-Originating-IP: [202.211.207.9]
+Authentication-Results: mta1021.mail.ird.yahoo.com  from=ml.smile-etc.jp; domainkeys=neutral (no sig);  from=ml.smile-etc.jp; dkim=neutral (no sig)
+Received: from 127.0.0.1  (EHLO ml.etc-plaza.jp) (202.211.207.9)
+  by mta1021.mail.ird.yahoo.com with SMTP; Tue, 15 Nov 2011 23:08:53 +0000
+MIME-version: 1.0
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=iso-2022-jp
+Received: from mailsrvp1p.ml.etc-plaza.jp ([172.24.6.175])
+ by ml.etc-plaza.jp (dourojigyousya)
+ with ESMTP id <0LUQ00CFI5MRTN20@ml.etc-plaza.jp> for kana_chika@yahoo.fr; Wed,
+ 16 Nov 2011 08:08:51 +0900 (JST)
+Received: from ml.etc-plaza.jp ([172.24.6.175]) by mailsrvp1p.ml.etc-plaza.jp
+ (dourojigyousya) with ESMTP id <0LUQ001HX5MMT2O0@mailsrvp1p.ml.etc-plaza.jp>
+ for kana_chika@yahoo.fr; Wed, 16 Nov 2011 08:08:51 +0900 (JST)
+Date-warning: Date header was inserted by mailsrvp1p.ml.etc-plaza.jp
+Date: Wed, 16 Nov 2011 08:08:51 +0900 (JST)
+From: =?iso-2022-jp?B?GyRCI0UjVCNDJV4lJCVsITwlOCU1ITwlUyU5O3ZMMzZJGyhC?=
+ <admin@ml.smile-etc.jp>
+Message-id: <18750399.1171.1321398531003.JavaMail.jhetc@mailapl1>
+Subject: =?iso-2022-jp?B?GyRCI0UjVCNDJV4lJCVsITwlOCQrJGkkTiQqQ04kaSQ7GyhC?=
+X-MAILNO: 103-111115-92277383
+X-SENDDATE: 20111116080850
+X-USERID: 111050185121
+To: Undisclosed recipients: ;
+
+いつもＥＴＣマイレージサービスをご利用いただき
+誠にありがとうございます。
+(本メールはお知らせメールを希望されている方にお送りしています。）
+--------------------------------------------------------------------
+
+★☆ お知らせ内容 ☆★
+　　　　◆【重要】システム一時停止（サーバーメンテナンスのため）
+　　　　◆ご利用のＥＴＣカード番号に変更があった方へ
+　　　　◆お引越しなどで住所等に変更があった方へ
+　　　　◆ポイントについて
+　　　　◆お問合せ時のお願い
+--------------------------------------------------------------------
+
+◆システム一時停止【サーバーメンテナンスのため】(１０時間程度）
+
+　　◇◆平成２３年１１月２９日（火）２２時から翌朝８時頃まで◆◇
+
+　・ポイント・還元額の残高照会やポイント交換などのインターネット及び
+　　自動音声ダイヤルによるサービスがご利用になれません。
+　・ＥＴＣ走行や還元額（無料走行分）のご利用には、影響ありません。
+
+　　ご迷惑をおかけしますが、ご理解とご協力の程よろしくお願いします。
+--------------------------------------------------------------------
+
+◆ご利用のＥＴＣカード番号に変更があった方へ
+
+　　★ＥＴＣカードの情報に変更がある場合　
+　　　こちらからログインのうえお手続きお願いします。
+　　　→　 http://www.smile-etc.jp/
+　　上記ログイン後　「カード情報変更」画面へ
+
+　　・変更したＥＴＣカードは変更完了日の翌日午前０時から適用されます。
+　　・ＥＴＣカード有効期限の変更があった場合も登録変更をお願いします。
+　　・ご利用停止中は、書面によりお手続きお願いします。
+　　　　こちらから　→　http://www.smile-etc.jp/guide/pdf/02.pdf
+
+　注：ご利用のＥＴＣカードを変更された場合、ご登録のＥＴＣカード番号の
+　　　変更のお手続きを行わないと、新しいＥＴＣカードでご走行されても、
+　　　ポイントは貯まりません。
+　　　また、還元額（無料走行分）をお持ちの場合でも、還元額はご利用いた
+　　　だけませんのでご注意ください。
+
+　　　なお、お手続きが完了する前に新しいＥＴＣカードでご走行された分に
+　　　ついては、遡ってポイントをお付けすることはできませんので、ご了承
+　　　ください。
+--------------------------------------------------------------------
+
+◆お引越しなどで住所等を変更された方へ
+
+　　『ポイント残高のお知らせ』は、ご登録の住所にお送りします。
+　　ご登録住所が変更されておらず、お届けできないケースが増えています。
+　　お引越しなどで、住所変更された方はご登録住所の変更をお願いします。
+
+　　★住所等の登録情報を確認および変更する場合　
+　　こちらからログインのうえお手続きお願いします。
+　　→ http://www.smile-etc.jp/MlgUserInfChange.html
+　　上記ログイン後、住所等の確認をお願いします。
+--------------------------------------------------------------------
+
+◆ポイントについて
+
+　　・ポイントは、ご利用月の「翌月２０日」にお付けします。
+
+　　・ポイントの有効期間〔還元額（無料走行分）に交換できる期間〕は
+　　　最大２年です。
+　　　ポイントが付いた年度（４月〜翌３月）の翌年度末までです。
+
+　　・自動還元サービスをご利用でも、各会社、公社毎のポイントが１０００
+　　　ポイント未満の場合は、自動交換されませんのでご注意下さい。
+
+　　・各会社、公社間のポイントは合算できません。
+　（ＮＥＸＣＯ東/中/西日本と宮城県道路公社のポイントは合算されます。）
+
+　　・複数カード間のポイント・還元額は合算できません。
+--------------------------------------------------------------------
+
+◆お問合せ時のお願い
+
+　　・ご登録のご本人様以外からお電話によるお問合せは、概要説明のみと
+　　　させていただきます。ご家族、ご友人等からの詳細のお問合せは、
+ 　　 個人情報保護の観点からお答えできませんのでご了承ください。
+
+　　・社員様等の個人名でご登録されている法人様につきましても、ご登録の
+　　　社員ご本人様からのお電話のみ詳細をお答えします。
+--------------------------------------------------------------------
+
+　◇◆◇　ＥＴＣマイレージサービス事務局　◇◆◇
+
+　　　　０５７０−０１０１２５　（ナビダイヤル）
+
+　　　　携帯電話、ＰＨＳ、ＩＰ電話などでのご利用は
+　　　　０４５−４７７−３７９３
+　　　　（受付：平日９時〜２１時、土日祝日９時〜１８時）
+--------------------------------------------------------------------
+東/中/西日本高速道路(株)・阪神高速道路(株)・本州四国連絡高速道路(株）
+--------------------------------------------------------------------
+　　本メールは配信専用です。
+　　配信停止等のお手続きは、下記ログイン後、「登録情報変更」画面より
+　　「お知らせメール」を「希望しない」へ変更してください。
+　　　　→　 http://www.smile-etc.jp/
+　　「マイレージＩＤ」と「パスワード」をご用意のうえご利用ください。

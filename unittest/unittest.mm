@@ -87,17 +87,20 @@
     NSString * _builderOutputPath;
     NSString * _parserOutputPath;
     NSString * _charsetDetectionPath;
+    NSString * _summaryDetectionPath;
+    NSString * _summaryDetectionOutputPath;
 }
 
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
     _mainPath = [[[NSBundle bundleForClass:[self class]] resourcePath] stringByAppendingPathComponent:@"data"];
     _builderPath = [_mainPath stringByAppendingPathComponent:@"builder/input"];
     _builderOutputPath = [_mainPath stringByAppendingPathComponent:@"builder/output"];
     _parserPath = [_mainPath stringByAppendingPathComponent:@"parser/input"];
     _parserOutputPath = [_mainPath stringByAppendingPathComponent:@"parser/output"];
     _charsetDetectionPath = [_mainPath stringByAppendingPathComponent:@"charset-detection"];
+    _summaryDetectionPath = [_mainPath stringByAppendingPathComponent:@"summary/input"];
+    _summaryDetectionOutputPath = [_mainPath stringByAppendingPathComponent:@"summary/output"];
 }
 
 - (void)tearDown {
@@ -207,6 +210,37 @@
         NSString * charset = MCO_TO_OBJC([data mco_mcData]->charsetWithFilteredHTML(false));
         charset = [charset lowercaseString];
         XCTAssertEqualObjects([[name lastPathComponent] stringByDeletingPathExtension], charset);
+    }
+}
+
+- (void)testSummary {
+    NSArray * list = [[NSFileManager defaultManager] subpathsAtPath:_summaryDetectionPath];
+    for(NSString * name in list) {
+        NSString * path = [_summaryDetectionPath stringByAppendingPathComponent:name];
+        BOOL isDirectory = NO;
+        [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDirectory];
+        if (isDirectory) {
+            continue;
+        }
+        NSData * data = [NSData dataWithContentsOfFile:path];
+        MCOMessageParser * parser = [MCOMessageParser messageParserWithData:data];
+        NSString * str = [parser plainTextRendering];
+
+//        NSString * outputPath = [@"/Users/hoa/mc2-results/summary" stringByAppendingPathComponent:name];
+//        outputPath = [[outputPath stringByDeletingPathExtension] stringByAppendingPathExtension:@"txt"];
+//        NSString * directory = [outputPath stringByDeletingLastPathComponent];
+//        [[NSFileManager defaultManager] createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:NULL];
+//        [str writeToFile:outputPath atomically:YES encoding:NSUTF8StringEncoding error:NULL];
+
+        NSString * resultPath = [_summaryDetectionOutputPath stringByAppendingPathComponent:name];
+        resultPath = [[resultPath stringByDeletingPathExtension] stringByAppendingPathExtension:@"txt"];
+        NSData * resultData = [NSData dataWithContentsOfFile:resultPath];
+        if (resultData == nil) {
+            NSLog(@"test %@ is a well-known failing test", name);
+            continue;
+        }
+
+        XCTAssertEqualObjects(str, [[NSString alloc] initWithData:resultData encoding:NSUTF8StringEncoding]);
     }
 }
 

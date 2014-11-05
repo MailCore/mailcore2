@@ -1,0 +1,12 @@
+Sender: =?utf-8?Q?=D0=92=D0=B5=D1=81=D1=82=D0=BD=D0=B8=D0=BA=20=D0=A7=D0=B8=D0=BF=D1=82=D1=80=D0=B8=D0=BF=D0=B0=C2=AE=20:)?=
+ <cheaptripinsider@mail139-244.wdc04.mandrillapp.com>
+From: =?utf-8?Q?=D0=92=D0=B5=D1=81=D1=82=D0=BD=D0=B8=D0=BA=20=D0=A7=D0=B8=D0=BF=D1=82=D1=80=D0=B8=D0=BF=D0=B0=C2=AE=20:)?=
+ <cheaptripinsider@moitrip.ru>
+To: mimekit@example.com
+Subject: test of empty multipart/alternative
+Date: Tue, 12 Nov 2013 09:12:42 -0500
+MIME-Version: 1.0
+Message-ID: <54AD68C9E3B0184CAC6041320424FD1B5B81E74D@localhost.localdomain>
+X-Mailer: Microsoft Office Outlook 12.0
+Content-Type: plain/text
+

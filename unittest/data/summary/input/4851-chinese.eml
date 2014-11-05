@@ -1,0 +1,103 @@
+Delivered-To: t.eichmann@eggsist.com
+Received: by 10.52.72.98 with SMTP id c2cs136194vdv;
+        Sun, 27 Nov 2011 02:27:39 -0800 (PST)
+Received: by 10.227.59.203 with SMTP id m11mr1207091wbh.18.1322389658210;
+        Sun, 27 Nov 2011 02:27:38 -0800 (PST)
+Return-Path: <everybody+bncCLi78Pj9CxCQocj2BBoEJD2Low@eggsist.com>
+Received: from mail-ey0-f198.google.com (mail-ey0-f198.google.com [209.85.215.198])
+        by mx.google.com with ESMTPS id l71si2409077weq.43.2011.11.27.02.27.28
+        (version=TLSv1/SSLv3 cipher=OTHER);
+        Sun, 27 Nov 2011 02:27:38 -0800 (PST)
+Received-SPF: pass (google.com: domain of everybody+bncCLi78Pj9CxCQocj2BBoEJD2Low@eggsist.com designates 209.85.215.198 as permitted sender) client-ip=209.85.215.198;
+Authentication-Results: mx.google.com; spf=pass (google.com: domain of everybody+bncCLi78Pj9CxCQocj2BBoEJD2Low@eggsist.com designates 209.85.215.198 as permitted sender) smtp.mail=everybody+bncCLi78Pj9CxCQocj2BBoEJD2Low@eggsist.com
+Received: by eaaq12 with SMTP id q12sf1067628eaa.9
+        for <multiple recipients>; Sun, 27 Nov 2011 02:27:28 -0800 (PST)
+Received: by 10.227.199.141 with SMTP id es13mr1279825wbb.1.1322389648439;
+        Sun, 27 Nov 2011 02:27:28 -0800 (PST)
+X-BeenThere: everybody@eggsist.com
+Received: by 10.180.77.233 with SMTP id v9ls2806678wiw.4.gmail; Sun, 27 Nov
+ 2011 02:27:28 -0800 (PST)
+Received: by 10.180.109.106 with SMTP id hr10mr51414290wib.9.1322389648275;
+        Sun, 27 Nov 2011 02:27:28 -0800 (PST)
+Received: by 10.180.109.106 with SMTP id hr10mr51414289wib.9.1322389648267;
+        Sun, 27 Nov 2011 02:27:28 -0800 (PST)
+Received: from mail-ey0-f180.google.com (mail-ey0-f180.google.com [209.85.215.180])
+        by mx.google.com with ESMTPS id ek8si6281760wbb.1.2011.11.27.02.27.28
+        (version=TLSv1/SSLv3 cipher=OTHER);
+        Sun, 27 Nov 2011 02:27:28 -0800 (PST)
+Received-SPF: pass (google.com: domain of s.roncari@eggsist.com designates 209.85.215.180 as permitted sender) client-ip=209.85.215.180;
+Received: by eaac11 with SMTP id c11so2319154eaa.39
+        for <everybody@eggsist.com>; Sun, 27 Nov 2011 02:27:27 -0800 (PST)
+Received: by 10.213.34.202 with SMTP id m10mr372505ebd.1.1322389647210; Sun,
+ 27 Nov 2011 02:27:27 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.14.119.142 with HTTP; Sun, 27 Nov 2011 02:27:06 -0800 (PST)
+From: Stefano Roncari <s.roncari@eggsist.com>
+Date: Sun, 27 Nov 2011 18:27:06 +0800
+Message-ID: <CAJTByT4iPErLhMtpebD34wDf95oCgTBrghakSR-HmsvEXoSOCw@mail.gmail.com>
+Subject: Cheeky Chuck Champ | Chinese name
+To: undisclosed-recipients:;
+Bcc: everybody@eggsist.com
+X-Original-Sender: s.roncari@eggsist.com
+X-Original-Authentication-Results: mx.google.com; spf=pass (google.com: domain
+ of s.roncari@eggsist.com designates 209.85.215.180 as permitted sender) smtp.mail=s.roncari@eggsist.com
+Precedence: list
+Mailing-list: list everybody@eggsist.com; contact everybody+owners@eggsist.com
+List-ID: <everybody.eggsist.com>
+X-Google-Group-Id: 882938910346
+List-Help: <http://www.google.com/support/a/eggsist.com/bin/static.py?hl=en_US&page=groups.cs>,
+ <mailto:everybody+help@eggsist.com>
+Content-Type: multipart/alternative; boundary=0015174c16e42d380204b2b4d588
+
+--0015174c16e42d380204b2b4d588
+Content-Type: text/plain; charset=GB2312
+Content-Transfer-Encoding: base64
+
+SGkgZXZlcnlvbmUhCldlIGhhdmUgdG8gY2hvb3NlIHRoZSBuYW1lIGZvciB0aGUgcGFpZCB2ZXJz
+aW9uIG9mIENoZWVreSBDaHVjayAod2hpY2gKYmFzaWNhbGx5IGluY2x1ZGVzIG1vcmUgbXVzaWMs
+IG1vcmUgYW5pbWF0aW9ucywgbW9yZSBjaGVla3kgYmVoYXZpb3VycywgYW5kCnRoZSBuZXcgInB1
+bmNoIG1vZGUiISkuClRoZSBFbmdsaXNoIG5hbWUgd2lsbCBiZSAiQ2hlZWt5IENodWNrIENoYW1w
+Ii4KCkknbSBzZW5kaW5nIHlvdSBhIGZldyBuYW1lIG9wdGlvbnMuCkVhY2ggb2YgeW91LCBwbGVh
+c2UgbGV0IG1lIGtub3cgd2hpY2ggbmFtZSB5b3UgcHJlZmVyIChtYXggMiBjaG9pY2VzISkKCi0t
+LS0tCgoKICAgMS4gxubG5t/H38djaGFtcAoKICAgMi4gxubG5t/H38e52r78sOYKCiAgIDMuIMbm
+xubfx9/Hs6y8trDmCgogICA0LiDG5sbm38ffx7rAu6qw5goKICAgNS4gxubG5t/H38fXpb/xsOYK
+CiAgIDYuIMbmxubfx9/H064KCiAgIDcuIMbmxubfx9/HyqQKCiAgIDguIMbmxubfx9/Hz97Bv7Dm
+CgogICA5LiDG5sbm38ffx87etdCw5goKICAgMTAuIMbmxubfx9/Hy63Kx7navvwKCiAgIDExLiDG
+5sbm38ffx7bhudrX3Lav1LEKCi0tLS0tCgpUaGFua3MsIGNoZWVycyEhCgpTdGV4CgoqRUdHc2lz
+dCBsaW1pdGVkKgpzdWl0ZSAyN2EsIHRvd2VyIGIsIG9yaWVudGFsIGtlbnpvCmRvbmd6aGltZW4s
+IGJlaWppbmcsIGNoaW5hCis4NiAoMDEwKSA4NDQ3NzA2Ngo=
+--0015174c16e42d380204b2b4d588
+Content-Type: text/html; charset=GB2312
+Content-Transfer-Encoding: quoted-printable
+
+Hi everyone!<div>We have to choose the name for the paid version of Cheeky =
+Chuck (which basically includes more music, more animations, more cheeky be=
+haviours, and the new &quot;punch mode&quot;!).</div><div>The English name =
+will be &quot;Cheeky Chuck Champ&quot;.</div>
+
+<div><br></div><div>I&#39;m sending you a few name options.</div><div>Each =
+of you, please let me know which name you prefer (max 2 choices!)</div><div=
+><br></div><div>-----</div><div><div><br></div><div><ol><li>=C6=E6=C6=E6=DF=
+=C7=DF=C7champ<br>
+
+<br></li><li>=C6=E6=C6=E6=DF=C7=DF=C7=B9=DA=BE=FC=B0=E6<br><br></li><li>=C6=
+=E6=C6=E6=DF=C7=DF=C7=B3=AC=BC=B6=B0=E6<br><br></li><li>=C6=E6=C6=E6=DF=C7=
+=DF=C7=BA=C0=BB=AA=B0=E6<br><br></li><li>=C6=E6=C6=E6=DF=C7=DF=C7=D7=A5=BF=
+=F1=B0=E6<br><br></li><li>=C6=E6=C6=E6=DF=C7=DF=C7=D3=AE<br><br></li><li>=
+=C6=E6=C6=E6=DF=C7=DF=C7=CA=A4<br><br></li><li>=C6=E6=C6=E6=DF=C7=DF=C7=CF=
+=DE=C1=BF=B0=E6<br><br></li><li>=C6=E6=C6=E6=DF=C7=DF=C7=CE=DE=B5=D0=B0=E6<=
+br><br></li><li>=C6=E6=C6=E6=DF=C7=DF=C7=CB=AD=CA=C7=B9=DA=BE=FC<br><br></l=
+i>
+
+<li>=C6=E6=C6=E6=DF=C7=DF=C7=B6=E1=B9=DA=D7=DC=B6=AF=D4=B1</li></ol></div><=
+/div><div>-----</div><div><br></div><div>Thanks, cheers!!</div><div><br></d=
+iv><div>Stex</div><div><br clear=3D"all"><span style=3D"border-collapse:col=
+lapse;font-family:arial, sans-serif;font-size:13px"><b style=3D"color:rgb(1=
+02, 102, 102)">EGGsist limited</b><br>
+
+suite 27a, tower b, oriental kenzo<br>dongzhimen, beijing, china<br>+86 (01=
+0) 84477066</span><br>
+</div><div><span style=3D"border-collapse:collapse;font-family:arial, sans-=
+serif;font-size:13px"><br></span></div>
+
+--0015174c16e42d380204b2b4d588--

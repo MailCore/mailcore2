@@ -1,0 +1,146 @@
+Delivered-To: help@dealcatcher.com
+Received: by 10.142.76.10 with SMTP id y10cs31093wfa;
+        Mon, 7 Feb 2011 07:46:12 -0800 (PST)
+Received: by 10.90.65.7 with SMTP id n7mr7170725aga.179.1297093571387;
+        Mon, 07 Feb 2011 07:46:11 -0800 (PST)
+Return-Path: <aol+bncCKGB6tmRExDCp8DqBBoErkZU6w@dealcatcher.com>
+Received: from mail-yw0-f70.google.com (mail-yw0-f70.google.com [209.85.213.70])
+        by mx.google.com with ESMTPS id i27si10572843anq.20.2011.02.07.07.46.11
+        (version=TLSv1/SSLv3 cipher=RC4-MD5);
+        Mon, 07 Feb 2011 07:46:11 -0800 (PST)
+Received-SPF: pass (google.com: domain of aol+bncCKGB6tmRExDCp8DqBBoErkZU6w@dealcatcher.com designates 209.85.213.70 as permitted sender) client-ip=209.85.213.70;
+Authentication-Results: mx.google.com; spf=pass (google.com: domain of aol+bncCKGB6tmRExDCp8DqBBoErkZU6w@dealcatcher.com designates 209.85.213.70 as permitted sender) smtp.mail=aol+bncCKGB6tmRExDCp8DqBBoErkZU6w@dealcatcher.com
+Received: by ywo32 with SMTP id 32sf3751488ywo.9
+        for <help@dealcatcher.com>; Mon, 07 Feb 2011 07:46:11 -0800 (PST)
+Received: by 10.90.95.11 with SMTP id s11mr9936614agb.29.1297093570961;
+        Mon, 07 Feb 2011 07:46:10 -0800 (PST)
+X-BeenThere: aol@dealcatcher.com
+Received: by 10.91.208.35 with SMTP id k35ls1170613agq.5.p; Mon, 07 Feb 2011
+ 07:46:10 -0800 (PST)
+Received: by 10.146.86.12 with SMTP id j12mr5019093yab.27.1297093570674;
+        Mon, 07 Feb 2011 07:46:10 -0800 (PST)
+Received: by 10.146.86.12 with SMTP id j12mr5019087yab.27.1297093570615;
+        Mon, 07 Feb 2011 07:46:10 -0800 (PST)
+Received: from omr-d24.mx.aol.com (omr-d24.mx.aol.com [205.188.249.68])
+        by mx.google.com with ESMTP id g1si6052714vch.20.2011.02.07.07.46.10;
+        Mon, 07 Feb 2011 07:46:10 -0800 (PST)
+Received-SPF: pass (google.com: domain of scomp@aol.net designates 205.188.249.68 as permitted sender) client-ip=205.188.249.68;
+Received: from scmp-m008.mail.aol.com (scmp-m008.mail.aol.com [172.21.155.170]) by omr-d24.mx.aol.com (v117.7) with ESMTP id MAILOMRD241-7d794d5013bd19a; Mon, 07 Feb 2011 10:46:05 -0500
+Received: from scomp@aol.net by scmp-m008.mail.aol.com; Mon, 07 Feb 2011 10:46:04 EST
+To: aol@dealcatcher.com
+From: scomp@aol.net
+Date: Mon, 07 Feb 2011 10:46:04 EST
+Subject: Email Feedback Report for IP 76.12.18.82
+MIME-Version: 1.0
+X-AOL-INRLY: email.dealcatcher.com [76.12.18.82] scmp-m008
+X-Loop: scomp
+X-AOL-IP: 172.21.155.170
+Message-ID: <201102071046.7d794d5013bd19a@omr-d24.mx.aol.com>
+X-Original-Sender: scomp@aol.net
+X-Original-Authentication-Results: mx.google.com; spf=pass (google.com: domain
+ of scomp@aol.net designates 205.188.249.68 as permitted sender) smtp.mail=scomp@aol.net
+Precedence: list
+Mailing-list: list aol@dealcatcher.com; contact aol+owners@dealcatcher.com
+List-ID: <aol.dealcatcher.com>
+List-Help: <http://www.google.com/support/a/dealcatcher.com/bin/static.py?hl=en_US&page=groups.cs>,
+ <mailto:aol+help@dealcatcher.com>
+Content-Type: multipart/report; report-type=feedback-report; boundary="boundary-1138-29572-2659438-5520"
+
+--boundary-1138-29572-2659438-5520
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+This is an email abuse report for an email message with the message-id of  received from IP address 76.12.18.82 on Mon,  7 Feb 2011 09:28:58 -0500 (EST)
+
+For information, please review the top portion of the following page:
+http://postmaster.aol.com/tools/fbl.html
+
+For information about AOL E-mail guidelines, please see
+http://postmaster.aol.com/guidelines/
+
+If you would like to cancel or change the configuration for your FBL please use the tool located at: 
+http://postmaster.aol.com/waters/fbl_change_form.html
+
+
+--boundary-1138-29572-2659438-5520
+Content-Disposition: inline
+Content-Type: message/feedback-report
+
+Feedback-Type: abuse
+User-Agent: AOL SComp
+Version: 0.1
+Received-Date: Mon,  7 Feb 2011 09:28:58 -0500 (EST)
+Source-IP: 76.12.18.82
+Reported-Domain: email.dealcatcher.com
+Redacted-Address: redacted
+Redacted-Address: redacted@
+
+
+--boundary-1138-29572-2659438-5520
+Content-Type: message/rfc822
+Content-Disposition: inline
+
+Received: from email.dealcatcher.com (email.dealcatcher.com [76.12.18.82])
+	by mtain-ma04.r1000.mx.aol.com (Internet Inbound) with ESMTP id 74E89380001BC
+	for <redacted@aol.com>; Mon,  7 Feb 2011 09:28:58 -0500 (EST)
+DomainKey-Signature: a=rsa-sha1; c=nofws;
+        d=email.dealcatcher.com; s=dealcatcheremail;
+        h=received:date:from:to:subject:mime-version:content-type;
+        b=Dnd0RfY5mP/HJZYxTZzLor+vMflxo7rNpVn4xNIe+piyHxc2U75NYc48gMHbuV5I5
+          A3yG/l5dR0DWnqQWLJAcw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=email.dealcatcher.com; s=dealcatcheremail;
+        h=content-type:mime-version:subject:to:from:date;
+        bh=SvKjvrZ851XTuD3qAItXr/UutOgkqw+b1XPu5AbWHZc=;
+        b=kc3uYsuAEuMqzuE4gR3cbXAyKLciHn3FYCGnT6l63kt5grtR/kqlQl3eJ6jLyong3
+          t4nFRQBrGsU+G3ssgkNMA==
+Received: from email.dealcatcher.com (UnknownHost [192.168.88.8]) by email.dealcatcher.com with SMTP;
+   Mon, 7 Feb 2011 09:28:39 -0500
+Date: Mon, 7 Feb 2011 09:17:50 -0500
+From: DealCatcher DealAlert <dealalert@email.dealcatcher.com>
+To: redacted@aol.com
+Subject: Deal Alerts for: dell
+Mime-Version: 1.0
+Content-Type: text/html; charset=utf-8
+x-aol-global-disposition: G
+X-AOL-SCOLL-SCORE: 1:2:422438432:93952408
+X-AOL-SCOLL-URL_COUNT: 4
+X-AOL-SCOLL-AUTHENTICATION: mail_rly_antispam_dkim-d251.1 ; domain : email.dealcatcher.com DKIM : pass
+x-aol-sid: 3039ac1d600c4d5001aa07a1
+X-AOL-IP: 76.12.18.82
+X-AOL-SPF: domain : email.dealcatcher.com SPF : pass
+
+<html>
+<body>
+
+    
+        We recently added the following deal that matched your alert for <b>dell</b>       
+    
+    <br/>
+    <br/>
+    
+        <a><img alt="996437661" src="http://d2gg0uigdtw9zz.cloudfront.net/large/996437661.jpg" /></a>
+        <br/>
+    
+    <b><a href="http://www.dealcatcher.com/monitors/dell-st2310-23-inch-full-hd-lcd-monitor?utm_source=dealalert&amp;utm_medium=email&amp;utm_content=dell&amp;utm_campaign=Dell Home">Dell Home - Dell ST2310 23-inch Full HD LCD Monitor <s> $599.00</s> $149.99</a></b>
+    
+    <br/><br/>
+
+<br/>
+Please do not reply to this email. If you need to contact DealCatcher.com with any questions or problems please use this
+link to <a href="http://www.dealcatcher.com/contact">contact us</a>.
+<br/><br/>
+DealCatcher.com <br/>
+2106 Silverside Road<br/>
+Suite 101<br/>
+Wilmington, DE 19810<br/>
+(302) 658-7441<br/><br/>
+tam3klm@aol.com <b>is currently signed up for the following Deal Alerts at DealCatcher.com:</b><br/><br/>
+
+    dell <b><a href="http://addalerts.com/do/users/remove_web?user_id=HOYmktw46hZddch6FxHg%2FA%3D%3D%0A&amp;alert_id=gYxQkvt46QcCi9AAD2Mirg%3D%3D%0A"> (Unsubscribe)</a></b>
+    <br/>
+
+</body>
+</html>
+
+--boundary-1138-29572-2659438-5520--
