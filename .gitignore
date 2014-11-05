@@ -2,6 +2,7 @@ Externals
 
 example/ios/iOS UI Test/DerivedData
 scripts/prebuilt.list
+scripts/installed-deps-versions.plist
 
 # Xcode
 .DS_Store
