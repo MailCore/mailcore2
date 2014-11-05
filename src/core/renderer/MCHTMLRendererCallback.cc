@@ -150,6 +150,10 @@ mailcore::HashMap * HTMLRendererTemplateCallback::templateValuesForPart(mailcore
     
     if (filename != NULL) {
         result->setObjectForKey(MCSTR("FILENAME"), filename->htmlEncodedString());
+        result->setObjectForKey(MCSTR("HASFILENAME"), mailcore::HashMap::hashMap());
+    }
+    else {
+        result->setObjectForKey(MCSTR("NOFILENAME"), mailcore::HashMap::hashMap());
     }
     
     if (part->className()->isEqual(MCSTR("mailcore::IMAPPart"))) {
@@ -219,10 +223,20 @@ mailcore::String * HTMLRendererTemplateCallback::templateForImage(AbstractPart *
 mailcore::String * HTMLRendererTemplateCallback::templateForAttachment(AbstractPart * part)
 {
     return MCSTR("{{#HASSIZE}}\
+                 {{#HASFILENAME}}\
                  <div>- {{FILENAME}}, {{SIZE}}</div>\
+                 {{/HASFILENAME}}\
+                 {{#NOFILENAME}}\
+                 <div>- Untitled, {{SIZE}}</div>\
+                 {{/NOFILENAME}}\
                  {{/HASSIZE}}\
                  {{#NOSIZE}}\
+                 {{#HASFILENAME}}\
                  <div>- {{FILENAME}}</div>\
+                 {{/HASFILENAME}}\
+                 {{#NOFILENAME}}\
+                 <div>- Untitled</div>\
+                 {{/NOFILENAME}}\
                  {{/NOSIZE}}\
                  ");
 }
