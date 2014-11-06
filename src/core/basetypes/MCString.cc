@@ -1295,23 +1295,36 @@ void String::appendBytes(const char * bytes, unsigned int length, const char * c
         return;
     }
     
-    CFStringRef cfStr = CFStringCreateWithBytes(NULL, (const UInt8 *) bytes, (CFIndex) length, encoding, false);
-    if (cfStr != NULL) {
-        CFDataRef data = CFStringCreateExternalRepresentation(NULL, cfStr, kCFStringEncodingUTF16LE, '_');
-        if (data != NULL) {
-            UChar * fixedData = (UChar *) malloc(CFDataGetLength(data));
-            memcpy(fixedData, CFDataGetBytePtr(data), CFDataGetLength(data));
-            unsigned int length = (unsigned int) CFDataGetLength(data) / 2;
-            for(int32_t i = 0 ; i < length ; i ++) {
-                if (fixedData[i] == 0) {
-                    fixedData[i] = ' ';
+    bool converted = false;
+    int conversionCount = 0;
+    while (!converted) {
+        CFStringRef cfStr = CFStringCreateWithBytes(NULL, (const UInt8 *) bytes, (CFIndex) length, encoding, false);
+        if (cfStr != NULL) {
+            converted = true;
+            CFDataRef data = CFStringCreateExternalRepresentation(NULL, cfStr, kCFStringEncodingUTF16LE, '_');
+            if (data != NULL) {
+                UChar * fixedData = (UChar *) malloc(CFDataGetLength(data));
+                memcpy(fixedData, CFDataGetBytePtr(data), CFDataGetLength(data));
+                unsigned int length = (unsigned int) CFDataGetLength(data) / 2;
+                for(int32_t i = 0 ; i < length ; i ++) {
+                    if (fixedData[i] == 0) {
+                        fixedData[i] = ' ';
+                    }
                 }
+                appendCharactersLength(fixedData, length);
+                free(fixedData);
+                CFRelease(data);
             }
-            appendCharactersLength(fixedData, length);
-            free(fixedData);
-            CFRelease(data);
+            CFRelease(cfStr);
         }
-        CFRelease(cfStr);
+        else {
+            length --;
+            conversionCount ++;
+            if (conversionCount > 10) {
+                // failed.
+                break;
+            }
+        }
     }
 #else
     UErrorCode err;

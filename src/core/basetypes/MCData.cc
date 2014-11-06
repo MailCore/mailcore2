@@ -315,25 +315,7 @@ String * Data::stringWithDetectedCharset(String * hintCharset, bool isHTML)
     
     // Remove whitespace at the end of the string to fix conversion.
     if (charset->isEqual(MCSTR("iso-2022-jp-2"))) {
-        const char * theBytes;
-        Data * data;
-        
-        theBytes = bytes();
-        data = this;
-        if (length() >= 2) {
-            unsigned int idx;
-            
-            idx = length();
-            while ((theBytes[idx - 1] == '\n') || (theBytes[idx - 1] == '\r')) {
-                idx --;
-                if (idx == 0)
-                    break;
-            }
-            
-            if (idx != length()) {
-                data = Data::dataWithBytes(theBytes, idx);
-            }
-        }
+        Data * data = this;
         result = data->stringWithCharset("iso-2022-jp-2");
         if (result == NULL) {
             result = data->stringWithCharset("iso-2022-jp");
