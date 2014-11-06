@@ -242,17 +242,17 @@ static bool isHintCharsetValid(String * hintCharset)
             "ISO-2022-CN",
             "ISO-2022-JP",
             "ISO-2022-KR",
-            "ISO-8859-5"
-            "windows-1251"
-            "KOI8-R"
-            "x-mac-cyrillic"
-            "IBM866"
-            "IBM855"
-            "ISO-8859-7"
-            "windows-1253"
-            "ISO-8859-2"
-            "windows-1250"
-            "TIS-620"
+            "ISO-8859-5",
+            "windows-1251",
+            "KOI8-R",
+            "x-mac-cyrillic",
+            "IBM866",
+            "IBM855",
+            "ISO-8859-7",
+            "windows-1253",
+            "ISO-8859-2",
+            "windows-1250",
+            "TIS-620",
         };
         for(unsigned int i = 0 ; i < sizeof(charset_list) / sizeof(charset_list[0]) ; i ++) {
             String * str = String::stringWithUTF8Characters(charset_list[i]);
