@@ -1,0 +1,33 @@
+Delivered-To: rong@xxxxx.com
+Received: by 10.70.100.99 with SMTP id ex3csp361721pdb;
+        Mon, 3 Nov 2014 15:02:24 -0800 (PST)
+X-Received: by 10.70.31.2 with SMTP id w2mr6070686pdh.128.1415055739733;
+        Mon, 03 Nov 2014 15:02:19 -0800 (PST)
+Return-Path: <support@xxxxx.com>
+Received: from JavaServer.localdomain (ec2-54-69-43-142.us-west-2.compute.amazonaws.com. [54.69.43.140])
+        by mx.google.com with ESMTP id mc2si16351177pdb.193.2014.11.03.15.02.19
+        for <rong@xxxxx.com>;
+        Mon, 03 Nov 2014 15:02:19 -0800 (PST)
+Received-SPF: softfail (google.com: domain of transitioning support@xxxxx.com does not designate 54.69.43.140 as permitted sender) client-ip=54.69.43.140;
+Authentication-Results: mx.google.com;
+       spf=softfail (google.com: domain of transitioning support@xxxxx.com does not designate 54.69.43.140 as permitted sender) smtp.mail=support@xxxxx.com
+Received: from localhost (localhost [127.0.0.1])
+        by JavaServer.localdomain (Postfix) with ESMTP id 0DF51178077
+        for <rong@xxxxx.com>; Mon,  3 Nov 2014 23:02:19 +0000 (UTC)
+Date: Mon, 3 Nov 2014 23:02:19 +0000 (UTC)
+From: xxxxx <support@xxxxx.com>
+Reply-To: support@xxxxx.com
+To: rong@xxxxx.com
+Message-ID: <926811750.37.1415055739022.JavaMail.javamailuser@localhost>
+Subject: Welcome to APPNAME
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+ 
+Welcome to APPNAME=E2=84=A2.
+ 
+Thanks for joining us!
+ 
+ 
+Sincerely,
+The dev team
