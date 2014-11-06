@@ -527,7 +527,19 @@ ConversionResult ConvertUTF8toUTF16 (
         /* Do this check whether lenient or strict */
         if (!isLegalUTF8(source, extraBytesToRead+1)) {
             result = sourceIllegal;
-            break;
+            if (flags == strictConversion) {
+                /* Abort conversion. */
+                break;
+            } else {
+                /*
+                 * Replace the maximal subpart of ill-formed sequence with
+                 * replacement character.
+                 */
+                source += findMaximalSubpartOfIllFormedUTF8Sequence(source,
+                                                                    sourceEnd);
+                *target++ = UNI_REPLACEMENT_CHAR;
+                continue;
+            }
         }
         /*
          * The cases all fall through. See "Note A" below.

@@ -1290,6 +1290,11 @@ void String::appendBytes(const char * bytes, unsigned int length, const char * c
         }
         CFRelease(encodingName);
     }
+    if (encoding == kCFStringEncodingUTF8) {
+        appendUTF8CharactersLength(bytes, length);
+        return;
+    }
+    
     CFStringRef cfStr = CFStringCreateWithBytes(NULL, (const UInt8 *) bytes, (CFIndex) length, encoding, false);
     if (cfStr != NULL) {
         CFDataRef data = CFStringCreateExternalRepresentation(NULL, cfStr, kCFStringEncodingUTF16LE, '_');
