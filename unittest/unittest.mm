@@ -26,11 +26,11 @@
 
 - (void) prepareForUnitTest
 {
-    if ([[self date] timeIntervalSinceNow] <= 2) {
+    if (fabs([[self date] timeIntervalSinceNow]) <= 2) {
         // Date might be generated, set to known date.
         [self setDate:[NSDate dateWithTimeIntervalSinceReferenceDate:0]];
     }
-    if ([[self receivedDate] timeIntervalSinceNow] <= 2) {
+    if (fabs([[self receivedDate] timeIntervalSinceNow]) <= 2) {
         // Date might be generated, set to known date.
         [self setReceivedDate:[NSDate dateWithTimeIntervalSinceReferenceDate:0]];
     }
@@ -224,6 +224,7 @@
         }
         NSData * data = [NSData dataWithContentsOfFile:path];
         MCOMessageParser * parser = [MCOMessageParser messageParserWithData:data];
+        [[parser header] prepareForUnitTest];
         NSString * str = [parser plainTextRendering];
 
 //        NSString * outputPath = [@"/Users/hoa/mc2-results/summary" stringByAppendingPathComponent:name];
