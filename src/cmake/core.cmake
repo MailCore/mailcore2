@@ -12,7 +12,7 @@ set(abstract_files
 IF(APPLE)
   set(basetypes_files_apple
     core/basetypes/MCAutoreleasePoolMac.mm
-    core/basetypes/MCMainThread.mm
+    core/basetypes/MCMainThreadMac.mm
     core/basetypes/MCObjectMac.mm
     core/basetypes/MCDataMac.mm
     core/rfc822/MCMessageParserMac.mm
