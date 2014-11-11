@@ -279,7 +279,7 @@
 		C64EA714169E847800778456 /* MCSet.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6B5169E847800778456 /* MCSet.cc */; };
 		C64EA716169E847800778456 /* MCString.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6B7169E847800778456 /* MCString.cc */; };
 		C64EA719169E847800778456 /* MCValue.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6BA169E847800778456 /* MCValue.cc */; };
-		C64EA71C169E847800778456 /* MCMainThread.mm in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6BD169E847800778456 /* MCMainThread.mm */; };
+		C64EA71C169E847800778456 /* MCMainThreadMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6BD169E847800778456 /* MCMainThreadMac.mm */; };
 		C64EA71D169E847800778456 /* MCOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6BE169E847800778456 /* MCOperation.cc */; };
 		C64EA720169E847800778456 /* MCOperationQueue.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6C1169E847800778456 /* MCOperationQueue.cc */; };
 		C64EA723169E847800778456 /* MCIMAPFolder.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6C5169E847800778456 /* MCIMAPFolder.cc */; };
@@ -611,7 +611,7 @@
 		C6BA2BA81705F4E6003F0E9E /* MCSet.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6B5169E847800778456 /* MCSet.cc */; };
 		C6BA2BA91705F4E6003F0E9E /* MCString.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6B7169E847800778456 /* MCString.cc */; };
 		C6BA2BAA1705F4E6003F0E9E /* MCValue.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6BA169E847800778456 /* MCValue.cc */; };
-		C6BA2BAB1705F4E6003F0E9E /* MCMainThread.mm in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6BD169E847800778456 /* MCMainThread.mm */; };
+		C6BA2BAB1705F4E6003F0E9E /* MCMainThreadMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6BD169E847800778456 /* MCMainThreadMac.mm */; };
 		C6BA2BAC1705F4E6003F0E9E /* MCOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6BE169E847800778456 /* MCOperation.cc */; };
 		C6BA2BAD1705F4E6003F0E9E /* MCOperationQueue.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6C1169E847800778456 /* MCOperationQueue.cc */; };
 		C6BA2BAE1705F4E6003F0E9E /* MCIMAPFolder.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6C5169E847800778456 /* MCIMAPFolder.cc */; };
@@ -1600,7 +1600,7 @@
 		C64EA6BA169E847800778456 /* MCValue.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCValue.cc; sourceTree = "<group>"; };
 		C64EA6BB169E847800778456 /* MCValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCValue.h; sourceTree = "<group>"; };
 		C64EA6BC169E847800778456 /* MCMainThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMainThread.h; sourceTree = "<group>"; };
-		C64EA6BD169E847800778456 /* MCMainThread.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCMainThread.mm; sourceTree = "<group>"; };
+		C64EA6BD169E847800778456 /* MCMainThreadMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCMainThreadMac.mm; sourceTree = "<group>"; };
 		C64EA6BE169E847800778456 /* MCOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCOperation.cc; sourceTree = "<group>"; };
 		C64EA6BF169E847800778456 /* MCOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOperation.h; sourceTree = "<group>"; };
 		C64EA6C0169E847800778456 /* MCOperationCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOperationCallback.h; sourceTree = "<group>"; };
@@ -2359,7 +2359,7 @@
 				C64EA6AF169E847800778456 /* MCLog.c */,
 				C64EA6B0169E847800778456 /* MCLog.h */,
 				C64EA6BC169E847800778456 /* MCMainThread.h */,
-				C64EA6BD169E847800778456 /* MCMainThread.mm */,
+				C64EA6BD169E847800778456 /* MCMainThreadMac.mm */,
 				C6D6F950171E5CB8006F5B28 /* MCMD5.cc */,
 				C6D6F951171E5CB8006F5B28 /* MCMD5.h */,
 				C6D6F952171E5CB8006F5B28 /* MCNull.cc */,
@@ -3076,7 +3076,7 @@
 				C64EA714169E847800778456 /* MCSet.cc in Sources */,
 				C64EA716169E847800778456 /* MCString.cc in Sources */,
 				C64EA719169E847800778456 /* MCValue.cc in Sources */,
-				C64EA71C169E847800778456 /* MCMainThread.mm in Sources */,
+				C64EA71C169E847800778456 /* MCMainThreadMac.mm in Sources */,
 				C64EA71D169E847800778456 /* MCOperation.cc in Sources */,
 				C64EA720169E847800778456 /* MCOperationQueue.cc in Sources */,
 				C64EA723169E847800778456 /* MCIMAPFolder.cc in Sources */,
@@ -3319,7 +3319,7 @@
 				C6BA2BA81705F4E6003F0E9E /* MCSet.cc in Sources */,
 				C6BA2BA91705F4E6003F0E9E /* MCString.cc in Sources */,
 				C6BA2BAA1705F4E6003F0E9E /* MCValue.cc in Sources */,
-				C6BA2BAB1705F4E6003F0E9E /* MCMainThread.mm in Sources */,
+				C6BA2BAB1705F4E6003F0E9E /* MCMainThreadMac.mm in Sources */,
 				C6BA2BAC1705F4E6003F0E9E /* MCOperation.cc in Sources */,
 				C6BA2BAD1705F4E6003F0E9E /* MCOperationQueue.cc in Sources */,
 				C61CC25819765763004A28D3 /* MCLibetpan.cc in Sources */,
