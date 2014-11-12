@@ -9,6 +9,12 @@
 #include "test-all.h"
 
 #include <MailCore/MailCore.h>
+#if __APPLE__
+#include <CoreFoundation/CoreFoundation.h>
+#endif
+#if __linux__
+#include <glib.h>
+#endif
 
 extern "C" {
     extern int mailstream_debug;
@@ -17,6 +23,9 @@ extern "C" {
 static mailcore::String * password = NULL;
 static mailcore::String * displayName = NULL;
 static mailcore::String * email = NULL;
+#if __linux
+static GMainLoop * s_main_loop = NULL;
+#endif
 
 class TestOperation : public mailcore::Operation {
     void main()
@@ -179,7 +188,11 @@ static void testOperationQueue()
         op->release();
     }
     
-    [[NSRunLoop currentRunLoop] run];
+#if __APPLE__
+    CFRunLoopRun();
+#elif __linux__
+    g_main_loop_run(s_main_loop);
+#endif
     
     queue->release();
 }
@@ -214,7 +227,11 @@ static void testAsyncSMTP(mailcore::Data * data)
     op->setCallback(callback);
     op->start();
     
-    [[NSRunLoop currentRunLoop] run];
+#if __APPLE__
+    CFRunLoopRun();
+#elif __linux__
+    g_main_loop_run(s_main_loop);
+#endif
     
     //smtp->release();
 }
@@ -259,7 +276,11 @@ static void testAsyncIMAP()
     op->setImapCallback(callback);
     op->start();
     //MCLog("%s", MCUTF8DESC(messages));
-    [[NSRunLoop currentRunLoop] run];
+#if __APPLE__
+    CFRunLoopRun();
+#elif __linux__
+    g_main_loop_run(s_main_loop);
+#endif
     
     //session->release();
 }
@@ -297,7 +318,11 @@ static void testAsyncPOP()
     //mailcore::Array * messages = session->fetchMessages(&error);
     //MCLog("%s", MCUTF8DESC(messages));
     
-    [[NSRunLoop currentRunLoop] run];
+#if __APPLE__
+    CFRunLoopRun();
+#elif __linux__
+    g_main_loop_run(s_main_loop);
+#endif
 }
 
 static void testAddresses()
@@ -313,13 +338,6 @@ static void testAddresses()
     MCLog("%s", MCUTF8DESC(str));
 }
 
-static void testProviders() {
-    NSString *filename =  [[NSBundle bundleForClass:[MCOMessageBuilder class]] pathForResource:@"providers" ofType:@"json"];
-    mailcore::MailProvidersManager::sharedManager()->registerProvidersWithFilename(filename.mco_mcString);
-    
-    NSLog(@"Providers: %s", MCUTF8DESC(mailcore::MailProvidersManager::sharedManager()->providerForEmail(MCSTR("email1@gmail.com"))));
-}
-
 static void testAttachments()
 {
     mailcore::Attachment *attachment = mailcore::Attachment::attachmentWithText(MCSTR("Hello World"));
@@ -328,42 +346,6 @@ static void testAttachments()
     MCLog("%s", MCUTF8DESC(str));
 }
 
-void testObjC()
-{
-    MCOIMAPSession *session = [[MCOIMAPSession alloc] init];
-    session.username = [NSString mco_stringWithMCString:email];
-    session.password = [NSString mco_stringWithMCString:password];
-    session.hostname = @"imap.gmail.com";
-    session.port = 993;
-    session.connectionType = MCOConnectionTypeTLS;
-    
-    NSLog(@"check account");
-    MCOIMAPOperation *checkOp = [session checkAccountOperation];
-    [checkOp start:^(NSError *err) {
-     NSLog(@"check account done");
-     if (err) {
-     NSLog(@"Oh crap, an error %@", err);
-     } else {
-     NSLog(@"CONNECTED");
-     NSLog(@"fetch all folders");
-     MCOIMAPFetchFoldersOperation *foldersOp = [session fetchAllFoldersOperation];
-     [foldersOp start:^(NSError *err, NSArray *folders) {
-      NSLog(@"fetch all folders done");
-      if (err) {
-      NSLog(@"Oh crap, an error %@", err);
-      } else {
-      NSLog(@"Folder %@", folders);
-      }
-      }];
-     }
-     }];
-    
-    
-    [[NSRunLoop currentRunLoop] run];
-    [session autorelease];
-}
-
-
 void testAll()
 {
     mailcore::setICUDataDirectory(MCSTR("/usr/local/share/icu"));
@@ -371,6 +353,10 @@ void testAll()
     email = MCSTR("email@gmail.com");
     password = MCSTR("MyP4ssw0rd");
     displayName = MCSTR("My Email");
+    
+#if __linux__
+    s_main_loop = g_main_loop_new (NULL, FALSE);
+#endif
     
     mailcore::AutoreleasePool * pool = new mailcore::AutoreleasePool();
     MCLogEnabled = 1;
@@ -387,9 +373,6 @@ void testAll()
     //testAsyncPOP();
     //testAddresses();
     //testAttachments();
-    //testProviders();
-    //testObjC();
-    
-    MCLog("pool release");
+  
     pool->release();
 }

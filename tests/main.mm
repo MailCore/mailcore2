@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 #include "test-all.h"
+#if __APPLE__
+#include "test-all-mac.h"
+#endif
 
 int main(int argc, const char * argv[])
 {
@@ -16,6 +19,7 @@ int main(int argc, const char * argv[])
     @autoreleasepool {
         
         testAll();
+        testAllMac();
         
     }
     return 0;
