@@ -175,6 +175,7 @@ else()
   message(STATUS "Found zlib")
 endif()
 
+pkg_check_modules (GLIB2   glib-2.0)
 
 file(GLOB_RECURSE
   source_files
@@ -202,6 +203,7 @@ include_directories("${CMAKE_CURRENT_BINARY_DIR}/include"
   ${additional_includes}
   /usr/include/tidy
   /usr/include/libxml2
+  ${GLIB2_INCLUDE_DIRS}
 )
 
 add_library(MailCore
@@ -209,3 +211,5 @@ add_library(MailCore
   ${async_files}
   ${objc_files}
 )
+
+

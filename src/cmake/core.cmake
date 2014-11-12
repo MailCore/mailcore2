@@ -18,6 +18,9 @@ IF(APPLE)
     core/rfc822/MCMessageParserMac.mm
   )
 ENDIF()
+  set(basetypes_files_apple
+    core/basetypes/MCMainThreadGTK.cpp
+  )
 
 set(basetypes_files
   core/basetypes/MCArray.cc

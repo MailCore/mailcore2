@@ -1,4 +1,5 @@
 cmake_minimum_required (VERSION 2.6)
+find_package(PkgConfig)
 project (mailcore2) 
 
 IF(APPLE)
@@ -7,6 +8,4 @@ IF(APPLE)
 ENDIF()
 
 add_subdirectory (src)
-IF(APPLE)
   add_subdirectory (tests)
-ENDIF()
