@@ -357,7 +357,7 @@
 		C64EA790169F259200778456 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64EA78F169F259200778456 /* Foundation.framework */; };
 		C64EA79E169F29A700778456 /* MCSMTPSendWithDataOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA79C169F29A700778456 /* MCSMTPSendWithDataOperation.cc */; };
 		C64EA7A5169F2A6100778456 /* MailCore.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA7A4169F2A3E00778456 /* MailCore.h */; };
-		C64EA7AB16A00AF600778456 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = C64EA7AA16A00AF600778456 /* main.mm */; };
+		C64EA7AB16A00AF600778456 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA7AA16A00AF600778456 /* main.cpp */; };
 		C64EA7B116A00BBB00778456 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64EA7B016A00BBB00778456 /* CoreServices.framework */; };
 		C64EA7DA16A1386600778456 /* MCSMTPOperation.cc in Sources */ = {isa = PBXBuildFile; fileRef = C64EA7D816A1386500778456 /* MCSMTPOperation.cc */; };
 		C64EA7DC16A13A4C00778456 /* MCSMTPOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C64EA7D916A1386600778456 /* MCSMTPOperation.h */; };
@@ -1657,7 +1657,7 @@
 		C64EA79C169F29A700778456 /* MCSMTPSendWithDataOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCSMTPSendWithDataOperation.cc; sourceTree = "<group>"; };
 		C64EA79D169F29A700778456 /* MCSMTPSendWithDataOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSMTPSendWithDataOperation.h; sourceTree = "<group>"; };
 		C64EA7A4169F2A3E00778456 /* MailCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailCore.h; sourceTree = "<group>"; };
-		C64EA7AA16A00AF600778456 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		C64EA7AA16A00AF600778456 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		C64EA7B016A00BBB00778456 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		C64EA7D816A1386500778456 /* MCSMTPOperation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCSMTPOperation.cc; sourceTree = "<group>"; };
 		C64EA7D916A1386600778456 /* MCSMTPOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSMTPOperation.h; sourceTree = "<group>"; };
@@ -2490,7 +2490,7 @@
 		C64EA7A916A00AF400778456 /* tests */ = {
 			isa = PBXGroup;
 			children = (
-				C64EA7AA16A00AF600778456 /* main.mm */,
+				C64EA7AA16A00AF600778456 /* main.cpp */,
 				C6A81BAC1706847900882C15 /* test-all.cpp */,
 				C6A81BAD1706847900882C15 /* test-all.h */,
 				BD6272961A13FF2A00129AA8 /* test-all-mac.mm */,
@@ -3273,7 +3273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C64EA7AB16A00AF600778456 /* main.mm in Sources */,
+				C64EA7AB16A00AF600778456 /* main.cpp in Sources */,
 				BD6272981A13FF2A00129AA8 /* test-all-mac.mm in Sources */,
 				C6A81BAF170684D300882C15 /* test-all.cpp in Sources */,
 			);
