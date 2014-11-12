@@ -18,9 +18,13 @@ IF(APPLE)
     core/rfc822/MCMessageParserMac.mm
   )
 ENDIF()
-  set(basetypes_files_apple
+
+IF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+  set(basetypes_files_linux
     core/basetypes/MCMainThreadGTK.cpp
   )
+ENDIF()
+
 
 set(basetypes_files
   core/basetypes/MCArray.cc
@@ -48,6 +52,7 @@ set(basetypes_files
   core/basetypes/MCValue.cc
   core/basetypes/ConvertUTF.c
   ${basetypes_files_apple}
+  ${basetypes_files_linux}
 )
 
 set(imap_files

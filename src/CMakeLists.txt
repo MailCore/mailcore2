@@ -175,7 +175,9 @@ else()
   message(STATUS "Found zlib")
 endif()
 
-pkg_check_modules (GLIB2   glib-2.0)
+IF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+pkg_check_modules(GLIB2 glib-2.0)
+ENDIF()
 
 file(GLOB_RECURSE
   source_files
@@ -211,5 +213,3 @@ add_library(MailCore
   ${async_files}
   ${objc_files}
 )
-
-

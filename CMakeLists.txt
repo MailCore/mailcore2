@@ -1,5 +1,4 @@
 cmake_minimum_required (VERSION 2.6)
-find_package(PkgConfig)
 project (mailcore2) 
 
 IF(APPLE)
@@ -7,5 +6,10 @@ IF(APPLE)
   set(CMAKE_EXE_LINKER_FLAGS "-lc++ -stdlib=libc++")
 ENDIF()
 
+IF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+  find_package(PkgConfig)
+ENDIF()
+
 add_subdirectory (src)
-  add_subdirectory (tests)
+add_subdirectory (tests)
+
