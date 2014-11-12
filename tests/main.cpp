@@ -14,7 +14,9 @@
 int main(int argc, const char * argv[])
 {
     testAll();
+#if __APPLE__
     testAllMac();
+#endif
     return 0;
 }
 
