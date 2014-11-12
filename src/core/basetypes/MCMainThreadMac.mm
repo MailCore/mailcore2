@@ -68,7 +68,6 @@ void mailcore::callOnMainThread(void (* function)(void *), void * context)
     [caller setFunction:function];
     [caller setContext:context];
     [caller performSelectorOnMainThread:@selector(call) withObject:nil waitUntilDone:NO];
-    //[caller release];
 }
 
 void mailcore::callOnMainThreadAndWait(void (* function)(void *), void * context)
@@ -78,7 +77,6 @@ void mailcore::callOnMainThreadAndWait(void (* function)(void *), void * context
     [caller setFunction:function];
     [caller setContext:context];
     [caller performSelectorOnMainThread:@selector(call) withObject:nil waitUntilDone:YES];
-    //[caller release];
 }
 
 void * mailcore::callAfterDelay(void (* function)(void *), void * context, double time)
