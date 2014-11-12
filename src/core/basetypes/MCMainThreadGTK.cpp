@@ -71,7 +71,7 @@ static gboolean call_after_delay_wrapper(struct main_thread_call_data * data)
 
 static void call_after_delay_destroy_notify(struct main_thread_call_data * data)
 {
-  free(data);
+  // Do nothing.
 }
 
 void * mailcore::callAfterDelay(void (* function)(void *), void * context, double time)
