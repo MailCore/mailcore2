@@ -1,6 +1,6 @@
 {
   "name": "mailcore2",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "summary": "Mailcore 2",
   "description": "MailCore 2 provide a simple and asynchronous API to work with e-mail protocols IMAP, POP and SMTP.",
   "homepage": "http://libmailcore.com",
@@ -16,6 +16,7 @@
   "platforms": {
     "ios": 7.0
   },
+  "header_dir": "MailCore",
   "requires_arc": false,
   "public_header_files": "include/MailCore/*.h",
   "preserve_paths": "include/MailCore/*.h",
