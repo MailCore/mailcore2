@@ -1,3 +1,5 @@
+#include "MCWin32.h" // should be included first.
+
 #include "MCRange.h"
 
 #include "MCIndexSet.h"
@@ -6,7 +8,9 @@
 #include "MCUtils.h"
 #include "MCArray.h"
 
+#ifndef _MSC_VER
 #include <sys/param.h>
+#endif
 
 using namespace mailcore;
 

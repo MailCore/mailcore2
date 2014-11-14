@@ -2,7 +2,9 @@
 
 #include <stdlib.h>
 #include <typeinfo>
+#ifndef _MSC_VER
 #include <cxxabi.h>
+#endif
 #include <libetpan/libetpan.h>
 #include <string.h>
 #if __APPLE__
@@ -89,9 +91,13 @@ Object * Object::autorelease()
 String * Object::className()
 {
     int status;
+#ifdef _MSC_VER
+    String * result = String::uniquedStringWithUTF8Characters(typeid(*this).name());
+#else
     char * unmangled = abi::__cxa_demangle(typeid(* this).name(), NULL, NULL, &status);
     String * result = String::uniquedStringWithUTF8Characters(unmangled);
     free(unmangled);
+#endif
     return result;
 }
 

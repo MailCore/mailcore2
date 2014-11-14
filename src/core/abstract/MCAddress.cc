@@ -1,7 +1,11 @@
+#include "MCWin32.h" // should be included first.
+
 #include "MCAddress.h"
 
 #include <libetpan/libetpan.h>
 #include <string.h>
+
+#include "MCDefines.h"
 
 using namespace mailcore;
 
@@ -517,8 +521,7 @@ void Address::importSerializable(HashMap * serializable)
     setDisplayName((String *) serializable->objectForKey(MCSTR("displayName")));
 }
 
-__attribute__((constructor))
-static void initialize()
+INITIALIZE(Address)
 {
     Object::registerObjectConstructor("mailcore::Address", &createObject);
 }

@@ -1,3 +1,5 @@
+#include "MCWin32.h" // Should be included first.
+
 #include "MCMessageBuilder.h"
 
 #include "MCMessageHeader.h"
@@ -5,7 +7,9 @@
 #include "MCMessageParser.h"
 
 #include <stdlib.h>
+#ifndef _MSC_VER
 #include <unistd.h>
+#endif
 #include <string.h>
 #include <libetpan/libetpan.h>
 

@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include "MCDefines.h"
 #include "MCString.h"
 #include "MCHash.h"
 #include "MCUtils.h"
@@ -452,8 +453,7 @@ void * Value::createObject()
     return new Value();
 }
 
-__attribute__((constructor))
-static void initialize()
+INITIALIZE(Value)
 {
     Object::registerObjectConstructor("mailcore::Value", &Value::createObject);
 }

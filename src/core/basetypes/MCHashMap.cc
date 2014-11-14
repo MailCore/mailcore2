@@ -1,8 +1,11 @@
+#include "MCWin32.h" // should be first include.
+
 #include "MCHashMap.h"
 
 #include <stdlib.h>
 #include <string.h>
 
+#include "MCDefines.h"
 #include "MCArray.h"
 #include "MCString.h"
 #include "MCUtils.h"
@@ -322,8 +325,7 @@ static void * createObject()
     return new HashMap();
 }
 
-__attribute__((constructor))
-static void initialize()
+INITIALIZE(HashMap)
 {
     Object::registerObjectConstructor("mailcore::HashMap", &createObject);
 }

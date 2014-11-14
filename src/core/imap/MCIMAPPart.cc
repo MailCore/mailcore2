@@ -1,8 +1,11 @@
+#include "MCWin32.h" // Should be included first.
+
 #include "MCIMAPPart.h"
 
 #include <string.h>
 #include <libetpan/libetpan.h>
 
+#include "MCDefines.h"
 #include "MCIMAPMessagePart.h"
 #include "MCIMAPMultipart.h"
 #include "MCMessageHeader.h"
@@ -359,8 +362,7 @@ static void * createObject()
     return new IMAPPart();
 }
 
-__attribute__((constructor))
-static void initialize()
+INITIALIZE(IMAPPart)
 {
     Object::registerObjectConstructor("mailcore::IMAPPart", &createObject);
 }

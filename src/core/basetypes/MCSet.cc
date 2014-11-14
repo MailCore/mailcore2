@@ -1,5 +1,6 @@
 #include "MCSet.h"
 
+#include "MCDefines.h"
 #include "MCHashMap.h"
 #include "MCString.h"
 #include "MCUtils.h"
@@ -119,8 +120,7 @@ static void * createObject()
     return new Set();
 }
 
-__attribute__((constructor))
-static void initialize()
+INITIALIZE(Set)
 {
     Object::registerObjectConstructor("mailcore::Set", &createObject);
 }

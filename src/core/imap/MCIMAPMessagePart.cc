@@ -1,5 +1,7 @@
 #include "MCIMAPMessagePart.h"
 
+#include "MCDefines.h"
+
 using namespace mailcore;
 
 IMAPMessagePart::IMAPMessagePart()
@@ -59,8 +61,7 @@ static void * createObject()
     return new IMAPMessagePart();
 }
 
-__attribute__((constructor))
-static void initialize()
+INITIALIZE(IMAPMessagePart)
 {
     Object::registerObjectConstructor("mailcore::IMAPMessagePart", &createObject);
 }

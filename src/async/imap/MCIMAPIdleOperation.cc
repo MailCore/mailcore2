@@ -36,7 +36,7 @@ uint32_t IMAPIdleOperation::lastKnownUID()
     return mLastKnownUid;
 }
 
-void IMAPIdleOperation::prepare()
+void IMAPIdleOperation::prepare(void * data)
 {
     if (isInterrupted()) {
         mSetupSuccess = false;
@@ -46,7 +46,7 @@ void IMAPIdleOperation::prepare()
     mSetupSuccess = session()->session()->setupIdle();
 }
 
-void IMAPIdleOperation::unprepare()
+void IMAPIdleOperation::unprepare(void * data)
 {
     if (mSetupSuccess) {
         session()->session()->unsetupIdle();

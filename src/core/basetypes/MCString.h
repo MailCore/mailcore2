@@ -6,6 +6,7 @@
 #include <MailCore/MCRange.h>
 #include <MailCore/MCICUTypes.h>
 
+#include <stdlib.h>
 #include <stdarg.h>
 
 #ifdef __cplusplus

@@ -1,9 +1,12 @@
+#include "MCWin32.h" // Should be included first.
+
 #include "MCIMAPSession.h"
 
 #include <libetpan/libetpan.h>
 #include <string.h>
 #include <stdlib.h>
 
+#include "MCDefines.h"
 #include "MCIMAPSearchExpression.h"
 #include "MCIMAPFolder.h"
 #include "MCIMAPMessage.h"
@@ -40,8 +43,7 @@ String * mailcore::IMAPNamespaceShared = NULL;
 
 static Array * resultsWithError(int r, clist * list, ErrorCode * pError);
 
-__attribute__((constructor))
-static void initialize()
+INITIALIZE(IMAPSEssion)
 {
     AutoreleasePool * pool = new AutoreleasePool();
     IMAPNamespacePersonal = (String *) MCSTR("IMAPNamespacePersonal")->retain();
@@ -2788,38 +2790,44 @@ static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpr
         case IMAPSearchKindBeforeDate:
         {
             time_t date = expression->date();
-            tm * timeinfo = localtime(&date);
-            return mailimap_search_key_new_sentbefore(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon+1, timeinfo->tm_year+1900));
+            struct tm timeinfo;
+            localtime_r(&date, &timeinfo);
+            return mailimap_search_key_new_sentbefore(mailimap_date_new(timeinfo.tm_mday, timeinfo.tm_mon+1, timeinfo.tm_year+1900));
         }
         case IMAPSearchKindOnDate:
         {
             time_t date = expression->date();
-            tm * timeinfo = localtime(&date);
-            return mailimap_search_key_new_senton(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon+1, timeinfo->tm_year+1900));
+            struct tm timeinfo;
+            localtime_r(&date, &timeinfo);
+            return mailimap_search_key_new_senton(mailimap_date_new(timeinfo.tm_mday, timeinfo.tm_mon+1, timeinfo.tm_year+1900));
         }
         case IMAPSearchKindSinceDate:
         {
             time_t date = expression->date();
-            tm * timeinfo = localtime(&date);
-            return mailimap_search_key_new_sentsince(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon+1, timeinfo->tm_year+1900));
+            struct tm timeinfo;
+            localtime_r(&date, &timeinfo);
+            return mailimap_search_key_new_sentsince(mailimap_date_new(timeinfo.tm_mday, timeinfo.tm_mon+1, timeinfo.tm_year+1900));
         }
         case IMAPSearchKindBeforeReceivedDate:
         {
             time_t date = expression->date();
-            tm * timeinfo = localtime(&date);
-            return mailimap_search_key_new_before(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon+1, timeinfo->tm_year+1900));
+            struct tm timeinfo;
+            localtime_r(&date, &timeinfo);
+            return mailimap_search_key_new_before(mailimap_date_new(timeinfo.tm_mday, timeinfo.tm_mon+1, timeinfo.tm_year+1900));
         }
         case IMAPSearchKindOnReceivedDate:
         {
             time_t date = expression->date();
-            tm * timeinfo = localtime(&date);
-            return mailimap_search_key_new_on(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon+1, timeinfo->tm_year+1900));
+            struct tm timeinfo;
+            localtime_r(&date, &timeinfo);
+            return mailimap_search_key_new_on(mailimap_date_new(timeinfo.tm_mday, timeinfo.tm_mon+1, timeinfo.tm_year+1900));
         }
         case IMAPSearchKindSinceReceivedDate:
         {
             time_t date = expression->date();
-            tm * timeinfo = localtime(&date);
-            return mailimap_search_key_new_since(mailimap_date_new(timeinfo->tm_mday, timeinfo->tm_mon+1, timeinfo->tm_year+1900));
+            struct tm timeinfo;
+            localtime_r(&date, &timeinfo);
+            return mailimap_search_key_new_since(mailimap_date_new(timeinfo.tm_mday, timeinfo.tm_mon+1, timeinfo.tm_year+1900));
         }
         case IMAPSearchKindGmailThreadID:
         {

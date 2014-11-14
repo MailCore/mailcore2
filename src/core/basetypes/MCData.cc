@@ -1,3 +1,5 @@
+#include "MCWin32.h" // should be first include.
+
 #include "MCData.h"
 
 #define USE_UCHARDET 1
@@ -5,6 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <pthread.h>
 #if USE_UCHARDET
 #include <uchardet/uchardet.h>
 #else
@@ -16,6 +19,7 @@
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
+#include "MCDefines.h"
 #include "MCString.h"
 #include "MCHash.h"
 #include "MCUtils.h"
@@ -23,7 +27,7 @@
 #include "MCBase64.h"
 #include "MCSet.h"
 
-#define DEFAULT_CHARSET "iso-8859-1"
+#define MCDATA_DEFAULT_CHARSET "iso-8859-1"
 
 using namespace mailcore;
 
@@ -308,7 +312,7 @@ String * Data::stringWithDetectedCharset(String * hintCharset, bool isHTML)
     }
     
     if (charset == NULL) {
-        charset = MCSTR(DEFAULT_CHARSET);
+        charset = MCSTR(MCDATA_DEFAULT_CHARSET);
     }
     
     charset = normalizeCharset(charset);
@@ -895,8 +899,7 @@ static void * createObject()
     return new Data();
 }
 
-__attribute__((constructor))
-static void initialize()
+INITIALIZE(Data)
 {
     Object::registerObjectConstructor("mailcore::Data", &createObject);
 #if __APPLE__

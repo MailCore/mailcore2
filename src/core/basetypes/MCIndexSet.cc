@@ -8,6 +8,7 @@
 
 #include "MCIndexSet.h"
 
+#include "MCDefines.h"
 #include "MCString.h"
 #include "MCAssert.h"
 #include "MCRange.h"
@@ -430,8 +431,7 @@ static void * createObject()
     return new IndexSet();
 }
 
-__attribute__((constructor))
-static void initialize()
+INITIALIZE(IndexSet)
 {
     Object::registerObjectConstructor("mailcore::IndexSet", &createObject);
 }

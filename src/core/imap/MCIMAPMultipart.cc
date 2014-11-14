@@ -1,5 +1,7 @@
 #include "MCIMAPMultipart.h"
 
+#include "MCDefines.h"
+
 using namespace mailcore;
 
 IMAPMultipart::IMAPMultipart()
@@ -59,8 +61,7 @@ static void * createObject()
     return new IMAPMultipart();
 }
 
-__attribute__((constructor))
-static void initialize()
+INITIALIZE(IMAPMultipart)
 {
     Object::registerObjectConstructor("mailcore::IMAPMultipart", &createObject);
 }

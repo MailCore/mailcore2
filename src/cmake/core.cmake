@@ -40,7 +40,7 @@ set(basetypes_files
   core/basetypes/MCJSON.cc
   core/basetypes/MCJSONParser.cc
   core/basetypes/MCLibetpan.cc
-  core/basetypes/MCLog.c
+  core/basetypes/MCLog.cpp
   core/basetypes/MCMD5.cc
   core/basetypes/MCNull.cc
   core/basetypes/MCObject.cc
@@ -112,7 +112,6 @@ set(smtp_files
 set(zip_files
   core/zip/MCZip.cc
   core/zip/MiniZip/ioapi.c
-  core/zip/MiniZip/mztools.c
   core/zip/MiniZip/unzip.c
   core/zip/MiniZip/zip.c
 )

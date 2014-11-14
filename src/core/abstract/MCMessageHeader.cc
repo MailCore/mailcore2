@@ -1,11 +1,16 @@
+#include "MCWin32.h" // should be first include.
+
 #include "MCMessageHeader.h"
 
+#include "MCDefines.h"
 #include "MCAddress.h"
 #include "MCIterator.h"
 #include "MCLibetpan.h"
 
 #include <string.h>
+#ifndef _MSC_VER
 #include <unistd.h>
+#endif
 #include <libetpan/libetpan.h>
 
 using namespace mailcore;
@@ -1280,8 +1285,7 @@ static void * createObject()
     return new MessageHeader();
 }
 
-__attribute__((constructor))
-static void initialize()
+INITIALIZE(MessageHeader)
 {
     Object::registerObjectConstructor("mailcore::MessageHeader", &createObject);
 }

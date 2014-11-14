@@ -1,12 +1,22 @@
+#include "MCWin32.h" // Should be included first.
+
 #include "MCZip.h"
 
 #include "zip.h"
 #include "unzip.h"
 
 #include <sys/types.h>
+#ifndef _MSC_VER
 #include <dirent.h>
+#endif
 #include <sys/stat.h>
 #include <time.h>
+
+#ifdef _MSC_VER
+#define USEWIN32IOAPI
+#include "ioapi.h"
+#include "iowin32.h"
+#endif
 
 using namespace mailcore;
 
@@ -14,7 +24,13 @@ static ErrorCode addFile(zipFile file, String * path);
 
 ErrorCode mailcore::CreateZipFileFromFolder(String * zipFilename, String * path)
 {
+#ifdef _MSC_VER
+    zlib_filefunc64_def ffunc;
+    fill_win32_filefunc64A(&ffunc);
+    zipFile file = zipOpen2_64(zipFilename->fileSystemRepresentation(), APPEND_STATUS_CREATE, NULL, &ffunc);
+#else
     zipFile file = zipOpen(zipFilename->fileSystemRepresentation(), APPEND_STATUS_CREATE);
+#endif
     if (file == NULL) {
         return ErrorFile;
     }
@@ -40,6 +56,7 @@ static ErrorCode addFile(zipFile file, String * path)
     if (r < 0)
         return ErrorFile;
     
+#ifndef _MSC_VER
     if (S_ISDIR(statinfo.st_mode)) {
         DIR * dir = opendir(cPath);
         if (dir == NULL) {
@@ -59,6 +76,9 @@ static ErrorCode addFile(zipFile file, String * path)
         
         return ErrorNone;
     }
+#else
+    // XXX - should be implemented on Win32.
+#endif
     
     time_t clock;
     time(&clock);

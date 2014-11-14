@@ -2,6 +2,8 @@
 
 #define MAILCORE_MCDATA_H
 
+#include <stdlib.h>
+
 #include <MailCore/MCObject.h>
 #include <MailCore/MCMessageConstants.h>
 

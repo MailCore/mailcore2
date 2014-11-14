@@ -1,3 +1,5 @@
+#include "MCWin32.h" // should be included first.
+
 #include "MCPOPSession.h"
 
 #include <string.h>

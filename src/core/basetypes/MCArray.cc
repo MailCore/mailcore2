@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <libetpan/libetpan.h>
 
+#include "MCDefines.h"
 #include "MCAssert.h"
 #include "MCString.h"
 #include "MCLog.h"
@@ -195,7 +196,7 @@ struct sortData {
     void * context;
 };
 
-#ifdef __MACH__
+#if defined(__MACH__) || defined(_MSC_VER)
 static int sortCompare(struct sortData * data, Object ** pa, Object ** pb)
 #else
 static int sortCompare(Object ** pa, Object ** pb, struct sortData * data)
@@ -226,6 +227,11 @@ void Array::sortArray(int (* compare)(void * a, void * b, void * context), void 
     qsort_r(carray_data(mArray), carray_count(mArray),
             sizeof(* carray_data(mArray)), &data,
             (int (*)(void *, const void *, const void *)) sortCompare);
+#elif defined(_MSC_VER)
+    qsort_s(carray_data(mArray), carray_count(mArray),
+            sizeof(*carray_data(mArray)),
+            (int(*)(void *, const void *, const void *)) sortCompare,
+            &data);
 #else
     qsort_r(carray_data(mArray), carray_count(mArray),
             sizeof(* carray_data(mArray)),
@@ -271,8 +277,7 @@ static void * createObject()
     return new Array();
 }
 
-__attribute__((constructor))
-static void initialize()
+INITIALIZE(Array)
 {
     Object::registerObjectConstructor("mailcore::Array", &createObject);
 }

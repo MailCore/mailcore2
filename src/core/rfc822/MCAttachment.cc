@@ -1,3 +1,5 @@
+#include "MCWin32.h" // should be included first.
+
 #include "MCAttachment.h"
 
 #include "MCMultipart.h"
@@ -9,7 +11,9 @@
 
 #include <stdlib.h>
 #include <string.h>
+#ifndef _MSC_VER
 #include <unistd.h>
+#endif
 #include <sys/stat.h>
 #include <libetpan/libetpan.h>
 
@@ -487,10 +491,17 @@ static char * get_content_type_str(struct mailmime_content * content)
     if (subtype == NULL)
         subtype = "unknown";
     
-    result = (char *) malloc(strlen(str) + strlen(subtype) + 2);
+    size_t len = strlen(str) + strlen(subtype) + 2;
+    result = (char *) malloc(len);
+#ifndef _MSC_VER
     strcpy(result, str);
     strcat(result, "/");
     strcat(result, subtype);
+#else
+    strcpy_s(result, len, str);
+    strcat_s(result, len, "/");
+    strcat_s(result, len, subtype);
+#endif
     
     return result;
 }

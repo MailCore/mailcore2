@@ -1,3 +1,5 @@
+#include "MCWin32.h" // should be included first.
+
 #include "MCString.h"
 
 #if __APPLE__
@@ -11,7 +13,9 @@
 #include <unicode/ucnv.h>
 #include <unicode/utypes.h>
 #endif
+#ifndef _MSC_VER
 #include <uuid/uuid.h>
+#endif
 #include <pthread.h>
 #include <libetpan/libetpan.h>
 #include <libxml/xmlmemory.h>
@@ -20,6 +24,7 @@
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
+#include "MCDefines.h"
 #include "MCData.h"
 #include "MCHash.h"
 #include "MCLog.h"
@@ -1376,6 +1381,7 @@ String * String::extractedSubjectAndKeepBracket(bool keepBracket)
     return str;
 }
 
+#ifndef _MSC_VER
 String * String::uuidString()
 {
     uuid_t uuid;
@@ -1389,6 +1395,7 @@ String * String::uuidString()
     uuid_unparse_lower(uuid, uuidString);
     return String::stringWithUTF8Characters(uuidString);
 }
+#endif
 
 unsigned int String::replaceOccurrencesOfString(String * occurrence, String * replacement)
 {
@@ -1923,7 +1930,7 @@ String * String::flattenHTMLAndShowBlockquoteAndLink(bool showBlockquote, bool s
     int mem_base = xmlMemBlocks();
     String * result = String::string();
     xmlSAXHandler handler;
-    bzero(&handler, sizeof(xmlSAXHandler));
+    memset(&handler, 0, sizeof(xmlSAXHandler));
     handler.characters = charactersParsed;
     handler.startElement = elementStarted;
     handler.endElement = elementEnded;
@@ -2440,8 +2447,7 @@ static void * createObject()
     return new String();
 }
 
-__attribute__((constructor))
-static void initialize()
+INITIALIZE(String)
 {
     Object::registerObjectConstructor("mailcore::String", &createObject);
 

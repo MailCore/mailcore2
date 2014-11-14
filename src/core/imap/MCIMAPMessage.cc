@@ -1,5 +1,6 @@
 #include "MCIMAPMessage.h"
 
+#include "MCDefines.h"
 #include "MCMessageHeader.h"
 #include "MCIMAPPart.h"
 #include "MCIMAPMessagePart.h"
@@ -317,8 +318,7 @@ static void * createObject()
     return new IMAPMessage();
 }
 
-__attribute__((constructor))
-static void initialize()
+INITIALIZE(IMAPMessage)
 {
     Object::registerObjectConstructor("mailcore::IMAPMessage", &createObject);
 }

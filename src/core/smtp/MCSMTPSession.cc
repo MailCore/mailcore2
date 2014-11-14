@@ -1,3 +1,5 @@
+#include "MCWin32.h" // Should be included first.
+
 #include "MCSMTPSession.h"
 
 #include <string.h>

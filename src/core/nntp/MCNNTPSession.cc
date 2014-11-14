@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 MailCore. All rights reserved.
 //
 
+#include "MCWin32.h" // should be included first.
+
 #include "MCNNTPSession.h"
 
 #include <string.h>

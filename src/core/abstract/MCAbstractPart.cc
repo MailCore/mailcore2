@@ -1,3 +1,5 @@
+#include "MCWin32.h" // should be first include.
+
 #include "MCAbstractPart.h"
 
 #include <string.h>

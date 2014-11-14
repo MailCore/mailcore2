@@ -6,17 +6,20 @@
 //  Copyright (c) 2013 MailCore. All rights reserved.
 //
 
+#include "MCWin32.h" // should be included first.
+
 #include "MCLibetpan.h"
 
 #include <libetpan/libetpan.h>
+
+#include "MCDefines.h"
 
 using namespace mailcore;
 
 static time_t mkgmtime(struct tm * tmp);
 static int tmcomp(struct tm * atmp, struct tm * btmp);
 
-__attribute__((constructor))
-static void initialize()
+INITIALIZE(Libetpan)
 {
     // It will enable CFStream on platforms that supports it.
     mailstream_cfstream_enabled = 1;
