@@ -3,7 +3,7 @@
 FILE * mailcore::win32_fopen(const char * filename, const char * mode)
 {
     FILE * f = NULL;
-    int r = fopen_s(&f, filename->fileSystemRepresentation(), "rb");
+    int r = fopen_s(&f, filename, "rb");
     if (r != 0) {
         return NULL;
     }
@@ -66,12 +66,14 @@ time_t mailcore::win32_timegm(struct tm *tm) {
 
 struct tm * mailcore::win32_gmtime_r(const time_t *clock, struct tm *result)
 {
-    return gmtime_s(result, clock);
+    gmtime_s(result, clock);
+	return result;
 }
 
 struct tm * mailcore::win32_localtime_r(const time_t *clock, struct tm *result)
 {
-    return localtime_s(result, clock);
+    localtime_s(result, clock);
+	return result;
 }
 
 char * mailcore::win32_strcasestr(const char * s, const char * find)
@@ -141,10 +143,10 @@ pid_t mailcore::win32_getpid(void)
 static const char padchar[] =
     "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
-char * mailcore::win32_mkdtemp(char *name_template)
+char * mailcore::win32_mkdtemp(char *path)
 {
     register char *start, *trv, *suffp;
-    char *pad;
+    const char *pad;
     struct stat sbuf;
     int rval;
 
@@ -189,7 +191,7 @@ char * mailcore::win32_mkdtemp(char *name_template)
     }
 
     for (;;) {
-        if (mkdir(path, 0700) == 0)
+        if (mkdir(path) == 0)
             return path;
         if (errno != EEXIST)
             return NULL;

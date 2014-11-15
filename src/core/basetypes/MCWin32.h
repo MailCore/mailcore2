@@ -6,6 +6,21 @@
 
 #ifdef _MSC_VER
 
+/*
+#if WINAPI_FAMILY == WINAPI_FAMILY_PC_APP
+#error pc app
+#elif WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP
+#error phone app
+#elif WINAPI_FAMILY == WINAPI_FAMILY_DESKTOP_APP
+#error desktop app
+#else
+#error other
+#endif
+*/
+
+#undef WINAPI_FAMILY
+#define WINAPI_FAMILY WINAPI_FAMILY_DESKTOP_APP
+
 #define _CRT_RAND_S
 #include <stdlib.h>
 
@@ -16,6 +31,10 @@
 #include <Winsock2.h>
 #include <windows.h>
 #include <rpc.h>
+#include <time.h>
+#include <sys/stat.h>
+#include <errno.h>
+#include <direct.h>
 
 #define MIN(a,b) (((a)<(b))?(a):(b))
 #define MAX(a,b) (((a)>(b))?(a):(b))
@@ -25,6 +44,7 @@
 #define strdup _strdup
 #define fileno _fileno
 #define unlink _unlink
+#define mkdir _mkdir
 #define fopen mailcore::win32_fopen
 #define gmtime_r mailcore::win32_gmtime_r
 #define localtime_r mailcore::win32_localtime_r
