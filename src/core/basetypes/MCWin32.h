@@ -28,6 +28,7 @@
 #include <algorithm>
 #endif
 
+#include <stdio.h>
 #include <Winsock2.h>
 #include <windows.h>
 #include <rpc.h>

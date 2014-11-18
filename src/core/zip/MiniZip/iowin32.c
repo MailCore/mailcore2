@@ -10,6 +10,7 @@
      For more info read MiniZip_info.txt
 
 */
+#include "MCWin32.h"
 
 #include <stdlib.h>
 
