@@ -1,12 +1,12 @@
 # Files to build
 
 set(abstract_files
-  core/abstract/MCAbstractMessage.cc
-  core/abstract/MCAbstractMessagePart.cc
-  core/abstract/MCAbstractMultipart.cc
-  core/abstract/MCAbstractPart.cc
-  core/abstract/MCAddress.cc
-  core/abstract/MCMessageHeader.cc
+  core/abstract/MCAbstractMessage.cpp
+  core/abstract/MCAbstractMessagePart.cpp
+  core/abstract/MCAbstractMultipart.cpp
+  core/abstract/MCAbstractPart.cpp
+  core/abstract/MCAddress.cpp
+  core/abstract/MCMessageHeader.cpp
 )
 
 IF(APPLE)
@@ -27,97 +27,97 @@ ENDIF()
 
 
 set(basetypes_files
-  core/basetypes/MCArray.cc
+  core/basetypes/MCArray.cpp
   core/basetypes/MCAssert.c
-  core/basetypes/MCAutoreleasePool.cc
+  core/basetypes/MCAutoreleasePool.cpp
   core/basetypes/MCBase64.c
-  core/basetypes/MCConnectionLoggerUtils.cc
-  core/basetypes/MCData.cc
-  core/basetypes/MCHash.cc
-  core/basetypes/MCHashMap.cc
-  core/basetypes/MCHTMLCleaner.cc
-  core/basetypes/MCIndexSet.cc
-  core/basetypes/MCJSON.cc
-  core/basetypes/MCJSONParser.cc
-  core/basetypes/MCLibetpan.cc
+  core/basetypes/MCConnectionLoggerUtils.cpp
+  core/basetypes/MCData.cpp
+  core/basetypes/MCHash.cpp
+  core/basetypes/MCHashMap.cpp
+  core/basetypes/MCHTMLCleaner.cpp
+  core/basetypes/MCIndexSet.cpp
+  core/basetypes/MCJSON.cpp
+  core/basetypes/MCJSONParser.cpp
+  core/basetypes/MCLibetpan.cpp
   core/basetypes/MCLog.cpp
-  core/basetypes/MCMD5.cc
-  core/basetypes/MCNull.cc
-  core/basetypes/MCObject.cc
-  core/basetypes/MCOperation.cc
-  core/basetypes/MCOperationQueue.cc
-  core/basetypes/MCRange.cc
-  core/basetypes/MCSet.cc
-  core/basetypes/MCString.cc
-  core/basetypes/MCValue.cc
+  core/basetypes/MCMD5.cpp
+  core/basetypes/MCNull.cpp
+  core/basetypes/MCObject.cpp
+  core/basetypes/MCOperation.cpp
+  core/basetypes/MCOperationQueue.cpp
+  core/basetypes/MCRange.cpp
+  core/basetypes/MCSet.cpp
+  core/basetypes/MCString.cpp
+  core/basetypes/MCValue.cpp
   core/basetypes/ConvertUTF.c
   ${basetypes_files_apple}
   ${basetypes_files_linux}
 )
 
 set(imap_files
-  core/imap/MCIMAPFolder.cc
-  core/imap/MCIMAPFolderStatus.cc
-  core/imap/MCIMAPIdentity.cc
-  core/imap/MCIMAPMessage.cc
-  core/imap/MCIMAPMessagePart.cc
-  core/imap/MCIMAPMultipart.cc
-  core/imap/MCIMAPNamespace.cc
-  core/imap/MCIMAPNamespaceItem.cc
-  core/imap/MCIMAPPart.cc
-  core/imap/MCIMAPSearchExpression.cc
-  core/imap/MCIMAPSession.cc
-  core/imap/MCIMAPSyncResult.cc
+  core/imap/MCIMAPFolder.cpp
+  core/imap/MCIMAPFolderStatus.cpp
+  core/imap/MCIMAPIdentity.cpp
+  core/imap/MCIMAPMessage.cpp
+  core/imap/MCIMAPMessagePart.cpp
+  core/imap/MCIMAPMultipart.cpp
+  core/imap/MCIMAPNamespace.cpp
+  core/imap/MCIMAPNamespaceItem.cpp
+  core/imap/MCIMAPPart.cpp
+  core/imap/MCIMAPSearchExpression.cpp
+  core/imap/MCIMAPSession.cpp
+  core/imap/MCIMAPSyncResult.cpp
 )
 
 set(pop_files
-  core/pop/MCPOPMessageInfo.cc
-  core/pop/MCPOPSession.cc
+  core/pop/MCPOPMessageInfo.cpp
+  core/pop/MCPOPSession.cpp
 )
 
 set(nntp_files
-  core/nntp/MCNNTPGroupInfo.cc
-  core/nntp/MCNNTPSession.cc
+  core/nntp/MCNNTPGroupInfo.cpp
+  core/nntp/MCNNTPSession.cpp
 )
 
 set(provider_files
-  core/provider/MCMailProvider.cc
-  core/provider/MCMailProvidersManager.cc
-  core/provider/MCNetService.cc
+  core/provider/MCMailProvider.cpp
+  core/provider/MCMailProvidersManager.cpp
+  core/provider/MCNetService.cpp
 )
 
 set(renderer_files
-  core/renderer/MCAddressDisplay.cc
-  core/renderer/MCDateFormatter.cc
-  core/renderer/MCHTMLBodyRendererTemplateCallback.cc
-  core/renderer/MCHTMLRenderer.cc
-  core/renderer/MCHTMLRendererCallback.cc
-  core/renderer/MCHTMLRendererIMAPDataCallback.cc
-  core/renderer/MCSizeFormatter.cc
+  core/renderer/MCAddressDisplay.cpp
+  core/renderer/MCDateFormatter.cpp
+  core/renderer/MCHTMLBodyRendererTemplateCallback.cpp
+  core/renderer/MCHTMLRenderer.cpp
+  core/renderer/MCHTMLRendererCallback.cpp
+  core/renderer/MCHTMLRendererIMAPDataCallback.cpp
+  core/renderer/MCSizeFormatter.cpp
   
 )
 
 set(rfc822_files
-  core/rfc822/MCAttachment.cc
-  core/rfc822/MCMessageBuilder.cc
-  core/rfc822/MCMessageParser.cc
-  core/rfc822/MCMessagePart.cc
-  core/rfc822/MCMultipart.cc
+  core/rfc822/MCAttachment.cpp
+  core/rfc822/MCMessageBuilder.cpp
+  core/rfc822/MCMessageParser.cpp
+  core/rfc822/MCMessagePart.cpp
+  core/rfc822/MCMultipart.cpp
 )
 
 set(smtp_files
-  core/smtp/MCSMTPSession.cc
+  core/smtp/MCSMTPSession.cpp
 )
 
 set(zip_files
-  core/zip/MCZip.cc
+  core/zip/MCZip.cpp
   core/zip/MiniZip/ioapi.c
   core/zip/MiniZip/unzip.c
   core/zip/MiniZip/zip.c
 )
 
 set(security_files
-  core/security/MCCertificateUtils.cc
+  core/security/MCCertificateUtils.cpp
 )
 
 set(core_files
