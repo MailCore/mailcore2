@@ -107,7 +107,7 @@ build_git_ios()
     cd "$tmpdir/bin"
     mkdir -p "$name-$version/$name"
     mkdir -p "$name-$version/$name/lib"
-    if test x$build_mailcore=x1 ; then
+    if test x$build_mailcore = x1 ; then
       mkdir -p "$name-$version/$name/include"
       mv Release-iphoneos/include/MailCore "$name-$version/$name/include"
     else
@@ -124,12 +124,12 @@ build_git_ios()
       else
         echo Dependency $dep not found
       fi
-      if test x$build_mailcore=x1 ; then
+      if test x$build_mailcore = x1 ; then
         cp -R "$name-$version/$dep/lib" "$name-$version/$name"
         rm -rf "$name-$version/$dep"
       fi
     done
-    if test x$build_mailcore=x1 ; then
+    if test x$build_mailcore = x1 ; then
       mv "$name-$version/$name/lib" "$name-$version"
       mv "$name-$version/$name/include" "$name-$version"
       rm -rf "$name-$version/$name"
@@ -241,7 +241,7 @@ build_git_osx()
     cd "$tmpdir/bin"
     mkdir -p "$name-$version/$name"
     mkdir -p "$name-$version/$name/lib"
-    if test x$build_mailcore=x1 ; then
+    if test x$build_mailcore = x1 ; then
       mkdir -p "$name-$version/$name/include"
       mv Release/include/MailCore "$name-$version/$name/include"
     else
@@ -256,12 +256,12 @@ build_git_osx()
       else
         echo Dependency $dep not found
       fi
-      if test x$build_mailcore=x1 ; then
+      if test x$build_mailcore = x1 ; then
         cp -R "$name-$version/$dep/lib" "$name-$version/$name"
         rm -rf "$name-$version/$dep"
       fi
     done
-    if test x$build_mailcore=x1 ; then
+    if test x$build_mailcore = x1 ; then
       mv "$name-$version/$name/lib" "$name-$version"
       mv "$name-$version/$name/include" "$name-$version"
       rm -rf "$name-$version/$name"
@@ -286,7 +286,7 @@ build_git_osx()
   popd >/dev/null
 
   echo cleaning
-  rm -rf "$tempbuilddir"
+  #rm -rf "$tempbuilddir"
 
   if test x$build_for_external != x1 ; then
     defaults write "$versions_path" "$name" "$version"
