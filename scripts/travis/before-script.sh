@@ -2,6 +2,7 @@
 set -e
 
 if test x"`uname`" = xDarwin ; then
+  sudo systemsetup -settimezone GMT
   brew update
 #  brew install cmake
 elif test x"`uname`" = xLinux ; then
