@@ -13,6 +13,30 @@ MailCore 2 provides a simple and asynchronous Objective-C API to work with the e
 
 ## Installation ##
 
+### Cocoapods ###
+
+Mailcore 2 is available on [Cocoapods](http://cocoapods.org/).
+
+**For iOS:**
+```
+pod 'mailcore2-ios'
+```
+
+**For OS X:**
+```
+pod 'mailcore2-osx'
+```
+
+### Binary ###
+
+**For iOS:**
+Download the latest [build for iOS](http://d.etpan.org/mailcore2-deps/mailcore2-ios/).
+
+**For iOS:**
+Download the latest [build for OS X](http://d.etpan.org/mailcore2-deps/mailcore2-osx/).
+
+### Submodule ###
+
 1. If you're migrating from MailCore1, you should first clean your build folder.
 2. Checkout MailCore2 into a directory relative to your project.
 3. Under the `build-mac` directory, locate the `mailcore2.xcodeproj` file, and drag this into your Xcode project.
