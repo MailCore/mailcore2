@@ -11,7 +11,14 @@
 #include "MCIterator.h"
 #include "MCJSON.h"
 
+#ifdef _MSC_VER
+#include <unicode/utext.h>
+#include <unicode/utypes.h>
+#include <unicode/localpointer.h>
+#include <unicode/parseerr.h>
+#else
 #include <regex.h>
+#endif
 
 using namespace mailcore;
 
@@ -181,6 +188,30 @@ bool MailProvider::matchMX(String * hostname)
 
 bool MailProvider::matchDomain(String * match, String * domain)
 {
+#ifdef _MSC_VER
+    UParseError error;
+    UErrorCode code = U_ZERO_ERROR;
+    URegularExpression * r = uregex_open(match->unicodeCharacters(), match->length(), UREGEX_CASE_INSENSITIVE, &error, &code);
+    if (code != U_ZERO_ERROR) {
+        uregex_close(r);
+        return false;
+    }
+    uregex_setText(r, domain->unicodeChararacters(), domain->length(), &code);
+    if (code != U_ZERO_ERROR) {
+        uregex_close(r);
+        return false;
+    }
+
+    bool matched = uregex_matches(r, 0, &code)
+    if (code != U_ZERO_ERROR) {
+        uregex_close(r);
+        return false;
+    }
+
+    uregex_close(r);
+
+    return matched;
+#else
     const char * cDomain;
     regex_t r;
     bool matched;  
@@ -200,6 +231,7 @@ bool MailProvider::matchDomain(String * match, String * domain)
     regfree(&r);
 
     return matched;
+#endif
 }
 
 String * MailProvider::sentMailFolderPath()
