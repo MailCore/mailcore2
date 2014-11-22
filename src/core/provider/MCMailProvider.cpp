@@ -12,6 +12,7 @@
 #include "MCJSON.h"
 
 #ifdef _MSC_VER
+#include <unicode/uregex.h>
 #include <unicode/utext.h>
 #include <unicode/utypes.h>
 #include <unicode/localpointer.h>
@@ -196,13 +197,13 @@ bool MailProvider::matchDomain(String * match, String * domain)
         uregex_close(r);
         return false;
     }
-    uregex_setText(r, domain->unicodeChararacters(), domain->length(), &code);
+    uregex_setText(r, domain->unicodeCharacters(), domain->length(), &code);
     if (code != U_ZERO_ERROR) {
         uregex_close(r);
         return false;
     }
 
-    bool matched = uregex_matches(r, 0, &code)
+	bool matched = uregex_matches(r, 0, &code);
     if (code != U_ZERO_ERROR) {
         uregex_close(r);
         return false;

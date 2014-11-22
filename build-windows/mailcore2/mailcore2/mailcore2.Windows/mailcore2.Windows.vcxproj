@@ -373,69 +373,87 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <CompileAsWinRT>false</CompileAsWinRT>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory);..\..\..\include;..\..\..\..\Externals\include;..\..\..\..\src\core\basetypes;..\..\..\..\src\core\zip;..\..\..\..\src\core\zip\minizip;..\..\..\..\src\core\renderer;..\..\..\..\src\core/rfc822;..\..\..\..\src\core/imap;..\..\..\..\src\core\abstract;..\..\..\..\src\core\security;..\..\..\..\src\core\imap;..\..\..\..\src\core\pop;..\..\..\..\src\core\nntp;..\..\..\..\src\core\smtp</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>PTW32_STATIC_LIB;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ZLIB_DLL;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
-      <AdditionalDependencies>uchardet.lib;ssleay32MD.lib;libeay32MD.lib;zlib.lib;regex.lib;User32.lib;Ws2_32.lib;zlibwapi.lib;libctemplate.lib;kernel32.lib;libetpan.lib;libtidy.dll.lib;libxml2.lib;pthreadVC2.lib;icudt.lib;icuin.lib;icuio.lib;icule.lib;iculx.lib;icuuc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libtidy.lib;libxml2.lib;uchardet.lib;ssleay32MD.lib;libeay32MD.lib;zlib.lib;User32.lib;Ws2_32.lib;libctemplate.lib;kernel32.lib;libetpan.lib;pthreadVC2.lib;icudt.lib;icuin.lib;icuio.lib;icule.lib;iculx.lib;icuuc.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\..\..\Externals\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <CompileAsWinRT>false</CompileAsWinRT>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory);..\..\..\include;..\..\..\..\Externals\include;..\..\..\..\src\core\basetypes;..\..\..\..\src\core\zip;..\..\..\..\src\core\zip\minizip;..\..\..\..\src\core\renderer;..\..\..\..\src\core/rfc822;..\..\..\..\src\core/imap;..\..\..\..\src\core\abstract;..\..\..\..\src\core\security;..\..\..\..\src\core\imap;..\..\..\..\src\core\pop;..\..\..\..\src\core\nntp;..\..\..\..\src\core\smtp</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>ZLIB_DLL;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
+      <AdditionalDependencies>libtidy.lib;libxml2.lib;uchardet.lib;ssleay32MD.lib;libeay32MD.lib;zlib.lib;User32.lib;Ws2_32.lib;libctemplate.lib;kernel32.lib;libetpan.lib;pthreadVC2.lib;icudt.lib;icuin.lib;icuio.lib;icule.lib;iculx.lib;icuuc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\Externals\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|arm'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <CompileAsWinRT>false</CompileAsWinRT>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory);..\..\..\include;..\..\..\..\Externals\include;..\..\..\..\src\core\basetypes;..\..\..\..\src\core\zip;..\..\..\..\src\core\zip\minizip;..\..\..\..\src\core\renderer;..\..\..\..\src\core/rfc822;..\..\..\..\src\core/imap;..\..\..\..\src\core\abstract;..\..\..\..\src\core\security;..\..\..\..\src\core\imap;..\..\..\..\src\core\pop;..\..\..\..\src\core\nntp;..\..\..\..\src\core\smtp</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>ZLIB_DLL;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
+      <AdditionalDependencies>libtidy.lib;libxml2.lib;uchardet.lib;ssleay32MD.lib;libeay32MD.lib;zlib.lib;User32.lib;Ws2_32.lib;libctemplate.lib;kernel32.lib;libetpan.lib;pthreadVC2.lib;icudt.lib;icuin.lib;icuio.lib;icule.lib;iculx.lib;icuuc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|arm'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <CompileAsWinRT>false</CompileAsWinRT>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory);..\..\..\include;..\..\..\..\Externals\include;..\..\..\..\src\core\basetypes;..\..\..\..\src\core\zip;..\..\..\..\src\core\zip\minizip;..\..\..\..\src\core\renderer;..\..\..\..\src\core/rfc822;..\..\..\..\src\core/imap;..\..\..\..\src\core\abstract;..\..\..\..\src\core\security;..\..\..\..\src\core\imap;..\..\..\..\src\core\pop;..\..\..\..\src\core\nntp;..\..\..\..\src\core\smtp</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>ZLIB_DLL;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
+      <AdditionalDependencies>libtidy.lib;libxml2.lib;uchardet.lib;ssleay32MD.lib;libeay32MD.lib;zlib.lib;User32.lib;Ws2_32.lib;libctemplate.lib;kernel32.lib;libetpan.lib;pthreadVC2.lib;icudt.lib;icuin.lib;icuio.lib;icule.lib;iculx.lib;icuuc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <CompileAsWinRT>false</CompileAsWinRT>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory);..\..\..\include;..\..\..\..\Externals\include;..\..\..\..\src\core\basetypes;..\..\..\..\src\core\zip;..\..\..\..\src\core\zip\minizip;..\..\..\..\src\core\renderer;..\..\..\..\src\core/rfc822;..\..\..\..\src\core/imap;..\..\..\..\src\core\abstract;..\..\..\..\src\core\security;..\..\..\..\src\core\imap;..\..\..\..\src\core\pop;..\..\..\..\src\core\nntp;..\..\..\..\src\core\smtp</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>ZLIB_DLL;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
+      <AdditionalDependencies>libtidy.lib;libxml2.lib;uchardet.lib;ssleay32MD.lib;libeay32MD.lib;zlib.lib;User32.lib;Ws2_32.lib;libctemplate.lib;kernel32.lib;libetpan.lib;pthreadVC2.lib;icudt.lib;icuin.lib;icuio.lib;icule.lib;iculx.lib;icuuc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\Externals\lib64</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <CompileAsWinRT>false</CompileAsWinRT>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory);..\..\..\include;..\..\..\..\Externals\include;..\..\..\..\src\core\basetypes;..\..\..\..\src\core\zip;..\..\..\..\src\core\zip\minizip;..\..\..\..\src\core\renderer;..\..\..\..\src\core/rfc822;..\..\..\..\src\core/imap;..\..\..\..\src\core\abstract;..\..\..\..\src\core\security;..\..\..\..\src\core\imap;..\..\..\..\src\core\pop;..\..\..\..\src\core\nntp;..\..\..\..\src\core\smtp</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>ZLIB_DLL;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
+      <AdditionalDependencies>libtidy.lib;libxml2.lib;uchardet.lib;ssleay32MD.lib;libeay32MD.lib;zlib.lib;User32.lib;Ws2_32.lib;libctemplate.lib;kernel32.lib;libetpan.lib;pthreadVC2.lib;icudt.lib;icuin.lib;icuio.lib;icule.lib;iculx.lib;icuuc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\Externals\lib64</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
