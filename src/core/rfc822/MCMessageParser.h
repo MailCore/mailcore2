@@ -15,6 +15,7 @@ namespace mailcore {
     
     class HTMLRendererTemplateCallback;
     
+    MAILCORE_EXPORT
     class MessageParser : public AbstractMessage {
     public:
         static MessageParser * messageParserWithData(Data * data);

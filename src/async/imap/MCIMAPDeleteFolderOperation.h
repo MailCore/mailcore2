@@ -16,6 +16,7 @@
 
 namespace mailcore {
     
+    MAILCORE_EXPORT
     class IMAPDeleteFolderOperation : public IMAPOperation {
     public:
         IMAPDeleteFolderOperation();

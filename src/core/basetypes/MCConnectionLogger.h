@@ -33,6 +33,7 @@ namespace mailcore {
         ConnectionLogTypeErrorSent,
     };
     
+    MAILCORE_EXPORT
     class ConnectionLogger {
     public:
         virtual void log(void * sender, ConnectionLogType logType, Data * buffer) {}

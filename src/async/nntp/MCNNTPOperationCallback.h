@@ -16,6 +16,7 @@ namespace mailcore {
     
     class NNTPOperation;
     
+    MAILCORE_EXPORT
     class NNTPOperationCallback {
     public:
         virtual void bodyProgress(NNTPOperation * session, unsigned int current, unsigned int maximum) {};

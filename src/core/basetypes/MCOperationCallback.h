@@ -8,6 +8,7 @@ namespace mailcore {
     
     class Operation;
     
+    MAILCORE_EXPORT
     class OperationCallback {
     public:
         virtual void operationFinished(Operation * op) {}

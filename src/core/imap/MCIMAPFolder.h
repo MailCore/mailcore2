@@ -9,6 +9,7 @@
 
 namespace mailcore {
     
+    MAILCORE_EXPORT
     class IMAPFolder : public Object {
     public:
         IMAPFolder();

@@ -18,6 +18,7 @@
 
 namespace mailcore {
     
+    MAILCORE_EXPORT
     class IMAPDisconnectOperation : public IMAPOperation {
     public:
         IMAPDisconnectOperation();

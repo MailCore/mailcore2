@@ -18,6 +18,7 @@ namespace mailcore {
     
     class IMAPIdentity;
     
+    MAILCORE_EXPORT
     class IMAPIdentityOperation : public IMAPOperation {
     public:
         IMAPIdentityOperation();

@@ -18,6 +18,7 @@
 
 namespace mailcore {
 
+    MAILCORE_EXPORT
     class IMAPFetchParsedContentOperation : public IMAPOperation {
     public:
         IMAPFetchParsedContentOperation();

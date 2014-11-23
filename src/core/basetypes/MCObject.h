@@ -7,11 +7,9 @@
 #include <dispatch/dispatch.h>
 #endif
 
-#ifdef __cplusplus
+#include <MailCore/MCUtils.h>
 
-#define MC_PROPERTY(mcType, setter, getter) \
-    virtual void setter(mcType * getter); \
-    virtual mcType * getter();
+#ifdef __cplusplus
 
 namespace mailcore {
     
@@ -20,6 +18,7 @@ namespace mailcore {
     class String;
     class HashMap;
     
+    MAILCORE_EXPORT
     class Object {
     public:
         Object();

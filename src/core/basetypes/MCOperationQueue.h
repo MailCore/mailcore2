@@ -15,6 +15,7 @@ namespace mailcore {
     class OperationQueueCallback;
     class Array;
     
+    MAILCORE_EXPORT
     class OperationQueue : public Object {
     public:
         OperationQueue();

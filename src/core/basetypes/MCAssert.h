@@ -7,6 +7,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif	
+    MAILCORE_EXPORT
 	void MCAssertInternal(const char * filename, unsigned int line, int cond, const char * condString);
 #ifdef __cplusplus
 }

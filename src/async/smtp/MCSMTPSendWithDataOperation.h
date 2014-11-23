@@ -18,6 +18,7 @@
 
 namespace mailcore {
     
+    MAILCORE_EXPORT
     class SMTPSendWithDataOperation : public SMTPOperation {
     public:
         SMTPSendWithDataOperation();

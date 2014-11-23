@@ -16,6 +16,7 @@
 
 namespace mailcore {
     
+    MAILCORE_EXPORT
     class IMAPExpungeOperation : public IMAPOperation {
     public:
         IMAPExpungeOperation();

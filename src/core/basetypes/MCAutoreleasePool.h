@@ -11,6 +11,7 @@ typedef struct carray_s carray;
 
 namespace mailcore {
     
+    MAILCORE_EXPORT
     class AutoreleasePool : public Object {
     public:
         AutoreleasePool();

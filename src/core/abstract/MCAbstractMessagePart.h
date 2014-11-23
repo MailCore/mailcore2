@@ -11,6 +11,7 @@ namespace mailcore {
     
     class MessageHeader;
     
+    MAILCORE_EXPORT
     class AbstractMessagePart : public AbstractPart {
     public:
         AbstractMessagePart();

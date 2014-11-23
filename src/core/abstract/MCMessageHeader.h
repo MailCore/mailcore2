@@ -11,6 +11,7 @@ namespace mailcore {
     
     class Address;
     
+    MAILCORE_EXPORT
     class MessageHeader : public Object {
     public:
         MessageHeader();

@@ -13,6 +13,7 @@ namespace mailcore {
     
     class MessagePart;
     
+    MAILCORE_EXPORT
     class Attachment : public AbstractPart {
     public:
         static String * mimeTypeForFilename(String * filename);

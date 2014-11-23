@@ -16,6 +16,7 @@
 
 namespace mailcore {
     
+    MAILCORE_EXPORT
     class IMAPSyncResult : public Object {
     public:
         IMAPSyncResult();

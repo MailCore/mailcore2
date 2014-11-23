@@ -16,6 +16,7 @@
 
 namespace mailcore {
     
+    MAILCORE_EXPORT
     class IMAPQuotaOperation : public IMAPOperation {
     public:
         IMAPQuotaOperation();

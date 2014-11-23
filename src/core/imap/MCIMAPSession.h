@@ -22,6 +22,7 @@ namespace mailcore {
     class IMAPFolderStatus;
     class IMAPIdentity;
     
+    MAILCORE_EXPORT
     class IMAPSession : public Object {
     public:
         IMAPSession();

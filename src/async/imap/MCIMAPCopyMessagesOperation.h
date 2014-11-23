@@ -16,6 +16,7 @@
 
 namespace mailcore {
     
+    MAILCORE_EXPORT
     class IMAPCopyMessagesOperation : public IMAPOperation {
     public:
         IMAPCopyMessagesOperation();

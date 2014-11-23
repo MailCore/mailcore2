@@ -13,6 +13,7 @@ namespace mailcore {
     class POPProgressCallback;
     class MessageHeader;
     
+    MAILCORE_EXPORT
     class POPSession : public Object {
     public:
         POPSession();

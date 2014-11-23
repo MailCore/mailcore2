@@ -16,6 +16,7 @@ namespace mailcore {
     
     class POPOperation;
     
+    MAILCORE_EXPORT
     class POPOperationCallback {
     public:
         virtual void bodyProgress(POPOperation * session, unsigned int current, unsigned int maximum) {};

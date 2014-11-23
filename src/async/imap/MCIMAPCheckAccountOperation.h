@@ -16,6 +16,7 @@
 
 namespace mailcore {
     
+    MAILCORE_EXPORT
     class IMAPCheckAccountOperation : public IMAPOperation {
     public: // subclass behavior
         virtual void main();

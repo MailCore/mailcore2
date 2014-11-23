@@ -34,6 +34,7 @@ namespace mailcore {
     class IMAPMessage;
     class IMAPIdentity;
     
+    MAILCORE_EXPORT
     class IMAPAsyncConnection : public Object {
     public:
         IMAPAsyncConnection();

@@ -18,6 +18,7 @@ namespace mailcore {
     
     class String;
     
+    MAILCORE_EXPORT
     class SizeFormatter : public Object {
     public:
         static String * stringWithSize(unsigned int size);

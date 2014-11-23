@@ -13,6 +13,7 @@ namespace mailcore {
     struct HashMapCell;
     typedef HashMapCell HashMapIter;
     
+    MAILCORE_EXPORT
     class HashMap : public Object {
     public:
         HashMap();

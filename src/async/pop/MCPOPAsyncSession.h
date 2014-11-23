@@ -25,6 +25,7 @@ namespace mailcore {
     class POPOperationQueueCallback;
     class POPConnectionLogger;
     
+    MAILCORE_EXPORT
     class POPAsyncSession : public Object {
     public:
         POPAsyncSession();

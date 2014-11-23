@@ -13,6 +13,7 @@ namespace mailcore {
     class SMTPProgressCallback;
     class MessageBuilder;
     
+    MAILCORE_EXPORT
     class SMTPSession : public Object {
     public:
         SMTPSession();

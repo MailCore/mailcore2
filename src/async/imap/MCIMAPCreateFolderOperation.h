@@ -16,6 +16,7 @@
 
 namespace mailcore {
     
+    MAILCORE_EXPORT
     class IMAPCreateFolderOperation : public IMAPOperation {
     public:
         IMAPCreateFolderOperation();

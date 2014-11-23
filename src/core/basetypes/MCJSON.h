@@ -23,6 +23,7 @@ namespace mailcore {
     
     class Null;
     
+    MAILCORE_EXPORT
     class JSON {
     public:
         static String * objectToJSONString(Object * object);

@@ -36,6 +36,16 @@
 
 #define MCISKINDOFCLASS(instance, class) (dynamic_cast<class *>(instance) != NULL)
 
+#ifdef _MSC_VER
+#	ifdef MAILCORE_DLL
+#		define MAILCORE_EXPORT __declspec(dllexport)
+#	else
+#		define MAILCORE_EXPORT __declspec(dllimport)
+#   endif
+#else
+#	define MAILCORE_EXPORT
+#endif
+
 #endif
 
 #endif

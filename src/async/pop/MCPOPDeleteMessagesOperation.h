@@ -16,6 +16,7 @@
 
 namespace mailcore {
     
+    MAILCORE_EXPORT
     class POPDeleteMessagesOperation : public POPOperation {
     public:
         POPDeleteMessagesOperation();

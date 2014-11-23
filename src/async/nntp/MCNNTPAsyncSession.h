@@ -19,6 +19,7 @@ namespace mailcore {
     class NNTPOperationQueueCallback;
     class NNTPConnectionLogger;
     
+    MAILCORE_EXPORT
     class NNTPAsyncSession : public Object {
     public:
         NNTPAsyncSession();

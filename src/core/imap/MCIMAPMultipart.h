@@ -8,6 +8,7 @@
 
 namespace mailcore {
     
+    MAILCORE_EXPORT
     class IMAPMultipart : public AbstractMultipart {
     public:
         IMAPMultipart();

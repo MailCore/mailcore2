@@ -22,16 +22,34 @@ namespace mailcore {
         uint64_t length;
     };
     
+    MAILCORE_EXPORT
     extern Range RangeEmpty;
     
+    MAILCORE_EXPORT
     Range RangeMake(uint64_t location, uint64_t length);
+
+    MAILCORE_EXPORT
     IndexSet * RangeRemoveRange(Range range1, Range range2);
+
+    MAILCORE_EXPORT
     IndexSet * RangeUnion(Range range1, Range range2);
+
+    MAILCORE_EXPORT
     Range RangeIntersection(Range range1, Range range2);
+
+    MAILCORE_EXPORT
     bool RangeHasIntersection(Range range1, Range range2);
+
+    MAILCORE_EXPORT
     uint64_t RangeLeftBound(Range range);
+
+    MAILCORE_EXPORT
     uint64_t RangeRightBound(Range range);
+
+    MAILCORE_EXPORT
     String * RangeToString(Range range);
+    
+    MAILCORE_EXPORT
     Range RangeFromString(String * rangeString);
 }
 

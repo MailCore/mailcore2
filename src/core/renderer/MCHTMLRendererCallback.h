@@ -19,6 +19,7 @@ namespace mailcore {
     
     class MessageParser;
     
+    MAILCORE_EXPORT
     class HTMLRendererIMAPCallback {
     public:
         HTMLRendererIMAPCallback() {}
@@ -29,6 +30,7 @@ namespace mailcore {
         virtual void prefetchImageIMAPPart(String * folder, IMAPPart * part) {}
     };
     
+    MAILCORE_EXPORT
     class HTMLRendererTemplateCallback {
     public:
         virtual bool canPreviewPart(AbstractPart * part);

@@ -18,6 +18,7 @@
 
 namespace mailcore {
     
+    MAILCORE_EXPORT
     class SMTPNoopOperation : public SMTPOperation {
     public:
         SMTPNoopOperation();

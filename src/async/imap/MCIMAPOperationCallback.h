@@ -16,6 +16,7 @@ namespace mailcore {
     
     class IMAPOperation;
     
+    MAILCORE_EXPORT
     class IMAPOperationCallback {
     public:
         virtual void bodyProgress(IMAPOperation * session, unsigned int current, unsigned int maximum) {};

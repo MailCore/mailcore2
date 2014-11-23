@@ -15,6 +15,7 @@ namespace mailcore {
     class HTMLRendererIMAPCallback;
     class HTMLRendererTemplateCallback;
     
+    MAILCORE_EXPORT
     class IMAPMessage : public AbstractMessage {
     public:
         IMAPMessage();

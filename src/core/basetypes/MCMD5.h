@@ -16,7 +16,10 @@
 #ifdef __cplusplus
 
 namespace mailcore {
+    MAILCORE_EXPORT
     Data * md5Data(Data * data);
+
+    MAILCORE_EXPORT
     String * md5String(Data * data);
 }
 

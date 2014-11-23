@@ -19,6 +19,7 @@ namespace mailcore {
     
     class IMAPFolderStatus;
     
+    MAILCORE_EXPORT
     class IMAPFolderStatusOperation : public IMAPOperation {
     public:
         IMAPFolderStatusOperation();

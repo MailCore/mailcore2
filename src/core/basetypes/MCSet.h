@@ -12,6 +12,7 @@ namespace mailcore {
     class Array;
     class HashMap;
     
+    MAILCORE_EXPORT
     class Set : public Object {
     public:
         Set();

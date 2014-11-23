@@ -16,6 +16,7 @@
 
 namespace mailcore {
     
+    MAILCORE_EXPORT
     class IMAPStoreFlagsOperation : public IMAPOperation {
     public:
         IMAPStoreFlagsOperation();

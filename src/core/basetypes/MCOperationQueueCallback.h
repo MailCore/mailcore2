@@ -13,6 +13,7 @@ namespace mailcore {
     
     class OperationQueue;
     
+    MAILCORE_EXPORT
     class OperationQueueCallback {
     public:
         virtual void queueStartRunning() {}

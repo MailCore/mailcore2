@@ -8,6 +8,7 @@ namespace mailcore {
     
     class NNTPSession;
     
+    MAILCORE_EXPORT
     class NNTPProgressCallback {
     public:
         virtual void bodyProgress(NNTPSession * session, unsigned int current, unsigned int maximum) {};

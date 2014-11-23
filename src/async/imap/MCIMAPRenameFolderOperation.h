@@ -16,6 +16,7 @@
 
 namespace mailcore {
     
+    MAILCORE_EXPORT
     class IMAPRenameFolderOperation : public IMAPOperation {
     public:
         IMAPRenameFolderOperation();

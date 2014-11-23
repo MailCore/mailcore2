@@ -17,6 +17,7 @@ namespace mailcore {
     
     class String;
     
+    MAILCORE_EXPORT
     class Data : public Object {
     public:
         Data();

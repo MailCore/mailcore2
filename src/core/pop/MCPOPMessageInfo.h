@@ -8,6 +8,7 @@
 
 namespace mailcore {
     
+    MAILCORE_EXPORT
     class POPMessageInfo : public Object {
     public:
         POPMessageInfo();

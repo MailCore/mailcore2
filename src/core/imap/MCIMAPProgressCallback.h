@@ -8,6 +8,7 @@ namespace mailcore {
     
     class IMAPSession;
     
+    MAILCORE_EXPORT
     class IMAPProgressCallback {
     public:
         virtual void bodyProgress(IMAPSession * session, unsigned int current, unsigned int maximum) {};
