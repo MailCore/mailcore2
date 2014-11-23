@@ -16,8 +16,7 @@
 
 namespace mailcore {
     
-    MAILCORE_EXPORT
-    class POPCheckAccountOperation : public POPOperation {
+    class MAILCORE_EXPORT POPCheckAccountOperation : public POPOperation {
     public:
         POPCheckAccountOperation();
         virtual ~POPCheckAccountOperation();

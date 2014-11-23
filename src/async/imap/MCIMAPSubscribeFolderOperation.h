@@ -16,8 +16,7 @@
 
 namespace mailcore {
     
-    MAILCORE_EXPORT
-    class IMAPSubscribeFolderOperation : public IMAPOperation {
+    class MAILCORE_EXPORT IMAPSubscribeFolderOperation : public IMAPOperation {
     public:
         IMAPSubscribeFolderOperation();
         virtual ~IMAPSubscribeFolderOperation();

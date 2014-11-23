@@ -16,8 +16,7 @@
 
 namespace mailcore {
     
-    MAILCORE_EXPORT
-    class POPFetchMessagesOperation : public POPOperation {
+    class MAILCORE_EXPORT POPFetchMessagesOperation : public POPOperation {
     public:
         POPFetchMessagesOperation();
         virtual ~POPFetchMessagesOperation();

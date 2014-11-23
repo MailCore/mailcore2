@@ -16,8 +16,7 @@
 
 namespace mailcore {
     
-    MAILCORE_EXPORT
-    class NNTPDisconnectOperation : public NNTPOperation {
+    class MAILCORE_EXPORT NNTPDisconnectOperation : public NNTPOperation {
     public:
         NNTPDisconnectOperation();
         virtual ~NNTPDisconnectOperation();

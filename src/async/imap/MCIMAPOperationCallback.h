@@ -10,14 +10,15 @@
 
 #define MAILCORE_MCIMAPOPERATIONCALLBACK_H
 
+#include <MailCore/MCUtils.h>
+
 #ifdef __cplusplus
 
 namespace mailcore {
     
     class IMAPOperation;
     
-    MAILCORE_EXPORT
-    class IMAPOperationCallback {
+    class MAILCORE_EXPORT IMAPOperationCallback {
     public:
         virtual void bodyProgress(IMAPOperation * session, unsigned int current, unsigned int maximum) {};
         virtual void itemProgress(IMAPOperation * session, unsigned int current, unsigned int maximum) {};

@@ -16,8 +16,7 @@
 
 namespace mailcore {
     
-    MAILCORE_EXPORT
-    class IMAPIdleOperation : public IMAPOperation {
+    class MAILCORE_EXPORT IMAPIdleOperation : public IMAPOperation {
     public:
         IMAPIdleOperation();
         virtual ~IMAPIdleOperation();

@@ -31,8 +31,7 @@ namespace mailcore {
         DateFormatStyleNone = -1 /* UDAT_NONE */,
     };
     
-    MAILCORE_EXPORT
-    class DateFormatter : public Object {
+    class MAILCORE_EXPORT DateFormatter : public Object {
     public:
         DateFormatter();
         virtual ~DateFormatter();

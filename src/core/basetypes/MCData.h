@@ -17,8 +17,7 @@ namespace mailcore {
     
     class String;
     
-    MAILCORE_EXPORT
-    class Data : public Object {
+    class MAILCORE_EXPORT Data : public Object {
     public:
         Data();
         Data(int capacity);

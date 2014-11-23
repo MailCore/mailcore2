@@ -16,8 +16,7 @@
 
 namespace mailcore {
     
-    MAILCORE_EXPORT
-    class NNTPCheckAccountOperation : public NNTPOperation {
+    class MAILCORE_EXPORT NNTPCheckAccountOperation : public NNTPOperation {
     public:
         NNTPCheckAccountOperation();
         virtual ~NNTPCheckAccountOperation();

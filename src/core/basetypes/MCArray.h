@@ -12,8 +12,7 @@ namespace mailcore {
     
     class String;
     
-    MAILCORE_EXPORT
-    class Array : public Object {
+    class MAILCORE_EXPORT Array : public Object {
     public:
         Array();
         virtual ~Array();

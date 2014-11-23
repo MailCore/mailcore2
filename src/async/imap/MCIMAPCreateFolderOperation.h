@@ -16,8 +16,7 @@
 
 namespace mailcore {
     
-    MAILCORE_EXPORT
-    class IMAPCreateFolderOperation : public IMAPOperation {
+    class MAILCORE_EXPORT IMAPCreateFolderOperation : public IMAPOperation {
     public:
         IMAPCreateFolderOperation();
         virtual ~IMAPCreateFolderOperation();

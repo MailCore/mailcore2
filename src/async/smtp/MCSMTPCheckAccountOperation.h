@@ -17,8 +17,7 @@
 
 namespace mailcore {
     
-    MAILCORE_EXPORT
-    class SMTPCheckAccountOperation : public SMTPOperation {
+    class MAILCORE_EXPORT SMTPCheckAccountOperation : public SMTPOperation {
     public:
         SMTPCheckAccountOperation();
         virtual ~SMTPCheckAccountOperation();

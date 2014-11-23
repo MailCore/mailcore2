@@ -17,8 +17,7 @@
 
 namespace mailcore {
     
-    MAILCORE_EXPORT
-    class NetService : public Object {
+    class MAILCORE_EXPORT NetService : public Object {
     
     public:
         NetService();

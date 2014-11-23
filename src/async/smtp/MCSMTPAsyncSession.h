@@ -16,8 +16,7 @@ namespace mailcore {
     class SMTPOperationQueueCallback;
     class SMTPConnectionLogger;
     
-    MAILCORE_EXPORT
-    class SMTPAsyncSession : public Object {
+    class MAILCORE_EXPORT SMTPAsyncSession : public Object {
     public:
         SMTPAsyncSession();
         virtual ~SMTPAsyncSession();

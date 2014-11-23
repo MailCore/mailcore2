@@ -9,8 +9,7 @@
 
 namespace mailcore {
     
-    MAILCORE_EXPORT
-    class IMAPSearchExpression : public Object {
+    class MAILCORE_EXPORT IMAPSearchExpression : public Object {
     public:
         IMAPSearchExpression();
         virtual ~IMAPSearchExpression();

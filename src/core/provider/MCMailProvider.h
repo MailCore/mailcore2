@@ -18,8 +18,7 @@ namespace mailcore {
     
     class NetService;
     
-    MAILCORE_EXPORT
-    class MailProvider : public Object {
+    class MAILCORE_EXPORT MailProvider : public Object {
     public:
         static MailProvider * providerWithInfo(HashMap * info);
         

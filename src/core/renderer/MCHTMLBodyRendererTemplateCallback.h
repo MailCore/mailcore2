@@ -11,13 +11,13 @@
 #define MAILCORE_MCHTMLBODYRENDERERTEMPLATECALLBACK_H
 
 #include <MailCore/MCHTMLRendererCallback.h>
+#include <MailCore/MCUtils.h>
 
 #ifdef __cplusplus
 
 namespace mailcore {
     
-    MAILCORE_EXPORT
-    class HTMLBodyRendererTemplateCallback : public Object, public HTMLRendererTemplateCallback {
+    class MAILCORE_EXPORT HTMLBodyRendererTemplateCallback : public Object, public HTMLRendererTemplateCallback {
     public:
         virtual String * templateForMainHeader(MessageHeader * header);
     };

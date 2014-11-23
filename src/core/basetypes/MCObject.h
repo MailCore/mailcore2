@@ -18,8 +18,7 @@ namespace mailcore {
     class String;
     class HashMap;
     
-    MAILCORE_EXPORT
-    class Object {
+    class MAILCORE_EXPORT Object {
     public:
         Object();
         virtual ~Object();

@@ -10,14 +10,15 @@
 
 #define MAILCORE_MCNNTPOPERATIONCALLBACK_H
 
+#include <MailCore/MCUtils.h>
+
 #ifdef __cplusplus
 
 namespace mailcore {
     
     class NNTPOperation;
     
-    MAILCORE_EXPORT
-    class NNTPOperationCallback {
+    class MAILCORE_EXPORT NNTPOperationCallback {
     public:
         virtual void bodyProgress(NNTPOperation * session, unsigned int current, unsigned int maximum) {};
     };

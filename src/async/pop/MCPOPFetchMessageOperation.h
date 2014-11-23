@@ -15,8 +15,7 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-    MAILCORE_EXPORT
-    class POPFetchMessageOperation : public POPOperation {
+    class MAILCORE_EXPORT POPFetchMessageOperation : public POPOperation {
     public:
         POPFetchMessageOperation();
         virtual ~POPFetchMessageOperation();

@@ -41,8 +41,7 @@ namespace mailcore {
     class IMAPIdentity;
     class OperationQueueCallback;
     
-    MAILCORE_EXPORT
-    class IMAPAsyncSession : public Object {
+    class MAILCORE_EXPORT IMAPAsyncSession : public Object {
     public:
         IMAPAsyncSession();
         virtual ~IMAPAsyncSession();

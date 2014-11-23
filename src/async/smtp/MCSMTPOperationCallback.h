@@ -10,14 +10,15 @@
 
 #define MAILCORE_MCSMTPOPERATIONCALLBACK_H
 
+#include <MailCore/MCUtils.h>
+
 #ifdef __cplusplus
 
 namespace mailcore {
     
     class SMTPOperation;
     
-    MAILCORE_EXPORT
-    class SMTPOperationCallback {
+    class MAILCORE_EXPORT SMTPOperationCallback {
     public:
         virtual void bodyProgress(SMTPOperation * session, unsigned int current, unsigned int maximum) {};
     };

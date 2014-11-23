@@ -16,8 +16,7 @@
 
 namespace mailcore {
     
-    MAILCORE_EXPORT
-    class NNTPFetchServerTimeOperation : public NNTPOperation {
+    class MAILCORE_EXPORT NNTPFetchServerTimeOperation : public NNTPOperation {
     public:
         NNTPFetchServerTimeOperation();
         virtual ~NNTPFetchServerTimeOperation();

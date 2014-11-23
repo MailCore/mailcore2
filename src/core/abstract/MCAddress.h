@@ -8,8 +8,7 @@
 
 namespace mailcore {
     
-    MAILCORE_EXPORT
-    class Address : public Object {
+    class MAILCORE_EXPORT Address : public Object {
     public:
         Address();
         virtual ~Address();

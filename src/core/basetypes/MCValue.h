@@ -29,8 +29,7 @@ namespace mailcore {
         ValueTypeData,
     };
     
-    MAILCORE_EXPORT
-    class Value : public Object {
+    class MAILCORE_EXPORT Value : public Object {
     public:
         virtual ~Value();
         

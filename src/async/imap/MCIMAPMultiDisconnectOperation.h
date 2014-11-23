@@ -16,8 +16,7 @@
 
 namespace mailcore {
     
-    MAILCORE_EXPORT
-    class IMAPMultiDisconnectOperation : public IMAPOperation, public OperationCallback {
+    class MAILCORE_EXPORT IMAPMultiDisconnectOperation : public IMAPOperation, public OperationCallback {
     public:
         IMAPMultiDisconnectOperation();
         virtual ~IMAPMultiDisconnectOperation();

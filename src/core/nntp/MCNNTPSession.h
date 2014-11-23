@@ -11,8 +11,7 @@ namespace mailcore {
     class NNTPProgressCallback;
     class MessageHeader;
     
-    MAILCORE_EXPORT
-    class NNTPSession : public Object {
+    class MAILCORE_EXPORT NNTPSession : public Object {
     public:
         NNTPSession();
         virtual ~NNTPSession();

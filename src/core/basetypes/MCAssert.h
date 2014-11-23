@@ -2,6 +2,8 @@
 
 #define MAILCORE_MCASSERT_H
 
+#include <MailCore/MCUtils.h>
+
 #define MCAssert(cond) MCAssertInternal(__FILE__, __LINE__, cond, #cond)
 
 #ifdef __cplusplus

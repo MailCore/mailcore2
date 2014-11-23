@@ -16,8 +16,7 @@ namespace mailcore {
     class Data;
     class Array;
     
-    MAILCORE_EXPORT
-    class String : public Object {
+    class MAILCORE_EXPORT String : public Object {
     public:
         String(const UChar * unicodeChars = NULL);
         String(const UChar * unicodeChars, unsigned int length);

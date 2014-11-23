@@ -16,8 +16,7 @@
 
 namespace mailcore {
     
-    MAILCORE_EXPORT
-    class IMAPIdentity : public Object {
+    class MAILCORE_EXPORT IMAPIdentity : public Object {
     public:
         
         IMAPIdentity();

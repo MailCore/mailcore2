@@ -11,7 +11,7 @@ namespace mailcore {
     
     class OperationCallback;
     
-    class Operation : public Object {
+    class MAILCORE_EXPORT Operation : public Object {
     public:
         Operation();
         virtual ~Operation();

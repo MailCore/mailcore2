@@ -8,8 +8,7 @@
 
 namespace mailcore {
     
-    MAILCORE_EXPORT
-    class NNTPGroupInfo : public Object {
+    class MAILCORE_EXPORT NNTPGroupInfo : public Object {
     public:
         NNTPGroupInfo();
         virtual ~NNTPGroupInfo();

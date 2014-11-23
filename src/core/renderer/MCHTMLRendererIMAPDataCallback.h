@@ -11,13 +11,13 @@
 #define MAILCORE_MCHTMLRENDERERIMAPDATACALLBACK_H
 
 #include "MCHTMLRendererCallback.h"
+#include <MailCore/MCUtils.h>
 
 #ifdef __cplusplus
 
 namespace mailcore {
     
-    MAILCORE_EXPORT
-    class HTMLRendererIMAPDataCallback : public Object, public HTMLRendererIMAPCallback {
+    class MAILCORE_EXPORT HTMLRendererIMAPDataCallback : public Object, public HTMLRendererIMAPCallback {
     public:
         HTMLRendererIMAPDataCallback(IMAPSession * session, uint32_t uid);
         

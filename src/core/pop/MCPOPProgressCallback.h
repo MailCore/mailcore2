@@ -4,12 +4,13 @@
 
 #ifdef __cplusplus
 
+#include <MailCore/MCUtils.h>
+
 namespace mailcore {
     
     class POPSession;
     
-    MAILCORE_EXPORT
-    class POPProgressCallback {
+    class MAILCORE_EXPORT POPProgressCallback {
     public:
         virtual void bodyProgress(POPSession * session, unsigned int current, unsigned int maximum) {};
     };

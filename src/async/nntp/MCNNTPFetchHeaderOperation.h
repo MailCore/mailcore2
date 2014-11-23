@@ -18,8 +18,7 @@ namespace mailcore {
     
     class MessageHeader;
     
-    MAILCORE_EXPORT
-    class NNTPFetchHeaderOperation : public NNTPOperation {
+    class MAILCORE_EXPORT NNTPFetchHeaderOperation : public NNTPOperation {
     public:
         NNTPFetchHeaderOperation();
         virtual ~NNTPFetchHeaderOperation();
