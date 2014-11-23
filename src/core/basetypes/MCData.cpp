@@ -14,8 +14,8 @@
 #include <unicode/ucsdet.h>
 #endif
 #include <libetpan/libetpan.h>
-#include <iconv.h>
 #if __APPLE__
+#include <iconv.h>
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
