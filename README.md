@@ -1,4 +1,4 @@
-## Mailcore 2: Introduction ##
+## MailCore 2: Introduction ##
 
 MailCore 2 provides a simple and asynchronous Objective-C API to work with the e-mail protocols **IMAP**, **POP** and **SMTP**. The API has been redesigned from the ground up.  It features:
 
@@ -15,7 +15,7 @@ MailCore 2 provides a simple and asynchronous Objective-C API to work with the e
 
 ### Cocoapods ###
 
-Mailcore 2 is available on [Cocoapods](http://cocoapods.org/).
+MailCore 2 is available on [Cocoapods](http://cocoapods.org/).
 
 **For iOS:**
 ```
