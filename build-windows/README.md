@@ -28,16 +28,16 @@ You'll need all the dependencies, download the most recent binary builds in:
 - [Tidy HTML5](http://d.etpan.org/mailcore2-deps/tidy-html5-win32/)
 - [uchardet](http://d.etpan.org/mailcore2-deps/uchardet-win32/)
 - [zlib](http://d.etpan.org/mailcore2-deps/zlib-win32/)
-- [ICU, OpenSSL and pthread for win32](http://d.etpan.org/mailcore2-deps/misc-win32/)
+- [icu4c, OpenSSL and pthread for win32](http://d.etpan.org/mailcore2-deps/misc-win32/)
 
 Instructions for CTemplate, libEtPan, LibXML 2, Tidy HTML5, uchardet and zlib:
 - copy `include`, `lib` and `lib64` folders to `mailcore2/Externals`.
 
-#### ICU win32 ####
+#### icu4c win32 ####
 
 - copy `bin`, `include` and `lib` folders to `mailcore2/Externals`.
 
-#### ICU win64 ####
+#### icu4c win64 ####
 
 - copy `bin64`, `include` and `lib64` folders to `mailcore2/Externals`.
 
