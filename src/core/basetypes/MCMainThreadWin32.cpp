@@ -10,6 +10,7 @@
 #include "MCMainThread.h"
 
 #include <stdlib.h>
+#include <pthread.h>
 #include <libetpan/libetpan.h>
 
 #include "MCDefines.h"
@@ -17,6 +18,7 @@
 static HWND threadingWindowHandle;
 static UINT threadingFiredMessage;
 static const LPCWSTR kThreadingWindowClassName = L"ThreadingWindowClass";
+static chash * timers = NULL;
 
 struct call_after_delay_data {
     void (* function)(void *);
@@ -47,7 +49,13 @@ LRESULT CALLBACK ThreadingWindowWndProc(HWND hWnd, UINT message, WPARAM wParam, 
         return 0;
     }
     else if (message == WM_TIMER) {
-		struct call_after_delay_data * data = (struct call_after_delay_data *) wParam;
+		UINT_PTR timer_id = wParam;
+		chashdatum key;
+		chashdatum value;
+		key.data = &timer_id;
+		key.len = sizeof(timer_id);
+		chash_get(timers, &key, &value);
+		struct call_after_delay_data * data = (struct call_after_delay_data *) value.data;
         call_after_delay_wrapper(data);
         return 0;
     }
@@ -96,7 +104,11 @@ static void call_after_delay_wrapper(struct call_after_delay_data * data)
 {
     data->function(data->context);
     KillTimer(threadingWindowHandle, data->timer_id);
-    free(data);
+	chashdatum key;
+	key.data = &data->timer_id;
+	key.len = sizeof(data->timer_id);
+	chash_delete(timers, &key, NULL);
+	free(data);
 }
 
 static uint64_t generate_timer_id()
@@ -112,6 +124,13 @@ void * mailcore::callAfterDelay(void (* function)(void *), void * context, doubl
     data->context = context;
 	UINT_PTR timer_id = (UINT_PTR) generate_timer_id();
 	data->timer_id = SetTimer(threadingWindowHandle, timer_id, (int)(time * 1000), NULL);
+	chashdatum key;
+	chashdatum value;
+	key.data = &data->timer_id;
+	key.len = sizeof(data->timer_id);
+	value.data = data;
+	value.len = 0;
+	chash_set(timers, &key, &value, NULL);
 	return data;
 }
 
@@ -119,6 +138,10 @@ void mailcore::cancelDelayedCall(void * delayedCall)
 {
     struct call_after_delay_data * data = (struct call_after_delay_data *) delayedCall;
     KillTimer(threadingWindowHandle, data->timer_id);
+	chashdatum key;
+	key.data = &data->timer_id;
+	key.len = sizeof(data->timer_id);
+	chash_delete(timers, &key, NULL);
     free(data);
 }
 
@@ -133,4 +156,6 @@ INITIALIZE(MainThreadWin32)
     threadingWindowHandle = CreateWindowW(kThreadingWindowClassName, 0, 0,
     CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, HWND_MESSAGE, 0, 0, 0);
     threadingFiredMessage = RegisterWindowMessageW(L"com.libmailcore.mailcore2.MainThreadFired");
+
+	timers = chash_new(CHASH_DEFAULTSIZE, CHASH_COPYKEY);
 }
