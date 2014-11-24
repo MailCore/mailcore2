@@ -138,6 +138,7 @@ namespace mailcore {
         void appendUTF8CharactersLength(const char * UTF8Characters, unsigned int length);
     };
     
+    MAILCORE_EXPORT
     void setICUDataDirectory(String * directory);
 }
 

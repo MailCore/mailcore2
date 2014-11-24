@@ -6,21 +6,6 @@
 
 #ifdef _MSC_VER
 
-/*
-#if WINAPI_FAMILY == WINAPI_FAMILY_PC_APP
-#error pc app
-#elif WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP
-#error phone app
-#elif WINAPI_FAMILY == WINAPI_FAMILY_DESKTOP_APP
-#error desktop app
-#else
-#error other
-#endif
-*/
-
-#undef WINAPI_FAMILY
-#define WINAPI_FAMILY WINAPI_FAMILY_DESKTOP_APP
-
 #define _CRT_RAND_S
 #include <stdlib.h>
 

@@ -37,7 +37,7 @@ build-windows/include
 build-windows/_headers_depends
 build-windows/mailcore2/Debug
 build-windows/mailcore2/Release
-build-windows/mailcore2/mailcore2/mailcore2.Windows/Release
-build-windows/mailcore2/mailcore2/mailcore2.Windows/x64/Release
-build-windows/mailcore2/mailcore2/mailcore2.Windows/Debug
-build-windows/mailcore2/mailcore2/mailcore2.Windows/x64/Debug
+build-windows/mailcore2/mailcore2/Release
+build-windows/mailcore2/mailcore2/x64/Release
+build-windows/mailcore2/mailcore2/Debug
+build-windows/mailcore2/mailcore2/x64/Debug
