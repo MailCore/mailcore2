@@ -1,3 +1,25 @@
+### Cocoapods ###
+
+MailCore 2 is available on [Cocoapods](http://cocoapods.org/).
+
+**For iOS:**
+```
+pod 'mailcore2-ios'
+```
+
+**For OS X:**
+```
+pod 'mailcore2-osx'
+```
+
+### Binary ###
+
+**For iOS:**
+Download the latest [build for iOS](http://d.etpan.org/mailcore2-deps/mailcore2-ios/).
+
+**For iOS:**
+Download the latest [build for OS X](http://d.etpan.org/mailcore2-deps/mailcore2-osx/).
+
 ### Build for iOS/OSX ###
 
 1. If you're migrating from MailCore1, you should first clean your build folder.

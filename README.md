@@ -13,31 +13,6 @@ MailCore 2 provides a simple and asynchronous Objective-C API to work with the e
 
 ## Installation ##
 
-### Cocoapods ###
-
-MailCore 2 is available on [Cocoapods](http://cocoapods.org/).
-
-**For iOS:**
-```
-pod 'mailcore2-ios'
-```
-
-**For OS X:**
-```
-pod 'mailcore2-osx'
-```
-
-### Binary ###
-
-**For iOS:**
-Download the latest [build for iOS](http://d.etpan.org/mailcore2-deps/mailcore2-ios/).
-
-**For iOS:**
-Download the latest [build for OS X](http://d.etpan.org/mailcore2-deps/mailcore2-osx/).
-
-**For Windows**
-Download the latest [build for Win32/Win64](http://d.etpan.org/mailcore2-deps/mailcore2-win32/).
-
 ### Build for iOS/OSX ###
 
 Read [instructions for iOS/OSX](https://github.com/MailCore/mailcore2/blob/master/build-mac/README.md).
