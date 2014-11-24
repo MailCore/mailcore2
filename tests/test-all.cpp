@@ -16,10 +16,6 @@
 #include <glib.h>
 #endif
 
-extern "C" {
-    extern int mailstream_debug;
-}
-
 static mailcore::String * password = NULL;
 static mailcore::String * displayName = NULL;
 static mailcore::String * email = NULL;
@@ -360,7 +356,6 @@ void testAll()
     
     mailcore::AutoreleasePool * pool = new mailcore::AutoreleasePool();
     MCLogEnabled = 1;
-    mailstream_debug = 1;
     
     //mailcore::Data * data = testMessageBuilder();
     //testMessageParser(data);

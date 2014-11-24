@@ -41,3 +41,7 @@ build-windows/mailcore2/mailcore2/Release
 build-windows/mailcore2/mailcore2/x64/Release
 build-windows/mailcore2/mailcore2/Debug
 build-windows/mailcore2/mailcore2/x64/Debug
+build-windows/mailcore2/test/Release
+build-windows/mailcore2/test/x64/Release
+build-windows/mailcore2/test/Debug
+build-windows/mailcore2/test/x64/Debug
