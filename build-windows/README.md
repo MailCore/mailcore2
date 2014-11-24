@@ -8,7 +8,7 @@ For the debug mode, you need to download the repositories and compile them.
 In case you just need a binary build of MailCore 2:
 - [MailCore 2](http://d.etpan.org/mailcore2-deps/mailcore2-win32/)
 
-Also, you'll need all the dependencies:
+Also, you'll need all the dependencies, download the most recent binary builds in:
 
 - [CTemplate](http://d.etpan.org/mailcore2-deps/ctemplate-win32/)
 - [libEtPan](http://d.etpan.org/mailcore2-deps/libetpan-win32/)
@@ -20,7 +20,8 @@ Also, you'll need all the dependencies:
 
 ### Build using Visual Studio 2013 ###
 
-Download the most recent builds in:
+You'll need all the dependencies, download the most recent binary builds in:
+
 - [CTemplate](http://d.etpan.org/mailcore2-deps/ctemplate-win32/)
 - [libEtPan](http://d.etpan.org/mailcore2-deps/libetpan-win32/)
 - [LibXML 2](http://d.etpan.org/mailcore2-deps/libxml2-win32/)
@@ -32,16 +33,20 @@ Download the most recent builds in:
 Instructions for CTemplate, libEtPan, LibXML 2, Tidy HTML5, uchardet and zlib:
 - copy `include`, `lib` and `lib64` folders to `mailcore2/Externals`.
 
-ICU win32:
+#### ICU win32 ####
+
 - copy `bin`, `include` and `lib` folders to `mailcore2/Externals`.
 
-ICU win64:
+#### ICU win64 ####
+
 - copy `bin64`, `include` and `lib64` folders to `mailcore2/Externals`.
 
-openssl:
+#### openssl ####
+
 - copy `bin`, `bin64`, `include`, `lib` and `lib64` to `mailcore2/Externals`.
 
-pthread:
+#### pthread ####
+
 - In `Pre-built.2`, copy `dll`, `include` and `lib` to `mailcore2/Externals`.
 
 As a result, in `Externals` folder, you should have the following folders: `include`, `lib`, `lib64`, `bin`, `bin64` and `dll`.
