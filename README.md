@@ -21,6 +21,10 @@ Read [instructions for iOS/OSX](https://github.com/MailCore/mailcore2/blob/maste
 
 Read [instructions for Windows](https://github.com/MailCore/mailcore2/blob/master/build-windows/README.md).
 
+### Build for Linux ###
+
+Read [instructions for Linux](https://github.com/MailCore/mailcore2/blob/master/build-linux/README.md).
+
 ## Basic IMAP Usage ##
 
 Using MailCore 2 is just a little more complex conceptually than the original MailCore.  All fetch requests in MailCore 2 are made asynchronously through a queue.  What does this mean?  Well, let's  take a look at a simple example:
