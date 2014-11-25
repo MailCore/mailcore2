@@ -15,6 +15,9 @@
 #if __linux__
 #include <glib.h>
 #endif
+#ifdef _MSC_VER
+#include <Windows.h>
+#endif
 
 static mailcore::String * password = NULL;
 static mailcore::String * displayName = NULL;
@@ -22,6 +25,29 @@ static mailcore::String * email = NULL;
 #if __linux
 static GMainLoop * s_main_loop = NULL;
 #endif
+
+#ifdef _MSC_VER
+static void win32MainLoop(void)
+{
+	MSG msg;
+	while (GetMessage(&msg, NULL, 0, 0))
+	{
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+}
+#endif
+
+static void mainLoop(void)
+{
+#if __APPLE__
+	CFRunLoopRun();
+#elif __linux__
+	g_main_loop_run(s_main_loop);
+#elif defined(_MSC_VER)
+	win32MainLoop();
+#endif
+}
 
 class TestOperation : public mailcore::Operation {
     void main()
@@ -184,12 +210,8 @@ static void testOperationQueue()
         op->release();
     }
     
-#if __APPLE__
-    CFRunLoopRun();
-#elif __linux__
-    g_main_loop_run(s_main_loop);
-#endif
-    
+	mainLoop();
+
     queue->release();
 }
 
@@ -223,12 +245,8 @@ static void testAsyncSMTP(mailcore::Data * data)
     op->setCallback(callback);
     op->start();
     
-#if __APPLE__
-    CFRunLoopRun();
-#elif __linux__
-    g_main_loop_run(s_main_loop);
-#endif
-    
+	mainLoop();
+
     //smtp->release();
 }
 
@@ -272,12 +290,8 @@ static void testAsyncIMAP()
     op->setImapCallback(callback);
     op->start();
     //MCLog("%s", MCUTF8DESC(messages));
-#if __APPLE__
-    CFRunLoopRun();
-#elif __linux__
-    g_main_loop_run(s_main_loop);
-#endif
-    
+	mainLoop();
+
     //session->release();
 }
 
@@ -314,11 +328,7 @@ static void testAsyncPOP()
     //mailcore::Array * messages = session->fetchMessages(&error);
     //MCLog("%s", MCUTF8DESC(messages));
     
-#if __APPLE__
-    CFRunLoopRun();
-#elif __linux__
-    g_main_loop_run(s_main_loop);
-#endif
+	mainLoop();
 }
 
 static void testAddresses()
@@ -368,6 +378,6 @@ void testAll()
     //testAsyncPOP();
     //testAddresses();
     //testAttachments();
-  
+
     pool->release();
 }
