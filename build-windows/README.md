@@ -30,7 +30,7 @@ You'll need all the dependencies, download the most recent binary builds in:
 - [zlib](http://d.etpan.org/mailcore2-deps/zlib-win32/)
 - [icu4c, OpenSSL and pthread for win32](http://d.etpan.org/mailcore2-deps/misc-win32/)
 
-Instructions for CTemplate, libEtPan, LibXML 2, Tidy HTML5, uchardet and zlib:
+#### Instructions for CTemplate, libEtPan, LibXML 2, Tidy HTML5, uchardet and zlib ####
 - copy `include`, `lib` and `lib64` folders to `mailcore2/Externals`.
 
 #### icu4c win32 ####
