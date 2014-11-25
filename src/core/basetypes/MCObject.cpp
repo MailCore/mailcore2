@@ -93,6 +93,10 @@ String * Object::className()
     int status;
 #ifdef _MSC_VER
     String * result = String::uniquedStringWithUTF8Characters(typeid(*this).name());
+	// typeid(*this).name() will return "class mailcore::Object". Therefore, we'll strip the prefix "class " from it.
+	if (result->hasPrefix(MCSTR("class "))) {
+		result = result->substringFromIndex(6);
+	}
 #else
     char * unmangled = abi::__cxa_demangle(typeid(* this).name(), NULL, NULL, &status);
     String * result = String::uniquedStringWithUTF8Characters(unmangled);
