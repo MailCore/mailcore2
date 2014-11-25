@@ -41,3 +41,5 @@ mkdir -p build-cmake
 cd build-cmake
 cmake ..
 make
+cd unittest
+./unittestcpp ../../unittest/data

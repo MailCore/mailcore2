@@ -319,5 +319,9 @@ int main(int argc, char ** argv)
 
     pool->release();
 
+    if (global_failure > 0) {
+        exit(EXIT_FAILURE);
+    }
+
     exit(EXIT_SUCCESS);
 }
