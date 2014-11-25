@@ -110,7 +110,26 @@ err:
         goto free_certs;
     }
     
-    status = X509_STORE_set_default_paths(store);
+#ifdef _MSC_VER
+	HCERTSTORE systemStore = CertOpenSystemStore(NULL, L"ROOT");
+
+	PCCERT_CONTEXT previousCert = NULL;
+	while (1) {
+		PCCERT_CONTEXT nextCert = CertEnumCertificatesInStore(systemStore, previousCert);
+		if (nextCert == NULL) {
+			break;
+		}
+		X509 * openSSLCert = d2i_X509(NULL, (const unsigned char **)&nextCert->pbCertEncoded, nextCert->cbCertEncoded);
+		if (openSSLCert != NULL) {
+			X509_STORE_add_cert(store, openSSLCert);
+			X509_free(openSSLCert);
+		}
+		previousCert = nextCert;
+	}
+	CertCloseStore(systemStore, 0);
+#endif
+
+	status = X509_STORE_set_default_paths(store);
     if (status != 1) {
         printf("Error loading the system-wide CA certificates");
     }
