@@ -281,6 +281,29 @@ void HashMap::removeAllObjects()
     mCount = 0;
 }
 
+bool HashMap::isEqual(Object * otherObject)
+{
+    HashMap * otherMap = (HashMap *) otherObject;
+    if (otherMap->count() != count()) {
+        return false;
+    }
+    bool result = true;
+    mc_foreachhashmapKeyAndValue(Object, key, Object, value, this) {
+        Object * otherValue = otherMap->objectForKey(key);
+        if (otherValue == NULL) {
+            result = false;
+            break;
+        }
+        if (!value->isEqual(otherValue)) {
+            fprintf(stderr, "%s: %s %s\n", MCUTF8(key), MCUTF8(value), MCUTF8(otherValue));
+            result = false;
+            break;
+        }
+    }
+
+    return result;
+}
+
 HashMap * HashMap::serializable()
 {
     HashMap * result = Object::serializable();

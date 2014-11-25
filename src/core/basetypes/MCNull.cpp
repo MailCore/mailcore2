@@ -10,10 +10,16 @@
 
 using namespace mailcore;
 
-Null * Null::null()
+static Null * s_null = NULL;
+static pthread_once_t s_once;
+
+static void init_null(void)
 {
-    Null * result = new Null();
-    result->autorelease();
-    return result;
+    s_null = new Null();
 }
 
+Null * Null::null()
+{
+    pthread_once(&s_once, init_null);
+    return s_null;
+}

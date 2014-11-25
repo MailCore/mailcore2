@@ -225,6 +225,7 @@
         NSData * data = [NSData dataWithContentsOfFile:path];
         MCOMessageParser * parser = [MCOMessageParser messageParserWithData:data];
         [[parser header] prepareForUnitTest];
+        [[parser mainPart] prepareForUnitTest];
         NSString * str = [parser plainTextRendering];
 
 //        NSString * outputPath = [@"/Users/hoa/mc2-results/summary" stringByAppendingPathComponent:name];

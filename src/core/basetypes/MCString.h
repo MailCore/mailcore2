@@ -52,7 +52,8 @@ namespace mailcore {
         virtual String * stringByAppendingCharacters(const UChar * unicodeCharacters);
         virtual String * stringByAppendingPathComponent(String * component);
         virtual String * stringByDeletingLastPathComponent();
-        
+        virtual String * stringByDeletingPathExtension();
+
         virtual int compare(String * otherString);
         virtual int caseInsensitiveCompare(String * otherString);
         virtual String * lowercaseString();
@@ -62,7 +63,8 @@ namespace mailcore {
         virtual void deleteCharactersInRange(Range range);
         virtual unsigned int replaceOccurrencesOfString(String * occurrence, String * replacement);
         virtual int locationOfString(String * occurrence);
-        
+        virtual int lastLocationOfString(String * occurrence);
+
         virtual Array * componentsSeparatedByString(String * separator);
         
         virtual bool isEqualCaseInsensitive(String * otherString);

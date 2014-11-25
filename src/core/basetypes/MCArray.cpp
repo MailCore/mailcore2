@@ -253,6 +253,24 @@ String * Array::componentsJoinedByString(String * delimiter)
     return result;
 }
 
+bool Array::isEqual(Object * otherObject)
+{
+    Array * otherArray = (Array *) otherObject;
+    if (otherArray->count() != count()) {
+        return false;
+    }
+    bool result = true;
+    mc_foreacharrayIndex(i, Object, value, this) {
+        Object * otherValue = otherArray->objectAtIndex(i);
+        if (!value->isEqual(otherValue)) {
+            result = false;
+            break;
+        }
+    }
+
+    return result;
+}
+
 HashMap * Array::serializable()
 {
     HashMap * result = Object::serializable();

@@ -1184,6 +1184,9 @@ Data * String::encodedMIMEHeaderValueForSubject()
 
 int String::compareWithCaseSensitive(String * otherString, bool caseSensitive)
 {
+    if ((length() == 0) && (otherString->length() == 0)) {
+        return 0;
+    }
     if ((unicodeCharacters() == NULL) && (otherString->unicodeCharacters() != NULL)) {
         return 0;
     }
@@ -1483,6 +1486,17 @@ int String::locationOfString(String * occurrence)
         return -1;
     }
     
+    return (int) (location - mUnicodeChars);
+}
+
+int String::lastLocationOfString(String * occurrence)
+{
+    UChar * location;
+    location = u_strrstr(mUnicodeChars, occurrence->unicodeCharacters());
+    if (location == NULL) {
+        return -1;
+    }
+
     return (int) (location - mUnicodeChars);
 }
 
@@ -2143,10 +2157,37 @@ String * String::stringByAppendingPathComponent(String * component)
 
 String * String::stringByDeletingLastPathComponent()
 {
-    String * component = lastPathComponent();
-    String * result = (String *) this->copy()->autorelease();
-    result->deleteCharactersInRange(RangeMake(result->length() - component->length(), component->length()));
-    return result;
+    String * currentString = this;
+    if (currentString->isEqual(MCSTR("/"))) {
+        return currentString;
+    }
+    if (currentString->length() == 0) {
+        return currentString;
+    }
+    if (currentString->unicodeCharacters()[currentString->length() - 1] == '/') {
+        currentString = currentString->substringToIndex(currentString->length() - 1);
+    }
+    String * component = currentString->lastPathComponent();
+    currentString = currentString->substringToIndex(currentString->length() - component->length());
+    if (currentString->isEqual(MCSTR("/"))) {
+        return currentString;
+    }
+    if (currentString->length() == 0) {
+        return currentString;
+    }
+    if (currentString->unicodeCharacters()[currentString->length() - 1] == '/') {
+        currentString = currentString->substringToIndex(currentString->length() - 1);
+    }
+    return currentString;
+}
+
+String * String::stringByDeletingPathExtension()
+{
+    int location = lastLocationOfString(MCSTR("."));
+    if ((location == -1) || (location == 0)) {
+        return this;
+    }
+    return substringToIndex(location);
 }
 
 Array * String::componentsSeparatedByString(String * separator)
