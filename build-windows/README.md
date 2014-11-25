@@ -54,3 +54,5 @@ As a result, in `Externals` folder, you should have the following folders: `incl
 
 In `mailcore2/build-windows/mailcore2`, using Visual Studio 2013, open `mailcore2.sln`.
 Then, build.
+
+Public headers will be located in `mailcore2/build-windows/include`.
