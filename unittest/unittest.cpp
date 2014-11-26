@@ -1,6 +1,7 @@
 #include <MailCore/MailCore.h>
 #include <dirent.h>
 #include <math.h>
+#include <time.h>
 
 using namespace mailcore;
 
@@ -299,6 +300,8 @@ static void testSummary(String * path)
 
 int main(int argc, char ** argv)
 {
+    tzset();
+
     if (argc < 2) {
         fprintf(stderr, "syntax: unittestcpp [unittestdatadir]\n");
         exit(EXIT_FAILURE);
