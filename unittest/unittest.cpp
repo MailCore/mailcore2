@@ -260,8 +260,7 @@ static void testCharsetDetection(String * path)
 
 static String * tweakDateFromSummary(String * summary) {
     Array * components = summary->componentsSeparatedByString(MCSTR("\n"));
-    if (components->count() >= 4) {
-        String * line = (String *) components->objectAtIndex(3);
+    mc_foreacharray(String, line, components) {
         if (line->hasPrefix(MCSTR("Date:"))) {
             line->replaceOccurrencesOfString(MCSTR(" at "), MCSTR(" "));
         }
