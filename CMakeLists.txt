@@ -25,6 +25,7 @@ ELSEIF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
   set(CMAKE_CXX_FLAGS "-std=gnu++0x")
   
   set(additional_includes
+    /usr/include/tidy
     /usr/include/libxml2
   )
   
