@@ -1,5 +1,6 @@
 #include <MailCore/MailCore.h>
 #include <dirent.h>
+#include <math.h>
 
 using namespace mailcore;
 
@@ -272,7 +273,7 @@ static void testSummary(String * path)
         String * resultPath = outputPath->stringByAppendingPathComponent(filename->substringFromIndex(inputPath->length()));
         resultPath = resultPath->stringByDeletingPathExtension()->stringByAppendingString(MCSTR(".txt"));
         Data * resultData = Data::dataWithContentsOfFile(resultPath);
-        if (resultData == nil) {
+        if (resultData == NULL) {
             fprintf(stderr, "test %s is a well-known failing test", MCUTF8(filename));
             continue;
         }
