@@ -29,8 +29,8 @@ ELSEIF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     /usr/include/libxml2
   )
   
-  #set(icu_libraries icudata icui18n icuio icule iculx icutest icutu icuuc)
-  set(linux_libraries pthread uuid)
+  set(icu_libraries icudata icui18n icuio icule iculx icutest icutu icuuc)
+  set(linux_libraries ${icu_libraries} pthread uuid)
 ENDIF()
 
 
