@@ -258,6 +258,17 @@ static void testCharsetDetection(String * path)
     global_success ++;
 }
 
+static String * tweakDateFromSummary(String * summary) {
+    Array * components = summary->componentsSeparatedByString(MCSTR("\n"));
+    if (components->count() >= 4) {
+        String * line = (String *) components->objectAtIndex(3);
+        if (line->hasPrefix(MCSTR("Date:"))) {
+            line->replaceOccurrencesOfString(MCSTR(" at "), MCSTR(" "));
+        }
+    }
+    return components->componentsJoinedByString(MCSTR("\n"));
+}
+
 static void testSummary(String * path)
 {
     printf("testSummary\n");
@@ -278,8 +289,11 @@ static void testSummary(String * path)
             fprintf(stderr, "test %s is a well-known failing test", MCUTF8(filename));
             continue;
         }
+        String * resultString = resultData->stringWithCharset("utf-8");
+        str = tweakDateFromSummary(str);
+        resultString = tweakDateFromSummary(resultString);
 
-        if (!resultData->stringWithCharset("utf-8")->isEqual(str)) {
+        if (!resultString->isEqual(str)) {
             failure ++;
             fprintf(stderr, "testSummary: failed for %s\n", MCUTF8(filename));
             fprintf(stderr, "got: %s\n", MCUTF8(str));
