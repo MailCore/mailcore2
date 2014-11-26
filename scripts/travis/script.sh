@@ -42,4 +42,5 @@ cd build-cmake
 cmake ..
 make
 cd unittest
+export TZ=PST8PDT
 ./unittestcpp ../../unittest/data
