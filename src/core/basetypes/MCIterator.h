@@ -156,10 +156,10 @@ namespace mailcore {
             return false;
         }
         
-        if (keyp != NULL) {
+        if (keyp != NULL && * keyp != NULL) {
             * keyp = iterator->keys->objectAtIndex(iterator->index);
         }
-        if (valuep != NULL) {
+        if (valuep != NULL && * valuep != NULL) {
             * valuep = iterator->values->objectAtIndex(iterator->index);
         }
         iterator->index ++;

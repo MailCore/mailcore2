@@ -794,9 +794,9 @@
 		C6E665B61796500B0063F2CF /* MCZip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6E665AA1796500B0063F2CF /* MCZip.cpp */; };
 		C6E665B71796500B0063F2CF /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = C6E665AD1796500B0063F2CF /* ioapi.c */; };
 		C6E665B81796500B0063F2CF /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = C6E665AD1796500B0063F2CF /* ioapi.c */; };
-		C6E665BB1796500C0063F2CF /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = C6E665B11796500B0063F2CF /* unzip.c */; };
+		C6E665BB1796500C0063F2CF /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = C6E665B11796500B0063F2CF /* unzip.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		C6E665BC1796500C0063F2CF /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = C6E665B11796500B0063F2CF /* unzip.c */; };
-		C6E665BD1796500C0063F2CF /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = C6E665B31796500B0063F2CF /* zip.c */; };
+		C6E665BD1796500C0063F2CF /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = C6E665B31796500B0063F2CF /* zip.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-checker"; }; };
 		C6E665BE1796500C0063F2CF /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = C6E665B31796500B0063F2CF /* zip.c */; };
 		C6EB30DE16B5B8050091F4F1 /* MCObjC.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6EB30DC16B5B7770091F4F1 /* MCObjC.h */; };
 		C6EB30F716B8C9480091F4F1 /* NSDictionary+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6EB30F616B8C9480091F4F1 /* NSDictionary+MCO.mm */; };
