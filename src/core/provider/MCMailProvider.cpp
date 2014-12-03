@@ -75,10 +75,10 @@ MailProvider * MailProvider::providerWithInfo(HashMap * info)
 
 void MailProvider::fillWithInfo(HashMap * info)
 {
-    Array * imapInfos;
-    Array * smtpInfos;
-    Array * popInfos;
-    HashMap * serverInfo;
+    Array * imapInfos = NULL;
+    Array * smtpInfos = NULL;
+    Array * popInfos = NULL;
+    HashMap * serverInfo = NULL;
     
     MC_SAFE_RELEASE(mDomainMatch);
     if (info->objectForKey(MCSTR("domain-match")) != NULL) {
@@ -102,9 +102,11 @@ void MailProvider::fillWithInfo(HashMap * info)
         MCLog("servers key missing from provider %s", MCUTF8DESC(info));
     }
     MCAssert(serverInfo != NULL);
-    imapInfos = (Array *) serverInfo->objectForKey(MCSTR("imap"));
-    smtpInfos = (Array *) serverInfo->objectForKey(MCSTR("smtp"));
-    popInfos = (Array *) serverInfo->objectForKey(MCSTR("pop"));
+    if (serverInfo != NULL) {
+        imapInfos = (Array *) serverInfo->objectForKey(MCSTR("imap"));
+        smtpInfos = (Array *) serverInfo->objectForKey(MCSTR("smtp"));
+        popInfos = (Array *) serverInfo->objectForKey(MCSTR("pop"));
+    }
     
     mImapServices->removeAllObjects();
     mc_foreacharray(HashMap, imapInfo, imapInfos) {

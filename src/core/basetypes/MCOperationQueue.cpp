@@ -108,27 +108,29 @@ void OperationQueue::runOperations()
         }
 
         performOnCallbackThread(op, (Object::Method) &OperationQueue::beforeMain, op, true);
-        
-        if (!op->isCancelled() || op->shouldRunWhenCancelled()) {
-            op->main();
-        }
-        
-        op->retain()->autorelease();
-        
-        pthread_mutex_lock(&mLock);
-        mOperations->removeObjectAtIndex(0);
-        if (mOperations->count() == 0) {
-            if (mWaiting) {
-                mailsem_up(mWaitingFinishedSem);
+
+        if (op != NULL) {
+            if (!op->isCancelled() || op->shouldRunWhenCancelled()) {
+                op->main();
             }
-            needsCheckRunning = true;
-        }
-        pthread_mutex_unlock(&mLock);
+
+            op->retain()->autorelease();
+
+            pthread_mutex_lock(&mLock);
+            mOperations->removeObjectAtIndex(0);
+            if (mOperations->count() == 0) {
+                if (mWaiting) {
+                    mailsem_up(mWaitingFinishedSem);
+                }
+                needsCheckRunning = true;
+            }
+            pthread_mutex_unlock(&mLock);
         
-        if (!op->isCancelled()) {
-            performOnCallbackThread(op, (Object::Method) &OperationQueue::callbackOnMainThread, op, true);
+            if (!op->isCancelled()) {
+                performOnCallbackThread(op, (Object::Method) &OperationQueue::callbackOnMainThread, op, true);
+            }
         }
-        
+
         if (needsCheckRunning) {
             retain(); // (1)
             //MCLog("check running %p", this);
@@ -147,7 +149,9 @@ void OperationQueue::runOperations()
 void OperationQueue::performOnCallbackThread(Operation * op, Method method, void * context, bool waitUntilDone)
 {
 #if __APPLE__
-    dispatch_queue_t queue = op->callbackDispatchQueue();
+    dispatch_queue_t queue = NULL;
+    if (op != NULL)
+        queue = op->callbackDispatchQueue();
     if (queue == NULL) {
         queue = dispatch_get_main_queue();
     }

@@ -935,7 +935,7 @@ String * String::stringWithCharacters(const UChar * characters, unsigned int len
 
 void String::appendCharactersLength(const UChar * unicodeCharacters, unsigned int length)
 {
-    if (unicodeCharacters == NULL) {
+    if (unicodeCharacters == NULL || mUnicodeChars == NULL) {
         return;
     }
     allocate(mLength + length);
