@@ -935,10 +935,13 @@ String * String::stringWithCharacters(const UChar * characters, unsigned int len
 
 void String::appendCharactersLength(const UChar * unicodeCharacters, unsigned int length)
 {
-    if (unicodeCharacters == NULL || mUnicodeChars == NULL) {
+    if (unicodeCharacters == NULL) {
         return;
     }
     allocate(mLength + length);
+    if (mUnicodeChars == NULL) {
+        return;
+    }
     memcpy(&mUnicodeChars[mLength], unicodeCharacters, length * sizeof(* mUnicodeChars));
     mLength += length;
     mUnicodeChars[mLength] = 0;
