@@ -1204,5 +1204,38 @@
             "sentmail": "Отправленные",
             "trash": "Удаленные"
         }
+    },
+    "rambler": {
+        "servers": {
+            "imap": [
+                     {
+                     "port": 993,
+                     "hostname": "imap.rambler.ru",
+                     "ssl": true
+                     }
+                     ],
+            "smtp": [
+                     {
+                     "port": 465,
+                     "hostname": "smtp.rambler.ru",
+                     "ssl": true
+                     }
+                     ]
+            
+        },
+        "domain-match": [
+                         "rambler\\.ru",
+                         "lenta\\.ru",
+                         "autorambler\\.ru",
+                         "myrambler\\.ru",
+                         "ro\\.ru",
+                         "r0\\.ru"
+                         ],
+        "mailboxes": {
+            "drafts": "DraftBox",
+            "spam": "Spam",
+            "sentmail": "SentBox",
+            "trash": "Trash"
+        }
     }
 }
