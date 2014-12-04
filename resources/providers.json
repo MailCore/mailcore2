@@ -1176,5 +1176,33 @@
     	"mx-match": [
     		"mx\\.rcn\\.com"
     	]
+    },
+    "ukrnet": {
+        "servers": {
+            "imap": [
+                     {
+                     "port": 993,
+                     "hostname": "imap.ukr.net",
+                     "ssl": true
+                     }
+                     ],
+            "smtp": [
+                     {
+                     "port": 465,
+                     "hostname": "smtp.ukr.net",
+                     "ssl": true
+                     }
+                     ]
+            
+        },
+        "domain-match": [
+                         "ukr\\.net"
+                         ],
+        "mailboxes": {
+            "drafts": "Черновики",
+            "spam": "Спам",
+            "sentmail": "Отправленные",
+            "trash": "Удаленные"
+        }
     }
 }
