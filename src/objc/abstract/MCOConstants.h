@@ -324,7 +324,7 @@ typedef NS_ENUM(NSInteger, MCOIMAPCapability) {
 /** Here's the list of errors.*/
 typedef NS_ENUM(NSInteger, MCOErrorCode) {
     /** No error occurred.*/
-    MCOErrorNone,
+    MCOErrorNone, // 0
     /** An error related to the connection occurred.*/
     /** It could not connect or it's been disconnected.*/
     MCOErrorConnection,
@@ -345,7 +345,7 @@ typedef NS_ENUM(NSInteger, MCOErrorCode) {
     /** Specific to Mobile Me: Moved to iCloud.*/
     MCOErrorMobileMeMoved,
     /** Specific to Yahoo: not available.*/
-    MCOErrorYahooUnavailable,
+    MCOErrorYahooUnavailable, // 10
     /** Non existant folder, select failed.*/
     MCOErrorNonExistantFolder,
     /** IMAP: Error occurred while renaming a folder.*/
@@ -365,7 +365,7 @@ typedef NS_ENUM(NSInteger, MCOErrorCode) {
     /** IMAP: Error occurred while fetching messages.*/
     MCOErrorFetch,
     /** IMAP: Error occurred while IDLing.*/
-    MCOErrorIdle,
+    MCOErrorIdle, // 20
     /** IMAP: Error occurred while sending/getting identity.*/
     MCOErrorIdentity,
     /** IMAP: Error occurred while getting namespace.*/
@@ -385,7 +385,7 @@ typedef NS_ENUM(NSInteger, MCOErrorCode) {
     /** SMTP: Specific to hotmail. Needs to connect to webmail.*/
     MCOErrorNeedsConnectToWebmail,
     /** SMTP: Error while sending message.*/
-    MCOErrorSendMessage,
+    MCOErrorSendMessage, // 30
     /** SMTP: Authentication required.*/
     MCOErrorAuthenticationRequired,
     /** POP: Error occurred while fetching message list.*/
@@ -394,6 +394,8 @@ typedef NS_ENUM(NSInteger, MCOErrorCode) {
     MCOErrorDeleteMessage,
     /** SMTP: Error while checking account.*/
     MCOErrorInvalidAccount,
+    /** Error when accessing/reading/writing file.*/
+    MCOErrorFile,
     /** IMAP: Error when trying to enable compression.*/
     MCOErrorCompression,
     /** SMTP: Error when no sender has been specified.*/
@@ -404,7 +406,9 @@ typedef NS_ENUM(NSInteger, MCOErrorCode) {
     MCOErrorNoop,
     /** IMAP: Error when the password has been entered but second factor
      authentication is enabled: an application specific password is required. */
-    MCOErrorGmailApplicationSpecificPasswordRequired,
+    MCOErrorGmailApplicationSpecificPasswordRequired, // 40
+    /** NNTP: error when requesting date */
+    MCOErrorServerDate,
     /** The count of all errors */
     MCOErrorCodeCount,
 };
