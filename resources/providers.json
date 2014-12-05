@@ -1251,7 +1251,7 @@
                      {
                      "port": 587,
                      "hostname": "smtp.office365.com",
-                     "ssl": true
+                     "starttls": true
                      }
                      ]
             },
