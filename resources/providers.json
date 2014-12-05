@@ -1237,5 +1237,29 @@
             "sentmail": "SentBox",
             "trash": "Trash"
         }
+    },
+    "office365": {
+        "servers": {
+            "imap": [
+                     {
+                     "port": 993,
+                     "hostname": "outlook.office365.com",
+                     "ssl": true
+                     }
+                     ],
+            "smtp": [
+                     {
+                     "port": 587,
+                     "hostname": "smtp.office365.com",
+                     "starttls": true
+                     }
+                     ]
+            },
+        "mailboxes": {
+            "drafts": "Drafts",
+            "spam": "Junk Email",
+            "sentmail": "Sent Items",
+            "trash": "Deleted Items"
+        }
     }
 }
