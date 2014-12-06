@@ -45,7 +45,12 @@ Download the latest [build for OS X](http://d.etpan.org/mailcore2-deps/mailcore2
     * Set 'Other Linker Flags': `-luchardet-ios -lctemplate-ios -letpan-ios -lxml2 -lsasl2 -liconv -ltidy -lz` `-lc++ -stdlib=libc++ -ObjC`
     * Make sure to use LLVM C++ standard library.  Open Build Settings, scroll down to 'C++ Standard Library', and select `libc++`.
     * In Build Phases, add a Target Dependency of `static mailcore2 ios`.
-6. Profit.
+6. **For Swift** - If you are using Mailcore in a Swift project you also need to complete the following steps:
+    * Create a new header file in your project and name it ```Project-Name-Bridging-Header.h```.
+    * Remove any template code from the file and add ```#import <MailCore/MailCore.h>```
+    * In your target settings search for _Objective-c Bridging Header_ and add a link to your bridging header.
+    * You do not need to import Mailcore in any of your classes as the bridging header takes care of this automatically.
+7. Profit.
 
 Here's a video that shows all the steps for iOS:
 http://www.youtube.com/watch?v=9fAo6oBzlQI
