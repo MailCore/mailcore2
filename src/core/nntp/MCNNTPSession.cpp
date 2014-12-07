@@ -17,6 +17,7 @@
 #include "MCMessageHeader.h"
 #include "MCConnectionLoggerUtils.h"
 #include "MCCertificateUtils.h"
+#include "MCLibetpan.h"
 
 #define NNTP_DEFAULT_PORT  119
 #define NNTPS_DEFAULT_PORT 563
@@ -504,21 +505,21 @@ time_t NNTPSession::fetchServerDate(ErrorCode * pError) {
     
     loginIfNeeded(pError);
     if (* pError != ErrorNone) {
-        return NULL;
+        return (time_t) -1;
     }
     
     r = newsnntp_date(mNNTP, &time);
     
     if (r == NEWSNNTP_ERROR_STREAM) {
         * pError = ErrorConnection;
-        return NULL;
+        return (time_t) -1;
     }
     else if (r != NEWSNNTP_NO_ERROR) {
         * pError = ErrorServerDate;
-        return NULL;
+        return (time_t) -1;
     }
     
-    result = timegm(&time);
+    result = mkgmtime(&time);
     * pError = ErrorNone;
     
     return result;

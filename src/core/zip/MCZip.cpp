@@ -8,6 +8,7 @@
 #include <sys/types.h>
 #ifndef _MSC_VER
 #include <dirent.h>
+#include <unistd.h>
 #endif
 #include <sys/stat.h>
 #include <time.h>

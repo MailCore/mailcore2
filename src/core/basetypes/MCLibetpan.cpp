@@ -16,7 +16,6 @@
 
 using namespace mailcore;
 
-static time_t mkgmtime(struct tm * tmp);
 static int tmcomp(struct tm * atmp, struct tm * btmp);
 
 INITIALIZE(Libetpan)
@@ -178,7 +177,7 @@ static int tmcomp(struct tm * atmp, struct tm * btmp)
     return result;
 }
 
-static time_t mkgmtime(struct tm * tmp)
+time_t mailcore::mkgmtime(struct tm * tmp)
 {
     int            dir;
     int            bits;

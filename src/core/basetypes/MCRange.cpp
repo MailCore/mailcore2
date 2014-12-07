@@ -12,6 +12,10 @@
 #include <sys/param.h>
 #endif
 
+#if defined(ANDROID) || defined(__ANDROID__)
+#include "MCAndroid.h"
+#endif
+
 using namespace mailcore;
 
 Range mailcore::RangeEmpty = {UINT64_MAX, 0};

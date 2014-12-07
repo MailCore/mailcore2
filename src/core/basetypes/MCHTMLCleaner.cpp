@@ -11,6 +11,10 @@
 #include "MCString.h"
 #include "MCData.h"
 
+#if defined(ANDROID) || defined(__ANDROID__)
+typedef unsigned long ulong;
+#endif
+
 #include <tidy.h>
 #include <buffio.h>
 

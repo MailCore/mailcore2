@@ -13,7 +13,7 @@
 #include <unicode/ucnv.h>
 #include <unicode/utypes.h>
 #endif
-#ifndef _MSC_VER
+#if !defined(_MSC_VER) && !defined(ANDROID) && !defined(__ANDROID__)
 #include <uuid/uuid.h>
 #endif
 #include <pthread.h>
@@ -1384,6 +1384,26 @@ String * String::extractedSubjectAndKeepBracket(bool keepBracket)
     return str;
 }
 
+#if defined(ANDROID) || defined(__ANDROID__)
+
+String * String::uuidString()
+{
+    char buffer[38];
+    FILE * f = fopen("/proc/sys/kernel/random/uuid", "r");
+    if (f == NULL) {
+        return NULL;
+    }
+    if (fgets(buffer, sizeof(buffer), f) == NULL) {
+        fclose(f);
+        return NULL;
+    }
+    buffer[38] = 0;
+    fclose(f);
+    return String::stringWithUTF8Characters(buffer);
+}
+
+#else
+
 #ifndef _MSC_VER
 String * String::uuidString()
 {
@@ -1398,6 +1418,8 @@ String * String::uuidString()
     uuid_unparse_lower(uuid, uuidString);
     return String::stringWithUTF8Characters(uuidString);
 }
+#endif
+
 #endif
 
 unsigned int String::replaceOccurrencesOfString(String * occurrence, String * replacement)
