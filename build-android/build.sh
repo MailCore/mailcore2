@@ -37,6 +37,7 @@ function build {
   
     cd "$current_dir/jni"
     $ANDROID_NDK/ndk-build TARGET_PLATFORM=$ANDROID_PLATFORM TARGET_ARCH_ABI=$TARGET_ARCH_ABI \
+        NDK_TOOLCHAIN_VERSION=4.9 \
         CTEMPLATE_PATH=$current_dir/third-party/ctemplate-android-1 \
         ICU4C_PATH=$current_dir/third-party/icu4c-android-1 \
         LIBETPAN_PATH=$current_dir/third-party/libetpan-android-1 \
@@ -46,9 +47,19 @@ function build {
         OPENSSL_PATH=$current_dir/third-party/openssl-android-1
 
     mkdir -p "$current_dir/$package_name-$build_version/libs/$TARGET_ARCH_ABI"
-    cp "$current_dir/obj/local/$TARGET_ARCH_ABI/libMailCore.a" "$current_dir/$package_name-$build_version/libs/$TARGET_ARCH_ABI"
+    cp "$current_dir/libs/$TARGET_ARCH_ABI/libMailCore.so" "$current_dir/$package_name-$build_version/libs/$TARGET_ARCH_ABI"
     rm -rf "$current_dir/obj"
+    rm -rf "$current_dir/libs"
 }
+
+mkdir -p "$current_dir/cmake-build"
+cd "$current_dir/cmake-build"
+cmake ../..
+
+mkdir -p "$current_dir/include"
+cp -R "$current_dir/cmake-build/src/include/MailCore" "$current_dir/include"
+mkdir -p "$current_dir/$package_name-$build_version/include"
+cp -R "$current_dir/cmake-build/src/include/MailCore" "$current_dir/$package_name-$build_version/include"
 
 mkdir -p "$current_dir/third-party"
 cd "$current_dir/third-party"
