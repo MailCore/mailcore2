@@ -19,8 +19,6 @@
 #include "MCLog.h"
 #include "MCAutoreleasePool.h"
 
-#include "test-all.h"
-
 using namespace mailcore;
 
 struct main_thread_call_data {
