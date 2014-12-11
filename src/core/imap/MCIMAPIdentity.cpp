@@ -83,6 +83,11 @@ void IMAPIdentity::setInfoForKey(String * key, String * value)
     }
 }
 
+void IMAPIdentity::removeAllInfos()
+{
+    mValues->removeAllObjects();
+}
+
 Object * IMAPIdentity::copy()
 {
     return new IMAPIdentity(this);

@@ -10,7 +10,7 @@
 extern "C" {
 #endif	
     MAILCORE_EXPORT
-	void MCAssertInternal(const char * filename, unsigned int line, int cond, const char * condString);
+	void MCAssertInternal(const char * filename, unsigned int line, int cond, const char * condString) CLANG_ANALYZER_NORETURN;
 #ifdef __cplusplus
 }
 #endif

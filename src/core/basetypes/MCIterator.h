@@ -14,6 +14,7 @@
 #include <MailCore/MCHashMap.h>
 #include <MailCore/MCIndexSet.h>
 #include <MailCore/MCAutoreleasePool.h>
+#include <MailCore/MCAssert.h>
 #include <string.h>
 
 #ifdef __cplusplus
@@ -157,9 +158,11 @@ namespace mailcore {
         }
         
         if (keyp != NULL) {
+            MCAssert(iterator->keys != NULL);
             * keyp = iterator->keys->objectAtIndex(iterator->index);
         }
         if (valuep != NULL) {
+            MCAssert(iterator->values != NULL);
             * valuep = iterator->values->objectAtIndex(iterator->index);
         }
         iterator->index ++;

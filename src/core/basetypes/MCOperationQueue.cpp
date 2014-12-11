@@ -11,6 +11,7 @@
 #include "MCLog.h"
 #include "MCAutoreleasePool.h"
 #include "MCMainThreadAndroid.h"
+#include "MCAssert.h"
 
 using namespace mailcore;
 
@@ -112,6 +113,7 @@ void OperationQueue::runOperations()
             break;
         }
 
+        MCAssert(op != NULL);
         performOnCallbackThread(op, (Object::Method) &OperationQueue::beforeMain, op, true);
         
         if (!op->isCancelled() || op->shouldRunWhenCancelled()) {

@@ -31,7 +31,8 @@ namespace mailcore {
 void HashMap::init()
 {
     mCount = 0;
-    mCells = (void **) (HashMapCell **) calloc(CHASH_DEFAULTSIZE, sizeof(HashMapCell *));
+    size_t hashMapCellSize = sizeof(HashMapCell *);
+    mCells = (void **) calloc(CHASH_DEFAULTSIZE, hashMapCellSize);
     mAllocated = CHASH_DEFAULTSIZE;
 }
 

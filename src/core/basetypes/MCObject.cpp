@@ -165,7 +165,9 @@ static void removeFromPerformHash(Object * obj, Object::Method method, void * co
     struct mainThreadCallKeyData keyData;
     Object * queueIdentifier = NULL;
 #if __APPLE__
-    queueIdentifier = (String *) dispatch_queue_get_specific((dispatch_queue_t) targetDispatchQueue, "MCDispatchQueueID");
+    if (targetDispatchQueue != NULL) {
+        queueIdentifier = (Object *) dispatch_queue_get_specific((dispatch_queue_t) targetDispatchQueue, "MCDispatchQueueID");
+    }
 #endif
     memset(&keyData, 0, sizeof(keyData));
     keyData.dispatchQueueIdentifier = queueIdentifier;
@@ -194,10 +196,15 @@ static void addToPerformHash(Object * obj, Object::Method method, void * context
     struct mainThreadCallKeyData keyData;
     Object * queueIdentifier = NULL;
 #if __APPLE__
-    queueIdentifier = (String *) dispatch_queue_get_specific((dispatch_queue_t) targetDispatchQueue, "MCDispatchQueueID");
-    if (queueIdentifier == NULL) {
-        queueIdentifier = new Object();
-        dispatch_queue_set_specific((dispatch_queue_t) targetDispatchQueue, "MCDispatchQueueID", queueIdentifier, queueIdentifierDestructor);
+    if (targetDispatchQueue == NULL) {
+        queueIdentifier = NULL;
+    }
+    else {
+        queueIdentifier = (Object *) dispatch_queue_get_specific((dispatch_queue_t) targetDispatchQueue, "MCDispatchQueueID");
+        if (queueIdentifier == NULL) {
+            queueIdentifier = new Object();
+            dispatch_queue_set_specific((dispatch_queue_t) targetDispatchQueue, "MCDispatchQueueID", queueIdentifier, queueIdentifierDestructor);
+        }
     }
 #endif
     memset(&keyData, 0, sizeof(keyData));
@@ -223,10 +230,11 @@ static void * getFromPerformHash(Object * obj, Object::Method method, void * con
     
     Object * queueIdentifier = NULL;
 #if __APPLE__
-    MCAssert(targetDispatchQueue != NULL);
-    queueIdentifier = (String *) dispatch_queue_get_specific((dispatch_queue_t) targetDispatchQueue, "MCDispatchQueueID");
-    if (queueIdentifier == NULL)
-        return NULL;
+    if (targetDispatchQueue != NULL) {
+        queueIdentifier = (Object *) dispatch_queue_get_specific((dispatch_queue_t) targetDispatchQueue, "MCDispatchQueueID");
+        if (queueIdentifier == NULL)
+            return NULL;
+    }
 #endif
     memset(&keyData, 0, sizeof(keyData));
     keyData.dispatchQueueIdentifier = queueIdentifier;

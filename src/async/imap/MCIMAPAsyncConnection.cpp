@@ -239,8 +239,11 @@ IMAPNamespace * IMAPAsyncConnection::defaultNamespace()
 void IMAPAsyncConnection::setClientIdentity(IMAPIdentity * identity)
 {
     MC_SAFE_REPLACE_COPY(IMAPIdentity, mClientIdentity, identity);
-    mc_foreacharray(String, key, identity->allInfoKeys()) {
-        mSession->clientIdentity()->setInfoForKey(key, identity->infoForKey(key));
+    mSession->clientIdentity()->removeAllInfos();
+    if (identity != NULL) {
+        mc_foreacharray(String, key, identity->allInfoKeys()) {
+            mSession->clientIdentity()->setInfoForKey(key, identity->infoForKey(key));
+        }
     }
 }
 

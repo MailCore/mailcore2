@@ -323,6 +323,7 @@ int main(int argc, char ** argv)
     AutoreleasePool * pool = new AutoreleasePool();
 
     String * path = String::stringWithUTF8Characters(argv[1]);
+    MCAssert(path != NULL);
     printf("data path: %s\n", MCUTF8(path));
 
     testMessageBuilder1(path->stringByAppendingPathComponent(MCSTR("builder")));

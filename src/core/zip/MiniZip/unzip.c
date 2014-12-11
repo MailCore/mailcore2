@@ -63,6 +63,7 @@
 
 */
 
+#ifndef __clang_analyzer__
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -1696,7 +1697,7 @@ extern int ZEXPORT unzReadCurrentFile  (unzFile file, voidp buf, unsigned len)
         return UNZ_PARAMERROR;
 
 
-    if ((pfile_in_zip_read_info->read_buffer == NULL))
+    if (pfile_in_zip_read_info->read_buffer == NULL)
         return UNZ_END_OF_LIST_OF_FILE;
     if (len==0)
         return 0;
@@ -2123,3 +2124,5 @@ extern int ZEXPORT unzSetOffset (unzFile file, uLong pos)
 {
     return unzSetOffset64(file,pos);
 }
+
+#endif

@@ -1877,10 +1877,8 @@ HashMap * IMAPSession::fetchMessageNumberUIDMapping(String * folder, uint32_t fr
 }
 
 struct msg_att_handler_data {
-    IMAPSession * self;
     bool fetchByUID;
     Array * result;
-    String * folder;
     IMAPMessagesRequestKind requestKind;
     uint32_t mLastFetchedSequenceNumber;
     HashMap * mapping;
@@ -1905,11 +1903,8 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
     bool hasGmailMessageID;
     bool hasGmailThreadID;
     struct msg_att_handler_data * msg_att_context;
-    // struct
-    IMAPSession * self;
     bool fetchByUID;
     Array * result;
-    String * folder;
     IMAPMessagesRequestKind requestKind;
     uint32_t mLastFetchedSequenceNumber;
     HashMap * mapping;
@@ -1922,12 +1917,9 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
     uint32_t startUid;
     
     msg_att_context = (struct msg_att_handler_data *) context;
-    self = msg_att_context->self;
     fetchByUID = msg_att_context->fetchByUID;
     result = msg_att_context->result;
-    folder = msg_att_context->folder;
     requestKind = msg_att_context->requestKind;
-    mLastFetchedSequenceNumber = msg_att_context->mLastFetchedSequenceNumber;
     mapping = msg_att_context->mapping;
     needsHeader = msg_att_context->needsHeader;
     needsBody = msg_att_context->needsBody;
@@ -2101,6 +2093,10 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
         return;
     }
     if (needsGmailMessageID && !hasGmailMessageID) {
+        msg->release();
+        return;
+    }
+    if (needsGmailLabels && !hasGmailLabels) {
         msg->release();
         return;
     }
@@ -2280,10 +2276,8 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
     struct msg_att_handler_data msg_att_data;
     
     memset(&msg_att_data, 0, sizeof(msg_att_data));
-    msg_att_data.self = this;
     msg_att_data.fetchByUID = fetchByUID;
     msg_att_data.result = messages;
-    msg_att_data.folder = folder;
     msg_att_data.requestKind = requestKind;
     msg_att_data.mLastFetchedSequenceNumber = mLastFetchedSequenceNumber;
     msg_att_data.mapping = mapping;
@@ -2603,8 +2597,8 @@ Data * IMAPSession::fetchMessageAttachment(String * folder, bool identifier_is_u
     clist * sec_list;
     Array * partIDArray;
     int r;
-    char * text;
-    size_t text_length;
+    char * text = NULL;
+    size_t text_length = 0;
     Data * data;
     
     selectIfNeeded(folder, pError);
@@ -2650,7 +2644,7 @@ Data * IMAPSession::fetchMessageAttachment(String * folder, bool identifier_is_u
         * pError = ErrorFetch;
         return NULL;
     }
-    
+
     data = Data::dataWithBytes(text, (unsigned int) text_length);
     data = data->decodedDataUsingEncoding(encoding);
     

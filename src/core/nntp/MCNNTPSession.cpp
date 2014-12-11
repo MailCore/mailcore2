@@ -386,7 +386,7 @@ Array * NNTPSession::listDefaultNewsgroups(ErrorCode * pError)
         
         grp_info = (struct newsnntp_group_info *) clist_content(iter);
         
-        name = String::stringWithUTF8Characters(strdup(grp_info->grp_name));
+        name = String::stringWithUTF8Characters(grp_info->grp_name);
         name->retain();
         
         NNTPGroupInfo * info = new NNTPGroupInfo();

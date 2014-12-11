@@ -25,7 +25,7 @@ namespace mailcore {
         virtual void removeObjectAtIndex(unsigned int idx);
         virtual void removeObject(Object * obj);
         virtual int indexOfObject(Object * obj);
-        virtual Object * objectAtIndex(unsigned int idx);
+        virtual Object * objectAtIndex(unsigned int idx) ATTRIBUTE_RETURNS_NONNULL;
         virtual void replaceObject(unsigned int idx, Object * obj);
         virtual void insertObject(unsigned int idx, Object * obj);
         virtual void removeAllObjects();

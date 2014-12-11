@@ -52,7 +52,7 @@ Array * NNTPFetchOverviewOperation::articles() {
 
 void NNTPFetchOverviewOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     mArticles = Array::array();
     for(unsigned int i = 0 ; i < mIndexes->rangesCount() ; i ++) {
         Range range = mIndexes->allRanges()[i];

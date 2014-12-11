@@ -650,7 +650,7 @@ void SMTPSession::sendMessage(Address * from, Array * recipients, Data * message
         goto err;
     }
     else if (r == MAILSMTP_ERROR_EXCEED_STORAGE_ALLOCATION) {
-        if (response->locationOfString(MCSTR("5.7.0")) != -1) {
+        if ((response != NULL) && (response->locationOfString(MCSTR("5.7.0")) != -1)) {
             * pError = ErrorSendMessageIllegalAttachment;
         }
         else {
@@ -667,7 +667,7 @@ void SMTPSession::sendMessage(Address * from, Array * recipients, Data * message
         goto err;
     }
     else if (r != MAILSMTP_NO_ERROR) {
-        if ((responseCode == 550) && (response->hasPrefix(MCSTR("5.3.4")))) {
+        if ((responseCode == 550) && (response != NULL) && (response->hasPrefix(MCSTR("5.3.4")))) {
             * pError = ErrorNeedsConnectToWebmail;
             goto err;
         }
