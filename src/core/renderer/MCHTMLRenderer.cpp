@@ -97,10 +97,10 @@ static bool isTextPart(AbstractPart * part, htmlRendererContext * context)
         }
     }
     
-    if (mimeType->isEqual(MCSTR("text/plain"))) {
+    if (mimeType != NULL && mimeType->isEqual(MCSTR("text/plain"))) {
         return true;
     }
-    else if (mimeType->isEqual(MCSTR("text/html"))) {
+    else if (mimeType != NULL && mimeType->isEqual(MCSTR("text/html"))) {
         return true;
     }
     else {
@@ -244,21 +244,23 @@ static String * htmlForAbstractMultipartAlternative(AbstractMultipart * part, ht
 
 static String * htmlForAbstractPart(AbstractPart * part, htmlRendererContext * context)
 {
-    switch (part->partType()) {
-        case PartTypeSingle:
-            return htmlForAbstractSinglePart((AbstractPart *) part, context);
-        case PartTypeMessage:
-            return htmlForAbstractMessagePart((AbstractMessagePart *) part, context);
-        case PartTypeMultipartMixed:
-            return htmlForAbstractMultipartMixed((AbstractMultipart *) part, context);
-        case PartTypeMultipartRelated:
-            return htmlForAbstractMultipartRelated((AbstractMultipart *) part, context);
-        case PartTypeMultipartAlternative:
-            return htmlForAbstractMultipartAlternative((AbstractMultipart *) part, context);
-        case PartTypeMultipartSigned:
-            return htmlForAbstractMultipartMixed((AbstractMultipart *) part, context);
-        default:
-            MCAssert(0);
+    if (part != NULL) {
+        switch (part->partType()) {
+            case PartTypeSingle:
+                return htmlForAbstractSinglePart((AbstractPart *) part, context);
+            case PartTypeMessage:
+                return htmlForAbstractMessagePart((AbstractMessagePart *) part, context);
+            case PartTypeMultipartMixed:
+                return htmlForAbstractMultipartMixed((AbstractMultipart *) part, context);
+            case PartTypeMultipartRelated:
+                return htmlForAbstractMultipartRelated((AbstractMultipart *) part, context);
+            case PartTypeMultipartAlternative:
+                return htmlForAbstractMultipartAlternative((AbstractMultipart *) part, context);
+            case PartTypeMultipartSigned:
+                return htmlForAbstractMultipartMixed((AbstractMultipart *) part, context);
+            default:
+                MCAssert(0);
+        }
     }
     return NULL;
 }
@@ -281,7 +283,7 @@ static String * htmlForAbstractSinglePart(AbstractPart * part, htmlRendererConte
         
         context->hasTextPart = true;
         
-        if (mimeType->isEqual(MCSTR("text/plain"))) {
+        if (mimeType != NULL && mimeType->isEqual(MCSTR("text/plain"))) {
             String * charset = part->charset();
             Data * data = NULL;
             if (part->className()->isEqual(MCSTR("mailcore::IMAPPart"))) {
@@ -299,7 +301,7 @@ static String * htmlForAbstractSinglePart(AbstractPart * part, htmlRendererConte
             context->firstRendered = true;
             return str;
         }
-        else if (mimeType->isEqual(MCSTR("text/html"))) {
+        else if (mimeType != NULL && mimeType->isEqual(MCSTR("text/html"))) {
             String * charset = part->charset();
             Data * data = NULL;
             if (part->className()->isEqual(MCSTR("mailcore::IMAPPart"))) {

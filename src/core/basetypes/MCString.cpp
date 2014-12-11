@@ -939,6 +939,9 @@ void String::appendCharactersLength(const UChar * unicodeCharacters, unsigned in
         return;
     }
     allocate(mLength + length);
+    if (mUnicodeChars == NULL) {
+        return;
+    }
     memcpy(&mUnicodeChars[mLength], unicodeCharacters, length * sizeof(* mUnicodeChars));
     mLength += length;
     mUnicodeChars[mLength] = 0;

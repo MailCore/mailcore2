@@ -943,7 +943,7 @@ void IMAPSession::selectIfNeeded(String * folder, ErrorCode * pError)
     
     if (mState == STATE_SELECTED) {
         MCAssert(mCurrentFolder != NULL);
-        if (mCurrentFolder->caseInsensitiveCompare(folder) != 0) {
+        if (mCurrentFolder != NULL && mCurrentFolder->caseInsensitiveCompare(folder) != 0) {
             select(folder, pError);
         }
     }
@@ -1901,38 +1901,30 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
     bool hasHeader;
     bool hasBody;
     bool hasFlags;
-    bool hasGmailLabels;
     bool hasGmailMessageID;
     bool hasGmailThreadID;
     struct msg_att_handler_data * msg_att_context;
     // struct
-    IMAPSession * self;
     bool fetchByUID;
     Array * result;
-    String * folder;
     IMAPMessagesRequestKind requestKind;
     uint32_t mLastFetchedSequenceNumber;
     HashMap * mapping;
     bool needsHeader;
     bool needsBody;
     bool needsFlags;
-    bool needsGmailLabels;
     bool needsGmailMessageID;
     bool needsGmailThreadID;
     uint32_t startUid;
     
     msg_att_context = (struct msg_att_handler_data *) context;
-    self = msg_att_context->self;
     fetchByUID = msg_att_context->fetchByUID;
     result = msg_att_context->result;
-    folder = msg_att_context->folder;
     requestKind = msg_att_context->requestKind;
-    mLastFetchedSequenceNumber = msg_att_context->mLastFetchedSequenceNumber;
     mapping = msg_att_context->mapping;
     needsHeader = msg_att_context->needsHeader;
     needsBody = msg_att_context->needsBody;
     needsFlags = msg_att_context->needsFlags;
-    needsGmailLabels = msg_att_context->needsGmailLabels;
     needsGmailMessageID = msg_att_context->needsGmailMessageID;
     needsGmailThreadID = msg_att_context->needsGmailThreadID;
     startUid = msg_att_context->startUid;
@@ -1940,7 +1932,6 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
     hasHeader = false;
     hasBody = false;
     hasFlags = false;
-    hasGmailLabels = false;
     hasGmailMessageID = false;
     hasGmailThreadID = false;
     
@@ -2031,7 +2022,6 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
                 clistiter * cur;
                 
                 labels = new Array();
-                hasGmailLabels = true;
                 cLabels = (struct mailimap_msg_att_xgmlabels *) ext_data->ext_data;
                 for(cur = clist_begin(cLabels->att_labels) ; cur != NULL ; cur = clist_next(cur)) {
                     char * cLabel;
@@ -2603,8 +2593,8 @@ Data * IMAPSession::fetchMessageAttachment(String * folder, bool identifier_is_u
     clist * sec_list;
     Array * partIDArray;
     int r;
-    char * text;
-    size_t text_length;
+    char * text = NULL;
+    size_t text_length = 0;
     Data * data;
     
     selectIfNeeded(folder, pError);
