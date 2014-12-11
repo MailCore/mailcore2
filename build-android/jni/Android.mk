@@ -102,6 +102,11 @@ LOCAL_SRC_FILES := $(CTEMPLATE_PATH)/libs/$(TARGET_ARCH_ABI)/libctemplate.a
 include $(PREBUILT_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
+LOCAL_MODULE    := sasl2
+LOCAL_SRC_FILES := $(CYRUS_SASL_PATH)/libs/$(TARGET_ARCH_ABI)/libsasl2.a
+include $(PREBUILT_STATIC_LIBRARY)
+
+include $(CLEAR_VARS)
 LOCAL_MODULE    := MailCore
 LOCAL_C_INCLUDES := $(includes)
 LOCAL_SRC_FILES := $(core_src_files) $(abstract_src_files) $(imap_src_files) $(nntp_src_files) \
@@ -110,7 +115,7 @@ LOCAL_SRC_FILES := $(core_src_files) $(abstract_src_files) $(imap_src_files) $(n
 	$(async_imap_src_files) $(async_nntp_src_files) $(async_pop_src_files) $(async_smtp_src_files)
 LOCAL_CPPFLAGS := -frtti
 LOCAL_CFLAGS := -DNOCRYPT
-LOCAL_LDLIBS := -lz \
+LOCAL_LDLIBS := -lz -llog \
 	 -lc++_shared -L$(ANDROID_NDK)/sources/cxx-stl/llvm-libc++/libs/$(TARGET_ARCH_ABI)
-LOCAL_STATIC_LIBRARIES := etpan ssl crypto icu4c xml2 uchardet tidy ctemplate
+LOCAL_STATIC_LIBRARIES := etpan sasl2 ssl crypto icu4c xml2 uchardet tidy ctemplate
 include $(BUILD_SHARED_LIBRARY)

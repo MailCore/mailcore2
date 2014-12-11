@@ -16,6 +16,10 @@
 #include <execinfo.h>
 #endif
 
+#if defined(ANDROID) || defined(__ANDROID__)
+#include <android/log.h>
+#endif
+
 static pid_t sPid = -1;
 int MCLogEnabled = 0;
 
@@ -61,7 +65,11 @@ static void logInternalv(FILE * file,
     struct timeval tv;
     struct tm tm_value;
     pthread_t thread_id = pthread_self();
-    
+
+#if defined(ANDROID) || defined(__ANDROID__)
+    __android_log_vprint(ANDROID_LOG_INFO, filename, format, argp);
+#else
+
     gettimeofday(&tv, NULL);
     time_t timevalue_sec = tv.tv_sec;
     localtime_r(&timevalue_sec, &tm_value);
@@ -103,5 +111,5 @@ static void logInternalv(FILE * file,
 #endif
         // TODO: other platforms implemented needed.
     }
-        
+#endif
 }

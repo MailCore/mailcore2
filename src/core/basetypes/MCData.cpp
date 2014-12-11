@@ -809,7 +809,7 @@ static int lepIConv(const char * tocode, const char * fromcode,
         goto err;
     }
 
-    out_size = length * 6;
+    out_size = * result_len;
     old_out_size = out_size;
     p_result = result;
 
@@ -861,6 +861,9 @@ static int lepCFConv(const char * tocode, const char * fromcode,
 
     unsigned int len;
     len = (unsigned int) CFDataGetLength(resultData);
+    if (len > * result_len) {
+        len = (unsigned int) * result_len;
+    }
     CFDataGetBytes(resultData, CFRangeMake(0, len), (UInt8 *) result);
     * result_len = len;
     result[len] = 0;
@@ -894,6 +897,34 @@ static int lepMixedConv(const char * tocode, const char * fromcode,
 }
 #endif
 
+#if defined(__ANDROID__) || defined(ANDROID)
+
+static int lepMixedConv(const char * tocode, const char * fromcode,
+                        const char * str, size_t length,
+                        char * result, size_t * result_len)
+{
+    Data * data = Data::dataWithBytes(str, length);
+    String * ustr = data->stringWithCharset(fromcode);
+    if (ustr == NULL) {
+        return MAIL_CHARCONV_ERROR_CONV;
+    }
+    data = ustr->dataUsingEncoding(tocode);
+    if (data == NULL) {
+        return MAIL_CHARCONV_ERROR_CONV;
+    }
+    size_t len = data->length();
+    if (len > * result_len) {
+        len = * result_len;
+    }
+    memcpy(result, data->bytes(), len);
+    result[len] = 0;
+    * result_len = len;
+
+    return MAIL_CHARCONV_NO_ERROR;
+}
+
+#endif
+
 static void * createObject()
 {
     return new Data();
@@ -902,7 +933,7 @@ static void * createObject()
 INITIALIZE(Data)
 {
     Object::registerObjectConstructor("mailcore::Data", &createObject);
-#if __APPLE__
+#if __APPLE__ || defined(__ANDROID__) || defined(ANDROID)
     extended_charconv = lepMixedConv;
 #endif
 }

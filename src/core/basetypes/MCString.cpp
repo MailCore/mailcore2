@@ -1388,7 +1388,7 @@ String * String::extractedSubjectAndKeepBracket(bool keepBracket)
 
 String * String::uuidString()
 {
-    char buffer[38];
+    char buffer[40];
     FILE * f = fopen("/proc/sys/kernel/random/uuid", "r");
     if (f == NULL) {
         return NULL;
@@ -1397,7 +1397,7 @@ String * String::uuidString()
         fclose(f);
         return NULL;
     }
-    buffer[38] = 0;
+    buffer[36] = 0;
     fclose(f);
     return String::stringWithUTF8Characters(buffer);
 }

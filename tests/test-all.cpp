@@ -12,7 +12,7 @@
 #if __APPLE__
 #include <CoreFoundation/CoreFoundation.h>
 #endif
-#if __linux__
+#if __linux__ && !defined(ANDROID) && !defined(__ANDROID__)
 #include <glib.h>
 #endif
 #ifdef _MSC_VER
@@ -22,7 +22,7 @@
 static mailcore::String * password = NULL;
 static mailcore::String * displayName = NULL;
 static mailcore::String * email = NULL;
-#if __linux
+#if __linux__ && !defined(ANDROID) && !defined(__ANDROID__)
 static GMainLoop * s_main_loop = NULL;
 #endif
 
@@ -42,7 +42,7 @@ static void mainLoop(void)
 {
 #if __APPLE__
 	CFRunLoopRun();
-#elif __linux__
+#elif __linux__ && !defined(ANDROID) && !defined(__ANDROID__)
 	g_main_loop_run(s_main_loop);
 #elif defined(_MSC_VER)
 	win32MainLoop();
@@ -360,7 +360,7 @@ void testAll()
     password = MCSTR("MyP4ssw0rd");
     displayName = MCSTR("My Email");
     
-#if __linux__
+#if __linux__ && !defined(ANDROID) && !defined(__ANDROID__)
     s_main_loop = g_main_loop_new (NULL, FALSE);
 #endif
     

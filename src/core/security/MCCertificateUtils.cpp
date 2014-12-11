@@ -19,6 +19,8 @@
 #include <openssl/err.h>
 #endif
 
+#include <dirent.h>
+
 #include "MCLog.h"
 
 bool mailcore::checkCertificate(mailstream * stream, String * hostname)
@@ -97,6 +99,9 @@ err:
     X509_STORE * store = NULL;
     X509_STORE_CTX * storectx = NULL;
     STACK_OF(X509) * certificates = NULL;
+    DIR * dir = NULL;
+    struct dirent * ent = NULL;
+    FILE * f = NULL;
     int status;
     
     carray * cCerts = mailstream_get_certificate_chain(stream);
@@ -127,6 +132,25 @@ err:
 		previousCert = nextCert;
 	}
 	CertCloseStore(systemStore, 0);
+#elif defined(ANDROID) || defined(__ANDROID__)
+    dir = opendir("/system/etc/security/cacerts");
+    while (ent = readdir(dir)) {
+        if (ent->d_name[0] == '.') {
+            continue;
+        }
+        char filename[1024];
+        snprintf(filename, sizeof(filename), "/system/etc/security/cacerts/%s", ent->d_name);
+        f = fopen(filename, "rb");
+        if (f != NULL) {
+            X509 * cert = PEM_read_X509(f, NULL, NULL, NULL);
+            if (cert != NULL) {
+                X509_STORE_add_cert(store, cert);
+                X509_free(cert);
+            }
+            fclose(f);
+        }
+    }
+    closedir(dir);
 #endif
 
 	status = X509_STORE_set_default_paths(store);
