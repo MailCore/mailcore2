@@ -19,7 +19,9 @@
 #include <openssl/err.h>
 #endif
 
+#if defined(ANDROID) || defined(__ANDROID__)
 #include <dirent.h>
+#endif
 
 #include "MCLog.h"
 
