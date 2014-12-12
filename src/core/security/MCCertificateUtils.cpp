@@ -101,9 +101,11 @@ err:
     X509_STORE * store = NULL;
     X509_STORE_CTX * storectx = NULL;
     STACK_OF(X509) * certificates = NULL;
+#if defined(ANDROID) || defined(__ANDROID__)
     DIR * dir = NULL;
     struct dirent * ent = NULL;
     FILE * f = NULL;
+#endif
     int status;
     
     carray * cCerts = mailstream_get_certificate_chain(stream);
