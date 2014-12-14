@@ -135,6 +135,22 @@ Value * Value::valueWithUnsignedCharValue(unsigned char value)
 
 ///////////////////////
 
+Value * Value::valueWithShortValue(short value)
+{
+    Value * result = new Value();
+    result->mType = VALUE_TYPE_SHORT_VALUE;
+    result->mValue.shortValue = value;
+    return (Value *) result->autorelease();
+}
+
+Value * Value::valueWithUnsignedShortValue(unsigned short value)
+{
+    Value * result = new Value();
+    result->mType = VALUE_TYPE_UNSIGNED_SHORT_VALUE;
+    result->mValue.unsignedShortValue = value;
+    return (Value *) result->autorelease();
+}
+
 Value * Value::valueWithIntValue(int value)
 {
     Value * result = new Value();
