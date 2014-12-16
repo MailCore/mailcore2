@@ -283,7 +283,7 @@ static bool isHintCharsetValid(String * hintCharset)
             return true;
         }
         
-        if (!knownCharset->containsObject(hintCharset)) {
+        if (knownCharset->containsObject(hintCharset)) {
             return true;
         }
     }
