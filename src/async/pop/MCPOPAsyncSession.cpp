@@ -32,9 +32,15 @@ namespace mailcore {
         
         virtual void queueStartRunning() {
             mSession->retain();
+            if (mSession->operationQueueCallback() != NULL) {
+                mSession->operationQueueCallback()->queueStartRunning();
+            }
         }
         
         virtual void queueStoppedRunning() {
+            if (mSession->operationQueueCallback() != NULL) {
+                mSession->operationQueueCallback()->queueStoppedRunning();
+            }
             mSession->release();
         }
         
@@ -72,6 +78,7 @@ POPAsyncSession::POPAsyncSession()
     pthread_mutex_init(&mConnectionLoggerLock, NULL);
     mInternalLogger = new POPConnectionLogger(this);
     mSession->setConnectionLogger(mInternalLogger);
+    mOperationQueueCallback = NULL;
 }
 
 POPAsyncSession::~POPAsyncSession()
@@ -273,3 +280,23 @@ dispatch_queue_t POPAsyncSession::dispatchQueue()
     return mQueue->dispatchQueue();
 }
 #endif
+
+void POPAsyncSession::setOperationQueueCallback(OperationQueueCallback * callback)
+{
+    mOperationQueueCallback = callback;
+}
+
+OperationQueueCallback * POPAsyncSession::operationQueueCallback()
+{
+    return mOperationQueueCallback;
+}
+
+bool POPAsyncSession::isOperationQueueRunning()
+{
+    return mQueue->count() > 0;
+}
+
+void POPAsyncSession::cancelAllOperations()
+{
+    mQueue->cancelAllOperations();
+}

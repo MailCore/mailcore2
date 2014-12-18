@@ -34,9 +34,15 @@ namespace mailcore {
         
         virtual void queueStartRunning() {
             mSession->retain();
+            if (mSession->operationQueueCallback() != NULL) {
+                mSession->operationQueueCallback()->queueStartRunning();
+            }
         }
         
         virtual void queueStoppedRunning() {
+            if (mSession->operationQueueCallback() != NULL) {
+                mSession->operationQueueCallback()->queueStoppedRunning();
+            }
             mSession->release();
         }
         
@@ -74,6 +80,7 @@ NNTPAsyncSession::NNTPAsyncSession()
     pthread_mutex_init(&mConnectionLoggerLock, NULL);
     mInternalLogger = new NNTPConnectionLogger(this);
     mSession->setConnectionLogger(mInternalLogger);
+    mOperationQueueCallback = NULL;
 }
 
 NNTPAsyncSession::~NNTPAsyncSession()
@@ -300,3 +307,23 @@ dispatch_queue_t NNTPAsyncSession::dispatchQueue()
     return mQueue->dispatchQueue();
 }
 #endif
+
+void NNTPAsyncSession::setOperationQueueCallback(OperationQueueCallback * callback)
+{
+    mOperationQueueCallback = callback;
+}
+
+OperationQueueCallback * NNTPAsyncSession::operationQueueCallback()
+{
+    return mOperationQueueCallback;
+}
+
+bool NNTPAsyncSession::isOperationQueueRunning()
+{
+    return mQueue->count() > 0;
+}
+
+void NNTPAsyncSession::cancelAllOperations()
+{
+    mQueue->cancelAllOperations();
+}

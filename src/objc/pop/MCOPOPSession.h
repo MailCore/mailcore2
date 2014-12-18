@@ -72,6 +72,30 @@ See MCOConnectionType for more information.*/
 @property (nonatomic, assign) dispatch_queue_t dispatchQueue;
 #endif
 
+/**
+ The value will be YES when asynchronous operations are running, else it will return NO.
+ */
+@property (nonatomic, assign, readonly, getter=isOperationQueueRunning) BOOL operationQueueRunning;
+
+/**
+ Sets operation running callback. It will be called when operations start or stop running.
+
+ [session setOperationQueueRunningChangeBlock:^{
+   if ([session isOperationQueueRunning]) {
+     ...
+   }
+   else {
+     ...
+   }
+ }];
+ */
+@property (nonatomic, copy) MCOOperationQueueRunningChangeBlock operationQueueRunningChangeBlock;
+
+/**
+ Cancel all operations
+ */
+- (void) cancelAllOperations;
+
 /** @name Operations */
 
 /**

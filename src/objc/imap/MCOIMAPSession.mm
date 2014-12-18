@@ -49,7 +49,7 @@ public:
     {
         [mSession _queueRunningChanged];
     }
-    
+
     virtual void queueStoppedRunning()
     {
         [mSession _queueRunningChanged];

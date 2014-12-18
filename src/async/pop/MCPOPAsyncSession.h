@@ -61,7 +61,12 @@ namespace mailcore {
         virtual void setDispatchQueue(dispatch_queue_t dispatchQueue);
         virtual dispatch_queue_t dispatchQueue();
 #endif
-        
+
+        virtual void setOperationQueueCallback(OperationQueueCallback * callback);
+        virtual OperationQueueCallback * operationQueueCallback();
+        virtual bool isOperationQueueRunning();
+        virtual void cancelAllOperations();
+
         virtual POPFetchMessagesOperation * fetchMessagesOperation();
         
         virtual POPFetchHeaderOperation * fetchHeaderOperation(unsigned int index);
@@ -84,6 +89,7 @@ namespace mailcore {
         ConnectionLogger * mConnectionLogger;
         pthread_mutex_t mConnectionLoggerLock;
         POPConnectionLogger * mInternalLogger;
+        OperationQueueCallback * mOperationQueueCallback;
         
     public: // private
         virtual void runOperation(POPOperation * operation);

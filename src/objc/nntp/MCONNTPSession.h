@@ -64,7 +64,35 @@
  It will make MCONNTPSession safe. It will also set all the callbacks of operations to run on this given queue.
  Defaults to the main queue.
  This property should be used only if there's performance issue using MCONNTPSession in the main thread. */
+#if OS_OBJECT_USE_OBJC
+@property (nonatomic, retain) dispatch_queue_t dispatchQueue;
+#else
 @property (nonatomic, assign) dispatch_queue_t dispatchQueue;
+#endif
+
+/**
+ The value will be YES when asynchronous operations are running, else it will return NO.
+ */
+@property (nonatomic, assign, readonly, getter=isOperationQueueRunning) BOOL operationQueueRunning;
+
+/**
+ Sets operation running callback. It will be called when operations start or stop running.
+
+ [session setOperationQueueRunningChangeBlock:^{
+   if ([session isOperationQueueRunning]) {
+      ...
+   }
+   else {
+     ...
+   }
+ }];
+ */
+@property (nonatomic, copy) MCOOperationQueueRunningChangeBlock operationQueueRunningChangeBlock;
+
+/**
+ Cancel all operations
+ */
+- (void) cancelAllOperations;
 
 /** @name Operations */
 
