@@ -257,6 +257,7 @@ static bool isHintCharsetValid(String * hintCharset)
             "ISO-8859-2",
             "windows-1250",
             "TIS-620",
+            "GBK"
         };
         for(unsigned int i = 0 ; i < sizeof(charset_list) / sizeof(charset_list[0]) ; i ++) {
             String * str = String::stringWithUTF8Characters(charset_list[i]);
@@ -283,7 +284,7 @@ static bool isHintCharsetValid(String * hintCharset)
             return true;
         }
         
-        if (!knownCharset->containsObject(hintCharset)) {
+        if (knownCharset->containsObject(hintCharset)) {
             return true;
         }
     }
