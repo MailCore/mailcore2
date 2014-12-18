@@ -283,6 +283,8 @@ static bool isHintCharsetValid(String * hintCharset)
             return true;
         }
         
+        // If it's among the known charset, we want to try to detect it
+        // to validate that it's the correct charset.
         if (!knownCharset->containsObject(hintCharset)) {
             return true;
         }
@@ -459,23 +461,18 @@ String * Data::charsetWithFilteredHTML(bool filterHTML, String * hintCharset)
     
     return result;
 #else
-    String * result;
-    uchardet_t ud = uchardet_new();
-    int r = uchardet_handle_data(ud, bytes(), length());
-    if (r == 0) {
-        uchardet_data_end(ud);
-        const char * charset = uchardet_get_charset(ud);
-        if (charset[0] == 0) {
-            result = hintCharset;
-        }
-        else {
-            result = String::stringWithUTF8Characters(charset);
+    if (hintCharset->caseInsensitiveCompare(MCSTR("utf-8")) == 0) {
+        // Checks if the string converts well.
+        String * value = stringWithCharset("utf-8");
+        if (value != NULL) {
+            return hintCharset;
         }
     }
-    else {
+
+    String * result = charsetWithFilteredHTMLWithoutHint(filterHTML);
+    if (result == NULL) {
         result = hintCharset;
     }
-    uchardet_delete(ud);
     
     return result;
 #endif
