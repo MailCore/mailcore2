@@ -474,6 +474,11 @@ String * Data::charsetWithFilteredHTML(bool filterHTML, String * hintCharset)
         result = hintCharset;
     }
     
+    if (result->lowercaseString()->isEqual(MCSTR("x-mac-cyrillic")) &&
+        hintCharset->lowercaseString()->isEqual(MCSTR("windows-1251"))) {
+        result = MCSTR("windows-1251");
+    }
+
     return result;
 #endif
 }
