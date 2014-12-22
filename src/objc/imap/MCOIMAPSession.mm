@@ -615,7 +615,6 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
 - (MCOIMAPMessageRenderingOperation *) htmlBodyRenderingOperationWithMessage:(MCOIMAPMessage *)message
                                                                       folder:(NSString *)folder
 {
-    assert(folder != NULL);
     IMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->htmlBodyRenderingOperation(MCO_FROM_OBJC(IMAPMessage, message), [folder mco_mcString]);
     return MCO_TO_OBJC_OP(coreOp);
 }
@@ -630,7 +629,6 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
 - (MCOIMAPMessageRenderingOperation *) plainTextBodyRenderingOperationWithMessage:(MCOIMAPMessage *)message
                                                                            folder:(NSString *)folder
 {
-    assert(folder != NULL);
     return [self plainTextBodyRenderingOperationWithMessage:message folder:folder stripWhitespace:YES];
 }
 
