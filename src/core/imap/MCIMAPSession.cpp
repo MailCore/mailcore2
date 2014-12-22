@@ -3798,7 +3798,8 @@ String * IMAPSession::htmlRendering(IMAPMessage * message, String * folder, Erro
 }
 
 String * IMAPSession::htmlBodyRendering(IMAPMessage * message, String * folder, ErrorCode * pError)
-{    
+{
+    MCAssert(folder != NULL);
     HTMLRendererIMAPDataCallback * dataCallback = new HTMLRendererIMAPDataCallback(this, message->uid());
     HTMLBodyRendererTemplateCallback * htmlCallback = new HTMLBodyRendererTemplateCallback();
     
@@ -3832,6 +3833,7 @@ String * IMAPSession::plainTextRendering(IMAPMessage * message, String * folder,
 
 String * IMAPSession::plainTextBodyRendering(IMAPMessage * message, String * folder, bool stripWhitespace, ErrorCode * pError)
 {
+    MCAssert(folder != NULL);
     String * htmlBodyString = htmlBodyRendering(message, folder, pError);
     
     if (* pError != ErrorNone) {
