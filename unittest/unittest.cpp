@@ -311,6 +311,28 @@ static void testSummary(String * path)
     global_success ++;
 }
 
+static void testMUTF7(void)
+{
+    int failure = 0;
+    int success = 0;
+    const char * mutf7string = "~peter/mail/&U,BTFw-/&ZeVnLIqe-";
+    IMAPNamespace * ns = IMAPNamespace::namespaceWithPrefix(MCSTR(""), '/');
+    Array * result = ns->componentsFromPath(String::stringWithUTF8Characters(mutf7string));
+    if (strcmp(MCUTF8(result), "[~peter,mail,台北,日本語]") != 0) {
+        failure ++;
+    }
+    else {
+        success ++;
+    }
+    if (failure > 0) {
+        printf("testMUTF7 ok: %i succeeded, %i failed\n", success, failure);
+        global_failure ++;
+        return;
+    }
+    printf("testMUTF7 ok: %i succeeded\n", success);
+    global_success ++;
+}
+
 int main(int argc, char ** argv)
 {
     tzset();
@@ -332,6 +354,7 @@ int main(int argc, char ** argv)
     testMessageParser(path->stringByAppendingPathComponent(MCSTR("parser")));
     testCharsetDetection(path->stringByAppendingPathComponent(MCSTR("charset-detection")));
     testSummary(path->stringByAppendingPathComponent(MCSTR("summary")));
+    testMUTF7();
 
     printf("%i tests succeeded, %i tests failed\n", global_success, global_failure);
 
