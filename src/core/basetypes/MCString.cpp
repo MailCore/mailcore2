@@ -1337,7 +1337,12 @@ void String::appendBytes(const char * bytes, unsigned int length, const char * c
     }
 #else
     UErrorCode err;
-    
+
+    // ICU uses "IMAP-mailbox-name" as charset name.
+    if (strcasecmp(charset, "mutf-7") == 0) {
+        charset = "IMAP-mailbox-name";
+    }
+
     err = U_ZERO_ERROR;
     UConverter * converter = ucnv_open(charset, &err); 
     if (converter == NULL) {
@@ -2122,13 +2127,18 @@ Data * String::dataUsingEncoding(const char * charset)
     UErrorCode err;
     Data * data;
     
+    // ICU uses "IMAP-mailbox-name" as charset name.
+    if (strcasecmp(charset, "mutf-7") == 0) {
+        charset = "IMAP-mailbox-name";
+    }
+
     err = U_ZERO_ERROR;
     UConverter * converter = ucnv_open(charset, &err); 
     if (converter == NULL) {
         MCLog("invalid charset %s %i", charset, err);
         return NULL;
     }
-    
+
     err = U_ZERO_ERROR;
     int32_t destLength = ucnv_fromUChars(converter, NULL, 0, mUnicodeChars, mLength, &err);
     int32_t destCapacity = destLength + 1;
