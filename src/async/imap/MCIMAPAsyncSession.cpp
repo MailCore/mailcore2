@@ -485,8 +485,8 @@ IMAPFetchMessagesOperation * IMAPAsyncSession::fetchMessagesByNumberOperation(St
     return op;
 }
 
-IMAPFetchMessagesOperation * IMAPAsyncSession::syncMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
-                                                                 IndexSet * uids, uint64_t modSeq)
+IMAPFetchMessagesOperation * IMAPAsyncSession::syncMessagesByUIDOperation(String * folder, IMAPMessagesRequestKind requestKind,
+                                                                          IndexSet * uids, uint64_t modSeq)
 {
     IMAPFetchMessagesOperation * op = new IMAPFetchMessagesOperation();
     op->setMainSession(this);

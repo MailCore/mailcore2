@@ -72,6 +72,11 @@ void MessageParser::setBytes(char * dataBytes, unsigned int dataLength)
     mailmessage_free(msg);
 }
 
+MessageParser::MessageParser()
+{
+    init();
+}
+
 MessageParser::MessageParser(Data * data)
 {
     init();
@@ -118,7 +123,9 @@ String * MessageParser::description()
     String * result = String::string();
     result->appendUTF8Format("<%s:%p ", MCUTF8(className()), this);
     result->appendUTF8Format("<%p>", mMainPart);
-    result->appendString(mMainPart->description());
+    if (mMainPart != NULL) {
+        result->appendString(mMainPart->description());
+    }
     result->appendUTF8Characters(">");
     
     return result;
@@ -140,11 +147,17 @@ Object * MessageParser::copy()
 
 AbstractPart * MessageParser::partForContentID(String * contentID)
 {
+    if (mainPart() == NULL) {
+        return NULL;
+    }
     return mainPart()->partForContentID(contentID);
 }
 
 AbstractPart * MessageParser::partForUniqueID(String * uniqueID)
 {
+    if (mainPart() == NULL) {
+        return NULL;
+    }
     return mainPart()->partForUniqueID(uniqueID);
 }
 

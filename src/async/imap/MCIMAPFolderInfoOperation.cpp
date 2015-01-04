@@ -10,51 +10,23 @@
 
 #include "MCIMAPSession.h"
 #include "MCIMAPAsyncConnection.h"
+#include "MCIMAPFolderInfo.h"
 
 using namespace mailcore;
 
 IMAPFolderInfoOperation::IMAPFolderInfoOperation()
 {
-    mUidNext = 0;
-    mUidValidity = 0;
-    mMessageCount = 0;
-    mModSequenceValue = 0;
-    mFirstUnseenUid = 0;
-    mAllowsNewPermanentFlags = false;
+    mInfo = NULL;
 }
 
 IMAPFolderInfoOperation::~IMAPFolderInfoOperation()
 {
+    MC_SAFE_RELEASE(mInfo);
 }
 
-uint32_t IMAPFolderInfoOperation::uidNext()
+IMAPFolderInfo * IMAPFolderInfoOperation::info()
 {
-    return mUidNext;
-}
-
-uint32_t IMAPFolderInfoOperation::uidValidity()
-{
-    return mUidValidity;
-}
-
-uint64_t IMAPFolderInfoOperation::modSequenceValue()
-{
-    return mModSequenceValue;
-}
-
-int IMAPFolderInfoOperation::messageCount()
-{
-    return mMessageCount;
-}
-
-uint32_t IMAPFolderInfoOperation::firstUnseenUid()
-{
-    return mFirstUnseenUid;
-}
-
-bool IMAPFolderInfoOperation::allowsNewPermanentFlags()
-{
-    return mAllowsNewPermanentFlags;
+    return mInfo;
 }
 
 void IMAPFolderInfoOperation::main()
@@ -73,14 +45,14 @@ void IMAPFolderInfoOperation::main()
         return;
     }
     
-    
-    mUidNext = session()->session()->uidNext();
-    mUidValidity = session()->session()->uidValidity();
-    mModSequenceValue = session()->session()->modSequenceValue();
-    mMessageCount = session()->session()->lastFolderMessageCount();
-    mFirstUnseenUid = session()->session()->firstUnseenUid();
-    mAllowsNewPermanentFlags = session()->session()->allowsNewPermanentFlags();
-  
+    mInfo = new IMAPFolderInfo();
+    mInfo->setUidNext(session()->session()->uidNext());
+    mInfo->setUidValidity(session()->session()->uidValidity());
+    mInfo->setModSequenceValue(session()->session()->modSequenceValue());
+    mInfo->setMessageCount(session()->session()->lastFolderMessageCount());
+    mInfo->setFirstUnseenUid(session()->session()->firstUnseenUid());
+    mInfo->setAllowsNewPermanentFlags(session()->session()->allowsNewPermanentFlags());
+
     setError(error);
 }
 

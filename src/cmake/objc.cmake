@@ -21,7 +21,7 @@ set(objc_imap_files
   objc/imap/MCOIMAPFetchMessagesOperation.mm
   objc/imap/MCOIMAPFetchNamespaceOperation.mm
   objc/imap/MCOIMAPFolder.mm
-  objc/imap/MCOIMAPFolderInfo.m
+  objc/imap/MCOIMAPFolderInfo.mm
   objc/imap/MCOIMAPFolderInfoOperation.mm
   objc/imap/MCOIMAPFolderStatus.mm
   objc/imap/MCOIMAPFolderStatusOperation.mm

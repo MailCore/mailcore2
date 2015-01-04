@@ -18,6 +18,7 @@
 #include "MCAssert.h"
 #include "MCLog.h"
 #include "MCAutoreleasePool.h"
+#include "TypesUtils.h"
 
 using namespace mailcore;
 
@@ -53,6 +54,7 @@ JNIEXPORT void JNICALL Java_com_libmailcore_MainThreadUtils_setupNative(JNIEnv *
     jclass localClass = env->FindClass("com/libmailcore/MainThreadUtils");
     s_mainThreadUtilsClass = reinterpret_cast<jclass>(env->NewGlobalRef(localClass));
     MCAssert(s_mainThreadUtilsClass != NULL);
+    MCTypesUtilsInit();
 
     pool->release();
 }
@@ -101,10 +103,10 @@ void mailcore::callOnMainThreadAndWait(void (* function)(void *), void * context
     jmethodID mid = env->GetMethodID(s_mainThreadUtilsClass, "runOnMainThreadAndWait", "(J)V");
     MCAssert(mid != NULL);
     env->CallVoidMethod(s_mainThreadUtils, mid, (jlong) data);
-    
+
     // Wait.
     mailsem_down(data->sem);
-  
+
     mailsem_free(data->sem);
     free(data);
 }

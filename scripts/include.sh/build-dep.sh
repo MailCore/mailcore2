@@ -331,7 +331,12 @@ get_prebuilt_dep()
   curl -O "$url/$name/$name-$version.zip"
   unzip -q "$name-$version.zip"
   rm -rf "$scriptpath/../Externals/$name"
-  mv "$name-$version"/* "$scriptpath/../Externals"
+  cd "$name-$version"
+  for folder in * ; do
+      rm -rf "$scriptpath/../Externals/$folder"
+      mv "$folder" "$scriptpath/../Externals"
+  done
+  cd ..
   rm -f "$scriptpath/../Externals/git-rev"
   rm -rf "$tempbuilddir"
   

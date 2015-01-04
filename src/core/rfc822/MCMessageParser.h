@@ -20,6 +20,7 @@ namespace mailcore {
         static MessageParser * messageParserWithData(Data * data);
         static MessageParser * messageParserWithContentsOfFile(String * filename);
         
+        MessageParser();
         MessageParser(Data * data);
         virtual ~MessageParser();
         

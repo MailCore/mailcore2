@@ -15,6 +15,14 @@
 
 using namespace mailcore;
 
+HTMLRendererTemplateCallback::HTMLRendererTemplateCallback()
+{
+}
+
+HTMLRendererTemplateCallback::~HTMLRendererTemplateCallback()
+{
+}
+
 mailcore::HashMap * HTMLRendererTemplateCallback::templateValuesForHeader(mailcore::MessageHeader * header)
 {
     mailcore::HashMap * result = mailcore::HashMap::hashMap();

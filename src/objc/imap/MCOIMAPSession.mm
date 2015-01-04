@@ -321,10 +321,10 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
                                                       uids:(MCOIndexSet *)uids
                                                     modSeq:(uint64_t)modSeq
 {
-    IMAPFetchMessagesOperation * coreOp = MCO_NATIVE_INSTANCE->syncMessagesByUID([folder mco_mcString],
-                                                                                 (IMAPMessagesRequestKind) requestKind,
-                                                                                 MCO_FROM_OBJC(IndexSet, uids),
-                                                                                 modSeq);
+    IMAPFetchMessagesOperation * coreOp = MCO_NATIVE_INSTANCE->syncMessagesByUIDOperation([folder mco_mcString],
+                                                                                          (IMAPMessagesRequestKind) requestKind,
+                                                                                          MCO_FROM_OBJC(IndexSet, uids),
+                                                                                          modSeq);
     return MCO_TO_OBJC_OP(coreOp);
 }
 

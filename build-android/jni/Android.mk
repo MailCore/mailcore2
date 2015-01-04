@@ -14,7 +14,9 @@ subdirs = \
 	core/security \
 	core/smtp \
 	core/zip \
-	core/zip/MiniZip
+	core/zip/MiniZip \
+	async/imap \
+	java java/native
 includes = \
 	$(CURRENT_DIR)/../include \
     $(CTEMPLATE_PATH)/include \
@@ -49,6 +51,7 @@ async_imap_src_files := $(wildcard $(src_dir)/async/imap/*.cpp)
 async_nntp_src_files := $(wildcard $(src_dir)/async/nntp/*.cpp)
 async_pop_src_files := $(wildcard $(src_dir)/async/pop/*.cpp)
 async_smtp_src_files := $(wildcard $(src_dir)/async/smtp/*.cpp)
+jni_src_files := $(wildcard $(src_dir)/java/native/*.cpp) $(wildcard $(src_dir)/java/*.cpp)
 
 # include $(CLEAR_VARS)
 # LOCAL_MODULE    := MailCore
@@ -109,7 +112,9 @@ include $(PREBUILT_STATIC_LIBRARY)
 include $(CLEAR_VARS)
 LOCAL_MODULE    := MailCore
 LOCAL_C_INCLUDES := $(includes)
-LOCAL_SRC_FILES := $(core_src_files) $(abstract_src_files) $(imap_src_files) $(nntp_src_files) \
+LOCAL_SRC_FILES := \
+	$(jni_src_files) \
+	$(core_src_files) $(abstract_src_files) $(imap_src_files) $(nntp_src_files) \
 	$(pop_src_files) $(provider_src_files) $(renderer_src_files) $(rfc822_src_files) \
 	$(security_src_files) $(smtp_src_files) $(zip_src_files) $(minizip_src_files) \
 	$(async_imap_src_files) $(async_nntp_src_files) $(async_pop_src_files) $(async_smtp_src_files)
