@@ -6,6 +6,7 @@ core/abstract/MCAbstractMessage.h
 core/basetypes/MCBaseTypes.h
 core/basetypes/MCAutoreleasePool.h
 core/basetypes/MCObject.h
+core/basetypes/MCUtils.h
 core/basetypes/MCValue.h
 core/basetypes/MCString.h
 core/basetypes/MCRange.h
@@ -21,7 +22,6 @@ core/basetypes/MCSet.h
 core/basetypes/MCHash.h
 core/basetypes/MCLog.h
 core/basetypes/MCAssert.h
-core/basetypes/MCUtils.h
 core/basetypes/MCIndexSet.h
 core/basetypes/MCOperation.h
 core/basetypes/MCOperationQueue.h
@@ -88,6 +88,7 @@ async/imap/MCIMAPFetchMessagesOperation.h
 async/imap/MCIMAPFetchContentOperation.h
 async/imap/MCIMAPFetchParsedContentOperation.h
 async/imap/MCIMAPIdleOperation.h
+async/imap/MCIMAPFolderInfo.h
 async/imap/MCIMAPFolderInfoOperation.h
 async/imap/MCIMAPFolderStatusOperation.h
 async/imap/MCIMAPSearchOperation.h
