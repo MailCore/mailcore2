@@ -204,6 +204,10 @@ void AbstractPart::importIMAPFields(struct mailimap_body_fields * fields,
             else if (strcasecmp(imap_param->pa_name, "charset") == 0) {
                 setCharset(String::stringByDecodingMIMEHeaderValue(imap_param->pa_value));
             }
+            else {
+                setContentTypeParameter(String::stringWithUTF8Characters(imap_param->pa_name),
+                    String::stringByDecodingMIMEHeaderValue(imap_param->pa_value));
+            }
         }
     }
     if (fields->bd_id != NULL) {
