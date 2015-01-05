@@ -20,6 +20,11 @@ if test "x$ANDROID_NDK" = x ; then
   exit 1
 fi
 
+if test "x$ANDROID_SDK" = x ; then
+  echo should set ANDROID_SDK before running this script.
+  exit 1
+fi
+
 function download_dep {
     name="$1"
     version="$2"
@@ -48,8 +53,9 @@ function build {
         OPENSSL_PATH=$current_dir/third-party/openssl-android-1 \
         CYRUS_SASL_PATH=$current_dir/third-party/cyrus-sasl-android-1
 
-    mkdir -p "$current_dir/$package_name-$build_version/libs/$TARGET_ARCH_ABI"
-    cp "$current_dir/libs/$TARGET_ARCH_ABI/libMailCore.so" "$current_dir/$package_name-$build_version/libs/$TARGET_ARCH_ABI"
+    mkdir -p "$current_dir/bin/jni/$TARGET_ARCH_ABI"
+    cp "$current_dir/libs/$TARGET_ARCH_ABI/libMailCore.so" "$current_dir/bin/jni/$TARGET_ARCH_ABI"
+    cp "$ANDROID_NDK/sources/cxx-stl/llvm-libc++/libs/$TARGET_ARCH_ABI/libc++_shared.so" "$current_dir/bin/jni/$TARGET_ARCH_ABI"
     rm -rf "$current_dir/obj"
     rm -rf "$current_dir/libs"
 }
@@ -60,8 +66,6 @@ cmake ../..
 
 mkdir -p "$current_dir/include"
 cp -R "$current_dir/cmake-build/src/include/MailCore" "$current_dir/include"
-mkdir -p "$current_dir/$package_name-$build_version/include"
-cp -R "$current_dir/cmake-build/src/include/MailCore" "$current_dir/$package_name-$build_version/include"
 
 mkdir -p "$current_dir/third-party"
 cd "$current_dir/third-party"
@@ -80,6 +84,14 @@ for arch in $archs ; do
   build
 done
 
-cd "$current_dir"
-zip -qry "$package_name-$build_version.zip" "$package_name-$build_version"
-rm -rf "$package_name-$build_version"
+cd "$current_dir/../src/java"
+mkdir -p "$current_dir/bin"
+javac -d "$current_dir/bin" -source 1.6 -target 1.6 -classpath $ANDROID_SDK/platforms/$ANDROID_PLATFORM/android.jar com/libmailcore/*.java
+cd "$current_dir/bin"
+jar cf classes.jar .
+rm -rf "$current_dir/bin/com"
+mkdir -p res
+sed -e "s/android:versionCode=\"1\"/android:versionCode=\"$build_version\"/" "$current_dir/AndroidManifest.xml" > "$current_dir/bin/AndroidManifest.xml"
+zip -qry "$current_dir/$package_name-$build_version.aar" .
+
+rm -rf "$current_dir/bin"
