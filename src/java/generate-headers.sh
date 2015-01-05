@@ -1,5 +1,10 @@
 #!/bin/bash
-ANDROID_SDK=$HOME/Android/android-sdk-macosx
+
+if test "x$ANDROID_SDK" = x ; then
+  echo should set ANDROID_SDK before running this script.
+  exit 1
+fi
+
 TARGET_PLATFORM=android-21
 
 echo Building Java

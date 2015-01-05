@@ -166,6 +166,8 @@
 		BD6272981A13FF2A00129AA8 /* test-all-mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = BD6272961A13FF2A00129AA8 /* test-all-mac.mm */; };
 		BD6272991A13FF2A00129AA8 /* test-all-mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = BD6272961A13FF2A00129AA8 /* test-all-mac.mm */; };
 		BD63713B177DFF080094121B /* MCLibetpan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BD637139177DFF080094121B /* MCLibetpan.cpp */; };
+		BDCD7C5B1A5B1C2C0001DCC3 /* MCErrorMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C591A5B1C2C0001DCC3 /* MCErrorMessage.cpp */; };
+		BDCD7C5C1A5B1C2C0001DCC3 /* MCErrorMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C591A5B1C2C0001DCC3 /* MCErrorMessage.cpp */; };
 		C07AD5D7FD82F8ACAB576231 /* NSError+MCO.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C07AD44B013BB42A240B4F04 /* NSError+MCO.h */; };
 		C07AD99B2E2054C684DB8FF6 /* NSError+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = C07ADFE43E22B38EFF23ADB5 /* NSError+MCO.mm */; };
 		C07ADC28B83E7959BF114D46 /* MCOIMAPSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = C07AD057D3C8FBDC7AC95733 /* MCOIMAPSession.mm */; };
@@ -1489,6 +1491,8 @@
 		BD62729C1A158DA900129AA8 /* MCWin32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCWin32.h; sourceTree = "<group>"; };
 		BD637139177DFF080094121B /* MCLibetpan.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCLibetpan.cpp; sourceTree = "<group>"; };
 		BD63713A177DFF080094121B /* MCLibetpan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCLibetpan.h; sourceTree = "<group>"; };
+		BDCD7C591A5B1C2C0001DCC3 /* MCErrorMessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCErrorMessage.cpp; sourceTree = "<group>"; };
+		BDCD7C5A1A5B1C2C0001DCC3 /* MCErrorMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCErrorMessage.h; sourceTree = "<group>"; };
 		C07AD057D3C8FBDC7AC95733 /* MCOIMAPSession.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOIMAPSession.mm; sourceTree = "<group>"; };
 		C07AD44B013BB42A240B4F04 /* NSError+MCO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+MCO.h"; sourceTree = "<group>"; };
 		C07ADFE43E22B38EFF23ADB5 /* NSError+MCO.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSError+MCO.mm"; sourceTree = "<group>"; };
@@ -2349,6 +2353,8 @@
 		C64EA692169E847800778456 /* abstract */ = {
 			isa = PBXGroup;
 			children = (
+				BDCD7C591A5B1C2C0001DCC3 /* MCErrorMessage.cpp */,
+				BDCD7C5A1A5B1C2C0001DCC3 /* MCErrorMessage.h */,
 				C64EA693169E847800778456 /* MCAbstract.h */,
 				C64EA694169E847800778456 /* MCAbstractMessage.cpp */,
 				C64EA695169E847800778456 /* MCAbstractMessage.h */,
@@ -3321,6 +3327,7 @@
 				C6D6F954171E5CB8006F5B28 /* MCMD5.cpp in Sources */,
 				C6D6F956171E5CB8006F5B28 /* MCNull.cpp in Sources */,
 				C6D6F967171FCF9F006F5B28 /* MCJSONParser.cpp in Sources */,
+				BDCD7C5B1A5B1C2C0001DCC3 /* MCErrorMessage.cpp in Sources */,
 				84CFA98719F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cpp in Sources */,
 				84D73768199BFFFC005124E5 /* MCONNTPOperation.mm in Sources */,
 				C668E2C71735C8D500A2BB47 /* MCObjectMac.mm in Sources */,
@@ -3566,6 +3573,7 @@
 				C6D6F7FA171E595D006F5B28 /* MCJSON.cpp in Sources */,
 				C6D6F955171E5CB8006F5B28 /* MCMD5.cpp in Sources */,
 				C6D6F957171E5CB8006F5B28 /* MCNull.cpp in Sources */,
+				BDCD7C5C1A5B1C2C0001DCC3 /* MCErrorMessage.cpp in Sources */,
 				84CFA98819F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cpp in Sources */,
 				C6D6F968171FCF9F006F5B28 /* MCJSONParser.cpp in Sources */,
 				84D73769199BFFFC005124E5 /* MCONNTPOperation.mm in Sources */,

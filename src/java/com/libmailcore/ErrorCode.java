@@ -1,6 +1,6 @@
 package com.libmailcore;
 
-public class Error {
+public class ErrorCode {
     public final static int ErrorNone = 0; // 0
     public final static int ErrorConnection = 1;
     public final static int ErrorTLSNotAvailable = 2;

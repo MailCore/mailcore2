@@ -2,7 +2,7 @@ package com.libmailcore;
 
 public class IMAPOperation extends Operation {
     public MailException exception() {
-        if (errorCode() == Error.ErrorNone) {
+        if (errorCode() == ErrorCode.ErrorNone) {
             return null;
         }
         return new MailException(errorCode());
@@ -13,7 +13,7 @@ public class IMAPOperation extends Operation {
     protected void callCallback()
     {
         if (callback != null) {
-            if (errorCode() == Error.ErrorNone) {
+            if (errorCode() == ErrorCode.ErrorNone) {
                 callback.succeeded();
             }
             else {

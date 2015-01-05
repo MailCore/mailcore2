@@ -7,6 +7,7 @@ set(abstract_files
   core/abstract/MCAbstractPart.cpp
   core/abstract/MCAddress.cpp
   core/abstract/MCMessageHeader.cpp
+  core/abstract/MCErrorMessage.cpp
 )
 
 IF(APPLE)
