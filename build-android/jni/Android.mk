@@ -16,6 +16,9 @@ subdirs = \
 	core/zip \
 	core/zip/MiniZip \
 	async/imap \
+	async/nntp \
+	async/pop \
+	async/smtp \
 	java java/native
 includes = \
 	$(CURRENT_DIR)/../include \
