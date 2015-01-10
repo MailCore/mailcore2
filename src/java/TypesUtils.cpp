@@ -11,17 +11,7 @@ using namespace mailcore;
 static chash * cppClassHash = NULL;
 static chash * javaClassHash = NULL;
 
-/*
-         case jniBoolean: name += "Z"; break;
-         case jniVoid: name += "V"; break;
-         case jniByte: name += "B"; break;
-         case jniChar: name += "C"; break;
-         case jniShort: name += "S"; break;
-         case jniInt: name += "I"; break;
-         case jniLong: name += "J"; break;
-         case jniFloat: name += "F"; break;
-         case jniDouble: name += "D"; break;
-*/
+#define RANGE_MAX (1 >> 63 - 1)
 
 static void init(void);
 static void real_init(void);
@@ -30,7 +20,13 @@ jobject mailcore::rangeToJava(JNIEnv * env, Range range)
 {
     jclass cls = env->FindClass("com/libmailcore/Range");
     jmethodID constructor = env->GetMethodID(cls, "<init>", "(JJ)V");
-    jobject javaObject = env->NewObject(cls, constructor, (jlong) range.location, (jlong) range.length);
+    jobject javaObject;
+    if (range.length == UINT64_MAX) {
+        javaObject = env->NewObject(cls, constructor, (jlong) range.location, (jlong) RANGE_MAX);
+    }
+    else {
+        javaObject = env->NewObject(cls, constructor, (jlong) range.location, (jlong) range.length);
+    }
     return javaObject;
 }
 
@@ -41,7 +37,12 @@ Range mailcore::rangeFromJava(JNIEnv * env, jobject obj)
     jfieldID lengthField = env->GetFieldID(cls, "length", "J");
     jlong location = env->GetLongField(obj, locationField);
     jlong length = env->GetLongField(obj, lengthField);
-    return RangeMake((uint64_t) location, (uint64_t) length);
+    if (length == RANGE_MAX) {
+        return RangeMake((uint64_t) location, UINT64_MAX);
+    }
+    else {
+        return RangeMake((uint64_t) location, (uint64_t) length);
+    }
 }
 
 time_t mailcore::javaDateToTime(JNIEnv * env, jobject date)

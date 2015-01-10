@@ -3,7 +3,9 @@ package com.libmailcore;
 public class Range {
     public long location;
     public long length;
-    
+
+    static public long RangeMax = 1 >> 63 - 1;
+
     public Range() {}
     public Range(long aLocation, long aLength)
     {

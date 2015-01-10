@@ -1,4 +1,4 @@
-#include "com_libmailcore_Address.h"
+#include "com_libmailcore_MessageHeader.h"
 
 #include "TypesUtils.h"
 #include "JavaHandle.h"

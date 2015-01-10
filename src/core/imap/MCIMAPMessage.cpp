@@ -41,7 +41,12 @@ IMAPMessage::IMAPMessage(IMAPMessage * other) : AbstractMessage(other)
     setFlags(other->flags());
     setOriginalFlags(other->originalFlags());
     setCustomFlags(other->customFlags());
-    setMainPart((AbstractPart *) other->mainPart()->copy()->autorelease());
+    if (other->mainPart() != NULL) {
+        setMainPart((AbstractPart *) other->mainPart()->copy()->autorelease());
+    }
+    else {
+        setMainPart(NULL);
+    }
     setGmailLabels(other->gmailLabels());
     setGmailThreadID(other->gmailThreadID());
     setGmailMessageID(other->gmailMessageID());
