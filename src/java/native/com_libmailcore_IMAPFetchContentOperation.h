@@ -7,6 +7,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#undef com_libmailcore_IMAPFetchContentOperation_serialVersionUID
+#define com_libmailcore_IMAPFetchContentOperation_serialVersionUID 1LL
 /*
  * Class:     com_libmailcore_IMAPFetchContentOperation
  * Method:    data

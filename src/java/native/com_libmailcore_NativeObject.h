@@ -7,6 +7,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#undef com_libmailcore_NativeObject_serialVersionUID
+#define com_libmailcore_NativeObject_serialVersionUID 1LL
 /*
  * Class:     com_libmailcore_NativeObject
  * Method:    initWithNative
@@ -41,19 +43,19 @@ JNIEXPORT jobject JNICALL Java_com_libmailcore_NativeObject_clone
 
 /*
  * Class:     com_libmailcore_NativeObject
- * Method:    serializable
- * Signature: ()Ljava/util/Map;
+ * Method:    serializableData
+ * Signature: ()[B
  */
-JNIEXPORT jobject JNICALL Java_com_libmailcore_NativeObject_serializable
+JNIEXPORT jbyteArray JNICALL Java_com_libmailcore_NativeObject_serializableData
   (JNIEnv *, jobject);
 
 /*
  * Class:     com_libmailcore_NativeObject
- * Method:    objectWithSerializable
- * Signature: (Ljava/util/Map;)Lcom/libmailcore/NativeObject;
+ * Method:    importSerializableData
+ * Signature: ([B)V
  */
-JNIEXPORT jobject JNICALL Java_com_libmailcore_NativeObject_objectWithSerializable
-  (JNIEnv *, jclass, jobject);
+JNIEXPORT void JNICALL Java_com_libmailcore_NativeObject_importSerializableData
+  (JNIEnv *, jobject, jbyteArray);
 
 #ifdef __cplusplus
 }

@@ -4,6 +4,8 @@
 #include "JavaHandle.h"
 #include "TypesUtils.h"
 
+#define nativeType Object
+
 using namespace mailcore;
 
 JNIEXPORT void JNICALL Java_com_libmailcore_NativeObject_initWithNative
@@ -30,7 +32,7 @@ JNIEXPORT jstring JNICALL Java_com_libmailcore_NativeObject_toString
         return (jstring) MC_TO_JAVA(MCSTR("<Uninitialized NativeObject>"));
     }
     else {
-        return (jstring) MC_TO_JAVA(mcObj->description());
+        return MC_JAVA_BRIDGE_GET_STRING(description);
     }
 }
 
@@ -40,14 +42,14 @@ JNIEXPORT jobject JNICALL Java_com_libmailcore_NativeObject_clone
     return MC_TO_JAVA(MC_FROM_JAVA(Object, obj)->copy()->autorelease());
 }
 
-JNIEXPORT jobject JNICALL Java_com_libmailcore_NativeObject_serializable
+JNIEXPORT jbyteArray JNICALL Java_com_libmailcore_NativeObject_serializableData
   (JNIEnv * env, jobject obj)
 {
-    return MC_TO_JAVA(MC_FROM_JAVA(Object, obj)->serializable());
+    return (jbyteArray) MC_TO_JAVA(JSON::objectToJSONData(MC_JAVA_NATIVE_INSTANCE->serializable()));
 }
 
-JNIEXPORT jobject JNICALL Java_com_libmailcore_NativeObject_objectWithSerializable
-  (JNIEnv * env, jclass cls, jobject serializable)
+JNIEXPORT void JNICALL Java_com_libmailcore_NativeObject_importSerializableData
+  (JNIEnv * env, jobject obj, jbyteArray data)
 {
-    return MC_TO_JAVA(Object::objectWithSerializable(MC_FROM_JAVA(HashMap, serializable)));
+    MC_JAVA_NATIVE_INSTANCE->importSerializable((HashMap *) JSON::objectFromJSONData(MC_FROM_JAVA(Data, data)));
 }

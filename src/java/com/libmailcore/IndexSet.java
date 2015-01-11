@@ -29,4 +29,6 @@ public class IndexSet extends NativeObject {
     public native void removeAllIndexes();
     
     private native void setupNative();
+
+    private static final long serialVersionUID = 1L;
 }

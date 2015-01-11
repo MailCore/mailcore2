@@ -29,4 +29,6 @@ public class Address extends NativeObject {
     public native String nonEncodedRFC822String();
     
     private native void setupNative();
+
+    private static final long serialVersionUID = 1L;
 }

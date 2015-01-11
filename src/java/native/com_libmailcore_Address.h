@@ -7,6 +7,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#undef com_libmailcore_Address_serialVersionUID
+#define com_libmailcore_Address_serialVersionUID 1LL
+#undef com_libmailcore_Address_serialVersionUID
+#define com_libmailcore_Address_serialVersionUID 1LL
 /*
  * Class:     com_libmailcore_Address
  * Method:    addressWithDisplayName

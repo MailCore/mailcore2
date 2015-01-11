@@ -11,7 +11,7 @@ using namespace mailcore;
 static chash * cppClassHash = NULL;
 static chash * javaClassHash = NULL;
 
-#define RANGE_MAX (1 >> 63 - 1)
+#define RANGE_MAX (1ULL >> 63ULL - 1ULL)
 
 static void init(void);
 static void real_init(void);

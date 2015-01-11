@@ -7,6 +7,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#undef com_libmailcore_IMAPIdentity_serialVersionUID
+#define com_libmailcore_IMAPIdentity_serialVersionUID 1LL
 /*
  * Class:     com_libmailcore_IMAPIdentity
  * Method:    setVendor

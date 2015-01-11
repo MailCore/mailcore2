@@ -7,6 +7,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#undef com_libmailcore_NNTPListNewsgroupsOperation_serialVersionUID
+#define com_libmailcore_NNTPListNewsgroupsOperation_serialVersionUID 1LL
 /*
  * Class:     com_libmailcore_NNTPListNewsgroupsOperation
  * Method:    groups

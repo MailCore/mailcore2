@@ -22,4 +22,8 @@ public class Range {
     public native String toString();
     
     public static native Range rangeWithString(String rangeString);
+
+    static {
+        MainThreadUtils.singleton();
+    }
 }

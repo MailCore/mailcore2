@@ -7,12 +7,14 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#undef com_libmailcore_NNTPFetchHeaderOperation_serialVersionUID
+#define com_libmailcore_NNTPFetchHeaderOperation_serialVersionUID 1LL
 /*
  * Class:     com_libmailcore_NNTPFetchHeaderOperation
- * Method:    data
- * Signature: ()[B
+ * Method:    header
+ * Signature: ()Lcom/libmailcore/MessageHeader;
  */
-JNIEXPORT jbyteArray JNICALL Java_com_libmailcore_NNTPFetchHeaderOperation_data
+JNIEXPORT jobject JNICALL Java_com_libmailcore_NNTPFetchHeaderOperation_header
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus

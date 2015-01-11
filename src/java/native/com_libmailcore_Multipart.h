@@ -7,6 +7,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#undef com_libmailcore_Multipart_serialVersionUID
+#define com_libmailcore_Multipart_serialVersionUID 1LL
 #ifdef __cplusplus
 }
 #endif

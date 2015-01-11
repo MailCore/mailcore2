@@ -7,6 +7,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#undef com_libmailcore_IMAPMessage_serialVersionUID
+#define com_libmailcore_IMAPMessage_serialVersionUID 1LL
+#undef com_libmailcore_IMAPMessage_serialVersionUID
+#define com_libmailcore_IMAPMessage_serialVersionUID 1LL
 /*
  * Class:     com_libmailcore_IMAPMessage
  * Method:    sequenceNumber

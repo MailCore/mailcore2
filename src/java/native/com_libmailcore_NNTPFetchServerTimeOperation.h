@@ -7,12 +7,14 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#undef com_libmailcore_NNTPFetchServerTimeOperation_serialVersionUID
+#define com_libmailcore_NNTPFetchServerTimeOperation_serialVersionUID 1LL
 /*
  * Class:     com_libmailcore_NNTPFetchServerTimeOperation
- * Method:    date
+ * Method:    time
  * Signature: ()Ljava/util/Date;
  */
-JNIEXPORT jobject JNICALL Java_com_libmailcore_NNTPFetchServerTimeOperation_date
+JNIEXPORT jobject JNICALL Java_com_libmailcore_NNTPFetchServerTimeOperation_time
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus

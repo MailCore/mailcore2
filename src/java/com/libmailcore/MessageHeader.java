@@ -69,4 +69,6 @@ public class MessageHeader extends NativeObject {
     public native MessageHeader forwardHeader();
     
     private native void setupNative();
+
+    private static final long serialVersionUID = 1L;
 }

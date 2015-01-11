@@ -50,4 +50,6 @@ public class IMAPMessage extends AbstractMessage {
     {
         return htmlRendering(folder, dataCallback, null);
     }
+
+    private static final long serialVersionUID = 1L;
 }

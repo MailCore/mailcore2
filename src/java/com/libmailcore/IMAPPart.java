@@ -11,4 +11,6 @@ public class IMAPPart extends AbstractPart {
     
     public native void setEncoding(int encoding);
     public native int encoding();
+
+    private static final long serialVersionUID = 1L;
 }
