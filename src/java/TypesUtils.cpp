@@ -63,7 +63,6 @@ jobject mailcore::timeToJavaDate(JNIEnv * env, time_t t)
 
 void mailcore::MCJNIRegisterNativeClass(const std::type_info * info, ObjectToJavaConverter converter)
 {
-    MCLogEnabled = 1;
     MCLog("MCJNIRegisterNativeClass");
     init();
     
@@ -87,7 +86,6 @@ void mailcore::MCJNIRegisterNativeClass(const std::type_info * info, ObjectToJav
 
 void mailcore::MCJNIRegisterJavaClass(const char * className, JavaToObjectConverter converter)
 {
-    MCLogEnabled = 1;
     MCLog("MCJNIRegisterJavaClass %s", className);
     init();
     
@@ -504,7 +502,6 @@ static void init(void)
 
 static void real_init(void)
 {
-    MCLogEnabled = 1;
     MCLog("real_init");
     MCLog("init cppClassHash");
     cppClassHash = chash_new(CHASH_DEFAULTSIZE, CHASH_COPYKEY);
