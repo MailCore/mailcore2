@@ -104,7 +104,10 @@ void OperationQueue::runOperations()
             
             retain(); // (2)
 #if __APPLE__
-            performMethodOnDispatchQueue((Object::Method) &OperationQueue::stoppedOnMainThread, NULL, mDispatchQueue, true);
+            dispatch_queue_t queue = mDispatchQueue;
+            dispatch_retain(queue);
+            performMethodOnDispatchQueue((Object::Method) &OperationQueue::stoppedOnMainThread, NULL, queue, true);
+            dispatch_release(queue);
 #else
             performMethodOnMainThread((Object::Method) &OperationQueue::stoppedOnMainThread, NULL, true);
 #endif
