@@ -13,7 +13,10 @@ using namespace mailcore;
 JNIEXPORT jobject JNICALL Java_com_libmailcore_NNTPListNewsgroupsOperation_groups
   (JNIEnv * env, jobject obj)
 {
-    return MC_JAVA_BRIDGE_GET(groups);
+    MC_POOL_BEGIN;
+    jobject result = MC_JAVA_BRIDGE_GET(groups);
+    MC_POOL_END;
+    return result;
 }
 
 MC_JAVA_BRIDGE

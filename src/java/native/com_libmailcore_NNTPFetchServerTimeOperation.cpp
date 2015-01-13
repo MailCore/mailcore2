@@ -13,7 +13,10 @@ using namespace mailcore;
 JNIEXPORT jobject JNICALL Java_com_libmailcore_NNTPFetchServerTimeOperation_time
   (JNIEnv * env, jobject obj)
 {
-    return timeToJavaDate(env, MC_JAVA_NATIVE_INSTANCE->time());
+    MC_POOL_BEGIN;
+    jobject result = timeToJavaDate(env, MC_JAVA_NATIVE_INSTANCE->time());
+    MC_POOL_END;
+    return result;
 }
 
 MC_JAVA_BRIDGE

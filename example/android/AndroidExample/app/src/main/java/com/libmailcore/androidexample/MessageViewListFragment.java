@@ -14,7 +14,6 @@ import com.libmailcore.IMAPFetchMessagesOperation;
 import com.libmailcore.IMAPMessage;
 import com.libmailcore.MailException;
 import com.libmailcore.OperationCallback;
-//import com.libmailcore.androidexample.dummy.DummyContent;
 import com.libmailcore.IndexSet;
 import com.libmailcore.IMAPMessagesRequestKind;
 import com.libmailcore.Range;
@@ -184,7 +183,6 @@ public class MessageViewListFragment extends ListFragment implements OperationCa
                 android.R.id.text1,
                 array);
 
-        // TODO: replace with a real list adapter.
         setListAdapter(adapter);
 
     }

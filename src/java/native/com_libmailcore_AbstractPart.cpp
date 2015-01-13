@@ -21,29 +21,43 @@ MC_JAVA_SYNTHESIZE_SCALAR(jboolean, bool, setInlineAttachment, isInlineAttachmen
 JNIEXPORT jobject JNICALL Java_com_libmailcore_AbstractPart_partForContentID
   (JNIEnv * env, jobject obj, jstring contentID)
 {
-    return MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->partForContentID(MC_FROM_JAVA(String, contentID)));
+    MC_POOL_BEGIN;
+    jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->partForContentID(MC_FROM_JAVA(String, contentID)));
+    MC_POOL_END;
+    return result;
 }
 
 JNIEXPORT jobject JNICALL Java_com_libmailcore_AbstractPart_partForUniqueID
   (JNIEnv * env, jobject obj, jstring uniqueID)
 {
-    return MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->partForUniqueID(MC_FROM_JAVA(String, uniqueID)));
+    MC_POOL_BEGIN;
+    jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->partForUniqueID(MC_FROM_JAVA(String, uniqueID)));
+    MC_POOL_END;
+    return result;
 }
 
 JNIEXPORT void JNICALL Java_com_libmailcore_AbstractPart_setContentTypeParameter
   (JNIEnv * env, jobject obj, jstring name, jstring value)
 {
+    MC_POOL_BEGIN;
     MC_JAVA_NATIVE_INSTANCE->setContentTypeParameter(MC_FROM_JAVA(String, name), MC_FROM_JAVA(String, value));
+    MC_POOL_END;
 }
 
 JNIEXPORT jstring JNICALL Java_com_libmailcore_AbstractPart_contentTypeParameterValueForName
   (JNIEnv * env, jobject obj, jstring name)
 {
-    return (jstring) MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->contentTypeParameterValueForName(MC_FROM_JAVA(String, name)));
+    MC_POOL_BEGIN;
+    jobject result = (jstring) MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->contentTypeParameterValueForName(MC_FROM_JAVA(String, name)));
+    MC_POOL_END;
+    return (jstring) result;
 }
 
 JNIEXPORT jobject JNICALL Java_com_libmailcore_AbstractPart_allContentTypeParametersNames
   (JNIEnv * env, jobject obj)
 {
-    return MC_JAVA_BRIDGE_GET(allContentTypeParametersNames);
+    MC_POOL_BEGIN;
+    jobject result = MC_JAVA_BRIDGE_GET(allContentTypeParametersNames);
+    MC_POOL_END;
+    return result;
 }

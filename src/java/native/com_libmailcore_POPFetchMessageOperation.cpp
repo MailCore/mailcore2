@@ -13,7 +13,10 @@ using namespace mailcore;
 JNIEXPORT jbyteArray JNICALL Java_com_libmailcore_POPFetchMessageOperation_data
   (JNIEnv * env, jobject obj)
 {
-    return MC_JAVA_BRIDGE_GET_DATA(data);
+    MC_POOL_BEGIN;
+    jobject result = MC_JAVA_BRIDGE_GET_DATA(data);
+    MC_POOL_END;
+    return (jbyteArray) result;
 }
 
 MC_JAVA_BRIDGE

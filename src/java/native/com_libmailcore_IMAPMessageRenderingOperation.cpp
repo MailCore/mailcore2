@@ -13,7 +13,10 @@ using namespace mailcore;
 JNIEXPORT jstring JNICALL Java_com_libmailcore_IMAPMessageRenderingOperation_result
   (JNIEnv * env, jobject obj)
 {
-    return MC_JAVA_BRIDGE_GET_STRING(result);
+    MC_POOL_BEGIN;
+    jstring result = MC_JAVA_BRIDGE_GET_STRING(result);
+    MC_POOL_END;
+    return result;
 }
 
 MC_JAVA_BRIDGE

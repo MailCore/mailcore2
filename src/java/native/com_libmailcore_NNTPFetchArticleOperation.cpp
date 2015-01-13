@@ -14,7 +14,10 @@ using namespace mailcore;
 JNIEXPORT jbyteArray JNICALL Java_com_libmailcore_NNTPFetchArticleOperation_data
   (JNIEnv * env, jobject obj)
 {
-    return MC_JAVA_BRIDGE_GET_DATA(data);
+    MC_POOL_BEGIN;
+    jbyteArray result = MC_JAVA_BRIDGE_GET_DATA(data);
+    MC_POOL_END;
+    return result;
 }
 
 MC_JAVA_BRIDGE

@@ -17,7 +17,10 @@ MC_JAVA_SYNTHESIZE_SCALAR(jint, Encoding, setEncoding, encoding)
 JNIEXPORT jlong JNICALL Java_com_libmailcore_IMAPPart_decodedSize
   (JNIEnv * env, jobject obj)
 {
-    return MC_JAVA_BRIDGE_GET_SCALAR(jlong, decodedSize);
+    MC_POOL_BEGIN;
+    jlong result = MC_JAVA_BRIDGE_GET_SCALAR(jlong, decodedSize);
+    MC_POOL_END;
+    return result;
 }
 
 MC_JAVA_BRIDGE

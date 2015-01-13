@@ -27,24 +27,34 @@ MC_JAVA_SYNTHESIZE_SCALAR(jlong, uint64_t, setGmailThreadID, gmailThreadID);
 JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPMessage_partForPartID
   (JNIEnv * env, jobject obj, jstring partID)
 {
-    return MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->partForPartID(MC_FROM_JAVA(String, partID)));
+    MC_POOL_BEGIN;
+    jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->partForPartID(MC_FROM_JAVA(String, partID)));
+    MC_POOL_END;
+    return result;
 }
 
 JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPMessage_partForContentID
   (JNIEnv * env, jobject obj, jstring contentID)
 {
-    return MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->partForContentID(MC_FROM_JAVA(String, contentID)));
+    MC_POOL_BEGIN;
+    jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->partForContentID(MC_FROM_JAVA(String, contentID)));
+    MC_POOL_END;
+    return result;
 }
 
 JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPMessage_partForUniqueID
   (JNIEnv * env, jobject obj, jstring uniqueID)
 {
-    return MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->partForUniqueID(MC_FROM_JAVA(String, uniqueID)));
+    MC_POOL_BEGIN;
+    jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->partForUniqueID(MC_FROM_JAVA(String, uniqueID)));
+    MC_POOL_END;
+    return result;
 }
 
 JNIEXPORT jstring JNICALL Java_com_libmailcore_IMAPMessage_htmlRendering
   (JNIEnv * env, jobject obj, jstring folder, jobject dataCallback, jobject htmlTemplateCallback)
 {
+    MC_POOL_BEGIN;
     JavaHTMLRendererTemplateCallback * templateCallback = NULL;
     if (htmlTemplateCallback != NULL) {
         templateCallback = new JavaHTMLRendererTemplateCallback(env, htmlTemplateCallback);
@@ -60,6 +70,7 @@ JNIEXPORT jstring JNICALL Java_com_libmailcore_IMAPMessage_htmlRendering
     if (templateCallback != NULL) {
         delete templateCallback;
     }
+    MC_POOL_END;
     return result;
 }
 

@@ -44,21 +44,28 @@ private:
 JNIEXPORT void JNICALL Java_com_libmailcore_Operation_cancel
   (JNIEnv * env, jobject obj)
 {
+    MC_POOL_BEGIN;
     MC_JAVA_NATIVE_INSTANCE->cancel();
+    MC_POOL_END;
 }
 
 JNIEXPORT jboolean JNICALL Java_com_libmailcore_Operation_isCancelled
   (JNIEnv * env, jobject obj)
 {
-    return MC_JAVA_BRIDGE_GET_SCALAR(jboolean, isCancelled);
+    MC_POOL_BEGIN;
+    jboolean result = MC_JAVA_BRIDGE_GET_SCALAR(jboolean, isCancelled);
+    MC_POOL_END;
+    return result;
 }
 
 JNIEXPORT void JNICALL Java_com_libmailcore_Operation_nativeStart
   (JNIEnv * env, jobject obj)
 {
+    MC_POOL_BEGIN;
     JavaOperationCallback * callback = new JavaOperationCallback(env, obj);
     MC_JAVA_NATIVE_INSTANCE->setCallback(callback);
     MC_JAVA_NATIVE_INSTANCE->start();
+    MC_POOL_END;
 }
 
 MC_JAVA_BRIDGE

@@ -13,7 +13,10 @@ using namespace mailcore;
 JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPSearchOperation_uids
   (JNIEnv * env, jobject obj)
 {
-    return MC_JAVA_BRIDGE_GET(uids);
+    MC_POOL_BEGIN;
+    jobject result = MC_JAVA_BRIDGE_GET(uids);
+    MC_POOL_END;
+    return result;
 }
 
 MC_JAVA_BRIDGE

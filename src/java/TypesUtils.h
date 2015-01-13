@@ -23,52 +23,73 @@
 #define MC_JAVA_BRIDGE MC_JAVA_BRIDGE_internal(javaType, nativeType)
 
 #define MC_JAVA_CONCAT(a, b) a ## b
-//#define prefix MC_JAVA_CONCAT(prefix1, _)
-//#define prefix(nativeType) Java_com_libmailcore_ ## nativeType ## _
 #define prefixed_function(javaType, function_name) Java_com_libmailcore_ ## javaType ## _ ## function_name
+
+#define MC_POOL_BEGIN AutoreleasePool * __pool = new AutoreleasePool();
+#define MC_POOL_END __pool->release();
 
 #define MC_JAVA_SYNTHESIZE_internal(type, javaType, setter, getter) \
     JNIEXPORT jobject JNICALL prefixed_function(javaType, getter) (JNIEnv * env, jobject obj) \
     { \
-        return MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->getter()); \
+        MC_POOL_BEGIN; \
+        jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->getter()); \
+        MC_POOL_END; \
+        return result; \
     } \
     \
     JNIEXPORT void JNICALL prefixed_function(javaType, setter) (JNIEnv * env, jobject obj, jobject value) \
     { \
+        MC_POOL_BEGIN; \
         MC_JAVA_NATIVE_INSTANCE->setter(MC_FROM_JAVA(type, value)); \
+        MC_POOL_END; \
     }
 
 #define MC_JAVA_SYNTHESIZE_STRING_internal(javaType, setter, getter) \
     JNIEXPORT jstring JNICALL prefixed_function(javaType, getter) (JNIEnv * env, jobject obj) \
     { \
-        return (jstring) MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->getter()); \
+        MC_POOL_BEGIN; \
+        jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->getter()); \
+        MC_POOL_END; \
+        return (jstring) result; \
     } \
     \
     JNIEXPORT void JNICALL prefixed_function(javaType, setter) (JNIEnv * env, jobject obj, jstring value) \
     { \
+        MC_POOL_BEGIN; \
         MC_JAVA_NATIVE_INSTANCE->setter(MC_FROM_JAVA(String, value)); \
+        MC_POOL_END; \
     }
 
 #define MC_JAVA_SYNTHESIZE_DATA_internal(javaType, setter, getter) \
     JNIEXPORT jbyteArray JNICALL prefixed_function(javaType, getter) (JNIEnv * env, jobject obj) \
     { \
-        return (jbyteArray) MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->getter()); \
+        MC_POOL_BEGIN; \
+        jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->getter()); \
+        MC_POOL_END; \
+        return (jbyteArray) result; \
     } \
     \
     JNIEXPORT void JNICALL prefixed_function(javaType, setter) (JNIEnv * env, jobject obj, jbyteArray value) \
     { \
+        MC_POOL_BEGIN; \
         MC_JAVA_NATIVE_INSTANCE->setter(MC_FROM_JAVA(Data, value)); \
+        MC_POOL_END; \
     }
 
 #define MC_JAVA_SYNTHESIZE_SCALAR_internal(javaScalarType, scalarType, javaType, setter, getter) \
     JNIEXPORT javaScalarType JNICALL prefixed_function(javaType, getter) (JNIEnv * env, jobject obj) \
     { \
-        return (javaScalarType) MC_JAVA_NATIVE_INSTANCE->getter(); \
+        MC_POOL_BEGIN; \
+        javaScalarType result = (javaScalarType) MC_JAVA_NATIVE_INSTANCE->getter(); \
+        MC_POOL_END; \
+        return result; \
     } \
     \
     JNIEXPORT void JNICALL prefixed_function(javaType, setter) (JNIEnv * env, jobject obj, javaScalarType value) \
     { \
+        MC_POOL_BEGIN; \
         MC_JAVA_NATIVE_INSTANCE->setter((scalarType) value); \
+        MC_POOL_END; \
     }
 
 #define mc_quote(word) #word

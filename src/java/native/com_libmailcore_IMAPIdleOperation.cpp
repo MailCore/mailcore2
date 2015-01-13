@@ -13,7 +13,9 @@ using namespace mailcore;
 JNIEXPORT void JNICALL Java_com_libmailcore_IMAPIdleOperation_interruptIdle
   (JNIEnv * env, jobject obj)
 {
+    MC_POOL_BEGIN;
     MC_JAVA_NATIVE_INSTANCE->interruptIdle();
+    MC_POOL_END;
 }
 
 MC_JAVA_BRIDGE

@@ -14,7 +14,10 @@ using namespace mailcore;
 JNIEXPORT jobject JNICALL Java_com_libmailcore_NNTPFetchHeaderOperation_header
   (JNIEnv * env, jobject obj)
 {
-    return MC_JAVA_BRIDGE_GET(header);
+    MC_POOL_BEGIN;
+    jobject result = MC_JAVA_BRIDGE_GET(header);
+    MC_POOL_END;
+    return result;
 }
 
 MC_JAVA_BRIDGE

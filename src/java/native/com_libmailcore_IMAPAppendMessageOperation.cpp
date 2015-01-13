@@ -13,19 +13,27 @@ using namespace mailcore;
 JNIEXPORT void JNICALL Java_com_libmailcore_IMAPAppendMessageOperation_setDate
   (JNIEnv * env, jobject obj, jobject date)
 {
+    MC_POOL_BEGIN;
     MC_JAVA_NATIVE_INSTANCE->setDate(javaDateToTime(env, date));
+    MC_POOL_END;
 }
 
 JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPAppendMessageOperation_date
   (JNIEnv * env, jobject obj)
 {
-    return timeToJavaDate(env, MC_JAVA_NATIVE_INSTANCE->date());
+    MC_POOL_BEGIN;
+    jobject result = timeToJavaDate(env, MC_JAVA_NATIVE_INSTANCE->date());
+    MC_POOL_END;
+    return result;
 }
 
 JNIEXPORT jlong JNICALL Java_com_libmailcore_IMAPAppendMessageOperation_createdUID
   (JNIEnv * env, jobject obj)
 {
-    return MC_JAVA_BRIDGE_GET_SCALAR(jlong, createdUID);
+    MC_POOL_BEGIN;
+    jlong result = MC_JAVA_BRIDGE_GET_SCALAR(jlong, createdUID);
+    MC_POOL_END;
+    return result;
 }
 
 MC_JAVA_BRIDGE

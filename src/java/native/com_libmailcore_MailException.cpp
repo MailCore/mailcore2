@@ -9,5 +9,8 @@ using namespace mailcore;
 JNIEXPORT jstring JNICALL Java_com_libmailcore_MailException_messageForErrorCode
   (JNIEnv * env, jclass cls, jint errorCode)
 {
-    return (jstring) MC_TO_JAVA(mailcore::errorMessageWithErrorCode((ErrorCode) errorCode));
+    MC_POOL_BEGIN;
+    jobject result = MC_TO_JAVA(mailcore::errorMessageWithErrorCode((ErrorCode) errorCode));
+    MC_POOL_END;
+    return (jstring) result;
 }

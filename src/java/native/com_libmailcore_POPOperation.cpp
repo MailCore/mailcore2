@@ -13,7 +13,10 @@ using namespace mailcore;
 JNIEXPORT jint JNICALL Java_com_libmailcore_POPOperation_errorCode
   (JNIEnv * env, jobject obj)
 {
-    return MC_JAVA_BRIDGE_GET_SCALAR(jint, error);
+    MC_POOL_BEGIN;
+    jint result = MC_JAVA_BRIDGE_GET_SCALAR(jint, error);
+    MC_POOL_END;
+    return result;
 }
 
 MC_JAVA_BRIDGE

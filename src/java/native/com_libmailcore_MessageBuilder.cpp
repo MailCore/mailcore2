@@ -18,7 +18,9 @@ MC_JAVA_SYNTHESIZE(Array, setAttachments, attachments)
 JNIEXPORT void JNICALL Java_com_libmailcore_MessageBuilder_addAttachment
     (JNIEnv * env, jobject obj, jobject attachment)
 {
+    MC_POOL_BEGIN;
     MC_JAVA_NATIVE_INSTANCE->addAttachment(MC_FROM_JAVA(Attachment, attachment));
+    MC_POOL_END;
 }
 
 MC_JAVA_SYNTHESIZE(Array, setRelatedAttachments, relatedAttachments)
@@ -26,7 +28,9 @@ MC_JAVA_SYNTHESIZE(Array, setRelatedAttachments, relatedAttachments)
 JNIEXPORT void JNICALL Java_com_libmailcore_MessageBuilder_addRelatedAttachment
     (JNIEnv * env, jobject obj, jobject attachment)
 {
+    MC_POOL_BEGIN;
     MC_JAVA_NATIVE_INSTANCE->addRelatedAttachment(MC_FROM_JAVA(Attachment, attachment));
+    MC_POOL_END;
 }
 
 MC_JAVA_SYNTHESIZE_STRING(setBoundaryPrefix, boundaryPrefix)
@@ -34,18 +38,25 @@ MC_JAVA_SYNTHESIZE_STRING(setBoundaryPrefix, boundaryPrefix)
 JNIEXPORT jbyteArray JNICALL Java_com_libmailcore_MessageBuilder_data
     (JNIEnv * env, jobject obj)
 {
-    return (jbyteArray) MC_JAVA_BRIDGE_GET(data);
+    MC_POOL_BEGIN;
+    jbyteArray result = MC_JAVA_BRIDGE_GET_DATA(data);
+    MC_POOL_END;
+    return result;
 }
 
 JNIEXPORT jbyteArray JNICALL Java_com_libmailcore_MessageBuilder_dataForEncryption
     (JNIEnv * env, jobject obj)
 {
-    return (jbyteArray) MC_JAVA_BRIDGE_GET(dataForEncryption);
+    MC_POOL_BEGIN;
+    jbyteArray result = MC_JAVA_BRIDGE_GET_DATA(dataForEncryption);
+    MC_POOL_END;
+    return result;
 }
 
 JNIEXPORT jstring JNICALL Java_com_libmailcore_MessageBuilder_htmlRendering
     (JNIEnv * env, jobject obj, jobject javaCallback)
 {
+    MC_POOL_BEGIN;
     JavaHTMLRendererTemplateCallback * callback = NULL;
     if (javaCallback != NULL) {
         callback = new JavaHTMLRendererTemplateCallback(env, javaCallback);
@@ -54,37 +65,53 @@ JNIEXPORT jstring JNICALL Java_com_libmailcore_MessageBuilder_htmlRendering
     if (callback != NULL) {
         delete callback;
     }
+    MC_POOL_END;
     return result;
 }
 
 JNIEXPORT jstring JNICALL Java_com_libmailcore_MessageBuilder_htmlBodyRendering
     (JNIEnv * env, jobject obj)
 {
-    return (jstring) MC_JAVA_BRIDGE_GET(htmlBodyRendering);
+    MC_POOL_BEGIN;
+    jstring result = MC_JAVA_BRIDGE_GET_STRING(htmlBodyRendering);
+    MC_POOL_END;
+    return result;
 }
 
 JNIEXPORT jstring JNICALL Java_com_libmailcore_MessageBuilder_plainTextRendering
     (JNIEnv * env, jobject obj)
 {
-    return (jstring) MC_JAVA_NATIVE_INSTANCE->plainTextRendering();
+    MC_POOL_BEGIN;
+    jstring result = MC_JAVA_BRIDGE_GET_STRING(plainTextRendering);
+    MC_POOL_END;
+    return result;
 }
 
 JNIEXPORT jstring JNICALL Java_com_libmailcore_MessageBuilder_plainTextBodyRendering
     (JNIEnv * env, jobject obj, jboolean stripWhitespace)
 {
-    return (jstring) MC_JAVA_NATIVE_INSTANCE->plainTextBodyRendering((bool) stripWhitespace);
+    MC_POOL_BEGIN;
+    jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->plainTextBodyRendering((bool) stripWhitespace));
+    MC_POOL_END;
+    return (jstring) result;
 }
 
 JNIEXPORT jbyteArray JNICALL Java_com_libmailcore_MessageBuilder_openPGPSignedMessageDataWithSignatureData
     (JNIEnv * env, jobject obj, jbyteArray signature)
 {
-    return (jbyteArray) MC_JAVA_NATIVE_INSTANCE->openPGPSignedMessageDataWithSignatureData(MC_FROM_JAVA(Data, signature));
+    MC_POOL_BEGIN;
+    jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->openPGPSignedMessageDataWithSignatureData(MC_FROM_JAVA(Data, signature)));
+    MC_POOL_END;
+    return (jbyteArray) result;
 }
 
 JNIEXPORT jbyteArray JNICALL Java_com_libmailcore_MessageBuilder_openPGPEncryptedMessageDataWithEncryptedData
     (JNIEnv * env, jobject obj, jbyteArray encryptedData)
 {
-    return (jbyteArray) MC_JAVA_NATIVE_INSTANCE->openPGPEncryptedMessageDataWithEncryptedData(MC_FROM_JAVA(Data, encryptedData));
+    MC_POOL_BEGIN;
+    jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->openPGPEncryptedMessageDataWithEncryptedData(MC_FROM_JAVA(Data, encryptedData)));
+    MC_POOL_END;
+    return (jbyteArray) result;
 }
 
 MC_JAVA_BRIDGE

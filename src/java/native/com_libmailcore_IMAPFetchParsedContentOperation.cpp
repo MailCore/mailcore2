@@ -14,20 +14,26 @@ using namespace mailcore;
 JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPFetchParsedContentOperation_parser
   (JNIEnv * env, jobject obj)
 {
-    return MC_JAVA_BRIDGE_GET(parser);
+    MC_POOL_BEGIN;
+    jobject result = MC_JAVA_BRIDGE_GET(parser);
+    MC_POOL_END;
+    return result;
 }
 
 JNIEXPORT void JNICALL Java_com_libmailcore_IMAPFetchParsedContentOperation_finalizeNative
   (JNIEnv * env, jobject obj)
 {
+    MC_POOL_BEGIN;
     JavaIMAPOperationCallback * callback = (JavaIMAPOperationCallback *) MC_JAVA_NATIVE_INSTANCE->imapCallback();
     MC_SAFE_RELEASE(callback);
     MC_JAVA_NATIVE_INSTANCE->setImapCallback(NULL);
+    MC_POOL_END;
 }
 
 JNIEXPORT void JNICALL Java_com_libmailcore_IMAPFetchParsedContentOperation_setupNativeOperationProgressListener
   (JNIEnv * env, jobject obj)
 {
+    MC_POOL_BEGIN;
     JavaIMAPOperationCallback * callback = (JavaIMAPOperationCallback *) MC_JAVA_NATIVE_INSTANCE->imapCallback();
     MC_SAFE_RELEASE(callback);
     MC_JAVA_NATIVE_INSTANCE->setImapCallback(NULL);
@@ -37,6 +43,7 @@ JNIEXPORT void JNICALL Java_com_libmailcore_IMAPFetchParsedContentOperation_setu
         callback = new JavaIMAPOperationCallback(env, javaListener);
         MC_JAVA_NATIVE_INSTANCE->setImapCallback(callback);
     }
+    MC_POOL_END;
 }
 
 MC_JAVA_BRIDGE

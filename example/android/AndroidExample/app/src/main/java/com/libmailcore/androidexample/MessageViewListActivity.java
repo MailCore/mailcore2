@@ -51,8 +51,6 @@ public class MessageViewListActivity extends Activity
                     .findFragmentById(R.id.messageview_list))
                     .setActivateOnItemClick(true);
         }
-
-        // TODO: If exposing deep links into your app, handle intents here.
     }
 
     /**

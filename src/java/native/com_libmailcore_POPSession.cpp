@@ -24,60 +24,87 @@ MC_JAVA_SYNTHESIZE_SCALAR(jboolean, bool, setCheckCertificateEnabled, isCheckCer
 JNIEXPORT jboolean JNICALL Java_com_libmailcore_POPSession_isOperationQueueRunning
   (JNIEnv * env, jobject obj)
 {
-    return MC_JAVA_BRIDGE_GET_SCALAR(jboolean, isOperationQueueRunning);
+    MC_POOL_BEGIN;
+    jboolean result = MC_JAVA_BRIDGE_GET_SCALAR(jboolean, isOperationQueueRunning);
+    MC_POOL_END;
+    return result;
 }
 
 JNIEXPORT void JNICALL Java_com_libmailcore_POPSession_cancelAllOperations
   (JNIEnv * env, jobject obj)
 {
+    MC_POOL_BEGIN;
     MC_JAVA_NATIVE_INSTANCE->cancelAllOperations();
+    MC_POOL_END;
 }
 
 JNIEXPORT jobject JNICALL Java_com_libmailcore_POPSession_fetchMessagesOperation
   (JNIEnv * env, jobject obj)
 {
-    return MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->fetchMessagesOperation());
+    MC_POOL_BEGIN;
+    jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->fetchMessagesOperation());
+    MC_POOL_END;
+    return result;
 }
 
 JNIEXPORT jobject JNICALL Java_com_libmailcore_POPSession_fetchHeaderOperation
   (JNIEnv * env, jobject obj, jint idx)
 {
-    return MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->fetchHeaderOperation((unsigned int) idx));
+    MC_POOL_BEGIN;
+    jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->fetchHeaderOperation((unsigned int) idx));
+    MC_POOL_END;
+    return result;
 }
 
 JNIEXPORT jobject JNICALL Java_com_libmailcore_POPSession_fetchMessageOperation
   (JNIEnv * env, jobject obj, jint idx)
 {
-    return MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->fetchMessageOperation((unsigned int) idx));
+    MC_POOL_BEGIN;
+    jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->fetchMessageOperation((unsigned int) idx));
+    MC_POOL_END;
+    return result;
 }
 
 JNIEXPORT jobject JNICALL Java_com_libmailcore_POPSession_deleteMessagesOperation
   (JNIEnv * env, jobject obj, jobject indexes)
 {
-    return MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->deleteMessagesOperation(MC_FROM_JAVA(IndexSet, indexes)));
+    MC_POOL_BEGIN;
+    jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->deleteMessagesOperation(MC_FROM_JAVA(IndexSet, indexes)));
+    MC_POOL_END;
+    return result;
 }
 
 JNIEXPORT jobject JNICALL Java_com_libmailcore_POPSession_disconnectOperation
   (JNIEnv * env, jobject obj)
 {
-    return MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->disconnectOperation());
+    MC_POOL_BEGIN;
+    jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->disconnectOperation());
+    MC_POOL_END;
+    return result;
 }
 
 JNIEXPORT jobject JNICALL Java_com_libmailcore_POPSession_checkAccountOperation
   (JNIEnv * env, jobject obj)
 {
-    return MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->checkAccountOperation());
+    MC_POOL_BEGIN;
+    jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->checkAccountOperation());
+    MC_POOL_END;
+    return result;
 }
 
 JNIEXPORT jobject JNICALL Java_com_libmailcore_POPSession_noopOperation
   (JNIEnv * env, jobject obj)
 {
-    return MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->noopOperation());
+    MC_POOL_BEGIN;
+    jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->noopOperation());
+    MC_POOL_END;
+    return result;
 }
 
 JNIEXPORT void JNICALL Java_com_libmailcore_POPSession_finalizeNative
   (JNIEnv * env, jobject obj)
 {
+    MC_POOL_BEGIN;
     JavaOperationQueueCallback * callback = (JavaOperationQueueCallback *) MC_JAVA_NATIVE_INSTANCE->operationQueueCallback();
     MC_SAFE_RELEASE(callback);
     MC_JAVA_NATIVE_INSTANCE->setOperationQueueCallback(NULL);
@@ -85,11 +112,13 @@ JNIEXPORT void JNICALL Java_com_libmailcore_POPSession_finalizeNative
     JavaConnectionLogger * logger = (JavaConnectionLogger *) MC_JAVA_NATIVE_INSTANCE->connectionLogger();
     MC_SAFE_RELEASE(logger);
     MC_JAVA_NATIVE_INSTANCE->setConnectionLogger(NULL);
+    MC_POOL_END;
 }
 
 JNIEXPORT void JNICALL Java_com_libmailcore_POPSession_setupNativeOperationQueueListener
   (JNIEnv * env, jobject obj)
 {
+    MC_POOL_BEGIN;
     JavaOperationQueueCallback * callback = (JavaOperationQueueCallback *) MC_JAVA_NATIVE_INSTANCE->operationQueueCallback();
     MC_SAFE_RELEASE(callback);
     MC_JAVA_NATIVE_INSTANCE->setOperationQueueCallback(NULL);
@@ -99,11 +128,13 @@ JNIEXPORT void JNICALL Java_com_libmailcore_POPSession_setupNativeOperationQueue
         callback = new JavaOperationQueueCallback(env, javaListener);
         MC_JAVA_NATIVE_INSTANCE->setOperationQueueCallback(callback);
     }
+    MC_POOL_END;
 }
 
 JNIEXPORT void JNICALL Java_com_libmailcore_POPSession_setupNativeConnectionLogger
   (JNIEnv * env, jobject obj)
 {
+    MC_POOL_BEGIN;
     JavaConnectionLogger * logger = (JavaConnectionLogger *) MC_JAVA_NATIVE_INSTANCE->connectionLogger();
     MC_SAFE_RELEASE(logger);
     MC_JAVA_NATIVE_INSTANCE->setConnectionLogger(NULL);
@@ -113,6 +144,7 @@ JNIEXPORT void JNICALL Java_com_libmailcore_POPSession_setupNativeConnectionLogg
         logger = new JavaConnectionLogger(env, javaLogger);
         MC_JAVA_NATIVE_INSTANCE->setConnectionLogger(logger);
     }
+    MC_POOL_END;
 }
 
 MC_JAVA_BRIDGE
