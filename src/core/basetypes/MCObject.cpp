@@ -310,13 +310,17 @@ void Object::performMethodOnMainThread(Method method, void * context, bool waitU
 void Object::performMethodOnDispatchQueue(Method method, void * context, void * targetDispatchQueue, bool waitUntilDone)
 {
     if (waitUntilDone) {
+        dispatch_retain((dispatch_queue_t) targetDispatchQueue);
         dispatch_sync((dispatch_queue_t) targetDispatchQueue, ^{
             (this->*method)(context);
+            dispatch_release((dispatch_queue_t) targetDispatchQueue);
         });
     }
     else {
+        dispatch_retain((dispatch_queue_t) targetDispatchQueue);
         dispatch_async((dispatch_queue_t) targetDispatchQueue, ^{
             (this->*method)(context);
+            dispatch_release((dispatch_queue_t) targetDispatchQueue);
         });
     }
 }
