@@ -11,6 +11,22 @@ extern "C" {
 #define com_libmailcore_IMAPFetchMessagesOperation_serialVersionUID 1LL
 /*
  * Class:     com_libmailcore_IMAPFetchMessagesOperation
+ * Method:    setExtraHeaders
+ * Signature: (Ljava/util/List;)V
+ */
+JNIEXPORT void JNICALL Java_com_libmailcore_IMAPFetchMessagesOperation_setExtraHeaders
+  (JNIEnv *, jobject, jobject);
+
+/*
+ * Class:     com_libmailcore_IMAPFetchMessagesOperation
+ * Method:    extraHeaders
+ * Signature: ()Ljava/util/List;
+ */
+JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPFetchMessagesOperation_extraHeaders
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_libmailcore_IMAPFetchMessagesOperation
  * Method:    messages
  * Signature: ()Ljava/util/List;
  */

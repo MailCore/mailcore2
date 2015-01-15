@@ -33,24 +33,6 @@ JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPMessage_partForPartID
     return result;
 }
 
-JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPMessage_partForContentID
-  (JNIEnv * env, jobject obj, jstring contentID)
-{
-    MC_POOL_BEGIN;
-    jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->partForContentID(MC_FROM_JAVA(String, contentID)));
-    MC_POOL_END;
-    return result;
-}
-
-JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPMessage_partForUniqueID
-  (JNIEnv * env, jobject obj, jstring uniqueID)
-{
-    MC_POOL_BEGIN;
-    jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->partForUniqueID(MC_FROM_JAVA(String, uniqueID)));
-    MC_POOL_END;
-    return result;
-}
-
 JNIEXPORT jstring JNICALL Java_com_libmailcore_IMAPMessage_htmlRendering
   (JNIEnv * env, jobject obj, jstring folder, jobject dataCallback, jobject htmlTemplateCallback)
 {

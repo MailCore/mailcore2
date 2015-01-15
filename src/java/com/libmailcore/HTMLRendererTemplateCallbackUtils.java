@@ -2,6 +2,7 @@ package com.libmailcore;
 
 import java.util.Map;
 
+/** Default implementations for HTMLRendererTemplateCallback */
 public class HTMLRendererTemplateCallbackUtils {
     native static boolean canPreviewPart(AbstractPart part);
     native static boolean shouldShowPart(AbstractPart part);

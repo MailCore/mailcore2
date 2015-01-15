@@ -1,6 +1,8 @@
 package com.libmailcore;
 
+/** MIME encoding. */
 public class Encoding {
+    /** 7-bit encoding. */
     final public static int Encoding7Bit = 0;
     final public static int Encoding8Bit = 1;
     final public static int EncodingBinary = 2;

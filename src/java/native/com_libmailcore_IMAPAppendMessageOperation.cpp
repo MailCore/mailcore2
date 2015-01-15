@@ -3,6 +3,7 @@
 #include "MCBaseTypes.h"
 #include "JavaHandle.h"
 #include "TypesUtils.h"
+#include "JavaIMAPOperationCallback.h"
 #include "MCIMAPAppendMessageOperation.h"
 
 using namespace mailcore;
@@ -34,6 +35,32 @@ JNIEXPORT jlong JNICALL Java_com_libmailcore_IMAPAppendMessageOperation_createdU
     jlong result = MC_JAVA_BRIDGE_GET_SCALAR(jlong, createdUID);
     MC_POOL_END;
     return result;
+}
+
+JNIEXPORT void JNICALL Java_com_libmailcore_IMAPAppendMessageOperation_finalizeNative
+  (JNIEnv * env, jobject obj)
+{
+    MC_POOL_BEGIN;
+    JavaIMAPOperationCallback * callback = (JavaIMAPOperationCallback *) MC_JAVA_NATIVE_INSTANCE->imapCallback();
+    MC_SAFE_RELEASE(callback);
+    MC_JAVA_NATIVE_INSTANCE->setImapCallback(NULL);
+    MC_POOL_END;
+}
+
+JNIEXPORT void JNICALL Java_com_libmailcore_IMAPAppendMessageOperation_setupNativeOperationProgressListener
+  (JNIEnv * env, jobject obj)
+{
+    MC_POOL_BEGIN;
+    JavaIMAPOperationCallback * callback = (JavaIMAPOperationCallback *) MC_JAVA_NATIVE_INSTANCE->imapCallback();
+    MC_SAFE_RELEASE(callback);
+    MC_JAVA_NATIVE_INSTANCE->setImapCallback(NULL);
+
+    jobject javaListener = getObjectField(env, obj, "listener");
+    if (javaListener != NULL) {
+        callback = new JavaIMAPOperationCallback(env, javaListener);
+        MC_JAVA_NATIVE_INSTANCE->setImapCallback(callback);
+    }
+    MC_POOL_END;
 }
 
 MC_JAVA_BRIDGE

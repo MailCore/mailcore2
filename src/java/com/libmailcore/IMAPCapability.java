@@ -1,5 +1,6 @@
 package com.libmailcore;
 
+/** Capabilities of the IMAP server. */
 public class IMAPCapability {
     final public static int IMAPCapabilityACL = 0;
     final public static int IMAPCapabilityBinary = 1;
