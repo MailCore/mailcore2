@@ -1,5 +1,7 @@
 package com.libmailcore;
 
+/** MIME Part type.
+    @see AbstractPart#partType() */
 public class PartType {
     public final static int PartTypeSingle = 0;
     public final static int PartTypeMessage = 1;

@@ -1,6 +1,7 @@
 package com.libmailcore;
 
-/** MIME encoding. */
+/** MIME encoding.
+    See IMAPPart#encoding() */
 public class Encoding {
     /** 7-bit encoding. */
     final public static int Encoding7Bit = 0;

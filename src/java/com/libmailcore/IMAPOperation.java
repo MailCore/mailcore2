@@ -1,6 +1,10 @@
 package com.libmailcore;
 
 public class IMAPOperation extends Operation {
+    /**
+        Returns error once the operation finished running. It will return null if the operation
+        successfully ran.
+    */
     public MailException exception() {
         if (errorCode() == ErrorCode.ErrorNone) {
             return null;
@@ -10,6 +14,11 @@ public class IMAPOperation extends Operation {
 
     private native int errorCode();
     
+    /**
+        Calls the method succeeded() of the callback if the operation succeeded or failed()
+        if the operation failed.
+        @see OperationCallback
+    */
     protected void callCallback()
     {
         if (callback != null) {

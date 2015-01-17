@@ -1,6 +1,7 @@
 package com.libmailcore;
 
-/** Flags of a folder. */
+/** Flags of a folder.
+    @see IMAPFolder#flags() */
 public class IMAPFolderFlags {
     public final static int IMAPFolderFlagNone = 0;
     public final static int IMAPFolderFlagMarked      = 1 << 0;

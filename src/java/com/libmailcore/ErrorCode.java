@@ -1,6 +1,7 @@
 package com.libmailcore;
 
-/** Error codes. */
+/** Error codes.
+    @see MailException#errorCode() */
 public class ErrorCode {
     /** No error occurred.*/
     public final static int ErrorNone = 0; // 0

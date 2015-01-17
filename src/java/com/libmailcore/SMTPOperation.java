@@ -1,6 +1,10 @@
 package com.libmailcore;
 
 public class SMTPOperation extends Operation {
+    /**
+        Returns error once the operation finished running. It will return null if the operation
+        successfully ran.
+    */
     public MailException exception() {
         if (errorCode() == ErrorCode.ErrorNone) {
             return null;
