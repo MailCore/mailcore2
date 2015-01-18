@@ -14,6 +14,11 @@ public class SMTPOperation extends Operation {
 
     private native int errorCode();
     
+    /**
+        Calls the method succeeded() of the callback if the operation succeeded or failed()
+        if the operation failed.
+        @see OperationCallback
+    */
     protected void callCallback()
     {
         if (callback != null) {

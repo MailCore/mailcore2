@@ -1,5 +1,6 @@
 package com.libmailcore;
 
+/** IMAP Operation. */
 public class IMAPOperation extends Operation {
     /**
         Returns error once the operation finished running. It will return null if the operation
