@@ -17,6 +17,10 @@ MailCore 2 provides a simple and asynchronous Objective-C API to work with the e
 
 Read [instructions for iOS/OSX](https://github.com/MailCore/mailcore2/blob/master/build-mac/README.md).
 
+### Build for Android ###
+
+Read [instructions for Android](https://github.com/MailCore/mailcore2/blob/master/build-android/README.md).
+
 ### Build for Windows ###
 
 Read [instructions for Windows](https://github.com/MailCore/mailcore2/blob/master/build-windows/README.md).
@@ -27,7 +31,7 @@ Read [instructions for Linux](https://github.com/MailCore/mailcore2/blob/master/
 
 ## Basic IMAP Usage ##
 
-Using MailCore 2 is just a little more complex conceptually than the original MailCore.  All fetch requests in MailCore 2 are made asynchronously through a queue.  What does this mean?  Well, let's  take a look at a simple example:
+Using MailCore 2 is just a little more complex conceptually than the original MailCore.  All fetch requests in MailCore 2 are made asynchronously through a queue.  What does this mean?  Well, let's take a look at a simple example:
 
 ```objc
     MCOIMAPSession *session = [[MCOIMAPSession alloc] init];
