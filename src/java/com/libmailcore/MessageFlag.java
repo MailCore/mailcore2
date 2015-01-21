@@ -1,7 +1,7 @@
 package com.libmailcore;
 
 /** Flags of a message.
-    @see IMAPMessage#flags() */
+    @see com.libmailcore.IMAPMessage#flags() */
 public class MessageFlag {
     final public static int MessageFlagNone          = 0;
     final public static int MessageFlagSeen          = 1 << 0;

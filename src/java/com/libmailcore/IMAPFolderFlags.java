@@ -1,7 +1,7 @@
 package com.libmailcore;
 
 /** Flags of a folder.
-    @see IMAPFolder#flags() */
+    @see com.libmailcore.IMAPFolder#flags() */
 public class IMAPFolderFlags {
     public final static int IMAPFolderFlagNone = 0;
     public final static int IMAPFolderFlagMarked      = 1 << 0;
@@ -30,17 +30,17 @@ public class IMAPFolderFlags {
     public final static int IMAPFolderFlagArchive     = 1 << 12;
     /**
         Same as IMAPFolderFlagAllMail.
-        @see IMAPFolderFlagAllMail
+        @see com.libmailcore.IMAPFolderFlags#IMAPFolderFlagAllMail
     */
     public final static int IMAPFolderFlagAll = IMAPFolderFlagAllMail;
     /**
         Same as IMAPFolderFlagSpam.
-        @see IMAPFolderFlagSpam
+        @see com.libmailcore.IMAPFolderFlags#IMAPFolderFlagSpam
     */
     public final static int IMAPFolderFlagJunk = IMAPFolderFlagSpam;
     /**
         Same as IMAPFolderFlagStarred.
-        @see IMAPFolderFlagStarred
+        @see com.libmailcore.IMAPFolderFlags#IMAPFolderFlagStarred
     */
     public final static int IMAPFolderFlagFlagged = IMAPFolderFlagStarred;
     /** Mask for the types of folder. */

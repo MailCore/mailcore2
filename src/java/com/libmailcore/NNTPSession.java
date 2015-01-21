@@ -34,12 +34,12 @@ public class NNTPSession extends NativeObject {
 
     /**
         Set connection type (clear-text, SSL or STARTTLS).
-        @see ConnectionType
+        @see com.libmailcore.ConnectionType
     */
     public native void setConnectionType(int connectionType);
     /**
         Returns connection type (clear-text, SSL or STARTTLS).
-        @see ConnectionType
+        @see com.libmailcore.ConnectionType
     */
     public native int connectionType();
     

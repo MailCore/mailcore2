@@ -4,16 +4,19 @@ import java.util.List;
 
 /** Abstract message. */
 public class AbstractMessage extends NativeObject {
-    /** Header of the message. */
+    /** Returns the header of the message. */
     public native MessageHeader header();
     /** Sets the header of the message. */
     public native void setHeader(MessageHeader header);
     
-    /** Returns the MIME part with the given Content-ID. */
+    /**
+        Returns the MIME part with the given Content-ID.
+        @see com.libmailcore.AbstractPart#contentID()
+    */
     public native AbstractPart partForContentID(String contentID);
     /**
         Returns the MIME part with the given uniqueID.
-        @see AbtractPart#uniqueID()
+        @see com.libmailcore.AbstractPart#uniqueID()
     */
     public native AbstractPart partForUniqueID(String uniqueID);
     /** Returns the list of attachments, not part of the content of the message. */

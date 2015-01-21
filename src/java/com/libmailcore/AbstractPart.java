@@ -6,12 +6,12 @@ import java.util.AbstractList;
 public class AbstractPart extends NativeObject {
     /**
         Returns the type of the part.
-        @see PartType.
+        @see com.libmailcore.PartType
     */
     public native int partType();
     /**
         Sets the type of the part.
-        @see PartType.
+        @see com.libmailcore.PartType
     */
     public native void setPartType(int partType);
     
@@ -53,11 +53,14 @@ public class AbstractPart extends NativeObject {
     /** Sets the hint about whether the attachment should be shown inline. */
     public native void setInlineAttachment(boolean inlineAttachment);
     
-    /** Returns the MIME part with the given Content-ID. */
+    /**
+        Returns the MIME part with the given Content-ID.
+        @see com.libmailcore.AbstractPart#contentID()
+    */
     public native AbstractPart partForContentID(String contentID);
     /**
         Returns the MIME part with the given uniqueID.
-        @see AbtractPart#uniqueID()
+        @see com.libmailcore.AbstractPart#uniqueID()
     */
     public native AbstractPart partForUniqueID(String uniqueID);
     

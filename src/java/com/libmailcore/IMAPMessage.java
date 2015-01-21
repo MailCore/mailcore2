@@ -21,23 +21,23 @@ public class IMAPMessage extends AbstractMessage {
     
     /**
         Sets flags of the message.
-        @see MessageFlag
+        @see com.libmailcore.MessageFlag
     */
     public native void setFlags(int flags);
     /**
         Flags of the message.
-        @see MessageFlag
+        @see com.libmailcore.MessageFlag
     */
     public native int flags();
     
     /**
         Set original message flags.
-        @see MessageFlag
+        @see com.libmailcore.MessageFlag
     */
     public native void setOriginalFlags(int flags);
     /**
         Original message flags.
-        @see MessageFlag
+        @see com.libmailcore.MessageFlag
     */
     public native int originalFlags();
     
@@ -77,9 +77,9 @@ public class IMAPMessage extends AbstractMessage {
     
     /**
         Returns the MIME part with the given partID.
-        @see IMAPPart#partID()
-        @see IMAPMessagePart#partID()
-        @see IMAPMultipart#partID()
+        @see com.libmailcore.IMAPPart#partID()
+        @see com.libmailcore.IMAPMessagePart#partID()
+        @see com.libmailcore.IMAPMultipart#partID()
     */
     public native AbstractPart partForPartID(String partID);
     

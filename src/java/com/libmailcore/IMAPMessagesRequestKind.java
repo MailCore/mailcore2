@@ -2,9 +2,9 @@ package com.libmailcore;
 
 /**
     Items to request when fetching the list of messages.
-    @see IMAPSession#fetchMessagesByUIDOperation(String folder, int requestKind, IndexSet indexes)
-    @see IMAPSession#fetchMessagesByNumberOperation(String folder, int requestKind, IndexSet indexes)
-    @see IMAPSession#syncMessagesByUIDOperation(String folder, int requestKind, IndexSet indexes, long modSeq)
+    @see com.libmailcore.IMAPSession#fetchMessagesByUIDOperation(String folder, int requestKind, IndexSet indexes)
+    @see com.libmailcore.IMAPSession#fetchMessagesByNumberOperation(String folder, int requestKind, IndexSet indexes)
+    @see com.libmailcore.IMAPSession#syncMessagesByUIDOperation(String folder, int requestKind, IndexSet indexes, long modSeq)
 */
 public class IMAPMessagesRequestKind {
     /** Requests UID of the messages. */
@@ -29,7 +29,7 @@ public class IMAPMessagesRequestKind {
     public final static int IMAPMessagesRequestKindGmailThreadID = 1 << 8;
     /**
         Requests extra headers.
-        @see IMAPFetchMessagesOperation#setExtraHeaders(List<String> extraHeaders)
+        @see com.libmailcore.IMAPFetchMessagesOperation#setExtraHeaders
     */
     public final static int IMAPMessagesRequestKindExtraHeaders = 1 << 9;
     /** Requests the size of the messages. */

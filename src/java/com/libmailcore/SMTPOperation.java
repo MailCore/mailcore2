@@ -17,7 +17,7 @@ public class SMTPOperation extends Operation {
     /**
         Calls the method succeeded() of the callback if the operation succeeded or failed()
         if the operation failed.
-        @see OperationCallback
+        @see com.libmailcore.OperationCallback
     */
     protected void callCallback()
     {

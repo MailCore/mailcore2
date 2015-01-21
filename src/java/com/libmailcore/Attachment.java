@@ -23,7 +23,7 @@ public class Attachment extends AbstractPart {
     
     /**
         Returns the content of the attachment decoded using the charset encoding.
-        @see AbstractPart#charset()
+        @see com.libmailcore.AbstractPart#charset()
     */
     public native String decodedString();
 }

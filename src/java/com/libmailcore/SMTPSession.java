@@ -41,23 +41,23 @@ public class SMTPSession extends NativeObject {
     
     /**
         Sets the authentication type.
-        @see AuthType
+        @see com.libmailcore.AuthType
     */
     public native void setAuthType(int authType);
     /**
         Returns authentication type.
-        @see Authtype
+        @see com.libmailcore.AuthType
     */
     public native int authType();
     
     /**
         Set connection type (clear-text, SSL or STARTTLS).
-        @see ConnectionType
+        @see com.libmailcore.ConnectionType
     */
     public native void setConnectionType(int connectionType);
     /**
         Returns connection type (clear-text, SSL or STARTTLS).
-        @see ConnectionType
+        @see com.libmailcore.ConnectionType
     */
     public native int connectionType();
     

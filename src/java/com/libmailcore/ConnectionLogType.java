@@ -1,7 +1,7 @@
 package com.libmailcore;
 
 /** Logs type for the connection logger.
-    @see ConnectionLogger#log(long connectionID, int type, byte[] data) */
+    @see com.libmailcore.ConnectionLogger#log(long connectionID, int type, byte[] data) */
 public class ConnectionLogType {
     /** Received data. */
     final public static int ConnectionLogTypeReceived = 0;

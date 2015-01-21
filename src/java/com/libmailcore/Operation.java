@@ -6,8 +6,8 @@ public class Operation extends NativeObject {
     /** Returns whether the operation has been cancelled. */
     public native boolean isCancelled();
     
-    /** Starts the operation. Calls the aCallback.finished() when the operation is finished.
-        @see OperationCallback.finished() */
+    /** Starts the operation. Calls the aCallback.succeeded() when the operation is finished.
+        @see com.libmailcore.OperationCallback#succeeded() */
     public void start(OperationCallback aCallback)
     {
         callback = aCallback;

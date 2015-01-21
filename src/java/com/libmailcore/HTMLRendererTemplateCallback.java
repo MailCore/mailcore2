@@ -37,7 +37,7 @@ public interface HTMLRendererTemplateCallback {
     String templateForAttachmentSeparator();
     /**
         Clean a HTML string.
-        The default implementation fixes broken tags, add missing <html>, <body> tags.
+        The default implementation fixes broken tags, add missing &lt;html&gt;, &lt;body&gt; tags.
     */
     String cleanHTML(String html);
     /**

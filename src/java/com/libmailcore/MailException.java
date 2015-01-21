@@ -3,7 +3,7 @@ package com.libmailcore;
 public class MailException extends Exception {
     /**
         Error code.
-        @see ErrorCode
+        @see com.libmailcore.ErrorCode
     */
     public int errorCode()
     {

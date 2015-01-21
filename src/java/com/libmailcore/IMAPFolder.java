@@ -19,12 +19,12 @@ public class IMAPFolder extends NativeObject {
     
     /**
         Sets the flags of the folder.
-        @see IMAPFolderFlags
+        @see com.libmailcore.IMAPFolderFlags
     */
     public native void setFlags(int flags);
     /**
         Returns the flags of the folder.
-        @see IMAPFolderFlags
+        @see com.libmailcore.IMAPFolderFlags
     */
     public native int flags();
     

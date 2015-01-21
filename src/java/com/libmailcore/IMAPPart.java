@@ -17,12 +17,12 @@ public class IMAPPart extends AbstractPart {
     
     /**
         Sets encoding used (base64, quoted-printable, etc).
-        @see Encoding
+        @see com.libmailcore.Encoding
     */
     public native void setEncoding(int encoding);
     /**
         Returns encoding used (base64, quoted-printable, etc.)
-        @see Encoding
+        @see com.libmailcore.Encoding
     */
     public native int encoding();
 
