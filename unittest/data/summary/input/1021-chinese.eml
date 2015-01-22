@@ -1,0 +1,64 @@
+HMM_SOURCE_IP:10.62.8.17:58409.173036363
+HMM_ATTACHE_NUM:0000
+HMM_SOURCE_TYPE:SMTP
+Received: from smtpbg328.qq.com (as7.inner-189.cn [10.62.8.17])
+    by 189.cn (HERMES) with ESMTP id 9DAD6260004
+    for <wujingyou@189.cn>; Wed, 24 Dec 2014 04:09:34 +0800 (CST)
+Received: from smtpbg328.qq.com ([14.17.43.160])
+    by 189CN(MEDUSA 10.62.8.17) with ESMTP id 1419365374.28408 for wujingyou@189.cn
+    ;
+    Wed Dec 24 04:09:36 2014
+0/X-Total-Score: -120:
+2/X-Total-Score: 0:
+3/X-Total-Score: 0:
+X-FILTER-SCORE: to=<5254545257515a595451536152595a4f848f>, score=<1419365376ttttpttftt9tpf9Oa7wdLtZZZFZZ6ZZjZF6jmU1+KNZZ>  
+X-REAL-FROM:wujyou@qq.com
+X-Receive-IP:14.17.43.160 wujyou@qq.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201307;
+    t=1419365374; bh=+L9WKWb/TZ/WN/hsH9zWebN7pLH2WpJWpe8JNnjkHzU=;
+    h=X-QQ-FEAT:X-QQ-SSF:X-QQ-WAPMAIL:X-QQ-BUSINESS-ORIGIN:
+     X-Originating-IP:X-QQ-STYLE:X-QQ-mid:From:To:Subject:Mime-Version:Content-Type:Content-Transfer-Encoding:Date:
+     X-Priority:Message-ID:X-QQ-MIME:X-Mailer:X-QQ-Mailer:
+     X-QQ-SENDSIZE;
+    b=TOFY9TbuFdUSu607LkA8z4siu7aRWfyPRfKR4Zdwjq2VDklCS4pOnYd3K7gUnU+Rw
+     rpJvAGZllbkcuDJM/2YB7SPb3yYH8Z55KnTfUPsm8aQxrXABv8OnOJmoU9zhFt2o9p
+     kfxuV+sdaT4MQJI/WXjN24W7Aq+zTTx3SBmcnONo=
+X-QQ-FEAT: zaIfg0hwV2r5ipAJ//zZfBFZvJON7nl/P/xc0g9oL/Y=
+X-QQ-SSF: 00010000000000F0
+X-QQ-WAPMAIL: 1
+X-QQ-BUSINESS-ORIGIN: 2
+X-Originating-IP: 120.237.120.44
+X-QQ-STYLE: 
+X-QQ-mid: wapmail39t1419365373t592355
+From: "=?gb18030?B?z/LX8w==?=" <wujyou@qq.com>
+To: "=?gb18030?B?MTg509M=?=" <wujingyou@189.cn>
+Subject: =?gb18030?B?uf65/g==?=
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+    boundary="----=_NextPart_5499CBFD_09046CF8_7A47AD55"
+Content-Transfer-Encoding: 8Bit
+Date: Wed, 24 Dec 2014 04:09:33 +0800
+X-Priority: 3
+Message-ID: <tencent_768EB412354CD73039FB412B@qq.com>
+X-QQ-MIME: TCMime 1.0 by Tencent
+X-Mailer: QQMail 2.x
+X-QQ-Mailer: QQMail 2.x
+X-QQ-SENDSIZE: 520
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_5499CBFD_09046CF8_7A47AD55
+Content-Type: text/plain;
+    charset="gb18030"
+Content-Transfer-Encoding: base64
+
+uf65/g==
+
+------=_NextPart_5499CBFD_09046CF8_7A47AD55
+Content-Type: text/html;
+    charset="gb18030"
+Content-Transfer-Encoding: base64
+
+uf65/g==
+
+------=_NextPart_5499CBFD_09046CF8_7A47AD55--

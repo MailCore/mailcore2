@@ -168,6 +168,50 @@
 		BD63713B177DFF080094121B /* MCLibetpan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BD637139177DFF080094121B /* MCLibetpan.cpp */; };
 		BDCD7C5B1A5B1C2C0001DCC3 /* MCErrorMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C591A5B1C2C0001DCC3 /* MCErrorMessage.cpp */; };
 		BDCD7C5C1A5B1C2C0001DCC3 /* MCErrorMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C591A5B1C2C0001DCC3 /* MCErrorMessage.cpp */; };
+		BDCD7CC31A70771B0001DCC3 /* csdetect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C6A1A70771B0001DCC3 /* csdetect.cpp */; };
+		BDCD7CC41A70771B0001DCC3 /* csdetect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C6A1A70771B0001DCC3 /* csdetect.cpp */; };
+		BDCD7CC51A70771B0001DCC3 /* csmatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C6B1A70771B0001DCC3 /* csmatch.cpp */; };
+		BDCD7CC61A70771B0001DCC3 /* csmatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C6B1A70771B0001DCC3 /* csmatch.cpp */; };
+		BDCD7CC71A70771B0001DCC3 /* csr2022.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C6C1A70771B0001DCC3 /* csr2022.cpp */; };
+		BDCD7CC81A70771B0001DCC3 /* csr2022.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C6C1A70771B0001DCC3 /* csr2022.cpp */; };
+		BDCD7CC91A70771B0001DCC3 /* csrecog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C6D1A70771B0001DCC3 /* csrecog.cpp */; };
+		BDCD7CCA1A70771B0001DCC3 /* csrecog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C6D1A70771B0001DCC3 /* csrecog.cpp */; };
+		BDCD7CCB1A70771B0001DCC3 /* csrmbcs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C6E1A70771B0001DCC3 /* csrmbcs.cpp */; };
+		BDCD7CCC1A70771B0001DCC3 /* csrmbcs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C6E1A70771B0001DCC3 /* csrmbcs.cpp */; };
+		BDCD7CCD1A70771B0001DCC3 /* csrsbcs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C6F1A70771B0001DCC3 /* csrsbcs.cpp */; };
+		BDCD7CCE1A70771B0001DCC3 /* csrsbcs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C6F1A70771B0001DCC3 /* csrsbcs.cpp */; };
+		BDCD7CCF1A70771B0001DCC3 /* csrucode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C701A70771B0001DCC3 /* csrucode.cpp */; };
+		BDCD7CD01A70771B0001DCC3 /* csrucode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C701A70771B0001DCC3 /* csrucode.cpp */; };
+		BDCD7CD11A70771B0001DCC3 /* csrutf8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C711A70771B0001DCC3 /* csrutf8.cpp */; };
+		BDCD7CD21A70771B0001DCC3 /* csrutf8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C711A70771B0001DCC3 /* csrutf8.cpp */; };
+		BDCD7CD31A70771B0001DCC3 /* cstring.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C721A70771B0001DCC3 /* cstring.c */; };
+		BDCD7CD41A70771B0001DCC3 /* cstring.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C721A70771B0001DCC3 /* cstring.c */; };
+		BDCD7CD51A70771B0001DCC3 /* inputext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CB91A70771B0001DCC3 /* inputext.cpp */; };
+		BDCD7CD61A70771B0001DCC3 /* inputext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CB91A70771B0001DCC3 /* inputext.cpp */; };
+		BDCD7CD71A70771B0001DCC3 /* uarrsort.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CBA1A70771B0001DCC3 /* uarrsort.c */; };
+		BDCD7CD81A70771B0001DCC3 /* uarrsort.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CBA1A70771B0001DCC3 /* uarrsort.c */; };
+		BDCD7CD91A70771B0001DCC3 /* ucln_cmn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CBB1A70771B0001DCC3 /* ucln_cmn.cpp */; };
+		BDCD7CDA1A70771B0001DCC3 /* ucln_cmn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CBB1A70771B0001DCC3 /* ucln_cmn.cpp */; };
+		BDCD7CDB1A70771B0001DCC3 /* ucln_in.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CBC1A70771B0001DCC3 /* ucln_in.cpp */; };
+		BDCD7CDC1A70771B0001DCC3 /* ucln_in.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CBC1A70771B0001DCC3 /* ucln_in.cpp */; };
+		BDCD7CDD1A70771B0001DCC3 /* udataswp.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CBD1A70771B0001DCC3 /* udataswp.c */; };
+		BDCD7CDE1A70771B0001DCC3 /* udataswp.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CBD1A70771B0001DCC3 /* udataswp.c */; };
+		BDCD7CDF1A70771B0001DCC3 /* uenum.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CBE1A70771B0001DCC3 /* uenum.c */; };
+		BDCD7CE01A70771B0001DCC3 /* uenum.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CBE1A70771B0001DCC3 /* uenum.c */; };
+		BDCD7CE11A70771B0001DCC3 /* uinvchar.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CBF1A70771B0001DCC3 /* uinvchar.c */; };
+		BDCD7CE21A70771B0001DCC3 /* uinvchar.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CBF1A70771B0001DCC3 /* uinvchar.c */; };
+		BDCD7CE31A70771B0001DCC3 /* uobject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CC01A70771B0001DCC3 /* uobject.cpp */; };
+		BDCD7CE41A70771B0001DCC3 /* uobject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CC01A70771B0001DCC3 /* uobject.cpp */; };
+		BDCD7CE51A70771B0001DCC3 /* ustring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CC11A70771B0001DCC3 /* ustring.cpp */; };
+		BDCD7CE61A70771B0001DCC3 /* ustring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CC11A70771B0001DCC3 /* ustring.cpp */; };
+		BDCD7CE71A70771B0001DCC3 /* utrace.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CC21A70771B0001DCC3 /* utrace.c */; };
+		BDCD7CE81A70771B0001DCC3 /* utrace.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CC21A70771B0001DCC3 /* utrace.c */; };
+		BDCD7CEA1A7077680001DCC3 /* ucsdet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CE91A7077680001DCC3 /* ucsdet.cpp */; };
+		BDCD7CEB1A7077680001DCC3 /* ucsdet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CE91A7077680001DCC3 /* ucsdet.cpp */; };
+		BDCD7CEE1A7079300001DCC3 /* cmemory.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CEC1A7079300001DCC3 /* cmemory.c */; };
+		BDCD7CEF1A7079300001DCC3 /* cmemory.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CEC1A7079300001DCC3 /* cmemory.c */; };
+		BDCD7CF01A7079300001DCC3 /* umutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CED1A7079300001DCC3 /* umutex.cpp */; };
+		BDCD7CF11A7079300001DCC3 /* umutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CED1A7079300001DCC3 /* umutex.cpp */; };
 		C07AD5D7FD82F8ACAB576231 /* NSError+MCO.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C07AD44B013BB42A240B4F04 /* NSError+MCO.h */; };
 		C07AD99B2E2054C684DB8FF6 /* NSError+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = C07ADFE43E22B38EFF23ADB5 /* NSError+MCO.mm */; };
 		C07ADC28B83E7959BF114D46 /* MCOIMAPSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = C07AD057D3C8FBDC7AC95733 /* MCOIMAPSession.mm */; };
@@ -1493,6 +1537,96 @@
 		BD63713A177DFF080094121B /* MCLibetpan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCLibetpan.h; sourceTree = "<group>"; };
 		BDCD7C591A5B1C2C0001DCC3 /* MCErrorMessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCErrorMessage.cpp; sourceTree = "<group>"; };
 		BDCD7C5A1A5B1C2C0001DCC3 /* MCErrorMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCErrorMessage.h; sourceTree = "<group>"; };
+		BDCD7C6A1A70771B0001DCC3 /* csdetect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = csdetect.cpp; sourceTree = "<group>"; };
+		BDCD7C6B1A70771B0001DCC3 /* csmatch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = csmatch.cpp; sourceTree = "<group>"; };
+		BDCD7C6C1A70771B0001DCC3 /* csr2022.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = csr2022.cpp; sourceTree = "<group>"; };
+		BDCD7C6D1A70771B0001DCC3 /* csrecog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = csrecog.cpp; sourceTree = "<group>"; };
+		BDCD7C6E1A70771B0001DCC3 /* csrmbcs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = csrmbcs.cpp; sourceTree = "<group>"; };
+		BDCD7C6F1A70771B0001DCC3 /* csrsbcs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = csrsbcs.cpp; sourceTree = "<group>"; };
+		BDCD7C701A70771B0001DCC3 /* csrucode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = csrucode.cpp; sourceTree = "<group>"; };
+		BDCD7C711A70771B0001DCC3 /* csrutf8.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = csrutf8.cpp; sourceTree = "<group>"; };
+		BDCD7C721A70771B0001DCC3 /* cstring.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cstring.c; sourceTree = "<group>"; };
+		BDCD7C741A70771B0001DCC3 /* charstr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = charstr.h; sourceTree = "<group>"; };
+		BDCD7C751A70771B0001DCC3 /* cmemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cmemory.h; sourceTree = "<group>"; };
+		BDCD7C761A70771B0001DCC3 /* csdetect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = csdetect.h; sourceTree = "<group>"; };
+		BDCD7C771A70771B0001DCC3 /* csmatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = csmatch.h; sourceTree = "<group>"; };
+		BDCD7C781A70771B0001DCC3 /* csr2022.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = csr2022.h; sourceTree = "<group>"; };
+		BDCD7C791A70771B0001DCC3 /* csrecog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = csrecog.h; sourceTree = "<group>"; };
+		BDCD7C7A1A70771B0001DCC3 /* csrmbcs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = csrmbcs.h; sourceTree = "<group>"; };
+		BDCD7C7B1A70771B0001DCC3 /* csrsbcs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = csrsbcs.h; sourceTree = "<group>"; };
+		BDCD7C7C1A70771B0001DCC3 /* csrucode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = csrucode.h; sourceTree = "<group>"; };
+		BDCD7C7D1A70771B0001DCC3 /* csrutf8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = csrutf8.h; sourceTree = "<group>"; };
+		BDCD7C7E1A70771B0001DCC3 /* cstring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cstring.h; sourceTree = "<group>"; };
+		BDCD7C7F1A70771B0001DCC3 /* cwchar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cwchar.h; sourceTree = "<group>"; };
+		BDCD7C801A70771B0001DCC3 /* inputext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inputext.h; sourceTree = "<group>"; };
+		BDCD7C811A70771B0001DCC3 /* locmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = locmap.h; sourceTree = "<group>"; };
+		BDCD7C821A70771B0001DCC3 /* mutex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mutex.h; sourceTree = "<group>"; };
+		BDCD7C831A70771B0001DCC3 /* putilimp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = putilimp.h; sourceTree = "<group>"; };
+		BDCD7C841A70771B0001DCC3 /* uarrsort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uarrsort.h; sourceTree = "<group>"; };
+		BDCD7C851A70771B0001DCC3 /* uassert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uassert.h; sourceTree = "<group>"; };
+		BDCD7C861A70771B0001DCC3 /* ucase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ucase.h; sourceTree = "<group>"; };
+		BDCD7C871A70771B0001DCC3 /* ucln.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ucln.h; sourceTree = "<group>"; };
+		BDCD7C881A70771B0001DCC3 /* ucln_cmn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ucln_cmn.h; sourceTree = "<group>"; };
+		BDCD7C891A70771B0001DCC3 /* ucln_imp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ucln_imp.h; sourceTree = "<group>"; };
+		BDCD7C8A1A70771B0001DCC3 /* ucln_in.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ucln_in.h; sourceTree = "<group>"; };
+		BDCD7C8B1A70771B0001DCC3 /* ucmndata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ucmndata.h; sourceTree = "<group>"; };
+		BDCD7C8C1A70771B0001DCC3 /* udataswp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = udataswp.h; sourceTree = "<group>"; };
+		BDCD7C8D1A70771B0001DCC3 /* uelement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uelement.h; sourceTree = "<group>"; };
+		BDCD7C8E1A70771B0001DCC3 /* uenumimp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uenumimp.h; sourceTree = "<group>"; };
+		BDCD7C8F1A70771B0001DCC3 /* uinvchar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uinvchar.h; sourceTree = "<group>"; };
+		BDCD7C901A70771B0001DCC3 /* umapfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = umapfile.h; sourceTree = "<group>"; };
+		BDCD7C911A70771B0001DCC3 /* umutex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = umutex.h; sourceTree = "<group>"; };
+		BDCD7C931A70771B0001DCC3 /* appendable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = appendable.h; sourceTree = "<group>"; };
+		BDCD7C941A70771B0001DCC3 /* bytestream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bytestream.h; sourceTree = "<group>"; };
+		BDCD7C951A70771B0001DCC3 /* localpointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = localpointer.h; sourceTree = "<group>"; };
+		BDCD7C961A70771B0001DCC3 /* platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = platform.h; sourceTree = "<group>"; };
+		BDCD7C971A70771B0001DCC3 /* ptypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ptypes.h; sourceTree = "<group>"; };
+		BDCD7C981A70771B0001DCC3 /* putil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = putil.h; sourceTree = "<group>"; };
+		BDCD7C991A70771B0001DCC3 /* rep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rep.h; sourceTree = "<group>"; };
+		BDCD7C9A1A70771B0001DCC3 /* std_string.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = std_string.h; sourceTree = "<group>"; };
+		BDCD7C9B1A70771B0001DCC3 /* strenum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = strenum.h; sourceTree = "<group>"; };
+		BDCD7C9C1A70771B0001DCC3 /* stringpiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stringpiece.h; sourceTree = "<group>"; };
+		BDCD7C9D1A70771B0001DCC3 /* ucasemap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ucasemap.h; sourceTree = "<group>"; };
+		BDCD7C9E1A70771B0001DCC3 /* uchar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uchar.h; sourceTree = "<group>"; };
+		BDCD7C9F1A70771B0001DCC3 /* uclean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uclean.h; sourceTree = "<group>"; };
+		BDCD7CA01A70771B0001DCC3 /* ucnv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ucnv.h; sourceTree = "<group>"; };
+		BDCD7CA11A70771B0001DCC3 /* ucnv_err.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ucnv_err.h; sourceTree = "<group>"; };
+		BDCD7CA21A70771B0001DCC3 /* uconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uconfig.h; sourceTree = "<group>"; };
+		BDCD7CA31A70771B0001DCC3 /* ucsdet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ucsdet.h; sourceTree = "<group>"; };
+		BDCD7CA41A70771B0001DCC3 /* udata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = udata.h; sourceTree = "<group>"; };
+		BDCD7CA51A70771B0001DCC3 /* uenum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uenum.h; sourceTree = "<group>"; };
+		BDCD7CA61A70771B0001DCC3 /* uiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uiter.h; sourceTree = "<group>"; };
+		BDCD7CA71A70771B0001DCC3 /* umachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = umachine.h; sourceTree = "<group>"; };
+		BDCD7CA81A70771B0001DCC3 /* unistr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unistr.h; sourceTree = "<group>"; };
+		BDCD7CA91A70771B0001DCC3 /* uobject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uobject.h; sourceTree = "<group>"; };
+		BDCD7CAA1A70771B0001DCC3 /* urename.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = urename.h; sourceTree = "<group>"; };
+		BDCD7CAB1A70771B0001DCC3 /* uset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uset.h; sourceTree = "<group>"; };
+		BDCD7CAC1A70771B0001DCC3 /* ustring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ustring.h; sourceTree = "<group>"; };
+		BDCD7CAD1A70771B0001DCC3 /* utf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utf.h; sourceTree = "<group>"; };
+		BDCD7CAE1A70771B0001DCC3 /* utf16.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utf16.h; sourceTree = "<group>"; };
+		BDCD7CAF1A70771B0001DCC3 /* utf8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utf8.h; sourceTree = "<group>"; };
+		BDCD7CB01A70771B0001DCC3 /* utf_old.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utf_old.h; sourceTree = "<group>"; };
+		BDCD7CB11A70771B0001DCC3 /* utrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utrace.h; sourceTree = "<group>"; };
+		BDCD7CB21A70771B0001DCC3 /* utypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utypes.h; sourceTree = "<group>"; };
+		BDCD7CB31A70771B0001DCC3 /* uvernum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uvernum.h; sourceTree = "<group>"; };
+		BDCD7CB41A70771B0001DCC3 /* uversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uversion.h; sourceTree = "<group>"; };
+		BDCD7CB51A70771B0001DCC3 /* uposixdefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uposixdefs.h; sourceTree = "<group>"; };
+		BDCD7CB61A70771B0001DCC3 /* uset_imp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uset_imp.h; sourceTree = "<group>"; };
+		BDCD7CB71A70771B0001DCC3 /* ustr_imp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ustr_imp.h; sourceTree = "<group>"; };
+		BDCD7CB81A70771B0001DCC3 /* utracimp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utracimp.h; sourceTree = "<group>"; };
+		BDCD7CB91A70771B0001DCC3 /* inputext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = inputext.cpp; sourceTree = "<group>"; };
+		BDCD7CBA1A70771B0001DCC3 /* uarrsort.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = uarrsort.c; sourceTree = "<group>"; };
+		BDCD7CBB1A70771B0001DCC3 /* ucln_cmn.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ucln_cmn.cpp; sourceTree = "<group>"; };
+		BDCD7CBC1A70771B0001DCC3 /* ucln_in.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ucln_in.cpp; sourceTree = "<group>"; };
+		BDCD7CBD1A70771B0001DCC3 /* udataswp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = udataswp.c; sourceTree = "<group>"; };
+		BDCD7CBE1A70771B0001DCC3 /* uenum.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = uenum.c; sourceTree = "<group>"; };
+		BDCD7CBF1A70771B0001DCC3 /* uinvchar.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = uinvchar.c; sourceTree = "<group>"; };
+		BDCD7CC01A70771B0001DCC3 /* uobject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uobject.cpp; sourceTree = "<group>"; };
+		BDCD7CC11A70771B0001DCC3 /* ustring.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ustring.cpp; sourceTree = "<group>"; };
+		BDCD7CC21A70771B0001DCC3 /* utrace.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utrace.c; sourceTree = "<group>"; };
+		BDCD7CE91A7077680001DCC3 /* ucsdet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ucsdet.cpp; sourceTree = "<group>"; };
+		BDCD7CEC1A7079300001DCC3 /* cmemory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cmemory.c; sourceTree = "<group>"; };
+		BDCD7CED1A7079300001DCC3 /* umutex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = umutex.cpp; sourceTree = "<group>"; };
 		C07AD057D3C8FBDC7AC95733 /* MCOIMAPSession.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOIMAPSession.mm; sourceTree = "<group>"; };
 		C07AD44B013BB42A240B4F04 /* NSError+MCO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+MCO.h"; sourceTree = "<group>"; };
 		C07ADFE43E22B38EFF23ADB5 /* NSError+MCO.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSError+MCO.mm"; sourceTree = "<group>"; };
@@ -2091,6 +2225,119 @@
 			path = nntp;
 			sourceTree = "<group>";
 		};
+		BDCD7C691A70771B0001DCC3 /* icu-ucsdet */ = {
+			isa = PBXGroup;
+			children = (
+				BDCD7CEC1A7079300001DCC3 /* cmemory.c */,
+				BDCD7C6A1A70771B0001DCC3 /* csdetect.cpp */,
+				BDCD7C6B1A70771B0001DCC3 /* csmatch.cpp */,
+				BDCD7C6C1A70771B0001DCC3 /* csr2022.cpp */,
+				BDCD7C6D1A70771B0001DCC3 /* csrecog.cpp */,
+				BDCD7C6E1A70771B0001DCC3 /* csrmbcs.cpp */,
+				BDCD7C6F1A70771B0001DCC3 /* csrsbcs.cpp */,
+				BDCD7C701A70771B0001DCC3 /* csrucode.cpp */,
+				BDCD7C711A70771B0001DCC3 /* csrutf8.cpp */,
+				BDCD7C721A70771B0001DCC3 /* cstring.c */,
+				BDCD7C731A70771B0001DCC3 /* include */,
+				BDCD7CB91A70771B0001DCC3 /* inputext.cpp */,
+				BDCD7CBA1A70771B0001DCC3 /* uarrsort.c */,
+				BDCD7CBB1A70771B0001DCC3 /* ucln_cmn.cpp */,
+				BDCD7CBC1A70771B0001DCC3 /* ucln_in.cpp */,
+				BDCD7CE91A7077680001DCC3 /* ucsdet.cpp */,
+				BDCD7CBD1A70771B0001DCC3 /* udataswp.c */,
+				BDCD7CBE1A70771B0001DCC3 /* uenum.c */,
+				BDCD7CBF1A70771B0001DCC3 /* uinvchar.c */,
+				BDCD7CED1A7079300001DCC3 /* umutex.cpp */,
+				BDCD7CC01A70771B0001DCC3 /* uobject.cpp */,
+				BDCD7CC11A70771B0001DCC3 /* ustring.cpp */,
+				BDCD7CC21A70771B0001DCC3 /* utrace.c */,
+			);
+			path = "icu-ucsdet";
+			sourceTree = "<group>";
+		};
+		BDCD7C731A70771B0001DCC3 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				BDCD7C741A70771B0001DCC3 /* charstr.h */,
+				BDCD7C751A70771B0001DCC3 /* cmemory.h */,
+				BDCD7C761A70771B0001DCC3 /* csdetect.h */,
+				BDCD7C771A70771B0001DCC3 /* csmatch.h */,
+				BDCD7C781A70771B0001DCC3 /* csr2022.h */,
+				BDCD7C791A70771B0001DCC3 /* csrecog.h */,
+				BDCD7C7A1A70771B0001DCC3 /* csrmbcs.h */,
+				BDCD7C7B1A70771B0001DCC3 /* csrsbcs.h */,
+				BDCD7C7C1A70771B0001DCC3 /* csrucode.h */,
+				BDCD7C7D1A70771B0001DCC3 /* csrutf8.h */,
+				BDCD7C7E1A70771B0001DCC3 /* cstring.h */,
+				BDCD7C7F1A70771B0001DCC3 /* cwchar.h */,
+				BDCD7C801A70771B0001DCC3 /* inputext.h */,
+				BDCD7C811A70771B0001DCC3 /* locmap.h */,
+				BDCD7C821A70771B0001DCC3 /* mutex.h */,
+				BDCD7C831A70771B0001DCC3 /* putilimp.h */,
+				BDCD7C841A70771B0001DCC3 /* uarrsort.h */,
+				BDCD7C851A70771B0001DCC3 /* uassert.h */,
+				BDCD7C861A70771B0001DCC3 /* ucase.h */,
+				BDCD7C871A70771B0001DCC3 /* ucln.h */,
+				BDCD7C881A70771B0001DCC3 /* ucln_cmn.h */,
+				BDCD7C891A70771B0001DCC3 /* ucln_imp.h */,
+				BDCD7C8A1A70771B0001DCC3 /* ucln_in.h */,
+				BDCD7C8B1A70771B0001DCC3 /* ucmndata.h */,
+				BDCD7C8C1A70771B0001DCC3 /* udataswp.h */,
+				BDCD7C8D1A70771B0001DCC3 /* uelement.h */,
+				BDCD7C8E1A70771B0001DCC3 /* uenumimp.h */,
+				BDCD7C8F1A70771B0001DCC3 /* uinvchar.h */,
+				BDCD7C901A70771B0001DCC3 /* umapfile.h */,
+				BDCD7C911A70771B0001DCC3 /* umutex.h */,
+				BDCD7C921A70771B0001DCC3 /* unicode */,
+				BDCD7CB51A70771B0001DCC3 /* uposixdefs.h */,
+				BDCD7CB61A70771B0001DCC3 /* uset_imp.h */,
+				BDCD7CB71A70771B0001DCC3 /* ustr_imp.h */,
+				BDCD7CB81A70771B0001DCC3 /* utracimp.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		BDCD7C921A70771B0001DCC3 /* unicode */ = {
+			isa = PBXGroup;
+			children = (
+				BDCD7C931A70771B0001DCC3 /* appendable.h */,
+				BDCD7C941A70771B0001DCC3 /* bytestream.h */,
+				BDCD7C951A70771B0001DCC3 /* localpointer.h */,
+				BDCD7C961A70771B0001DCC3 /* platform.h */,
+				BDCD7C971A70771B0001DCC3 /* ptypes.h */,
+				BDCD7C981A70771B0001DCC3 /* putil.h */,
+				BDCD7C991A70771B0001DCC3 /* rep.h */,
+				BDCD7C9A1A70771B0001DCC3 /* std_string.h */,
+				BDCD7C9B1A70771B0001DCC3 /* strenum.h */,
+				BDCD7C9C1A70771B0001DCC3 /* stringpiece.h */,
+				BDCD7C9D1A70771B0001DCC3 /* ucasemap.h */,
+				BDCD7C9E1A70771B0001DCC3 /* uchar.h */,
+				BDCD7C9F1A70771B0001DCC3 /* uclean.h */,
+				BDCD7CA01A70771B0001DCC3 /* ucnv.h */,
+				BDCD7CA11A70771B0001DCC3 /* ucnv_err.h */,
+				BDCD7CA21A70771B0001DCC3 /* uconfig.h */,
+				BDCD7CA31A70771B0001DCC3 /* ucsdet.h */,
+				BDCD7CA41A70771B0001DCC3 /* udata.h */,
+				BDCD7CA51A70771B0001DCC3 /* uenum.h */,
+				BDCD7CA61A70771B0001DCC3 /* uiter.h */,
+				BDCD7CA71A70771B0001DCC3 /* umachine.h */,
+				BDCD7CA81A70771B0001DCC3 /* unistr.h */,
+				BDCD7CA91A70771B0001DCC3 /* uobject.h */,
+				BDCD7CAA1A70771B0001DCC3 /* urename.h */,
+				BDCD7CAB1A70771B0001DCC3 /* uset.h */,
+				BDCD7CAC1A70771B0001DCC3 /* ustring.h */,
+				BDCD7CAD1A70771B0001DCC3 /* utf.h */,
+				BDCD7CAE1A70771B0001DCC3 /* utf16.h */,
+				BDCD7CAF1A70771B0001DCC3 /* utf8.h */,
+				BDCD7CB01A70771B0001DCC3 /* utf_old.h */,
+				BDCD7CB11A70771B0001DCC3 /* utrace.h */,
+				BDCD7CB21A70771B0001DCC3 /* utypes.h */,
+				BDCD7CB31A70771B0001DCC3 /* uvernum.h */,
+				BDCD7CB41A70771B0001DCC3 /* uversion.h */,
+			);
+			path = unicode;
+			sourceTree = "<group>";
+		};
 		C63CD67616BDCDD300DB18F1 /* renderer */ = {
 			isa = PBXGroup;
 			children = (
@@ -2376,6 +2623,7 @@
 		C64EA6A1169E847800778456 /* basetypes */ = {
 			isa = PBXGroup;
 			children = (
+				BDCD7C691A70771B0001DCC3 /* icu-ucsdet */,
 				BD62729B1A158DA900129AA8 /* MCWin32.cpp */,
 				BD62729C1A158DA900129AA8 /* MCWin32.h */,
 				BD62729A1A158DA000129AA8 /* MCDefines.h */,
@@ -3144,6 +3392,7 @@
 				84D7373D199BF83B005124E5 /* MCNNTPFetchArticleOperation.cpp in Sources */,
 				C64EA6F4169E847800778456 /* MCAbstractMessage.cpp in Sources */,
 				C64EA6F6169E847800778456 /* MCAbstractMessagePart.cpp in Sources */,
+				BDCD7CF01A7079300001DCC3 /* umutex.cpp in Sources */,
 				84B639ED17F280F3003B5BA2 /* MCIMAPNoopOperation.cpp in Sources */,
 				C64EA6F8169E847800778456 /* MCAbstractMultipart.cpp in Sources */,
 				C64EA6FA169E847800778456 /* MCAbstractPart.cpp in Sources */,
@@ -3178,7 +3427,9 @@
 				C64EA72B169E847800778456 /* MCIMAPNamespace.cpp in Sources */,
 				C64EA72D169E847800778456 /* MCIMAPNamespaceItem.cpp in Sources */,
 				C64EA72F169E847800778456 /* MCIMAPPart.cpp in Sources */,
+				BDCD7CCB1A70771B0001DCC3 /* csrmbcs.cpp in Sources */,
 				C64EA732169E847800778456 /* MCIMAPSearchExpression.cpp in Sources */,
+				BDCD7CE11A70771B0001DCC3 /* uinvchar.c in Sources */,
 				C64EA734169E847800778456 /* MCIMAPSession.cpp in Sources */,
 				C68B2AF717797389005E61EF /* MCConnectionLoggerUtils.cpp in Sources */,
 				C64EA737169E847800778456 /* MCPOPMessageInfo.cpp in Sources */,
@@ -3199,6 +3450,7 @@
 				C64EA7DA16A1386600778456 /* MCSMTPOperation.cpp in Sources */,
 				C64EA7EA16A154B300778456 /* MCSMTPCheckAccountOperation.cpp in Sources */,
 				C64EA7F116A15A4D00778456 /* MCIMAPOperation.cpp in Sources */,
+				BDCD7CDB1A70771B0001DCC3 /* ucln_in.cpp in Sources */,
 				C64EA7F816A15A7800778456 /* MCIMAPCheckAccountOperation.cpp in Sources */,
 				943F1A9A17D964F600F0C798 /* MCIMAPConnectOperation.cpp in Sources */,
 				C64EA7FC16A2959800778456 /* MCIMAPFetchFoldersOperation.cpp in Sources */,
@@ -3208,11 +3460,13 @@
 				C63D315C17C9155C00A4D993 /* MCIMAPIdentity.cpp in Sources */,
 				84D73742199BF963005124E5 /* MCNNTPFetchAllArticlesOperation.cpp in Sources */,
 				C64EA80816A2999A00778456 /* MCIMAPCreateFolderOperation.cpp in Sources */,
+				BDCD7CC51A70771B0001DCC3 /* csmatch.cpp in Sources */,
 				C64EA80B16A299B700778456 /* MCIMAPSubscribeFolderOperation.cpp in Sources */,
 				84D7372C199BF66C005124E5 /* MCNNTPAsyncSession.cpp in Sources */,
 				C64EA81116A299ED00778456 /* MCIMAPAppendMessageOperation.cpp in Sources */,
 				C64EA81416A29A2300778456 /* MCIMAPCopyMessagesOperation.cpp in Sources */,
 				C64EA81716A29A8700778456 /* MCIMAPExpungeOperation.cpp in Sources */,
+				BDCD7CE31A70771B0001DCC3 /* uobject.cpp in Sources */,
 				C69BA85B17DEFCCB00D601B7 /* NSIndexSet+MCO.m in Sources */,
 				C64EA81A16A29AF200778456 /* MCIMAPFetchMessagesOperation.cpp in Sources */,
 				C64EA81D16A29DC500778456 /* MCIMAPFetchContentOperation.cpp in Sources */,
@@ -3230,6 +3484,7 @@
 				C62C6ED416A2A0E600737497 /* MCIMAPIdentityOperation.cpp in Sources */,
 				C62C6ED816A398FA00737497 /* MCIMAPFolderInfoOperation.cpp in Sources */,
 				C62C6EDA16A3D60700737497 /* MCIMAPAsyncConnection.cpp in Sources */,
+				BDCD7CD11A70771B0001DCC3 /* csrutf8.cpp in Sources */,
 				C62C6EEF16A7B67600737497 /* MCPOPAsyncSession.cpp in Sources */,
 				C62C6EF216A7C6DE00737497 /* MCPOPFetchHeaderOperation.cpp in Sources */,
 				C62C6EF516A7C6EA00737497 /* MCPOPFetchMessageOperation.cpp in Sources */,
@@ -3237,13 +3492,18 @@
 				C62C6EFB16A7C94000737497 /* MCPOPOperation.cpp in Sources */,
 				C62C6F0616A7E54500737497 /* MCPOPFetchMessagesOperation.cpp in Sources */,
 				C62C6F0A16A8F58000737497 /* MCIMAPAsyncSession.cpp in Sources */,
+				BDCD7CDD1A70771B0001DCC3 /* udataswp.c in Sources */,
+				BDCD7CD31A70771B0001DCC3 /* cstring.c in Sources */,
 				C6D42C1D16AE03D6002BB4F9 /* NSData+MCO.mm in Sources */,
 				C6D42C1E16AE03D6002BB4F9 /* NSString+MCO.mm in Sources */,
 				C64FF39116B3C13000F8C162 /* MCOObjectWrapper.mm in Sources */,
 				84D73737199BF7F2005124E5 /* MCNNTPFetchHeaderOperation.cpp in Sources */,
 				84D7376D199C005A005124E5 /* MCONNTPFetchHeaderOperation.mm in Sources */,
 				C6E665B71796500B0063F2CF /* ioapi.c in Sources */,
+				BDCD7CD51A70771B0001DCC3 /* inputext.cpp in Sources */,
+				BDCD7CEA1A7077680001DCC3 /* ucsdet.cpp in Sources */,
 				C07ADC28B83E7959BF114D46 /* MCOIMAPSession.mm in Sources */,
+				BDCD7CE71A70771B0001DCC3 /* utrace.c in Sources */,
 				C07AD99B2E2054C684DB8FF6 /* NSError+MCO.mm in Sources */,
 				F87F190C16BB62B00012652F /* MCOIMAPFetchFoldersOperation.mm in Sources */,
 				84B639F117F282B4003B5BA2 /* MCOPOPNoopOperation.mm in Sources */,
@@ -3251,6 +3511,7 @@
 				8199FBF119FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.cpp in Sources */,
 				C6EB30FE16B8E50F0091F4F1 /* NSArray+MCO.mm in Sources */,
 				C6EB310116B8E6E60091F4F1 /* NSObject+MCO.mm in Sources */,
+				BDCD7CDF1A70771B0001DCC3 /* uenum.c in Sources */,
 				C63CD67F16BDCDD400DB18F1 /* MCAddressDisplay.cpp in Sources */,
 				C63CD68016BDCDD400DB18F1 /* MCDateFormatter.cpp in Sources */,
 				C63CD68116BDCDD400DB18F1 /* MCHTMLRenderer.cpp in Sources */,
@@ -3263,8 +3524,10 @@
 				C64BB22E16E5C1EE000DB34C /* MCIndexSet.cpp in Sources */,
 				84D73764199BFFC7005124E5 /* MCONNTPSession.mm in Sources */,
 				C64BB23516EDAA17000DB34C /* MCOAbstractMessage.mm in Sources */,
+				BDCD7CE51A70771B0001DCC3 /* ustring.cpp in Sources */,
 				C64BB23916EDAA3F000DB34C /* MCOAbstractMessagePart.mm in Sources */,
 				C64BB23C16EDAAC7000DB34C /* MCOAbstractMultipart.mm in Sources */,
+				BDCD7CD71A70771B0001DCC3 /* uarrsort.c in Sources */,
 				C6D4FD4319FB7DAA001F7E01 /* MCDataMac.mm in Sources */,
 				C64BB23F16EDAAE1000DB34C /* MCOAbstractPart.mm in Sources */,
 				C64BB24216EDAAF4000DB34C /* MCOAddress.mm in Sources */,
@@ -3274,6 +3537,7 @@
 				C64BB25E16FD4377000DB34C /* MCOAttachment.mm in Sources */,
 				C64BB26116FD4390000DB34C /* MCOMessageBuilder.mm in Sources */,
 				C64BB26416FD43A1000DB34C /* MCOMessageParser.mm in Sources */,
+				BDCD7CCD1A70771B0001DCC3 /* csrsbcs.cpp in Sources */,
 				C64BB26716FD43E2000DB34C /* MCOMessagePart.mm in Sources */,
 				C64BB26A16FD44C2000DB34C /* MCOMultipart.mm in Sources */,
 				C623C58F16FE6B45001BBEFC /* MCOIMAPOperation.mm in Sources */,
@@ -3291,6 +3555,8 @@
 				C6CCC5C716FFE5190077A5FC /* MCORange.mm in Sources */,
 				C63D316217C92D8300A4D993 /* MCOIMAPIdentity.mm in Sources */,
 				C6F61F7B170169EE0073032E /* MCOIMAPFolderInfoOperation.mm in Sources */,
+				BDCD7CC31A70771B0001DCC3 /* csdetect.cpp in Sources */,
+				BDCD7CCF1A70771B0001DCC3 /* csrucode.cpp in Sources */,
 				C6F61F7E170169FB0073032E /* MCOIMAPAppendMessageOperation.mm in Sources */,
 				C6F61F8117016A0D0073032E /* MCOIMAPCopyMessagesOperation.mm in Sources */,
 				DA0F1C7B177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.cpp in Sources */,
@@ -3308,6 +3574,7 @@
 				C6F61FB51702AB340073032E /* MCOIMAPBaseOperation.mm in Sources */,
 				C608167517759967001F1018 /* MCSMTPDisconnectOperation.cpp in Sources */,
 				C6A81BBF17068E5E00882C15 /* MCOSMTPSession.mm in Sources */,
+				BDCD7CC71A70771B0001DCC3 /* csr2022.cpp in Sources */,
 				C673EBED1A46B41000A53F7F /* MCIMAPFolderInfo.cpp in Sources */,
 				8B0095CC1A00DDE700F84BC0 /* MCOSMTPLoginOperation.mm in Sources */,
 				C6A81BC317068E9500882C15 /* MCOSMTPSendOperation.mm in Sources */,
@@ -3323,9 +3590,12 @@
 				C6A81BE61706906D00882C15 /* MCOPOPFetchMessagesOperation.mm in Sources */,
 				C6A81C001707CEE600882C15 /* MCOPOPMessageInfo.mm in Sources */,
 				C6AC110017114DAF00B715B7 /* MCPOPCheckAccountOperation.cpp in Sources */,
+				BDCD7CD91A70771B0001DCC3 /* ucln_cmn.cpp in Sources */,
 				C6D6F7F9171E595D006F5B28 /* MCJSON.cpp in Sources */,
 				C6D6F954171E5CB8006F5B28 /* MCMD5.cpp in Sources */,
 				C6D6F956171E5CB8006F5B28 /* MCNull.cpp in Sources */,
+				BDCD7CEE1A7079300001DCC3 /* cmemory.c in Sources */,
+				BDCD7CC91A70771B0001DCC3 /* csrecog.cpp in Sources */,
 				C6D6F967171FCF9F006F5B28 /* MCJSONParser.cpp in Sources */,
 				BDCD7C5B1A5B1C2C0001DCC3 /* MCErrorMessage.cpp in Sources */,
 				84CFA98719F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cpp in Sources */,
@@ -3390,6 +3660,7 @@
 				84D7373E199BF83B005124E5 /* MCNNTPFetchArticleOperation.cpp in Sources */,
 				C6BA2B991705F4E6003F0E9E /* MCAbstractMessage.cpp in Sources */,
 				C6BA2B9A1705F4E6003F0E9E /* MCAbstractMessagePart.cpp in Sources */,
+				BDCD7CF11A7079300001DCC3 /* umutex.cpp in Sources */,
 				84B639EE17F280F3003B5BA2 /* MCIMAPNoopOperation.cpp in Sources */,
 				C6BA2B9B1705F4E6003F0E9E /* MCAbstractMultipart.cpp in Sources */,
 				C6BA2B9C1705F4E6003F0E9E /* MCAbstractPart.cpp in Sources */,
@@ -3424,7 +3695,9 @@
 				C6BA2BB11705F4E6003F0E9E /* MCIMAPMultipart.cpp in Sources */,
 				C6BA2BB21705F4E6003F0E9E /* MCIMAPNamespace.cpp in Sources */,
 				C6BA2BB31705F4E6003F0E9E /* MCIMAPNamespaceItem.cpp in Sources */,
+				BDCD7CCC1A70771B0001DCC3 /* csrmbcs.cpp in Sources */,
 				C6BA2BB41705F4E6003F0E9E /* MCIMAPPart.cpp in Sources */,
+				BDCD7CE21A70771B0001DCC3 /* uinvchar.c in Sources */,
 				C6BA2BB51705F4E6003F0E9E /* MCIMAPSearchExpression.cpp in Sources */,
 				C6BA2BB61705F4E6003F0E9E /* MCIMAPSession.cpp in Sources */,
 				C68B2AF817797389005E61EF /* MCConnectionLoggerUtils.cpp in Sources */,
@@ -3445,6 +3718,7 @@
 				C6BA2BC01705F4E6003F0E9E /* MCSMTPSendWithDataOperation.cpp in Sources */,
 				C6BA2BC11705F4E6003F0E9E /* MCSMTPOperation.cpp in Sources */,
 				C6BA2BC21705F4E6003F0E9E /* MCSMTPCheckAccountOperation.cpp in Sources */,
+				BDCD7CDC1A70771B0001DCC3 /* ucln_in.cpp in Sources */,
 				C6BA2BC31705F4E6003F0E9E /* MCIMAPOperation.cpp in Sources */,
 				C6BA2BC41705F4E6003F0E9E /* MCIMAPCheckAccountOperation.cpp in Sources */,
 				943F1A9E17D96C5500F0C798 /* MCIMAPConnectOperation.cpp in Sources */,
@@ -3454,11 +3728,13 @@
 				C6BA2BC71705F4E6003F0E9E /* MCIMAPDeleteFolderOperation.cpp in Sources */,
 				C63D315D17C9155C00A4D993 /* MCIMAPIdentity.cpp in Sources */,
 				84D73743199BF963005124E5 /* MCNNTPFetchAllArticlesOperation.cpp in Sources */,
+				BDCD7CC61A70771B0001DCC3 /* csmatch.cpp in Sources */,
 				C6BA2BC81705F4E6003F0E9E /* MCIMAPCreateFolderOperation.cpp in Sources */,
 				C6BA2BC91705F4E6003F0E9E /* MCIMAPSubscribeFolderOperation.cpp in Sources */,
 				84D7372D199BF66C005124E5 /* MCNNTPAsyncSession.cpp in Sources */,
 				C6BA2BCA1705F4E6003F0E9E /* MCIMAPAppendMessageOperation.cpp in Sources */,
 				C6BA2BCB1705F4E6003F0E9E /* MCIMAPCopyMessagesOperation.cpp in Sources */,
+				BDCD7CE41A70771B0001DCC3 /* uobject.cpp in Sources */,
 				C6BA2BCC1705F4E6003F0E9E /* MCIMAPExpungeOperation.cpp in Sources */,
 				C69BA85C17DEFCCB00D601B7 /* NSIndexSet+MCO.m in Sources */,
 				C6BA2BCD1705F4E6003F0E9E /* MCIMAPFetchMessagesOperation.cpp in Sources */,
@@ -3476,6 +3752,7 @@
 				849189A218C93FB7002063A3 /* MCNNTPSession.cpp in Sources */,
 				C6BA2BD41705F4E6003F0E9E /* MCIMAPIdentityOperation.cpp in Sources */,
 				C6BA2BD51705F4E6003F0E9E /* MCIMAPFolderInfoOperation.cpp in Sources */,
+				BDCD7CD21A70771B0001DCC3 /* csrutf8.cpp in Sources */,
 				C6BA2BD61705F4E6003F0E9E /* MCIMAPAsyncConnection.cpp in Sources */,
 				C6BA2BD71705F4E6003F0E9E /* MCPOPAsyncSession.cpp in Sources */,
 				C6BA2BD81705F4E6003F0E9E /* MCPOPFetchHeaderOperation.cpp in Sources */,
@@ -3483,13 +3760,18 @@
 				C6BA2BDA1705F4E6003F0E9E /* MCPOPDeleteMessagesOperation.cpp in Sources */,
 				C6BA2BDB1705F4E6003F0E9E /* MCPOPOperation.cpp in Sources */,
 				C6BA2BDC1705F4E6003F0E9E /* MCPOPFetchMessagesOperation.cpp in Sources */,
+				BDCD7CDE1A70771B0001DCC3 /* udataswp.c in Sources */,
+				BDCD7CD41A70771B0001DCC3 /* cstring.c in Sources */,
 				C6BA2BDD1705F4E6003F0E9E /* MCIMAPAsyncSession.cpp in Sources */,
 				C6BA2BDE1705F4E6003F0E9E /* NSData+MCO.mm in Sources */,
 				C6BA2BDF1705F4E6003F0E9E /* NSString+MCO.mm in Sources */,
 				C6BA2BE01705F4E6003F0E9E /* MCOObjectWrapper.mm in Sources */,
 				84D73738199BF7F2005124E5 /* MCNNTPFetchHeaderOperation.cpp in Sources */,
 				84D7376E199C005A005124E5 /* MCONNTPFetchHeaderOperation.mm in Sources */,
+				BDCD7CD61A70771B0001DCC3 /* inputext.cpp in Sources */,
+				BDCD7CEB1A7077680001DCC3 /* ucsdet.cpp in Sources */,
 				C6E665B81796500B0063F2CF /* ioapi.c in Sources */,
+				BDCD7CE81A70771B0001DCC3 /* utrace.c in Sources */,
 				C6BA2BE11705F4E6003F0E9E /* MCOIMAPSession.mm in Sources */,
 				C6BA2BE21705F4E6003F0E9E /* NSError+MCO.mm in Sources */,
 				C6BA2BE31705F4E6003F0E9E /* MCOIMAPFetchFoldersOperation.mm in Sources */,
@@ -3497,6 +3779,7 @@
 				8199FBF219FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.cpp in Sources */,
 				C6BA2BE41705F4E6003F0E9E /* NSDictionary+MCO.mm in Sources */,
 				C6BA2BE51705F4E6003F0E9E /* NSArray+MCO.mm in Sources */,
+				BDCD7CE01A70771B0001DCC3 /* uenum.c in Sources */,
 				C6BA2BE61705F4E6003F0E9E /* NSObject+MCO.mm in Sources */,
 				C6BA2BE71705F4E6003F0E9E /* MCAddressDisplay.cpp in Sources */,
 				C6BA2BE81705F4E6003F0E9E /* MCDateFormatter.cpp in Sources */,
@@ -3509,8 +3792,10 @@
 				C6BA2BEE1705F4E6003F0E9E /* MCIMAPCapabilityOperation.cpp in Sources */,
 				C6BA2BEF1705F4E6003F0E9E /* MCIndexSet.cpp in Sources */,
 				84D73765199BFFC7005124E5 /* MCONNTPSession.mm in Sources */,
+				BDCD7CE61A70771B0001DCC3 /* ustring.cpp in Sources */,
 				C6BA2BF01705F4E6003F0E9E /* MCOAbstractMessage.mm in Sources */,
 				C6BA2BF11705F4E6003F0E9E /* MCOAbstractMessagePart.mm in Sources */,
+				BDCD7CD81A70771B0001DCC3 /* uarrsort.c in Sources */,
 				C6D4FD4419FB7DB2001F7E01 /* MCDataMac.mm in Sources */,
 				C6BA2BF21705F4E6003F0E9E /* MCOAbstractMultipart.mm in Sources */,
 				C6BA2BF31705F4E6003F0E9E /* MCOAbstractPart.mm in Sources */,
@@ -3520,6 +3805,7 @@
 				C6BA2BF71705F4E6003F0E9E /* MCOOperation.mm in Sources */,
 				C6BA2BF81705F4E6003F0E9E /* MCOAttachment.mm in Sources */,
 				C6BA2BF91705F4E6003F0E9E /* MCOMessageBuilder.mm in Sources */,
+				BDCD7CCE1A70771B0001DCC3 /* csrsbcs.cpp in Sources */,
 				C6BA2BFA1705F4E6003F0E9E /* MCOMessageParser.mm in Sources */,
 				C6BA2BFB1705F4E6003F0E9E /* MCOMessagePart.mm in Sources */,
 				C6BA2BFC1705F4E6003F0E9E /* MCOMultipart.mm in Sources */,
@@ -3537,6 +3823,8 @@
 				C6BA2C061705F4E6003F0E9E /* MCOAbstractMessageRendererCallback.mm in Sources */,
 				C6BA2C071705F4E6003F0E9E /* MCORange.mm in Sources */,
 				C63D316317C92D8300A4D993 /* MCOIMAPIdentity.mm in Sources */,
+				BDCD7CC41A70771B0001DCC3 /* csdetect.cpp in Sources */,
+				BDCD7CD01A70771B0001DCC3 /* csrucode.cpp in Sources */,
 				C6BA2C081705F4E6003F0E9E /* MCOIMAPFolderInfoOperation.mm in Sources */,
 				C6BA2C091705F4E6003F0E9E /* MCOIMAPAppendMessageOperation.mm in Sources */,
 				C6BA2C0A1705F4E6003F0E9E /* MCOIMAPCopyMessagesOperation.mm in Sources */,
@@ -3554,6 +3842,7 @@
 				C6BA2C131705F4E6003F0E9E /* MCOIMAPFolderInfo.mm in Sources */,
 				C6BA2C141705F4E6003F0E9E /* MCOIMAPBaseOperation.mm in Sources */,
 				C608167617759968001F1018 /* MCSMTPDisconnectOperation.cpp in Sources */,
+				BDCD7CC81A70771B0001DCC3 /* csr2022.cpp in Sources */,
 				C673EBEE1A46B41000A53F7F /* MCIMAPFolderInfo.cpp in Sources */,
 				C6A81BC017068E5E00882C15 /* MCOSMTPSession.mm in Sources */,
 				8B0095CE1A00DE7700F84BC0 /* MCOSMTPLoginOperation.mm in Sources */,
@@ -3569,9 +3858,12 @@
 				C6A81BE31706905600882C15 /* MCOPOPOperation.mm in Sources */,
 				C6A81BE71706906D00882C15 /* MCOPOPFetchMessagesOperation.mm in Sources */,
 				C6A81C011707CEE600882C15 /* MCOPOPMessageInfo.mm in Sources */,
+				BDCD7CDA1A70771B0001DCC3 /* ucln_cmn.cpp in Sources */,
 				C6AC110117114DAF00B715B7 /* MCPOPCheckAccountOperation.cpp in Sources */,
 				C6D6F7FA171E595D006F5B28 /* MCJSON.cpp in Sources */,
 				C6D6F955171E5CB8006F5B28 /* MCMD5.cpp in Sources */,
+				BDCD7CEF1A7079300001DCC3 /* cmemory.c in Sources */,
+				BDCD7CCA1A70771B0001DCC3 /* csrecog.cpp in Sources */,
 				C6D6F957171E5CB8006F5B28 /* MCNull.cpp in Sources */,
 				BDCD7C5C1A5B1C2C0001DCC3 /* MCErrorMessage.cpp in Sources */,
 				84CFA98819F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cpp in Sources */,
@@ -3656,7 +3948,6 @@
 				INFOPLIST_FILE = "framework-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_LDFLAGS = (
-					"-luchardet-ios",
 					"-lctemplate-ios",
 					"-letpan-ios",
 					"-lxml2",
@@ -3684,7 +3975,6 @@
 				INFOPLIST_FILE = "framework-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_LDFLAGS = (
-					"-luchardet-ios",
 					"-lctemplate-ios",
 					"-letpan-ios",
 					"-lxml2",
@@ -3724,7 +4014,6 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = (
-					"-luchardet",
 					"-lctemplate",
 					"-letpan",
 					"-lxml2",
@@ -3764,7 +4053,6 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = (
-					"-luchardet",
 					"-lctemplate",
 					"-letpan",
 					"-lxml2",
@@ -3799,8 +4087,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
-					"JSON_NDEBUG=1",
-					"JSON_ISO_STRICT=1",
+					"U_COMMON_IMPLEMENTATION=1",
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -3818,8 +4105,8 @@
 				"HEADER_SEARCH_PATHS[sdk=iphoneos*]" = "$(IOS_HEADERS_SEARCH_PATHS)";
 				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(IOS_HEADERS_SEARCH_PATHS)";
 				"HEADER_SEARCH_PATHS[sdk=macosx*]" = "$(OSX_HEADERS_SEARCH_PATHS)";
-				IOS_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-ios/include\" \"$(SRCROOT)/../Externals/ctemplate-ios/include\" \"$(SRCROOT)/../Externals/tidy-html5-ios/include/tidy\" \"$(SRCROOT)/../Externals/uchardet-ios/include\" /usr/include/libxml2";
-				IOS_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-ios/lib\" \"$(SRCROOT)/../Externals/ctemplate-ios/lib\" \"$(SRCROOT)/../Externals/libsasl-ios/lib\" \"$(SRCROOT)/../Externals/tidy-html5-ios/lib\" \"$(SRCROOT)/../Externals/uchardet-ios/lib\"";
+				IOS_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../src/core/basetypes/icu-ucsdet/include\" \"$(SRCROOT)/../Externals/libetpan-ios/include\" \"$(SRCROOT)/../Externals/ctemplate-ios/include\" \"$(SRCROOT)/../Externals/tidy-html5-ios/include/tidy\" /usr/include/libxml2";
+				IOS_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-ios/lib\" \"$(SRCROOT)/../Externals/ctemplate-ios/lib\" \"$(SRCROOT)/../Externals/libsasl-ios/lib\" \"$(SRCROOT)/../Externals/tidy-html5-ios/lib\"";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../Externals/libetpan/lib\"",
 					"\"$(SRCROOT)/../Externals/icu4c/lib\"",
@@ -3830,8 +4117,8 @@
 				"LIBRARY_SEARCH_PATHS[sdk=macosx*]" = "$(OSX_LIBRARY_SEARCH_PATHS)";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
-				OSX_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-osx/include\" \"$(SRCROOT)/../Externals/ctemplate-osx/include\" \"$(SRCROOT)/../Externals/uchardet-osx/include\" /usr/include/tidy /usr/include/libxml2";
-				OSX_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-osx/lib\" \"$(SRCROOT)/../Externals/uchardet-osx/lib\" \"$(SRCROOT)/../Externals/ctemplate-osx/lib\"";
+				OSX_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../src/core/basetypes/icu-ucsdet/include\" \"$(SRCROOT)/../Externals/libetpan-osx/include\" \"$(SRCROOT)/../Externals/ctemplate-osx/include\" /usr/include/tidy /usr/include/libxml2";
+				OSX_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-osx/lib\" \"$(SRCROOT)/../Externals/ctemplate-osx/lib\"";
 			};
 			name = Debug;
 		};
@@ -3848,10 +4135,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"JSON_NDEBUG=1",
-					"JSON_ISO_STRICT=1",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "U_COMMON_IMPLEMENTATION=1";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -3866,8 +4150,8 @@
 				"HEADER_SEARCH_PATHS[sdk=iphoneos*]" = "$(IOS_HEADERS_SEARCH_PATHS)";
 				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(IOS_HEADERS_SEARCH_PATHS)";
 				"HEADER_SEARCH_PATHS[sdk=macosx*]" = "$(OSX_HEADERS_SEARCH_PATHS)";
-				IOS_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-ios/include\" \"$(SRCROOT)/../Externals/ctemplate-ios/include\" \"$(SRCROOT)/../Externals/tidy-html5-ios/include/tidy\" \"$(SRCROOT)/../Externals/uchardet-ios/include\" /usr/include/libxml2";
-				IOS_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-ios/lib\" \"$(SRCROOT)/../Externals/ctemplate-ios/lib\" \"$(SRCROOT)/../Externals/libsasl-ios/lib\" \"$(SRCROOT)/../Externals/tidy-html5-ios/lib\" \"$(SRCROOT)/../Externals/uchardet-ios/lib\"";
+				IOS_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../src/core/basetypes/icu-ucsdet/include\" \"$(SRCROOT)/../Externals/libetpan-ios/include\" \"$(SRCROOT)/../Externals/ctemplate-ios/include\" \"$(SRCROOT)/../Externals/tidy-html5-ios/include/tidy\" /usr/include/libxml2";
+				IOS_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-ios/lib\" \"$(SRCROOT)/../Externals/ctemplate-ios/lib\" \"$(SRCROOT)/../Externals/libsasl-ios/lib\" \"$(SRCROOT)/../Externals/tidy-html5-ios/lib\"";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../Externals/libetpan/lib\"",
 					"\"$(SRCROOT)/../Externals/icu4c/lib\"",
@@ -3877,8 +4161,8 @@
 				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(IOS_LIBRARY_SEARCH_PATHS)";
 				"LIBRARY_SEARCH_PATHS[sdk=macosx*]" = "$(OSX_LIBRARY_SEARCH_PATHS)";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				OSX_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-osx/include\" \"$(SRCROOT)/../Externals/ctemplate-osx/include\" \"$(SRCROOT)/../Externals/uchardet-osx/include\" /usr/include/tidy /usr/include/libxml2";
-				OSX_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-osx/lib\" \"$(SRCROOT)/../Externals/uchardet-osx/lib\" \"$(SRCROOT)/../Externals/ctemplate-osx/lib\"";
+				OSX_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../src/core/basetypes/icu-ucsdet/include\" \"$(SRCROOT)/../Externals/libetpan-osx/include\" \"$(SRCROOT)/../Externals/ctemplate-osx/include\" /usr/include/tidy /usr/include/libxml2";
+				OSX_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-osx/lib\" \"$(SRCROOT)/../Externals/ctemplate-osx/lib\"";
 			};
 			name = Release;
 		};
@@ -3932,7 +4216,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
-					"-luchardet-ios",
 					"-lctemplate-ios",
 					"-letpan-ios",
 					"-lxml2",
@@ -3964,7 +4247,6 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
-					"-luchardet-ios",
 					"-lctemplate-ios",
 					"-letpan-ios",
 					"-lxml2",
@@ -4094,7 +4376,6 @@
 					"-all_load",
 					"-ltidy",
 					"-lz",
-					"-luchardet",
 				);
 				PRODUCT_NAME = MailCore;
 				SDKROOT = macosx;
@@ -4123,7 +4404,6 @@
 					"-all_load",
 					"-ltidy",
 					"-lz",
-					"-luchardet",
 				);
 				PRODUCT_NAME = MailCore;
 				SDKROOT = macosx;

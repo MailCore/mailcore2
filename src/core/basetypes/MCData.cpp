@@ -2,7 +2,7 @@
 
 #include "MCData.h"
 
-#define USE_UCHARDET 1
+#define USE_UCHARDET 0
 
 #include <stdlib.h>
 #include <string.h>
