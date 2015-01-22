@@ -6,7 +6,7 @@ popd > /dev/null
 
 . "$scriptpath/include.sh/build-dep.sh"
 
-deps="ctemplate-osx libetpan-osx uchardet-osx"
+deps="ctemplate-osx libetpan-osx"
 for dep in $deps ; do
   name="$dep"
   get_prebuilt_dep

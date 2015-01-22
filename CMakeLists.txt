@@ -7,13 +7,11 @@ IF(APPLE)
   
   set(additional_lib_searchpath
     "${CMAKE_CURRENT_SOURCE_DIR}/Externals/ctemplate-osx/lib"
-    "${CMAKE_CURRENT_SOURCE_DIR}/Externals/uchardet-osx/lib"
     "${CMAKE_CURRENT_SOURCE_DIR}/Externals/libetpan-osx/lib"
   )
   
   set(additional_includes
     "${CMAKE_CURRENT_SOURCE_DIR}/Externals/ctemplate-osx/include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/Externals/uchardet-osx/include"
     "${CMAKE_CURRENT_SOURCE_DIR}/Externals/libetpan-osx/include"
     /usr/include/tidy
     /usr/include/libxml2
@@ -82,24 +80,6 @@ if(NOT CTEMPLATE_INCLUDE_DIR OR NOT CTEMPLATE_LIBRARY)
   message(FATAL_ERROR "ERROR: Could not find ctemplate")
 else()
   message(STATUS "Found ctemplate")
-endif()
-
-
-# detect uchardet
-
-find_path(UCHARDET_INCLUDE_DIR
-  NAMES uchardet/uchardet.h
-  PATHS ${additional_includes}
-)
-find_library(UCHARDET_LIBRARY
-  NAMES uchardet
-  PATHS ${additional_lib_searchpath}
-)
-
-if(NOT UCHARDET_INCLUDE_DIR OR NOT UCHARDET_LIBRARY)
-  message(FATAL_ERROR "ERROR: Could not find uchardet")
-else()
-  message(STATUS "Found uchardet")
 endif()
 
 

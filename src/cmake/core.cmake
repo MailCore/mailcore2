@@ -56,6 +56,31 @@ set(basetypes_files
   ${basetypes_files_linux}
 )
 
+set(icu_ucsdet_files
+  core/basetypes/icu-ucsdet/cmemory.c
+  core/basetypes/icu-ucsdet/csdetect.cpp
+  core/basetypes/icu-ucsdet/csmatch.cpp
+  core/basetypes/icu-ucsdet/csr2022.cpp
+  core/basetypes/icu-ucsdet/csrecog.cpp
+  core/basetypes/icu-ucsdet/csrmbcs.cpp
+  core/basetypes/icu-ucsdet/csrsbcs.cpp
+  core/basetypes/icu-ucsdet/csrucode.cpp
+  core/basetypes/icu-ucsdet/csrutf8.cpp
+  core/basetypes/icu-ucsdet/cstring.c
+  core/basetypes/icu-ucsdet/inputext.cpp
+  core/basetypes/icu-ucsdet/uarrsort.c
+  core/basetypes/icu-ucsdet/ucln_cmn.cpp
+  core/basetypes/icu-ucsdet/ucln_in.cpp
+  core/basetypes/icu-ucsdet/ucsdet.cpp
+  core/basetypes/icu-ucsdet/udataswp.c
+  core/basetypes/icu-ucsdet/uenum.c
+  core/basetypes/icu-ucsdet/uinvchar.c
+  core/basetypes/icu-ucsdet/umutex.cpp
+  core/basetypes/icu-ucsdet/uobject.cpp
+  core/basetypes/icu-ucsdet/ustring.cpp
+  core/basetypes/icu-ucsdet/utrace.c
+)
+
 set(imap_files
   core/imap/MCIMAPFolder.cpp
   core/imap/MCIMAPFolderStatus.cpp
@@ -123,6 +148,7 @@ set(security_files
 
 set(core_files
   ${basetypes_files}
+  ${icu_ucsdet_files}
   ${abstract_files}
   ${imap_files}
   ${pop_files}
@@ -140,6 +166,8 @@ set(core_includes
   "${CMAKE_CURRENT_SOURCE_DIR}/core"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/abstract"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/basetypes"
+  "${CMAKE_CURRENT_SOURCE_DIR}/core/basetypes/icu-ucsdet"
+  "${CMAKE_CURRENT_SOURCE_DIR}/core/basetypes/icu-ucsdet/include"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/imap"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/pop"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/nntp"
