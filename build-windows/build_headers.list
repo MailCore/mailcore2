@@ -87,6 +87,7 @@ src\async\imap\MCIMAPFetchMessagesOperation.h
 src\async\imap\MCIMAPFetchContentOperation.h
 src\async\imap\MCIMAPFetchParsedContentOperation.h
 src\async\imap\MCIMAPIdleOperation.h
+src\async\imap\MCIMAPFolderInfo.h
 src\async\imap\MCIMAPFolderInfoOperation.h
 src\async\imap\MCIMAPFolderStatusOperation.h
 src\async\imap\MCIMAPSearchOperation.h

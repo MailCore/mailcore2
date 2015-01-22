@@ -33,6 +33,22 @@ JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPAppendMessageOperation_date
 JNIEXPORT jlong JNICALL Java_com_libmailcore_IMAPAppendMessageOperation_createdUID
   (JNIEnv *, jobject);
 
+/*
+ * Class:     com_libmailcore_IMAPAppendMessageOperation
+ * Method:    finalizeNative
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_libmailcore_IMAPAppendMessageOperation_finalizeNative
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_libmailcore_IMAPAppendMessageOperation
+ * Method:    setupNativeOperationProgressListener
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_libmailcore_IMAPAppendMessageOperation_setupNativeOperationProgressListener
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif

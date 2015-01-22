@@ -1,5 +1,7 @@
 package com.libmailcore;
 
+/** Search types.
+    @see com.libmailcore.IMAPSession#searchOperation(String folder, int kind, String searchString) */
 public class IMAPSearchKind {
     public final static int IMAPSearchKindAll = 0;
     public final static int IMAPSearchKindNone = 1;

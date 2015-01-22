@@ -1,7 +1,10 @@
 package com.libmailcore;
 
+/** IMAP multipart */
 public class IMAPMultipart extends AbstractMultipart {
+    /** Sets part ID. */
     public native void setPartID(String partID);
+    /** Returns part ID. */
     public native String partID();
     private native void setupNative();
 

@@ -36,6 +36,7 @@
     <ClInclude Include="..\..\..\src\async\imap\MCIMAPFetchMessagesOperation.h" />
     <ClInclude Include="..\..\..\src\async\imap\MCIMAPFetchNamespaceOperation.h" />
     <ClInclude Include="..\..\..\src\async\imap\MCIMAPFetchParsedContentOperation.h" />
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPFolderInfo.h" />
     <ClInclude Include="..\..\..\src\async\imap\MCIMAPFolderInfoOperation.h" />
     <ClInclude Include="..\..\..\src\async\imap\MCIMAPFolderStatusOperation.h" />
     <ClInclude Include="..\..\..\src\async\imap\MCIMAPIdentityOperation.h" />
@@ -88,6 +89,7 @@
     <ClInclude Include="..\..\..\src\core\abstract\MCAbstractMultipart.h" />
     <ClInclude Include="..\..\..\src\core\abstract\MCAbstractPart.h" />
     <ClInclude Include="..\..\..\src\core\abstract\MCAddress.h" />
+    <ClInclude Include="..\..\..\src\core\abstract\MCErrorMessage.h" />
     <ClInclude Include="..\..\..\src\core\abstract\MCMessageConstants.h" />
     <ClInclude Include="..\..\..\src\core\abstract\MCMessageHeader.h" />
     <ClInclude Include="..\..\..\src\core\basetypes\ConvertUTF.h" />
@@ -195,6 +197,7 @@
     <ClCompile Include="..\..\..\src\async\imap\MCIMAPFetchMessagesOperation.cpp" />
     <ClCompile Include="..\..\..\src\async\imap\MCIMAPFetchNamespaceOperation.cpp" />
     <ClCompile Include="..\..\..\src\async\imap\MCIMAPFetchParsedContentOperation.cpp" />
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPFolderInfo.cpp" />
     <ClCompile Include="..\..\..\src\async\imap\MCIMAPFolderInfoOperation.cpp" />
     <ClCompile Include="..\..\..\src\async\imap\MCIMAPFolderStatusOperation.cpp" />
     <ClCompile Include="..\..\..\src\async\imap\MCIMAPIdentityOperation.cpp" />
@@ -239,6 +242,7 @@
     <ClCompile Include="..\..\..\src\core\abstract\MCAbstractMultipart.cpp" />
     <ClCompile Include="..\..\..\src\core\abstract\MCAbstractPart.cpp" />
     <ClCompile Include="..\..\..\src\core\abstract\MCAddress.cpp" />
+    <ClCompile Include="..\..\..\src\core\abstract\MCErrorMessage.cpp" />
     <ClCompile Include="..\..\..\src\core\abstract\MCMessageHeader.cpp" />
     <ClCompile Include="..\..\..\src\core\basetypes\ConvertUTF.c" />
     <ClCompile Include="..\..\..\src\core\basetypes\MCArray.cpp" />

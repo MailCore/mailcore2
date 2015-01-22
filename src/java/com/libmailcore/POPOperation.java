@@ -1,6 +1,11 @@
 package com.libmailcore;
 
+/** POP Operation. */
 public class POPOperation extends Operation {
+    /**
+        Returns error once the operation finished running. It will return null if the operation
+        successfully ran.
+    */
     public MailException exception() {
         if (errorCode() == ErrorCode.ErrorNone) {
             return null;
@@ -10,6 +15,11 @@ public class POPOperation extends Operation {
 
     private native int errorCode();
     
+    /**
+        Calls the method succeeded() of the callback if the operation succeeded or failed()
+        if the operation failed.
+        @see com.libmailcore.OperationCallback
+    */
     protected void callCallback()
     {
         if (callback != null) {

@@ -289,14 +289,6 @@ JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPSearchExpression_searchOr
 JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPSearchExpression_searchNot
   (JNIEnv *, jclass, jobject);
 
-/*
- * Class:     com_libmailcore_IMAPSearchExpression
- * Method:    setupNative
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_com_libmailcore_IMAPSearchExpression_setupNative
-  (JNIEnv *, jobject);
-
 #ifdef __cplusplus
 }
 #endif

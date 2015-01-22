@@ -11,6 +11,8 @@ using namespace mailcore;
 #define nativeType IMAPFetchMessagesOperation
 #define javaType nativeType
 
+MC_JAVA_SYNTHESIZE(Array, setExtraHeaders, extraHeaders)
+
 JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPFetchMessagesOperation_messages
   (JNIEnv * env, jobject obj)
 {

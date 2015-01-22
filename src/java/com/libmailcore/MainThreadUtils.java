@@ -5,12 +5,12 @@ import android.os.Looper;
 import android.util.Log;
 import java.util.HashMap;
 
-public class MainThreadUtils {
+class MainThreadUtils {
     private static volatile MainThreadUtils instance = new MainThreadUtils();
     private Handler handler;
     private HashMap<Long, Runnable> runnablesForIdentifiers = new HashMap<Long, Runnable>();
     
-    static public MainThreadUtils singleton() {
+    static MainThreadUtils singleton() {
         return instance;
     }
 

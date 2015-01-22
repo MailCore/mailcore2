@@ -4,6 +4,7 @@ import java.util.Map;
 import java.io.Serializable;
 import java.io.IOException;
 
+/** Native C++ Object wrapper. */
 public class NativeObject implements Cloneable, Serializable {
     protected void finalize() throws Throwable
     {
@@ -13,7 +14,9 @@ public class NativeObject implements Cloneable, Serializable {
 
     protected native void initWithNative(long nativeHandle);
     private native void unsetupNative();
+    /** Returns a string representing the object. */
     public native String toString();
+    /** Create a copy of the object. */
     public native Object clone() throws CloneNotSupportedException;
 
     private long nativeHandle;

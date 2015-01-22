@@ -197,22 +197,6 @@ JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPMessage_partForPartID
 
 /*
  * Class:     com_libmailcore_IMAPMessage
- * Method:    partForContentID
- * Signature: (Ljava/lang/String;)Lcom/libmailcore/AbstractPart;
- */
-JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPMessage_partForContentID
-  (JNIEnv *, jobject, jstring);
-
-/*
- * Class:     com_libmailcore_IMAPMessage
- * Method:    partForUniqueID
- * Signature: (Ljava/lang/String;)Lcom/libmailcore/AbstractPart;
- */
-JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPMessage_partForUniqueID
-  (JNIEnv *, jobject, jstring);
-
-/*
- * Class:     com_libmailcore_IMAPMessage
  * Method:    htmlRendering
  * Signature: (Ljava/lang/String;Lcom/libmailcore/HTMLRendererIMAPCallback;Lcom/libmailcore/HTMLRendererTemplateCallback;)Ljava/lang/String;
  */

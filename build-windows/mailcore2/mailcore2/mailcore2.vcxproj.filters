@@ -540,6 +540,12 @@
     <ClInclude Include="..\..\..\src\async\nntp\MCNNTPOperationCallback.h">
       <Filter>Source Files\async\nntp</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\core\abstract\MCErrorMessage.h">
+      <Filter>Source Files\core\abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPFolderInfo.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\core\abstract\MCAbstractMessage.cpp">
@@ -919,6 +925,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\async\nntp\MCNNTPOperation.cpp">
       <Filter>Source Files\async\nntp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\abstract\MCErrorMessage.cpp">
+      <Filter>Source Files\core\abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPFolderInfo.cpp">
+      <Filter>Source Files\async\imap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
