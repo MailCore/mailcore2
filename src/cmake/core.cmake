@@ -148,7 +148,9 @@ set(security_files
 
 set(core_files
   ${basetypes_files}
+IF(APPLE)
   ${icu_ucsdet_files}
+ENDIF()
   ${abstract_files}
   ${imap_files}
   ${pop_files}
@@ -166,8 +168,10 @@ set(core_includes
   "${CMAKE_CURRENT_SOURCE_DIR}/core"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/abstract"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/basetypes"
+IF(APPLE)
   "${CMAKE_CURRENT_SOURCE_DIR}/core/basetypes/icu-ucsdet"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/basetypes/icu-ucsdet/include"
+ENDIF()
   "${CMAKE_CURRENT_SOURCE_DIR}/core/imap"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/pop"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/nntp"
