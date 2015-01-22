@@ -18,6 +18,11 @@ IF(APPLE)
     core/basetypes/MCDataMac.mm
     core/rfc822/MCMessageParserMac.mm
   )
+
+  set(core_includes_apple
+    "${CMAKE_CURRENT_SOURCE_DIR}/core/basetypes/icu-ucsdet"
+    "${CMAKE_CURRENT_SOURCE_DIR}/core/basetypes/icu-ucsdet/include"
+  )
 ENDIF()
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
@@ -168,10 +173,7 @@ set(core_includes
   "${CMAKE_CURRENT_SOURCE_DIR}/core"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/abstract"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/basetypes"
-IF(APPLE)
-  "${CMAKE_CURRENT_SOURCE_DIR}/core/basetypes/icu-ucsdet"
-  "${CMAKE_CURRENT_SOURCE_DIR}/core/basetypes/icu-ucsdet/include"
-ENDIF()
+  ${core_includes_apple}
   "${CMAKE_CURRENT_SOURCE_DIR}/core/imap"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/pop"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/nntp"
