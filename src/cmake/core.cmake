@@ -61,30 +61,32 @@ set(basetypes_files
   ${basetypes_files_linux}
 )
 
-set(icu_ucsdet_files
-  core/basetypes/icu-ucsdet/cmemory.c
-  core/basetypes/icu-ucsdet/csdetect.cpp
-  core/basetypes/icu-ucsdet/csmatch.cpp
-  core/basetypes/icu-ucsdet/csr2022.cpp
-  core/basetypes/icu-ucsdet/csrecog.cpp
-  core/basetypes/icu-ucsdet/csrmbcs.cpp
-  core/basetypes/icu-ucsdet/csrsbcs.cpp
-  core/basetypes/icu-ucsdet/csrucode.cpp
-  core/basetypes/icu-ucsdet/csrutf8.cpp
-  core/basetypes/icu-ucsdet/cstring.c
-  core/basetypes/icu-ucsdet/inputext.cpp
-  core/basetypes/icu-ucsdet/uarrsort.c
-  core/basetypes/icu-ucsdet/ucln_cmn.cpp
-  core/basetypes/icu-ucsdet/ucln_in.cpp
-  core/basetypes/icu-ucsdet/ucsdet.cpp
-  core/basetypes/icu-ucsdet/udataswp.c
-  core/basetypes/icu-ucsdet/uenum.c
-  core/basetypes/icu-ucsdet/uinvchar.c
-  core/basetypes/icu-ucsdet/umutex.cpp
-  core/basetypes/icu-ucsdet/uobject.cpp
-  core/basetypes/icu-ucsdet/ustring.cpp
-  core/basetypes/icu-ucsdet/utrace.c
-)
+IF(APPLE)
+  set(icu_ucsdet_files
+    core/basetypes/icu-ucsdet/cmemory.c
+    core/basetypes/icu-ucsdet/csdetect.cpp
+    core/basetypes/icu-ucsdet/csmatch.cpp
+    core/basetypes/icu-ucsdet/csr2022.cpp
+    core/basetypes/icu-ucsdet/csrecog.cpp
+    core/basetypes/icu-ucsdet/csrmbcs.cpp
+    core/basetypes/icu-ucsdet/csrsbcs.cpp
+    core/basetypes/icu-ucsdet/csrucode.cpp
+    core/basetypes/icu-ucsdet/csrutf8.cpp
+    core/basetypes/icu-ucsdet/cstring.c
+    core/basetypes/icu-ucsdet/inputext.cpp
+    core/basetypes/icu-ucsdet/uarrsort.c
+    core/basetypes/icu-ucsdet/ucln_cmn.cpp
+    core/basetypes/icu-ucsdet/ucln_in.cpp
+    core/basetypes/icu-ucsdet/ucsdet.cpp
+    core/basetypes/icu-ucsdet/udataswp.c
+    core/basetypes/icu-ucsdet/uenum.c
+    core/basetypes/icu-ucsdet/uinvchar.c
+    core/basetypes/icu-ucsdet/umutex.cpp
+    core/basetypes/icu-ucsdet/uobject.cpp
+    core/basetypes/icu-ucsdet/ustring.cpp
+    core/basetypes/icu-ucsdet/utrace.c
+  )
+ENDIF()
 
 set(imap_files
   core/imap/MCIMAPFolder.cpp
@@ -153,9 +155,7 @@ set(security_files
 
 set(core_files
   ${basetypes_files}
-IF(APPLE)
   ${icu_ucsdet_files}
-ENDIF()
   ${abstract_files}
   ${imap_files}
   ${pop_files}
