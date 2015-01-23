@@ -39,6 +39,7 @@
 #include "MCBase64.h"
 #include "MCIterator.h"
 #include "ConvertUTF.h"
+#include "MCLock.h"
 
 #if defined(_MSC_VER)
 #define PATH_SEPARATOR_CHAR '\\'
@@ -1672,9 +1673,9 @@ static void returnToLineAtBeginningOfBlock(struct parserState * state)
 static Set * blockElements(void)
 {
     static Set * elements = NULL;
-    pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+    MC_LOCK_TYPE lock = MC_LOCK_INITIAL_VALUE;
     
-    pthread_mutex_lock(&lock);
+    MC_LOCK(&lock);
     if (elements == NULL) {
         elements = new Set();
         elements->addObject(MCSTR("address"));
@@ -1705,7 +1706,7 @@ static Set * blockElements(void)
         elements->addObject(MCSTR("tr"));
         elements->addObject(MCSTR("td"));
     }
-    pthread_mutex_unlock(&lock);
+    MC_UNLOCK(&lock);
     
     return elements;
 }
@@ -1956,9 +1957,9 @@ static void commentParsed(void * ctx, const xmlChar * value)
 void initializeLibXML()
 {
     static bool initDone = false;
-    static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+    static MC_LOCK_TYPE lock = MC_LOCK_INITIAL_VALUE;
     
-    pthread_mutex_lock(&lock);
+    MC_LOCK(&lock);
     if (!initDone) {
         initDone = true;
         xmlInitParser();
@@ -1968,7 +1969,7 @@ void initializeLibXML()
         xmlSetStructuredErrorFunc(xmlGenericErrorContext,
                                   &structuredError);
     }
-    pthread_mutex_unlock(&lock);
+    MC_UNLOCK(&lock);
 }
 
 String * String::flattenHTMLAndShowBlockquoteAndLink(bool showBlockquote, bool showLink)
@@ -2342,7 +2343,7 @@ String * String::substringWithRange(Range range)
 }
 
 static chash * uniquedStringHash = NULL;
-static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+static MC_LOCK_TYPE lock = MC_LOCK_INITIAL_VALUE;
 
 static void initUniquedStringHash()
 {
@@ -2359,17 +2360,17 @@ String * String::uniquedStringWithUTF8Characters(const char * UTF8Characters)
     pthread_once(&once, initUniquedStringHash);
     key.data = (void *) UTF8Characters;
     key.len = (unsigned int) strlen(UTF8Characters);
-    pthread_mutex_lock(&lock);
+    MC_LOCK(&lock);
     r = chash_get(uniquedStringHash, &key, &value);
     if (r == 0) {
-        pthread_mutex_unlock(&lock);
+        MC_UNLOCK(&lock);
         return (String *) value.data;
     }
     else {
         value.data = new String(UTF8Characters);
         value.len = 0;
         chash_set(uniquedStringHash, &key, &value, NULL);
-        pthread_mutex_unlock(&lock);
+        MC_UNLOCK(&lock);
         return (String *) value.data;
     }
 }

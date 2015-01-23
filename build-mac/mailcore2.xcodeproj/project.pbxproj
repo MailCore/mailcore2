@@ -1667,6 +1667,7 @@
 		C62C6F0516A7E54400737497 /* MCPOPFetchMessagesOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPOPFetchMessagesOperation.h; sourceTree = "<group>"; };
 		C62C6F0816A8F57000737497 /* MCIMAPAsyncSession.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPAsyncSession.cpp; sourceTree = "<group>"; };
 		C62C6F0916A8F57700737497 /* MCIMAPAsyncSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPAsyncSession.h; sourceTree = "<group>"; };
+		C634B7791A723BD1003EE538 /* MCLock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCLock.h; sourceTree = "<group>"; };
 		C63CD67716BDCDD400DB18F1 /* MCAddressDisplay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCAddressDisplay.cpp; sourceTree = "<group>"; };
 		C63CD67816BDCDD400DB18F1 /* MCAddressDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAddressDisplay.h; sourceTree = "<group>"; };
 		C63CD67916BDCDD400DB18F1 /* MCDateFormatter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCDateFormatter.cpp; sourceTree = "<group>"; };
@@ -2689,6 +2690,7 @@
 				C64EA6BA169E847800778456 /* MCValue.cpp */,
 				C64EA6BB169E847800778456 /* MCValue.h */,
 				C64BB25316FC2AA0000DB34C /* MCValuePrivate.h */,
+				C634B7791A723BD1003EE538 /* MCLock.h */,
 			);
 			path = basetypes;
 			sourceTree = "<group>";

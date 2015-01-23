@@ -20,6 +20,7 @@
 #include "MCMainThread.h"
 #include "MCLog.h"
 #include "MCHashMap.h"
+#include "MCLock.h"
 
 using namespace mailcore;
 
@@ -36,24 +37,28 @@ Object::~Object()
 
 void Object::init()
 {
+#if __APPLE__
+    mLock = OS_SPINLOCK_INIT;
+#else
     pthread_mutex_init(&mLock, NULL);
+#endif
     mCounter = 1;
 }
 
 int Object::retainCount()
 {
-    pthread_mutex_lock(&mLock);
+    MC_LOCK(&mLock);
     int value = mCounter;
-    pthread_mutex_unlock(&mLock);
+    MC_UNLOCK(&mLock);
     
     return value;
 }
 
 Object * Object::retain()
 {
-    pthread_mutex_lock(&mLock);
+    MC_LOCK(&mLock);
     mCounter ++;
-    pthread_mutex_unlock(&mLock);
+    MC_UNLOCK(&mLock);
     return this;
 }
 
@@ -61,7 +66,7 @@ void Object::release()
 {
     bool shouldRelease = false;
     
-    pthread_mutex_lock(&mLock);
+    MC_LOCK(&mLock);
     mCounter --;
     if (mCounter == 0) {
         shouldRelease = true;
@@ -70,8 +75,8 @@ void Object::release()
         MCLog("release too much %p %s", this, MCUTF8(className()));
         MCAssert(0);
     }
-    pthread_mutex_unlock(&mLock);
-    
+    MC_UNLOCK(&mLock);
+
     if (shouldRelease && !zombieEnabled) {
         //int status;
         //char * unmangled = abi::__cxa_demangle(typeid(* this).name(), NULL, NULL, &status);

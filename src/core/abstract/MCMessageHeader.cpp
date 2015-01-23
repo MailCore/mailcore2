@@ -6,6 +6,7 @@
 #include "MCAddress.h"
 #include "MCIterator.h"
 #include "MCLibetpan.h"
+#include "MCLock.h"
 
 #include <string.h>
 #ifndef _MSC_VER
@@ -76,9 +77,9 @@ void MessageHeader::init(bool generateDate, bool generateMessageID)
     }
     if (generateMessageID) {
         static String * hostname = NULL;
-        static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+        static MC_LOCK_TYPE lock = MC_LOCK_INITIAL_VALUE;
         
-        pthread_mutex_lock(&lock);
+        MC_LOCK(&lock);
         if (hostname == NULL) {
             char name[MAX_HOSTNAME];
             int r;
@@ -94,7 +95,7 @@ void MessageHeader::init(bool generateDate, bool generateMessageID)
                 hostname = new String("localhost");
             }
         }
-        pthread_mutex_unlock(&lock);
+        MC_UNLOCK(&lock);
         
         String * messageID = new String();
         messageID->appendString(String::uuidString());

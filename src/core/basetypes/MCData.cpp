@@ -26,6 +26,7 @@
 #include "MCHashMap.h"
 #include "MCBase64.h"
 #include "MCSet.h"
+#include "MCLock.h"
 
 #define MCDATA_DEFAULT_CHARSET "iso-8859-1"
 
@@ -205,10 +206,10 @@ String * Data::stringWithCharset(const char * charset)
 
 static bool isHintCharsetValid(String * hintCharset)
 {
-    static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+    static MC_LOCK_TYPE lock = MC_LOCK_INITIAL_VALUE;
     static Set * knownCharset = NULL;
     
-    pthread_mutex_lock(&lock);
+    MC_LOCK(&lock);
     if (knownCharset == NULL) {
         knownCharset = new Set();
         
@@ -265,7 +266,7 @@ static bool isHintCharsetValid(String * hintCharset)
         }
 #endif
     }
-    pthread_mutex_unlock(&lock);
+    MC_UNLOCK(&lock);
     
     if (hintCharset != NULL) {
         hintCharset = normalizeCharset(hintCharset);
