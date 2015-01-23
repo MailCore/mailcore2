@@ -40,6 +40,14 @@
 #include "MCIterator.h"
 #include "ConvertUTF.h"
 
+#if defined(_MSC_VER)
+#define PATH_SEPARATOR_CHAR '\\'
+#define PATH_SEPARATOR_STRING "\\"
+#else
+#define PATH_SEPARATOR_CHAR '/'
+#define PATH_SEPARATOR_STRING "/"
+#endif
+
 using namespace mailcore;
 
 static String * s_unicode160 = NULL;
@@ -2077,7 +2085,7 @@ String * String::lastPathComponent()
     // TODO: Improve Windows compatibility.
     if (mUnicodeChars == NULL)
         return MCSTR("");
-    UChar * component = u_strrchr(mUnicodeChars, '/');
+    UChar * component = u_strrchr(mUnicodeChars, PATH_SEPARATOR_CHAR);
     if (component == NULL)
         return (String *) this->copy()->autorelease();
     return String::stringWithCharacters(component + 1);
@@ -2180,8 +2188,8 @@ String * String::stringByAppendingPathComponent(String * component)
     String * result = (String *) this->copy()->autorelease();
     if (result->length() > 0) {
         UChar lastChar = result->unicodeCharacters()[result->length() - 1];
-        if (lastChar != '/') {
-            result->appendUTF8Characters("/");
+        if (lastChar != PATH_SEPARATOR_CHAR) {
+            result->appendUTF8Characters(PATH_SEPARATOR_STRING);
         }
     }
     result->appendString(component);
@@ -2191,24 +2199,24 @@ String * String::stringByAppendingPathComponent(String * component)
 String * String::stringByDeletingLastPathComponent()
 {
     String * currentString = this;
-    if (currentString->isEqual(MCSTR("/"))) {
+    if (currentString->isEqual(MCSTR(PATH_SEPARATOR_STRING))) {
         return currentString;
     }
     if (currentString->length() == 0) {
         return currentString;
     }
-    if (currentString->unicodeCharacters()[currentString->length() - 1] == '/') {
+    if (currentString->unicodeCharacters()[currentString->length() - 1] == PATH_SEPARATOR_CHAR) {
         currentString = currentString->substringToIndex(currentString->length() - 1);
     }
     String * component = currentString->lastPathComponent();
     currentString = currentString->substringToIndex(currentString->length() - component->length());
-    if (currentString->isEqual(MCSTR("/"))) {
+    if (currentString->isEqual(MCSTR(PATH_SEPARATOR_STRING))) {
         return currentString;
     }
     if (currentString->length() == 0) {
         return currentString;
     }
-    if (currentString->unicodeCharacters()[currentString->length() - 1] == '/') {
+    if (currentString->unicodeCharacters()[currentString->length() - 1] == PATH_SEPARATOR_CHAR) {
         currentString = currentString->substringToIndex(currentString->length() - 1);
     }
     return currentString;

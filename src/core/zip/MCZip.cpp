@@ -57,8 +57,8 @@ static ErrorCode addFile(zipFile file, String * path)
     if (r < 0)
         return ErrorFile;
     
-#ifndef _MSC_VER
     if (S_ISDIR(statinfo.st_mode)) {
+#ifndef _MSC_VER
         DIR * dir = opendir(cPath);
         if (dir == NULL) {
             return ErrorFile;
@@ -74,13 +74,37 @@ static ErrorCode addFile(zipFile file, String * path)
             addFile(file, subpath);
         }
         closedir(dir);
-        
+#else
+        String * wildcard = path->stringByAppendingPathComponent(MCSTR("*"));
+
+        HANDLE hFind = INVALID_HANDLE_VALUE;
+        WIN32_FIND_DATA ffd;
+
+        hFind = FindFirstFile(wildcard->fileSystemRepresentation(), &ffd);
+        if (hFind == INVALID_HANDLE_VALUE)  {
+            return ErrorFile;
+        }
+
+        do {
+            if ((strcmp(ffd.cFileName, ".") == 0) || (strcmp(ffd.cFileName, "..") == 0)) {
+                continue;
+            }
+            String * subpath = path->stringByAppendingPathComponent(String::stringWithFileSystemRepresentation(ffd.cFileName));
+            addFile(file, subpath);
+        }
+        while (FindNextFile(hFind, &ffd) != 0);
+
+        if (GetLastError() != ERROR_NO_MORE_FILES) {
+            FindClose(hFind);
+            return ErrorFile;
+        }
+
+        FindClose(hFind);
+#endif
+
         return ErrorNone;
     }
-#else
-    // XXX - should be implemented on Win32.
-#endif
-    
+
     time_t clock;
     time(&clock);
     
