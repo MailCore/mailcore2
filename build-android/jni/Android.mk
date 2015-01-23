@@ -26,7 +26,6 @@ includes = \
     $(ICU4C_PATH)/include \
     $(LIBETPAN_PATH)/include \
     $(LIBXML2_PATH)/include \
-    $(UCHARDET_PATH)/include \
     $(TIDY_HTML5_PATH)/include \
     $(OPENSSL_PATH)/include \
     $(ANDROID_NDK)/sources/cxx-stl/llvm-libc++/libcxx/include \
@@ -93,11 +92,6 @@ LOCAL_SRC_FILES := $(LIBXML2_PATH)/libs/$(TARGET_ARCH_ABI)/libxml2.a
 include $(PREBUILT_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE    := uchardet
-LOCAL_SRC_FILES := $(UCHARDET_PATH)/libs/$(TARGET_ARCH_ABI)/libuchardet.a
-include $(PREBUILT_STATIC_LIBRARY)
-
-include $(CLEAR_VARS)
 LOCAL_MODULE    := tidy
 LOCAL_SRC_FILES := $(TIDY_HTML5_PATH)/libs/$(TARGET_ARCH_ABI)/libtidy.a
 include $(PREBUILT_STATIC_LIBRARY)
@@ -125,5 +119,5 @@ LOCAL_CPPFLAGS := -frtti
 LOCAL_CFLAGS := -DNOCRYPT
 LOCAL_LDLIBS := -lz -llog \
 	 -lc++_shared -L$(ANDROID_NDK)/sources/cxx-stl/llvm-libc++/libs/$(TARGET_ARCH_ABI)
-LOCAL_STATIC_LIBRARIES := etpan sasl2 ssl crypto icu4c xml2 uchardet tidy ctemplate
+LOCAL_STATIC_LIBRARIES := etpan sasl2 ssl crypto icu4c xml2 tidy ctemplate
 include $(BUILD_SHARED_LIBRARY)
