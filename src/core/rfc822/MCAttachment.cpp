@@ -576,7 +576,9 @@ Attachment * Attachment::attachmentWithSingleMIME(struct mailmime * mime)
         while (iter != NULL) {
             param = (struct mailmime_parameter *) clist_content(iter);
             if (param != NULL) {
-                result->setContentTypeParameter(String::stringWithUTF8Characters(param->pa_name), String::stringWithUTF8Characters(param->pa_value));
+                if ((strcasecmp("name", param->pa_name) != 0) && (strcasecmp("charset", param->pa_name) != 0)) {
+                    result->setContentTypeParameter(String::stringWithUTF8Characters(param->pa_name), String::stringWithUTF8Characters(param->pa_value));
+                }
             }
             iter = clist_next(iter);
         }
