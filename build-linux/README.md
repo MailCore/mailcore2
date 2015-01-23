@@ -4,7 +4,7 @@
 
 ```
 sudo apt-get install libctemplate-dev libicu-dev libsasl2-dev libtidy-dev \
-    uuid-dev libxml2-dev libuchardet-dev libglib2.0-dev autoconf automake libtool
+    uuid-dev libxml2-dev libglib2.0-dev autoconf automake libtool
 ```
 
 - Grab and compile the latest of libetpan: https://github.com/dinhviethoa/libetpan
