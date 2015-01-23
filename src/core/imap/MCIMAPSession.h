@@ -272,8 +272,10 @@ namespace mailcore {
         void unsetup();
         char fetchDelimiterIfNeeded(char defaultDelimiter, ErrorCode * pError);
         IMAPSyncResult * fetchMessages(String * folder, IMAPMessagesRequestKind requestKind,
-                                       bool fetchByUID, struct mailimap_set * imapset, uint64_t modseq,
-                                       HashMap * mapping, uint32_t startUid, IMAPProgressCallback * progressCallback,
+                                       bool fetchByUID, struct mailimap_set * imapset,
+                                       IndexSet * uidsFilter, IndexSet * numbersFilter,
+                                       uint64_t modseq,
+                                       HashMap * mapping, IMAPProgressCallback * progressCallback,
                                        Array * extraHeaders, ErrorCode * pError);
         void capabilitySetWithSessionState(IndexSet * capabilities);
         bool enableFeature(String * feature);

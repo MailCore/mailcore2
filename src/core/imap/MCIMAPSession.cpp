@@ -1877,6 +1877,8 @@ HashMap * IMAPSession::fetchMessageNumberUIDMapping(String * folder, uint32_t fr
 }
 
 struct msg_att_handler_data {
+    IndexSet * uidsFilter;
+    IndexSet * numbersFilter;
     bool fetchByUID;
     Array * result;
     IMAPMessagesRequestKind requestKind;
@@ -1888,7 +1890,6 @@ struct msg_att_handler_data {
     bool needsGmailLabels;
     bool needsGmailMessageID;
     bool needsGmailThreadID;
-    uint32_t startUid;
 };
 
 static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
@@ -1914,9 +1915,12 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
     bool needsGmailLabels;
     bool needsGmailMessageID;
     bool needsGmailThreadID;
-    uint32_t startUid;
+    IndexSet * uidsFilter;
+    IndexSet * numbersFilter;
     
     msg_att_context = (struct msg_att_handler_data *) context;
+    uidsFilter = msg_att_context->uidsFilter;
+    numbersFilter = msg_att_context->numbersFilter;
     fetchByUID = msg_att_context->fetchByUID;
     result = msg_att_context->result;
     requestKind = msg_att_context->requestKind;
@@ -1927,8 +1931,7 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
     needsGmailLabels = msg_att_context->needsGmailLabels;
     needsGmailMessageID = msg_att_context->needsGmailMessageID;
     needsGmailThreadID = msg_att_context->needsGmailThreadID;
-    startUid = msg_att_context->startUid;
-    
+
     hasHeader = false;
     hasBody = false;
     hasFlags = false;
@@ -1936,6 +1939,12 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
     hasGmailMessageID = false;
     hasGmailThreadID = false;
     
+    if (numbersFilter != NULL) {
+        if (!numbersFilter->containsIndex((uint64_t) msg_att->att_number)) {
+            return;
+        }
+    }
+
     msg = new IMAPMessage();
     
     uid = 0;
@@ -1943,6 +1952,7 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
     if (mapping != NULL) {
         uid = (uint32_t) ((Value *) mapping->objectForKey(Value::valueWithUnsignedLongValue(msg_att->att_number)))->longLongValue();
     }
+
     msg->setSequenceNumber(msg_att->att_number);
     for(item_iter = clist_begin(msg_att->att_list) ; item_iter != NULL ; item_iter = clist_next(item_iter)) {
         struct mailimap_msg_att_item * att_item;
@@ -2070,12 +2080,6 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
         }
     }
     
-    if (fetchByUID) {
-        if (uid < startUid) {
-            uid = 0;
-        }
-    }
-    
     if (needsBody && !hasBody) {
         msg->release();
         return;
@@ -2107,6 +2111,13 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
         msg->release();
         return;
     }
+
+    if (uidsFilter != NULL) {
+        if (!uidsFilter->containsIndex((uint64_t) uid)) {
+            msg->release();
+            return;
+        }
+    }
     
     result->addObject(msg);
     msg->release();
@@ -2115,7 +2126,8 @@ static void msg_att_handler(struct mailimap_msg_att * msg_att, void * context)
 }
 
 IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequestKind requestKind, bool fetchByUID,
-                                            struct mailimap_set * imapset, uint64_t modseq, HashMap * mapping, uint32_t startUid,
+                                            struct mailimap_set * imapset, IndexSet * uidsFilter, IndexSet * numbersFilter,
+                                            uint64_t modseq, HashMap * mapping,
                                             IMAPProgressCallback * progressCallback, Array * extraHeaders, ErrorCode * pError)
 {
     struct mailimap_fetch_type * fetch_type;
@@ -2276,6 +2288,8 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
     struct msg_att_handler_data msg_att_data;
     
     memset(&msg_att_data, 0, sizeof(msg_att_data));
+    msg_att_data.uidsFilter = uidsFilter;
+    msg_att_data.numbersFilter = numbersFilter;
     msg_att_data.fetchByUID = fetchByUID;
     msg_att_data.result = messages;
     msg_att_data.requestKind = requestKind;
@@ -2285,7 +2299,6 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
     msg_att_data.needsBody = needsBody;
     msg_att_data.needsFlags = needsFlags;
     msg_att_data.needsGmailLabels = needsGmailLabels;
-    msg_att_data.startUid = startUid;
     msg_att_data.needsGmailMessageID = needsGmailMessageID;
     msg_att_data.needsGmailThreadID = needsGmailThreadID;
     mailimap_set_msg_att_handler(mImap, msg_att_handler, &msg_att_data);
@@ -2371,7 +2384,8 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
                 requestKind = (IMAPMessagesRequestKind) (requestKind | IMAPMessagesRequestKindFullHeaders);
 
                 result = fetchMessages(folder, requestKind, fetchByUID,
-                    imapset, modseq, NULL, startUid, progressCallback, extraHeaders, pError);
+                    imapset, uidsFilter, numbersFilter,
+                    modseq, NULL, progressCallback, extraHeaders, pError);
                 if (result != NULL) {
                     if (result->modifiedOrAddedMessages() != NULL) {
                         if (result->modifiedOrAddedMessages()->count() > 0) {
@@ -2401,7 +2415,7 @@ Array * IMAPSession::fetchMessagesByUIDWithExtraHeaders(String * folder, IMAPMes
                                                         Array * extraHeaders, ErrorCode * pError)
 {
     struct mailimap_set * imapset = setFromIndexSet(uids);
-    IMAPSyncResult * syncResult = fetchMessages(folder, requestKind, true, imapset, 0, NULL, 0,
+    IMAPSyncResult * syncResult = fetchMessages(folder, requestKind, true, imapset, uids, NULL, 0, NULL,
                                                 progressCallback, extraHeaders, pError);
     if (syncResult == NULL) {
         mailimap_set_free(imapset);
@@ -2425,7 +2439,7 @@ Array * IMAPSession::fetchMessagesByNumberWithExtraHeaders(String * folder, IMAP
                                                            Array * extraHeaders, ErrorCode * pError)
 {
     struct mailimap_set * imapset = setFromIndexSet(numbers);
-    IMAPSyncResult * syncResult = fetchMessages(folder, requestKind, false, imapset, 0, NULL, 0,
+    IMAPSyncResult * syncResult = fetchMessages(folder, requestKind, false, imapset, NULL, numbers, 0, NULL,
                                                 progressCallback, extraHeaders, pError);
     if (syncResult == NULL) {
         mailimap_set_free(imapset);
@@ -3593,10 +3607,10 @@ IMAPSyncResult * IMAPSession::syncMessagesByUIDWithExtraHeaders(String * folder,
                                                 IMAPProgressCallback * progressCallback, Array * extraHeaders,
                                                 ErrorCode * pError)
 {
-    MCAssert(uids->rangesCount() > 0);
     struct mailimap_set * imapset = setFromIndexSet(uids);
-    IMAPSyncResult * result = fetchMessages(folder, requestKind, true, imapset, modseq, NULL,
-                                            (uint32_t) uids->allRanges()[0].location,
+    IMAPSyncResult * result = fetchMessages(folder, requestKind, true, imapset,
+                                            uids, NULL,
+                                            modseq, NULL,
                                             progressCallback, extraHeaders, pError);
     mailimap_set_free(imapset);
     return result;
