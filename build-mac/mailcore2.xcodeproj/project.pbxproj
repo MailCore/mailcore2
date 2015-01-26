@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27478E801A764698004AE621 /* MCAccountValidator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27478E7E1A764698004AE621 /* MCAccountValidator.cpp */; };
+		27478E811A764699004AE621 /* MCAccountValidator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27478E7E1A764698004AE621 /* MCAccountValidator.cpp */; };
+		27478E841A7646F8004AE621 /* MCOAccountValidator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 27478E831A7646F8004AE621 /* MCOAccountValidator.mm */; };
+		27478E851A7646F8004AE621 /* MCOAccountValidator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 27478E831A7646F8004AE621 /* MCOAccountValidator.mm */; };
+		27478E861A76475F004AE621 /* MCOAccountValidator.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27478E821A7646F8004AE621 /* MCOAccountValidator.h */; };
+		27478E871A76475F004AE621 /* MCAccountValidator.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27478E7F1A764698004AE621 /* MCAccountValidator.h */; };
+		27478E881A7647AC004AE621 /* MCOAccountValidator.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27478E821A7646F8004AE621 /* MCOAccountValidator.h */; };
+		27478E891A7647AC004AE621 /* MCAccountValidator.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27478E7F1A764698004AE621 /* MCAccountValidator.h */; };
 		27780C2E19CF9CD100C77E44 /* MCOFramework.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6BD28A9170BDB6B00A91AC1 /* MCOFramework.mm */; };
 		27780C3219CF9CD100C77E44 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6ED6D1917A1919500A4A14C /* Security.framework */; };
 		27780C3619CF9CD100C77E44 /* providers.json in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E7D172DBAF600E60AA3 /* providers.json */; };
@@ -992,6 +1000,8 @@
 			dstPath = include/MailCore;
 			dstSubfolderSpec = 16;
 			files = (
+				27478E861A76475F004AE621 /* MCOAccountValidator.h in CopyFiles */,
+				27478E871A76475F004AE621 /* MCAccountValidator.h in CopyFiles */,
 				C673EBF01A46B45300A53F7F /* MCIMAPFolderInfo.h in CopyFiles */,
 				C6181D3319FE0F8D0088FBBC /* MCIMAPFetchParsedContentOperation.h in CopyFiles */,
 				C6181D3219FE0F8A0088FBBC /* MCOIMAPFetchParsedContentOperation.h in CopyFiles */,
@@ -1221,6 +1231,8 @@
 			dstPath = include/MailCore;
 			dstSubfolderSpec = 16;
 			files = (
+				27478E881A7647AC004AE621 /* MCOAccountValidator.h in CopyFiles */,
+				27478E891A7647AC004AE621 /* MCAccountValidator.h in CopyFiles */,
 				C673EBEF1A46B44E00A53F7F /* MCIMAPFolderInfo.h in CopyFiles */,
 				8199FBF719FAF3AF0040BBC3 /* MCOIMAPFetchParsedContentOperation.h in CopyFiles */,
 				8199FBF819FAF3AF0040BBC3 /* MCIMAPFetchParsedContentOperation.h in CopyFiles */,
@@ -1438,6 +1450,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		27478E7E1A764698004AE621 /* MCAccountValidator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCAccountValidator.cpp; sourceTree = "<group>"; };
+		27478E7F1A764698004AE621 /* MCAccountValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAccountValidator.h; sourceTree = "<group>"; };
+		27478E821A7646F8004AE621 /* MCOAccountValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOAccountValidator.h; sourceTree = "<group>"; };
+		27478E831A7646F8004AE621 /* MCOAccountValidator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOAccountValidator.mm; sourceTree = "<group>"; };
 		27780C3A19CF9CD100C77E44 /* MailCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MailCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27780C3C19CF9D9800C77E44 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.0.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
 		27780D3419CFA19500C77E44 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.0.sdk/usr/lib/libstdc++.dylib"; sourceTree = DEVELOPER_DIR; };
@@ -2143,6 +2159,8 @@
 		84AF9E72172DACC900E60AA3 /* provider */ = {
 			isa = PBXGroup;
 			children = (
+				27478E7E1A764698004AE621 /* MCAccountValidator.cpp */,
+				27478E7F1A764698004AE621 /* MCAccountValidator.h */,
 				C6CF62BF175324F0006398B9 /* MCMailProvider.cpp */,
 				C6CF62C0175324F0006398B9 /* MCMailProvider.h */,
 				C6CF62C1175324F0006398B9 /* MCMailProvidersManager.cpp */,
@@ -2157,6 +2175,8 @@
 		84AF9E84172DBC1000E60AA3 /* provider */ = {
 			isa = PBXGroup;
 			children = (
+				27478E821A7646F8004AE621 /* MCOAccountValidator.h */,
+				27478E831A7646F8004AE621 /* MCOAccountValidator.mm */,
 				C6CF62B2175324CE006398B9 /* MCOMailProvider.h */,
 				C6CF62B3175324CE006398B9 /* MCOMailProvider.mm */,
 				C6CF62B4175324CE006398B9 /* MCOMailProvidersManager.h */,
@@ -3436,6 +3456,7 @@
 				C68B2AF717797389005E61EF /* MCConnectionLoggerUtils.cpp in Sources */,
 				C64EA737169E847800778456 /* MCPOPMessageInfo.cpp in Sources */,
 				C64EA73A169E847800778456 /* MCPOPSession.cpp in Sources */,
+				27478E801A764698004AE621 /* MCAccountValidator.cpp in Sources */,
 				84D7375C199BFDCA005124E5 /* MCNNTPListNewsgroupsOperation.cpp in Sources */,
 				C64EA73C169E847800778456 /* MCAttachment.cpp in Sources */,
 				C64EA73E169E847800778456 /* MCMessageBuilder.cpp in Sources */,
@@ -3534,6 +3555,7 @@
 				C64BB23F16EDAAE1000DB34C /* MCOAbstractPart.mm in Sources */,
 				C64BB24216EDAAF4000DB34C /* MCOAddress.mm in Sources */,
 				C64BB24516EDAAFE000DB34C /* MCOMessageHeader.mm in Sources */,
+				27478E841A7646F8004AE621 /* MCOAccountValidator.mm in Sources */,
 				C64BB25216FC284A000DB34C /* NSValue+MCO.mm in Sources */,
 				C64BB25A16FD3BCB000DB34C /* MCOOperation.mm in Sources */,
 				C64BB25E16FD4377000DB34C /* MCOAttachment.mm in Sources */,
@@ -3704,6 +3726,7 @@
 				C6BA2BB61705F4E6003F0E9E /* MCIMAPSession.cpp in Sources */,
 				C68B2AF817797389005E61EF /* MCConnectionLoggerUtils.cpp in Sources */,
 				C6BA2BB71705F4E6003F0E9E /* MCPOPMessageInfo.cpp in Sources */,
+				27478E811A764699004AE621 /* MCAccountValidator.cpp in Sources */,
 				C6BA2BB81705F4E6003F0E9E /* MCPOPSession.cpp in Sources */,
 				84D7375D199BFDCA005124E5 /* MCNNTPListNewsgroupsOperation.cpp in Sources */,
 				C6BA2BB91705F4E6003F0E9E /* MCAttachment.cpp in Sources */,
@@ -3802,6 +3825,7 @@
 				C6BA2BF21705F4E6003F0E9E /* MCOAbstractMultipart.mm in Sources */,
 				C6BA2BF31705F4E6003F0E9E /* MCOAbstractPart.mm in Sources */,
 				C6BA2BF41705F4E6003F0E9E /* MCOAddress.mm in Sources */,
+				27478E851A7646F8004AE621 /* MCOAccountValidator.mm in Sources */,
 				C6BA2BF51705F4E6003F0E9E /* MCOMessageHeader.mm in Sources */,
 				C6BA2BF61705F4E6003F0E9E /* NSValue+MCO.mm in Sources */,
 				C6BA2BF71705F4E6003F0E9E /* MCOOperation.mm in Sources */,
