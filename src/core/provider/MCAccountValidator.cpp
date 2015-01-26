@@ -106,7 +106,7 @@ bool AccountValidator::setup()
             if (provider->imapServices()->count() > 0) {
                 mImapServices = provider->imapServices();
             } else {
-                mImapError = ErrorNoInfoFound;
+                mImapError = ErrorNoValidServerFound;
             }
         }
     
@@ -114,7 +114,7 @@ bool AccountValidator::setup()
             if (provider->popServices()->count() > 0) {
                 mPopServices = provider->popServices();
             } else {
-                mPopError = ErrorNoInfoFound;
+                mPopError = ErrorNoValidServerFound;
             }
         }
     
@@ -122,7 +122,7 @@ bool AccountValidator::setup()
             if (provider->smtpServices()->count() > 0) {
                 mSmtpServices = provider->smtpServices();
             } else {
-                mSmtpError = ErrorNoInfoFound;
+                mSmtpError = ErrorNoValidServerFound;
             }
     }
     }

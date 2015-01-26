@@ -250,7 +250,7 @@ namespace mailcore {
         ErrorNoop,
         ErrorGmailApplicationSpecificPasswordRequired, // 40
         ErrorServerDate,
-        ErrorNoInfoFound,
+        ErrorNoValidServerFound,
     };
     
     enum PartType {
