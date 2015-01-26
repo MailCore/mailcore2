@@ -106,7 +106,7 @@ bool AccountValidator::setup()
             if (provider->imapServices()->count() > 0) {
                 mImapServices = provider->imapServices();
             } else {
-                //mImapError = NewError? No Info found or provided;
+                mImapError = ErrorNoInfoFound;
             }
         }
     
@@ -114,7 +114,7 @@ bool AccountValidator::setup()
             if (provider->popServices()->count() > 0) {
                 mPopServices = provider->popServices();
             } else {
-                //mPopError = NewError? No Info found or provided
+                mPopError = ErrorNoInfoFound;
             }
         }
     
@@ -122,7 +122,7 @@ bool AccountValidator::setup()
             if (provider->smtpServices()->count() > 0) {
                 mSmtpServices = provider->smtpServices();
             } else {
-                //mSmtpError = NewError? No Info found or provided;
+                mSmtpError = ErrorNoInfoFound;
             }
     }
     }
