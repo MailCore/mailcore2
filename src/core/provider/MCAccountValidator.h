@@ -74,9 +74,9 @@ namespace mailcore {
         ErrorCode mPopError;
         ErrorCode mSmtpError;
         
-        bool setup();
+        void setup();
         void test();
-        MailProvider * VTMxRecordForHostname(String *hostname);
+        MailProvider * ResolveProviderUsingMXRecord(String *hostname);
         
         //indexs for services being tested
         int mCurrentServiceIndex;

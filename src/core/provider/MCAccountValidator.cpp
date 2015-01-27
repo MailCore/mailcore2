@@ -23,6 +23,14 @@
 
 using namespace mailcore;
 
+/* this is the service being tested */
+
+enum {
+    SERVICE_IMAP,  /* IMAP service */
+    SERVICE_POP,   /* POP  service */
+    SERVICE_SMTP,  /* SMTP service */
+};
+
 void AccountValidator::init()
 {
     mEmail = NULL;
@@ -65,8 +73,8 @@ AccountValidator::~AccountValidator()
 
 void AccountValidator::start()
 {
-    if (setup()) test();
-    else mCallback->operationFinished(this);
+    setup();
+    test();
 }
 
 void AccountValidator::operationFinished(Operation * op)
@@ -74,10 +82,10 @@ void AccountValidator::operationFinished(Operation * op)
     opCompleted();
 }
 
-bool AccountValidator::setup()
+void AccountValidator::setup()
 {
     if (mEmail == NULL) {
-        if (mUsername == NULL) return false;
+        if (mUsername == NULL) return;
         else mEmail = mUsername;
     }else if (mUsername == NULL){
         mUsername = mEmail;
@@ -91,58 +99,53 @@ bool AccountValidator::setup()
     
         components = mUsername->componentsSeparatedByString(MCSTR("@"));
         if (components->count() < 2)
-            return false;
+            return;
     
         domain = (String *) components->lastObject();
-        provider = VTMxRecordForHostname(domain);
+        provider = ResolveProviderUsingMXRecord(domain);
     }
     
     if (provider != NULL) {
         mIdentifier = provider->identifier();
-    
-        //If no custom Services have been set look for some in the provider
         
-        if (mImapServices->count() == 0) {
-            if (provider->imapServices()->count() > 0) {
-                mImapServices = provider->imapServices();
-            } else {
-                mImapError = ErrorNoValidServerFound;
-            }
-        }
-    
-        if (mPopServices->count() == 0) {
-            if (provider->popServices()->count() > 0) {
-                mPopServices = provider->popServices();
-            } else {
-                mPopError = ErrorNoValidServerFound;
-            }
-        }
-    
-        if (mSmtpServices->count() == 0) {
-            if (provider->smtpServices()->count() > 0) {
-                mSmtpServices = provider->smtpServices();
-            } else {
-                mSmtpError = ErrorNoValidServerFound;
-            }
-    }
+        if (mImapServices->count() == 0 and provider->imapServices()->count() > 0)
+            mImapServices = provider->imapServices();
+        
+        if (mPopServices->count() == 0 and provider->popServices()->count() > 0)
+            mPopServices = provider->popServices();
+        
+        if (mSmtpServices->count() == 0 and provider->smtpServices()->count() > 0)
+            mSmtpServices = provider->smtpServices();
     }
     
-    return (mImapServices->count() > 0 || mPopServices->count() > 0 || mSmtpServices->count() > 0);
+    if (mImapServices->count() == 0)
+        mImapError = ErrorNoValidServerFound;
+    
+    if (mPopServices->count() == 0)
+        mPopError = ErrorNoValidServerFound;
+    
+    if (mSmtpServices->count() == 0)
+        mSmtpError = ErrorNoValidServerFound;
 }
 
 void AccountValidator::opCompleted()
 {
-    if (mCurrentServiceTested == 0) {
-        mImapError = ((IMAPOperation *)mOperation)->error();
-        (mImapError == ErrorNone) ? mCurrentServiceTested ++ : mCurrentServiceIndex ++;
-    } else if (mCurrentServiceTested == 1) {
-        mPopError = ((POPOperation *)mOperation)->error();
-        (mPopError == ErrorNone) ? mCurrentServiceTested ++ : mCurrentServiceIndex ++;
-    } else if (mCurrentServiceTested == 2) {
-        mSmtpError = ((SMTPOperation *)mOperation)->error();
-        (mSmtpError == ErrorNone) ? mCurrentServiceTested ++ : mCurrentServiceIndex ++;
+    ErrorCode error = ErrorNone;
+    
+    if (mCurrentServiceTested == SERVICE_IMAP) {
+        error = mImapError = ((IMAPOperation *)mOperation)->error();
+    } else if (mCurrentServiceTested == SERVICE_POP) {
+        error = mPopError = ((POPOperation *)mOperation)->error();
+    } else if (mCurrentServiceTested == SERVICE_SMTP) {
+        error = mSmtpError = ((SMTPOperation *)mOperation)->error();
     }
-        
+    
+    if (error == ErrorNone) {
+        mCurrentServiceTested ++;
+    } else {
+        mCurrentServiceIndex ++;
+    }
+    
     test();
 }
 
@@ -155,7 +158,7 @@ void AccountValidator::opCompleted()
  */
 void AccountValidator::test()
 {
-    if (mCurrentServiceTested == 0) {
+    if (mCurrentServiceTested == SERVICE_IMAP) {
         if (mCurrentServiceIndex < mImapServices->count()) {
             IMAPAsyncSession *imapSession = new IMAPAsyncSession();
             imapSession->setUsername(mUsername);
@@ -171,11 +174,11 @@ void AccountValidator::test()
             mOperation->start();
         
         } else {
-            mCurrentServiceTested = 1;
+            mCurrentServiceTested = SERVICE_POP;
             mCurrentServiceIndex = 0;
             test();
         }
-    }else if (mCurrentServiceTested == 1){
+    }else if (mCurrentServiceTested == SERVICE_POP){
         if (mCurrentServiceIndex < mPopServices->count()) {
             POPAsyncSession *popSession = new POPAsyncSession();
             popSession->setUsername(mUsername);
@@ -190,11 +193,11 @@ void AccountValidator::test()
             mOperation->setCallback(this);
             mOperation->start();
         } else {
-            mCurrentServiceTested = 2;
+            mCurrentServiceTested = SERVICE_SMTP;
             mCurrentServiceIndex = 0;
             test();
         }
-    }else if (mCurrentServiceTested == 2){
+    }else if (mCurrentServiceTested == SERVICE_SMTP){
         if (mCurrentServiceIndex < mSmtpServices->count()) {
             SMTPAsyncSession *smtpSession = new SMTPAsyncSession();
             smtpSession->setUsername(mUsername);
@@ -217,7 +220,7 @@ void AccountValidator::test()
     }
 }
 
-MailProvider* AccountValidator::VTMxRecordForHostname(String *hostname)
+MailProvider* AccountValidator::ResolveProviderUsingMXRecord(String *hostname)
 {
     unsigned char response[NS_PACKETSZ];
     ns_msg handle;
