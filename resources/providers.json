@@ -985,7 +985,8 @@
             "live\\.de",
             "live\\.be",
             "live\\.com\\.ar",
-            "live\\.com\\.mx"
+            "live\\.com\\.mx",
+            "live\\.co\\.uk"
         ],
         "mailboxes":{
             "drafts":"Drafts",
