@@ -19,6 +19,8 @@ namespace mailcore {
     class NetService;
     class MailProvider;
     class IMAPOperation;
+    class ValidatorOperationQueueCallback;
+    class ResolveProviderUsingMXRecord;
     
     class MAILCORE_EXPORT AccountValidator : public Operation, public OperationCallback {
     public:
@@ -51,9 +53,12 @@ namespace mailcore {
         virtual ErrorCode smtpError();
         
         virtual void start();
+        virtual void cancel();
         
-        virtual void setCallback(OperationCallback * callback);
-        virtual OperationCallback * Callback();
+        virtual void setOperationQueueCallback(OperationQueueCallback * callback);
+        virtual OperationQueueCallback * operationQueueCallback();
+        virtual bool isOperationQueueRunning();
+        virtual void cancelAllOperations();
         
     private:
         String * mEmail; /* for SMTP */
@@ -74,9 +79,9 @@ namespace mailcore {
         ErrorCode mPopError;
         ErrorCode mSmtpError;
         
-        void setup();
+        MailProvider * mProvider;
+        
         void test();
-        MailProvider * ResolveProviderUsingMXRecord(String *hostname);
         
         //indexs for services being tested
         int mCurrentServiceIndex;
@@ -84,10 +89,18 @@ namespace mailcore {
         
         void init();
 
-        OperationCallback * mCallback;
         Operation * mOperation;
         void opCompleted();
         virtual void operationFinished(Operation * op);
+        
+        OperationQueue * mQueue;
+        ValidatorOperationQueueCallback * mQueueCallback;
+        OperationQueueCallback * mOperationQueueCallback;
+        ResolveProviderUsingMXRecord * mResolveMX;
+        
+    public://private
+        void setup();
+
     };
 }
 

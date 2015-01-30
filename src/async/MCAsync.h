@@ -14,5 +14,6 @@
 #include <MailCore/MCAsyncIMAP.h>
 #include <MailCore/MCAsyncPOP.h>
 #include <MailCore/MCAsyncNNTP.h>
+#include <MailCore/MCResolveProviderUsingMXRecord.h>
 
 #endif

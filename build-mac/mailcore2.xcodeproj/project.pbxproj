@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2744B16A1A7A4637009E9E67 /* MCResolveProviderUsingMXRecord.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2744B1681A7A4637009E9E67 /* MCResolveProviderUsingMXRecord.cpp */; };
+		2744B16B1A7A4637009E9E67 /* MCResolveProviderUsingMXRecord.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2744B1681A7A4637009E9E67 /* MCResolveProviderUsingMXRecord.cpp */; };
 		27478E801A764698004AE621 /* MCAccountValidator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27478E7E1A764698004AE621 /* MCAccountValidator.cpp */; };
 		27478E811A764699004AE621 /* MCAccountValidator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27478E7E1A764698004AE621 /* MCAccountValidator.cpp */; };
 		27478E841A7646F8004AE621 /* MCOAccountValidator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 27478E831A7646F8004AE621 /* MCOAccountValidator.mm */; };
@@ -15,6 +17,7 @@
 		27478E871A76475F004AE621 /* MCAccountValidator.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27478E7F1A764698004AE621 /* MCAccountValidator.h */; };
 		27478E881A7647AC004AE621 /* MCOAccountValidator.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27478E821A7646F8004AE621 /* MCOAccountValidator.h */; };
 		27478E891A7647AC004AE621 /* MCAccountValidator.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27478E7F1A764698004AE621 /* MCAccountValidator.h */; };
+		276A65D01A7B7E7D008722C2 /* MCResolveProviderUsingMXRecord.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2744B1691A7A4637009E9E67 /* MCResolveProviderUsingMXRecord.h */; };
 		27780C2E19CF9CD100C77E44 /* MCOFramework.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6BD28A9170BDB6B00A91AC1 /* MCOFramework.mm */; };
 		27780C3219CF9CD100C77E44 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6ED6D1917A1919500A4A14C /* Security.framework */; };
 		27780C3619CF9CD100C77E44 /* providers.json in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E7D172DBAF600E60AA3 /* providers.json */; };
@@ -1231,6 +1234,7 @@
 			dstPath = include/MailCore;
 			dstSubfolderSpec = 16;
 			files = (
+				276A65D01A7B7E7D008722C2 /* MCResolveProviderUsingMXRecord.h in CopyFiles */,
 				27478E881A7647AC004AE621 /* MCOAccountValidator.h in CopyFiles */,
 				27478E891A7647AC004AE621 /* MCAccountValidator.h in CopyFiles */,
 				C673EBEF1A46B44E00A53F7F /* MCIMAPFolderInfo.h in CopyFiles */,
@@ -1450,6 +1454,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2744B1681A7A4637009E9E67 /* MCResolveProviderUsingMXRecord.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MCResolveProviderUsingMXRecord.cpp; path = mx/MCResolveProviderUsingMXRecord.cpp; sourceTree = "<group>"; };
+		2744B1691A7A4637009E9E67 /* MCResolveProviderUsingMXRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCResolveProviderUsingMXRecord.h; path = mx/MCResolveProviderUsingMXRecord.h; sourceTree = "<group>"; };
 		27478E7E1A764698004AE621 /* MCAccountValidator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCAccountValidator.cpp; sourceTree = "<group>"; };
 		27478E7F1A764698004AE621 /* MCAccountValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAccountValidator.h; sourceTree = "<group>"; };
 		27478E821A7646F8004AE621 /* MCOAccountValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOAccountValidator.h; sourceTree = "<group>"; };
@@ -2143,6 +2149,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2744B1671A7A459C009E9E67 /* mx */ = {
+			isa = PBXGroup;
+			children = (
+				2744B1681A7A4637009E9E67 /* MCResolveProviderUsingMXRecord.cpp */,
+				2744B1691A7A4637009E9E67 /* MCResolveProviderUsingMXRecord.h */,
+			);
+			name = mx;
+			sourceTree = "<group>";
+		};
 		8491899A18C93F6E002063A3 /* nntp */ = {
 			isa = PBXGroup;
 			children = (
@@ -2475,6 +2490,7 @@
 				C64EA68D169E847800778456 /* pop */,
 				84D73728199BF61B005124E5 /* nntp */,
 				C64EA68E169E847800778456 /* smtp */,
+				2744B1671A7A459C009E9E67 /* mx */,
 				C64EA7E416A14A4500778456 /* MCAsync.h */,
 			);
 			path = async;
@@ -3473,6 +3489,7 @@
 				C64EA7DA16A1386600778456 /* MCSMTPOperation.cpp in Sources */,
 				C64EA7EA16A154B300778456 /* MCSMTPCheckAccountOperation.cpp in Sources */,
 				C64EA7F116A15A4D00778456 /* MCIMAPOperation.cpp in Sources */,
+				2744B16A1A7A4637009E9E67 /* MCResolveProviderUsingMXRecord.cpp in Sources */,
 				BDCD7CDB1A70771B0001DCC3 /* ucln_in.cpp in Sources */,
 				C64EA7F816A15A7800778456 /* MCIMAPCheckAccountOperation.cpp in Sources */,
 				943F1A9A17D964F600F0C798 /* MCIMAPConnectOperation.cpp in Sources */,
@@ -3743,6 +3760,7 @@
 				C6BA2BC01705F4E6003F0E9E /* MCSMTPSendWithDataOperation.cpp in Sources */,
 				C6BA2BC11705F4E6003F0E9E /* MCSMTPOperation.cpp in Sources */,
 				C6BA2BC21705F4E6003F0E9E /* MCSMTPCheckAccountOperation.cpp in Sources */,
+				2744B16B1A7A4637009E9E67 /* MCResolveProviderUsingMXRecord.cpp in Sources */,
 				BDCD7CDC1A70771B0001DCC3 /* ucln_in.cpp in Sources */,
 				C6BA2BC31705F4E6003F0E9E /* MCIMAPOperation.cpp in Sources */,
 				C6BA2BC41705F4E6003F0E9E /* MCIMAPCheckAccountOperation.cpp in Sources */,
@@ -3982,6 +4000,7 @@
 					"-ltidy",
 					"-lz",
 					"-ObjC",
+					"-lresolv",
 				);
 				PRODUCT_NAME = MailCore;
 				SDKROOT = iphoneos;
@@ -4009,6 +4028,7 @@
 					"-ltidy",
 					"-lz",
 					"-ObjC",
+					"-lresolv",
 				);
 				PRODUCT_NAME = MailCore;
 				SDKROOT = iphoneos;
@@ -4052,6 +4072,7 @@
 					"-ObjC",
 					"-lcrypto",
 					"-lssl",
+					"-lresolv",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -4091,6 +4112,7 @@
 					"-ObjC",
 					"-lcrypto",
 					"-lssl",
+					"-lresolv",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -4250,6 +4272,7 @@
 					"-all_load",
 					"-ltidy",
 					"-lz",
+					"-lresolv",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -4281,6 +4304,7 @@
 					"-all_load",
 					"-ltidy",
 					"-lz",
+					"-lresolv",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -4402,6 +4426,7 @@
 					"-all_load",
 					"-ltidy",
 					"-lz",
+					"-lresolv",
 				);
 				PRODUCT_NAME = MailCore;
 				SDKROOT = macosx;
@@ -4430,6 +4455,7 @@
 					"-all_load",
 					"-ltidy",
 					"-lz",
+					"-lresolv",
 				);
 				PRODUCT_NAME = MailCore;
 				SDKROOT = macosx;

@@ -17,9 +17,8 @@
 #include "MCIMAPOperation.h"
 #include "MCPOPOperation.h"
 #include "MCSMTPOperation.h"
-
-#include <arpa/inet.h>
-#include <resolv.h>
+#include "MCResolveProviderUsingMXRecord.h"
+#include "MCOperationQueueCallback.h"
 
 using namespace mailcore;
 
@@ -30,6 +29,35 @@ enum {
     SERVICE_POP,   /* POP  service */
     SERVICE_SMTP,  /* SMTP service */
 };
+
+namespace mailcore {
+    
+    class ValidatorOperationQueueCallback : public Object, public OperationQueueCallback {
+    public:
+        ValidatorOperationQueueCallback(AccountValidator * validator) {
+            mValidator = validator;
+        }
+        
+        virtual ~ValidatorOperationQueueCallback() {
+        }
+        
+        virtual void queueStartRunning() {
+            if (mValidator->operationQueueCallback() != NULL) {
+                mValidator->operationQueueCallback()->queueStartRunning();
+            }
+        }
+        
+        virtual void queueStoppedRunning() {
+            if (mValidator->operationQueueCallback() != NULL) {
+                mValidator->operationQueueCallback()->queueStoppedRunning();
+            }
+    
+            mValidator->setup();
+        }
+    private:
+        AccountValidator * mValidator;
+    };
+}
 
 void AccountValidator::init()
 {
@@ -52,6 +80,13 @@ void AccountValidator::init()
     
     mCurrentServiceIndex = 0;
     mCurrentServiceTested = 0;
+    
+    mProvider = NULL;
+    
+    mQueue = new OperationQueue();
+    mQueueCallback = new ValidatorOperationQueueCallback(this);
+    mQueue->setCallback(mQueueCallback);
+    mOperationQueueCallback = NULL;
 }
 
 AccountValidator::AccountValidator()
@@ -69,12 +104,46 @@ AccountValidator::~AccountValidator()
     MC_SAFE_RELEASE(mSmtpServices);
     MC_SAFE_RELEASE(mPopServices);
     MC_SAFE_RELEASE(mIdentifier);
+    MC_SAFE_RELEASE(mProvider);
 }
 
 void AccountValidator::start()
 {
-    setup();
-    test();
+    if (mEmail == NULL) {
+        if (mUsername == NULL) {
+            return;
+        }
+        else {
+            mEmail = mUsername;
+        }
+    }
+    else if (mUsername == NULL){
+        mUsername = mEmail;
+    }
+    
+    mProvider = MailProvidersManager::sharedManager()->providerForEmail(mUsername);
+    
+    if (mProvider == NULL) {
+        Array * components;
+        String * domain;
+        
+        components = mUsername->componentsSeparatedByString(MCSTR("@"));
+        if (components->count() >= 2) {
+            domain = (String *) components->lastObject();
+            mResolveMX = new ResolveProviderUsingMXRecord();
+            mResolveMX->setHostname(domain);
+            mQueue->addOperation(mResolveMX);
+        }
+    }
+    else{
+        setup();
+    }
+}
+
+void AccountValidator::cancel()
+{
+    mOperation->cancel();
+    Operation::cancel();
 }
 
 void AccountValidator::operationFinished(Operation * op)
@@ -84,38 +153,21 @@ void AccountValidator::operationFinished(Operation * op)
 
 void AccountValidator::setup()
 {
-    if (mEmail == NULL) {
-        if (mUsername == NULL) return;
-        else mEmail = mUsername;
-    }else if (mUsername == NULL){
-        mUsername = mEmail;
+    if (mResolveMX != NULL) {
+       mProvider = mResolveMX->provider();
     }
     
-    MailProvider *provider = MailProvidersManager::sharedManager()->providerForEmail(mUsername);
-    
-    if (provider == NULL) {
-        Array * components;
-        String * domain;
-    
-        components = mUsername->componentsSeparatedByString(MCSTR("@"));
-        if (components->count() < 2)
-            return;
-    
-        domain = (String *) components->lastObject();
-        provider = ResolveProviderUsingMXRecord(domain);
-    }
-    
-    if (provider != NULL) {
-        mIdentifier = provider->identifier();
+    if (mProvider != NULL) {
+        mIdentifier = mProvider->identifier();
         
-        if (mImapServices->count() == 0 and provider->imapServices()->count() > 0)
-            mImapServices = provider->imapServices();
+        if (mImapServices->count() == 0 and mProvider->imapServices()->count() > 0)
+            mImapServices = mProvider->imapServices();
         
-        if (mPopServices->count() == 0 and provider->popServices()->count() > 0)
-            mPopServices = provider->popServices();
+        if (mPopServices->count() == 0 and mProvider->popServices()->count() > 0)
+            mPopServices = mProvider->popServices();
         
-        if (mSmtpServices->count() == 0 and provider->smtpServices()->count() > 0)
-            mSmtpServices = provider->smtpServices();
+        if (mSmtpServices->count() == 0 and mProvider->smtpServices()->count() > 0)
+            mSmtpServices = mProvider->smtpServices();
     }
     
     if (mImapServices->count() == 0)
@@ -126,6 +178,8 @@ void AccountValidator::setup()
     
     if (mSmtpServices->count() == 0)
         mSmtpError = ErrorNoValidServerFound;
+    
+    test();
 }
 
 void AccountValidator::opCompleted()
@@ -133,16 +187,22 @@ void AccountValidator::opCompleted()
     ErrorCode error = ErrorNone;
     
     if (mCurrentServiceTested == SERVICE_IMAP) {
-        error = mImapError = ((IMAPOperation *)mOperation)->error();
-    } else if (mCurrentServiceTested == SERVICE_POP) {
-        error = mPopError = ((POPOperation *)mOperation)->error();
-    } else if (mCurrentServiceTested == SERVICE_SMTP) {
-        error = mSmtpError = ((SMTPOperation *)mOperation)->error();
+        mImapError = ((IMAPOperation *)mOperation)->error();
+        error = mImapError;
+    }
+    else if (mCurrentServiceTested == SERVICE_POP) {
+        mPopError = ((POPOperation *)mOperation)->error();
+        error = mPopError;
+    }
+    else if (mCurrentServiceTested == SERVICE_SMTP) {
+        mSmtpError = ((SMTPOperation *)mOperation)->error();
+        error = mSmtpError;
     }
     
     if (error == ErrorNone) {
         mCurrentServiceTested ++;
-    } else {
+    }
+    else {
         mCurrentServiceIndex ++;
     }
     
@@ -173,12 +233,14 @@ void AccountValidator::test()
             mOperation->setCallback(this);
             mOperation->start();
         
-        } else {
+        }
+        else {
             mCurrentServiceTested = SERVICE_POP;
             mCurrentServiceIndex = 0;
             test();
         }
-    }else if (mCurrentServiceTested == SERVICE_POP){
+    }
+    else if (mCurrentServiceTested == SERVICE_POP){
         if (mCurrentServiceIndex < mPopServices->count()) {
             POPAsyncSession *popSession = new POPAsyncSession();
             popSession->setUsername(mUsername);
@@ -192,12 +254,14 @@ void AccountValidator::test()
             mOperation = (POPOperation *)popSession->checkAccountOperation();
             mOperation->setCallback(this);
             mOperation->start();
-        } else {
+        }
+        else {
             mCurrentServiceTested = SERVICE_SMTP;
             mCurrentServiceIndex = 0;
             test();
         }
-    }else if (mCurrentServiceTested == SERVICE_SMTP){
+    }
+    else if (mCurrentServiceTested == SERVICE_SMTP){
         if (mCurrentServiceIndex < mSmtpServices->count()) {
             SMTPAsyncSession *smtpSession = new SMTPAsyncSession();
             smtpSession->setUsername(mUsername);
@@ -212,64 +276,15 @@ void AccountValidator::test()
             mOperation->setCallback(this);
             mOperation->start();
 
-        } else {
-           mCallback->operationFinished(this);
         }
-    } else {
-        mCallback->operationFinished(this);
+        else {
+           callback()->operationFinished(this);
+        }
+    }
+    else {
+        callback()->operationFinished(this);
     }
 }
-
-MailProvider* AccountValidator::ResolveProviderUsingMXRecord(String *hostname)
-{
-    unsigned char response[NS_PACKETSZ];
-    ns_msg handle;
-    ns_rr rr;
-    int len;
-    char dispbuf[4096];
-    
-    if ((len = res_search(MCUTF8(hostname), ns_c_in, ns_t_mx, response, sizeof(response))) < 0) {
-        /* WARN: res_search failed */
-        return nil;
-    }
-    
-    if (ns_initparse(response, len, &handle) < 0) {
-        return nil;
-    }
-    
-    len = ns_msg_count(handle, ns_s_an);
-    if (len < 0)
-        return nil;
-    
-    CFBundleRef mainBundle = CFBundleGetMainBundle();
-    CFURLRef imageURL = CFBundleCopyResourceURL(mainBundle, CFSTR("providers"), CFSTR("json"), NULL);
-    CFStringRef imagePath = CFURLCopyFileSystemPath(imageURL, kCFURLPOSIXPathStyle);
-    CFStringEncoding encodingMethod = CFStringGetSystemEncoding();
-    const char *path = CFStringGetCStringPtr(imagePath, encodingMethod);
-    
-    String * sPath = String::stringWithUTF8Characters(path);
-    
-    MailProvidersManager::sharedManager()->registerProvidersWithFilename(sPath);
-    
-    for (int ns_index = 0; ns_index < len; ns_index++) {
-        if (ns_parserr(&handle, ns_s_an, ns_index, &rr)) {
-            /* WARN: ns_parserr failed */
-            continue;
-        }
-        ns_sprintrr (&handle, &rr, NULL, NULL, dispbuf, sizeof (dispbuf));
-        if (ns_rr_class(rr) == ns_c_in and ns_rr_type(rr) == ns_t_mx) {
-            char mxname[4096];
-            dn_expand(ns_msg_base(handle), ns_msg_base(handle) + ns_msg_size(handle), ns_rr_rdata(rr) + NS_INT16SZ, mxname, sizeof(mxname));
-            String * str = String::stringWithUTF8Characters(mxname);
-            MailProvider *provider = MailProvidersManager::sharedManager()->providerForMX(str);
-            if (provider)
-                return provider;
-        }
-    }
-    
-    return nil;
-}
-
 
 void AccountValidator::setEmail(String * email)
 {
@@ -376,12 +391,22 @@ ErrorCode AccountValidator::smtpError()
     return mSmtpError;
 }
 
-void AccountValidator::setCallback(OperationCallback * callback)
+void POPAsyncSession::setOperationQueueCallback(OperationQueueCallback * callback)
 {
-    mCallback = callback;
+    mOperationQueueCallback = callback;
 }
 
-OperationCallback * AccountValidator::Callback()
+OperationQueueCallback * POPAsyncSession::operationQueueCallback()
 {
-    return mCallback;
+    return mOperationQueueCallback;
+}
+
+bool POPAsyncSession::isOperationQueueRunning()
+{
+    return mQueue->count() > 0;
+}
+
+void POPAsyncSession::cancelAllOperations()
+{
+    mQueue->cancelAllOperations();
 }
