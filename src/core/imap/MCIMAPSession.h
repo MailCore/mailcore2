@@ -86,8 +86,8 @@ namespace mailcore {
         virtual void appendMessageWithCustomFlagsAndDate(String * folder, Data * messageData, MessageFlag flags, Array * customFlags, time_t date,
                                                          IMAPProgressCallback * progressCallback, uint32_t * createdUID, ErrorCode * pError);
         
-        void copyMessages(String * folder, IndexSet * uidSet, String * destFolder,
-                          HashMap ** pUidMapping, ErrorCode * pError);
+        virtual void copyMessages(String * folder, IndexSet * uidSet, String * destFolder,
+                                  HashMap ** pUidMapping, ErrorCode * pError);
         
         virtual void expunge(String * folder, ErrorCode * pError);
         
@@ -155,7 +155,7 @@ namespace mailcore {
         
         virtual void login(ErrorCode * pError);
         
-        IMAPIdentity * identity(IMAPIdentity * clientIdentity, ErrorCode * pError);
+        virtual IMAPIdentity * identity(IMAPIdentity * clientIdentity, ErrorCode * pError);
         
         virtual IndexSet * capability(ErrorCode * pError);
         
