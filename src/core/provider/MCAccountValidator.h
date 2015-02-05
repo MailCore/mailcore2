@@ -15,12 +15,13 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-    
+
     class NetService;
     class MailProvider;
-    class IMAPOperation;
-    class ValidatorOperationQueueCallback;
-    class ResolveProviderUsingMXRecord;
+    class MXRecordResolverOperation;
+    class IMAPAsyncSession;
+    class POPAsyncSession;
+    class SMTPAsyncSession;
     
     class MAILCORE_EXPORT AccountValidator : public Operation, public OperationCallback {
     public:
@@ -55,11 +56,6 @@ namespace mailcore {
         virtual void start();
         virtual void cancel();
         
-        virtual void setOperationQueueCallback(OperationQueueCallback * callback);
-        virtual OperationQueueCallback * operationQueueCallback();
-        virtual bool isOperationQueueRunning();
-        virtual void cancelAllOperations();
-        
     private:
         String * mEmail; /* for SMTP */
         String * mUsername;
@@ -81,8 +77,13 @@ namespace mailcore {
         
         MailProvider * mProvider;
         
-        void test();
+        void resolveMX();
+        void resolveMXDone();
         
+        void startCheckingHosts();
+        void checkNextHost();
+        void checkNextHostDone();
+
         //indexs for services being tested
         int mCurrentServiceIndex;
         int mCurrentServiceTested;
@@ -90,17 +91,14 @@ namespace mailcore {
         void init();
 
         Operation * mOperation;
-        void opCompleted();
         virtual void operationFinished(Operation * op);
         
         OperationQueue * mQueue;
-        ValidatorOperationQueueCallback * mQueueCallback;
-        OperationQueueCallback * mOperationQueueCallback;
-        ResolveProviderUsingMXRecord * mResolveMX;
+        MXRecordResolverOperation * mResolveMX;
         
-    public://private
-        void setup();
-
+        IMAPAsyncSession * mImapSession;
+        POPAsyncSession * mPopSession;
+        SMTPAsyncSession * mSmtpSession;
     };
 }
 

@@ -17,23 +17,21 @@
 
 namespace mailcore {
     
-    class MailProvider;
-
-    class MAILCORE_EXPORT ResolveProviderUsingMXRecord : public Operation {
+    class MAILCORE_EXPORT MXRecordResolverOperation : public Operation {
     public:
-        ResolveProviderUsingMXRecord();
-        virtual ~ResolveProviderUsingMXRecord();
+        MXRecordResolverOperation();
+        virtual ~MXRecordResolverOperation();
         
         virtual void setHostname(String * hostname);
         virtual String * hostname();
         
-        virtual MailProvider * provider();
+        virtual Array * mxRecords();
         
     public: // subclass behavior
         virtual void main();
         
     private:
-        MailProvider * mProvider;
+        Array * mMXRecords;
         String * mHostname;
     };
 }

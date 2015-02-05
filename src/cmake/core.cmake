@@ -118,6 +118,7 @@ set(provider_files
   core/provider/MCMailProvidersManager.cpp
   core/provider/MCNetService.cpp
   core/provider/MCAccountValidator.cpp
+  core/provider/MCMXRecordResolverOperation.cpp
 )
 
 set(renderer_files

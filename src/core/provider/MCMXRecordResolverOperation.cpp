@@ -6,44 +6,42 @@
 //  Copyright (c) 2015 MailCore. All rights reserved.
 //
 
-#include "MCResolveProviderUsingMXRecord.h"
-
-#include "MCMailProvider.h"
-#include "MCMailProvidersManager.h"
+#include "MCMXRecordResolverOperation.h"
 
 #include <arpa/inet.h>
 #include <resolv.h>
 
 using namespace mailcore;
 
-ResolveProviderUsingMXRecord::ResolveProviderUsingMXRecord()
+MXRecordResolverOperation::MXRecordResolverOperation()
 {
     mHostname = NULL;
-    mProvider = NULL;
+    mMXRecords = NULL;
 }
 
-ResolveProviderUsingMXRecord::~ResolveProviderUsingMXRecord()
+MXRecordResolverOperation::~MXRecordResolverOperation()
 {
-     MC_SAFE_RELEASE(mProvider);
+     MC_SAFE_RELEASE(mMXRecords);
 }
 
-void ResolveProviderUsingMXRecord::setHostname(String * hostname)
+void MXRecordResolverOperation::setHostname(String * hostname)
 {
     MC_SAFE_REPLACE_COPY(String, mHostname, hostname);
 }
 
-String * ResolveProviderUsingMXRecord::hostname()
+String * MXRecordResolverOperation::hostname()
 {
     return mHostname;
 }
 
-MailProvider * ResolveProviderUsingMXRecord::provider()
+Array * MXRecordResolverOperation::mxRecords()
 {
-    return mProvider;
+    return mMXRecords;
 }
 
-void ResolveProviderUsingMXRecord::main()
+void MXRecordResolverOperation::main()
 {
+    mMXRecords = new Array();
     unsigned char response[NS_PACKETSZ];
     ns_msg handle;
     ns_rr rr;
@@ -54,16 +52,8 @@ void ResolveProviderUsingMXRecord::main()
         (ns_initparse(response, len, &handle) >= 0) and
         (ns_msg_count(handle, ns_s_an) >= 0)) {
     
-        CFBundleRef mainBundle = CFBundleGetMainBundle();
-        CFURLRef imageURL = CFBundleCopyResourceURL(mainBundle, CFSTR("providers"), CFSTR("json"), NULL);
-        CFStringRef imagePath = CFURLCopyFileSystemPath(imageURL, kCFURLPOSIXPathStyle);
-        CFStringEncoding encodingMethod = CFStringGetSystemEncoding();
-        const char *path = CFStringGetCStringPtr(imagePath, encodingMethod);
-    
-        String * sPath = String::stringWithUTF8Characters(path);
-    
-        MailProvidersManager::sharedManager()->registerProvidersWithFilename(sPath);
-    
+        
+        
         for (int ns_index = 0; ns_index < len; ns_index++) {
             if (ns_parserr(&handle, ns_s_an, ns_index, &rr)) {
                 /* WARN: ns_parserr failed */
@@ -74,9 +64,7 @@ void ResolveProviderUsingMXRecord::main()
                 char mxname[4096];
                 dn_expand(ns_msg_base(handle), ns_msg_base(handle) + ns_msg_size(handle), ns_rr_rdata(rr) + NS_INT16SZ, mxname, sizeof(mxname));
                 String * str = String::stringWithUTF8Characters(mxname);
-                MailProvider *provider = MailProvidersManager::sharedManager()->providerForMX(str);
-                if (provider)
-                    mProvider = provider;
+                mMXRecords->addObject(str);
             }
         }
     }

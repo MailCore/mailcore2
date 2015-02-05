@@ -74,6 +74,7 @@ core/provider/MCMailProvidersManager.h
 core/provider/MCMailProvider.h
 core/provider/MCNetService.h
 core/provider/MCAccountValidator.h
+core/provider/MCMXRecordResolverOperation.h
 async/MCAsync.h
 async/smtp/MCAsyncSMTP.h
 async/smtp/MCSMTPAsyncSession.h
@@ -116,7 +117,6 @@ async/nntp/MCNNTPListNewsgroupsOperation.h
 async/nntp/MCNNTPFetchOverviewOperation.h
 async/nntp/MCNNTPFetchServerTimeOperation.h
 async/nntp/MCNNTPOperationCallback.h
-async/mx/MCResolveProviderUsingMXRecord.h
 objc/MCObjC.h
 objc/utils/MCOUtils.h
 objc/utils/MCOObjectWrapper.h
