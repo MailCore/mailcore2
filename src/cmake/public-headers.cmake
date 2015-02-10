@@ -74,7 +74,6 @@ core/provider/MCMailProvidersManager.h
 core/provider/MCMailProvider.h
 core/provider/MCNetService.h
 core/provider/MCAccountValidator.h
-core/provider/MCMXRecordResolverOperation.h
 async/MCAsync.h
 async/smtp/MCAsyncSMTP.h
 async/smtp/MCSMTPAsyncSession.h

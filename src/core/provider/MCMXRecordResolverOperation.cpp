@@ -21,7 +21,8 @@ MXRecordResolverOperation::MXRecordResolverOperation()
 
 MXRecordResolverOperation::~MXRecordResolverOperation()
 {
-     MC_SAFE_RELEASE(mMXRecords);
+    MC_SAFE_RELEASE(mMXRecords);
+    MC_SAFE_RELEASE(mHostname);
 }
 
 void MXRecordResolverOperation::setHostname(String * hostname)

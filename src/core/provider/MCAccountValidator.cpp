@@ -153,18 +153,18 @@ void AccountValidator::resolveMX()
         mQueue = new OperationQueue();
         mQueue->addOperation(mResolveMX);
     }
+    else {
+        mImapError = ErrorNoValidServerFound;
+        mPopError = ErrorNoValidServerFound;
+        mSmtpError = ErrorNoValidServerFound;
+        
+        callback()->operationFinished(this);
+    }
 }
 
 void AccountValidator::resolveMXDone()
 {
     Array * mxRecords = mResolveMX->mxRecords();
-    
-    CFURLRef imageURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), CFSTR("providers"), CFSTR("json"), NULL);
-    CFStringRef imagePath = CFURLCopyFileSystemPath(imageURL, kCFURLPOSIXPathStyle);
-    const char *path = CFStringGetCStringPtr(imagePath, CFStringGetSystemEncoding());
-    String * sPath = String::stringWithUTF8Characters(path);
-    
-    MailProvidersManager::sharedManager()->registerProvidersWithFilename(sPath);
     
     mc_foreacharray(String, mxRecord, mxRecords) {
         MailProvider *provider = MailProvidersManager::sharedManager()->providerForMX(mxRecord);
