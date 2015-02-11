@@ -74,9 +74,9 @@ MCO_OBJC_SYNTHESIZE_STRING(setOAuth2Token, OAuth2Token)
 
 - (id) init
 {
-    mailcore::AccountValidator * msg = new mailcore::AccountValidator();
-    self = [self initWithMCValidator:msg];
-    msg->release();
+    mailcore::AccountValidator * validator = new mailcore::AccountValidator();
+    self = [self initWithMCValidator:validator];
+    validator->release();
     return self;
 }
 

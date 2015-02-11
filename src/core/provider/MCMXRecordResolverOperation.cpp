@@ -53,8 +53,6 @@ void MXRecordResolverOperation::main()
         (ns_initparse(response, len, &handle) >= 0) and
         (ns_msg_count(handle, ns_s_an) >= 0)) {
     
-        
-        
         for (int ns_index = 0; ns_index < len; ns_index++) {
             if (ns_parserr(&handle, ns_s_an, ns_index, &rr)) {
                 /* WARN: ns_parserr failed */

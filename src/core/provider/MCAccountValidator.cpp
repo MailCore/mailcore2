@@ -121,6 +121,9 @@ void AccountValidator::cancel()
     if (mQueue != NULL)
         mQueue->cancelAllOperations();
     
+    MC_SAFE_RELEASE(mOperation);
+    MC_SAFE_RELEASE(mResolveMX);
+    MC_SAFE_RELEASE(mQueue);
     MC_SAFE_RELEASE(mImapSession);
     MC_SAFE_RELEASE(mPopSession);
     MC_SAFE_RELEASE(mSmtpSession);
@@ -215,12 +218,9 @@ void AccountValidator::checkNextHost()
 {
     if (mCurrentServiceTested == SERVICE_IMAP) {
         if (mCurrentServiceIndex < mImapServices->count()) {
-            
-            if (mImapSession == NULL) {
-                mImapSession = new IMAPAsyncSession();
-                mImapSession->setUsername(mUsername);
-                mImapSession->setPassword(mPassword);
-            }
+            mImapSession = new IMAPAsyncSession();
+            mImapSession->setUsername(mUsername);
+            mImapSession->setPassword(mPassword);
             
             mImapServer = (NetService *) mImapServices->objectAtIndex(mCurrentServiceIndex);
             mImapSession->setHostname(mImapServer->hostname());
@@ -230,7 +230,6 @@ void AccountValidator::checkNextHost()
             mOperation = (IMAPOperation *)mImapSession->checkAccountOperation();
             mOperation->setCallback((OperationCallback *)this);
             mOperation->start();
-        
         }
         else {
             mCurrentServiceTested ++;
@@ -273,7 +272,6 @@ void AccountValidator::checkNextHost()
             mOperation =  (SMTPOperation *)smtpSession->checkAccountOperation(Address::addressWithMailbox(mEmail));
             mOperation->setCallback((OperationCallback *)this);
             mOperation->start();
-
         }
         else {
             mCurrentServiceTested ++;
@@ -282,8 +280,6 @@ void AccountValidator::checkNextHost()
         }
     }
     else {
-        MC_SAFE_RELEASE(mPopSession);
-        MC_SAFE_RELEASE(mSmtpSession);
         callback()->operationFinished(this);
     }
 }
@@ -295,15 +291,20 @@ void AccountValidator::checkNextHostDone()
     if (mCurrentServiceTested == SERVICE_IMAP) {
         mImapError = ((IMAPOperation *)mOperation)->error();
         error = mImapError;
+        MC_SAFE_RELEASE(mImapSession);
     }
     else if (mCurrentServiceTested == SERVICE_POP) {
         mPopError = ((POPOperation *)mOperation)->error();
         error = mPopError;
+        MC_SAFE_RELEASE(mPopSession);
     }
     else if (mCurrentServiceTested == SERVICE_SMTP) {
         mSmtpError = ((SMTPOperation *)mOperation)->error();
         error = mSmtpError;
+        MC_SAFE_RELEASE(mSmtpSession);
     }
+    
+    MC_SAFE_RELEASE(mOperation);
     
     if (error == ErrorNone) {
         mCurrentServiceTested ++;
