@@ -228,7 +228,7 @@ void AccountValidator::checkNextHost()
             mImapSession->setConnectionType(mImapServer->connectionType());
             
             mOperation = (IMAPOperation *)mImapSession->checkAccountOperation();
-            mOperation->setCallback((OperationCallback *)this);
+            mOperation->setCallback(this);
             mOperation->start();
         }
         else {
@@ -239,17 +239,17 @@ void AccountValidator::checkNextHost()
     }
     else if (mCurrentServiceTested == SERVICE_POP){
         if (mCurrentServiceIndex < mPopServices->count()) {
-            POPAsyncSession *popSession = new POPAsyncSession();
-            popSession->setUsername(mUsername);
-            popSession->setPassword(mPassword);
+            mPopSession = new POPAsyncSession();
+            mPopSession->setUsername(mUsername);
+            mPopSession->setPassword(mPassword);
             
             mPopServer = (NetService *) mPopServices->objectAtIndex(mCurrentServiceIndex);
-            popSession->setHostname(mPopServer->hostname());
-            popSession->setPort(mPopServer->port());
-            popSession->setConnectionType(mPopServer->connectionType());
+            mPopSession->setHostname(mPopServer->hostname());
+            mPopSession->setPort(mPopServer->port());
+            mPopSession->setConnectionType(mPopServer->connectionType());
             
-            mOperation = (POPOperation *)popSession->checkAccountOperation();
-            mOperation->setCallback((OperationCallback *)this);
+            mOperation = mPopSession->checkAccountOperation();
+            mOperation->setCallback(this);
             mOperation->start();
         }
         else {
@@ -260,17 +260,17 @@ void AccountValidator::checkNextHost()
     }
     else if (mCurrentServiceTested == SERVICE_SMTP){
         if (mCurrentServiceIndex < mSmtpServices->count()) {
-            SMTPAsyncSession *smtpSession = new SMTPAsyncSession();
-            smtpSession->setUsername(mUsername);
-            smtpSession->setPassword(mPassword);
+            mSmtpSession = new SMTPAsyncSession();
+            mSmtpSession->setUsername(mUsername);
+            mSmtpSession->setPassword(mPassword);
             
             mSmtpServer = (NetService *) mSmtpServices->objectAtIndex(mCurrentServiceIndex);
-            smtpSession->setHostname(mSmtpServer->hostname());
-            smtpSession->setPort(mSmtpServer->port());
-            smtpSession->setConnectionType(mSmtpServer->connectionType());
+            mSmtpSession->setHostname(mSmtpServer->hostname());
+            mSmtpSession->setPort(mSmtpServer->port());
+            mSmtpSession->setConnectionType(mSmtpServer->connectionType());
             
-            mOperation =  (SMTPOperation *)smtpSession->checkAccountOperation(Address::addressWithMailbox(mEmail));
-            mOperation->setCallback((OperationCallback *)this);
+            mOperation = mSmtpSession->checkAccountOperation(Address::addressWithMailbox(mEmail));
+            mOperation->setCallback(this);
             mOperation->start();
         }
         else {
@@ -303,8 +303,6 @@ void AccountValidator::checkNextHostDone()
         error = mSmtpError;
         MC_SAFE_RELEASE(mSmtpSession);
     }
-    
-    MC_SAFE_RELEASE(mOperation);
     
     if (error == ErrorNone) {
         mCurrentServiceTested ++;
