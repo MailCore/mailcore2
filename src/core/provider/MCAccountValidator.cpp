@@ -228,6 +228,7 @@ void AccountValidator::checkNextHost()
             mImapSession->setConnectionType(mImapServer->connectionType());
             
             mOperation = (IMAPOperation *)mImapSession->checkAccountOperation();
+            mOperation->retain();
             mOperation->setCallback(this);
             mOperation->start();
         }
@@ -249,6 +250,7 @@ void AccountValidator::checkNextHost()
             mPopSession->setConnectionType(mPopServer->connectionType());
             
             mOperation = mPopSession->checkAccountOperation();
+            mOperation->retain();
             mOperation->setCallback(this);
             mOperation->start();
         }
@@ -270,6 +272,7 @@ void AccountValidator::checkNextHost()
             mSmtpSession->setConnectionType(mSmtpServer->connectionType());
             
             mOperation = mSmtpSession->checkAccountOperation(Address::addressWithMailbox(mEmail));
+            mOperation->retain();
             mOperation->setCallback(this);
             mOperation->start();
         }
@@ -303,6 +306,8 @@ void AccountValidator::checkNextHostDone()
         error = mSmtpError;
         MC_SAFE_RELEASE(mSmtpSession);
     }
+    
+    MC_SAFE_RELEASE(mOperation);
     
     if (error == ErrorNone) {
         mCurrentServiceTested ++;
