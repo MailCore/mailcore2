@@ -18,7 +18,7 @@ namespace mailcore {
     
     class MessageHeader;
     
-    class POPFetchHeaderOperation : public POPOperation {
+    class MAILCORE_EXPORT POPFetchHeaderOperation : public POPOperation {
     public:
         POPFetchHeaderOperation();
         virtual ~POPFetchHeaderOperation();

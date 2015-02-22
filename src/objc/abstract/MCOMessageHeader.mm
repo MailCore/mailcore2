@@ -13,6 +13,7 @@
 
 #include "MCMessageHeader.h"
 #include "MCAddress.h"
+#include "MCDefines.h"
 
 #import "MCOUtils.h"
 #import "MCOAddress.h"

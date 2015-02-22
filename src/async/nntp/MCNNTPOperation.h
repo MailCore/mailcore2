@@ -20,7 +20,7 @@ namespace mailcore {
     class NNTPAsyncSession;
     class NNTPOperationCallback;
     
-    class NNTPOperation : public Operation, public NNTPProgressCallback {
+    class MAILCORE_EXPORT NNTPOperation : public Operation, public NNTPProgressCallback {
     public:
         NNTPOperation();
         virtual ~NNTPOperation();

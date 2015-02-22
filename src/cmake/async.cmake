@@ -1,68 +1,71 @@
 # Files to build
 
 set(async_imap_files
-  async/imap/MCIMAPAppendMessageOperation.cc
-  async/imap/MCIMAPAsyncConnection.cc
-  async/imap/MCIMAPAsyncSession.cc
-  async/imap/MCIMAPCapabilityOperation.cc
-  async/imap/MCIMAPCheckAccountOperation.cc
-  async/imap/MCIMAPConnectOperation.cc
-  async/imap/MCIMAPCopyMessagesOperation.cc
-  async/imap/MCIMAPCreateFolderOperation.cc
-  async/imap/MCIMAPDeleteFolderOperation.cc
-  async/imap/MCIMAPDisconnectOperation.cc
-  async/imap/MCIMAPExpungeOperation.cc
-  async/imap/MCIMAPFetchContentOperation.cc
-  async/imap/MCIMAPFetchFoldersOperation.cc
-  async/imap/MCIMAPFetchMessagesOperation.cc
-  async/imap/MCIMAPFetchNamespaceOperation.cc
-  async/imap/MCIMAPFolderInfoOperation.cc
-  async/imap/MCIMAPFolderStatusOperation.cc
-  async/imap/MCIMAPIdentityOperation.cc
-  async/imap/MCIMAPIdleOperation.cc
-  async/imap/MCIMAPMessageRenderingOperation.cc
-  async/imap/MCIMAPMultiDisconnectOperation.cc
-  async/imap/MCIMAPOperation.cc
-  async/imap/MCIMAPQuotaOperation.cc
-  async/imap/MCIMAPRenameFolderOperation.cc
-  async/imap/MCIMAPSearchOperation.cc
-  async/imap/MCIMAPStoreFlagsOperation.cc
-  async/imap/MCIMAPStoreLabelsOperation.cc
-  async/imap/MCIMAPSubscribeFolderOperation.cc
-  async/imap/MCIMAPNoopOperation.cc
+  async/imap/MCIMAPAppendMessageOperation.cpp
+  async/imap/MCIMAPAsyncConnection.cpp
+  async/imap/MCIMAPAsyncSession.cpp
+  async/imap/MCIMAPCapabilityOperation.cpp
+  async/imap/MCIMAPCheckAccountOperation.cpp
+  async/imap/MCIMAPConnectOperation.cpp
+  async/imap/MCIMAPCopyMessagesOperation.cpp
+  async/imap/MCIMAPCreateFolderOperation.cpp
+  async/imap/MCIMAPDeleteFolderOperation.cpp
+  async/imap/MCIMAPDisconnectOperation.cpp
+  async/imap/MCIMAPExpungeOperation.cpp
+  async/imap/MCIMAPFetchContentOperation.cpp
+  async/imap/MCIMAPFetchParsedContentOperation.cpp
+  async/imap/MCIMAPFetchFoldersOperation.cpp
+  async/imap/MCIMAPFetchMessagesOperation.cpp
+  async/imap/MCIMAPFetchNamespaceOperation.cpp
+  async/imap/MCIMAPFolderInfo.cpp
+  async/imap/MCIMAPFolderInfoOperation.cpp
+  async/imap/MCIMAPFolderStatusOperation.cpp
+  async/imap/MCIMAPIdentityOperation.cpp
+  async/imap/MCIMAPIdleOperation.cpp
+  async/imap/MCIMAPMessageRenderingOperation.cpp
+  async/imap/MCIMAPMultiDisconnectOperation.cpp
+  async/imap/MCIMAPOperation.cpp
+  async/imap/MCIMAPQuotaOperation.cpp
+  async/imap/MCIMAPRenameFolderOperation.cpp
+  async/imap/MCIMAPSearchOperation.cpp
+  async/imap/MCIMAPStoreFlagsOperation.cpp
+  async/imap/MCIMAPStoreLabelsOperation.cpp
+  async/imap/MCIMAPSubscribeFolderOperation.cpp
+  async/imap/MCIMAPNoopOperation.cpp
 )
 
 set(async_pop_files
-  async/pop/MCPOPAsyncSession.cc
-  async/pop/MCPOPCheckAccountOperation.cc
-  async/pop/MCPOPDeleteMessagesOperation.cc
-  async/pop/MCPOPFetchHeaderOperation.cc
-  async/pop/MCPOPFetchMessageOperation.cc
-  async/pop/MCPOPFetchMessagesOperation.cc
-  async/pop/MCPOPNoopOperation.cc
-  async/pop/MCPOPOperation.cc
+  async/pop/MCPOPAsyncSession.cpp
+  async/pop/MCPOPCheckAccountOperation.cpp
+  async/pop/MCPOPDeleteMessagesOperation.cpp
+  async/pop/MCPOPFetchHeaderOperation.cpp
+  async/pop/MCPOPFetchMessageOperation.cpp
+  async/pop/MCPOPFetchMessagesOperation.cpp
+  async/pop/MCPOPNoopOperation.cpp
+  async/pop/MCPOPOperation.cpp
 )
 
 set(async_smtp_files
-  async/smtp/MCSMTPAsyncSession.cc
-  async/smtp/MCSMTPCheckAccountOperation.cc
-  async/smtp/MCSMTPDisconnectOperation.cc
-  async/smtp/MCSMTPOperation.cc
-  async/smtp/MCSMTPSendWithDataOperation.cc
-  async/smtp/MCSMTPNoopOperation.cc
+  async/smtp/MCSMTPAsyncSession.cpp
+  async/smtp/MCSMTPCheckAccountOperation.cpp
+  async/smtp/MCSMTPDisconnectOperation.cpp
+  async/smtp/MCSMTPOperation.cpp
+  async/smtp/MCSMTPLoginOperation.cpp
+  async/smtp/MCSMTPSendWithDataOperation.cpp
+  async/smtp/MCSMTPNoopOperation.cpp
 )
 
 set(async_nntp_files
-  async/nntp/MCNNTPAsyncSession.cc
-  async/nntp/MCNNTPCheckAccountOperation.cc
-  async/nntp/MCNNTPDisconnectOperation.cc
-  async/nntp/MCNNTPFetchArticleOperation.cc
-  async/nntp/MCNNTPFetchAllArticlesOperation.cc
-  async/nntp/MCNNTPFetchHeaderOperation.cc
-  async/nntp/MCNNTPListNewsgroupsOperation.cc
-  async/nntp/MCNNTPFetchOverviewOperation.cc
-  async/nntp/MCNNTPFetchServerTimeOperation.cc
-  async/nntp/MCNNTPOperation.cc
+  async/nntp/MCNNTPAsyncSession.cpp
+  async/nntp/MCNNTPCheckAccountOperation.cpp
+  async/nntp/MCNNTPDisconnectOperation.cpp
+  async/nntp/MCNNTPFetchArticleOperation.cpp
+  async/nntp/MCNNTPFetchAllArticlesOperation.cpp
+  async/nntp/MCNNTPFetchHeaderOperation.cpp
+  async/nntp/MCNNTPListNewsgroupsOperation.cpp
+  async/nntp/MCNNTPFetchOverviewOperation.cpp
+  async/nntp/MCNNTPFetchServerTimeOperation.cpp
+  async/nntp/MCNNTPOperation.cpp
 )
 
 set(async_files

@@ -72,6 +72,12 @@
     else if (strcmp([self objCType], @encode(unsigned char)) == 0) {
         return mailcore::Value::valueWithUnsignedCharValue([nb unsignedCharValue]);
     }
+    else if (strcmp([self objCType], @encode(short)) == 0) {
+        return mailcore::Value::valueWithShortValue([nb shortValue]);
+    }
+    else if (strcmp([self objCType], @encode(unsigned short)) == 0) {
+        return mailcore::Value::valueWithUnsignedShortValue([nb unsignedShortValue]);
+    }
     else if (strcmp([self objCType], @encode(int)) == 0) {
         return mailcore::Value::valueWithIntValue([nb intValue]);
     }

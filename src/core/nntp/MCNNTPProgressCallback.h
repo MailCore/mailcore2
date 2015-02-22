@@ -4,11 +4,13 @@
 
 #ifdef __cplusplus
 
+#include <MailCore/MCUtils.h>
+
 namespace mailcore {
     
     class NNTPSession;
     
-    class NNTPProgressCallback {
+    class MAILCORE_EXPORT NNTPProgressCallback {
     public:
         virtual void bodyProgress(NNTPSession * session, unsigned int current, unsigned int maximum) {};
     };

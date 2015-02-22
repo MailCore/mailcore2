@@ -1,0 +1,17 @@
+From:Christopher Price<cp@denverboulder.com>
+To:help@sparrowmailapp.com
+Subject:The message could not be sent.
+Date:October 13, 2010 at 4:42:21 PM PDT
+
+
+Got this message when trying to email a 983Kb .gz file:
+
+The message could not be sent. The attachments of the message "Old ideasinharmony backup" are probably too large.
+
+Best,
+Christopher Price
+DenverBoulder.com(http://denverboulder.com/)
+O: 303-922-3000 x300 | C: 303-921-3850 | F: 303-302-0935
+
+
+

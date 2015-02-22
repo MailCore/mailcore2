@@ -16,7 +16,7 @@
 
 namespace mailcore {
     
-    class IMAPIdleOperation : public IMAPOperation {
+    class MAILCORE_EXPORT IMAPIdleOperation : public IMAPOperation {
     public:
         IMAPIdleOperation();
         virtual ~IMAPIdleOperation();
@@ -34,8 +34,8 @@ namespace mailcore {
         bool mSetupSuccess;
         bool mInterrupted;
         pthread_mutex_t mLock;
-        void prepare();
-        void unprepare();
+        void prepare(void * data);
+        void unprepare(void * data);
         bool isInterrupted();
     };
     

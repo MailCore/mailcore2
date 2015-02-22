@@ -12,7 +12,7 @@ namespace mailcore {
     class Attachment;
     class HTMLRendererTemplateCallback;
     
-    class MessageBuilder : public AbstractMessage {
+    class MAILCORE_EXPORT MessageBuilder : public AbstractMessage {
     public:
         MessageBuilder();
         virtual ~MessageBuilder();

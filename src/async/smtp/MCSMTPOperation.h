@@ -20,7 +20,7 @@ namespace mailcore {
     class SMTPAsyncSession;
     class SMTPOperationCallback;
     
-    class SMTPOperation : public Operation, public SMTPProgressCallback {
+    class MAILCORE_EXPORT SMTPOperation : public Operation, public SMTPProgressCallback {
     public:
         SMTPOperation();
         virtual ~SMTPOperation();

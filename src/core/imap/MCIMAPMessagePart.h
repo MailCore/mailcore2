@@ -8,7 +8,7 @@
 
 namespace mailcore {
     
-    class IMAPMessagePart : public AbstractMessagePart {
+    class MAILCORE_EXPORT IMAPMessagePart : public AbstractMessagePart {
     public:
         IMAPMessagePart();
         virtual ~IMAPMessagePart();

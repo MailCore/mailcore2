@@ -11,19 +11,26 @@ namespace mailcore {
     class AbstractPart;
     class MessageHeader;
     
-    class AbstractMessage : public Object {
+    class MAILCORE_EXPORT AbstractMessage : public Object {
     public:
         AbstractMessage();
         virtual ~AbstractMessage();
         
+        /** Header of the message. */
         virtual MessageHeader * header();
+        /** Set a header of the message. */
         virtual void setHeader(MessageHeader * header);
         
+        /** Returns a part matching the given contentID. */
         virtual AbstractPart * partForContentID(String * contentID);
+        /** Returns a part matching the given uniqueID */
         virtual AbstractPart * partForUniqueID(String * uniqueID);
         
+        /** Returns the list of attachments, not part of the content of the message. */
         virtual Array * /* AbstractPart */ attachments();
+        /** Returns the list of attachments that are shown inline in the content of the message. */
         virtual Array * /* AbstractPart */ htmlInlineAttachments();
+        /** Returns the list of the text parts required to render the message properly. */
         virtual Array * /* AbstractPart */ requiredPartsForRendering();
         
     public: //subclass behavior

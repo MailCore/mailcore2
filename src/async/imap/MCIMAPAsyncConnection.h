@@ -15,6 +15,7 @@ namespace mailcore {
     class IMAPCopyMessagesOperation;
     class IMAPFetchMessagesOperation;
     class IMAPFetchContentOperation;
+    class IMAPFetchParsedContentOperation;
     class IMAPIdleOperation;
     class IMAPFolderInfoOperation;
     class IMAPFolderStatusOperation;
@@ -33,7 +34,7 @@ namespace mailcore {
     class IMAPMessage;
     class IMAPIdentity;
     
-    class IMAPAsyncConnection : public Object {
+    class MAILCORE_EXPORT IMAPAsyncConnection : public Object {
     public:
         IMAPAsyncConnection();
         virtual ~IMAPAsyncConnection();

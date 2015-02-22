@@ -15,18 +15,20 @@
 #import "MCOOperation+Private.h"
 #import "MCONNTPFetchAllArticlesOperation.h"
 #import "MCONNTPOperation+Private.h"
+#include "MCOperationQueueCallback.h"
 
 using namespace mailcore;
 
 @interface MCONNTPSession ()
 
 - (void) _logWithSender:(void *)sender connectionType:(MCOConnectionLogType)logType data:(NSData *)data;
+- (void) _queueRunningChanged;
 
 @end
 
-class MCONNTPConnectionLoggerBridge : public Object, public ConnectionLogger {
+class MCONNTPCallbackBridge : public Object, public ConnectionLogger, public OperationQueueCallback {
 public:
-    MCONNTPConnectionLoggerBridge(MCONNTPSession * session)
+    MCONNTPCallbackBridge(MCONNTPSession * session)
     {
         mSession = session;
     }
@@ -35,7 +37,17 @@ public:
     {
         [mSession _logWithSender:sender connectionType:(MCOConnectionLogType)logType data:MCO_TO_OBJC(data)];
     }
-    
+
+    virtual void queueStartRunning()
+    {
+        [mSession _queueRunningChanged];
+    }
+
+    virtual void queueStoppedRunning()
+    {
+        [mSession _queueRunningChanged];
+    }
+
 private:
     MCONNTPSession * mSession;
 };
@@ -43,7 +55,8 @@ private:
 @implementation MCONNTPSession {
     mailcore::NNTPAsyncSession * _session;
     MCOConnectionLogger _connectionLogger;
-    MCONNTPConnectionLoggerBridge * _loggerBridge;
+    MCONNTPCallbackBridge * _callbackBridge;
+    MCOOperationQueueRunningChangeBlock _operationQueueRunningChangeBlock;
 }
 
 #define nativeType mailcore::NNTPAsyncSession
@@ -62,13 +75,13 @@ private:
     self = [super init];
     
     _session = new mailcore::NNTPAsyncSession();
-    _loggerBridge = new MCONNTPConnectionLoggerBridge(self);
+    _callbackBridge = new MCONNTPCallbackBridge(self);
     
     return self;
 }
 
 - (void)dealloc {
-    MC_SAFE_RELEASE(_loggerBridge);
+    MC_SAFE_RELEASE(_callbackBridge);
     [_connectionLogger release];
     _session->setConnectionLogger(NULL);
     _session->release();
@@ -90,7 +103,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
     _connectionLogger = [connectionLogger copy];
     
     if (_connectionLogger != nil) {
-        _session->setConnectionLogger(_loggerBridge);
+        _session->setConnectionLogger(_callbackBridge);
     }
     else {
         _session->setConnectionLogger(NULL);
@@ -100,6 +113,29 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
 - (MCOConnectionLogger) connectionLogger
 {
     return _connectionLogger;
+}
+
+- (void) setOperationQueueRunningChangeBlock:(MCOOperationQueueRunningChangeBlock)operationQueueRunningChangeBlock
+{
+    [_operationQueueRunningChangeBlock release];
+    _operationQueueRunningChangeBlock = [operationQueueRunningChangeBlock copy];
+
+    if (_operationQueueRunningChangeBlock != nil) {
+        _session->setOperationQueueCallback(_callbackBridge);
+    }
+    else {
+        _session->setOperationQueueCallback(NULL);
+    }
+}
+
+- (MCOOperationQueueRunningChangeBlock) operationQueueRunningChangeBlock
+{
+    return _operationQueueRunningChangeBlock;
+}
+
+- (void) cancelAllOperations
+{
+    MCO_NATIVE_INSTANCE->cancelAllOperations();
 }
 
 #pragma mark - Operations
@@ -180,6 +216,19 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
 - (void) _logWithSender:(void *)sender connectionType:(MCOConnectionLogType)logType data:(NSData *)data
 {
     _connectionLogger(sender, logType, data);
+}
+
+- (void) _queueRunningChanged
+{
+    if (_operationQueueRunningChangeBlock == NULL)
+        return;
+
+    _operationQueueRunningChangeBlock();
+}
+
+- (BOOL) isOperationQueueRunning
+{
+    return _session->isOperationQueueRunning();
 }
 
 @end

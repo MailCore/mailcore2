@@ -16,7 +16,7 @@
 
 namespace mailcore {
     
-    class IMAPFetchNamespaceOperation : public IMAPOperation {
+    class MAILCORE_EXPORT IMAPFetchNamespaceOperation : public IMAPOperation {
     public:
         IMAPFetchNamespaceOperation();
         virtual ~IMAPFetchNamespaceOperation();

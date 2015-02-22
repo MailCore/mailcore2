@@ -16,7 +16,7 @@
 
 namespace mailcore {
     
-    class IMAPConnectOperation : public IMAPOperation {
+    class MAILCORE_EXPORT IMAPConnectOperation : public IMAPOperation {
     public: // subclass behavior
         virtual void main();
     };

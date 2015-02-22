@@ -5,13 +5,12 @@
 #include <pthread.h>
 #if __APPLE__
 #include <dispatch/dispatch.h>
+#include <libkern/OSAtomic.h>
 #endif
 
-#ifdef __cplusplus
+#include <MailCore/MCUtils.h>
 
-#define MC_PROPERTY(mcType, setter, getter) \
-    virtual void setter(mcType * getter); \
-    virtual mcType * getter();
+#ifdef __cplusplus
 
 namespace mailcore {
     
@@ -20,7 +19,7 @@ namespace mailcore {
     class String;
     class HashMap;
     
-    class Object {
+    class MAILCORE_EXPORT Object {
     public:
         Object();
         virtual ~Object();
@@ -58,7 +57,11 @@ namespace mailcore {
     public: // private
         
     private:
+#if __APPLE__
+        OSSpinLock mLock;
+#else
         pthread_mutex_t mLock;
+#endif
         int mCounter;
         void init();
         static void initObjectConstructors();

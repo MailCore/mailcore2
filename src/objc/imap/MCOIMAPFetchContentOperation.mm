@@ -61,7 +61,7 @@ typedef void (^CompletionType)(NSError *error, NSData * data);
     
     nativeType *op = MCO_NATIVE_INSTANCE;
     if (op->error() == mailcore::ErrorNone) {
-        _completionBlock(nil, MCO_TO_OBJC(op->data()));
+        _completionBlock(nil, (NSData *) op->data()->destructiveNSData());
     } else {
         _completionBlock([NSError mco_errorWithErrorCode:op->error()], nil);
     }

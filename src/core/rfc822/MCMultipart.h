@@ -9,7 +9,7 @@
 
 namespace mailcore {
     
-    class Multipart : public AbstractMultipart {
+    class MAILCORE_EXPORT Multipart : public AbstractMultipart {
     public:
         Multipart();
         virtual ~Multipart();

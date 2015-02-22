@@ -16,7 +16,6 @@
 #import <MailCore/NSDictionary+MCO.h>
 #import <MailCore/NSArray+MCO.h>
 #import <MailCore/NSObject+MCO.h>
-#import <MailCore/MCOObjectWrapper.h>
 #import <MailCore/NSError+MCO.h>
 #import <MailCore/NSValue+MCO.h>
 #import <MailCore/MCOOperation.h>

@@ -16,7 +16,7 @@
 
 namespace mailcore {
     
-    class POPNoopOperation : public POPOperation {
+    class MAILCORE_EXPORT POPNoopOperation : public POPOperation {
     public:
         POPNoopOperation();
         virtual ~POPNoopOperation();

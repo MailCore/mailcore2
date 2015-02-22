@@ -1,0 +1,55 @@
+Delivered-To: help@sparrowmailapp.com
+Received: by 10.231.186.84 with SMTP id cr20cs286369ibb;
+        Wed, 13 Oct 2010 16:42:29 -0700 (PDT)
+Received: by 10.90.35.15 with SMTP id i15mr4402946agi.96.1287013348660;
+        Wed, 13 Oct 2010 16:42:28 -0700 (PDT)
+Return-Path: <cp@denverboulder.com>
+Received: from mail-yw0-f49.google.com (mail-yw0-f49.google.com [209.85.213.49])
+        by mx.google.com with ESMTP id x31si9301516ana.74.2010.10.13.16.42.28;
+        Wed, 13 Oct 2010 16:42:28 -0700 (PDT)
+Received-SPF: neutral (google.com: 209.85.213.49 is neither permitted nor denied by best guess record for domain of cp@denverboulder.com) client-ip=209.85.213.49;
+Authentication-Results: mx.google.com; spf=neutral (google.com: 209.85.213.49 is neither permitted nor denied by best guess record for domain of cp@denverboulder.com) smtp.mail=cp@denverboulder.com
+Received: by ywp6 with SMTP id 6so265201ywp.22
+        for <help@sparrowmailapp.com>; Wed, 13 Oct 2010 16:42:28 -0700 (PDT)
+Received: by 10.151.108.9 with SMTP id k9mr2056398ybm.269.1287013347289;
+        Wed, 13 Oct 2010 16:42:27 -0700 (PDT)
+Return-Path: <cp@denverboulder.com>
+Received: from localhost ([64.134.124.57])
+        by mx.google.com with ESMTPS id p38sm168130ybk.4.2010.10.13.16.42.24
+        (version=TLSv1/SSLv3 cipher=RC4-MD5);
+        Wed, 13 Oct 2010 16:42:26 -0700 (PDT)
+Date: Wed, 13 Oct 2010 17:42:21 -0600
+From: Christopher Price <cp@denverboulder.com>
+To: help@sparrowmailapp.com
+Message-ID: <1F0DD955DD704D97890F50B275975BAC@denverboulder.com>
+Subject: The message could not be sent.
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="4cb643dd_3c622f2_761"
+Content-Transfer-Encoding: 8bit
+
+--4cb643dd_3c622f2_761
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Content-Disposition: inline
+
+
+			Got this message when trying to email a 983Kb .gz file:
+			The message could not be sent. The attachments of the message "Old ideasinharmony backup" are probably too large.
+		
+        Best,Christopher PriceDenverBoulder.comO: 303-922-3000 x300 | C: 303-921-3850 | F: 303-302-0935
+--4cb643dd_3c622f2_761
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Content-Disposition: inline
+
+
+		<div>
+			Got this message when trying to email a 983Kb .gz file:</div><div><br>
+			The message could not be sent. The attachments of the message "Old ideasinharmony backup" are probably too large.
+		</div>
+        <div id="A2ED43A2787F4779BE7275D608757D2B"><div><br></div><div><div>Best,</div><img src="http://christopherprice.com/images/christopher.gif"><div>Christopher Price</div><div><a href="http://denverboulder.com/">DenverBoulder.com</a></div><div>O: 303-922-3000 x300 | C: 303-921-3850 | F: 303-302-0935</div></div></div>
+    
+
+
+--4cb643dd_3c622f2_761--
+

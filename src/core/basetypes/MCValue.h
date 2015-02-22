@@ -29,13 +29,15 @@ namespace mailcore {
         ValueTypeData,
     };
     
-    class Value : public Object {
+    class MAILCORE_EXPORT Value : public Object {
     public:
         virtual ~Value();
         
         static Value * valueWithBoolValue(bool value);
         static Value * valueWithCharValue(char value);
         static Value * valueWithUnsignedCharValue(unsigned char value);
+        static Value * valueWithShortValue(short value);
+        static Value * valueWithUnsignedShortValue(unsigned short value);
         static Value * valueWithIntValue(int value);
         static Value * valueWithUnsignedIntValue(unsigned int value);
         static Value * valueWithLongValue(long value);

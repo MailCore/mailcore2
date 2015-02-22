@@ -22,7 +22,7 @@ namespace mailcore {
     class HTMLRendererTemplateCallback;
     class HTMLRendererIMAPCallback;
     
-    class HTMLRenderer {
+    class MAILCORE_EXPORT HTMLRenderer {
     public:
         static String * htmlForRFC822Message(MessageParser * message,
                                              HTMLRendererTemplateCallback * htmlCallback);

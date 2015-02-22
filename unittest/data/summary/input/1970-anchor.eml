@@ -1,0 +1,3789 @@
+Delivered-To: max@maxfenton.com
+Received: by 10.204.119.14 with SMTP id x14cs424311bkq;
+        Fri, 21 Jan 2011 01:26:59 -0800 (PST)
+Received: by 10.42.172.1 with SMTP id l1mr455641icz.111.1295602017415;
+        Fri, 21 Jan 2011 01:26:57 -0800 (PST)
+Return-Path: <sentto-18869257-2057-1295602014-max=maxfenton.com@returns.groups.yahoo.com>
+Received: from n68d.bullet.mail.sp1.yahoo.com (n68d.bullet.mail.sp1.yahoo.com [98.136.45.93])
+        by mx.google.com with SMTP id y11si9923027vbn.25.2011.01.21.01.26.54;
+        Fri, 21 Jan 2011 01:26:56 -0800 (PST)
+Received-SPF: pass (google.com: manual fallback record for domain of sentto-18869257-2057-1295602014-max=maxfenton.com@returns.groups.yahoo.com designates 98.136.45.93 as permitted sender) client-ip=98.136.45.93;
+Authentication-Results: mx.google.com; spf=pass (google.com: manual fallback record for domain of sentto-18869257-2057-1295602014-max=maxfenton.com@returns.groups.yahoo.com designates 98.136.45.93 as permitted sender) smtp.mail=sentto-18869257-2057-1295602014-max=maxfenton.com@returns.groups.yahoo.com; dkim=pass header.i=@yahoogroups.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoogroups.com; s=lima; t=1295602014; bh=4T6DQ/jjkIQ7aO53ydvoch81IrY0e+3wclrD705WDNM=; h=Received:Received:X-Yahoo-Newman-Id:MIME-Version:Message-ID:Mailing-List:Delivered-To:List-Id:Precedence:List-Unsubscribe:Date:From:To:Subject:X-Yahoo-Newman-Property:Reply-To:Content-Type:Content-Transfer-Encoding; b=Kmx6+Z2n3y7PeRmc/Hx2bmpKbPMqzqtFRFQqZhGpxGErMJ1I1Vz6I+MdrglRDXhwHv5uKOn4G+tAy2OI7fJ/q9OI8gZMdIt4gPwu5m61BzOewVsKBgEVDDicKhDCD6Bl
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=lima; d=yahoogroups.com;
+	b=MVp4TW/unx5Y6GLkO968DHBb/tSQUAoHQKkdJNFROjQOCKp2wrsMzEnbo3f8hL0O9OtTeMn1K6g71Y6ksyX/raqPCa8S6RLuOqul9JeLbgpjn7GRhLnLTPsBjBuwvCWA;
+Received: from [69.147.65.172] by n68.bullet.mail.sp1.yahoo.com with NNFMP; 21 Jan 2011 09:26:54 -0000
+Received: from [98.137.34.37] by t14.bullet.mail.sp1.yahoo.com with NNFMP; 21 Jan 2011 09:26:54 -0000
+X-Yahoo-Newman-Id: 18869257-d2057
+MIME-Version: 1.0
+Message-ID: <1295602014.866.82148.m1@yahoogroups.com>
+Mailing-List: list frieNDA@yahoogroups.com; contact frieNDA-owner@yahoogroups.com
+Delivered-To: mailing list frieNDA@yahoogroups.com
+List-Id: <frieNDA.yahoogroups.com>
+Precedence: bulk
+List-Unsubscribe: <mailto:frieNDA-unsubscribe@yahoogroups.com>
+Date: 21 Jan 2011 09:26:54 -0000
+From: frieNDA@yahoogroups.com
+To: frieNDA@yahoogroups.com
+Subject: [frieNDA] Digest Number 2057
+X-Yahoo-Newman-Property: groups-digest-ff-m
+Reply-To: "No Reply"<notify-dg-frieNDA@yahoogroups.com>
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.=
+w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<style type=3D"text/css">
+<!--
+#ygrp-mlmsg {font-size:13px; font-family: arial,helvetica,clean,sans-serif;=
+*font-size:small;*font:x-small;}
+#ygrp-mlmsg table{font-size:inherit; font:100%;}
+#ygrp-mlmsg select, input, textarea{font:99% arial,helvetica,clean,sans-ser=
+if;}
+#ygrp-mlmsg pre, code{font:115% monospace; *font-size:100%;}
+#ygrp-mlmsg * {line-height:1.22em;}
+#ygrp-mlmsg a{color:#1e66ae;}
+#ygrp-mlmsg{width:715px;}=20
+#ygrp-mlmsg #ygrp-banner p{ float: right; margin: .5em 0 0 0; font: italic =
+77% Arial; color: #fff;}
+
+#ygrp-msg{
+   width: 532px;
+   float: left;
+   padding: 0 20px 0 0;
+   margin-bottom: 10px;
+}
+#ygrp-msg .new{color:#ff8000;}
+#ygrp-msg .action{
+   font-weight:bold;
+   text-align:center;
+   clear:both;
+   padding:20px 0;
+   border-bottom:4px solid #eee;
+}
+#ygrp-msg #ygrp-detail dl{
+   margin: 0;
+}
+#ygrp-msg #ygrp-detail dd{
+    border-bottom: 4px solid #ccc;
+    margin-left: 25px;
+}
+#ygrp-msg #ygrp-detail dd, #ygrp-msg #ygrp-detail dt{
+   padding-top:20px;
+   margin-top:0;
+}
+#ygrp-msg #ygrp-detail dt{
+   display: block;
+   float: left;
+   font-size: 92%;
+}
+#ygrp-msg #ygrp-detail h2 a {
+   text-decoration:none;
+}
+
+div#ygrp-detail dl.first dd.last p a {
+  margin-right: 10px;
+  font-family: Verdana;
+  font-size: 10px;
+  color: #628C2A;
+}
+
+dd.last p span.yshortcuts {
+  margin-right: 0;
+}
+
+#ygrp-msg p#attach-count {
+  clear: both;
+  padding: 15px 0 3px 0;
+  overflow: hidden;
+}=20
+
+#ygrp-msg p#attach-count span {
+  color: #1E66AE;
+  font-weight: bold;
+}
+
+#ygrp-msg #ygrp-detail .ygrp-photo-title {
+  clear: both;
+  font-size: smaller;
+  height: 12px;
+  overflow: hidden;
+  text-align: center;
+  width: 72px;
+}
+
+#ygrp-msg #ygrp-detail div.photo-title=20
+a,
+div.photo-title a:active,
+div.photo-title a:hover,
+div.photo-title a:visited {=20
+    text-decoration: none;=20
+}=20
+#ygrp-msg #ygrp-detail div.file-title=20
+a,
+div.file-title a:active,
+div.file-title a:hover,
+div.file-title a:visited {=20
+    text-decoration: none;=20
+}=20
+
+div#ygrp-mlmsg #ygrp-msg div#ygrp-detail dl.first dd.last p a span.yshortcu=
+ts {
+  font-family: Verdana;
+  font-size: 10px;
+  font-weight: normal;
+}
+
+#ygrp-msg #ygrp-detail div.attach-table div {
+    float: left;
+    margin: 2px 0;
+}
+
+#ygrp-msg #ygrp-detail div.attach-table div.attach-row {
+  clear: both;
+  float: left;
+}
+
+#ygrp-msg #ygrp-detail div.attach-table div div a {
+    text-decoration: none;
+}
+
+#ygrp-msg #ygrp-detail div.attach-table div div span {
+    font-weight: normal;
+}
+
+table a,a:hover,a:focus,a:active {
+  text-decoration: none;
+}
+
+#ygrp-sponsor #hd{
+   color: #999;
+   font-size: 77%;
+}
+#ygrp-sponsor #ov{
+   padding: 6px 13px;
+   background-color: #e0ecee;
+   margin-bottom: 20px;
+}
+#ygrp-sponsor #ov ul{
+   padding: 0 0 0 8px;
+   margin: 0;
+}
+#ygrp-sponsor #ov li{
+   list-style-type: square;
+   padding: 6px 0;
+   font-size: 77%;
+}
+#ygrp-sponsor #ov li a{
+   text-decoration: none;
+   font-size: 130%;
+}
+
+#ygrp-sponsor #nc {
+    background-color: #eee;
+    margin-bottom: 20px;
+    padding: 0 8px;
+}
+
+#ygrp-sponsor .ad #hd1{
+    font-family: Arial;
+    font-weight: bold;
+    color: #628c2a;
+    font-size: 100%;
+    line-height: 122%;
+}
+
+#ygrp-sponsor #nc .ad p {
+  font-weight: normal;
+}
+
+#ygrp-sponsor #nc .ad p {
+  font-weight: normal;
+}
+
+#ygrp-sponsor .ad{
+   padding: 8px 0;
+}
+#ygrp-sponsor .ad a{
+   text-decoration: none;
+}
+#ygrp-sponsor .ad a:hover{
+   text-decoration: underline;
+}
+#ygrp-sponsor .ad p{
+   margin: 0;
+}
+
+#ygrp-vital ul{
+    padding: 0;
+    margin: 2px 0;
+}
+
+#ygrp-vital a {
+	text-decoration: none;
+}
+
+#ygrp-vital a:hover{
+  text-decoration: underline;
+}
+
+#ygrp-vitnav a{padding:0 3px;}
+
+#ygrp-msg .last, #ygrp-msg #ygrp-detail dd.last{border:0;}
+
+#ygrp-msg #ygrp-detail dl.first{ border-top:0; }
+#ygrp-msg #ygrp-detail dl.last{ border-bottom:0; }
+
+#ygrp-mkp {
+  border: 1px solid #d8d8d8;
+  font-family: Arial;
+  margin: 10px 0;
+  padding: 0 10px;
+}
+
+#ygrp-mkp hr {
+  border: 1px solid #d8d8d8;
+}
+
+#ygrp-mkp #hd {
+  color: #628c2a;
+  font-size: 85%;
+  font-weight: 700;
+  line-height: 122%;
+  margin: 10px 0;
+}
+
+#ygrp-mkp #ads {
+  margin-bottom: 10px;
+}
+
+#ygrp-mkp .ad {
+  padding: 0 0;
+}
+
+#ygrp-mkp .ad p {
+  margin: 0;
+}
+
+#ygrp-mkp .ad a {
+  color: #0000ff;
+  text-decoration: none;
+}
+#ygrp-sponsor #ygrp-lc {
+  font-family: Arial;
+}
+
+#ygrp-sponsor #ygrp-lc #hd {
+  margin: 10px 0px;
+  font-weight: 700;
+  font-size: 78%;
+  line-height: 122%;
+}
+
+#ygrp-sponsor #ygrp-lc .ad {
+  margin-bottom: 10px;
+  padding: 0 0;
+}
+-->
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=20=20
+
+
+
+
+
+
+
+
+
+
+
+<title>frieNDA</title>
+</head>
+<body style=3D"background-color: #ffffff;">
+ <div id=3D"ygrp-mlmsg" style=3D"width:655px; position:relative;">
+  <div  id=3D"ygrp-banner" style=3D"background-color:#295c7d; border:1px so=
+lid #7d9ebd; padding: 3px; margin-bottom: 10px; text-align:center;">
+    <a href=3D"http://groups.yahoo.com/group/frieNDA;_ylc=3DX3oDMTJlMDdsMjh=
+xBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OARzZWMDaGRyBH=
+NsawNocGgEc3RpbWUDMTI5NTYwMjAxMw--" style=3D"font-size: 136%; font-weight: =
+bold; color: #fff;">
+      frieNDA    </a>
+  </div>=20
+   <div id=3D"ygrp-msg" style=3D"width: 470px; margin:0; padding:0 25px 0 0=
+; float:left; z-index:1;">
+    <h1 style=3D"font-size:110%; font-weight:bold; padding:.3em 0; margin: =
+0; display: inline;">Messages In This Digest      (23=20
+              Messages)
+          </h1>
+    <div id=3D"ygrp-summary" style=3D"padding-bottom: 20px;">
+      <a name=3D"toc"></a>
+              <dl style=3D"padding-bottom: 5px; font-family: Verdana; margi=
+n: 5px 0;">=20
+                      <dt style=3D"display: block; float: left; font-size: =
+92%;">1a. </dt>=20
+<dd style=3D"margin-left: 25px; font-size: 77%; line-height:150%;">
+  <a href=3D"#1a" class=3D"ygrp-subj" style=3D"font-family: Georgia; text-d=
+ecoration: none; font-size: 120%; margin-right: 4px;"> Re: nda advice from =
+frienda?</a>
+  From:=20
+      Mark Stephen Meadows  </dd>
+                      <dt style=3D"display: block; float: left; font-size: =
+92%;">1b. </dt>=20
+<dd style=3D"margin-left: 25px; font-size: 77%; line-height:150%;">
+  <a href=3D"#1b" class=3D"ygrp-subj" style=3D"font-family: Georgia; text-d=
+ecoration: none; font-size: 120%; margin-right: 4px;"> Re: nda advice from =
+frienda?</a>
+  From:=20
+      Brian Wane  </dd>
+                      <dt style=3D"display: block; float: left; font-size: =
+92%;">1c. </dt>=20
+<dd style=3D"margin-left: 25px; font-size: 77%; line-height:150%;">
+  <a href=3D"#1c" class=3D"ygrp-subj" style=3D"font-family: Georgia; text-d=
+ecoration: none; font-size: 120%; margin-right: 4px;"> Re: nda advice from =
+frienda?</a>
+  From:=20
+      Chris Hecker  </dd>
+                      <dt style=3D"display: block; float: left; font-size: =
+92%;">1d. </dt>=20
+<dd style=3D"margin-left: 25px; font-size: 77%; line-height:150%;">
+  <a href=3D"#1d" class=3D"ygrp-subj" style=3D"font-family: Georgia; text-d=
+ecoration: none; font-size: 120%; margin-right: 4px;"> Re: nda advice from =
+frienda?</a>
+  From:=20
+      Elizabeth Goodman  </dd>
+                  </dl>
+              <dl style=3D"padding-bottom: 5px; font-family: Verdana; margi=
+n: 5px 0;">=20
+                      <dt style=3D"display: block; float: left; font-size: =
+92%;">2a. </dt>=20
+<dd style=3D"margin-left: 25px; font-size: 77%; line-height:150%;">
+  <a href=3D"#2a" class=3D"ygrp-subj" style=3D"font-family: Georgia; text-d=
+ecoration: none; font-size: 120%; margin-right: 4px;"> Re: summer intern - =
+know anyone?</a>
+  From:=20
+      Elizabeth Goodman  </dd>
+                  </dl>
+              <dl style=3D"padding-bottom: 5px; font-family: Verdana; margi=
+n: 5px 0;">=20
+                      <dt style=3D"display: block; float: left; font-size: =
+92%;">3a. </dt>=20
+<dd style=3D"margin-left: 25px; font-size: 77%; line-height:150%;">
+  <a href=3D"#3a" class=3D"ygrp-subj" style=3D"font-family: Georgia; text-d=
+ecoration: none; font-size: 120%; margin-right: 4px;"> Apple Reboot</a>
+  From:=20
+      Souris Hong-Porretta  </dd>
+                      <dt style=3D"display: block; float: left; font-size: =
+92%;">3b. </dt>=20
+<dd style=3D"margin-left: 25px; font-size: 77%; line-height:150%;">
+  <a href=3D"#3b" class=3D"ygrp-subj" style=3D"font-family: Georgia; text-d=
+ecoration: none; font-size: 120%; margin-right: 4px;"> Re: Apple Reboot</a>
+  From:=20
+      Daniel Terdiman  </dd>
+                      <dt style=3D"display: block; float: left; font-size: =
+92%;">3c. </dt>=20
+<dd style=3D"margin-left: 25px; font-size: 77%; line-height:150%;">
+  <a href=3D"#3c" class=3D"ygrp-subj" style=3D"font-family: Georgia; text-d=
+ecoration: none; font-size: 120%; margin-right: 4px;"> Re: Apple Reboot</a>
+  From:=20
+      Wiley Wiggins  </dd>
+                      <dt style=3D"display: block; float: left; font-size: =
+92%;">3d. </dt>=20
+<dd style=3D"margin-left: 25px; font-size: 77%; line-height:150%;">
+  <a href=3D"#3d" class=3D"ygrp-subj" style=3D"font-family: Georgia; text-d=
+ecoration: none; font-size: 120%; margin-right: 4px;"> Re: Apple Reboot</a>
+  From:=20
+      Wiley Wiggins  </dd>
+                      <dt style=3D"display: block; float: left; font-size: =
+92%;">3e. </dt>=20
+<dd style=3D"margin-left: 25px; font-size: 77%; line-height:150%;">
+  <a href=3D"#3e" class=3D"ygrp-subj" style=3D"font-family: Georgia; text-d=
+ecoration: none; font-size: 120%; margin-right: 4px;"> Re: Apple Reboot</a>
+  From:=20
+      Wiley Wiggins  </dd>
+                      <dt style=3D"display: block; float: left; font-size: =
+92%;">3f. </dt>=20
+<dd style=3D"margin-left: 25px; font-size: 77%; line-height:150%;">
+  <a href=3D"#3f" class=3D"ygrp-subj" style=3D"font-family: Georgia; text-d=
+ecoration: none; font-size: 120%; margin-right: 4px;"> Re: Apple Reboot</a>
+  From:=20
+      Rama Gottfried  </dd>
+                      <dt style=3D"display: block; float: left; font-size: =
+92%;">3g. </dt>=20
+<dd style=3D"margin-left: 25px; font-size: 77%; line-height:150%;">
+  <a href=3D"#3g" class=3D"ygrp-subj" style=3D"font-family: Georgia; text-d=
+ecoration: none; font-size: 120%; margin-right: 4px;"> Re: Apple Reboot</a>
+  From:=20
+      Wiley Wiggins  </dd>
+                      <dt style=3D"display: block; float: left; font-size: =
+92%;">3h. </dt>=20
+<dd style=3D"margin-left: 25px; font-size: 77%; line-height:150%;">
+  <a href=3D"#3h" class=3D"ygrp-subj" style=3D"font-family: Georgia; text-d=
+ecoration: none; font-size: 120%; margin-right: 4px;"> Re: Apple Reboot</a>
+  From:=20
+      L. Souris Hong-Porretta  </dd>
+                      <dt style=3D"display: block; float: left; font-size: =
+92%;">3i. </dt>=20
+<dd style=3D"margin-left: 25px; font-size: 77%; line-height:150%;">
+  <a href=3D"#3i" class=3D"ygrp-subj" style=3D"font-family: Georgia; text-d=
+ecoration: none; font-size: 120%; margin-right: 4px;"> Re: Apple Reboot</a>
+  From:=20
+      Daniel Terdiman  </dd>
+                  </dl>
+              <dl style=3D"padding-bottom: 5px; font-family: Verdana; margi=
+n: 5px 0;">=20
+                      <dt style=3D"display: block; float: left; font-size: =
+92%;">4a. </dt>=20
+<dd style=3D"margin-left: 25px; font-size: 77%; line-height:150%;">
+  <a href=3D"#4a" class=3D"ygrp-subj" style=3D"font-family: Georgia; text-d=
+ecoration: none; font-size: 120%; margin-right: 4px;"> APPLE APPS and GOATS=
+</a>
+  From:=20
+      Souris Hong-Porretta  </dd>
+                      <dt style=3D"display: block; float: left; font-size: =
+92%;">4b. </dt>=20
+<dd style=3D"margin-left: 25px; font-size: 77%; line-height:150%;">
+  <a href=3D"#4b" class=3D"ygrp-subj" style=3D"font-family: Georgia; text-d=
+ecoration: none; font-size: 120%; margin-right: 4px;"> Re: APPLE APPS and G=
+OATS</a>
+  From:=20
+      Jeannette Harshbarger  </dd>
+                      <dt style=3D"display: block; float: left; font-size: =
+92%;">4c. </dt>=20
+<dd style=3D"margin-left: 25px; font-size: 77%; line-height:150%;">
+  <a href=3D"#4c" class=3D"ygrp-subj" style=3D"font-family: Georgia; text-d=
+ecoration: none; font-size: 120%; margin-right: 4px;"> Re: APPLE APPS and G=
+OATS</a>
+  From:=20
+      L. Souris Hong-Porretta  </dd>
+                      <dt style=3D"display: block; float: left; font-size: =
+92%;">4d. </dt>=20
+<dd style=3D"margin-left: 25px; font-size: 77%; line-height:150%;">
+  <a href=3D"#4d" class=3D"ygrp-subj" style=3D"font-family: Georgia; text-d=
+ecoration: none; font-size: 120%; margin-right: 4px;"> Re: APPLE APPS and G=
+OATS</a>
+  From:=20
+      David Jacobs  </dd>
+                      <dt style=3D"display: block; float: left; font-size: =
+92%;">4e. </dt>=20
+<dd style=3D"margin-left: 25px; font-size: 77%; line-height:150%;">
+  <a href=3D"#4e" class=3D"ygrp-subj" style=3D"font-family: Georgia; text-d=
+ecoration: none; font-size: 120%; margin-right: 4px;"> Re: APPLE APPS and G=
+OATS</a>
+  From:=20
+      Jeannette Harshbarger  </dd>
+                      <dt style=3D"display: block; float: left; font-size: =
+92%;">4f. </dt>=20
+<dd style=3D"margin-left: 25px; font-size: 77%; line-height:150%;">
+  <a href=3D"#4f" class=3D"ygrp-subj" style=3D"font-family: Georgia; text-d=
+ecoration: none; font-size: 120%; margin-right: 4px;"> Re: APPLE APPS and G=
+OATS</a>
+  From:=20
+      Jeannette Harshbarger  </dd>
+                      <dt style=3D"display: block; float: left; font-size: =
+92%;">4g. </dt>=20
+<dd style=3D"margin-left: 25px; font-size: 77%; line-height:150%;">
+  <a href=3D"#4g" class=3D"ygrp-subj" style=3D"font-family: Georgia; text-d=
+ecoration: none; font-size: 120%; margin-right: 4px;"> Re: APPLE APPS and G=
+OATS</a>
+  From:=20
+      L. Souris Hong-Porretta  </dd>
+                      <dt style=3D"display: block; float: left; font-size: =
+92%;">4h. </dt>=20
+<dd style=3D"margin-left: 25px; font-size: 77%; line-height:150%;">
+  <a href=3D"#4h" class=3D"ygrp-subj" style=3D"font-family: Georgia; text-d=
+ecoration: none; font-size: 120%; margin-right: 4px;"> Re: APPLE APPS and G=
+OATS</a>
+  From:=20
+      Kim Pallister  </dd>
+                  </dl>
+              <dl style=3D"padding-bottom: 5px; font-family: Verdana; margi=
+n: 5px 0;">=20
+                      <dt style=3D"display: block; float: left; font-size: =
+92%;">5. </dt>=20
+<dd style=3D"margin-left: 25px; font-size: 77%; line-height:150%;">
+  <a href=3D"#5" class=3D"ygrp-subj" style=3D"font-family: Georgia; text-de=
+coration: none; font-size: 120%; margin-right: 4px;"> Fw: [frieNDA] iphone =
+apps</a>
+  From:=20
+      Jeannette Harshbarger  </dd>
+                  </dl>
+          </div>=20
+    <div style=3D"float:right; font-size:77%; display:inline; padding-top:5=
+px; font-weight:bold;">
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/messages;_ylc=3D=
+X3oDMTJnc2ozYWU0BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE=
+2OARzZWMDZG1zZwRzbGsDYXRwYwRzdGltZQMxMjk1NjAyMDE0?xm=3D1&m=3Dp&tidx=3D1">Vi=
+ew All Topics</a> | <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_=
+ylc=3DX3oDMTJnZ2owNGJkBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwN=
+zIxOTE2OARzZWMDZG1zZwRzbGsDbnRwYwRzdGltZQMxMjk1NjAyMDE0">Create New Topic</=
+a>
+        </div>=20
+  <h1 style=3D"font-size:110%; font-weight:bold; padding:.3em 0; margin: 0;=
+ display: inline;">
+           Messages       </h1>
+
+  <div id=3D"ygrp-detail">
+           <dl  class=3D"first">
+        <dt style=3D"display: block; float: left; font-size: 92%;">1a. </dt=
+>
+  <dd  style=3D"border-bottom: 4px solid #ccc;">=20
+    <h2 style=3D"font-size:100%; font-family:Georgia; font-weight:bold; mar=
+gin: 0 0 5px 0;">
+      <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20551;_ylc=
+=3DX3oDMTJzbWw5bmJiBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARtc2dJZAMyMDU1MQRzZWMDZG1zZwRzbGsDdm1zZwRzdGltZQMxMjk1NjAyMDE0" name=
+=3D"1a">=20
+        Re: nda advice from frienda?      </a>
+    </h2>
+    <h3 style=3D"font: 100% Arial; margin: 0;">Posted by:      "Mark Stephe=
+n Meadows"      <a href=3D"mailto:mark@markmeadows.com?Subject=3D Re%3A%20n=
+da%20advice%20from%20frienda%3F">
+      mark@markmeadows.com      </a>
+              &nbsp;
+        <a href=3D"http://profiles.yahoo.com/markstephenmeadows">
+          markstephenmeadows=20
+        </a>
+          </h3>
+    <h4 style=3D"font: 77% verdana; margin: 0 0 20px 0;">
+      Thu Jan&nbsp;20,&nbsp;2011 6:21&nbsp;am        (PST)    </h4>
+
+    <div class=3D"ygrp-content" style=3D"font-family:Georgia; font-size:100=
+%; line-height:122%;">
+                  <br><br>
+      <br>
+yeah, what mike said!<br>
+<br>
+an NDA is a bit of a class demarcation, like souris said (well,<br>
+or didn't, kinda).  and who wants to spend their time chasing a<br>
+breached NDA, anyway?  dirty lollipop syndrome!<br>
+<br>
+FrieNDA. Friend + NDA.  personal + legal. it's a double-trust<br>
+factor.  but, really, in the real world, the friend part is far<br>
+more important, more valuable, more interesting, and more<br>
+enforceable.  an NDA is just a patch-job for a reputation. i<br>
+think someone else kinda said that, too.<br>
+<br>
+i've had dozens of m/NDAs signed in my day (at Construct, then<br>
+Headcase / E&amp;S), and i never felt really good about it.  i've<br>
+signed as many and none of them ever protected an idea i didn't<br>
+already know about.  in the end they're a waste of time.<br>
+<br>
+i like to think that a good idea is one that no one else on the<br>
+planet could implement.<br>
+<br>
+<br>
+<br>
+Mike Kuniavsky wrote:    I'm of the opinion that if someone I'm<br>
+talking to is assuring me that  they're totally trustworthy, then<br>
+they should put a ring on it and sign  the NDA without blinking.<br>
+An NDA isn't a patent. It's just an agreement  that says that the<br>
+signer won't reveal what you told them to a potential <br>
+competitor. That's it. You can put a time limit on it, say three<br>
+months.  Anyone, in any industry, should be able to keep from<br>
+telling a competitor  about your idea for THREE MONTHS. If they<br>
+can't, or can't guarantee that,  then they're probably not<br>
+someone you should be talking to.  Conversely, when someone says<br>
+&quot;I can't tell you anything about my  idea until you sign an NDA,&quot;=
+<br>
+I call bullshit on that, too. You can tell me  something. You can<br>
+tell me just about everything except for what your  secret sauce<br>
+is, and that'll get me close enough to knowing whether I even <br>
+want to know what the secret sauce is.  In either case, I say<br>
+absolutes kill trust. They kill trust when someone  says that<br>
+they're not willing to meet you even an inch of the way (aka <br>
+sign a simple NDA) and they kill when someone says that they<br>
+can't trust  you at all until they have an iron clad guarantee of<br>
+confidentiality  (which an NDA isn't, so that's bullshit, too). <br>
+Finally, I have never heard of someone being sued for breach of<br>
+NDA. It's  just not important enough in the larger scheme of<br>
+things. It IS important,  however, as a small trust-building step<br>
+at the right point in a  discussion.  On Wed, 19 Jan 2011, Kim<br>
+Pallister wrote:             VC's are in this camp too.  Sent<br>
+from my SpacePhone  On Jan 19, 2011, at 12:46 PM, &quot;L. Souris<br>
+Hong-Porretta&quot; &lt;<a href=3D"mailto:souris%40hustlerofculture.com">so=
+uris@hustlerofcul<wbr>ture.com</a>&gt;<br>
+&lt;mailto:<a href=3D"mailto:souris%40hustlerofculture.com">souris@hustlero=
+fcul<wbr>ture.com</a>&gt;  wrote:          Depending<br>
+on who you are talking to, they might not sign an NDA at all. I<br>
+know that when we had our       game studio, the publishers would<br>
+not sign NDAs to talk to us. This happens in a lot of creative<br>
+studios here in Hollywood too. I also know that at EMV we NEVER<br>
+or well, RARELY signed NDAs. Our job       is to listen to<br>
+pitches ALL DAY LONG and I can tell you that 99 out of 100 times<br>
+we were being       pitched something that was related-to or an<br>
+iteration of something else we'd heard before. We didn't      <br>
+sign NDAs as standard practice, bc we didn't need TOM, DICK, or<br>
+KYOUNG coming back to sue us if we       moved forward with one<br>
+of the companies and they decided we &quot;stole&quot; their idea. We also<=
+br>
+relied on our       reputations so it wasn't in our interest to<br>
+tell everyone about everything we ever heard.   Everybody knows<br>
+I'm a fucking big mouth, but everyone also knows, your<br>
+abortion-serious-<wbr>secret is safe with me.  It really depends on<br>
+what the project is and whom you're discussing it with.  My two<br>
+cents.  xosourisxo   On Jan 16, 2011, at 7:06 AM, Kyoung Kim<br>
+wrote:    hi frienda,  was wondering in your practices, when do<br>
+you think is the &quot;right&quot; time to present an nda (in approaching<b=
+r>
+developers, contractors, investors, etc.).? may seem like a dumb<br>
+question, but well, you know.  thanks, kyoung    ****  souris<br>
+hong-porretta 3101 5th street #5  santa monica, ca 90405 <br>
+310.500.7870 mobile  <a href=3D"mailto:souris%40hustlerofculture.com">souri=
+s@hustlerofcul<wbr>ture.com</a><br>
+&lt;mailto:<a href=3D"mailto:souris%40hustlerofculture.com">souris@hustlero=
+fcul<wbr>ture.com</a>&gt;  www.hustlerofcultur<wbr>e.com<br>
+&lt;<a href=3D"http://www.hustlerofculture.com">http://www.hustlero<wbr>fcu=
+lture.<wbr>com</a>&gt;  @hustlerculture <br>
+<a href=3D"mailto:tinyironfists%40gmail.com">tinyironfists@<wbr>gmail.com</=
+a> &lt;mailto:<a href=3D"mailto:tinyironfists%40gmail.com">tinyironfists@<w=
+br>gmail.com</a>&gt; <br>
+www.tinyironfists.<wbr>com &lt;<a href=3D"http://www.tinyironfists.com">htt=
+p://www.tinyiron<wbr>fists.com</a>&gt; <br>
+@tinyironfists  ****<br>
+--   <a href=3D"http://markmeadows.com">http://markmeadows.<wbr>com</a> &lt=
+;<a href=3D"http://markmeadows.com">http://markmeadows.<wbr>com</a>&gt;    =
+            </div>=20=20=20=20=20=20=20
+=20=20=20=20
+    <div class=3D"ygrp-dateline" style=3D"clear: both; font-family: Arial; =
+line-height: 140%; padding: 10px 0; margin-bottom: 20px;">
+      <div class=3D"offset" style=3D"float: right;font: 77% verdana; paddin=
+g-top:2em;">
+        <a href=3D"#toc" style=3D"padding-bottom: 20px;">
+          Back to top        </a>
+      </div>                         <a href=3D"mailto:mark@markmeadows.com=
+?Subject=3DRe%3A%20nda%20advice%20from%20frienda%3F" style=3D"padding-botto=
+m: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">sender=
+</span>
+          </a> |
+          <a href=3D"mailto:frieNDA@yahoogroups.com?Subject=3D Re%3A%20nda%=
+20advice%20from%20frienda%3F" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">group<=
+/span>
+          </a> |
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_ylc=3DX3oD=
+MTJzZHU3OHZsBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OAR=
+tc2dJZAMyMDU1MQRzZWMDZG1zZwRzbGsDcnBseQRzdGltZQMxMjk1NjAyMDE0?act=3Dreply&m=
+essageNum=3D20551" style=3D"padding-bottom: 20px;">
+            Reply <span class=3D"bld" style=3D"font-weight:bold;">via web p=
+ost</span>
+          </a> <br>
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20484;_y=
+lc=3DX3oDMTM4b3M3bzJlBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNz=
+IxOTE2OARtc2dJZAMyMDU1MQRzZWMDZG1zZwRzbGsDdnRwYwRzdGltZQMxMjk1NjAyMDE0BHRwY=
+0lkAzIwNDg0" style=3D"padding-bottom: 20px;">
+            Messages in this topic=20
+          </a> (24)
+                  </div>     </dd>
+        <dt style=3D"display: block; float: left; font-size: 92%;">1b. </dt=
+>
+  <dd  style=3D"border-bottom: 4px solid #ccc;">=20
+    <h2 style=3D"font-size:100%; font-family:Georgia; font-weight:bold; mar=
+gin: 0 0 5px 0;">
+      <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20552;_ylc=
+=3DX3oDMTJzYms3dHZnBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARtc2dJZAMyMDU1MgRzZWMDZG1zZwRzbGsDdm1zZwRzdGltZQMxMjk1NjAyMDE0" name=
+=3D"1b">=20
+        Re: nda advice from frienda?      </a>
+    </h2>
+    <h3 style=3D"font: 100% Arial; margin: 0;">Posted by:      "Brian Wane"=
+      <a href=3D"mailto:bpwane@smerc.com?Subject=3D Re%3A%20nda%20advice%20=
+from%20frienda%3F">
+      bpwane@smerc.com      </a>
+              &nbsp;
+        <a href=3D"http://profiles.yahoo.com/bpwane2">
+          bpwane2=20
+        </a>
+          </h3>
+    <h4 style=3D"font: 77% verdana; margin: 0 0 20px 0;">
+      Thu Jan&nbsp;20,&nbsp;2011 7:41&nbsp;am        (PST)    </h4>
+
+    <div class=3D"ygrp-content" style=3D"font-family:Georgia; font-size:100=
+%; line-height:122%;">
+                  <br><br>
+      On 1/19/2011 7:13 PM, christian svanes kolding wrote:<br>
+&gt;<br>
+&gt; it should also be added that NDA or no NDA, if you think someone stole=
+ <br>
+&gt; your idea, you'd better be serious about it and understand that, right=
+ <br>
+&gt; or wrong, there will be consequences.<br>
+&gt;<br>
+&gt; no one in any of the creative industries likes to be accused of <br>
+&gt; stealing. thus, i would imagine that in 99% of the cases, people would=
+ <br>
+&gt; rather avoid having anything to do with someone who starts pointing <b=
+r>
+&gt; fingers - even if the accuser is justified.<br>
+&gt;<br>
+We have our ideas taken all the time after an NDA is signed, usually at <br=
+>
+the request of the other party. It isn't worth pursuing. Bringing it up <br=
+>
+means that relationship is over. You may ask, well, if they took your <br>
+idea or part of it then why would you work with them again? To which I <br>
+respond- they like your ideas and will probably fund one in the future. <br=
+>
+This has been my experience at least.<br>
+<br>
+Yes, I eye rolled at Hecker's comment, too. NDA signing douche bags unite!<=
+br>
+<br>
+&gt; <br>
+<br>
+-- <br>
+<br>
+*Brian Wane*<br>
+CEO<br>
+<br>
+SMERC<br>
+Web: smerc.com &lt;<a href=3D"http://www.smerc.com/">http://www.smerc.<wbr>=
+com/</a>&gt;<br>
+Email: <a href=3D"mailto:bpwane%40smerc.com">bpwane@smerc.<wbr>com</a> &lt;=
+mailto:<a href=3D"mailto:bpwane%40smerc.com">bpwane@smerc.<wbr>com</a>&gt;<=
+br>
+Phone: (718) 486-0002<br>
+<br>
+Keep a look out for our new game Hercules: Curse of the Hydra <br>
+&lt;<a href=3D"http://hercules.smercgame.com/">http://hercules.<wbr>smercga=
+me.<wbr>com/</a>&gt; on iPhone, iPad and Android devices<br>
+<br>
+          </div>=20=20=20=20=20=20=20
+=20=20=20=20
+    <div class=3D"ygrp-dateline" style=3D"clear: both; font-family: Arial; =
+line-height: 140%; padding: 10px 0; margin-bottom: 20px;">
+      <div class=3D"offset" style=3D"float: right;font: 77% verdana; paddin=
+g-top:2em;">
+        <a href=3D"#toc" style=3D"padding-bottom: 20px;">
+          Back to top        </a>
+      </div>                         <a href=3D"mailto:bpwane@smerc.com?Sub=
+ject=3DRe%3A%20nda%20advice%20from%20frienda%3F" style=3D"padding-bottom: 2=
+0px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">sender=
+</span>
+          </a> |
+          <a href=3D"mailto:frieNDA@yahoogroups.com?Subject=3D Re%3A%20nda%=
+20advice%20from%20frienda%3F" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">group<=
+/span>
+          </a> |
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_ylc=3DX3oD=
+MTJza2MwZmgwBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OAR=
+tc2dJZAMyMDU1MgRzZWMDZG1zZwRzbGsDcnBseQRzdGltZQMxMjk1NjAyMDE0?act=3Dreply&m=
+essageNum=3D20552" style=3D"padding-bottom: 20px;">
+            Reply <span class=3D"bld" style=3D"font-weight:bold;">via web p=
+ost</span>
+          </a> <br>
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20484;_y=
+lc=3DX3oDMTM4Ymo4ZnVqBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNz=
+IxOTE2OARtc2dJZAMyMDU1MgRzZWMDZG1zZwRzbGsDdnRwYwRzdGltZQMxMjk1NjAyMDE0BHRwY=
+0lkAzIwNDg0" style=3D"padding-bottom: 20px;">
+            Messages in this topic=20
+          </a> (24)
+                  </div>     </dd>
+        <dt style=3D"display: block; float: left; font-size: 92%;">1c. </dt=
+>
+  <dd  style=3D"border-bottom: 4px solid #ccc;">=20
+    <h2 style=3D"font-size:100%; font-family:Georgia; font-weight:bold; mar=
+gin: 0 0 5px 0;">
+      <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20553;_ylc=
+=3DX3oDMTJzbjJsbWVpBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARtc2dJZAMyMDU1MwRzZWMDZG1zZwRzbGsDdm1zZwRzdGltZQMxMjk1NjAyMDE0" name=
+=3D"1c">=20
+        Re: nda advice from frienda?      </a>
+    </h2>
+    <h3 style=3D"font: 100% Arial; margin: 0;">Posted by:      "Chris Hecke=
+r"      <a href=3D"mailto:checker@d6.com?Subject=3D Re%3A%20nda%20advice%20=
+from%20frienda%3F">
+      checker@d6.com      </a>
+          </h3>
+    <h4 style=3D"font: 77% verdana; margin: 0 0 20px 0;">
+      Thu Jan&nbsp;20,&nbsp;2011 11:59&nbsp;am        (PST)    </h4>
+
+    <div class=3D"ygrp-content" style=3D"font-family:Georgia; font-size:100=
+%; line-height:122%;">
+                  <br><br>
+      <br>
+&gt; Yes, I eye rolled at Hecker's comment, too. NDA signing douche bags<br=
+>
+&gt; unite!<br>
+<br>
+Don't worry, you guys massively outnumber us!<br>
+<br>
+Chris<br>
+<br>
+On 2011/01/20 07:41, Brian Wane wrote:<br>
+&gt; On 1/19/2011 7:13 PM, christian svanes kolding wrote:<br>
+&gt;<br>
+&gt;&gt; it should also be added that NDA or no NDA, if you think someone s=
+tole<br>
+&gt;&gt; your idea, you'd better be serious about it and understand that, r=
+ight<br>
+&gt;&gt; or wrong, there will be consequences.<br>
+&gt;&gt;<br>
+&gt;&gt; no one in any of the creative industries likes to be accused of<br=
+>
+&gt;&gt; stealing. thus, i would imagine that in 99% of the cases, people w=
+ould<br>
+&gt;&gt; rather avoid having anything to do with someone who starts pointin=
+g<br>
+&gt;&gt; fingers - even if the accuser is justified.<br>
+&gt;&gt;<br>
+&gt; We have our ideas taken all the time after an NDA is signed, usually a=
+t<br>
+&gt; the request of the other party. It isn't worth pursuing. Bringing it u=
+p<br>
+&gt; means that relationship is over. You may ask, well, if they took your<=
+br>
+&gt; idea or part of it then why would you work with them again? To which I=
+<br>
+&gt; respond- they like your ideas and will probably fund one in the future=
+.<br>
+&gt; This has been my experience at least.<br>
+&gt;<br>
+&gt; Yes, I eye rolled at Hecker's comment, too. NDA signing douche bags un=
+ite!<br>
+&gt;<br>
+&gt;<br>
+&gt;<br>
+&gt; --<br>
+&gt;<br>
+&gt; *Brian Wane*<br>
+&gt; CEO<br>
+&gt;<br>
+&gt; SMERC<br>
+&gt; Web: smerc.com &lt;<a href=3D"http://www.smerc.com/">http://www.smerc.=
+<wbr>com/</a>&gt;<br>
+&gt; Email: <a href=3D"mailto:bpwane%40smerc.com">bpwane@smerc.<wbr>com</a>=
+ &lt;mailto:<a href=3D"mailto:bpwane%40smerc.com">bpwane@smerc.<wbr>com</a>=
+&gt;<br>
+&gt; Phone: (718) 486-0002<br>
+&gt;<br>
+&gt; Keep a look out for our new game Hercules: Curse of the Hydra<br>
+&gt; &lt;<a href=3D"http://hercules.smercgame.com/">http://hercules.<wbr>sm=
+ercgame.<wbr>com/</a>&gt; on iPhone, iPad and Android devices<br>
+&gt;<br>
+&gt; <br>
+<br>
+          </div>=20=20=20=20=20=20=20
+=20=20=20=20
+    <div class=3D"ygrp-dateline" style=3D"clear: both; font-family: Arial; =
+line-height: 140%; padding: 10px 0; margin-bottom: 20px;">
+      <div class=3D"offset" style=3D"float: right;font: 77% verdana; paddin=
+g-top:2em;">
+        <a href=3D"#toc" style=3D"padding-bottom: 20px;">
+          Back to top        </a>
+      </div>                         <a href=3D"mailto:checker@d6.com?Subje=
+ct=3DRe%3A%20nda%20advice%20from%20frienda%3F" style=3D"padding-bottom: 20p=
+x;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">sender=
+</span>
+          </a> |
+          <a href=3D"mailto:frieNDA@yahoogroups.com?Subject=3D Re%3A%20nda%=
+20advice%20from%20frienda%3F" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">group<=
+/span>
+          </a> |
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_ylc=3DX3oD=
+MTJzY3NmajdwBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OAR=
+tc2dJZAMyMDU1MwRzZWMDZG1zZwRzbGsDcnBseQRzdGltZQMxMjk1NjAyMDE0?act=3Dreply&m=
+essageNum=3D20553" style=3D"padding-bottom: 20px;">
+            Reply <span class=3D"bld" style=3D"font-weight:bold;">via web p=
+ost</span>
+          </a> <br>
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20484;_y=
+lc=3DX3oDMTM4cXRucWZoBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNz=
+IxOTE2OARtc2dJZAMyMDU1MwRzZWMDZG1zZwRzbGsDdnRwYwRzdGltZQMxMjk1NjAyMDE0BHRwY=
+0lkAzIwNDg0" style=3D"padding-bottom: 20px;">
+            Messages in this topic=20
+          </a> (24)
+                  </div>     </dd>
+        <dt style=3D"display: block; float: left; font-size: 92%;">1d. </dt=
+>
+  <dd  style=3D"border-bottom: 4px solid #ccc;">=20
+    <h2 style=3D"font-size:100%; font-family:Georgia; font-weight:bold; mar=
+gin: 0 0 5px 0;">
+      <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20555;_ylc=
+=3DX3oDMTJzdW1mdTVrBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARtc2dJZAMyMDU1NQRzZWMDZG1zZwRzbGsDdm1zZwRzdGltZQMxMjk1NjAyMDE0" name=
+=3D"1d">=20
+        Re: nda advice from frienda?      </a>
+    </h2>
+    <h3 style=3D"font: 100% Arial; margin: 0;">Posted by:      "Elizabeth G=
+oodman"      <a href=3D"mailto:egoodman@confectious.net?Subject=3D Re%3A%20=
+nda%20advice%20from%20frienda%3F">
+      egoodman@confectious.net      </a>
+              &nbsp;
+        <a href=3D"http://profiles.yahoo.com/esg224">
+          esg224=20
+        </a>
+          </h3>
+    <h4 style=3D"font: 77% verdana; margin: 0 0 20px 0;">
+      Thu Jan&nbsp;20,&nbsp;2011 12:45&nbsp;pm        (PST)    </h4>
+
+    <div class=3D"ygrp-content" style=3D"font-family:Georgia; font-size:100=
+%; line-height:122%;">
+                  <br><br>
+      I get asked to sign NDAs all the time before people consent to be<br>
+interviewed for my (totally academic, not gonna be published for<br>
+a     year) dissertation. I see it as essentially an ass-covering<br>
+move.<br>
+<br>
+On the one hand, I don't take them all that seriously. Because,<br>
+as     Mike says, no one ever gets sued for breach of NDA.<br>
+Instead, the NDA     for my interviewees is a way for mid-level<br>
+creatives to protect     themselves against any kind of douchey<br>
+retaliation by their     companies' legal departments. Or a way<br>
+for principals, partners, or     C-level people to let me know<br>
+that they're personally okay with     giving me sensitive<br>
+information about clients or vendors, but that     it matters to<br>
+their companies. Because, really, there are two     outcomes if I<br>
+violate the NDA: (1) no one will ever find out it was     me,<br>
+because anything people are willing to tell me in a casual    <br>
+interview is something that's already common knowledge among<br>
+tens,     if not hundreds of other potentially indiscreet<br>
+blabbers or (2) I'll     gain a reputation for being<br>
+untrustworthy and people will stop     giving me sensitive info.<br>
+<br>
+On the other hand, I take them very seriously. NDAs are just a<br>
+way     to confirm that you, the signer, are outside an<br>
+organizational     boundary, and that you are getting privileged<br>
+access to something     that would usually stay within that<br>
+boundary. Verbal or paper-based     requests have about the same<br>
+level of importance in terms of     signalling one's<br>
+expectations. You could argue (and I would, when     I'm being<br>
+all academic) that it is the NDA that makes the    <br>
+organizational boundary, not the other way around. So it's<br>
+important     for me to know that the person I'm talking to wants<br>
+to erect some     boundaries.<br>
+<br>
+But then, I'm not in the game industry. Or in marketing. Or in<br>
+entertainment. I do interactive product and service design and<br>
+strategy. As Mike suggests, different industries have really    <br>
+different assumptions about the relationship between<br>
+organizations     and information sharing. Some industries,<br>
+looking at the responses     on this list, use NDAs (or &quot;keep a<br>
+secret&quot; language) to create     stricter boundary lines than<br>
+others.<br>
+<br>
+Liz<br>
+<br>
+On 1/19/11 4:54 PM, Mike Kuniavsky wrote:<br>
+I'm of the opinion that if someone I'm talking to is<br>
+assuring me that<br>
+they're totally trustworthy, then they should put a ring<br>
+on it and sign<br>
+the NDA without blinking. An NDA isn't a patent. It's just<br>
+an agreement<br>
+that says that the signer won't reveal what you told them<br>
+to a potential<br>
+competitor. That's it. You can put a time limit on it, say<br>
+three months.<br>
+Anyone, in any industry, should be able to keep from<br>
+telling a competitor<br>
+about your idea for THREE MONTHS. If they can't, or can't<br>
+guarantee that,<br>
+then they're probably not someone you should be talking<br>
+to.<br>
+<br>
+Conversely, when someone says &quot;I can't tell you anything<br>
+about my<br>
+idea until you sign an NDA,&quot; I call bullshit on that, too.<br>
+You can tell me<br>
+something. You can tell me just about everything except<br>
+for what your<br>
+secret sauce is, and that'll get me close enough to              <br>
+knowing whether I even<br>
+want to know what the secret sauce is.<br>
+<br>
+In either case, I say absolutes kill trust. They kill<br>
+trust when someone<br>
+says that they're not willing to meet you even an inch of<br>
+the way (aka<br>
+sign a simple NDA) and they kill when someone says that<br>
+they can't trust<br>
+you at all until they have an iron clad guarantee of<br>
+confidentiality<br>
+(which an NDA isn't, so that's bullshit, too).<br>
+<br>
+Finally, I have never heard of someone being sued for<br>
+breach of NDA. It's<br>
+just not important enough in the larger scheme of things.<br>
+It IS important,<br>
+however, as a small trust-building step at the right point<br>
+in a<br>
+discussion.<br>
+<br>
+On Wed, 19 Jan 2011, Kim Pallister wrote:<br>
+<br>
+&gt;<br>
+&gt;<br>
+&gt; VC's are in this camp too.<br>
+&gt;<br>
+&gt; Sent from my SpacePhone<br>
+&gt;<br>
+&gt; On Jan 19, 2011, at 12:46 PM, &quot;L. Souris              <br>
+Hong-Porretta&quot; &lt;<a href=3D"mailto:souris%40hustlerofculture.com">so=
+uris@hustlerofcul<wbr>ture.com</a><br>
+&lt;mailto:souris%<wbr>40hustlerofcultu<wbr>re.com&gt; &gt;               w=
+rote:<br>
+&gt;<br>
+&gt;<br>
+&gt;<br>
+&gt; Depending on who you are talking to, they might not<br>
+sign an NDA at all. I know that when we had our<br>
+&gt; game studio, the publishers would not sign NDAs to<br>
+talk to us. This happens in a lot of creative<br>
+&gt; studios here in Hollywood too. I also know that at<br>
+EMV we NEVER or well, RARELY signed NDAs. Our job<br>
+&gt; is to listen to pitches ALL DAY LONG and I can tell<br>
+you that 99 out of 100 times we were being<br>
+&gt; pitched something that was related-to or an iteration<br>
+of something else we'd heard before. We didn't<br>
+&gt; sign NDAs as standard practice, bc we didn't need              <br>
+TOM, DICK, or KYOUNG coming back to sue us if we<br>
+&gt; moved forward with one of the companies and they              <br>
+decided we &quot;stole&quot; their idea. We also relied on our<br>
+&gt; reputations so it wasn't in our interest to tell              <br>
+everyone about everything we ever heard.<br>
+&gt;<br>
+&gt;<br>
+&gt; Everybody knows I'm a fucking big mouth, but everyone<br>
+also knows, your abortion-serious-<wbr>secret is safe with<br>
+&gt; me.<br>
+&gt;<br>
+&gt; It really depends on what the project is and whom              <br>
+you're discussing it with.<br>
+&gt;<br>
+&gt; My two cents.<br>
+&gt;<br>
+&gt; xosourisxo<br>
+&gt;<br>
+&gt;<br>
+&gt; On Jan 16, 2011, at 7:06 AM, Kyoung Kim wrote:<br>
+&gt;<br>
+&gt;<br>
+&gt;<br>
+&gt; hi frienda,<br>
+&gt;<br>
+&gt; was wondering in your practices, when do you think is<br>
+the &quot;right&quot; time to present an nda (in approaching<br>
+&gt; developers, contractors, investors, etc.).?<br>
+&gt; may seem like a dumb question, but well, you know.<br>
+&gt;<br>
+&gt; thanks,<br>
+&gt; kyoung<br>
+&gt;<br>
+&gt;<br>
+&gt;<br>
+&gt; ****<br>
+&gt;<br>
+&gt; souris hong-porretta<br>
+&gt; 3101 5th street #5<br>
+&gt; santa monica, ca 90405<br>
+&gt;<br>
+&gt; 310.500.7870 mobile<br>
+&gt;<br>
+&gt; <a href=3D"mailto:souris%40hustlerofculture.com">souris@hustlerofcul<w=
+br>ture.com</a><br>
+&lt;mailto:souris%<wbr>40hustlerofcultu<wbr>re.com&gt;<br>
+&gt; www.hustlerofcultur<wbr>e.com &lt;<a href=3D"http://www.hustlerofcultu=
+re.com">http://www.hustlero<wbr>fculture.<wbr>com</a>&gt;<br>
+&gt; @hustlerculture<br>
+&gt;<br>
+&gt; <a href=3D"mailto:tinyironfists%40gmail.com">tinyironfists@<wbr>gmail.=
+com</a> &lt;mailto:tinyironfis<wbr>ts%40gmail.<wbr>com&gt;<br>
+&gt; www.tinyironfists.<wbr>com &lt;<a href=3D"http://www.tinyironfists.com=
+">http://www.tinyiron<wbr>fists.com</a>&gt;<br>
+&gt; @tinyironfists<br>
+&gt;<br>
+&gt; ****<br>
+&gt;<br>
+&gt;<br>
+&gt;<br>
+&gt;<br>
+&gt;<br>
+&gt;<br>
+<br>
+--<br>
+Mike Kuniavsky<br>
+<a href=3D"mailto:mikek%40orangecone.com">mikek@orangecone.<wbr>com</a> &lt=
+;mailto:mikek%<wbr>40orangecone.<wbr>com&gt;<br>
+<br>
+          </div>=20=20=20=20=20=20=20
+=20=20=20=20
+    <div class=3D"ygrp-dateline" style=3D"clear: both; font-family: Arial; =
+line-height: 140%; padding: 10px 0; margin-bottom: 20px;">
+      <div class=3D"offset" style=3D"float: right;font: 77% verdana; paddin=
+g-top:2em;">
+        <a href=3D"#toc" style=3D"padding-bottom: 20px;">
+          Back to top        </a>
+      </div>                         <a href=3D"mailto:egoodman@confectious=
+.net?Subject=3DRe%3A%20nda%20advice%20from%20frienda%3F" style=3D"padding-b=
+ottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">sender=
+</span>
+          </a> |
+          <a href=3D"mailto:frieNDA@yahoogroups.com?Subject=3D Re%3A%20nda%=
+20advice%20from%20frienda%3F" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">group<=
+/span>
+          </a> |
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_ylc=3DX3oD=
+MTJzbTNpdmkwBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OAR=
+tc2dJZAMyMDU1NQRzZWMDZG1zZwRzbGsDcnBseQRzdGltZQMxMjk1NjAyMDE0?act=3Dreply&m=
+essageNum=3D20555" style=3D"padding-bottom: 20px;">
+            Reply <span class=3D"bld" style=3D"font-weight:bold;">via web p=
+ost</span>
+          </a> <br>
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20484;_y=
+lc=3DX3oDMTM4dGtycm51BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNz=
+IxOTE2OARtc2dJZAMyMDU1NQRzZWMDZG1zZwRzbGsDdnRwYwRzdGltZQMxMjk1NjAyMDE0BHRwY=
+0lkAzIwNDg0" style=3D"padding-bottom: 20px;">
+            Messages in this topic=20
+          </a> (24)
+                  </div>     </dd>
+    </dl>
+           <dl >
+        <dt style=3D"display: block; float: left; font-size: 92%;">2a. </dt=
+>
+  <dd  style=3D"border-bottom: 4px solid #ccc;">=20
+    <h2 style=3D"font-size:100%; font-family:Georgia; font-weight:bold; mar=
+gin: 0 0 5px 0;">
+      <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20554;_ylc=
+=3DX3oDMTJzN2xnZXU1BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARtc2dJZAMyMDU1NARzZWMDZG1zZwRzbGsDdm1zZwRzdGltZQMxMjk1NjAyMDE0" name=
+=3D"2a">=20
+        Re: summer intern - know anyone?      </a>
+    </h2>
+    <h3 style=3D"font: 100% Arial; margin: 0;">Posted by:      "Elizabeth G=
+oodman"      <a href=3D"mailto:egoodman@confectious.net?Subject=3D Re%3A%20=
+summer%20intern%20-%20know%20anyone%3F">
+      egoodman@confectious.net      </a>
+              &nbsp;
+        <a href=3D"http://profiles.yahoo.com/esg224">
+          esg224=20
+        </a>
+          </h3>
+    <h4 style=3D"font: 77% verdana; margin: 0 0 20px 0;">
+      Thu Jan&nbsp;20,&nbsp;2011 12:12&nbsp;pm        (PST)    </h4>
+
+    <div class=3D"ygrp-content" style=3D"font-family:Georgia; font-size:100=
+%; line-height:122%;">
+                  <br><br>
+      I saw this job posting at Berkeley, actually. Are you going to be<br>
+actively working with the intern? If you are, I will forward it<br>
+around even more widely to students (like at CCA) who do great UX<br>
+work but aren't, ummm, the traditional Qualcomm hires.<br>
+<br>
+L.<br>
+<br>
+On 1/19/11 4:32 PM, jeeparksf wrote:<br>
+hi all,<br>
+<br>
+my company is hiring a summer intern and i thought this<br>
+group may know of some good peeps. it's user experience<br>
+focused. i've already sent it out to uc berkeley,              <br>
+stanford, and iit, but pls forward it as you see fit.<br>
+<br>
+<a href=3D"https://jobs.qualcomm.com/public/jobDetails.xhtml?requisitionId=
+=3D1884530&amp;page=3DjobSearch">https://jobs.<wbr>qualcomm.<wbr>com/public=
+/<wbr>jobDetails.<wbr>xhtml?requisitio<wbr>nId=3D1\<br>
+884530&amp;page=3D<wbr>jobSearch</a><br>
+&lt;<a href=3D"https://jobs.qualcomm.com/public/jobDetails.xhtml?requisitio=
+nId=3D1884530&amp;page=3DjobSearch">https://jobs.<wbr>qualcomm.<wbr>com/pub=
+lic/<wbr>jobDetails.<wbr>xhtml?requisitio<wbr>nId=3D\<br>
+1884530&amp;page=3D<wbr>jobSearch</a>&gt;<br>
+<br>
+thanks,<br>
+jee<br>
+<br>
+<br>
+          </div>=20=20=20=20=20=20=20
+=20=20=20=20
+    <div class=3D"ygrp-dateline" style=3D"clear: both; font-family: Arial; =
+line-height: 140%; padding: 10px 0; margin-bottom: 20px;">
+      <div class=3D"offset" style=3D"float: right;font: 77% verdana; paddin=
+g-top:2em;">
+        <a href=3D"#toc" style=3D"padding-bottom: 20px;">
+          Back to top        </a>
+      </div>                         <a href=3D"mailto:egoodman@confectious=
+.net?Subject=3DRe%3A%20summer%20intern%20-%20know%20anyone%3F" style=3D"pad=
+ding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">sender=
+</span>
+          </a> |
+          <a href=3D"mailto:frieNDA@yahoogroups.com?Subject=3D Re%3A%20summ=
+er%20intern%20-%20know%20anyone%3F" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">group<=
+/span>
+          </a> |
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_ylc=3DX3oD=
+MTJzbW4yNzhzBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OAR=
+tc2dJZAMyMDU1NARzZWMDZG1zZwRzbGsDcnBseQRzdGltZQMxMjk1NjAyMDE0?act=3Dreply&m=
+essageNum=3D20554" style=3D"padding-bottom: 20px;">
+            Reply <span class=3D"bld" style=3D"font-weight:bold;">via web p=
+ost</span>
+          </a> <br>
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20542;_y=
+lc=3DX3oDMTM4aTFpbGdkBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNz=
+IxOTE2OARtc2dJZAMyMDU1NARzZWMDZG1zZwRzbGsDdnRwYwRzdGltZQMxMjk1NjAyMDE0BHRwY=
+0lkAzIwNTQy" style=3D"padding-bottom: 20px;">
+            Messages in this topic=20
+          </a> (2)
+                  </div>     </dd>
+    </dl>
+           <dl >
+        <dt style=3D"display: block; float: left; font-size: 92%;">3a. </dt=
+>
+  <dd  style=3D"border-bottom: 4px solid #ccc;">=20
+    <h2 style=3D"font-size:100%; font-family:Georgia; font-weight:bold; mar=
+gin: 0 0 5px 0;">
+      <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20556;_ylc=
+=3DX3oDMTJzcmFxZ2t0BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARtc2dJZAMyMDU1NgRzZWMDZG1zZwRzbGsDdm1zZwRzdGltZQMxMjk1NjAyMDE0" name=
+=3D"3a">=20
+        Apple Reboot      </a>
+    </h2>
+    <h3 style=3D"font: 100% Arial; margin: 0;">Posted by:      "Souris Hong=
+-Porretta"      <a href=3D"mailto:souris@hustlerofculture.com?Subject=3D Re=
+%3A%20Apple%20Reboot">
+      souris@hustlerofculture.com      </a>
+              &nbsp;
+        <a href=3D"http://profiles.yahoo.com/souris_hong">
+          souris_hong=20
+        </a>
+          </h3>
+    <h4 style=3D"font: 77% verdana; margin: 0 0 20px 0;">
+      Thu Jan&nbsp;20,&nbsp;2011 3:02&nbsp;pm        (PST)    </h4>
+
+    <div class=3D"ygrp-content" style=3D"font-family:Georgia; font-size:100=
+%; line-height:122%;">
+                  <br><br>
+      While updating my GARMIN GPS software, my screen hazed over with a  <=
+br>
+message that said, &quot;you have to reboot your computer by pressing down =
+ <br>
+the button for a couple of seconds&quot; or something like that...<br>
+<br>
+Anything I should be concerned about? I've NEVER seen this screen or  <br>
+error message before (THANKS)!<br>
+<br>
+This is the error log that it sent to APPLE:<br>
+<br>
+Interval Since Last Panic Report:  41189704 sec<br>
+Panics Since Last Report:          1<br>
+Anonymous UUID:                    804A117E-D4C2-<wbr>4184-A33D-<wbr>7E9EF1=
+90CE1D<br>
+<br>
+Thu Jan 20 14:57:23 2011<br>
+panic(cpu 1 caller 0x001AB0FE): Kernel trap at 0x56db29b6, type  <br>
+14=3Dpage fault, registers:<br>
+CR0: 0x8001003b, CR2: 0x42dda000, CR3: 0x018fd000, CR4: 0x00000660<br>
+EAX: 0xffffffff, EBX: 0x0e06e880, ECX: 0x00000000, EDX: 0x0000effc<br>
+CR2: 0x42dda000, EBP: 0x56d4b8f8, ESI: 0x42dcb004, EDI: 0x00003bfe<br>
+EFL: 0x00010203, EIP: 0x56db29b6, CS:  0x00000008, DS:  0x00040010<br>
+Error code: 0x00000000<br>
+<br>
+Backtrace (CPU 1), Frame : Return Address (4 potential args on stack)<br>
+0x56d4b6d8 : 0x12b4c6 (0x45f91c 0x56d4b70c 0x13355c 0x0)<br>
+0x56d4b728 : 0x1ab0fe (0x469a98 0x56db29b6 0xe 0x469248)<br>
+0x56d4b808 : 0x1a1713 (0x56d4b820 0x246 0x56d4b8f8 0x56db29b6)<br>
+0x56d4b818 : 0x56db29b6 (0xe 0x48 0x10 0x10)<br>
+0x56d4b8f8 : 0x56db2bdc (0x0 0x56d4b92c 0x0 0x77fe0)<br>
+0x56d4b948 : 0x56db3444 (0xffffffff 0x56d4b98c 0x56d4b988 0x5272a8d0)<br>
+0x56d4b9a8 : 0x56db1281 (0xe06e880 0x80 0x56d4b9d8 0x1a9ad9)<br>
+0x56d4ba28 : 0x56db13eb (0xe06e880 0x100000 0x0 0xe067ec4)<br>
+0x56d4ba98 : 0x56db711c (0xe06e880 0x100000 0x0 0xe067ec4)<br>
+0x56d4bad8 : 0x1f536e (0x56d4bdac 0x56d4bb34 0x0 0x0)<br>
+0x56d4bdd8 : 0x1f7c65 (0x78b3a30 0x56d4be78 0xe067ec4 0x0)<br>
+0x56d4be38 : 0x1e7e83 (0x78b3a30 0x56d4be78 0xe067ec4 0x0)<br>
+0x56d4bf78 : 0x3e3a7f (0x6ebde90 0xe067dc0 0xe067e04 0xffffffff)<br>
+0x56d4bfc8 : 0x1a1c0a (0xd6d0f80 0x0 0x1a40b5 0xd6d0f80)<br>
+No mapping exists for frame pointer<br>
+Backtrace terminated-invalid frame pointer 0xb080b688<br>
+       Kernel loadable modules in backtrace (with dependencies)<wbr>:<br>
+          com.apple.filesyste<wbr>ms.msdosfs(<wbr>1.5.5)@0x56daf00<wbr>0-&g=
+t;0x56dbbfff<br>
+<br>
+BSD process name corresponding to current thread: mds<br>
+<br>
+Mac OS version:<br>
+9L31a<br>
+<br>
+Kernel version:<br>
+Darwin Kernel Version 9.8.0: Wed Jul 15 16:55:01 PDT 2009;  <br>
+root:xnu-1228.<wbr>15.4~1/RELEASE_<wbr>I386<br>
+System model name: MacBook5,1 (Mac-F42D89C8)<br>
+<br>
+System uptime in nanoseconds: 92031377355481<br>
+unloaded kexts:<br>
+com.apple.driver.<wbr>iTunesPhoneDrive<wbr>r	1.0 - last unloaded 9200326539=
+3829<br>
+loaded kexts:<br>
+com.rim.driver.<wbr>BlackBerryUSBDri<wbr>verInt	0.0.52<br>
+com.apple.driver.<wbr>iTunesPhoneDrive<wbr>r	1.0 - last loaded 919339499958=
+42<br>
+com.apple.driver.<wbr>IOBluetoothHIDDr<wbr>iver	2.1.9f10<br>
+com.apple.filesyste<wbr>ms.msdosfs	1.5.5<br>
+com.apple.driver.<wbr>AppleHWSensor	1.9d0<br>
+com.apple.iokit.<wbr>IOBluetoothSeria<wbr>lManager	2.1.9f10<br>
+com.apple.filesyste<wbr>ms.autofs	2.0.2<br>
+com.apple.driver.<wbr>BroadcomUSBBluet<wbr>oothHCIControlle<wbr>r	2.1.9f10<=
+br>
+com.apple.driver.<wbr>AppleMikeyHIDDri<wbr>ver	1.0.6<br>
+com.apple.driver.<wbr>AppleUpstreamUse<wbr>rClient	2.7.5<br>
+com.apple.driver.<wbr>AppleHDA	1.7.1a2<br>
+com.apple.driver.<wbr>AppleMikeyDriver	1.7.1a2<br>
+com.apple.driver.<wbr>AppleHDAControll<wbr>er	1.7.1a2<br>
+com.apple.driver.<wbr>AGPM	100.8.7<br>
+com.apple.Dont_<wbr>Steal_Mac_<wbr>OS_X	6.0.3<br>
+com.apple.driver.<wbr>SMCMotionSensor	2.1.1d2<br>
+com.apple.driver.<wbr>AppleIRControlle<wbr>r	113<br>
+com.apple.driver.<wbr>AudioIPCDriver	1.0.6<br>
+com.apple.kext.<wbr>AppleSMCLMU	1.4.5d1<br>
+com.apple.GeForce	5.4.8<br>
+com.apple.driver.<wbr>ACPI_SMC_<wbr>PlatformPlugin	3.4.0a17<br>
+com.apple.driver.<wbr>NVSMU	1.1.7<br>
+com.apple.driver.<wbr>AppleSMBusPCI	1.0.1d1<br>
+com.apple.driver.<wbr>AppleLPC	1.3.1<br>
+com.apple.driver.<wbr>AppleBacklight	1.6.0<br>
+com.apple.nvidia.<wbr>nv50hal	5.4.8<br>
+com.apple.driver.<wbr>AppleUSBTCButton<wbr>s	1.7.4f1<br>
+com.apple.driver.<wbr>AppleUSBMultitou<wbr>ch	189.35<br>
+com.apple.driver.<wbr>AppleUSBTCKeyboa<wbr>rd	1.7.4f1<br>
+com.apple.driver.<wbr>AppleUSBMergeNub	3.5.2<br>
+com.apple.driver.<wbr>XsanFilter	2.7.91<br>
+com.apple.iokit.<wbr>IOSCSIMultimedia<wbr>CommandsDevice	2.1.1<br>
+com.apple.iokit.<wbr>SCSITaskUserClie<wbr>nt	2.1.1<br>
+com.apple.iokit.<wbr>IOAHCISerialATAP<wbr>I	1.1.2<br>
+com.apple.iokit.<wbr>IOAHCIBlockStora<wbr>ge	1.2.3<br>
+com.apple.driver.<wbr>AirPortBrcm43xx	366.91.21<br>
+com.apple.driver.<wbr>AppleAHCIPort	1.7.0<br>
+com.apple.nvenet	1.0.54<br>
+com.apple.driver.<wbr>AppleUSBOHCI	3.4.6<br>
+com.apple.driver.<wbr>AppleUSBHub	3.4.9<br>
+com.apple.iokit.<wbr>IOUSBUserClient	3.5.2<br>
+com.apple.driver.<wbr>AppleUSBEHCI	3.4.6<br>
+com.apple.driver.<wbr>AppleEFINVRAM	1.2.0<br>
+com.apple.driver.<wbr>AppleSmartBatter<wbr>yManager	158.10.5<br>
+com.apple.driver.<wbr>AppleRTC	1.2.3<br>
+com.apple.driver.<wbr>AppleHPET	1.4<br>
+com.apple.driver.<wbr>AppleACPIPCI	1.2.5<br>
+com.apple.driver.<wbr>AppleACPIButtons	1.2.5<br>
+com.apple.driver.<wbr>AppleSMBIOS	1.4<br>
+com.apple.driver.<wbr>AppleACPIEC	1.2.5<br>
+com.apple.driver.<wbr>AppleAPIC	1.4<br>
+com.apple.security.<wbr>seatbelt	107.12<br>
+com.apple.nke.<wbr>applicationfirew<wbr>all	1.8.77<br>
+com.apple.security.<wbr>TMSafetyNet	3<br>
+com.apple.driver.<wbr>AppleIntelCPUPow<wbr>erManagement	76.2.0<br>
+com.apple.driver.<wbr>DiskImages	199<br>
+com.apple.BootCache	30.4<br>
+com.apple.iokit.<wbr>IOUSBMassStorage<wbr>Class	2.0.8<br>
+com.apple.iokit.<wbr>IOSerialFamily	9.4<br>
+com.apple.driver.<wbr>AppleUSBBluetoot<wbr>hHCIController	2.1.9f10<br>
+com.apple.iokit.<wbr>IOBluetoothFamil<wbr>y	2.1.9f10<br>
+com.apple.driver.<wbr>DspFuncLib	1.7.1a2<br>
+com.apple.driver.<wbr>AppleSMBusContro<wbr>ller	1.0.1d1<br>
+com.apple.iokit.<wbr>IOHDAFamily	1.7.1a2<br>
+com.apple.iokit.<wbr>IOAudioFamily	1.6.9fc5<br>
+com.apple.kext.<wbr>OSvKernDSPLib	1.1<br>
+com.apple.driver.<wbr>IOPlatformPlugin<wbr>Family	3.4.0a17<br>
+com.apple.driver.<wbr>AppleSMC	2.3.1d1<br>
+com.apple.NVDAResma<wbr>n	5.4.8<br>
+com.apple.iokit.<wbr>IONDRVSupport	1.7.3<br>
+com.apple.iokit.<wbr>IOGraphicsFamily	1.7.3<br>
+com.apple.iokit.<wbr>IOUSBHIDDriver	3.4.6<br>
+com.apple.driver.<wbr>AppleUSBComposit<wbr>e	3.2.0<br>
+com.apple.iokit.<wbr>IOSCSIBlockComma<wbr>ndsDevice	2.1.1<br>
+com.apple.iokit.<wbr>IOBDStorageFamil<wbr>y	1.5<br>
+com.apple.iokit.<wbr>IODVDStorageFami<wbr>ly	1.5<br>
+com.apple.iokit.<wbr>IOCDStorageFamil<wbr>y	1.5<br>
+com.apple.iokit.<wbr>IOSCSIArchitectu<wbr>reModelFamily	2.1.1<br>
+com.apple.iokit.<wbr>IO80211Family	216.1<br>
+com.apple.iokit.<wbr>IOAHCIFamily	1.5.0<br>
+com.apple.iokit.<wbr>IONetworkingFami<wbr>ly	1.6.1<br>
+com.apple.iokit.<wbr>IOUSBFamily	3.5.2<br>
+com.apple.driver.<wbr>AppleEFIRuntime	1.2.0<br>
+com.apple.iokit.<wbr>IOSMBusFamily	1.1<br>
+com.apple.iokit.<wbr>IOStorageFamily	1.5.6<br>
+com.apple.iokit.<wbr>IOHIDFamily	1.5.5<br>
+com.apple.driver.<wbr>AppleACPIPlatfor<wbr>m	1.2.5<br>
+com.apple.iokit.<wbr>IOPCIFamily	2.6<br>
+com.apple.iokit.<wbr>IOACPIFamily	1.2.0<br>
+<br>
+          </div>=20=20=20=20=20=20=20
+=20=20=20=20
+    <div class=3D"ygrp-dateline" style=3D"clear: both; font-family: Arial; =
+line-height: 140%; padding: 10px 0; margin-bottom: 20px;">
+      <div class=3D"offset" style=3D"float: right;font: 77% verdana; paddin=
+g-top:2em;">
+        <a href=3D"#toc" style=3D"padding-bottom: 20px;">
+          Back to top        </a>
+      </div>                         <a href=3D"mailto:souris@hustlerofcult=
+ure.com?Subject=3DRe%3A%20Apple%20Reboot" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">sender=
+</span>
+          </a> |
+          <a href=3D"mailto:frieNDA@yahoogroups.com?Subject=3D Re%3A%20Appl=
+e%20Reboot" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">group<=
+/span>
+          </a> |
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_ylc=3DX3oD=
+MTJzajlmaWc5BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OAR=
+tc2dJZAMyMDU1NgRzZWMDZG1zZwRzbGsDcnBseQRzdGltZQMxMjk1NjAyMDE0?act=3Dreply&m=
+essageNum=3D20556" style=3D"padding-bottom: 20px;">
+            Reply <span class=3D"bld" style=3D"font-weight:bold;">via web p=
+ost</span>
+          </a> <br>
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20556;_y=
+lc=3DX3oDMTM4cXE3NjlnBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNz=
+IxOTE2OARtc2dJZAMyMDU1NgRzZWMDZG1zZwRzbGsDdnRwYwRzdGltZQMxMjk1NjAyMDE0BHRwY=
+0lkAzIwNTU2" style=3D"padding-bottom: 20px;">
+            Messages in this topic=20
+          </a> (9)
+                  </div>     </dd>
+        <dt style=3D"display: block; float: left; font-size: 92%;">3b. </dt=
+>
+  <dd  style=3D"border-bottom: 4px solid #ccc;">=20
+    <h2 style=3D"font-size:100%; font-family:Georgia; font-weight:bold; mar=
+gin: 0 0 5px 0;">
+      <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20557;_ylc=
+=3DX3oDMTJzdGNpbHQxBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARtc2dJZAMyMDU1NwRzZWMDZG1zZwRzbGsDdm1zZwRzdGltZQMxMjk1NjAyMDE0" name=
+=3D"3b">=20
+        Re: Apple Reboot      </a>
+    </h2>
+    <h3 style=3D"font: 100% Arial; margin: 0;">Posted by:      "Daniel Terd=
+iman"      <a href=3D"mailto:daniel.terdiman@earthlink.net?Subject=3D Re%3A=
+%20Apple%20Reboot">
+      daniel.terdiman@earthlink.net      </a>
+              &nbsp;
+        <a href=3D"http://profiles.yahoo.com/jschooldan">
+          jschooldan=20
+        </a>
+          </h3>
+    <h4 style=3D"font: 77% verdana; margin: 0 0 20px 0;">
+      Thu Jan&nbsp;20,&nbsp;2011 3:10&nbsp;pm        (PST)    </h4>
+
+    <div class=3D"ygrp-content" style=3D"font-family:Georgia; font-size:100=
+%; line-height:122%;">
+                  <br><br>
+      Assuming that you're all backed up, I wouldn't worry about it. <br>
+Occasionally, Macs will do the old bombshell crash. They usually recover.<b=
+r>
+<br>
+Once you're back up and running, you might want to consider repairing <br>
+disk permissions (that's always a good thing to do, anyway). You do that <b=
+r>
+by going into your Applications folder, then choosing Utilities, then <br>
+choosing Disk Utility, and then Repair permissions.<br>
+<br>
+I think you'll be fine. Hopefully, you're properly backed up.<br>
+<br>
+Daniel<br>
+<br>
+On 1/20/11 3:02 PM, Souris Hong-Porretta wrote:<br>
+&gt;<br>
+&gt; While updating my GARMIN GPS software, my screen hazed over with a<br>
+&gt; message that said, &quot;you have to reboot your computer by pressing =
+down<br>
+&gt; the button for a couple of seconds&quot; or something like that...<br>
+&gt;<br>
+&gt; Anything I should be concerned about? I've NEVER seen this screen or<b=
+r>
+&gt; error message before (THANKS)!<br>
+&gt;<br>
+&gt; This is the error log that it sent to APPLE:<br>
+&gt;<br>
+&gt; Interval Since Last Panic Report: 41189704 sec<br>
+&gt; Panics Since Last Report: 1<br>
+&gt; Anonymous UUID: 804A117E-D4C2-<wbr>4184-A33D-<wbr>7E9EF190CE1D<br>
+&gt;<br>
+&gt; Thu Jan 20 14:57:23 2011<br>
+&gt; panic(cpu 1 caller 0x001AB0FE): Kernel trap at 0x56db29b6, type<br>
+&gt; 14=3Dpage fault, registers:<br>
+&gt; CR0: 0x8001003b, CR2: 0x42dda000, CR3: 0x018fd000, CR4: 0x00000660<br>
+&gt; EAX: 0xffffffff, EBX: 0x0e06e880, ECX: 0x00000000, EDX: 0x0000effc<br>
+&gt; CR2: 0x42dda000, EBP: 0x56d4b8f8, ESI: 0x42dcb004, EDI: 0x00003bfe<br>
+&gt; EFL: 0x00010203, EIP: 0x56db29b6, CS: 0x00000008, DS: 0x00040010<br>
+&gt; Error code: 0x00000000<br>
+&gt;<br>
+&gt; Backtrace (CPU 1), Frame : Return Address (4 potential args on stack)<=
+br>
+&gt; 0x56d4b6d8 : 0x12b4c6 (0x45f91c 0x56d4b70c 0x13355c 0x0)<br>
+&gt; 0x56d4b728 : 0x1ab0fe (0x469a98 0x56db29b6 0xe 0x469248)<br>
+&gt; 0x56d4b808 : 0x1a1713 (0x56d4b820 0x246 0x56d4b8f8 0x56db29b6)<br>
+&gt; 0x56d4b818 : 0x56db29b6 (0xe 0x48 0x10 0x10)<br>
+&gt; 0x56d4b8f8 : 0x56db2bdc (0x0 0x56d4b92c 0x0 0x77fe0)<br>
+&gt; 0x56d4b948 : 0x56db3444 (0xffffffff 0x56d4b98c 0x56d4b988 0x5272a8d0)<=
+br>
+&gt; 0x56d4b9a8 : 0x56db1281 (0xe06e880 0x80 0x56d4b9d8 0x1a9ad9)<br>
+&gt; 0x56d4ba28 : 0x56db13eb (0xe06e880 0x100000 0x0 0xe067ec4)<br>
+&gt; 0x56d4ba98 : 0x56db711c (0xe06e880 0x100000 0x0 0xe067ec4)<br>
+&gt; 0x56d4bad8 : 0x1f536e (0x56d4bdac 0x56d4bb34 0x0 0x0)<br>
+&gt; 0x56d4bdd8 : 0x1f7c65 (0x78b3a30 0x56d4be78 0xe067ec4 0x0)<br>
+&gt; 0x56d4be38 : 0x1e7e83 (0x78b3a30 0x56d4be78 0xe067ec4 0x0)<br>
+&gt; 0x56d4bf78 : 0x3e3a7f (0x6ebde90 0xe067dc0 0xe067e04 0xffffffff)<br>
+&gt; 0x56d4bfc8 : 0x1a1c0a (0xd6d0f80 0x0 0x1a40b5 0xd6d0f80)<br>
+&gt; No mapping exists for frame pointer<br>
+&gt; Backtrace terminated-invalid frame pointer 0xb080b688<br>
+&gt; Kernel loadable modules in backtrace (with dependencies)<wbr>:<br>
+&gt; com.apple.filesyste<wbr>ms.msdosfs(<wbr>1.5.5)@0x56daf00<wbr>0-&gt;0x5=
+6dbbfff<br>
+&gt;<br>
+&gt; BSD process name corresponding to current thread: mds<br>
+&gt;<br>
+&gt; Mac OS version:<br>
+&gt; 9L31a<br>
+&gt;<br>
+&gt; Kernel version:<br>
+&gt; Darwin Kernel Version 9.8.0: Wed Jul 15 16:55:01 PDT 2009;<br>
+&gt; root:xnu-1228.<wbr>15.4~1/RELEASE_<wbr>I386<br>
+&gt; System model name: MacBook5,1 (Mac-F42D89C8)<br>
+&gt;<br>
+&gt; System uptime in nanoseconds: 92031377355481<br>
+&gt; unloaded kexts:<br>
+&gt; com.apple.driver.<wbr>iTunesPhoneDrive<wbr>r 1.0 - last unloaded 92003=
+265393829<br>
+&gt; loaded kexts:<br>
+&gt; com.rim.driver.<wbr>BlackBerryUSBDri<wbr>verInt 0.0.52<br>
+&gt; com.apple.driver.<wbr>iTunesPhoneDrive<wbr>r 1.0 - last loaded 9193394=
+9995842<br>
+&gt; com.apple.driver.<wbr>IOBluetoothHIDDr<wbr>iver 2.1.9f10<br>
+&gt; com.apple.filesyste<wbr>ms.msdosfs 1.5.5<br>
+&gt; com.apple.driver.<wbr>AppleHWSensor 1.9d0<br>
+&gt; com.apple.iokit.<wbr>IOBluetoothSeria<wbr>lManager 2.1.9f10<br>
+&gt; com.apple.filesyste<wbr>ms.autofs 2.0.2<br>
+&gt; com.apple.driver.<wbr>BroadcomUSBBluet<wbr>oothHCIControlle<wbr>r 2.1.=
+9f10<br>
+&gt; com.apple.driver.<wbr>AppleMikeyHIDDri<wbr>ver 1.0.6<br>
+&gt; com.apple.driver.<wbr>AppleUpstreamUse<wbr>rClient 2.7.5<br>
+&gt; com.apple.driver.<wbr>AppleHDA 1.7.1a2<br>
+&gt; com.apple.driver.<wbr>AppleMikeyDriver 1.7.1a2<br>
+&gt; com.apple.driver.<wbr>AppleHDAControll<wbr>er 1.7.1a2<br>
+&gt; com.apple.driver.<wbr>AGPM 100.8.7<br>
+&gt; com.apple.Dont_<wbr>Steal_Mac_<wbr>OS_X 6.0.3<br>
+&gt; com.apple.driver.<wbr>SMCMotionSensor 2.1.1d2<br>
+&gt; com.apple.driver.<wbr>AppleIRControlle<wbr>r 113<br>
+&gt; com.apple.driver.<wbr>AudioIPCDriver 1.0.6<br>
+&gt; com.apple.kext.<wbr>AppleSMCLMU 1.4.5d1<br>
+&gt; com.apple.GeForce 5.4.8<br>
+&gt; com.apple.driver.<wbr>ACPI_SMC_<wbr>PlatformPlugin 3.4.0a17<br>
+&gt; com.apple.driver.<wbr>NVSMU 1.1.7<br>
+&gt; com.apple.driver.<wbr>AppleSMBusPCI 1.0.1d1<br>
+&gt; com.apple.driver.<wbr>AppleLPC 1.3.1<br>
+&gt; com.apple.driver.<wbr>AppleBacklight 1.6.0<br>
+&gt; com.apple.nvidia.<wbr>nv50hal 5.4.8<br>
+&gt; com.apple.driver.<wbr>AppleUSBTCButton<wbr>s 1.7.4f1<br>
+&gt; com.apple.driver.<wbr>AppleUSBMultitou<wbr>ch 189.35<br>
+&gt; com.apple.driver.<wbr>AppleUSBTCKeyboa<wbr>rd 1.7.4f1<br>
+&gt; com.apple.driver.<wbr>AppleUSBMergeNub 3.5.2<br>
+&gt; com.apple.driver.<wbr>XsanFilter 2.7.91<br>
+&gt; com.apple.iokit.<wbr>IOSCSIMultimedia<wbr>CommandsDevice 2.1.1<br>
+&gt; com.apple.iokit.<wbr>SCSITaskUserClie<wbr>nt 2.1.1<br>
+&gt; com.apple.iokit.<wbr>IOAHCISerialATAP<wbr>I 1.1.2<br>
+&gt; com.apple.iokit.<wbr>IOAHCIBlockStora<wbr>ge 1.2.3<br>
+&gt; com.apple.driver.<wbr>AirPortBrcm43xx 366.91.21<br>
+&gt; com.apple.driver.<wbr>AppleAHCIPort 1.7.0<br>
+&gt; com.apple.nvenet 1.0.54<br>
+&gt; com.apple.driver.<wbr>AppleUSBOHCI 3.4.6<br>
+&gt; com.apple.driver.<wbr>AppleUSBHub 3.4.9<br>
+&gt; com.apple.iokit.<wbr>IOUSBUserClient 3.5.2<br>
+&gt; com.apple.driver.<wbr>AppleUSBEHCI 3.4.6<br>
+&gt; com.apple.driver.<wbr>AppleEFINVRAM 1.2.0<br>
+&gt; com.apple.driver.<wbr>AppleSmartBatter<wbr>yManager 158.10.5<br>
+&gt; com.apple.driver.<wbr>AppleRTC 1.2.3<br>
+&gt; com.apple.driver.<wbr>AppleHPET 1.4<br>
+&gt; com.apple.driver.<wbr>AppleACPIPCI 1.2.5<br>
+&gt; com.apple.driver.<wbr>AppleACPIButtons 1.2.5<br>
+&gt; com.apple.driver.<wbr>AppleSMBIOS 1.4<br>
+&gt; com.apple.driver.<wbr>AppleACPIEC 1.2.5<br>
+&gt; com.apple.driver.<wbr>AppleAPIC 1.4<br>
+&gt; com.apple.security.<wbr>seatbelt 107.12<br>
+&gt; com.apple.nke.<wbr>applicationfirew<wbr>all 1.8.77<br>
+&gt; com.apple.security.<wbr>TMSafetyNet 3<br>
+&gt; com.apple.driver.<wbr>AppleIntelCPUPow<wbr>erManagement 76.2.0<br>
+&gt; com.apple.driver.<wbr>DiskImages 199<br>
+&gt; com.apple.BootCache 30.4<br>
+&gt; com.apple.iokit.<wbr>IOUSBMassStorage<wbr>Class 2.0.8<br>
+&gt; com.apple.iokit.<wbr>IOSerialFamily 9.4<br>
+&gt; com.apple.driver.<wbr>AppleUSBBluetoot<wbr>hHCIController 2.1.9f10<br>
+&gt; com.apple.iokit.<wbr>IOBluetoothFamil<wbr>y 2.1.9f10<br>
+&gt; com.apple.driver.<wbr>DspFuncLib 1.7.1a2<br>
+&gt; com.apple.driver.<wbr>AppleSMBusContro<wbr>ller 1.0.1d1<br>
+&gt; com.apple.iokit.<wbr>IOHDAFamily 1.7.1a2<br>
+&gt; com.apple.iokit.<wbr>IOAudioFamily 1.6.9fc5<br>
+&gt; com.apple.kext.<wbr>OSvKernDSPLib 1.1<br>
+&gt; com.apple.driver.<wbr>IOPlatformPlugin<wbr>Family 3.4.0a17<br>
+&gt; com.apple.driver.<wbr>AppleSMC 2.3.1d1<br>
+&gt; com.apple.NVDAResma<wbr>n 5.4.8<br>
+&gt; com.apple.iokit.<wbr>IONDRVSupport 1.7.3<br>
+&gt; com.apple.iokit.<wbr>IOGraphicsFamily 1.7.3<br>
+&gt; com.apple.iokit.<wbr>IOUSBHIDDriver 3.4.6<br>
+&gt; com.apple.driver.<wbr>AppleUSBComposit<wbr>e 3.2.0<br>
+&gt; com.apple.iokit.<wbr>IOSCSIBlockComma<wbr>ndsDevice 2.1.1<br>
+&gt; com.apple.iokit.<wbr>IOBDStorageFamil<wbr>y 1.5<br>
+&gt; com.apple.iokit.<wbr>IODVDStorageFami<wbr>ly 1.5<br>
+&gt; com.apple.iokit.<wbr>IOCDStorageFamil<wbr>y 1.5<br>
+&gt; com.apple.iokit.<wbr>IOSCSIArchitectu<wbr>reModelFamily 2.1.1<br>
+&gt; com.apple.iokit.<wbr>IO80211Family 216.1<br>
+&gt; com.apple.iokit.<wbr>IOAHCIFamily 1.5.0<br>
+&gt; com.apple.iokit.<wbr>IONetworkingFami<wbr>ly 1.6.1<br>
+&gt; com.apple.iokit.<wbr>IOUSBFamily 3.5.2<br>
+&gt; com.apple.driver.<wbr>AppleEFIRuntime 1.2.0<br>
+&gt; com.apple.iokit.<wbr>IOSMBusFamily 1.1<br>
+&gt; com.apple.iokit.<wbr>IOStorageFamily 1.5.6<br>
+&gt; com.apple.iokit.<wbr>IOHIDFamily 1.5.5<br>
+&gt; com.apple.driver.<wbr>AppleACPIPlatfor<wbr>m 1.2.5<br>
+&gt; com.apple.iokit.<wbr>IOPCIFamily 2.6<br>
+&gt; com.apple.iokit.<wbr>IOACPIFamily 1.2.0<br>
+&gt;<br>
+&gt; <br>
+          </div>=20=20=20=20=20=20=20
+=20=20=20=20
+    <div class=3D"ygrp-dateline" style=3D"clear: both; font-family: Arial; =
+line-height: 140%; padding: 10px 0; margin-bottom: 20px;">
+      <div class=3D"offset" style=3D"float: right;font: 77% verdana; paddin=
+g-top:2em;">
+        <a href=3D"#toc" style=3D"padding-bottom: 20px;">
+          Back to top        </a>
+      </div>                         <a href=3D"mailto:daniel.terdiman@eart=
+hlink.net?Subject=3DRe%3A%20Apple%20Reboot" style=3D"padding-bottom: 20px;"=
+>
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">sender=
+</span>
+          </a> |
+          <a href=3D"mailto:frieNDA@yahoogroups.com?Subject=3D Re%3A%20Appl=
+e%20Reboot" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">group<=
+/span>
+          </a> |
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_ylc=3DX3oD=
+MTJzZDdsc2VoBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OAR=
+tc2dJZAMyMDU1NwRzZWMDZG1zZwRzbGsDcnBseQRzdGltZQMxMjk1NjAyMDE0?act=3Dreply&m=
+essageNum=3D20557" style=3D"padding-bottom: 20px;">
+            Reply <span class=3D"bld" style=3D"font-weight:bold;">via web p=
+ost</span>
+          </a> <br>
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20556;_y=
+lc=3DX3oDMTM4M29oanRlBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNz=
+IxOTE2OARtc2dJZAMyMDU1NwRzZWMDZG1zZwRzbGsDdnRwYwRzdGltZQMxMjk1NjAyMDE0BHRwY=
+0lkAzIwNTU2" style=3D"padding-bottom: 20px;">
+            Messages in this topic=20
+          </a> (9)
+                  </div>     </dd>
+        <dt style=3D"display: block; float: left; font-size: 92%;">3c. </dt=
+>
+  <dd  style=3D"border-bottom: 4px solid #ccc;">=20
+    <h2 style=3D"font-size:100%; font-family:Georgia; font-weight:bold; mar=
+gin: 0 0 5px 0;">
+      <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20558;_ylc=
+=3DX3oDMTJzMWNuY3Y2BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARtc2dJZAMyMDU1OARzZWMDZG1zZwRzbGsDdm1zZwRzdGltZQMxMjk1NjAyMDE0" name=
+=3D"3c">=20
+        Re: Apple Reboot      </a>
+    </h2>
+    <h3 style=3D"font: 100% Arial; margin: 0;">Posted by:      "Wiley Wiggi=
+ns"      <a href=3D"mailto:weevil@wileywiggins.com?Subject=3D Re%3A%20Apple=
+%20Reboot">
+      weevil@wileywiggins.com      </a>
+              &nbsp;
+        <a href=3D"http://profiles.yahoo.com/wiley_wiggins">
+          wiley_wiggins=20
+        </a>
+          </h3>
+    <h4 style=3D"font: 77% verdana; margin: 0 0 20px 0;">
+      Thu Jan&nbsp;20,&nbsp;2011 3:21&nbsp;pm        (PST)    </h4>
+
+    <div class=3D"ygrp-content" style=3D"font-family:Georgia; font-size:100=
+%; line-height:122%;">
+                  <br><br>
+      You had a Kernel Panic. It can be caused by hardware or by the System=
+, but rarely by an App. <br>
+Disk permissions resets are meaningless unless you are having an actual per=
+missions issue. Same with the voodoo 'Pram Zap'.<br>
+Either run -fsck n your drive in single user mode, or boot from your OS dis=
+c and run the actual disc repair, which looks at the file structure.<br>
+Unless it happens again you are probably fine.<br>
+<br>
+(Sorry, Ex Applecare agent).<br>
+<br>
+On Jan 20, 2011, at 5:10 PM, Daniel Terdiman wrote:<br>
+<br>
+&gt; Assuming that you're all backed up, I wouldn't worry about it. Occasio=
+nally, Macs will do the old bombshell crash. They usually recover.<br>
+&gt; <br>
+&gt; Once you're back up and running, you might want to consider repairing =
+disk permissions (that's always a good thing to do, anyway). You do that by=
+ going into your Applications folder, then choosing Utilities, then choosin=
+g Disk Utility, and then Repair permissions. <br>
+&gt; <br>
+&gt; I think you'll be fine. Hopefully, you're properly backed up.<br>
+&gt; <br>
+&gt; Daniel<br>
+&gt; <br>
+&gt; On 1/20/11 3:02 PM, Souris Hong-Porretta wrote:<br>
+&gt; <br>
+&gt;&gt;  <br>
+&gt;&gt; While updating my GARMIN GPS software, my screen hazed over with a=
+ <br>
+&gt;&gt; message that said, &quot;you have to reboot your computer by press=
+ing down <br>
+&gt;&gt; the button for a couple of seconds&quot; or something like that...=
+<br>
+&gt;&gt; <br>
+&gt;&gt; Anything I should be concerned about? I've NEVER seen this screen =
+or <br>
+&gt;&gt; error message before (THANKS)!<br>
+&gt;&gt; <br>
+&gt;&gt; This is the error log that it sent to APPLE:<br>
+&gt;&gt; <br>
+&gt;&gt; Interval Since Last Panic Report: 41189704 sec<br>
+&gt;&gt; Panics Since Last Report: 1<br>
+&gt;&gt; Anonymous UUID: 804A117E-D4C2-<wbr>4184-A33D-<wbr>7E9EF190CE1D<br>
+&gt;&gt; <br>
+&gt;&gt; Thu Jan 20 14:57:23 2011<br>
+&gt;&gt; panic(cpu 1 caller 0x001AB0FE): Kernel trap at 0x56db29b6, type <b=
+r>
+&gt;&gt; 14=3Dpage fault, registers:<br>
+&gt;&gt; CR0: 0x8001003b, CR2: 0x42dda000, CR3: 0x018fd000, CR4: 0x00000660=
+<br>
+&gt;&gt; EAX: 0xffffffff, EBX: 0x0e06e880, ECX: 0x00000000, EDX: 0x0000effc=
+<br>
+&gt;&gt; CR2: 0x42dda000, EBP: 0x56d4b8f8, ESI: 0x42dcb004, EDI: 0x00003bfe=
+<br>
+&gt;&gt; EFL: 0x00010203, EIP: 0x56db29b6, CS: 0x00000008, DS: 0x00040010<b=
+r>
+&gt;&gt; Error code: 0x00000000<br>
+&gt;&gt; <br>
+&gt;&gt; Backtrace (CPU 1), Frame : Return Address (4 potential args on sta=
+ck)<br>
+&gt;&gt; 0x56d4b6d8 : 0x12b4c6 (0x45f91c 0x56d4b70c 0x13355c 0x0)<br>
+&gt;&gt; 0x56d4b728 : 0x1ab0fe (0x469a98 0x56db29b6 0xe 0x469248)<br>
+&gt;&gt; 0x56d4b808 : 0x1a1713 (0x56d4b820 0x246 0x56d4b8f8 0x56db29b6)<br>
+&gt;&gt; 0x56d4b818 : 0x56db29b6 (0xe 0x48 0x10 0x10)<br>
+&gt;&gt; 0x56d4b8f8 : 0x56db2bdc (0x0 0x56d4b92c 0x0 0x77fe0)<br>
+&gt;&gt; 0x56d4b948 : 0x56db3444 (0xffffffff 0x56d4b98c 0x56d4b988 0x5272a8=
+d0)<br>
+&gt;&gt; 0x56d4b9a8 : 0x56db1281 (0xe06e880 0x80 0x56d4b9d8 0x1a9ad9)<br>
+&gt;&gt; 0x56d4ba28 : 0x56db13eb (0xe06e880 0x100000 0x0 0xe067ec4)<br>
+&gt;&gt; 0x56d4ba98 : 0x56db711c (0xe06e880 0x100000 0x0 0xe067ec4)<br>
+&gt;&gt; 0x56d4bad8 : 0x1f536e (0x56d4bdac 0x56d4bb34 0x0 0x0)<br>
+&gt;&gt; 0x56d4bdd8 : 0x1f7c65 (0x78b3a30 0x56d4be78 0xe067ec4 0x0)<br>
+&gt;&gt; 0x56d4be38 : 0x1e7e83 (0x78b3a30 0x56d4be78 0xe067ec4 0x0)<br>
+&gt;&gt; 0x56d4bf78 : 0x3e3a7f (0x6ebde90 0xe067dc0 0xe067e04 0xffffffff)<b=
+r>
+&gt;&gt; 0x56d4bfc8 : 0x1a1c0a (0xd6d0f80 0x0 0x1a40b5 0xd6d0f80)<br>
+&gt;&gt; No mapping exists for frame pointer<br>
+&gt;&gt; Backtrace terminated-invalid frame pointer 0xb080b688<br>
+&gt;&gt; Kernel loadable modules in backtrace (with dependencies)<wbr>:<br>
+&gt;&gt; com.apple.filesyste<wbr>ms.msdosfs(<wbr>1.5.5)@0x56daf00<wbr>0-&gt=
+;0x56dbbfff<br>
+&gt;&gt; <br>
+&gt;&gt; BSD process name corresponding to current thread: mds<br>
+&gt;&gt; <br>
+&gt;&gt; Mac OS version:<br>
+&gt;&gt; 9L31a<br>
+&gt;&gt; <br>
+&gt;&gt; Kernel version:<br>
+&gt;&gt; Darwin Kernel Version 9.8.0: Wed Jul 15 16:55:01 PDT 2009; <br>
+&gt;&gt; root:xnu-1228.<wbr>15.4~1/RELEASE_<wbr>I386<br>
+&gt;&gt; System model name: MacBook5,1 (Mac-F42D89C8)<br>
+&gt;&gt; <br>
+&gt;&gt; System uptime in nanoseconds: 92031377355481<br>
+&gt;&gt; unloaded kexts:<br>
+&gt;&gt; com.apple.driver.<wbr>iTunesPhoneDrive<wbr>r 1.0 - last unloaded 9=
+2003265393829<br>
+&gt;&gt; loaded kexts:<br>
+&gt;&gt; com.rim.driver.<wbr>BlackBerryUSBDri<wbr>verInt 0.0.52<br>
+&gt;&gt; com.apple.driver.<wbr>iTunesPhoneDrive<wbr>r 1.0 - last loaded 919=
+33949995842<br>
+&gt;&gt; com.apple.driver.<wbr>IOBluetoothHIDDr<wbr>iver 2.1.9f10<br>
+&gt;&gt; com.apple.filesyste<wbr>ms.msdosfs 1.5.5<br>
+&gt;&gt; com.apple.driver.<wbr>AppleHWSensor 1.9d0<br>
+&gt;&gt; com.apple.iokit.<wbr>IOBluetoothSeria<wbr>lManager 2.1.9f10<br>
+&gt;&gt; com.apple.filesyste<wbr>ms.autofs 2.0.2<br>
+&gt;&gt; com.apple.driver.<wbr>BroadcomUSBBluet<wbr>oothHCIControlle<wbr>r =
+2.1.9f10<br>
+&gt;&gt; com.apple.driver.<wbr>AppleMikeyHIDDri<wbr>ver 1.0.6<br>
+&gt;&gt; com.apple.driver.<wbr>AppleUpstreamUse<wbr>rClient 2.7.5<br>
+&gt;&gt; com.apple.driver.<wbr>AppleHDA 1.7.1a2<br>
+&gt;&gt; com.apple.driver.<wbr>AppleMikeyDriver 1.7.1a2<br>
+&gt;&gt; com.apple.driver.<wbr>AppleHDAControll<wbr>er 1.7.1a2<br>
+&gt;&gt; com.apple.driver.<wbr>AGPM 100.8.7<br>
+&gt;&gt; com.apple.Dont_<wbr>Steal_Mac_<wbr>OS_X 6.0.3<br>
+&gt;&gt; com.apple.driver.<wbr>SMCMotionSensor 2.1.1d2<br>
+&gt;&gt; com.apple.driver.<wbr>AppleIRControlle<wbr>r 113<br>
+&gt;&gt; com.apple.driver.<wbr>AudioIPCDriver 1.0.6<br>
+&gt;&gt; com.apple.kext.<wbr>AppleSMCLMU 1.4.5d1<br>
+&gt;&gt; com.apple.GeForce 5.4.8<br>
+&gt;&gt; com.apple.driver.<wbr>ACPI_SMC_<wbr>PlatformPlugin 3.4.0a17<br>
+&gt;&gt; com.apple.driver.<wbr>NVSMU 1.1.7<br>
+&gt;&gt; com.apple.driver.<wbr>AppleSMBusPCI 1.0.1d1<br>
+&gt;&gt; com.apple.driver.<wbr>AppleLPC 1.3.1<br>
+&gt;&gt; com.apple.driver.<wbr>AppleBacklight 1.6.0<br>
+&gt;&gt; com.apple.nvidia.<wbr>nv50hal 5.4.8<br>
+&gt;&gt; com.apple.driver.<wbr>AppleUSBTCButton<wbr>s 1.7.4f1<br>
+&gt;&gt; com.apple.driver.<wbr>AppleUSBMultitou<wbr>ch 189.35<br>
+&gt;&gt; com.apple.driver.<wbr>AppleUSBTCKeyboa<wbr>rd 1.7.4f1<br>
+&gt;&gt; com.apple.driver.<wbr>AppleUSBMergeNub 3.5.2<br>
+&gt;&gt; com.apple.driver.<wbr>XsanFilter 2.7.91<br>
+&gt;&gt; com.apple.iokit.<wbr>IOSCSIMultimedia<wbr>CommandsDevice 2.1.1<br>
+&gt;&gt; com.apple.iokit.<wbr>SCSITaskUserClie<wbr>nt 2.1.1<br>
+&gt;&gt; com.apple.iokit.<wbr>IOAHCISerialATAP<wbr>I 1.1.2<br>
+&gt;&gt; com.apple.iokit.<wbr>IOAHCIBlockStora<wbr>ge 1.2.3<br>
+&gt;&gt; com.apple.driver.<wbr>AirPortBrcm43xx 366.91.21<br>
+&gt;&gt; com.apple.driver.<wbr>AppleAHCIPort 1.7.0<br>
+&gt;&gt; com.apple.nvenet 1.0.54<br>
+&gt;&gt; com.apple.driver.<wbr>AppleUSBOHCI 3.4.6<br>
+&gt;&gt; com.apple.driver.<wbr>AppleUSBHub 3.4.9<br>
+&gt;&gt; com.apple.iokit.<wbr>IOUSBUserClient 3.5.2<br>
+&gt;&gt; com.apple.driver.<wbr>AppleUSBEHCI 3.4.6<br>
+&gt;&gt; com.apple.driver.<wbr>AppleEFINVRAM 1.2.0<br>
+&gt;&gt; com.apple.driver.<wbr>AppleSmartBatter<wbr>yManager 158.10.5<br>
+&gt;&gt; com.apple.driver.<wbr>AppleRTC 1.2.3<br>
+&gt;&gt; com.apple.driver.<wbr>AppleHPET 1.4<br>
+&gt;&gt; com.apple.driver.<wbr>AppleACPIPCI 1.2.5<br>
+&gt;&gt; com.apple.driver.<wbr>AppleACPIButtons 1.2.5<br>
+&gt;&gt; com.apple.driver.<wbr>AppleSMBIOS 1.4<br>
+&gt;&gt; com.apple.driver.<wbr>AppleACPIEC 1.2.5<br>
+&gt;&gt; com.apple.driver.<wbr>AppleAPIC 1.4<br>
+&gt;&gt; com.apple.security.<wbr>seatbelt 107.12<br>
+&gt;&gt; com.apple.nke.<wbr>applicationfirew<wbr>all 1.8.77<br>
+&gt;&gt; com.apple.security.<wbr>TMSafetyNet 3<br>
+&gt;&gt; com.apple.driver.<wbr>AppleIntelCPUPow<wbr>erManagement 76.2.0<br>
+&gt;&gt; com.apple.driver.<wbr>DiskImages 199<br>
+&gt;&gt; com.apple.BootCache 30.4<br>
+&gt;&gt; com.apple.iokit.<wbr>IOUSBMassStorage<wbr>Class 2.0.8<br>
+&gt;&gt; com.apple.iokit.<wbr>IOSerialFamily 9.4<br>
+&gt;&gt; com.apple.driver.<wbr>AppleUSBBluetoot<wbr>hHCIController 2.1.9f10=
+<br>
+&gt;&gt; com.apple.iokit.<wbr>IOBluetoothFamil<wbr>y 2.1.9f10<br>
+&gt;&gt; com.apple.driver.<wbr>DspFuncLib 1.7.1a2<br>
+&gt;&gt; com.apple.driver.<wbr>AppleSMBusContro<wbr>ller 1.0.1d1<br>
+&gt;&gt; com.apple.iokit.<wbr>IOHDAFamily 1.7.1a2<br>
+&gt;&gt; com.apple.iokit.<wbr>IOAudioFamily 1.6.9fc5<br>
+&gt;&gt; com.apple.kext.<wbr>OSvKernDSPLib 1.1<br>
+&gt;&gt; com.apple.driver.<wbr>IOPlatformPlugin<wbr>Family 3.4.0a17<br>
+&gt;&gt; com.apple.driver.<wbr>AppleSMC 2.3.1d1<br>
+&gt;&gt; com.apple.NVDAResma<wbr>n 5.4.8<br>
+&gt;&gt; com.apple.iokit.<wbr>IONDRVSupport 1.7.3<br>
+&gt;&gt; com.apple.iokit.<wbr>IOGraphicsFamily 1.7.3<br>
+&gt;&gt; com.apple.iokit.<wbr>IOUSBHIDDriver 3.4.6<br>
+&gt;&gt; com.apple.driver.<wbr>AppleUSBComposit<wbr>e 3.2.0<br>
+&gt;&gt; com.apple.iokit.<wbr>IOSCSIBlockComma<wbr>ndsDevice 2.1.1<br>
+&gt;&gt; com.apple.iokit.<wbr>IOBDStorageFamil<wbr>y 1.5<br>
+&gt;&gt; com.apple.iokit.<wbr>IODVDStorageFami<wbr>ly 1.5<br>
+&gt;&gt; com.apple.iokit.<wbr>IOCDStorageFamil<wbr>y 1.5<br>
+&gt;&gt; com.apple.iokit.<wbr>IOSCSIArchitectu<wbr>reModelFamily 2.1.1<br>
+&gt;&gt; com.apple.iokit.<wbr>IO80211Family 216.1<br>
+&gt;&gt; com.apple.iokit.<wbr>IOAHCIFamily 1.5.0<br>
+&gt;&gt; com.apple.iokit.<wbr>IONetworkingFami<wbr>ly 1.6.1<br>
+&gt;&gt; com.apple.iokit.<wbr>IOUSBFamily 3.5.2<br>
+&gt;&gt; com.apple.driver.<wbr>AppleEFIRuntime 1.2.0<br>
+&gt;&gt; com.apple.iokit.<wbr>IOSMBusFamily 1.1<br>
+&gt;&gt; com.apple.iokit.<wbr>IOStorageFamily 1.5.6<br>
+&gt;&gt; com.apple.iokit.<wbr>IOHIDFamily 1.5.5<br>
+&gt;&gt; com.apple.driver.<wbr>AppleACPIPlatfor<wbr>m 1.2.5<br>
+&gt;&gt; com.apple.iokit.<wbr>IOPCIFamily 2.6<br>
+&gt;&gt; com.apple.iokit.<wbr>IOACPIFamily 1.2.0<br>
+&gt;&gt; <br>
+&gt; <br>
+&gt; <br>
+<br>
+          </div>=20=20=20=20=20=20=20
+=20=20=20=20
+    <div class=3D"ygrp-dateline" style=3D"clear: both; font-family: Arial; =
+line-height: 140%; padding: 10px 0; margin-bottom: 20px;">
+      <div class=3D"offset" style=3D"float: right;font: 77% verdana; paddin=
+g-top:2em;">
+        <a href=3D"#toc" style=3D"padding-bottom: 20px;">
+          Back to top        </a>
+      </div>                         <a href=3D"mailto:weevil@wileywiggins.=
+com?Subject=3DRe%3A%20Apple%20Reboot" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">sender=
+</span>
+          </a> |
+          <a href=3D"mailto:frieNDA@yahoogroups.com?Subject=3D Re%3A%20Appl=
+e%20Reboot" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">group<=
+/span>
+          </a> |
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_ylc=3DX3oD=
+MTJzNDMxOTE1BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OAR=
+tc2dJZAMyMDU1OARzZWMDZG1zZwRzbGsDcnBseQRzdGltZQMxMjk1NjAyMDE0?act=3Dreply&m=
+essageNum=3D20558" style=3D"padding-bottom: 20px;">
+            Reply <span class=3D"bld" style=3D"font-weight:bold;">via web p=
+ost</span>
+          </a> <br>
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20556;_y=
+lc=3DX3oDMTM4dm5sOGh2BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNz=
+IxOTE2OARtc2dJZAMyMDU1OARzZWMDZG1zZwRzbGsDdnRwYwRzdGltZQMxMjk1NjAyMDE0BHRwY=
+0lkAzIwNTU2" style=3D"padding-bottom: 20px;">
+            Messages in this topic=20
+          </a> (9)
+                  </div>     </dd>
+        <dt style=3D"display: block; float: left; font-size: 92%;">3d. </dt=
+>
+  <dd  style=3D"border-bottom: 4px solid #ccc;">=20
+    <h2 style=3D"font-size:100%; font-family:Georgia; font-weight:bold; mar=
+gin: 0 0 5px 0;">
+      <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20559;_ylc=
+=3DX3oDMTJzM2xrbWdwBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARtc2dJZAMyMDU1OQRzZWMDZG1zZwRzbGsDdm1zZwRzdGltZQMxMjk1NjAyMDE0" name=
+=3D"3d">=20
+        Re: Apple Reboot      </a>
+    </h2>
+    <h3 style=3D"font: 100% Arial; margin: 0;">Posted by:      "Wiley Wiggi=
+ns"      <a href=3D"mailto:weevil@wileywiggins.com?Subject=3D Re%3A%20Apple=
+%20Reboot">
+      weevil@wileywiggins.com      </a>
+              &nbsp;
+        <a href=3D"http://profiles.yahoo.com/wiley_wiggins">
+          wiley_wiggins=20
+        </a>
+          </h3>
+    <h4 style=3D"font: 77% verdana; margin: 0 0 20px 0;">
+      Thu Jan&nbsp;20,&nbsp;2011 3:23&nbsp;pm        (PST)    </h4>
+
+    <div class=3D"ygrp-content" style=3D"font-family:Georgia; font-size:100=
+%; line-height:122%;">
+                  <br><br>
+      How to run disc repair:<br>
+<br>
+<a href=3D"http://support.apple.com/kb/HT1782">http://support.<wbr>apple.co=
+m/<wbr>kb/HT1782</a><br>
+<br>
+          </div>=20=20=20=20=20=20=20
+=20=20=20=20
+    <div class=3D"ygrp-dateline" style=3D"clear: both; font-family: Arial; =
+line-height: 140%; padding: 10px 0; margin-bottom: 20px;">
+      <div class=3D"offset" style=3D"float: right;font: 77% verdana; paddin=
+g-top:2em;">
+        <a href=3D"#toc" style=3D"padding-bottom: 20px;">
+          Back to top        </a>
+      </div>                         <a href=3D"mailto:weevil@wileywiggins.=
+com?Subject=3DRe%3A%20Apple%20Reboot" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">sender=
+</span>
+          </a> |
+          <a href=3D"mailto:frieNDA@yahoogroups.com?Subject=3D Re%3A%20Appl=
+e%20Reboot" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">group<=
+/span>
+          </a> |
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_ylc=3DX3oD=
+MTJzNzlxZHBmBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OAR=
+tc2dJZAMyMDU1OQRzZWMDZG1zZwRzbGsDcnBseQRzdGltZQMxMjk1NjAyMDE0?act=3Dreply&m=
+essageNum=3D20559" style=3D"padding-bottom: 20px;">
+            Reply <span class=3D"bld" style=3D"font-weight:bold;">via web p=
+ost</span>
+          </a> <br>
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20556;_y=
+lc=3DX3oDMTM4M2VoMGx0BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNz=
+IxOTE2OARtc2dJZAMyMDU1OQRzZWMDZG1zZwRzbGsDdnRwYwRzdGltZQMxMjk1NjAyMDE0BHRwY=
+0lkAzIwNTU2" style=3D"padding-bottom: 20px;">
+            Messages in this topic=20
+          </a> (9)
+                  </div>     </dd>
+        <dt style=3D"display: block; float: left; font-size: 92%;">3e. </dt=
+>
+  <dd  style=3D"border-bottom: 4px solid #ccc;">=20
+    <h2 style=3D"font-size:100%; font-family:Georgia; font-weight:bold; mar=
+gin: 0 0 5px 0;">
+      <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20560;_ylc=
+=3DX3oDMTJzMjFzN25yBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARtc2dJZAMyMDU2MARzZWMDZG1zZwRzbGsDdm1zZwRzdGltZQMxMjk1NjAyMDE0" name=
+=3D"3e">=20
+        Re: Apple Reboot      </a>
+    </h2>
+    <h3 style=3D"font: 100% Arial; margin: 0;">Posted by:      "Wiley Wiggi=
+ns"      <a href=3D"mailto:weevil@wileywiggins.com?Subject=3D Re%3A%20Apple=
+%20Reboot">
+      weevil@wileywiggins.com      </a>
+              &nbsp;
+        <a href=3D"http://profiles.yahoo.com/wiley_wiggins">
+          wiley_wiggins=20
+        </a>
+          </h3>
+    <h4 style=3D"font: 77% verdana; margin: 0 0 20px 0;">
+      Thu Jan&nbsp;20,&nbsp;2011 3:24&nbsp;pm        (PST)    </h4>
+
+    <div class=3D"ygrp-content" style=3D"font-family:Georgia; font-size:100=
+%; line-height:122%;">
+                  <br><br>
+      Sorry, I meant this one:<br>
+<br>
+<a href=3D"http://support.apple.com/kb/TS1417">http://support.<wbr>apple.co=
+m/<wbr>kb/TS1417</a><br>
+<br>
+          </div>=20=20=20=20=20=20=20
+=20=20=20=20
+    <div class=3D"ygrp-dateline" style=3D"clear: both; font-family: Arial; =
+line-height: 140%; padding: 10px 0; margin-bottom: 20px;">
+      <div class=3D"offset" style=3D"float: right;font: 77% verdana; paddin=
+g-top:2em;">
+        <a href=3D"#toc" style=3D"padding-bottom: 20px;">
+          Back to top        </a>
+      </div>                         <a href=3D"mailto:weevil@wileywiggins.=
+com?Subject=3DRe%3A%20Apple%20Reboot" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">sender=
+</span>
+          </a> |
+          <a href=3D"mailto:frieNDA@yahoogroups.com?Subject=3D Re%3A%20Appl=
+e%20Reboot" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">group<=
+/span>
+          </a> |
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_ylc=3DX3oD=
+MTJzN2hiNjQyBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OAR=
+tc2dJZAMyMDU2MARzZWMDZG1zZwRzbGsDcnBseQRzdGltZQMxMjk1NjAyMDE0?act=3Dreply&m=
+essageNum=3D20560" style=3D"padding-bottom: 20px;">
+            Reply <span class=3D"bld" style=3D"font-weight:bold;">via web p=
+ost</span>
+          </a> <br>
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20556;_y=
+lc=3DX3oDMTM4M2VpMmIyBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNz=
+IxOTE2OARtc2dJZAMyMDU2MARzZWMDZG1zZwRzbGsDdnRwYwRzdGltZQMxMjk1NjAyMDE0BHRwY=
+0lkAzIwNTU2" style=3D"padding-bottom: 20px;">
+            Messages in this topic=20
+          </a> (9)
+                  </div>     </dd>
+        <dt style=3D"display: block; float: left; font-size: 92%;">3f. </dt=
+>
+  <dd  style=3D"border-bottom: 4px solid #ccc;">=20
+    <h2 style=3D"font-size:100%; font-family:Georgia; font-weight:bold; mar=
+gin: 0 0 5px 0;">
+      <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20561;_ylc=
+=3DX3oDMTJzYTRhaDg3BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARtc2dJZAMyMDU2MQRzZWMDZG1zZwRzbGsDdm1zZwRzdGltZQMxMjk1NjAyMDE0" name=
+=3D"3f">=20
+        Re: Apple Reboot      </a>
+    </h2>
+    <h3 style=3D"font: 100% Arial; margin: 0;">Posted by:      "Rama Gottfr=
+ied"      <a href=3D"mailto:rama.gottfried@gmail.com?Subject=3D Re%3A%20App=
+le%20Reboot">
+      rama.gottfried@gmail.com      </a>
+              &nbsp;
+        <a href=3D"http://profiles.yahoo.com/ramagottfried">
+          ramagottfried=20
+        </a>
+          </h3>
+    <h4 style=3D"font: 77% verdana; margin: 0 0 20px 0;">
+      Thu Jan&nbsp;20,&nbsp;2011 3:25&nbsp;pm        (PST)    </h4>
+
+    <div class=3D"ygrp-content" style=3D"font-family:Georgia; font-size:100=
+%; line-height:122%;">
+                  <br><br>
+      that's a kernel panic - i've been seeing that regularly working with =
+the adruino FTDI drivers in maxMSP.  I wouldn't worry too much about it unl=
+ess you had some unsaved important documents open.<br>
+<br>
+I think this is cause by some miscommunication between the USB port and the=
+ other device.  If it happens every time you try to update your GPS softwar=
+e - try switching the USB port you're using... but yeah, it sucks - and is =
+likely due to an iffy USB driver that Garmin is using (like the iffy FTDI d=
+rivers that arduino uses(used)).<br>
+<br>
+On Jan 20, 2011, at 3:02 PM, Souris Hong-Porretta wrote:<br>
+<br>
+&gt; While updating my GARMIN GPS software, my screen hazed over with a <br=
+>
+&gt; message that said, &quot;you have to reboot your computer by pressing =
+down <br>
+&gt; the button for a couple of seconds&quot; or something like that...<br>
+&gt; <br>
+&gt; Anything I should be concerned about? I've NEVER seen this screen or <=
+br>
+&gt; error message before (THANKS)!<br>
+&gt; <br>
+&gt; This is the error log that it sent to APPLE:<br>
+&gt; <br>
+&gt; Interval Since Last Panic Report: 41189704 sec<br>
+&gt; Panics Since Last Report: 1<br>
+&gt; Anonymous UUID: 804A117E-D4C2-<wbr>4184-A33D-<wbr>7E9EF190CE1D<br>
+&gt; <br>
+&gt; Thu Jan 20 14:57:23 2011<br>
+&gt; panic(cpu 1 caller 0x001AB0FE): Kernel trap at 0x56db29b6, type <br>
+&gt; 14=3Dpage fault, registers:<br>
+&gt; CR0: 0x8001003b, CR2: 0x42dda000, CR3: 0x018fd000, CR4: 0x00000660<br>
+&gt; EAX: 0xffffffff, EBX: 0x0e06e880, ECX: 0x00000000, EDX: 0x0000effc<br>
+&gt; CR2: 0x42dda000, EBP: 0x56d4b8f8, ESI: 0x42dcb004, EDI: 0x00003bfe<br>
+&gt; EFL: 0x00010203, EIP: 0x56db29b6, CS: 0x00000008, DS: 0x00040010<br>
+&gt; Error code: 0x00000000<br>
+&gt; <br>
+&gt; Backtrace (CPU 1), Frame : Return Address (4 potential args on stack)<=
+br>
+&gt; 0x56d4b6d8 : 0x12b4c6 (0x45f91c 0x56d4b70c 0x13355c 0x0)<br>
+&gt; 0x56d4b728 : 0x1ab0fe (0x469a98 0x56db29b6 0xe 0x469248)<br>
+&gt; 0x56d4b808 : 0x1a1713 (0x56d4b820 0x246 0x56d4b8f8 0x56db29b6)<br>
+&gt; 0x56d4b818 : 0x56db29b6 (0xe 0x48 0x10 0x10)<br>
+&gt; 0x56d4b8f8 : 0x56db2bdc (0x0 0x56d4b92c 0x0 0x77fe0)<br>
+&gt; 0x56d4b948 : 0x56db3444 (0xffffffff 0x56d4b98c 0x56d4b988 0x5272a8d0)<=
+br>
+&gt; 0x56d4b9a8 : 0x56db1281 (0xe06e880 0x80 0x56d4b9d8 0x1a9ad9)<br>
+&gt; 0x56d4ba28 : 0x56db13eb (0xe06e880 0x100000 0x0 0xe067ec4)<br>
+&gt; 0x56d4ba98 : 0x56db711c (0xe06e880 0x100000 0x0 0xe067ec4)<br>
+&gt; 0x56d4bad8 : 0x1f536e (0x56d4bdac 0x56d4bb34 0x0 0x0)<br>
+&gt; 0x56d4bdd8 : 0x1f7c65 (0x78b3a30 0x56d4be78 0xe067ec4 0x0)<br>
+&gt; 0x56d4be38 : 0x1e7e83 (0x78b3a30 0x56d4be78 0xe067ec4 0x0)<br>
+&gt; 0x56d4bf78 : 0x3e3a7f (0x6ebde90 0xe067dc0 0xe067e04 0xffffffff)<br>
+&gt; 0x56d4bfc8 : 0x1a1c0a (0xd6d0f80 0x0 0x1a40b5 0xd6d0f80)<br>
+&gt; No mapping exists for frame pointer<br>
+&gt; Backtrace terminated-invalid frame pointer 0xb080b688<br>
+&gt; Kernel loadable modules in backtrace (with dependencies)<wbr>:<br>
+&gt; com.apple.filesyste<wbr>ms.msdosfs(<wbr>1.5.5)@0x56daf00<wbr>0-&gt;0x5=
+6dbbfff<br>
+&gt; <br>
+&gt; BSD process name corresponding to current thread: mds<br>
+&gt; <br>
+&gt; Mac OS version:<br>
+&gt; 9L31a<br>
+&gt; <br>
+&gt; Kernel version:<br>
+&gt; Darwin Kernel Version 9.8.0: Wed Jul 15 16:55:01 PDT 2009; <br>
+&gt; root:xnu-1228.<wbr>15.4~1/RELEASE_<wbr>I386<br>
+&gt; System model name: MacBook5,1 (Mac-F42D89C8)<br>
+&gt; <br>
+&gt; System uptime in nanoseconds: 92031377355481<br>
+&gt; unloaded kexts:<br>
+&gt; com.apple.driver.<wbr>iTunesPhoneDrive<wbr>r	1.0 - last unloaded 92003=
+265393829<br>
+&gt; loaded kexts:<br>
+&gt; com.rim.driver.<wbr>BlackBerryUSBDri<wbr>verInt	0.0.52<br>
+&gt; com.apple.driver.<wbr>iTunesPhoneDrive<wbr>r	1.0 - last loaded 9193394=
+9995842<br>
+&gt; com.apple.driver.<wbr>IOBluetoothHIDDr<wbr>iver	2.1.9f10<br>
+&gt; com.apple.filesyste<wbr>ms.msdosfs	1.5.5<br>
+&gt; com.apple.driver.<wbr>AppleHWSensor	1.9d0<br>
+&gt; com.apple.iokit.<wbr>IOBluetoothSeria<wbr>lManager	2.1.9f10<br>
+&gt; com.apple.filesyste<wbr>ms.autofs	2.0.2<br>
+&gt; com.apple.driver.<wbr>BroadcomUSBBluet<wbr>oothHCIControlle<wbr>r	2.1.=
+9f10<br>
+&gt; com.apple.driver.<wbr>AppleMikeyHIDDri<wbr>ver	1.0.6<br>
+&gt; com.apple.driver.<wbr>AppleUpstreamUse<wbr>rClient	2.7.5<br>
+&gt; com.apple.driver.<wbr>AppleHDA	1.7.1a2<br>
+&gt; com.apple.driver.<wbr>AppleMikeyDriver	1.7.1a2<br>
+&gt; com.apple.driver.<wbr>AppleHDAControll<wbr>er	1.7.1a2<br>
+&gt; com.apple.driver.<wbr>AGPM	100.8.7<br>
+&gt; com.apple.Dont_<wbr>Steal_Mac_<wbr>OS_X	6.0.3<br>
+&gt; com.apple.driver.<wbr>SMCMotionSensor	2.1.1d2<br>
+&gt; com.apple.driver.<wbr>AppleIRControlle<wbr>r	113<br>
+&gt; com.apple.driver.<wbr>AudioIPCDriver	1.0.6<br>
+&gt; com.apple.kext.<wbr>AppleSMCLMU	1.4.5d1<br>
+&gt; com.apple.GeForce	5.4.8<br>
+&gt; com.apple.driver.<wbr>ACPI_SMC_<wbr>PlatformPlugin	3.4.0a17<br>
+&gt; com.apple.driver.<wbr>NVSMU	1.1.7<br>
+&gt; com.apple.driver.<wbr>AppleSMBusPCI	1.0.1d1<br>
+&gt; com.apple.driver.<wbr>AppleLPC	1.3.1<br>
+&gt; com.apple.driver.<wbr>AppleBacklight	1.6.0<br>
+&gt; com.apple.nvidia.<wbr>nv50hal	5.4.8<br>
+&gt; com.apple.driver.<wbr>AppleUSBTCButton<wbr>s	1.7.4f1<br>
+&gt; com.apple.driver.<wbr>AppleUSBMultitou<wbr>ch	189.35<br>
+&gt; com.apple.driver.<wbr>AppleUSBTCKeyboa<wbr>rd	1.7.4f1<br>
+&gt; com.apple.driver.<wbr>AppleUSBMergeNub	3.5.2<br>
+&gt; com.apple.driver.<wbr>XsanFilter	2.7.91<br>
+&gt; com.apple.iokit.<wbr>IOSCSIMultimedia<wbr>CommandsDevice	2.1.1<br>
+&gt; com.apple.iokit.<wbr>SCSITaskUserClie<wbr>nt	2.1.1<br>
+&gt; com.apple.iokit.<wbr>IOAHCISerialATAP<wbr>I	1.1.2<br>
+&gt; com.apple.iokit.<wbr>IOAHCIBlockStora<wbr>ge	1.2.3<br>
+&gt; com.apple.driver.<wbr>AirPortBrcm43xx	366.91.21<br>
+&gt; com.apple.driver.<wbr>AppleAHCIPort	1.7.0<br>
+&gt; com.apple.nvenet	1.0.54<br>
+&gt; com.apple.driver.<wbr>AppleUSBOHCI	3.4.6<br>
+&gt; com.apple.driver.<wbr>AppleUSBHub	3.4.9<br>
+&gt; com.apple.iokit.<wbr>IOUSBUserClient	3.5.2<br>
+&gt; com.apple.driver.<wbr>AppleUSBEHCI	3.4.6<br>
+&gt; com.apple.driver.<wbr>AppleEFINVRAM	1.2.0<br>
+&gt; com.apple.driver.<wbr>AppleSmartBatter<wbr>yManager	158.10.5<br>
+&gt; com.apple.driver.<wbr>AppleRTC	1.2.3<br>
+&gt; com.apple.driver.<wbr>AppleHPET	1.4<br>
+&gt; com.apple.driver.<wbr>AppleACPIPCI	1.2.5<br>
+&gt; com.apple.driver.<wbr>AppleACPIButtons	1.2.5<br>
+&gt; com.apple.driver.<wbr>AppleSMBIOS	1.4<br>
+&gt; com.apple.driver.<wbr>AppleACPIEC	1.2.5<br>
+&gt; com.apple.driver.<wbr>AppleAPIC	1.4<br>
+&gt; com.apple.security.<wbr>seatbelt	107.12<br>
+&gt; com.apple.nke.<wbr>applicationfirew<wbr>all	1.8.77<br>
+&gt; com.apple.security.<wbr>TMSafetyNet	3<br>
+&gt; com.apple.driver.<wbr>AppleIntelCPUPow<wbr>erManagement	76.2.0<br>
+&gt; com.apple.driver.<wbr>DiskImages	199<br>
+&gt; com.apple.BootCache	30.4<br>
+&gt; com.apple.iokit.<wbr>IOUSBMassStorage<wbr>Class	2.0.8<br>
+&gt; com.apple.iokit.<wbr>IOSerialFamily	9.4<br>
+&gt; com.apple.driver.<wbr>AppleUSBBluetoot<wbr>hHCIController	2.1.9f10<br>
+&gt; com.apple.iokit.<wbr>IOBluetoothFamil<wbr>y	2.1.9f10<br>
+&gt; com.apple.driver.<wbr>DspFuncLib	1.7.1a2<br>
+&gt; com.apple.driver.<wbr>AppleSMBusContro<wbr>ller	1.0.1d1<br>
+&gt; com.apple.iokit.<wbr>IOHDAFamily	1.7.1a2<br>
+&gt; com.apple.iokit.<wbr>IOAudioFamily	1.6.9fc5<br>
+&gt; com.apple.kext.<wbr>OSvKernDSPLib	1.1<br>
+&gt; com.apple.driver.<wbr>IOPlatformPlugin<wbr>Family	3.4.0a17<br>
+&gt; com.apple.driver.<wbr>AppleSMC	2.3.1d1<br>
+&gt; com.apple.NVDAResma<wbr>n	5.4.8<br>
+&gt; com.apple.iokit.<wbr>IONDRVSupport	1.7.3<br>
+&gt; com.apple.iokit.<wbr>IOGraphicsFamily	1.7.3<br>
+&gt; com.apple.iokit.<wbr>IOUSBHIDDriver	3.4.6<br>
+&gt; com.apple.driver.<wbr>AppleUSBComposit<wbr>e	3.2.0<br>
+&gt; com.apple.iokit.<wbr>IOSCSIBlockComma<wbr>ndsDevice	2.1.1<br>
+&gt; com.apple.iokit.<wbr>IOBDStorageFamil<wbr>y	1.5<br>
+&gt; com.apple.iokit.<wbr>IODVDStorageFami<wbr>ly	1.5<br>
+&gt; com.apple.iokit.<wbr>IOCDStorageFamil<wbr>y	1.5<br>
+&gt; com.apple.iokit.<wbr>IOSCSIArchitectu<wbr>reModelFamily	2.1.1<br>
+&gt; com.apple.iokit.<wbr>IO80211Family	216.1<br>
+&gt; com.apple.iokit.<wbr>IOAHCIFamily	1.5.0<br>
+&gt; com.apple.iokit.<wbr>IONetworkingFami<wbr>ly	1.6.1<br>
+&gt; com.apple.iokit.<wbr>IOUSBFamily	3.5.2<br>
+&gt; com.apple.driver.<wbr>AppleEFIRuntime	1.2.0<br>
+&gt; com.apple.iokit.<wbr>IOSMBusFamily	1.1<br>
+&gt; com.apple.iokit.<wbr>IOStorageFamily	1.5.6<br>
+&gt; com.apple.iokit.<wbr>IOHIDFamily	1.5.5<br>
+&gt; com.apple.driver.<wbr>AppleACPIPlatfor<wbr>m	1.2.5<br>
+&gt; com.apple.iokit.<wbr>IOPCIFamily	2.6<br>
+&gt; com.apple.iokit.<wbr>IOACPIFamily	1.2.0<br>
+&gt; <br>
+&gt; <br>
+<br>
+          </div>=20=20=20=20=20=20=20
+=20=20=20=20
+    <div class=3D"ygrp-dateline" style=3D"clear: both; font-family: Arial; =
+line-height: 140%; padding: 10px 0; margin-bottom: 20px;">
+      <div class=3D"offset" style=3D"float: right;font: 77% verdana; paddin=
+g-top:2em;">
+        <a href=3D"#toc" style=3D"padding-bottom: 20px;">
+          Back to top        </a>
+      </div>                         <a href=3D"mailto:rama.gottfried@gmail=
+.com?Subject=3DRe%3A%20Apple%20Reboot" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">sender=
+</span>
+          </a> |
+          <a href=3D"mailto:frieNDA@yahoogroups.com?Subject=3D Re%3A%20Appl=
+e%20Reboot" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">group<=
+/span>
+          </a> |
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_ylc=3DX3oD=
+MTJzczMxdW5kBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OAR=
+tc2dJZAMyMDU2MQRzZWMDZG1zZwRzbGsDcnBseQRzdGltZQMxMjk1NjAyMDE0?act=3Dreply&m=
+essageNum=3D20561" style=3D"padding-bottom: 20px;">
+            Reply <span class=3D"bld" style=3D"font-weight:bold;">via web p=
+ost</span>
+          </a> <br>
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20556;_y=
+lc=3DX3oDMTM4dnZwc3JnBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNz=
+IxOTE2OARtc2dJZAMyMDU2MQRzZWMDZG1zZwRzbGsDdnRwYwRzdGltZQMxMjk1NjAyMDE0BHRwY=
+0lkAzIwNTU2" style=3D"padding-bottom: 20px;">
+            Messages in this topic=20
+          </a> (9)
+                  </div>     </dd>
+        <dt style=3D"display: block; float: left; font-size: 92%;">3g. </dt=
+>
+  <dd  style=3D"border-bottom: 4px solid #ccc;">=20
+    <h2 style=3D"font-size:100%; font-family:Georgia; font-weight:bold; mar=
+gin: 0 0 5px 0;">
+      <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20562;_ylc=
+=3DX3oDMTJzbGticjZyBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARtc2dJZAMyMDU2MgRzZWMDZG1zZwRzbGsDdm1zZwRzdGltZQMxMjk1NjAyMDE0" name=
+=3D"3g">=20
+        Re: Apple Reboot      </a>
+    </h2>
+    <h3 style=3D"font: 100% Arial; margin: 0;">Posted by:      "Wiley Wiggi=
+ns"      <a href=3D"mailto:weevil@wileywiggins.com?Subject=3D Re%3A%20Apple=
+%20Reboot">
+      weevil@wileywiggins.com      </a>
+              &nbsp;
+        <a href=3D"http://profiles.yahoo.com/wiley_wiggins">
+          wiley_wiggins=20
+        </a>
+          </h3>
+    <h4 style=3D"font: 77% verdana; margin: 0 0 20px 0;">
+      Thu Jan&nbsp;20,&nbsp;2011 3:27&nbsp;pm        (PST)    </h4>
+
+    <div class=3D"ygrp-content" style=3D"font-family:Georgia; font-size:100=
+%; line-height:122%;">
+                  <br><br>
+      Oh god, FTDI. I actually had a kernel panic once too trying to work w=
+ith a DMX to USB converter for controlling stage lights that used FTDI. I'm=
+ glad Arduino is getting away from it. <br>
+<br>
+&gt; I think this is cause by some miscommunication between the USB port an=
+d the other device.  If it happens every time you try to update your GPS so=
+ftware - try switching the USB port you're using... but yeah, it sucks - an=
+d is likely due to an iffy USB driver that Garmin is using (like the iffy F=
+TDI drivers that arduino uses(used)).<br>
+<br>
+          </div>=20=20=20=20=20=20=20
+=20=20=20=20
+    <div class=3D"ygrp-dateline" style=3D"clear: both; font-family: Arial; =
+line-height: 140%; padding: 10px 0; margin-bottom: 20px;">
+      <div class=3D"offset" style=3D"float: right;font: 77% verdana; paddin=
+g-top:2em;">
+        <a href=3D"#toc" style=3D"padding-bottom: 20px;">
+          Back to top        </a>
+      </div>                         <a href=3D"mailto:weevil@wileywiggins.=
+com?Subject=3DRe%3A%20Apple%20Reboot" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">sender=
+</span>
+          </a> |
+          <a href=3D"mailto:frieNDA@yahoogroups.com?Subject=3D Re%3A%20Appl=
+e%20Reboot" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">group<=
+/span>
+          </a> |
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_ylc=3DX3oD=
+MTJzNDhvM2RnBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OAR=
+tc2dJZAMyMDU2MgRzZWMDZG1zZwRzbGsDcnBseQRzdGltZQMxMjk1NjAyMDE0?act=3Dreply&m=
+essageNum=3D20562" style=3D"padding-bottom: 20px;">
+            Reply <span class=3D"bld" style=3D"font-weight:bold;">via web p=
+ost</span>
+          </a> <br>
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20556;_y=
+lc=3DX3oDMTM4dHMwYjR0BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNz=
+IxOTE2OARtc2dJZAMyMDU2MgRzZWMDZG1zZwRzbGsDdnRwYwRzdGltZQMxMjk1NjAyMDE0BHRwY=
+0lkAzIwNTU2" style=3D"padding-bottom: 20px;">
+            Messages in this topic=20
+          </a> (9)
+                  </div>     </dd>
+        <dt style=3D"display: block; float: left; font-size: 92%;">3h. </dt=
+>
+  <dd  style=3D"border-bottom: 4px solid #ccc;">=20
+    <h2 style=3D"font-size:100%; font-family:Georgia; font-weight:bold; mar=
+gin: 0 0 5px 0;">
+      <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20563;_ylc=
+=3DX3oDMTJzOGRtMHY0BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARtc2dJZAMyMDU2MwRzZWMDZG1zZwRzbGsDdm1zZwRzdGltZQMxMjk1NjAyMDE0" name=
+=3D"3h">=20
+        Re: Apple Reboot      </a>
+    </h2>
+    <h3 style=3D"font: 100% Arial; margin: 0;">Posted by:      "L. Souris H=
+ong-Porretta"      <a href=3D"mailto:souris@hustlerofculture.com?Subject=3D=
+ Re%3A%20Apple%20Reboot">
+      souris@hustlerofculture.com      </a>
+              &nbsp;
+        <a href=3D"http://profiles.yahoo.com/souris_hong">
+          souris_hong=20
+        </a>
+          </h3>
+    <h4 style=3D"font: 77% verdana; margin: 0 0 20px 0;">
+      Thu Jan&nbsp;20,&nbsp;2011 4:21&nbsp;pm        (PST)    </h4>
+
+    <div class=3D"ygrp-content" style=3D"font-family:Georgia; font-size:100=
+%; line-height:122%;">
+                  <br><br>
+      Thanks SO MUCH, dudes.<br>
+<br>
+D, I followed your instructions and everything looks OK. THANK YOU for  <br=
+>
+spelling it all out, cause I'm a fucking numbnut these days and can't  <br>
+find shit anywhere on this Apple computer (like find your so-and-so- <br>
+utility-so-and-<wbr>so).<br>
+<br>
+I have everything backed up on two external hard drives now (thanks  <br>
+Julian, Neb, and DJ)! That said, I didn't lose any work.<br>
+<br>
+THANKS, again.<br>
+<br>
+xosourisxo<br>
+<br>
+On Jan 20, 2011, at 3:27 PM, Wiley Wiggins wrote:<br>
+<br>
+Oh god, FTDI. I actually had a kernel panic once too trying to work  <br>
+with a DMX to USB converter for controlling stage lights that used  <br>
+FTDI. I'm glad Arduino is getting away from it.<br>
+<br>
+&gt; I think this is cause by some miscommunication between the USB port  <=
+br>
+&gt; and the other device.  If it happens every time you try to update  <br=
+>
+&gt; your GPS software - try switching the USB port you're using... but  <b=
+r>
+&gt; yeah, it sucks - and is likely due to an iffy USB driver that Garmin  =
+<br>
+&gt; is using (like the iffy FTDI drivers that arduino uses(used)).<br>
+<br>
+****<br>
+<br>
+souris hong-porretta<br>
+3101 5th street #5<br>
+santa monica, ca 90405<br>
+<br>
+310.500.7870 mobile<br>
+<br>
+<a href=3D"mailto:souris%40hustlerofculture.com">souris@hustlerofcul<wbr>tu=
+re.com</a><br>
+www.hustlerofcultur<wbr>e.com<br>
+@hustlerculture<br>
+<br>
+<a href=3D"mailto:tinyironfists%40gmail.com">tinyironfists@<wbr>gmail.com</=
+a><br>
+www.tinyironfists.<wbr>com<br>
+@tinyironfists<br>
+<br>
+****<br>
+<br>
+          </div>=20=20=20=20=20=20=20
+=20=20=20=20
+    <div class=3D"ygrp-dateline" style=3D"clear: both; font-family: Arial; =
+line-height: 140%; padding: 10px 0; margin-bottom: 20px;">
+      <div class=3D"offset" style=3D"float: right;font: 77% verdana; paddin=
+g-top:2em;">
+        <a href=3D"#toc" style=3D"padding-bottom: 20px;">
+          Back to top        </a>
+      </div>                         <a href=3D"mailto:souris@hustlerofcult=
+ure.com?Subject=3DRe%3A%20Apple%20Reboot" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">sender=
+</span>
+          </a> |
+          <a href=3D"mailto:frieNDA@yahoogroups.com?Subject=3D Re%3A%20Appl=
+e%20Reboot" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">group<=
+/span>
+          </a> |
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_ylc=3DX3oD=
+MTJzOGpicjM3BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OAR=
+tc2dJZAMyMDU2MwRzZWMDZG1zZwRzbGsDcnBseQRzdGltZQMxMjk1NjAyMDE0?act=3Dreply&m=
+essageNum=3D20563" style=3D"padding-bottom: 20px;">
+            Reply <span class=3D"bld" style=3D"font-weight:bold;">via web p=
+ost</span>
+          </a> <br>
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20556;_y=
+lc=3DX3oDMTM4MjZnbnJjBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNz=
+IxOTE2OARtc2dJZAMyMDU2MwRzZWMDZG1zZwRzbGsDdnRwYwRzdGltZQMxMjk1NjAyMDE0BHRwY=
+0lkAzIwNTU2" style=3D"padding-bottom: 20px;">
+            Messages in this topic=20
+          </a> (9)
+                  </div>     </dd>
+        <dt style=3D"display: block; float: left; font-size: 92%;">3i. </dt=
+>
+  <dd class=3D"last" style=3D"border-bottom: 4px solid #ccc;">=20
+    <h2 style=3D"font-size:100%; font-family:Georgia; font-weight:bold; mar=
+gin: 0 0 5px 0;">
+      <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20567;_ylc=
+=3DX3oDMTJzazlrc2FhBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARtc2dJZAMyMDU2NwRzZWMDZG1zZwRzbGsDdm1zZwRzdGltZQMxMjk1NjAyMDE0" name=
+=3D"3i">=20
+        Re: Apple Reboot      </a>
+    </h2>
+    <h3 style=3D"font: 100% Arial; margin: 0;">Posted by:      "Daniel Terd=
+iman"      <a href=3D"mailto:daniel.terdiman@earthlink.net?Subject=3D Re%3A=
+%20Apple%20Reboot">
+      daniel.terdiman@earthlink.net      </a>
+              &nbsp;
+        <a href=3D"http://profiles.yahoo.com/jschooldan">
+          jschooldan=20
+        </a>
+          </h3>
+    <h4 style=3D"font: 77% verdana; margin: 0 0 20px 0;">
+      Thu Jan&nbsp;20,&nbsp;2011 4:35&nbsp;pm        (PST)    </h4>
+
+    <div class=3D"ygrp-content" style=3D"font-family:Georgia; font-size:100=
+%; line-height:122%;">
+                  <br><br>
+      As Wiley pointed out, the repair disk permissions thing almost certai=
+nly <br>
+didn't help with this particular situation. But it's always good to run <br=
+>
+that once in awhile anyway.<br>
+<br>
+Glad things are looking better now.<br>
+<br>
+D<br>
+<br>
+On 1/20/11 4:21 PM, L. Souris Hong-Porretta wrote:<br>
+&gt;<br>
+&gt; Thanks SO MUCH, dudes.<br>
+&gt;<br>
+&gt;<br>
+&gt; D, I followed your instructions and everything looks OK. THANK YOU for=
+ <br>
+&gt; spelling it all out, cause I'm a fucking numbnut these days and can't =
+<br>
+&gt; find shit anywhere on this Apple computer (like find your <br>
+&gt; so-and-so-utility-<wbr>so-and-so)<wbr>.<br>
+&gt;<br>
+&gt; I have everything backed up on two external hard drives now (thanks <b=
+r>
+&gt; Julian, Neb, and DJ)! That said, I didn't lose any work.<br>
+&gt;<br>
+&gt; THANKS, again.<br>
+&gt;<br>
+&gt; xosourisxo<br>
+&gt;<br>
+&gt;<br>
+&gt; On Jan 20, 2011, at 3:27 PM, Wiley Wiggins wrote:<br>
+&gt;<br>
+&gt;<br>
+&gt;<br>
+&gt; Oh god, FTDI. I actually had a kernel panic once too trying to work <b=
+r>
+&gt; with a DMX to USB converter for controlling stage lights that used <br=
+>
+&gt; FTDI. I'm glad Arduino is getting away from it.<br>
+&gt;<br>
+&gt;&gt; I think this is cause by some miscommunication between the USB por=
+t <br>
+&gt;&gt; and the other device.  If it happens every time you try to update =
+<br>
+&gt;&gt; your GPS software - try switching the USB port you're using... but=
+ <br>
+&gt;&gt; yeah, it sucks - and is likely due to an iffy USB driver that Garm=
+in <br>
+&gt;&gt; is using (like the iffy FTDI drivers that arduino uses(used)).<br>
+&gt;<br>
+&gt;<br>
+&gt;<br>
+&gt;<br>
+&gt; ****<br>
+&gt;<br>
+&gt; souris hong-porretta<br>
+&gt; 3101 5th street #5<br>
+&gt; santa monica, ca 90405<br>
+&gt;<br>
+&gt; 310.500.7870 mobile<br>
+&gt;<br>
+&gt; <a href=3D"mailto:souris%40hustlerofculture.com">souris@hustlerofcul<w=
+br>ture.com</a> &lt;mailto:<a href=3D"mailto:souris%40hustlerofculture.com"=
+>souris@hustlerofcul<wbr>ture.com</a>&gt;<br>
+&gt; www.hustlerofcultur<wbr>e.com &lt;<a href=3D"http://www.hustlerofcultu=
+re.com">http://www.hustlero<wbr>fculture.<wbr>com</a>&gt;<br>
+&gt; @hustlerculture<br>
+&gt;<br>
+&gt; <a href=3D"mailto:tinyironfists%40gmail.com">tinyironfists@<wbr>gmail.=
+com</a> &lt;mailto:<a href=3D"mailto:tinyironfists%40gmail.com">tinyironfis=
+ts@<wbr>gmail.com</a>&gt;<br>
+&gt; www.tinyironfists.<wbr>com &lt;<a href=3D"http://www.tinyironfists.com=
+">http://www.tinyiron<wbr>fists.com</a>&gt;<br>
+&gt; @tinyironfists<br>
+&gt;<br>
+&gt; ****<br>
+&gt;<br>
+&gt; <br>
+          </div>=20=20=20=20=20=20=20
+=20=20=20=20
+    <div class=3D"ygrp-dateline" style=3D"clear: both; font-family: Arial; =
+line-height: 140%; padding: 10px 0; margin-bottom: 20px;">
+      <div class=3D"offset" style=3D"float: right;font: 77% verdana; paddin=
+g-top:2em;">
+        <a href=3D"#toc" style=3D"padding-bottom: 20px;">
+          Back to top        </a>
+      </div>                         <a href=3D"mailto:daniel.terdiman@eart=
+hlink.net?Subject=3DRe%3A%20Apple%20Reboot" style=3D"padding-bottom: 20px;"=
+>
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">sender=
+</span>
+          </a> |
+          <a href=3D"mailto:frieNDA@yahoogroups.com?Subject=3D Re%3A%20Appl=
+e%20Reboot" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">group<=
+/span>
+          </a> |
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_ylc=3DX3oD=
+MTJzMnIxbXRtBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OAR=
+tc2dJZAMyMDU2NwRzZWMDZG1zZwRzbGsDcnBseQRzdGltZQMxMjk1NjAyMDE0?act=3Dreply&m=
+essageNum=3D20567" style=3D"padding-bottom: 20px;">
+            Reply <span class=3D"bld" style=3D"font-weight:bold;">via web p=
+ost</span>
+          </a> <br>
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20556;_y=
+lc=3DX3oDMTM4bWRnNDdvBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNz=
+IxOTE2OARtc2dJZAMyMDU2NwRzZWMDZG1zZwRzbGsDdnRwYwRzdGltZQMxMjk1NjAyMDE0BHRwY=
+0lkAzIwNTU2" style=3D"padding-bottom: 20px;">
+            Messages in this topic=20
+          </a> (9)
+                  </div>     </dd>
+    </dl>
+           <dl >
+        <dt style=3D"display: block; float: left; font-size: 92%;">4a. </dt=
+>
+  <dd  style=3D"border-bottom: 4px solid #ccc;">=20
+    <h2 style=3D"font-size:100%; font-family:Georgia; font-weight:bold; mar=
+gin: 0 0 5px 0;">
+      <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20564;_ylc=
+=3DX3oDMTJzZDdycmlyBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARtc2dJZAMyMDU2NARzZWMDZG1zZwRzbGsDdm1zZwRzdGltZQMxMjk1NjAyMDE0" name=
+=3D"4a">=20
+        APPLE APPS and GOATS      </a>
+    </h2>
+    <h3 style=3D"font: 100% Arial; margin: 0;">Posted by:      "Souris Hong=
+-Porretta"      <a href=3D"mailto:souris@hustlerofculture.com?Subject=3D Re=
+%3A%20APPLE%20APPS%20and%20GOATS">
+      souris@hustlerofculture.com      </a>
+              &nbsp;
+        <a href=3D"http://profiles.yahoo.com/souris_hong">
+          souris_hong=20
+        </a>
+          </h3>
+    <h4 style=3D"font: 77% verdana; margin: 0 0 20px 0;">
+      Thu Jan&nbsp;20,&nbsp;2011 4:26&nbsp;pm        (PST)    </h4>
+
+    <div class=3D"ygrp-content" style=3D"font-family:Georgia; font-size:100=
+%; line-height:122%;">
+                  <br><br>
+      Welcome to 2007, my friends!<br>
+<br>
+DANIEL TERDIMAN has loaned me his spare 32GB iTouch and I want to  <br>
+check out everything you guys have been raving about. EXCEPT THAT,  <br>
+when I went to access the frieNDA files, there was NO SUCH file for  <br>
+APPLE APPS, as many times as I know others have inquired about it.  <br>
+Normally, I'd go through ALL MY FRIENDA EMAIL and search and find the  <br>
+answers, but with the recent crash of the server I was hosted on, I  <br>
+ended up losing thousands of my emails (I also deleted my apple  <br>
+account not knowing it would wipe out my mail messages so this really  <br>
+screwed up my back up / rebooting process). BLAH BLAH BLAH.<br>
+<br>
+WHO, I said... WHO on this board has asked for the apps before? Can  <br>
+you send me the suggested list and I'll add it to a master file in the  <br=
+>
+MISCELLANEOUS folder.<br>
+<br>
+Also, Wiley's DEFENSE OF THE IPAD is the sole entry to the GOAT  <br>
+(greatest of all time frieNDA posts). Is it true that we only have ONE  <br=
+>
+POST that qualifies for GOAT status?!<br>
+<br>
+THANKS in advance!<br>
+<br>
+xosourisxo<br>
+<br>
+****<br>
+<br>
+souris hong-porretta<br>
+3101 5th street #5<br>
+santa monica, ca 90405<br>
+<br>
+310.500.7870 mobile<br>
+<br>
+<a href=3D"mailto:souris%40hustlerofculture.com">souris@hustlerofcul<wbr>tu=
+re.com</a><br>
+www.hustlerofcultur<wbr>e.com<br>
+@hustlerculture<br>
+<br>
+<a href=3D"mailto:tinyironfists%40gmail.com">tinyironfists@<wbr>gmail.com</=
+a><br>
+www.tinyironfists.<wbr>com<br>
+@tinyironfists<br>
+<br>
+****<br>
+<br>
+          </div>=20=20=20=20=20=20=20
+=20=20=20=20
+    <div class=3D"ygrp-dateline" style=3D"clear: both; font-family: Arial; =
+line-height: 140%; padding: 10px 0; margin-bottom: 20px;">
+      <div class=3D"offset" style=3D"float: right;font: 77% verdana; paddin=
+g-top:2em;">
+        <a href=3D"#toc" style=3D"padding-bottom: 20px;">
+          Back to top        </a>
+      </div>                         <a href=3D"mailto:souris@hustlerofcult=
+ure.com?Subject=3DRe%3A%20APPLE%20APPS%20and%20GOATS" style=3D"padding-bott=
+om: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">sender=
+</span>
+          </a> |
+          <a href=3D"mailto:frieNDA@yahoogroups.com?Subject=3D Re%3A%20APPL=
+E%20APPS%20and%20GOATS" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">group<=
+/span>
+          </a> |
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_ylc=3DX3oD=
+MTJzY2djMzg5BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OAR=
+tc2dJZAMyMDU2NARzZWMDZG1zZwRzbGsDcnBseQRzdGltZQMxMjk1NjAyMDE0?act=3Dreply&m=
+essageNum=3D20564" style=3D"padding-bottom: 20px;">
+            Reply <span class=3D"bld" style=3D"font-weight:bold;">via web p=
+ost</span>
+          </a> <br>
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20564;_y=
+lc=3DX3oDMTM4bm4wbDIzBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNz=
+IxOTE2OARtc2dJZAMyMDU2NARzZWMDZG1zZwRzbGsDdnRwYwRzdGltZQMxMjk1NjAyMDE0BHRwY=
+0lkAzIwNTY0" style=3D"padding-bottom: 20px;">
+            Messages in this topic=20
+          </a> (8)
+                  </div>     </dd>
+        <dt style=3D"display: block; float: left; font-size: 92%;">4b. </dt=
+>
+  <dd  style=3D"border-bottom: 4px solid #ccc;">=20
+    <h2 style=3D"font-size:100%; font-family:Georgia; font-weight:bold; mar=
+gin: 0 0 5px 0;">
+      <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20565;_ylc=
+=3DX3oDMTJzNzlrYmdkBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARtc2dJZAMyMDU2NQRzZWMDZG1zZwRzbGsDdm1zZwRzdGltZQMxMjk1NjAyMDE0" name=
+=3D"4b">=20
+        Re: APPLE APPS and GOATS      </a>
+    </h2>
+    <h3 style=3D"font: 100% Arial; margin: 0;">Posted by:      "Jeannette H=
+arshbarger"      <a href=3D"mailto:jeannetteagogo@yahoo.com?Subject=3D Re%3=
+A%20APPLE%20APPS%20and%20GOATS">
+      jeannetteagogo@yahoo.com      </a>
+              &nbsp;
+        <a href=3D"http://profiles.yahoo.com/jeannetteagogo">
+          jeannetteagogo=20
+        </a>
+          </h3>
+    <h4 style=3D"font: 77% verdana; margin: 0 0 20px 0;">
+      Thu Jan&nbsp;20,&nbsp;2011 4:31&nbsp;pm        (PST)    </h4>
+
+    <div class=3D"ygrp-content" style=3D"font-family:Georgia; font-size:100=
+%; line-height:122%;">
+                  <br><br>
+      Didn't DavidJ or Juster or cHecker nominate themself for the GOAT fol=
+der?=C2=A0 <br>
+<br>
+--- On Thu, 1/20/11, Souris Hong-Porretta &lt;<a href=3D"mailto:souris%40hu=
+stlerofculture.com">souris@hustlerofcul<wbr>ture.com</a>&gt; wrote:<br>
+<br>
+From: Souris Hong-Porretta &lt;<a href=3D"mailto:souris%40hustlerofculture.=
+com">souris@hustlerofcul<wbr>ture.com</a>&gt;<br>
+Subject: [frieNDA] APPLE APPS and GOATS<br>
+To: <a href=3D"mailto:frieNDA%40yahoogroups.com">frieNDA@yahoogroups<wbr>.c=
+om</a><br>
+Date: Thursday, January 20, 2011, 4:26 PM<br>
+<br>
+=C2=A0<br>
+<br>
+Welcome to 2007, my friends!<br>
+DANIEL TERDIMAN has loaned me his spare 32GB iTouch and I want to check out=
+ everything you guys have been raving about. EXCEPT THAT, when I went to ac=
+cess the frieNDA files, there was NO SUCH file for APPLE APPS, as many time=
+s as I know others have inquired about it. Normally, I'd go through ALL MY =
+FRIENDA EMAIL and search and find the answers, but with the recent crash of=
+ the server I was hosted on, I ended up losing thousands of my emails (I al=
+so deleted my apple account not knowing it would wipe out my mail messages =
+so this really screwed up my back up / rebooting process). BLAH BLAH BLAH.<=
+br>
+WHO, I said... WHO on this board has asked for the apps before? Can you sen=
+d me the suggested list and I'll add it to a master file in the MISCELLANEO=
+US folder.<br>
+Also, Wiley's DEFENSE OF THE IPAD is the sole entry to the GOAT (greatest o=
+f all time frieNDA posts). Is it true that we only have ONE POST that quali=
+fies for GOAT status?!<br>
+THANKS in advance!<br>
+xosourisxo<br>
+<br>
+****<br>
+souris hong-porretta3101 5th street #5=C2=A0santa monica, ca 90405<br>
+310.500.7870 mobile<br>
+<a href=3D"mailto:souris%40hustlerofculture.comwww.hustlerofculture.com">so=
+uris@hustlerofcul<wbr>ture.comwww.<wbr>hustlerofculture<wbr>.com</a>@hustle=
+rculture<br>
+<a href=3D"mailto:tinyironfists%40gmail.comwww.tinyironfists.com">tinyironf=
+ists@<wbr>gmail.comwww.<wbr>tinyironfists.<wbr>com</a>@tinyironfists<br>
+**** <br>
+<br>
+          </div>=20=20=20=20=20=20=20
+=20=20=20=20
+    <div class=3D"ygrp-dateline" style=3D"clear: both; font-family: Arial; =
+line-height: 140%; padding: 10px 0; margin-bottom: 20px;">
+      <div class=3D"offset" style=3D"float: right;font: 77% verdana; paddin=
+g-top:2em;">
+        <a href=3D"#toc" style=3D"padding-bottom: 20px;">
+          Back to top        </a>
+      </div>                         <a href=3D"mailto:jeannetteagogo@yahoo=
+.com?Subject=3DRe%3A%20APPLE%20APPS%20and%20GOATS" style=3D"padding-bottom:=
+ 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">sender=
+</span>
+          </a> |
+          <a href=3D"mailto:frieNDA@yahoogroups.com?Subject=3D Re%3A%20APPL=
+E%20APPS%20and%20GOATS" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">group<=
+/span>
+          </a> |
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_ylc=3DX3oD=
+MTJzZGQ4N2k5BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OAR=
+tc2dJZAMyMDU2NQRzZWMDZG1zZwRzbGsDcnBseQRzdGltZQMxMjk1NjAyMDE0?act=3Dreply&m=
+essageNum=3D20565" style=3D"padding-bottom: 20px;">
+            Reply <span class=3D"bld" style=3D"font-weight:bold;">via web p=
+ost</span>
+          </a> <br>
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20564;_y=
+lc=3DX3oDMTM4NjdobDNrBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNz=
+IxOTE2OARtc2dJZAMyMDU2NQRzZWMDZG1zZwRzbGsDdnRwYwRzdGltZQMxMjk1NjAyMDE0BHRwY=
+0lkAzIwNTY0" style=3D"padding-bottom: 20px;">
+            Messages in this topic=20
+          </a> (8)
+                  </div>     </dd>
+        <dt style=3D"display: block; float: left; font-size: 92%;">4c. </dt=
+>
+  <dd  style=3D"border-bottom: 4px solid #ccc;">=20
+    <h2 style=3D"font-size:100%; font-family:Georgia; font-weight:bold; mar=
+gin: 0 0 5px 0;">
+      <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20566;_ylc=
+=3DX3oDMTJza25vaWFjBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARtc2dJZAMyMDU2NgRzZWMDZG1zZwRzbGsDdm1zZwRzdGltZQMxMjk1NjAyMDE0" name=
+=3D"4c">=20
+        Re: APPLE APPS and GOATS      </a>
+    </h2>
+    <h3 style=3D"font: 100% Arial; margin: 0;">Posted by:      "L. Souris H=
+ong-Porretta"      <a href=3D"mailto:souris@hustlerofculture.com?Subject=3D=
+ Re%3A%20APPLE%20APPS%20and%20GOATS">
+      souris@hustlerofculture.com      </a>
+              &nbsp;
+        <a href=3D"http://profiles.yahoo.com/souris_hong">
+          souris_hong=20
+        </a>
+          </h3>
+    <h4 style=3D"font: 77% verdana; margin: 0 0 20px 0;">
+      Thu Jan&nbsp;20,&nbsp;2011 4:34&nbsp;pm        (PST)    </h4>
+
+    <div class=3D"ygrp-content" style=3D"font-family:Georgia; font-size:100=
+%; line-height:122%;">
+                  <br><br>
+      Yes. DJ set it up. But there's gotta be MORE entries?! Or is it a  <b=
+r>
+HIGHLANDER deal?!<br>
+<br>
+And I think the only thing Juster nominated himself for was more lube  <br>
+for that eye socket thingamagiggy.<br>
+<br>
+On Jan 20, 2011, at 4:29 PM, Jeannette Harshbarger wrote:<br>
+<br>
+Didn't DavidJ or Juster or cHecker nominate themself for the GOAT  <br>
+folder?<br>
+<br>
+          </div>=20=20=20=20=20=20=20
+=20=20=20=20
+    <div class=3D"ygrp-dateline" style=3D"clear: both; font-family: Arial; =
+line-height: 140%; padding: 10px 0; margin-bottom: 20px;">
+      <div class=3D"offset" style=3D"float: right;font: 77% verdana; paddin=
+g-top:2em;">
+        <a href=3D"#toc" style=3D"padding-bottom: 20px;">
+          Back to top        </a>
+      </div>                         <a href=3D"mailto:souris@hustlerofcult=
+ure.com?Subject=3DRe%3A%20APPLE%20APPS%20and%20GOATS" style=3D"padding-bott=
+om: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">sender=
+</span>
+          </a> |
+          <a href=3D"mailto:frieNDA@yahoogroups.com?Subject=3D Re%3A%20APPL=
+E%20APPS%20and%20GOATS" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">group<=
+/span>
+          </a> |
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_ylc=3DX3oD=
+MTJzNjFiMW5mBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OAR=
+tc2dJZAMyMDU2NgRzZWMDZG1zZwRzbGsDcnBseQRzdGltZQMxMjk1NjAyMDE0?act=3Dreply&m=
+essageNum=3D20566" style=3D"padding-bottom: 20px;">
+            Reply <span class=3D"bld" style=3D"font-weight:bold;">via web p=
+ost</span>
+          </a> <br>
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20564;_y=
+lc=3DX3oDMTM4M2M0cDltBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNz=
+IxOTE2OARtc2dJZAMyMDU2NgRzZWMDZG1zZwRzbGsDdnRwYwRzdGltZQMxMjk1NjAyMDE0BHRwY=
+0lkAzIwNTY0" style=3D"padding-bottom: 20px;">
+            Messages in this topic=20
+          </a> (8)
+                  </div>     </dd>
+        <dt style=3D"display: block; float: left; font-size: 92%;">4d. </dt=
+>
+  <dd  style=3D"border-bottom: 4px solid #ccc;">=20
+    <h2 style=3D"font-size:100%; font-family:Georgia; font-weight:bold; mar=
+gin: 0 0 5px 0;">
+      <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20568;_ylc=
+=3DX3oDMTJzM2RvcnVoBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARtc2dJZAMyMDU2OARzZWMDZG1zZwRzbGsDdm1zZwRzdGltZQMxMjk1NjAyMDE0" name=
+=3D"4d">=20
+        Re: APPLE APPS and GOATS      </a>
+    </h2>
+    <h3 style=3D"font: 100% Arial; margin: 0;">Posted by:      "David Jacob=
+s"      <a href=3D"mailto:djacobs@gmail.com?Subject=3D Re%3A%20APPLE%20APPS=
+%20and%20GOATS">
+      djacobs@gmail.com      </a>
+              &nbsp;
+        <a href=3D"http://profiles.yahoo.com/pdx_davidj">
+          pdx_davidj=20
+        </a>
+          </h3>
+    <h4 style=3D"font: 77% verdana; margin: 0 0 20px 0;">
+      Thu Jan&nbsp;20,&nbsp;2011 4:44&nbsp;pm        (PST)    </h4>
+
+    <div class=3D"ygrp-content" style=3D"font-family:Georgia; font-size:100=
+%; line-height:122%;">
+                  <br><br>
+      &quot;Or is it a HIGHLANDER deal?!&quot;<br>
+<br>
+I just think there's nothing close yet. And I read most of the mails (not<b=
+r>
+this NDA thread, though).<br>
+<br>
+David<br>
+<br>
+On Thu, Jan 20, 2011 at 7:34 PM, L. Souris Hong-Porretta &lt;<br>
+<a href=3D"mailto:souris%40hustlerofculture.com">souris@hustlerofcul<wbr>tu=
+re.com</a>&gt; wrote:<br>
+<br>
+&gt;<br>
+&gt;<br>
+&gt; Yes. DJ set it up. But there's gotta be MORE entries?! Or is it a<br>
+&gt; HIGHLANDER deal?!<br>
+&gt;<br>
+&gt; And I think the only thing Juster nominated himself for was more lube =
+for<br>
+&gt; that eye socket thingamagiggy.<br>
+&gt;<br>
+&gt;<br>
+&gt;<br>
+&gt; On Jan 20, 2011, at 4:29 PM, Jeannette Harshbarger wrote:<br>
+&gt;<br>
+&gt;<br>
+&gt;<br>
+&gt; Didn't DavidJ or Juster or cHecker nominate themself for the GOAT fold=
+er?<br>
+&gt;<br>
+&gt;<br>
+&gt;  <br>
+&gt;<br>
+<br>
+-- <br>
+<a href=3D"mailto:djacobs%40gmail.com">djacobs@gmail.<wbr>com</a><br>
+(646) 244 9910<br>
+<a href=3D"http://hello.typepad.com">http://hello.<wbr>typepad.com</a><br>
+          </div>=20=20=20=20=20=20=20
+=20=20=20=20
+    <div class=3D"ygrp-dateline" style=3D"clear: both; font-family: Arial; =
+line-height: 140%; padding: 10px 0; margin-bottom: 20px;">
+      <div class=3D"offset" style=3D"float: right;font: 77% verdana; paddin=
+g-top:2em;">
+        <a href=3D"#toc" style=3D"padding-bottom: 20px;">
+          Back to top        </a>
+      </div>                         <a href=3D"mailto:djacobs@gmail.com?Su=
+bject=3DRe%3A%20APPLE%20APPS%20and%20GOATS" style=3D"padding-bottom: 20px;"=
+>
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">sender=
+</span>
+          </a> |
+          <a href=3D"mailto:frieNDA@yahoogroups.com?Subject=3D Re%3A%20APPL=
+E%20APPS%20and%20GOATS" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">group<=
+/span>
+          </a> |
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_ylc=3DX3oD=
+MTJzbjE0azI2BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OAR=
+tc2dJZAMyMDU2OARzZWMDZG1zZwRzbGsDcnBseQRzdGltZQMxMjk1NjAyMDE0?act=3Dreply&m=
+essageNum=3D20568" style=3D"padding-bottom: 20px;">
+            Reply <span class=3D"bld" style=3D"font-weight:bold;">via web p=
+ost</span>
+          </a> <br>
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20564;_y=
+lc=3DX3oDMTM4NmFsYWw5BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNz=
+IxOTE2OARtc2dJZAMyMDU2OARzZWMDZG1zZwRzbGsDdnRwYwRzdGltZQMxMjk1NjAyMDE0BHRwY=
+0lkAzIwNTY0" style=3D"padding-bottom: 20px;">
+            Messages in this topic=20
+          </a> (8)
+                  </div>     </dd>
+        <dt style=3D"display: block; float: left; font-size: 92%;">4e. </dt=
+>
+  <dd  style=3D"border-bottom: 4px solid #ccc;">=20
+    <h2 style=3D"font-size:100%; font-family:Georgia; font-weight:bold; mar=
+gin: 0 0 5px 0;">
+      <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20569;_ylc=
+=3DX3oDMTJzZ2p1dGZ0BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARtc2dJZAMyMDU2OQRzZWMDZG1zZwRzbGsDdm1zZwRzdGltZQMxMjk1NjAyMDE0" name=
+=3D"4e">=20
+        Re: APPLE APPS and GOATS      </a>
+    </h2>
+    <h3 style=3D"font: 100% Arial; margin: 0;">Posted by:      "Jeannette H=
+arshbarger"      <a href=3D"mailto:jeannetteagogo@yahoo.com?Subject=3D Re%3=
+A%20APPLE%20APPS%20and%20GOATS">
+      jeannetteagogo@yahoo.com      </a>
+              &nbsp;
+        <a href=3D"http://profiles.yahoo.com/jeannetteagogo">
+          jeannetteagogo=20
+        </a>
+          </h3>
+    <h4 style=3D"font: 77% verdana; margin: 0 0 20px 0;">
+      Thu Jan&nbsp;20,&nbsp;2011 7:44&nbsp;pm        (PST)    </h4>
+
+    <div class=3D"ygrp-content" style=3D"font-family:Georgia; font-size:100=
+%; line-height:122%;">
+                  <br><br>
+      Christina was the person that asked for ONE APP RECOMMENDATION PER PE=
+RSON when he got his iPhone.<br>
+<br>
+Here are the ones I use the most:<br>
+<br>
+YELP - Yeah, you can type in &quot;tamales&quot; or &quot;nail salon&quot; =
+or &quot;book store&quot; or &quot;coffee&quot; and hit the &quot;close to =
+my location&quot; button...which will pull up a list and then allow you to =
+click a button which will bring up a map with directions to the business.=
+=C2=A0 I use this ALL the time.=C2=A0=C2=A0 <br>
+<br>
+SHAZAM - Listens to songs and tells you what they are.=C2=A0 You can only a=
+sk for 5 songs a month unless you pay to upgrade ($3.99 i think... I paid).=
+=C2=A0 <br>
+<br>
+NIKE+<br>
+ GPS - You don't even need the Nike pod thingee for your shoes or the fancy=
+ Nike shoes to use this app.=C2=A0 It tells you how fast you go, it maps yo=
+ur route and uploads your stats to Nike.com so that you can see how far you=
+'ve run / power walked in a week/month/year.=C2=A0 <br>
+THE BEST thing about it is that Tracy Jordan roots for me by saying &quot;t=
+hat's my GURL!&quot; and other fun things when I'm done.=C2=A0 You can also=
+ sync with FB and when someone gives you a thumbs up or comments while you'=
+re running it CHEERS over your music.=C2=A0 Who likes to run?=C2=A0 Not me.=
+=C2=A0 Who likes to run when it's made fun?=C2=A0 I guess me.=C2=A0 <br>
+<br>
+WORDS WITH FRIENDS:<br>
+Scrabble with strangers or your friends... play at your leisure... you can =
+play like 15 game simultaneously too, I think.=C2=A0 <br>
+<br>
+INSTAGRAM:<br>
+It's like flickr with dumb hipstamatic type processing and you can &quot;sh=
+are&quot; a photo which posts it in a stream that everyone that's following=
+ you can see.=C2=A0 A bunch of us are on it.=C2=A0 To quote Jason - &quot;H=
+ey Instagram... CAT PHOTO, CAT PHOTO, CAT PHOTO.... How do YOU like it?&quo=
+t;=C2=A0 I keep looking for cats to photograph to share with Jason, but I d=
+on't ever see any....<br>
+<br>
+FB<br>
+It's nice to just look at / post / and get notified of FB activity on a pho=
+ne app without having to log onto a computer.=C2=A0 <br>
+<br>
+KAYAK<br>
+Research travel on the go<br>
+<br>
+INCEPTION:<br>
+Fun...creepy.<wbr>...fun and creepy.=C2=A0 You'll need headphones with a bu=
+ilt in microphone tho...<br>
+<br>
+REDBOX:<br>
+I can reserve a $1 movie from my neighborhood kiosk (the 7-11 around the co=
+rner) and pick it up later before it runs out.=C2=A0 Popular titles run out=
+ sometimes.=C2=A0 When you just don't want to wait for damned Netflix to co=
+me in the mail.=C2=A0 <br>
+<br>
+AIM:<br>
+You know when you IM me sometimes and I'm slow in responding?=C2=A0 I'm usi=
+ng the mobile version of IM and am texting with one finger.=C2=A0 <br>
+<br>
+MOONPHASE:<br>
+Cuz I like to know the phase of the moon...<br>
+<br>
+FARECOMPARE<br>
+Also for travel.=C2=A0 Sends you alerts when a price drops or goes up on yo=
+ur watch list.=C2=A0 Self explanatory, really.<br>
+<br>
+EBAY:<br>
+As if I don't have enough of a problem with Ebay...<br>
+<br>
+TWEETDECK<br>
+Lets you follow your stream, has @replies in a sep column, DMs in another c=
+olumn and any lists you may follow in OTHER columns.=C2=A0 Good if you're s=
+earching for a certain keyword too (like #bedbugs )=C2=A0 <br>
+<br>
+TRIP ADVISOR<br>
+Mobile app - same as site<br>
+<br>
+--- On Thu, 1/20/11, Souris Hong-Porretta &lt;<a href=3D"mailto:souris%40hu=
+stlerofculture.com">souris@hustlerofcul<wbr>ture.com</a>&gt; wrote:<br>
+<br>
+From: Souris Hong-Porretta &lt;<a href=3D"mailto:souris%40hustlerofculture.=
+com">souris@hustlerofcul<wbr>ture.com</a>&gt;<br>
+Subject: [frieNDA] APPLE APPS and GOATS<br>
+To: <a href=3D"mailto:frieNDA%40yahoogroups.com">frieNDA@yahoogroups<wbr>.c=
+om</a><br>
+Date: Thursday, January 20, 2011, 4:26<br>
+ PM<br>
+<br>
+=C2=A0<br>
+<br>
+Welcome to 2007, my friends!<br>
+DANIEL TERDIMAN has loaned me his spare 32GB iTouch and I want to check out=
+ everything you guys have been raving about. EXCEPT THAT, when I went to ac=
+cess the frieNDA files, there was NO SUCH file for APPLE APPS, as many time=
+s as I know others have inquired about it. Normally, I'd go through ALL MY =
+FRIENDA EMAIL and search and find the answers, but with the recent crash of=
+ the server I was hosted on, I ended up losing thousands of my emails (I al=
+so deleted my apple account not knowing it would wipe out my mail messages =
+so this really screwed up my back up / rebooting process). BLAH BLAH BLAH.<=
+br>
+WHO, I said... WHO on this board has asked for the apps before? Can you sen=
+d me the suggested list and I'll add it to a master file in the MISCELLANEO=
+US folder.<br>
+Also, Wiley's DEFENSE OF THE IPAD is the sole entry to the GOAT (greatest o=
+f all time frieNDA<br>
+ posts). Is it true that we only have ONE POST that qualifies for GOAT stat=
+us?!<br>
+THANKS in advance!<br>
+xosourisxo<br>
+<br>
+****<br>
+souris hong-porretta3101 5th street #5=C2=A0santa monica, ca 90405<br>
+310.500.7870 mobile<br>
+<a href=3D"mailto:souris%40hustlerofculture.comwww.hustlerofculture.com">so=
+uris@hustlerofcul<wbr>ture.comwww.<wbr>hustlerofculture<wbr>.com</a>@hustle=
+rculture<br>
+<a href=3D"mailto:tinyironfists%40gmail.comwww.tinyironfists.com">tinyironf=
+ists@<wbr>gmail.comwww.<wbr>tinyironfists.<wbr>com</a>@tinyironfists<br>
+**** <br>
+<br>
+          </div>=20=20=20=20=20=20=20
+=20=20=20=20
+    <div class=3D"ygrp-dateline" style=3D"clear: both; font-family: Arial; =
+line-height: 140%; padding: 10px 0; margin-bottom: 20px;">
+      <div class=3D"offset" style=3D"float: right;font: 77% verdana; paddin=
+g-top:2em;">
+        <a href=3D"#toc" style=3D"padding-bottom: 20px;">
+          Back to top        </a>
+      </div>                         <a href=3D"mailto:jeannetteagogo@yahoo=
+.com?Subject=3DRe%3A%20APPLE%20APPS%20and%20GOATS" style=3D"padding-bottom:=
+ 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">sender=
+</span>
+          </a> |
+          <a href=3D"mailto:frieNDA@yahoogroups.com?Subject=3D Re%3A%20APPL=
+E%20APPS%20and%20GOATS" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">group<=
+/span>
+          </a> |
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_ylc=3DX3oD=
+MTJzZ2pwcnJuBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OAR=
+tc2dJZAMyMDU2OQRzZWMDZG1zZwRzbGsDcnBseQRzdGltZQMxMjk1NjAyMDE0?act=3Dreply&m=
+essageNum=3D20569" style=3D"padding-bottom: 20px;">
+            Reply <span class=3D"bld" style=3D"font-weight:bold;">via web p=
+ost</span>
+          </a> <br>
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20564;_y=
+lc=3DX3oDMTM4MXR2dmtsBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNz=
+IxOTE2OARtc2dJZAMyMDU2OQRzZWMDZG1zZwRzbGsDdnRwYwRzdGltZQMxMjk1NjAyMDE0BHRwY=
+0lkAzIwNTY0" style=3D"padding-bottom: 20px;">
+            Messages in this topic=20
+          </a> (8)
+                  </div>     </dd>
+        <dt style=3D"display: block; float: left; font-size: 92%;">4f. </dt=
+>
+  <dd  style=3D"border-bottom: 4px solid #ccc;">=20
+    <h2 style=3D"font-size:100%; font-family:Georgia; font-weight:bold; mar=
+gin: 0 0 5px 0;">
+      <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20571;_ylc=
+=3DX3oDMTJzN2Vnc2x2BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARtc2dJZAMyMDU3MQRzZWMDZG1zZwRzbGsDdm1zZwRzdGltZQMxMjk1NjAyMDE0" name=
+=3D"4f">=20
+        Re: APPLE APPS and GOATS      </a>
+    </h2>
+    <h3 style=3D"font: 100% Arial; margin: 0;">Posted by:      "Jeannette H=
+arshbarger"      <a href=3D"mailto:jeannetteagogo@yahoo.com?Subject=3D Re%3=
+A%20APPLE%20APPS%20and%20GOATS">
+      jeannetteagogo@yahoo.com      </a>
+              &nbsp;
+        <a href=3D"http://profiles.yahoo.com/jeannetteagogo">
+          jeannetteagogo=20
+        </a>
+          </h3>
+    <h4 style=3D"font: 77% verdana; margin: 0 0 20px 0;">
+      Thu Jan&nbsp;20,&nbsp;2011 7:48&nbsp;pm        (PST)    </h4>
+
+    <div class=3D"ygrp-content" style=3D"font-family:Georgia; font-size:100=
+%; line-height:122%;">
+                  <br><br>
+      <a href=3D"http://groups.yahoo.com/group/frieNDA/message/14301">http:=
+//groups.<wbr>yahoo.com/<wbr>group/frieNDA/<wbr>message/14301</a><br>
+<br>
+--- On Thu, 1/20/11, Jeannette Harshbarger &lt;<a href=3D"mailto:jeannettea=
+gogo%40yahoo.com">jeannetteagogo@<wbr>yahoo.com</a>&gt; wrote:<br>
+<br>
+From: Jeannette Harshbarger &lt;<a href=3D"mailto:jeannetteagogo%40yahoo.co=
+m">jeannetteagogo@<wbr>yahoo.com</a>&gt;<br>
+Subject: Re: [frieNDA] APPLE APPS and GOATS<br>
+To: <a href=3D"mailto:frieNDA%40yahoogroups.com">frieNDA@yahoogroups<wbr>.c=
+om</a><br>
+Date: Thursday, January 20, 2011, 7:44 PM<br>
+<br>
+=C2=A0<br>
+<br>
+Christina was the person that asked for ONE APP RECOMMENDATION PER PERSON w=
+hen he got his iPhone.<br>
+<br>
+          </div>=20=20=20=20=20=20=20
+=20=20=20=20
+    <div class=3D"ygrp-dateline" style=3D"clear: both; font-family: Arial; =
+line-height: 140%; padding: 10px 0; margin-bottom: 20px;">
+      <div class=3D"offset" style=3D"float: right;font: 77% verdana; paddin=
+g-top:2em;">
+        <a href=3D"#toc" style=3D"padding-bottom: 20px;">
+          Back to top        </a>
+      </div>                         <a href=3D"mailto:jeannetteagogo@yahoo=
+.com?Subject=3DRe%3A%20APPLE%20APPS%20and%20GOATS" style=3D"padding-bottom:=
+ 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">sender=
+</span>
+          </a> |
+          <a href=3D"mailto:frieNDA@yahoogroups.com?Subject=3D Re%3A%20APPL=
+E%20APPS%20and%20GOATS" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">group<=
+/span>
+          </a> |
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_ylc=3DX3oD=
+MTJzdGxiMzVqBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OAR=
+tc2dJZAMyMDU3MQRzZWMDZG1zZwRzbGsDcnBseQRzdGltZQMxMjk1NjAyMDE0?act=3Dreply&m=
+essageNum=3D20571" style=3D"padding-bottom: 20px;">
+            Reply <span class=3D"bld" style=3D"font-weight:bold;">via web p=
+ost</span>
+          </a> <br>
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20564;_y=
+lc=3DX3oDMTM4NmJwNDE0BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNz=
+IxOTE2OARtc2dJZAMyMDU3MQRzZWMDZG1zZwRzbGsDdnRwYwRzdGltZQMxMjk1NjAyMDE0BHRwY=
+0lkAzIwNTY0" style=3D"padding-bottom: 20px;">
+            Messages in this topic=20
+          </a> (8)
+                  </div>     </dd>
+        <dt style=3D"display: block; float: left; font-size: 92%;">4g. </dt=
+>
+  <dd  style=3D"border-bottom: 4px solid #ccc;">=20
+    <h2 style=3D"font-size:100%; font-family:Georgia; font-weight:bold; mar=
+gin: 0 0 5px 0;">
+      <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20572;_ylc=
+=3DX3oDMTJzYmU4dmMzBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARtc2dJZAMyMDU3MgRzZWMDZG1zZwRzbGsDdm1zZwRzdGltZQMxMjk1NjAyMDE0" name=
+=3D"4g">=20
+        Re: APPLE APPS and GOATS      </a>
+    </h2>
+    <h3 style=3D"font: 100% Arial; margin: 0;">Posted by:      "L. Souris H=
+ong-Porretta"      <a href=3D"mailto:souris@hustlerofculture.com?Subject=3D=
+ Re%3A%20APPLE%20APPS%20and%20GOATS">
+      souris@hustlerofculture.com      </a>
+              &nbsp;
+        <a href=3D"http://profiles.yahoo.com/souris_hong">
+          souris_hong=20
+        </a>
+          </h3>
+    <h4 style=3D"font: 77% verdana; margin: 0 0 20px 0;">
+      Thu Jan&nbsp;20,&nbsp;2011 8:07&nbsp;pm        (PST)    </h4>
+
+    <div class=3D"ygrp-content" style=3D"font-family:Georgia; font-size:100=
+%; line-height:122%;">
+                  <br><br>
+      awesome thanks! that didn't pull up in YAHOO SEARCH for me (that thin=
+g  <br>
+fucking sucks)!<br>
+<br>
+Christina... tsk. tsk. TSK!<br>
+<br>
+On Jan 20, 2011, at 7:47 PM, Jeannette Harshbarger wrote:<br>
+<br>
+<a href=3D"http://groups.yahoo.com/group/frieNDA/message/14301">http://grou=
+ps.<wbr>yahoo.com/<wbr>group/frieNDA/<wbr>message/14301</a><br>
+<br>
+--- On Thu, 1/20/11, Jeannette Harshbarger &lt;<a href=3D"mailto:jeannettea=
+gogo%40yahoo.com">jeannetteagogo@<wbr>yahoo.com</a>&gt;  <br>
+wrote:<br>
+<br>
+From: Jeannette Harshbarger &lt;<a href=3D"mailto:jeannetteagogo%40yahoo.co=
+m">jeannetteagogo@<wbr>yahoo.com</a>&gt;<br>
+Subject: Re: [frieNDA] APPLE APPS and GOATS<br>
+To: <a href=3D"mailto:frieNDA%40yahoogroups.com">frieNDA@yahoogroups<wbr>.c=
+om</a><br>
+Date: Thursday, January 20, 2011, 7:44 PM<br>
+<br>
+Christina was the person that asked for ONE APP RECOMMENDATION PER  <br>
+PERSON when he got his iPhone.<br>
+<br>
+****<br>
+<br>
+souris hong-porretta<br>
+3101 5th street #5<br>
+santa monica, ca 90405<br>
+<br>
+310.500.7870 mobile<br>
+<br>
+<a href=3D"mailto:souris%40hustlerofculture.com">souris@hustlerofcul<wbr>tu=
+re.com</a><br>
+www.hustlerofcultur<wbr>e.com<br>
+@hustlerculture<br>
+<br>
+<a href=3D"mailto:tinyironfists%40gmail.com">tinyironfists@<wbr>gmail.com</=
+a><br>
+www.tinyironfists.<wbr>com<br>
+@tinyironfists<br>
+<br>
+****<br>
+<br>
+          </div>=20=20=20=20=20=20=20
+=20=20=20=20
+    <div class=3D"ygrp-dateline" style=3D"clear: both; font-family: Arial; =
+line-height: 140%; padding: 10px 0; margin-bottom: 20px;">
+      <div class=3D"offset" style=3D"float: right;font: 77% verdana; paddin=
+g-top:2em;">
+        <a href=3D"#toc" style=3D"padding-bottom: 20px;">
+          Back to top        </a>
+      </div>                         <a href=3D"mailto:souris@hustlerofcult=
+ure.com?Subject=3DRe%3A%20APPLE%20APPS%20and%20GOATS" style=3D"padding-bott=
+om: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">sender=
+</span>
+          </a> |
+          <a href=3D"mailto:frieNDA@yahoogroups.com?Subject=3D Re%3A%20APPL=
+E%20APPS%20and%20GOATS" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">group<=
+/span>
+          </a> |
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_ylc=3DX3oD=
+MTJzcGdrdDYxBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OAR=
+tc2dJZAMyMDU3MgRzZWMDZG1zZwRzbGsDcnBseQRzdGltZQMxMjk1NjAyMDE0?act=3Dreply&m=
+essageNum=3D20572" style=3D"padding-bottom: 20px;">
+            Reply <span class=3D"bld" style=3D"font-weight:bold;">via web p=
+ost</span>
+          </a> <br>
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20564;_y=
+lc=3DX3oDMTM4cTYxYjRwBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNz=
+IxOTE2OARtc2dJZAMyMDU3MgRzZWMDZG1zZwRzbGsDdnRwYwRzdGltZQMxMjk1NjAyMDE0BHRwY=
+0lkAzIwNTY0" style=3D"padding-bottom: 20px;">
+            Messages in this topic=20
+          </a> (8)
+                  </div>     </dd>
+        <dt style=3D"display: block; float: left; font-size: 92%;">4h. </dt=
+>
+  <dd class=3D"last" style=3D"border-bottom: 4px solid #ccc;">=20
+    <h2 style=3D"font-size:100%; font-family:Georgia; font-weight:bold; mar=
+gin: 0 0 5px 0;">
+      <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20573;_ylc=
+=3DX3oDMTJzbzY2N2JoBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARtc2dJZAMyMDU3MwRzZWMDZG1zZwRzbGsDdm1zZwRzdGltZQMxMjk1NjAyMDE0" name=
+=3D"4h">=20
+        Re: APPLE APPS and GOATS      </a>
+    </h2>
+    <h3 style=3D"font: 100% Arial; margin: 0;">Posted by:      "Kim Pallist=
+er"      <a href=3D"mailto:kim_pallister@hotmail.com?Subject=3D Re%3A%20APP=
+LE%20APPS%20and%20GOATS">
+      kim_pallister@hotmail.com      </a>
+              &nbsp;
+        <a href=3D"http://profiles.yahoo.com/kpallist2">
+          kpallist2=20
+        </a>
+          </h3>
+    <h4 style=3D"font: 77% verdana; margin: 0 0 20px 0;">
+      Thu Jan&nbsp;20,&nbsp;2011 8:08&nbsp;pm        (PST)    </h4>
+
+    <div class=3D"ygrp-content" style=3D"font-family:Georgia; font-size:100=
+%; line-height:122%;">
+                  <br><br>
+      Reeder + Instapaper FT*MF*W! Though I use both 90% of the time on ipa=
+d. Still nice to have both on ipad &amp; iPhone.<br>
+<br>
+I like the Chase photo-check deposit app.<br>
+<br>
+Shazam, pandora, snaptell, wikiamo, Netflix all get used a lot<br>
+<br>
+Sent from my SpacePhone<br>
+<br>
+On Jan 20, 2011, at 4:34 PM, &quot;L. Souris Hong-Porretta&quot; &lt;<a hre=
+f=3D"mailto:souris%40hustlerofculture.com">souris@hustlerofcul<wbr>ture.com=
+</a>&gt; wrote:<br>
+<br>
+&gt; Yes. DJ set it up. But there's gotta be MORE entries?! Or is it a HIGH=
+LANDER deal?!<br>
+&gt; <br>
+&gt; <br>
+&gt; And I think the only thing Juster nominated himself for was more lube =
+for that eye socket thingamagiggy.<br>
+&gt; <br>
+&gt; <br>
+&gt; <br>
+&gt; On Jan 20, 2011, at 4:29 PM, Jeannette Harshbarger wrote:<br>
+&gt; <br>
+&gt; <br>
+&gt; <br>
+&gt; Didn't DavidJ or Juster or cHecker nominate themself for the GOAT fold=
+er?  <br>
+&gt; <br>
+&gt; <br>
+          </div>=20=20=20=20=20=20=20
+=20=20=20=20
+    <div class=3D"ygrp-dateline" style=3D"clear: both; font-family: Arial; =
+line-height: 140%; padding: 10px 0; margin-bottom: 20px;">
+      <div class=3D"offset" style=3D"float: right;font: 77% verdana; paddin=
+g-top:2em;">
+        <a href=3D"#toc" style=3D"padding-bottom: 20px;">
+          Back to top        </a>
+      </div>                         <a href=3D"mailto:kim_pallister@hotmai=
+l.com?Subject=3DRe%3A%20APPLE%20APPS%20and%20GOATS" style=3D"padding-bottom=
+: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">sender=
+</span>
+          </a> |
+          <a href=3D"mailto:frieNDA@yahoogroups.com?Subject=3D Re%3A%20APPL=
+E%20APPS%20and%20GOATS" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">group<=
+/span>
+          </a> |
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_ylc=3DX3oD=
+MTJzb2VnNWZwBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OAR=
+tc2dJZAMyMDU3MwRzZWMDZG1zZwRzbGsDcnBseQRzdGltZQMxMjk1NjAyMDE0?act=3Dreply&m=
+essageNum=3D20573" style=3D"padding-bottom: 20px;">
+            Reply <span class=3D"bld" style=3D"font-weight:bold;">via web p=
+ost</span>
+          </a> <br>
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20564;_y=
+lc=3DX3oDMTM4ZjFqMDYxBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNz=
+IxOTE2OARtc2dJZAMyMDU3MwRzZWMDZG1zZwRzbGsDdnRwYwRzdGltZQMxMjk1NjAyMDE0BHRwY=
+0lkAzIwNTY0" style=3D"padding-bottom: 20px;">
+            Messages in this topic=20
+          </a> (8)
+                  </div>     </dd>
+    </dl>
+           <dl  class=3D"last" >
+        <dt style=3D"display: block; float: left; font-size: 92%;">5. </dt>
+  <dd class=3D"last" style=3D"border-bottom: 4px solid #ccc;">=20
+    <h2 style=3D"font-size:100%; font-family:Georgia; font-weight:bold; mar=
+gin: 0 0 5px 0;">
+      <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20570;_ylc=
+=3DX3oDMTJzZDYycTU5BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARtc2dJZAMyMDU3MARzZWMDZG1zZwRzbGsDdm1zZwRzdGltZQMxMjk1NjAyMDE0" name=
+=3D"5">=20
+        Fw: [frieNDA] iphone apps      </a>
+    </h2>
+    <h3 style=3D"font: 100% Arial; margin: 0;">Posted by:      "Jeannette H=
+arshbarger"      <a href=3D"mailto:jeannetteagogo@yahoo.com?Subject=3D Re%3=
+A%20Fw%3A%20%5BfrieNDA%5D%20iphone%20apps">
+      jeannetteagogo@yahoo.com      </a>
+              &nbsp;
+        <a href=3D"http://profiles.yahoo.com/jeannetteagogo">
+          jeannetteagogo=20
+        </a>
+          </h3>
+    <h4 style=3D"font: 77% verdana; margin: 0 0 20px 0;">
+      Thu Jan&nbsp;20,&nbsp;2011 7:46&nbsp;pm        (PST)    </h4>
+
+    <div class=3D"ygrp-content" style=3D"font-family:Georgia; font-size:100=
+%; line-height:122%;">
+                  <br><br>
+      Maybe you can follow the entire string of answers from the link at th=
+e bottom of this email...<br>
+<br>
+--- On Sat, 1/23/10, christian svanes kolding &lt;<a href=3D"mailto:christi=
+an%40farmfreshfilms.com">christian@farmfresh<wbr>films.com</a>&gt; wrote:<b=
+r>
+<br>
+From: christian svanes kolding &lt;<a href=3D"mailto:christian%40farmfreshf=
+ilms.com">christian@farmfresh<wbr>films.com</a>&gt;<br>
+Subject: [frieNDA] iphone apps<br>
+To: <a href=3D"mailto:frieNDA%40yahoogroups.com">frieNDA@yahoogroups<wbr>.c=
+om</a><br>
+Date: Saturday, January 23, 2010, 7:54 AM<br>
+<br>
+=C2=A0<br>
+<br>
+esteemed members of the board, now that we've upgraded to the iphone, i pre=
+sent you with the time-honoured questions:<br>
+<br>
+what is your favourite iphone app? and why is it your favourite? <br>
+<br>
+please limit your response to only one app.<br>
+<br>
+thank you.<br>
+<br>
+humbly submitted,<br>
+<br>
+csk<br>
+<br>
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .<br>
+<br>
+christian svanes kolding<br>
+<br>
+christian@christian svaneskolding. com<br>
+<br>
+&#43;45 26 36 34 70<br>
+<br>
+&#43;1 310 848 7310<br>
+<br>
+ichat: christiansvanes (text first, please)<br>
+<br>
+          </div>=20=20=20=20=20=20=20
+=20=20=20=20
+    <div class=3D"ygrp-dateline" style=3D"clear: both; font-family: Arial; =
+line-height: 140%; padding: 10px 0; margin-bottom: 20px;">
+      <div class=3D"offset" style=3D"float: right;font: 77% verdana; paddin=
+g-top:2em;">
+        <a href=3D"#toc" style=3D"padding-bottom: 20px;">
+          Back to top        </a>
+      </div>                         <a href=3D"mailto:jeannetteagogo@yahoo=
+.com?Subject=3DRe%3A%20Fw%3A%20%5BfrieNDA%5D%20iphone%20apps" style=3D"padd=
+ing-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">sender=
+</span>
+          </a> |
+          <a href=3D"mailto:frieNDA@yahoogroups.com?Subject=3D Re%3A%20Fw%3=
+A%20%5BfrieNDA%5D%20iphone%20apps" style=3D"padding-bottom: 20px;">
+            Reply to <span class=3D"bld" style=3D"font-weight:bold;">group<=
+/span>
+          </a> |
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_ylc=3DX3oD=
+MTJzNmZoNWpiBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OAR=
+tc2dJZAMyMDU3MARzZWMDZG1zZwRzbGsDcnBseQRzdGltZQMxMjk1NjAyMDE0?act=3Dreply&m=
+essageNum=3D20570" style=3D"padding-bottom: 20px;">
+            Reply <span class=3D"bld" style=3D"font-weight:bold;">via web p=
+ost</span>
+          </a> <br>
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/message/20570;_y=
+lc=3DX3oDMTM4NXEwdDJuBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNz=
+IxOTE2OARtc2dJZAMyMDU3MARzZWMDZG1zZwRzbGsDdnRwYwRzdGltZQMxMjk1NjAyMDE0BHRwY=
+0lkAzIwNTcw" style=3D"padding-bottom: 20px;">
+            Messages in this topic=20
+          </a> (1)
+                  </div>     </dd>
+    </dl>
+      </div> </div> <!-- Sponsor -->
+  <!-- |**|begin egp html banner|**| -->
+    <div id=3D"ygrp-sponsor" style=3D"width:160px; float:right; clear:none;=
+ margin:0 0 25px 0; background:white;">
+      <!-- Network content -->
+=20=20=20=20=20=20
+
+<!-- Start Recommendations -->
+ <div id=3D"ygrp-reco" style=3D"margin-bottom: 20px; padding: 0px;">
+    </div>=20=20=20=20=20=20=20
+<!-- End Recommendations -->
+
+
+    <!-- Start vitality -->
+    <div id=3D"ygrp-vital" style=3D"background-color: #e0ecee; margin-botto=
+m: 20px; padding: 2px 0 8px 8px;">
+              <div id=3D"vithd" style=3D"font-size: 77%; font-family: Verda=
+na; font-weight: bold; color: #333; text-transform: uppercase;">Recent Acti=
+vity</div>
+        <ul style=3D"list-style-type:none; padding: 0; margin: 2px 0;">
+=20=20=20=20=20=20=20=20=20=20=20=20
+=20=20=20=20=20=20=20=20=20=20=20=20
+=20=20=20=20=20=20=20=20=20=20=20=20
+=20=20=20=20=20=20=20=20=20=20=20=20
+=20=20=20=20=20=20=20=20=20=20=20=20
+=20=20=20=20=20=20=20=20=20=20=20=20
+        </ul>
+            <a href=3D"http://groups.yahoo.com/group/frieNDA;_ylc=3DX3oDMTJ=
+maWswdm82BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OARzZW=
+MDdnRsBHNsawN2Z2hwBHN0aW1lAzEyOTU2MDIwMTQ-">
+        Visit Your Group      </a>
+    </div>=20
+=20=20=20=20
+    <!-- Network content -->
+          <div style=3D"background-color:#EEEEEE; margin-bottom:20px; paddi=
+ng:10px 8px;">    <div id=3D"nc">
+              <div class=3D"ad" style=3D"color:#628C2A; font-family:Arial; =
+font-weight:bold;">
+                      <div id=3D"hd1">Yahoo! Groups</div>=20
+<p><a href=3D"http://global.ard.yahoo.com/SIG=3D15lpt5jdu/M=3D493064.145439=
+65.14365489.8674578/D=3Dgroups/S=3D1707219168:NC/Y=3DYAHOO/EXP=3D1295609214=
+/L=3D95e67882-2540-11e0-9618-1714dbf441d5/B=3Dx5itJGKJiSY-/J=3D129560201442=
+7989/K=3DMRjea7CZJaNN5sW1S.wDpg/A=3D5741392/R=3D0/SIG=3D11m8njht2/*http://a=
+dvision.webevents.yahoo.com/mentalhealthzone">Mental Health Zone</a></p>=20
+<p>Learn about issues</p>=20
+<p>Find support</p><script language=3Djavascript>
+if(window.yzq_d=3D=3Dnull)window.yzq_d=3Dnew Object();
+window.yzq_d['x5itJGKJiSY-']=3D'&U=3D139scnjs0%2fN%3dx5itJGKJiSY-%2fC%3d493=
+064.14543965.14365489.8674578%2fD%3dNC%2fB%3d5741392%2fV%3d1';
+</script><noscript><img width=3D1 height=3D1 alt=3D"" src=3D"http://us.bc.y=
+ahoo.com/b?P=3D95e67882-2540-11e0-9618-1714dbf441d5&T=3D1cdnpruel%2fX%3d129=
+5602014%2fE%3d1707219168%2fR%3dgroups%2fK%3d5%2fV%3d2.1%2fW%3dH%2fY%3dYAHOO=
+%2fF%3d2933046073%2fH%3dY29udGVudD0iRmxpY2tyO1BvZGNhc3RzO0dvO0dyb3VwcztXaWR=
+nZXRzO01haWw7UGhvdG9zO0NhbGVuZGFyO0dlb2NpdGllcztTbWFsbF9CdXNpbmVzczsiIGRpc2=
+FibGVzaHVmZmxpbmc9IjEiIHNlcnZlSWQ9Ijk1ZTY3ODgyLTI1NDAtMTFlMC05NjE4LTE3MTRkY=
+mY0NDFkNSIgc2l0ZUlkPSI0NDUyNTUxIiB0U3RtcD0iMTI5NTYwMjAxNDQxNjA1MiIg%2fQ%3d-=
+1%2fS%3d1%2fJ%3d25228962&U=3D139scnjs0%2fN%3dx5itJGKJiSY-%2fC%3d493064.1454=
+3965.14365489.8674578%2fD%3dNC%2fB%3d5741392%2fV%3d1"></noscript>          =
+        </div>
+                    <div class=3D"ad" style=3D"color:#628C2A; font-family:A=
+rial; font-weight:bold;">
+                      <div id=3D"hd1">Yahoo! Groups</div>=20
+<p><a href=3D"http://global.ard.yahoo.com/SIG=3D15le4v9nr/M=3D493064.145439=
+46.14365449.8674578/D=3Dgroups/S=3D1707219168:NC/Y=3DYAHOO/EXP=3D1295609214=
+/L=3D95e67882-2540-11e0-9618-1714dbf441d5/B=3DyJitJGKJiSY-/J=3D129560201442=
+7989/K=3DMRjea7CZJaNN5sW1S.wDpg/A=3D5898817/R=3D0/SIG=3D11kkq36go/*http://a=
+dvision.webevents.yahoo.com/parentingzone/">Parenting Zone</a></p>=20
+<p>Tips for a happy,</p>=20
+<p>healthy home</p><script language=3Djavascript>
+if(window.yzq_d=3D=3Dnull)window.yzq_d=3Dnew Object();
+window.yzq_d['yJitJGKJiSY-']=3D'&U=3D1398ld4c3%2fN%3dyJitJGKJiSY-%2fC%3d493=
+064.14543946.14365449.8674578%2fD%3dNC%2fB%3d5898817%2fV%3d1';
+</script><noscript><img width=3D1 height=3D1 alt=3D"" src=3D"http://us.bc.y=
+ahoo.com/b?P=3D95e67882-2540-11e0-9618-1714dbf441d5&T=3D1cdcjlgr6%2fX%3d129=
+5602014%2fE%3d1707219168%2fR%3dgroups%2fK%3d5%2fV%3d2.1%2fW%3dH%2fY%3dYAHOO=
+%2fF%3d1274586965%2fH%3dY29udGVudD0iRmxpY2tyO1BvZGNhc3RzO0dvO0dyb3VwcztXaWR=
+nZXRzO01haWw7UGhvdG9zO0NhbGVuZGFyO0dlb2NpdGllcztTbWFsbF9CdXNpbmVzczsiIGRpc2=
+FibGVzaHVmZmxpbmc9IjEiIHNlcnZlSWQ9Ijk1ZTY3ODgyLTI1NDAtMTFlMC05NjE4LTE3MTRkY=
+mY0NDFkNSIgc2l0ZUlkPSI0NDUyNTUxIiB0U3RtcD0iMTI5NTYwMjAxNDQxNjA1MiIg%2fQ%3d-=
+1%2fS%3d1%2fJ%3d25228962&U=3D1398ld4c3%2fN%3dyJitJGKJiSY-%2fC%3d493064.1454=
+3946.14365449.8674578%2fD%3dNC%2fB%3d5898817%2fV%3d1"></noscript>          =
+        </div>
+                    <div class=3D"ad" style=3D"color:#628C2A; font-family:A=
+rial; font-weight:bold;">
+                      <div id=3D"hd1">Sitebuilder</div>
+<p><a href=3D"http://global.ard.yahoo.com/SIG=3D15ld0hogs/M=3D493064.145439=
+52.14365456.8674578/D=3Dgroups/S=3D1707219168:NC/Y=3DYAHOO/EXP=3D1295609214=
+/L=3D95e67882-2540-11e0-9618-1714dbf441d5/B=3DxpitJGKJiSY-/J=3D129560201442=
+7989/K=3DMRjea7CZJaNN5sW1S.wDpg/A=3D4025304/R=3D0/SIG=3D12uhb64pb/*http://u=
+s.rd.yahoo.com/evt=3D44092/*http://smallbusiness.yahoo.com/webhosting/siteb=
+uilding.php">Build a web site</a></p>
+<p>quickly &amp; easily</p>
+<p>with Sitebuilder.</p><script language=3Djavascript>
+if(window.yzq_d=3D=3Dnull)window.yzq_d=3Dnew Object();
+window.yzq_d['xpitJGKJiSY-']=3D'&U=3D1395et36e%2fN%3dxpitJGKJiSY-%2fC%3d493=
+064.14543952.14365456.8674578%2fD%3dNC%2fB%3d4025304%2fV%3d1';
+</script><noscript><img width=3D1 height=3D1 alt=3D"" src=3D"http://us.bc.y=
+ahoo.com/b?P=3D95e67882-2540-11e0-9618-1714dbf441d5&T=3D1cclqd8hi%2fX%3d129=
+5602014%2fE%3d1707219168%2fR%3dgroups%2fK%3d5%2fV%3d2.1%2fW%3dH%2fY%3dYAHOO=
+%2fF%3d269593035%2fH%3dY29udGVudD0iRmxpY2tyO1BvZGNhc3RzO0dvO0dyb3VwcztXaWRn=
+ZXRzO01haWw7UGhvdG9zO0NhbGVuZGFyO0dlb2NpdGllcztTbWFsbF9CdXNpbmVzczsiIGRpc2F=
+ibGVzaHVmZmxpbmc9IjEiIHNlcnZlSWQ9Ijk1ZTY3ODgyLTI1NDAtMTFlMC05NjE4LTE3MTRkYm=
+Y0NDFkNSIgc2l0ZUlkPSI0NDUyNTUxIiB0U3RtcD0iMTI5NTYwMjAxNDQxNjA1MiIg%2fQ%3d-1=
+%2fS%3d1%2fJ%3d25228962&U=3D1395et36e%2fN%3dxpitJGKJiSY-%2fC%3d493064.14543=
+952.14365456.8674578%2fD%3dNC%2fB%3d4025304%2fV%3d1"></noscript>           =
+       </div>
+          </div>
+</div>
+=20=20=20=20
+          <div id=3D"nc" style=3D"background-color: #eee; margin-bottom: 20=
+px; padding: 0 8px;">
+          <div class=3D"ad" style=3D"padding: 8px 0;">
+            <div id=3D"hd1" style=3D"font-family: Arial; font-weight: bold;=
+ color: #628c2a; font-size: 100%; line-height: 122%;">Need to Reply?</div>
+              <p style=3D"margin: 0;">Click one of the "Reply" links to res=
+pond to a specific message in the Daily Digest.</p>
+          </div>
+       </div>
+      </div>=20
+  <div id=3D"post" style=3D"clear:both; background-color:#e7eff7; padding:1=
+0px; margin-top:10px; text-align:left; font-size:100%; font-weight:bold; zo=
+om: 1;">
+    <a href=3D"http://groups.yahoo.com/group/frieNDA/post;_ylc=3DX3oDMTJmM2=
+FiMml0BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OARzZWMDZ=
+nRyBHNsawNudHBjBHN0aW1lAzEyOTU2MDIwMTQ-" class=3D"head">
+      Create New Topic    </a> |
+    <a href=3D"http://groups.yahoo.com/group/frieNDA;_ylc=3DX3oDMTJkbnY4am5=
+pBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OARzZWMDZnRyBH=
+NsawNocARzdGltZQMxMjk1NjAyMDE0" class=3D"head">
+      Visit Your Group on the Web</a>
+    </a>=20
+  </div>
+
+<!-------     Start Nav Bar  ------>
+  <div id=3D"ygrp-vitnav" style=3D"padding:10px 0; font-family:Verdana; fon=
+t-size:77%; clear:both;">
+          <a href=3D"http://groups.yahoo.com/group/frieNDA/messages;_ylc=3D=
+X3oDMTJmdGJkZzZ2BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE=
+2OARzZWMDZnRyBHNsawNtc2dzBHN0aW1lAzEyOTU2MDIwMTQ-">Messages</a>=20=20
+      |    <a href=3D"http://groups.yahoo.com/group/frieNDA/files;_ylc=3DX3=
+oDMTJnZHNic2c2BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2O=
+ARzZWMDZnRyBHNsawNmaWxlcwRzdGltZQMxMjk1NjAyMDE0">Files</a>=20=20
+      |    <a href=3D"http://groups.yahoo.com/group/frieNDA/photos;_ylc=3DX=
+3oDMTJmbHU4bWNuBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2=
+OARzZWMDZnRyBHNsawNwaG90BHN0aW1lAzEyOTU2MDIwMTQ-">Photos</a>=20=20
+      |    <a href=3D"http://groups.yahoo.com/group/frieNDA/links;_ylc=3DX3=
+oDMTJnczQ2ZjNkBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2O=
+ARzZWMDZnRyBHNsawNsaW5rcwRzdGltZQMxMjk1NjAyMDE0">Links</a>=20=20
+      |    <a href=3D"http://groups.yahoo.com/group/frieNDA/database;_ylc=
+=3DX3oDMTJkbm9odTBhBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARzZWMDZnRyBHNsawNkYgRzdGltZQMxMjk1NjAyMDE0">Database</a>=20=20
+      |    <a href=3D"http://groups.yahoo.com/group/frieNDA/polls;_ylc=3DX3=
+oDMTJnNmkxbDBqBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2O=
+ARzZWMDZnRyBHNsawNwb2xscwRzdGltZQMxMjk1NjAyMDE0">Polls</a>=20=20
+      |    <a href=3D"http://groups.yahoo.com/group/frieNDA/members;_ylc=3D=
+X3oDMTJmZG1nczAwBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE=
+2OARzZWMDZnRyBHNsawNtYnJzBHN0aW1lAzEyOTU2MDIwMTQ-">Members</a>=20=20
+      |    <a href=3D"http://groups.yahoo.com/group/frieNDA/calendar;_ylc=
+=3DX3oDMTJlNmMybGZkBF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIx=
+OTE2OARzZWMDZnRyBHNsawNjYWwEc3RpbWUDMTI5NTYwMjAxNA--">Calendar</a>=20=20
+  </div>
+=20=20
+              <div id=3D"ygrp-mkp" style=3D"border: 1px solid #d8d8d8; clea=
+r: both; float: left; font-family: Arial; margin: 5px 0 10px 0; padding: 0 =
+10px;">
+      <div id=3D"hd" style=3D"color: #628c2a; font-size: 85%; font-weight: =
+700; line-height: 122%; margin: 10px 0;">MARKETPLACE</div>
+      <div id=3D"ads" style=3D"margin-bottom: 10px;">
+                          <div class=3D"ad" style=3D"color: #628C2A; font-f=
+amily: Arial; font-weight: 700; padding: 0 0;">
+                        <p><a href=3D"http://global.ard.yahoo.com/SIG=3D15o=
+d2gqi1/M=3D493064.14543979.14365478.13298430/D=3Dgroups/S=3D1707219168:MKP1=
+/Y=3DYAHOO/EXP=3D1295609214/L=3D95e67882-2540-11e0-9618-1714dbf441d5/B=3Dw5=
+itJGKJiSY-/J=3D1295602014427989/K=3DMRjea7CZJaNN5sW1S.wDpg/A=3D6060255/R=3D=
+0/SIG=3D1194m4keh/*http://us.toolbar.yahoo.com/?.cpdl=3Dgrpj">Stay on top o=
+f your group activity without leaving the page you're on - Get the Yahoo! T=
+oolbar now.</a></p> <script language=3Djavascript>
+if(window.yzq_d=3D=3Dnull)window.yzq_d=3Dnew Object();
+window.yzq_d['w5itJGKJiSY-']=3D'&U=3D13c1l2urm%2fN%3dw5itJGKJiSY-%2fC%3d493=
+064.14543979.14365478.13298430%2fD%3dMKP1%2fB%3d6060255%2fV%3d1';
+</script><noscript><img width=3D1 height=3D1 alt=3D"" src=3D"http://us.bc.y=
+ahoo.com/b?P=3D95e67882-2540-11e0-9618-1714dbf441d5&T=3D1cdcehtj1%2fX%3d129=
+5602014%2fE%3d1707219168%2fR%3dgroups%2fK%3d5%2fV%3d2.1%2fW%3dH%2fY%3dYAHOO=
+%2fF%3d2394272052%2fH%3dY29udGVudD0iRmxpY2tyO1BvZGNhc3RzO0dvO0dyb3VwcztXaWR=
+nZXRzO01haWw7UGhvdG9zO0NhbGVuZGFyO0dlb2NpdGllcztTbWFsbF9CdXNpbmVzczsiIGRpc2=
+FibGVzaHVmZmxpbmc9IjEiIHNlcnZlSWQ9Ijk1ZTY3ODgyLTI1NDAtMTFlMC05NjE4LTE3MTRkY=
+mY0NDFkNSIgc2l0ZUlkPSI0NDUyNTUxIiB0U3RtcD0iMTI5NTYwMjAxNDQxNjA1MiIg%2fQ%3d-=
+1%2fS%3d1%2fJ%3d25228962&U=3D13c1l2urm%2fN%3dw5itJGKJiSY-%2fC%3d493064.1454=
+3979.14365478.13298430%2fD%3dMKP1%2fB%3d6060255%2fV%3d1"></noscript>       =
+   </div>
+                          <div class=3D"ad" style=3D"color: #628C2A; font-f=
+amily: Arial; font-weight: 700; padding: 0 0;">
+                          <hr style=3D"border: 1px solid #d8d8d8;">
+                        <p><a href=3D"http://global.ard.yahoo.com/SIG=3D15o=
+s1h3fc/M=3D493064.14543977.14365476.10835568/D=3Dgroups/S=3D1707219168:MKP1=
+/Y=3DYAHOO/EXP=3D1295609214/L=3D95e67882-2540-11e0-9618-1714dbf441d5/B=3DxJ=
+itJGKJiSY-/J=3D1295602014427989/K=3DMRjea7CZJaNN5sW1S.wDpg/A=3D6260316/R=3D=
+0/SIG=3D11bc8n8gt/*http://custom.yahoo.com/fibromyalgiazone/">Find useful a=
+rticles and helpful tips on living with Fibromyalgia. Visit the Fibromyalgi=
+a Zone today!</a></p><script language=3Djavascript>
+if(window.yzq_d=3D=3Dnull)window.yzq_d=3Dnew Object();
+window.yzq_d['xJitJGKJiSY-']=3D'&U=3D13ckhdfli%2fN%3dxJitJGKJiSY-%2fC%3d493=
+064.14543977.14365476.10835568%2fD%3dMKP1%2fB%3d6260316%2fV%3d1';
+</script><noscript><img width=3D1 height=3D1 alt=3D"" src=3D"http://us.bc.y=
+ahoo.com/b?P=3D95e67882-2540-11e0-9618-1714dbf441d5&T=3D1cd7cgp0g%2fX%3d129=
+5602014%2fE%3d1707219168%2fR%3dgroups%2fK%3d5%2fV%3d2.1%2fW%3dH%2fY%3dYAHOO=
+%2fF%3d3403550405%2fH%3dY29udGVudD0iRmxpY2tyO1BvZGNhc3RzO0dvO0dyb3VwcztXaWR=
+nZXRzO01haWw7UGhvdG9zO0NhbGVuZGFyO0dlb2NpdGllcztTbWFsbF9CdXNpbmVzczsiIGRpc2=
+FibGVzaHVmZmxpbmc9IjEiIHNlcnZlSWQ9Ijk1ZTY3ODgyLTI1NDAtMTFlMC05NjE4LTE3MTRkY=
+mY0NDFkNSIgc2l0ZUlkPSI0NDUyNTUxIiB0U3RtcD0iMTI5NTYwMjAxNDQxNjA1MiIg%2fQ%3d-=
+1%2fS%3d1%2fJ%3d25228962&U=3D13ckhdfli%2fN%3dxJitJGKJiSY-%2fC%3d493064.1454=
+3977.14365476.10835568%2fD%3dMKP1%2fB%3d6260316%2fV%3d1"></noscript>       =
+   </div>
+              </div>
+    </div>
+=20=20=20=20
+  <div id=3D"ygrp-ft" style=3D"border-top:1px solid #666; padding-top:10px;=
+ font-family:Verdana; font-size:77%;">
+    <a href=3D"http://groups.yahoo.com/;_ylc=3DX3oDMTJlcDY2aGhzBF9TAzk3MzU5=
+NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OARzZWMDZnRyBHNsawNnZnAEc3R=
+pbWUDMTI5NTYwMjAxNA--"><img src=3D"http://l.yimg.com/a/i/us/yg/logo/us.gif"=
+ height=3D"15" width=3D"137" border=3D"0" alt=3D"Yahoo! Groups"></a > <br>
+    <a href=3D"http://groups.yahoo.com/group/frieNDA/join;_ylc=3DX3oDMTJncm=
+I1aWs2BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OARzZWMDZ=
+nRyBHNsawNzdG5ncwRzdGltZQMxMjk1NjAyMDE0">Change settings via the Web</a> (Y=
+ahoo! ID required) <br>
+    Change settings via email: <a href=3D"mailto:frieNDA-normal@yahoogroups=
+.com?subject=3DEmail Delivery: Indiviual Email">Switch delivery to Individu=
+al</a> | <a href =3D "mailto:frieNDA-traditional@yahoogroups.com?subject=3D=
+Change Delivery Format: Traditional">Switch format to Traditional</a> <br>
+    <a href=3D"http://groups.yahoo.com/group/frieNDA;_ylc=3DX3oDMTJlajJtdTc=
+4BF9TAzk3MzU5NzE1BGdycElkAzE4ODY5MjU3BGdycHNwSWQDMTcwNzIxOTE2OARzZWMDZnRyBH=
+NsawNocGYEc3RpbWUDMTI5NTYwMjAxNA--">
+      Visit Your Group    </a> |
+    <a href=3D"http://docs.yahoo.com/info/terms/">
+      Yahoo! Groups Terms of Use    </a> |
+    <a href=3D"mailto:frieNDA-unsubscribe@yahoogroups.com?subject=3DUnsubsc=
+ribe">
+      Unsubscribe    </a>
+  </div>   <img src=3D"http://geo.yahoo.com/serv?s=3D97359715/grpId=3D18869=
+257/grpspId=3D1707219168/msgId=3D2057/stime=3D1295602013/nc1=3D5741392/nc2=
+=3D5898817/nc3=3D4025304" width=3D"1" height=3D"1" border=3D"0"
+ alt=3D"">
+</div> </body>
+</html>

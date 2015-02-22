@@ -1,0 +1,4 @@
+third-party
+include
+mailcore2-android-*.zip
+cmake-build

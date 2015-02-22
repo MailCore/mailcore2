@@ -17,7 +17,7 @@
 
 namespace mailcore {
     
-    class IMAPMessageRenderingOperation : public IMAPOperation {
+    class MAILCORE_EXPORT IMAPMessageRenderingOperation : public IMAPOperation {
     public:
         IMAPMessageRenderingOperation();
         virtual ~IMAPMessageRenderingOperation();

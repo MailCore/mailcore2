@@ -1,0 +1,941 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\core">
+      <UniqueIdentifier>{1826bc5c-297b-4ba7-96f8-051ae4b5e7e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\abstract">
+      <UniqueIdentifier>{ed15cbb1-0930-42ca-9c90-d3d2af7f86e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\basetypes">
+      <UniqueIdentifier>{71537cef-6ee0-4bcc-aedd-1715ffb4310c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\imap">
+      <UniqueIdentifier>{4f57c1aa-4ddb-4983-ae38-c12aa493a473}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\smtp">
+      <UniqueIdentifier>{e3b641cb-08cf-411d-bbfd-12d497f28cf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\nntp">
+      <UniqueIdentifier>{cd9399c6-90ef-4383-833c-5054a21ccb71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\pop">
+      <UniqueIdentifier>{8074348e-f4c8-44fd-85b1-80bba2057f4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\provider">
+      <UniqueIdentifier>{07aa6807-c3fa-4d17-ac67-1baff0947b3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\renderer">
+      <UniqueIdentifier>{51a582cb-0aeb-4156-a6e0-a7228566fbb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\rfc822">
+      <UniqueIdentifier>{9dfe3068-b318-4143-b718-94df738d2a26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\security">
+      <UniqueIdentifier>{a9cda156-07be-4771-bcbe-6912ad902d1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\zip">
+      <UniqueIdentifier>{6f34a2b3-0c43-42c3-ae71-f17ef9206c5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\async">
+      <UniqueIdentifier>{114ac68e-a7f0-48b3-8fee-eca0cf2c8e30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\async\imap">
+      <UniqueIdentifier>{7bcac4dc-e0b6-4a2a-b867-3502e8cb7b82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\async\nntp">
+      <UniqueIdentifier>{a5bb3047-fe25-477e-8f97-73c1be099ad7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\async\smtp">
+      <UniqueIdentifier>{b6501fb9-8395-478e-8955-538cd13a5e0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\async\pop">
+      <UniqueIdentifier>{a9e89d80-bf19-41f6-a5c8-b73ead0d6c7e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\core\abstract\MCAbstract.h">
+      <Filter>Source Files\core\abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\abstract\MCAbstractMessage.h">
+      <Filter>Source Files\core\abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\abstract\MCAbstractMessagePart.h">
+      <Filter>Source Files\core\abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\abstract\MCAbstractMultipart.h">
+      <Filter>Source Files\core\abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\abstract\MCAbstractPart.h">
+      <Filter>Source Files\core\abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\abstract\MCAddress.h">
+      <Filter>Source Files\core\abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\MCCore.h">
+      <Filter>Source Files\core\abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\abstract\MCMessageConstants.h">
+      <Filter>Source Files\core\abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\abstract\MCMessageHeader.h">
+      <Filter>Source Files\core\abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\ConvertUTF.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCArray.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCAssert.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCAutoreleasePool.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCBase64.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCBaseTypes.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCConnectionLogger.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCConnectionLoggerUtils.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCData.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCDefines.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCHash.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCHashMap.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCHTMLCleaner.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCICUTypes.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCIndexSet.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCIterator.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCJSON.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCJSONParser.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCLibetpan.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCLibetpanTypes.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCLog.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCMainThread.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCMD5.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCNull.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCObject.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCOperation.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCOperationCallback.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCOperationQueue.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCOperationQueueCallback.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCRange.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCSet.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCString.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCUtils.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCValue.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCValuePrivate.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCWin32.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\imap\MCIMAP.h">
+      <Filter>Source Files\core\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\imap\MCIMAPFolder.h">
+      <Filter>Source Files\core\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\imap\MCIMAPFolderStatus.h">
+      <Filter>Source Files\core\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\imap\MCIMAPIdentity.h">
+      <Filter>Source Files\core\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\imap\MCIMAPMessage.h">
+      <Filter>Source Files\core\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\imap\MCIMAPMessagePart.h">
+      <Filter>Source Files\core\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\imap\MCIMAPMultipart.h">
+      <Filter>Source Files\core\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\imap\MCIMAPNamespace.h">
+      <Filter>Source Files\core\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\imap\MCIMAPNamespaceItem.h">
+      <Filter>Source Files\core\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\imap\MCIMAPPart.h">
+      <Filter>Source Files\core\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\imap\MCIMAPProgressCallback.h">
+      <Filter>Source Files\core\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\imap\MCIMAPSearchExpression.h">
+      <Filter>Source Files\core\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\imap\MCIMAPSession.h">
+      <Filter>Source Files\core\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\imap\MCIMAPSyncResult.h">
+      <Filter>Source Files\core\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\smtp\MCSMTP.h">
+      <Filter>Source Files\core\smtp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\smtp\MCSMTPProgressCallback.h">
+      <Filter>Source Files\core\smtp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\smtp\MCSMTPSession.h">
+      <Filter>Source Files\core\smtp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\nntp\MCNNTP.h">
+      <Filter>Source Files\core\nntp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\nntp\MCNNTPGroupInfo.h">
+      <Filter>Source Files\core\nntp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\nntp\MCNNTPProgressCallback.h">
+      <Filter>Source Files\core\nntp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\nntp\MCNNTPSession.h">
+      <Filter>Source Files\core\nntp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\provider\MCMailProvider.h">
+      <Filter>Source Files\core\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\provider\MCMailProvidersManager.h">
+      <Filter>Source Files\core\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\provider\MCNetService.h">
+      <Filter>Source Files\core\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\provider\MCProvider.h">
+      <Filter>Source Files\core\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\rfc822\MCAttachment.h">
+      <Filter>Source Files\core\rfc822</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\rfc822\MCMessageBuilder.h">
+      <Filter>Source Files\core\rfc822</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\rfc822\MCMessageParser.h">
+      <Filter>Source Files\core\rfc822</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\rfc822\MCMessagePart.h">
+      <Filter>Source Files\core\rfc822</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\rfc822\MCMultipart.h">
+      <Filter>Source Files\core\rfc822</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\rfc822\MCRFC822.h">
+      <Filter>Source Files\core\rfc822</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\renderer\MCAddressDisplay.h">
+      <Filter>Source Files\core\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\renderer\MCDateFormatter.h">
+      <Filter>Source Files\core\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\renderer\MCHTMLBodyRendererTemplateCallback.h">
+      <Filter>Source Files\core\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\renderer\MCHTMLRenderer.h">
+      <Filter>Source Files\core\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\renderer\MCHTMLRendererCallback.h">
+      <Filter>Source Files\core\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\renderer\MCHTMLRendererIMAPDataCallback.h">
+      <Filter>Source Files\core\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\renderer\MCRenderer.h">
+      <Filter>Source Files\core\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\renderer\MCSizeFormatter.h">
+      <Filter>Source Files\core\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\pop\MCPOP.h">
+      <Filter>Source Files\core\pop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\pop\MCPOPMessageInfo.h">
+      <Filter>Source Files\core\pop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\pop\MCPOPProgressCallback.h">
+      <Filter>Source Files\core\pop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\pop\MCPOPSession.h">
+      <Filter>Source Files\core\pop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\zip\MCZip.h">
+      <Filter>Source Files\core\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\zip\MiniZip\crypt.h">
+      <Filter>Source Files\core\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\zip\MiniZip\ioapi.h">
+      <Filter>Source Files\core\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\zip\MiniZip\iowin32.h">
+      <Filter>Source Files\core\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\zip\MiniZip\unzip.h">
+      <Filter>Source Files\core\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\zip\MiniZip\zip.h">
+      <Filter>Source Files\core\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\security\MCCertificateUtils.h">
+      <Filter>Source Files\core\security</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCAsyncIMAP.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPAppendMessageOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPAsyncConnection.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPAsyncSession.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPCapabilityOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPCheckAccountOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPConnectOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPCopyMessagesOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPCreateFolderOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPDeleteFolderOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPDisconnectOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPExpungeOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPFetchContentOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPFetchFoldersOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPFetchMessagesOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPFetchNamespaceOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPFetchParsedContentOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPFolderInfoOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPFolderStatusOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPIdentityOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPIdleOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPMessageRenderingOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPMultiDisconnectOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPNoopOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPOperationCallback.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPQuotaOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPRenameFolderOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPSearchOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPStoreFlagsOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPStoreLabelsOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPSubscribeFolderOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\pop\MCAsyncPOP.h">
+      <Filter>Source Files\async\pop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\pop\MCPOPAsyncSession.h">
+      <Filter>Source Files\async\pop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\pop\MCPOPCheckAccountOperation.h">
+      <Filter>Source Files\async\pop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\pop\MCPOPDeleteMessagesOperation.h">
+      <Filter>Source Files\async\pop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\pop\MCPOPFetchHeaderOperation.h">
+      <Filter>Source Files\async\pop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\pop\MCPOPFetchMessageOperation.h">
+      <Filter>Source Files\async\pop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\pop\MCPOPFetchMessagesOperation.h">
+      <Filter>Source Files\async\pop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\pop\MCPOPNoopOperation.h">
+      <Filter>Source Files\async\pop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\pop\MCPOPOperation.h">
+      <Filter>Source Files\async\pop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\pop\MCPOPOperationCallback.h">
+      <Filter>Source Files\async\pop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\smtp\MCAsyncSMTP.h">
+      <Filter>Source Files\async\smtp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\smtp\MCSMTPAsyncSession.h">
+      <Filter>Source Files\async\smtp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\smtp\MCSMTPCheckAccountOperation.h">
+      <Filter>Source Files\async\smtp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\smtp\MCSMTPDisconnectOperation.h">
+      <Filter>Source Files\async\smtp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\smtp\MCSMTPLoginOperation.h">
+      <Filter>Source Files\async\smtp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\smtp\MCSMTPNoopOperation.h">
+      <Filter>Source Files\async\smtp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\smtp\MCSMTPOperation.h">
+      <Filter>Source Files\async\smtp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\smtp\MCSMTPOperationCallback.h">
+      <Filter>Source Files\async\smtp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\smtp\MCSMTPSendWithDataOperation.h">
+      <Filter>Source Files\async\smtp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\nntp\MCAsyncNNTP.h">
+      <Filter>Source Files\async\nntp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\nntp\MCNNTPAsyncSession.h">
+      <Filter>Source Files\async\nntp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\nntp\MCNNTPCheckAccountOperation.h">
+      <Filter>Source Files\async\nntp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\nntp\MCNNTPDisconnectOperation.h">
+      <Filter>Source Files\async\nntp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\nntp\MCNNTPFetchAllArticlesOperation.h">
+      <Filter>Source Files\async\nntp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\nntp\MCNNTPFetchArticleOperation.h">
+      <Filter>Source Files\async\nntp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\nntp\MCNNTPFetchHeaderOperation.h">
+      <Filter>Source Files\async\nntp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\nntp\MCNNTPFetchOverviewOperation.h">
+      <Filter>Source Files\async\nntp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\nntp\MCNNTPFetchServerTimeOperation.h">
+      <Filter>Source Files\async\nntp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\nntp\MCNNTPListNewsgroupsOperation.h">
+      <Filter>Source Files\async\nntp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\nntp\MCNNTPOperation.h">
+      <Filter>Source Files\async\nntp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\nntp\MCNNTPOperationCallback.h">
+      <Filter>Source Files\async\nntp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\abstract\MCErrorMessage.h">
+      <Filter>Source Files\core\abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPFolderInfo.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\core\abstract\MCAbstractMessage.cpp">
+      <Filter>Source Files\core\abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\abstract\MCAbstractMessagePart.cpp">
+      <Filter>Source Files\core\abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\abstract\MCAbstractMultipart.cpp">
+      <Filter>Source Files\core\abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\abstract\MCAbstractPart.cpp">
+      <Filter>Source Files\core\abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\abstract\MCAddress.cpp">
+      <Filter>Source Files\core\abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\abstract\MCMessageHeader.cpp">
+      <Filter>Source Files\core\abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\ConvertUTF.c">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCArray.cpp">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCAssert.c">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCAutoreleasePool.cpp">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCBase64.c">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCConnectionLoggerUtils.cpp">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCData.cpp">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCHash.cpp">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCHashMap.cpp">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCHTMLCleaner.cpp">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCIndexSet.cpp">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCJSON.cpp">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCJSONParser.cpp">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCLibetpan.cpp">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCLog.cpp">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCMainThreadWin32.cpp">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCMD5.cpp">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCNull.cpp">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCObject.cpp">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCOperation.cpp">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCOperationQueue.cpp">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCRange.cpp">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCSet.cpp">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCString.cpp">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCStringWin32.cpp">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCValue.cpp">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\basetypes\MCWin32.cpp">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\imap\MCIMAPFolder.cpp">
+      <Filter>Source Files\core\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\imap\MCIMAPFolderStatus.cpp">
+      <Filter>Source Files\core\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\imap\MCIMAPIdentity.cpp">
+      <Filter>Source Files\core\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\imap\MCIMAPMessage.cpp">
+      <Filter>Source Files\core\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\imap\MCIMAPMessagePart.cpp">
+      <Filter>Source Files\core\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\imap\MCIMAPMultipart.cpp">
+      <Filter>Source Files\core\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\imap\MCIMAPNamespace.cpp">
+      <Filter>Source Files\core\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\imap\MCIMAPNamespaceItem.cpp">
+      <Filter>Source Files\core\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\imap\MCIMAPPart.cpp">
+      <Filter>Source Files\core\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\imap\MCIMAPSearchExpression.cpp">
+      <Filter>Source Files\core\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\imap\MCIMAPSession.cpp">
+      <Filter>Source Files\core\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\imap\MCIMAPSyncResult.cpp">
+      <Filter>Source Files\core\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\smtp\MCSMTPSession.cpp">
+      <Filter>Source Files\core\smtp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\nntp\MCNNTPGroupInfo.cpp">
+      <Filter>Source Files\core\nntp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\nntp\MCNNTPSession.cpp">
+      <Filter>Source Files\core\nntp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\provider\MCMailProvider.cpp">
+      <Filter>Source Files\core\provider</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\provider\MCMailProvidersManager.cpp">
+      <Filter>Source Files\core\provider</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\provider\MCNetService.cpp">
+      <Filter>Source Files\core\provider</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\rfc822\MCAttachment.cpp">
+      <Filter>Source Files\core\rfc822</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\rfc822\MCMessageBuilder.cpp">
+      <Filter>Source Files\core\rfc822</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\rfc822\MCMessageParser.cpp">
+      <Filter>Source Files\core\rfc822</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\rfc822\MCMessagePart.cpp">
+      <Filter>Source Files\core\rfc822</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\rfc822\MCMultipart.cpp">
+      <Filter>Source Files\core\rfc822</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\renderer\MCAddressDisplay.cpp">
+      <Filter>Source Files\core\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\renderer\MCDateFormatter.cpp">
+      <Filter>Source Files\core\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\renderer\MCHTMLBodyRendererTemplateCallback.cpp">
+      <Filter>Source Files\core\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\renderer\MCHTMLRenderer.cpp">
+      <Filter>Source Files\core\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\renderer\MCHTMLRendererCallback.cpp">
+      <Filter>Source Files\core\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\renderer\MCHTMLRendererIMAPDataCallback.cpp">
+      <Filter>Source Files\core\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\renderer\MCSizeFormatter.cpp">
+      <Filter>Source Files\core\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\pop\MCPOPMessageInfo.cpp">
+      <Filter>Source Files\core\pop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\pop\MCPOPSession.cpp">
+      <Filter>Source Files\core\pop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\zip\MCZip.cpp">
+      <Filter>Source Files\core\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\zip\MiniZip\ioapi.c">
+      <Filter>Source Files\core\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\zip\MiniZip\iowin32.c">
+      <Filter>Source Files\core\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\zip\MiniZip\unzip.c">
+      <Filter>Source Files\core\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\zip\MiniZip\zip.c">
+      <Filter>Source Files\core\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\security\MCCertificateUtils.cpp">
+      <Filter>Source Files\core\security</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPAppendMessageOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPAsyncConnection.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPAsyncSession.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPCapabilityOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPCheckAccountOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPConnectOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPCopyMessagesOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPCreateFolderOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPDeleteFolderOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPDisconnectOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPExpungeOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPFetchContentOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPFetchFoldersOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPFetchMessagesOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPFetchNamespaceOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPFetchParsedContentOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPFolderInfoOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPFolderStatusOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPIdentityOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPIdleOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPMessageRenderingOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPMultiDisconnectOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPNoopOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPQuotaOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPRenameFolderOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPSearchOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPStoreFlagsOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPStoreLabelsOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPSubscribeFolderOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\pop\MCPOPAsyncSession.cpp">
+      <Filter>Source Files\async\pop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\pop\MCPOPCheckAccountOperation.cpp">
+      <Filter>Source Files\async\pop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\pop\MCPOPDeleteMessagesOperation.cpp">
+      <Filter>Source Files\async\pop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\pop\MCPOPFetchHeaderOperation.cpp">
+      <Filter>Source Files\async\pop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\pop\MCPOPFetchMessageOperation.cpp">
+      <Filter>Source Files\async\pop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\pop\MCPOPFetchMessagesOperation.cpp">
+      <Filter>Source Files\async\pop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\pop\MCPOPNoopOperation.cpp">
+      <Filter>Source Files\async\pop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\pop\MCPOPOperation.cpp">
+      <Filter>Source Files\async\pop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\smtp\MCSMTPAsyncSession.cpp">
+      <Filter>Source Files\async\smtp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\smtp\MCSMTPCheckAccountOperation.cpp">
+      <Filter>Source Files\async\smtp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\smtp\MCSMTPDisconnectOperation.cpp">
+      <Filter>Source Files\async\smtp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\smtp\MCSMTPLoginOperation.cpp">
+      <Filter>Source Files\async\smtp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\smtp\MCSMTPNoopOperation.cpp">
+      <Filter>Source Files\async\smtp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\smtp\MCSMTPOperation.cpp">
+      <Filter>Source Files\async\smtp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\smtp\MCSMTPSendWithDataOperation.cpp">
+      <Filter>Source Files\async\smtp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\nntp\MCNNTPAsyncSession.cpp">
+      <Filter>Source Files\async\nntp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\nntp\MCNNTPCheckAccountOperation.cpp">
+      <Filter>Source Files\async\nntp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\nntp\MCNNTPDisconnectOperation.cpp">
+      <Filter>Source Files\async\nntp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\nntp\MCNNTPFetchAllArticlesOperation.cpp">
+      <Filter>Source Files\async\nntp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\nntp\MCNNTPFetchArticleOperation.cpp">
+      <Filter>Source Files\async\nntp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\nntp\MCNNTPFetchHeaderOperation.cpp">
+      <Filter>Source Files\async\nntp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\nntp\MCNNTPFetchOverviewOperation.cpp">
+      <Filter>Source Files\async\nntp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\nntp\MCNNTPFetchServerTimeOperation.cpp">
+      <Filter>Source Files\async\nntp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\nntp\MCNNTPListNewsgroupsOperation.cpp">
+      <Filter>Source Files\async\nntp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\nntp\MCNNTPOperation.cpp">
+      <Filter>Source Files\async\nntp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\abstract\MCErrorMessage.cpp">
+      <Filter>Source Files\core\abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPFolderInfo.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\src\core\rfc822\MCMessageParserMac.mm">
+      <Filter>Source Files\core\rfc822</Filter>
+    </None>
+  </ItemGroup>
+</Project>

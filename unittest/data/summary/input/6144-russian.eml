@@ -1,0 +1,160 @@
+Delivered-To: pfishman@gmail.com
+Received: by 10.146.120.16 with SMTP id s16csp185503yac;
+        Tue, 19 Jun 2012 13:31:10 -0700 (PDT)
+Received: by 10.204.133.207 with SMTP id g15mr8937157bkt.35.1340137869511;
+        Tue, 19 Jun 2012 13:31:09 -0700 (PDT)
+Return-Path: <pasha+caf_=pfishman=gmail.com@geeksputnik.tv>
+Received: from mail-bk0-f42.google.com (mail-bk0-f42.google.com [209.85.214.42])
+        by mx.google.com with ESMTPS id fw3si16425176bkc.114.2012.06.19.13.31.09
+        (version=TLSv1/SSLv3 cipher=OTHER);
+        Tue, 19 Jun 2012 13:31:09 -0700 (PDT)
+Received-SPF: neutral (google.com: 209.85.214.42 is neither permitted nor denied by best guess record for domain of pasha+caf_=pfishman=gmail.com@geeksputnik.tv) client-ip=209.85.214.42;
+Authentication-Results: mx.google.com; spf=neutral (google.com: 209.85.214.42 is neither permitted nor denied by best guess record for domain of pasha+caf_=pfishman=gmail.com@geeksputnik.tv) smtp.mail=pasha+caf_=pfishman=gmail.com@geeksputnik.tv; dkim=pass header.i=@youtube.com
+Received: by mail-bk0-f42.google.com with SMTP id ik5so5508188bkc.15
+        for <pfishman@gmail.com>; Tue, 19 Jun 2012 13:31:09 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20120113;
+        h=x-forwarded-to:x-forwarded-for:delivered-to:received-spf
+         :x-forwarded-to:x-x-forwarded-for:delivered-to:received-spf
+         :dkim-signature:date:message-id:content-type:mime-version:subject
+         :from:to:x-gm-message-state;
+        bh=aM2/Vg99o8aQRd8Z/UgLWLNOGNMfWivI2DMK6Osx/tk=;
+        b=CLK6kHP1FQTs57RPIO8AeDxz0OebXO7fzD+V7bSN5yg+5fuzWbsU0GNJwXqlxIIGfE
+         W+hL4X7d/xmsPTQeorMZsE8MQ+X4u4aXrzA1juYujKpL/0HPVeCkznlhKrL4kIKPgWoe
+         wuZw54wfz67Inslso9MiI367DdaPI28I4O7yo7o3sm8j8l0R2cjBgPxzc12B4FmaVDNg
+         WMAnoF/AezBfzzTDfp+r8jEy18ysMDTB31ZvXoP0InBHv5r9E3Q1HfV6i6+6rtib91cZ
+         I4SrVR9wZ8YTW51Q94kDxf/AF7cpLQRqg/5ReV+0HoEHpbvkcGmmg9Bg4CKfLii+n1Ha
+         P26Q==
+Received: by 10.152.144.168 with SMTP id sn8mr19821171lab.1.1340137868981;
+        Tue, 19 Jun 2012 13:31:08 -0700 (PDT)
+X-Forwarded-To: pfishman@gmail.com
+X-Forwarded-For: pasha@geeksputnik.tv pfishman@gmail.com
+Delivered-To: pasha@geeksputnik.tv
+Received: by 10.112.97.52 with SMTP id dx20csp250050lbb;
+        Tue, 19 Jun 2012 13:31:07 -0700 (PDT)
+Received: by 10.236.75.164 with SMTP id z24mr24326036yhd.69.1340137866733;
+        Tue, 19 Jun 2012 13:31:06 -0700 (PDT)
+Return-Path: <pashagstv+caf_=pasha=geeksputnik.tv@gmail.com>
+Received: from mail-yx0-f176.google.com (mail-yx0-f176.google.com [209.85.213.176])
+        by mx.google.com with ESMTPS id j14si9362581anm.158.2012.06.19.13.31.06
+        (version=TLSv1/SSLv3 cipher=OTHER);
+        Tue, 19 Jun 2012 13:31:06 -0700 (PDT)
+Received-SPF: pass (google.com: domain of pashagstv+caf_=pasha=geeksputnik.tv@gmail.com designates 209.85.213.176 as permitted sender) client-ip=209.85.213.176;
+Received: by yenl5 with SMTP id l5so5386475yen.35
+        for <pasha@geeksputnik.tv>; Tue, 19 Jun 2012 13:31:06 -0700 (PDT)
+Received: by 10.50.220.194 with SMTP id py2mr2572244igc.15.1340137865782;
+        Tue, 19 Jun 2012 13:31:05 -0700 (PDT)
+X-Forwarded-To: pasha@geeksputnik.tv
+X-X-Forwarded-For: pashagstv@gmail.com pasha@geeksputnik.tv
+Delivered-To: pashagstv@gmail.com
+Received: by 10.64.31.198 with SMTP id c6csp169141iei;
+        Tue, 19 Jun 2012 13:31:05 -0700 (PDT)
+Return-Path: <3h-HgTwcLCVI78By95II8EDEvy.w86juC1uamnp06u25.w86@youtube.bounces.google.com>
+Received-SPF: pass (google.com: domain of 3h-HgTwcLCVI78By95II8EDEvy.w86juC1uamnp06u25.w86@youtube.bounces.google.com designates 10.52.179.69 as permitted sender) client-ip=10.52.179.69;
+Received: from mr.google.com ([10.52.179.69])
+        by 10.52.179.69 with SMTP id de5mr21337357vdc.7.1340137863881 (num_hops = 1);
+        Tue, 19 Jun 2012 13:31:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=youtube.com; s=beta;
+        h=date:message-id:content-type:mime-version:subject:from:to;
+        bh=aM2/Vg99o8aQRd8Z/UgLWLNOGNMfWivI2DMK6Osx/tk=;
+        b=aKhEkKUVkjY33iUaOLJ98zB/zN/k5HIzN7lvEN+V9gPIyJSQ/gzu643mwl9dTUznGQ
+         6JlhgENa+E+vlCY9EM7dgKpznwWwSgKgvVXDcIQHKvJyOXCFNlt11szSgKJ3xuOXpezF
+         4aqAzsJZqCNyyoutsSlBMrZBMDKCmu7V8hkKg=
+Date: Tue, 19 Jun 2012 20:31:03 +0000
+Message-Id: <bcaec5014a37539f8004c2d9293f@google.com>
+Received: by 10.52.179.69 with SMTP id de5mr14954254vdc.7.1340137863871;
+        Tue, 19 Jun 2012 13:31:03 -0700 (PDT)
+Content-Type: multipart/alternative; boundary="===============0628368556=="
+MIME-Version: 1.0
+Subject: =?koi8_r?b?Q29tbWVudCBwb3N0ZWQgb24gIv7UzyDM1d7bxSBBbmRyb2lkIMnMySBpT1Mu?=
+ =?koi8_r?b?Lj8hIg==?=
+From: YouTube Service <noreply@youtube.com>
+To: geeksputnik <PashaGSTV@gmail.com>
+X-Gm-Message-State: ALoCoQnr4bGTvRdRxUzHEJMdxHABpwEX1nCD4qkr0h/AflcYEorzCEcMQga2HER2cW2A4iWheU26
+
+
+
+
+
+  Your mail reader is not capable of displaying this MIME message.
+  
+--===============0628368556==
+Content-Type: text/plain; charset="koi8_r"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+
+TUVIQU5JSzg4ODggaGFzIG1hZGUgYSBjb21tZW50IG9uIP7UzyDM1d7bxSBBbmRyb2lkIMnMySBp
+T1MuLj8hOgogICAgICDo1crO0SDPwtrP0iDHz9PQz8TBICEg98XT2M3BINXE0tXeo84g1MXNLCDe
+1M8g0M/U0sHUycwgMTAgzcnO1dQg1snazskgzsEg08/axdLDwc7JxSDRwszPxsHHwS7g2sHMIM/C
+xSDP08kgz8TOz9rOwd7Oz8fPIM3Oxc7J0SDOxSDTzM/WyczP09ggLiDuwSDBzsTSz8rExSDF09TY
+IMTP18/M2M7PIM3P3c7ZxSDJIMnO1MXSxdPO2cUgxMXXwcrT2SAKCgpZb3UgY2FuIHJlcGx5IHRv
+IHRoaXMgY29tbWVudCBieSB2aXNpdGluZyB0aGlzIGxpbms6Cmh0dHA6Ly93d3cueW91dHViZS5j
+b20vd2F0Y2g/dj1pUnhHTUNKczRTTSZsY29yPTEmbGM9eGo3bmJndUxhWEhFU0twSHJDb05FLUZk
+ZDRoV3ZhcC1BRy1pZVB4SFo0dyZsY2g9ZW1haWwmZmVhdHVyZT1lbS1jb21tZW50X3JlY2VpdmVk
+Cg==
+
+--===============0628368556==
+Content-Type: text/html; charset="koi8_r"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+
+ICAgIDxodG1sIGxhbmc9ImVuIj4KCiAgPGhlYWQ+CiAgICA8dGl0bGU+Q29tbWVudCBwb3N0ZWQg
+b24gIv7UzyDM1d7bxSBBbmRyb2lkIMnMySBpT1MuLj8hIjwvdGl0bGU+CiAgPC9oZWFkPgoKCiAg
+PGJvZHkgc3R5bGU9ImJhY2tncm91bmQtY29sb3I6ICNGRkY7IG1hcmdpbjogMjBweDsgcGFkZGlu
+ZzogMHB4OyI+CiAgICA8dGFibGUgd2lkdGg9IjEwMCUiIGNlbGxzcGFjaW5nPSIwIiBjZWxscGFk
+ZGluZz0iMCIgYm9yZGVyPSIwIj4KCiAgICAgIDx0ciB2YWxpZ249ImNlbnRlciI+CiAgICAgICAg
+PHRkIGFsaWduPSJsZWZ0IiB3aWR0aD0iMTgwIj4KICAgICAgICAgIDxhIGhyZWY9Imh0dHA6Ly93
+d3cueW91dHViZS5jb20vIj4KICAgICAgICAgICAgPGltZyBib3JkZXI9IjAiIGFsdD0iWW91VHVi
+ZSIgd2lkdGg9IjE3NSIgaGVpZ2h0PSIzMyIgc3JjPSJodHRwOi8vcy55dGltZy5jb20veXQvaW1n
+L2VtYWlsX2xvZ29fbm9fdGFnbGluZS5wbmciPgogICAgICAgICAgPC9hPgogICAgICAgIDwvdGQ+
+CiAgICAgICAgPHRkIGFsaWduPSJyaWdodCI+CiAgICAgICAgICA8YSBocmVmPSIvL3N1cHBvcnQu
+Z29vZ2xlLmNvbS95b3V0dWJlLyI+aGVscCBjZW50ZXI8L2E+CiAgICAgICAgICB8IDxhIGhyZWY9
+Imh0dHA6Ly93d3cueW91dHViZS5jb20vYWNjb3VudF9ub3RpZmljYXRpb25zIj5lLW1haWwgb3B0
+aW9uczwvYT4KICAgICAgICAgICAgfCA8YSBocmVmPSJodHRwOi8vd3d3LnlvdXR1YmUuY29tL2Vt
+YWlsX3NwYW0/dj0xYSZjPTZ5X1hlVFRYYzJzb3BQLXpBVmtlcHB1aWdsY2RFTm5uMHRhN2lUSk1M
+OGxobDAwR2ExODQ2ZS11V1kyemdneDM1eUVGcmNBX1FFZnVVQzJJaG1XMVlfQmZGVDJLM0otenpN
+dDBzcjVxWUFFZHJjc2gxekYxNTFQRTdaOUNDUlFNcG1QZjVoYWFXd2dHaG5SX3JqN0FGMTl4SXdw
+UmIwWHdZd1g5My12VmVlZDc4aHAxTU81VjFuYjVlMXAybHlvSTlDVzE4MVBEQjZkaGM1RXJDTUxr
+ckEwb2pMZ3JES1JFa3liNW9Id0dvakFtSUVNZjhTY1JXcHJVeDVKaC1uaFIxWVppRWRUTk1oMHpF
+SDF2Nzg1Z1NwZG9VWDA5bWQxMXVGQUl1YVd6aFZUdXhSNTdDYXV2NFNId1d5MXNYYXhIVzljX1dz
+WHZYMFVmdlRtem1KeU9EZ0ZfU2ZyNnJ3MVVjY2lfbG03YXZVQ2pvNUo4R1UxMHRadkJORzhENGQx
+NjVzNDl0UUVCMkRpOVF5MEM4clZZbm1rWGpyZ2Z0S2Riemp3MVFmNDRtS2I4Z3pCUXJmbGhNNkVw
+RW1PcXlCQ1dfb09DMVNtVnQtalcxSHRyNTRQSnVIek44YmlMekY5X3g4QmdqQV9GdFlFZEE5ZTUw
+MjNsbXl2UDh2cldheThwVERIVDByajRjd3ZMcTNXM3RMZmMtQ0ZFdTRPXzU3ZzBCb1AxZG5ZNTRI
+SzZCdG41SjlOM2pxbl9qa2pjM2FoOWUtZ1hoX29lQkMyVDNDTVRSVXdiY0JZMWJqRndGemRWOG5T
+SE5rVzVYWTc3MmFkYVU5ckJOZGF0aVpSbHJwYzhBeVRXZThYbjZ4QmppMzZMQ0toSVdMOW5HdE1D
+TUtkSURSV09vNTRjV1RIUjNiWURuOG1UMm9yUUw2bWxKZnh1YmZwVldtdTZlNkwxdWNqWFhXTVFX
+dmM5Vmd0OERNSjVJTURWbVRMUXdYYmtpYmF1M2lwOUktbWtkY0o5Yk00LWtHSWlFQ1lnT05nWFR1
+VDhFbnltVkRlbllvYnI2VlR0TjFGMm9NaFBIWXFsSEdXMTZOX3dIaXhKUjdFby02NHVmSS1UQXh3
+blZCcjhKdXowUGo4dlRaUWlEUVdjckJxMSI+cmVwb3J0IHNwYW08L2E+CiAgICAgICAgICAgIHwg
+PGEgaHJlZj0iaHR0cDovL3d3dy55b3V0dWJlLmNvbS9lbWFpbF91bnN1YnNjcmliZT9hY3Rpb25f
+dW5zdWJzY3JpYmU9S2pvMUI5aXY1dVZab2drQWZPaXNFYmF3VWpkOE1UTTBNREV6TnpnMk0wQXhN
+elF3TVRNM09EWXomdWlkPVBBT2hxOHN4TV9nWVRXbWRJd0RsWEEmZmVhdHVyZT1lbS1jb21tZW50
+X3JlY2VpdmVkIj51bnN1YnNjcmliZTwvYT4KICAgICAgICA8L3RkPgogICAgICA8L3RyPgoKICAg
+ICAgPHRyPgogICAgICAgIDx0ZCBjb2xzcGFuPSIyIiBzdHlsZT0icGFkZGluZzogMTBweCAwcHgg
+MHB4IDBweDsiPgogIDxwPjxhIGhyZWY9Imh0dHA6Ly93d3cueW91dHViZS5jb20vdXNlci9NRUhB
+TklLODg4OD9mZWF0dXJlPWVtLWNvbW1lbnRfcmVjZWl2ZWQiPk1FSEFOSUs4ODg4PC9hPiBoYXMg
+bWFkZSBhIGNvbW1lbnQgb24gPGEgaHJlZj0iaHR0cDovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92
+PWlSeEdNQ0pzNFNNJmxjPXhqN25iZ3VMYVhIRVNLcEhyQ29ORS1GZGQ0aFd2YXAtQUctaWVQeEha
+NHcmbGNoPWVtYWlsJmZlYXR1cmU9ZW0tY29tbWVudF9yZWNlaXZlZCIgZGlyPSJsdHIiPv7UzyDM
+1d7bxSBBbmRyb2lkIMnMySBpT1MuLj8hPC9hPjoKCiAgCiAgPGRpdiBzdHlsZT0iYmFja2dyb3Vu
+ZC1jb2xvcjogI0ZGRjsgYm9yZGVyOiAwcHg7IHBhZGRpbmc6IDBweDsgbWFyZ2luOiAxNXB4IDBw
+eCAwcHggMTVweDsiPgoKCiAgICAgIDxkaXYgc3R5bGU9Im1hcmdpbi1ib3R0b206IDE1cHg7IiBk
+aXI9Imx0ciI+CiAgICAgICAgICDo1crO0SDPwtrP0iDHz9PQz8TBICEg98XT2M3BINXE0tXeo84g
+1MXNLCDe1M8g0M/U0sHUycwgMTAgzcnO1dQg1snazskgzsEg08/axdLDwc7JxSDRwszPxsHHwS7g
+2sHMIM/CxSDP08kgz8TOz9rOwd7Oz8fPIM3Oxc7J0SDOxSDTzM/WyczP09ggLiDuwSDBzsTSz8rE
+xSDF09TYIMTP18/M2M7PIM3P3c7ZxSDJIMnO1MXSxdPO2cUgxMXXwcrT2SAKICAgICAgPC9kaXY+
+CgoKICA8L2Rpdj4KCgogIDxwPlRvIHJlcGx5IHRvIHRoaXMgY29tbWVudCA8YSBocmVmPSJodHRw
+Oi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9aVJ4R01DSnM0U00mbGNvcj0xJmxjPXhqN25iZ3VM
+YVhIRVNLcEhyQ29ORS1GZGQ0aFd2YXAtQUctaWVQeEhaNHcmbGNoPWVtYWlsJmZlYXR1cmU9ZW0t
+Y29tbWVudF9yZWNlaXZlZCI+Y2xpY2sgaGVyZTwvYT4uPC9wPgogIDxwPlRvIHNlZSBhbGwgY29t
+bWVudHMgb24gdGhpcyB2aWRlbyA8YSBocmVmPSJodHRwOi8vd3d3LnlvdXR1YmUuY29tL2FsbF9j
+b21tZW50cz92PWlSeEdNQ0pzNFNNJmZlYXR1cmU9ZW0tY29tbWVudF9yZWNlaXZlZCI+Y2xpY2sg
+aGVyZTwvYT4uPC9wPgogICAgICAgIDwvdGQ+CiAgICAgIDwvdHI+CgogICAgICA8dHI+CiAgICAg
+ICAgPHRkIGNvbHNwYW49IjIiIGFsaWduPSJjZW50ZXIiIHN0eWxlPSJwYWRkaW5nLXRvcDogNTBw
+eDsgY29sb3I6ICNjY2M7Ij4KICAgICAgICAgICZjb3B5OyAyMDEyIFlvdVR1YmUsIExMQzxicj4K
+ICAgICAgICAgIDkwMSBDaGVycnkgQXZlLCBTYW4gQnJ1bm8sIENBIDk0MDY2CiAgICAgICAgPC90
+ZD4KICAgICAgPC90cj4KCiAgICA8L3RhYmxlPgogIDwvYm9keT4KICA8L2h0bWw+Cg==
+
+--===============0628368556==--

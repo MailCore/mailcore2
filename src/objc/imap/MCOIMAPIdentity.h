@@ -37,6 +37,9 @@
 /** Retrieve a custom field in the identity */
 - (void) setInfo:(NSString *)value forKey:(NSString *)key;
 
+/** Remove all info keys including vendor, name and version */
+- (void) removeAllInfos;
+
 @end
 
 #endif

@@ -13,7 +13,7 @@ namespace mailcore {
     struct HashMapCell;
     typedef HashMapCell HashMapIter;
     
-    class HashMap : public Object {
+    class MAILCORE_EXPORT HashMap : public Object {
     public:
         HashMap();
         virtual ~HashMap();
@@ -34,7 +34,8 @@ namespace mailcore {
         virtual Object * copy();
         virtual HashMap * serializable();
         virtual void importSerializable(HashMap * serializable);
-        
+        virtual bool isEqual(Object * otherObject);
+
     private:
         unsigned int mAllocated;
         unsigned int mCount;

@@ -23,6 +23,7 @@ namespace mailcore {
     class IMAPCopyMessagesOperation;
     class IMAPFetchMessagesOperation;
     class IMAPFetchContentOperation;
+    class IMAPFetchParsedContentOperation;
     class IMAPIdleOperation;
     class IMAPFolderInfoOperation;
     class IMAPFolderStatusOperation;
@@ -40,7 +41,7 @@ namespace mailcore {
     class IMAPIdentity;
     class OperationQueueCallback;
     
-    class IMAPAsyncSession : public Object {
+    class MAILCORE_EXPORT IMAPAsyncSession : public Object {
     public:
         IMAPAsyncSession();
         virtual ~IMAPAsyncSession();
@@ -126,8 +127,8 @@ namespace mailcore {
                                                                          IndexSet * indexes);
         virtual IMAPFetchMessagesOperation * fetchMessagesByNumberOperation(String * folder, IMAPMessagesRequestKind requestKind,
                                                                             IndexSet * indexes);
-        virtual IMAPFetchMessagesOperation * syncMessagesByUID(String * folder, IMAPMessagesRequestKind requestKind,
-                                                               IndexSet * indexes, uint64_t modSeq);
+        virtual IMAPFetchMessagesOperation * syncMessagesByUIDOperation(String * folder, IMAPMessagesRequestKind requestKind,
+                                                                        IndexSet * indexes, uint64_t modSeq);
         
         virtual IMAPFetchContentOperation * fetchMessageByUIDOperation(String * folder, uint32_t uid, bool urgent = false);
         virtual IMAPFetchContentOperation * fetchMessageAttachmentByUIDOperation(String * folder, uint32_t uid, String * partID,
@@ -137,6 +138,9 @@ namespace mailcore {
         virtual IMAPFetchContentOperation * fetchMessageAttachmentByNumberOperation(String * folder, uint32_t number, String * partID,
                                                                                     Encoding encoding, bool urgent = false);
         
+        virtual IMAPFetchParsedContentOperation * fetchParsedMessageByUIDOperation(String * folder, uint32_t uid, bool urgent = false);
+        virtual IMAPFetchParsedContentOperation * fetchParsedMessageByNumberOperation(String * folder, uint32_t number, bool urgent = false);
+
         virtual IMAPOperation * storeFlagsByUIDOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, MessageFlag flags, Array * customFlags = NULL);
         virtual IMAPOperation * storeFlagsByNumberOperation(String * folder, IndexSet * numbers, IMAPStoreFlagsRequestKind kind, MessageFlag flags, Array * customFlags = NULL);
         virtual IMAPOperation * storeLabelsByUIDOperation(String * folder, IndexSet * uids, IMAPStoreFlagsRequestKind kind, Array * labels);

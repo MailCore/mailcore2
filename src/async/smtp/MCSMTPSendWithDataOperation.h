@@ -18,7 +18,7 @@
 
 namespace mailcore {
     
-    class SMTPSendWithDataOperation : public SMTPOperation {
+    class MAILCORE_EXPORT SMTPSendWithDataOperation : public SMTPOperation {
     public:
         SMTPSendWithDataOperation();
         virtual ~SMTPSendWithDataOperation();

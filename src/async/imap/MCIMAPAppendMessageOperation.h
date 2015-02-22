@@ -17,7 +17,7 @@
 
 namespace mailcore {
     
-    class IMAPAppendMessageOperation : public IMAPOperation {
+    class MAILCORE_EXPORT IMAPAppendMessageOperation : public IMAPOperation {
     public:
         IMAPAppendMessageOperation();
         virtual ~IMAPAppendMessageOperation();

@@ -12,7 +12,7 @@ namespace mailcore {
     class IMAPMessagePart;
     class IMAPMultipart;
     
-    class IMAPPart : public AbstractPart {
+    class MAILCORE_EXPORT IMAPPart : public AbstractPart {
     public:
         IMAPPart();
         virtual ~IMAPPart();

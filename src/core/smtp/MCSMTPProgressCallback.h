@@ -4,11 +4,13 @@
 
 #ifdef __cplusplus
 
+#include <MailCore/MCUtils.h>
+
 namespace mailcore {
     
     class SMTPSession;
     
-    class SMTPProgressCallback {
+    class MAILCORE_EXPORT SMTPProgressCallback {
     public:
         virtual void bodyProgress(SMTPSession * session, unsigned int current, unsigned int maximum) {};
     };

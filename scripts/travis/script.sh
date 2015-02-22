@@ -1,9 +1,9 @@
 #!/bin/sh
 set -e
 
-IPHONESDK=iphoneos8.0
-SIMULATORSDK=iphonesimulator8.0
-MACSDK=macosx10.9
+IPHONESDK=iphoneos8.1
+SIMULATORSDK=iphonesimulator8.1
+MACSDK=macosx10.10
 
 echo Operating system:
 uname
@@ -41,3 +41,6 @@ mkdir -p build-cmake
 cd build-cmake
 cmake ..
 make
+cd unittest
+export TZ=PST8PDT
+./unittestcpp ../../unittest/data

@@ -13,7 +13,7 @@ namespace mailcore {
     class SMTPProgressCallback;
     class MessageBuilder;
     
-    class SMTPSession : public Object {
+    class MAILCORE_EXPORT SMTPSession : public Object {
     public:
         SMTPSession();
         virtual ~SMTPSession();
@@ -95,13 +95,13 @@ namespace mailcore {
         void setup();
         void unsetup();
         void connectIfNeeded(ErrorCode * pError);
-        void loginIfNeeded(ErrorCode * pError);
         bool checkCertificate();
         
         void sendMessage(MessageBuilder * msg, SMTPProgressCallback * callback, ErrorCode * pError);
         
     public: // private
         virtual bool isDisconnected();
+        virtual void loginIfNeeded(ErrorCode * pError);
     };
     
 }

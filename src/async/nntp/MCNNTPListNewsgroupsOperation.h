@@ -16,7 +16,7 @@
 
 namespace mailcore {
     
-    class NNTPListNewsgroupsOperation : public NNTPOperation {
+    class MAILCORE_EXPORT NNTPListNewsgroupsOperation : public NNTPOperation {
     public:
         NNTPListNewsgroupsOperation();
         virtual ~NNTPListNewsgroupsOperation();

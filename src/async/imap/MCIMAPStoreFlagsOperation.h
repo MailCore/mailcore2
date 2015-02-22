@@ -15,8 +15,8 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-    
-    class IMAPStoreFlagsOperation : public IMAPOperation {
+
+    class MAILCORE_EXPORT IMAPStoreFlagsOperation : public IMAPOperation {
     public:
         IMAPStoreFlagsOperation();
         virtual ~IMAPStoreFlagsOperation();

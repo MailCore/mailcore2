@@ -12,6 +12,8 @@
 
 #include <stdlib.h>
 
+#include <MailCore/MCUtils.h>
+
 #ifdef __cplusplus
 
 namespace mailcore {
@@ -33,7 +35,7 @@ namespace mailcore {
         ConnectionLogTypeErrorSent,
     };
     
-    class ConnectionLogger {
+    class MAILCORE_EXPORT ConnectionLogger {
     public:
         virtual void log(void * sender, ConnectionLogType logType, Data * buffer) {}
     };

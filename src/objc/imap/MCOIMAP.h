@@ -29,6 +29,7 @@
 #import <MailCore/MCOIMAPCopyMessagesOperation.h>
 #import <MailCore/MCOIMAPFetchMessagesOperation.h>
 #import <MailCore/MCOIMAPFetchContentOperation.h>
+#import <MailCore/MCOIMAPFetchParsedContentOperation.h>
 #import <MailCore/MCOIMAPSearchOperation.h>
 #import <MailCore/MCOIMAPIdleOperation.h>
 #import <MailCore/MCOIMAPFetchNamespaceOperation.h>

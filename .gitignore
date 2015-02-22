@@ -2,6 +2,7 @@ Externals
 
 example/ios/iOS UI Test/DerivedData
 scripts/prebuilt.list
+scripts/installed-deps-versions.plist
 
 # Xcode
 .DS_Store
@@ -25,3 +26,24 @@ DerivedData
 
 #CocoaPods
 Pods
+Podfile.lock
+
+#Windows
+*.sdf
+*.opensdf
+*.suo
+Externals
+build-windows/include
+build-windows/_headers_depends
+build-windows/mailcore2/Debug
+build-windows/mailcore2/Release
+build-windows/mailcore2/x64/Debug
+build-windows/mailcore2/x64/Release
+build-windows/mailcore2/mailcore2/Release
+build-windows/mailcore2/mailcore2/x64/Release
+build-windows/mailcore2/mailcore2/Debug
+build-windows/mailcore2/mailcore2/x64/Debug
+build-windows/mailcore2/test/Release
+build-windows/mailcore2/test/x64/Release
+build-windows/mailcore2/test/Debug
+build-windows/mailcore2/test/x64/Debug

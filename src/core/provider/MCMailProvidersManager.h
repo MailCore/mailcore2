@@ -18,7 +18,7 @@ namespace mailcore {
     
     class MailProvider;
     
-    class MailProvidersManager : public Object {
+    class MAILCORE_EXPORT MailProvidersManager : public Object {
     public:
         static MailProvidersManager * sharedManager();
         

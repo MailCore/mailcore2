@@ -12,7 +12,7 @@ namespace mailcore {
     
     class String;
     
-    class Array : public Object {
+    class MAILCORE_EXPORT Array : public Object {
     public:
         Array();
         virtual ~Array();
@@ -25,7 +25,7 @@ namespace mailcore {
         virtual void removeObjectAtIndex(unsigned int idx);
         virtual void removeObject(Object * obj);
         virtual int indexOfObject(Object * obj);
-        virtual Object * objectAtIndex(unsigned int idx);
+        virtual Object * objectAtIndex(unsigned int idx) ATTRIBUTE_RETURNS_NONNULL;
         virtual void replaceObject(unsigned int idx, Object * obj);
         virtual void insertObject(unsigned int idx, Object * obj);
         virtual void removeAllObjects();
@@ -45,7 +45,8 @@ namespace mailcore {
         virtual Object * copy();
         virtual HashMap * serializable();
         virtual void importSerializable(HashMap * serializable);
-        
+        virtual bool isEqual(Object * otherObject);
+
     private:
         carray * mArray;
         void init();

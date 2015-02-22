@@ -16,7 +16,7 @@
 
 namespace mailcore {
     
-    class NNTPFetchOverviewOperation : public NNTPOperation {
+    class MAILCORE_EXPORT NNTPFetchOverviewOperation : public NNTPOperation {
     public:
         NNTPFetchOverviewOperation();
         virtual ~NNTPFetchOverviewOperation();

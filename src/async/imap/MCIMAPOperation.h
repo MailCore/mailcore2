@@ -21,7 +21,7 @@ namespace mailcore {
     class IMAPAsyncSession;
     class IMAPOperationCallback;
     
-    class IMAPOperation : public Operation, public IMAPProgressCallback {
+    class MAILCORE_EXPORT IMAPOperation : public Operation, public IMAPProgressCallback {
     public:
         IMAPOperation();
         virtual ~IMAPOperation();

@@ -1,0 +1,66 @@
+Delivered-To: tulkibayev@gmail.com
+Received: by 10.236.48.238 with SMTP id v74cs84027yhb;
+        Wed, 30 Nov 2011 02:55:08 -0800 (PST)
+Received: by 10.68.73.98 with SMTP id k2mr6267851pbv.2.1322650505073;
+        Wed, 30 Nov 2011 02:55:05 -0800 (PST)
+Return-Path: <>
+Received: from nanny01.jgc.co.jp (nanny01.jgc.co.jp. [150.5.65.37])
+        by mx.google.com with ESMTPS id y7si2774694pbm.5.2011.11.30.02.54.03
+        (version=TLSv1/SSLv3 cipher=OTHER);
+        Wed, 30 Nov 2011 02:55:04 -0800 (PST)
+Received-SPF: pass (google.com: best guess record for domain of nanny01.jgc.co.jp designates 150.5.65.37 as permitted sender) client-ip=150.5.65.37;
+Authentication-Results: mx.google.com; spf=pass (google.com: best guess record for domain of nanny01.jgc.co.jp designates 150.5.65.37 as permitted sender) smtp.mail=
+Received: from lucifer02.jgc.co.jp (lucifer02.jgc.co.jp [150.5.99.82])
+	by nanny01.jgc.co.jp (Switch-3.3.2/Switch-3.3.2) with ESMTP id pAUAr28w001263
+	for <tulkibayev@gmail.com>; Wed, 30 Nov 2011 19:53:02 +0900 (JST)
+Received: from srvm009.jgc.co.jp (smtpgw.jgc.co.jp [10.1.201.29])
+	by lucifer02.jgc.co.jp (Switch-3.3.2/Switch-3.3.2/NOTES) with ESMTP id pAUAr2c3008473
+	for <tulkibayev@gmail.com>; Wed, 30 Nov 2011 19:53:02 +0900 (JST)
+Received: from lnsve01.jgc.co.jp ([192.168.81.35])
+          by srvm009.jgc.co.jp (Lotus Domino Release 8.0.2)
+          with ESMTP id 2011113019530832-772692 ;
+          Wed, 30 Nov 2011 19:53:08 +0900 
+Received: from lucifer02.jgc.co.jp ([150.5.99.82])
+          by srvm009.jgc.co.jp (Lotus Domino Release 8.0.2)
+          with ESMTP id 2011113019520363-772633 ;
+          Wed, 30 Nov 2011 19:52:03 +0900 
+Received: from mr02.jgc.co.jp (mr02.jgc.co.jp [150.5.65.51])
+	by lucifer02.jgc.co.jp (Switch-3.3.2/Switch-3.3.2/NOTES) with ESMTP id pAUApu7c008375
+	for <tulkibaev.erbol@jgc.co.jp>; Wed, 30 Nov 2011 19:51:56 +0900 (JST)
+X-AuditID: c0a80133-b7bb9ae000001316-b6-4ed60acbb2cb
+Received: from ns3.uzinfocom.uz (ns3.uzinfocom.uz [91.212.89.3])
+	by mr02.jgc.co.jp (Symantec Mail Security) with SMTP id 29.60.04886.BCA06DE4; Wed, 30 Nov 2011 19:51:56 +0900 (JST)
+Received: from ns3.uzinfocom.uz (localhost [127.0.0.1])
+	by ns3.uzinfocom.uz (Postfix) with ESMTP id 4650B8F87FA
+	for <tulkibaev.erbol@jgc.co.jp>; Wed, 30 Nov 2011 15:51:54 +0500 (UZT)
+Received: by ns3.uzinfocom.uz (Postfix, from userid 33)
+	id 420718F8800; Wed, 30 Nov 2011 15:51:54 +0500 (UZT)
+To: tulkibaev.erbol@jgc.co.jp
+Subject: Рассылка: Уведомление участникам тендеров
+From: ngd@mail.uz
+X-Mailer: PHP/5.2.6-1+lenny13
+Message-Id: <20111130105154.420718F8800@ns3.uzinfocom.uz>
+Date: Wed, 30 Nov 2011 15:51:54 +0500 (UZT)
+X-Brightmail-Tracker: AAAAAA==
+X-MIMETrack: Itemize by SMTP Server on LNSVG01/JGC/JP(Release 8.0.2|August 07, 2008) at
+ 2011/11/30 19:53:03,
+	Serialize by Router on LNSVE01/JGC/JP(Release 8.0.2|August 07, 2008) at 11/30/2011
+ 19:52:59,
+	Serialize complete at 11/30/2011 19:52:59,
+	Itemize by SMTP Server on LNSVG01/JGC/JP(Release 8.0.2|August 07, 2008) at
+ 2011/11/30 19:53:08,
+	Serialize by Router on LNSVG01/JGC/JP(Release 8.0.2|August 07, 2008) at
+ 2011/11/30 19:53:09,
+	Serialize complete at 2011/11/30 19:53:09
+X-MailFwdBy: CN=ERBOL TULKIBAEV/OU=K3845/O=JGC/C=JP
+Auto-Submitted: auto-forwarded
+Content-Type: text/html; charset=windows-1251
+
+
+
+<p style='color:red;'><strong>Рассылка c сайта:</strong> <a href='http://www.neftgazdepozit.uz'>www.neftgazdepozit.uz</a></p>
+<p><strong style='color:#0099FF; font-size:16px;'>Уведомление участникам тендеров:</strong><br>
+<strong>Дата:</strong>  30-11-2011 г. в 15:51</p>
+<p>
+	Уведомление участникам тендера № 158/11</p>
+ <a href='http://www.ngd.uz/za_tender.php?id=4'>подробнее...</a>

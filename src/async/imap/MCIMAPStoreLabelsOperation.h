@@ -16,7 +16,7 @@
 
 namespace mailcore {
     
-    class IMAPStoreLabelsOperation : public IMAPOperation {
+    class MAILCORE_EXPORT IMAPStoreLabelsOperation : public IMAPOperation {
     public:
         IMAPStoreLabelsOperation();
         virtual ~IMAPStoreLabelsOperation();

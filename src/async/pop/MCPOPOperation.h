@@ -20,7 +20,7 @@ namespace mailcore {
     class POPAsyncSession;
     class POPOperationCallback;
     
-    class POPOperation : public Operation, public POPProgressCallback {
+    class MAILCORE_EXPORT POPOperation : public Operation, public POPProgressCallback {
     public:
         POPOperation();
         virtual ~POPOperation();

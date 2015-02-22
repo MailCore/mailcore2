@@ -16,12 +16,12 @@
 
 namespace mailcore {
     
-    class IMAPIdentity : public Object {
+    class MAILCORE_EXPORT IMAPIdentity : public Object {
     public:
         
         IMAPIdentity();
         virtual ~IMAPIdentity();
-        
+
         virtual void setVendor(String * vendor);
         virtual String * vendor();
         
@@ -30,6 +30,8 @@ namespace mailcore {
         
         virtual void setVersion(String * version);
         virtual String * version();
+
+        virtual void removeAllInfos();
         
         virtual Array * allInfoKeys();
         virtual String * infoForKey(String * key);

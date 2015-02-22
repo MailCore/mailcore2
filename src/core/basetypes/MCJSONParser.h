@@ -12,13 +12,14 @@
 
 #include <MailCore/MCObject.h>
 #include <MailCore/MCICUTypes.h>
+#include <MailCore/MCUtils.h>
 
 namespace mailcore {
     
     class Data;
     class String;
     
-    class JSONParser : public Object {
+    class MAILCORE_EXPORT JSONParser : public Object {
     public:
         JSONParser();
         virtual ~JSONParser();

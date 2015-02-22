@@ -22,7 +22,7 @@ namespace mailcore {
     class IMAPFolderStatus;
     class IMAPIdentity;
     
-    class IMAPSession : public Object {
+    class MAILCORE_EXPORT IMAPSession : public Object {
     public:
         IMAPSession();
         virtual ~IMAPSession();
@@ -86,8 +86,8 @@ namespace mailcore {
         virtual void appendMessageWithCustomFlagsAndDate(String * folder, Data * messageData, MessageFlag flags, Array * customFlags, time_t date,
                                                          IMAPProgressCallback * progressCallback, uint32_t * createdUID, ErrorCode * pError);
         
-        void copyMessages(String * folder, IndexSet * uidSet, String * destFolder,
-                          HashMap ** pUidMapping, ErrorCode * pError);
+        virtual void copyMessages(String * folder, IndexSet * uidSet, String * destFolder,
+                                  HashMap ** pUidMapping, ErrorCode * pError);
         
         virtual void expunge(String * folder, ErrorCode * pError);
         
@@ -155,7 +155,7 @@ namespace mailcore {
         
         virtual void login(ErrorCode * pError);
         
-        IMAPIdentity * identity(IMAPIdentity * clientIdentity, ErrorCode * pError);
+        virtual IMAPIdentity * identity(IMAPIdentity * clientIdentity, ErrorCode * pError);
         
         virtual IndexSet * capability(ErrorCode * pError);
         
@@ -272,8 +272,10 @@ namespace mailcore {
         void unsetup();
         char fetchDelimiterIfNeeded(char defaultDelimiter, ErrorCode * pError);
         IMAPSyncResult * fetchMessages(String * folder, IMAPMessagesRequestKind requestKind,
-                                       bool fetchByUID, struct mailimap_set * imapset, uint64_t modseq,
-                                       HashMap * mapping, uint32_t startUid, IMAPProgressCallback * progressCallback,
+                                       bool fetchByUID, struct mailimap_set * imapset,
+                                       IndexSet * uidsFilter, IndexSet * numbersFilter,
+                                       uint64_t modseq,
+                                       HashMap * mapping, IMAPProgressCallback * progressCallback,
                                        Array * extraHeaders, ErrorCode * pError);
         void capabilitySetWithSessionState(IndexSet * capabilities);
         bool enableFeature(String * feature);

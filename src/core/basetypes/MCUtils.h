@@ -38,4 +38,31 @@
 
 #endif
 
+#ifdef _MSC_VER
+#	ifdef MAILCORE_DLL
+#		define MAILCORE_EXPORT __declspec(dllexport)
+#	else
+#		define MAILCORE_EXPORT __declspec(dllimport)
+#   endif
+#else
+#	define MAILCORE_EXPORT
+#endif
+
+#ifdef __clang__
+
+#if __has_feature(attribute_analyzer_noreturn)
+#define CLANG_ANALYZER_NORETURN __attribute__((analyzer_noreturn))
+#else
+#define CLANG_ANALYZER_NORETURN
+#endif
+
+#define ATTRIBUTE_RETURNS_NONNULL __attribute__((returns_nonnull))
+
+#else
+
+#define CLANG_ANALYZER_NORETURN
+#define ATTRIBUTE_RETURNS_NONNULL
+
+#endif
+
 #endif

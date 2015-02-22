@@ -9,16 +9,22 @@
 #ifndef MAILCORE_OPERATIONQUEUECALLBACK_H
 #define MAILCORE_OPERATIONQUEUECALLBACK_H
 
+#include <MailCore/MCUtils.h>
+
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class OperationQueue;
     
-    class OperationQueueCallback {
+    class MAILCORE_EXPORT OperationQueueCallback {
     public:
         virtual void queueStartRunning() {}
         virtual void queueStoppedRunning() {}
     };
     
 }
+
+#endif
 
 #endif

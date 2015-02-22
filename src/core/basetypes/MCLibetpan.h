@@ -19,6 +19,7 @@ namespace mailcore {
     time_t timestampFromIMAPDate(struct mailimap_date_time * date_time);
     struct mailimf_date_time * dateFromTimestamp(time_t timeval);
     struct mailimap_date_time * imapDateFromTimestamp(time_t timeval);
+    time_t mkgmtime(struct tm * tmp);
     
 }
 

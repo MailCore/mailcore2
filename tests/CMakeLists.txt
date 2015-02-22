@@ -1,14 +1,21 @@
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/../src/include)
-link_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Externals/ctemplate/lib
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Externals/icu4c/lib
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Externals/libetpan/lib
+include_directories(
+    ${CMAKE_CURRENT_BINARY_DIR}/../src/include
+    ${GLIB2_INCLUDE_DIRS}
 )
 
-find_library(FOUNDATIONFRAMEWORK NAMES Foundation)
-find_library(SECURITYFRAMEWORK NAMES Security)
-find_library(CORESERVICESFRAMEWORK NAMES CoreServices)
+link_directories(
+    ${additional_lib_searchpath}
+)
 
-add_executable (tests main.mm test-all.mm) 
-target_link_libraries (tests MailCore z etpan xml2 icudata icui18n icuuc sasl2 iconv tidy ctemplate ssl crypto
-    ${FOUNDATIONFRAMEWORK} ${SECURITYFRAMEWORK} ${CORESERVICESFRAMEWORK})
+IF(APPLE)
+    set(test_mac_files test-all-mac.mm)
+    set(mac_libraries iconv)
+ENDIF()
+
+add_executable (tests main.cpp test-all.cpp ${test_mac_files})
+target_link_libraries (
+    tests MailCore
+    ${ZLIB_LIBRARY} ${LIBETPAN_LIBRARY} ${LIBXML_LIBRARY} ${UCHARDET_LIBRARY} sasl2
+    ${TIDY_LIBRARY} ${CTEMPLATE_LIBRARY} ssl crypto ${linux_libraries} ${mac_libraries}
+    ${GLIB2_LIBRARIES} ${FOUNDATIONFRAMEWORK} ${SECURITYFRAMEWORK} ${CORESERVICESFRAMEWORK}
+)

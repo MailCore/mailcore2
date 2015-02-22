@@ -19,7 +19,7 @@ namespace mailcore {
     
     class IMAPSearchExpression;
     
-    class IMAPSearchOperation : public IMAPOperation {
+    class MAILCORE_EXPORT IMAPSearchOperation : public IMAPOperation {
     public:
         IMAPSearchOperation();
         virtual ~IMAPSearchOperation();

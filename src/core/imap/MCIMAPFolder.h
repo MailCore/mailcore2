@@ -9,7 +9,7 @@
 
 namespace mailcore {
     
-    class IMAPFolder : public Object {
+    class MAILCORE_EXPORT IMAPFolder : public Object {
     public:
         IMAPFolder();
         virtual ~IMAPFolder();

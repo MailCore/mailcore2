@@ -82,6 +82,11 @@ MCO_OBJC_SYNTHESIZE_STRING(setVersion, version)
     MCO_NATIVE_INSTANCE->setInfoForKey([key mco_mcString], [value mco_mcString]);
 }
 
+- (void) removeAllInfos
+{
+    MCO_NATIVE_INSTANCE->removeAllInfos();
+}
+
 + (MCOIMAPIdentity *) identityWithVendor:(NSString *)vendor
                                     name:(NSString *)name
                                  version:(NSString *)version

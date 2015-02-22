@@ -10,13 +10,15 @@
 
 #define MAILCORE_MCPOPOPERATIONCALLBACK_H
 
+#include <MailCore/MCUtils.h>
+
 #ifdef __cplusplus
 
 namespace mailcore {
     
     class POPOperation;
     
-    class POPOperationCallback {
+    class MAILCORE_EXPORT POPOperationCallback {
     public:
         virtual void bodyProgress(POPOperation * session, unsigned int current, unsigned int maximum) {};
     };

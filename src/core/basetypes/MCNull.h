@@ -16,7 +16,7 @@
 
 namespace mailcore {
     
-    class Null : public Object {
+    class MAILCORE_EXPORT Null : public Object {
     public:
         static Null * null();
     };

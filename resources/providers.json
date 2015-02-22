@@ -985,7 +985,8 @@
             "live\\.de",
             "live\\.be",
             "live\\.com\\.ar",
-            "live\\.com\\.mx"
+            "live\\.com\\.mx",
+            "live\\.co\\.uk"
         ],
         "mailboxes":{
             "drafts":"Drafts",
@@ -1092,21 +1093,26 @@
             "imap": [
                      {
                      "port": 993,
-                     "hostname": "imap.yandex.ru",
+                     "hostname": "imap.yandex.com",
                      "ssl": true
                      }
                      ],
             "smtp": [
                      {
                      "port": 465,
-                     "hostname": "smtp.yandex.ru",
+                     "hostname": "smtp.yandex.com",
                      "ssl": true
                      }
                      ]
             
         },
         "domain-match": [
-                         "yandex\\.ru"
+                         "yandex\\.ru",
+                         "yandex\\.ua",
+                         "yandex\\.kz",
+                         "yandex\\.by",
+                         "yandex\\.com",
+                         "yandex\\.com\\.tr"
                          ],
         "mailboxes": {
             "drafts": "Черновики",
@@ -1176,5 +1182,90 @@
     	"mx-match": [
     		"mx\\.rcn\\.com"
     	]
+    },
+    "ukrnet": {
+        "servers": {
+            "imap": [
+                     {
+                     "port": 993,
+                     "hostname": "imap.ukr.net",
+                     "ssl": true
+                     }
+                     ],
+            "smtp": [
+                     {
+                     "port": 465,
+                     "hostname": "smtp.ukr.net",
+                     "ssl": true
+                     }
+                     ]
+            
+        },
+        "domain-match": [
+                         "ukr\\.net"
+                         ],
+        "mailboxes": {
+            "drafts": "Черновики",
+            "spam": "Спам",
+            "sentmail": "Отправленные",
+            "trash": "Удаленные"
+        }
+    },
+    "rambler": {
+        "servers": {
+            "imap": [
+                     {
+                     "port": 993,
+                     "hostname": "imap.rambler.ru",
+                     "ssl": true
+                     }
+                     ],
+            "smtp": [
+                     {
+                     "port": 465,
+                     "hostname": "smtp.rambler.ru",
+                     "ssl": true
+                     }
+                     ]
+            
+        },
+        "domain-match": [
+                         "rambler\\.ru",
+                         "lenta\\.ru",
+                         "autorambler\\.ru",
+                         "myrambler\\.ru",
+                         "ro\\.ru",
+                         "r0\\.ru"
+                         ],
+        "mailboxes": {
+            "drafts": "DraftBox",
+            "spam": "Spam",
+            "sentmail": "SentBox",
+            "trash": "Trash"
+        }
+    },
+    "office365": {
+        "servers": {
+            "imap": [
+                     {
+                     "port": 993,
+                     "hostname": "outlook.office365.com",
+                     "ssl": true
+                     }
+                     ],
+            "smtp": [
+                     {
+                     "port": 587,
+                     "hostname": "smtp.office365.com",
+                     "starttls": true
+                     }
+                     ]
+            },
+        "mailboxes": {
+            "drafts": "Drafts",
+            "spam": "Junk Email",
+            "sentmail": "Sent Items",
+            "trash": "Deleted Items"
+        }
     }
 }

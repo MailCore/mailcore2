@@ -18,7 +18,7 @@
 
 namespace mailcore {
     
-    class SMTPDisconnectOperation : public SMTPOperation {
+    class MAILCORE_EXPORT SMTPDisconnectOperation : public SMTPOperation {
     public:
         SMTPDisconnectOperation();
         virtual ~SMTPDisconnectOperation();

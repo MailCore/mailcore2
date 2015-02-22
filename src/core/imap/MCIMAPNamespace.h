@@ -10,7 +10,7 @@ namespace mailcore {
     
     class IMAPNamespaceItem;
     
-    class IMAPNamespace : public Object {
+    class MAILCORE_EXPORT IMAPNamespace : public Object {
     public:
         IMAPNamespace();
         virtual ~IMAPNamespace();

@@ -15,7 +15,7 @@
 #ifdef __cplusplus
 
 namespace mailcore {
-    class NNTPFetchArticleOperation : public NNTPOperation {
+    class MAILCORE_EXPORT NNTPFetchArticleOperation : public NNTPOperation {
     public:
         NNTPFetchArticleOperation();
         virtual ~NNTPFetchArticleOperation();

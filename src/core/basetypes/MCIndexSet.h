@@ -18,10 +18,10 @@
 
 namespace mailcore {
     
-    class IndexSet : public Object {
+    class MAILCORE_EXPORT IndexSet : public Object {
     public:
         IndexSet();
-        IndexSet(IndexSet * o);
+        virtual ~IndexSet();
         
         static IndexSet * indexSet();
         static IndexSet * indexSetWithRange(Range range);
@@ -45,7 +45,7 @@ namespace mailcore {
         virtual void removeAllIndexes();
         
     public: // subclass behavior
-        virtual ~IndexSet();
+        IndexSet(IndexSet * o);
         virtual String * description();
         virtual Object * copy();
         virtual HashMap * serializable();

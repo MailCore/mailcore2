@@ -14,10 +14,7 @@
 
 /* This class holds IMAP folder metadata */
 
-@interface MCOIMAPFolderInfo : NSObject
-
-/** Create an empty instance */
-+ (MCOIMAPFolderInfo *) info;
+@interface MCOIMAPFolderInfo : NSObject <NSCopying>
 
 /** The folder's IMAP UIDNEXT value. Used to determine the uid for the next received message. */
 @property (nonatomic, assign) uint32_t uidNext;
