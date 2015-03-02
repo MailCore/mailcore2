@@ -44,6 +44,8 @@ static const char * localizedDescriptionTable[] = {
     "A recipient is required to send message",                                       /** MCOErrorNoRecipient */
     "An error occured while performing a No-Op operation.",                          /** MCOErrorNoop */
     "An application specific password is required",                                  /** MCOErrorGmailApplicationSpecificPasswordRequired */
+    "An error when requesting date",                                                 /** MCOErrorServerDate */
+    "No valid server found",                                                         /** MCOErrorNoValidServerFound */
 };
 
 String * mailcore::errorMessageWithErrorCode(ErrorCode errorCode)

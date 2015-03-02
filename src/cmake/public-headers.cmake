@@ -73,6 +73,7 @@ core/provider/MCProvider.h
 core/provider/MCMailProvidersManager.h
 core/provider/MCMailProvider.h
 core/provider/MCNetService.h
+core/provider/MCAccountValidator.h
 async/MCAsync.h
 async/smtp/MCAsyncSMTP.h
 async/smtp/MCSMTPAsyncSession.h
@@ -200,4 +201,5 @@ objc/provider/MCOProvider.h
 objc/provider/MCONetService.h
 objc/provider/MCOMailProvider.h
 objc/provider/MCOMailProvidersManager.h
+objc/provider/MCOAccountValidator.h
 )
