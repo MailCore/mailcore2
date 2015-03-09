@@ -300,7 +300,7 @@ void IMAPMessage::importSerializable(HashMap * serializable)
     }
     String * originalFlags = (String *) serializable->objectForKey(MCSTR("originalFlags"));
     if (originalFlags != NULL) {
-        setFlags((MessageFlag) originalFlags->unsignedIntValue());
+        setOriginalFlags((MessageFlag) originalFlags->unsignedIntValue());
     }
     String * customFlags = (String *) serializable->objectForKey(MCSTR("customFlags"));
     if (customFlags != NULL) {
