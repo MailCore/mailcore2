@@ -257,7 +257,7 @@ HashMap * IMAPMessage::serializable()
     HashMap * result = AbstractMessage::serializable();
     result->setObjectForKey(MCSTR("modSeqValue"), String::stringWithUTF8Format("%llu", (long long unsigned) modSeqValue()));
     result->setObjectForKey(MCSTR("uid"), String::stringWithUTF8Format("%lu", (long unsigned) uid()));
-    result->setObjectForKey(MCSTR("size"), String::stringWithUTF8Format("%lu", (long unsigned) uid()));
+    result->setObjectForKey(MCSTR("size"), String::stringWithUTF8Format("%lu", (long unsigned) size()));
     result->setObjectForKey(MCSTR("flags"), String::stringWithUTF8Format("%u", (unsigned) flags()));
     result->setObjectForKey(MCSTR("originalFlags"), String::stringWithUTF8Format("%u", (unsigned) originalFlags()));
     if (customFlags() != NULL) {
