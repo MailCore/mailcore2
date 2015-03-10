@@ -44,6 +44,8 @@ namespace mailcore {
         virtual Data * decodedDataUsingEncoding(Encoding encoding);
         
         virtual String * base64String();
+
+        virtual ErrorCode writeToFile(String * filename);
         
     public: // private
         virtual String * charsetWithFilteredHTML(bool filterHTML, String * hintCharset = NULL);
