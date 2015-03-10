@@ -92,7 +92,7 @@ static bool isTextPart(AbstractPart * part, htmlRendererContext * context)
     MCAssert(mimeType != NULL);
     
     if (!part->isInlineAttachment()) {
-        if ((part->filename() != NULL) && context->firstRendered) {
+        if (part->isAttachment() || ((part->filename() != NULL) && context->firstRendered)) {
             return false;
         }
     }

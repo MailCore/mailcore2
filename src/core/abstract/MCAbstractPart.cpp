@@ -28,6 +28,7 @@ AbstractPart::AbstractPart(AbstractPart * other)
     setContentLocation(other->mContentLocation);
     setContentDescription(other->mContentDescription);
     setInlineAttachment(other->mInlineAttachment);
+    setAttachment(other->mAttachment);
     setPartType(other->mPartType);
     setContentTypeParameters(other->mContentTypeParameters);
 }
@@ -42,6 +43,7 @@ void AbstractPart::init()
     mContentLocation = NULL;
     mContentDescription = NULL;
     mInlineAttachment = false;
+    mAttachment = false;
     mPartType = PartTypeSingle;
     mContentTypeParameters = NULL;
 }
@@ -81,6 +83,7 @@ String * AbstractPart::description()
         result->appendUTF8Format("content-description: %s\n", mContentDescription->UTF8Characters());
     }
     result->appendUTF8Format("inline: %i\n", mInlineAttachment);
+    result->appendUTF8Format("attachment: %i\n", mAttachment);
     if (mContentTypeParameters != NULL) {
         mc_foreachhashmapKeyAndValue(String, key, String, value, mContentTypeParameters) {
             result->appendUTF8Format("%s: %s\n", key->UTF8Characters(), value->UTF8Characters());
@@ -186,6 +189,16 @@ void AbstractPart::setInlineAttachment(bool inlineAttachment)
     mInlineAttachment = inlineAttachment;
 }
 
+bool AbstractPart::isAttachment()
+{
+    return mAttachment;
+}
+
+void AbstractPart::setAttachment(bool attachment)
+{
+    mAttachment = attachment;
+}
+
 void AbstractPart::importIMAPFields(struct mailimap_body_fields * fields,
     struct mailimap_body_ext_1part * extension)
 {
@@ -233,7 +246,10 @@ void AbstractPart::importIMAPFields(struct mailimap_body_fields * fields,
             if (strcasecmp(extension->bd_disposition->dsp_type, "inline") == 0) {
                 setInlineAttachment(true);
             }
-            
+            else if (strcasecmp(extension->bd_disposition->dsp_type, "attachment") == 0) {
+                setAttachment(true);
+            }
+
             if (extension->bd_disposition->dsp_attributes != NULL) {
                 clistiter * cur;
                 
@@ -345,6 +361,9 @@ HashMap * AbstractPart::serializable()
     if (mInlineAttachment) {
         result->setObjectForKey(MCSTR("inlineAttachment"), MCSTR("1"));
     }
+    if (mAttachment) {
+        result->setObjectForKey(MCSTR("attachment"), MCSTR("1"));
+    }
     String * partTypeStr;
     switch (mPartType) {
         default:
@@ -387,6 +406,12 @@ void AbstractPart::importSerializable(HashMap * serializable)
             setInlineAttachment(true);
         }
     }
+    value = (String *) serializable->objectForKey(MCSTR("attachment"));
+    if (value != NULL) {
+        if (value->intValue()) {
+            setAttachment(true);
+        }
+    }
     value = (String *) serializable->objectForKey(MCSTR("partType"));
     if (value != NULL) {
         if (value->isEqual(MCSTR("single"))) {
@@ -417,8 +442,9 @@ void AbstractPart::setContentTypeParameters(HashMap * parameters)
 
 Array * AbstractPart::allContentTypeParametersNames()
 {
-    if (mContentTypeParameters == NULL)
+    if (mContentTypeParameters == NULL) {
         return Array::array();
+    }
     return mContentTypeParameters->allKeys();
 }
 
@@ -433,8 +459,9 @@ void AbstractPart::setContentTypeParameter(String * name, String * object)
 
 void AbstractPart::removeContentTypeParameter(String * name)
 {
-    if (mContentTypeParameters == NULL)
+    if (mContentTypeParameters == NULL) {
         return;
+    }
     mc_foreachhashmapKey(String, key, mContentTypeParameters) {
         if (key->isEqualCaseInsensitive(name)) {
             mContentTypeParameters->removeObjectForKey(key);

@@ -589,6 +589,9 @@ Attachment * Attachment::attachmentWithSingleMIME(struct mailmime * mime)
             if (single_fields.fld_disposition->dsp_type->dsp_type == MAILMIME_DISPOSITION_TYPE_INLINE) {
                 result->setInlineAttachment(true);
             }
+            else if (single_fields.fld_disposition->dsp_type->dsp_type == MAILMIME_DISPOSITION_TYPE_ATTACHMENT) {
+                result->setAttachment(true);
+            }
         }
     }
     

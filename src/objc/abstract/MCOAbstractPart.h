@@ -73,6 +73,9 @@ typedef NS_ENUM(NSInteger, MCOPartType) {
 /** Returns whether the part is an explicit inline attachment.*/
 @property (nonatomic, assign, getter=isInlineAttachment) BOOL inlineAttachment;
 
+/** Returns whether the part is an explicit attachment.*/
+@property (nonatomic, assign, getter=isAttachment) BOOL attachment;
+
 /** Returns the part with the given Content-ID among this part and its subparts.*/
 - (MCOAbstractPart *) partForContentID:(NSString *)contentID;
 
