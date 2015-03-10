@@ -1194,6 +1194,9 @@ Data * String::encodedMIMEHeaderValueForSubject()
 
 int String::compareWithCaseSensitive(String * otherString, bool caseSensitive)
 {
+    if (otherString == NULL) {
+        return 1;
+    }
     if ((length() == 0) && (otherString->length() == 0)) {
         return 0;
     }
@@ -1206,7 +1209,7 @@ int String::compareWithCaseSensitive(String * otherString, bool caseSensitive)
     }
     
     if (otherString->unicodeCharacters() == NULL) {
-        return -1;
+        return 1;
     }
     
 #if DISABLE_ICU
