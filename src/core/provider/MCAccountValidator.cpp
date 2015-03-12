@@ -221,6 +221,10 @@ void AccountValidator::checkNextHost()
             mImapSession = new IMAPAsyncSession();
             mImapSession->setUsername(mUsername);
             mImapSession->setPassword(mPassword);
+            if (mOAuth2Token != NULL) {
+                mImapSession->setOAuth2Token(mOAuth2Token);
+                mImapSession->setAuthType(AuthTypeXOAuth2);
+            }
             
             mImapServer = (NetService *) mImapServices->objectAtIndex(mCurrentServiceIndex);
             mImapSession->setHostname(mImapServer->hostname());
@@ -265,6 +269,10 @@ void AccountValidator::checkNextHost()
             mSmtpSession = new SMTPAsyncSession();
             mSmtpSession->setUsername(mUsername);
             mSmtpSession->setPassword(mPassword);
+            if (mOAuth2Token != NULL) {
+                mSmtpSession->setOAuth2Token(mOAuth2Token);
+                mSmtpSession->setAuthType(AuthTypeXOAuth2);
+            }
             
             mSmtpServer = (NetService *) mSmtpServices->objectAtIndex(mCurrentServiceIndex);
             mSmtpSession->setHostname(mSmtpServer->hostname());
