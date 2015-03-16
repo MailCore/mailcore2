@@ -17,7 +17,7 @@ pod 'mailcore2-osx'
 **For iOS:**
 Download the latest [build for iOS](http://d.etpan.org/mailcore2-deps/mailcore2-ios/).
 
-**For iOS:**
+**For OS X:**
 Download the latest [build for OS X](http://d.etpan.org/mailcore2-deps/mailcore2-osx/).
 
 ### Build for iOS/OSX ###
