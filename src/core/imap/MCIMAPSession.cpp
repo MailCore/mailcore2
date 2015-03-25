@@ -316,6 +316,7 @@ void IMAPSession::init()
     mConnectionType = ConnectionTypeClear;
     mCheckCertificateEnabled = true;
     mVoIPEnabled = true;
+    mNetEaseWorkaroundEnabled = false;
     mDelimiter = 0;
     
     mBodyProgressEnabled = true;
@@ -475,6 +476,16 @@ void IMAPSession::setVoIPEnabled(bool enabled)
 bool IMAPSession::isVoIPEnabled()
 {
     return mVoIPEnabled;
+}
+
+void IMAPSession::setNetEaseWorkaroundEnabled(bool enabled) 
+{
+    mNetEaseWorkaroundEnabled = enabled;
+}
+
+bool IMAPSession::isNetEaseWorkaroundEnabled() 
+{
+    return mNetEaseWorkaroundEnabled;
 }
 
 static bool hasError(int errorCode)
