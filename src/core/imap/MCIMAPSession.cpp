@@ -547,7 +547,7 @@ void IMAPSession::setup()
     mailimap_set_timeout(mImap, timeout());
     mailimap_set_progress_callback(mImap, body_progress, IMAPSession::items_progress, this);
     mailimap_set_logger(mImap, logger, this);
-#ifdef ENABLE_163_WORKAROUND
+#ifdef LIBETPAN_HAS_MAILIMAP_163_WORKAROUND
     mailimap_set_163_workaround_enabled(mImap, mNetEaseWorkaroundEnabled);
 #endif
 }
