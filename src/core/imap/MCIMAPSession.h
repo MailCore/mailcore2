@@ -59,6 +59,9 @@ namespace mailcore {
         virtual void setVoIPEnabled(bool enabled);
         virtual bool isVoIPEnabled();
         
+        virtual void setNetEaseWorkaroundEnabled(bool enabled);
+        virtual bool isNetEaseWorkaroundEnabled();
+        
         // Needed for fetchSubscribedFolders() and fetchAllFolders().
         virtual void setDefaultNamespace(IMAPNamespace * ns);
         virtual IMAPNamespace * defaultNamespace();
