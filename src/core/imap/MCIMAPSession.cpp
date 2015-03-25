@@ -547,6 +547,7 @@ void IMAPSession::setup()
     mailimap_set_timeout(mImap, timeout());
     mailimap_set_progress_callback(mImap, body_progress, IMAPSession::items_progress, this);
     mailimap_set_logger(mImap, logger, this);
+    mailimap_set_163_workaround_enabled(mImap, mNetEaseWorkaroundEnabled);
 }
 
 void IMAPSession::unsetup()
