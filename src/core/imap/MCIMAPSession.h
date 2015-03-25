@@ -223,6 +223,7 @@ namespace mailcore {
         ConnectionType mConnectionType;
         bool mCheckCertificateEnabled;
         bool mVoIPEnabled;
+        bool mNetEaseWorkaroundEnabled;
         char mDelimiter;
         IMAPNamespace * mDefaultNamespace;
         IMAPIdentity * mServerIdentity;
