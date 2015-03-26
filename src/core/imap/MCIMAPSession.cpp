@@ -486,16 +486,6 @@ bool IMAPSession::isVoIPEnabled()
     return mVoIPEnabled;
 }
 
-void IMAPSession::setNetEaseWorkaroundEnabled(bool enabled) 
-{
-    mNetEaseWorkaroundEnabled = enabled;
-}
-
-bool IMAPSession::isNetEaseWorkaroundEnabled() 
-{
-    return mNetEaseWorkaroundEnabled;
-}
-
 static bool hasError(int errorCode)
 {
     return ((errorCode != MAILIMAP_NO_ERROR) && (errorCode != MAILIMAP_NO_ERROR_AUTHENTICATED) &&
