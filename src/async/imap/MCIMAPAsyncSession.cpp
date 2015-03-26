@@ -97,6 +97,15 @@ IMAPAsyncSession::~IMAPAsyncSession()
 void IMAPAsyncSession::setHostname(String * hostname)
 {
     MC_SAFE_REPLACE_COPY(String, mHostname, hostname);
+    
+    
+    if(!mNetEaseWorkaroundEnabled && hostname
+       && (hostname->hasSuffix(String::stringWithUTF8Characters((char *) ".163.com"))
+           || hostname->hasSuffix(String::stringWithUTF8Characters((char *) ".126.com"))
+           || hostname->hasSuffix(String::stringWithUTF8Characters((char *) ".yeah.net"))
+           )) {
+           mNetEaseWorkaroundEnabled = true;
+    }
 }
 
 String * IMAPAsyncSession::hostname()
