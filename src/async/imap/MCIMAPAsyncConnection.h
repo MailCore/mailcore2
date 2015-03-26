@@ -69,6 +69,9 @@ namespace mailcore {
         virtual void setVoIPEnabled(bool enabled);
         virtual bool isVoIPEnabled();
         
+        virtual void setNetEaseWorkaroundEnabled(bool enabled);
+        virtual bool isNetEaseWorkaroundEnabled();
+        
         virtual void setAutomaticConfigurationEnabled(bool enabled);
         virtual bool isAutomaticConfigurationEnabled();
         

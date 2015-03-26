@@ -62,6 +62,7 @@ IMAPAsyncSession::IMAPAsyncSession()
     mConnectionType = ConnectionTypeClear;
     mCheckCertificateEnabled = true;
     mVoIPEnabled = true;
+    mNetEaseWorkaroundEnabled = false;
     mDefaultNamespace = NULL;
     mTimeout = 30.;
     mConnectionLogger = NULL;
@@ -193,6 +194,16 @@ bool IMAPAsyncSession::isVoIPEnabled()
     return mVoIPEnabled;
 }
 
+void IMAPAsyncSession::setNetEaseWorkaroundEnabled(bool enabled)
+{
+    mNetEaseWorkaroundEnabled = enabled;
+}
+
+bool IMAPAsyncSession::isNetEaseWorkaroundEnabled()
+{
+    return mNetEaseWorkaroundEnabled;
+}
+
 IMAPNamespace * IMAPAsyncSession::defaultNamespace()
 {
     return mDefaultNamespace;
@@ -255,6 +266,7 @@ IMAPAsyncConnection * IMAPAsyncSession::session()
     session->setTimeout(mTimeout);
     session->setCheckCertificateEnabled(mCheckCertificateEnabled);
     session->setVoIPEnabled(mVoIPEnabled);
+    session->setNetEaseWorkaroundEnabled(mNetEaseWorkaroundEnabled);
     session->setDefaultNamespace(mDefaultNamespace);
     session->setClientIdentity(mClientIdentity);
 #if __APPLE__

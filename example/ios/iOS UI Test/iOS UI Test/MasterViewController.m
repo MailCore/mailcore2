@@ -118,6 +118,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 	self.imapSession.port = 993;
 	self.imapSession.username = username;
 	self.imapSession.password = password;
+    self.imapSession.netEaseWorkaroundEnabled = YES;
     if (oauth2Token != nil) {
         self.imapSession.OAuth2Token = oauth2Token;
         self.imapSession.authType = MCOAuthTypeXOAuth2;
