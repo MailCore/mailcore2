@@ -225,16 +225,6 @@ bool IMAPAsyncConnection::isVoIPEnabled()
     return mSession->isVoIPEnabled();
 }
 
-void IMAPAsyncConnection::setNetEaseWorkaroundEnabled(bool enabled)
-{
-    mSession->setNetEaseWorkaroundEnabled(enabled);
-}
-
-bool IMAPAsyncConnection::isNetEaseWorkaroundEnabled()
-{
-    return mSession->isNetEaseWorkaroundEnabled();
-}
-
 void IMAPAsyncConnection::setDefaultNamespace(IMAPNamespace * ns)
 {
     mSession->setDefaultNamespace(ns);

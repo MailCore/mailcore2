@@ -316,7 +316,6 @@ void IMAPSession::init()
     mConnectionType = ConnectionTypeClear;
     mCheckCertificateEnabled = true;
     mVoIPEnabled = true;
-    mNetEaseWorkaroundEnabled = false;
     mDelimiter = 0;
     
     mBodyProgressEnabled = true;
@@ -478,16 +477,6 @@ bool IMAPSession::isVoIPEnabled()
     return mVoIPEnabled;
 }
 
-void IMAPSession::setNetEaseWorkaroundEnabled(bool enabled) 
-{
-    mNetEaseWorkaroundEnabled = enabled;
-}
-
-bool IMAPSession::isNetEaseWorkaroundEnabled() 
-{
-    return mNetEaseWorkaroundEnabled;
-}
-
 static bool hasError(int errorCode)
 {
     return ((errorCode != MAILIMAP_NO_ERROR) && (errorCode != MAILIMAP_NO_ERROR_AUTHENTICATED) &&
@@ -547,9 +536,6 @@ void IMAPSession::setup()
     mailimap_set_timeout(mImap, timeout());
     mailimap_set_progress_callback(mImap, body_progress, IMAPSession::items_progress, this);
     mailimap_set_logger(mImap, logger, this);
-#ifdef LIBETPAN_HAS_MAILIMAP_163_WORKAROUND
-    mailimap_set_163_workaround_enabled(mImap, mNetEaseWorkaroundEnabled);
-#endif
 }
 
 void IMAPSession::unsetup()
@@ -641,6 +627,11 @@ void IMAPSession::connect(ErrorCode * pError)
     if (mImap->imap_response != NULL) {
         MC_SAFE_REPLACE_RETAIN(String, mWelcomeString, String::stringWithUTF8Characters(mImap->imap_response));
         mYahooServer = (mWelcomeString->locationOfString(MCSTR("yahoo.com")) != -1);
+#ifdef LIBETPAN_HAS_MAILIMAP_163_WORKAROUND
+        if(mWelcomeString->locationOfString(MCSTR("* OK Coremail System IMap Server Ready")) != -1) {
+            mailimap_set_163_workaround_enabled(mImap, 1);
+        }
+#endif
     }
     
     mState = STATE_CONNECTED;

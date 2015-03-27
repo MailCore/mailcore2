@@ -62,7 +62,6 @@ IMAPAsyncSession::IMAPAsyncSession()
     mConnectionType = ConnectionTypeClear;
     mCheckCertificateEnabled = true;
     mVoIPEnabled = true;
-    mNetEaseWorkaroundEnabled = false;
     mDefaultNamespace = NULL;
     mTimeout = 30.;
     mConnectionLogger = NULL;
@@ -97,15 +96,6 @@ IMAPAsyncSession::~IMAPAsyncSession()
 void IMAPAsyncSession::setHostname(String * hostname)
 {
     MC_SAFE_REPLACE_COPY(String, mHostname, hostname);
-    
-    
-    if(!mNetEaseWorkaroundEnabled && hostname
-       && (hostname->hasSuffix(String::stringWithUTF8Characters((char *) ".163.com"))
-           || hostname->hasSuffix(String::stringWithUTF8Characters((char *) ".126.com"))
-           || hostname->hasSuffix(String::stringWithUTF8Characters((char *) ".yeah.net"))
-           )) {
-           mNetEaseWorkaroundEnabled = true;
-    }
 }
 
 String * IMAPAsyncSession::hostname()
@@ -203,21 +193,6 @@ bool IMAPAsyncSession::isVoIPEnabled()
     return mVoIPEnabled;
 }
 
-void IMAPAsyncSession::setNetEaseWorkaroundEnabled(bool enabled)
-{
-    mNetEaseWorkaroundEnabled = enabled;
-}
-
-bool IMAPAsyncSession::isNetEaseWorkaroundEnabled()
-{
-    return mNetEaseWorkaroundEnabled;
-}
-
-IMAPNamespace * IMAPAsyncSession::defaultNamespace()
-{
-    return mDefaultNamespace;
-}
-
 void IMAPAsyncSession::setDefaultNamespace(IMAPNamespace * ns)
 {
     MC_SAFE_REPLACE_RETAIN(IMAPNamespace, mDefaultNamespace, ns);
@@ -275,7 +250,6 @@ IMAPAsyncConnection * IMAPAsyncSession::session()
     session->setTimeout(mTimeout);
     session->setCheckCertificateEnabled(mCheckCertificateEnabled);
     session->setVoIPEnabled(mVoIPEnabled);
-    session->setNetEaseWorkaroundEnabled(mNetEaseWorkaroundEnabled);
     session->setDefaultNamespace(mDefaultNamespace);
     session->setClientIdentity(mClientIdentity);
 #if __APPLE__

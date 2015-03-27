@@ -81,9 +81,6 @@
 /** When set to YES, VoIP capability will be enabled on the IMAP connection on iOS */
 @property (nonatomic, assign, getter=isVoIPEnabled) BOOL voIPEnabled;
 
-/** When set to YES, the workaround for NetEase's imap server will be enabled on the IMAP connection on iOS */
-@property (nonatomic, assign, getter=isNetEaseWorkaroundEnabled) BOOL netEaseWorkaroundEnabled;
-
 /** The default namespace. */
 @property (nonatomic, strong) MCOIMAPNamespace * defaultNamespace;
 
