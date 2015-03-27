@@ -5,6 +5,7 @@
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
+#include "MCDefines.h"
 #include "MCAttachment.h"
 #include "MCMessageHeader.h"
 #include "MCHTMLRenderer.h"
@@ -140,6 +141,15 @@ HashMap * MessageParser::serializable()
     return result;
 }
 
+void MessageParser::importSerializable(HashMap * serializable)
+{
+    AbstractMessage::importSerializable(serializable);
+    MC_SAFE_REPLACE_RETAIN(AbstractPart, mMainPart, Object::objectWithSerializable((HashMap *) serializable->objectForKey(MCSTR("mainPart"))));
+    if (mMainPart != NULL) {
+        mMainPart->applyUniquePartID();
+    }
+}
+
 Object * MessageParser::copy()
 {
     return new MessageParser(this);
@@ -189,4 +199,14 @@ String * MessageParser::plainTextBodyRendering(bool stripWhitespace)
         plainTextBodyString = plainTextBodyString->stripWhitespace();
     }
     return plainTextBodyString;
+}
+
+static void * createObject()
+{
+    return new MessageParser();
+}
+
+INITIALIZE(MessageParser)
+{
+    Object::registerObjectConstructor("mailcore::MessageParser", &createObject);
 }

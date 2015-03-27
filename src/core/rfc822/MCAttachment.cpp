@@ -2,6 +2,7 @@
 
 #include "MCAttachment.h"
 
+#include "MCDefines.h"
 #include "MCMultipart.h"
 #include "MCMessagePart.h"
 #include "MCMessageHeader.h"
@@ -609,4 +610,14 @@ MessagePart * Attachment::attachmentWithMessageMIME(struct mailmime * mime)
     attachment->setMainPart(mainPart);
     
     return (MessagePart *) attachment->autorelease();
+}
+
+static void * createObject()
+{
+    return new Attachment();
+}
+
+INITIALIZE(Attachment)
+{
+    Object::registerObjectConstructor("mailcore::Attachment", &createObject);
 }
