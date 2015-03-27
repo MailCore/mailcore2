@@ -193,6 +193,11 @@ bool IMAPAsyncSession::isVoIPEnabled()
     return mVoIPEnabled;
 }
 
+IMAPNamespace * IMAPAsyncSession::defaultNamespace()
+{
+    return mDefaultNamespace;
+}
+
 void IMAPAsyncSession::setDefaultNamespace(IMAPNamespace * ns)
 {
     MC_SAFE_REPLACE_RETAIN(IMAPNamespace, mDefaultNamespace, ns);
