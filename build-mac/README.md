@@ -2,6 +2,13 @@
 
 MailCore 2 is available through [Carthage](https://github.com/Carthage/Carthage).
 
+Add this line to the `Cartfile`
+```
+github "MailCore/mailcore2"
+```
+
+Here you can find [Instructions for install Carthage](https://github.com/Carthage/Carthage#installing-carthage).
+
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 ### Cocoapods ###
