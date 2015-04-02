@@ -255,6 +255,13 @@ SMTPOperation * SMTPAsyncSession::noopOperation()
     return (SMTPOperation *) op->autorelease();
 }
 
+SMTPOperation * SMTPAsyncSession::disconnectOperation()
+{
+    SMTPDisconnectOperation * op = new SMTPDisconnectOperation();
+    op->setSession(this);
+    return (SMTPOperation *) op->autorelease();
+}
+
 void SMTPAsyncSession::setConnectionLogger(ConnectionLogger * logger)
 {
     pthread_mutex_lock(&mConnectionLoggerLock);

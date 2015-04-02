@@ -626,6 +626,7 @@ void SMTPSession::sendMessage(Address * from, Array * recipients, Data * message
         r = mailesmtp_send_quit(mSmtp, MCUTF8(from->mailbox()), 0, NULL,
             address_list,
             messageData->bytes(), messageData->length());
+        mShouldDisconnect = true;
     }
     else {
         r = mailesmtp_send(mSmtp, MCUTF8(from->mailbox()), 0, NULL,
