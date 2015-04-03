@@ -30,6 +30,10 @@
 @property (nonatomic, retain) NSArray * /* MCONetService */ popServers;
 @property (nonatomic, retain) NSArray * /* MCONetService */ smtpServers;
 
+@property (nonatomic, assign, getter=isImapEnabled) BOOL imapEnabled;
+@property (nonatomic, assign, getter=isPopEnabled) BOOL popEnabled;
+@property (nonatomic, assign, getter=isSmtpEnabled) BOOL smtpEnabled;
+
 // result
 @property (nonatomic, retain, readonly) NSString * identifier;
 @property (nonatomic, retain, readonly) MCONetService * imapServer;

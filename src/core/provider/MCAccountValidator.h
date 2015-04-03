@@ -22,7 +22,7 @@ namespace mailcore {
     class IMAPAsyncSession;
     class POPAsyncSession;
     class SMTPAsyncSession;
-    
+
     class MAILCORE_EXPORT AccountValidator : public Operation, public OperationCallback {
     public:
         AccountValidator();
@@ -36,7 +36,16 @@ namespace mailcore {
         virtual String * password();
         virtual void setOAuth2Token(String * OAuth2Token);
         virtual String * OAuth2Token();
-        
+
+        virtual void setImapEnabled(bool enabled);
+        virtual bool isImapEnabled();
+
+        virtual void setPopEnabled(bool enabled);
+        virtual bool isPopEnabled();
+
+        virtual void setSmtpEnabled(bool enabled);
+        virtual bool isSmtpEnabled();
+
         virtual void setImapServices(Array * imapServices);
         virtual Array * /* NetService */ imapServices();
         virtual void setSmtpServices(Array * smtpServices);
@@ -77,19 +86,10 @@ namespace mailcore {
         
         MailProvider * mProvider;
         
-        void resolveMX();
-        void resolveMXDone();
-        
-        void startCheckingHosts();
-        void checkNextHost();
-        void checkNextHostDone();
-
         //indexs for services being tested
         int mCurrentServiceIndex;
         int mCurrentServiceTested;
         
-        void init();
-
         Operation * mOperation;
         virtual void operationFinished(Operation * op);
         
@@ -99,6 +99,18 @@ namespace mailcore {
         IMAPAsyncSession * mImapSession;
         POPAsyncSession * mPopSession;
         SMTPAsyncSession * mSmtpSession;
+
+        bool mImapEnabled;
+        bool mPopEnabled;
+        bool mSmtpEnabled;
+
+        void init();
+        void setupServices();
+        void resolveMX();
+        void resolveMXDone();
+        void startCheckingHosts();
+        void checkNextHost();
+        void checkNextHostDone();
     };
 }
 

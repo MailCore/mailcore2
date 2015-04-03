@@ -60,6 +60,10 @@ void AccountValidator::init()
     mImapSession = NULL;
     mPopSession = NULL;
     mSmtpSession = NULL;
+
+    mImapEnabled = false;
+    mPopEnabled = false;
+    mSmtpEnabled = false;
 }
 
 AccountValidator::AccountValidator()
@@ -170,14 +174,26 @@ void AccountValidator::resolveMXDone()
     Array * mxRecords = mResolveMX->mxRecords();
     
     mc_foreacharray(String, mxRecord, mxRecords) {
-        MailProvider *provider = MailProvidersManager::sharedManager()->providerForMX(mxRecord);
-        if (provider){
+        MailProvider * provider = MailProvidersManager::sharedManager()->providerForMX(mxRecord);
+        if (provider != NULL){
             mProvider = provider;
+            MC_SAFE_RETAIN(mProvider);
+            setupServices();
             break;
         }
     }
     
     startCheckingHosts();
+}
+
+void AccountValidator::setupServices()
+{
+    mImapServices = mProvider->imapServices();
+    MC_SAFE_RETAIN(mImapServices);
+    mPopServices = mProvider->popServices();
+    MC_SAFE_RETAIN(mPopServices);
+    mSmtpServices = mProvider->smtpServices();
+    MC_SAFE_RETAIN(mSmtpServices);
 }
 
 void AccountValidator::startCheckingHosts()
@@ -217,7 +233,7 @@ void AccountValidator::startCheckingHosts()
 void AccountValidator::checkNextHost()
 {
     if (mCurrentServiceTested == SERVICE_IMAP) {
-        if (mCurrentServiceIndex < mImapServices->count()) {
+        if (mImapEnabled && (mCurrentServiceIndex < mImapServices->count())) {
             mImapSession = new IMAPAsyncSession();
             mImapSession->setUsername(mUsername);
             mImapSession->setPassword(mPassword);
@@ -236,6 +252,10 @@ void AccountValidator::checkNextHost()
             mOperation->setCallback(this);
             mOperation->start();
         }
+        else if (mImapEnabled && (mImapServices->count() > 0)) {
+            mImapServer = NULL;
+            callback()->operationFinished(this);
+        }
         else {
             mCurrentServiceTested ++;
             mCurrentServiceIndex = 0;
@@ -243,7 +263,7 @@ void AccountValidator::checkNextHost()
         }
     }
     else if (mCurrentServiceTested == SERVICE_POP){
-        if (mCurrentServiceIndex < mPopServices->count()) {
+        if (mPopEnabled && (mCurrentServiceIndex < mPopServices->count())) {
             mPopSession = new POPAsyncSession();
             mPopSession->setUsername(mUsername);
             mPopSession->setPassword(mPassword);
@@ -258,6 +278,10 @@ void AccountValidator::checkNextHost()
             mOperation->setCallback(this);
             mOperation->start();
         }
+        else if (mPopEnabled && (mPopServices->count() > 0)) {
+            mPopServer = NULL;
+            callback()->operationFinished(this);
+        }
         else {
             mCurrentServiceTested ++;
             mCurrentServiceIndex = 0;
@@ -265,7 +289,7 @@ void AccountValidator::checkNextHost()
         }
     }
     else if (mCurrentServiceTested == SERVICE_SMTP){
-        if (mCurrentServiceIndex < mSmtpServices->count()) {
+        if (mPopEnabled && (mCurrentServiceIndex < mSmtpServices->count())) {
             mSmtpSession = new SMTPAsyncSession();
             mSmtpSession->setUsername(mUsername);
             mSmtpSession->setPassword(mPassword);
@@ -283,6 +307,10 @@ void AccountValidator::checkNextHost()
             mOperation->retain();
             mOperation->setCallback(this);
             mOperation->start();
+        }
+        else if (mPopEnabled && (mSmtpServices->count() > 0)) {
+            mSmtpServer = NULL;
+            callback()->operationFinished(this);
         }
         else {
             mCurrentServiceTested ++;
@@ -318,6 +346,7 @@ void AccountValidator::checkNextHostDone()
     MC_SAFE_RELEASE(mOperation);
     
     if (error == ErrorNone) {
+        mCurrentServiceIndex = 0;
         mCurrentServiceTested ++;
     }
     else {
@@ -365,6 +394,37 @@ void AccountValidator::setOAuth2Token(String * OAuth2Token)
 String * AccountValidator::OAuth2Token()
 {
     return mOAuth2Token;
+}
+
+void AccountValidator::setImapEnabled(bool enabled)
+{
+    mImapEnabled = enabled;
+}
+
+bool AccountValidator::isImapEnabled()
+{
+    return mImapEnabled;
+}
+
+void AccountValidator::setPopEnabled(bool enabled)
+{
+    mPopEnabled = enabled;
+}
+
+bool AccountValidator::isPopEnabled()
+{
+    return mPopEnabled;
+}
+
+
+void AccountValidator::setSmtpEnabled(bool enabled)
+{
+    mSmtpEnabled = enabled;
+}
+
+bool AccountValidator::isSmtpEnabled()
+{
+    return mSmtpEnabled;
 }
 
 void AccountValidator::setImapServices(Array * imapServices)

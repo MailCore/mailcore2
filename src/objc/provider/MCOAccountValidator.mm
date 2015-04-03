@@ -19,11 +19,7 @@ typedef void (^CompletionType)(void);
 
 @interface MCOAccountValidator ()
 
-@property (nonatomic, retain) NSError * imapError;
-@property (nonatomic, retain) NSError * popError;
-@property (nonatomic, retain) NSError * smtpError;
-
-- (void) operationCompleted;
+- (void) _operationCompleted;
 
 @end
 
@@ -36,7 +32,7 @@ public:
     
     void operationFinished(mailcore::Operation * op)
     {
-        [mOperation operationCompleted];
+        [mOperation _operationCompleted];
     }
     
 private:
@@ -71,6 +67,9 @@ MCO_OBJC_SYNTHESIZE_STRING(setEmail, email)
 MCO_OBJC_SYNTHESIZE_STRING(setUsername, username)
 MCO_OBJC_SYNTHESIZE_STRING(setPassword, password)
 MCO_OBJC_SYNTHESIZE_STRING(setOAuth2Token, OAuth2Token)
+MCO_OBJC_SYNTHESIZE_BOOL(setImapEnabled, isImapEnabled)
+MCO_OBJC_SYNTHESIZE_BOOL(setPopEnabled, isPopEnabled)
+MCO_OBJC_SYNTHESIZE_BOOL(setSmtpEnabled, isSmtpEnabled)
 
 - (id) init
 {
@@ -106,7 +105,7 @@ MCO_OBJC_SYNTHESIZE_STRING(setOAuth2Token, OAuth2Token)
     [super cancel];
 }
 
-- (void) operationCompleted
+- (void) _operationCompleted
 {
     if (_completionBlock == NULL)
         return;
