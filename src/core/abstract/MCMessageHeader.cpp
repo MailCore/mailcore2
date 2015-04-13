@@ -985,6 +985,7 @@ Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool
     Array * toField;
     Array * ccField;
     bool containsSender;
+    Array * senderEmailsMailboxes;
     
     toField = NULL;
     ccField = NULL;
@@ -992,19 +993,23 @@ Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool
     hasTo = false;
     hasCc = false;
     addedAddresses = new Set();
-    
+    senderEmailsMailboxes = Array::array();
+
     containsSender = false;
     if (senderEmails != NULL) {
-      if (from() != NULL) {
-        if (senderEmails->containsObject(from()->mailbox()->lowercaseString())) {
-          containsSender = true;
+        mc_foreacharray(Address, address, senderEmails) {
+            senderEmailsMailboxes->addObject(address->mailbox()->lowercaseString());
         }
-      }
-      if (sender() != NULL) {
-        if (senderEmails->containsObject(sender()->mailbox()->lowercaseString())) {
-          containsSender = true;
+        if (from() != NULL) {
+            if (senderEmailsMailboxes->containsObject(from()->mailbox()->lowercaseString())) {
+                containsSender = true;
+            }
         }
-      }
+        if (sender() != NULL) {
+            if (senderEmailsMailboxes->containsObject(sender()->mailbox()->lowercaseString())) {
+                containsSender = true;
+            }
+        }
     }
     
     if (containsSender) {
@@ -1066,7 +1071,7 @@ Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool
         }
     }
     else {
-        addedAddresses->addObjectsFromArray(senderEmails);
+        addedAddresses->addObjectsFromArray(senderEmailsMailboxes);
         
         if (replyTo() != NULL && replyTo()->count() > 0) {
             hasTo = true;
@@ -1152,7 +1157,12 @@ MessageHeader * MessageHeader::replyHeader(bool replyAll, Array * addressesExclu
         subjectValue = MCSTR("Re: ");
     }
     else {
-        subjectValue = MCSTR("Re: ")->stringByAppendingString(subject());
+        if (!subject()->lowercaseString()->hasPrefix(MCSTR("re:"))) {
+            subjectValue = MCSTR("Re: ")->stringByAppendingString(subject());
+        }
+        else {
+            subjectValue = (String *) subject()->copy()->autorelease();
+        }
     }
     if (references() != NULL) {
         referencesValue = (Array *) (references()->copy());
