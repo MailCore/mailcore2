@@ -65,4 +65,8 @@
 
 #endif
 
+#ifndef DEPRECATED_ATTRIBUTE
+#define DEPRECATED_ATTRIBUTE        __attribute__((deprecated))
+#endif
+
 #endif

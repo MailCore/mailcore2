@@ -90,8 +90,14 @@
 /** The identity of the IMAP server. */
 @property (nonatomic, strong, readonly) MCOIMAPIdentity * serverIdentity;
 
-/** Display name of the Gmail user. It will be nil if it's not a Gmail server. */
-@property (nonatomic, copy, readonly) NSString * gmailUserDisplayName;
+/**
+ Display name of the Gmail user. It will be nil if it's not a Gmail server.
+
+ ** DEPRECATED **
+ This attribute has been broken by Gmail IMAP server. It's not longer available
+ as a correct display name.
+*/
+@property (nonatomic, copy, readonly) NSString * gmailUserDisplayName DEPRECATED_ATTRIBUTE;
 
 /**
  When set to YES, the session is allowed open to open several connections to the same folder.

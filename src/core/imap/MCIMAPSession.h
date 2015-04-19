@@ -177,7 +177,7 @@ namespace mailcore {
         virtual bool isCompressionEnabled();
         virtual bool allowsNewPermanentFlags(); 
       
-        virtual String * gmailUserDisplayName();
+        virtual String * gmailUserDisplayName() DEPRECATED_ATTRIBUTE;
         
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
