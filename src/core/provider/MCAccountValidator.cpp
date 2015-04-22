@@ -103,9 +103,11 @@ void AccountValidator::start()
     else if (mUsername == NULL){
         mUsername = mEmail;
     }
-    
-    mProvider = MailProvidersManager::sharedManager()->providerForEmail(mUsername);
-    
+
+    MC_SAFE_RELEASE(mProvider);
+    mProvider = MailProvidersManager::sharedManager()->providerForEmail(mEmail);
+    MC_SAFE_RETAIN(mProvider);
+
     if (mProvider == NULL) {
         resolveMX();
     }
@@ -172,13 +174,11 @@ void AccountValidator::resolveMX()
 void AccountValidator::resolveMXDone()
 {
     Array * mxRecords = mResolveMX->mxRecords();
-    
+
     mc_foreacharray(String, mxRecord, mxRecords) {
         MailProvider * provider = MailProvidersManager::sharedManager()->providerForMX(mxRecord);
         if (provider != NULL){
-            mProvider = provider;
-            MC_SAFE_RETAIN(mProvider);
-            setupServices();
+            MC_SAFE_REPLACE_RETAIN(MailProvider, mProvider, provider);
             break;
         }
     }
@@ -188,10 +188,15 @@ void AccountValidator::resolveMXDone()
 
 void AccountValidator::setupServices()
 {
+    MC_SAFE_RELEASE(mImapServices);
     mImapServices = mProvider->imapServices();
     MC_SAFE_RETAIN(mImapServices);
+
+    MC_SAFE_RELEASE(mPopServices);
     mPopServices = mProvider->popServices();
     MC_SAFE_RETAIN(mPopServices);
+
+    MC_SAFE_RELEASE(mSmtpServices);
     mSmtpServices = mProvider->smtpServices();
     MC_SAFE_RETAIN(mSmtpServices);
 }
@@ -199,18 +204,9 @@ void AccountValidator::setupServices()
 void AccountValidator::startCheckingHosts()
 {
     if (mProvider != NULL) {
-        mIdentifier = mProvider->identifier();
-        
-        if (mImapServices->count() == 0 and mProvider->imapServices()->count() > 0)
-            mImapServices = mProvider->imapServices();
-        
-        if (mPopServices->count() == 0 and mProvider->popServices()->count() > 0)
-            mPopServices = mProvider->popServices();
-        
-        if (mSmtpServices->count() == 0 and mProvider->smtpServices()->count() > 0)
-            mSmtpServices = mProvider->smtpServices();
+        setupServices();
     }
-    
+
     if (mImapServices->count() == 0)
         mImapError = ErrorNoValidServerFound;
     
@@ -289,7 +285,7 @@ void AccountValidator::checkNextHost()
         }
     }
     else if (mCurrentServiceTested == SERVICE_SMTP){
-        if (mPopEnabled && (mCurrentServiceIndex < mSmtpServices->count())) {
+        if (mSmtpEnabled && (mCurrentServiceIndex < mSmtpServices->count())) {
             mSmtpSession = new SMTPAsyncSession();
             mSmtpSession->setUsername(mUsername);
             mSmtpSession->setPassword(mPassword);
@@ -308,7 +304,7 @@ void AccountValidator::checkNextHost()
             mOperation->setCallback(this);
             mOperation->start();
         }
-        else if (mPopEnabled && (mSmtpServices->count() > 0)) {
+        else if (mSmtpEnabled && (mSmtpServices->count() > 0)) {
             mSmtpServer = NULL;
             callback()->operationFinished(this);
         }
