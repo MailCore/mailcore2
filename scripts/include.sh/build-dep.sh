@@ -7,7 +7,13 @@ build_git_ios()
   fi
 
   simarchs="i386 x86_64"
-  if xcodebuild -showsdks 2>/dev/null|grep iphoneos8.1 >/dev/null ; then
+  if xcodebuild -showsdks 2>/dev/null|grep iphoneos8.3 >/dev/null ; then
+    sdkversion=8.3
+    devicearchs="armv7 armv7s arm64"
+  elif xcodebuild -showsdks 2>/dev/null|grep iphoneos8.2 >/dev/null ; then
+    sdkversion=8.2
+    devicearchs="armv7 armv7s arm64"
+  elif xcodebuild -showsdks 2>/dev/null|grep iphoneos8.1 >/dev/null ; then
     sdkversion=8.1
     devicearchs="armv7 armv7s arm64"
   elif xcodebuild -showsdks 2>/dev/null|grep iphoneos8.0 >/dev/null ; then
