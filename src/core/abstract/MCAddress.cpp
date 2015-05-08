@@ -213,6 +213,9 @@ Array * Address::addressesWithNonEncodedRFC822String(String * string)
 String * Address::RFC822StringForAddresses(Array * addresses)
 {
     String * result = String::string();
+    if (addresses == NULL) {
+        return result;
+    }
     for(unsigned int i = 0 ; i < addresses->count() ; i ++) {
         Address * address = (Address *) addresses->objectAtIndex(i);
         if (i != 0) {
@@ -226,6 +229,9 @@ String * Address::RFC822StringForAddresses(Array * addresses)
 String * Address::nonEncodedRFC822StringForAddresses(Array * addresses)
 {
     String * result = String::string();
+    if (addresses == NULL) {
+        return result;
+    }
     for(unsigned int i = 0 ; i < addresses->count() ; i ++) {
         Address * address = (Address *) addresses->objectAtIndex(i);
         if (i != 0) {
