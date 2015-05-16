@@ -170,6 +170,13 @@ IMAPSearchExpression * IMAPSearchExpression::searchUIDs(IndexSet * uids)
     return (IMAPSearchExpression *) expr->autorelease();
 }
 
+IMAPSearchExpression * IMAPSearchExpression::searchNumbers(IndexSet * numbers)
+{
+	IMAPSearchExpression * expr = new IMAPSearchExpression();
+	expr->mKind = IMAPSearchKindNumbers;
+	MC_SAFE_REPLACE_COPY(IndexSet, expr->mUids, numbers);
+	return (IMAPSearchExpression *) expr->autorelease();
+}
 
 IMAPSearchExpression * IMAPSearchExpression::searchHeader(String * header, String * value)
 {
