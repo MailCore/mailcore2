@@ -2797,7 +2797,7 @@ static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpr
         }
         case IMAPSearchKindNumbers:
         {
-            return mailimap_search_key_new_set(setFromIndexSet(expression->uids()));
+            return mailimap_search_key_new_set(setFromIndexSet(expression->numbers()));
         }
         case IMAPSearchKindHeader:
         {

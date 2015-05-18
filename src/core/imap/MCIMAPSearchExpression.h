@@ -20,6 +20,7 @@ namespace mailcore {
         virtual uint64_t longNumber();
         virtual time_t date();
         virtual IndexSet * uids();
+        virtual IndexSet * numbers();
         
         
         virtual IMAPSearchExpression * leftExpression();
@@ -74,6 +75,7 @@ namespace mailcore {
         String * mValue;
         uint64_t mLongNumber;
         IndexSet * mUids;
+        IndexSet * mNumbers;
         IMAPSearchExpression * mLeftExpression;
         IMAPSearchExpression * mRightExpression;
         void init();
