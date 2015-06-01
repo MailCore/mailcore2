@@ -790,6 +790,8 @@
 		C6BD28A3170BD84F00A91AC1 /* libMailCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C64EA537169E772200778456 /* libMailCore.a */; };
 		C6BD28AB170BDB6B00A91AC1 /* MCOFramework.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6BD28A9170BDB6B00A91AC1 /* MCOFramework.mm */; };
 		C6BD28AC170BDEA200A91AC1 /* MailCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6BD288D170BD71100A91AC1 /* MailCore.framework */; };
+		C6BEC1AA1B1256BA00546519 /* MCHTMLCleaner.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD69016BE566E00DB18F1 /* MCHTMLCleaner.h */; };
+		C6BEC1AB1B1256C100546519 /* MCHTMLCleaner.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD69016BE566E00DB18F1 /* MCHTMLCleaner.h */; };
 		C6CCC5C716FFE5190077A5FC /* MCORange.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6CCC5C616FFE5190077A5FC /* MCORange.mm */; };
 		C6CCC5C916FFEA070077A5FC /* MCORange.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6CCC5C816FFE54F0077A5FC /* MCORange.h */; };
 		C6CCC5CA16FFEA090077A5FC /* MCOIndexSet.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6F5B9F216FEAC6C00D9DABD /* MCOIndexSet.h */; };
@@ -1004,6 +1006,7 @@
 			dstPath = include/MailCore;
 			dstSubfolderSpec = 16;
 			files = (
+				C6BEC1AB1B1256C100546519 /* MCHTMLCleaner.h in CopyFiles */,
 				27E91D601A80D3F4005A3244 /* MCMXRecordResolverOperation.h in CopyFiles */,
 				27478E861A76475F004AE621 /* MCOAccountValidator.h in CopyFiles */,
 				27478E871A76475F004AE621 /* MCAccountValidator.h in CopyFiles */,
@@ -1236,6 +1239,7 @@
 			dstPath = include/MailCore;
 			dstSubfolderSpec = 16;
 			files = (
+				C6BEC1AA1B1256BA00546519 /* MCHTMLCleaner.h in CopyFiles */,
 				276A65D01A7B7E7D008722C2 /* MCMXRecordResolverOperation.h in CopyFiles */,
 				27478E881A7647AC004AE621 /* MCOAccountValidator.h in CopyFiles */,
 				27478E891A7647AC004AE621 /* MCAccountValidator.h in CopyFiles */,

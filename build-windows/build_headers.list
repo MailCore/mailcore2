@@ -28,6 +28,7 @@ src\core\basetypes\MCLibetpanTypes.h
 src\core\basetypes\MCOperationCallback.h
 src\core\basetypes\MCIterator.h
 src\core\basetypes\MCConnectionLogger.h
+src\core\basetypes\MCHTMLCleaner.h
 src\core\abstract\MCAbstractMessagePart.h
 src\core\abstract\MCAbstractPart.h
 src\core\abstract\MCAbstractMultipart.h
@@ -72,6 +73,7 @@ src\core\provider\MCProvider.h
 src\core\provider\MCMailProvidersManager.h
 src\core\provider\MCMailProvider.h
 src\core\provider\MCNetService.h
+src\core\provider\MCAccountValidator.h
 src\async\MCAsync.h
 src\async\smtp\MCAsyncSMTP.h
 src\async\smtp\MCSMTPAsyncSession.h
@@ -199,3 +201,4 @@ src\objc\provider\MCOProvider.h
 src\objc\provider\MCONetService.h
 src\objc\provider\MCOMailProvider.h
 src\objc\provider\MCOMailProvidersManager.h
+src\objc\provider\MCOAccountValidator.h

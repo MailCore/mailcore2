@@ -13,6 +13,8 @@
 #include <MailCore/MCString.h>
 #include <MailCore/MCUtils.h>
 
+#ifdef __cplusplus
+
 namespace mailcore {
     
     class MAILCORE_EXPORT HTMLCleaner {
@@ -21,5 +23,7 @@ namespace mailcore {
     };
     
 }
+
+#endif
 
 #endif

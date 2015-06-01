@@ -17,10 +17,14 @@ NNTPFetchArticleOperation::NNTPFetchArticleOperation()
 {
     mMessageIndex = 0;
     mData = NULL;
+    mGroupName = NULL;
+    mMessageID = NULL;
 }
 
 NNTPFetchArticleOperation::~NNTPFetchArticleOperation()
 {
+    MC_SAFE_RELEASE(mMessageID);
+    MC_SAFE_RELEASE(mGroupName);
     MC_SAFE_RELEASE(mData);
 }
 

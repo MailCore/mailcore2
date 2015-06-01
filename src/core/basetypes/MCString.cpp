@@ -2515,6 +2515,102 @@ Data * String::decodedBase64Data()
     return result;
 }
 
+static int hexValue(const char * code) {
+    int value = 0;
+    const char * pch = code;
+    for (;;) {
+        int digit = *pch++;
+        if (digit >= '0' && digit <= '9') {
+            value += digit - '0';
+        }
+        else if (digit >= 'A' && digit <= 'F') {
+            value += digit - 'A' + 10;
+        }
+        else if (digit >= 'a' && digit <= 'f') {
+            value += digit - 'a' + 10;
+        }
+        else {
+            return -1;
+        }
+        if (pch == code + 2) {
+            return value;
+        }
+        value <<= 4;
+    }
+}
+
+String * String::urlDecodedString()
+{
+    Data * sourceData = dataUsingEncoding();
+    const char * source = sourceData->bytes();
+    char * start = (char *) malloc(sourceData->length() + 1);
+    char * dest = start;
+    unsigned int i = 0;
+    while (i < sourceData->length()) {
+        switch (source[i]) {
+            case '%':
+            {
+                if (i + 2 < sourceData->length()) {
+                    int value = hexValue(&source[i + 1]);
+                    if (value >= 0) {
+                        *(dest++) = value;
+                        i += 3;
+                    }
+                    else {
+                        *dest++ = '?';
+                        i ++;
+                    }
+                }
+                else {
+                    *dest++ = '?';
+                    i ++;
+                }
+                break;
+            }
+            default:
+            {
+                *dest++ = source[i];
+                i ++;
+                break;
+            }
+        }
+    }
+    * dest = 0;
+    String * result = String::stringWithUTF8Characters(start);
+    free(start);
+    return result;
+}
+
+static inline bool isValidUrlChar(char ch) {
+    return strchr("$&+,/:;=?@[]#!'()* ", ch) == NULL;
+}
+
+String * String::urlEncodedString()
+{
+    const char * digits = "0123456789ABCDEF";
+    Data * sourceData = dataUsingEncoding();
+    const char * source = sourceData->bytes();
+    char * start = (char *) malloc(sourceData->length() * 3 + 1);
+    char * dest = start;
+    unsigned int i = 0;
+    while (i < sourceData->length()) {
+        unsigned char ch = (unsigned char) source[i];
+        if (isValidUrlChar(ch)) {
+            *dest++ = ch;
+        } else {
+            *dest++ = '%';
+            *dest++ = digits[(ch >> 4) & 0x0F];
+            *dest++ = digits[       ch & 0x0F];
+        }
+        i ++;
+    }
+    *dest = 0;
+    String * result = String::stringWithUTF8Characters(dest);
+    free(start);
+
+    return result;
+}
+
 HashMap * String::serializable()
 {
     HashMap * result = Object::serializable();

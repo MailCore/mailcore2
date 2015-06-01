@@ -725,10 +725,10 @@ ErrorCode Data::writeToFile(String * filename)
         return ErrorFile;
     }
     size_t result = fwrite(bytes(), length(), 1, f);
+    fclose(f);
     if (result == 0) {
         return ErrorFile;
     }
-    fclose(f);
     return ErrorNone;
 }
 

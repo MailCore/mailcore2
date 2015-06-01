@@ -73,6 +73,7 @@ IMAPAsyncSession::IMAPAsyncSession()
     mDispatchQueue = dispatch_get_main_queue();
 #endif
     mGmailUserDisplayName = NULL;
+    mQueueRunning = false;
 }
 
 IMAPAsyncSession::~IMAPAsyncSession()

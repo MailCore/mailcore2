@@ -9,6 +9,6 @@ void MCAssertInternal(const char * filename, unsigned int line, int cond, const 
         return;
     }
     
-    fprintf(stderr, "%s:%i: assert %s\n", filename, line, condString);
+    fprintf(stderr, "%s:%u: assert %s\n", filename, line, condString);
     abort();
 }

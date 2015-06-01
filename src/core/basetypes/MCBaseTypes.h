@@ -26,5 +26,6 @@
 #include <MailCore/MCICUTypes.h>
 #include <MailCore/MCIterator.h>
 #include <MailCore/MCConnectionLogger.h>
+#include <MailCore/MCHTMLCleaner.h>
 
 #endif

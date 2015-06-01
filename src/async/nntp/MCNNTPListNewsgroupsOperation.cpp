@@ -15,6 +15,8 @@ using namespace mailcore;
 
 NNTPListNewsgroupsOperation::NNTPListNewsgroupsOperation()
 {
+    mListsSuscribed = false;
+    mGroups = NULL;
 }
 
 NNTPListNewsgroupsOperation::~NNTPListNewsgroupsOperation()
@@ -44,5 +46,6 @@ void NNTPListNewsgroupsOperation::main()
     } else {
         mGroups = session()->session()->listAllNewsgroups(&error);
     }
+    MC_SAFE_RETAIN(mGroups);
     setError(error);
 }

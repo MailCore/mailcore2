@@ -1578,7 +1578,6 @@ void IMAPSession::appendMessageWithCustomFlagsAndDate(String * folder, Data * me
     mProgressCallback = progressCallback;
     bodyProgress(0, messageData->length());
     
-    flag_list = NULL;
     flag_list = flags_to_lep(flags);
     if (customFlags != NULL) {
         for (unsigned int i = 0 ; i < customFlags->count() ; i ++) {

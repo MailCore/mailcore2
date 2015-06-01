@@ -13,10 +13,12 @@ using namespace mailcore;
 void NNTPGroupInfo::init()
 {
     mMessageCount = 0;
+    mName = NULL;
 }
 
 NNTPGroupInfo::NNTPGroupInfo()
 {
+    MC_SAFE_RELEASE(mName);
     init();
 }
 

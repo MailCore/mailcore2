@@ -53,9 +53,7 @@ static void logInternalv(FILE * file,
         return;
     
     while (1) {
-        const char * p = filename;
-        
-        p = strchr(filename, '/');
+        const char * p = strchr(filename, '/');
         if (p == NULL) {
             break;
         }
@@ -80,7 +78,7 @@ static void logInternalv(FILE * file,
 #else
     if (0) {
 #endif
-        fprintf(file, "[%i:main] %s:%i: ", sPid, filename, line);
+        fprintf(file, "[%i:main] %s:%u: ", sPid, filename, line);
     }
     else {
         unsigned long threadValue;
@@ -91,7 +89,7 @@ static void logInternalv(FILE * file,
 #else
         threadValue = (unsigned long) thread_id;
 #endif
-        fprintf(file, "[%i:%lx] %s:%i: ", sPid, threadValue, filename, line);
+        fprintf(file, "[%i:%lx] %s:%u: ", sPid, threadValue, filename, line);
     }
     vfprintf(file, format, argp);
     fprintf(file, "\n");

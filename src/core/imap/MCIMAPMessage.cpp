@@ -26,6 +26,7 @@ void IMAPMessage::init()
     mModSeqValue = 0;
     mGmailThreadID = 0;
     mGmailMessageID = 0;
+    mSize = 0;
 }
 
 IMAPMessage::IMAPMessage()

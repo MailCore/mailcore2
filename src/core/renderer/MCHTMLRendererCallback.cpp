@@ -289,3 +289,7 @@ bool HTMLRendererTemplateCallback::shouldShowPart(AbstractPart * part)
 {
     return true;
 }
+
+void HTMLRendererTemplateCallback::setMixedTextAndAttachmentsModeEnabled(bool enabled)
+{
+}
