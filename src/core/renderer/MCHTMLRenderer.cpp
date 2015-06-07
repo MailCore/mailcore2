@@ -332,7 +332,8 @@ static String * htmlForAbstractSinglePart(AbstractPart * part, htmlRendererConte
             }
             else if (part->className()->isEqual(MCSTR("mailcore::Attachment"))) {
                 data = ((Attachment *) part)->data();
-                MCAssert(data != NULL);
+                // It may be NULL when mailcore::MessageParser::attachments() is invoked when
+                // when mailcore::MessageParser has been serialized/unserialized.
             }
             if (data == NULL)
                 return NULL;
