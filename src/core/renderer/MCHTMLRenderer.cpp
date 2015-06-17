@@ -321,6 +321,7 @@ static String * htmlForAbstractSinglePart(AbstractPart * part, htmlRendererConte
             
             String * str = data->stringWithDetectedCharset(charset, false);
             str = str->htmlMessageContent();
+            str = context->htmlCallback->filterHTMLForPart(str);
             context->firstRendered = true;
             return str;
         }
