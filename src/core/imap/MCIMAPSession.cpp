@@ -1097,14 +1097,17 @@ IMAPFolderStatus * IMAPSession::folderStatus(String * folder, ErrorCode * pError
         mShouldDisconnect = true;
         * pError = ErrorConnection;
         MCLog("status error : %s %i", MCUTF8DESC(this), * pError);
+        mailimap_status_att_list_free(status_att_list);
         return fs;
     }
     else if (r == MAILIMAP_ERROR_PARSE) {
         * pError = ErrorParse;
+        mailimap_status_att_list_free(status_att_list);
         return fs;
     }
     else if (hasError(r)) {
         * pError = ErrorNonExistantFolder;
+        mailimap_status_att_list_free(status_att_list);
         return fs;
     }
     
