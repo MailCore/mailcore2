@@ -704,6 +704,11 @@ String * MessageBuilder::boundaryPrefix()
 
 struct mailmime * MessageBuilder::mimeAndFilterBccAndForEncryption(bool filterBcc, bool forEncryption)
 {
+  return mimeForDraftAndFilterBccAndForEncryption(false, filterBcc, forEncryption);
+}
+
+struct mailmime * MessageBuilder::mimeForDraftAndFilterBccAndForEncryption(bool forDraft, bool filterBcc, bool forEncryption)
+{
     struct mailmime * htmlPart;
     struct mailmime * textPart;
     struct mailmime * altPart;
@@ -753,7 +758,7 @@ struct mailmime * MessageBuilder::mimeAndFilterBccAndForEncryption(bool filterBc
     unsigned int i;
     struct mailmime * mime;
     
-    fields = header()->createIMFFieldsAndFilterBcc(filterBcc);
+    fields = header()->createIMFFieldsForDraftAndFilterBcc(forDraft, filterBcc);
     
     mime = mailmime_new_message_data(NULL);
     mailmime_set_imf_fields(mime, fields);
@@ -785,13 +790,18 @@ struct mailmime * MessageBuilder::mimeAndFilterBccAndForEncryption(bool filterBc
 
 Data * MessageBuilder::dataAndFilterBccAndForEncryption(bool filterBcc, bool forEncryption)
 {
+  return dataForDraftAndFilterBccAndForEncryption(false, filterBcc, forEncryption);
+}
+
+Data * MessageBuilder::dataForDraftAndFilterBccAndForEncryption(bool forDraft, bool filterBcc, bool forEncryption)
+{
     Data * data;
     MMAPString * str;
     int col;
     
     str = mmap_string_new("");
     col = 0;
-    struct mailmime * mime = mimeAndFilterBccAndForEncryption(filterBcc, forEncryption);
+    struct mailmime * mime = mimeForDraftAndFilterBccAndForEncryption(forDraft, filterBcc, forEncryption);
     mailmime_write_mem(str, &col, mime);
     data = Data::dataWithBytes(str->str, (unsigned int) str->len);
     mmap_string_free(str);
@@ -808,6 +818,11 @@ Data * MessageBuilder::data()
 Data * MessageBuilder::dataForEncryption()
 {
     return dataAndFilterBccAndForEncryption(false, true);
+}
+
+Data * MessageBuilder::dataForDraft()
+{
+  return dataForDraftAndFilterBccAndForEncryption(true, false, false);
 }
 
 String * MessageBuilder::htmlRendering(HTMLRendererTemplateCallback * htmlCallback)

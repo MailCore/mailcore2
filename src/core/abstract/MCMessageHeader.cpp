@@ -678,6 +678,11 @@ static clist * msg_id_from_string_array(Array * msgids)
 
 struct mailimf_fields * MessageHeader::createIMFFieldsAndFilterBcc(bool filterBcc)
 {
+  return createIMFFieldsForDraftAndFilterBcc(false, filterBcc);
+}
+
+struct mailimf_fields * MessageHeader::createIMFFieldsForDraftAndFilterBcc(bool forDraft, bool filterBcc)
+{
     struct mailimf_date_time * imfDate;
     char * imfMsgid;
     char * imfSubject;
@@ -722,7 +727,7 @@ struct mailimf_fields * MessageHeader::createIMFFieldsAndFilterBcc(bool filterBc
         }
     }
     
-    if ((imfTo == NULL) && (imfCc == NULL) && (imfBcc == NULL)) {
+    if (!forDraft && (imfTo == NULL) && (imfCc == NULL) && (imfBcc == NULL)) {
         imfTo = mailimf_address_list_new_empty();
         mailimf_address_list_add_parse(imfTo, (char *) "Undisclosed recipients:;");
     }

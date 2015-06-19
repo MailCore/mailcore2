@@ -71,6 +71,11 @@ MCO_OBJC_SYNTHESIZE_STRING(setBoundaryPrefix, boundaryPrefix)
     return MCO_OBJC_BRIDGE_GET(dataForEncryption);
 }
 
+- (NSData *) dataForDraft
+{
+    return MCO_OBJC_BRIDGE_GET(dataForDraft);
+}
+
 - (NSString *) htmlRenderingWithDelegate:(id <MCOHTMLRendererDelegate>)delegate
 {
     MCOAbstractMessageRendererCallback * htmlRenderCallback = new MCOAbstractMessageRendererCallback(self, delegate, NULL);

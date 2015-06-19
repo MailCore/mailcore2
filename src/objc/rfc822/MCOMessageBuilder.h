@@ -61,6 +61,9 @@
 /** RFC 822 formatted message for encryption.*/
 - (NSData *) dataForEncryption;
 
+/** RFC 822 formatted message for draft.*/
+- (NSData *) dataForDraft;
+
 /**
  Returns an OpenPGP signed message with a given signature.
  The signature needs to be computed on the data returned by -dataForEncryption
