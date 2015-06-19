@@ -82,6 +82,7 @@ namespace mailcore {
         virtual void importIMAPInternalDate(struct mailimap_date_time * date);
         
         virtual struct mailimf_fields * createIMFFieldsAndFilterBcc(bool filterBcc);
+        virtual struct mailimf_fields * createIMFFieldsForDraftAndFilterBcc(bool forDraft, bool filterBcc);
         virtual void importIMFFields(struct mailimf_fields * fields);
         
     private:

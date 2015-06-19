@@ -40,6 +40,7 @@ namespace mailcore {
         
         virtual Data * data();
         virtual Data * dataForEncryption();
+        virtual Data * dataForDraft();
         
         virtual String * htmlRendering(HTMLRendererTemplateCallback * htmlCallback = NULL);
         virtual String * htmlBodyRendering();
@@ -68,7 +69,9 @@ namespace mailcore {
         String * mBoundaryPrefix;
         void init();
         Data * dataAndFilterBccAndForEncryption(bool filterBcc, bool forEncryption);
+        Data * dataForDraftAndFilterBccAndForEncryption(bool forDraft, bool filterBcc, bool forEncryption);
         struct mailmime * mimeAndFilterBccAndForEncryption(bool filterBcc, bool forEncryption);
+        struct mailmime * mimeForDraftAndFilterBccAndForEncryption(bool forDraft, bool filterBcc, bool forEncryption);
         Array * mBoundaries;
         unsigned int mCurrentBoundaryIndex;
     };
