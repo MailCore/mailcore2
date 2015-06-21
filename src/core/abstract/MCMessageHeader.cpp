@@ -721,12 +721,7 @@ struct mailimf_fields * MessageHeader::createIMFFieldsAndFilterBcc(bool filterBc
             imfSubject = strdup(data->bytes());
         }
     }
-    
-    if ((imfTo == NULL) && (imfCc == NULL) && (imfBcc == NULL)) {
-        imfTo = mailimf_address_list_new_empty();
-        mailimf_address_list_add_parse(imfTo, (char *) "Undisclosed recipients:;");
-    }
-    
+
     fields = mailimf_fields_new_with_data_all(imfDate,
         imfFrom,
         NULL /* sender */,

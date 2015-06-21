@@ -703,7 +703,8 @@ Data * SMTPSession::dataWithFilteredBcc(Data * data)
     
     struct mailimf_fields * fields = msg->msg_fields;
     int col = 0;
-    
+
+    int hasRecipient = 0;
     str = mmap_string_new("");
     for(clistiter * cur = clist_begin(fields->fld_list) ; cur != NULL ; cur = clist_next(cur)) {
         struct mailimf_field * field = (struct mailimf_field *) clist_content(cur);
@@ -712,6 +713,17 @@ Data * SMTPSession::dataWithFilteredBcc(Data * data)
             clist_delete(fields->fld_list, cur);
             break;
         }
+        else if ((field->fld_type == MAILIMF_FIELD_TO) || (field->fld_type == MAILIMF_FIELD_CC) || (field->fld_type == MAILIMF_FIELD_BCC)) {
+            hasRecipient = 1;
+        }
+    }
+    if (!hasRecipient) {
+        struct mailimf_address_list * imfTo;
+        imfTo = mailimf_address_list_new_empty();
+        mailimf_address_list_add_parse(imfTo, (char *) "Undisclosed recipients:;");
+        struct mailimf_to * toField = mailimf_to_new(imfTo);
+        struct mailimf_field * field = mailimf_field_new(MAILIMF_FIELD_TO, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, toField, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+        mailimf_fields_add(fields, field);
     }
     mailimf_fields_write_mem(str, &col, fields);
     mmap_string_append(str, "\n");
