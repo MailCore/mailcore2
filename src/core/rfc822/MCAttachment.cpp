@@ -112,10 +112,7 @@ String * Attachment::mimeTypeForFilename(String * filename)
     if (result != NULL)
         return result;
     
-    if (ext->isEqual(MCSTR("jpg"))) {
-        return MCSTR("image/jpeg");
-    }
-    else if (ext->isEqual(MCSTR("jpeg"))) {
+    if (ext->isEqual(MCSTR("jpeg")) || ext->isEqual(MCSTR("jpg"))) {
         return MCSTR("image/jpeg");
     }
     else if (ext->isEqual(MCSTR("png"))) {
@@ -129,6 +126,9 @@ String * Attachment::mimeTypeForFilename(String * filename)
     }
     else if (ext->isEqual(MCSTR("txt"))) {
         return MCSTR("text/plain");
+    }
+    else if (ext->isEqual(MCSTR("tiff")) || ext->isEqual(MCSTR("tif"))) {
+        return MCSTR("image/tiff");
     }
     return NULL;
 }
