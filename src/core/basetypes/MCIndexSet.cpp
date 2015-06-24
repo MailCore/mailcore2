@@ -435,3 +435,52 @@ INITIALIZE(IndexSet)
 {
     Object::registerObjectConstructor("mailcore::IndexSet", &createObject);
 }
+
+/*
+ 
+Unit test:
+
+String * uidsStr = MCSTR("129597-129662,129664,129667-129671,129673-129674,129678-129694,129696-129804");
+String * cachedUidsStr = MCSTR("129755-129804");
+IndexSet * uids = NULL;
+IndexSet * cachedUids = NULL;
+
+{
+    IndexSet * result = new IndexSet();
+    Array * array = uidsStr->componentsSeparatedByString(MCSTR(","));
+    mc_foreacharray(String, rangeStr, array) {
+        Array * rangeArray = rangeStr->componentsSeparatedByString(MCSTR("-"));
+        if (rangeArray->count() == 2) {
+            int left = ((String *) rangeArray->objectAtIndex(0))->intValue();
+            int right = ((String *) rangeArray->objectAtIndex(1))->intValue();
+            int length = right - left;
+            result->addRange(RangeMake(left, length));
+        }
+        else {
+            result->addIndex(rangeStr->intValue());
+        }
+    }
+    //fprintf(stderr, "%s\n", MCUTF8DESC(result));
+    uids = result;
+}
+{
+    IndexSet * result = new IndexSet();
+    Array * array = cachedUidsStr->componentsSeparatedByString(MCSTR(","));
+    mc_foreacharray(String, rangeStr, array) {
+        Array * rangeArray = rangeStr->componentsSeparatedByString(MCSTR("-"));
+        if (rangeArray->count() == 2) {
+            int left = ((String *) rangeArray->objectAtIndex(0))->intValue();
+            int right = ((String *) rangeArray->objectAtIndex(1))->intValue();
+            int length = right - left;
+            result->addRange(RangeMake(left, length));
+        }
+        else {
+            result->addIndex(rangeStr->intValue());
+        }
+    }
+    cachedUids = result;
+}
+fprintf(stderr, "|%s|\n", MCUTF8DESC(uids));
+uids->removeIndexSet(cachedUids);
+fprintf(stderr, "|%s|\n", MCUTF8DESC(uids));
+*/
