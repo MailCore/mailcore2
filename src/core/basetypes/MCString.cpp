@@ -2244,10 +2244,29 @@ Array * String::componentsSeparatedByString(String * separator)
     p = mUnicodeChars;
     while (1) {
         UChar * location;
+#if 0
         location = u_strstr(p, separator->unicodeCharacters());
         if (location == NULL) {
             break;
         }
+#else
+        int remaining = length() - (int) (p - mUnicodeChars);
+        location = NULL;
+        while (location == NULL) {
+            location = (UChar *) memmem(p, remaining * sizeof(UChar), separator->unicodeCharacters(), separator->length() * sizeof(UChar));
+            if (location == NULL) {
+                break;
+            }
+            // If it's odd, it's an invalid location. Keep looking for the pattern.
+            if (((char *) location - (char *) p) % sizeof(UChar) != 0) {
+                p = (UChar *) (((char *) location) + 1);
+                location = NULL;
+            }
+        }
+        if (location == NULL) {
+            break;
+        }
+#endif
         
         unsigned int length = (unsigned int) (location - p);
         String * value = new String(p, length);
