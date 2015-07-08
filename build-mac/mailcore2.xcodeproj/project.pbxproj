@@ -157,6 +157,9 @@
 		943F1A9E17D96C5500F0C798 /* MCIMAPConnectOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 943F1A9817D964F600F0C798 /* MCIMAPConnectOperation.cpp */; };
 		943F1AA017D9736100F0C798 /* MCIMAPConnectOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 943F1A9917D964F600F0C798 /* MCIMAPConnectOperation.h */; };
 		943F1AA117D973A800F0C798 /* MCIMAPConnectOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 943F1A9917D964F600F0C798 /* MCIMAPConnectOperation.h */; };
+		95FA7C7C1B4DA8E300E7745C /* MCZipMac.h in Headers */ = {isa = PBXBuildFile; fileRef = 95FA7C7B1B4DA8E300E7745C /* MCZipMac.h */; };
+		95FA7C7E1B4DA90500E7745C /* MCZipMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 95FA7C7D1B4DA90500E7745C /* MCZipMac.mm */; };
+		95FA7C7F1B4DA90500E7745C /* MCZipMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 95FA7C7D1B4DA90500E7745C /* MCZipMac.mm */; };
 		9E774D891767C7F60065EB9B /* MCIMAPFolderStatus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E774D881767C7F60065EB9B /* MCIMAPFolderStatus.cpp */; };
 		9E774D8A1767C7F60065EB9B /* MCIMAPFolderStatus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E774D881767C7F60065EB9B /* MCIMAPFolderStatus.cpp */; };
 		9E774D8B1767CD3C0065EB9B /* MCIMAPFolderStatus.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9E774D871767C54E0065EB9B /* MCIMAPFolderStatus.h */; };
@@ -1546,6 +1549,8 @@
 		8B0095CB1A00DDE700F84BC0 /* MCOSMTPLoginOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOSMTPLoginOperation.mm; sourceTree = "<group>"; };
 		943F1A9817D964F600F0C798 /* MCIMAPConnectOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPConnectOperation.cpp; sourceTree = "<group>"; };
 		943F1A9917D964F600F0C798 /* MCIMAPConnectOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPConnectOperation.h; sourceTree = "<group>"; };
+		95FA7C7B1B4DA8E300E7745C /* MCZipMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCZipMac.h; sourceTree = "<group>"; };
+		95FA7C7D1B4DA90500E7745C /* MCZipMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCZipMac.mm; sourceTree = "<group>"; };
 		9E774D871767C54E0065EB9B /* MCIMAPFolderStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPFolderStatus.h; sourceTree = "<group>"; };
 		9E774D881767C7F60065EB9B /* MCIMAPFolderStatus.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPFolderStatus.cpp; sourceTree = "<group>"; };
 		9EF9AB06175F2EC60027FA3B /* MCOIMAPFolderStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPFolderStatus.h; sourceTree = "<group>"; };
@@ -2949,6 +2954,8 @@
 			children = (
 				C6E665AA1796500B0063F2CF /* MCZip.cpp */,
 				C6E665AB1796500B0063F2CF /* MCZip.h */,
+				95FA7C7D1B4DA90500E7745C /* MCZipMac.mm */,
+				95FA7C7B1B4DA8E300E7745C /* MCZipMac.h */,
 				C6E665AC1796500B0063F2CF /* MiniZip */,
 			);
 			path = zip;
@@ -3096,6 +3103,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95FA7C7C1B4DA8E300E7745C /* MCZipMac.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3644,6 +3652,7 @@
 				C6CF62B9175324CE006398B9 /* MCOMailProvider.mm in Sources */,
 				C6CF62BB175324CE006398B9 /* MCOMailProvidersManager.mm in Sources */,
 				84D7378F199C02A8005124E5 /* MCONNTPDisconnectOperation.mm in Sources */,
+				95FA7C7E1B4DA90500E7745C /* MCZipMac.mm in Sources */,
 				C6CF62BD175324CE006398B9 /* MCONetService.mm in Sources */,
 				C6EFFBCC1833334900CFF656 /* MCOIMAPMultiDisconnectOperation.mm in Sources */,
 				C6CF62C6175324F0006398B9 /* MCMailProvider.cpp in Sources */,
@@ -3915,6 +3924,7 @@
 				C668E2CD1735CB8900A2BB47 /* MCAutoreleasePoolMac.mm in Sources */,
 				C6CF62BA175324CE006398B9 /* MCOMailProvider.mm in Sources */,
 				C6CF62BC175324CE006398B9 /* MCOMailProvidersManager.mm in Sources */,
+				95FA7C7F1B4DA90500E7745C /* MCZipMac.mm in Sources */,
 				84D73790199C02A8005124E5 /* MCONNTPDisconnectOperation.mm in Sources */,
 				C6CF62BE175324CE006398B9 /* MCONetService.mm in Sources */,
 				C6EFFBCD1833334900CFF656 /* MCOIMAPMultiDisconnectOperation.mm in Sources */,

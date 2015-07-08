@@ -1,6 +1,8 @@
 #include "MCWin32.h" // Should be included first.
 
 #include "MCZip.h"
+#import "MCZipMac.h"
+#include <stdio.h>
 
 #include "zip.h"
 #include "unzip.h"
@@ -168,9 +170,14 @@ static ErrorCode addFile(zipFile file, String * path)
 
 String * mailcore::CreateTemporaryZipFileFromFolder(String * folder)
 {
-    char tempdir[] = "/tmp/mailcore2-XXXXXX";
+    string * strtempdir = TemporaryDirectoryForZip();
+    char * tempdir = new char[strtempdir->length() + 1];
+    strcpy(tempdir, strtempdir->c_str());
+
     char * result = mkdtemp(tempdir);
     if (result == NULL) {
+        delete strtempdir;
+        delete [] tempdir;
         return NULL;
     }
     
@@ -181,8 +188,13 @@ String * mailcore::CreateTemporaryZipFileFromFolder(String * folder)
     if (err != ErrorNone) {
         unlink(path->fileSystemRepresentation());
         unlink(tempdir);
+        delete strtempdir;
+        delete [] tempdir;
         return NULL;
     }
+
+    delete strtempdir;
+    delete [] tempdir;
     
     return path;
 }
