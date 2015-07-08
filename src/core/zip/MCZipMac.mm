@@ -7,11 +7,25 @@
 //
 
 #import "MCZipMac.h"
+#import "NSObject+MCO.h"
 #import <Foundation/Foundation.h>
 
-string * mailcore::TemporaryDirectoryForZip()
+using namespace mailcore;
+
+String * mailcore::TemporaryDirectoryForZip()
 {
-    string * result = new std::string([NSTemporaryDirectory() UTF8String]);
-    (*result) += "mailcore2-XXXXXX";
-    return result;
+    NSError * error;
+    NSString * newDirString;
+    NSURL * directoryURL;
+    
+    error = nil;
+    newDirString = [NSTemporaryDirectory() stringByAppendingPathComponent:[[NSProcessInfo processInfo] globallyUniqueString]];
+    directoryURL = [NSURL fileURLWithPath:newDirString isDirectory:YES];
+    
+    [[NSFileManager defaultManager] createDirectoryAtURL:directoryURL withIntermediateDirectories:YES attributes:nil error:&error];
+    
+    if (error != nil)
+        return nil;
+    
+    return MCO_FROM_OBJC(String, newDirString);
 }

@@ -9,12 +9,11 @@
 #ifndef mailcore2_MCZipMac_h
 #define mailcore2_MCZipMac_h
 
-#include <string>
-using namespace std;
+#include <MailCore/MCBaseTypes.h>
 
 namespace mailcore {
     
-    string * TemporaryDirectoryForZip();
+    String * TemporaryDirectoryForZip();
     
 };
 
