@@ -1,7 +1,7 @@
 #include "MCWin32.h" // Should be included first.
 
 #include "MCZip.h"
-#if APPLE
+#if __APPLE__
 #import "MCZipMac.h"
 #endif
 
@@ -169,29 +169,32 @@ static ErrorCode addFile(zipFile file, String * path)
     return ErrorNone;
 }
 
-String * mailcore::CreateTemporaryZipFileFromFolder(String * folder)
+#ifndef __APPLE__
+String * mailcore::TemporaryDirectoryForZip()
 {
-    char * result;
-    
-#if APPLE
-    char * tempdir = TemporaryDirectoryForZip();
-    result = tempdir;
-#else
     char tempdir[] = "/tmp/mailcore2-XXXXXX";
-    result = mkdtemp(tempdir);
-#endif
-    
+    char * result = mkdtemp(tempdir);
     if (result == NULL) {
         return NULL;
     }
+    return String::stringWithFileSystemRepresentation(tempdir);
+}
+#endif
+
+String * mailcore::CreateTemporaryZipFileFromFolder(String * folder)
+{
+    String * tempDirectoryString = TemporaryDirectoryForZip();
     
-    String * tempDirectoryString = String::stringWithFileSystemRepresentation(tempdir);
+    if (tempDirectoryString == NULL) {
+        return NULL;
+    }
+    
     String * path = tempDirectoryString->stringByAppendingPathComponent(folder->lastPathComponent())->stringByAppendingUTF8Format(".zip");
     
     ErrorCode err = CreateZipFileFromFolder(path, folder);
     if (err != ErrorNone) {
         unlink(path->fileSystemRepresentation());
-        unlink(tempdir);
+        unlink(tempDirectoryString->UTF8Characters());
         return NULL;
     }
     
