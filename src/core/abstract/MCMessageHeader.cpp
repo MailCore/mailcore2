@@ -1019,12 +1019,14 @@ Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool
                 }
                 if ((from() != NULL) && address->mailbox()->isEqualCaseInsensitive(from()->mailbox())) {
                     recipient->addObjectsFromArray(replyTo());
-                    for(unsigned int j = 0 ; j < replyTo()->count() ; j ++) {
-                        Address * rtAddress = (Address *) replyTo()->objectAtIndex(j);
-                        if (addedAddresses->containsObject(rtAddress->mailbox()->lowercaseString())) {
-                            continue;
+                    if (replyTo() != NULL) {
+                        for(unsigned int j = 0 ; j < replyTo()->count() ; j ++) {
+                            Address * rtAddress = (Address *) replyTo()->objectAtIndex(j);
+                            if (addedAddresses->containsObject(rtAddress->mailbox()->lowercaseString())) {
+                                continue;
+                            }
+                            addedAddresses->addObject(rtAddress->mailbox()->lowercaseString());
                         }
-                        addedAddresses->addObject(rtAddress->mailbox()->lowercaseString());
                     }
                 }
                 else {
