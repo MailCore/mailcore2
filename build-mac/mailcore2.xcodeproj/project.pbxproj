@@ -178,6 +178,8 @@
 		BD6272981A13FF2A00129AA8 /* test-all-mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = BD6272961A13FF2A00129AA8 /* test-all-mac.mm */; };
 		BD6272991A13FF2A00129AA8 /* test-all-mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = BD6272961A13FF2A00129AA8 /* test-all-mac.mm */; };
 		BD63713B177DFF080094121B /* MCLibetpan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BD637139177DFF080094121B /* MCLibetpan.cpp */; };
+		BD7C0F461B545CE2003337DF /* MCZipMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = BD7C0F451B545CE2003337DF /* MCZipMac.mm */; };
+		BD7C0F471B545CE2003337DF /* MCZipMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = BD7C0F451B545CE2003337DF /* MCZipMac.mm */; };
 		BDCD7C5B1A5B1C2C0001DCC3 /* MCErrorMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C591A5B1C2C0001DCC3 /* MCErrorMessage.cpp */; };
 		BDCD7C5C1A5B1C2C0001DCC3 /* MCErrorMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C591A5B1C2C0001DCC3 /* MCErrorMessage.cpp */; };
 		BDCD7CC31A70771B0001DCC3 /* csdetect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C6A1A70771B0001DCC3 /* csdetect.cpp */; };
@@ -1563,6 +1565,8 @@
 		BD62729C1A158DA900129AA8 /* MCWin32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCWin32.h; sourceTree = "<group>"; };
 		BD637139177DFF080094121B /* MCLibetpan.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCLibetpan.cpp; sourceTree = "<group>"; };
 		BD63713A177DFF080094121B /* MCLibetpan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCLibetpan.h; sourceTree = "<group>"; };
+		BD7C0F451B545CE2003337DF /* MCZipMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCZipMac.mm; sourceTree = "<group>"; };
+		BD7C0F481B545D0B003337DF /* MCZipPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCZipPrivate.h; sourceTree = "<group>"; };
 		BDCD7C591A5B1C2C0001DCC3 /* MCErrorMessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCErrorMessage.cpp; sourceTree = "<group>"; };
 		BDCD7C5A1A5B1C2C0001DCC3 /* MCErrorMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCErrorMessage.h; sourceTree = "<group>"; };
 		BDCD7C6A1A70771B0001DCC3 /* csdetect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = csdetect.cpp; sourceTree = "<group>"; };
@@ -2947,6 +2951,8 @@
 		C6E665A91796500B0063F2CF /* zip */ = {
 			isa = PBXGroup;
 			children = (
+				BD7C0F481B545D0B003337DF /* MCZipPrivate.h */,
+				BD7C0F451B545CE2003337DF /* MCZipMac.mm */,
 				C6E665AA1796500B0063F2CF /* MCZip.cpp */,
 				C6E665AB1796500B0063F2CF /* MCZip.h */,
 				C6E665AC1796500B0063F2CF /* MiniZip */,
@@ -3644,6 +3650,7 @@
 				C6CF62B9175324CE006398B9 /* MCOMailProvider.mm in Sources */,
 				C6CF62BB175324CE006398B9 /* MCOMailProvidersManager.mm in Sources */,
 				84D7378F199C02A8005124E5 /* MCONNTPDisconnectOperation.mm in Sources */,
+				BD7C0F461B545CE2003337DF /* MCZipMac.mm in Sources */,
 				C6CF62BD175324CE006398B9 /* MCONetService.mm in Sources */,
 				C6EFFBCC1833334900CFF656 /* MCOIMAPMultiDisconnectOperation.mm in Sources */,
 				C6CF62C6175324F0006398B9 /* MCMailProvider.cpp in Sources */,
@@ -3915,6 +3922,7 @@
 				C668E2CD1735CB8900A2BB47 /* MCAutoreleasePoolMac.mm in Sources */,
 				C6CF62BA175324CE006398B9 /* MCOMailProvider.mm in Sources */,
 				C6CF62BC175324CE006398B9 /* MCOMailProvidersManager.mm in Sources */,
+				BD7C0F471B545CE2003337DF /* MCZipMac.mm in Sources */,
 				84D73790199C02A8005124E5 /* MCONNTPDisconnectOperation.mm in Sources */,
 				C6CF62BE175324CE006398B9 /* MCONetService.mm in Sources */,
 				C6EFFBCD1833334900CFF656 /* MCOIMAPMultiDisconnectOperation.mm in Sources */,
