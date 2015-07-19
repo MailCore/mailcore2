@@ -19,6 +19,7 @@
 
 @class MCOMessageParser;
 
+NS_ASSUME_NONNULL_BEGIN
 @interface MCOIMAPFetchParsedContentOperation : MCOIMAPBaseOperation
 
 /**
@@ -34,11 +35,12 @@
  - On success `error` will be nil and `parser` will contain the requested message
 
  - On failure, `error` will be set with `MCOErrorDomain` as domain and an
-   error code available in `MCOConstants.h`, `data` will be nil
+   error code available in `MCOConstants.h`, `parser` will be nil
 */
 
-- (void) start:(void (^)(NSError * error, MCOMessageParser * parser))completionBlock;
+- (void) start:(void (^)(NSError * __nullable error, MCOMessageParser * __nullable parser))completionBlock;
 
 @end
+NS_ASSUME_NONNULL_END
 
 #endif

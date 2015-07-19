@@ -116,7 +116,7 @@
  Returns an operation that will perform a login.
  
  MCOSMTPOperation * op = [session loginOperation];
- [op start:^(NSError * error) {
+ [op start:^(NSError * __nullable error) {
  ...
  }];
  */
@@ -130,7 +130,7 @@
  Generate RFC 822 data using MCOMessageBuilder
 
      MCOSMTPOperation * op = [session sendOperationWithData:rfc822Data];
-     [op start:^(NSError * error) {
+     [op start:^(NSError * __nullable error) {
           ...
      }];
 */
@@ -146,7 +146,7 @@
  MCOSMTPOperation * op = [session sendOperationWithData:rfc822Data
                                                   from:[MCOAddress addressWithMailbox:@"hoa@etpan.org"]
                                             recipients:[NSArray arrayWithObject:[MCOAddress addressWithMailbox:@"laura@etpan.org"]]];
- [op start:^(NSError * error) {
+ [op start:^(NSError * __nullable error) {
  ...
  }];
  */
@@ -158,7 +158,7 @@
  Returns an operation that will check whether the SMTP account is valid.
 
      MCOSMTPOperation * op = [session checkAccountOperationWithFrom:[MCOAddress addressWithMailbox:@"hoa@etpan.org"]];
-     [op start:^(NSError * error) {
+     [op start:^(NSError * __nullable error) {
           ...
      }];
 */
@@ -168,7 +168,7 @@
  Returns an operation that will perform a No-Op.
  
  MCOSMTPOperation * op = [session noopOperation];
- [op start:^(NSError * error) {
+ [op start:^(NSError * __nullable error) {
  ...
  }];
  */

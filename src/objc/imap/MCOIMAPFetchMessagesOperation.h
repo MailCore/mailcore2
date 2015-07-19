@@ -17,6 +17,7 @@
 
 @class MCOIndexSet;
 
+NS_ASSUME_NONNULL_BEGIN
 @interface MCOIMAPFetchMessagesOperation : MCOIMAPBaseOperation
 
 /** This block will be called each time a new message is downloaded. */
@@ -38,8 +39,9 @@
 
    If you are not supporting QRESYNC you can safely ignore `vanishedMessages`.
 */
-- (void) start:(void (^)(NSError * error, NSArray * /* MCOIMAPMessage */ messages, MCOIndexSet * vanishedMessages))completionBlock;
+- (void) start:(void (^)(NSError * __nullable error, NSArray * /* MCOIMAPMessage */ __nullable messages, MCOIndexSet * __nullable vanishedMessages))completionBlock;
 
 @end
+NS_ASSUME_NONNULL_END
 
 #endif

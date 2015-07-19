@@ -15,6 +15,7 @@
 
 @class MCOIndexSet;
 
+NS_ASSUME_NONNULL_BEGIN
 /** This is an asynchronous operation that will fetch the list of a messages on the NNTP server. */
 @interface MCONNTPFetchServerTimeOperation : MCONNTPOperation
 
@@ -26,10 +27,11 @@
  - On success `error` will be nil and `date` will be the server's date and time as an NSDate.
  
  - On failure, `error` will be set with `MCOErrorDomain` as domain and an 
- error code available in MCOConstants.h, `messages` will be null
+ error code available in MCOConstants.h, `date` will be null
  */
-- (void) start:(void (^)(NSError * error, NSDate * date))completionBlock;
+- (void) start:(void (^)(NSError * __nullable error, NSDate * __nullable date))completionBlock;
 
 @end
+NS_ASSUME_NONNULL_END
 
 #endif
