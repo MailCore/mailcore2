@@ -1,8 +1,8 @@
 #!/bin/sh
 set -e
 
-IPHONESDK=iphoneos8.1
-SIMULATORSDK=iphonesimulator8.1
+IPHONESDK=iphoneos8.4
+SIMULATORSDK=iphonesimulator8.4
 MACSDK=macosx10.10
 
 echo Operating system:
