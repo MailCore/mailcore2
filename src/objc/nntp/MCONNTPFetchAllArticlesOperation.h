@@ -15,6 +15,7 @@
 
 @class MCOIndexSet;
 
+NS_ASSUME_NONNULL_BEGIN
 /** This is an asynchronous operation that will fetch the list of a messages on the NNTP server. */
 @interface MCONNTPFetchAllArticlesOperation : MCONNTPOperation
 
@@ -26,10 +27,11 @@
  - On success `error` will be nil and `articles` will be an index set of article numbers.
  
  - On failure, `error` will be set with `MCOErrorDomain` as domain and an 
- error code available in MCOConstants.h, `messages` will be null
+ error code available in MCOConstants.h, `articles` will be null
  */
-- (void) start:(void (^)(NSError * error, MCOIndexSet * articles))completionBlock;
+- (void) start:(void (^)(NSError * __nullable error, MCOIndexSet * __nullable articles))completionBlock;
 
 @end
+NS_ASSUME_NONNULL_END
 
 #endif

@@ -18,6 +18,7 @@
  @see MCOPOPSession
 */
 
+NS_ASSUME_NONNULL_BEGIN
 @interface MCOPOPOperation : MCOOperation
 
 /** 
@@ -30,8 +31,9 @@
  - On failure, `error` will be set with `MCOErrorDomain` as domain and an 
    error code available in MCOConstants.h,
 */
-- (void) start:(void (^)(NSError * error))completionBlock;
+- (void) start:(void (^)(NSError * __nullable error))completionBlock;
 
 @end
+NS_ASSUME_NONNULL_END
 
 #endif

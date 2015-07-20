@@ -19,6 +19,7 @@
 
 #import <MailCore/MCOIMAPBaseOperation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 @interface MCOIMAPIdentityOperation : MCOIMAPBaseOperation
 
 /** 
@@ -32,8 +33,9 @@
  - On failure, `error` will be set with `MCOErrorDomain` as domain and an 
    error code available in `MCOConstants.h`, `serverIdentity` will be nil
 */
-- (void) start:(void (^)(NSError * error, NSDictionary * serverIdentity))completionBlock;
+- (void) start:(void (^)(NSError * __nullable error, NSDictionary * __nullable serverIdentity))completionBlock;
 
 @end
+NS_ASSUME_NONNULL_END
 
 #endif

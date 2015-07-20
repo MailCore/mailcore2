@@ -8,8 +8,10 @@
 
 #import "MCOIMAPBaseOperation.h"
 
+NS_ASSUME_NONNULL_BEGIN
 @interface MCOIMAPQuotaOperation : MCOIMAPBaseOperation
 
-- (void) start:(void (^)(NSError * error, NSUInteger usage, NSUInteger limit))completionBlock;
+- (void) start:(void (^)(NSError * __nullable error, NSUInteger usage, NSUInteger limit))completionBlock;
 
 @end
+NS_ASSUME_NONNULL_END
