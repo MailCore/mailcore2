@@ -189,6 +189,10 @@ static void logger(mailsmtp * smtp, int log_type, const char * buffer, size_t si
         return;
     
     ConnectionLogType type = getConnectionType(log_type);
+    if ((int) type == -1) {
+        // in case of MAILSTREAM_LOG_TYPE_INFO_RECEIVED or MAILSTREAM_LOG_TYPE_INFO_SENT.
+        return;
+    }
     bool isBuffer = isBufferFromLogType(log_type);
     
     if (isBuffer) {
