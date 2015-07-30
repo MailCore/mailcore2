@@ -1200,7 +1200,7 @@ MessageHeader * MessageHeader::forwardHeader()
         subjectValue = MCSTR("Fw: ");
     }
     else {
-        subjectValue = MCSTR("Fw: ")->stringByAppendingString(subject());
+        subjectValue = MCSTR("Fw: ")->stringByAppendingString(subject()->extractedSubjectAndKeepBracket(true));
     }
     if (references() != NULL) {
         referencesValue = (Array *) (references()->copy());
