@@ -87,6 +87,15 @@ MCO_SYNTHESIZE_NSCODING
     return indexSet;
 }
 
+- (BOOL) isEqual:(id)other
+{
+    if (other == nil) {
+        return NO;
+    }
+    MCOIndexSet * otherIndexSet = other;
+    return _indexSet->isEqual(otherIndexSet->_indexSet);
+}
+
 - (NSString *) description
 {
     return MCO_OBJC_BRIDGE_GET(description);

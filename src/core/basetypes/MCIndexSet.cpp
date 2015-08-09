@@ -398,6 +398,21 @@ void IndexSet::importSerializable(HashMap * serializable)
     }
 }
 
+bool IndexSet::isEqual(Object * otherObject)
+{
+    IndexSet * otherIndexSet = (IndexSet *) otherObject;
+    if (mCount != otherIndexSet->mCount) {
+        return false;
+    }
+    for(unsigned int i = 0 ; i < mCount ; i ++) {
+        if ((mRanges[i].location != otherIndexSet->mRanges[i].location) ||
+            (mRanges[i].length != otherIndexSet->mRanges[i].length)) {
+            return false;
+        }
+    }
+    return true;
+}
+
 void IndexSet::addIndexSet(IndexSet * indexSet)
 {
     for(unsigned int i = 0 ; i < indexSet->rangesCount() ; i ++) {
