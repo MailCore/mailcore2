@@ -673,11 +673,11 @@ void SMTPSession::sendMessage(Address * from, Array * recipients, Data * message
     }
     else if (r != MAILSMTP_NO_ERROR) {
         if ((responseCode == 550) && (response != NULL)) {
-            if (response->hasPrefix(MCSTR("5.3.4"))) {
+            if (response->hasPrefix(MCSTR("5.3.4 "))) {
                 * pError = ErrorNeedsConnectToWebmail;
                 goto err;
             }
-            else if (response->hasPrefix(MCSTR("5.7.1 Client does not have permissions to send as this sender"))) {
+            else if (response->hasPrefix(MCSTR("5.7.1 "))) {
                 * pError = ErrorSendMessageNotAllowed;
                 goto err;
             }
