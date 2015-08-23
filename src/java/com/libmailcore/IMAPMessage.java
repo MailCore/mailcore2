@@ -4,6 +4,10 @@ import java.util.List;
 
 /** IMAP messages. */
 public class IMAPMessage extends AbstractMessage {
+     /** Constuctor. */
+    public IMAPMessage() {
+        setupNative();
+    }
     /** IMAP sequence number. */
     public native long sequenceNumber();
     /** Sets the IMAP sequence number. */
