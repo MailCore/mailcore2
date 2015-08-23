@@ -109,4 +109,6 @@ public class IMAPMessage extends AbstractMessage {
     }
 
     private static final long serialVersionUID = 1L;
+    
+    private native void setupNative();
 }
