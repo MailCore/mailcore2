@@ -437,6 +437,9 @@ Object * mailcore::javaToMCObject(JNIEnv * env, jobject obj)
     else if (isJavaMap(env, obj)) {
         return arrayJavaToObjectConverter(env, obj);
     }
+    else if (isJavaList(env, obj)) {
+        return arrayJavaToObjectConverter(env, obj);
+    }
     else {
         Object * result = NULL;
         
