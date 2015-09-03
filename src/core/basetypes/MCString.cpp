@@ -2037,25 +2037,69 @@ String * String::flattenHTML()
 
 String * String::stripWhitespace()
 {
-    String *str = (String *)copy();
-    
-    str->replaceOccurrencesOfString(MCSTR("\t"), MCSTR(" "));
-    str->replaceOccurrencesOfString(MCSTR("\n"), MCSTR(" "));
-    str->replaceOccurrencesOfString(MCSTR("\v"), MCSTR(" "));
-    str->replaceOccurrencesOfString(MCSTR("\f"), MCSTR(" "));
-    str->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
-    str->replaceOccurrencesOfString(s_unicode160, MCSTR(" "));
-    str->replaceOccurrencesOfString(s_unicode133, MCSTR(" "));
-    str->replaceOccurrencesOfString(s_unicode2028, MCSTR(" "));
+    String * str = (String *)copy();
 
-    while (str->replaceOccurrencesOfString(MCSTR("  "), MCSTR(" ")) > 0) {
-        /* do nothing */
+    // replace space-like characters with space.
+    const UChar * source = str->unicodeCharacters();
+    UChar * dest = str->mUnicodeChars;
+    while (* source != 0) {
+        if (* source == '\t') {
+            * dest = ' ';
+        }
+        else if (* source == '\n') {
+            * dest = ' ';
+        }
+        else if (* source == '\t') {
+            * dest = ' ';
+        }
+        else if (* source == '\f') {
+            * dest = ' ';
+        }
+        else if (* source == '\r') {
+            * dest = ' ';
+        }
+        else if (* source == 160) {
+            * dest = ' ';
+        }
+        else if (* source == 133) {
+            * dest = ' ';
+        }
+        else if (* source == 0x2028) {
+            * dest = ' ';
+        }
+        else {
+            * dest = * source;
+        }
+        dest ++;
+        source ++;
     }
-    while (str->hasPrefix(MCSTR(" "))) {
-        str->deleteCharactersInRange(RangeMake(0, 1));
+
+    // skip spaces at the beginning.
+    source = str->unicodeCharacters();
+    dest = str->mUnicodeChars;
+    while (* source == ' ') {
+        source ++;
     }
-    while (str->hasSuffix(MCSTR(" "))) {
-        str->deleteCharactersInRange(RangeMake(str->length() - 1, 1));
+
+    // copy content
+    while (* source != 0) {
+        if ((* source == ' ') && (* (source + 1) == ' ')) {
+            source ++;
+        }
+        * dest = * source;
+        source ++;
+        dest ++;
+    }
+    * dest = 0;
+    str->mLength = (unsigned int) (dest - str->mUnicodeChars);
+
+    // skip spaces at the end.
+    if (str->mLength > 0) {
+        while (* (dest - 1) == ' ') {
+            dest --;
+        }
+        * dest = 0;
+        str->mLength = (unsigned int) (dest - str->mUnicodeChars);
     }
 
     str->autorelease();
