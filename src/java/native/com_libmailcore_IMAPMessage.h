@@ -209,7 +209,7 @@ JNIEXPORT jstring JNICALL Java_com_libmailcore_IMAPMessage_htmlRendering
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_com_libmailcore_IMAPMessage_setupNative
-  (JNIEnv *, jobject);    
+  (JNIEnv *, jobject);
 
 #ifdef __cplusplus
 }
