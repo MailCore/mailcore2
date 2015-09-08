@@ -19,6 +19,7 @@ namespace mailcore {
 @interface MCOAbstractMessage (Private)
 
 - (id) initWithMCMessage:(mailcore::AbstractMessage *)message;
+- (void) setMCMessage:(mailcore::AbstractMessage *)message;
 
 @end
 
