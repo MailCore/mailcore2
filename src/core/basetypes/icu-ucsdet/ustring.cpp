@@ -997,7 +997,7 @@ u_strlen(const UChar *s)
     while(*t != 0) {
       ++t;
     }
-    return t - s;
+    return (int32_t)(t - s);
 #endif
 }
 
