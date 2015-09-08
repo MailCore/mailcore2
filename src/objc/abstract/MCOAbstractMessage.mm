@@ -44,11 +44,6 @@
     return self;
 }
 
-- (void) setMessage:(mailcore::AbstractMessage *)message
-{
-    MC_SAFE_REPLACE_RETAIN(mailcore::AbstractMessage, _message, message);
-}
-
 - (id) copyWithZone:(NSZone *)zone
 {
     nativeType * nativeObject = (nativeType *) [self mco_mcObject]->copy();

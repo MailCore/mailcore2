@@ -28,8 +28,7 @@
 - (id) init
 {
     mailcore::IMAPMessage * msg = new mailcore::IMAPMessage();
-    self = [super init];
-    [self setMCMessage:msg];
+    self = [self initWithMCMessage:msg];
     msg->release();
     return self;
 }

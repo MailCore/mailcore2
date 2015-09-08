@@ -26,8 +26,7 @@
 - (id)init
 {
     mailcore::MessageBuilder * message = new mailcore::MessageBuilder();
-    self = [super init];
-    [self setMCMessage:message];
+    self = [super initWithMCMessage:message];
     MC_SAFE_RELEASE(message);
     return self;
 }
