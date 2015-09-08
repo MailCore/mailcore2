@@ -13,7 +13,6 @@
 
 #import "MCOHTMLRendererDelegate.h"
 #import "NSObject+MCO.h"
-#import "MCOAbstractMessage+Private.h"
 #import "MCOUtils.h"
 #import "MCOAbstractMessageRendererCallback.h"
 

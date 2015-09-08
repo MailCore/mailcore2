@@ -10,7 +10,6 @@
 
 #include "MCIMAP.h"
 
-#import "MCOAbstractMessage+Private.h"
 #import "MCOUtils.h"
 #import "MCOAbstractMessageRendererCallback.h"
 #import "MCOHTMLRendererDelegate.h"

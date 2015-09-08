@@ -30,6 +30,7 @@
 
 - (id) init
 {
+    self = [self initWithMCMessage:NULL];
     MCAssert(0);
     return nil;
 }
@@ -38,7 +39,7 @@
 {
     self = [super init];
     
-    message->retain();
+    MC_SAFE_RETAIN(message);
     _message = message;
     
     return self;

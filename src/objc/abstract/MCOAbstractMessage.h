@@ -15,7 +15,17 @@
 @class MCOMessageHeader;
 @class MCOAbstractPart;
 
+#ifdef __cplusplus
+namespace mailcore {
+    class AbstractMessage;
+}
+#endif
+
 @interface MCOAbstractMessage : NSObject <NSCopying>
+
+#ifdef __cplusplus
+- (id) initWithMCMessage:(mailcore::AbstractMessage *)message NS_DESIGNATED_INITIALIZER;
+#endif
 
 /** Header of the message. */
 @property (nonatomic, strong) MCOMessageHeader * header;

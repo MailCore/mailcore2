@@ -7,7 +7,6 @@
 //
 
 #import "MCOAbstractPart.h"
-#import "MCOAbstractPart+Private.h"
 
 #include "MCAbstractPart.h"
 #include "MCAbstractMessage.h"
@@ -29,6 +28,7 @@
 
 - (id) init
 {
+    self = [self initWithMCPart:NULL];
     MCAssert(0);
     return nil;
 }
@@ -37,7 +37,7 @@
 {
     self = [super init];
     
-    part->retain();
+    MC_SAFE_RETAIN(part);
     _part = part;
     
     return self;
