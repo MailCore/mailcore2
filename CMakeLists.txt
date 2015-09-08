@@ -64,6 +64,9 @@ if(NOT APPLE)
   
 endif()
 
+IF(ANDROID)
+  message(STATUS "Android platform")
+ELSE()
 
 # detect ctemplate
 
@@ -167,6 +170,8 @@ if(NOT ZLIB_INCLUDE_DIR OR NOT ZLIB_LIBRARY)
 else()
   message(STATUS "Found zlib")
 endif()
+
+ENDIF() # Android platform
 
 add_subdirectory (src)
 add_subdirectory (tests)

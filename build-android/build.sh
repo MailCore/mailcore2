@@ -61,7 +61,7 @@ function build {
 
 mkdir -p "$current_dir/cmake-build"
 cd "$current_dir/cmake-build"
-cmake ../..
+cmake -D ANDROID=1 ../..
 
 mkdir -p "$current_dir/include"
 cp -R "$current_dir/cmake-build/src/include/MailCore" "$current_dir/include"
