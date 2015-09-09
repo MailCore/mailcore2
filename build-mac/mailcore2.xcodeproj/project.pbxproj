@@ -1673,7 +1673,6 @@
 		C6081679177635D2001F1018 /* MCIMAPDisconnectOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPDisconnectOperation.cpp; sourceTree = "<group>"; };
 		C608167A177635D2001F1018 /* MCIMAPDisconnectOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPDisconnectOperation.h; sourceTree = "<group>"; };
 		C608167F17766FC5001F1018 /* MCOIMAPBaseOperation+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MCOIMAPBaseOperation+Private.h"; sourceTree = "<group>"; };
-		C623C58A16FD8C22001BBEFC /* MCOAbstractMessage+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MCOAbstractMessage+Private.h"; sourceTree = "<group>"; };
 		C623C58B16FE52C0001BBEFC /* MCOHTMLRendererDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCOHTMLRendererDelegate.h; sourceTree = "<group>"; };
 		C623C58D16FE6B45001BBEFC /* MCOIMAPOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPOperation.h; sourceTree = "<group>"; };
 		C623C58E16FE6B45001BBEFC /* MCOIMAPOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOIMAPOperation.mm; sourceTree = "<group>"; };
@@ -1740,7 +1739,6 @@
 		C64BB24416EDAAFE000DB34C /* MCOMessageHeader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOMessageHeader.mm; sourceTree = "<group>"; };
 		C64BB24616EEF89D000DB34C /* MCOAddress+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MCOAddress+Private.h"; sourceTree = "<group>"; };
 		C64BB24E16EEFFE2000DB34C /* MCOMessageHeader+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MCOMessageHeader+Private.h"; sourceTree = "<group>"; };
-		C64BB24F16FBEF0E000DB34C /* MCOAbstractPart+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MCOAbstractPart+Private.h"; sourceTree = "<group>"; };
 		C64BB25016FC2846000DB34C /* NSValue+MCO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+MCO.h"; sourceTree = "<group>"; };
 		C64BB25116FC2848000DB34C /* NSValue+MCO.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSValue+MCO.mm"; sourceTree = "<group>"; };
 		C64BB25316FC2AA0000DB34C /* MCValuePrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCValuePrivate.h; sourceTree = "<group>"; };
@@ -2404,14 +2402,12 @@
 			children = (
 				C64BB23616EDAA2B000DB34C /* MCOAbstract.h */,
 				C64BB23316EDAA17000DB34C /* MCOAbstractMessage.h */,
-				C623C58A16FD8C22001BBEFC /* MCOAbstractMessage+Private.h */,
 				C64BB23416EDAA17000DB34C /* MCOAbstractMessage.mm */,
 				C64BB23716EDAA3F000DB34C /* MCOAbstractMessagePart.h */,
 				C64BB23816EDAA3F000DB34C /* MCOAbstractMessagePart.mm */,
 				C64BB23A16EDAAC7000DB34C /* MCOAbstractMultipart.h */,
 				C64BB23B16EDAAC7000DB34C /* MCOAbstractMultipart.mm */,
 				C64BB23D16EDAAE0000DB34C /* MCOAbstractPart.h */,
-				C64BB24F16FBEF0E000DB34C /* MCOAbstractPart+Private.h */,
 				C64BB23E16EDAAE1000DB34C /* MCOAbstractPart.mm */,
 				C64BB24016EDAAF3000DB34C /* MCOAddress.h */,
 				C64BB24616EEF89D000DB34C /* MCOAddress+Private.h */,
