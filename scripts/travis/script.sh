@@ -7,6 +7,8 @@ IPHONESDK=iphoneos$IOSSDK
 SIMULATORSDK=iphonesimulator$IOSSDK
 MACSDK=macosx$OSXSDK
 
+export TZ=PST8PDT
+
 echo Operating system:
 uname
 
@@ -44,5 +46,4 @@ cd build-cmake
 cmake ..
 make
 cd unittest
-export TZ=PST8PDT
 ./unittestcpp ../../unittest/data
