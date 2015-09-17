@@ -1,9 +1,11 @@
 #!/bin/sh
 set -e
 
-IPHONESDK=iphoneos8.4
-SIMULATORSDK=iphonesimulator8.4
-MACSDK=macosx10.10
+IOSSDK="`xcodebuild -showsdks 2>/dev/null | grep iphoneos | sed 's/.*iphoneos\(.*\)/\1/'`"
+OSXSDK="`xcodebuild -showsdks 2>/dev/null | grep macosx | sed 's/.*macosx\(.*\)/\1/'`"
+IPHONESDK=iphoneos$IOSSDK
+SIMULATORSDK=iphonesimulator$IOSSDK
+MACSDK=macosx$OSXSDK
 
 echo Operating system:
 uname
