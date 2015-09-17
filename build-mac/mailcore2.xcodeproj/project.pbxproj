@@ -3993,6 +3993,7 @@
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "framework-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
 					"-letpan-ios",
@@ -4021,6 +4022,7 @@
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "framework-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
 					"-letpan-ios",
@@ -4131,7 +4133,6 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -4165,7 +4166,6 @@
 				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = "$(IOS_LIBRARY_SEARCH_PATHS)";
 				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(IOS_LIBRARY_SEARCH_PATHS)";
 				"LIBRARY_SEARCH_PATHS[sdk=macosx*]" = "$(OSX_LIBRARY_SEARCH_PATHS)";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				OSX_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../src/core/basetypes/icu-ucsdet/include\" \"$(SRCROOT)/../Externals/libetpan-osx/include\" \"$(SRCROOT)/../Externals/ctemplate-osx/include\" /usr/include/tidy /usr/include/libxml2";
 				OSX_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-osx/lib\" \"$(SRCROOT)/../Externals/ctemplate-osx/lib\"";
@@ -4183,7 +4183,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "U_COMMON_IMPLEMENTATION=1";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -4210,7 +4209,6 @@
 				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = "$(IOS_LIBRARY_SEARCH_PATHS)";
 				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(IOS_LIBRARY_SEARCH_PATHS)";
 				"LIBRARY_SEARCH_PATHS[sdk=macosx*]" = "$(OSX_LIBRARY_SEARCH_PATHS)";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OSX_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../src/core/basetypes/icu-ucsdet/include\" \"$(SRCROOT)/../Externals/libetpan-osx/include\" \"$(SRCROOT)/../Externals/ctemplate-osx/include\" /usr/include/tidy /usr/include/libxml2";
 				OSX_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-osx/lib\" \"$(SRCROOT)/../Externals/ctemplate-osx/lib\"";
 			};
@@ -4220,7 +4218,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_BITCODE = YES;
 				EXECUTABLE_PREFIX = lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = MailCore;
 				SDKROOT = macosx;
 			};
@@ -4230,7 +4230,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_BITCODE = YES;
 				EXECUTABLE_PREFIX = lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = MailCore;
 				SDKROOT = macosx;
 			};
@@ -4239,6 +4241,7 @@
 		C64EA799169F259300778456 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -4247,6 +4250,7 @@
 		C64EA79A169F259300778456 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -4258,12 +4262,13 @@
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
 				);
 				INFOPLIST_FILE = "../tests-ios/tests-ios-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
@@ -4289,12 +4294,13 @@
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
 				);
 				INFOPLIST_FILE = "../tests-ios/tests-ios-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
@@ -4386,7 +4392,9 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				DEAD_CODE_STRIPPING = NO;
+				ENABLE_BITCODE = YES;
 				EXECUTABLE_PREFIX = lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "MailCore-ios";
 				SDKROOT = iphoneos;
@@ -4399,7 +4407,9 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				DEAD_CODE_STRIPPING = NO;
+				ENABLE_BITCODE = YES;
 				EXECUTABLE_PREFIX = lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "MailCore-ios";
 				SDKROOT = iphoneos;
@@ -4417,6 +4427,7 @@
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "framework-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = (
 					"-lctemplate",
 					"-letpan",
@@ -4446,6 +4457,7 @@
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "framework-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = (
 					"-lctemplate",
 					"-letpan",
