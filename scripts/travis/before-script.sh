@@ -4,6 +4,7 @@ set -e
 if test x"`uname`" = xDarwin ; then
   sudo systemsetup -settimezone America/Los_Angeles
   brew update || brew update || :
+  brew install xctool
 #  brew install cmake
 elif test x"`uname`" = xLinux ; then
   git clone --depth=1 https://github.com/dinhviethoa/libetpan
