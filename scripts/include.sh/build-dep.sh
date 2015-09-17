@@ -67,14 +67,14 @@ build_git_ios()
   cd "$srcdir/$name/build-mac"
   sdk="iphoneos$sdkversion"
   echo building $sdk
-  xctool -project "$xcode_project" -sdk $sdk -scheme "$xcode_target" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$devicearchs" IPHONEOS_DEPLOYMENT_TARGET="$sdkversion" OTHER_CFLAGS="-fembed-bitcode"
+  xctool -project "$xcode_project" -sdk $sdk -scheme "$xcode_target" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$devicearchs" IPHONEOS_DEPLOYMENT_TARGET="$sdkversion" OTHER_CFLAGS='$(inherited) -fembed-bitcode'
   if test x$? != x0 ; then
     echo failed
     exit 1
   fi
   sdk="iphonesimulator$sdkversion"
   echo building $sdk
-  xctool -project "$xcode_project" -sdk $sdk -scheme "$xcode_target" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$simarchs" IPHONEOS_DEPLOYMENT_TARGET="$sdkversion" OTHER_CFLAGS="-fembed-bitcode"
+  xctool -project "$xcode_project" -sdk $sdk -scheme "$xcode_target" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$simarchs" IPHONEOS_DEPLOYMENT_TARGET="$sdkversion" OTHER_CFLAGS='$(inherited) -fembed-bitcode'
   if test x$? != x0 ; then
     echo failed
     exit 1
@@ -141,6 +141,7 @@ build_git_ios()
 
   if test x$build_for_external != x1 ; then
     defaults write "$versions_path" "$name" "$version"
+    plutil -convert xml1 "$versions_path"
   fi
 }
 
@@ -273,6 +274,7 @@ build_git_osx()
 
   if test x$build_for_external != x1 ; then
     defaults write "$versions_path" "$name" "$version"
+    plutil -convert xml1 "$versions_path"
   fi
 }
 
@@ -325,5 +327,6 @@ get_prebuilt_dep()
   
   if test -d "$scriptpath/../Externals/$name" ; then
     defaults write "$installed_versions_path" "$name" "$version"
+    plutil -convert xml1 "$installed_versions_path"
   fi
 }
