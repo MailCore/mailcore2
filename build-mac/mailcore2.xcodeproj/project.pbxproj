@@ -3267,7 +3267,7 @@
 		C64EA52E169E772200778456 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = MailCore;
 				TargetAttributes = {
 					C600B6131A242C3F000728F1 = {
@@ -4005,6 +4005,7 @@
 					"-ObjC",
 					"-lresolv",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.libmailcore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = MailCore;
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = framework;
@@ -4034,6 +4035,7 @@
 					"-ObjC",
 					"-lresolv",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.libmailcore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = MailCore;
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = framework;
@@ -4133,6 +4135,7 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -4281,6 +4284,7 @@
 					"-lz",
 					"-lresolv",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.libmailcore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4314,6 +4318,7 @@
 					"-lz",
 					"-lresolv",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.libmailcore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4350,6 +4355,7 @@
 					"-framework",
 					XCTest,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.libmailcore.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -4381,6 +4387,7 @@
 					"-framework",
 					XCTest,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.libmailcore.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				VALIDATE_PRODUCT = YES;
@@ -4441,6 +4448,7 @@
 					"-lz",
 					"-lresolv",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.libmailcore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = MailCore;
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
@@ -4471,6 +4479,7 @@
 					"-lz",
 					"-lresolv",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.libmailcore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = MailCore;
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
