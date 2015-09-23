@@ -98,10 +98,12 @@ void AccountValidator::start()
         }
         else {
             mEmail = mUsername;
+            MC_SAFE_RETAIN(mEmail);
         }
     }
     else if (mUsername == NULL){
         mUsername = mEmail;
+        MC_SAFE_RETAIN(mUsername);
     }
 
     MC_SAFE_RELEASE(mProvider);
