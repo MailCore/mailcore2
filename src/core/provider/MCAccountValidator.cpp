@@ -108,6 +108,9 @@ void AccountValidator::start()
 
     MC_SAFE_RELEASE(mProvider);
     mProvider = MailProvidersManager::sharedManager()->providerForEmail(mEmail);
+    if (mProvider != NULL) {
+        MC_SAFE_REPLACE_COPY(String, mIdentifier, mProvider->identifier());
+    }
     MC_SAFE_RETAIN(mProvider);
 
     if (mProvider == NULL) {
@@ -181,6 +184,9 @@ void AccountValidator::resolveMXDone()
         MailProvider * provider = MailProvidersManager::sharedManager()->providerForMX(mxRecord);
         if (provider != NULL){
             MC_SAFE_REPLACE_RETAIN(MailProvider, mProvider, provider);
+            if (mProvider != NULL) {
+                MC_SAFE_REPLACE_COPY(String, mIdentifier, mProvider->identifier());
+            }
             break;
         }
     }
