@@ -39,23 +39,11 @@ void POPDeleteMessagesOperation::main()
         return;
     
     ErrorCode error;
-#if 0
-    for(unsigned int i = 0 ; i < mMessageIndexes->rangesCount() ; i ++) {
-        Range range = mMessageIndexes->allRanges()[i];
-        for(unsigned int k = 0 ; k <= range.length ; k ++) {
-            session()->session()->deleteMessage((unsigned int) (range.location + k), &error);
-            if (error != ErrorNone) {
-                setError(error);
-                return;
-            }
-        }
-    }
-#endif
     mc_foreachindexset(index, mMessageIndexes) {
         session()->session()->deleteMessage((unsigned int) index, &error);
         if (error != ErrorNone) {
             setError(error);
-            return;
+            break;
         }
     }
     session()->session()->disconnect();
