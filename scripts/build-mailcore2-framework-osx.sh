@@ -12,6 +12,6 @@ name="mailcore2-framework-osx"
 xcode_target="mailcore osx"
 xcode_project="mailcore2.xcodeproj"
 library="MailCore.framework"
-embedded_deps="ctemplate-osx libetpan-osx uchardet-osx"
+embedded_deps="ctemplate-osx libetpan-osx"
 
 build_git_osx

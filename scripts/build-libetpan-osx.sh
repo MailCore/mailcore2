@@ -7,7 +7,7 @@ popd > /dev/null
 . "$scriptpath/include.sh/build-dep.sh"
 
 url="https://github.com/dinhviethoa/libetpan.git"
-rev=fd95586c4140c4a40fd4a6ccd68fc8ddc4deca75
+rev=bafc71c93d08761ecadda397c7df8519d4735181
 name="libetpan-osx"
 xcode_target="static libetpan"
 xcode_project="libetpan.xcodeproj"
