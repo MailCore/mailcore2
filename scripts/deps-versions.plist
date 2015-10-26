@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>ctemplate-ios</key>
-	<string>3</string>
+	<string>4</string>
 	<key>ctemplate-osx</key>
 	<string>2</string>
 	<key>libetpan-ios</key>
-	<string>8</string>
+	<string>9</string>
 	<key>libetpan-osx</key>
 	<string>8</string>
 	<key>mailcore2-framework-osx</key>
@@ -17,7 +17,7 @@
 	<key>mailcore2-osx</key>
 	<string>9</string>
 	<key>tidy-html5-ios</key>
-	<string>3</string>
+	<string>4</string>
 	<key>uchardet-ios</key>
 	<string>1</string>
 	<key>uchardet-osx</key>
