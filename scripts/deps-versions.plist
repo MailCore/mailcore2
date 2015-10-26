@@ -5,11 +5,11 @@
 	<key>ctemplate-ios</key>
 	<string>4</string>
 	<key>ctemplate-osx</key>
-	<string>2</string>
+	<string>3</string>
 	<key>libetpan-ios</key>
 	<string>9</string>
 	<key>libetpan-osx</key>
-	<string>8</string>
+	<string>9</string>
 	<key>mailcore2-framework-osx</key>
 	<string>6</string>
 	<key>mailcore2-ios</key>
