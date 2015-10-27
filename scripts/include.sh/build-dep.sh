@@ -65,10 +65,16 @@ build_git_ios()
   git checkout -q $rev
   echo building $name $version - $rev
 
+  BITCODE_FLAGS="-fembed-bitcode"
+  if test "x$NOBITCODE" != x ; then
+     BITCODE_FLAGS=""
+  fi
+  XCTOOL_OTHERFLAGS='$(inherited)'
+  XCTOOL_OTHERFLAGS="$XCTOOL_OTHERFLAGS $BITCODE_FLAGS"
   cd "$srcdir/$name/build-mac"
   sdk="iphoneos$sdkversion"
   echo building $sdk
-  xctool -project "$xcode_project" -sdk $sdk -scheme "$xcode_target" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$devicearchs" IPHONEOS_DEPLOYMENT_TARGET="$sdkminversion" OTHER_CFLAGS='$(inherited) -fembed-bitcode'
+  xctool -project "$xcode_project" -sdk $sdk -scheme "$xcode_target" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$devicearchs" IPHONEOS_DEPLOYMENT_TARGET="$sdkminversion" OTHER_CFLAGS="$XCTOOL_OTHERFLAGS"
   if test x$? != x0 ; then
     echo failed
     exit 1
