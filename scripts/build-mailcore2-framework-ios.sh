@@ -7,7 +7,7 @@ popd > /dev/null
 . "$scriptpath/include.sh/build-dep.sh"
 
 url="https://github.com/mailcore/mailcore2.git"
-rev=c519d475178d09651271913f3453a4820fdd82b4
+rev=26b78229f7b09fa3f358c0ab096d6d9504ca56ba
 name="mailcore2-framework-ios"
 xcode_target="mailcore ios"
 xcode_project="mailcore2.xcodeproj"
