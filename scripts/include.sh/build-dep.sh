@@ -68,13 +68,14 @@ build_git_ios()
   BITCODE_FLAGS="-fembed-bitcode"
   if test "x$NOBITCODE" != x ; then
      BITCODE_FLAGS=""
+     XCODE_BITCODE_FLAGS="ENABLE_BITCODE=NO"
   fi
   XCTOOL_OTHERFLAGS='$(inherited)'
   XCTOOL_OTHERFLAGS="$XCTOOL_OTHERFLAGS $BITCODE_FLAGS"
   cd "$srcdir/$name/build-mac"
   sdk="iphoneos$sdkversion"
   echo building $sdk
-  xctool -project "$xcode_project" -sdk $sdk -scheme "$xcode_target" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$devicearchs" IPHONEOS_DEPLOYMENT_TARGET="$sdkminversion" OTHER_CFLAGS="$XCTOOL_OTHERFLAGS"
+  xctool -project "$xcode_project" -sdk $sdk -scheme "$xcode_target" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$devicearchs" IPHONEOS_DEPLOYMENT_TARGET="$sdkminversion" OTHER_CFLAGS="$XCTOOL_OTHERFLAGS" $XCODE_BITCODE_FLAGS
   if test x$? != x0 ; then
     echo failed
     exit 1
