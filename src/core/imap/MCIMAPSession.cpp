@@ -996,6 +996,16 @@ static uint64_t get_mod_sequence_value(mailimap * session)
     return mod_sequence_value;
 }
 
+void IMAPSession::sendCustomCommand(String * command)
+{
+    int r;
+
+    MCLog("custom command");
+    MCAssert(mState == STATE_LOGGEDIN);
+    
+    mailimap_custom_command(mImap, MCUTF8(command));
+}
+
 void IMAPSession::select(String * folder, ErrorCode * pError)
 {
     int r;

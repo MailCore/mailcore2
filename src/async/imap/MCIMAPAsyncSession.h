@@ -40,6 +40,7 @@ namespace mailcore {
     class IMAPSession;
     class IMAPIdentity;
     class OperationQueueCallback;
+    class IMAPCustomCommandOperation;
     
     class MAILCORE_EXPORT IMAPAsyncSession : public Object {
     public:
@@ -135,6 +136,7 @@ namespace mailcore {
                                                                                  Encoding encoding, bool urgent = false);
         
         virtual IMAPFetchContentOperation * fetchMessageByNumberOperation(String * folder, uint32_t number, bool urgent = false);
+        virtual IMAPCustomCommandOperation * sendCustomCommand(String *command, bool urgent);
         virtual IMAPFetchContentOperation * fetchMessageAttachmentByNumberOperation(String * folder, uint32_t number, String * partID,
                                                                                     Encoding encoding, bool urgent = false);
         
