@@ -1001,7 +1001,6 @@ void IMAPSession::sendCustomCommand(String * command)
     int r;
 
     MCLog("custom command");
-    MCAssert(mState == STATE_LOGGEDIN);
     
     mailimap_custom_command(mImap, MCUTF8(command));
 }
