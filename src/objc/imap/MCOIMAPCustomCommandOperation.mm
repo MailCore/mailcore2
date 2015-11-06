@@ -9,11 +9,12 @@
 #import "MCOIMAPCustomCommandOperation.h"
 
 #include "MCAsyncIMAP.h"
+#include "MCIMAPCustomCommandOperation.h"
 
 #import "MCOOperation+Private.h"
 #import "MCOUtils.h"
 
-typedef void (^CompletionType)(NSError *error);
+typedef void (^CompletionType)(NSString * __nullable response, NSError * __nullable error);
 
 @implementation MCOIMAPCustomCommandOperation {
     CompletionType _completionBlock;
@@ -38,7 +39,7 @@ typedef void (^CompletionType)(NSError *error);
     [super dealloc];
 }
 
-- (void)start:(void(^)(NSError * __nullable error))completionBlock
+- (void)start:(void(^)(NSString * __nullable response, NSError * __nullable error))completionBlock
 {
     _completionBlock = [completionBlock copy];
     [self start];
@@ -58,9 +59,11 @@ typedef void (^CompletionType)(NSError *error);
     
     nativeType *op = MCO_NATIVE_INSTANCE;
     if (op->error() == mailcore::ErrorNone) {
-        _completionBlock(nil);
+        NSString *response = [NSString mco_stringWithMCString:op->response()];
+        _completionBlock(response, nil);
     } else {
-        _completionBlock([NSError mco_errorWithErrorCode:op->error()]);
+        NSError *error = [NSError mco_errorWithErrorCode:op->error()];
+        _completionBlock(nil, error);
     }
     [_completionBlock release];
     _completionBlock = nil;

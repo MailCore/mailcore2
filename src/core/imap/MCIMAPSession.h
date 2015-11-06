@@ -107,7 +107,7 @@ namespace mailcore {
                                                                                 IndexSet * numbers,
                                                                                 IMAPProgressCallback * progressCallback,
                                                                                 Array * extraHeaders, ErrorCode * pError);
-        virtual void sendCustomCommand(String * command);
+        virtual String * sendCustomCommand(String * command);
 
         virtual Data * fetchMessageByUID(String * folder, uint32_t uid,
                                          IMAPProgressCallback * progressCallback, ErrorCode * pError);

@@ -16,21 +16,27 @@ using namespace mailcore;
 IMAPCustomCommandOperation::IMAPCustomCommandOperation()
 {
     mCustomCommand = NULL;
+    mResponse = NULL;
 }
 
 IMAPCustomCommandOperation::~IMAPCustomCommandOperation()
 {
     MC_SAFE_RELEASE(mCustomCommand);
+    MC_SAFE_RELEASE(mResponse);
 }
 
-void IMAPCustomCommandOperation::setCustomCommand(mailcore::String * command)
+void IMAPCustomCommandOperation::setCustomCommand(String * command)
 {
-    mCustomCommand = command;
+    MC_SAFE_REPLACE_COPY(String, mCustomCommand, command);
+}
+
+String * IMAPCustomCommandOperation::response()
+{
+    return mResponse;
 }
 
 void IMAPCustomCommandOperation::main()
 {
-
-    session()->session()->sendCustomCommand(mCustomCommand);
-
+    mResponse = session()->session()->sendCustomCommand(mCustomCommand);
+    MC_SAFE_RETAIN(mResponse);
 }

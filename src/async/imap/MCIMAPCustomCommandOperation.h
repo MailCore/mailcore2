@@ -22,12 +22,14 @@ namespace mailcore {
         virtual ~IMAPCustomCommandOperation();
 
         virtual void setCustomCommand(String *command);
+        virtual String * response();
 
     public: // subclass behavior
         virtual void main();
 
     private:
         String * mCustomCommand;
+        String * mResponse;
     };
 
 }

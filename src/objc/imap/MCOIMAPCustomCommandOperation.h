@@ -16,7 +16,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @interface MCOIMAPCustomCommandOperation : MCOIMAPBaseOperation
 
-- (void)start:(void(^)(NSError * __nullable error))completionBlock;
+- (void)start:(void(^)(NSString * __nullable response, NSError * __nullable error))completionBlock;
 
 @end
 NS_ASSUME_NONNULL_END
