@@ -106,7 +106,7 @@
     { \
         jclass cls = env->FindClass("com/libmailcore/" mc_expand_and_quote(javaType)); \
         jmethodID constructor = env->GetMethodID(cls, "initWithNative", "(J)V"); \
-        jobject javaObject = env->NewObject(cls, constructor, obj); \
+        jobject javaObject = env->NewObject(cls, constructor, (jlong) obj); \
         return javaObject; \
     } \
     \
