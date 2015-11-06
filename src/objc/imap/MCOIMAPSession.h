@@ -681,6 +681,16 @@ vanishedMessages will be set only for servers that support QRESYNC. See [RFC5162
                                                                          encoding:(MCOEncoding)encoding
                                                                            urgent:(BOOL)urgent DEPRECATED_ATTRIBUTE;
 
+/**
+ Returns an operation for custom command.
+ @param command is the text representation of the command to be send.
+ 
+ 
+ MCOIMAPCustomCommandOperation * op = [session customCommandOperation:@"ACTIVATE SERVICE"];
+ [op start: ^(NSString * __nullable response, NSError * __nullable error) {
+   ...
+ }];
+ */
 - (MCOIMAPCustomCommandOperation *) customCommandOperation:(NSString *)command;
 
 /**
