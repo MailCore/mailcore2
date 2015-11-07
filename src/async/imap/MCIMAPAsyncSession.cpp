@@ -537,7 +537,7 @@ IMAPFetchContentOperation * IMAPAsyncSession::fetchMessageByNumberOperation(Stri
     return op;
 }
 
-IMAPCustomCommandOperation * IMAPAsyncSession::sendCustomCommand(String *command, bool urgent)
+IMAPCustomCommandOperation * IMAPAsyncSession::customCommand(String *command, bool urgent)
 {
 
     IMAPCustomCommandOperation *op = new IMAPCustomCommandOperation();

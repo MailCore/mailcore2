@@ -37,6 +37,8 @@ String * IMAPCustomCommandOperation::response()
 
 void IMAPCustomCommandOperation::main()
 {
-    mResponse = session()->session()->sendCustomCommand(mCustomCommand);
+    ErrorCode error;
+    mResponse = session()->session()->customCommand(mCustomCommand, &error);
     MC_SAFE_RETAIN(mResponse);
+    setError(error);
 }

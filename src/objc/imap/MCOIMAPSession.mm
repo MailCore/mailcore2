@@ -436,7 +436,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
 }
 
 - (MCOIMAPCustomCommandOperation *) customCommandOperation:(NSString *)command {
-    IMAPCustomCommandOperation *customOp = MCO_NATIVE_INSTANCE->sendCustomCommand([command mco_mcString], false);
+    IMAPCustomCommandOperation *customOp = MCO_NATIVE_INSTANCE->customCommand([command mco_mcString], false);
     return MCO_TO_OBJC_OP(customOp);
 }
 

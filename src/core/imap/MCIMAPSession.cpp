@@ -996,9 +996,16 @@ static uint64_t get_mod_sequence_value(mailimap * session)
     return mod_sequence_value;
 }
 
-String * IMAPSession::sendCustomCommand(String * command)
+String * IMAPSession::customCommand(String * command, ErrorCode * pError)
 {
-    mailimap_custom_command(mImap, MCUTF8(command));
+    int r;
+    
+    r = mailimap_custom_command(mImap, MCUTF8(command));
+    if (r == MAILIMAP_ERROR_CUSTOM_COMMAND) {
+        * pError = ErrorCustomCommand;
+        return NULL;
+    }
+    
     String *response = String::stringWithUTF8Characters(mImap->imap_response);
     return response;
 }
