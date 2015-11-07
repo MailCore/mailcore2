@@ -32,6 +32,7 @@ set(async_imap_files
   async/imap/MCIMAPStoreLabelsOperation.cpp
   async/imap/MCIMAPSubscribeFolderOperation.cpp
   async/imap/MCIMAPNoopOperation.cpp
+  async/imap/MCIMAPCustomCommandOperation.cpp
 )
 
 set(async_pop_files
