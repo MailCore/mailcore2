@@ -1001,8 +1001,17 @@ String * IMAPSession::customCommand(String * command, ErrorCode * pError)
     int r;
     
     r = mailimap_custom_command(mImap, MCUTF8(command));
-    if (r == MAILIMAP_ERROR_CUSTOM_COMMAND) {
-        * pError = ErrorCustomCommand;
+    if (r == MAILIMAP_ERROR_STREAM) {
+        mShouldDisconnect = true;
+        * pError = ErrorConnection;
+        return NULL;
+    }
+    else if (r == MAILIMAP_ERROR_PARSE) {
+        * pError = ErrorParse;
+        return NULL;
+    }
+    else if (hasError(r)) {
+        * pError = ErrorDelete;
         return NULL;
     }
     
