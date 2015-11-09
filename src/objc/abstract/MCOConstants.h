@@ -411,6 +411,8 @@ typedef NS_ENUM(NSInteger, MCOErrorCode) {
     MCOErrorServerDate,
     /** No valid server found */
     MCOErrorNoValidServerFound,
+    /** Error while running custom command */
+    MCOErrorCustomCommand,
     /** The count of all errors */
     MCOErrorCodeCount,
 };

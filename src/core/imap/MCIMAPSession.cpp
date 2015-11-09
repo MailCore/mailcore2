@@ -1011,7 +1011,7 @@ String * IMAPSession::customCommand(String * command, ErrorCode * pError)
         return NULL;
     }
     else if (hasError(r)) {
-        * pError = ErrorDelete;
+        * pError = ErrorCustomCommand;
         return NULL;
     }
     
