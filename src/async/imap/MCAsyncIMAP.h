@@ -33,5 +33,6 @@
 #include <MailCore/MCIMAPQuotaOperation.h>
 #include <MailCore/MCIMAPOperationCallback.h>
 #include <MailCore/MCIMAPMessageRenderingOperation.h>
+#include <MailCore/MCIMAPCustomCommandOperation.h>
 
 #endif

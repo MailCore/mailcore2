@@ -100,6 +100,7 @@ async/imap/MCIMAPCapabilityOperation.h
 async/imap/MCIMAPQuotaOperation.h
 async/imap/MCIMAPOperationCallback.h
 async/imap/MCIMAPMessageRenderingOperation.h
+async/imap/MCIMAPCustomCommandOperation.h
 async/pop/MCAsyncPOP.h
 async/pop/MCPOPAsyncSession.h
 async/pop/MCPOPOperation.h
@@ -171,6 +172,7 @@ objc/imap/MCOIMAPCapabilityOperation.h
 objc/imap/MCOIMAPQuotaOperation.h
 objc/imap/MCOIMAPSearchExpression.h
 objc/imap/MCOIMAPMessageRenderingOperation.h
+objc/imap/MCOIMAPCustomCommandOperation.h
 objc/rfc822/MCORFC822.h
 objc/rfc822/MCOAttachment.h
 objc/rfc822/MCOMessageBuilder.h

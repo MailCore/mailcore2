@@ -38,6 +38,7 @@
 #include "MCIMAPAsyncSession.h"
 #include "MCConnectionLogger.h"
 #include "MCIMAPMessageRenderingOperation.h"
+#include "MCIMAPCustomCommandOperation.h"
 #include "MCIMAPIdentity.h"
 
 using namespace mailcore;

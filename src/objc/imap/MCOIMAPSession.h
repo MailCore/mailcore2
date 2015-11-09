@@ -34,6 +34,7 @@
 @class MCOIMAPMessageRenderingOperation;
 @class MCOIMAPMessage;
 @class MCOIMAPIdentity;
+@class MCOIMAPCustomCommandOperation;
 
 /**
  This is the main IMAP class from which all operations are created
@@ -679,6 +680,18 @@ vanishedMessages will be set only for servers that support QRESYNC. See [RFC5162
                                                                            partID:(NSString *)partID
                                                                          encoding:(MCOEncoding)encoding
                                                                            urgent:(BOOL)urgent DEPRECATED_ATTRIBUTE;
+
+/**
+ Returns an operation for custom command.
+ @param command is the text representation of the command to be send.
+ 
+ 
+ MCOIMAPCustomCommandOperation * op = [session customCommandOperation:@"ACTIVATE SERVICE"];
+ [op start: ^(NSString * __nullable response, NSError * __nullable error) {
+   ...
+ }];
+ */
+- (MCOIMAPCustomCommandOperation *) customCommandOperation:(NSString *)command;
 
 /**
   Returns an operation to fetch an attachment.

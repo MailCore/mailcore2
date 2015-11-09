@@ -996,6 +996,29 @@ static uint64_t get_mod_sequence_value(mailimap * session)
     return mod_sequence_value;
 }
 
+String * IMAPSession::customCommand(String * command, ErrorCode * pError)
+{
+    int r;
+    
+    r = mailimap_custom_command(mImap, MCUTF8(command));
+    if (r == MAILIMAP_ERROR_STREAM) {
+        mShouldDisconnect = true;
+        * pError = ErrorConnection;
+        return NULL;
+    }
+    else if (r == MAILIMAP_ERROR_PARSE) {
+        * pError = ErrorParse;
+        return NULL;
+    }
+    else if (hasError(r)) {
+        * pError = ErrorDelete;
+        return NULL;
+    }
+    
+    String *response = String::stringWithUTF8Characters(mImap->imap_response);
+    return response;
+}
+
 void IMAPSession::select(String * folder, ErrorCode * pError)
 {
     int r;

@@ -42,6 +42,7 @@
 #include "MCIMAPDisconnectOperation.h"
 #include "MCIMAPNoopOperation.h"
 #include "MCIMAPMessageRenderingOperation.h"
+#include "MCIMAPCustomCommandOperation.h"
 
 #define DEFAULT_MAX_CONNECTIONS 3
 
@@ -531,6 +532,17 @@ IMAPFetchContentOperation * IMAPAsyncSession::fetchMessageByNumberOperation(Stri
     op->setMainSession(this);
     op->setFolder(folder);
     op->setNumber(number);
+    op->setUrgent(urgent);
+    op->autorelease();
+    return op;
+}
+
+IMAPCustomCommandOperation * IMAPAsyncSession::customCommand(String *command, bool urgent)
+{
+
+    IMAPCustomCommandOperation *op = new IMAPCustomCommandOperation();
+    op->setMainSession(this);
+    op->setCustomCommand(command);
     op->setUrgent(urgent);
     op->autorelease();
     return op;
