@@ -939,6 +939,11 @@
                     "port":25,
                     "hostname":"smtp-mail.outlook.com",
                     "starttls":true
+                },
+                {
+                    "port":587,
+                    "hostname":"smtp-mail.outlook.com",
+                    "starttls":true
                 }
             ]
         },
