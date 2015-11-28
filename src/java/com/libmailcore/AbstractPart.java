@@ -20,6 +20,11 @@ public class AbstractPart extends NativeObject {
     /** Sets the filename of the attachment. */
     public native void setFilename(String filename);
     
+    /** Returns the mime type of the attachment. */
+    public native String mimeType();
+    /** Sets the charset encoding of the attachment. */
+    public native void setMimeType(String mimeType);
+    
     /** Returns the charset encoding of the attachment. */
     public native String charset();
     /** Sets the charset encoding of the attachment. */
