@@ -108,7 +108,7 @@
         jmethodID constructor = env->GetMethodID(cls, "<init>", "()V"); \
         jobject javaObject = env->NewObject(cls, constructor); \
         jmethodID initMethod = env->GetMethodID(cls, "initWithNative", "(J)V"); \
-        env->CallVoidMethod(cls, initMethod, (jlong) obj); \
+        env->CallVoidMethod(javaObject, initMethod, (jlong) obj); \
         return javaObject; \
     } \
     \
