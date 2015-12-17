@@ -587,7 +587,7 @@ bool JSONParser::parseFloat()
     }
     else {
         mPosition += endptr - str;
-        mResult = Value::valueWithDoubleValue(value);
+        mResult = Value::valueWithDoubleValue(value)->retain();
     }
     pool->release();
     
