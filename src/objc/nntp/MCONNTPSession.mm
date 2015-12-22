@@ -177,7 +177,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
 }
 
 - (MCONNTPFetchArticleOperation *) fetchArticleOperationWithMessageID:(NSString *)messageID {
-    mailcore::NNTPFetchArticleOperation * coreOp = MCO_NATIVE_INSTANCE->fetchArticleByMessageIDOperation(MCO_FROM_OBJC(mailcore::String, group));
+    mailcore::NNTPFetchArticleOperation * coreOp = MCO_NATIVE_INSTANCE->fetchArticleByMessageIDOperation(MCO_FROM_OBJC(mailcore::String, messageID));
     return MCO_TO_OBJC_OP(coreOp);
 }
 
