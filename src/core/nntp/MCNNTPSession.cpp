@@ -464,7 +464,7 @@ Data * NNTPSession::fetchArticle(String *groupName, unsigned int index, NNTPProg
     return result;
 }
 
-Data * NNTPSession::fetchArticleByMessageID(String * groupName, String * messageID, ErrorCode * pError)
+Data * NNTPSession::fetchArticleByMessageID(String * messageID, ErrorCode * pError)
 {
     int r;
     char * msgID;
@@ -472,11 +472,6 @@ Data * NNTPSession::fetchArticleByMessageID(String * groupName, String * message
     size_t content_len;
     
     MCLog("fetch article at message-id %s", messageID->UTF8Characters());
-    
-    selectGroup(groupName, pError);
-    if (* pError != ErrorNone) {
-        return NULL;
-    }
     
     msgID = strdup(messageID->UTF8Characters());
     
@@ -496,6 +491,11 @@ Data * NNTPSession::fetchArticleByMessageID(String * groupName, String * message
     * pError = ErrorNone;
     
     return result;
+}
+
+Data * NNTPSession::fetchArticleByMessageID(String * groupName, String * messageID, ErrorCode * pError)
+{
+    return this->fetchArticleByMessageID(messageID, pError);
 }
 
 time_t NNTPSession::fetchServerDate(ErrorCode * pError) {
