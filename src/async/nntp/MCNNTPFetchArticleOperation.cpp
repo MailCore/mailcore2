@@ -65,7 +65,7 @@ void NNTPFetchArticleOperation::main()
     if (mMessageID == NULL) {
         mData = session()->session()->fetchArticle(mGroupName, mMessageIndex, this, &error);
     } else {
-        mData = session()->session()->fetchArticleByMessageID(mGroupName, mMessageID, &error);
+        mData = session()->session()->fetchArticleByMessageID(mMessageID, &error);
     }
     MC_SAFE_RETAIN(mData);
     setError(error);
