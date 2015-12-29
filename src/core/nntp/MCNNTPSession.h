@@ -53,6 +53,7 @@ namespace mailcore {
         virtual IndexSet * fetchAllArticles(String * groupname, ErrorCode * pError);
                 
         virtual Data * fetchArticle(String *groupName, unsigned int index, NNTPProgressCallback * callback, ErrorCode * pError);
+        virtual Data * fetchArticleByMessageID(String * messageID, ErrorCode * pError);
         virtual Data * fetchArticleByMessageID(String * groupname, String * messageID, ErrorCode * pError);
         
         virtual time_t fetchServerDate(ErrorCode * pError);

@@ -138,12 +138,22 @@
 /**
  Returns an operation that will fetch the content of a message with the given messageID.
  
+ MCONNTPFetchArticleOperation * op = [session fetchArticleOperationWithMessageID:@"<MessageID123@mail.google.com>"];
+ [op start:^(NSError * __nullable error, NSData * messageData) {
+ // messageData is the RFC 822 formatted message data.
+ }];
+ */
+- (MCONNTPFetchArticleOperation *) fetchArticleOperationWithMessageID:(NSString *)messageID;
+
+/**
+ Obsolete. Use -fetchArticleOperationWithMessageID: instead.
+ 
  MCONNTPFetchArticleOperation * op = [session fetchArticleOperationWithMessageID:@"<MessageID123@mail.google.com>" inGroup:@"comp.lang.c"];
  [op start:^(NSError * __nullable error, NSData * messageData) {
  // messageData is the RFC 822 formatted message data.
  }];
  */
-- (MCONNTPFetchArticleOperation *) fetchArticleOperationWithMessageID:(NSString *)messageID inGroup:(NSString *)group;
+- (MCONNTPFetchArticleOperation *) fetchArticleOperationWithMessageID:(NSString *)messageID inGroup:(NSString * __nullable)group;
 
 /**
  Returns an operation that will fetch the server's date and time.
