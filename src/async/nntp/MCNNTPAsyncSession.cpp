@@ -191,14 +191,18 @@ NNTPFetchArticleOperation * NNTPAsyncSession::fetchArticleOperation(String * gro
     return op;
 }
 
-NNTPFetchArticleOperation * NNTPAsyncSession::fetchArticleByMessageIDOperation(String *groupName, String *messageID)
+NNTPFetchArticleOperation * NNTPAsyncSession::fetchArticleByMessageIDOperation(String *messageID)
 {
     NNTPFetchArticleOperation * op = new NNTPFetchArticleOperation();
     op->setSession(this);
-    op->setGroupName(groupName);
     op->setMessageID(messageID);
     op->autorelease();
     return op;
+}
+
+NNTPFetchArticleOperation * NNTPAsyncSession::fetchArticleByMessageIDOperation(String *groupName, String *messageID)
+{
+    return this->fetchArticleByMessageIDOperation(messageID);
 }
 
 NNTPFetchOverviewOperation * NNTPAsyncSession::fetchOverviewOperationWithIndexes(String * groupName, IndexSet * indexes)
