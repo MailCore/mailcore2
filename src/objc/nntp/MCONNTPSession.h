@@ -153,7 +153,7 @@
  // messageData is the RFC 822 formatted message data.
  }];
  */
-- (MCONNTPFetchArticleOperation *) fetchArticleOperationWithMessageID:(NSString *)messageID inGroup:(NSString * __nullable)group;
+- (MCONNTPFetchArticleOperation *) fetchArticleOperationWithMessageID:(NSString *)messageID inGroup:(NSString * __nullable)group DEPRECATED_ATTRIBUTE;
 
 /**
  Returns an operation that will fetch the server's date and time.

@@ -493,11 +493,6 @@ Data * NNTPSession::fetchArticleByMessageID(String * messageID, ErrorCode * pErr
     return result;
 }
 
-Data * NNTPSession::fetchArticleByMessageID(String * groupName, String * messageID, ErrorCode * pError)
-{
-    return this->fetchArticleByMessageID(messageID, pError);
-}
-
 time_t NNTPSession::fetchServerDate(ErrorCode * pError) {
     int r;
     struct tm time;
