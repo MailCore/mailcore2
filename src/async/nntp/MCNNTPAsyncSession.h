@@ -64,7 +64,6 @@ namespace mailcore {
         
         virtual NNTPFetchArticleOperation * fetchArticleOperation(String *groupName, unsigned int index);
         virtual NNTPFetchArticleOperation * fetchArticleByMessageIDOperation(String * messageID);
-        virtual NNTPFetchArticleOperation * fetchArticleByMessageIDOperation(String * groupname, String * messageID);
         
         virtual NNTPFetchOverviewOperation * fetchOverviewOperationWithIndexes(String * groupName, IndexSet * indexes);
         

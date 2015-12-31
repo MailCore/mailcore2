@@ -200,11 +200,6 @@ NNTPFetchArticleOperation * NNTPAsyncSession::fetchArticleByMessageIDOperation(S
     return op;
 }
 
-NNTPFetchArticleOperation * NNTPAsyncSession::fetchArticleByMessageIDOperation(String *groupName, String *messageID)
-{
-    return this->fetchArticleByMessageIDOperation(messageID);
-}
-
 NNTPFetchOverviewOperation * NNTPAsyncSession::fetchOverviewOperationWithIndexes(String * groupName, IndexSet * indexes)
 {
     NNTPFetchOverviewOperation * op = new NNTPFetchOverviewOperation();
