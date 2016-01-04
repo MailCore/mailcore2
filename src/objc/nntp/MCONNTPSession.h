@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 MailCore. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #ifndef MAILCORE_MCONNTPSESSION_H
 
 #define MAILCORE_MCONNTPSESSION_H
@@ -27,6 +25,7 @@
 
 /** This class implements asynchronous access to the NNTP protocol.*/
 
+NS_ASSUME_NONNULL_BEGIN
 @interface MCONNTPSession : NSObject
 
 /** This is the hostname of the NNTP server to connect to.*/
@@ -203,5 +202,6 @@
 - (MCONNTPOperation *) checkAccountOperation;
 
 @end
+NS_ASSUME_NONNULL_END
 
 #endif
