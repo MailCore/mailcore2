@@ -823,7 +823,9 @@ String::String(const char * UTF8Characters)
 {
     mUnicodeChars = NULL;
     reset();
-    allocate((unsigned int) strlen(UTF8Characters), true);
+    if (UTF8Characters != NULL) {
+        allocate((unsigned int) strlen(UTF8Characters), true);
+    }
     appendUTF8Characters(UTF8Characters);
 }
 
@@ -890,7 +892,7 @@ void String::allocate(unsigned int length, bool force)
 
 String * String::string()
 {
-    return stringWithCharacters(NULL);
+    return stringWithCharacters(NULL, 0);
 }
 
 String * String::stringWithData(Data * data, const char * charset)
@@ -926,12 +928,18 @@ String * String::stringWithVUTF8Format(const char * format, va_list ap)
 
 String * String::stringWithUTF8Characters(const char * UTF8Characters)
 {
+    if (UTF8Characters == NULL) {
+        return NULL;
+    }
     String * result = new String(UTF8Characters);
     return (String *) result->autorelease();
 }
 
 String * String::stringWithCharacters(const UChar * characters)
 {
+    if (characters == NULL) {
+        return NULL;
+    }
     String * result = new String(characters);
     return (String *) result->autorelease();
 }
@@ -2423,6 +2431,10 @@ String * String::uniquedStringWithUTF8Characters(const char * UTF8Characters)
     static pthread_once_t once = PTHREAD_ONCE_INIT;
     int r;
     
+    if (UTF8Characters == NULL) {
+        return NULL;
+    }
+
     pthread_once(&once, initUniquedStringHash);
     key.data = (void *) UTF8Characters;
     key.len = (unsigned int) strlen(UTF8Characters);
