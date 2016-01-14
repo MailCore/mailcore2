@@ -1000,6 +1000,10 @@ String * IMAPSession::customCommand(String * command, ErrorCode * pError)
 {
     int r;
     
+    loginIfNeeded(pError);
+    if (* pError != ErrorNone)
+        return NULL;
+
     r = mailimap_custom_command(mImap, MCUTF8(command));
     if (r == MAILIMAP_ERROR_STREAM) {
         mShouldDisconnect = true;
