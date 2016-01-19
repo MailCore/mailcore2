@@ -718,6 +718,20 @@ void Data::importSerializable(HashMap * serializable)
     setData(((String *) (serializable->objectForKey(MCSTR("data"))))->decodedBase64Data());
 }
 
+ErrorCode Data::writeToFile(String * filename)
+{
+    FILE * f = fopen(filename->fileSystemRepresentation(), "wb");
+    if (f == NULL) {
+        return ErrorFile;
+    }
+    size_t result = fwrite(bytes(), length(), 1, f);
+    fclose(f);
+    if (result == 0) {
+        return ErrorFile;
+    }
+    return ErrorNone;
+}
+
 #if __APPLE__
 static CFStringEncoding encodingFromCString(const char * charset)
 {

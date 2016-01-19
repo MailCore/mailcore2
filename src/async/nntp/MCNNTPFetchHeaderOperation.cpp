@@ -18,10 +18,12 @@ NNTPFetchHeaderOperation::NNTPFetchHeaderOperation()
 {
     mMessageIndex = 0;
     mHeader = NULL;
+    mGroupName = NULL;
 }
 
 NNTPFetchHeaderOperation::~NNTPFetchHeaderOperation()
 {
+    MC_SAFE_RELEASE(mGroupName);
     MC_SAFE_RELEASE(mHeader);
 }
 

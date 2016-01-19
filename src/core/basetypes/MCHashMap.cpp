@@ -169,6 +169,10 @@ void HashMap::removeObjectForKey(Object * key)
 {
     unsigned int func, indx;
     HashMapIter * iter, * old;
+
+    if (key == NULL) {
+        return;
+    }
     
     func = key->hash();;
     indx = func % mAllocated;

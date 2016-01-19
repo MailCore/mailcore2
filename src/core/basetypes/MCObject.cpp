@@ -181,7 +181,7 @@ static void removeFromPerformHash(Object * obj, Object::Method method, void * co
     keyData.method = method;
     key.data = &keyData;
     key.len = sizeof(keyData);
-    
+
     pthread_mutex_lock(&delayedPerformLock);
     chash_delete(delayedPerformHash, (chashdatum *) &key, NULL);
     pthread_mutex_unlock(&delayedPerformLock);
@@ -360,7 +360,9 @@ void Object::performMethodOnDispatchQueueAfterDelay(Method method, void * contex
         }
         dupCancelableBlock(false);
         Block_release(dupCancelableBlock);
-        release();
+        if (!cancelled) {
+            release();
+        }
     });
 }
 
@@ -373,6 +375,7 @@ void Object::cancelDelayedPerformMethodOnDispatchQueue(Method method, void * con
     }
     removeFromPerformHash(this, method, context, targetDispatchQueue);
     dupCancelableBlock(true);
+    release();
 }
 #endif
 

@@ -41,6 +41,7 @@ set(objc_imap_files
   objc/imap/MCOIMAPSearchExpression.mm
   objc/imap/MCOIMAPSearchOperation.mm
   objc/imap/MCOIMAPNoopOperation.mm
+  objc/imap/MCOIMAPCustomCommandOperation.mm
   objc/imap/MCOIMAPSession.mm
 )
 
@@ -58,6 +59,7 @@ set(objc_provider_files
   objc/provider/MCOMailProvider.mm
   objc/provider/MCOMailProvidersManager.mm
   objc/provider/MCONetService.mm
+  objc/provider/MCOAccountValidator.mm
 )
 
 set(objc_rfc822_files
@@ -109,6 +111,7 @@ set(objc_files
   ${objc_abstract_files}
   ${objc_imap_files}
   ${objc_pop_files}
+  ${objc_provider_files}
   ${objc_nntp_files}
   ${objc_rfc822_files}
   ${objc_smtp_files}
@@ -123,6 +126,7 @@ set(objc_includes
   "${CMAKE_CURRENT_SOURCE_DIR}/objc/abstract"
   "${CMAKE_CURRENT_SOURCE_DIR}/objc/imap"
   "${CMAKE_CURRENT_SOURCE_DIR}/objc/pop"
+  "${CMAKE_CURRENT_SOURCE_DIR}/objc/provider"
   "${CMAKE_CURRENT_SOURCE_DIR}/objc/nntp"
   "${CMAKE_CURRENT_SOURCE_DIR}/objc/rfc822"
   "${CMAKE_CURRENT_SOURCE_DIR}/objc/smtp"

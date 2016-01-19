@@ -20,6 +20,7 @@
 
 @class MCOMessageHeader;
 
+NS_ASSUME_NONNULL_BEGIN
 @interface MCONNTPFetchHeaderOperation : MCONNTPOperation
 
 /** 
@@ -30,10 +31,11 @@
  - On success `error` will be nil and `header` will contain the message header
  
  - On failure, `error` will be set with `MCOErrorDomain` as domain and an 
- error code available in MCOConstants.h, `header` will be null
+ error code available in MCOConstants.h, `header` will be nil
  */
-- (void) start:(void (^)(NSError * error, MCOMessageHeader * header))completionBlock;
+- (void) start:(void (^)(NSError * __nullable error, MCOMessageHeader * __nullable header))completionBlock;
 
 @end
+NS_ASSUME_NONNULL_END
 
 #endif

@@ -11,6 +11,7 @@ using namespace mailcore;
 
 MC_JAVA_SYNTHESIZE_SCALAR(jint, PartType, setPartType, partType)
 MC_JAVA_SYNTHESIZE_STRING(setFilename, filename)
+MC_JAVA_SYNTHESIZE_STRING(setMimeType, mimeType)
 MC_JAVA_SYNTHESIZE_STRING(setCharset, charset)
 MC_JAVA_SYNTHESIZE_STRING(setUniqueID, uniqueID)
 MC_JAVA_SYNTHESIZE_STRING(setContentID, contentID)

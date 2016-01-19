@@ -409,6 +409,10 @@ typedef NS_ENUM(NSInteger, MCOErrorCode) {
     MCOErrorGmailApplicationSpecificPasswordRequired, // 40
     /** NNTP: error when requesting date */
     MCOErrorServerDate,
+    /** No valid server found */
+    MCOErrorNoValidServerFound,
+    /** Error while running custom command */
+    MCOErrorCustomCommand,
     /** The count of all errors */
     MCOErrorCodeCount,
 };

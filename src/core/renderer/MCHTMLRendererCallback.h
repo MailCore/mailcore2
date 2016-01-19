@@ -35,6 +35,8 @@ namespace mailcore {
         HTMLRendererTemplateCallback();
         virtual ~HTMLRendererTemplateCallback();
 
+        virtual void setMixedTextAndAttachmentsModeEnabled(bool enabled);
+
         virtual bool canPreviewPart(AbstractPart * part);
         virtual bool shouldShowPart(AbstractPart * part);
         

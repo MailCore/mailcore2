@@ -150,3 +150,23 @@ static Array * decodedComponents(Array * components)
     
     return result;
 }
+
+HashMap * IMAPNamespaceItem::serializable()
+{
+    HashMap * result = Object::serializable();
+    result->setObjectForKey(MCSTR("delimiter"), String::stringWithUTF8Format("%c", mDelimiter));
+    if (mPrefix != NULL) {
+        result->setObjectForKey(MCSTR("prefix"), mPrefix);
+    }
+    return result;
+}
+
+void IMAPNamespaceItem::importSerializable(HashMap * serializable)
+{
+    String * aPrefix = (String *) serializable->objectForKey(MCSTR("prefix"));
+    setPrefix(aPrefix);
+    String * delimiterString = (String *) serializable->objectForKey(MCSTR("delimiter"));
+    if ((delimiterString != NULL) && (delimiterString->length() > 0)) {
+        setDelimiter((char) delimiterString->characterAtIndex(0));
+    }
+}

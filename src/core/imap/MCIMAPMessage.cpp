@@ -26,6 +26,7 @@ void IMAPMessage::init()
     mModSeqValue = 0;
     mGmailThreadID = 0;
     mGmailMessageID = 0;
+    mSize = 0;
 }
 
 IMAPMessage::IMAPMessage()
@@ -257,7 +258,7 @@ HashMap * IMAPMessage::serializable()
     HashMap * result = AbstractMessage::serializable();
     result->setObjectForKey(MCSTR("modSeqValue"), String::stringWithUTF8Format("%llu", (long long unsigned) modSeqValue()));
     result->setObjectForKey(MCSTR("uid"), String::stringWithUTF8Format("%lu", (long unsigned) uid()));
-    result->setObjectForKey(MCSTR("size"), String::stringWithUTF8Format("%lu", (long unsigned) uid()));
+    result->setObjectForKey(MCSTR("size"), String::stringWithUTF8Format("%lu", (long unsigned) size()));
     result->setObjectForKey(MCSTR("flags"), String::stringWithUTF8Format("%u", (unsigned) flags()));
     result->setObjectForKey(MCSTR("originalFlags"), String::stringWithUTF8Format("%u", (unsigned) originalFlags()));
     if (customFlags() != NULL) {
@@ -300,7 +301,7 @@ void IMAPMessage::importSerializable(HashMap * serializable)
     }
     String * originalFlags = (String *) serializable->objectForKey(MCSTR("originalFlags"));
     if (originalFlags != NULL) {
-        setFlags((MessageFlag) originalFlags->unsignedIntValue());
+        setOriginalFlags((MessageFlag) originalFlags->unsignedIntValue());
     }
     String * customFlags = (String *) serializable->objectForKey(MCSTR("customFlags"));
     if (customFlags != NULL) {

@@ -42,7 +42,8 @@ namespace mailcore {
         virtual AbstractPart * partForUniqueID(String * uniqueID);
         
         virtual HashMap * serializable();
-        
+        virtual void importSerializable(HashMap * serializable);
+
 #ifdef __APPLE__
     public:
         static MessageParser * messageParserWithData(CFDataRef data);

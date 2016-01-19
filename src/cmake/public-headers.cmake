@@ -29,6 +29,7 @@ core/basetypes/MCLibetpanTypes.h
 core/basetypes/MCOperationCallback.h
 core/basetypes/MCIterator.h
 core/basetypes/MCConnectionLogger.h
+core/basetypes/MCHTMLCleaner.h
 core/abstract/MCAbstractMessagePart.h
 core/abstract/MCAbstractPart.h
 core/abstract/MCAbstractMultipart.h
@@ -73,6 +74,7 @@ core/provider/MCProvider.h
 core/provider/MCMailProvidersManager.h
 core/provider/MCMailProvider.h
 core/provider/MCNetService.h
+core/provider/MCAccountValidator.h
 async/MCAsync.h
 async/smtp/MCAsyncSMTP.h
 async/smtp/MCSMTPAsyncSession.h
@@ -98,6 +100,7 @@ async/imap/MCIMAPCapabilityOperation.h
 async/imap/MCIMAPQuotaOperation.h
 async/imap/MCIMAPOperationCallback.h
 async/imap/MCIMAPMessageRenderingOperation.h
+async/imap/MCIMAPCustomCommandOperation.h
 async/pop/MCAsyncPOP.h
 async/pop/MCPOPAsyncSession.h
 async/pop/MCPOPOperation.h
@@ -169,6 +172,7 @@ objc/imap/MCOIMAPCapabilityOperation.h
 objc/imap/MCOIMAPQuotaOperation.h
 objc/imap/MCOIMAPSearchExpression.h
 objc/imap/MCOIMAPMessageRenderingOperation.h
+objc/imap/MCOIMAPCustomCommandOperation.h
 objc/rfc822/MCORFC822.h
 objc/rfc822/MCOAttachment.h
 objc/rfc822/MCOMessageBuilder.h
@@ -200,4 +204,5 @@ objc/provider/MCOProvider.h
 objc/provider/MCONetService.h
 objc/provider/MCOMailProvider.h
 objc/provider/MCOMailProvidersManager.h
+objc/provider/MCOAccountValidator.h
 )

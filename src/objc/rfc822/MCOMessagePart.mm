@@ -11,7 +11,6 @@
 #include "MCRFC822.h"
 
 #import "NSObject+MCO.h"
-#import "MCOAbstractPart+Private.h"
 
 @implementation MCOMessagePart
 

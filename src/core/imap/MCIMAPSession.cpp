@@ -627,6 +627,10 @@ void IMAPSession::connect(ErrorCode * pError)
     if (mImap->imap_response != NULL) {
         MC_SAFE_REPLACE_RETAIN(String, mWelcomeString, String::stringWithUTF8Characters(mImap->imap_response));
         mYahooServer = (mWelcomeString->locationOfString(MCSTR("yahoo.com")) != -1);
+#ifdef LIBETPAN_HAS_MAILIMAP_163_WORKAROUND
+        if(mWelcomeString->locationOfString(MCSTR("Coremail System IMap Server Ready")) != -1)
+            mailimap_set_163_workaround_enabled(mImap, 1);
+#endif
     }
     
     mState = STATE_CONNECTED;
@@ -789,7 +793,12 @@ void IMAPSession::login(ErrorCode * pError)
             
         case AuthTypeXOAuth2:
         case AuthTypeXOAuth2Outlook:
-            r = mailimap_oauth2_authenticate(mImap, utf8username, MCUTF8(mOAuth2Token));
+            if (mOAuth2Token == NULL) {
+                r = MAILIMAP_ERROR_STREAM;
+            }
+            else {
+                r = mailimap_oauth2_authenticate(mImap, utf8username, MCUTF8(mOAuth2Token));
+            }
             break;
     }
     if (r == MAILIMAP_ERROR_STREAM) {
@@ -987,6 +996,33 @@ static uint64_t get_mod_sequence_value(mailimap * session)
     return mod_sequence_value;
 }
 
+String * IMAPSession::customCommand(String * command, ErrorCode * pError)
+{
+    int r;
+    
+    loginIfNeeded(pError);
+    if (* pError != ErrorNone)
+        return NULL;
+
+    r = mailimap_custom_command(mImap, MCUTF8(command));
+    if (r == MAILIMAP_ERROR_STREAM) {
+        mShouldDisconnect = true;
+        * pError = ErrorConnection;
+        return NULL;
+    }
+    else if (r == MAILIMAP_ERROR_PARSE) {
+        * pError = ErrorParse;
+        return NULL;
+    }
+    else if (hasError(r)) {
+        * pError = ErrorCustomCommand;
+        return NULL;
+    }
+    
+    String *response = String::stringWithUTF8Characters(mImap->imap_response);
+    return response;
+}
+
 void IMAPSession::select(String * folder, ErrorCode * pError)
 {
     int r;
@@ -1088,14 +1124,17 @@ IMAPFolderStatus * IMAPSession::folderStatus(String * folder, ErrorCode * pError
         mShouldDisconnect = true;
         * pError = ErrorConnection;
         MCLog("status error : %s %i", MCUTF8DESC(this), * pError);
+        mailimap_status_att_list_free(status_att_list);
         return fs;
     }
     else if (r == MAILIMAP_ERROR_PARSE) {
         * pError = ErrorParse;
+        mailimap_status_att_list_free(status_att_list);
         return fs;
     }
     else if (hasError(r)) {
         * pError = ErrorNonExistantFolder;
+        mailimap_status_att_list_free(status_att_list);
         return fs;
     }
     
@@ -1141,7 +1180,7 @@ IMAPFolderStatus * IMAPSession::folderStatus(String * folder, ErrorCode * pError
     }
         
     mailimap_status_att_list_free(status_att_list);
-    
+    mailimap_mailbox_data_status_free(status);
     
     return fs;
 }
@@ -1574,7 +1613,6 @@ void IMAPSession::appendMessageWithCustomFlagsAndDate(String * folder, Data * me
     mProgressCallback = progressCallback;
     bodyProgress(0, messageData->length());
     
-    flag_list = NULL;
     flag_list = flags_to_lep(flags);
     if (customFlags != NULL) {
         for (unsigned int i = 0 ; i < customFlags->count() ; i ++) {
@@ -2790,6 +2828,10 @@ static struct mailimap_search_key * searchKeyFromSearchExpression(IMAPSearchExpr
         case IMAPSearchKindUIDs:
         {
             return mailimap_search_key_new_uid(setFromIndexSet(expression->uids()));
+        }
+        case IMAPSearchKindNumbers:
+        {
+            return mailimap_search_key_new_set(setFromIndexSet(expression->numbers()));
         }
         case IMAPSearchKindHeader:
         {

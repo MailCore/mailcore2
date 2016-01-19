@@ -28,7 +28,9 @@ namespace mailcore {
         IMAPNamespaceItem(IMAPNamespaceItem * other);
         virtual String * description();
         virtual Object * copy();
-        
+        virtual HashMap * serializable();
+        virtual void importSerializable(HashMap * serializable);
+
     private:
         char mDelimiter;
         String * mPrefix;

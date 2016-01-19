@@ -40,6 +40,7 @@ namespace mailcore {
     class IMAPSession;
     class IMAPIdentity;
     class OperationQueueCallback;
+    class IMAPCustomCommandOperation;
     
     class MAILCORE_EXPORT IMAPAsyncSession : public Object {
     public:
@@ -102,7 +103,7 @@ namespace mailcore {
         
         virtual IMAPIdentity * serverIdentity();
         virtual IMAPIdentity * clientIdentity();
-        virtual String * gmailUserDisplayName();
+        virtual String * gmailUserDisplayName() DEPRECATED_ATTRIBUTE;
         
         virtual IMAPFolderInfoOperation * folderInfoOperation(String * folder);
         virtual IMAPFolderStatusOperation * folderStatusOperation(String * folder);
@@ -135,6 +136,7 @@ namespace mailcore {
                                                                                  Encoding encoding, bool urgent = false);
         
         virtual IMAPFetchContentOperation * fetchMessageByNumberOperation(String * folder, uint32_t number, bool urgent = false);
+        virtual IMAPCustomCommandOperation * customCommand(String *command, bool urgent);
         virtual IMAPFetchContentOperation * fetchMessageAttachmentByNumberOperation(String * folder, uint32_t number, String * partID,
                                                                                     Encoding encoding, bool urgent = false);
         

@@ -1,6 +1,6 @@
 {
   "name": "mailcore2-osx",
-  "version": "0.5.0",
+  "version": "0.5.2",
   "summary": "Mailcore 2 for OS X",
   "description": "MailCore 2 provide a simple and asynchronous API to work with e-mail protocols IMAP, POP and SMTP.",
   "homepage": "http://libmailcore.com",
@@ -10,11 +10,11 @@
   },
   "authors": "MailCore Authors",
   "source": {
-    "http": "http://d.etpan.org/mailcore2-deps/mailcore2-osx/mailcore2-osx-6.zip",
+    "http": "http://d.etpan.org/mailcore2-deps/mailcore2-osx/mailcore2-osx-7.zip",
     "flatten": true
   },
   "platforms": {
-    "osx": 10.9
+    "osx": 10.8
   },
   "header_dir": "MailCore",
   "requires_arc": false,

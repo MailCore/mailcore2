@@ -13,5 +13,6 @@
 #include <MailCore/MCMailProvidersManager.h>
 #include <MailCore/MCMailProvider.h>
 #include <MailCore/MCNetService.h>
+#include <MailCore/MCAccountValidator.h>
 
 #endif

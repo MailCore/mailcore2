@@ -41,5 +41,6 @@
 #import <MailCore/MCOIMAPQuotaOperation.h>
 #import <MailCore/MCOIMAPSearchExpression.h>
 #import <MailCore/MCOIMAPMessageRenderingOperation.h>
+#import <MailCore/MCOIMAPCustomCommandOperation.h>
 
 #endif

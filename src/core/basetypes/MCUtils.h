@@ -48,6 +48,20 @@
 #	define MAILCORE_EXPORT
 #endif
 
+#ifdef __ANDROID_API__
+#if __ANDROID_API__ < 21
+#include <wchar.h>
+extern int               iswblank(wint_t);
+extern int vfwscanf(FILE*, const wchar_t*, va_list);
+extern int vswscanf(const wchar_t*, const wchar_t*, va_list);
+extern int vwscanf(const wchar_t*, va_list);
+extern float wcstof(const wchar_t*, wchar_t**);
+extern long double wcstold(const wchar_t*, wchar_t**);
+extern long long wcstoll(const wchar_t*, wchar_t**, int);
+extern unsigned long long wcstoull(const wchar_t*, wchar_t**, int);
+#endif
+#endif
+
 #ifdef __clang__
 
 #if __has_feature(attribute_analyzer_noreturn)
@@ -63,6 +77,10 @@
 #define CLANG_ANALYZER_NORETURN
 #define ATTRIBUTE_RETURNS_NONNULL
 
+#endif
+
+#ifndef DEPRECATED_ATTRIBUTE
+#define DEPRECATED_ATTRIBUTE        __attribute__((deprecated))
 #endif
 
 #endif

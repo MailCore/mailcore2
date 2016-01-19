@@ -11,7 +11,6 @@
 #include "MCRFC822.h"
 
 #import "MCOUtils.h"
-#import "MCOAbstractMessage+Private.h"
 #import "MCOAbstractMessageRendererCallback.h"
 
 @implementation MCOMessageBuilder

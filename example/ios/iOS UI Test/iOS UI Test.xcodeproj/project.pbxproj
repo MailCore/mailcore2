@@ -39,6 +39,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		7D2DAB5B1AF747FE0005A691 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB7BA4321713898B00104953 /* mailcore2.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C600B6141A242C3F000728F1;
+			remoteInfo = unittestcpp;
+		};
 		AB7BA43A1713898B00104953 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AB7BA4321713898B00104953 /* mailcore2.xcodeproj */;
@@ -184,8 +191,9 @@
 				AB7BA43F1713898B00104953 /* tests */,
 				AB7BA4411713898B00104953 /* test-ios.app */,
 				AB7BA4431713898B00104953 /* MailCore.framework */,
-				C6181D2F19FDA8EA0088FBBC /* MailCore-ios.framework */,
+				C6181D2F19FDA8EA0088FBBC /* MailCore.framework */,
 				C6181D3119FDA8EA0088FBBC /* unittest.xctest */,
+				7D2DAB5C1AF747FE0005A691 /* unittestcpp */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -377,6 +385,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		7D2DAB5C1AF747FE0005A691 /* unittestcpp */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = unittestcpp;
+			remoteRef = 7D2DAB5B1AF747FE0005A691 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		AB7BA43B1713898B00104953 /* libMailCore.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -412,7 +427,7 @@
 			remoteRef = AB7BA4421713898B00104953 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C6181D2F19FDA8EA0088FBBC /* MailCore-ios.framework */ = {
+		C6181D2F19FDA8EA0088FBBC /* MailCore.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = MailCore.framework;
@@ -560,7 +575,6 @@
 				GCC_PREFIX_HEADER = "iOS UI Test/iOS UI Test-Prefix.pch";
 				INFOPLIST_FILE = "iOS UI Test/iOS UI Test-Info.plist";
 				OTHER_LDFLAGS = (
-					"-luchardet-ios",
 					"-lctemplate-ios",
 					"-letpan-ios",
 					"-lxml2",
@@ -570,6 +584,7 @@
 					"-ltidy",
 					"-lc++",
 					"-lz",
+					"-lresolv",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -584,7 +599,6 @@
 				GCC_PREFIX_HEADER = "iOS UI Test/iOS UI Test-Prefix.pch";
 				INFOPLIST_FILE = "iOS UI Test/iOS UI Test-Info.plist";
 				OTHER_LDFLAGS = (
-					"-luchardet-ios",
 					"-lctemplate-ios",
 					"-letpan-ios",
 					"-lxml2",
@@ -594,6 +608,7 @@
 					"-ltidy",
 					"-lc++",
 					"-lz",
+					"-lresolv",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

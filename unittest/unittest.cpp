@@ -167,11 +167,11 @@ static Array * pathsInDirectory(String * directory)
 static void prepareHeaderForUnitTest(MessageHeader * header)
 {
     time_t now = time(NULL);
-    if (fabs(now - header->date()) <= 2) {
+    if (fabs((double) (now - header->date())) <= 2) {
         // Date might be generated, set to known date.
         header->setDate(referenceDate());
     }
-    if (fabs(header->receivedDate() - now) <= 2) {
+    if (fabs((double) (header->receivedDate() - now)) <= 2) {
         // Date might be generated, set to known date.
         header->setReceivedDate(referenceDate());
     }

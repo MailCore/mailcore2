@@ -15,6 +15,7 @@ using namespace mailcore;
 
 NNTPFetchServerTimeOperation::NNTPFetchServerTimeOperation()
 {
+    mTime = -1;
 }
 
 NNTPFetchServerTimeOperation::~NNTPFetchServerTimeOperation()

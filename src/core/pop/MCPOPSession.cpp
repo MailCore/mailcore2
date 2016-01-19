@@ -174,6 +174,7 @@ static void logger(mailpop3 * pop3, int log_type, const char * buffer, size_t si
 void POPSession::setup()
 {
     mPop = mailpop3_new(0, NULL);
+    mailpop3_set_timeout(mPop, timeout());
     mailpop3_set_progress_callback(mPop, POPSession::body_progress, this);
     mailpop3_set_logger(mPop, logger, this);
 }

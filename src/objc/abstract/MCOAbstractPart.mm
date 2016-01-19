@@ -7,7 +7,6 @@
 //
 
 #import "MCOAbstractPart.h"
-#import "MCOAbstractPart+Private.h"
 
 #include "MCAbstractPart.h"
 #include "MCAbstractMessage.h"
@@ -29,6 +28,7 @@
 
 - (id) init
 {
+    self = [self initWithMCPart:NULL];
     MCAssert(0);
     return nil;
 }
@@ -37,7 +37,7 @@
 {
     self = [super init];
     
-    part->retain();
+    MC_SAFE_RETAIN(part);
     _part = part;
     
     return self;
@@ -72,6 +72,7 @@ MCO_OBJC_SYNTHESIZE_STRING(setContentID, contentID)
 MCO_OBJC_SYNTHESIZE_STRING(setContentLocation, contentLocation)
 MCO_OBJC_SYNTHESIZE_STRING(setContentDescription, contentDescription)
 MCO_OBJC_SYNTHESIZE_BOOL(setInlineAttachment, isInlineAttachment)
+MCO_OBJC_SYNTHESIZE_BOOL(setAttachment, isAttachment)
 
 - (MCOAbstractPart *) partForContentID:(NSString *)contentID
 {

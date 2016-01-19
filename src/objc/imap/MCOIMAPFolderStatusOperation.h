@@ -19,6 +19,7 @@
 
 @class MCOIMAPFolderStatus;
 
+NS_ASSUME_NONNULL_BEGIN
 @interface MCOIMAPFolderStatusOperation : MCOIMAPBaseOperation
 
 /**
@@ -29,11 +30,12 @@
  - On success `error` will be nil and `status` will contain the status metadata
  
  - On failure, `error` will be set with `MCOErrorDomain` as domain and an
- error code available in `MCOConstants.h`, `info` will be nil
+ error code available in `MCOConstants.h`, `status` will be nil
  */
 
-- (void) start:(void (^)(NSError * error, MCOIMAPFolderStatus * status))completionBlock;
+- (void) start:(void (^)(NSError * __nullable error, MCOIMAPFolderStatus * __nullable status))completionBlock;
 
 @end
+NS_ASSUME_NONNULL_END
 
 #endif

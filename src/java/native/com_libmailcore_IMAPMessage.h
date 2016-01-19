@@ -203,6 +203,14 @@ JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPMessage_partForPartID
 JNIEXPORT jstring JNICALL Java_com_libmailcore_IMAPMessage_htmlRendering
   (JNIEnv *, jobject, jstring, jobject, jobject);
 
+/*
+ * Class:     com_libmailcore_IMAPMessage
+ * Method:    setupNative
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_libmailcore_IMAPMessage_setupNative
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif

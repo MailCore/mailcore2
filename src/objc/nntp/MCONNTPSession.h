@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 MailCore. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #ifndef MAILCORE_MCONNTPSESSION_H
 
 #define MAILCORE_MCONNTPSESSION_H
@@ -27,6 +25,7 @@
 
 /** This class implements asynchronous access to the NNTP protocol.*/
 
+NS_ASSUME_NONNULL_BEGIN
 @interface MCONNTPSession : NSObject
 
 /** This is the hostname of the NNTP server to connect to.*/
@@ -100,7 +99,7 @@
  Returns an operation that will fetch the list of article numbers.
  
  MCONNTPFetchAllArticlesOperation * op = [session fetchAllArticlesOperation:@"comp.lang.c"];
- [op start:^(NSError * error, MCOIndexSet * articles) {
+ [op start:^(NSError * __nullable error, MCOIndexSet * articles) {
  }];
  */
 - (MCONNTPFetchAllArticlesOperation *) fetchAllArticlesOperation:(NSString *)group;
@@ -109,7 +108,7 @@
  Returns an operation that will fetch the header of the given message.
  
  MCONNTPFetchHeaderOperation * op = [session fetchHeaderOperationWithIndex:idx inGroup:@"comp.lang.c"];
- [op start:^(NSError * error, MCOMessageHeader * header) {
+ [op start:^(NSError * __nullable error, MCOMessageHeader * header) {
  // header is the parsed header of the message.
  }];
  */
@@ -119,7 +118,7 @@
  Returns an operation that will fetch an overview (headers) for a set of messages.
  
  MCONNTPFetchHeaderOperation * op = [session fetchOverviewOperationWithIndexes:indexes inGroup:@"comp.lang.c"];
- [op start:^(NSError * error, NSArray * headers) {
+ [op start:^(NSError * __nullable error, NSArray * headers) {
  // headers are the parsed headers of each part of the overview.
  }];
  */
@@ -129,7 +128,7 @@
  Returns an operation that will fetch the content of the given message.
  
  MCONNTPFetchArticleOperation * op = [session fetchArticleOperationWithIndex:idx inGroup:@"comp.lang.c"];
- [op start:^(NSError * error, NSData * messageData) {
+ [op start:^(NSError * __nullable error, NSData * messageData) {
  // messageData is the RFC 822 formatted message data.
  }];
  */
@@ -138,18 +137,28 @@
 /**
  Returns an operation that will fetch the content of a message with the given messageID.
  
- MCONNTPFetchArticleOperation * op = [session fetchArticleOperationWithMessageID:@"<MessageID123@mail.google.com>" inGroup:@"comp.lang.c"];
- [op start:^(NSError * error, NSData * messageData) {
+ MCONNTPFetchArticleOperation * op = [session fetchArticleOperationWithMessageID:@"<MessageID123@mail.google.com>"];
+ [op start:^(NSError * __nullable error, NSData * messageData) {
  // messageData is the RFC 822 formatted message data.
  }];
  */
-- (MCONNTPFetchArticleOperation *) fetchArticleOperationWithMessageID:(NSString *)messageID inGroup:(NSString *)group;
+- (MCONNTPFetchArticleOperation *) fetchArticleOperationWithMessageID:(NSString *)messageID;
+
+/**
+ Obsolete. Use -fetchArticleOperationWithMessageID: instead.
+ 
+ MCONNTPFetchArticleOperation * op = [session fetchArticleOperationWithMessageID:@"<MessageID123@mail.google.com>" inGroup:@"comp.lang.c"];
+ [op start:^(NSError * __nullable error, NSData * messageData) {
+ // messageData is the RFC 822 formatted message data.
+ }];
+ */
+- (MCONNTPFetchArticleOperation *) fetchArticleOperationWithMessageID:(NSString *)messageID inGroup:(NSString * __nullable)group DEPRECATED_ATTRIBUTE;
 
 /**
  Returns an operation that will fetch the server's date and time.
  
  MCONNTPFetchArticleOperation * op = [session fetchServerDateOperation];
- [op start:^(NSError * error, NSDate * serverDate) {
+ [op start:^(NSError * __nullable error, NSDate * serverDate) {
  }];
  */
 - (MCONNTPFetchServerTimeOperation *) fetchServerDateOperation;
@@ -158,7 +167,7 @@
  Returns an operation that will list all available newsgroups.
  
  MCONNTPListNewsgroupsOperation * op = [session listAllNewsgroupsOperation];
- [op start:^(NSError * error, NSArray * subscribedGroups) {
+ [op start:^(NSError * __nullable error, NSArray * subscribedGroups) {
  }];
  */
 - (MCONNTPListNewsgroupsOperation *) listAllNewsgroupsOperation;
@@ -167,7 +176,7 @@
  Returns an operation that will list server-suggested default newsgroups.
  
  MCONNTPListNewsgroupsOperation * op = [session listDefaultNewsgroupsOperation];
- [op start:^(NSError * error, NSArray * defaultGroups) {
+ [op start:^(NSError * __nullable error, NSArray * defaultGroups) {
  }];
  */
 - (MCONNTPListNewsgroupsOperation *) listDefaultNewsgroupsOperation;
@@ -176,7 +185,7 @@
  Returns an operation that will disconnect the session.
  
  MCONNTPOperation * op = [session disconnectOperation];
- [op start:^(NSError * error) {
+ [op start:^(NSError * __nullable error) {
  ...
  }];
  */
@@ -186,12 +195,13 @@
  Returns an operation that will check whether the NNTP account is valid.
  
  MCONNTPOperation * op = [session checkAccountOperation];
- [op start:^(NSError * error) {
+ [op start:^(NSError * __nullable error) {
  ...
  }];
  */
 - (MCONNTPOperation *) checkAccountOperation;
 
 @end
+NS_ASSUME_NONNULL_END
 
 #endif

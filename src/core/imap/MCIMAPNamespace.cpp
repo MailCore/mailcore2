@@ -142,3 +142,16 @@ void IMAPNamespace::importIMAPNamespace(struct mailimap_namespace_item * item)
         item->release();
     }
 }
+
+HashMap * IMAPNamespace::serializable()
+{
+    HashMap * result = Object::serializable();
+    result->setObjectForKey(MCSTR("items"), mItems->serializable());
+    return result;
+}
+
+void IMAPNamespace::importSerializable(HashMap * serializable)
+{
+    Array * items = (Array *) Object::objectWithSerializable((HashMap *) serializable->objectForKey(MCSTR("items")));
+    MC_SAFE_REPLACE_RETAIN(Array, mItems, items);
+}

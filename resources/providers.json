@@ -693,7 +693,13 @@
             "spam":"Junk Mail",
             "sentmail":"Sent Items",
             "trash":"Trash"
-        }
+        },
+        "mx-match":[
+                    "in1.smtp.messagingengine.com",
+                    "in2.smtp.messagingengine.com",
+                    "in1-smtp.messagingengine.com",
+                    "in2-smtp.messagingengine.com"
+                    ]
     },
     "apple":{
         "servers":{
@@ -931,6 +937,11 @@
             "smtp":[
                 {
                     "port":25,
+                    "hostname":"smtp-mail.outlook.com",
+                    "starttls":true
+                },
+                {
+                    "port":587,
                     "hostname":"smtp-mail.outlook.com",
                     "starttls":true
                 }

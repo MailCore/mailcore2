@@ -721,12 +721,7 @@ struct mailimf_fields * MessageHeader::createIMFFieldsAndFilterBcc(bool filterBc
             imfSubject = strdup(data->bytes());
         }
     }
-    
-    if ((imfTo == NULL) && (imfCc == NULL) && (imfBcc == NULL)) {
-        imfTo = mailimf_address_list_new_empty();
-        mailimf_address_list_add_parse(imfTo, (char *) "Undisclosed recipients:;");
-    }
-    
+
     fields = mailimf_fields_new_with_data_all(imfDate,
         imfFrom,
         NULL /* sender */,
@@ -985,6 +980,7 @@ Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool
     Array * toField;
     Array * ccField;
     bool containsSender;
+    Array * senderEmailsMailboxes;
     
     toField = NULL;
     ccField = NULL;
@@ -992,19 +988,23 @@ Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool
     hasTo = false;
     hasCc = false;
     addedAddresses = new Set();
-    
+    senderEmailsMailboxes = Array::array();
+
     containsSender = false;
     if (senderEmails != NULL) {
-      if (from() != NULL) {
-        if (senderEmails->containsObject(from()->mailbox()->lowercaseString())) {
-          containsSender = true;
+        mc_foreacharray(Address, address, senderEmails) {
+            senderEmailsMailboxes->addObject(address->mailbox()->lowercaseString());
         }
-      }
-      if (sender() != NULL) {
-        if (senderEmails->containsObject(sender()->mailbox()->lowercaseString())) {
-          containsSender = true;
+        if (from() != NULL) {
+            if (senderEmailsMailboxes->containsObject(from()->mailbox()->lowercaseString())) {
+                containsSender = true;
+            }
         }
-      }
+        if (sender() != NULL) {
+            if (senderEmailsMailboxes->containsObject(sender()->mailbox()->lowercaseString())) {
+                containsSender = true;
+            }
+        }
     }
     
     if (containsSender) {
@@ -1019,12 +1019,14 @@ Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool
                 }
                 if ((from() != NULL) && address->mailbox()->isEqualCaseInsensitive(from()->mailbox())) {
                     recipient->addObjectsFromArray(replyTo());
-                    for(unsigned int j = 0 ; j < replyTo()->count() ; j ++) {
-                        Address * rtAddress = (Address *) replyTo()->objectAtIndex(j);
-                        if (addedAddresses->containsObject(rtAddress->mailbox()->lowercaseString())) {
-                            continue;
+                    if (replyTo() != NULL) {
+                        for(unsigned int j = 0 ; j < replyTo()->count() ; j ++) {
+                            Address * rtAddress = (Address *) replyTo()->objectAtIndex(j);
+                            if (addedAddresses->containsObject(rtAddress->mailbox()->lowercaseString())) {
+                                continue;
+                            }
+                            addedAddresses->addObject(rtAddress->mailbox()->lowercaseString());
                         }
-                        addedAddresses->addObject(rtAddress->mailbox()->lowercaseString());
                     }
                 }
                 else {
@@ -1066,7 +1068,7 @@ Array * MessageHeader::recipientWithReplyAll(bool replyAll, bool includeTo, bool
         }
     }
     else {
-        addedAddresses->addObjectsFromArray(senderEmails);
+        addedAddresses->addObjectsFromArray(senderEmailsMailboxes);
         
         if (replyTo() != NULL && replyTo()->count() > 0) {
             hasTo = true;
@@ -1152,7 +1154,12 @@ MessageHeader * MessageHeader::replyHeader(bool replyAll, Array * addressesExclu
         subjectValue = MCSTR("Re: ");
     }
     else {
-        subjectValue = MCSTR("Re: ")->stringByAppendingString(subject());
+        if (!subject()->lowercaseString()->hasPrefix(MCSTR("re:"))) {
+            subjectValue = MCSTR("Re: ")->stringByAppendingString(subject());
+        }
+        else {
+            subjectValue = (String *) subject()->copy()->autorelease();
+        }
     }
     if (references() != NULL) {
         referencesValue = (Array *) (references()->copy());
@@ -1193,7 +1200,7 @@ MessageHeader * MessageHeader::forwardHeader()
         subjectValue = MCSTR("Fw: ");
     }
     else {
-        subjectValue = MCSTR("Fw: ")->stringByAppendingString(subject());
+        subjectValue = MCSTR("Fw: ")->stringByAppendingString(subject()->extractedSubjectAndKeepBracket(true));
     }
     if (references() != NULL) {
         referencesValue = (Array *) (references()->copy());

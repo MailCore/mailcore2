@@ -220,11 +220,13 @@ static jobject hashmapObjectToJavaConverter(JNIEnv * env, Object * obj)
     jmethodID method = env->GetMethodID(cls, "put", "(Ljava/lang/Object;Ljava/lang/Object;)V");
     Array * keys = hashMap->allKeys();
     for(unsigned int i = 0 ; i < keys->count() ; i ++) {
+        env->PushLocalFrame(32);
         Object * key = keys->objectAtIndex(i);
         jobject javaKey = mcObjectToJava(env, key);
         Object * value = hashMap->objectForKey(key);
         jobject javaValue = mcObjectToJava(env, value);
         env->CallVoidMethod(javaHashMap, method, javaKey, javaValue);
+        env->PopLocalFrame(NULL);
     }
     return javaHashMap;
 }
@@ -238,11 +240,13 @@ static jobject arrayObjectToJavaConverter(JNIEnv * env, Object * obj)
     jmethodID method = env->GetMethodID(cls, "add", "(Ljava/lang/Object;)Z");
     MCLog("add method %p", method);
     for(unsigned int i = 0 ; i < array->count() ; i ++) {
+        env->PushLocalFrame(32);
         MCLog("converting object %s", MCUTF8(array->objectAtIndex(i)));
         jobject javaObject = mcObjectToJava(env, array->objectAtIndex(i));
         MCLog("add object %p", javaObject);
         env->CallBooleanMethod(javaVector, method, javaObject);
         MCLog("added object %p", javaObject);
+        env->PopLocalFrame(NULL);
     }
     MCLog("array converted");
     return javaVector;
@@ -435,6 +439,9 @@ Object * mailcore::javaToMCObject(JNIEnv * env, jobject obj)
         return hashmapJavaToObjectConverter(env, obj);
     }
     else if (isJavaMap(env, obj)) {
+        return arrayJavaToObjectConverter(env, obj);
+    }
+    else if (isJavaList(env, obj)) {
         return arrayJavaToObjectConverter(env, obj);
     }
     else {

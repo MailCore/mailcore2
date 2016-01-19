@@ -109,6 +109,15 @@
 + (MCOIMAPSearchExpression *) searchUIDs:(MCOIndexSet *) uids;
 
 /**
+ Creates a search expression that matches the message numbers specified.
+ 
+ Example:
+ 
+ MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchNumbers:numbers]
+ **/
++ (MCOIMAPSearchExpression *) searchNumbers:(MCOIndexSet *) numbers;
+
+/**
  Creates a search expression that matches the content of a specific header.
 
  Example:

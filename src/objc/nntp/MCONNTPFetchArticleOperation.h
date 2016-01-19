@@ -17,6 +17,7 @@
 
 typedef void (^MCONNTPOperationProgressBlock)(unsigned int current, unsigned int maximum);
 
+NS_ASSUME_NONNULL_BEGIN
 @interface MCONNTPFetchArticleOperation : MCONNTPOperation
 
 /** This block will be called as data is downloaded from the network */
@@ -32,8 +33,9 @@ typedef void (^MCONNTPOperationProgressBlock)(unsigned int current, unsigned int
  - On failure, `error` will be set with `MCOErrorDomain` as domain and an 
  error code available in MCOConstants.h, `data` will be nil
  */
-- (void) start:(void (^)(NSError * error, NSData * messageData))completionBlock;
+- (void) start:(void (^)(NSError * __nullable error, NSData * __nullable messageData))completionBlock;
 
 @end
+NS_ASSUME_NONNULL_END
 
 #endif

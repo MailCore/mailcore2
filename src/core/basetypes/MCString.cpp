@@ -823,7 +823,9 @@ String::String(const char * UTF8Characters)
 {
     mUnicodeChars = NULL;
     reset();
-    allocate((unsigned int) strlen(UTF8Characters), true);
+    if (UTF8Characters != NULL) {
+        allocate((unsigned int) strlen(UTF8Characters), true);
+    }
     appendUTF8Characters(UTF8Characters);
 }
 
@@ -890,7 +892,7 @@ void String::allocate(unsigned int length, bool force)
 
 String * String::string()
 {
-    return stringWithCharacters(NULL);
+    return stringWithCharacters(NULL, 0);
 }
 
 String * String::stringWithData(Data * data, const char * charset)
@@ -926,12 +928,18 @@ String * String::stringWithVUTF8Format(const char * format, va_list ap)
 
 String * String::stringWithUTF8Characters(const char * UTF8Characters)
 {
+    if (UTF8Characters == NULL) {
+        return NULL;
+    }
     String * result = new String(UTF8Characters);
     return (String *) result->autorelease();
 }
 
 String * String::stringWithCharacters(const UChar * characters)
 {
+    if (characters == NULL) {
+        return NULL;
+    }
     String * result = new String(characters);
     return (String *) result->autorelease();
 }
@@ -1194,6 +1202,9 @@ Data * String::encodedMIMEHeaderValueForSubject()
 
 int String::compareWithCaseSensitive(String * otherString, bool caseSensitive)
 {
+    if (otherString == NULL) {
+        return 1;
+    }
     if ((length() == 0) && (otherString->length() == 0)) {
         return 0;
     }
@@ -1206,7 +1217,7 @@ int String::compareWithCaseSensitive(String * otherString, bool caseSensitive)
     }
     
     if (otherString->unicodeCharacters() == NULL) {
-        return -1;
+        return 1;
     }
     
 #if DISABLE_ICU
@@ -2034,25 +2045,69 @@ String * String::flattenHTML()
 
 String * String::stripWhitespace()
 {
-    String *str = (String *)copy();
-    
-    str->replaceOccurrencesOfString(MCSTR("\t"), MCSTR(" "));
-    str->replaceOccurrencesOfString(MCSTR("\n"), MCSTR(" "));
-    str->replaceOccurrencesOfString(MCSTR("\v"), MCSTR(" "));
-    str->replaceOccurrencesOfString(MCSTR("\f"), MCSTR(" "));
-    str->replaceOccurrencesOfString(MCSTR("\r"), MCSTR(" "));
-    str->replaceOccurrencesOfString(s_unicode160, MCSTR(" "));
-    str->replaceOccurrencesOfString(s_unicode133, MCSTR(" "));
-    str->replaceOccurrencesOfString(s_unicode2028, MCSTR(" "));
+    String * str = (String *)copy();
 
-    while (str->replaceOccurrencesOfString(MCSTR("  "), MCSTR(" ")) > 0) {
-        /* do nothing */
+    // replace space-like characters with space.
+    const UChar * source = str->unicodeCharacters();
+    UChar * dest = str->mUnicodeChars;
+    while (* source != 0) {
+        if (* source == '\t') {
+            * dest = ' ';
+        }
+        else if (* source == '\n') {
+            * dest = ' ';
+        }
+        else if (* source == '\t') {
+            * dest = ' ';
+        }
+        else if (* source == '\f') {
+            * dest = ' ';
+        }
+        else if (* source == '\r') {
+            * dest = ' ';
+        }
+        else if (* source == 160) {
+            * dest = ' ';
+        }
+        else if (* source == 133) {
+            * dest = ' ';
+        }
+        else if (* source == 0x2028) {
+            * dest = ' ';
+        }
+        else {
+            * dest = * source;
+        }
+        dest ++;
+        source ++;
     }
-    while (str->hasPrefix(MCSTR(" "))) {
-        str->deleteCharactersInRange(RangeMake(0, 1));
+
+    // skip spaces at the beginning.
+    source = str->unicodeCharacters();
+    dest = str->mUnicodeChars;
+    while (* source == ' ') {
+        source ++;
     }
-    while (str->hasSuffix(MCSTR(" "))) {
-        str->deleteCharactersInRange(RangeMake(str->length() - 1, 1));
+
+    // copy content
+    while (* source != 0) {
+        if ((* source == ' ') && (* (source + 1) == ' ')) {
+            source ++;
+        }
+        * dest = * source;
+        source ++;
+        dest ++;
+    }
+    * dest = 0;
+    str->mLength = (unsigned int) (dest - str->mUnicodeChars);
+
+    // skip spaces at the end.
+    if (str->mLength > 0) {
+        while (* (dest - 1) == ' ') {
+            dest --;
+        }
+        * dest = 0;
+        str->mLength = (unsigned int) (dest - str->mUnicodeChars);
     }
 
     str->autorelease();
@@ -2241,10 +2296,29 @@ Array * String::componentsSeparatedByString(String * separator)
     p = mUnicodeChars;
     while (1) {
         UChar * location;
+#if 0
         location = u_strstr(p, separator->unicodeCharacters());
         if (location == NULL) {
             break;
         }
+#else
+        int remaining = length() - (int) (p - mUnicodeChars);
+        location = NULL;
+        while (location == NULL) {
+            location = (UChar *) memmem(p, remaining * sizeof(UChar), separator->unicodeCharacters(), separator->length() * sizeof(UChar));
+            if (location == NULL) {
+                break;
+            }
+            // If it's odd, it's an invalid location. Keep looking for the pattern.
+            if (((char *) location - (char *) p) % sizeof(UChar) != 0) {
+                p = (UChar *) (((char *) location) + 1);
+                location = NULL;
+            }
+        }
+        if (location == NULL) {
+            break;
+        }
+#endif
         
         unsigned int length = (unsigned int) (location - p);
         String * value = new String(p, length);
@@ -2357,6 +2431,10 @@ String * String::uniquedStringWithUTF8Characters(const char * UTF8Characters)
     static pthread_once_t once = PTHREAD_ONCE_INIT;
     int r;
     
+    if (UTF8Characters == NULL) {
+        return NULL;
+    }
+
     pthread_once(&once, initUniquedStringHash);
     key.data = (void *) UTF8Characters;
     key.len = (unsigned int) strlen(UTF8Characters);
@@ -2509,6 +2587,102 @@ Data * String::decodedBase64Data()
     char * decoded = MCDecodeBase64(utf8, encoded_len, &decoded_len);
     Data * result = Data::dataWithBytes(decoded, decoded_len);
     free(decoded);
+    return result;
+}
+
+static int hexValue(const char * code) {
+    int value = 0;
+    const char * pch = code;
+    for (;;) {
+        int digit = *pch++;
+        if (digit >= '0' && digit <= '9') {
+            value += digit - '0';
+        }
+        else if (digit >= 'A' && digit <= 'F') {
+            value += digit - 'A' + 10;
+        }
+        else if (digit >= 'a' && digit <= 'f') {
+            value += digit - 'a' + 10;
+        }
+        else {
+            return -1;
+        }
+        if (pch == code + 2) {
+            return value;
+        }
+        value <<= 4;
+    }
+}
+
+String * String::urlDecodedString()
+{
+    Data * sourceData = dataUsingEncoding();
+    const char * source = sourceData->bytes();
+    char * start = (char *) malloc(sourceData->length() + 1);
+    char * dest = start;
+    unsigned int i = 0;
+    while (i < sourceData->length()) {
+        switch (source[i]) {
+            case '%':
+            {
+                if (i + 2 < sourceData->length()) {
+                    int value = hexValue(&source[i + 1]);
+                    if (value >= 0) {
+                        *(dest++) = value;
+                        i += 3;
+                    }
+                    else {
+                        *dest++ = '?';
+                        i ++;
+                    }
+                }
+                else {
+                    *dest++ = '?';
+                    i ++;
+                }
+                break;
+            }
+            default:
+            {
+                *dest++ = source[i];
+                i ++;
+                break;
+            }
+        }
+    }
+    * dest = 0;
+    String * result = String::stringWithUTF8Characters(start);
+    free(start);
+    return result;
+}
+
+static inline bool isValidUrlChar(char ch) {
+    return strchr("$&+,/:;=?@[]#!'()* ", ch) == NULL;
+}
+
+String * String::urlEncodedString()
+{
+    const char * digits = "0123456789ABCDEF";
+    Data * sourceData = dataUsingEncoding();
+    const char * source = sourceData->bytes();
+    char * start = (char *) malloc(sourceData->length() * 3 + 1);
+    char * dest = start;
+    unsigned int i = 0;
+    while (i < sourceData->length()) {
+        unsigned char ch = (unsigned char) source[i];
+        if (isValidUrlChar(ch)) {
+            *dest++ = ch;
+        } else {
+            *dest++ = '%';
+            *dest++ = digits[(ch >> 4) & 0x0F];
+            *dest++ = digits[       ch & 0x0F];
+        }
+        i ++;
+    }
+    *dest = 0;
+    String * result = String::stringWithUTF8Characters(dest);
+    free(start);
+
     return result;
 }
 

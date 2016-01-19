@@ -161,30 +161,42 @@ bool MailProvider::matchEmail(String * email)
     
     domain = (String *) components->lastObject();
 
+    bool matchExcludeDomain = false;
     mc_foreacharray(String, exclude, mDomainExclude) {
         if (matchDomain(exclude, domain)){
-            return false;
+            matchExcludeDomain = true;;
+            break;
         }
     }
-    
+    if (matchExcludeDomain) {
+        return false;
+    }
+
+    bool matchValidDomain = false;
     mc_foreacharray(String, match, mDomainMatch) {
         if (matchDomain(match, domain)){
-            return true;
+            matchValidDomain = true;
+            break;
         }
     }
-    
+    if (matchValidDomain) {
+        return true;
+    }
+
     return false;
 }
 
 bool MailProvider::matchMX(String * hostname)
 {
+    bool result = false;
     mc_foreacharray(String, match, mMxMatch) {
         if (matchDomain(match, hostname)){
-            return true;
+            result = true;
+            break;
         }
     }
-    
-    return false;
+
+    return result;
 }
 
 bool MailProvider::matchDomain(String * match, String * domain)
@@ -272,6 +284,7 @@ String * MailProvider::importantFolderPath()
 
 bool MailProvider::isMainFolder(String * folderPath, String * prefix)
 {
+    bool result = false;
     mc_foreachhashmapValue(String, path, mMailboxPaths) {
         String * fullPath;
         
@@ -282,11 +295,13 @@ bool MailProvider::isMainFolder(String * folderPath, String * prefix)
             fullPath = path;
         }
         
-        if (fullPath->isEqual(folderPath))
-            return true;
+        if (fullPath->isEqual(folderPath)) {
+            result = true;
+            break;
+        }
     }
     
-    return false;
+    return result;
 }
 
 String * MailProvider::description()

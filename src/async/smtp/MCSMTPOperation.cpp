@@ -19,6 +19,7 @@ SMTPOperation::SMTPOperation()
 {
     mSession = NULL;
     mError = ErrorNone;
+    mSmtpCallback = NULL;
 }
 
 SMTPOperation::~SMTPOperation()

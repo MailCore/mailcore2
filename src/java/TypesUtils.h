@@ -105,8 +105,10 @@
     static jobject objectToJavaConverter(JNIEnv * env, Object * obj) \
     { \
         jclass cls = env->FindClass("com/libmailcore/" mc_expand_and_quote(javaType)); \
-        jmethodID constructor = env->GetMethodID(cls, "initWithNative", "(J)V"); \
-        jobject javaObject = env->NewObject(cls, constructor, obj); \
+        jmethodID constructor = env->GetMethodID(cls, "<init>", "()V"); \
+        jobject javaObject = env->NewObject(cls, constructor); \
+        jmethodID initMethod = env->GetMethodID(cls, "initWithNative", "(J)V"); \
+        env->CallVoidMethod(javaObject, initMethod, (jlong) obj); \
         return javaObject; \
     } \
     \

@@ -92,7 +92,7 @@ static bool isTextPart(AbstractPart * part, htmlRendererContext * context)
     MCAssert(mimeType != NULL);
     
     if (!part->isInlineAttachment()) {
-        if ((part->filename() != NULL) && context->firstRendered) {
+        if (part->isAttachment() || ((part->filename() != NULL) && context->firstRendered)) {
             return false;
         }
     }
@@ -218,6 +218,9 @@ static String * htmlForAbstractMessage(String * folder, AbstractMessage * messag
     context.pass = 1;
     context.firstAttachment = false;
     context.hasTextPart = false;
+
+    htmlCallback->setMixedTextAndAttachmentsModeEnabled(context.hasMixedTextAndAttachments);
+
     String * content = htmlForAbstractPart(mainPart, &context);
     if (content == NULL)
         return NULL;
@@ -274,6 +277,28 @@ static String * htmlForAbstractSinglePart(AbstractPart * part, htmlRendererConte
     if (isTextPart(part, context)) {
         if (context->pass == 0) {
             if (context->state == RENDER_STATE_HAD_ATTACHMENT) {
+#if 0
+                if (part->className()->isEqual(MCSTR("mailcore::IMAPPart"))) {
+                    if (mimeType->isEqual(MCSTR("text/plain"))) {
+                        Data * data = context->dataCallback->dataForIMAPPart(context->folder, (IMAPPart *) part);
+                        if (data != NULL) {
+                            if (data->length() == 0) {
+                                return NULL;
+                            }
+                            else if (data->length() == 2) {
+                                if (strncmp(data->bytes(), "\r\n", 2) == 0) {
+                                    return NULL;
+                                }
+                            }
+                            else if (data->length() == 1) {
+                                if (strncmp(data->bytes(), "\n", 1) == 0) {
+                                    return NULL;
+                                }
+                            }
+                        }
+                    }
+                }
+#endif
                 context->state = RENDER_STATE_HAD_ATTACHMENT_THEN_TEXT;
             }
             return NULL;
@@ -296,6 +321,7 @@ static String * htmlForAbstractSinglePart(AbstractPart * part, htmlRendererConte
             
             String * str = data->stringWithDetectedCharset(charset, false);
             str = str->htmlMessageContent();
+            str = context->htmlCallback->filterHTMLForPart(str);
             context->firstRendered = true;
             return str;
         }
@@ -307,7 +333,8 @@ static String * htmlForAbstractSinglePart(AbstractPart * part, htmlRendererConte
             }
             else if (part->className()->isEqual(MCSTR("mailcore::Attachment"))) {
                 data = ((Attachment *) part)->data();
-                MCAssert(data != NULL);
+                // It may be NULL when mailcore::MessageParser::attachments() is invoked when
+                // when mailcore::MessageParser has been serialized/unserialized.
             }
             if (data == NULL)
                 return NULL;

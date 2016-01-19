@@ -88,10 +88,10 @@
 - (void) importHeadersData:(NSData *)data;
 
 /** Returns a header that can be used as a base for a reply message.*/
-- (MCOMessageHeader *) replyHeaderWithExcludedRecipients:(NSArray *)excludedRecipients;
+- (MCOMessageHeader *) replyHeaderWithExcludedRecipients:(NSArray * /* MCOAddress */)excludedRecipients;
 
 /** Returns a header that can be used as a base for a reply all message.*/
-- (MCOMessageHeader *) replyAllHeaderWithExcludedRecipients:(NSArray *)excludedRecipients;
+- (MCOMessageHeader *) replyAllHeaderWithExcludedRecipients:(NSArray * /* MCOAddress */)excludedRecipients;
 
 /** Returns a header that can be used as a base for a forward message.*/
 - (MCOMessageHeader *) forwardHeader;
