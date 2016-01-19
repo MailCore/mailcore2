@@ -40,7 +40,7 @@
 
 @interface MCOOperation (MCOUnavailable)
 
-- (instancetype) init NS_UNAVAILABLE;
+- (id) init NS_UNAVAILABLE;
 
 @end
 

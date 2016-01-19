@@ -16,6 +16,10 @@
 #import "MCOUtils.h"
 #import "MCOAbstractMessageRendererCallback.h"
 
+@interface MCOMessageParser ()
+- (id) initWithMCMessage:(mailcore::AbstractMessage *)message NS_DESIGNATED_INITIALIZER;
+@end
+
 @implementation MCOMessageParser
 
 #define nativeType mailcore::MessageParser
@@ -42,6 +46,11 @@
     self = [super initWithMCMessage:message];
     MC_SAFE_RELEASE(message);
     return self;
+}
+
+- (id) initWithMCMessage:(mailcore::AbstractMessage *)message
+{
+    return [super initWithMCMessage:message];
 }
 
 - (void) dealloc

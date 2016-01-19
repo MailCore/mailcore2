@@ -19,6 +19,11 @@
 #import "MCOAddress.h"
 #import "MCOAddress+Private.h"
 
+@interface MCOMessageHeader ()
+- (id) initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (id) initWithMCMessageHeader:(mailcore::MessageHeader *)header NS_DESIGNATED_INITIALIZER;
+@end
+
 @implementation MCOMessageHeader {
     mailcore::MessageHeader * _nativeHeader;
 }

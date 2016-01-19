@@ -63,6 +63,9 @@
 /** Returns a header created from RFC 822 data.*/
 + (MCOMessageHeader *) headerWithData:(NSData *)data;
 
+/** Initialize a header with empty RFC 822 data. */
+- (id) init NS_DESIGNATED_INITIALIZER;
+
 /** Initialize a header with RFC 822 data.*/
 - (id) initWithData:(NSData *)data;
 

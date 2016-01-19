@@ -17,6 +17,10 @@
 #import "NSString+MCO.h"
 #import "NSObject+MCO.h"
 
+@interface MCOMailProvider ()
+- (id) initWithMCProvider:(mailcore::MailProvider *)provider NS_DESIGNATED_INITIALIZER;
+@end
+
 @implementation MCOMailProvider {
     mailcore::MailProvider * _provider;
 }
@@ -37,6 +41,13 @@
 {
     mailcore::MailProvider * provider = (mailcore::MailProvider *) object;
     return [[[self alloc] initWithMCProvider:provider] autorelease];
+}
+
+- (id) init
+{
+    MCAssert(0);
+    [self release];
+    return (self = nil);
 }
 
 - (id) initWithInfo:(NSDictionary *)info
