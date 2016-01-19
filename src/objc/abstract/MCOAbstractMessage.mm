@@ -30,9 +30,9 @@
 
 - (id) init
 {
-    self = [self initWithMCMessage:NULL];
     MCAssert(0);
-    return nil;
+    [self release];
+    return (self = nil);
 }
 
 - (id) initWithMCMessage:(mailcore::AbstractMessage *)message

@@ -28,9 +28,9 @@
 
 - (id) init
 {
-    self = [self initWithMCPart:NULL];
     MCAssert(0);
-    return nil;
+    [self release];
+    return (self = nil);
 }
 
 - (id) initWithMCPart:(mailcore::AbstractPart *)part
