@@ -529,7 +529,13 @@ void SMTPSession::login(ErrorCode * pError)
             if (utf8Username == NULL) {
                 utf8Username = "";
             }
-            r = mailsmtp_oauth2_authenticate(mSmtp, utf8Username, MCUTF8(mOAuth2Token));
+            
+            if (mOAuth2Token == NULL) {
+                r = MAILSMTP_ERROR_STREAM;
+            }
+            else {
+                r = mailsmtp_oauth2_authenticate(mSmtp, utf8Username, MCUTF8(mOAuth2Token));
+            }
             break;
         }
         
@@ -538,7 +544,12 @@ void SMTPSession::login(ErrorCode * pError)
             if (utf8Username == NULL) {
                 utf8Username = "";
             }
-            r = mailsmtp_oauth2_outlook_authenticate(mSmtp, utf8Username, MCUTF8(mOAuth2Token));
+            
+            if (mOAuth2Token == NULL) {
+                r = MAILSMTP_ERROR_STREAM;
+            } else {
+                r = mailsmtp_oauth2_outlook_authenticate(mSmtp, utf8Username, MCUTF8(mOAuth2Token));
+            }
             break;
         }
     }
