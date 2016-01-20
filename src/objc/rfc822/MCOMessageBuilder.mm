@@ -26,7 +26,7 @@
     MCORegisterClass(self, &typeid(nativeType));
 }
 
-- (id)init
+- (id) init
 {
     mailcore::MessageBuilder * message = new mailcore::MessageBuilder();
     self = [super initWithMCMessage:message];

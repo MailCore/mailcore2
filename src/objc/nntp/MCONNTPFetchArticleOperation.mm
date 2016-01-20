@@ -60,7 +60,7 @@ private:
     return [[[self alloc] initWithMCOperation:op] autorelease];
 }
 
-- (id)initWithMCOperation:(mailcore::Operation *)op
+- (id) initWithMCOperation:(mailcore::Operation *)op
 {
     self = [super initWithMCOperation:op];
     
