@@ -39,3 +39,10 @@
 - (NSString *) hostnameWithEmail:(NSString *)email;
 
 @end
+
+@interface MCONetService (MCOUnavailable)
+
+/** Do not invoke this directly. */
+- (id) init NS_UNAVAILABLE;
+
+@end
