@@ -13,6 +13,10 @@
 #import "MCOUtils.h"
 #import "MCOAbstractMessageRendererCallback.h"
 
+@interface MCOMessageBuilder ()
+- (id) initWithMCMessage:(mailcore::AbstractMessage *)message NS_DESIGNATED_INITIALIZER;
+@end
+
 @implementation MCOMessageBuilder
 
 #define nativeType mailcore::MessageBuilder
@@ -22,12 +26,17 @@
     MCORegisterClass(self, &typeid(nativeType));
 }
 
-- (id)init
+- (id) init
 {
     mailcore::MessageBuilder * message = new mailcore::MessageBuilder();
     self = [super initWithMCMessage:message];
     MC_SAFE_RELEASE(message);
     return self;
+}
+
+- (id) initWithMCMessage:(mailcore::AbstractMessage *)message
+{
+    return [super initWithMCMessage:message];
 }
 
 - (id) copyWithZone:(NSZone *)zone

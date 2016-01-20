@@ -38,4 +38,10 @@
 
 @end
 
+@interface MCOOperation (MCOUnavailable)
+
+- (id) init NS_UNAVAILABLE;
+
+@end
+
 #endif

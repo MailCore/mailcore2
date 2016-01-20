@@ -26,7 +26,7 @@
 + (MCOMessageParser *) messageParserWithData:(NSData *)data;
 
 /** data is the RFC 822 formatted message.*/
-- (id) initWithData:(NSData *)data;
+- (id) initWithData:(NSData *)data NS_DESIGNATED_INITIALIZER;
 - (void) dealloc;
 
 /** It's the main part of the message. It can be MCOMessagePart, MCOMultipart or MCOAttachment.*/
@@ -51,6 +51,12 @@
 /** Text rendering of the body of the message. All end of line will be removed and white spaces cleaned up if requested.
  This method can be used to generate the summary of the message.*/
 - (NSString *) plainTextBodyRenderingAndStripWhitespace:(BOOL)stripWhitespace;
+
+@end
+
+@interface MCOMessageParser (MCOUnavailable)
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 

@@ -71,7 +71,7 @@ private:
     return MCO_OBJC_BRIDGE_GET(description);
 }
 
-- (id)init {
+- (id) init {
     self = [super init];
     
     _session = new mailcore::NNTPAsyncSession();

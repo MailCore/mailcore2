@@ -16,6 +16,16 @@
 @interface MCONetService : NSObject <NSCopying>
 
 /**
+   Creates and initializes a `MCONetService` object with the info dictionary.
+*/
++ (MCONetService *) serviceWithInfo:(NSDictionary *)info;
+
+/**
+   Initializes a `MCONetService` object with the given info dictionary.
+*/
+- (id) initWithInfo:(NSDictionary *)info NS_DESIGNATED_INITIALIZER;
+
+/**
    The hostname of the server. [MCONetService hostnameWithEmail:] is recommended
    instead as it can handle services with custom domains 
 */
@@ -27,9 +37,6 @@
 /** What kind of connection type is supported, like SSL, Start TLS, Plain etc. */
 @property (nonatomic, assign) MCOConnectionType connectionType;
 
-+ (MCONetService *) serviceWithInfo:(NSDictionary *)info;
-
-- (id) initWithInfo:(NSDictionary *)info;
 - (NSDictionary *) info;
 
 /** 
@@ -37,5 +44,11 @@
     off the email address
 */
 - (NSString *) hostnameWithEmail:(NSString *)email;
+
+@end
+
+@interface MCONetService (MCOUnavailable)
+
+- (id) init NS_UNAVAILABLE;
 
 @end

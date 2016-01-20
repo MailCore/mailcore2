@@ -13,6 +13,10 @@
 #import "NSString+MCO.h"
 #import "NSObject+MCO.h"
 
+@interface MCONetService ()
+- (id) initWithNetService:(mailcore::NetService *)netService NS_DESIGNATED_INITIALIZER;
+@end
+
 @implementation MCONetService {
     mailcore::NetService *_netService;
 }
@@ -38,6 +42,13 @@
 + (MCONetService *) serviceWithInfo:(NSDictionary *)info
 {
     return [[[self alloc] initWithInfo:info] autorelease];
+}
+
+- (id) init
+{
+    MCAssert(0);
+    [self release];
+    return (self = nil);
 }
 
 - (id) initWithInfo:(NSDictionary *)info

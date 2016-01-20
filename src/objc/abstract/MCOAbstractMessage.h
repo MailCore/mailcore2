@@ -56,4 +56,11 @@ namespace mailcore {
 
 @end
 
+@interface MCOAbstractMessage (MCOUnavailable)
+
+/** Do not invoke this directly */
+- (id) init;
+
+@end
+
 #endif

@@ -14,9 +14,12 @@
 
 @interface MCOMailProvider : NSObject
 
-@property (nonatomic, copy) NSString * identifier;
+/**
+   Initializes an `MCOMailProvider` object with the info dictionary.
+*/
+- (id) initWithInfo:(NSDictionary *)info NS_DESIGNATED_INITIALIZER;
 
-- (id) initWithInfo:(NSDictionary *)info;
+@property (nonatomic, copy) NSString * identifier;
 
 /**
    A list of ways that you can connect to the IMAP server
@@ -82,5 +85,11 @@
    @return Returns nil if it is unknown
 */
 - (NSString *) importantFolderPath;
+
+@end
+
+@interface MCOMailProvider (MCOUnavailable)
+
+- (id) init NS_UNAVAILABLE;
 
 @end
