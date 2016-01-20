@@ -57,7 +57,10 @@ namespace mailcore {
 @end
 
 @interface MCOAbstractMessage (MCOUnavailable)
-- (id) init NS_UNAVAILABLE;
+
+/** Do not invoke this directly */
+- (id) init;
+
 @end
 
 #endif

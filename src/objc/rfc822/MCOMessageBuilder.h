@@ -34,6 +34,9 @@
 
 @interface MCOMessageBuilder : MCOAbstractMessage <NSCopying>
 
+/** Creates and initializes an empty message builder. */
+- (id) init NS_DESIGNATED_INITIALIZER;
+
 /** Main HTML content of the message.*/
 @property (nonatomic, copy, setter=setHTMLBody:) NSString * htmlBody;
 
