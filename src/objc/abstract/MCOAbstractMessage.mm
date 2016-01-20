@@ -17,6 +17,10 @@
 #import "NSObject+MCO.h"
 #import "NSString+MCO.h"
 
+@interface MCOAbstractMessage ()
+- (id)init NS_DESIGNATED_INITIALIZER;
+@end
+
 @implementation MCOAbstractMessage {
     mailcore::AbstractMessage * _message;
 }
