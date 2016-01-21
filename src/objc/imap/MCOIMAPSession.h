@@ -24,6 +24,7 @@
 @class MCOIndexSet;
 @class MCOIMAPFetchMessagesOperation;
 @class MCOIMAPFetchContentOperation;
+@class MCOIMAPFetchContentToFileOperation;
 @class MCOIMAPFetchParsedContentOperation;
 @class MCOIMAPSearchOperation;
 @class MCOIMAPIdleOperation;
@@ -847,6 +848,37 @@ vanishedMessages will be set only for servers that support QRESYNC. See [RFC5162
                                                                       number:(uint32_t)number
                                                                       partID:(NSString *)partID
                                                                     encoding:(MCOEncoding)encoding;
+
+/**
+ Returns an operation to fetch an attachment to a file.
+ @param  urgent is set to YES, an additional connection to the same folder might be opened to fetch the content.
+ Operation will be perform in a memory efficient manner.
+
+     MCOIMAPFetchContentToFileOperation * op = [session fetchMessageAttachmentToFileOperationWithFolder:@"INBOX"
+                                                                                                    uid:456
+                                                                                                 partID:@"1.2"
+                                                                                               encoding:MCOEncodingBase64
+                                                                                               filename:filename
+                                                                                                 urgent:YES];
+
+     // Optionally, explicitly enable chunked mode
+     [op setLoadingByChunksEnabled:YES];
+     [op setChunksSize:1024*1024];
+     // need in chunked mode for correct progress indication
+     [op setEstimatedSize:sizeOfAttachFromBodystructure];
+
+     [op start:^(NSError * __nullable error) {
+         ...
+     }];
+
+ */
+- (MCOIMAPFetchContentToFileOperation *) fetchMessageAttachmentToFileOperationWithFolder:(NSString *)folder
+                                                                                     uid:(uint32_t)uid
+                                                                                  partID:(NSString *)partID
+                                                                                encoding:(MCOEncoding)encoding
+                                                                                filename:(NSString *)filename
+                                                                                  urgent:(BOOL)urgent;
+
 
 /** @name General IMAP Actions */
 

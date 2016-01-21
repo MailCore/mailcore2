@@ -14,6 +14,7 @@ set(async_imap_files
   async/imap/MCIMAPDisconnectOperation.cpp
   async/imap/MCIMAPExpungeOperation.cpp
   async/imap/MCIMAPFetchContentOperation.cpp
+  async/imap/MCIMAPFetchContentToFileOperation.cpp
   async/imap/MCIMAPFetchParsedContentOperation.cpp
   async/imap/MCIMAPFetchFoldersOperation.cpp
   async/imap/MCIMAPFetchMessagesOperation.cpp

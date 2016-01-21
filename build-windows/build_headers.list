@@ -11,6 +11,8 @@ src\core\basetypes\MCString.h
 src\core\basetypes\MCRange.h
 src\core\basetypes\MCICUTypes.h
 src\core\basetypes\MCData.h
+src\core\basetypes\MCDataDecoderUtils.h
+src\core\basetypes\MCDataStreamDecoder.h
 src\core\abstract\MCMessageConstants.h
 src\core\basetypes\MCArray.h
 src\core\basetypes\MCHashMap.h
@@ -88,6 +90,7 @@ src\async\imap\MCIMAPCopyMessagesOperation.h
 src\async\imap\MCIMAPMoveMessagesOperation.h
 src\async\imap\MCIMAPFetchMessagesOperation.h
 src\async\imap\MCIMAPFetchContentOperation.h
+src\async\imap\MCIMAPFetchContentToFileOperation.h
 src\async\imap\MCIMAPFetchParsedContentOperation.h
 src\async\imap\MCIMAPIdleOperation.h
 src\async\imap\MCIMAPFolderInfo.h
@@ -164,6 +167,7 @@ src\objc\imap\MCOIMAPCopyMessagesOperation.h
 src\objc\imap\MCOIMAPMoveMessagesOperation.h
 src\objc\imap\MCOIMAPFetchMessagesOperation.h
 src\objc\imap\MCOIMAPFetchContentOperation.h
+src\objc\imap\MCOIMAPFetchContentToFileOperation.h
 src\objc\imap\MCOIMAPFetchParsedContentOperation.h
 src\objc\imap\MCOIMAPSearchOperation.h
 src\objc\imap\MCOIMAPIdleOperation.h

@@ -33,6 +33,7 @@
     <ClInclude Include="..\..\..\src\async\imap\MCIMAPDisconnectOperation.h" />
     <ClInclude Include="..\..\..\src\async\imap\MCIMAPExpungeOperation.h" />
     <ClInclude Include="..\..\..\src\async\imap\MCIMAPFetchContentOperation.h" />
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPFetchContentToFileOperation.h" />
     <ClInclude Include="..\..\..\src\async\imap\MCIMAPFetchFoldersOperation.h" />
     <ClInclude Include="..\..\..\src\async\imap\MCIMAPFetchMessagesOperation.h" />
     <ClInclude Include="..\..\..\src\async\imap\MCIMAPFetchNamespaceOperation.h" />
@@ -103,6 +104,8 @@
     <ClInclude Include="..\..\..\src\core\basetypes\MCConnectionLogger.h" />
     <ClInclude Include="..\..\..\src\core\basetypes\MCConnectionLoggerUtils.h" />
     <ClInclude Include="..\..\..\src\core\basetypes\MCData.h" />
+    <ClInclude Include="..\..\..\src\core\basetypes\MCDataDecoderUtils.h" />
+    <ClInclude Include="..\..\..\src\core\basetypes\MCDataStreamDecoder.h" />
     <ClInclude Include="..\..\..\src\core\basetypes\MCDefines.h" />
     <ClInclude Include="..\..\..\src\core\basetypes\MCHash.h" />
     <ClInclude Include="..\..\..\src\core\basetypes\MCHashMap.h" />
@@ -196,6 +199,7 @@
     <ClCompile Include="..\..\..\src\async\imap\MCIMAPDisconnectOperation.cpp" />
     <ClCompile Include="..\..\..\src\async\imap\MCIMAPExpungeOperation.cpp" />
     <ClCompile Include="..\..\..\src\async\imap\MCIMAPFetchContentOperation.cpp" />
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPFetchContentToFileOperation.cpp" />
     <ClCompile Include="..\..\..\src\async\imap\MCIMAPFetchFoldersOperation.cpp" />
     <ClCompile Include="..\..\..\src\async\imap\MCIMAPFetchMessagesOperation.cpp" />
     <ClCompile Include="..\..\..\src\async\imap\MCIMAPFetchNamespaceOperation.cpp" />
@@ -255,6 +259,8 @@
     <ClCompile Include="..\..\..\src\core\basetypes\MCBase64.c" />
     <ClCompile Include="..\..\..\src\core\basetypes\MCConnectionLoggerUtils.cpp" />
     <ClCompile Include="..\..\..\src\core\basetypes\MCData.cpp" />
+    <ClCompile Include="..\..\..\src\core\basetypes\MCDataDecoderUtils.cpp" />
+    <ClCompile Include="..\..\..\src\core\basetypes\MCDataStreamDecoder.cpp" />
     <ClCompile Include="..\..\..\src\core\basetypes\MCHash.cpp" />
     <ClCompile Include="..\..\..\src\core\basetypes\MCHashMap.cpp" />
     <ClCompile Include="..\..\..\src\core\basetypes\MCHTMLCleaner.cpp" />

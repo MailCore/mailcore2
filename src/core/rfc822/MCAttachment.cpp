@@ -548,12 +548,12 @@ Attachment * Attachment::attachmentWithSingleMIME(struct mailmime * mime)
     mailmime_single_fields_init(&single_fields, mime->mm_mime_fields, mime->mm_content_type);
     
     encoding = encodingForMIMEEncoding(single_fields.fld_encoding, data->dt_encoding);
-    
+
     Data * mimeData;
     mimeData = Data::dataWithBytes(bytes, (unsigned int) length);
     mimeData = mimeData->decodedDataUsingEncoding(encoding);
     result->setData(mimeData);
-    
+
     str = get_content_type_str(mime->mm_content_type);
     result->setMimeType(String::stringWithUTF8Characters(str));
     free(str);
