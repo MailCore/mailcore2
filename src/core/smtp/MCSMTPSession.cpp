@@ -547,7 +547,8 @@ void SMTPSession::login(ErrorCode * pError)
             
             if (mOAuth2Token == NULL) {
                 r = MAILSMTP_ERROR_STREAM;
-            } else {
+            } 
+            else {
                 r = mailsmtp_oauth2_outlook_authenticate(mSmtp, utf8Username, MCUTF8(mOAuth2Token));
             }
             break;

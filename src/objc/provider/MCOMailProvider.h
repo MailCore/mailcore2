@@ -84,3 +84,10 @@
 - (NSString *) importantFolderPath;
 
 @end
+
+@interface MCOMailProvider (MCOUnavailable)
+
+/** Do not invoke this directly. */
+- (id) init NS_UNAVAILABLE;
+
+@end
