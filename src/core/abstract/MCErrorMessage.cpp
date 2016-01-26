@@ -46,11 +46,14 @@ static const char * localizedDescriptionTable[] = {
     "An application specific password is required",                                  /** MCOErrorGmailApplicationSpecificPasswordRequired */
     "An error when requesting date",                                                 /** MCOErrorServerDate */
     "No valid server found",                                                         /** MCOErrorNoValidServerFound */
+    NULL,                                                                            /** MCOErrorCustomCommand */
+    "Cannot send message due to possible spam detected by server",                   /** MCOErrorSendMessageSpamSuspected */
+    "User is over the limit for messages allowed to be sent in a single day",        /** MCOErrorSendMessageDailyLimitExceeded */
 };
 
 String * mailcore::errorMessageWithErrorCode(ErrorCode errorCode)
 {
-    if (errorCode < 0) {
+    if (errorCode < 0 || errorCode == ErrorCustomCommand) {
         return NULL;
     }
     if (errorCode >= sizeof(localizedDescriptionTable) / sizeof(localizedDescriptionTable[0])) {

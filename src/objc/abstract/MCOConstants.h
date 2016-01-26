@@ -413,6 +413,10 @@ typedef NS_ENUM(NSInteger, MCOErrorCode) {
     MCOErrorNoValidServerFound,
     /** Error while running custom command */
     MCOErrorCustomCommand,
+    /** Spam was suspected by server */
+    MCOErrorSendMessageSpamSuspected,
+    /** Daily limit of sent messages was hit */
+    MCOErrorSendMessageDailyLimitExceeded,
     /** The count of all errors */
     MCOErrorCodeCount,
 };
