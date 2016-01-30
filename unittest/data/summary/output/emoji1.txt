@@ -1,5 +1,5 @@
 From:Bob Van Osten<bob@relateiq.com>
-To:"Bob@relateiq.com"<bob@relateiq.com>
+To:Bob@relateiq.com<bob@relateiq.com>
 Subject:Emoji Test
 Date:December 11, 2014 at 11:42:50 AM PST
 

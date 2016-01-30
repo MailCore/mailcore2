@@ -1,6 +1,6 @@
-From:"Иван Винников"<iv@reggi.ru>
-To:"'Эльдар Мустафин'"<mustafin@prototype.ru>, "'Руслан Лобачев'"<lobachev@prototype.ru>
-Cc:"Дмитрий Денискин"<dd@reggi.ru>
+From:Иван Винников<iv@reggi.ru>
+To:'Эльдар Мустафин'<mustafin@prototype.ru>, 'Руслан Лобачев'<lobachev@prototype.ru>
+Cc:Дмитрий Денискин<dd@reggi.ru>
 Subject:REGGI
 Date:December 22, 2011 at 4:13:00 AM PST
 

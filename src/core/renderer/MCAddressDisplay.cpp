@@ -83,7 +83,18 @@ String * AddressDisplay::veryShortDisplayStringForAddress(Address * address)
 
 String * AddressDisplay::displayStringForAddresses(Array * addresses)
 {
-    return Address::nonEncodedRFC822StringForAddresses(addresses);
+    String * result = String::string();
+    if (addresses == NULL) {
+        return result;
+    }
+    for(unsigned int i = 0 ; i < addresses->count() ; i ++) {
+        Address * address = (Address *) addresses->objectAtIndex(i);
+        if (i != 0) {
+            result->appendString(MCSTR(", "));
+        }
+        result->appendString(AddressDisplay::displayStringForAddress(address));
+    }
+    return result;
 }
 
 String * AddressDisplay::shortDisplayStringForAddresses(Array * addresses)
