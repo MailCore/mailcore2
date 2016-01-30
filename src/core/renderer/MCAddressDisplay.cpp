@@ -10,15 +10,38 @@
 
 using namespace mailcore;
 
+String * AddressDisplay::sanitizeDisplayName(String * displayName)
+{
+    if (displayName->hasPrefix(MCSTR("\"")) && displayName->hasSuffix(MCSTR("\""))) {
+        String * unquotedDisplayName = displayName->substringWithRange(RangeMake(1, displayName->length() - 2));
+        if (unquotedDisplayName->locationOfString(MCSTR("\"")) != -1) {
+            return displayName;
+        }
+        else {
+            return unquotedDisplayName;
+        }
+    }
+    else {
+        return displayName;
+    }
+}
+
 String * AddressDisplay::displayStringForAddress(Address * address)
 {
-    return address->nonEncodedRFC822String();
+    if (address->displayName() != NULL) {
+        return String::stringWithUTF8Format("%s <%s>",
+                                            MCUTF8(AddressDisplay::sanitizeDisplayName(address->displayName())),
+                                            MCUTF8(address->mailbox()));
+    }
+    else {
+        return address->mailbox();
+    }
 }
 
 String * AddressDisplay::shortDisplayStringForAddress(Address * address)
 {
     if ((address->displayName() != NULL) && (address->displayName()->length() > 0)) {
-        return address->displayName();
+        return sanitizeDisplayName(address->displayName());
     }
     else if (address->mailbox()) {
         return address->mailbox();
@@ -34,7 +57,7 @@ String * AddressDisplay::veryShortDisplayStringForAddress(Address * address)
         Array * components;
         String * senderName;
         
-        senderName = address->displayName();
+        senderName = sanitizeDisplayName(address->displayName());
         senderName = (String *) senderName->copy()->autorelease();
         
         senderName->replaceOccurrencesOfString(MCSTR(","), MCSTR(" "));
