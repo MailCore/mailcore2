@@ -682,12 +682,12 @@ void SMTPSession::sendMessage(Address * from, Array * recipients, Data * message
                 goto err;
             }
         }
-        else if (responseCode == 521 && response->locationOfString(MCSTR("limit")) != -1) {
-            * pError = ErrorSendMessageDailyLimitExceeded;
+        else if (responseCode == 521 && response->locationOfString(MCSTR("over the limit")) != -1) {
+            * pError = ErrorYahooSendMessageDailyLimitExceeded;
             goto err;
         }
         else if (responseCode == 554 && response->locationOfString(MCSTR("spam")) != -1) {
-            * pError = ErrorSendMessageSpamSuspected;
+            * pError = ErrorYahooSendMessageSpamSuspected;
             goto err;
         }
         

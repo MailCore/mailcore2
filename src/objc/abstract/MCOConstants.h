@@ -414,9 +414,9 @@ typedef NS_ENUM(NSInteger, MCOErrorCode) {
     /** Error while running custom command */
     MCOErrorCustomCommand,
     /** Spam was suspected by server */
-    MCOErrorSendMessageSpamSuspected,
+    MCOErrorYahooSendMessageSpamSuspected,
     /** Daily limit of sent messages was hit */
-    MCOErrorSendMessageDailyLimitExceeded,
+    MCOErrorYahooSendMessageDailyLimitExceeded,
     /** The count of all errors */
     MCOErrorCodeCount,
 };
