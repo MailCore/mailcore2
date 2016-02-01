@@ -253,6 +253,8 @@ namespace mailcore {
         ErrorServerDate,
         ErrorNoValidServerFound,
         ErrorCustomCommand,
+        ErrorYahooSendMessageSpamSuspected,
+        ErrorYahooSendMessageDailyLimitExceeded
     };
     
     enum PartType {

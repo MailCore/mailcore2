@@ -694,6 +694,14 @@ void SMTPSession::sendMessage(Address * from, Array * recipients, Data * message
                 goto err;
             }
         }
+        else if (responseCode == 521 && response->locationOfString(MCSTR("over the limit")) != -1) {
+            * pError = ErrorYahooSendMessageDailyLimitExceeded;
+            goto err;
+        }
+        else if (responseCode == 554 && response->locationOfString(MCSTR("spam")) != -1) {
+            * pError = ErrorYahooSendMessageSpamSuspected;
+            goto err;
+        }
         
         * pError = ErrorSendMessage;
         MC_SAFE_REPLACE_COPY(String, mLastSMTPResponse, response);
