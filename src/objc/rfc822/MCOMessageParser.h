@@ -26,7 +26,7 @@
 + (MCOMessageParser *) messageParserWithData:(NSData *)data;
 
 /** data is the RFC 822 formatted message.*/
-- (id) initWithData:(NSData *)data;
+- (instancetype) initWithData:(NSData *)data;
 - (void) dealloc;
 
 /** It's the main part of the message. It can be MCOMessagePart, MCOMultipart or MCOAttachment.*/

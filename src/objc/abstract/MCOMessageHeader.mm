@@ -49,7 +49,7 @@
     return _nativeHeader;
 }
 
-- (id) init
+- (instancetype) init
 {
     self = [super init];
     
@@ -58,7 +58,7 @@
     return self;
 }
 
-- (id) initWithMCMessageHeader:(mailcore::MessageHeader *)header
+- (instancetype) initWithMCMessageHeader:(mailcore::MessageHeader *)header
 {
     self = [super init];
     
@@ -73,7 +73,7 @@
     return [[[MCOMessageHeader alloc] initWithData:data] autorelease];
 }
 
-- (id) initWithData:(NSData *)data
+- (instancetype) initWithData:(NSData *)data
 {
     self = [self init];
     [self importHeadersData:data];

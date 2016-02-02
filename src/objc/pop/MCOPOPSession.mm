@@ -71,7 +71,7 @@ private:
     return MCO_OBJC_BRIDGE_GET(description);
 }
 
-- (id)init {
+- (instancetype) init {
     self = [super init];
     
     _session = new mailcore::POPAsyncSession();

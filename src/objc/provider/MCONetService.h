@@ -29,7 +29,7 @@
 
 + (MCONetService *) serviceWithInfo:(NSDictionary *)info;
 
-- (id) initWithInfo:(NSDictionary *)info;
+- (instancetype) initWithInfo:(NSDictionary *)info;
 - (NSDictionary *) info;
 
 /** 
@@ -43,6 +43,6 @@
 @interface MCONetService (MCOUnavailable)
 
 /** Do not invoke this directly. */
-- (id) init NS_UNAVAILABLE;
+- (instancetype) init NS_UNAVAILABLE;
 
 @end

@@ -23,7 +23,7 @@
     MCORegisterClass(self, &typeid(nativeType));
 }
 
-- (id) init
+- (instancetype) init
 {
     mailcore::IMAPIdentity * identity = new mailcore::IMAPIdentity();
     self = [self initWithMCIdentity:identity];
@@ -32,7 +32,7 @@
     return self;
 }
 
-- (id) initWithMCIdentity:(mailcore::IMAPIdentity *)identity
+- (instancetype) initWithMCIdentity:(mailcore::IMAPIdentity *)identity
 {
     self = [super init];
     

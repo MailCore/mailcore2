@@ -44,7 +44,7 @@ MCO_SYNTHESIZE_NSCODING
     return _indexSet;
 }
 
-- (id) init
+- (instancetype) init
 {
     mailcore::IndexSet * indexSet = new mailcore::IndexSet();
     self = [self initWithMCIndexSet:indexSet];
@@ -52,7 +52,7 @@ MCO_SYNTHESIZE_NSCODING
     return self;
 }
 
-- (id) initWithMCIndexSet:(mailcore::IndexSet *)indexSet
+- (instancetype) initWithMCIndexSet:(mailcore::IndexSet *)indexSet
 {
     self = [super init];
     _indexSet = indexSet;

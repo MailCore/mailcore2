@@ -71,7 +71,7 @@ MCO_OBJC_SYNTHESIZE_BOOL(setImapEnabled, isImapEnabled)
 MCO_OBJC_SYNTHESIZE_BOOL(setPopEnabled, isPopEnabled)
 MCO_OBJC_SYNTHESIZE_BOOL(setSmtpEnabled, isSmtpEnabled)
 
-- (id) init
+- (instancetype) init
 {
     mailcore::AccountValidator * validator = new mailcore::AccountValidator();
     self = [self initWithMCValidator:validator];
@@ -79,7 +79,7 @@ MCO_OBJC_SYNTHESIZE_BOOL(setSmtpEnabled, isSmtpEnabled)
     return self;
 }
 
-- (id) initWithMCValidator:(mailcore::AccountValidator *)validator
+- (instancetype) initWithMCValidator:(mailcore::AccountValidator *)validator
 {
     self = [super initWithMCOperation:validator];
     

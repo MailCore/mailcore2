@@ -31,7 +31,7 @@
     return [[[self alloc] initWithMCPart:attachment] autorelease];
 }
 
-- (id) init
+- (instancetype) init
 {
     mailcore::Attachment * attachment = new mailcore::Attachment();
     self = [super initWithMCPart:attachment];
