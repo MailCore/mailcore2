@@ -60,7 +60,9 @@ namespace mailcore {
         virtual void sendMessage(Data * messageData, SMTPProgressCallback * callback, ErrorCode * pError);
         virtual void sendMessage(Address * from, Array * /* Address */ recipients, Data * messageData,
                                  SMTPProgressCallback * callback, ErrorCode * pError);
-        
+        virtual void sendMessage(Address * from, Array * /* Address */ recipients, String * messagePath,
+                                 SMTPProgressCallback * callback, ErrorCode * pError);
+
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
         

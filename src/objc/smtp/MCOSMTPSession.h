@@ -154,6 +154,24 @@
                                             from:(MCOAddress *)from
                                       recipients:(NSArray *)recipients;
 
+
+/**
+ Returns an operation that will send the message from the given file through SMTP.
+ It will use the sender and recipient set from the parameters.
+ It will also filter out Bcc from the content of the message.
+
+ MCOSMTPOperation * op = [session sendOperationWithContentsOfFile:rfc822DataFilename
+                                                             from:[MCOAddress addressWithMailbox:@"hoa@etpan.org"]
+                                                       recipients:[NSArray arrayWithObject:
+                                                                   [MCOAddress addressWithMailbox:@"laura@etpan.org"]]];
+ [op start:^(NSError * __nullable error) {
+ ...
+ }];
+ */
+- (MCOSMTPSendOperation *) sendOperationWithContentsOfFile:(NSString *)path
+                                                      from:(MCOAddress *)from
+                                                recipients:(NSArray *)recipients;
+
 /**
  Returns an operation that will check whether the SMTP account is valid.
 

@@ -170,6 +170,19 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
     return result;
 }
 
+- (MCOSMTPSendOperation *) sendOperationWithContentsOfFile:(NSString *)path
+                                                      from:(MCOAddress *)from
+                                                recipients:(NSArray *)recipients
+{
+    mailcore::SMTPOperation * coreOp =
+    MCO_NATIVE_INSTANCE->sendMessageOperation(MCO_FROM_OBJC(Address, from),
+                                              MCO_FROM_OBJC(Array, recipients),
+                                              MCO_FROM_OBJC(String, path));
+    MCOSMTPSendOperation * result = [[[MCOSMTPSendOperation alloc] initWithMCOperation:coreOp] autorelease];
+    [result setSession:self];
+    return result;
+}
+
 - (MCOSMTPOperation *) checkAccountOperationWithFrom:(MCOAddress *)from
 {
     mailcore::SMTPOperation *coreOp = MCO_NATIVE_INSTANCE->checkAccountOperation(MCO_FROM_OBJC(mailcore::Address, from));

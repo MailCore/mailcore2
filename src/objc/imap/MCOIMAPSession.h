@@ -305,6 +305,24 @@
                                                         customFlags:(NSArray *)customFlags;
 
 /**
+ Returns an operation to add a message with custom flags to a folder.
+
+     MCOIMAPOperation * op = [session appendMessageOperationWithFolder:@"Sent Mail"
+                                                        contentsAtPath:rfc822DataFilename
+                                                                 flags:MCOMessageFlagNone
+                                                           customFlags:@[@"$CNS-Greeting-On"]];
+     [op start:^(NSError * __nullable error, uint32_t createdUID) {
+       if (error == nil) {
+         NSLog(@"created message with UID %lu", (unsigned long) createdUID);
+       }
+     }];
+ */
+- (MCOIMAPAppendMessageOperation *)appendMessageOperationWithFolder:(NSString *)folder
+                                                     contentsAtPath:(NSString *)path
+                                                              flags:(MCOMessageFlag)flags
+                                                        customFlags:(NSArray *)customFlags;
+
+/**
  Returns an operation to copy messages to a folder.
 
      MCOIMAPCopyMessagesOperation * op = [session copyMessagesOperationWithFolder:@"INBOX"

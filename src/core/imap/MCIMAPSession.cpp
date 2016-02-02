@@ -1655,6 +1655,18 @@ void IMAPSession::appendMessageWithCustomFlagsAndDate(String * folder, Data * me
     * pError = ErrorNone;
 }
 
+void IMAPSession::appendMessageWithCustomFlagsAndDate(String * folder, String * messagePath, MessageFlag flags, Array * customFlags, time_t date,
+                                                      IMAPProgressCallback * progressCallback, uint32_t * createdUID, ErrorCode * pError)
+{
+    Data * messageData = Data::dataWithContentsOfFile(messagePath);
+    if (!messageData) {
+        * pError = ErrorFile;
+        return;
+    }
+
+    return appendMessageWithCustomFlagsAndDate(folder, messageData, flags, customFlags, date, progressCallback, createdUID, pError);
+}
+
 void IMAPSession::copyMessages(String * folder, IndexSet * uidSet, String * destFolder,
      HashMap ** pUidMapping, ErrorCode * pError)
 {

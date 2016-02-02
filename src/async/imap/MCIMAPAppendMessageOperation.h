@@ -24,7 +24,10 @@ namespace mailcore {
         
         virtual void setMessageData(Data * messageData);
         virtual Data * messageData();
-        
+
+        virtual void setMessageFilepath(String * path);
+        virtual String * messageFilepath();
+
         virtual void setFlags(MessageFlag flags);
         virtual MessageFlag flags();
         
@@ -41,6 +44,7 @@ namespace mailcore {
         
     private:
         Data * mMessageData;
+        String * mMessageFilepath;
         MessageFlag mFlags;
         Array * mCustomFlags;
         time_t mDate;

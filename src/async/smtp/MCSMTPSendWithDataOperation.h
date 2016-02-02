@@ -31,15 +31,18 @@ namespace mailcore {
         
         virtual void setMessageData(Data * data);
         virtual Data * messageData();
-        
+
+        virtual void setMessageFilepath(String * path);
+        virtual String * messageFilepath();
+
     public: // subclass behavior
         virtual void main();
         
     private:
         Data * mMessageData;
+        String * mMessageFilepath;
         Array * mRecipients;
         Address * mFrom;
-        
     };
     
 }
