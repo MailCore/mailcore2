@@ -85,6 +85,7 @@ src\async\imap\MCIMAPOperation.h
 src\async\imap\MCIMAPFetchFoldersOperation.h
 src\async\imap\MCIMAPAppendMessageOperation.h
 src\async\imap\MCIMAPCopyMessagesOperation.h
+src\async\imap\MCIMAPMoveMessagesOperation.h
 src\async\imap\MCIMAPFetchMessagesOperation.h
 src\async\imap\MCIMAPFetchContentOperation.h
 src\async\imap\MCIMAPFetchParsedContentOperation.h
@@ -159,6 +160,7 @@ src\objc\imap\MCOIMAPFolderStatusOperation.h
 src\objc\imap\MCOIMAPFolderStatus.h
 src\objc\imap\MCOIMAPAppendMessageOperation.h
 src\objc\imap\MCOIMAPCopyMessagesOperation.h
+src\objc\imap\MCOIMAPMoveMessagesOperation.h
 src\objc\imap\MCOIMAPFetchMessagesOperation.h
 src\objc\imap\MCOIMAPFetchContentOperation.h
 src\objc\imap\MCOIMAPFetchParsedContentOperation.h

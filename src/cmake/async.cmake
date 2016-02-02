@@ -8,6 +8,7 @@ set(async_imap_files
   async/imap/MCIMAPCheckAccountOperation.cpp
   async/imap/MCIMAPConnectOperation.cpp
   async/imap/MCIMAPCopyMessagesOperation.cpp
+  async/imap/MCIMAPMoveMessagesOperation.cpp
   async/imap/MCIMAPCreateFolderOperation.cpp
   async/imap/MCIMAPDeleteFolderOperation.cpp
   async/imap/MCIMAPDisconnectOperation.cpp

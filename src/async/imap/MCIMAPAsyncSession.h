@@ -21,6 +21,7 @@ namespace mailcore {
     class IMAPFetchFoldersOperation;
     class IMAPAppendMessageOperation;
     class IMAPCopyMessagesOperation;
+    class IMAPMoveMessagesOperation;
     class IMAPFetchMessagesOperation;
     class IMAPFetchContentOperation;
     class IMAPFetchParsedContentOperation;
@@ -121,6 +122,7 @@ namespace mailcore {
         virtual IMAPAppendMessageOperation * appendMessageOperation(String * folder, Data * messageData, MessageFlag flags, Array * customFlags = NULL);
         
         virtual IMAPCopyMessagesOperation * copyMessagesOperation(String * folder, IndexSet * uids, String * destFolder);
+        virtual IMAPMoveMessagesOperation * moveMessagesOperation(String * folder, IndexSet * uids, String * destFolder);
         
         virtual IMAPOperation * expungeOperation(String * folder);
         
