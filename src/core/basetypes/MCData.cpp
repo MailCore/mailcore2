@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <sys/mman.h>
 #include <pthread.h>
 #if USE_UCHARDET
 #include <uchardet/uchardet.h>
@@ -522,20 +523,17 @@ void Data::takeBytesOwnership(char * bytes, unsigned int length, BytesDeallocato
     mBytesDeallocator = bytesDeallocator;
 }
 
-void Data::takeBytesOwnership(char * bytes, unsigned int length)
-{
-    reset();
-    mBytes = (char *) bytes;
-    mLength = length;
+static void mmapDeallocator(char * bytes, unsigned int length) {
+    if (bytes) {
+        munmap(bytes, length);
+    }
 }
 
 Data * Data::dataWithContentsOfFile(String * filename)
 {
     int r;
-    size_t read_items;
     struct stat stat_buf;
     FILE * f;
-    char * buf;
     Data * data;
     
     f = fopen(filename->fileSystemRepresentation(), "rb");
@@ -548,21 +546,17 @@ Data * Data::dataWithContentsOfFile(String * filename)
         fclose(f);
         return NULL;
     }
-    
-    buf = (char *) malloc((size_t) stat_buf.st_size);
-    
-    read_items = fread(buf, 1, (size_t)  stat_buf.st_size, f);
-    if ((off_t) read_items != stat_buf.st_size) {
-        free(buf);
-        fclose(f);
+
+    unsigned int length = (unsigned int)stat_buf.st_size;
+    void * bytes = mmap(NULL, length, PROT_READ, MAP_PRIVATE, fileno(f), 0);
+    fclose(f);
+
+    if (bytes == MAP_FAILED) {
         return NULL;
     }
     
     data = Data::data();
-    data->takeBytesOwnership(buf, (unsigned int) stat_buf.st_size);
-    
-    fclose(f);
-    
+    data->takeBytesOwnership((char *)bytes, length, mmapDeallocator);
     return data;
 }
 

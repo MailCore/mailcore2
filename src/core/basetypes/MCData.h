@@ -81,7 +81,6 @@ namespace mailcore {
         void init();
         void reset();
         String * charsetWithFilteredHTMLWithoutHint(bool filterHTML);
-        void takeBytesOwnership(char * bytes, unsigned int length);
         
     };
 
