@@ -560,26 +560,30 @@ Data * Data::dataWithContentsOfFile(String * filename)
     return data;
 }
 
-static size_t uudecode(char * text, size_t size)
+static size_t uudecode(const char * text, size_t size, char * dst, size_t dst_buf_size)
 {
     unsigned int count = 0;
-    char *b = text;		/* beg */
-    char *s = b;			/* src */
-    char *d = b;			/* dst */
-    char *e = b+size;			/* end */
+    const char *b = text;		/* beg */
+    const char *s = b;			/* src */
+    const char *e = b+size;			/* end */
+    char *d = dst;
     int out = (*s++ & 0x7f) - 0x20;
     
     /* don't process lines without leading count character */
     if (out < 0)
         return size;
-    
+
+    /* dummy check. user must allocate buffer with appropriate length */
+    if (dst_buf_size < out)
+        return size;
+
     /* don't process begin and end lines */
     if ((strncasecmp((const char *)b, "begin ", 6) == 0) ||
         (strncasecmp((const char *)b, "end",    3) == 0))
         return size;
     
     //while (s < e - 4)
-    while (s < e)
+    while (s < e && count < out)
     {
         int v = 0;
         int i;
@@ -595,7 +599,6 @@ static size_t uudecode(char * text, size_t size)
         d += 3;
         count += 3;
     }
-    *d = (char) '\0';
     return count;
 }
 
@@ -649,24 +652,24 @@ Data * Data::decodedDataUsingEncoding(Encoding encoding)
         }
         case EncodingUUEncode:
         {
-            char * dup_data;
-            size_t decoded_length;
             Data * data;
-            char * current_p;
+            const char * current_p;
             
             data = Data::dataWithCapacity((unsigned int) text_length);
-            
-            dup_data = (char *) malloc(text_length);
-            memcpy(dup_data, text, text_length);
-            
-            current_p = dup_data;
+
+            current_p = text;
             while (1) {
+                /* In uuencoded files each data line usually have 45 bytes of decoded data.
+                 Maximum possible length is limited by (0x7f-0x20) bytes.
+                 So 256-bytes buffer is enough. */
+                char decoded_buf[256];
+                size_t decoded_length;
                 size_t length;
-                char * p;
-                char * p1;
-                char * p2;
-                char * end_line;
-                
+                const char * p;
+                const char * p1;
+                const char * p2;
+                const char * end_line;
+
                 p1 = strchr(current_p, '\n');
                 p2 = strchr(current_p, '\r');
                 if (p1 == NULL) {
@@ -685,7 +688,7 @@ Data * Data::decodedDataUsingEncoding(Encoding encoding)
                 }
                 end_line = p;
                 if (p != NULL) {
-                    while ((size_t) (p - dup_data) < text_length) {
+                    while ((size_t) (p - text) < text_length) {
                         if ((* p != '\r') && (* p != '\n')) {
                             break;
                         }
@@ -693,7 +696,7 @@ Data * Data::decodedDataUsingEncoding(Encoding encoding)
                     }
                 }
                 if (p == NULL) {
-                    length = text_length - (current_p - dup_data);
+                    length = text_length - (current_p - text);
                 }
                 else {
                     length = end_line - current_p;
@@ -701,23 +704,22 @@ Data * Data::decodedDataUsingEncoding(Encoding encoding)
                 if (length == 0) {
                     break;
                 }
-                decoded_length = uudecode(current_p, length);
+                decoded_length = uudecode(current_p, length, decoded_buf, sizeof(decoded_buf));
                 if (decoded_length != 0 && decoded_length < length) {
-                    data->appendBytes(current_p, (unsigned int) decoded_length);
+                    data->appendBytes(decoded_buf, (unsigned int) decoded_length);
                 }
                 
                 if (p == NULL)
                     break;
                 
                 current_p = p;
-                while ((size_t) (current_p - dup_data) < text_length) {
+                while ((size_t) (current_p - text) < text_length) {
                     if ((* current_p != '\r') && (* current_p != '\n')) {
                         break;
                     }
                     current_p ++;
                 }
             }
-            free(dup_data);
             
             return data;
         }
