@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <sys/mman.h>
 #include <pthread.h>
 #if USE_UCHARDET
 #include <uchardet/uchardet.h>
@@ -39,6 +40,25 @@ static int isPowerOfTwo (unsigned int x)
 
 void Data::allocate(unsigned int length, bool force)
 {
+    if (mExternallyAllocatedMemory) {
+        // We don't know how this memory was allocated.
+        // Possibly this memory is readonly.
+        // So we need fallback to malloc'ed implementation.
+
+        unsigned int bytes_len = 0;
+        char * bytes = NULL;
+        if (mBytes) {
+            bytes_len = mLength;
+            bytes = (char *) malloc(mLength);
+            memcpy(bytes, mBytes, mLength);
+        }
+
+        reset();
+        mBytes = bytes;
+        mLength = bytes_len;
+        mAllocated = bytes_len;
+    }
+
     if (length <= mAllocated)
         return;
 
@@ -62,37 +82,46 @@ void Data::allocate(unsigned int length, bool force)
 
 void Data::reset()
 {
-    free(mBytes);
+    if (mExternallyAllocatedMemory) {
+        if (mBytes && mBytesDeallocator) {
+            mBytesDeallocator(mBytes, mLength);
+        }
+    } else {
+        free(mBytes);
+    }
+    init();
+}
+
+void Data::init()
+{
     mAllocated = 0;
     mLength = 0;
     mBytes = NULL;
+    mExternallyAllocatedMemory = false;
+    mBytesDeallocator = NULL;
 }
 
 Data::Data()
 {
-    mBytes = NULL;
-    reset();
+    init();
 }
 
 Data::Data(Data * otherData) : Object()
 {
-    mBytes = NULL;
-    reset();
+    init();
     appendData(otherData);
 }
 
 Data::Data(const char * bytes, unsigned int length)
 {
-    mBytes = NULL;
-    reset();
+    init();
     allocate(length, true);
     appendBytes(bytes, length);
 }
 
 Data::Data(int capacity)
 {
-    mBytes = NULL;
-    reset();
+    init();
     allocate(capacity, true);
 }
 
@@ -484,20 +513,27 @@ String * Data::charsetWithFilteredHTML(bool filterHTML, String * hintCharset)
 #endif
 }
 
-void Data::takeBytesOwnership(char * bytes, unsigned int length)
+void Data::takeBytesOwnership(char * bytes, unsigned int length, BytesDeallocator bytesDeallocator)
 {
-    free(mBytes);
-    mBytes = (char *) bytes;
+    reset();
+    mBytes = bytes;
     mLength = length;
+    mAllocated = length;
+    mExternallyAllocatedMemory = true;
+    mBytesDeallocator = bytesDeallocator;
+}
+
+static void mmapDeallocator(char * bytes, unsigned int length) {
+    if (bytes) {
+        munmap(bytes, length);
+    }
 }
 
 Data * Data::dataWithContentsOfFile(String * filename)
 {
     int r;
-    size_t read_items;
     struct stat stat_buf;
     FILE * f;
-    char * buf;
     Data * data;
     
     f = fopen(filename->fileSystemRepresentation(), "rb");
@@ -510,44 +546,44 @@ Data * Data::dataWithContentsOfFile(String * filename)
         fclose(f);
         return NULL;
     }
-    
-    buf = (char *) malloc((size_t) stat_buf.st_size);
-    
-    read_items = fread(buf, 1, (size_t)  stat_buf.st_size, f);
-    if ((off_t) read_items != stat_buf.st_size) {
-        free(buf);
-        fclose(f);
+
+    unsigned int length = (unsigned int)stat_buf.st_size;
+    void * bytes = mmap(NULL, length, PROT_READ, MAP_PRIVATE, fileno(f), 0);
+    fclose(f);
+
+    if (bytes == MAP_FAILED) {
         return NULL;
     }
     
     data = Data::data();
-    data->takeBytesOwnership(buf, (unsigned int) stat_buf.st_size);
-    
-    fclose(f);
-    
+    data->takeBytesOwnership((char *)bytes, length, mmapDeallocator);
     return data;
 }
 
-static size_t uudecode(char * text, size_t size)
+static size_t uudecode(const char * text, size_t size, char * dst, size_t dst_buf_size)
 {
     unsigned int count = 0;
-    char *b = text;		/* beg */
-    char *s = b;			/* src */
-    char *d = b;			/* dst */
-    char *e = b+size;			/* end */
+    const char *b = text;		/* beg */
+    const char *s = b;			/* src */
+    const char *e = b+size;			/* end */
+    char *d = dst;
     int out = (*s++ & 0x7f) - 0x20;
     
     /* don't process lines without leading count character */
     if (out < 0)
         return size;
-    
+
+    /* dummy check. user must allocate buffer with appropriate length */
+    if (dst_buf_size < out)
+        return size;
+
     /* don't process begin and end lines */
     if ((strncasecmp((const char *)b, "begin ", 6) == 0) ||
         (strncasecmp((const char *)b, "end",    3) == 0))
         return size;
     
     //while (s < e - 4)
-    while (s < e)
+    while (s < e && count < out)
     {
         int v = 0;
         int i;
@@ -563,9 +599,12 @@ static size_t uudecode(char * text, size_t size)
         d += 3;
         count += 3;
     }
-    *d = (char) '\0';
     return count;
 }
+
+static void decodedPartDeallocator(char * decoded, unsigned int decoded_length) {
+    mailmime_decoded_part_free(decoded);
+};
 
 Data * Data::decodedDataUsingEncoding(Encoding encoding)
 {
@@ -606,30 +645,31 @@ Data * Data::decodedDataUsingEncoding(Encoding encoding)
             cur_token = 0;
             mailmime_part_parse(text, text_length, &cur_token,
                                 mime_encoding, &decoded, &decoded_length);
-            data = Data::dataWithBytes(decoded, (unsigned int) decoded_length);
-            mailmime_decoded_part_free(decoded);
+
+            data = Data::data();
+            data->takeBytesOwnership(decoded, (unsigned int) decoded_length, decodedPartDeallocator);
             return data;
         }
         case EncodingUUEncode:
         {
-            char * dup_data;
-            size_t decoded_length;
             Data * data;
-            char * current_p;
+            const char * current_p;
             
             data = Data::dataWithCapacity((unsigned int) text_length);
-            
-            dup_data = (char *) malloc(text_length);
-            memcpy(dup_data, text, text_length);
-            
-            current_p = dup_data;
+
+            current_p = text;
             while (1) {
+                /* In uuencoded files each data line usually have 45 bytes of decoded data.
+                 Maximum possible length is limited by (0x7f-0x20) bytes.
+                 So 256-bytes buffer is enough. */
+                char decoded_buf[256];
+                size_t decoded_length;
                 size_t length;
-                char * p;
-                char * p1;
-                char * p2;
-                char * end_line;
-                
+                const char * p;
+                const char * p1;
+                const char * p2;
+                const char * end_line;
+
                 p1 = strchr(current_p, '\n');
                 p2 = strchr(current_p, '\r');
                 if (p1 == NULL) {
@@ -648,7 +688,7 @@ Data * Data::decodedDataUsingEncoding(Encoding encoding)
                 }
                 end_line = p;
                 if (p != NULL) {
-                    while ((size_t) (p - dup_data) < text_length) {
+                    while ((size_t) (p - text) < text_length) {
                         if ((* p != '\r') && (* p != '\n')) {
                             break;
                         }
@@ -656,7 +696,7 @@ Data * Data::decodedDataUsingEncoding(Encoding encoding)
                     }
                 }
                 if (p == NULL) {
-                    length = text_length - (current_p - dup_data);
+                    length = text_length - (current_p - text);
                 }
                 else {
                     length = end_line - current_p;
@@ -664,23 +704,22 @@ Data * Data::decodedDataUsingEncoding(Encoding encoding)
                 if (length == 0) {
                     break;
                 }
-                decoded_length = uudecode(current_p, length);
+                decoded_length = uudecode(current_p, length, decoded_buf, sizeof(decoded_buf));
                 if (decoded_length != 0 && decoded_length < length) {
-                    data->appendBytes(current_p, (unsigned int) decoded_length);
+                    data->appendBytes(decoded_buf, (unsigned int) decoded_length);
                 }
                 
                 if (p == NULL)
                     break;
                 
                 current_p = p;
-                while ((size_t) (current_p - dup_data) < text_length) {
+                while ((size_t) (current_p - text) < text_length) {
                     if ((* current_p != '\r') && (* current_p != '\n')) {
                         break;
                     }
                     current_p ++;
                 }
             }
-            free(dup_data);
             
             return data;
         }
