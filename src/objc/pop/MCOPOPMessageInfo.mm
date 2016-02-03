@@ -48,7 +48,7 @@
     return MCO_OBJC_BRIDGE_GET(description);
 }
 
-- (id) initWithMCPOPMessageInfo:(mailcore::POPMessageInfo *)info
+- (instancetype) initWithMCPOPMessageInfo:(mailcore::POPMessageInfo *)info
 {
     self = [super init];
     

@@ -16,7 +16,7 @@
 
 @property (nonatomic, copy) NSString * identifier;
 
-- (id) initWithInfo:(NSDictionary *)info;
+- (instancetype) initWithInfo:(NSDictionary *)info;
 
 /**
    A list of ways that you can connect to the IMAP server
@@ -88,6 +88,6 @@
 @interface MCOMailProvider (MCOUnavailable)
 
 /** Do not invoke this directly. */
-- (id) init NS_UNAVAILABLE;
+- (instancetype) init NS_UNAVAILABLE;
 
 @end

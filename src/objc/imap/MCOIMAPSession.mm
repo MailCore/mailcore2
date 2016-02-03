@@ -73,7 +73,7 @@ private:
     return _session;
 }
 
-- (id)init {
+- (instancetype) init {
     self = [super init];
     
     _session = new IMAPAsyncSession();

@@ -24,7 +24,7 @@ namespace mailcore {
 @interface MCOAbstractMessage : NSObject <NSCopying>
 
 #ifdef __cplusplus
-- (id) initWithMCMessage:(mailcore::AbstractMessage *)message NS_DESIGNATED_INITIALIZER;
+- (instancetype) initWithMCMessage:(mailcore::AbstractMessage *)message NS_DESIGNATED_INITIALIZER;
 #endif
 
 /** Header of the message. */

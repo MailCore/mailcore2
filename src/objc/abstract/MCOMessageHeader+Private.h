@@ -17,7 +17,7 @@ namespace mailcore {
 
 @interface MCOMessageHeader (Private)
 
-- (id) initWithMCMessageHeader:(mailcore::MessageHeader *)header;
+- (instancetype) initWithMCMessageHeader:(mailcore::MessageHeader *)header;
 + (MCOAddress *) addressWithMCMessageHeader:(mailcore::MessageHeader *)header;
 
 @end

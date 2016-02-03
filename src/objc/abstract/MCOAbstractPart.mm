@@ -26,14 +26,14 @@
     return _part;
 }
 
-- (id) init
+- (instancetype) init
 {
     self = [self initWithMCPart:NULL];
     MCAssert(0);
     return nil;
 }
 
-- (id) initWithMCPart:(mailcore::AbstractPart *)part
+- (instancetype) initWithMCPart:(mailcore::AbstractPart *)part
 {
     self = [super init];
     

@@ -108,7 +108,7 @@ MCO_SYNTHESIZE_NSCODING
 }
 
 
-- (id) init
+- (instancetype) init
 {
     self = [super init];
     
@@ -117,7 +117,7 @@ MCO_SYNTHESIZE_NSCODING
     return self;
 }
 
-- (id) initWithMCAddress:(mailcore::Address *)address
+- (instancetype) initWithMCAddress:(mailcore::Address *)address
 {
     self = [super init];
     

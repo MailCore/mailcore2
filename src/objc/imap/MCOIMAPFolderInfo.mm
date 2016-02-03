@@ -22,7 +22,7 @@
     MCORegisterClass(self, &typeid(nativeType));
 }
 
-- (id) initWithMCFolderInfo:(mailcore::IMAPFolderInfo *)info
+- (instancetype) initWithMCFolderInfo:(mailcore::IMAPFolderInfo *)info
 {
     self = [super init];
 

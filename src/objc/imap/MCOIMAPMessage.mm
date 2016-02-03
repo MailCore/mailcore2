@@ -24,7 +24,7 @@
     MCORegisterClass(self, &typeid(nativeType));
 }
 
-- (id) init
+- (instancetype) init
 {
     mailcore::IMAPMessage * msg = new mailcore::IMAPMessage();
     self = [self initWithMCMessage:msg];

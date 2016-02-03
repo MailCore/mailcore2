@@ -17,7 +17,7 @@ namespace mailcore {
 
 @interface MCOAddress (Private)
 
-- (id) initWithMCAddress:(mailcore::Address *)address;
+- (instancetype) initWithMCAddress:(mailcore::Address *)address;
 + (MCOAddress *) addressWithMCAddress:(mailcore::Address *)address;
 
 @end
