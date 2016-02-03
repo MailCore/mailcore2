@@ -2634,6 +2634,10 @@ Data * IMAPSession::fetchMessage(String * folder, bool identifier_is_uid, uint32
     return data;
 }
 
+static void nstringDeallocator(char * bytes, unsigned int length) {
+    mailimap_nstring_free(bytes);
+};
+
 Data * IMAPSession::fetchMessageAttachment(String * folder, bool identifier_is_uid,
                                            uint32_t identifier, String * partID,
                                            Encoding encoding, IMAPProgressCallback * progressCallback, ErrorCode * pError)
@@ -2693,10 +2697,10 @@ Data * IMAPSession::fetchMessageAttachment(String * folder, bool identifier_is_u
         return NULL;
     }
 
-    data = Data::dataWithBytes(text, (unsigned int) text_length);
+    data = Data::data();
+    data->takeBytesOwnership(text, (unsigned int) text_length, nstringDeallocator);
     data = data->decodedDataUsingEncoding(encoding);
     
-    mailimap_nstring_free(text);
     * pError = ErrorNone;
     
     return data;

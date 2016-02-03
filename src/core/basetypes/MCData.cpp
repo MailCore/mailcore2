@@ -39,6 +39,25 @@ static int isPowerOfTwo (unsigned int x)
 
 void Data::allocate(unsigned int length, bool force)
 {
+    if (mExternallyAllocatedMemory) {
+        // We don't know how this memory was allocated.
+        // Possibly this memory is readonly.
+        // So we need fallback to malloc'ed implementation.
+
+        unsigned int bytes_len = 0;
+        char * bytes = NULL;
+        if (mBytes) {
+            bytes_len = mLength;
+            bytes = (char *) malloc(mLength);
+            memcpy(bytes, mBytes, mLength);
+        }
+
+        reset();
+        mBytes = bytes;
+        mLength = bytes_len;
+        mAllocated = bytes_len;
+    }
+
     if (length <= mAllocated)
         return;
 
@@ -62,37 +81,46 @@ void Data::allocate(unsigned int length, bool force)
 
 void Data::reset()
 {
-    free(mBytes);
+    if (mExternallyAllocatedMemory) {
+        if (mBytes && mBytesDeallocator) {
+            mBytesDeallocator(mBytes, mLength);
+        }
+    } else {
+        free(mBytes);
+    }
+    init();
+}
+
+void Data::init()
+{
     mAllocated = 0;
     mLength = 0;
     mBytes = NULL;
+    mExternallyAllocatedMemory = false;
+    mBytesDeallocator = NULL;
 }
 
 Data::Data()
 {
-    mBytes = NULL;
-    reset();
+    init();
 }
 
 Data::Data(Data * otherData) : Object()
 {
-    mBytes = NULL;
-    reset();
+    init();
     appendData(otherData);
 }
 
 Data::Data(const char * bytes, unsigned int length)
 {
-    mBytes = NULL;
-    reset();
+    init();
     allocate(length, true);
     appendBytes(bytes, length);
 }
 
 Data::Data(int capacity)
 {
-    mBytes = NULL;
-    reset();
+    init();
     allocate(capacity, true);
 }
 
@@ -484,9 +512,19 @@ String * Data::charsetWithFilteredHTML(bool filterHTML, String * hintCharset)
 #endif
 }
 
+void Data::takeBytesOwnership(char * bytes, unsigned int length, BytesDeallocator bytesDeallocator)
+{
+    reset();
+    mBytes = bytes;
+    mLength = length;
+    mAllocated = length;
+    mExternallyAllocatedMemory = true;
+    mBytesDeallocator = bytesDeallocator;
+}
+
 void Data::takeBytesOwnership(char * bytes, unsigned int length)
 {
-    free(mBytes);
+    reset();
     mBytes = (char *) bytes;
     mLength = length;
 }
@@ -567,6 +605,10 @@ static size_t uudecode(char * text, size_t size)
     return count;
 }
 
+static void decodedPartDeallocator(char * decoded, unsigned int decoded_length) {
+    mailmime_decoded_part_free(decoded);
+};
+
 Data * Data::decodedDataUsingEncoding(Encoding encoding)
 {
     const char * text;
@@ -606,8 +648,9 @@ Data * Data::decodedDataUsingEncoding(Encoding encoding)
             cur_token = 0;
             mailmime_part_parse(text, text_length, &cur_token,
                                 mime_encoding, &decoded, &decoded_length);
-            data = Data::dataWithBytes(decoded, (unsigned int) decoded_length);
-            mailmime_decoded_part_free(decoded);
+
+            data = Data::data();
+            data->takeBytesOwnership(decoded, (unsigned int) decoded_length, decodedPartDeallocator);
             return data;
         }
         case EncodingUUEncode:
