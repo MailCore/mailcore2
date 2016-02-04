@@ -176,7 +176,9 @@ namespace mailcore {
         virtual bool isXOAuthEnabled();
         virtual bool isNamespaceEnabled();
         virtual bool isCompressionEnabled();
-        virtual bool allowsNewPermanentFlags(); 
+        virtual bool allowsNewPermanentFlags();
+        
+        virtual IndexSet * storedCapabilities();
       
         virtual String * gmailUserDisplayName() DEPRECATED_ATTRIBUTE;
         
