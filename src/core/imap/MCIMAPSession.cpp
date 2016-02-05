@@ -3749,6 +3749,18 @@ void IMAPSession::capabilitySetWithSessionState(IndexSet * capabilities)
     applyCapabilities(capabilities);
 }
 
+IndexSet * IMAPSession::storedCapabilities() {
+    if (mImap == NULL ||
+        mImap->imap_connection_info == NULL ||
+        mImap->imap_connection_info->imap_capability == NULL) {
+        return NULL;
+    }
+    IndexSet *result = new IndexSet();
+    capabilitySetWithSessionState(result);
+    result->autorelease();
+    return result;
+}
+
 void IMAPSession::applyCapabilities(IndexSet * capabilities)
 {
     if (capabilities->containsIndex(IMAPCapabilityId)) {
