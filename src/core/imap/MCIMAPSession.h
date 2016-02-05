@@ -177,8 +177,6 @@ namespace mailcore {
         virtual bool isNamespaceEnabled();
         virtual bool isCompressionEnabled();
         virtual bool allowsNewPermanentFlags();
-        
-        virtual IndexSet * storedCapabilities();
       
         virtual String * gmailUserDisplayName() DEPRECATED_ATTRIBUTE;
         
@@ -212,6 +210,7 @@ namespace mailcore {
         virtual bool isAutomaticConfigurationDone();
         virtual void resetAutomaticConfigurationDone();
         virtual void applyCapabilities(IndexSet * capabilities);
+        virtual IndexSet * storedCapabilities();
         
     private:
         String * mHostname;
