@@ -274,6 +274,15 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
     return MCO_TO_OBJC_OP(coreOp);
 }
 
+- (MCOIMAPMoveMessagesOperation *)moveMessagesOperationWithFolder:(NSString *)folder
+                                                             uids:(MCOIndexSet *)uids
+                                                       destFolder:(NSString *)destFolder
+{
+    IMAPMoveMessagesOperation * coreOp = MCO_NATIVE_INSTANCE->moveMessagesOperation([folder mco_mcString],
+                                                                                    MCO_FROM_OBJC(IndexSet, uids),
+                                                                                    [destFolder mco_mcString]);
+    return MCO_TO_OBJC_OP(coreOp);
+}
 
 - (MCOIMAPOperation *) expungeOperation:(NSString *)folder
 {

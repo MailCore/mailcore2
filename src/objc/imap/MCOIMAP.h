@@ -27,6 +27,7 @@
 #import <MailCore/MCOIMAPFolderStatus.h>
 #import <MailCore/MCOIMAPAppendMessageOperation.h>
 #import <MailCore/MCOIMAPCopyMessagesOperation.h>
+#import <MailCore/MCOIMAPMoveMessagesOperation.h>
 #import <MailCore/MCOIMAPFetchMessagesOperation.h>
 #import <MailCore/MCOIMAPFetchContentOperation.h>
 #import <MailCore/MCOIMAPFetchParsedContentOperation.h>

@@ -1739,6 +1739,90 @@ void IMAPSession::copyMessages(String * folder, IndexSet * uidSet, String * dest
     mailimap_set_free(set);
 }
 
+void IMAPSession::moveMessages(String * folder, IndexSet * uidSet, String * destFolder,
+     HashMap ** pUidMapping, ErrorCode * pError)
+{
+    int r;
+    struct mailimap_set * set;
+    struct mailimap_set * src_uid;
+    struct mailimap_set * dest_uid;
+    uint32_t uidvalidity;
+    clist * setList;
+    IndexSet * uidSetResult;
+    HashMap * uidMapping = NULL;
+
+    selectIfNeeded(folder, pError);
+    if (* pError != ErrorNone)
+        return;
+
+    set = setFromIndexSet(uidSet);
+    if (clist_count(set->set_list) == 0) {
+        mailimap_set_free(set);
+        return;
+    }
+
+    setList = splitSet(set, 10);
+    uidSetResult = NULL;
+
+    for(clistiter * iter = clist_begin(setList) ; iter != NULL ; iter = clist_next(iter)) {
+        struct mailimap_set * current_set;
+
+        current_set = (struct mailimap_set *) clist_content(iter);
+
+        r = mailimap_uidplus_uid_move(mImap, current_set, MCUTF8(destFolder),
+            &uidvalidity, &src_uid, &dest_uid);
+        if (r == MAILIMAP_ERROR_STREAM) {
+            mShouldDisconnect = true;
+            * pError = ErrorConnection;
+            goto release;
+        }
+        else if (r == MAILIMAP_ERROR_PARSE) {
+            * pError = ErrorParse;
+            goto release;
+        }
+        else if (hasError(r)) {
+            * pError = ErrorCopy;
+            goto release;
+        }
+
+        if ((src_uid != NULL) && (dest_uid != NULL)) {
+            if (uidMapping == NULL) {
+                uidMapping = HashMap::hashMap();
+            }
+            
+            Array * srcUidsArray = arrayFromSet(src_uid);
+            Array * destUidsArray = arrayFromSet(dest_uid);
+
+            for(int i = 0 ; i < srcUidsArray->count() && i < destUidsArray->count() ; i ++) {
+                uidMapping->setObjectForKey(srcUidsArray->objectAtIndex(i), destUidsArray->objectAtIndex(i));
+            }
+        }
+
+        if (src_uid != NULL) {
+            mailimap_set_free(src_uid);
+        }
+
+        if (dest_uid != NULL) {
+            mailimap_set_free(dest_uid);
+        }
+    }
+    if (pUidMapping != NULL) {
+        * pUidMapping = uidMapping;
+    }
+    * pError = ErrorNone;
+
+    release:
+
+    for(clistiter * iter = clist_begin(setList) ; iter != NULL ; iter = clist_next(iter)) {
+        struct mailimap_set * current_set;
+
+        current_set = (struct mailimap_set *) clist_content(iter);
+        mailimap_set_free(current_set);
+    }
+    clist_free(setList);
+    mailimap_set_free(set);
+}
+
 void IMAPSession::expunge(String * folder, ErrorCode * pError)
 {
     int r;

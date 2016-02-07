@@ -27,6 +27,7 @@
     <ClInclude Include="..\..\..\src\async\imap\MCIMAPCheckAccountOperation.h" />
     <ClInclude Include="..\..\..\src\async\imap\MCIMAPConnectOperation.h" />
     <ClInclude Include="..\..\..\src\async\imap\MCIMAPCopyMessagesOperation.h" />
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPMoveMessagesOperation.h" />
     <ClInclude Include="..\..\..\src\async\imap\MCIMAPCreateFolderOperation.h" />
     <ClInclude Include="..\..\..\src\async\imap\MCIMAPDeleteFolderOperation.h" />
     <ClInclude Include="..\..\..\src\async\imap\MCIMAPDisconnectOperation.h" />
@@ -188,6 +189,7 @@
     <ClCompile Include="..\..\..\src\async\imap\MCIMAPCheckAccountOperation.cpp" />
     <ClCompile Include="..\..\..\src\async\imap\MCIMAPConnectOperation.cpp" />
     <ClCompile Include="..\..\..\src\async\imap\MCIMAPCopyMessagesOperation.cpp" />
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPMoveMessagesOperation.cpp" />
     <ClCompile Include="..\..\..\src\async\imap\MCIMAPCreateFolderOperation.cpp" />
     <ClCompile Include="..\..\..\src\async\imap\MCIMAPDeleteFolderOperation.cpp" />
     <ClCompile Include="..\..\..\src\async\imap\MCIMAPDisconnectOperation.cpp" />

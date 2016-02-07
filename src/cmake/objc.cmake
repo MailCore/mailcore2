@@ -15,6 +15,7 @@ set(objc_imap_files
   objc/imap/MCOIMAPBaseOperation.mm
   objc/imap/MCOIMAPCapabilityOperation.mm
   objc/imap/MCOIMAPCopyMessagesOperation.mm
+  objc/imap/MCOIMAPMoveMessagesOperation.mm
   objc/imap/MCOIMAPFetchContentOperation.mm
   objc/imap/MCOIMAPFetchParsedContentOperation.mm
   objc/imap/MCOIMAPFetchFoldersOperation.mm

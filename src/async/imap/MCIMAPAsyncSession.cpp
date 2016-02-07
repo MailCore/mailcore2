@@ -26,6 +26,7 @@
 #include "MCIMAPExpungeOperation.h"
 #include "MCIMAPAppendMessageOperation.h"
 #include "MCIMAPCopyMessagesOperation.h"
+#include "MCIMAPMoveMessagesOperation.h"
 #include "MCIMAPFetchMessagesOperation.h"
 #include "MCIMAPFetchContentOperation.h"
 #include "MCIMAPFetchParsedContentOperation.h"
@@ -445,6 +446,17 @@ IMAPAppendMessageOperation * IMAPAsyncSession::appendMessageOperation(String * f
 IMAPCopyMessagesOperation * IMAPAsyncSession::copyMessagesOperation(String * folder, IndexSet * uids, String * destFolder)
 {
     IMAPCopyMessagesOperation * op = new IMAPCopyMessagesOperation();
+    op->setMainSession(this);
+    op->setFolder(folder);
+    op->setUids(uids);
+    op->setDestFolder(destFolder);
+    op->autorelease();
+    return op;
+}
+
+IMAPMoveMessagesOperation * IMAPAsyncSession::moveMessagesOperation(String * folder, IndexSet * uids, String * destFolder)
+{
+    IMAPMoveMessagesOperation * op = new IMAPMoveMessagesOperation();
     op->setMainSession(this);
     op->setFolder(folder);
     op->setUids(uids);

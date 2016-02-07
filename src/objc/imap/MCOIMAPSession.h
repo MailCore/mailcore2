@@ -20,6 +20,7 @@
 @class MCOIMAPFolderStatusOperation;
 @class MCOIMAPAppendMessageOperation;
 @class MCOIMAPCopyMessagesOperation;
+@class MCOIMAPMoveMessagesOperation;
 @class MCOIndexSet;
 @class MCOIMAPFetchMessagesOperation;
 @class MCOIMAPFetchContentOperation;
@@ -314,6 +315,20 @@
      }];
 */
 - (MCOIMAPCopyMessagesOperation *)copyMessagesOperationWithFolder:(NSString *)folder
+                                                             uids:(MCOIndexSet *)uids
+                                                       destFolder:(NSString *)destFolder NS_RETURNS_NOT_RETAINED;
+
+/**
+ Returns an operation to move messages to a folder.
+
+     MCOIMAPMoveMessagesOperation * op = [session moveMessagesOperationWithFolder:@"INBOX"
+                                                                             uids:[MCIndexSet indexSetWithIndex:456]
+                                                                       destFolder:@"Cocoa"];
+     [op start:^(NSError * __nullable error, NSDictionary * uidMapping) {
+          NSLog(@"moved to folder with UID mapping %@", uidMapping);
+     }];
+*/
+- (MCOIMAPMoveMessagesOperation *)moveMessagesOperationWithFolder:(NSString *)folder
                                                              uids:(MCOIndexSet *)uids
                                                        destFolder:(NSString *)destFolder NS_RETURNS_NOT_RETAINED;
 

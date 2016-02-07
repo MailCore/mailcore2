@@ -141,6 +141,28 @@ static void testIMAP()
     session->release();
 }
 
+static void testIMAPMove()
+{
+    mailcore::IMAPSession * session;
+    mailcore::HashMap *uidMapping;
+    mailcore::ErrorCode error;
+    
+    session = new mailcore::IMAPSession();
+    session->setHostname(MCSTR("imap.mail.ru"));
+    session->setPort(993);
+    session->setUsername(email);
+    session->setPassword(password);
+    session->setConnectionType(mailcore::ConnectionTypeTLS);
+
+    session->moveMessages(MCSTR("INBOX"),
+                          mailcore::IndexSet::indexSetWithIndex(14990),
+                          MCSTR("Personal"), &uidMapping, &error);
+    
+    MCLog("mapping: %s, error: %i", MCUTF8DESC(uidMapping), error);
+    
+    session->release();
+}
+
 static void testSMTP(mailcore::Data * data)
 {
     mailcore::SMTPSession * smtp;
@@ -371,6 +393,7 @@ void testAll()
     //testMessageParser(data);
     //testSMTP(data);
     //testIMAP();
+    //testIMAPMove();
     //testPOP();
     //testNNTP();
     //testAsyncSMTP(data);
