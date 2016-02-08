@@ -25,6 +25,11 @@ pod 'mailcore2-ios'
 pod 'mailcore2-osx'
 ```
 
+**Further Steps**
+
+You may also need to add `-lresolv` to your application-target -> `Build Settings` -> `Other Linker Flags`.
+
+
 ### Binary ###
 
 **For iOS:**
