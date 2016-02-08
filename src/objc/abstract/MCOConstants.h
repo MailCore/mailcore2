@@ -266,6 +266,8 @@ typedef NS_ENUM(NSInteger, MCOIMAPCapability) {
     MCOIMAPCapabilityId,
     /** LITERAL+ Capability.*/
     MCOIMAPCapabilityLiteralPlus,
+    /** MOVE Capability */
+    MCOIMAPCapabilityMove,
     /** MULTIAPPEND Capability.*/
     MCOIMAPCapabilityMultiAppend,
     /** NAMESPACE Capability.*/

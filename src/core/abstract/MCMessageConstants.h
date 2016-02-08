@@ -107,6 +107,7 @@ namespace mailcore {
         IMAPCapabilityIdle,
         IMAPCapabilityId,
         IMAPCapabilityLiteralPlus,
+        IMAPCapabilityMove,
         IMAPCapabilityMultiAppend,
         IMAPCapabilityNamespace,
         IMAPCapabilityQResync,
