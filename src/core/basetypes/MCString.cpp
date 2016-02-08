@@ -8,7 +8,9 @@
 
 #include <string.h>
 #include <stdlib.h>
-#if !DISABLE_ICU
+#if DISABLE_ICU
+#include <unicode/ustring.h>
+#else
 #include <unicode/ustring.h>
 #include <unicode/ucnv.h>
 #include <unicode/utypes.h>
@@ -55,7 +57,7 @@ static String * s_unicode160 = NULL;
 static String * s_unicode133 = NULL;
 static String * s_unicode2028 = NULL;
 
-#if DISABLE_ICU
+#if DISABLE_ICU && 0
 static int32_t u_strlen(const UChar *s) {
     if (s == NULL) {
         return 0;
@@ -1221,12 +1223,17 @@ int String::compareWithCaseSensitive(String * otherString, bool caseSensitive)
     }
     
 #if DISABLE_ICU
-    CFStringRef cfThis = CFStringCreateWithCharactersNoCopy(NULL, mUnicodeChars, mLength, kCFAllocatorNull);
-    CFStringRef cfOther = CFStringCreateWithCharactersNoCopy(NULL, otherString->mUnicodeChars, otherString->mLength, kCFAllocatorNull);
-    CFComparisonResult result = CFStringCompare(cfThis, cfOther, caseSensitive ? 0 : kCFCompareCaseInsensitive);
-    CFRelease(cfThis);
-    CFRelease(cfOther);
-    return result;
+    if (caseSensitive) {
+        return u_strcmp(unicodeCharacters(), otherString->unicodeCharacters());
+    }
+    else {
+        CFStringRef cfThis = CFStringCreateWithCharactersNoCopy(NULL, mUnicodeChars, mLength, kCFAllocatorNull);
+        CFStringRef cfOther = CFStringCreateWithCharactersNoCopy(NULL, otherString->mUnicodeChars, otherString->mLength, kCFAllocatorNull);
+        CFComparisonResult result = CFStringCompare(cfThis, cfOther, kCFCompareCaseInsensitive);
+        CFRelease(cfThis);
+        CFRelease(cfOther);
+        return result;
+    }
 #else
     if (caseSensitive) {
         return u_strcmp(unicodeCharacters(), otherString->unicodeCharacters());
