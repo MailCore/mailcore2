@@ -3829,6 +3829,9 @@ void IMAPSession::capabilitySetWithSessionState(IndexSet * capabilities)
     if (mailimap_has_extension(mImap, (char *)"CHILDREN")) {
         capabilities->addIndex(IMAPCapabilityChildren);
     }
+    if (mailimap_has_extension(mImap, (char *)"MOVE")) {
+        capabilities->addIndex(IMAPCapabilityMove);
+    }
 
     applyCapabilities(capabilities);
 }

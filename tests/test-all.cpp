@@ -163,6 +163,25 @@ static void testIMAPMove()
     session->release();
 }
 
+static void testIMAPCapability()
+{
+    mailcore::IMAPSession * session;
+    mailcore::ErrorCode error;
+
+    session = new mailcore::IMAPSession();
+    session->setHostname(MCSTR("imap.mail.ru"));
+    session->setPort(993);
+    session->setUsername(email);
+    session->setPassword(password);
+    session->setConnectionType(mailcore::ConnectionTypeTLS);
+
+    mailcore::IndexSet *caps = session->capability(&error);
+
+    MCLog("capability: %s, error: %i", MCUTF8DESC(caps), error);
+
+    session->release();
+}
+
 static void testSMTP(mailcore::Data * data)
 {
     mailcore::SMTPSession * smtp;
@@ -394,6 +413,7 @@ void testAll()
     //testSMTP(data);
     //testIMAP();
     //testIMAPMove();
+    //testIMAPCapability();
     //testPOP();
     //testNNTP();
     //testAsyncSMTP(data);
