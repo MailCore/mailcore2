@@ -63,6 +63,16 @@ class TestCallback : public mailcore::Object, public mailcore::OperationCallback
     }
 };
 
+static mailcore::String * temporaryFilenameForTest()
+{
+    char tempfile[] = "/tmp/mailcore2-test-XXXXXX";
+    char * result = mktemp(tempfile);
+    if (result == NULL) {
+        return NULL;
+    }
+    return mailcore::String::stringWithFileSystemRepresentation(tempfile);
+}
+
 static mailcore::Data * testMessageBuilder()
 {
     mailcore::Address * address = new mailcore::Address();
@@ -96,7 +106,12 @@ static mailcore::Data * testMessageBuilder()
     mailcore::Data * data = msg->data();
     
     MCLog("%s", data->bytes());
-    
+
+    mailcore::String *filename = temporaryFilenameForTest();
+    msg->writeToFile(filename);
+    mailcore::Data *fileData = mailcore::Data::dataWithContentsOfFile(filename);
+    MCAssert(data->isEqual(fileData));
+
     mailcore::MessageBuilder * msg2 = new mailcore::MessageBuilder(msg);
     mailcore::String *htmlBody = msg->htmlBody();
     mailcore::String *htmlBody2 = msg2->htmlBody();
@@ -104,7 +119,8 @@ static mailcore::Data * testMessageBuilder()
     
     msg->release();
     msg2->release();
-    
+    unlink(filename->fileSystemRepresentation());
+
     return data;
 }
 
