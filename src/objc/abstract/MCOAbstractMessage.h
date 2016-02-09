@@ -25,10 +25,6 @@ namespace mailcore {
 
 #ifdef __cplusplus
 - (instancetype) initWithMCMessage:(mailcore::AbstractMessage *)message NS_DESIGNATED_INITIALIZER;
-/** Do not invoke this directly. */
-- (instancetype) init NS_UNAVAILABLE;
-/** Do not invoke this directly. */
-+ (instancetype) new NS_UNAVAILABLE;
 #endif
 
 /** Header of the message. */
