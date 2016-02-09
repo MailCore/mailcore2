@@ -443,6 +443,18 @@ IMAPAppendMessageOperation * IMAPAsyncSession::appendMessageOperation(String * f
     return op;
 }
 
+IMAPAppendMessageOperation * IMAPAsyncSession::appendMessageOperation(String * folder, String * messagePath, MessageFlag flags, Array * customFlags)
+{
+    IMAPAppendMessageOperation * op = new IMAPAppendMessageOperation();
+    op->setMainSession(this);
+    op->setFolder(folder);
+    op->setMessageFilepath(messagePath);
+    op->setFlags(flags);
+    op->setCustomFlags(customFlags);
+    op->autorelease();
+    return op;
+}
+
 IMAPCopyMessagesOperation * IMAPAsyncSession::copyMessagesOperation(String * folder, IndexSet * uids, String * destFolder)
 {
     IMAPCopyMessagesOperation * op = new IMAPCopyMessagesOperation();

@@ -63,6 +63,16 @@ class TestCallback : public mailcore::Object, public mailcore::OperationCallback
     }
 };
 
+static mailcore::String * temporaryFilenameForTest()
+{
+    char tempfile[] = "/tmp/mailcore2-test-XXXXXX";
+    char * result = mktemp(tempfile);
+    if (result == NULL) {
+        return NULL;
+    }
+    return mailcore::String::stringWithFileSystemRepresentation(tempfile);
+}
+
 static mailcore::Data * testMessageBuilder()
 {
     mailcore::Address * address = new mailcore::Address();
@@ -96,7 +106,12 @@ static mailcore::Data * testMessageBuilder()
     mailcore::Data * data = msg->data();
     
     MCLog("%s", data->bytes());
-    
+
+    mailcore::String *filename = temporaryFilenameForTest();
+    msg->writeToFile(filename);
+    mailcore::Data *fileData = mailcore::Data::dataWithContentsOfFile(filename);
+    MCAssert(data->isEqual(fileData));
+
     mailcore::MessageBuilder * msg2 = new mailcore::MessageBuilder(msg);
     mailcore::String *htmlBody = msg->htmlBody();
     mailcore::String *htmlBody2 = msg2->htmlBody();
@@ -104,7 +119,8 @@ static mailcore::Data * testMessageBuilder()
     
     msg->release();
     msg2->release();
-    
+    unlink(filename->fileSystemRepresentation());
+
     return data;
 }
 
@@ -200,6 +216,49 @@ static void testSMTP(mailcore::Data * data)
     smtp->release();
 }
 
+static void parseAddressesFromRfc822(mailcore::String * filename, mailcore::Array ** pRecipients, mailcore::Address ** pFrom)
+{
+    mailcore::MessageParser * parser = mailcore::MessageParser::messageParserWithContentsOfFile(filename);
+
+    mailcore::Array * recipients = mailcore::Array::array();
+    if (parser->header()->to() != NULL) {
+        recipients->addObjectsFromArray(parser->header()->to());
+    }
+    if (parser->header()->cc() != NULL) {
+        recipients->addObjectsFromArray(parser->header()->cc());
+    }
+    if (parser->header()->bcc() != NULL) {
+        recipients->addObjectsFromArray(parser->header()->bcc());
+    }
+    *pRecipients = recipients;
+    *pFrom = parser->header()->from();
+}
+
+static void testSendingMessageFromFileViaSMTP(mailcore::Data * data)
+{
+    mailcore::SMTPSession * smtp;
+    mailcore::ErrorCode error;
+
+    mailcore::String * filename = temporaryFilenameForTest();
+    data->writeToFile(filename);
+
+    smtp = new mailcore::SMTPSession();
+
+    smtp->setHostname(MCSTR("smtp.gmail.com"));
+    smtp->setPort(25);
+    smtp->setUsername(email);
+    smtp->setPassword(password);
+    smtp->setConnectionType(mailcore::ConnectionTypeStartTLS);
+
+    mailcore::Array * recipients;
+    mailcore::Address * from;
+    parseAddressesFromRfc822(filename, &recipients, &from);
+
+    smtp->sendMessage(from, recipients, filename, NULL, &error);
+
+    smtp->release();
+}
+
 static void testPOP()
 {
     mailcore::POPSession * session;
@@ -287,6 +346,36 @@ static void testAsyncSMTP(mailcore::Data * data)
     op->start();
     
 	mainLoop();
+
+    //smtp->release();
+}
+
+static void testAsyncSendMessageFromFileViaSMTP(mailcore::Data * data)
+{
+    mailcore::SMTPAsyncSession * smtp;
+    TestSMTPCallback * callback = new TestSMTPCallback();
+
+    mailcore::String * filename = temporaryFilenameForTest();
+    data->writeToFile(filename);
+
+    mailcore::Array * recipients;
+    mailcore::Address * from;
+    parseAddressesFromRfc822(filename, &recipients, &from);
+
+    smtp = new mailcore::SMTPAsyncSession();
+
+    smtp->setHostname(MCSTR("smtp.gmail.com"));
+    smtp->setPort(25);
+    smtp->setUsername(email);
+    smtp->setPassword(password);
+    smtp->setConnectionType(mailcore::ConnectionTypeStartTLS);
+
+    mailcore::SMTPOperation * op = smtp->sendMessageOperation(from, recipients, filename);
+    op->setSmtpCallback(callback);
+    op->setCallback(callback);
+    op->start();
+
+    mainLoop();
 
     //smtp->release();
 }
@@ -411,12 +500,14 @@ void testAll()
     //mailcore::Data * data = testMessageBuilder();
     //testMessageParser(data);
     //testSMTP(data);
+    //testSendingMessageFromFileViaSMTP(data);
     //testIMAP();
     //testIMAPMove();
     //testIMAPCapability();
     //testPOP();
     //testNNTP();
     //testAsyncSMTP(data);
+    //testAsyncSendMessageFromFileViaSMTP(data);
     //testAsyncIMAP();
     //testAsyncPOP();
     //testAddresses();

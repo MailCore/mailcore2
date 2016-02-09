@@ -264,6 +264,18 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
     return MCO_TO_OBJC_OP(coreOp);
 }
 
+- (MCOIMAPAppendMessageOperation *)appendMessageOperationWithFolder:(NSString *)folder
+                                                     contentsAtPath:(NSString *)path
+                                                              flags:(MCOMessageFlag)flags
+                                                        customFlags:(NSArray *)customFlags
+{
+    IMAPAppendMessageOperation * coreOp = MCO_NATIVE_INSTANCE->appendMessageOperation([folder mco_mcString],
+                                                                                      MCO_FROM_OBJC(String, path),
+                                                                                      (MessageFlag) flags,
+                                                                                      MCO_FROM_OBJC(Array, customFlags));
+    return MCO_TO_OBJC_OP(coreOp);
+}
+
 - (MCOIMAPCopyMessagesOperation *)copyMessagesOperationWithFolder:(NSString *)folder
                                                              uids:(MCOIndexSet *)uids
                                                        destFolder:(NSString *)destFolder

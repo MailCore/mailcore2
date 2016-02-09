@@ -810,6 +810,31 @@ Data * MessageBuilder::dataForEncryption()
     return dataAndFilterBccAndForEncryption(false, true);
 }
 
+ErrorCode MessageBuilder::writeToFile(String * filename)
+{
+    FILE * f = fopen(filename->fileSystemRepresentation(), "wb");
+    if (f == NULL) {
+        return ErrorFile;
+    }
+
+    ErrorCode error = ErrorNone;
+    struct mailmime * mime = mimeAndFilterBccAndForEncryption(false, false);
+
+    int col = 0;
+    int r = mailmime_write_file(f, &col, mime);
+    if (r != MAILIMF_NO_ERROR) {
+        error = ErrorFile;
+    }
+
+    mailmime_free(mime);
+
+    if (fclose(f) != 0) {
+        error = ErrorFile;
+    }
+
+    return error;
+}
+
 String * MessageBuilder::htmlRendering(HTMLRendererTemplateCallback * htmlCallback)
 {
     MessageParser * message = MessageParser::messageParserWithData(data());

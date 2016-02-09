@@ -61,6 +61,9 @@
 /** RFC 822 formatted message for encryption.*/
 - (NSData *) dataForEncryption;
 
+/** Store RFC 822 formatted message to file. */
+- (BOOL) writeToFile:(NSString *)filename error:(NSError **)error;
+
 /**
  Returns an OpenPGP signed message with a given signature.
  The signature needs to be computed on the data returned by -dataForEncryption

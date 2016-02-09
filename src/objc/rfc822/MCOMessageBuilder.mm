@@ -70,6 +70,15 @@ MCO_OBJC_SYNTHESIZE_STRING(setBoundaryPrefix, boundaryPrefix)
     return MCO_OBJC_BRIDGE_GET(dataForEncryption);
 }
 
+- (BOOL) writeToFile:(NSString *)filename error:(NSError **)error
+{
+    mailcore::ErrorCode errorCode = MCO_NATIVE_INSTANCE->writeToFile(MCO_FROM_OBJC(mailcore::String, filename));
+    if (error) {
+        *error = [NSError mco_errorWithErrorCode:errorCode];
+    }
+    return errorCode == mailcore::ErrorNone;
+}
+
 - (NSString *) htmlRenderingWithDelegate:(id <MCOHTMLRendererDelegate>)delegate
 {
     MCOAbstractMessageRendererCallback * htmlRenderCallback = new MCOAbstractMessageRendererCallback(self, delegate, NULL);
