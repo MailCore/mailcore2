@@ -197,6 +197,49 @@ static void testSMTP(mailcore::Data * data)
     smtp->release();
 }
 
+static void parseAddressesFromRfc822(mailcore::String * filename, mailcore::Array ** pRecipients, mailcore::Address ** pFrom)
+{
+    mailcore::MessageParser * parser = mailcore::MessageParser::messageParserWithContentsOfFile(filename);
+
+    mailcore::Array * recipients = mailcore::Array::array();
+    if (parser->header()->to() != NULL) {
+        recipients->addObjectsFromArray(parser->header()->to());
+    }
+    if (parser->header()->cc() != NULL) {
+        recipients->addObjectsFromArray(parser->header()->cc());
+    }
+    if (parser->header()->bcc() != NULL) {
+        recipients->addObjectsFromArray(parser->header()->bcc());
+    }
+    *pRecipients = recipients;
+    *pFrom = parser->header()->from();
+}
+
+static void testSendingMessageFromFileViaSMTP(mailcore::Data * data)
+{
+    mailcore::SMTPSession * smtp;
+    mailcore::ErrorCode error;
+
+    mailcore::String * filename = temporaryFilenameForTest();
+    data->writeToFile(filename);
+
+    smtp = new mailcore::SMTPSession();
+
+    smtp->setHostname(MCSTR("smtp.gmail.com"));
+    smtp->setPort(25);
+    smtp->setUsername(email);
+    smtp->setPassword(password);
+    smtp->setConnectionType(mailcore::ConnectionTypeStartTLS);
+
+    mailcore::Array * recipients;
+    mailcore::Address * from;
+    parseAddressesFromRfc822(filename, &recipients, &from);
+
+    smtp->sendMessage(from, recipients, filename, NULL, &error);
+
+    smtp->release();
+}
+
 static void testPOP()
 {
     mailcore::POPSession * session;
@@ -284,6 +327,36 @@ static void testAsyncSMTP(mailcore::Data * data)
     op->start();
     
 	mainLoop();
+
+    //smtp->release();
+}
+
+static void testAsyncSendMessageFromFileViaSMTP(mailcore::Data * data)
+{
+    mailcore::SMTPAsyncSession * smtp;
+    TestSMTPCallback * callback = new TestSMTPCallback();
+
+    mailcore::String * filename = temporaryFilenameForTest();
+    data->writeToFile(filename);
+
+    mailcore::Array * recipients;
+    mailcore::Address * from;
+    parseAddressesFromRfc822(filename, &recipients, &from);
+
+    smtp = new mailcore::SMTPAsyncSession();
+
+    smtp->setHostname(MCSTR("smtp.gmail.com"));
+    smtp->setPort(25);
+    smtp->setUsername(email);
+    smtp->setPassword(password);
+    smtp->setConnectionType(mailcore::ConnectionTypeStartTLS);
+
+    mailcore::SMTPOperation * op = smtp->sendMessageOperation(from, recipients, filename);
+    op->setSmtpCallback(callback);
+    op->setCallback(callback);
+    op->start();
+
+    mainLoop();
 
     //smtp->release();
 }
@@ -408,11 +481,13 @@ void testAll()
     //mailcore::Data * data = testMessageBuilder();
     //testMessageParser(data);
     //testSMTP(data);
+    //testSendingMessageFromFileViaSMTP(data);
     //testIMAP();
     //testIMAPMove();
     //testPOP();
     //testNNTP();
     //testAsyncSMTP(data);
+    //testAsyncSendMessageFromFileViaSMTP(data);
     //testAsyncIMAP();
     //testAsyncPOP();
     //testAddresses();
