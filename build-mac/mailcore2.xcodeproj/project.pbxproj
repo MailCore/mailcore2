@@ -157,6 +157,7 @@
 		84E65533199BE15500EC8CC4 /* MCNNTPSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 849189A018C93FB7002063A3 /* MCNNTPSession.h */; };
 		84E65534199BE2BF00EC8CC4 /* MCNNTPGroupInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 849189AA18C94986002063A3 /* MCNNTPGroupInfo.h */; };
 		84E65535199BE2C300EC8CC4 /* MCNNTPGroupInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 849189AA18C94986002063A3 /* MCNNTPGroupInfo.h */; };
+		851682AD1C6A2484005B86C4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 851682AC1C6A2484005B86C4 /* Default-568h@2x.png */; };
 		8568A4131C610D9800FF4470 /* MCIMAPMoveMessagesOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8568A4111C610D9800FF4470 /* MCIMAPMoveMessagesOperation.cpp */; };
 		8568A4141C610DA800FF4470 /* MCIMAPMoveMessagesOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8568A4111C610D9800FF4470 /* MCIMAPMoveMessagesOperation.cpp */; };
 		8568A41A1C610F6600FF4470 /* MCOIMAPMoveMessagesOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8568A4191C610F6600FF4470 /* MCOIMAPMoveMessagesOperation.mm */; };
@@ -1572,6 +1573,7 @@
 		84D7378E199C02A8005124E5 /* MCONNTPDisconnectOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCONNTPDisconnectOperation.mm; sourceTree = "<group>"; };
 		84D73791199C0511005124E5 /* MCONNTPGroupInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCONNTPGroupInfo.h; sourceTree = "<group>"; };
 		84D73792199C0511005124E5 /* MCONNTPGroupInfo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCONNTPGroupInfo.mm; sourceTree = "<group>"; };
+		851682AC1C6A2484005B86C4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8568A4111C610D9800FF4470 /* MCIMAPMoveMessagesOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPMoveMessagesOperation.cpp; sourceTree = "<group>"; };
 		8568A4121C610D9800FF4470 /* MCIMAPMoveMessagesOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPMoveMessagesOperation.h; sourceTree = "<group>"; };
 		8568A4181C610F6600FF4470 /* MCOIMAPMoveMessagesOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPMoveMessagesOperation.h; sourceTree = "<group>"; };
@@ -2479,6 +2481,7 @@
 		C64EA52C169E772200778456 = {
 			isa = PBXGroup;
 			children = (
+				851682AC1C6A2484005B86C4 /* Default-568h@2x.png */,
 				C6BD28A1170BD78E00A91AC1 /* mailcore-framework */,
 				C64EA545169E78B100778456 /* src */,
 				C64EA7A916A00AF400778456 /* tests */,
@@ -3374,6 +3377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C668E2DD1736333900A2BB47 /* providers.json in Resources */,
+				851682AD1C6A2484005B86C4 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
