@@ -44,5 +44,7 @@
 
 /** Do not invoke this directly. */
 - (instancetype) init NS_UNAVAILABLE;
+/** Do not invoke this directly. */
++ (instancetype) new NS_UNAVAILABLE;
 
 @end
