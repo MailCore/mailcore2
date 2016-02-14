@@ -33,6 +33,8 @@ namespace mailcore {
         
         virtual char * bytes();
         virtual unsigned int length();
+
+        virtual void increaseCapacity(unsigned int length);
         
         virtual void appendData(Data * otherData);
         virtual void appendBytes(const char * bytes, unsigned int length);

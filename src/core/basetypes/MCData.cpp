@@ -146,6 +146,11 @@ unsigned int Data::length()
     return mLength;
 }
 
+void Data::increaseCapacity(unsigned int length)
+{
+    allocate(mLength + length);
+}
+
 void Data::appendData(Data * otherData)
 {
     appendBytes(otherData->bytes(), otherData->length());
