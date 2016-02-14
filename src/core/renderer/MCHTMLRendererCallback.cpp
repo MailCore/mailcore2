@@ -104,41 +104,50 @@ mailcore::HashMap * HTMLRendererTemplateCallback::templateValuesForHeader(mailco
     
     mailcore::String * dateString;
     static mailcore::DateFormatter * fullFormatter = NULL;
+    static pthread_mutex_t formatterLock = PTHREAD_MUTEX_INITIALIZER;
+    pthread_mutex_lock(&formatterLock);
     if (fullFormatter == NULL) {
         fullFormatter = new mailcore::DateFormatter();
         fullFormatter->setDateStyle(mailcore::DateFormatStyleFull);
         fullFormatter->setTimeStyle(mailcore::DateFormatStyleFull);
     }
+    pthread_mutex_unlock(&formatterLock);
     dateString = fullFormatter->stringFromDate(header->date());
     if (dateString != NULL) {
         result->setObjectForKey(MCSTR("FULLDATE"), dateString->htmlEncodedString());
     }
     static mailcore::DateFormatter * longFormatter = NULL;
+    pthread_mutex_lock(&formatterLock);
     if (longFormatter == NULL) {
         longFormatter = new mailcore::DateFormatter();
         longFormatter->setDateStyle(mailcore::DateFormatStyleLong);
         longFormatter->setTimeStyle(mailcore::DateFormatStyleLong);
     }
+    pthread_mutex_unlock(&formatterLock);
     dateString = longFormatter->stringFromDate(header->date());
     if (dateString != NULL) {
         result->setObjectForKey(MCSTR("LONGDATE"), dateString->htmlEncodedString());
     }
     static mailcore::DateFormatter * mediumFormatter = NULL;
+    pthread_mutex_lock(&formatterLock);
     if (mediumFormatter == NULL) {
         mediumFormatter = new mailcore::DateFormatter();
         mediumFormatter->setDateStyle(mailcore::DateFormatStyleMedium);
         mediumFormatter->setTimeStyle(mailcore::DateFormatStyleMedium);
     }
+    pthread_mutex_unlock(&formatterLock);
     dateString = mediumFormatter->stringFromDate(header->date());
     if (dateString != NULL) {
         result->setObjectForKey(MCSTR("MEDIUMDATE"), dateString->htmlEncodedString());
     }
     static mailcore::DateFormatter * shortFormatter = NULL;
+    pthread_mutex_lock(&formatterLock);
     if (shortFormatter == NULL) {
         shortFormatter = new mailcore::DateFormatter();
         shortFormatter->setDateStyle(mailcore::DateFormatStyleShort);
         shortFormatter->setTimeStyle(mailcore::DateFormatStyleShort);
     }
+    pthread_mutex_unlock(&formatterLock);
     dateString = shortFormatter->stringFromDate(header->date());
     if (dateString != NULL) {
         result->setObjectForKey(MCSTR("SHORTDATE"), dateString->htmlEncodedString());
