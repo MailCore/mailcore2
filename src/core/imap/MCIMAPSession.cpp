@@ -3412,6 +3412,11 @@ IMAPIdentity * IMAPSession::clientIdentity()
     return mClientIdentity;
 }
 
+void IMAPSession::setClientIdentity(IMAPIdentity * identity)
+{
+    MC_SAFE_REPLACE_COPY(IMAPIdentity, mClientIdentity, identity);
+}
+
 HashMap * IMAPSession::fetchNamespace(ErrorCode * pError)
 {
     HashMap * result;

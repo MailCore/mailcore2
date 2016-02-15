@@ -65,7 +65,8 @@ namespace mailcore {
         
         virtual IMAPIdentity * serverIdentity();
         virtual IMAPIdentity * clientIdentity();
-        
+        virtual void setClientIdentity(IMAPIdentity * identity);
+
         virtual void select(String * folder, ErrorCode * pError);
         virtual IMAPFolderStatus * folderStatus(String * folder, ErrorCode * pError);
         

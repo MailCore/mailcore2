@@ -236,6 +236,11 @@ IMAPIdentity * IMAPAsyncSession::clientIdentity()
     return mClientIdentity;
 }
 
+void IMAPAsyncSession::setClientIdentity(IMAPIdentity * clientIdentity)
+{
+    MC_SAFE_REPLACE_COPY(IMAPIdentity, mClientIdentity, clientIdentity);
+}
+
 String * IMAPAsyncSession::gmailUserDisplayName()
 {
     return mGmailUserDisplayName;
