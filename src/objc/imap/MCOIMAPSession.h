@@ -87,7 +87,7 @@
 @property (nonatomic, strong) MCOIMAPNamespace * defaultNamespace;
 
 /** The identity of the IMAP client. */
-@property (nonatomic, strong, readonly) MCOIMAPIdentity * clientIdentity;
+@property (nonatomic, copy) MCOIMAPIdentity * clientIdentity;
 
 /** The identity of the IMAP server. */
 @property (nonatomic, strong, readonly) MCOIMAPIdentity * serverIdentity;

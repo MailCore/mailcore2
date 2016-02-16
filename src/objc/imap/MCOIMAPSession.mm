@@ -122,6 +122,11 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
     return MCO_OBJC_BRIDGE_GET(clientIdentity);
 }
 
+- (void) setClientIdentity:(MCOIMAPIdentity *)clientIdentity
+{
+    MCO_OBJC_BRIDGE_SET(setClientIdentity, IMAPIdentity, clientIdentity);
+}
+
 - (MCOIMAPIdentity *) serverIdentity
 {
     return MCO_OBJC_BRIDGE_GET(serverIdentity);

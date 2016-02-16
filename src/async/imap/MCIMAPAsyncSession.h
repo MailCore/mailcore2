@@ -104,6 +104,8 @@ namespace mailcore {
         
         virtual IMAPIdentity * serverIdentity();
         virtual IMAPIdentity * clientIdentity();
+        virtual void setClientIdentity(IMAPIdentity * clientIdentity);
+
         virtual String * gmailUserDisplayName() DEPRECATED_ATTRIBUTE;
         
         virtual IMAPFolderInfoOperation * folderInfoOperation(String * folder);
