@@ -16,6 +16,7 @@
 #include "MCNNTPFetchOverviewOperation.h"
 #include "MCNNTPCheckAccountOperation.h"
 #include "MCNNTPFetchServerTimeOperation.h"
+#include "MCNNTPSendOperation.h"
 #include "MCNNTPDisconnectOperation.h"
 #include "MCOperationQueueCallback.h"
 #include "MCConnectionLogger.h"
@@ -232,6 +233,24 @@ NNTPListNewsgroupsOperation * NNTPAsyncSession::listDefaultNewsgroupsOperation()
     NNTPListNewsgroupsOperation * op = new NNTPListNewsgroupsOperation();
     op->setSession(this);
     op->setListsSubscribed(true);
+    op->autorelease();
+    return op;
+}
+
+NNTPSendOperation * NNTPAsyncSession::sendMessageOperation(Data * messageData)
+{
+    NNTPSendOperation * op = new NNTPSendOperation();
+    op->setSession(this);
+    op->setMessageData(messageData);
+    op->autorelease();
+    return op;
+}
+
+NNTPSendOperation * NNTPAsyncSession::sendMessageOperation(String * filename)
+{
+    NNTPSendOperation * op = new NNTPSendOperation();
+    op->setSession(this);
+    op->setMessageFilepath(filename);
     op->autorelease();
     return op;
 }

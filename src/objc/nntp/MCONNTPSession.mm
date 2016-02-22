@@ -14,6 +14,7 @@
 #import "MCONNTPOperation.h"
 #import "MCOOperation+Private.h"
 #import "MCONNTPFetchAllArticlesOperation.h"
+#import "MCONNTPSendOperation.h"
 #import "MCONNTPOperation+Private.h"
 #include "MCOperationQueueCallback.h"
 
@@ -202,6 +203,17 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
 
 - (MCONNTPListNewsgroupsOperation *) listDefaultNewsgroupsOperation {
     mailcore::NNTPListNewsgroupsOperation * coreOp = MCO_NATIVE_INSTANCE->listDefaultNewsgroupsOperation();
+    return MCO_TO_OBJC_OP(coreOp);
+}
+
+- (MCONNTPSendOperation *) sendOperationWithData:(NSData *)messageData {
+    mailcore::NNTPSendOperation * coreOp = MCO_NATIVE_INSTANCE->sendMessageOperation(MCO_FROM_OBJC(mailcore::Data, messageData));
+    return MCO_TO_OBJC_OP(coreOp);
+}
+
+- (MCONNTPSendOperation *) sendOperationWithContentsOfFile:(NSString *)path
+{
+    mailcore::NNTPSendOperation * coreOp = MCO_NATIVE_INSTANCE->sendMessageOperation(MCO_FROM_OBJC(mailcore::String, path));
     return MCO_TO_OBJC_OP(coreOp);
 }
 
