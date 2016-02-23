@@ -3326,12 +3326,11 @@ IMAPIdentity * IMAPSession::identity(IMAPIdentity * clientIdentity, ErrorCode * 
     client_identification = mailimap_id_params_list_new_empty();
 
     mc_foreacharray(String, key, clientIdentity->allInfoKeys()) {
-        char * dup_name;
-        char * dup_value;
-        
-        dup_name = strdup(key->UTF8Characters());
-        dup_value = strdup(clientIdentity->infoForKey(key)->UTF8Characters());
-        mailimap_id_params_list_add_name_value(client_identification, dup_name, dup_value);
+        MMAPString * mmap_str_name = mmap_string_new(key->UTF8Characters());
+        MMAPString * mmap_str_value = mmap_string_new(clientIdentity->infoForKey(key)->UTF8Characters());
+        mmap_string_ref(mmap_str_name);
+        mmap_string_ref(mmap_str_value);
+        mailimap_id_params_list_add_name_value(client_identification, mmap_str_name->str, mmap_str_value->str);
     }
 
     int r;
