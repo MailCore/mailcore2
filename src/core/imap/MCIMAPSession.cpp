@@ -518,10 +518,12 @@ static void logger(mailimap * imap, int log_type, const char * buffer, size_t si
         return;
     
     bool isBuffer = isBufferFromLogType(log_type);
-    
+
     if (isBuffer) {
+        AutoreleasePool * pool = new AutoreleasePool();
         Data * data = Data::dataWithBytes(buffer, (unsigned int) size);
         session->connectionLogger()->log(session, type, data);
+        pool->release();
     }
     else {
         session->connectionLogger()->log(session, type, NULL);
