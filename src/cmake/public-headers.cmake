@@ -118,6 +118,7 @@ async/nntp/MCNNTPFetchAllArticlesOperation.h
 async/nntp/MCNNTPListNewsgroupsOperation.h
 async/nntp/MCNNTPFetchOverviewOperation.h
 async/nntp/MCNNTPFetchServerTimeOperation.h
+async/nntp/MCNNTPSendOperation.h
 async/nntp/MCNNTPOperationCallback.h
 objc/MCObjC.h
 objc/utils/MCOUtils.h
@@ -201,6 +202,7 @@ objc/nntp/MCONNTPFetchAllArticlesOperation.h
 objc/nntp/MCONNTPListNewsgroupsOperation.h
 objc/nntp/MCONNTPFetchOverviewOperation.h
 objc/nntp/MCONNTPFetchServerTimeOperation.h
+objc/nntp/MCONNTPSendOperation.h
 objc/nntp/MCONNTPGroupInfo.h
 objc/provider/MCOProvider.h
 objc/provider/MCONetService.h
