@@ -537,6 +537,9 @@
     <ClInclude Include="..\..\..\src\async\nntp\MCNNTPListNewsgroupsOperation.h">
       <Filter>Source Files\async\nntp</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\async\nntp\MCNNTPSendOperation.h">
+      <Filter>Source Files\async\nntp</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\src\async\nntp\MCNNTPOperation.h">
       <Filter>Source Files\async\nntp</Filter>
     </ClInclude>
@@ -927,6 +930,9 @@
       <Filter>Source Files\async\nntp</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\async\nntp\MCNNTPListNewsgroupsOperation.cpp">
+      <Filter>Source Files\async\nntp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\nntp\MCNNTPSendOperation.cpp">
       <Filter>Source Files\async\nntp</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\async\nntp\MCNNTPOperation.cpp">

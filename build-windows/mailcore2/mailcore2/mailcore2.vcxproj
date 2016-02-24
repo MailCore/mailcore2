@@ -63,6 +63,7 @@
     <ClInclude Include="..\..\..\src\async\nntp\MCNNTPFetchOverviewOperation.h" />
     <ClInclude Include="..\..\..\src\async\nntp\MCNNTPFetchServerTimeOperation.h" />
     <ClInclude Include="..\..\..\src\async\nntp\MCNNTPListNewsgroupsOperation.h" />
+    <ClInclude Include="..\..\..\src\async\nntp\MCNNTPSendOperation.h" />
     <ClInclude Include="..\..\..\src\async\nntp\MCNNTPOperation.h" />
     <ClInclude Include="..\..\..\src\async\nntp\MCNNTPOperationCallback.h" />
     <ClInclude Include="..\..\..\src\async\pop\MCAsyncPOP.h" />
@@ -223,6 +224,7 @@
     <ClCompile Include="..\..\..\src\async\nntp\MCNNTPFetchOverviewOperation.cpp" />
     <ClCompile Include="..\..\..\src\async\nntp\MCNNTPFetchServerTimeOperation.cpp" />
     <ClCompile Include="..\..\..\src\async\nntp\MCNNTPListNewsgroupsOperation.cpp" />
+    <ClCompile Include="..\..\..\src\async\nntp\MCNNTPSendOperation.cpp" />
     <ClCompile Include="..\..\..\src\async\nntp\MCNNTPOperation.cpp" />
     <ClCompile Include="..\..\..\src\async\pop\MCPOPAsyncSession.cpp" />
     <ClCompile Include="..\..\..\src\async\pop\MCPOPCheckAccountOperation.cpp" />
