@@ -132,6 +132,7 @@ namespace mailcore {
         IMAPCapabilityAuthSKey,
         IMAPCapabilityAuthSRP,
         IMAPCapabilityXOAuth2,
+        IMAPCapabilityXYMHighestModseq,
         IMAPCapabilityGmail,
     };
     

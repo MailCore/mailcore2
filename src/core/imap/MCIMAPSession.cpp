@@ -323,6 +323,7 @@ void IMAPSession::init()
     mXListEnabled = false;
     mQResyncEnabled = false;
     mCondstoreEnabled = false;
+    mXYMHighestModseqEnabled = false;
     mIdentityEnabled = false;
     mNamespaceEnabled = false;
     mCompressionEnabled = false;
@@ -1111,7 +1112,7 @@ IMAPFolderStatus * IMAPSession::folderStatus(String * folder, ErrorCode * pError
     mailimap_status_att_list_add(status_att_list, MAILIMAP_STATUS_ATT_RECENT);
     mailimap_status_att_list_add(status_att_list, MAILIMAP_STATUS_ATT_UIDNEXT);
     mailimap_status_att_list_add(status_att_list, MAILIMAP_STATUS_ATT_UIDVALIDITY);
-    if (mCondstoreEnabled) {
+    if (mCondstoreEnabled || mXYMHighestModseqEnabled) {
         mailimap_status_att_list_add(status_att_list, MAILIMAP_STATUS_ATT_HIGHESTMODSEQ);
     }
     
@@ -3850,7 +3851,9 @@ void IMAPSession::capabilitySetWithSessionState(IndexSet * capabilities)
     if (mailimap_has_extension(mImap, (char *)"MOVE")) {
         capabilities->addIndex(IMAPCapabilityMove);
     }
-
+    if (mailimap_has_extension(mImap, (char *)"XYMHIGHESTMODSEQ")) {
+        capabilities->addIndex(IMAPCapabilityXYMHighestModseq);
+    }
     applyCapabilities(capabilities);
 }
 
@@ -3886,6 +3889,9 @@ void IMAPSession::applyCapabilities(IndexSet * capabilities)
     }
     if (capabilities->containsIndex(IMAPCapabilityQResync)) {
         mQResyncEnabled = true;
+    }
+    if (capabilities->containsIndex(IMAPCapabilityXYMHighestModseq)) {
+        mXYMHighestModseqEnabled = true;
     }
     if (capabilities->containsIndex(IMAPCapabilityXOAuth2)) {
         mXOauth2Enabled = true;
