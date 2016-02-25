@@ -57,8 +57,8 @@ namespace mailcore {
         
         virtual time_t fetchServerDate(ErrorCode * pError);
         
-        virtual void sendMessage(Data * messageData, NNTPProgressCallback * callback, ErrorCode * pError);
-        virtual void sendMessage(String * messagePath, NNTPProgressCallback * callback, ErrorCode * pError);
+        virtual void postMessage(Data * messageData, NNTPProgressCallback * callback, ErrorCode * pError);
+        virtual void postMessage(String * messagePath, NNTPProgressCallback * callback, ErrorCode * pError);
         
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();

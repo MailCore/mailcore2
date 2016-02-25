@@ -18,7 +18,7 @@
 #include <MailCore/MCNNTPListNewsgroupsOperation.h>
 #include <MailCore/MCNNTPFetchOverviewOperation.h>
 #include <MailCore/MCNNTPFetchServerTimeOperation.h>
-#include <MailCore/MCNNTPSendOperation.h>
+#include <MailCore/MCNNTPPostOperation.h>
 #include <MailCore/MCNNTPOperationCallback.h>
 
 #endif

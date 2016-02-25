@@ -622,7 +622,7 @@ Array * NNTPSession::fetchOverArticlesInRange(Range range, String * groupName, E
     return result;
 }
 
-void NNTPSession::sendMessage(Data * messageData, NNTPProgressCallback * callback, ErrorCode * pError)
+void NNTPSession::postMessage(Data * messageData, NNTPProgressCallback * callback, ErrorCode * pError)
 {
     int r;
     
@@ -665,7 +665,7 @@ err:
     mProgressCallback = NULL;
 }
 
-void NNTPSession::sendMessage(String * messagePath, NNTPProgressCallback * callback, ErrorCode * pError)
+void NNTPSession::postMessage(String * messagePath, NNTPProgressCallback * callback, ErrorCode * pError)
 {
     Data * messageData = Data::dataWithContentsOfFile(messagePath);
     if (!messageData) {
@@ -673,7 +673,7 @@ void NNTPSession::sendMessage(String * messagePath, NNTPProgressCallback * callb
         return;
     }
     
-    return sendMessage(messageData, callback, pError);
+    return postMessage(messageData, callback, pError);
 }
 
 static void mmapStringDeallocator(char * bytes, unsigned int length) {

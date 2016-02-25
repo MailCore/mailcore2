@@ -1,14 +1,14 @@
 //
-//  MCNNTPSendOperation.h
+//  MCNNTPPostOperation.h
 //  mailcore2
 //
 //  Created by Daryle Walker on 2/21/16.
 //  Copyright © 2016 MailCore. All rights reserved.
 //
 
-#ifndef MAILCORE_MCNNTPSENDOPERATION_H
+#ifndef MAILCORE_MCNNTPPOSTOPERATION_H
 
-#define MAILCORE_MCNNTPSENDOPERATION_H
+#define MAILCORE_MCNNTPPOSTOPERATION_H
 
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCAbstract.h>
@@ -18,10 +18,10 @@
 
 namespace mailcore {
     
-    class MAILCORE_EXPORT NNTPSendOperation : public NNTPOperation {
+    class MAILCORE_EXPORT NNTPPostOperation : public NNTPOperation {
     public:
-        NNTPSendOperation();
-        virtual ~NNTPSendOperation();
+        NNTPPostOperation();
+        virtual ~NNTPPostOperation();
         
         virtual void setMessageData(Data * data);
         virtual Data * messageData();

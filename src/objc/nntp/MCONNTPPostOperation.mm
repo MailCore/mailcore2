@@ -1,35 +1,35 @@
 //
-//  MCONNTPSendOperation.mm
+//  MCONNTPPostOperation.mm
 //  mailcore2
 //
 //  Created by Daryle Walker on 2/21/16.
 //  Copyright © 2016 MailCore. All rights reserved.
 //
 
-#import "MCONNTPSendOperation.h"
+#import "MCONNTPPostOperation.h"
 
 #import "MCAsyncNNTP.h"
 
 #import "MCOUtils.h"
 #import "MCOOperation+Private.h"
 
-#define nativeType mailcore::NNTPSendOperation
+#define nativeType mailcore::NNTPPostOperation
 
 typedef void (^CompletionType)(NSError *error);
 
-@interface MCONNTPSendOperation ()
+@interface MCONNTPPostOperation ()
 
 - (void) bodyProgress:(unsigned int)current maximum:(unsigned int)maximum;
 
 @end
 
-class MCONNTPSendOperationCallback : public mailcore::NNTPOperationCallback {
+class MCONNTPPostOperationCallback : public mailcore::NNTPOperationCallback {
 public:
-    MCONNTPSendOperationCallback(MCONNTPSendOperation * op)
+    MCONNTPPostOperationCallback(MCONNTPPostOperation * op)
     {
         mOperation = op;
     }
-    virtual ~MCONNTPSendOperationCallback()
+    virtual ~MCONNTPPostOperationCallback()
     {
     }
     
@@ -38,12 +38,12 @@ public:
     }
     
 private:
-    MCONNTPSendOperation * mOperation;
+    MCONNTPPostOperation * mOperation;
 };
 
-@implementation MCONNTPSendOperation {
+@implementation MCONNTPPostOperation {
     CompletionType _completionBlock;
-    MCONNTPSendOperationCallback * _popCallback;
+    MCONNTPPostOperationCallback * _popCallback;
     MCONNTPOperationProgressBlock _progress;
 }
 
@@ -64,7 +64,7 @@ private:
 {
     self = [super initWithMCOperation:op];
     
-    _popCallback = new MCONNTPSendOperationCallback(self);
+    _popCallback = new MCONNTPPostOperationCallback(self);
     ((mailcore::NNTPOperation *) op)->setNNTPCallback(_popCallback);
     
     return self;

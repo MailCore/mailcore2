@@ -20,7 +20,7 @@
 @class MCONNTPListNewsgroupsOperation;
 @class MCONNTPFetchOverviewOperation;
 @class MCONNTPFetchServerTimeOperation;
-@class MCONNTPSendOperation;
+@class MCONNTPPostOperation;
 @class MCONNTPOperation;
 @class MCOIndexSet;
 
@@ -183,30 +183,30 @@ NS_ASSUME_NONNULL_BEGIN
 - (MCONNTPListNewsgroupsOperation *) listDefaultNewsgroupsOperation;
 
 /**
- Returns an operation that will send the given message through NNTP.
+ Returns an operation that will post the given message through NNTP.
  It will use the newsgroups set in the message data.
  It will also filter out Bcc from the content of the message.
  
  Generate RFC 822 data using MCOMessageBuilder
  
-      MCONNTPOperation * op = [session sendOperationWithData:rfc822Data];
+      MCONNTPOperation * op = [session postOperationWithData:rfc822Data];
       [op start:^(NSError * __nullable error) {
            ...
       }];
  */
-- (MCONNTPSendOperation *) sendOperationWithData:(NSData *)messageData;
+- (MCONNTPPostOperation *) postOperationWithData:(NSData *)messageData;
 
 /**
- Returns an operation that will send the message from the given file through NNTP.
+ Returns an operation that will post the message from the given file through NNTP.
  It will use the newsgroups set in the message data.
  It will also filter out Bcc from the content of the message.
  
-      MCONNTPOperation * op = [session sendOperationWithContentsOfFile:rfc822DataFilename];
+      MCONNTPOperation * op = [session postOperationWithContentsOfFile:rfc822DataFilename];
       [op start:^(NSError * __nullable error) {
            ...
       }];
  */
-- (MCONNTPSendOperation *) sendOperationWithContentsOfFile:(NSString *)path;
+- (MCONNTPPostOperation *) postOperationWithContentsOfFile:(NSString *)path;
 
 /**
  Returns an operation that will disconnect the session.

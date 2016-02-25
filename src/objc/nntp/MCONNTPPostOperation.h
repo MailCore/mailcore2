@@ -1,20 +1,20 @@
 //
-//  MCONNTPSendOperation.h
+//  MCONNTPPostOperation.h
 //  mailcore2
 //
 //  Created by Daryle Walker on 2/21/16.
 //  Copyright © 2016 MailCore. All rights reserved.
 //
 
-#ifndef MAILCORE_MCONNTPSENDOPERATION_H
+#ifndef MAILCORE_MCONNTPPOSTOPERATION_H
 
-#define MAILCORE_MCONNTPSENDOPERATION_H
+#define MAILCORE_MCONNTPPOSTOPERATION_H
 
 #import <Foundation/Foundation.h>
 #import <MailCore/MCONNTPOperation.h>
 
 NS_ASSUME_NONNULL_BEGIN
-@interface MCONNTPSendOperation : MCONNTPOperation
+@interface MCONNTPPostOperation : MCONNTPOperation
 
 /** This block will be called as data is downloaded from the network */
 @property (nonatomic, copy) MCONNTPOperationProgressBlock progress;
