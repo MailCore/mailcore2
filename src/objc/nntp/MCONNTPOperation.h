@@ -13,6 +13,10 @@
 #import <Foundation/Foundation.h>
 #import <MailCore/MCOOperation.h>
 
+/** Transmit a message using NNTP3 */
+
+typedef void (^MCONNTPOperationProgressBlock)(unsigned int current, unsigned int maximum);
+
 /**
  This is a generic asynchronous NNTP3 operation. 
  @see MCONNTPSession

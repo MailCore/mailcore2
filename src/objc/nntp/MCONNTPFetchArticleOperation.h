@@ -13,10 +13,6 @@
 #import <Foundation/Foundation.h>
 #import <MailCore/MCONNTPOperation.h>
 
-/** Fetch a message from NNTP3 */
-
-typedef void (^MCONNTPOperationProgressBlock)(unsigned int current, unsigned int maximum);
-
 NS_ASSUME_NONNULL_BEGIN
 @interface MCONNTPFetchArticleOperation : MCONNTPOperation
 
