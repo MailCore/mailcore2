@@ -15,6 +15,7 @@
 
 #include "MCNNTPGroupInfo.h"
 #include "MCMessageHeader.h"
+#include "MCNNTPProgressCallback.h"
 #include "MCConnectionLoggerUtils.h"
 #include "MCCertificateUtils.h"
 #include "MCLibetpan.h"
@@ -45,6 +46,7 @@ void NNTPSession::init()
     mTimeout = 30;
     
     mNNTP = NULL;
+    mProgressCallback = NULL;
     mState = STATE_DISCONNECTED;
     mConnectionLogger = NULL;
 }
@@ -136,6 +138,21 @@ bool NNTPSession::checkCertificate()
     if (!isCheckCertificateEnabled())
         return true;
     return mailcore::checkCertificate(mNNTP->nntp_stream, hostname());
+}
+
+void NNTPSession::body_progress(size_t current, size_t maximum, void * context)
+{
+    NNTPSession * session;
+    
+    session = (NNTPSession *) context;
+    session->bodyProgress((unsigned int) current, (unsigned int) maximum);
+}
+
+void NNTPSession::bodyProgress(unsigned int current, unsigned int maximum)
+{
+    if (mProgressCallback != NULL) {
+        mProgressCallback->bodyProgress(this, current, maximum);
+    }
 }
 
 static void logger(newsnntp * nntp, int log_type, const char * buffer, size_t size, void * context)
@@ -601,6 +618,124 @@ Array * NNTPSession::fetchOverArticlesInRange(Range range, String * groupName, E
     
     newsnntp_xover_resp_list_free(msg_list);
     * pError = ErrorNone;
+    
+    return result;
+}
+
+void NNTPSession::postMessage(Data * messageData, NNTPProgressCallback * callback, ErrorCode * pError)
+{
+    int r;
+    
+    messageData = dataWithFilteredBcc(messageData);
+    
+    mProgressCallback = callback;
+    bodyProgress(0, messageData->length());
+    
+    MCLog("setup");
+    
+    MCLog("connect");
+    loginIfNeeded(pError);
+    if (* pError != ErrorNone) {
+        goto err;
+    }
+    
+    MCLog("send");
+    r = newsnntp_post(mNNTP, messageData->bytes(), messageData->length());
+    
+    String * response;
+    
+    response = NULL;
+    if (mNNTP->nntp_response != NULL) {
+        response = String::stringWithUTF8Characters(mNNTP->nntp_response);
+    }
+    
+    if (r == NEWSNNTP_ERROR_STREAM) {
+        * pError = ErrorConnection;
+        goto err;
+    }
+    else if (r != NEWSNNTP_NO_ERROR) {
+        * pError = ErrorSendMessage;
+        goto err;
+    }
+    
+    bodyProgress(messageData->length(), messageData->length());
+    * pError = ErrorNone;
+    
+err:
+    mProgressCallback = NULL;
+}
+
+void NNTPSession::postMessage(String * messagePath, NNTPProgressCallback * callback, ErrorCode * pError)
+{
+    Data * messageData = Data::dataWithContentsOfFile(messagePath);
+    if (!messageData) {
+        * pError = ErrorFile;
+        return;
+    }
+    
+    return postMessage(messageData, callback, pError);
+}
+
+static void mmapStringDeallocator(char * bytes, unsigned int length) {
+    mmap_string_unref(bytes);
+}
+
+Data * NNTPSession::dataWithFilteredBcc(Data * data)
+{
+    int r;
+    size_t idx;
+    struct mailimf_message * msg;
+    
+    idx = 0;
+    r = mailimf_message_parse(data->bytes(), data->length(), &idx, &msg);
+    if (r != MAILIMF_NO_ERROR) {
+        return Data::data();
+    }
+    
+    struct mailimf_fields * fields = msg->msg_fields;
+    int col = 0;
+    
+    int hasRecipient = 0;
+    bool bccWasActuallyRemoved = false;
+    for(clistiter * cur = clist_begin(fields->fld_list) ; cur != NULL ; cur = clist_next(cur)) {
+        struct mailimf_field * field = (struct mailimf_field *) clist_content(cur);
+        if (field->fld_type == MAILIMF_FIELD_BCC) {
+            mailimf_field_free(field);
+            clist_delete(fields->fld_list, cur);
+            bccWasActuallyRemoved = true;
+            break;
+        }
+        else if ((field->fld_type == MAILIMF_FIELD_TO) || (field->fld_type == MAILIMF_FIELD_CC)) {
+            hasRecipient = 1;
+        }
+    }
+    if (!hasRecipient) {
+        struct mailimf_address_list * imfTo;
+        imfTo = mailimf_address_list_new_empty();
+        mailimf_address_list_add_parse(imfTo, (char *) "Undisclosed recipients:;");
+        struct mailimf_to * toField = mailimf_to_new(imfTo);
+        struct mailimf_field * field = mailimf_field_new(MAILIMF_FIELD_TO, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, toField, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+        mailimf_fields_add(fields, field);
+    }
+    
+    Data * result;
+    if (!hasRecipient || bccWasActuallyRemoved) {
+        MMAPString * str = mmap_string_new("");
+        mailimf_fields_write_mem(str, &col, fields);
+        mmap_string_append(str, "\n");
+        mmap_string_append_len(str, msg->msg_body->bd_text, msg->msg_body->bd_size);
+        
+        mmap_string_ref(str);
+        
+        result = Data::data();
+        result->takeBytesOwnership(str->str, (unsigned int) str->len, mmapStringDeallocator);
+    }
+    else {
+        // filter Bcc and modify To: only if necessary.
+        result = data;
+    }
+    
+    mailimf_message_free(msg);
     
     return result;
 }

@@ -16,6 +16,7 @@ namespace mailcore {
     class NNTPFetchOverviewOperation;
     class NNTPListNewsgroupsOperation;
     class NNTPFetchServerTimeOperation;
+    class NNTPPostOperation;
     class NNTPOperationQueueCallback;
     class NNTPConnectionLogger;
     
@@ -72,6 +73,9 @@ namespace mailcore {
         virtual NNTPListNewsgroupsOperation * listAllNewsgroupsOperation();
         virtual NNTPListNewsgroupsOperation * listDefaultNewsgroupsOperation();
         
+        virtual NNTPPostOperation * postMessageOperation(Data * messageData);
+        virtual NNTPPostOperation * postMessageOperation(String * filename);
+
         virtual NNTPOperation * disconnectOperation();
         
         virtual NNTPOperation * checkAccountOperation();
