@@ -217,7 +217,9 @@ namespace mailcore {
         virtual void resetAutomaticConfigurationDone();
         virtual void applyCapabilities(IndexSet * capabilities);
         virtual IndexSet * storedCapabilities();
-        
+        virtual void lockConnectionLogger();
+        virtual void unlockConnectionLogger();
+
     private:
         String * mHostname;
         unsigned int mPort;
@@ -264,6 +266,7 @@ namespace mailcore {
         IMAPProgressCallback * mProgressCallback;
         unsigned int mProgressItemsCount;
         ConnectionLogger * mConnectionLogger;
+        pthread_mutex_t mConnectionLoggerLock;
         bool mAutomaticConfigurationEnabled;
         bool mAutomaticConfigurationDone;
         bool mShouldDisconnect;

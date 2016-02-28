@@ -350,6 +350,7 @@ void IMAPSession::init()
     mProgressCallback = NULL;
     mProgressItemsCount = 0;
     mConnectionLogger = NULL;
+    pthread_mutex_init(&mConnectionLoggerLock, NULL);
     mAutomaticConfigurationEnabled = true;
     mAutomaticConfigurationDone = false;
     mShouldDisconnect = false;
@@ -376,6 +377,7 @@ IMAPSession::~IMAPSession()
     MC_SAFE_RELEASE(mDefaultNamespace);
     MC_SAFE_RELEASE(mCurrentFolder);
     pthread_mutex_destroy(&mIdleLock);
+    pthread_mutex_destroy(&mConnectionLoggerLock);
 }
 
 void IMAPSession::setHostname(String * hostname)
@@ -510,13 +512,18 @@ void IMAPSession::items_progress(size_t current, size_t maximum, void * context)
 static void logger(mailimap * imap, int log_type, const char * buffer, size_t size, void * context)
 {
     IMAPSession * session = (IMAPSession *) context;
-    
-    if (session->connectionLogger() == NULL)
+    session->lockConnectionLogger();
+
+    if (session->connectionLogger() == NULL) {
+        session->unlockConnectionLogger();
         return;
+    }
     
     ConnectionLogType type = getConnectionType(log_type);
-    if ((int) type == -1)
+    if ((int) type == -1) {
+        session->unlockConnectionLogger();
         return;
+    }
     
     bool isBuffer = isBufferFromLogType(log_type);
 
@@ -529,6 +536,7 @@ static void logger(mailimap * imap, int log_type, const char * buffer, size_t si
     else {
         session->connectionLogger()->log(session, type, NULL);
     }
+    session->unlockConnectionLogger();
 }
 
 void IMAPSession::setup()
@@ -3955,12 +3963,24 @@ bool IMAPSession::isDisconnected()
 
 void IMAPSession::setConnectionLogger(ConnectionLogger * logger)
 {
+    lockConnectionLogger();
     mConnectionLogger = logger;
+    unlockConnectionLogger();
 }
 
 ConnectionLogger * IMAPSession::connectionLogger()
 {
     return mConnectionLogger;
+}
+
+void IMAPSession::lockConnectionLogger()
+{
+    pthread_mutex_lock(&mConnectionLoggerLock);
+}
+
+void IMAPSession::unlockConnectionLogger()
+{
+    pthread_mutex_unlock(&mConnectionLoggerLock);
 }
 
 String * IMAPSession::htmlRendering(IMAPMessage * message, String * folder, ErrorCode * pError)
