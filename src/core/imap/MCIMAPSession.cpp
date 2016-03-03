@@ -3996,7 +3996,13 @@ void IMAPSession::setConnectionLogger(ConnectionLogger * logger)
 
 ConnectionLogger * IMAPSession::connectionLogger()
 {
-    return mConnectionLogger;
+    ConnectionLogger * result;
+
+    lockConnectionLogger();
+    result = mConnectionLogger;
+    unlockConnectionLogger();
+
+    return result;
 }
 
 void IMAPSession::lockConnectionLogger()
