@@ -20,10 +20,11 @@ typedef void (^CompletionType)(void);
 @interface MCOAccountValidator ()
 
 - (void) _operationCompleted;
+- (void) _logWithSender:(void *)sender connectionType:(MCOConnectionLogType)logType data:(NSData *)data;
 
 @end
 
-class MCOValidatorOperationCallback: public mailcore::Object, public mailcore::OperationCallback {
+class MCOValidatorOperationCallback: public mailcore::Object, public mailcore::OperationCallback, public mailcore::ConnectionLogger {
 public:
     MCOValidatorOperationCallback(MCOAccountValidator * op)
     {
@@ -35,6 +36,11 @@ public:
         [mOperation _operationCompleted];
     }
     
+    virtual void log(void * sender, mailcore::ConnectionLogType logType, mailcore::Data * data)
+    {
+        [mOperation _logWithSender:sender connectionType:(MCOConnectionLogType)logType data:MCO_TO_OBJC(data)];
+    }
+
 private:
     MCOAccountValidator * mOperation;
 };
@@ -42,7 +48,8 @@ private:
 @implementation MCOAccountValidator{
     CompletionType _completionBlock;
     mailcore::AccountValidator * _validator;
-    MCOValidatorOperationCallback * _imapCallback;
+    MCOValidatorOperationCallback * _callback;
+    MCOConnectionLogger _connectionLogger;
 }
 
 #define nativeType mailcore::AccountValidator
@@ -84,11 +91,20 @@ MCO_OBJC_SYNTHESIZE_BOOL(setSmtpEnabled, isSmtpEnabled)
     self = [super initWithMCOperation:validator];
     
     _validator = validator;
-    _imapCallback = new MCOValidatorOperationCallback(self);
-    _validator->setCallback(_imapCallback);
+    _callback = new MCOValidatorOperationCallback(self);
+    _validator->setCallback(_callback);
     _validator->retain();
     
     return self;
+}
+
+- (void) dealloc
+{
+    [_completionBlock release];
+    MC_SAFE_RELEASE(_validator);
+    MC_SAFE_RELEASE(_callback);
+    [_connectionLogger release];
+    [super dealloc];
 }
 
 - (void) start:(void (^)(void))completionBlock
@@ -148,6 +164,29 @@ MCO_OBJC_SYNTHESIZE_BOOL(setSmtpEnabled, isSmtpEnabled)
 - (NSError *) smtpError
 {
     return [NSError mco_errorWithErrorCode:_validator->smtpError()];
+}
+
+- (void) setConnectionLogger:(MCOConnectionLogger)connectionLogger
+{
+    [_connectionLogger release];
+    _connectionLogger = [connectionLogger copy];
+
+    if (_connectionLogger != nil) {
+        _validator->setConnectionLogger(_callback);
+    }
+    else {
+        _validator->setConnectionLogger(NULL);
+    }
+}
+
+- (MCOConnectionLogger) connectionLogger
+{
+    return _connectionLogger;
+}
+
+- (void) _logWithSender:(void *)sender connectionType:(MCOConnectionLogType)logType data:(NSData *)data
+{
+    _connectionLogger(sender, logType, data);
 }
 
 @end

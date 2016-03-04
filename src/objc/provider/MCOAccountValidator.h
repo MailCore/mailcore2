@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <MailCore/MCOOperation.h>
+#import <MailCore/MCOConstants.h>
 
 /**
  This class is used to validate an email provider and it's associated
@@ -33,6 +34,8 @@
 @property (nonatomic, assign, getter=isImapEnabled) BOOL imapEnabled;
 @property (nonatomic, assign, getter=isPopEnabled) BOOL popEnabled;
 @property (nonatomic, assign, getter=isSmtpEnabled) BOOL smtpEnabled;
+
+@property (nonatomic, copy) MCOConnectionLogger connectionLogger;
 
 // result
 @property (nonatomic, retain, readonly) NSString * identifier;

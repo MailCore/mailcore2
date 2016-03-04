@@ -68,6 +68,11 @@ namespace mailcore {
         
         virtual void noop(ErrorCode * pError);
         
+    public: // private
+        virtual void lockConnectionLogger();
+        virtual void unlockConnectionLogger();
+        virtual ConnectionLogger * connectionLoggerNoLock();
+
     private:
         String * mHostname;
         unsigned int mPort;
@@ -89,7 +94,8 @@ namespace mailcore {
         int mLastSMTPResponseCode;
         
         ConnectionLogger * mConnectionLogger;
-        
+        pthread_mutex_t mConnectionLoggerLock;
+
         void init();
         Data * dataWithFilteredBcc(Data * data);
         static void body_progress(size_t current, size_t maximum, void * context);

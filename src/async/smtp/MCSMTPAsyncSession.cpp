@@ -277,13 +277,13 @@ void SMTPAsyncSession::setConnectionLogger(ConnectionLogger * logger)
 {
     pthread_mutex_lock(&mConnectionLoggerLock);
     mConnectionLogger = logger;
-    if (mConnectionLogger != NULL) {
+    pthread_mutex_unlock(&mConnectionLoggerLock);
+    if (logger != NULL) {
         mSession->setConnectionLogger(mInternalLogger);
     }
     else {
         mSession->setConnectionLogger(NULL);
     }
-    pthread_mutex_unlock(&mConnectionLoggerLock);
 }
 
 ConnectionLogger * SMTPAsyncSession::connectionLogger()

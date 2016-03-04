@@ -514,7 +514,7 @@ static void logger(mailimap * imap, int log_type, const char * buffer, size_t si
     IMAPSession * session = (IMAPSession *) context;
     session->lockConnectionLogger();
 
-    if (session->connectionLogger() == NULL) {
+    if (session->connectionLoggerNoLock() == NULL) {
         session->unlockConnectionLogger();
         return;
     }
@@ -530,11 +530,11 @@ static void logger(mailimap * imap, int log_type, const char * buffer, size_t si
     if (isBuffer) {
         AutoreleasePool * pool = new AutoreleasePool();
         Data * data = Data::dataWithBytes(buffer, (unsigned int) size);
-        session->connectionLogger()->log(session, type, data);
+        session->connectionLoggerNoLock()->log(session, type, data);
         pool->release();
     }
     else {
-        session->connectionLogger()->log(session, type, NULL);
+        session->connectionLoggerNoLock()->log(session, type, NULL);
     }
     session->unlockConnectionLogger();
 }
@@ -4013,6 +4013,11 @@ void IMAPSession::lockConnectionLogger()
 void IMAPSession::unlockConnectionLogger()
 {
     pthread_mutex_unlock(&mConnectionLoggerLock);
+}
+
+ConnectionLogger * IMAPSession::connectionLoggerNoLock()
+{
+    return mConnectionLogger;
 }
 
 String * IMAPSession::htmlRendering(IMAPMessage * message, String * folder, ErrorCode * pError)

@@ -219,6 +219,7 @@ namespace mailcore {
         virtual IndexSet * storedCapabilities();
         virtual void lockConnectionLogger();
         virtual void unlockConnectionLogger();
+        virtual ConnectionLogger * connectionLoggerNoLock();
 
     private:
         String * mHostname;

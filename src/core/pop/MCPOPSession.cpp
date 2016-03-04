@@ -36,6 +36,7 @@ void POPSession::init()
     mProgressCallback = NULL;
     mState = STATE_DISCONNECTED;
     mConnectionLogger = NULL;
+    pthread_mutex_init(&mConnectionLoggerLock, NULL);
 }
 
 POPSession::POPSession()
@@ -45,6 +46,7 @@ POPSession::POPSession()
 
 POPSession::~POPSession()
 {
+    pthread_mutex_destroy(&mConnectionLoggerLock);
     MC_SAFE_RELEASE(mHostname);
     MC_SAFE_RELEASE(mUsername);
     MC_SAFE_RELEASE(mPassword);
@@ -155,20 +157,24 @@ void POPSession::body_progress(size_t current, size_t maximum, void * context)
 static void logger(mailpop3 * pop3, int log_type, const char * buffer, size_t size, void * context)
 {
     POPSession * session = (POPSession *) context;
-    
-    if (session->connectionLogger() == NULL)
+    session->lockConnectionLogger();
+
+    if (session->connectionLoggerNoLock() == NULL) {
+        session->unlockConnectionLogger();
         return;
+    }
     
     ConnectionLogType type = getConnectionType(log_type);
     bool isBuffer = isBufferFromLogType(log_type);
     
     if (isBuffer) {
         Data * data = Data::dataWithBytes(buffer, (unsigned int) size);
-        session->connectionLogger()->log(session, type, data);
+        session->connectionLoggerNoLock()->log(session, type, data);
     }
     else {
-        session->connectionLogger()->log(session, type, NULL);
+        session->connectionLoggerNoLock()->log(session, type, NULL);
     }
+    session->unlockConnectionLogger();
 }
 
 void POPSession::setup()
@@ -592,12 +598,35 @@ void POPSession::noop(ErrorCode * pError)
     }
 }
 
+void POPSession::lockConnectionLogger()
+{
+    pthread_mutex_lock(&mConnectionLoggerLock);
+}
+
+void POPSession::unlockConnectionLogger()
+{
+    pthread_mutex_unlock(&mConnectionLoggerLock);
+}
+
 void POPSession::setConnectionLogger(ConnectionLogger * logger)
 {
+    lockConnectionLogger();
     mConnectionLogger = logger;
+    unlockConnectionLogger();
 }
 
 ConnectionLogger * POPSession::connectionLogger()
+{
+    ConnectionLogger * result;
+
+    lockConnectionLogger();
+    result = connectionLoggerNoLock();
+    unlockConnectionLogger();
+
+    return result;
+}
+
+ConnectionLogger * POPSession::connectionLoggerNoLock()
 {
     return mConnectionLogger;
 }

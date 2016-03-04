@@ -42,6 +42,7 @@ void SMTPSession::init()
     mLastLibetpanError = 0;
     mLastSMTPResponseCode = 0;
     mConnectionLogger = NULL;
+    pthread_mutex_init(&mConnectionLoggerLock, NULL);
 }
 
 SMTPSession::SMTPSession()
@@ -51,6 +52,7 @@ SMTPSession::SMTPSession()
 
 SMTPSession::~SMTPSession()
 {
+    pthread_mutex_destroy(&mConnectionLoggerLock);
     MC_SAFE_RELEASE(mLastSMTPResponse);
     MC_SAFE_RELEASE(mHostname);
     MC_SAFE_RELEASE(mUsername);
@@ -184,24 +186,29 @@ void SMTPSession::bodyProgress(unsigned int current, unsigned int maximum)
 static void logger(mailsmtp * smtp, int log_type, const char * buffer, size_t size, void * context)
 {
     SMTPSession * session = (SMTPSession *) context;
+    session->lockConnectionLogger();
     
-    if (session->connectionLogger() == NULL)
+    if (session->connectionLoggerNoLock() == NULL) {
+        session->unlockConnectionLogger();
         return;
+    }
     
     ConnectionLogType type = getConnectionType(log_type);
     if ((int) type == -1) {
         // in case of MAILSTREAM_LOG_TYPE_INFO_RECEIVED or MAILSTREAM_LOG_TYPE_INFO_SENT.
+        session->unlockConnectionLogger();
         return;
     }
     bool isBuffer = isBufferFromLogType(log_type);
     
     if (isBuffer) {
         Data * data = Data::dataWithBytes(buffer, (unsigned int) size);
-        session->connectionLogger()->log(session, type, data);
+        session->connectionLoggerNoLock()->log(session, type, data);
     }
     else {
-        session->connectionLogger()->log(session, type, NULL);
+        session->connectionLoggerNoLock()->log(session, type, NULL);
     }
+    session->unlockConnectionLogger();
 }
 
 
@@ -862,12 +869,35 @@ bool SMTPSession::isDisconnected()
     return mState == STATE_DISCONNECTED;
 }
 
+void SMTPSession::lockConnectionLogger()
+{
+    pthread_mutex_lock(&mConnectionLoggerLock);
+}
+
+void SMTPSession::unlockConnectionLogger()
+{
+    pthread_mutex_unlock(&mConnectionLoggerLock);
+}
+
 void SMTPSession::setConnectionLogger(ConnectionLogger * logger)
 {
+    lockConnectionLogger();
     mConnectionLogger = logger;
+    unlockConnectionLogger();
 }
 
 ConnectionLogger * SMTPSession::connectionLogger()
+{
+    ConnectionLogger * result;
+
+    lockConnectionLogger();
+    result = connectionLoggerNoLock();
+    unlockConnectionLogger();
+
+    return result;
+}
+
+ConnectionLogger * SMTPSession::connectionLoggerNoLock()
 {
     return mConnectionLogger;
 }

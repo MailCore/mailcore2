@@ -64,7 +64,12 @@ namespace mailcore {
         
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
-        
+
+    public: // private
+        virtual void lockConnectionLogger();
+        virtual void unlockConnectionLogger();
+        virtual ConnectionLogger * connectionLoggerNoLock();
+
     private:
         String * mHostname;
         unsigned int mPort;
@@ -81,6 +86,7 @@ namespace mailcore {
         int mState;
         
         ConnectionLogger * mConnectionLogger;
+        pthread_mutex_t mConnectionLoggerLock;
         
         void init();
         void bodyProgress(unsigned int current, unsigned int maximum);

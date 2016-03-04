@@ -64,6 +64,9 @@ void AccountValidator::init()
     mImapEnabled = false;
     mPopEnabled = false;
     mSmtpEnabled = false;
+
+    mConnectionLogger = NULL;
+    pthread_mutex_init(&mConnectionLoggerLock, NULL);
 }
 
 AccountValidator::AccountValidator()
@@ -73,6 +76,7 @@ AccountValidator::AccountValidator()
 
 AccountValidator::~AccountValidator()
 {
+    pthread_mutex_destroy(&mConnectionLoggerLock);
     MC_SAFE_RELEASE(mEmail);
     MC_SAFE_RELEASE(mUsername);
     MC_SAFE_RELEASE(mPassword);
@@ -250,6 +254,7 @@ void AccountValidator::checkNextHost()
             mImapSession->setHostname(mImapServer->hostname());
             mImapSession->setPort(mImapServer->port());
             mImapSession->setConnectionType(mImapServer->connectionType());
+            mImapSession->setConnectionLogger(this);
             
             mOperation = (IMAPOperation *)mImapSession->checkAccountOperation();
             mOperation->retain();
@@ -271,12 +276,13 @@ void AccountValidator::checkNextHost()
             mPopSession = new POPAsyncSession();
             mPopSession->setUsername(mUsername);
             mPopSession->setPassword(mPassword);
-            
+
             mPopServer = (NetService *) mPopServices->objectAtIndex(mCurrentServiceIndex);
             mPopSession->setHostname(mPopServer->hostname());
             mPopSession->setPort(mPopServer->port());
             mPopSession->setConnectionType(mPopServer->connectionType());
-            
+            mPopSession->setConnectionLogger(this);
+
             mOperation = mPopSession->checkAccountOperation();
             mOperation->retain();
             mOperation->setCallback(this);
@@ -306,7 +312,8 @@ void AccountValidator::checkNextHost()
             mSmtpSession->setHostname(mSmtpServer->hostname());
             mSmtpSession->setPort(mSmtpServer->port());
             mSmtpSession->setConnectionType(mSmtpServer->connectionType());
-            
+            mSmtpSession->setConnectionLogger(this);
+
             mOperation = mSmtpSession->checkAccountOperation(Address::addressWithMailbox(mEmail));
             mOperation->retain();
             mOperation->setCallback(this);
@@ -334,16 +341,19 @@ void AccountValidator::checkNextHostDone()
     if (mCurrentServiceTested == SERVICE_IMAP) {
         mImapError = ((IMAPOperation *)mOperation)->error();
         error = mImapError;
+        mImapSession->setConnectionLogger(NULL);
         MC_SAFE_RELEASE(mImapSession);
     }
     else if (mCurrentServiceTested == SERVICE_POP) {
         mPopError = ((POPOperation *)mOperation)->error();
         error = mPopError;
+        mPopSession->setConnectionLogger(NULL);
         MC_SAFE_RELEASE(mPopSession);
     }
     else if (mCurrentServiceTested == SERVICE_SMTP) {
         mSmtpError = ((SMTPOperation *)mOperation)->error();
         error = mSmtpError;
+        mSmtpSession->setConnectionLogger(NULL);
         MC_SAFE_RELEASE(mSmtpSession);
     }
     
@@ -494,4 +504,31 @@ ErrorCode AccountValidator::popError()
 ErrorCode AccountValidator::smtpError()
 {
     return mSmtpError;
+}
+
+void AccountValidator::setConnectionLogger(ConnectionLogger * logger)
+{
+    pthread_mutex_lock(&mConnectionLoggerLock);
+    mConnectionLogger = logger;
+    pthread_mutex_unlock(&mConnectionLoggerLock);
+}
+
+ConnectionLogger * AccountValidator::connectionLogger()
+{
+    ConnectionLogger * result;
+
+    pthread_mutex_lock(&mConnectionLoggerLock);
+    result = mConnectionLogger;
+    pthread_mutex_unlock(&mConnectionLoggerLock);
+
+    return result;
+}
+
+void AccountValidator::log(void * sender, ConnectionLogType logType, Data * buffer)
+{
+    pthread_mutex_lock(&mConnectionLoggerLock);
+    if (mConnectionLogger != NULL) {
+        mConnectionLogger->log(this, logType, buffer);
+    }
+    pthread_mutex_unlock(&mConnectionLoggerLock);
 }
