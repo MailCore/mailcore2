@@ -2060,9 +2060,6 @@ String * String::stripWhitespace()
         else if (* source == '\n') {
             * dest = ' ';
         }
-        else if (* source == '\t') {
-            * dest = ' ';
-        }
         else if (* source == '\f') {
             * dest = ' ';
         }
@@ -2076,6 +2073,9 @@ String * String::stripWhitespace()
             * dest = ' ';
         }
         else if (* source == 0x2028) {
+            * dest = ' ';
+        }
+        else if (* source == 0x2029) {
             * dest = ' ';
         }
         else {
