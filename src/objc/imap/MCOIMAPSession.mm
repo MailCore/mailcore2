@@ -616,7 +616,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
 - (MCOIMAPOperation *)checkAccountOperation
 {
     IMAPOperation *coreOp = MCO_NATIVE_INSTANCE->checkAccountOperation();
-    return OPAQUE_OPERATION(coreOp);
+    return MCO_TO_OBJC_OP(coreOp);
 }
 
 - (MCOIMAPCapabilityOperation *) capabilityOperation

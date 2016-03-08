@@ -35,5 +35,6 @@
 #include <MailCore/MCIMAPOperationCallback.h>
 #include <MailCore/MCIMAPMessageRenderingOperation.h>
 #include <MailCore/MCIMAPCustomCommandOperation.h>
+#include <MailCore/MCIMAPCheckAccountOperation.h>
 
 #endif

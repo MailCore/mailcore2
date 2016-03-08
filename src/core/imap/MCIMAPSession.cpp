@@ -480,6 +480,11 @@ bool IMAPSession::isVoIPEnabled()
     return mVoIPEnabled;
 }
 
+String * IMAPSession::loginResponse()
+{
+    return mLoginResponse;
+}
+
 static bool hasError(int errorCode)
 {
     return ((errorCode != MAILIMAP_NO_ERROR) && (errorCode != MAILIMAP_NO_ERROR_AUTHENTICATED) &&
@@ -829,6 +834,7 @@ void IMAPSession::login(ErrorCode * pError)
         if (mImap->imap_response != NULL) {
             response = String::stringWithUTF8Characters(mImap->imap_response);
         }
+        MC_SAFE_REPLACE_COPY(String, mLoginResponse, response);
         if (response->locationOfString(MCSTR("not enabled for IMAP use")) != -1) {
             * pError = ErrorGmailIMAPNotEnabled;
         }

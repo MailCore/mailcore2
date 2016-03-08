@@ -207,6 +207,8 @@ namespace mailcore {
         
         /** Check if the automatic query of the capabilities of the IMAP server is enabled. */
         virtual bool isAutomaticConfigurationEnabled();
+
+        virtual String * loginResponse();
         
     public: // private
         virtual void loginIfNeeded(ErrorCode * pError);

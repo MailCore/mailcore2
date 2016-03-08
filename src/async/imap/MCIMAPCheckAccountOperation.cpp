@@ -13,11 +13,30 @@
 
 using namespace mailcore;
 
+IMAPCheckAccountOperation::IMAPCheckAccountOperation()
+{
+    mLoginResponse = NULL;
+}
+
+IMAPCheckAccountOperation::~IMAPCheckAccountOperation()
+{
+    MC_SAFE_RELEASE(mLoginResponse);
+}
+
 void IMAPCheckAccountOperation::main()
 {
     ErrorCode error;
     session()->session()->connectIfNeeded(&error);
-    if (error == ErrorNone)
+    if (error == ErrorNone) {
         session()->session()->login(&error);
+        if (error != ErrorNone) {
+            MC_SAFE_REPLACE_COPY(String, mLoginResponse, session()->session()->loginResponse());
+        }
+    }
     setError(error);
+}
+
+String * IMAPCheckAccountOperation::loginResponse()
+{
+    return mLoginResponse;
 }

@@ -102,6 +102,7 @@ async/imap/MCIMAPQuotaOperation.h
 async/imap/MCIMAPOperationCallback.h
 async/imap/MCIMAPMessageRenderingOperation.h
 async/imap/MCIMAPCustomCommandOperation.h
+async/imap/MCIMAPCheckAccountOperation.h
 async/pop/MCAsyncPOP.h
 async/pop/MCPOPAsyncSession.h
 async/pop/MCPOPOperation.h

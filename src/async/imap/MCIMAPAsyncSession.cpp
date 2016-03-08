@@ -719,7 +719,7 @@ IMAPOperation * IMAPAsyncSession::connectOperation()
     return op;
 }
 
-IMAPOperation * IMAPAsyncSession::checkAccountOperation()
+IMAPCheckAccountOperation * IMAPAsyncSession::checkAccountOperation()
 {
     IMAPCheckAccountOperation * op = new IMAPCheckAccountOperation();
     op->setMainSession(this);

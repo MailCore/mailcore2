@@ -42,6 +42,7 @@ namespace mailcore {
     class IMAPIdentity;
     class OperationQueueCallback;
     class IMAPCustomCommandOperation;
+    class IMAPCheckAccountOperation;
     
     class MAILCORE_EXPORT IMAPAsyncSession : public Object {
     public:
@@ -163,7 +164,7 @@ namespace mailcore {
         virtual IMAPIdentityOperation * identityOperation(IMAPIdentity * identity);
         
         virtual IMAPOperation * connectOperation();
-        virtual IMAPOperation * checkAccountOperation();
+        virtual IMAPCheckAccountOperation * checkAccountOperation();
         virtual IMAPOperation * disconnectOperation();
         
         virtual IMAPCapabilityOperation * capabilityOperation();

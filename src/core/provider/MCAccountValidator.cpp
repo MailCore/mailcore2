@@ -18,6 +18,7 @@
 #include "MCPOPOperation.h"
 #include "MCSMTPOperation.h"
 #include "MCMXRecordResolverOperation.h"
+#include "MCIMAPCheckAccountOperation.h"
 
 using namespace mailcore;
 
@@ -47,6 +48,7 @@ void AccountValidator::init()
     mImapError = ErrorNone;
     mPopError = ErrorNone;
     mSmtpError = ErrorNone;
+    mImapLoginResponse = NULL;
     
     mCurrentServiceIndex = 0;
     mCurrentServiceTested = 0;
@@ -77,6 +79,7 @@ AccountValidator::AccountValidator()
 AccountValidator::~AccountValidator()
 {
     pthread_mutex_destroy(&mConnectionLoggerLock);
+    MC_SAFE_RELEASE(mImapLoginResponse);
     MC_SAFE_RELEASE(mEmail);
     MC_SAFE_RELEASE(mUsername);
     MC_SAFE_RELEASE(mPassword);
@@ -256,7 +259,7 @@ void AccountValidator::checkNextHost()
             mImapSession->setConnectionType(mImapServer->connectionType());
             mImapSession->setConnectionLogger(this);
             
-            mOperation = (IMAPOperation *)mImapSession->checkAccountOperation();
+            mOperation = mImapSession->checkAccountOperation();
             mOperation->retain();
             mOperation->setCallback(this);
             mOperation->start();
@@ -340,6 +343,7 @@ void AccountValidator::checkNextHostDone()
     
     if (mCurrentServiceTested == SERVICE_IMAP) {
         mImapError = ((IMAPOperation *)mOperation)->error();
+        MC_SAFE_REPLACE_COPY(String, mImapLoginResponse, ((IMAPCheckAccountOperation *)mOperation)->loginResponse());
         error = mImapError;
         mImapSession->setConnectionLogger(NULL);
         MC_SAFE_RELEASE(mImapSession);
@@ -504,6 +508,11 @@ ErrorCode AccountValidator::popError()
 ErrorCode AccountValidator::smtpError()
 {
     return mSmtpError;
+}
+
+String * AccountValidator::imapLoginResponse()
+{
+    return mImapLoginResponse;
 }
 
 void AccountValidator::setConnectionLogger(ConnectionLogger * logger)

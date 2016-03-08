@@ -64,7 +64,8 @@ namespace mailcore {
         virtual ErrorCode imapError();
         virtual ErrorCode popError();
         virtual ErrorCode smtpError();
-        
+        virtual String * imapLoginResponse();
+
         virtual void start();
         virtual void cancel();
 
@@ -89,6 +90,7 @@ namespace mailcore {
         ErrorCode mImapError;
         ErrorCode mPopError;
         ErrorCode mSmtpError;
+        String * mImapLoginResponse;
         
         MailProvider * mProvider;
         

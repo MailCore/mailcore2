@@ -43,6 +43,7 @@ set(objc_imap_files
   objc/imap/MCOIMAPSearchOperation.mm
   objc/imap/MCOIMAPNoopOperation.mm
   objc/imap/MCOIMAPCustomCommandOperation.mm
+  objc/imap/MCOIMAPCheckAccountOperation.mm
   objc/imap/MCOIMAPSession.mm
 )
 
