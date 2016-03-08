@@ -1595,7 +1595,6 @@ static void charactersParsed(void * context,
     String * modifiedString;
     modifiedString = new String((const char *) ch, len);
     modifiedString->autorelease();
-    modifiedString = modifiedString->stripWhitespace();
 
     if (modifiedString->length() > 0) {
         if (state->lastCharIsWhitespace) {
@@ -1772,7 +1771,7 @@ static void elementStarted(void * ctx, const xmlChar * name, const xmlChar ** at
         AutoreleasePool * pool;
         String * link = NULL;
         HashMap * attributes;
-        
+
         pool = new AutoreleasePool();
         attributes = dictionaryFromAttributes(atts);
         if (attributes != NULL) {
@@ -2032,11 +2031,8 @@ String * String::flattenHTMLAndShowBlockquoteAndLink(bool showBlockquote, bool s
     state.paragraphSpacingStack->release();
     state.linkStack->release();
     
-    UChar ch[2];
-    ch[0] = 160;
-    ch[1] = 0;
-    result->replaceOccurrencesOfString(String::stringWithCharacters(ch), MCSTR(" "));
-    
+    result = result->stripWhitespace();
+
     return result;
 }
 
@@ -2098,7 +2094,7 @@ String * String::stripWhitespace()
 
     // copy content
     while (* source != 0) {
-        if ((* source == ' ') && (* (source + 1) == ' ')) {
+        while ((* source == ' ') && (* (source + 1) == ' ')) {
             source ++;
         }
         * dest = * source;
