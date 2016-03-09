@@ -228,7 +228,7 @@
         [[parser mainPart] prepareForUnitTest];
         NSString * str = [parser plainTextRendering];
 
-//        NSString * outputPath = [@"/Users/hoa/mc2-results/summary" stringByAppendingPathComponent:name];
+//        NSString * outputPath = [[@"~/mc2-results/summary" stringByExpandingTildeInPath] stringByAppendingPathComponent:name];
 //        outputPath = [[outputPath stringByDeletingPathExtension] stringByAppendingPathExtension:@"txt"];
 //        NSString * directory = [outputPath stringByDeletingLastPathComponent];
 //        [[NSFileManager defaultManager] createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:NULL];
@@ -242,7 +242,17 @@
             continue;
         }
 
-        XCTAssertEqualObjects(str, [[NSString alloc] initWithData:resultData encoding:NSUTF8StringEncoding]);
+        NSString * diff = nil;
+        if (![str isEqualToString:[[NSString alloc] initWithData:resultData encoding:NSUTF8StringEncoding]]) {
+            NSString * filename = [[NSTemporaryDirectory() stringByAppendingPathComponent:name] stringByAppendingPathExtension:@"txt"];
+            [str writeToFile:filename atomically:YES encoding:NSUTF8StringEncoding error:NULL];
+            NSString * outputPath = [[NSTemporaryDirectory() stringByAppendingPathComponent:name] stringByAppendingPathExtension:@"out"];
+            NSString * command = [NSString stringWithFormat:@"diff -u '%@' '%@' > '%@'", resultPath, filename, outputPath];
+            system([command UTF8String]);
+
+            diff = [[NSString alloc] initWithContentsOfFile:outputPath encoding:NSUTF8StringEncoding error:NULL];
+        }
+        XCTAssertTrue(diff == nil, @"output changed:\n%@", diff);
     }
 }
 
