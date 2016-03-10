@@ -184,7 +184,8 @@ void IMAPPart::importIMAPFields(struct mailimap_body_fields * fields,
         
         isUUEncode = false;
         if (fields->bd_encoding->enc_type == MAILIMAP_BODY_FLD_ENC_OTHER) {
-            if (strcasecmp(fields->bd_encoding->enc_value, "x-uuencode") == 0) {
+            if (strcasecmp(fields->bd_encoding->enc_value, "x-uuencode") == 0 ||
+                strcasecmp(fields->bd_encoding->enc_value, "uuencode") == 0) {
                 isUUEncode = true;
             }
         }
