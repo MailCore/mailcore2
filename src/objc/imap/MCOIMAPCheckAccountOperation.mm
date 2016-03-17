@@ -62,7 +62,8 @@ typedef void (^CompletionType)(NSError *error);
     } else {
         NSError * error = [NSError mco_errorWithErrorCode:op->error()];
         if (op->loginResponse() != NULL) {
-            NSDictionary * userInfo = @{@"IMAPServerError": MCO_TO_OBJC(op->loginResponse())};
+            NSMutableDictionary * userInfo = [[error userInfo] mutableCopy];
+            userInfo[@"IMAPServerError"] = MCO_TO_OBJC(op->loginResponse());
             error = [NSError errorWithDomain:[error domain] code:[error code] userInfo:userInfo];
         }
         _completionBlock(error);
