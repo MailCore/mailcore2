@@ -2392,7 +2392,7 @@ Array * String::componentsSeparatedByString(String * separator)
         p = location + separator->length();
     }
     unsigned int length = (unsigned int) (mLength - (p - mUnicodeChars));
-    MCAssert(length < mLength);
+    MCAssert(length <= mLength);
     String * value = new String(p, length);
     result->addObject(value);
     value->release();
