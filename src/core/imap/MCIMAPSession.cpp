@@ -344,7 +344,6 @@ void IMAPSession::init()
     mLastFetchedSequenceNumber = 0;
     mCurrentFolder = NULL;
     pthread_mutex_init(&mIdleLock, NULL);
-    mCanIdle = true;
     mState = STATE_DISCONNECTED;
     mImap = NULL;
     mProgressCallback = NULL;
@@ -561,7 +560,7 @@ void IMAPSession::unsetup()
     LOCK();
     imap = mImap;
     mImap = NULL;
-    mCanIdle = false;
+    mIdleEnabled = false;
     UNLOCK();
     
     if (imap != NULL) {
@@ -3232,8 +3231,8 @@ bool IMAPSession::setupIdle()
 {
     // main thread
     LOCK();
-    bool canIdle = mCanIdle;
-    if (mCanIdle) {
+    bool canIdle = mIdleEnabled;
+    if (mIdleEnabled) {
         mailstream_setup_idle(mImap->imap_stream);
     }
     UNLOCK();
@@ -3332,7 +3331,7 @@ void IMAPSession::interruptIdle()
 {
     // main thread
     LOCK();
-    if (mCanIdle) {
+    if (mIdleEnabled) {
         mailstream_interrupt_idle(mImap->imap_stream);
     }
     UNLOCK();
@@ -3342,7 +3341,7 @@ void IMAPSession::unsetupIdle()
 {
     // main thread
     LOCK();
-    if (mCanIdle) {
+    if (mIdleEnabled) {
         mailstream_unsetup_idle(mImap->imap_stream);
     }
     UNLOCK();
@@ -3853,7 +3852,7 @@ void IMAPSession::capabilitySetWithSessionState(IndexSet * capabilities)
     }
     if (mailimap_has_idle(mImap)) {
         LOCK();
-        mCanIdle = true;
+        mIdleEnabled = true;
         UNLOCK();
     }
     if (mailimap_has_id(mImap)) {
