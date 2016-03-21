@@ -3851,9 +3851,7 @@ void IMAPSession::capabilitySetWithSessionState(IndexSet * capabilities)
         capabilities->addIndex(IMAPCapabilityAuthLogin);
     }
     if (mailimap_has_idle(mImap)) {
-        LOCK();
-        mIdleEnabled = true;
-        UNLOCK();
+        capabilities->addIndex(IMAPCapabilityIdle);
     }
     if (mailimap_has_id(mImap)) {
         capabilities->addIndex(IMAPCapabilityId);
@@ -3865,9 +3863,6 @@ void IMAPSession::capabilitySetWithSessionState(IndexSet * capabilities)
         // Disable use of XLIST if this is the Gmail IMAP server because it implements
         // RFC 6154.
         capabilities->addIndex(IMAPCapabilityGmail);
-    }
-    if (mailimap_has_idle(mImap)) {
-        capabilities->addIndex(IMAPCapabilityIdle);
     }
     if (mailimap_has_condstore(mImap)) {
         capabilities->addIndex(IMAPCapabilityCondstore);
