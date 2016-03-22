@@ -17,7 +17,7 @@ It will produce the following binaries:
 
 ### Running example ###
 
-Copy the binary result of the build (ailcore2-android-*version*.aar) to `mailcore2/example/android/AndroidExample/app/libs`.
+Copy the binary result of the build (mailcore2-android-*version*.aar) to `mailcore2/example/android/AndroidExample/app/libs`.
 
 - Open the example in Android Studio
 - Tweaks the login and password in the class `MessagesSyncManager`
