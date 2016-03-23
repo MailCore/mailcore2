@@ -12,9 +12,10 @@
 
 #include <MailCore/MCObject.h>
 #include <MailCore/MCRange.h>
-#include <inttypes.h>
 
 #ifdef __cplusplus
+
+#include <inttypes.h>
 
 namespace mailcore {
     
