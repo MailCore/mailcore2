@@ -3916,7 +3916,9 @@ void IMAPSession::applyCapabilities(IndexSet * capabilities)
         mIsGmail = true;
     }
     if (capabilities->containsIndex(IMAPCapabilityIdle)) {
+        LOCK();
         mIdleEnabled = true;
+        UNLOCK();
     }
     if (capabilities->containsIndex(IMAPCapabilityCondstore)) {
         mCondstoreEnabled = true;
@@ -3940,7 +3942,10 @@ void IMAPSession::applyCapabilities(IndexSet * capabilities)
 
 bool IMAPSession::isIdleEnabled()
 {
-    return mIdleEnabled;
+    LOCK();
+    bool idleEnabled = mIdleEnabled;
+    UNLOCK();
+    return idleEnabled;
 }
 
 bool IMAPSession::isXListEnabled()
