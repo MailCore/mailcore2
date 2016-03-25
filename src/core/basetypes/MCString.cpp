@@ -1161,6 +1161,10 @@ String * String::stringByDecodingMIMEHeaderValue(const char * phrase)
         MCLog("could not decode: %s\n", phrase);
     }
 
+    if (result == NULL) {
+      result = string();
+    }
+
     free(decoded);
     
     return result;

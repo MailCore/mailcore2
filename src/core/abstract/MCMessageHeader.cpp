@@ -516,6 +516,10 @@ void MessageHeader::importIMFFields(struct mailimf_fields * fields)
         
         fieldName = field->fld_data.fld_optional_field->fld_name;
         fieldNameStr = String::stringWithUTF8Characters(fieldName);
+        if (fieldNameStr == NULL) {
+            continue;
+        }
+
         // Set only if this optional-field is not set
         if (extraHeaderValueForName(fieldNameStr) == NULL) {
             char * fieldValue;
