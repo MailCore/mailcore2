@@ -140,7 +140,7 @@ void Array::insertObject(unsigned int idx, Object * obj)
 {
     if (idx < count()) {
         int count = carray_count(mArray) - idx;
-        carray_set_size(mArray, count + 1);
+        carray_set_size(mArray, carray_count(mArray) + 1);
         void ** p = carray_data(mArray);
         memmove(p + idx + 1, p + idx, count * sizeof(* p));
         obj->retain();
