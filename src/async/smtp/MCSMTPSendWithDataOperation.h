@@ -37,7 +37,7 @@ namespace mailcore {
 
     public: // subclass behavior
         virtual void main();
-        
+        virtual void cancel();
     private:
         Data * mMessageData;
         String * mMessageFilepath;
