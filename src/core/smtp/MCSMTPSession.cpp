@@ -683,15 +683,25 @@ void SMTPSession::internalSendMessage(Address * from, Array * recipients, Data *
     }
     MCLog("send");
     if ((mSmtp->esmtp & MAILSMTP_ESMTP_PIPELINING) != 0) {
-        r = mailesmtp_send_quit(mSmtp, MCUTF8(from->mailbox()), 0, NULL,
+        r = mailsmtp_data_message_quit_no_disconnect(mSmtp, MCUTF8(from->mailbox()), 0, NULL,
             address_list,
             messageData->bytes(), messageData->length());
+        CAN_CANCEL_LOCK();
+        mCanCancel = false;
+        CAN_CANCEL_UNLOCK();
+        if (mSmtp->stream != NULL) {
+            mailstream_close(mSmtp->stream);
+            mSmtp->stream = NULL;
+        }
         mShouldDisconnect = true;
     }
     else {
         r = mailesmtp_send(mSmtp, MCUTF8(from->mailbox()), 0, NULL,
             address_list,
             messageData->bytes(), messageData->length());
+        CAN_CANCEL_LOCK();
+        mCanCancel = false;
+        CAN_CANCEL_UNLOCK();
         mailsmtp_quit(mSmtp);
     }
     esmtp_address_list_free(address_list);
@@ -759,10 +769,6 @@ void SMTPSession::internalSendMessage(Address * from, Array * recipients, Data *
     
     err:
     mProgressCallback = NULL;
-    
-    CAN_CANCEL_LOCK();
-    mCanCancel = false;
-    CAN_CANCEL_UNLOCK();
 }
 
 void SMTPSession::sendMessage(Address * from, Array * recipients, String * messagePath,
