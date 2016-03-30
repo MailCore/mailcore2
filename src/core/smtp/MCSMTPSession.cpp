@@ -24,6 +24,9 @@ enum {
 #define CANCEL_LOCK() pthread_mutex_lock(&mCancelLock)
 #define CANCEL_UNLOCK() pthread_mutex_unlock(&mCancelLock)
 
+#define CAN_CANCEL_LOCK() pthread_mutex_lock(&mCanCancelLock)
+#define CAN_CANCEL_UNLOCK() pthread_mutex_unlock(&mCanCancelLock)
+
 void SMTPSession::init()
 {
     mHostname = NULL;
@@ -38,6 +41,7 @@ void SMTPSession::init()
     mUseHeloIPEnabled = false;
     mShouldDisconnect = false;
     mSendingCancelled = false;
+    mCanCancel = false;
     
     mSmtp = NULL;
     mProgressCallback = NULL;
@@ -48,6 +52,7 @@ void SMTPSession::init()
     mConnectionLogger = NULL;
     pthread_mutex_init(&mConnectionLoggerLock, NULL);
     pthread_mutex_init(&mCancelLock, NULL);
+    pthread_mutex_init(&mCanCancelLock, NULL);
 }
 
 SMTPSession::SMTPSession()
@@ -59,6 +64,7 @@ SMTPSession::~SMTPSession()
 {
     pthread_mutex_destroy(&mConnectionLoggerLock);
     pthread_mutex_destroy(&mCancelLock);
+    pthread_mutex_destroy(&mCanCancelLock);
     MC_SAFE_RELEASE(mLastSMTPResponse);
     MC_SAFE_RELEASE(mHostname);
     MC_SAFE_RELEASE(mUsername);
@@ -643,6 +649,10 @@ void SMTPSession::internalSendMessage(Address * from, Array * recipients, Data *
         return;
     }
     
+    CAN_CANCEL_LOCK();
+    mCanCancel = true;
+    CAN_CANCEL_UNLOCK();
+    
     messageData = dataWithFilteredBcc(messageData);
 
     mProgressCallback = callback;
@@ -659,7 +669,7 @@ void SMTPSession::internalSendMessage(Address * from, Array * recipients, Data *
     CANCEL_LOCK();
     sendingCancelled = mSendingCancelled;
     CANCEL_UNLOCK();
-    if (mSendingCancelled) {
+    if (sendingCancelled) {
         goto err;
     }
 
@@ -749,6 +759,10 @@ void SMTPSession::internalSendMessage(Address * from, Array * recipients, Data *
     
     err:
     mProgressCallback = NULL;
+    
+    CAN_CANCEL_LOCK();
+    mCanCancel = false;
+    CAN_CANCEL_UNLOCK();
 }
 
 void SMTPSession::sendMessage(Address * from, Array * recipients, String * messagePath,
@@ -903,7 +917,11 @@ void SMTPSession::cancelMessageSending()
     setSendingCancelled(true);
 
     if (mSmtp->stream != NULL) {
-        mailstream_cancel(mSmtp->stream);
+        CAN_CANCEL_LOCK();
+        if (mCanCancel) {
+            mailstream_cancel(mSmtp->stream);
+        }
+        CAN_CANCEL_UNLOCK();
     }
 }
 

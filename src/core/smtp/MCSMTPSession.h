@@ -88,6 +88,7 @@ namespace mailcore {
         bool mUseHeloIPEnabled;
         bool mShouldDisconnect;
         bool mSendingCancelled;
+        bool mCanCancel;
         
         mailsmtp * mSmtp;
         SMTPProgressCallback * mProgressCallback;
@@ -96,6 +97,7 @@ namespace mailcore {
         int mLastLibetpanError;
         int mLastSMTPResponseCode;
         pthread_mutex_t mCancelLock;
+        pthread_mutex_t mCanCancelLock;
         
         ConnectionLogger * mConnectionLogger;
         pthread_mutex_t mConnectionLoggerLock;
