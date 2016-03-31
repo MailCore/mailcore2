@@ -67,6 +67,10 @@
 */
 @property (nonatomic, assign, getter=isUseHeloIPEnabled) BOOL useHeloIPEnabled;
 
+@property (nonatomic, copy, readonly) NSString *lastSMTPResponse;
+
+@property (nonatomic, assign, readonly) NSInteger lastSMTPResponseCode;
+
 /**
  Sets logger callback. The network traffic will be sent to this block.
  

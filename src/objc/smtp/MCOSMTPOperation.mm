@@ -16,6 +16,9 @@
 
 typedef void (^CompletionType)(NSError *error);
 
+NSString *const kMCOSMTPSendOperationResponseKey = @"MCOSMTPSendOperationResponse";
+NSString *const kMCOSMTPSendOperationResponseCodeKey = @"MCOSMTPSendOperationResponseCode";
+
 @implementation MCOSMTPOperation {
     CompletionType _completionBlock;
     MCOSMTPSession * _session;

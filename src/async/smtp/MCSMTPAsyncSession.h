@@ -51,6 +51,10 @@ namespace mailcore {
         virtual void setUseHeloIPEnabled(bool enabled);
         virtual bool useHeloIPEnabled();
         
+        virtual String * lastSMTPResponse();
+
+        virtual int lastSMTPResponseCode();
+
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
         

@@ -15,6 +15,10 @@ using namespace mailcore;
 
 @implementation NSError (MCO)
 + (NSError *)mco_errorWithErrorCode:(mailcore::ErrorCode)code {
+    return [self mco_errorWithErrorCode:code userInfo:nil];
+}
+
++ (NSError *)mco_errorWithErrorCode:(mailcore::ErrorCode)code userInfo:(NSDictionary *)userInfoOverride {
     if (code == mailcore::ErrorNone) {
         return nil;
     }
@@ -28,6 +32,9 @@ using namespace mailcore;
         }
     }
     
+    if (userInfoOverride) {
+        [userInfo addEntriesFromDictionary:userInfoOverride];
+    }
     NSError *error = [NSError errorWithDomain:MCOErrorDomain
                                          code:(int)code
                                      userInfo:userInfo];

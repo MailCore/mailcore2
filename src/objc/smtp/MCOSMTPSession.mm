@@ -98,6 +98,14 @@ MCO_OBJC_SYNTHESIZE_BOOL(setCheckCertificateEnabled, isCheckCertificateEnabled)
 MCO_OBJC_SYNTHESIZE_BOOL(setUseHeloIPEnabled, useHeloIPEnabled)
 MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue, dispatchQueue);
 
+- (NSString *)lastSMTPResponse {
+    return [NSObject mco_objectWithMCObject:MCO_NATIVE_INSTANCE->lastSMTPResponse()];
+}
+
+- (NSInteger)lastSMTPResponseCode {
+    return MCO_NATIVE_INSTANCE->lastSMTPResponseCode();
+}
+
 - (void) setConnectionLogger:(MCOConnectionLogger)connectionLogger
 {
     [_connectionLogger release];

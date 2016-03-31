@@ -167,6 +167,16 @@ bool SMTPSession::useHeloIPEnabled()
     return mUseHeloIPEnabled;
 }
 
+String * SMTPSession::lastSMTPResponse()
+{
+    return mLastSMTPResponse;
+}
+
+int SMTPSession::lastSMTPResponseCode()
+{
+    return mLastSMTPResponseCode;
+}
+
 void SMTPSession::body_progress(size_t current, size_t maximum, void * context)
 {
     SMTPSession * session;

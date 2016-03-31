@@ -12,6 +12,8 @@
 
 #import "MCOUtils.h"
 #import "MCOOperation+Private.h"
+#import "MCOSMTPOperation+Private.h"
+#import "MCOSMTPSession.h"
 
 #define nativeType mailcore::SMTPOperation
 
@@ -99,7 +101,17 @@ private:
     if (_completionBlock == NULL)
         return;
     
-    NSError * error = [NSError mco_errorWithErrorCode:MCO_NATIVE_INSTANCE->error()];
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+    MCOSMTPSession *session = [self session];
+    if (session.lastSMTPResponse) {
+        userInfo[kMCOSMTPSendOperationResponseKey] = session.lastSMTPResponse;
+    }
+    if (session.lastSMTPResponseCode) {
+        userInfo[kMCOSMTPSendOperationResponseCodeKey] = @(session.lastSMTPResponseCode);
+    }
+
+    NSError * error = [NSError mco_errorWithErrorCode:MCO_NATIVE_INSTANCE->error() userInfo:userInfo];
+
     _completionBlock(error);
     [_completionBlock release];
     _completionBlock = NULL;
