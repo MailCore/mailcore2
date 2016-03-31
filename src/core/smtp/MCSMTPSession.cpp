@@ -683,9 +683,9 @@ void SMTPSession::internalSendMessage(Address * from, Array * recipients, Data *
     }
     MCLog("send");
     if ((mSmtp->esmtp & MAILSMTP_ESMTP_PIPELINING) != 0) {
-        r = mailsmtp_data_message_quit_no_disconnect(mSmtp, MCUTF8(from->mailbox()), 0, NULL,
-            address_list,
-            messageData->bytes(), messageData->length());
+        r = mailesmtp_send_quit_no_disconnect(mSmtp, MCUTF8(from->mailbox()), 0, NULL,
+                                              address_list,
+                                              messageData->bytes(), messageData->length());
         CAN_CANCEL_LOCK();
         mCanCancel = false;
         CAN_CANCEL_UNLOCK();
