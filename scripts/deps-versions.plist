@@ -7,9 +7,9 @@
 	<key>ctemplate-osx</key>
 	<string>3</string>
 	<key>libetpan-ios</key>
-	<string>16</string>
+	<string>17</string>
 	<key>libetpan-osx</key>
-	<string>16</string>
+	<string>17</string>
 	<key>mailcore2-framework-osx</key>
 	<string>8</string>
 	<key>mailcore2-ios</key>
