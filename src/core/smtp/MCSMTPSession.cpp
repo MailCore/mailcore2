@@ -649,10 +649,6 @@ void SMTPSession::internalSendMessage(Address * from, Array * recipients, Data *
         return;
     }
     
-    CAN_CANCEL_LOCK();
-    mCanCancel = true;
-    CAN_CANCEL_UNLOCK();
-    
     messageData = dataWithFilteredBcc(messageData);
 
     mProgressCallback = callback;
@@ -665,13 +661,17 @@ void SMTPSession::internalSendMessage(Address * from, Array * recipients, Data *
     if (* pError != ErrorNone) {
         goto err;
     }
-
+    
     CANCEL_LOCK();
     sendingCancelled = mSendingCancelled;
     CANCEL_UNLOCK();
     if (sendingCancelled) {
         goto err;
     }
+    
+    CAN_CANCEL_LOCK();
+    mCanCancel = true;
+    CAN_CANCEL_UNLOCK();
 
     // disable DSN feature for more compatibility
     mSmtp->esmtp &= ~MAILSMTP_ESMTP_DSN;
@@ -917,18 +917,16 @@ void SMTPSession::noop(ErrorCode * pError)
 void SMTPSession::cancelMessageSending()
 {
     // main thread
-    if (mSmtp == NULL)
-        return;
-
+    
     setSendingCancelled(true);
-
-    if (mSmtp->stream != NULL) {
-        CAN_CANCEL_LOCK();
-        if (mCanCancel) {
+    
+    CAN_CANCEL_LOCK();
+    if (mCanCancel) {
+        if (mSmtp != NULL && mSmtp->stream != NULL) {
             mailstream_cancel(mSmtp->stream);
         }
-        CAN_CANCEL_UNLOCK();
     }
+    CAN_CANCEL_UNLOCK();
 }
 
 bool SMTPSession::isDisconnected()
