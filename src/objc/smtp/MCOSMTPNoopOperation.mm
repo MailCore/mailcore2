@@ -12,6 +12,8 @@
 
 #import "MCOUtils.h"
 #import "MCOOperation+Private.h"
+#import "MCOSMTPOperation+Private.h"
+#import "MCOSMTPSession.h"
 
 typedef void (^CompletionType)(NSError *error);
 
@@ -56,7 +58,16 @@ typedef void (^CompletionType)(NSError *error);
     if (_completionBlock == NULL)
         return;
     
-    NSError * error = [NSError mco_errorWithErrorCode:MCO_NATIVE_INSTANCE->error()];
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+    MCOSMTPSession *session = [self session];
+    if (session.lastSMTPResponse) {
+        userInfo[kMCOSMTPOperationResponseKey] = session.lastSMTPResponse;
+    }
+    if (session.lastSMTPResponseCode) {
+        userInfo[kMCOSMTPOperationResponseCodeKey] = @(session.lastSMTPResponseCode);
+    }
+
+    NSError * error = [NSError mco_errorWithErrorCode:MCO_NATIVE_INSTANCE->error() userInfo:userInfo];
     _completionBlock(error);
     [_completionBlock release];
     _completionBlock = NULL;
