@@ -84,3 +84,9 @@ void SMTPSendWithDataOperation::main()
     }
     setError(error);
 }
+
+void SMTPSendWithDataOperation::cancel()
+{
+    SMTPOperation::cancel();
+    session()->session()->cancelMessageSending();
+}

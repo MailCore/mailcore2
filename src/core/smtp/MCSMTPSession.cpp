@@ -21,6 +21,12 @@ enum {
     STATE_LOGGEDIN,
 };
 
+#define CANCEL_LOCK() pthread_mutex_lock(&mCancelLock)
+#define CANCEL_UNLOCK() pthread_mutex_unlock(&mCancelLock)
+
+#define CAN_CANCEL_LOCK() pthread_mutex_lock(&mCanCancelLock)
+#define CAN_CANCEL_UNLOCK() pthread_mutex_unlock(&mCanCancelLock)
+
 void SMTPSession::init()
 {
     mHostname = NULL;
@@ -34,6 +40,8 @@ void SMTPSession::init()
     mCheckCertificateEnabled = true;
     mUseHeloIPEnabled = false;
     mShouldDisconnect = false;
+    mSendingCancelled = false;
+    mCanCancel = false;
     
     mSmtp = NULL;
     mProgressCallback = NULL;
@@ -43,6 +51,8 @@ void SMTPSession::init()
     mLastSMTPResponseCode = 0;
     mConnectionLogger = NULL;
     pthread_mutex_init(&mConnectionLoggerLock, NULL);
+    pthread_mutex_init(&mCancelLock, NULL);
+    pthread_mutex_init(&mCanCancelLock, NULL);
 }
 
 SMTPSession::SMTPSession()
@@ -53,6 +63,8 @@ SMTPSession::SMTPSession()
 SMTPSession::~SMTPSession()
 {
     pthread_mutex_destroy(&mConnectionLoggerLock);
+    pthread_mutex_destroy(&mCancelLock);
+    pthread_mutex_destroy(&mCanCancelLock);
     MC_SAFE_RELEASE(mLastSMTPResponse);
     MC_SAFE_RELEASE(mHostname);
     MC_SAFE_RELEASE(mUsername);
@@ -155,6 +167,12 @@ bool SMTPSession::checkCertificate()
     if (!isCheckCertificateEnabled())
         return true;
     return mailcore::checkCertificate(mSmtp->stream, hostname());
+}
+
+void SMTPSession::setSendingCancelled(bool isCancelled) {
+    CANCEL_LOCK();
+    mSendingCancelled = isCancelled;
+    CANCEL_UNLOCK();
 }
 
 void SMTPSession::setUseHeloIPEnabled(bool enabled)
@@ -609,10 +627,18 @@ void SMTPSession::checkAccount(Address * from, ErrorCode * pError)
 }
 
 void SMTPSession::sendMessage(Address * from, Array * recipients, Data * messageData,
+        SMTPProgressCallback * callback, ErrorCode * pError)
+{
+    setSendingCancelled(false);
+    internalSendMessage(from, recipients, messageData, callback, pError);
+}
+
+void SMTPSession::internalSendMessage(Address * from, Array * recipients, Data * messageData,
     SMTPProgressCallback * callback, ErrorCode * pError)
 {
     clist * address_list;
     int r;
+    bool sendingCancelled;
 
     if (from == NULL) {
         * pError = ErrorNoSender;
@@ -635,6 +661,17 @@ void SMTPSession::sendMessage(Address * from, Array * recipients, Data * message
     if (* pError != ErrorNone) {
         goto err;
     }
+    
+    CANCEL_LOCK();
+    sendingCancelled = mSendingCancelled;
+    CANCEL_UNLOCK();
+    if (sendingCancelled) {
+        goto err;
+    }
+    
+    CAN_CANCEL_LOCK();
+    mCanCancel = true;
+    CAN_CANCEL_UNLOCK();
 
     // disable DSN feature for more compatibility
     mSmtp->esmtp &= ~MAILSMTP_ESMTP_DSN;
@@ -646,15 +683,25 @@ void SMTPSession::sendMessage(Address * from, Array * recipients, Data * message
     }
     MCLog("send");
     if ((mSmtp->esmtp & MAILSMTP_ESMTP_PIPELINING) != 0) {
-        r = mailesmtp_send_quit(mSmtp, MCUTF8(from->mailbox()), 0, NULL,
-            address_list,
-            messageData->bytes(), messageData->length());
+        r = mailesmtp_send_quit_no_disconnect(mSmtp, MCUTF8(from->mailbox()), 0, NULL,
+                                              address_list,
+                                              messageData->bytes(), messageData->length());
+        CAN_CANCEL_LOCK();
+        mCanCancel = false;
+        CAN_CANCEL_UNLOCK();
+        if (mSmtp->stream != NULL) {
+            mailstream_close(mSmtp->stream);
+            mSmtp->stream = NULL;
+        }
         mShouldDisconnect = true;
     }
     else {
         r = mailesmtp_send(mSmtp, MCUTF8(from->mailbox()), 0, NULL,
             address_list,
             messageData->bytes(), messageData->length());
+        CAN_CANCEL_LOCK();
+        mCanCancel = false;
+        CAN_CANCEL_UNLOCK();
         mailsmtp_quit(mSmtp);
     }
     esmtp_address_list_free(address_list);
@@ -727,13 +774,14 @@ void SMTPSession::sendMessage(Address * from, Array * recipients, Data * message
 void SMTPSession::sendMessage(Address * from, Array * recipients, String * messagePath,
                               SMTPProgressCallback * callback, ErrorCode * pError)
 {
+    setSendingCancelled(false);
     Data * messageData = Data::dataWithContentsOfFile(messagePath);
     if (!messageData) {
         * pError = ErrorFile;
         return;
     }
 
-    return sendMessage(from, recipients, messageData, callback, pError);
+    return internalSendMessage(from, recipients, messageData, callback, pError);
 }
 
 static void mmapStringDeallocator(char * bytes, unsigned int length) {
@@ -802,6 +850,7 @@ Data * SMTPSession::dataWithFilteredBcc(Data * data)
 
 void SMTPSession::sendMessage(Data * messageData, SMTPProgressCallback * callback, ErrorCode * pError)
 {
+    setSendingCancelled(false);
     AutoreleasePool * pool = new AutoreleasePool();
     MessageParser * parser = new MessageParser(messageData);
     Array * recipients = new Array();
@@ -826,6 +875,7 @@ void SMTPSession::sendMessage(Data * messageData, SMTPProgressCallback * callbac
 
 void SMTPSession::sendMessage(MessageBuilder * msg, SMTPProgressCallback * callback, ErrorCode * pError)
 {
+    setSendingCancelled(false);
     Array * recipients = new Array();
     if (msg->header()->to() != NULL) {
         recipients->addObjectsFromArray(msg->header()->to());
@@ -862,6 +912,21 @@ void SMTPSession::noop(ErrorCode * pError)
             * pError = ErrorConnection;
         }
     }
+}
+
+void SMTPSession::cancelMessageSending()
+{
+    // main thread
+    
+    setSendingCancelled(true);
+    
+    CAN_CANCEL_LOCK();
+    if (mCanCancel) {
+        if (mSmtp != NULL && mSmtp->stream != NULL) {
+            mailstream_cancel(mSmtp->stream);
+        }
+    }
+    CAN_CANCEL_UNLOCK();
 }
 
 bool SMTPSession::isDisconnected()
