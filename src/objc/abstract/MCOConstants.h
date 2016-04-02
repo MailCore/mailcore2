@@ -452,4 +452,7 @@ typedef void (^MCOConnectionLogger)(void * connectionID, MCOConnectionLogType ty
  */
 typedef void (^MCOOperationQueueRunningChangeBlock)(void);
 
+/** MCOIMAPResponseKey is a key for NSError userInfo dictionary, the value is string with the server response. */
+#define MCOIMAPResponseKey @"MCOIMAPResponseKey"
+
 #endif

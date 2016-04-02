@@ -12,6 +12,7 @@
 
 #import "MCOOperation+Private.h"
 #import "MCOUtils.h"
+#import "MCOConstants.h"
 
 typedef void (^CompletionType)(NSError *error);
 
@@ -63,7 +64,7 @@ typedef void (^CompletionType)(NSError *error);
         NSError * error = [NSError mco_errorWithErrorCode:op->error()];
         if (op->loginResponse() != NULL) {
             NSMutableDictionary * userInfo = [[error userInfo] mutableCopy];
-            userInfo[@"IMAPServerError"] = MCO_TO_OBJC(op->loginResponse());
+            userInfo[MCOIMAPResponseKey] = MCO_TO_OBJC(op->loginResponse());
             error = [NSError errorWithDomain:[error domain] code:[error code] userInfo:userInfo];
         }
         _completionBlock(error);
