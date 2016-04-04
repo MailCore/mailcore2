@@ -102,7 +102,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
     return [NSObject mco_objectWithMCObject:MCO_NATIVE_INSTANCE->lastSMTPResponse()];
 }
 
-- (NSInteger)lastSMTPResponseCode {
+- (int)lastSMTPResponseCode {
     return MCO_NATIVE_INSTANCE->lastSMTPResponseCode();
 }
 
