@@ -10,6 +10,7 @@
 
 #include <stdlib.h>
 
+#include "MCSMTPSession.h"
 #include "MCSMTPAsyncSession.h"
 #include "MCSMTPOperationCallback.h"
 
@@ -70,6 +71,16 @@ void SMTPOperation::setError(ErrorCode error)
 ErrorCode SMTPOperation::error()
 {
     return mError;
+}
+
+String * SMTPOperation::lastSMTPResponse()
+{
+    return session()->session()->lastSMTPResponse();
+}
+
+int SMTPOperation::lastSMTPResponseCode()
+{
+    return session()->session()->lastSMTPResponseCode();
 }
 
 struct progressContext {

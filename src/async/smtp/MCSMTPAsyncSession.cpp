@@ -184,15 +184,6 @@ bool SMTPAsyncSession::useHeloIPEnabled()
     return mSession->useHeloIPEnabled();
 }
 
-String * SMTPAsyncSession::lastSMTPResponse()
-{
-    return mSession->lastSMTPResponse();
-}
-
-int SMTPAsyncSession::lastSMTPResponseCode() {
-    return mSession->lastSMTPResponseCode();
-}
-
 void SMTPAsyncSession::runOperation(SMTPOperation * operation)
 {
     cancelDelayedPerformMethod((Object::Method) &SMTPAsyncSession::tryAutomaticDisconnectAfterDelay, NULL);

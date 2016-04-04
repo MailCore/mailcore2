@@ -12,7 +12,6 @@
 
 #import "MCOUtils.h"
 #import "MCOOperation+Private.h"
-#import "MCOSMTPOperation+Private.h"
 #import "MCOSMTPSession.h"
 
 typedef void (^CompletionType)(NSError *error);
@@ -58,18 +57,16 @@ typedef void (^CompletionType)(NSError *error);
 }
 
 - (NSError *)error {
-    NSError *error = nil;
-    nativeType *op = MCO_NATIVE_INSTANCE;
-    if (op->error() != mailcore::ErrorNone) {
-        NSError * error = [NSError mco_errorWithErrorCode:op->error()];
-        MCOSMTPSession *session = [self session];
-        if ([session lastSMTPResponse] || [session lastSMTPResponseCode]) {
+    nativeType * op = MCO_NATIVE_INSTANCE;
+    NSError * error = [NSError mco_errorWithErrorCode:op->error()];
+    if (error != nil) {
+        if (op->lastSMTPResponse() != NULL || op->lastSMTPResponseCode() != 0) {
             NSMutableDictionary * userInfo = [[error userInfo] mutableCopy];
-            if ([session lastSMTPResponse]) {
-                userInfo[MCOSMTPResponseKey] = [session lastSMTPResponse];
+            if (op->lastSMTPResponse() != NULL) {
+                userInfo[MCOSMTPResponseKey] = MCO_TO_OBJC(op->lastSMTPResponse());
             }
-            if ([session lastSMTPResponseCode]) {
-                userInfo[MCOSMTPResponseCodeKey] = @([session lastSMTPResponseCode]);
+            if (op->lastSMTPResponseCode() != 0) {
+                userInfo[MCOSMTPResponseCodeKey] = @(op->lastSMTPResponseCode());
             }
             error = [NSError errorWithDomain:[error domain] code:[error code] userInfo:userInfo];
         }
