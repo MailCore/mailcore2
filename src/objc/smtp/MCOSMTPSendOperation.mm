@@ -101,18 +101,24 @@ private:
     if (_completionBlock == NULL)
         return;
     
-    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
-    MCOSMTPSession *session = [self session];
-    if (session.lastSMTPResponse) {
-        userInfo[MCOSMTPResponseKey] = [session lastSMTPResponse];
+    nativeType *op = MCO_NATIVE_INSTANCE;
+    if (op->error() == mailcore::ErrorNone) {
+        _completionBlock(nil);
+    } else {
+        NSError * error = [NSError mco_errorWithErrorCode:op->error()];
+        MCOSMTPSession *session = [self session];
+        if ([session lastSMTPResponse] || [session lastSMTPResponseCode]) {
+            NSMutableDictionary * userInfo = [[error userInfo] mutableCopy];
+            if ([session lastSMTPResponse]) {
+                userInfo[MCOSMTPResponseKey] = [session lastSMTPResponse];
+            }
+            if ([session lastSMTPResponseCode]) {
+                userInfo[MCOSMTPResponseCodeKey] = @([session lastSMTPResponseCode]);
+            }
+            error = [NSError errorWithDomain:[error domain] code:[error code] userInfo:userInfo];
+        }
+        _completionBlock(error);
     }
-    if (session.lastSMTPResponseCode) {
-        userInfo[MCOSMTPResponseCodeKey] = @([session lastSMTPResponseCode]);
-    }
-
-    NSError * error = [NSError mco_errorWithErrorCode:MCO_NATIVE_INSTANCE->error() userInfo:userInfo];
-
-    _completionBlock(error);
     [_completionBlock release];
     _completionBlock = NULL;
 }
