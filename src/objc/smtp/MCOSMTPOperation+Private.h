@@ -16,6 +16,8 @@
 
 @property (nonatomic, retain) MCOSMTPSession * session;
 
+@property (nonatomic, readonly, copy) NSError * error;
+
 @end
 
 #endif
