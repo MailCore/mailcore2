@@ -14,9 +14,6 @@
 
 /** This is an asynchronous SMTP operation, used for sending messages. */
 
-extern NSString * _Nonnull const kMCOSMTPOperationResponseKey;
-extern NSString * _Nonnull const kMCOSMTPOperationResponseCodeKey;
-
 NS_ASSUME_NONNULL_BEGIN
 @interface MCOSMTPOperation : MCOOperation
 

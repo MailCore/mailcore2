@@ -17,9 +17,6 @@
 
 typedef void (^CompletionType)(NSError *error);
 
-NSString *const kMCOSMTPOperationResponseKey = @"MCOSMTPOperationResponse";
-NSString *const kMCOSMTPOperationResponseCodeKey = @"MCOSMTPOperationResponseCode";
-
 @implementation MCOSMTPOperation {
     CompletionType _completionBlock;
     MCOSMTPSession * _session;
@@ -46,10 +43,10 @@ NSString *const kMCOSMTPOperationResponseCodeKey = @"MCOSMTPOperationResponseCod
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
     MCOSMTPSession *session = [self session];
     if (session.lastSMTPResponse) {
-        userInfo[kMCOSMTPOperationResponseKey] = session.lastSMTPResponse;
+        userInfo[MCOSMTPResponseKey] = [session lastSMTPResponse];
     }
     if (session.lastSMTPResponseCode) {
-        userInfo[kMCOSMTPOperationResponseCodeKey] = @(session.lastSMTPResponseCode);
+        userInfo[MCOSMTPResponseCodeKey] = @([session lastSMTPResponseCode]);
     }
 
     NSError * error = [NSError mco_errorWithErrorCode:MCO_NATIVE_INSTANCE->error() userInfo:userInfo];

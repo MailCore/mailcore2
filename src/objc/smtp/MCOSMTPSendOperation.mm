@@ -104,10 +104,10 @@ private:
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
     MCOSMTPSession *session = [self session];
     if (session.lastSMTPResponse) {
-        userInfo[kMCOSMTPOperationResponseKey] = session.lastSMTPResponse;
+        userInfo[MCOSMTPResponseKey] = [session lastSMTPResponse];
     }
     if (session.lastSMTPResponseCode) {
-        userInfo[kMCOSMTPOperationResponseCodeKey] = @(session.lastSMTPResponseCode);
+        userInfo[MCOSMTPResponseCodeKey] = @([session lastSMTPResponseCode]);
     }
 
     NSError * error = [NSError mco_errorWithErrorCode:MCO_NATIVE_INSTANCE->error() userInfo:userInfo];

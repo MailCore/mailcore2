@@ -423,6 +423,11 @@ typedef NS_ENUM(NSInteger, MCOErrorCode) {
     MCOErrorCodeCount,
 };
 
+/** Error userInfo key for SMTP operations response string */
+#define MCOSMTPResponseKey @"MCOSMTPResponseKey"
+/** Error userInfo key for SMTP operations response code */
+#define MCOSMTPResponseCodeKey @"MCOSMTPResponseCodeKey"
+
 /** Here's the list of connection log types.*/
 typedef NS_ENUM(NSInteger, MCOConnectionLogType) {
     /** Received data.*/
