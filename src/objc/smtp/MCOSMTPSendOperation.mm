@@ -100,7 +100,7 @@ private:
     if (_completionBlock == NULL)
         return;
     
-    NSError * error = [self error];
+    NSError * error = [self _errorFromNativeOperation];
     _completionBlock(error);
     [_completionBlock release];
     _completionBlock = NULL;
