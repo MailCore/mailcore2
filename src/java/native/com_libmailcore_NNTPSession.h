@@ -164,10 +164,10 @@ JNIEXPORT jobject JNICALL Java_com_libmailcore_NNTPSession_fetchArticleOperation
 /*
  * Class:     com_libmailcore_NNTPSession
  * Method:    fetchArticleByMessageIDOperation
- * Signature: (Ljava/lang/String;Ljava/lang/String;)Lcom/libmailcore/NNTPFetchArticleOperation;
+ * Signature: (Ljava/lang/String;)Lcom/libmailcore/NNTPFetchArticleOperation;
  */
 JNIEXPORT jobject JNICALL Java_com_libmailcore_NNTPSession_fetchArticleByMessageIDOperation
-  (JNIEnv *, jobject, jstring, jstring);
+  (JNIEnv *, jobject, jstring);
 
 /*
  * Class:     com_libmailcore_NNTPSession
