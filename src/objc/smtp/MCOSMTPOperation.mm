@@ -39,7 +39,7 @@ typedef void (^CompletionType)(NSError *error);
     if (_completionBlock == NULL)
         return;
     
-    NSError * error = [NSError mco_errorWithErrorCode:MCO_NATIVE_INSTANCE->error()];
+    NSError * error = [self _errorFromNativeOperation];
     _completionBlock(error);
     [_completionBlock release];
     _completionBlock = NULL;
@@ -54,6 +54,25 @@ typedef void (^CompletionType)(NSError *error);
 - (MCOSMTPSession *) session
 {
     return _session;
+}
+
+- (NSError *) _errorFromNativeOperation
+{
+    nativeType * op = MCO_NATIVE_INSTANCE;
+    NSError * error = [NSError mco_errorWithErrorCode:op->error()];
+    if (error != nil) {
+        if (op->lastSMTPResponse() != NULL || op->lastSMTPResponseCode() != 0) {
+            NSMutableDictionary * userInfo = [[error userInfo] mutableCopy];
+            if (op->lastSMTPResponse() != NULL) {
+                userInfo[MCOSMTPResponseKey] = MCO_TO_OBJC(op->lastSMTPResponse());
+            }
+            if (op->lastSMTPResponseCode() != 0) {
+                userInfo[MCOSMTPResponseCodeKey] = @(op->lastSMTPResponseCode());
+            }
+            error = [NSError errorWithDomain:[error domain] code:[error code] userInfo:userInfo];
+        }
+    }
+    return error;
 }
 
 @end

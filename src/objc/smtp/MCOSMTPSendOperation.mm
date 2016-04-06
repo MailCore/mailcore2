@@ -12,6 +12,7 @@
 
 #import "MCOUtils.h"
 #import "MCOOperation+Private.h"
+#import "MCOSMTPOperation+Private.h"
 
 #define nativeType mailcore::SMTPOperation
 
@@ -99,7 +100,7 @@ private:
     if (_completionBlock == NULL)
         return;
     
-    NSError * error = [NSError mco_errorWithErrorCode:MCO_NATIVE_INSTANCE->error()];
+    NSError * error = [self _errorFromNativeOperation];
     _completionBlock(error);
     [_completionBlock release];
     _completionBlock = NULL;

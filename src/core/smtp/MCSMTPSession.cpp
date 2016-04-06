@@ -185,6 +185,16 @@ bool SMTPSession::useHeloIPEnabled()
     return mUseHeloIPEnabled;
 }
 
+String * SMTPSession::lastSMTPResponse()
+{
+    return mLastSMTPResponse;
+}
+
+int SMTPSession::lastSMTPResponseCode()
+{
+    return mLastSMTPResponseCode;
+}
+
 void SMTPSession::body_progress(size_t current, size_t maximum, void * context)
 {
     SMTPSession * session;
@@ -712,8 +722,10 @@ void SMTPSession::internalSendMessage(Address * from, Array * recipients, Data *
     response = NULL;
     if (mSmtp->response != NULL) {
         response = String::stringWithUTF8Characters(mSmtp->response);
+        MC_SAFE_REPLACE_COPY(String, mLastSMTPResponse, response);
     }
     responseCode = mSmtp->response_code;
+    mLastSMTPResponseCode = responseCode;
 
     if ((r == MAILSMTP_ERROR_STREAM) || (r == MAILSMTP_ERROR_CONNECTION_REFUSED)) {
         * pError = ErrorConnection;
@@ -758,9 +770,7 @@ void SMTPSession::internalSendMessage(Address * from, Array * recipients, Data *
         }
         
         * pError = ErrorSendMessage;
-        MC_SAFE_REPLACE_COPY(String, mLastSMTPResponse, response);
         mLastLibetpanError = r;
-        mLastSMTPResponseCode = responseCode;
         goto err;
     }
 
