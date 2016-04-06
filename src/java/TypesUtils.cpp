@@ -348,16 +348,16 @@ static Object * hashmapJavaToObjectConverter(JNIEnv * env, jobject obj)
     jobject entrySet = (jobjectArray) env->CallObjectMethod(obj, method);
     javaClass = env->GetObjectClass(entrySet);
     method = env->GetMethodID(javaClass, "toArray", "()[Ljava/lang/Object;");
-    jobjectArray array = (jobjectArray) env->CallObjectMethod(obj, method);
+    jobjectArray array = (jobjectArray) env->CallObjectMethod(entrySet, method);
     int count = (int) env->GetArrayLength(array);
     for(int i = 0 ; i < count ; i ++) {
         jobject entry = env->GetObjectArrayElement(array, i);
         javaClass = env->GetObjectClass(entry);
         method = env->GetMethodID(javaClass, "getKey", "()Ljava/lang/Object;");
-        jobject key = env->CallObjectMethod(obj, method);
+        jobject key = env->CallObjectMethod(entry, method);
         Object * mcKey = javaToMCObject(env, key);
         method = env->GetMethodID(javaClass, "getValue", "()Ljava/lang/Object;");
-        jobject value = env->CallObjectMethod(obj, method);
+        jobject value = env->CallObjectMethod(entry, method);
         Object * mcValue = javaToMCObject(env, value);
         result->setObjectForKey(mcKey, mcValue);
     }

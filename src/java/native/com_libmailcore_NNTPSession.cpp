@@ -65,10 +65,10 @@ JNIEXPORT jobject JNICALL Java_com_libmailcore_NNTPSession_fetchArticleOperation
 }
 
 JNIEXPORT jobject JNICALL Java_com_libmailcore_NNTPSession_fetchArticleByMessageIDOperation
-  (JNIEnv * env, jobject obj, jstring group, jstring messageID)
+  (JNIEnv * env, jobject obj, jstring messageID)
 {
     MC_POOL_BEGIN;
-    jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->fetchArticleByMessageIDOperation(MC_FROM_JAVA(String, group), MC_FROM_JAVA(String, messageID)));
+    jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->fetchArticleByMessageIDOperation(MC_FROM_JAVA(String, messageID)));
     MC_POOL_END;
     return result;
 }

@@ -91,7 +91,7 @@ public class NNTPSession extends NativeObject {
     /** Returns an operation to fetch the content of a given article. */
     public native NNTPFetchArticleOperation fetchArticleOperation(String group, int idx);
     /** Returns an operation to fetch the content of a given articl using the Message-ID. */
-    public native NNTPFetchArticleOperation fetchArticleByMessageIDOperation(String group, String messageID);
+    public native NNTPFetchArticleOperation fetchArticleByMessageIDOperation(String messageID);
     /** Returns an operation to fetch the summary headers of set of articles of a newsgroup. */
     public native NNTPFetchOverviewOperation fetchOverviewOperationWithIndexes(String group, IndexSet indexes);
     /** Returns an operation to fetch the server date. */
