@@ -87,7 +87,7 @@ JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPSession_folderStatusOperation
   (JNIEnv * env, jobject obj, jstring path)
 {
     MC_POOL_BEGIN;
-    jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->folderInfoOperation(MC_FROM_JAVA(String, path)));
+    jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->folderStatusOperation(MC_FROM_JAVA(String, path)));
     MC_POOL_END;
     return result;
 }
