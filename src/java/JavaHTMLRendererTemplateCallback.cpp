@@ -64,7 +64,7 @@ String * JavaHTMLRendererTemplateCallback::templateForMessage(AbstractMessage * 
 {
     JNIEnv * env = mEnv;
     jclass cls = mEnv->GetObjectClass(mCallback);
-    jmethodID mid = mEnv->GetMethodID(cls, "templateForAttachment", "(Lcom/libmailcore/AbstractMessage;)Ljava/lang/String;");
+    jmethodID mid = mEnv->GetMethodID(cls, "templateForMessage", "(Lcom/libmailcore/AbstractMessage;)Ljava/lang/String;");
     return MC_FROM_JAVA(String, mEnv->CallObjectMethod(mCallback, mid, MC_TO_JAVA(message)));
 }
     
