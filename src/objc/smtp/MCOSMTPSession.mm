@@ -38,7 +38,9 @@ public:
     
     virtual void log(void * sender, ConnectionLogType logType, Data * data)
     {
-        [mSession _logWithSender:sender connectionType:(MCOConnectionLogType)logType data:MCO_TO_OBJC(data)];
+        @autoreleasepool {
+            [mSession _logWithSender:sender connectionType:(MCOConnectionLogType)logType data:MCO_TO_OBJC(data)];
+        }
     }
 
     virtual void queueStartRunning()
