@@ -230,8 +230,10 @@ static void logger(mailsmtp * smtp, int log_type, const char * buffer, size_t si
     bool isBuffer = isBufferFromLogType(log_type);
     
     if (isBuffer) {
+        AutoreleasePool * pool = new AutoreleasePool();
         Data * data = Data::dataWithBytes(buffer, (unsigned int) size);
         session->connectionLoggerNoLock()->log(session, type, data);
+        pool->release();
     }
     else {
         session->connectionLoggerNoLock()->log(session, type, NULL);
