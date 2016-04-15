@@ -3639,11 +3639,11 @@ void IMAPSession::storeFlagsAndCustomFlags(String * folder, bool identifier_is_u
         else if (r == MAILIMAP_ERROR_PARSE) {
             mShouldDisconnect = true;
             * pError = ErrorParse;
-            return;
+            goto release;
         }
         else if (hasError(r)) {
             * pError = ErrorStore;
-            return;
+            goto release;
         }
     }
     * pError = ErrorNone;
@@ -3736,11 +3736,11 @@ void IMAPSession::storeLabels(String * folder, bool identifier_is_uid, IndexSet 
         else if (r == MAILIMAP_ERROR_PARSE) {
             mShouldDisconnect = true;
             * pError = ErrorParse;
-            return;
+            goto release;
         }
         else if (hasError(r)) {
             * pError = ErrorStore;
-            return;
+            goto release;
         }
     }
     * pError = ErrorNone;
