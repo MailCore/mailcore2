@@ -3646,6 +3646,7 @@ void IMAPSession::storeFlagsAndCustomFlags(String * folder, bool identifier_is_u
             return;
         }
     }
+    * pError = ErrorNone;
 
     release:
     for(clistiter * iter = clist_begin(setList) ; iter != NULL ; iter = clist_next(iter)) {
@@ -3657,7 +3658,6 @@ void IMAPSession::storeFlagsAndCustomFlags(String * folder, bool identifier_is_u
     clist_free(setList);
     mailimap_store_att_flags_free(store_att_flags);
     mailimap_set_free(imap_set);
-    * pError = ErrorNone;
 }
 
 void IMAPSession::storeFlagsByNumber(String * folder, IndexSet * numbers, IMAPStoreFlagsRequestKind kind, MessageFlag flags, ErrorCode * pError)
@@ -3743,6 +3743,7 @@ void IMAPSession::storeLabels(String * folder, bool identifier_is_uid, IndexSet 
             return;
         }
     }
+    * pError = ErrorNone;
 
     release:
     for(clistiter * iter = clist_begin(setList) ; iter != NULL ; iter = clist_next(iter)) {
@@ -3754,7 +3755,6 @@ void IMAPSession::storeLabels(String * folder, bool identifier_is_uid, IndexSet 
     clist_free(setList);
     mailimap_msg_att_xgmlabels_free(xgmlabels);
     mailimap_set_free(imap_set);
-    * pError = ErrorNone;
 }
 
 uint32_t IMAPSession::uidValidity()
