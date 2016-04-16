@@ -12,9 +12,9 @@ public interface HTMLRendererTemplateCallback {
     /** Returns true if an attachment should (such as an image) be shown. */
     boolean shouldShowPart(AbstractPart part);
     /** Returns the values used in the header template for a given template. */
-    Map<String, String> templateValuesForHeader(MessageHeader header);
+    Map<String, Object> templateValuesForHeader(MessageHeader header);
     /** Returns the values used in the attachment template for a given attachment. */
-    Map<String, String> templateValuesForPart(AbstractPart part);
+    Map<String, Object> templateValuesForPart(AbstractPart part);
     /** Returns the template for the main header of the message. */
     String templateForMainHeader(MessageHeader header);
     /** Returns the template to render an image. */
@@ -39,7 +39,7 @@ public interface HTMLRendererTemplateCallback {
         Clean a HTML string.
         The default implementation fixes broken tags, add missing &lt;html&gt;, &lt;body&gt; tags.
     */
-    String cleanHTML(String html);
+    String cleanHTMLForPart(String html);
     /**
         Filter the HTML when rendering a given part. For example, it could filter out
         dangerous HTML tags or CSS style.

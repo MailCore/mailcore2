@@ -43,6 +43,22 @@ JNIEXPORT void JNICALL Java_com_libmailcore_AbstractPart_setFilename
 
 /*
  * Class:     com_libmailcore_AbstractPart
+ * Method:    mimeType
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_libmailcore_AbstractPart_mimeType
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_libmailcore_AbstractPart
+ * Method:    setMimeType
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_libmailcore_AbstractPart_setMimeType
+  (JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     com_libmailcore_AbstractPart
  * Method:    charset
  * Signature: ()Ljava/lang/String;
  */
