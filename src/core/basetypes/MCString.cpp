@@ -2370,9 +2370,9 @@ Array * String::componentsSeparatedByString(String * separator)
             break;
         }
 #else
-        int remaining = length() - (int) (p - mUnicodeChars);
         location = NULL;
         while (location == NULL) {
+            int remaining = length() - (int) (p - mUnicodeChars);
             location = (UChar *) memmem(p, remaining * sizeof(UChar), separator->unicodeCharacters(), separator->length() * sizeof(UChar));
             if (location == NULL) {
                 break;
