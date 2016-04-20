@@ -286,11 +286,21 @@ IMAPAsyncConnection * IMAPAsyncSession::session()
 IMAPAsyncConnection * IMAPAsyncSession::sessionForFolder(String * folder, bool urgent)
 {
     if (folder == NULL) {
-        return availableSession();
+        return matchingSessionForFolder(NULL);
     }
     else {
         IMAPAsyncConnection * s = NULL;
+
+        // try find session with empty queue, selected to the folder
+        s = sessionWithMinQueue(true, folder);
+        if (s != NULL && s->operationsCount() == 0) {
+            s->setLastFolder(folder);
+            return s;
+        }
+
         if (urgent && mAllowsFolderConcurrentAccessEnabled) {
+            // in urgent mode try reuse any available session with
+            // empty queue or create new one, if maximum connections limit does not reached.
             s = availableSession();
             if (s->operationsCount() == 0) {
                 s->setLastFolder(folder);
@@ -298,6 +308,7 @@ IMAPAsyncConnection * IMAPAsyncSession::sessionForFolder(String * folder, bool u
             }
         }
 
+        // otherwise returns session with minimum size of queue among selected to the folder.
         s = matchingSessionForFolder(folder);
         s->setLastFolder(folder);
         return s;
@@ -306,58 +317,74 @@ IMAPAsyncConnection * IMAPAsyncSession::sessionForFolder(String * folder, bool u
 
 IMAPAsyncConnection * IMAPAsyncSession::availableSession()
 {
-    if (mMaximumConnections == 0) {
-        for(unsigned int i = 0 ; i < mSessions->count() ; i ++) {
-            IMAPAsyncConnection * s = (IMAPAsyncConnection *) mSessions->objectAtIndex(i);
-            if (s->operationsCount() == 0)
-                return s;
-        }
-        IMAPAsyncConnection * chosenSession = session();
+    // try find existant session with empty queue for reusing.
+    IMAPAsyncConnection * chosenSession = sessionWithMinQueue(false, NULL);
+    if ((chosenSession != NULL) && (chosenSession->operationsCount() == 0)) {
+        return chosenSession;
+    }
+
+    // create new session, if maximum connections limit does not reached yet.
+    if ((mMaximumConnections == 0) || (mSessions->count() < mMaximumConnections)) {
+        chosenSession = session();
         mSessions->addObject(chosenSession);
         return chosenSession;
     }
-    else {
-        IMAPAsyncConnection * chosenSession = NULL;
-        unsigned int minOperationsCount = 0;
-        for(unsigned int i = 0 ; i < mSessions->count() ; i ++) {
-            IMAPAsyncConnection * s = (IMAPAsyncConnection *) mSessions->objectAtIndex(i);
-            if (chosenSession == NULL) {
-                chosenSession = s;
-                minOperationsCount = s->operationsCount();
-            }
-            else if (s->operationsCount() < minOperationsCount) {
-                chosenSession = s;
-                minOperationsCount = s->operationsCount();
-            }
-        }
-        if (mSessions->count() < mMaximumConnections) {
-            if ((chosenSession != NULL) && (minOperationsCount == 0)) {
-                return chosenSession;
-            }
-            chosenSession = session();
-            mSessions->addObject(chosenSession);
-            return chosenSession;
-        }
-        else {
-            return chosenSession;
-        }
-    }
+
+    // otherwise returns existant session with minimum size of queue.
+    return chosenSession;
 }
 
 IMAPAsyncConnection * IMAPAsyncSession::matchingSessionForFolder(String * folder)
 {
-    for(unsigned int i = 0 ; i < mSessions->count() ; i ++) {
-        IMAPAsyncConnection * currentSession = (IMAPAsyncConnection *) mSessions->objectAtIndex(i);
-        if (currentSession->lastFolder() != NULL) {
-            if (currentSession->lastFolder()->isEqual(folder)) {
-                return currentSession;
-            }
+    IMAPAsyncConnection * s = NULL;
+    if (folder == NULL) {
+        // try find session with minimum size of queue among non-selected to the any folder.
+        s = sessionWithMinQueue(true, NULL);
+
+        if (s == NULL) {
+            // prefer to use INBOX-selected folders for commands does not tight to specific folder.
+            s = sessionWithMinQueue(true, MCSTR("INBOX"));
         }
-        else {
-            return currentSession;
+    } else {
+        // try find session with minimum size of queue among selected to the folder.
+        s = sessionWithMinQueue(true, folder);
+
+        if (s == NULL) {
+            // try find session with minimum size of queue among non-selected to any folder ones.
+            s = sessionWithMinQueue(true, NULL);
         }
     }
+
+    if (s != NULL) {
+        return s;
+    }
+
+    // otherwise returns existant session with minumum size of queue or create new one.
     return availableSession();
+}
+
+IMAPAsyncConnection * IMAPAsyncSession::sessionWithMinQueue(bool filterByFolder, String * folder)
+{
+    IMAPAsyncConnection * chosenSession = NULL;
+    unsigned int minOperationsCount = 0;
+
+    for (unsigned int i = 0 ; i < mSessions->count() ; i ++) {
+        IMAPAsyncConnection * s = (IMAPAsyncConnection *) mSessions->objectAtIndex(i);
+        if ((chosenSession == NULL) || (s->operationsCount() < minOperationsCount)) {
+            bool matched = true;
+            if (filterByFolder) {
+                // filter by last selested folder
+                matched = ((folder != NULL && s->lastFolder() != NULL && s->lastFolder()->isEqual(folder))
+                           || (folder == NULL && s->lastFolder() == NULL));
+            }
+            if (matched) {
+                chosenSession = s;
+                minOperationsCount = s->operationsCount();
+            }
+        }
+    }
+
+    return chosenSession;
 }
 
 IMAPFolderInfoOperation * IMAPAsyncSession::folderInfoOperation(String * folder)
