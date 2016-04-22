@@ -1468,11 +1468,23 @@ Array * /* IMAPFolder */ IMAPSession::fetchAllFolders(ErrorCode * pError)
         }
 
         if (!hasInbox) {
-            r = mailimap_list(mImap, "", "INBOX", &imap_folders);
-            Array * inboxResult = resultsWithError(r, imap_folders, pError);
-            if (* pError == ErrorConnection || * pError == ErrorParse)
-                mShouldDisconnect = true;
-            result->addObjectsFromArray(inboxResult);
+            mc_foreacharray(IMAPFolder, folder, result) {
+                if (folder->flags() & IMAPFolderFlagInbox) {
+                    // some mail providers use non-standart name for inbox folder
+                    hasInbox = true;
+                    folder->setPath(MCSTR("INBOX"));
+                    break;
+                }
+            }
+
+            if (!hasInbox) {
+                r = mailimap_list(mImap, "", "INBOX", &imap_folders);
+                Array * inboxResult = resultsWithError(r, imap_folders, pError);
+                if (* pError == ErrorConnection || * pError == ErrorParse)
+                    mShouldDisconnect = true;
+                result->addObjectsFromArray(inboxResult);
+                hasInbox = true;
+            }
         }
     }
     
