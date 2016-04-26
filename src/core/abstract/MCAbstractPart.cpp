@@ -260,7 +260,10 @@ void AbstractPart::importIMAPFields(struct mailimap_body_fields * fields,
                     imap_param = (struct mailimap_single_body_fld_param *) clist_content(cur);
                     
                     if (strcasecmp(imap_param->pa_name, "filename") == 0) {
-                        setFilename(String::stringByDecodingMIMEHeaderValue(imap_param->pa_value));
+                        String * filename = String::stringByDecodingMIMEHeaderValue(imap_param->pa_value);
+                        if (filename != NULL && filename->length() > 0) {
+                            setFilename(filename);
+                        }
                     }
                 }
             }
