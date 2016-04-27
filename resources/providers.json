@@ -1278,5 +1278,61 @@
             "sentmail": "Sent Items",
             "trash": "Deleted Items"
         }
+    },
+    "wp.pl": {
+        "servers": {
+            "imap": [
+                     {
+                     "port": 993,
+                     "hostname": "imap.wp.pl",
+                     "ssl": true
+                     }
+                     ],
+            "smtp": [
+                     {
+                     "port": 465,
+                     "hostname": "smtp.wp.pl",
+                     "ssl": true
+                     }
+                     ]
+        },
+        "domain-match": [
+                         "wp\\.pl"
+                         ],
+        "mailboxes": {
+            "spam": "SPAM",
+            "sentmail": "Wys&AUI-ane",
+            "trash": "Kosz",
+            "drafts": "Robocze",
+            "allmail": "Archive"
+        }
+    },
+    "o2.pl": {
+        "servers": {
+            "imap": [
+                     {
+                     "port": 993,
+                     "hostname": "poczta.o2.pl",
+                     "ssl": true
+                     }
+                     ],
+            "smtp": [
+                     {
+                     "port": 465,
+                     "hostname": "poczta.o2.pl",
+                     "ssl": true
+                     }
+                     ]
+        },
+        "domain-match": [
+                         "o2\\.pl"
+                         ],
+        "mailboxes": {
+            "spam": "Spam",
+            "sentmail": "Sent",
+            "trash": "Trash",
+            "drafts": "Drafts",
+            "allmail": "Archive"
+        }
     }
 }
