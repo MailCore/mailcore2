@@ -222,6 +222,12 @@ void AccountValidator::startCheckingHosts()
         setupServices();
     }
 
+    if ((mPassword == NULL) && (mOAuth2Token == NULL)) {
+        // Shortcut to retrieve only the account type.
+        callback()->operationFinished(this);
+        return;
+    }
+
     if (mImapServices->count() == 0)
         mImapError = ErrorNoValidServerFound;
     
