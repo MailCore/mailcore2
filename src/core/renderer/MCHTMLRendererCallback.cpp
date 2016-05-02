@@ -181,9 +181,11 @@ mailcore::HashMap * HTMLRendererTemplateCallback::templateValuesForPart(mailcore
     }
     else if (part->className()->isEqual(MCSTR("mailcore::Attachment"))) {
         mailcore::Attachment * attachment = (mailcore::Attachment *) part;
-        mailcore::String * value = mailcore::SizeFormatter::stringWithSize(attachment->data()->length());
-        result->setObjectForKey(MCSTR("SIZE"), value);
-        result->setObjectForKey(MCSTR("HASSIZE"), mailcore::HashMap::hashMap());
+        if (attachment->data() != NULL) {
+            mailcore::String * value = mailcore::SizeFormatter::stringWithSize(attachment->data()->length());
+            result->setObjectForKey(MCSTR("SIZE"), value);
+            result->setObjectForKey(MCSTR("HASSIZE"), mailcore::HashMap::hashMap());
+        }
     }
     else {
         result->setObjectForKey(MCSTR("NOSIZE"), mailcore::HashMap::hashMap());

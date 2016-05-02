@@ -25,6 +25,9 @@ namespace mailcore {
         Attachment();
         virtual ~Attachment();
         
+        virtual void setPartID(String * partID);
+        virtual String * partID();
+
         virtual void setData(Data * data);
         virtual Data * data();
         virtual String * decodedString();
@@ -39,6 +42,8 @@ namespace mailcore {
         
     private:
         Data * mData;
+        String * mPartID;
+
         void init();
         static void fillMultipartSubAttachments(AbstractMultipart * multipart, struct mailmime * mime);
         static AbstractPart * attachmentsWithMIMEWithMain(struct mailmime * mime, bool isMain);

@@ -14,6 +14,10 @@
 namespace mailcore {
     
     class HTMLRendererTemplateCallback;
+    class HTMLRendererRFC822Callback;
+    class Multipart;
+    class MessagePart;
+    class Attachment;
     
     class MAILCORE_EXPORT MessageParser : public AbstractMessage {
     public:
@@ -28,6 +32,8 @@ namespace mailcore {
         virtual Data * data();
         
         virtual String * htmlRendering(HTMLRendererTemplateCallback * htmlCallback = NULL);
+        virtual String * htmlRenderingWithDataCallback(HTMLRendererTemplateCallback * htmlCallback,
+                                                       HTMLRendererRFC822Callback * dataCallback);
         virtual String * htmlBodyRendering();
         
         virtual String * plainTextRendering();
@@ -61,6 +67,15 @@ namespace mailcore {
     private:
         void setBytes(char * bytes, unsigned int length);
         Data * dataFromNSData();
+        void setupPartID();
+        void recursiveSetupPartIDWithPart(mailcore::AbstractPart * part,
+                                          mailcore::String * partIDPrefix);
+        void recursiveSetupPartIDWithSinglePart(mailcore::Attachment * part,
+                                                mailcore::String * partIDPrefix);
+        void recursiveSetupPartIDWithMessagePart(mailcore::MessagePart * part,
+                                                 mailcore::String * partIDPrefix);
+        void recursiveSetupPartIDWithMultipart(mailcore::Multipart * part,
+                                               mailcore::String * partIDPrefix);
     };
     
 };

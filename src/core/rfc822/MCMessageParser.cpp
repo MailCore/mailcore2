@@ -71,6 +71,8 @@ void MessageParser::setBytes(char * dataBytes, unsigned int dataLength)
         mailimf_fields_free(fields);
     }
     mailmessage_free(msg);
+
+    setupPartID();
 }
 
 MessageParser::MessageParser()
@@ -91,6 +93,7 @@ MessageParser::MessageParser(MessageParser * other) : AbstractMessage(other)
     init();
     MC_SAFE_REPLACE_RETAIN(Data, mData, other->mData);
     MC_SAFE_REPLACE_RETAIN(AbstractPart, mMainPart, other->mMainPart);
+    setupPartID();
 }
 
 MessageParser::~MessageParser()
@@ -148,6 +151,7 @@ void MessageParser::importSerializable(HashMap * serializable)
     if (mMainPart != NULL) {
         mMainPart->applyUniquePartID();
     }
+    setupPartID();
 }
 
 Object * MessageParser::copy()
@@ -173,7 +177,13 @@ AbstractPart * MessageParser::partForUniqueID(String * uniqueID)
 
 String * MessageParser::htmlRendering(HTMLRendererTemplateCallback * htmlCallback)
 {
-    return HTMLRenderer::htmlForRFC822Message(this, htmlCallback);
+    return HTMLRenderer::htmlForRFC822Message(this, NULL, htmlCallback);
+}
+
+String * MessageParser::htmlRenderingWithDataCallback(HTMLRendererTemplateCallback * htmlCallback,
+                                                      HTMLRendererRFC822Callback * dataCallback)
+{
+    return HTMLRenderer::htmlForRFC822Message(this, dataCallback, htmlCallback);
 }
 
 String * MessageParser::htmlBodyRendering()
@@ -199,6 +209,96 @@ String * MessageParser::plainTextBodyRendering(bool stripWhitespace)
         plainTextBodyString = plainTextBodyString->stripWhitespace();
     }
     return plainTextBodyString;
+}
+
+void MessageParser::setupPartID()
+{
+    if (mMainPart == NULL) {
+        return;
+    }
+    recursiveSetupPartIDWithPart(mMainPart, MCSTR(""));
+}
+
+void MessageParser::recursiveSetupPartIDWithPart(mailcore::AbstractPart * part,
+                                                 mailcore::String * partIDPrefix)
+{
+    switch (part->partType()) {
+        case PartTypeSingle:
+        {
+            String * partID = NULL;
+            if (partIDPrefix->length() == 0) {
+                partID = MCSTR("1");
+            }
+            else {
+                partID = partIDPrefix;
+            }
+            return recursiveSetupPartIDWithSinglePart((Attachment *) part, partID);
+        }
+        case PartTypeMessage:
+        {
+            String * partID = NULL;
+            if (partIDPrefix->length() == 0) {
+                partID = MCSTR("1");
+            }
+            else {
+                partID = partIDPrefix;
+            }
+            return recursiveSetupPartIDWithMessagePart((MessagePart *) part, partID);
+        }
+        case PartTypeMultipartMixed:
+        case PartTypeMultipartRelated:
+        case PartTypeMultipartAlternative:
+        case PartTypeMultipartSigned:
+            return recursiveSetupPartIDWithMultipart((Multipart *) part, partIDPrefix);
+        default:
+            MCAssert(0);
+    }
+}
+
+void MessageParser::recursiveSetupPartIDWithSinglePart(mailcore::Attachment * part,
+                                                       mailcore::String * partIDPrefix)
+{
+    part->setPartID(partIDPrefix);
+}
+
+void MessageParser::recursiveSetupPartIDWithMessagePart(mailcore::MessagePart * part,
+                                                        mailcore::String * partIDPrefix)
+{
+    part->setPartID(partIDPrefix);
+    String * partID = NULL;
+    switch (part->mainPart()->partType()) {
+        case PartTypeSingle:
+        case PartTypeMessage:
+        {
+            if (partIDPrefix->length() == 0) {
+                partID = MCSTR("1");
+            }
+            else {
+                partID = partIDPrefix->stringByAppendingUTF8Characters(".1");
+            }
+            break;
+        }
+        default:
+            partID = partIDPrefix;
+            break;
+    }
+    recursiveSetupPartIDWithPart(part->mainPart(), partID);
+}
+
+void MessageParser::recursiveSetupPartIDWithMultipart(mailcore::Multipart * part,
+                                                      mailcore::String * partIDPrefix)
+{
+    part->setPartID(partIDPrefix);
+    mc_foreacharrayIndex(idx, AbstractPart, subpart, part->parts()) {
+        String * partID = NULL;
+        if (partIDPrefix->length() == 0) {
+            partID = String::stringWithUTF8Format("%u", idx + 1);
+        }
+        else {
+            partID = partIDPrefix->stringByAppendingUTF8Format(".%u", idx + 1);
+        }
+        recursiveSetupPartIDWithPart(subpart, partID);
+    }
 }
 
 static void * createObject()
