@@ -203,6 +203,11 @@ static String * htmlForAbstractMessage(String * folder, AbstractMessage * messag
     else if (message->className()->isEqual(MCSTR("mailcore::MessageParser"))) {
         mainPart = ((MessageParser *) message)->mainPart();
     }
+    if (mainPart == NULL) {
+        // needs a mainPart.
+        return NULL;
+    }
+
     MCAssert(mainPart != NULL);
     
     htmlRendererContext context;
