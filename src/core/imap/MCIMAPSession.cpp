@@ -643,9 +643,15 @@ void IMAPSession::connect(ErrorCode * pError)
         MC_SAFE_REPLACE_RETAIN(String, mWelcomeString, String::stringWithUTF8Characters(mImap->imap_response));
         mYahooServer = (mWelcomeString->locationOfString(MCSTR("yahoo.com")) != -1);
 #ifdef LIBETPAN_HAS_MAILIMAP_163_WORKAROUND
-        if(mWelcomeString->locationOfString(MCSTR("Coremail System IMap Server Ready")) != -1)
+        if (mWelcomeString->locationOfString(MCSTR("Coremail System IMap Server Ready")) != -1)
             mailimap_set_163_workaround_enabled(mImap, 1);
 #endif
+        if (mWelcomeString->locationOfString(MCSTR("Courier-IMAP")) != -1) {
+            LOCK();
+            mIdleEnabled = true;
+            UNLOCK();
+            mNamespaceEnabled = true;
+        }
     }
     
     mState = STATE_CONNECTED;
