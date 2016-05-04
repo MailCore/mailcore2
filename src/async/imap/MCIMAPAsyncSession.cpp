@@ -76,6 +76,7 @@ IMAPAsyncSession::IMAPAsyncSession()
 #endif
     mGmailUserDisplayName = NULL;
     mQueueRunning = false;
+    mIdleEnabled = false;
 }
 
 IMAPAsyncSession::~IMAPAsyncSession()
@@ -244,6 +245,11 @@ void IMAPAsyncSession::setClientIdentity(IMAPIdentity * clientIdentity)
 String * IMAPAsyncSession::gmailUserDisplayName()
 {
     return mGmailUserDisplayName;
+}
+
+bool IMAPAsyncSession::isIdleEnabled()
+{
+    return mIdleEnabled;
 }
 
 IMAPAsyncConnection * IMAPAsyncSession::session()
@@ -820,6 +826,7 @@ void IMAPAsyncSession::automaticConfigurationDone(IMAPSession * session)
 {
     MC_SAFE_REPLACE_COPY(IMAPIdentity, mServerIdentity, session->serverIdentity());
     MC_SAFE_REPLACE_COPY(String, mGmailUserDisplayName, session->gmailUserDisplayName());
+    mIdleEnabled = session->isIdleEnabled();
     setDefaultNamespace(session->defaultNamespace());
     mAutomaticConfigurationDone = true;
 }
