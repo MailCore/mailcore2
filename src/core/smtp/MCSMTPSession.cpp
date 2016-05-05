@@ -258,6 +258,10 @@ void SMTPSession::unsetup()
 
 void SMTPSession::connectIfNeeded(ErrorCode * pError)
 {
+    // Clear out the last response from previous command.
+    MC_SAFE_RELEASE(mLastSMTPResponse);
+    mLastSMTPResponseCode = 0;
+
     if (mSmtp != NULL) {
         // In case pipelining is available, libetpan will disconnect the session.
         if (mSmtp->stream == NULL) {
@@ -287,6 +291,7 @@ void SMTPSession::connect(ErrorCode * pError)
         case ConnectionTypeStartTLS:
             MCLog("connect %s %u", MCUTF8(hostname()), (unsigned int) port());
             r = mailsmtp_socket_connect(mSmtp, MCUTF8(hostname()), port());
+            saveLastResponse();
             if (r != MAILSMTP_NO_ERROR) {
                 * pError = ErrorConnection;
                 goto close;
@@ -298,6 +303,7 @@ void SMTPSession::connect(ErrorCode * pError)
             } else {
                 r = mailsmtp_init(mSmtp);
             }
+            saveLastResponse();
             if (r == MAILSMTP_ERROR_STREAM) {
                 * pError = ErrorConnection;
                 goto close;
@@ -309,6 +315,7 @@ void SMTPSession::connect(ErrorCode * pError)
             
             MCLog("start TLS");
             r = mailsmtp_socket_starttls(mSmtp);
+            saveLastResponse();
             if (r != MAILSMTP_NO_ERROR) {
                 * pError = ErrorStartTLSNotAvailable;
                 goto close;
@@ -325,6 +332,7 @@ void SMTPSession::connect(ErrorCode * pError)
             } else {
                 r = mailsmtp_init(mSmtp);
             }
+            saveLastResponse();
             if (r == MAILSMTP_ERROR_STREAM) {
                 * pError = ErrorConnection;
                 goto close;
@@ -338,6 +346,7 @@ void SMTPSession::connect(ErrorCode * pError)
             
         case ConnectionTypeTLS:
             r = mailsmtp_ssl_connect(mSmtp, MCUTF8(mHostname), port());
+            saveLastResponse();
             if (r != MAILSMTP_NO_ERROR) {
                 * pError = ErrorConnection;
                 goto close;
@@ -353,6 +362,7 @@ void SMTPSession::connect(ErrorCode * pError)
             } else {
                 r = mailsmtp_init(mSmtp);
             }
+            saveLastResponse();
             if (r == MAILSMTP_ERROR_STREAM) {
                 * pError = ErrorConnection;
                 goto close;
@@ -366,6 +376,7 @@ void SMTPSession::connect(ErrorCode * pError)
             
         default:
             r = mailsmtp_socket_connect(mSmtp, MCUTF8(hostname()), port());
+            saveLastResponse();
             if (r != MAILSMTP_NO_ERROR) {
                 * pError = ErrorConnection;
                 goto close;
@@ -377,6 +388,7 @@ void SMTPSession::connect(ErrorCode * pError)
             } else {
                 r = mailsmtp_init(mSmtp);
             }
+            saveLastResponse();
             if (r == MAILSMTP_ERROR_STREAM) {
                 * pError = ErrorConnection;
                 goto close;
@@ -423,6 +435,19 @@ void SMTPSession::disconnect()
     unsetup();
     
     mState = STATE_DISCONNECTED;
+}
+
+void SMTPSession::saveLastResponse()
+{
+    if (mSmtp != NULL) {
+        if (mSmtp->response != NULL) {
+            String * response = String::stringWithUTF8Characters(mSmtp->response);
+            MC_SAFE_REPLACE_COPY(String, mLastSMTPResponse, response);
+        }
+        if (mSmtp->response_code != 0) {
+            mLastSMTPResponseCode = mSmtp->response_code;
+        }
+    }
 }
 
 void SMTPSession::loginIfNeeded(ErrorCode * pError)
@@ -591,6 +616,7 @@ void SMTPSession::login(ErrorCode * pError)
             break;
         }
     }
+    saveLastResponse();
     if (r == MAILSMTP_ERROR_STREAM) {
         * pError = ErrorConnection;
         mShouldDisconnect = true;
@@ -614,6 +640,7 @@ void SMTPSession::checkAccount(Address * from, ErrorCode * pError)
         return;
     }
     r = mailsmtp_mail(mSmtp, MCUTF8(from->mailbox()));
+    saveLastResponse();
     if (r == MAILSMTP_ERROR_STREAM) {
         * pError = ErrorConnection;
         mShouldDisconnect = true;
@@ -625,6 +652,7 @@ void SMTPSession::checkAccount(Address * from, ErrorCode * pError)
     }
     
     r = mailsmtp_rcpt(mSmtp, "email@invalid.com");
+    saveLastResponse();
     if (r == MAILSMTP_ERROR_STREAM) {
         * pError = ErrorConnection;
         mShouldDisconnect = true;
@@ -717,17 +745,7 @@ void SMTPSession::internalSendMessage(Address * from, Array * recipients, Data *
         mailsmtp_quit(mSmtp);
     }
     esmtp_address_list_free(address_list);
-
-    String * response;
-    int responseCode;
-
-    response = NULL;
-    if (mSmtp->response != NULL) {
-        response = String::stringWithUTF8Characters(mSmtp->response);
-        MC_SAFE_REPLACE_COPY(String, mLastSMTPResponse, response);
-    }
-    responseCode = mSmtp->response_code;
-    mLastSMTPResponseCode = responseCode;
+    saveLastResponse();
 
     if ((r == MAILSMTP_ERROR_STREAM) || (r == MAILSMTP_ERROR_CONNECTION_REFUSED)) {
         * pError = ErrorConnection;
@@ -735,7 +753,7 @@ void SMTPSession::internalSendMessage(Address * from, Array * recipients, Data *
         goto err;
     }
     else if (r == MAILSMTP_ERROR_EXCEED_STORAGE_ALLOCATION) {
-        if ((response != NULL) && (response->locationOfString(MCSTR("5.7.0")) != -1)) {
+        if ((mLastSMTPResponse != NULL) && (mLastSMTPResponse->locationOfString(MCSTR("5.7.0")) != -1)) {
             * pError = ErrorSendMessageIllegalAttachment;
         }
         else {
@@ -752,21 +770,21 @@ void SMTPSession::internalSendMessage(Address * from, Array * recipients, Data *
         goto err;
     }
     else if (r != MAILSMTP_NO_ERROR) {
-        if ((responseCode == 550) && (response != NULL)) {
-            if (response->hasPrefix(MCSTR("5.3.4 "))) {
+        if ((mLastSMTPResponseCode == 550) && (mLastSMTPResponse != NULL)) {
+            if (mLastSMTPResponse->hasPrefix(MCSTR("5.3.4 "))) {
                 * pError = ErrorNeedsConnectToWebmail;
                 goto err;
             }
-            else if (response->hasPrefix(MCSTR("5.7.1 "))) {
+            else if (mLastSMTPResponse->hasPrefix(MCSTR("5.7.1 "))) {
                 * pError = ErrorSendMessageNotAllowed;
                 goto err;
             }
         }
-        else if (responseCode == 521 && response->locationOfString(MCSTR("over the limit")) != -1) {
+        else if (mLastSMTPResponseCode == 521 && mLastSMTPResponse->locationOfString(MCSTR("over the limit")) != -1) {
             * pError = ErrorYahooSendMessageDailyLimitExceeded;
             goto err;
         }
-        else if (responseCode == 554 && response->locationOfString(MCSTR("spam")) != -1) {
+        else if (mLastSMTPResponseCode == 554 && mLastSMTPResponse->locationOfString(MCSTR("spam")) != -1) {
             * pError = ErrorYahooSendMessageSpamSuspected;
             goto err;
         }
@@ -920,6 +938,7 @@ void SMTPSession::noop(ErrorCode * pError)
     }
     if (mSmtp->stream != NULL) {
         r = mailsmtp_noop(mSmtp);
+        saveLastResponse();
         if (r == MAILSMTP_ERROR_STREAM) {
             * pError = ErrorConnection;
         }
