@@ -2396,6 +2396,10 @@ Array * String::componentsSeparatedByString(String * separator)
         p = location + separator->length();
     }
     unsigned int length = (unsigned int) (mLength - (p - mUnicodeChars));
+    if (length > mLength) {
+        fprintf(stderr, "trying to split string: |%s| |%s| %i %i %p %p\n", MCUTF8(this), MCUTF8(separator), length, mLength, p, mUnicodeChars);
+        return result;
+    }
     MCAssert(length <= mLength);
     String * value = new String(p, length);
     result->addObject(value);
