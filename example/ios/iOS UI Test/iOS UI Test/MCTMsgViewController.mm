@@ -257,19 +257,35 @@ typedef void (^DownloadCallback)(NSError * error);
     CGImageDestinationRef destination;
     NSMutableData * destData = [NSMutableData data];
 
-    destination = CGImageDestinationCreateWithData((__bridge CFMutableDataRef) destData,
-                                                   (CFStringRef) @"public.jpeg",
-                                                   1, NULL);
-    
-    CGImageDestinationAddImage(destination, thumbnail, NULL);
-    CGImageDestinationFinalize(destination);
+    if (destData != nil) {
+        destination = CGImageDestinationCreateWithData((__bridge CFMutableDataRef) destData,
+                                                       (CFStringRef) @"public.jpeg",
+                                                       1, NULL);
+        if ((destination != NULL) && (thumbnail != NULL)) {
+            CGImageDestinationAddImage(destination, thumbnail, NULL);
+        }
+        if (destination != NULL) {
+            CGImageDestinationFinalize(destination);
+        }
+    } else {
+        destination = NULL;
+    }
 
-    CFRelease(destination);
+    if (destination != NULL) {
+        CFRelease(destination);
+    }
+    if (thumbnail != NULL) {
+        CFRelease(thumbnail);
+    }
+    if (imageSource != NULL) {
+        CFRelease(imageSource);
+    }
 
-    CFRelease(thumbnail);
-    CFRelease(imageSource);
-
-    return destData;
+    if ((destData != NULL) && (thumbnail != NULL) && (destination != NULL)) {
+        return destData;
+    } else {
+        return nil;
+    }
 }
 
 @end
