@@ -2826,10 +2826,20 @@ Data * IMAPSession::fetchMessageAttachment(String * folder, bool identifier_is_u
     section = mailimap_section_new_part(section_part);
     fetch_att = mailimap_fetch_att_new_body_peek_section(section);
     fetch_type = mailimap_fetch_type_new_fetch_att(fetch_att);
-    
+
+#ifdef LIBETPAN_HAS_MAILIMAP_RAMBLER_WORKAROUND
+    if ((encoding == EncodingBase64 || encoding == EncodingUUEncode) && (mHostname->compare(MCSTR("imap.rambler.ru")) == 0)) {
+        mailimap_set_rambler_workaround_enabled(mImap, 1);
+    }
+#endif
+
     r = fetch_imap(mImap, identifier_is_uid, identifier, fetch_type, &text, &text_length);
     mailimap_fetch_type_free(fetch_type);
-    
+
+#ifdef LIBETPAN_HAS_MAILIMAP_RAMBLER_WORKAROUND
+    mailimap_set_rambler_workaround_enabled(mImap, 0);
+#endif
+
     mProgressCallback = NULL;
     
     MCLog("had error : %i", r);
