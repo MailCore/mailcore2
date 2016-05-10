@@ -123,6 +123,7 @@ namespace mailcore {
     public: // private
         virtual bool isDisconnected();
         virtual void loginIfNeeded(ErrorCode * pError);
+        virtual void saveLastResponse();
     };
     
 }
