@@ -259,6 +259,7 @@ namespace mailcore {
         unsigned int mFolderMsgCount;
         uint32_t mFirstUnseenUid;
         bool mYahooServer;
+        bool mRamblerRuServer;
         
         unsigned int mLastFetchedSequenceNumber;
         String * mCurrentFolder;

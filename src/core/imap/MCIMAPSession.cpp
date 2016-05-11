@@ -341,6 +341,7 @@ void IMAPSession::init()
     mFolderMsgCount = 0;
     mFirstUnseenUid = 0;
     mYahooServer = false;
+    mRamblerRuServer = false;
     mLastFetchedSequenceNumber = 0;
     mCurrentFolder = NULL;
     pthread_mutex_init(&mIdleLock, NULL);
@@ -652,6 +653,7 @@ void IMAPSession::connect(ErrorCode * pError)
             UNLOCK();
             mNamespaceEnabled = true;
         }
+        mRamblerRuServer = (mHostname->locationOfString(MCSTR(".rambler.ru")) != -1);
     }
     
     mState = STATE_CONNECTED;
@@ -2828,7 +2830,7 @@ Data * IMAPSession::fetchMessageAttachment(String * folder, bool identifier_is_u
     fetch_type = mailimap_fetch_type_new_fetch_att(fetch_att);
 
 #ifdef LIBETPAN_HAS_MAILIMAP_RAMBLER_WORKAROUND
-    if ((encoding == EncodingBase64 || encoding == EncodingUUEncode) && (mHostname->compare(MCSTR("imap.rambler.ru")) == 0)) {
+    if (mRamblerRuServer && (encoding == EncodingBase64 || encoding == EncodingUUEncode)) {
         mailimap_set_rambler_workaround_enabled(mImap, 1);
     }
 #endif
