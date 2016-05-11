@@ -30,6 +30,9 @@ void MailProvider::init()
     mSmtpServices = new Array();
     mPopServices = new Array();
     mDomainMatch = new Array();
+    mDomainMatchNoRegexp = new Array();
+    mDomainEndsWith = new Array();
+    mDomainStartsWith = new Array();
     mDomainExclude = new Array();
     mMxMatch = new Array();
     mMailboxPaths = NULL;
@@ -48,6 +51,9 @@ MailProvider::MailProvider(MailProvider * other)
     MC_SAFE_REPLACE_COPY(Array, mSmtpServices, other->mSmtpServices);
     MC_SAFE_REPLACE_COPY(Array, mPopServices, other->mPopServices);
     MC_SAFE_REPLACE_COPY(Array, mDomainMatch, other->mDomainMatch);
+    MC_SAFE_REPLACE_COPY(Array, mDomainMatchNoRegexp, other->mDomainMatchNoRegexp);
+    MC_SAFE_REPLACE_COPY(Array, mDomainEndsWith, other->mDomainEndsWith);
+    MC_SAFE_REPLACE_COPY(Array, mDomainStartsWith, other->mDomainStartsWith);
     MC_SAFE_REPLACE_COPY(Array, mDomainExclude, other->mDomainExclude);
     MC_SAFE_REPLACE_COPY(Array, mMxMatch, other->mMxMatch);
     MC_SAFE_REPLACE_COPY(HashMap, mMailboxPaths, other->mMailboxPaths);
@@ -60,6 +66,9 @@ MailProvider::~MailProvider()
     MC_SAFE_RELEASE(mPopServices);
     MC_SAFE_RELEASE(mMxMatch);
     MC_SAFE_RELEASE(mDomainMatch);
+    MC_SAFE_RELEASE(mDomainMatchNoRegexp);
+    MC_SAFE_RELEASE(mDomainEndsWith);
+    MC_SAFE_RELEASE(mDomainStartsWith);
     MC_SAFE_RELEASE(mDomainExclude);
     MC_SAFE_RELEASE(mMailboxPaths);
     MC_SAFE_RELEASE(mIdentifier);
@@ -83,6 +92,18 @@ void MailProvider::fillWithInfo(HashMap * info)
     MC_SAFE_RELEASE(mDomainMatch);
     if (info->objectForKey(MCSTR("domain-match")) != NULL) {
         mDomainMatch = (Array *) info->objectForKey(MCSTR("domain-match"))->retain();
+    }
+    MC_SAFE_RELEASE(mDomainMatchNoRegexp);
+    if (info->objectForKey(MCSTR("domain-match-noregexp")) != NULL) {
+        mDomainMatchNoRegexp = (Array *) info->objectForKey(MCSTR("domain-match-noregexp"))->retain();
+    }
+    MC_SAFE_RELEASE(mDomainEndsWith);
+    if (info->objectForKey(MCSTR("domain-end")) != NULL) {
+        mDomainEndsWith = (Array *) info->objectForKey(MCSTR("domain-end"))->retain();
+    }
+    MC_SAFE_RELEASE(mDomainStartsWith);
+    if (info->objectForKey(MCSTR("domain-start")) != NULL) {
+        mDomainStartsWith = (Array *) info->objectForKey(MCSTR("domain-start"))->retain();
     }
     MC_SAFE_RELEASE(mDomainExclude);
     if (info->objectForKey(MCSTR("domain-exclude")) != NULL) {
@@ -173,6 +194,34 @@ bool MailProvider::matchEmail(String * email)
     }
 
     bool matchValidDomain = false;
+    mc_foreacharray(String, matchNoRegexp, mDomainMatchNoRegexp) {
+        if (domain->locationOfString(matchNoRegexp) == 0 && domain->length() == matchNoRegexp->length()) {
+            matchValidDomain = true;
+            break;
+        }
+    }
+    if (matchValidDomain) {
+        return true;
+    }
+    mc_foreacharray(String, endsWith, mDomainEndsWith) {
+        int locationOfString = domain->locationOfString(endsWith);
+        if (locationOfString != -1 && locationOfString == (domain->length() - endsWith->length())) {
+            matchValidDomain = true;
+            break;
+        }
+    }
+    if (matchValidDomain) {
+        return true;
+    }
+    mc_foreacharray(String, startsWith, mDomainStartsWith) {
+        if (domain->locationOfString(startsWith) == 0) {
+            matchValidDomain = true;
+            break;
+        }
+    }
+    if (matchValidDomain) {
+        return true;
+    }
     mc_foreacharray(String, match, mDomainMatch) {
         if (matchDomain(match, domain)){
             matchValidDomain = true;
