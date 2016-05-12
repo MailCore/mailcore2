@@ -419,6 +419,8 @@ typedef NS_ENUM(NSInteger, MCOErrorCode) {
     MCOErrorYahooSendMessageSpamSuspected,
     /** Daily limit of sent messages was hit */
     MCOErrorYahooSendMessageDailyLimitExceeded,
+    /** You need to login via the web browser first */
+    MCOErrorOutlookLoginViaWebBrowser,
     /** The count of all errors */
     MCOErrorCodeCount,
 };

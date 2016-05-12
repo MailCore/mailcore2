@@ -49,6 +49,7 @@ static const char * localizedDescriptionTable[] = {
     "Error while running custom command",                                            /** MCOErrorCustomCommand */
     "Cannot send message due to possible spam detected by server",                   /** MCOErrorSendMessageSpamSuspected */
     "User is over the limit for messages allowed to be sent in a single day",        /** MCOErrorSendMessageDailyLimitExceeded */
+    "The user needs to log in via the web browser",                                  /** MCOErrorOutlookLoginViaWebBrowser */
 };
 
 String * mailcore::errorMessageWithErrorCode(ErrorCode errorCode)

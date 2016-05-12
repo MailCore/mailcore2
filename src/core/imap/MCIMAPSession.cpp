@@ -863,6 +863,9 @@ void IMAPSession::login(ErrorCode * pError)
         else if (response->locationOfString(MCSTR("OCF12")) != -1) {
             * pError = ErrorYahooUnavailable;
         }
+        else if (response->locationOfString(MCSTR("Login to your account via a web browser")) != 1) {
+            * pError = ErrorOutlookLoginViaWebBrowser;
+        }
         else {
             * pError = ErrorAuthentication;
         }
