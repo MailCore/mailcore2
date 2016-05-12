@@ -139,13 +139,24 @@ void AccountValidator::cancel()
     if (mQueue != NULL)
         mQueue->cancelAllOperations();
     
+    cancelDelayedPerformMethod((Object::Method) &AccountValidator::resolveMXTimeout, NULL);
+
     MC_SAFE_RELEASE(mOperation);
     MC_SAFE_RELEASE(mResolveMX);
     MC_SAFE_RELEASE(mQueue);
-    MC_SAFE_RELEASE(mImapSession);
-    MC_SAFE_RELEASE(mPopSession);
-    MC_SAFE_RELEASE(mSmtpSession);
-        
+    if (mImapSession != NULL) {
+        mImapSession->setConnectionLogger(NULL);
+        MC_SAFE_RELEASE(mImapSession);
+    }
+    if (mPopSession != NULL) {
+        mPopSession->setConnectionLogger(NULL);
+        MC_SAFE_RELEASE(mPopSession);
+    }
+    if (mSmtpSession != NULL) {
+        mSmtpSession->setConnectionLogger(NULL);
+        MC_SAFE_RELEASE(mSmtpSession);
+    }
+
     Operation::cancel();
 }
 
@@ -166,6 +177,8 @@ void AccountValidator::resolveMX()
     
     components = mUsername->componentsSeparatedByString(MCSTR("@"));
     if (components->count() >= 2) {
+        performMethodAfterDelay((Object::Method) &AccountValidator::resolveMXTimeout, NULL, 30.0);
+
         domain = (String *) components->lastObject();
         mResolveMX = new MXRecordResolverOperation();
         mResolveMX->setHostname(domain);
@@ -183,9 +196,21 @@ void AccountValidator::resolveMX()
     }
 }
 
+void AccountValidator::resolveMXTimeout(void * context)
+{
+    mResolveMX->cancel();
+    MC_SAFE_RELEASE(mResolveMX);
+    resolveMXDone();
+}
+
 void AccountValidator::resolveMXDone()
 {
-    Array * mxRecords = mResolveMX->mxRecords();
+    cancelDelayedPerformMethod((Object::Method) &AccountValidator::resolveMXTimeout, NULL);
+
+    Array * mxRecords = NULL;
+    if (mResolveMX != NULL) {
+        mxRecords = mResolveMX->mxRecords();
+    }
 
     mc_foreacharray(String, mxRecord, mxRecords) {
         MailProvider * provider = MailProvidersManager::sharedManager()->providerForMX(mxRecord);
