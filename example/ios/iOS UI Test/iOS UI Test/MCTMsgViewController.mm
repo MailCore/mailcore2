@@ -254,22 +254,27 @@ typedef void (^DownloadCallback)(NSError * error);
     [info setObject:(id) [NSNumber numberWithFloat:(float) IMAGE_PREVIEW_WIDTH] forKey:(__bridge id) kCGImageSourceThumbnailMaxPixelSize];
     thumbnail = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, (__bridge CFDictionaryRef) info);
 
-    CGImageDestinationRef destination;
-    NSMutableData * destData = [NSMutableData data];
-
-    destination = CGImageDestinationCreateWithData((__bridge CFMutableDataRef) destData,
-                                                   (CFStringRef) @"public.jpeg",
-                                                   1, NULL);
+    if (thumbnail != nil) {
+        
+        CGImageDestinationRef destination;
+        NSMutableData * destData = [NSMutableData data];
+        destination = CGImageDestinationCreateWithData((__bridge CFMutableDataRef) destData,
+                                                       (CFStringRef) @"public.jpeg",
+                                                       1, NULL);
+        
+        CGImageDestinationAddImage(destination, thumbnail, NULL);
+        CGImageDestinationFinalize(destination);
+        
+        CFRelease(destination);
+        
+        CFRelease(thumbnail);
+        CFRelease(imageSource);
+        
+        return destData;
+    } else {
+        return nil;
+    }
     
-    CGImageDestinationAddImage(destination, thumbnail, NULL);
-    CGImageDestinationFinalize(destination);
-
-    CFRelease(destination);
-
-    CFRelease(thumbnail);
-    CFRelease(imageSource);
-
-    return destData;
 }
 
 @end
