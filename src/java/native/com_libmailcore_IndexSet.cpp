@@ -136,6 +136,7 @@ JNIEXPORT jobject JNICALL Java_com_libmailcore_IndexSet_allRanges
     for(unsigned int i = 0 ; i < count ; i ++) {
         jobject javaObject = rangeToJava(env, ranges[i]);
         env->CallBooleanMethod(javaVector, method, javaObject);
+        env->DeleteLocalRef(javaObject);
     }
     MC_POOL_END;
     return javaVector;
