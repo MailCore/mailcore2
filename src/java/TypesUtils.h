@@ -124,9 +124,6 @@ namespace mailcore {
     Object * javaToMCObject(JNIEnv * env, jobject obj);
     jobject mcObjectToJava(JNIEnv * env, Object * obj);
     
-    Range javaToRange(JNIEnv * env, jobject range);
-    jobject rangeToJava(JNIEnv * env, Range range);
-    
     jobject errorToJava(int errorCode);
     
     time_t javaDateToTime(JNIEnv * env, jobject date);
