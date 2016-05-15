@@ -1000,7 +1000,9 @@ void String::appendUTF8CharactersLength(const char * UTF8Characters, unsigned in
 
 void String::appendUTF8Characters(const char * UTF8Characters)
 {
-    appendUTF8CharactersLength(UTF8Characters, (unsigned int) strlen(UTF8Characters));
+    if (UTF8Characters != NULL) {
+        appendUTF8CharactersLength(UTF8Characters, (unsigned int) strlen(UTF8Characters));
+    }
 }
 
 void String::appendCharacters(const UChar * unicodeCharacters)

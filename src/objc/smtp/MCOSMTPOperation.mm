@@ -70,6 +70,7 @@ typedef void (^CompletionType)(NSError *error);
                 userInfo[MCOSMTPResponseCodeKey] = @(op->lastSMTPResponseCode());
             }
             error = [NSError errorWithDomain:[error domain] code:[error code] userInfo:userInfo];
+            [userInfo release];
         }
     }
     return error;

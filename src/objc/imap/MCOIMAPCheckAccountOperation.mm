@@ -66,6 +66,7 @@ typedef void (^CompletionType)(NSError *error);
             NSMutableDictionary * userInfo = [[error userInfo] mutableCopy];
             userInfo[MCOIMAPResponseKey] = MCO_TO_OBJC(op->loginResponse());
             error = [NSError errorWithDomain:[error domain] code:[error code] userInfo:userInfo];
+            [userInfo release];
         }
         _completionBlock(error);
     }
