@@ -326,6 +326,9 @@ void MessageHeader::setExtraHeader(String * name, String * object)
         mExtraHeaders = new HashMap();
     }
     removeExtraHeader(name);
+    if (object == NULL) {
+        return;
+    }
     mExtraHeaders->setObjectForKey(name, object);
 }
 
