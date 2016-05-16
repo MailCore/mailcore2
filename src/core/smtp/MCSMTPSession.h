@@ -106,6 +106,8 @@ namespace mailcore {
         ConnectionLogger * mConnectionLogger;
         pthread_mutex_t mConnectionLoggerLock;
 
+        bool mOutlookServer;
+
         void init();
         Data * dataWithFilteredBcc(Data * data);
         static void body_progress(size_t current, size_t maximum, void * context);

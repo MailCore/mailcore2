@@ -53,6 +53,8 @@ void SMTPSession::init()
     pthread_mutex_init(&mConnectionLoggerLock, NULL);
     pthread_mutex_init(&mCancelLock, NULL);
     pthread_mutex_init(&mCanCancelLock, NULL);
+
+    mOutlookServer = true;
 }
 
 SMTPSession::SMTPSession()
@@ -286,7 +288,13 @@ void SMTPSession::connect(ErrorCode * pError)
     int r;
     
     setup();
-    
+
+    if (hostname() != NULL) {
+        if (hostname()->lowercaseString()->isEqual(MCSTR("smtp-mail.outlook.com"))) {
+            mOutlookServer = true;
+        }
+    }
+
     switch (mConnectionType) {
         case ConnectionTypeStartTLS:
             MCLog("connect %s %u", MCUTF8(hostname()), (unsigned int) port());
@@ -502,7 +510,14 @@ void SMTPSession::login(ErrorCode * pError)
         }
     }
 
-    switch (authType()) {
+    AuthType correctedAuthType = authType();
+    if (mOutlookServer) {
+        if (correctedAuthType == AuthTypeXOAuth2) {
+            correctedAuthType = AuthTypeXOAuth2Outlook;
+        }
+    }
+
+    switch (correctedAuthType) {
         case 0:
         default:
             r = mailesmtp_auth_sasl(mSmtp, "PLAIN",
