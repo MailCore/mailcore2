@@ -845,6 +845,9 @@ void IMAPSession::login(ErrorCode * pError)
         if (response->locationOfString(MCSTR("not enabled for IMAP use")) != -1) {
             * pError = ErrorGmailIMAPNotEnabled;
         }
+        else if (response->locationOfString(MCSTR("IMAP access is disabled")) != -1) {
+            * pError = ErrorGmailIMAPNotEnabled;
+        }
         else if (response->locationOfString(MCSTR("bandwidth limits")) != -1) {
             * pError = ErrorGmailExceededBandwidthLimit;
         }
