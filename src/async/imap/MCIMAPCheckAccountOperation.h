@@ -22,12 +22,14 @@ namespace mailcore {
         virtual ~IMAPCheckAccountOperation();
 
         virtual String * loginResponse();
+        virtual Data * loginUnparsedResponseData();
 
     public: // subclass behavior
         virtual void main();
 
     private:
         String * mLoginResponse;
+        Data * mLoginUnparsedResponseData;
     };
     
 }

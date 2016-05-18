@@ -16,11 +16,13 @@ using namespace mailcore;
 IMAPCheckAccountOperation::IMAPCheckAccountOperation()
 {
     mLoginResponse = NULL;
+    mLoginUnparsedResponseData = NULL;
 }
 
 IMAPCheckAccountOperation::~IMAPCheckAccountOperation()
 {
     MC_SAFE_RELEASE(mLoginResponse);
+    MC_SAFE_RELEASE(mLoginUnparsedResponseData);
 }
 
 void IMAPCheckAccountOperation::main()
@@ -31,6 +33,7 @@ void IMAPCheckAccountOperation::main()
         session()->session()->login(&error);
         if (error != ErrorNone) {
             MC_SAFE_REPLACE_COPY(String, mLoginResponse, session()->session()->loginResponse());
+            MC_SAFE_REPLACE_COPY(Data, mLoginUnparsedResponseData, session()->session()->unparsedResponseData());
         }
     }
     setError(error);
@@ -39,4 +42,9 @@ void IMAPCheckAccountOperation::main()
 String * IMAPCheckAccountOperation::loginResponse()
 {
     return mLoginResponse;
+}
+
+Data * IMAPCheckAccountOperation::loginUnparsedResponseData()
+{
+    return mLoginUnparsedResponseData;
 }

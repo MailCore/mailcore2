@@ -356,6 +356,7 @@ void IMAPSession::init()
     mShouldDisconnect = false;
     mLoginResponse = NULL;
     mGmailUserDisplayName = NULL;
+    mUnparsedResponseData = NULL;
 }
 
 IMAPSession::IMAPSession()
@@ -365,6 +366,7 @@ IMAPSession::IMAPSession()
 
 IMAPSession::~IMAPSession()
 {
+    MC_SAFE_RELEASE(mUnparsedResponseData);
     MC_SAFE_RELEASE(mGmailUserDisplayName);
     MC_SAFE_RELEASE(mLoginResponse);
     MC_SAFE_RELEASE(mClientIdentity);
@@ -483,6 +485,11 @@ bool IMAPSession::isVoIPEnabled()
 String * IMAPSession::loginResponse()
 {
     return mLoginResponse;
+}
+
+Data * IMAPSession::unparsedResponseData()
+{
+    return mUnparsedResponseData;
 }
 
 static bool hasError(int errorCode)
@@ -716,7 +723,10 @@ void IMAPSession::login(ErrorCode * pError)
     MCLog("login");
     
     MCAssert(mState == STATE_CONNECTED);
-    
+
+    MC_SAFE_RELEASE(mLoginResponse);
+    MC_SAFE_RELEASE(mUnparsedResponseData);
+
     if (mImap->imap_connection_info != NULL) {
         if (mImap->imap_connection_info->imap_capability != NULL) {
             mailimap_capability_data_free(mImap->imap_connection_info->imap_capability);
@@ -832,6 +842,13 @@ void IMAPSession::login(ErrorCode * pError)
     else if (r == MAILIMAP_ERROR_PARSE) {
         mShouldDisconnect = true;
         * pError = ErrorParse;
+
+        Data * unparsed_response = Data::data();
+        if (mImap->imap_stream_buffer != NULL) {
+            unparsed_response = Data::dataWithBytes(mImap->imap_stream_buffer->str, (unsigned int) mImap->imap_stream_buffer->len);
+        }
+        MC_SAFE_REPLACE_RETAIN(Data, mUnparsedResponseData, unparsed_response);
+
         return;
     }
     else if (hasError(r)) {
