@@ -62,9 +62,12 @@ typedef void (^CompletionType)(NSError *error);
         _completionBlock(nil);
     } else {
         NSError * error = [NSError mco_errorWithErrorCode:op->error()];
-        if (op->loginResponse() != NULL) {
+        if (op->loginResponse() != NULL || op->loginUnparsedResponseData() != NULL) {
             NSMutableDictionary * userInfo = [[error userInfo] mutableCopy];
-            userInfo[MCOIMAPResponseKey] = MCO_TO_OBJC(op->loginResponse());
+            if (op->loginResponse() != NULL)
+                userInfo[MCOIMAPResponseKey] = MCO_TO_OBJC(op->loginResponse());
+            if (op->loginUnparsedResponseData() != NULL)
+                userInfo[MCOIMAPUnparsedResponseDataKey] = MCO_TO_OBJC(op->loginUnparsedResponseData());
             error = [NSError errorWithDomain:[error domain] code:[error code] userInfo:userInfo];
             [userInfo release];
         }
