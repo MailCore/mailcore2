@@ -1340,5 +1340,33 @@
             "drafts": "Drafts",
             "allmail": "Archive"
         }
+    },
+    "facebook": {
+        "servers": {
+            "imap": [
+                     {
+                     "port": 993,
+                     "hostname": "outlook.office365.com",
+                     "ssl": true
+                     }
+                     ],
+            "smtp": [
+                     {
+                     "port": 587,
+                     "hostname": "smtp.office365.com",
+                     "starttls": true
+                     }
+                     ]
+        },
+        "domain-match": [
+                         "fb\\.com"
+                         ],
+        "mailboxes": {
+            "allmail": "Archive",
+            "drafts": "Drafts",
+            "spam": "Junk Email",
+            "sentmail": "Sent Items",
+            "trash": "Deleted Items"
+        }
     }
 }
