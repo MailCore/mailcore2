@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
  - On failure, `error` will be set with `MCOErrorDomain` as domain and an 
    error code available in `MCOConstants.h`, `namespaces` will be nil
 */
-- (void) start:(void (^)(NSError * __nullable error, NSDictionary * __nullable namespaces))completionBlock;
+- (void) start:(void (^)(NSError * __nullable error, NSDictionary <NSString *, MCOIMAPNamespace *> * __nullable namespaces))completionBlock;
 
 @end
 NS_ASSUME_NONNULL_END
