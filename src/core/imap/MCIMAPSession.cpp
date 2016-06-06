@@ -1280,13 +1280,12 @@ IMAPFolderStatus * IMAPSession::folderStatus(String * folder, ErrorCode * pError
                     }
                 }
             }            
-        
-        
+
+        mailimap_mailbox_data_status_free(status);
     }
-        
+
     mailimap_status_att_list_free(status_att_list);
-    mailimap_mailbox_data_status_free(status);
-    
+
     return fs;
 }
 
