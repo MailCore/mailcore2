@@ -498,6 +498,22 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
     return [self fetchMessageAttachmentOperationWithFolder:folder number:number partID:partID encoding:encoding urgent:NO];
 }
 
+- (MCOIMAPFetchContentToFileOperation *) fetchMessageAttachmentToFileOperationWithFolder:(NSString *)folder
+                                                                                     uid:(uint32_t)uid
+                                                                                  partID:(NSString *)partID
+                                                                                encoding:(MCOEncoding)encoding
+                                                                                filename:(NSString *)filename
+                                                                                  urgent:(BOOL)urgent
+{
+    IMAPFetchContentToFileOperation * coreOp = MCO_NATIVE_INSTANCE->fetchMessageAttachmentToFileByUIDOperation([folder mco_mcString],
+                                                                                                               uid,
+                                                                                                               [partID mco_mcString],
+                                                                                                               (Encoding) encoding,
+                                                                                                               [filename mco_mcString],
+                                                                                                               urgent);
+    return MCO_TO_OBJC_OP(coreOp);
+}
+
 - (MCOIMAPOperation *) storeFlagsOperationWithFolder:(NSString *)folder
                                                 uids:(MCOIndexSet *)uids
                                                 kind:(MCOIMAPStoreFlagsRequestKind)kind

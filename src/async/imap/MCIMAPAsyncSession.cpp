@@ -29,6 +29,7 @@
 #include "MCIMAPMoveMessagesOperation.h"
 #include "MCIMAPFetchMessagesOperation.h"
 #include "MCIMAPFetchContentOperation.h"
+#include "MCIMAPFetchContentToFileOperation.h"
 #include "MCIMAPFetchParsedContentOperation.h"
 #include "MCIMAPStoreFlagsOperation.h"
 #include "MCIMAPStoreLabelsOperation.h"
@@ -583,6 +584,24 @@ IMAPFetchContentOperation * IMAPAsyncSession::fetchMessageAttachmentByUIDOperati
     op->setUid(uid);
     op->setPartID(partID);
     op->setEncoding(encoding);
+    op->setUrgent(urgent);
+    op->autorelease();
+    return op;
+}
+
+IMAPFetchContentToFileOperation * IMAPAsyncSession::fetchMessageAttachmentToFileByUIDOperation(
+                                                                                   String * folder, uint32_t uid, String * partID,
+                                                                                   Encoding encoding,
+                                                                                   String * filename,
+                                                                                   bool urgent)
+{
+    IMAPFetchContentToFileOperation * op = new IMAPFetchContentToFileOperation();
+    op->setMainSession(this);
+    op->setFolder(folder);
+    op->setUid(uid);
+    op->setPartID(partID);
+    op->setEncoding(encoding);
+    op->setFilename(filename);
     op->setUrgent(urgent);
     op->autorelease();
     return op;

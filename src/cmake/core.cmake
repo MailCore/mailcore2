@@ -43,6 +43,8 @@ set(basetypes_files
   core/basetypes/MCBase64.c
   core/basetypes/MCConnectionLoggerUtils.cpp
   core/basetypes/MCData.cpp
+  core/basetypes/MCDataDecoderUtils.cpp
+  core/basetypes/MCDataStreamDecoder.cpp
   core/basetypes/MCHash.cpp
   core/basetypes/MCHashMap.cpp
   core/basetypes/MCHTMLCleaner.cpp

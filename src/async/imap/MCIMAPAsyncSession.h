@@ -24,6 +24,7 @@ namespace mailcore {
     class IMAPMoveMessagesOperation;
     class IMAPFetchMessagesOperation;
     class IMAPFetchContentOperation;
+    class IMAPFetchContentToFileOperation;
     class IMAPFetchParsedContentOperation;
     class IMAPIdleOperation;
     class IMAPFolderInfoOperation;
@@ -142,7 +143,13 @@ namespace mailcore {
         virtual IMAPFetchContentOperation * fetchMessageByUIDOperation(String * folder, uint32_t uid, bool urgent = false);
         virtual IMAPFetchContentOperation * fetchMessageAttachmentByUIDOperation(String * folder, uint32_t uid, String * partID,
                                                                                  Encoding encoding, bool urgent = false);
-        
+
+        virtual IMAPFetchContentToFileOperation * fetchMessageAttachmentToFileByUIDOperation(
+                                                                                 String * folder, uint32_t uid, String * partID,
+                                                                                 Encoding encoding,
+                                                                                 String * filename,
+                                                                                 bool urgent = false);
+
         virtual IMAPFetchContentOperation * fetchMessageByNumberOperation(String * folder, uint32_t number, bool urgent = false);
         virtual IMAPCustomCommandOperation * customCommand(String *command, bool urgent);
         virtual IMAPFetchContentOperation * fetchMessageAttachmentByNumberOperation(String * folder, uint32_t number, String * partID,
