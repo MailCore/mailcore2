@@ -11,6 +11,7 @@
 #define MAILCORE_MCONNTPLISTNEWSGROUPSOPERATION_H
 
 #import <Foundation/Foundation.h>
+#import <MailCore/MCONNTPGroupInfo.h>
 #import <MailCore/MCONNTPOperation.h>
 
 NS_ASSUME_NONNULL_BEGIN

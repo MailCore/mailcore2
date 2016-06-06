@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MailCore/MCONetService.h>
 
 /**
    Represents a email service provider, like for example Gmail, Yahoo, Fastmail.fm etc.

@@ -11,6 +11,7 @@
 #define MAILCORE_MCONNTPFETCHOVERVIEWOPERATION_H
 
 #import <Foundation/Foundation.h>
+#import <MailCore/MCOMessageHeader.h>
 #import <MailCore/MCONNTPOperation.h>
 
 

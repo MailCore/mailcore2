@@ -11,6 +11,7 @@
 #define MAILCORE_MCOIMAPFETCHMESSAGESOPERATION_H
 
 #import <MailCore/MCOIMAPBaseOperation.h>
+#import <MailCore/MCOIMAPMessage.h>
 #import <MailCore/MCOConstants.h>
 
 /** This class implements an operation to fetch a list of messages from a folder */
