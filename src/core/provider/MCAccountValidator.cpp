@@ -228,19 +228,19 @@ void AccountValidator::resolveMXDone()
 
 void AccountValidator::setupServices()
 {
-    if (mImapServices == NULL) {
+    if (mImapServices->count() == 0 && mProvider->imapServices() != NULL) {
         MC_SAFE_RELEASE(mImapServices);
         mImapServices = mProvider->imapServices();
         MC_SAFE_RETAIN(mImapServices);
     }
 
-    if (mPopServices == NULL) {
+    if (mPopServices->count() == 0 && mProvider->popServices() != NULL) {
         MC_SAFE_RELEASE(mPopServices);
         mPopServices = mProvider->popServices();
         MC_SAFE_RETAIN(mPopServices);
     }
 
-    if (mSmtpServices == NULL) {
+    if (mSmtpServices->count() == 0 && mProvider->smtpServices() != NULL) {
         MC_SAFE_RELEASE(mSmtpServices);
         mSmtpServices = mProvider->smtpServices();
         MC_SAFE_RETAIN(mSmtpServices);
