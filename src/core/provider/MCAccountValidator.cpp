@@ -175,7 +175,7 @@ void AccountValidator::resolveMX()
     Array * components;
     String * domain;
     
-    components = mUsername->componentsSeparatedByString(MCSTR("@"));
+    components = mEmail->componentsSeparatedByString(MCSTR("@"));
     if (components->count() >= 2) {
         performMethodAfterDelay((Object::Method) &AccountValidator::resolveMXTimeout, NULL, 30.0);
 
@@ -228,17 +228,23 @@ void AccountValidator::resolveMXDone()
 
 void AccountValidator::setupServices()
 {
-    MC_SAFE_RELEASE(mImapServices);
-    mImapServices = mProvider->imapServices();
-    MC_SAFE_RETAIN(mImapServices);
+    if (mImapServices == NULL) {
+        MC_SAFE_RELEASE(mImapServices);
+        mImapServices = mProvider->imapServices();
+        MC_SAFE_RETAIN(mImapServices);
+    }
 
-    MC_SAFE_RELEASE(mPopServices);
-    mPopServices = mProvider->popServices();
-    MC_SAFE_RETAIN(mPopServices);
+    if (mPopServices == NULL) {
+        MC_SAFE_RELEASE(mPopServices);
+        mPopServices = mProvider->popServices();
+        MC_SAFE_RETAIN(mPopServices);
+    }
 
-    MC_SAFE_RELEASE(mSmtpServices);
-    mSmtpServices = mProvider->smtpServices();
-    MC_SAFE_RETAIN(mSmtpServices);
+    if (mSmtpServices == NULL) {
+        MC_SAFE_RELEASE(mSmtpServices);
+        mSmtpServices = mProvider->smtpServices();
+        MC_SAFE_RETAIN(mSmtpServices);
+    }
 }
 
 void AccountValidator::startCheckingHosts()
@@ -253,13 +259,13 @@ void AccountValidator::startCheckingHosts()
         return;
     }
 
-    if (mImapServices->count() == 0)
+    if (mImapEnabled && mImapServices->count() == 0)
         mImapError = ErrorNoValidServerFound;
     
-    if (mPopServices->count() == 0)
+    if (mPopEnabled && mPopServices->count() == 0)
         mPopError = ErrorNoValidServerFound;
     
-    if (mSmtpServices->count() == 0)
+    if (mSmtpEnabled && mSmtpServices->count() == 0)
         mSmtpError = ErrorNoValidServerFound;
     
     checkNextHost();
@@ -285,11 +291,12 @@ void AccountValidator::checkNextHost()
             }
             
             mImapServer = (NetService *) mImapServices->objectAtIndex(mCurrentServiceIndex);
+            MCLog("checking imap %s %i\n", MCUTF8(mImapServer->hostname()), mImapServer->port());
             mImapSession->setHostname(mImapServer->hostname());
             mImapSession->setPort(mImapServer->port());
             mImapSession->setConnectionType(mImapServer->connectionType());
             mImapSession->setConnectionLogger(this);
-            
+
             mOperation = mImapSession->checkAccountOperation();
             mOperation->retain();
             mOperation->setCallback(this);
@@ -312,6 +319,7 @@ void AccountValidator::checkNextHost()
             mPopSession->setPassword(mPassword);
 
             mPopServer = (NetService *) mPopServices->objectAtIndex(mCurrentServiceIndex);
+            MCLog("checking pop %s %i\n", MCUTF8(mPopServer->hostname()), mPopServer->port());
             mPopSession->setHostname(mPopServer->hostname());
             mPopSession->setPort(mPopServer->port());
             mPopSession->setConnectionType(mPopServer->connectionType());
@@ -343,6 +351,7 @@ void AccountValidator::checkNextHost()
             }
             
             mSmtpServer = (NetService *) mSmtpServices->objectAtIndex(mCurrentServiceIndex);
+            MCLog("checking smtp %s %i\n", MCUTF8(mSmtpServer->hostname()), mSmtpServer->port());
             mSmtpSession->setHostname(mSmtpServer->hostname());
             mSmtpSession->setPort(mSmtpServer->port());
             mSmtpSession->setConnectionType(mSmtpServer->connectionType());
@@ -374,6 +383,7 @@ void AccountValidator::checkNextHostDone()
     
     if (mCurrentServiceTested == SERVICE_IMAP) {
         mImapError = ((IMAPOperation *)mOperation)->error();
+        MCLog("checking imap done %i\n", mImapError);
         MC_SAFE_REPLACE_COPY(String, mImapLoginResponse, ((IMAPCheckAccountOperation *)mOperation)->loginResponse());
         error = mImapError;
         mImapSession->setConnectionLogger(NULL);
@@ -381,12 +391,14 @@ void AccountValidator::checkNextHostDone()
     }
     else if (mCurrentServiceTested == SERVICE_POP) {
         mPopError = ((POPOperation *)mOperation)->error();
+        MCLog("checking pop done %i\n", mImapError);
         error = mPopError;
         mPopSession->setConnectionLogger(NULL);
         MC_SAFE_RELEASE(mPopSession);
     }
     else if (mCurrentServiceTested == SERVICE_SMTP) {
         mSmtpError = ((SMTPOperation *)mOperation)->error();
+        MCLog("checking smtp done %i\n", mImapError);
         error = mSmtpError;
         mSmtpSession->setConnectionLogger(NULL);
         MC_SAFE_RELEASE(mSmtpSession);
