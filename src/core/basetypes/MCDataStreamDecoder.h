@@ -9,6 +9,7 @@
 
 #define MAILCORE_MCDATASTREAMDECODER_H
 
+#include <stdio.h>
 #include <stdlib.h>
 
 #include <MailCore/MCObject.h>
