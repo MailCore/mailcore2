@@ -3,7 +3,7 @@ project (mailcore2)
 
 IF(APPLE)
   set(CMAKE_CXX__FLAGS "-std=c++11 -stdlib=libc++")
-  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++")
+  set(CMAKE_EXE_LINKER_FLAGS "-lc++ -stdlib=libc++")
 
   set(additional_lib_searchpath
     "${CMAKE_CURRENT_SOURCE_DIR}/Externals/ctemplate-osx/lib"
