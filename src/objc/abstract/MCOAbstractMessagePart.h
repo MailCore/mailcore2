@@ -22,7 +22,7 @@
 
 // Returns the main part of the embedded message. It can be MCOAbstractPart, MCOAbstractMultipart
 // or a MCOAbstractMessagePart.
-@property (nonatomic, strong) MCOAbstractPart * mainPart;
+@property (nonatomic, strong) __kindof MCOAbstractPart * mainPart;
 
 @end
 
