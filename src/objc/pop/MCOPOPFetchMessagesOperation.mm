@@ -38,7 +38,7 @@ typedef void (^CompletionType)(NSError *error, NSArray * messages);
     [super dealloc];
 }
 
-- (void) start:(void (^)(NSError *error, NSArray <__kindof MCOPOPMessageInfo *> * messages))completionBlock
+- (void) start:(void (^)(NSError *error, NSArray <MCOPOPMessageInfo *> * messages))completionBlock
 {
     _completionBlock = [completionBlock copy];
     [self start];

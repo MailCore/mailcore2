@@ -38,7 +38,7 @@ typedef void (^CompletionType)(NSError *error, NSArray * groups);
     [super dealloc];
 }
 
-- (void) start:(void (^)(NSError *error, NSArray <__kindof MCONNTPGroupInfo *> * groups))completionBlock
+- (void) start:(void (^)(NSError *error, NSArray <MCONNTPGroupInfo *> * groups))completionBlock
 {
     _completionBlock = [completionBlock copy];
     [self start];

@@ -41,10 +41,10 @@
 @property (nonatomic, copy) NSString * textBody;
 
 /** List of file attachments.*/
-@property (nonatomic, copy) NSArray <__kindof MCOAttachment *> * attachments;
+@property (nonatomic, copy) NSArray <MCOAttachment *> * attachments;
 
 /** List of related file attachments (included as cid: link in the HTML part).*/
-@property (nonatomic, copy) NSArray <__kindof MCOAttachment *> * relatedAttachments;
+@property (nonatomic, copy) NSArray <MCOAttachment *> * relatedAttachments;
 
 /** Prefix for the boundary identifier. Default value is nil.*/
 @property (nonatomic, copy) NSString * boundaryPrefix;
