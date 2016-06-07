@@ -76,17 +76,17 @@ MCO_OBJC_SYNTHESIZE(MessageHeader, setHeader, header)
     return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->partForUniqueID([uniqueID mco_mcString]));
 }
 
-- (NSArray <__kindof MCOAbstractPart *> *) attachments
+- (NSArray *) attachments
 {
     return MCO_OBJC_BRIDGE_GET(attachments);
 }
 
-- (NSArray <__kindof MCOAbstractPart *> *) htmlInlineAttachments
+- (NSArray *) htmlInlineAttachments
 {
     return MCO_OBJC_BRIDGE_GET(htmlInlineAttachments);
 }
 
-- (NSArray <__kindof MCOAbstractPart *> *) requiredPartsForRendering
+- (NSArray *) requiredPartsForRendering
 {
     return MCO_OBJC_BRIDGE_GET(requiredPartsForRendering);
 }
