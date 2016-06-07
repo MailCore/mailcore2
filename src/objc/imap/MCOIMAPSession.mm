@@ -139,6 +139,11 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
     return MCO_TO_OBJC(_session->gmailUserDisplayName());
 }
 
+- (BOOL) isIdleEnabled
+{
+    return MCO_NATIVE_INSTANCE->isIdleEnabled();
+}
+
 - (void) setConnectionLogger:(MCOConnectionLogger)connectionLogger
 {
     [_connectionLogger release];

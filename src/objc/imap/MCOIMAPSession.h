@@ -102,6 +102,8 @@
 */
 @property (nonatomic, copy, readonly) NSString * gmailUserDisplayName DEPRECATED_ATTRIBUTE;
 
+@property (nonatomic, assign, readonly, getter=isIdleEnabled) BOOL idleEnabled;
+
 /**
  When set to YES, the session is allowed open to open several connections to the same folder.
  @warning Some older IMAP servers don't like this
