@@ -43,16 +43,16 @@
 @property (nonatomic, copy) MCOAddress * from;
 
 /** To field: recipient of the message. It's an array of MCOAddress.*/
-@property (nonatomic, copy) NSArray <__kindof MCOAddress *> * to;
+@property (nonatomic, copy) NSArray <MCOAddress *> * to;
 
 /** Cc field: cc recipient of the message. It's an array of MCOAddress.*/
-@property (nonatomic, copy) NSArray <__kindof MCOAddress *> * cc;
+@property (nonatomic, copy) NSArray <MCOAddress *> * cc;
 
 /** Bcc field: bcc recipient of the message. It's an array of MCOAddress.*/
-@property (nonatomic, copy) NSArray <__kindof MCOAddress *> * bcc;
+@property (nonatomic, copy) NSArray <MCOAddress *> * bcc;
 
 /** Reply-To field. It's an array of MCOAddress.*/
-@property (nonatomic, copy) NSArray <__kindof MCOAddress *> * replyTo;
+@property (nonatomic, copy) NSArray <MCOAddress *> * replyTo;
 
 /** Subject of the message.*/
 @property (nonatomic, copy) NSString * subject;
@@ -88,10 +88,10 @@
 - (void) importHeadersData:(NSData *)data;
 
 /** Returns a header that can be used as a base for a reply message.*/
-- (MCOMessageHeader *) replyHeaderWithExcludedRecipients:(NSArray <__kindof MCOAddress *> *)excludedRecipients;
+- (MCOMessageHeader *) replyHeaderWithExcludedRecipients:(NSArray <MCOAddress *> *)excludedRecipients;
 
 /** Returns a header that can be used as a base for a reply all message.*/
-- (MCOMessageHeader *) replyAllHeaderWithExcludedRecipients:(NSArray <__kindof MCOAddress *> *)excludedRecipients;
+- (MCOMessageHeader *) replyAllHeaderWithExcludedRecipients:(NSArray <MCOAddress *> *)excludedRecipients;
 
 /** Returns a header that can be used as a base for a forward message.*/
 - (MCOMessageHeader *) forwardHeader;

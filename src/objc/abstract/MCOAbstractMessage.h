@@ -52,7 +52,7 @@ namespace mailcore {
  Returns parts required to render the message as plain text or html.
  This does not include inline images and attachments, but only the text content
  */
-- (NSArray *) requiredPartsForRendering;
+- (NSArray <__kindof MCOAbstractPart *> *) requiredPartsForRendering;
 
 @end
 

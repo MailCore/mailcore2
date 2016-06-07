@@ -153,12 +153,12 @@ MCO_OBJC_SYNTHESIZE_STRING(setUserAgent, userAgent)
     _nativeHeader->importHeadersData([data mco_mcData]);
 }
 
-- (MCOMessageHeader *) replyHeaderWithExcludedRecipients:(NSArray *)excludedRecipients
+- (MCOMessageHeader *) replyHeaderWithExcludedRecipients:(NSArray <MCOAddress *> *)excludedRecipients
 {
     return MCO_TO_OBJC(_nativeHeader->replyHeader(false, MCO_FROM_OBJC(mailcore::Array, excludedRecipients)));
 }
 
-- (MCOMessageHeader *) replyAllHeaderWithExcludedRecipients:(NSArray *)excludedRecipients
+- (MCOMessageHeader *) replyAllHeaderWithExcludedRecipients:(NSArray <MCOAddress *> *)excludedRecipients
 {
     return MCO_TO_OBJC(_nativeHeader->replyHeader(true, MCO_FROM_OBJC(mailcore::Array, excludedRecipients)));
 }
