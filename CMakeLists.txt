@@ -1,15 +1,15 @@
 cmake_minimum_required (VERSION 2.6)
-project (mailcore2) 
+project (mailcore2)
 
 IF(APPLE)
   set(CMAKE_CXX__FLAGS "-std=c++11 -stdlib=libc++")
-  set(CMAKE_EXE_LINKER_FLAGS "-lc++ -stdlib=libc++")
-  
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++")
+
   set(additional_lib_searchpath
     "${CMAKE_CURRENT_SOURCE_DIR}/Externals/ctemplate-osx/lib"
     "${CMAKE_CURRENT_SOURCE_DIR}/Externals/libetpan-osx/lib"
   )
-  
+
   execute_process(COMMAND xcrun --sdk macosx --show-sdk-path OUTPUT_VARIABLE sdkpath)
   string(STRIP "${sdkpath}" sdkpath)
   set(additional_includes
@@ -21,17 +21,17 @@ IF(APPLE)
     "${sdkpath}/usr/include/libxml2"
   )
   message(STATUS "${additional_includes}")
-  
+
   set(mac_libraries iconv)
-  
+
 ELSEIF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
   set(CMAKE_CXX_FLAGS "-std=gnu++0x")
-  
+
   set(additional_includes
     /usr/include/tidy
     /usr/include/libxml2
   )
-  
+
   set(icu_libraries icudata icui18n icuio icule iculx icutest icutu icuuc)
   set(linux_libraries ${icu_libraries} pthread uuid)
 ENDIF()
@@ -49,7 +49,7 @@ IF(APPLE)
 ENDIF()
 
 if(NOT APPLE)
-  
+
   # detect icu
 
   find_path(ICU4C_INCLUDE_DIR
@@ -66,7 +66,7 @@ if(NOT APPLE)
   else()
     message(STATUS "Found icu4c")
   endif()
-  
+
 endif()
 
 IF(ANDROID)
@@ -181,4 +181,3 @@ ENDIF() # Android platform
 add_subdirectory (src)
 add_subdirectory (tests)
 add_subdirectory (unittest)
-
