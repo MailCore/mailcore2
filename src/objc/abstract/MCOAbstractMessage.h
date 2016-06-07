@@ -40,19 +40,19 @@ namespace mailcore {
  It will return an array of MCOIMAPPart for MCOIMAPMessage.
  It will return an array of MCOAttachment for MCOMessageParser.
  It will return an array of MCOAttachment for MCOMessageBuilder. */
-- (NSArray<__kindof MCOAbstractPart *> *) attachments;
+- (NSArray <MCOAbstractPart *> *) attachments;
 
 /** All image attachments included inline in the message through cid: URLs.
  It will return an array of MCOIMAPPart for MCOIMAPMessage.
  It will return an array of MCOAttachment for MCOMessageParser.
  It will return an array of MCOAttachment for MCOMessageBuilder. */
-- (NSArray<__kindof MCOAbstractPart *> *) htmlInlineAttachments;
+- (NSArray <__kindof MCOAbstractPart *> *) htmlInlineAttachments;
 
 /**
  Returns parts required to render the message as plain text or html.
  This does not include inline images and attachments, but only the text content
  */
-- (NSArray<__kindof MCOAbstractPart *> *) requiredPartsForRendering;
+- (NSArray <__kindof MCOAbstractPart *> *) requiredPartsForRendering;
 
 @end
 
