@@ -40,8 +40,8 @@ build_git_ios()
   mkdir -p "$srcdir"
 
   pushd . >/dev/null
-  mkdir -p "$builddir/downloads"
-  cd "$builddir/downloads"
+#   mkdir -p "$builddir/downloads"
+#   cd "$builddir/downloads"
   # if test -d "$name" ; then
 #     cd "$name"
 #     git checkout master
@@ -56,8 +56,6 @@ build_git_ios()
 
   pushd . >/dev/null
 
-  cp -R "$builddir/downloads/$name" "$srcdir/$name"
-  cd "$srcdir/$name"
 #   if test "x$branch" != x ; then
 #     if ! git checkout -b "$branch" "origin/$branch" ; then
 #       git checkout "$branch"
@@ -73,7 +71,7 @@ build_git_ios()
   fi
   XCTOOL_OTHERFLAGS='$(inherited)'
   XCTOOL_OTHERFLAGS="$XCTOOL_OTHERFLAGS $BITCODE_FLAGS"
-  cd "$srcdir/$name/build-mac"
+  cd "$TOPDIR/build-mac"
   sdk="iphoneos$sdkversion"
   echo building $sdk
   xcodebuild -project "$xcode_project" -sdk $sdk -scheme "$xcode_target" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$devicearchs" IPHONEOS_DEPLOYMENT_TARGET="$sdkminversion" OTHER_CFLAGS="$XCTOOL_OTHERFLAGS" $XCODE_BITCODE_FLAGS
@@ -109,10 +107,10 @@ build_git_ios()
       "Release-iphonesimulator/$library" \
         -output "$name-$version/$name/lib/$library"
     for dep in $embedded_deps ; do
-      if test -d "$srcdir/$name/build-mac/$dep" ; then
-        mv "$srcdir/$name/build-mac/$dep" "$name-$version"
+      if test -d "$TOPDIR/build-mac/$dep" ; then
+        mv "$TOPDIR/build-mac/$dep" "$name-$version"
       elif test -d "$srcdir/$name/Externals/$dep" ; then
-        mv "$srcdir/$name/Externals/$dep" "$name-$version"
+        mv "$TOPDIR/Externals/$dep" "$name-$version"
       else
         echo Dependency $dep not found
       fi
@@ -130,7 +128,7 @@ build_git_ios()
       mkdir -p "$name-$version/lib"
       mv "$name-$version/$library" "$name-$version/lib"
     fi
-    echo "$rev"> "$name-$version/git-rev"
+    
     if test x$build_for_external = x1 ; then
       mkdir -p "$scriptpath/../Externals"
       cp -R "$name-$version"/* "$scriptpath/../Externals"

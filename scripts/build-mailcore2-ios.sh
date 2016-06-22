@@ -6,8 +6,6 @@ popd > /dev/null
 
 . "$scriptpath/include.sh/build-dep.sh"
 
-# url="https://github.com/virtru/mailcore2.git"
-# rev=897b4a23d27984b06dd2caf441268ef4b6ad9d67
 name="mailcore2-ios"
 xcode_target="static mailcore2 ios"
 xcode_project="mailcore2.xcodeproj"
