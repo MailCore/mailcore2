@@ -30,6 +30,7 @@ build_git_ios()
   logdir="$tempbuilddir/log"
   resultdir="$builddir/builds"
   tmpdir="$tempbuilddir/tmp"
+  
 
   echo "working in $tempbuilddir"
 
@@ -41,14 +42,14 @@ build_git_ios()
   pushd . >/dev/null
   mkdir -p "$builddir/downloads"
   cd "$builddir/downloads"
-  if test -d "$name" ; then
-    cd "$name"
-    git checkout master
-    git pull --rebase
-  else
-    git clone $url "$name"
-    cd "$name"
-  fi
+  # if test -d "$name" ; then
+#     cd "$name"
+#     git checkout master
+#     git pull --rebase
+#   else
+#     git clone $url "$name"
+#     cd "$name"
+#   fi
   #version=`echo $rev | cut -c1-10`
 
   popd >/dev/null
@@ -57,13 +58,13 @@ build_git_ios()
 
   cp -R "$builddir/downloads/$name" "$srcdir/$name"
   cd "$srcdir/$name"
-  if test "x$branch" != x ; then
-    if ! git checkout -b "$branch" "origin/$branch" ; then
-      git checkout "$branch"
-    fi
-  fi
-  git checkout -q $rev
-  echo building $name $version - $rev
+#   if test "x$branch" != x ; then
+#     if ! git checkout -b "$branch" "origin/$branch" ; then
+#       git checkout "$branch"
+#     fi
+#   fi
+#   git checkout -q $rev
+#   echo building $name $version - $rev
 
   BITCODE_FLAGS="-fembed-bitcode"
   if test "x$NOBITCODE" != x ; then
@@ -75,14 +76,14 @@ build_git_ios()
   cd "$srcdir/$name/build-mac"
   sdk="iphoneos$sdkversion"
   echo building $sdk
-  xctool -project "$xcode_project" -sdk $sdk -scheme "$xcode_target" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$devicearchs" IPHONEOS_DEPLOYMENT_TARGET="$sdkminversion" OTHER_CFLAGS="$XCTOOL_OTHERFLAGS" $XCODE_BITCODE_FLAGS
+  xcodebuild -project "$xcode_project" -sdk $sdk -scheme "$xcode_target" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$devicearchs" IPHONEOS_DEPLOYMENT_TARGET="$sdkminversion" OTHER_CFLAGS="$XCTOOL_OTHERFLAGS" $XCODE_BITCODE_FLAGS
   if test x$? != x0 ; then
     echo failed
     exit 1
   fi
   sdk="iphonesimulator$sdkversion"
   echo building $sdk
-  xctool -project "$xcode_project" -sdk $sdk -scheme "$xcode_target" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$simarchs" IPHONEOS_DEPLOYMENT_TARGET="$sdkminversion" OTHER_CFLAGS='$(inherited)'
+  xcodebuild -project "$xcode_project" -sdk $sdk -scheme "$xcode_target" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$simarchs" IPHONEOS_DEPLOYMENT_TARGET="$sdkminversion" OTHER_CFLAGS='$(inherited)'
   if test x$? != x0 ; then
     echo failed
     exit 1
@@ -140,6 +141,9 @@ build_git_ios()
     fi
   fi
 
+  mkdir -p "$TOPDIR/built"
+  echo temp dir $tmpdir/bin/$name-$version
+  cp -a "$tmpdir/bin/$name-$version/" "$TOPDIR/built"
   echo build of $name-$version done
 
   popd >/dev/null
