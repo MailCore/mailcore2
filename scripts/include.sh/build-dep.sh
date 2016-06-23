@@ -109,7 +109,7 @@ build_git_ios()
     for dep in $embedded_deps ; do
       if test -d "$TOPDIR/build-mac/$dep" ; then
         mv "$TOPDIR/build-mac/$dep" "$name-$version"
-      elif test -d "$srcdir/$name/Externals/$dep" ; then
+      elif test -d "$TOPDIR/Externals/$dep" ; then
         mv "$TOPDIR/Externals/$dep" "$name-$version"
       else
         echo Dependency $dep not found
