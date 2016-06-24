@@ -40,29 +40,7 @@ build_git_ios()
   mkdir -p "$srcdir"
 
   pushd . >/dev/null
-#   mkdir -p "$builddir/downloads"
-#   cd "$builddir/downloads"
-  # if test -d "$name" ; then
-#     cd "$name"
-#     git checkout master
-#     git pull --rebase
-#   else
-#     git clone $url "$name"
-#     cd "$name"
-#   fi
-  #version=`echo $rev | cut -c1-10`
 
-  popd >/dev/null
-
-  pushd . >/dev/null
-
-#   if test "x$branch" != x ; then
-#     if ! git checkout -b "$branch" "origin/$branch" ; then
-#       git checkout "$branch"
-#     fi
-#   fi
-#   git checkout -q $rev
-#   echo building $name $version - $rev
 
   BITCODE_FLAGS="-fembed-bitcode"
   if test "x$NOBITCODE" != x ; then
@@ -191,21 +169,6 @@ build_git_osx()
   mkdir -p "$logdir"
   mkdir -p "$tmpdir"
   mkdir -p "$srcdir"
-
-  pushd . >/dev/null
-  mkdir -p "$builddir/downloads"
-  cd "$builddir/downloads"
-  if test -d "$name" ; then
-  	cd "$name"
-    git checkout master
-  	git pull --rebase
-  else
-  	git clone $url "$name"
-  	cd "$name"
-  fi
-  #version=`echo $rev | cut -c1-10`
-
-  popd >/dev/null
 
   pushd . >/dev/null
 
