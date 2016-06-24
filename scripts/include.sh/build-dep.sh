@@ -209,17 +209,8 @@ build_git_osx()
 
   pushd . >/dev/null
 
-  cp -R "$builddir/downloads/$name" "$srcdir/$name"
-  cd "$srcdir/$name"
-  if test "x$branch" != x ; then
-    if ! git checkout -b "$branch" "origin/$branch" ; then
-      git checkout "$branch"
-    fi
-  fi
-  git checkout -q $rev
-  echo building $name $version - $rev
 
-  cd "$srcdir/$name/build-mac"
+  cd "$TOPDIR/build-mac"
   xctool -project "$xcode_project" -sdk macosx$sdk -scheme "$xcode_target" -configuration Release ARCHS="$archs" SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" MACOSX_DEPLOYMENT_TARGET="$sdkminversion"
   if test x$? != x0 ; then
     echo failed
@@ -244,10 +235,10 @@ build_git_osx()
     fi
     mv "Release/$library" "$name-$version/$name/lib"
     for dep in $embedded_deps ; do
-      if test -d "$srcdir/$name/build-mac/$dep" ; then
-        mv "$srcdir/$name/build-mac/$dep" "$name-$version"
-      elif test -d "$srcdir/$name/Externals/$dep" ; then
-        mv "$srcdir/$name/Externals/$dep" "$name-$version"
+      if test -d "$TOPDIR/build-mac/$dep" ; then
+        mv "$TOPDIR/build-mac/$dep" "$name-$version"
+      elif test -d "$TOPDIR/Externals/$dep" ; then
+        mv "$TOPDIR/Externals/$dep" "$name-$version"
       else
         echo Dependency $dep not found
       fi
@@ -265,7 +256,7 @@ build_git_osx()
       mkdir -p "$name-$version/lib"
       mv "$name-$version/$library" "$name-$version/lib"
     fi
-    echo "$rev"> "$name-$version/git-rev"
+    
     if test x$build_for_external = x1 ; then
       mkdir -p "$scriptpath/../Externals"
       cp -R "$name-$version"/* "$scriptpath/../Externals"
@@ -276,12 +267,15 @@ build_git_osx()
     fi
   fi
 
+  mkdir -p "$TOPDIR/built"
+  echo temp dir $tmpdir/bin/$name-$version
+  cp -a "$tmpdir/bin/$name-$version/" "$TOPDIR/built"
   echo build of $name-$version done
 
   popd >/dev/null
 
   echo cleaning
-  #rm -rf "$tempbuilddir"
+  rm -rf "$tempbuilddir"
 
   if test x$build_for_external != x1 ; then
     defaults write "$versions_path" "$name" "$version"
