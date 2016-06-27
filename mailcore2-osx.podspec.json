@@ -18,9 +18,9 @@
   },
   "header_dir": "MailCore",
   "requires_arc": false,
-  "public_header_files": "build/include/MailCore/*.h",
-  "preserve_paths": "built/include/MailCore/*.h",
-  "vendored_libraries": "built/lib/libMailCore.a",
+  "public_header_files": "cocoapods-build/include/MailCore/*.h",
+  "preserve_paths": "cocoapods-build/include/MailCore/*.h",
+  "vendored_libraries": "cocoapods-build/lib/libMailCore.a",
   "libraries": ["sasl2", "tidy", "xml2", "iconv", "z", "c++", "crypto", "ssl", "resolv"],
   "prepare_command": "./scripts/build-mailcore2-osx.sh"
 }
