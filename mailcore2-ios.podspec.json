@@ -22,5 +22,5 @@
   "preserve_paths": "cocoapods-build/include/MailCore/*.h",
   "vendored_libraries": "cocoapods-build/lib/libMailCore-ios.a",
   "libraries": ["xml2", "iconv", "z", "c++", "resolv"],
-  "prepare_command": "./scripts/build-mailcore2-ios.sh"
+  "prepare_command": "./scripts/build-mailcore2-ios-cocoapod.sh"
 }
