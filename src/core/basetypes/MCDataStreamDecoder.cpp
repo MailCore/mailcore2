@@ -88,6 +88,10 @@ ErrorCode DataStreamDecoder::appendDecodedData(Data * decodedData)
         return ErrorFile;
     }
 
+    if (decodedData->length() == 0) {
+        return ErrorNone;
+    }
+
     if (mFile == NULL) {
         mFile = fopen(mFilename->fileSystemRepresentation(), "wb");
 
