@@ -709,7 +709,9 @@ void SMTPSession::internalSendMessage(Address * from, Array * recipients, Data *
         return;
     }
     
-    messageData = dataWithFilteredBcc(messageData);
+    if (!this->mOutlook) {
+        messageData = dataWithFilteredBcc(messageData);
+    }
 
     mProgressCallback = callback;
     bodyProgress(0, messageData->length());
