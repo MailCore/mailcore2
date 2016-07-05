@@ -709,7 +709,7 @@ void SMTPSession::internalSendMessage(Address * from, Array * recipients, Data *
         return;
     }
     
-    if (!this->mOutlook) {
+    if (!this->mOutlookServer) {
         messageData = dataWithFilteredBcc(messageData);
     }
 
