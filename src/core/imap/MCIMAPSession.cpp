@@ -2760,6 +2760,16 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchKind kind, String * se
             expr = IMAPSearchExpression::searchContent(searchString);
             break;
         }
+        case IMAPSearchKindRead:
+        {
+            expr = IMAPSearchExpression::searchRead();
+            break;
+        }
+        case IMAPSearchKindUnread:
+        {
+            expr = IMAPSearchExpression::searchUnread();
+            break;
+        }
         default:
         {
             MCAssert(0);
