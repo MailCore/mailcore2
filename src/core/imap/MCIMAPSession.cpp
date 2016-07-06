@@ -3142,6 +3142,56 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchKind kind, String * se
             expr = IMAPSearchExpression::searchContent(searchString);
             break;
         }
+        case IMAPSearchKindRead:
+        {
+            expr = IMAPSearchExpression::searchRead();
+            break;
+        }
+        case IMAPSearchKindUnread:
+        {
+            expr = IMAPSearchExpression::searchUnread();
+            break;
+        }
+        case IMAPSearchKindFlagged:
+        {
+            expr = IMAPSearchExpression::searchFlagged();
+            break;
+        }
+        case IMAPSearchKindUnflagged:
+        {
+            expr = IMAPSearchExpression::searchUnflagged();
+            break;
+        }
+        case IMAPSearchKindAnswered:
+        {
+            expr = IMAPSearchExpression::searchAnswered();
+            break;
+        }
+        case IMAPSearchKindUnanswered:
+        {
+            expr = IMAPSearchExpression::searchUnanswered();
+            break;
+        }
+        case IMAPSearchKindDraft:
+        {
+            expr = IMAPSearchExpression::searchDraft();
+            break;
+        }
+        case IMAPSearchKindUndraft:
+        {
+            expr = IMAPSearchExpression::searchUndraft();
+            break;
+        }
+        case IMAPSearchKindDeleted:
+        {
+            expr = IMAPSearchExpression::searchDeleted();
+            break;
+        }
+        case IMAPSearchKindSpam:
+        {
+            expr = IMAPSearchExpression::searchSpam();
+            break;
+        }
         default:
         {
             MCAssert(0);
