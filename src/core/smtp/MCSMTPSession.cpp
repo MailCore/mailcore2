@@ -54,7 +54,7 @@ void SMTPSession::init()
     pthread_mutex_init(&mCancelLock, NULL);
     pthread_mutex_init(&mCanCancelLock, NULL);
 
-    mOutlookServer = true;
+    mOutlookServer = false;
 }
 
 SMTPSession::SMTPSession()

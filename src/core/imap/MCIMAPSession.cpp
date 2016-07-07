@@ -2973,7 +2973,7 @@ Data * IMAPSession::fetchMessageAttachmentByNumber(String * folder, uint32_t num
     return fetchMessageAttachment(folder, false, number, partID, encoding, progressCallback, pError);
 }
 
-void IMAPSession::fetchMessageAttachmentToFileByUID(String * folder, uint32_t uid, String * partID,
+void IMAPSession::fetchMessageAttachmentToFileByChunksByUID(String * folder, uint32_t uid, String * partID,
                                                     uint32_t estimatedSize, Encoding encoding,
                                                     String * outputFile, uint32_t chunkSize,
                                                     IMAPProgressCallback * progressCallback, ErrorCode * pError)
@@ -3051,6 +3051,51 @@ void IMAPSession::fetchMessageAttachmentToFileByUID(String * folder, uint32_t ui
     * pError = error;
 }
 
+static bool msg_body_handler(int msg_att_type, struct mailimap_msg_att_body_section * section,
+                             const char * bytes, size_t len, void * context)
+{
+    DataStreamDecoder * decoder = (DataStreamDecoder *)context;
+
+    AutoreleasePool * pool = new AutoreleasePool();
+
+    Data * data = Data::dataWithBytes(bytes, (unsigned int) len);
+    ErrorCode error = decoder->appendData(data);
+
+    pool->release();
+
+    return error == ErrorNone;
+}
+
+void IMAPSession::fetchMessageAttachmentToFileByUID(String * folder, uint32_t uid, String * partID,
+                                                    Encoding encoding, String * outputFile,
+                                                    IMAPProgressCallback * progressCallback, ErrorCode * pError)
+{
+    DataStreamDecoder * decoder = new DataStreamDecoder();
+    decoder->setEncoding(encoding);
+    decoder->setFilename(outputFile);
+
+    ErrorCode error = ErrorNone;
+    selectIfNeeded(folder, &error);
+    if (error != ErrorNone) {
+        * pError = error;
+        return;
+    }
+
+    mailimap_set_msg_body_handler(mImap, msg_body_handler, decoder);
+
+    fetchNonDecodedMessageAttachment(folder, true, uid, partID, true, 0, 0, encoding, progressCallback, &error);
+
+    mailimap_set_msg_body_handler(mImap, NULL, NULL);
+
+    if (error == ErrorNone) {
+        error = decoder->flushData();
+    }
+
+    MC_SAFE_RELEASE(decoder);
+
+    * pError = error;
+}
+
 IndexSet * IMAPSession::search(String * folder, IMAPSearchKind kind, String * searchString, ErrorCode * pError)
 {
     IMAPSearchExpression * expr;
@@ -3095,6 +3140,56 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchKind kind, String * se
         case IMAPSearchKindContent:
         {
             expr = IMAPSearchExpression::searchContent(searchString);
+            break;
+        }
+        case IMAPSearchKindRead:
+        {
+            expr = IMAPSearchExpression::searchRead();
+            break;
+        }
+        case IMAPSearchKindUnread:
+        {
+            expr = IMAPSearchExpression::searchUnread();
+            break;
+        }
+        case IMAPSearchKindFlagged:
+        {
+            expr = IMAPSearchExpression::searchFlagged();
+            break;
+        }
+        case IMAPSearchKindUnflagged:
+        {
+            expr = IMAPSearchExpression::searchUnflagged();
+            break;
+        }
+        case IMAPSearchKindAnswered:
+        {
+            expr = IMAPSearchExpression::searchAnswered();
+            break;
+        }
+        case IMAPSearchKindUnanswered:
+        {
+            expr = IMAPSearchExpression::searchUnanswered();
+            break;
+        }
+        case IMAPSearchKindDraft:
+        {
+            expr = IMAPSearchExpression::searchDraft();
+            break;
+        }
+        case IMAPSearchKindUndraft:
+        {
+            expr = IMAPSearchExpression::searchUndraft();
+            break;
+        }
+        case IMAPSearchKindDeleted:
+        {
+            expr = IMAPSearchExpression::searchDeleted();
+            break;
+        }
+        case IMAPSearchKindSpam:
+        {
+            expr = IMAPSearchExpression::searchSpam();
             break;
         }
         default:
