@@ -77,6 +77,12 @@ SMTPSession::~SMTPSession()
 void SMTPSession::setHostname(String * hostname)
 {
     MC_SAFE_REPLACE_COPY(String, mHostname, hostname);
+    
+    if (hostname != NULL) {
+        if (hostname->lowercaseString()->isEqual(MCSTR("smtp-mail.outlook.com"))) {
+            mOutlookServer = true;
+        }
+    }
 }
 
 String * SMTPSession::hostname()
@@ -288,12 +294,6 @@ void SMTPSession::connect(ErrorCode * pError)
     int r;
     
     setup();
-
-    if (hostname() != NULL) {
-        if (hostname()->lowercaseString()->isEqual(MCSTR("smtp-mail.outlook.com"))) {
-            mOutlookServer = true;
-        }
-    }
 
     switch (mConnectionType) {
         case ConnectionTypeStartTLS:
