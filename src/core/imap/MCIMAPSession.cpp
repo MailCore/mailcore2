@@ -4359,6 +4359,25 @@ String * IMAPSession::htmlBodyRendering(IMAPMessage * message, String * folder, 
     return htmlBodyString;
 }
 
+String * IMAPSession::htmlBodyRendering(IMAPMessage * message, String * folder, HTMLRendererTemplateCallback * htmlCallback, ErrorCode * pError)
+{
+	MCAssert(folder != NULL);
+	HTMLRendererIMAPDataCallback * dataCallback = new HTMLRendererIMAPDataCallback(this, message->uid());
+	String * htmlBodyString = HTMLRenderer::htmlForIMAPMessage(folder,
+															   message,
+															   dataCallback,
+															   htmlCallback);
+	
+	* pError = dataCallback->error();
+	
+	if (* pError != ErrorNone) {
+		return NULL;
+	}
+	
+	MC_SAFE_RELEASE(dataCallback);
+	return htmlBodyString;
+}
+
 String * IMAPSession::plainTextRendering(IMAPMessage * message, String * folder, ErrorCode * pError)
 {
     String * htmlString = htmlRendering(message, folder, pError);

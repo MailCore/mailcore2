@@ -24,7 +24,10 @@ namespace mailcore {
         
         virtual void setRenderingType(IMAPMessageRenderingType type);
         virtual IMAPMessageRenderingType renderingType();
-        
+		
+		virtual void setHtmlCallBack(HTMLRendererTemplateCallback * htmlCallBack);
+		virtual HTMLRendererTemplateCallback * htmlCallBack();
+		
         virtual void setMessage(IMAPMessage * message);
         virtual IMAPMessage * message();
         
@@ -38,6 +41,7 @@ namespace mailcore {
         IMAPMessageRenderingType mRenderingType;
         String * mResult;
         IMAPMessage * mMessage;
+		HTMLRendererTemplateCallback * mHtmlCallBack;
         
     };
     

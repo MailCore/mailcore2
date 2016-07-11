@@ -203,6 +203,8 @@ namespace mailcore {
         
         /** HTML rendering of the body of the message.*/
         virtual String * htmlBodyRendering(IMAPMessage * message, String * folder, ErrorCode * pError);
+		
+		virtual String * htmlBodyRendering(IMAPMessage * message, String * folder, HTMLRendererTemplateCallback * htmlCallback, ErrorCode * pError);
         
         /** Text rendering of the message.*/
         virtual String * plainTextRendering(IMAPMessage * message, String * folder, ErrorCode * pError);

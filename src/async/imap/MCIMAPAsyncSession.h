@@ -44,6 +44,7 @@ namespace mailcore {
     class OperationQueueCallback;
     class IMAPCustomCommandOperation;
     class IMAPCheckAccountOperation;
+	class HTMLRendererTemplateCallback;
     
     class MAILCORE_EXPORT IMAPAsyncSession : public Object {
     public:
@@ -183,6 +184,7 @@ namespace mailcore {
         
         virtual IMAPMessageRenderingOperation * htmlRenderingOperation(IMAPMessage * message, String * folder);
         virtual IMAPMessageRenderingOperation * htmlBodyRenderingOperation(IMAPMessage * message, String * folder);
+		virtual IMAPMessageRenderingOperation * htmlBodyRenderingOperation(IMAPMessage * message, String * folder, HTMLRendererTemplateCallback * htmlCallBack);
         virtual IMAPMessageRenderingOperation * plainTextRenderingOperation(IMAPMessage * message, String * folder);
         virtual IMAPMessageRenderingOperation * plainTextBodyRenderingOperation(IMAPMessage * message, String * folder, bool stripWhitespace);
         
@@ -235,6 +237,9 @@ namespace mailcore {
         virtual IMAPMessageRenderingOperation * renderingOperation(IMAPMessage * message,
                                                                    String * folder,
                                                                    IMAPMessageRenderingType type);
+		virtual IMAPMessageRenderingOperation * renderingOperation(IMAPMessage * message,
+																   String * folder,
+																   HTMLRendererTemplateCallback * htmlCallBack);
     };
     
 }

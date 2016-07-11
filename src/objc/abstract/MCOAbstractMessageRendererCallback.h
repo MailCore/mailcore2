@@ -22,6 +22,7 @@ class MCOAbstractMessageRendererCallback : public mailcore::Object, public mailc
 public:
     MCOAbstractMessageRendererCallback(MCOAbstractMessage * message, id <MCOHTMLRendererDelegate> rendererDelegate,
                                      id <MCOHTMLRendererIMAPDelegate> rendererIMAPDelegate);
+	virtual ~MCOAbstractMessageRendererCallback();
     virtual bool canPreviewPart(mailcore::AbstractPart * part);
     virtual bool shouldShowPart(mailcore::AbstractPart * part);
     virtual mailcore::HashMap * templateValuesForHeader(mailcore::MessageHeader * header);

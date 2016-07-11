@@ -841,6 +841,19 @@ IMAPMessageRenderingOperation * IMAPAsyncSession::renderingOperation(IMAPMessage
     return op;
 }
 
+IMAPMessageRenderingOperation * IMAPAsyncSession::renderingOperation(IMAPMessage * message,
+																	 String * folder,
+																	 HTMLRendererTemplateCallback * htmlCallBack)
+{
+	IMAPMessageRenderingOperation * op = new IMAPMessageRenderingOperation();
+	op->setMainSession(this);
+	op->setMessage(message);
+	op->setFolder(folder);
+	op->setHtmlCallBack(htmlCallBack);
+	op->autorelease();
+	return op;
+}
+
 IMAPMessageRenderingOperation * IMAPAsyncSession::htmlRenderingOperation(IMAPMessage * message,
                                                                          String * folder)
 {
@@ -851,6 +864,13 @@ IMAPMessageRenderingOperation * IMAPAsyncSession::htmlBodyRenderingOperation(IMA
                                                                              String * folder)
 {
     return renderingOperation(message, folder, IMAPMessageRenderingTypeHTMLBody);
+}
+
+IMAPMessageRenderingOperation * IMAPAsyncSession::htmlBodyRenderingOperation(IMAPMessage * message,
+																			 String * folder,
+																			 HTMLRendererTemplateCallback *htmlCallBack)
+{
+	return renderingOperation(message, folder, htmlCallBack);
 }
 
 IMAPMessageRenderingOperation * IMAPAsyncSession::plainTextRenderingOperation(IMAPMessage * message,

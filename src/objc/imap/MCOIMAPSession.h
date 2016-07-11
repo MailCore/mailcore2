@@ -38,6 +38,8 @@
 @class MCOIMAPIdentity;
 @class MCOIMAPCustomCommandOperation;
 
+@protocol MCOHTMLRendererDelegate;
+
 /**
  This is the main IMAP class from which all operations are created
 
@@ -1029,6 +1031,10 @@ vanishedMessages will be set only for servers that support QRESYNC. See [RFC5162
  */
 - (MCOIMAPMessageRenderingOperation *) htmlBodyRenderingOperationWithMessage:(MCOIMAPMessage *)message
                                                                       folder:(NSString *)folder;
+
+- (MCOIMAPMessageRenderingOperation *) htmlBodyRenderingOperationWithMessage:(MCOIMAPMessage *)message
+																	  folder:(NSString *)folder
+															rendererDelegate:(id <MCOHTMLRendererDelegate>)rendererDelegate;
 
 /**
  Returns an operation to render the plain text version of a message.
