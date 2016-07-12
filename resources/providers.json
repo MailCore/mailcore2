@@ -1130,6 +1130,18 @@
     },
     "comcast": {
         "servers": {
+            "imap": [
+                {
+                     "port": 993,
+                     "hostname":"imap.comcast.net",
+                     "ssl": true
+                },
+                {
+                     "port": 143,
+                     "hostname":"imap.comcast.net",
+                     "starttls": true
+                }
+            ],
             "pop": [
                 {
                     "port": 995,
