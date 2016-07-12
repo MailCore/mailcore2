@@ -382,7 +382,14 @@ void AccountValidator::checkNextHostDone()
     ErrorCode error = ErrorNone;
     
     if (mCurrentServiceTested == SERVICE_IMAP) {
-        mImapError = ((IMAPOperation *)mOperation)->error();
+        if (mImapError == ErrorAuthentication) {
+            if (((IMAPOperation *)mOperation)->error() != ErrorConnection) {
+                mImapError = ((IMAPOperation *)mOperation)->error();
+            }
+        }
+        else {
+            mImapError = ((IMAPOperation *)mOperation)->error();
+        }
         MCLog("checking imap done %i\n", mImapError);
         MC_SAFE_REPLACE_COPY(String, mImapLoginResponse, ((IMAPCheckAccountOperation *)mOperation)->loginResponse());
         error = mImapError;
@@ -390,14 +397,28 @@ void AccountValidator::checkNextHostDone()
         MC_SAFE_RELEASE(mImapSession);
     }
     else if (mCurrentServiceTested == SERVICE_POP) {
-        mPopError = ((POPOperation *)mOperation)->error();
+        if (mPopError == ErrorAuthentication) {
+            if (((POPOperation *)mOperation)->error() != ErrorConnection) {
+                mPopError = ((POPOperation *)mOperation)->error();
+            }
+        }
+        else {
+            mPopError = ((POPOperation *)mOperation)->error();
+        }
         MCLog("checking pop done %i\n", mImapError);
         error = mPopError;
         mPopSession->setConnectionLogger(NULL);
         MC_SAFE_RELEASE(mPopSession);
     }
     else if (mCurrentServiceTested == SERVICE_SMTP) {
-        mSmtpError = ((SMTPOperation *)mOperation)->error();
+        if (mSmtpError == ErrorAuthentication) {
+            if (((SMTPOperation *)mOperation)->error() != ErrorConnection) {
+                mSmtpError = ((SMTPOperation *)mOperation)->error();
+            }
+        }
+        else {
+            mSmtpError = ((SMTPOperation *)mOperation)->error();
+        }
         MCLog("checking smtp done %i\n", mImapError);
         error = mSmtpError;
         mSmtpSession->setConnectionLogger(NULL);
