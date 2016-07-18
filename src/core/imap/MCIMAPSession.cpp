@@ -3444,7 +3444,6 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchExpression * expressio
 {
     struct mailimap_search_key * key;
     
-    key = searchKeyFromSearchExpression(expression);
     selectIfNeeded(folder, pError);
     if (* pError != ErrorNone)
         return NULL;
@@ -3457,6 +3456,7 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchExpression * expressio
     }
     
     int r;
+    key = searchKeyFromSearchExpression(expression);
     if (mIsGmail) {
         r = mailimap_uid_search_literalplus(mImap, charset, key, &result_list);
     }
@@ -4329,11 +4329,12 @@ String * IMAPSession::htmlRendering(IMAPMessage * message, String * folder, Erro
                                                            NULL);
     * pError = dataCallback->error();
     
+    MC_SAFE_RELEASE(dataCallback);
+
     if (* pError != ErrorNone) {
         return NULL;
     }
     
-    MC_SAFE_RELEASE(dataCallback);
     return htmlString;
 }
 
@@ -4350,12 +4351,13 @@ String * IMAPSession::htmlBodyRendering(IMAPMessage * message, String * folder, 
 
     * pError = dataCallback->error();
     
+    MC_SAFE_RELEASE(dataCallback);
+    MC_SAFE_RELEASE(htmlCallback);
+
     if (* pError != ErrorNone) {
         return NULL;
     }
     
-    MC_SAFE_RELEASE(dataCallback);
-    MC_SAFE_RELEASE(htmlCallback);
     return htmlBodyString;
 }
 
@@ -4412,10 +4414,10 @@ bool IMAPSession::enableFeature(String * feature)
     
     struct mailimap_capability_data * result;
     r = mailimap_enable(mImap, caps, &result);
+    mailimap_capability_data_free(caps);
     if (r != MAILIMAP_NO_ERROR)
         return false;
     
-    mailimap_capability_data_free(caps);
     mailimap_capability_data_free(result);
     
     return true;
