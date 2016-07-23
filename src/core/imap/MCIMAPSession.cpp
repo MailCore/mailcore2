@@ -396,6 +396,7 @@ void IMAPSession::init()
     mFirstUnseenUid = 0;
     mYahooServer = false;
     mRamblerRuServer = false;
+    mHermesServer = false;
     mLastFetchedSequenceNumber = 0;
     mCurrentFolder = NULL;
     pthread_mutex_init(&mIdleLock, NULL);
@@ -715,6 +716,7 @@ void IMAPSession::connect(ErrorCode * pError)
             mNamespaceEnabled = true;
         }
         mRamblerRuServer = (mHostname->locationOfString(MCSTR(".rambler.ru")) != -1);
+        mHermesServer = (mWelcomeString->locationOfString(MCSTR("Hermes")) != -1);
     }
     
     mState = STATE_CONNECTED;
@@ -4227,8 +4229,13 @@ void IMAPSession::applyCapabilities(IndexSet * capabilities)
     if (capabilities->containsIndex(IMAPCapabilityXOAuth2)) {
         mXOauth2Enabled = true;
     }
-    if (capabilities->containsIndex(IMAPCapabilityNamespace)) {
-        mNamespaceEnabled = true;
+    if (mHermesServer) {
+        // Hermes server improperly advertise a namespace capability.
+    }
+    else {
+        if (capabilities->containsIndex(IMAPCapabilityNamespace)) {
+            mNamespaceEnabled = true;
+        }
     }
     if (capabilities->containsIndex(IMAPCapabilityCompressDeflate)) {
         mCompressionEnabled = true;

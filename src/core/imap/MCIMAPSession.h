@@ -271,6 +271,7 @@ namespace mailcore {
         uint32_t mFirstUnseenUid;
         bool mYahooServer;
         bool mRamblerRuServer;
+        bool mHermesServer;
         
         unsigned int mLastFetchedSequenceNumber;
         String * mCurrentFolder;
