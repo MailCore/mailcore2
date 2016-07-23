@@ -18,7 +18,7 @@
 @protocol MCOHTMLRendererDelegate;
 @protocol MCOHTMLRendererIMAPDelegate;
 
-class MCOAbstractMessageRendererCallback : public mailcore::Object, public mailcore::HTMLRendererTemplateCallback, public mailcore::HTMLRendererIMAPCallback {
+class MCOAbstractMessageRendererCallback : public mailcore::HTMLRendererTemplateCallback, public mailcore::HTMLRendererIMAPCallback {
 public:
     MCOAbstractMessageRendererCallback(MCOAbstractMessage * message, id <MCOHTMLRendererDelegate> rendererDelegate,
                                      id <MCOHTMLRendererIMAPDelegate> rendererIMAPDelegate);

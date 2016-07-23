@@ -25,6 +25,7 @@ IMAPMessageRenderingOperation::IMAPMessageRenderingOperation()
 IMAPMessageRenderingOperation::~IMAPMessageRenderingOperation()
 {
     MC_SAFE_RELEASE(mMessage);
+	MC_SAFE_RELEASE(mHtmlCallBack);
     MC_SAFE_RELEASE(mResult);
 }
 
@@ -40,7 +41,7 @@ IMAPMessageRenderingType IMAPMessageRenderingOperation::renderingType()
 
 void IMAPMessageRenderingOperation::setHtmlCallBack(HTMLRendererTemplateCallback * htmlCallBack)
 {
-	mHtmlCallBack = htmlCallBack;
+	MC_SAFE_REPLACE_RETAIN(HTMLRendererTemplateCallback, mHtmlCallBack, htmlCallBack);
 }
 
 HTMLRendererTemplateCallback * IMAPMessageRenderingOperation::htmlCallBack()
