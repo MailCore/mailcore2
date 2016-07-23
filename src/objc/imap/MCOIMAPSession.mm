@@ -667,19 +667,21 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
     return MCO_TO_OBJC_OP(coreOp);
 }
 
+- (MCOIMAPMessageRenderingOperation *) htmlRenderingOperationWithMessage:(MCOIMAPMessage *)message
+																  folder:(NSString *)folder
+														rendererDelegate:(id<MCOHTMLRendererDelegate>)rendererDelegate
+{
+	MCOAbstractMessageRendererCallback * htmlCallBack = new MCOAbstractMessageRendererCallback(NULL, rendererDelegate, NULL);
+	IMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->htmlRenderingOperation(MCO_FROM_OBJC(IMAPMessage, message), [folder mco_mcString], htmlCallBack);
+	htmlCallBack->release();
+	return MCO_TO_OBJC(coreOp);
+}
+
 - (MCOIMAPMessageRenderingOperation *) htmlBodyRenderingOperationWithMessage:(MCOIMAPMessage *)message
                                                                       folder:(NSString *)folder
 {
     IMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->htmlBodyRenderingOperation(MCO_FROM_OBJC(IMAPMessage, message), [folder mco_mcString]);
     return MCO_TO_OBJC_OP(coreOp);
-}
-
-- (MCOIMAPMessageRenderingOperation *) htmlBodyRenderingOperationWithMessage:(MCOIMAPMessage *)message
-																	  folder:(NSString *)folder
-															rendererDelegate:(id<MCOHTMLRendererDelegate>)rendererDelegate
-{
-	IMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->htmlRenderingOperation(MCO_FROM_OBJC(IMAPMessage, message), [folder mco_mcString], new MCOAbstractMessageRendererCallback(NULL, rendererDelegate, NULL));
-	return MCO_TO_OBJC(coreOp);
 }
 
 - (MCOIMAPMessageRenderingOperation *) plainTextRenderingOperationWithMessage:(MCOIMAPMessage *)message
