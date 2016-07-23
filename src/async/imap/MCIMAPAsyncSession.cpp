@@ -860,17 +860,17 @@ IMAPMessageRenderingOperation * IMAPAsyncSession::htmlRenderingOperation(IMAPMes
     return renderingOperation(message, folder, IMAPMessageRenderingTypeHTML);
 }
 
+IMAPMessageRenderingOperation * IMAPAsyncSession::htmlRenderingOperation(IMAPMessage * message,
+																		 String * folder,
+																		 HTMLRendererTemplateCallback *htmlCallBack)
+{
+	return renderingOperation(message, folder, htmlCallBack);
+}
+
 IMAPMessageRenderingOperation * IMAPAsyncSession::htmlBodyRenderingOperation(IMAPMessage * message,
                                                                              String * folder)
 {
     return renderingOperation(message, folder, IMAPMessageRenderingTypeHTMLBody);
-}
-
-IMAPMessageRenderingOperation * IMAPAsyncSession::htmlBodyRenderingOperation(IMAPMessage * message,
-																			 String * folder,
-																			 HTMLRendererTemplateCallback *htmlCallBack)
-{
-	return renderingOperation(message, folder, htmlCallBack);
 }
 
 IMAPMessageRenderingOperation * IMAPAsyncSession::plainTextRenderingOperation(IMAPMessage * message,

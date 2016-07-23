@@ -183,8 +183,8 @@ namespace mailcore {
         virtual IMAPOperation * noopOperation();
         
         virtual IMAPMessageRenderingOperation * htmlRenderingOperation(IMAPMessage * message, String * folder);
+		virtual IMAPMessageRenderingOperation * htmlRenderingOperation(IMAPMessage * message, String * folder, HTMLRendererTemplateCallback * htmlCallBack);
         virtual IMAPMessageRenderingOperation * htmlBodyRenderingOperation(IMAPMessage * message, String * folder);
-		virtual IMAPMessageRenderingOperation * htmlBodyRenderingOperation(IMAPMessage * message, String * folder, HTMLRendererTemplateCallback * htmlCallBack);
         virtual IMAPMessageRenderingOperation * plainTextRenderingOperation(IMAPMessage * message, String * folder);
         virtual IMAPMessageRenderingOperation * plainTextBodyRenderingOperation(IMAPMessage * message, String * folder, bool stripWhitespace);
         

@@ -678,7 +678,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
 																	  folder:(NSString *)folder
 															rendererDelegate:(id<MCOHTMLRendererDelegate>)rendererDelegate
 {
-	IMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->htmlBodyRenderingOperation(MCO_FROM_OBJC(IMAPMessage, message), [folder mco_mcString], new MCOAbstractMessageRendererCallback(NULL, rendererDelegate, NULL));
+	IMAPMessageRenderingOperation * coreOp = MCO_NATIVE_INSTANCE->htmlRenderingOperation(MCO_FROM_OBJC(IMAPMessage, message), [folder mco_mcString], new MCOAbstractMessageRendererCallback(NULL, rendererDelegate, NULL));
 	return MCO_TO_OBJC(coreOp);
 }
 
