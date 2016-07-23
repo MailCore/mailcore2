@@ -4371,10 +4371,10 @@ String * IMAPSession::htmlBodyRendering(IMAPMessage * message, String * folder, 
 	* pError = dataCallback->error();
 	
 	if (* pError != ErrorNone) {
+		MC_SAFE_RELEASE(dataCallback);
 		return NULL;
 	}
 	
-	MC_SAFE_RELEASE(dataCallback);
 	return htmlBodyString;
 }
 
