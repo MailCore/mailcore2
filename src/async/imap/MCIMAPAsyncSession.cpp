@@ -845,13 +845,13 @@ IMAPMessageRenderingOperation * IMAPAsyncSession::renderingOperation(IMAPMessage
 																	 String * folder,
 																	 HTMLRendererTemplateCallback * htmlCallBack)
 {
-	IMAPMessageRenderingOperation * op = new IMAPMessageRenderingOperation();
-	op->setMainSession(this);
-	op->setMessage(message);
-	op->setFolder(folder);
-	op->setHtmlCallBack(htmlCallBack);
-	op->autorelease();
-	return op;
+    IMAPMessageRenderingOperation * op = new IMAPMessageRenderingOperation();
+    op->setMainSession(this);
+    op->setMessage(message);
+    op->setFolder(folder);
+    op->setHtmlCallBack(htmlCallBack);
+    op->autorelease();
+    return op;
 }
 
 IMAPMessageRenderingOperation * IMAPAsyncSession::htmlRenderingOperation(IMAPMessage * message,
@@ -864,7 +864,7 @@ IMAPMessageRenderingOperation * IMAPAsyncSession::htmlRenderingOperation(IMAPMes
 																		 String * folder,
 																		 HTMLRendererTemplateCallback *htmlCallBack)
 {
-	return renderingOperation(message, folder, htmlCallBack);
+    return renderingOperation(message, folder, htmlCallBack);
 }
 
 IMAPMessageRenderingOperation * IMAPAsyncSession::htmlBodyRenderingOperation(IMAPMessage * message,
