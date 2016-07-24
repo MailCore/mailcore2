@@ -19,24 +19,24 @@ MCOAbstractMessageRendererCallback::MCOAbstractMessageRendererCallback(MCOAbstra
                                    id <MCOHTMLRendererIMAPDelegate> rendererIMAPDelegate)
 {
     mMessage = message;
-	if (rendererDelegate) {
-		size_t size = class_getInstanceSize([rendererDelegate class]);
-		char * rendererDelegatePointer = (char *)rendererDelegate;
-		char * destPointer = (char *)malloc(size);
-		memcpy(destPointer, rendererDelegatePointer, size);
-		
-		id <MCOHTMLRendererIMAPDelegate> dest = (id <MCOHTMLRendererIMAPDelegate>)destPointer;
-		mRendererDelegate = dest;
-	}
+    if (rendererDelegate) {
+        size_t size = class_getInstanceSize([rendererDelegate class]);
+        char * rendererDelegatePointer = (char *)rendererDelegate;
+        char * destPointer = (char *)malloc(size);
+        memcpy(destPointer, rendererDelegatePointer, size);
+        
+        id <MCOHTMLRendererIMAPDelegate> dest = (id <MCOHTMLRendererIMAPDelegate>)destPointer;
+        mRendererDelegate = dest;
+    }
     mIMAPDelegate = rendererIMAPDelegate;
 }
 
 MCOAbstractMessageRendererCallback::~MCOAbstractMessageRendererCallback()
 {
-	if (mRendererDelegate) {
-		char * destPointer = (char *)mRendererDelegate;
-		delete destPointer;
-	}
+    if (mRendererDelegate) {
+        char * destPointer = (char *)mRendererDelegate;
+        delete destPointer;
+    }
 }
 
 bool MCOAbstractMessageRendererCallback::canPreviewPart(AbstractPart * part)
