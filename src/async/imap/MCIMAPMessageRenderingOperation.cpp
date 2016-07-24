@@ -18,14 +18,14 @@ IMAPMessageRenderingOperation::IMAPMessageRenderingOperation()
 {
     mMessage = NULL;
     mRenderingType = IMAPMessageRenderingTypePlainTextBody;
-	mHtmlCallBack = NULL;
+    mHtmlCallBack = NULL;
     mResult = NULL;
 }
 
 IMAPMessageRenderingOperation::~IMAPMessageRenderingOperation()
 {
     MC_SAFE_RELEASE(mMessage);
-	MC_SAFE_RELEASE(mHtmlCallBack);
+    MC_SAFE_RELEASE(mHtmlCallBack);
     MC_SAFE_RELEASE(mResult);
 }
 
@@ -41,12 +41,12 @@ IMAPMessageRenderingType IMAPMessageRenderingOperation::renderingType()
 
 void IMAPMessageRenderingOperation::setHtmlCallBack(HTMLRendererTemplateCallback * htmlCallBack)
 {
-	MC_SAFE_REPLACE_RETAIN(HTMLRendererTemplateCallback, mHtmlCallBack, htmlCallBack);
+    MC_SAFE_REPLACE_RETAIN(HTMLRendererTemplateCallback, mHtmlCallBack, htmlCallBack);
 }
 
 HTMLRendererTemplateCallback * IMAPMessageRenderingOperation::htmlCallBack()
 {
-	return mHtmlCallBack;
+    return mHtmlCallBack;
 }
 
 void IMAPMessageRenderingOperation::setMessage(IMAPMessage * message)
@@ -68,27 +68,27 @@ void IMAPMessageRenderingOperation::main()
 {
     ErrorCode error = ErrorNone;
     
-	if (mHtmlCallBack != NULL) {
-		mResult = session()->session()->htmlBodyRendering(mMessage, folder(), mHtmlCallBack, &error);
-	}
-	else {
-		if (mRenderingType == IMAPMessageRenderingTypeHTML) {
-			mResult = session()->session()->htmlRendering(mMessage, folder(), &error);
-		}
-		else if (mRenderingType == IMAPMessageRenderingTypeHTMLBody) {
-			mResult = session()->session()->htmlBodyRendering(mMessage, folder(), &error);
-		}
-		else if (mRenderingType == IMAPMessageRenderingTypePlainText) {
-			mResult = session()->session()->plainTextRendering(mMessage, folder(), &error);
-		}
-		else if (mRenderingType == IMAPMessageRenderingTypePlainTextBody) {
-			mResult = session()->session()->plainTextBodyRendering(mMessage, folder(), false, &error);
-		}
-		else if (mRenderingType == IMAPMessageRenderingTypePlainTextBodyAndStripWhitespace) {
-			mResult = session()->session()->plainTextBodyRendering(mMessage, folder(), true, &error);
-		}
-	}
-	
+    if (mHtmlCallBack != NULL) {
+        mResult = session()->session()->htmlRendering(mMessage, folder(), mHtmlCallBack, &error);
+    }
+    else {
+        if (mRenderingType == IMAPMessageRenderingTypeHTML) {
+            mResult = session()->session()->htmlRendering(mMessage, folder(), &error);
+        }
+        else if (mRenderingType == IMAPMessageRenderingTypeHTMLBody) {
+            mResult = session()->session()->htmlBodyRendering(mMessage, folder(), &error);
+        }
+        else if (mRenderingType == IMAPMessageRenderingTypePlainText) {
+            mResult = session()->session()->plainTextRendering(mMessage, folder(), &error);
+        }
+        else if (mRenderingType == IMAPMessageRenderingTypePlainTextBody) {
+            mResult = session()->session()->plainTextBodyRendering(mMessage, folder(), false, &error);
+        }
+        else if (mRenderingType == IMAPMessageRenderingTypePlainTextBodyAndStripWhitespace) {
+            mResult = session()->session()->plainTextBodyRendering(mMessage, folder(), true, &error);
+        }
+    }
+
     MC_SAFE_RETAIN(mResult);
     setError(error);
 }
