@@ -26,6 +26,10 @@ namespace mailcore {
 - (mailcore::Data *) mco_mcData;
 #endif
 
+- (NSString *) stringWithDetectedCharset;
+- (NSString *) stringWithDetectedCharset:(const char *) charset;
+- (NSString *) stringWithDetectedCharset:(const char *) charset isHTML:(BOOL)isHTML;
+
 @end
 
 #endif
