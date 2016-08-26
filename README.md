@@ -62,6 +62,10 @@ Using MailCore 2 is just a little more complex conceptually than the original Ma
 
 In this sample, we retrieved and printed a list of email headers from an IMAP server.  In order to execute the fetch, we request an asynchronous operation object from the `MCOIMAPSession` instance with our parameters (more on this later).  This operation object is able to initiate a connection to Gmail when we call the `start` method.  Now here's where things get a little tricky.  We call the `start` function with an Objective-C block, which is executed on the main thread when the fetch operation completes.  The actual fetching from IMAP is done on a **background thread**, leaving your UI and other processing **free to use the main thread**.
 
+## Contributions ##
+
+Guidelines for Contributing to the framework are available [in the wiki](https://github.com/MailCore/mailcore2/wiki/Contributing)
+
 ## Documentation ##
 
 * [Class documentation](http://libmailcore.com/mailcore2/api/index.html)
