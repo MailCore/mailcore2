@@ -258,6 +258,7 @@ namespace mailcore {
         ErrorYahooSendMessageSpamSuspected,
         ErrorYahooSendMessageDailyLimitExceeded,
         ErrorOutlookLoginViaWebBrowser,
+        ErrorSimplePassword,
     };
     
     enum PartType {
