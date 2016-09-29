@@ -644,7 +644,12 @@ void SMTPSession::login(ErrorCode * pError)
         return;
     }
     else if (r != MAILSMTP_NO_ERROR) {
-        * pError = ErrorAuthentication;
+        if(mSmtp->response_code == 535
+           && strstr(mSmtp->response_buffer->str, "your password is too simple") != NULL) {
+            * pError = ErrorTiscaliSimplePassword;
+        } else {
+            * pError = ErrorAuthentication;
+        }
         return;
     }
     
