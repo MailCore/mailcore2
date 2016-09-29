@@ -50,7 +50,7 @@ static const char * localizedDescriptionTable[] = {
     "Cannot send message due to possible spam detected by server",                   /** MCOErrorSendMessageSpamSuspected */
     "User is over the limit for messages allowed to be sent in a single day",        /** MCOErrorSendMessageDailyLimitExceeded */
     "The user needs to log in via the web browser",                                  /** MCOErrorOutlookLoginViaWebBrowser */
-    "Credentials with password too simple",                                          /** MCOErrorSimpleMail */
+    "Credentials with password too simple",                                          /** MCOErrorTiscaliSimplePassword */
 };
 
 String * mailcore::errorMessageWithErrorCode(ErrorCode errorCode)

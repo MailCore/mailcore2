@@ -423,8 +423,8 @@ typedef NS_ENUM(NSInteger, MCOErrorCode) {
     MCOErrorYahooSendMessageDailyLimitExceeded,
     /** You need to login via the web browser first */
     MCOErrorOutlookLoginViaWebBrowser,
-    /** Simple Mail Error */
-    MCOErrorSimpleMail,
+    /** Tiscali Simple Mail Error */
+    MCOErrorTiscaliSimplePassword,
     /** The count of all errors */
     MCOErrorCodeCount,
 };
