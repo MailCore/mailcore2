@@ -16,6 +16,7 @@
 /** This class implements an operation to fetch a list of messages from a folder */
 
 @class MCOIndexSet;
+@class MCOIMAPMessage;
 
 NS_ASSUME_NONNULL_BEGIN
 @interface MCOIMAPFetchMessagesOperation : MCOIMAPBaseOperation
@@ -24,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) MCOIMAPBaseOperationItemProgressBlock progress;
 
 /** Extra headers to request. Must set requestKind | IMAPMessagesRequestKindExtraHeaders */
-@property (nonatomic, copy) NSArray * extraHeaders;
+@property (nonatomic, copy) NSArray<NSString *> * extraHeaders;
 
 /** 
  Starts the asynchronous fetch operation.
@@ -39,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 
    If you are not supporting QRESYNC you can safely ignore `vanishedMessages`.
 */
-- (void) start:(void (^)(NSError * __nullable error, NSArray * /* MCOIMAPMessage */ __nullable messages, MCOIndexSet * __nullable vanishedMessages))completionBlock;
+- (void) start:(void (^)(NSError * __nullable error, NSArray<MCOIMAPMessage *> * __nullable messages, MCOIndexSet * __nullable vanishedMessages))completionBlock;
 
 @end
 NS_ASSUME_NONNULL_END
