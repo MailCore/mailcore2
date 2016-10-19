@@ -40,14 +40,14 @@
  forms of the RFC822 encoded addresses.
 
  For example: @[ @"DINH Vi=C3=AAt Ho=C3=A0 <hoa@etpan.org>" ]*/
-+ (NSArray *) addressesWithRFC822String:(NSString *)string;
++ (NSArray<MCOAddress *> *) addressesWithRFC822String:(NSString *)string;
 
 /** 
  Returns an NSArray of MCOAddress objects that contain the parsed
  forms of non-encoded RFC822 addresses.
 
  For example: @[ "DINH Viêt Hoà <hoa@etpan.org>" ]*/
-+ (NSArray *) addressesWithNonEncodedRFC822String:(NSString *)string;
++ (NSArray<MCOAddress *> *) addressesWithNonEncodedRFC822String:(NSString *)string;
 
 
 /** Returns the display name of the address.*/

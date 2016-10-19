@@ -22,6 +22,9 @@ MessageParser * MessageParser::messageParserWithData(Data * data)
 MessageParser * MessageParser::messageParserWithContentsOfFile(String * filename)
 {
     Data * data = Data::dataWithContentsOfFile(filename);
+    if (data == NULL) {
+        data = Data::data();
+    }
     return messageParserWithData(data);
 }
 

@@ -20,10 +20,10 @@ JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPSearchExpression_searchAll
 }
 
 JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPSearchExpression_searchFrom
-  (JNIEnv * env, jclass cls, jstring)
+  (JNIEnv * env, jclass cls, jstring value)
 {
     MC_POOL_BEGIN;
-    jobject result = MC_TO_JAVA(IMAPSearchExpression::searchAll());
+    jobject result = MC_TO_JAVA(IMAPSearchExpression::searchFrom(MC_FROM_JAVA(String, value)));
     MC_POOL_END;
     return result;
 }
@@ -284,7 +284,7 @@ JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPSearchExpression_searchGmailM
   (JNIEnv * env, jclass cls, jlong messageID)
 {
     MC_POOL_BEGIN;
-    jobject result = MC_TO_JAVA(IMAPSearchExpression::searchGmailThreadID((uint64_t) messageID));
+    jobject result = MC_TO_JAVA(IMAPSearchExpression::searchGmailMessageID((uint64_t) messageID));
     MC_POOL_END;
     return result;
 }

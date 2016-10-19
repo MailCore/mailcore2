@@ -19,7 +19,7 @@ IMAPFetchContentToFileOperation::IMAPFetchContentToFileOperation()
     mPartID = NULL;
     mEncoding = Encoding7Bit;
     mFilename = NULL;
-    mLoadingByChunksEnabled = true;
+    mLoadingByChunksEnabled = false;
     mChunksSize = 2*1024*1024;
     mEstimatedSize = 0;
 }
@@ -83,9 +83,15 @@ uint32_t IMAPFetchContentToFileOperation::estimatedSize()
 void IMAPFetchContentToFileOperation::main()
 {
     ErrorCode error = ErrorNone;
-    session()->session()->fetchMessageAttachmentToFileByUID(folder(), mUid, mPartID,
-                                                            mEstimatedSize, mEncoding,
-                                                            mFilename, mChunksSize,
-                                                            this, &error);
+    if (mLoadingByChunksEnabled) {
+      session()->session()->fetchMessageAttachmentToFileByChunksByUID(folder(), mUid, mPartID,
+                                                              mEstimatedSize, mEncoding,
+                                                              mFilename, mChunksSize,
+                                                              this, &error);
+    } else {
+      session()->session()->fetchMessageAttachmentToFileByUID(folder(), mUid, mPartID,
+                                                              mEncoding, mFilename,
+                                                              this, &error);
+    }
     setError(error);
 }

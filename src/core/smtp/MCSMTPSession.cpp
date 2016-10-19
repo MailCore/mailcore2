@@ -54,7 +54,7 @@ void SMTPSession::init()
     pthread_mutex_init(&mCancelLock, NULL);
     pthread_mutex_init(&mCanCancelLock, NULL);
 
-    mOutlookServer = true;
+    mOutlookServer = false;
 }
 
 SMTPSession::SMTPSession()
@@ -77,6 +77,13 @@ SMTPSession::~SMTPSession()
 void SMTPSession::setHostname(String * hostname)
 {
     MC_SAFE_REPLACE_COPY(String, mHostname, hostname);
+    
+    if (hostname != NULL && hostname->lowercaseString()->isEqual(MCSTR("smtp-mail.outlook.com"))) {
+        mOutlookServer = true;
+    }
+    else {
+        mOutlookServer = false;
+    }
 }
 
 String * SMTPSession::hostname()
@@ -288,12 +295,6 @@ void SMTPSession::connect(ErrorCode * pError)
     int r;
     
     setup();
-
-    if (hostname() != NULL) {
-        if (hostname()->lowercaseString()->isEqual(MCSTR("smtp-mail.outlook.com"))) {
-            mOutlookServer = true;
-        }
-    }
 
     switch (mConnectionType) {
         case ConnectionTypeStartTLS:
@@ -643,7 +644,12 @@ void SMTPSession::login(ErrorCode * pError)
         return;
     }
     else if (r != MAILSMTP_NO_ERROR) {
-        * pError = ErrorAuthentication;
+        if(mSmtp->response_code == 535
+           && strstr(mSmtp->response_buffer->str, "your password is too simple") != NULL) {
+            * pError = ErrorTiscaliSimplePassword;
+        } else {
+            * pError = ErrorAuthentication;
+        }
         return;
     }
     
@@ -709,7 +715,9 @@ void SMTPSession::internalSendMessage(Address * from, Array * recipients, Data *
         return;
     }
     
-    messageData = dataWithFilteredBcc(messageData);
+    if (!this->mOutlookServer) {
+        messageData = dataWithFilteredBcc(messageData);
+    }
 
     mProgressCallback = callback;
     bodyProgress(0, messageData->length());
