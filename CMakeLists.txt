@@ -112,7 +112,7 @@ endif()
 # detect tidy
 
 find_path(TIDY_INCLUDE_DIR
-  NAMES tidy/tidy.h
+  NAMES tidy.h
   PATHS ${additional_includes}
 )
 find_library(TIDY_LIBRARY
