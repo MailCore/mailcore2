@@ -43,7 +43,7 @@ typedef void (^CompletionType)(NSError *error, NSArray *folder);
     [super dealloc];
 }
 
-- (void) start:(void (^)(NSError *error, NSArray<MCOIMAPFolder *> * folders))completionBlock
+- (void) start:(void (^)(NSError *error, NSArray * /* MCOIMAPFolder */ folders))completionBlock
 {
     _completionBlock = [completionBlock copy];
     [self start];
