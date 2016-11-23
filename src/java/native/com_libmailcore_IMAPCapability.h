@@ -75,8 +75,10 @@ extern "C" {
 #define com_libmailcore_IMAPCapability_IMAPCapabilityAuthSRP 32L
 #undef com_libmailcore_IMAPCapability_IMAPCapabilityXOAuth2
 #define com_libmailcore_IMAPCapability_IMAPCapabilityXOAuth2 33L
+#undef com_libmailcore_IMAPCapability_IMAPCapabilityXYMHighestModseq
+#define com_libmailcore_IMAPCapability_IMAPCapabilityXYMHighestModseq 34L
 #undef com_libmailcore_IMAPCapability_IMAPCapabilityGmail
-#define com_libmailcore_IMAPCapability_IMAPCapabilityGmail 34L
+#define com_libmailcore_IMAPCapability_IMAPCapabilityGmail 35L
 #ifdef __cplusplus
 }
 #endif
