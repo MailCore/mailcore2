@@ -12,6 +12,7 @@
 
 #import <Foundation/Foundation.h>
 #import <MailCore/MCOPOPOperation.h>
+#import <MailCore/MCOPOPMessageInfo.h>
 
 /** This is an asynchronous operation that will fetch the list of a messages on the POP3 account. */
 
@@ -28,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
  - On failure, `error` will be set with `MCOErrorDomain` as domain and an 
    error code available in MCOConstants.h, `messages` will be nil
 */
-- (void) start:(void (^)(NSError * __nullable error, NSArray * /* MCOPOPMessageInfo */__nullable messages))completionBlock;
+- (void) start:(void (^)(NSError * __nullable error, NSArray <MCOPOPMessageInfo *> * __nullable messages))completionBlock;
 
 @end
 NS_ASSUME_NONNULL_END

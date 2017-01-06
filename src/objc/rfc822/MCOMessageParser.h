@@ -30,7 +30,7 @@
 - (void) dealloc;
 
 /** It's the main part of the message. It can be MCOMessagePart, MCOMultipart or MCOAttachment.*/
-- (MCOAbstractPart *) mainPart;
+- (__kindof MCOAbstractPart *) mainPart;
 
 /** data of the RFC 822 formatted message. It's the input of the parser.*/
 - (NSData *) data;

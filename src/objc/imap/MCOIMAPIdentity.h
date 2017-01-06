@@ -29,7 +29,7 @@
 @property (nonatomic, copy) NSString * version;
 
 /** All fields names of the identity of the client */
-- (NSArray *) allInfoKeys;
+- (NSArray <NSString *> *) allInfoKeys;
 
 /** Set a custom field in the identity */
 - (NSString *) infoForKey:(NSString *)key;

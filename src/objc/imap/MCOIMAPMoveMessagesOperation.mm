@@ -39,7 +39,7 @@ typedef void (^CompletionType)(NSError *error, MCOIndexSet * destUids);
     [super dealloc];
 }
 
-- (void) start:(void (^)(NSError *error, NSDictionary * uidMapping))completionBlock
+- (void) start:(void (^)(NSError *error, NSDictionary <NSString *, NSString *> * uidMapping))completionBlock
 {
     _completionBlock = [completionBlock copy];
     [self start];

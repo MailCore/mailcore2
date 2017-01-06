@@ -27,9 +27,9 @@
 @property (nonatomic, copy) NSString * password;
 @property (nonatomic, copy) NSString * OAuth2Token;
 
-@property (nonatomic, retain) NSArray * /* MCONetService */ imapServers;
-@property (nonatomic, retain) NSArray * /* MCONetService */ popServers;
-@property (nonatomic, retain) NSArray * /* MCONetService */ smtpServers;
+@property (nonatomic, retain) NSArray <MCONetService *> * imapServers;
+@property (nonatomic, retain) NSArray <MCONetService *> * popServers;
+@property (nonatomic, retain) NSArray <MCONetService *> * smtpServers;
 
 @property (nonatomic, assign, getter=isImapEnabled) BOOL imapEnabled;
 @property (nonatomic, assign, getter=isPopEnabled) BOOL popEnabled;
