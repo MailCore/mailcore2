@@ -2459,7 +2459,7 @@ String * String::stringWithMUTF7Data(Data * data)
 String * String::mUTF7EncodedString()
 {
     Data * data = mUTF7EncodedData();
-    return data->stringWithCharset("ascii");
+    return data->stringWithCharset("us-ascii");
 }
 
 String * String::mUTF7DecodedString()

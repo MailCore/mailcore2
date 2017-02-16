@@ -36,5 +36,6 @@ public class IMAPCapability {
     final public static int IMAPCapabilityAuthSKey = 31;
     final public static int IMAPCapabilityAuthSRP = 32;
     final public static int IMAPCapabilityXOAuth2 = 33;
-    final public static int IMAPCapabilityGmail = 34;
+    final public static int IMAPCapabilityXYMHighestModseq = 34;
+    final public static int IMAPCapabilityGmail = 35;
 }

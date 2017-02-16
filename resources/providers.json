@@ -1,4 +1,40 @@
 {
+    "pobox": {
+        "servers": {
+            "imap": [
+                {
+                    "port": 993,
+                    "hostname": "mail.pobox.com",
+                    "ssl": true
+                }
+            ],
+            "pop": [
+                {
+                    "port": 995,
+                    "hostname": "mail.pobox.com",
+                    "ssl": true
+                }
+            ],
+            "smtp": [
+                {
+                    "port": 587,
+                    "hostname": "smtp.pobox.com",
+                    "starttls": true
+                }
+            ]
+        },
+        "mx-match": [
+            "mx-1\\.pobox\\.com",
+            "mx-2\\.pobox\\.com",
+            "mx-3\\.pobox\\.com",
+            "mx-1\\.rightbox\\.com",
+            "mx-2\\.rightbox\\.com",
+            "mx-3\\.rightbox\\.com"
+        ],
+        "domain-match": [
+            "pobox\\.com"
+        ]
+    },
     "hushmail": {
         "servers": {
             "imap": [

@@ -256,4 +256,13 @@
     }
 }
 
+- (void)testMUTF7 {
+    mailcore::String * mutf7string = mailcore::String::stringWithUTF8Characters("~peter/mail/&U,BTFw-/&ZeVnLIqe-");
+    mailcore::IMAPNamespace * ns = mailcore::IMAPNamespace::namespaceWithPrefix(MCSTR(""), '/');
+    mailcore::Array * result = ns->componentsFromPath(mutf7string);
+    XCTAssertTrue(strcmp(MCUTF8(result), "[~peter,mail,台北,日本語]") == 0);
+    XCTAssertTrue(mutf7string->mUTF7DecodedString()->isEqual(MCSTR("~peter/mail/台北/日本語")));
+    XCTAssertTrue(MCSTR("~peter/mail/台北/日本語")->mUTF7EncodedString()->isEqual(mutf7string));
+}
+
 @end

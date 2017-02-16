@@ -105,7 +105,7 @@ namespace mailcore {
 - (NSString *) contentTypeParameterValueForName:(NSString *)name;
 
 /** Returns an array with the names of all content type parameters.*/
-- (NSArray<NSString *> *) allContentTypeParametersNames;
+- (NSArray * /* NSString */) allContentTypeParametersNames;
 
 @end
 
