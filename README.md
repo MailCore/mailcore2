@@ -64,7 +64,7 @@ In this sample, we retrieved and printed a list of email headers from an IMAP se
 
 ## Documentation ##
 
-* [Class documentation](http://libmailcore.com/mailcore2/api/index.html)
+* Class documentation [Obj-C](http://libmailcore.com/api/objc/index.html) / [Java](http://libmailcore.com/api/java/index.html)
 * [Wiki](https://github.com/MailCore/mailcore2/wiki)
 
 ## License ##
