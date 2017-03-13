@@ -21,6 +21,6 @@
   "public_header_files": "include/MailCore/*.h",
   "preserve_paths": "include/MailCore/*.h",
   "vendored_libraries": "lib/libMailCore.a",
-  "libraries": ["sasl2", "tidy", "xml2", "iconv", "z", "c++", "crypto", "ssl", "resolv"],
+  "libraries": ["sasl2", "tidy", "xml2", "iconv", "z", "c++", "resolv"],
   "prepare_command": "curl -O https://github.com/MailCore/mailcore2/raw/master/LICENSE"
 }
