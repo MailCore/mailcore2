@@ -22,7 +22,7 @@ elif test x"`uname`" = xLinux ; then
   make >/dev/null
   sudo make install >/dev/null
   cd ..
-  curl -O http://ftp.kernel.org/pub/linux/utils/util-linux/v2.27/util-linux-2.27.1.tar.xz
+  curl -O https://www.kernel.org/pub/linux/utils/util-linux/v2.27/util-linux-2.27.1.tar.xz
   tar xf util-linux-2.27.1.tar.xz
   cd util-linux-2.27.1
   ./configure
