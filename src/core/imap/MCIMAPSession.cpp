@@ -2050,8 +2050,9 @@ fetch_imap(mailimap * imap, bool identifier_is_uid, uint32_t identifier,
     
     mailimap_fetch_list_free(fetch_result);
     
-    if (text == NULL)
-        return MAILIMAP_ERROR_FETCH;
+    if (text == NULL) {
+        text_length = 0;
+    }
     
     * result = text;
     * result_len = text_length;
