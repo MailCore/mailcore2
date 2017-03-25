@@ -175,7 +175,11 @@ Array * Address::addressesWithRFC822String(String * string)
     struct mailimf_address_list * addr_list;
     Array * result;
     int r;
-    
+
+    if (string == NULL) {
+        return NULL;
+    }
+
     utf8String = string->UTF8Characters();
     currentIndex = 0;
     

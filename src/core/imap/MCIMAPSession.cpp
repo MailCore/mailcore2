@@ -644,11 +644,16 @@ void IMAPSession::connect(ErrorCode * pError)
     int r;
     
     setup();
-    
+
     MCLog("connect %s", MCUTF8DESC(this));
-    
+
     MCAssert(mState == STATE_DISCONNECTED);
-    
+
+    if (mHostname == NULL) {
+        * pError = ErrorConnection;
+        goto close;
+    }
+
     switch (mConnectionType) {
         case ConnectionTypeStartTLS:
         MCLog("STARTTLS connect");
