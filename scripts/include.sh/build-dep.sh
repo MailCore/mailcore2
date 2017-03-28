@@ -75,14 +75,14 @@ build_git_ios()
   cd "$srcdir/$name/build-mac"
   sdk="iphoneos$sdkversion"
   echo building $sdk
-  xctool -project "$xcode_project" -sdk $sdk -scheme "$xcode_target" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$devicearchs" IPHONEOS_DEPLOYMENT_TARGET="$sdkminversion" OTHER_CFLAGS="$XCTOOL_OTHERFLAGS" $XCODE_BITCODE_FLAGS
+  xcodebuild -project "$xcode_project" -sdk $sdk -scheme "$xcode_target" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$devicearchs" IPHONEOS_DEPLOYMENT_TARGET="$sdkminversion" OTHER_CFLAGS="$XCTOOL_OTHERFLAGS" $XCODE_BITCODE_FLAGS
   if test x$? != x0 ; then
     echo failed
     exit 1
   fi
   sdk="iphonesimulator$sdkversion"
   echo building $sdk
-  xctool -project "$xcode_project" -sdk $sdk -scheme "$xcode_target" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$simarchs" IPHONEOS_DEPLOYMENT_TARGET="$sdkminversion" OTHER_CFLAGS='$(inherited)'
+  xcodebuild -project "$xcode_project" -sdk $sdk -scheme "$xcode_target" -configuration Release SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" ARCHS="$simarchs" IPHONEOS_DEPLOYMENT_TARGET="$sdkminversion" OTHER_CFLAGS='$(inherited)'
   if test x$? != x0 ; then
     echo failed
     exit 1
@@ -218,7 +218,7 @@ build_git_osx()
   echo building $name $version - $rev
 
   cd "$srcdir/$name/build-mac"
-  xctool -project "$xcode_project" -sdk macosx$sdk -scheme "$xcode_target" -configuration Release ARCHS="$archs" SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" MACOSX_DEPLOYMENT_TARGET="$sdkminversion"
+  xcodebuild -project "$xcode_project" -sdk macosx$sdk -scheme "$xcode_target" -configuration Release ARCHS="$archs" SYMROOT="$tmpdir/bin" OBJROOT="$tmpdir/obj" MACOSX_DEPLOYMENT_TARGET="$sdkminversion"
   if test x$? != x0 ; then
     echo failed
     exit 1
