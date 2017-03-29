@@ -17,7 +17,7 @@
 
 namespace mailcore {
     
-    class MAILCORE_EXPORT HTMLBodyRendererTemplateCallback : public Object, public HTMLRendererTemplateCallback {
+    class MAILCORE_EXPORT HTMLBodyRendererTemplateCallback : public HTMLRendererTemplateCallback {
     public:
         virtual String * templateForMainHeader(MessageHeader * header);
     };

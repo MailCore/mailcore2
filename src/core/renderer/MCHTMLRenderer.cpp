@@ -75,7 +75,7 @@ struct htmlRendererContext {
     Array * attachments;
 };
 
-class DefaultTemplateCallback : public Object, public HTMLRendererTemplateCallback {
+class DefaultTemplateCallback : public HTMLRendererTemplateCallback {
 };
 
 static bool partContainsMimeType(AbstractPart * part, String * mimeType);

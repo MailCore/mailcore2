@@ -18,10 +18,11 @@
 @protocol MCOHTMLRendererDelegate;
 @protocol MCOHTMLRendererIMAPDelegate;
 
-class MCOAbstractMessageRendererCallback : public mailcore::Object, public mailcore::HTMLRendererTemplateCallback, public mailcore::HTMLRendererIMAPCallback {
+class MCOAbstractMessageRendererCallback : public mailcore::HTMLRendererTemplateCallback, public mailcore::HTMLRendererIMAPCallback {
 public:
     MCOAbstractMessageRendererCallback(MCOAbstractMessage * message, id <MCOHTMLRendererDelegate> rendererDelegate,
                                      id <MCOHTMLRendererIMAPDelegate> rendererIMAPDelegate);
+    virtual ~MCOAbstractMessageRendererCallback();
     virtual bool canPreviewPart(mailcore::AbstractPart * part);
     virtual bool shouldShowPart(mailcore::AbstractPart * part);
     virtual mailcore::HashMap * templateValuesForHeader(mailcore::MessageHeader * header);

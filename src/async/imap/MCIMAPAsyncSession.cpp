@@ -841,10 +841,30 @@ IMAPMessageRenderingOperation * IMAPAsyncSession::renderingOperation(IMAPMessage
     return op;
 }
 
+IMAPMessageRenderingOperation * IMAPAsyncSession::renderingOperation(IMAPMessage * message,
+																	 String * folder,
+																	 HTMLRendererTemplateCallback * htmlCallBack)
+{
+    IMAPMessageRenderingOperation * op = new IMAPMessageRenderingOperation();
+    op->setMainSession(this);
+    op->setMessage(message);
+    op->setFolder(folder);
+    op->setHtmlCallBack(htmlCallBack);
+    op->autorelease();
+    return op;
+}
+
 IMAPMessageRenderingOperation * IMAPAsyncSession::htmlRenderingOperation(IMAPMessage * message,
                                                                          String * folder)
 {
     return renderingOperation(message, folder, IMAPMessageRenderingTypeHTML);
+}
+
+IMAPMessageRenderingOperation * IMAPAsyncSession::htmlRenderingOperation(IMAPMessage * message,
+																		 String * folder,
+																		 HTMLRendererTemplateCallback *htmlCallBack)
+{
+    return renderingOperation(message, folder, htmlCallBack);
 }
 
 IMAPMessageRenderingOperation * IMAPAsyncSession::htmlBodyRenderingOperation(IMAPMessage * message,

@@ -11,6 +11,7 @@
 #import "MCOHTMLRendererDelegate.h"
 #import "MCOHTMLRendererIMAPDelegate.h"
 #import "MCOUtils.h"
+#import <Objc/runtime.h>
 
 using namespace mailcore;
 
@@ -18,8 +19,24 @@ MCOAbstractMessageRendererCallback::MCOAbstractMessageRendererCallback(MCOAbstra
                                    id <MCOHTMLRendererIMAPDelegate> rendererIMAPDelegate)
 {
     mMessage = message;
-    mRendererDelegate = rendererDelegate;
+    if (rendererDelegate) {
+        size_t size = class_getInstanceSize([rendererDelegate class]);
+        char * rendererDelegatePointer = (char *)rendererDelegate;
+        char * destPointer = (char *)malloc(size);
+        memcpy(destPointer, rendererDelegatePointer, size);
+        
+        id <MCOHTMLRendererIMAPDelegate> dest = (id <MCOHTMLRendererIMAPDelegate>)destPointer;
+        mRendererDelegate = dest;
+    }
     mIMAPDelegate = rendererIMAPDelegate;
+}
+
+MCOAbstractMessageRendererCallback::~MCOAbstractMessageRendererCallback()
+{
+    if (mRendererDelegate) {
+        char * destPointer = (char *)mRendererDelegate;
+        delete destPointer;
+    }
 }
 
 bool MCOAbstractMessageRendererCallback::canPreviewPart(AbstractPart * part)

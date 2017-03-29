@@ -31,7 +31,7 @@ namespace mailcore {
         virtual void prefetchImageIMAPPart(String * folder, IMAPPart * part) {}
     };
 
-    class MAILCORE_EXPORT HTMLRendererTemplateCallback {
+	class MAILCORE_EXPORT HTMLRendererTemplateCallback: public Object {
     public:
         HTMLRendererTemplateCallback();
         virtual ~HTMLRendererTemplateCallback();
