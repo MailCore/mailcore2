@@ -3704,7 +3704,12 @@ IMAPIdentity * IMAPSession::identity(IMAPIdentity * clientIdentity, ErrorCode * 
         String * responseKey;
         String * responseValue;
         responseKey = String::stringWithUTF8Characters(param->idpa_name);
-        responseValue = String::stringWithUTF8Characters(param->idpa_value);
+        if (param->idpa_value != NULL) {
+            responseValue = String::stringWithUTF8Characters(param->idpa_value);
+        }
+        else {
+            responseValue = NULL;
+        }
         result->setInfoForKey(responseKey, responseValue);
     }
 
