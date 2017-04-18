@@ -283,6 +283,10 @@ static String * htmlForAbstractPart(AbstractPart * part, htmlRendererContext * c
 
 static String * htmlForAbstractSinglePart(AbstractPart * part, htmlRendererContext * context)
 {
+    if (!context->htmlCallback->shouldShowPart(part)) {
+        return MCSTR("");
+    }
+
     String * mimeType = NULL;
     if (part->mimeType() != NULL) {
         mimeType = part->mimeType()->lowercaseString();
@@ -374,9 +378,6 @@ static String * htmlForAbstractSinglePart(AbstractPart * part, htmlRendererConte
         }
     }
     else {
-		
-		if (!context->htmlCallback->shouldShowPart(part))
-            return MCSTR("");
 		
         if (context->pass == 0) {
             if (context->state == RENDER_STATE_NONE) {
