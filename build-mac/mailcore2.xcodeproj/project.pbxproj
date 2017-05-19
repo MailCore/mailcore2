@@ -39,8 +39,8 @@
 		4B3C1BE517AC0176008BBF4C /* MCIMAPQuotaOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C1BDF17ABF4BB008BBF4C /* MCIMAPQuotaOperation.cpp */; };
 		4BE4029117B548B900ECC5E4 /* MCOIMAPQuotaOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4B3C1BDC17ABF306008BBF4C /* MCOIMAPQuotaOperation.h */; };
 		4BE4029217B548D900ECC5E4 /* MCIMAPQuotaOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4B3C1BE017ABF4BC008BBF4C /* MCIMAPQuotaOperation.h */; };
-		636F55A01BCFA9A600AA00DB /* MailCore.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7A4169F2A3E00778456 /* MailCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		636F55A11BCFA9A600AA00DB /* MailCore.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7A4169F2A3E00778456 /* MailCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		802A99231ECF83E500FFF0AB /* MailCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 802A99221ECF838D00FFF0AB /* MailCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		802A99241ECF83E900FFF0AB /* MailCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 802A99211ECF837800FFF0AB /* MailCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		810DB78D1C68F4E200017B12 /* MCIMAPFetchContentToFileOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 810DB78B1C68F4E200017B12 /* MCIMAPFetchContentToFileOperation.cpp */; };
 		810DB78E1C68F4F000017B12 /* MCIMAPFetchContentToFileOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 810DB78B1C68F4E200017B12 /* MCIMAPFetchContentToFileOperation.cpp */; };
 		810DB7911C68F50600017B12 /* MCOIMAPFetchContentToFileOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 810DB7901C68F50600017B12 /* MCOIMAPFetchContentToFileOperation.mm */; };
@@ -1516,6 +1516,8 @@
 		4B3C1BDD17ABF307008BBF4C /* MCOIMAPQuotaOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOIMAPQuotaOperation.mm; sourceTree = "<group>"; };
 		4B3C1BDF17ABF4BB008BBF4C /* MCIMAPQuotaOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPQuotaOperation.cpp; sourceTree = "<group>"; };
 		4B3C1BE017ABF4BC008BBF4C /* MCIMAPQuotaOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPQuotaOperation.h; sourceTree = "<group>"; };
+		802A99211ECF837800FFF0AB /* MailCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MailCore.h; path = OSX/MailCore.h; sourceTree = "<group>"; };
+		802A99221ECF838D00FFF0AB /* MailCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MailCore.h; path = iOS/MailCore.h; sourceTree = "<group>"; };
 		810DB78B1C68F4E200017B12 /* MCIMAPFetchContentToFileOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPFetchContentToFileOperation.cpp; sourceTree = "<group>"; };
 		810DB78C1C68F4E200017B12 /* MCIMAPFetchContentToFileOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPFetchContentToFileOperation.h; sourceTree = "<group>"; };
 		810DB78F1C68F50600017B12 /* MCOIMAPFetchContentToFileOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPFetchContentToFileOperation.h; sourceTree = "<group>"; };
@@ -2217,6 +2219,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		802A991F1ECF82E100FFF0AB /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				802A99221ECF838D00FFF0AB /* MailCore.h */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		802A99201ECF82E900FFF0AB /* OSX */ = {
+			isa = PBXGroup;
+			children = (
+				802A99211ECF837800FFF0AB /* MailCore.h */,
+			);
+			name = OSX;
+			sourceTree = "<group>";
+		};
 		8491899A18C93F6E002063A3 /* nntp */ = {
 			isa = PBXGroup;
 			children = (
@@ -2959,6 +2977,8 @@
 		C6BD28A1170BD78E00A91AC1 /* mailcore-framework */ = {
 			isa = PBXGroup;
 			children = (
+				802A99201ECF82E900FFF0AB /* OSX */,
+				802A991F1ECF82E100FFF0AB /* iOS */,
 				84AF9E7D172DBAF600E60AA3 /* providers.json */,
 				C6BD28A2170BD79D00A91AC1 /* framework-Info.plist */,
 				C6BD28A8170BDB6B00A91AC1 /* MCOFramework.h */,
@@ -3181,7 +3201,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				636F55A01BCFA9A600AA00DB /* MailCore.h in Headers */,
+				802A99241ECF83E900FFF0AB /* MailCore.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3189,7 +3209,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				636F55A11BCFA9A600AA00DB /* MailCore.h in Headers */,
+				802A99231ECF83E500FFF0AB /* MailCore.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3449,7 +3469,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rsync -a --verbose \"$BUILT_PRODUCTS_DIR/include/MailCore/\" \"$BUILT_PRODUCTS_DIR/$PUBLIC_HEADERS_FOLDER_PATH\"\n";
+			shellScript = "rsync -a --verbose \"$BUILT_PRODUCTS_DIR/include/MailCore/\" \"$BUILT_PRODUCTS_DIR/$PUBLIC_HEADERS_FOLDER_PATH\"\nrm -rf \"$BUILT_PRODUCTS_DIR/include/MailCore/\"\n";
 		};
 		C64EA780169E867600778456 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3488,7 +3508,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rsync -a  \"$BUILT_PRODUCTS_DIR/include/MailCore/\" \"$BUILT_PRODUCTS_DIR/$PUBLIC_HEADERS_FOLDER_PATH\"";
+			shellScript = "rsync -a  \"$BUILT_PRODUCTS_DIR/include/MailCore/\" \"$BUILT_PRODUCTS_DIR/$PUBLIC_HEADERS_FOLDER_PATH\"\nrm -rf \"$BUILT_PRODUCTS_DIR/include/MailCore/\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
