@@ -3469,7 +3469,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rsync -a --verbose \"$BUILT_PRODUCTS_DIR/include/MailCore/\" \"$BUILT_PRODUCTS_DIR/$PUBLIC_HEADERS_FOLDER_PATH\"\nrm -rf \"$BUILT_PRODUCTS_DIR/include/MailCore/\"\n";
+			shellScript = "rsync -a --exclude 'MailCore.h' --verbose \"$BUILT_PRODUCTS_DIR/include/MailCore/\" \"$BUILT_PRODUCTS_DIR/$PUBLIC_HEADERS_FOLDER_PATH\"\nrm -rf \"$BUILT_PRODUCTS_DIR/include/MailCore/\"\n";
 		};
 		C64EA780169E867600778456 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3508,7 +3508,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rsync -a  \"$BUILT_PRODUCTS_DIR/include/MailCore/\" \"$BUILT_PRODUCTS_DIR/$PUBLIC_HEADERS_FOLDER_PATH\"\nrm -rf \"$BUILT_PRODUCTS_DIR/include/MailCore/\"";
+			shellScript = "rsync -a --exclude 'MailCore.h' \"$BUILT_PRODUCTS_DIR/include/MailCore/\" \"$BUILT_PRODUCTS_DIR/$PUBLIC_HEADERS_FOLDER_PATH\"\nrm -rf \"$BUILT_PRODUCTS_DIR/include/MailCore/\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
