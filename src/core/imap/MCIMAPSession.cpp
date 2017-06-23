@@ -949,6 +949,10 @@ void IMAPSession::login(ErrorCode * pError)
         else if (response->locationOfString(MCSTR("Login to your account via a web browser")) != -1) {
             * pError = ErrorOutlookLoginViaWebBrowser;
         }
+        else if (response->locationOfString(MCSTR("Service temporarily unavailable")) != -1) {
+            mShouldDisconnect = true;
+            * pError = ErrorConnection;
+        }
         else {
             * pError = ErrorAuthentication;
         }
