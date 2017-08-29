@@ -67,7 +67,7 @@ void IMAPAppendMessageOperation::setCustomFlags(Array * customFlags)
 
 Array * IMAPAppendMessageOperation::customFlags()
 {
-    return customFlags();
+    return mCustomFlags;
 }
 
 void IMAPAppendMessageOperation::setDate(time_t date)
