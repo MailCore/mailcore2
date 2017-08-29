@@ -1037,7 +1037,7 @@
             "drafts": "Drafts",
             "allmail": "Archive",
             "spam": "Junk",
-            "sentmail": "Sent Messages",
+            "sentmail": "Sent",
             "trash": "Deleted"
         }
     },
