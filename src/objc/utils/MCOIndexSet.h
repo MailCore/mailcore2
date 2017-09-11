@@ -28,7 +28,7 @@
 + (MCOIndexSet *) indexSetWithIndex:(uint64_t)idx;
 
 /** Returns the number of integers in that index set.*/
-- (unsigned int) count;
+- (NSUInteger) count;
 
 /** Adds an integer to the index set.*/
 - (void) addIndex:(uint64_t)idx;
