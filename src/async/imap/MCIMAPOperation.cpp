@@ -178,8 +178,15 @@ void IMAPOperation::beforeMain()
 
 void IMAPOperation::afterMain()
 {
+    retain();
+    performMethodOnMainThread((Object::Method) &IMAPOperation::afterMainOnMainThread, NULL);
+}
+
+void IMAPOperation::afterMainOnMainThread()
+{
     if (mSession->session()->isAutomaticConfigurationDone()) {
         mSession->owner()->automaticConfigurationDone(mSession->session());
         mSession->session()->resetAutomaticConfigurationDone();
     }
+    release();
 }
