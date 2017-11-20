@@ -474,7 +474,7 @@ String * htmlForAbstractMultipartAlternative(AbstractMultipart * part, htmlRende
     
     String * result = String::string();
     result->appendString(html);
-    if (calendar != NULL) {
+    if (calendar != NULL && calendar != preferredAlternative) {
         result->appendString(htmlForAbstractPart(calendar, context));
     }
     return result;
