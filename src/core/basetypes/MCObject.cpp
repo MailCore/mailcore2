@@ -33,6 +33,9 @@ Object::Object()
 
 Object::~Object()
 {
+#ifndef __APPLE__
+    pthread_mutex_destroy(&mLock);
+#endif
 }
 
 void Object::init()
