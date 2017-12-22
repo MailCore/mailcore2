@@ -38,10 +38,7 @@
 */
 - (NSString *) hostnameWithEmail:(NSString *)email;
 
-@end
-
-@interface MCONetService (MCOUnavailable)
-
+#pragma mark - Unavailable initializers
 /** Do not invoke this directly. */
 - (instancetype) init NS_UNAVAILABLE;
 /** Do not invoke this directly. */
