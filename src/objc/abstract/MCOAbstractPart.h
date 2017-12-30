@@ -107,10 +107,7 @@ namespace mailcore {
 /** Returns an array with the names of all content type parameters.*/
 - (NSArray * /* NSString */) allContentTypeParametersNames;
 
-@end
-
-@interface MCOAbstractPart (MCOUnavailable)
-
+#pragma mark - Unavailable initializers
 /** Do not invoke this directly. */
 - (instancetype) init NS_UNAVAILABLE;
 /** Do not invoke this directly. */
