@@ -57,14 +57,18 @@ namespace mailcore {
 
         virtual void queueStartRunning() {
             mConnection->setQueueRunning(true);
-            mConnection->owner()->operationRunningStateChanged();
+            if (mConnection->owner()) {
+                mConnection->owner()->operationRunningStateChanged();
+            }
             mConnection->queueStartRunning();
         }
 
         virtual void queueStoppedRunning() {
             mConnection->setQueueRunning(false);
             mConnection->tryAutomaticDisconnect();
-            mConnection->owner()->operationRunningStateChanged();
+            if (mConnection->owner()) {
+                mConnection->owner()->operationRunningStateChanged();
+            }
             mConnection->queueStoppedRunning();
         }
 
