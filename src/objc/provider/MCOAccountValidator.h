@@ -53,5 +53,6 @@
  */
 - (void) start:(void (^)(void))completionBlock;
 
+- (instancetype) init;
 
 @end
