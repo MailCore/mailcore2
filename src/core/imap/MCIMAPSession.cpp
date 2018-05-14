@@ -3155,6 +3155,11 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchKind kind, String * se
             expr = IMAPSearchExpression::searchContent(searchString);
             break;
         }
+        case IMAPSearchKindBody:
+        {
+            expr = IMAPSearchExpression::searchBody(searchString);
+            break;
+        }
         case IMAPSearchKindRead:
         {
             expr = IMAPSearchExpression::searchRead();
