@@ -175,6 +175,16 @@ JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPSession_copyMessagesOperation
     return result;
 }
 
+JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPSession_moveMessagesOperation
+  (JNIEnv * env, jobject obj, jstring sourcePath, jobject uids, jstring destPath)
+{
+    MC_POOL_BEGIN;
+    jobject result = MC_TO_JAVA(MC_JAVA_NATIVE_INSTANCE->moveMessagesOperation(MC_FROM_JAVA(String, sourcePath),
+        MC_FROM_JAVA(IndexSet, uids), MC_FROM_JAVA(String, destPath)));
+    MC_POOL_END;
+    return result;
+}
+
 JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPSession_expungeOperation
   (JNIEnv * env, jobject obj, jstring path)
 {

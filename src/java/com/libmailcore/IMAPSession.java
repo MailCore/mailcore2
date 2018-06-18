@@ -160,6 +160,9 @@ public class IMAPSession extends NativeObject {
     /** Returns an operation to copy messages to a folder. */
     public native IMAPCopyMessagesOperation copyMessagesOperation(String folder, IndexSet uids, String destFolder);
     
+    /** Returns an operation to move messages to a folder. */
+    public native IMAPMoveMessagesOperation moveMessagesOperation(String folder, IndexSet uids, String destFolder);
+    
     /** Returns an operation to expunge messages after they've been marked as deleted. */
     public native IMAPOperation expungeOperation(String folder);
     
