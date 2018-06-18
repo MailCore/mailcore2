@@ -4515,7 +4515,6 @@
 		C6BA2C171705F4E6003F0E9E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
 				DEAD_CODE_STRIPPING = NO;
 				ENABLE_BITCODE = YES;
 				EXECUTABLE_PREFIX = lib;
@@ -4530,7 +4529,6 @@
 		C6BA2C181705F4E6003F0E9E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
 				DEAD_CODE_STRIPPING = NO;
 				ENABLE_BITCODE = YES;
 				EXECUTABLE_PREFIX = lib;
