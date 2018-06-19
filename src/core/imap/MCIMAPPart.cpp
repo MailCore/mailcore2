@@ -154,7 +154,7 @@ IMAPMessagePart * IMAPPart::attachmentWithIMAPBody1PartMessage(struct mailimap_b
     nextPartID = NULL;
     if (message->bd_body->bd_type == MAILIMAP_BODY_1PART) {
         // msg or 1part
-        nextPartID = partID->stringByAppendingUTF8Format(".1");
+        nextPartID = partID;
     }
     else if (message->bd_body->bd_type == MAILIMAP_BODY_MPART) {
         // mpart

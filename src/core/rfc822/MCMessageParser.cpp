@@ -277,7 +277,7 @@ void MessageParser::recursiveSetupPartIDWithMessagePart(mailcore::MessagePart * 
                 partID = MCSTR("1");
             }
             else {
-                partID = partIDPrefix->stringByAppendingUTF8Characters(".1");
+                partID = partIDPrefix;
             }
             break;
         }
