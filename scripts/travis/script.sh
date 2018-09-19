@@ -28,7 +28,7 @@ if test x"`uname`" = xDarwin ; then
   #echo Link test for iPhoneOS
   #xcodebuild -project build-mac/mailcore2.xcodeproj -sdk iphoneos7.1 -target "test-ios" CODE_SIGN_IDENTITY="" build
   echo Link test for iPhoneSimulator
-  xctool -project build-mac/mailcore2.xcodeproj -sdk $SIMULATORSDK -scheme "test-ios" build ARCHS="i386 x86_64"
+  xcodebuild -project build-mac/mailcore2.xcodeproj -sdk $SIMULATORSDK -scheme "test-ios" build ARCHS="i386 x86_64"
 
   echo Building library for Mac
   xcodebuild -project build-mac/mailcore2.xcodeproj -sdk $MACSDK -scheme "static mailcore2 osx" build >/dev/null
