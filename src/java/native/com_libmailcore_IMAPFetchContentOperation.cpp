@@ -40,7 +40,8 @@ JNIEXPORT void JNICALL Java_com_libmailcore_IMAPFetchContentOperation_setupNativ
 
     jobject javaListener = getObjectField(env, obj, "listener", "Lcom/libmailcore/IMAPOperationProgressListener;");
     if (javaListener != NULL) {
-        callback = new JavaIMAPOperationCallback(env, javaListener);
+        jobject c = reinterpret_cast<jobject>(env->NewGlobalRef(javaListener));
+        callback = new JavaIMAPOperationCallback(env, c);
         MC_JAVA_NATIVE_INSTANCE->setImapCallback(callback);
     }
     MC_POOL_END;
