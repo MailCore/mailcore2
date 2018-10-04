@@ -38,7 +38,7 @@ JNIEXPORT void JNICALL Java_com_libmailcore_IMAPFetchParsedContentOperation_setu
     MC_SAFE_RELEASE(callback);
     MC_JAVA_NATIVE_INSTANCE->setImapCallback(NULL);
 
-    jobject javaListener = getObjectField(env, obj, "listener");
+    jobject javaListener = getObjectField(env, obj, "listener", "J");
     if (javaListener != NULL) {
         callback = new JavaIMAPOperationCallback(env, javaListener);
         MC_JAVA_NATIVE_INSTANCE->setImapCallback(callback);
