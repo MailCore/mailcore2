@@ -112,79 +112,79 @@ static jobject valueObjectToJavaConverter(JNIEnv * env, Object * obj)
         break;
         case mailcore::ValueTypeBool:
         // bool
-        cls = env->FindClass("java/util/Boolean");
+        cls = env->FindClass("java/lang/Boolean");
         constructor = env->GetMethodID(cls, "<init>", "(Z)V");
         result = env->NewObject(cls, constructor, value->boolValue());
         break;
         case mailcore::ValueTypeChar:
         // byte
-        cls = env->FindClass("java/util/Byte");
+        cls = env->FindClass("java/lang/Byte");
         constructor = env->GetMethodID(cls, "<init>", "(B)V");
         result = env->NewObject(cls, constructor, value->charValue());
         break;
         case mailcore::ValueTypeUnsignedChar:
         // short
-        cls = env->FindClass("java/util/Short");
+        cls = env->FindClass("java/lang/Short");
         constructor = env->GetMethodID(cls, "<init>", "(S)V");
         result = env->NewObject(cls, constructor, value->unsignedCharValue());
         break;
         case mailcore::ValueTypeShort:
         // short
-        cls = env->FindClass("java/util/Short");
+        cls = env->FindClass("java/lang/Short");
         constructor = env->GetMethodID(cls, "<init>", "(S)V");
         result = env->NewObject(cls, constructor, value->shortValue());
         break;
         case mailcore::ValueTypeUnsignedShort:
         // int
-        cls = env->FindClass("java/util/Integer");
+        cls = env->FindClass("java/lang/Integer");
         constructor = env->GetMethodID(cls, "<init>", "(I)V");
         result = env->NewObject(cls, constructor, value->intValue());
         break;
         case mailcore::ValueTypeInt:
         // int
-        cls = env->FindClass("java/util/Integer");
+        cls = env->FindClass("java/lang/Integer");
         constructor = env->GetMethodID(cls, "<init>", "(I)V");
         result = env->NewObject(cls, constructor, value->intValue());
         break;
         case mailcore::ValueTypeUnsignedInt:
         // long
-        cls = env->FindClass("java/util/Long");
+        cls = env->FindClass("java/lang/Long");
         constructor = env->GetMethodID(cls, "<init>", "(J)V");
         result = env->NewObject(cls, constructor, value->unsignedIntValue());
         break;
         case mailcore::ValueTypeLong:
         // long
-        cls = env->FindClass("java/util/Long");
+        cls = env->FindClass("java/lang/Long");
         constructor = env->GetMethodID(cls, "<init>", "(J)V");
         result = env->NewObject(cls, constructor, value->longValue());
         break;
         case mailcore::ValueTypeUnsignedLong:
         // long
-        cls = env->FindClass("java/util/Long");
+        cls = env->FindClass("java/lang/Long");
         constructor = env->GetMethodID(cls, "<init>", "(J)V");
         result = env->NewObject(cls, constructor, value->unsignedLongValue());
         break;
         case mailcore::ValueTypeLongLong:
         // long
-        cls = env->FindClass("java/util/Long");
+        cls = env->FindClass("java/lang/Long");
         constructor = env->GetMethodID(cls, "<init>", "(J)V");
         result = env->NewObject(cls, constructor, value->longLongValue());
         break;
         case mailcore::ValueTypeUnsignedLongLong:
         // long - might break
-        cls = env->FindClass("java/util/Long");
+        cls = env->FindClass("java/lang/Long");
         constructor = env->GetMethodID(cls, "<init>", "(J)V");
         result = env->NewObject(cls, constructor, value->unsignedLongLongValue());
         break;
         case mailcore::ValueTypeFloat:
         // float
-        cls = env->FindClass("java/util/Float");
+        cls = env->FindClass("java/lang/Float");
         constructor = env->GetMethodID(cls, "<init>", "(F)V");
         result = env->NewObject(cls, constructor, value->floatValue());
         break;
         case mailcore::ValueTypeDouble:
         // double
-        cls = env->FindClass("java/util/Double");
+        cls = env->FindClass("java/lang/Double");
         constructor = env->GetMethodID(cls, "<init>", "(D)V");
         result = env->NewObject(cls, constructor, value->doubleValue());
         break;
@@ -218,7 +218,7 @@ static jobject hashmapObjectToJavaConverter(JNIEnv * env, Object * obj)
     jclass cls = env->FindClass("java/util/HashMap");
     jmethodID constructor = env->GetMethodID(cls, "<init>", "(I)V");
     jobject javaHashMap = env->NewObject(cls, constructor, hashMap->count());
-    jmethodID method = env->GetMethodID(cls, "put", "(Ljava/lang/Object;Ljava/lang/Object;)V");
+    jmethodID method = env->GetMethodID(cls, "put", "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;");
     Array * keys = hashMap->allKeys();
     for(unsigned int i = 0 ; i < keys->count() ; i ++) {
         env->PushLocalFrame(LOCAL_FRAME_CAPACITY);
@@ -226,7 +226,7 @@ static jobject hashmapObjectToJavaConverter(JNIEnv * env, Object * obj)
         jobject javaKey = mcObjectToJava(env, key);
         Object * value = hashMap->objectForKey(key);
         jobject javaValue = mcObjectToJava(env, value);
-        env->CallVoidMethod(javaHashMap, method, javaKey, javaValue);
+        env->CallObjectMethod(javaHashMap, method, javaKey, javaValue);
         env->PopLocalFrame(NULL);
     }
     return javaHashMap;
