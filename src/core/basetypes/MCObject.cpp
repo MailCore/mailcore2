@@ -341,8 +341,10 @@ void Object::performMethodOnDispatchQueueAfterDelay(Method method, void * contex
     initDelayedPerform();
     
     __block bool cancelled = false;
-    
+
+    void (^dupCancelableBlock)(bool cancel) = NULL;
     void (^cancelableBlock)(bool cancel) = ^(bool cancel) {
+        Block_release(dupCancelableBlock);
         if (cancel) {
             cancelled = true;
             return;
@@ -352,7 +354,7 @@ void Object::performMethodOnDispatchQueueAfterDelay(Method method, void * contex
         }
     };
     
-    void (^dupCancelableBlock)(bool cancel) = Block_copy(cancelableBlock);
+    dupCancelableBlock = Block_copy(cancelableBlock);
     
     retain();
     addToPerformHash(this, method, context, targetDispatchQueue, (void *) dupCancelableBlock);
