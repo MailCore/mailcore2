@@ -149,7 +149,7 @@ JNIEXPORT void JNICALL Java_com_libmailcore_NNTPSession_setupNativeOperationQueu
     MC_SAFE_RELEASE(callback);
     MC_JAVA_NATIVE_INSTANCE->setOperationQueueCallback(NULL);
 
-    jobject javaListener = getObjectField(env, obj, "operationQueueListener");
+    jobject javaListener = getObjectField(env, obj, "operationQueueListener", "J");
     if (javaListener != NULL) {
         callback = new JavaOperationQueueCallback(env, javaListener);
         MC_JAVA_NATIVE_INSTANCE->setOperationQueueCallback(callback);
@@ -165,7 +165,7 @@ JNIEXPORT void JNICALL Java_com_libmailcore_NNTPSession_setupNativeConnectionLog
     MC_SAFE_RELEASE(logger);
     MC_JAVA_NATIVE_INSTANCE->setConnectionLogger(NULL);
 
-    jobject javaLogger = getObjectField(env, obj, "connectionLogger");
+    jobject javaLogger = getObjectField(env, obj, "connectionLogger", "J");
     if (javaLogger != NULL) {
         logger = new JavaConnectionLogger(env, javaLogger);
         MC_JAVA_NATIVE_INSTANCE->setConnectionLogger(logger);

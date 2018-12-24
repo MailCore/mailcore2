@@ -29,7 +29,7 @@ void JavaIMAPOperationCallback::bodyProgress(IMAPOperation * session, unsigned i
     JNIEnv * env = mEnv;
     jclass cls = mEnv->GetObjectClass(mListener);
     jmethodID mid = mEnv->GetMethodID(cls, "bodyProgress", "(JJ)V");
-    mEnv->CallVoidMethod(mListener, mid);
+    mEnv->CallVoidMethod(mListener, mid, (jlong) current, (jlong) maximum);
 }
 
 void JavaIMAPOperationCallback::itemProgress(IMAPOperation * session, unsigned int current, unsigned int maximum)
@@ -41,5 +41,5 @@ void JavaIMAPOperationCallback::itemProgress(IMAPOperation * session, unsigned i
     JNIEnv * env = mEnv;
     jclass cls = mEnv->GetObjectClass(mListener);
     jmethodID mid = mEnv->GetMethodID(cls, "itemProgress", "(JJ)V");
-    mEnv->CallVoidMethod(mListener, mid);
+    mEnv->CallVoidMethod(mListener, mid, (jlong) current, (jlong) maximum);
 }
