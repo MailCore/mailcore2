@@ -3024,6 +3024,7 @@ void IMAPSession::fetchMessageAttachmentToFileByChunksByUID(String * folder, uin
         }
 
         if (data == NULL) {
+            pool->release();
             break;
         }
 

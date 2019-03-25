@@ -21,6 +21,10 @@ MailProvidersManager::MailProvidersManager() {
     init();
 }
 
+MailProvidersManager::~MailProvidersManager() {
+    MC_SAFE_RELEASE(mProviders);
+}
+
 MailProvidersManager * MailProvidersManager::sharedManager()
 {
     static MailProvidersManager * instance = new MailProvidersManager();

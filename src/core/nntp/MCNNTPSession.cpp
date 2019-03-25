@@ -499,6 +499,7 @@ Data * NNTPSession::fetchArticleByMessageID(String * messageID, ErrorCode * pErr
     msgID = strdup(messageID->UTF8Characters());
     
     r = newsnntp_article_by_message_id(mNNTP, msgID, &content, &content_len);
+    free(msgID);
     if (r == NEWSNNTP_ERROR_STREAM) {
         * pError = ErrorConnection;
         return NULL;
