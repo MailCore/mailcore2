@@ -1,9 +1,9 @@
 {
   "name": "mailcore2-osx",
-  "version": "0.6.4",
+  "version": "0.6.3",
   "summary": "Mailcore 2 for OS X",
   "description": "MailCore 2 provide a simple and asynchronous API to work with e-mail protocols IMAP, POP and SMTP.",
-  "homepage": "http://libmailcore.com",
+  "homepage": "https://github.com/MailCore/mailcore2",
   "license": {
     "type": "BSD",
     "file": "LICENSE"
