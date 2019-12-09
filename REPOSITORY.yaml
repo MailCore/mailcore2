@@ -1,0 +1,3 @@
+requiredTestingStatuses:
+- continuous-integration/teamcity
+- sonarqube
