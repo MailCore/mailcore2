@@ -1,27 +1,9 @@
+#GUS team/s that can approve a pull request for this repo, initial list is based on team/s with WRITE access to the repo 
+@relateiq/inbox-mobile
 ###########################################
-#Mandatory do NOT change the below entries
+#Do NOT change the below entries as they are mandatory
 ###########################################
 @relateiq/ap-managers
 @relateiq/ap-robots
 @relateiq/ap-db-reviewers
 @relateiq/ap-sec-reviewers
-
-#Pick the GUS team/s the repo is owned by/belongs to, delete the rest
-@relateiq/inbox-mobile
-@relateiq/activities
-@relateiq/activity-metrics
-@relateiq/salesforce-for-outlook
-@relateiq/mailapp-gmail
-@relateiq/activity-foundation
-@relateiq/inbox-services
-@relateiq/activity-indexing
-@relateiq/activity-intelligence
-@relateiq/salesforceiq-crm
-@relateiq/activity-insights
-@relateiq/activitiesexperience
-@relateiq/s2x
-@relateiq/q3
-@relateiq/q4
-
-#Uncomment below line ONLY if you belong to a GUS team outside of Activity Platform
-#@relateiq/non-ap-managers
