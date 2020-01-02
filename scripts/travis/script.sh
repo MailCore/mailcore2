@@ -2,7 +2,7 @@
 set -e
 
 IOSSDK="`xcodebuild -showsdks 2>/dev/null | grep iphoneos | sed 's/.*iphoneos\(.*\)/\1/'`"
-OSXSDK="`xcodebuild -showsdks 2>/dev/null | grep macosx | sed 's/.*macosx\(.*\)/\1/'`"
+OSXSDK="`xcodebuild -showsdks 2>/dev/null | grep macosx | grep -v driverkit | sed 's/.*macosx\(.*\)/\1/'`"
 IPHONESDK=iphoneos$IOSSDK
 SIMULATORSDK=iphonesimulator$IOSSDK
 MACSDK=macosx$OSXSDK
