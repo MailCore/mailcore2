@@ -1,0 +1,7 @@
+This is html.
+
+{{#SECTION}}
+Happy section
+{{/SEC}}
+
+But the section never ends!

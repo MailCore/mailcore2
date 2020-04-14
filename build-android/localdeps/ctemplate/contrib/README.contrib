@@ -1,0 +1,13 @@
+All files under this contrib directory are UNSUPPORTED; use at your
+own risk.  They were provided by users of ctemplate and were not
+tested by the authors of ctemplate.  These files are not owned by
+Google.  Please contact the authors of the contributions for help
+about these, not the ctemplate authors. Thanks!, and enjoy.
+
+highlighting.vim    by Patrick Lacasse <patlac@borabora.crchul.ulaval.ca>
+   How to set up syntax highlighting (colorization) for ctemplate .tpl
+   files, using vim.  A shar file; see top-of-file for how to extract.
+
+tpl-mode.el   by Tony Gentilcore
+   Elisp file for syntax highlighting (colorization) for ctemplate
+   .tpl files, using emacs.  See top-of-file for how to use.

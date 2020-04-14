@@ -956,6 +956,7 @@
 		C6F61FB61702B5290073032E /* MCOIMAPBaseOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6F61FB31702AB2A0073032E /* MCOIMAPBaseOperation.h */; };
 		C6F7B19F17A1C15200BE78BB /* MCCertificateUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6F7B19D17A1C15200BE78BB /* MCCertificateUtils.cpp */; };
 		C6F7B1A017A1C15200BE78BB /* MCCertificateUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6F7B19D17A1C15200BE78BB /* MCCertificateUtils.cpp */; };
+		D66B32DD229FD9F60018EBE9 /* libetpan-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D66B32DC229FD9F60018EBE9 /* libetpan-ios.a */; };
 		DA0F1C7B177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA0F1C79177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.cpp */; };
 		DA0F1C7C177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA0F1C79177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.cpp */; };
 		DA89896D178A47D200F6D90A /* MCOIMAPMessageRenderingOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = DA89896C178A47D200F6D90A /* MCOIMAPMessageRenderingOperation.mm */; };
@@ -2119,6 +2120,7 @@
 		C6F61FB41702AB2F0073032E /* MCOIMAPBaseOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOIMAPBaseOperation.mm; sourceTree = "<group>"; };
 		C6F7B19D17A1C15200BE78BB /* MCCertificateUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCCertificateUtils.cpp; sourceTree = "<group>"; };
 		C6F7B19E17A1C15200BE78BB /* MCCertificateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCertificateUtils.h; sourceTree = "<group>"; };
+		D66B32DC229FD9F60018EBE9 /* libetpan-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libetpan-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA0F1C79177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPMessageRenderingOperation.cpp; sourceTree = "<group>"; };
 		DA0F1C7A177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPMessageRenderingOperation.h; sourceTree = "<group>"; };
 		DA89896B178A47D200F6D90A /* MCOIMAPMessageRenderingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPMessageRenderingOperation.h; sourceTree = "<group>"; };
@@ -2141,6 +2143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D66B32DD229FD9F60018EBE9 /* libetpan-ios.a in Frameworks */,
 				27780C3E19CF9DDF00C77E44 /* libMailCore-ios.a in Frameworks */,
 				27780C3D19CF9D9800C77E44 /* CFNetwork.framework in Frameworks */,
 				27780C3219CF9CD100C77E44 /* Security.framework in Frameworks */,
@@ -2883,6 +2886,7 @@
 		C64EA78E169F259200778456 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D66B32DC229FD9F60018EBE9 /* libetpan-ios.a */,
 				C600B6221A244CC3000728F1 /* CFNetwork.framework */,
 				C6B5AE1119F63496001352A6 /* Foundation.framework */,
 				C6B5AE0F19F6347C001352A6 /* Security.framework */,
@@ -4109,18 +4113,18 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
-					"-letpan-ios",
 					"-lxml2",
-					"-lsasl2",
 					"-liconv",
 					"-ltidy",
 					"-lz",
 					"-ObjC",
 					"-lresolv",
+					"-lsasl2",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.libmailcore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = MailCore;
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "arm64 x86_64 armv7";
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -4144,18 +4148,18 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
-					"-letpan-ios",
 					"-lxml2",
-					"-lsasl2",
 					"-liconv",
 					"-ltidy",
 					"-lz",
 					"-ObjC",
 					"-lresolv",
+					"-lsasl2",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.libmailcore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = MailCore;
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "arm64 x86_64 armv7";
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
@@ -4268,7 +4272,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../Externals/libetpan/include\"",
+					"\"$(SRCROOT)/../ExternalsSrc/libetpan/include\"",
 					"\"$(SRCROOT)/../Externals/icu4c/include\"",
 					"\"$(SRCROOT)/../Externals/ctemplate/include\"",
 					/usr/include/tidy,
@@ -4277,7 +4281,7 @@
 				"HEADER_SEARCH_PATHS[sdk=iphoneos*]" = "$(IOS_HEADERS_SEARCH_PATHS)";
 				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(IOS_HEADERS_SEARCH_PATHS)";
 				"HEADER_SEARCH_PATHS[sdk=macosx*]" = "$(OSX_HEADERS_SEARCH_PATHS)";
-				IOS_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../src/core/basetypes/icu-ucsdet/include\" \"$(SRCROOT)/../Externals/libetpan-ios/include\" \"$(SRCROOT)/../Externals/ctemplate-ios/include\" \"$(SRCROOT)/../Externals/tidy-html5-ios/include/tidy\" /usr/include/libxml2";
+				IOS_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../src/core/basetypes/icu-ucsdet/include\" \"$(SRCROOT)/../ExternalsSrc/libetpan/include\" \"$(SRCROOT)/../Externals/ctemplate-ios/include\" \"$(SRCROOT)/../Externals/tidy-html5-ios/include/tidy\" /usr/include/libxml2";
 				IOS_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-ios/lib\" \"$(SRCROOT)/../Externals/ctemplate-ios/lib\" \"$(SRCROOT)/../Externals/libsasl-ios/lib\" \"$(SRCROOT)/../Externals/tidy-html5-ios/lib\"";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -4289,8 +4293,9 @@
 				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(IOS_LIBRARY_SEARCH_PATHS)";
 				"LIBRARY_SEARCH_PATHS[sdk=macosx*]" = "$(OSX_LIBRARY_SEARCH_PATHS)";
 				ONLY_ACTIVE_ARCH = YES;
-				OSX_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../src/core/basetypes/icu-ucsdet/include\" \"$(SRCROOT)/../Externals/libetpan-osx/include\" \"$(SRCROOT)/../Externals/ctemplate-osx/include\" /usr/include/tidy /usr/include/libxml2";
+				OSX_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../src/core/basetypes/icu-ucsdet/include\" \"$(SRCROOT)/../ExternalsSrc/libetpan-osx/include\" \"$(SRCROOT)/../Externals/ctemplate-osx/include\" /usr/include/tidy /usr/include/libxml2";
 				OSX_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-osx/lib\" \"$(SRCROOT)/../Externals/ctemplate-osx/lib\"";
+				VALID_ARCHS = "armv7 arm64 x86_64";
 			};
 			name = Debug;
 		};
@@ -4312,7 +4317,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../Externals/libetpan/include\"",
+					"\"$(SRCROOT)/../ExternalsSrc/libetpan/include\"",
 					"\"$(SRCROOT)/../Externals/icu4c/include\"",
 					"\"$(SRCROOT)/../Externals/ctemplate/include\"",
 					/usr/include/tidy,
@@ -4321,7 +4326,7 @@
 				"HEADER_SEARCH_PATHS[sdk=iphoneos*]" = "$(IOS_HEADERS_SEARCH_PATHS)";
 				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(IOS_HEADERS_SEARCH_PATHS)";
 				"HEADER_SEARCH_PATHS[sdk=macosx*]" = "$(OSX_HEADERS_SEARCH_PATHS)";
-				IOS_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../src/core/basetypes/icu-ucsdet/include\" \"$(SRCROOT)/../Externals/libetpan-ios/include\" \"$(SRCROOT)/../Externals/ctemplate-ios/include\" \"$(SRCROOT)/../Externals/tidy-html5-ios/include/tidy\" /usr/include/libxml2";
+				IOS_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../src/core/basetypes/icu-ucsdet/include\" \"$(SRCROOT)/../ExternalsSrc/libetpan-ios/include\" \"$(SRCROOT)/../Externals/ctemplate-ios/include\" \"$(SRCROOT)/../Externals/tidy-html5-ios/include/tidy\" /usr/include/libxml2";
 				IOS_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-ios/lib\" \"$(SRCROOT)/../Externals/ctemplate-ios/lib\" \"$(SRCROOT)/../Externals/libsasl-ios/lib\" \"$(SRCROOT)/../Externals/tidy-html5-ios/lib\"";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -4332,8 +4337,9 @@
 				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = "$(IOS_LIBRARY_SEARCH_PATHS)";
 				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(IOS_LIBRARY_SEARCH_PATHS)";
 				"LIBRARY_SEARCH_PATHS[sdk=macosx*]" = "$(OSX_LIBRARY_SEARCH_PATHS)";
-				OSX_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../src/core/basetypes/icu-ucsdet/include\" \"$(SRCROOT)/../Externals/libetpan-osx/include\" \"$(SRCROOT)/../Externals/ctemplate-osx/include\" /usr/include/tidy /usr/include/libxml2";
+				OSX_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../src/core/basetypes/icu-ucsdet/include\" \"$(SRCROOT)/../ExternalsSrc/libetpan-osx/include\" \"$(SRCROOT)/../Externals/ctemplate-osx/include\" /usr/include/tidy /usr/include/libxml2";
 				OSX_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-osx/lib\" \"$(SRCROOT)/../Externals/ctemplate-osx/lib\"";
+				VALID_ARCHS = "armv7 arm64 x86_64";
 			};
 			name = Release;
 		};
@@ -4353,6 +4359,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
+				IOS_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../src/core/basetypes/icu-ucsdet/include\" \"$(SRCROOT)/../ExternalsSrc/libetpan/include\" \"$(SRCROOT)/../Externals/ctemplate-ios/include\" \"$(SRCROOT)/../Externals/tidy-html5-ios/include/tidy\" /usr/include/libxml2";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = MailCore;
 				SDKROOT = macosx;
@@ -4523,6 +4530,7 @@
 				PRODUCT_NAME = "MailCore-ios";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 x86_64 armv7";
 			};
 			name = Debug;
 		};
@@ -4532,11 +4540,13 @@
 				DEAD_CODE_STRIPPING = NO;
 				ENABLE_BITCODE = YES;
 				EXECUTABLE_PREFIX = lib;
+				IOS_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../src/core/basetypes/icu-ucsdet/include\" \"$(SRCROOT)/../ExternalsSrc/libetpan/include\" \"$(SRCROOT)/../Externals/ctemplate-ios/include\" \"$(SRCROOT)/../Externals/tidy-html5-ios/include/tidy\" /usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "MailCore-ios";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 x86_64 armv7";
 			};
 			name = Release;
 		};

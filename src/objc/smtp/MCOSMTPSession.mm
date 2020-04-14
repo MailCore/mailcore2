@@ -100,6 +100,21 @@ MCO_OBJC_SYNTHESIZE_BOOL(setCheckCertificateEnabled, isCheckCertificateEnabled)
 MCO_OBJC_SYNTHESIZE_BOOL(setUseHeloIPEnabled, useHeloIPEnabled)
 MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue, dispatchQueue);
 
+- (void) addPinningForHost:(NSString *)hostName withCertificate:(NSData *)cert
+{
+    String * nativeHost = new String([hostName UTF8String]);
+    Data * nativeData = new Data((const char*)[cert bytes], (unsigned int)[cert length]);
+    
+    _session->addPinningForHost(nativeHost, nativeData);
+}
+
+- (void) setClientCertificate:(NSData *)data withPassword:(NSString *)password
+{
+    Data * nativeData = new Data((const char*)[data bytes], (unsigned int)[data length]);
+    String * nativePassword = new String([password UTF8String]);
+    _session->setClientCertificate(nativeData, nativePassword);
+}
+
 - (void) setConnectionLogger:(MCOConnectionLogger)connectionLogger
 {
     [_connectionLogger release];

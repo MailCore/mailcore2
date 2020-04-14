@@ -1,0 +1,112 @@
+<html>
+<?state state=text, tag=html ?>
+
+  <head>
+    <?state state=text, tag=head ?>
+    <!-- Title element with markup -->
+    <title>
+      <?state state=text, tag=title ?>
+      <h1>
+        <?state state=text, tag=title ?>
+      </h1>
+      <!--
+        <?state state=text, tag=title ?>
+        </title>
+        <?state state=text, tag=title ?>
+      -->
+      <?state state=text, tag=title ?>
+    </title>
+    <?state state=text ?>
+
+    <!-- Style element with attributes -->
+    <style a=b>
+      <b><?state state=text, tag=style, in_js=false, in_css=true?></b>
+    </style>
+    <?state in_css=false?>
+  </head>
+<body>
+<?state state=text, in_js=false ?>
+  <!-- PCDATA nested block -->
+  <b>
+    <?state state=text, tag=b ?>
+    <i>
+      <?state state=text, tag=i ?>
+    </i>
+    <?state state=text ?>
+  </b>
+  <?state state=text ?>
+
+  <!-- Textarea element with space at the end of the closing tag -->
+  <textarea>
+  <?state state=text, tag=textarea ?>
+    <b>
+    <?state state=text, tag=textarea ?>
+      <i>
+      <?state state=text, tag=textarea, in_css=false ?>
+      <!--
+        <?state state=text, tag=textarea ?>
+        </textarea>
+        <?state state=text, tag=textarea ?>
+      -->
+      </i>
+      <?state state=text, tag=textarea ?>
+    </b>
+    <?state state=text, tag=textarea ?>
+  </textarea >
+
+<?state state=text ?>
+
+  <!-- script tag with other tags inside -->
+  <script>
+    document.write("
+      <?state in_js=true, js_quoted=true, tag=script ?>
+      <style>
+        .none { display:none }
+      </style>
+      <?state in_js=true, js_quoted=true ?>
+    ");
+    <?state in_js=true, js_quoted=false ?>
+  </script>
+
+  <?state in_js=false ?>
+
+  <!-- script tag with a backslash quoted script tag -->
+  <script>
+    <?state in_js=true, js_quoted=false ?>
+    document.body.innerHTML = '<script><\/script>'
+    <?state in_js=true, js_quoted=false ?>
+  </script>
+
+  <?state in_js=false ?>
+
+  <!-- </script> appearing between javascript comments -->
+  <script>
+  <!--
+    <?state in_js=true, js_quoted=false ?>
+    document.body.innerHTML = '<script></script>'
+    <?state in_js=true, js_quoted=false ?>
+  -->
+  </script>
+
+  <?state in_js=false ?>
+
+  <!-- Closing script with an extra space at the end of the tag. Some browsers
+  ignore this tag and some browsers honour it. We honour it. -->
+  <script>
+    <?state in_js=true, js_quoted=false ?>
+    document.body.innerHTML = '<script><\/script>'
+    <?state in_js=true, js_quoted=false ?>
+  </script >
+
+  <script>
+    <?state in_js=true, js_quoted=false ?>
+    </script%>
+    <?state in_js=true, js_quoted=false ?>
+  </script >
+
+  <?state in_js=false ?>
+
+</body>
+<?state in_js=false ?>
+</html>
+

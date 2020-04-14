@@ -1,0 +1,171 @@
+<html>
+<body>
+
+
+<script>
+
+// General regular expression literal synching tests.
+
+var regexp = /x'/;
+<?state state=text, in_js=true, js_quoted=false?>
+
+var string = '<?state state=text, in_js=true, js_quoted=true?>';
+<?state state=text, in_js=true, js_quoted=false?>
+
+var op = 1 / 2;
+var string2 = '<?state state=text, in_js=true, js_quoted=true?>';
+<?state state=text, in_js=true, js_quoted=false?>
+
+return /x'/;
+<?state state=text, in_js=true, js_quoted=false?>
+
+
+// General regular expression state tests
+
+var regexp = / <?state js_state=regexp?> /; <?state js_state=text?>
+
+var a = /"hello/.exec("<?state state=text, in_js=true, js_quoted=true ?>");
+var a = /"hello"/.exec("<?state state=text, in_js=true, js_quoted=true ?>");
+
+var expression = 10 / <?state js_state=text?> / <?state js_state=regexp?> /;
+
+<?state js_state=text?>
+
+var expression2 = / <?state js_state=regexp?> /;
+
+if (window.frames.length < /\d+<?state js_state=regexp?>/.exec(<?state js_state=text?>)[0]) {
+  alert(/ '" <?state js_state=regexp?>/.exec(<?state js_state=text?>)/);
+  var quoted_string = "<?state js_state=dq?>" <?state js_state=text?>;
+}
+
+switch(/ <?state js_state=regexp?> /) { <?state js_state=text?>
+  case / <?state js_state=regexp?> /: <?state js_state=text?>
+    break;
+  case / \/<?state js_state=regexp?> /: <?state js_state=text?>
+    break;
+}
+
+delete / <?state js_state=regexp?> x / <?state js_state=text?>;
+id / <?state js_state=text?> x / <?state js_state=text?>;
+
+function test(/ <?state js_state=regexp?> /) {
+  return / <?state js_state=regexp?> /.exec(<?state js_state=text?>);
+}
+
+function test2(/ <?state js_state=regexp?> /, <?state js_state=text?>) {
+  return / '"<?state js_state=regexp?> /.exec(<?state js_state=text?>);
+}
+
+var a = "/<?state js_state=dq?>"/<?state js_state=text?>;
+
+test in / <?state js_state=regexp?>/;
+min / <?state js_state=text?>;
+IN / <?state js_state=text?>;
+
+3.. /<?state js_state=text?>/;
+0x3./<?state js_state=text?>/;
+
+// Escaping in regular expressions
+
+var a = / blah\/<?state js_state=regexp?>/<?state js_state=text?>,
+/\//<?state js_state=text?>,
+/\/*/<?state js_state=text?> /**/ <?state js_state=text?>,
+
+// Bracket expressions
+var a = [/[/] <?state js_state=regexp?> / <?state js_state=text?>,
+var a = /[/\]/ <?state js_state=regexp?> ]/ <?state js_state=text?>,
+var a = /[/\\]/ <?state js_state=text?>];
+
+/* Unary incremented/decremented variable, followed by a division. */
+
+var w = w++ / 1 <?state js_state=text?>;
+var w = w-- / 1 <?state js_state=text?>;
+
+/* Division after array acessor. */
+var test = xpto[2] / <?state js_state=text?>;
+
+/* Division after parenthesis expression. */
+var test = (2 + 2) / <?state js_state=text?>;
+
+/* Division with comments before the the previous token. */
+var test = x/* test *// <?state js_state=text?>;
+var test = x /* test *// <?state js_state=text?>;
+var test = x/* test */ / <?state js_state=text?>;
+var test = x /* test */ / <?state js_state=text?>;
+var test = x /* test */
+/ <?state js_state=text?>;
+
+var test = x // test
+/ <?state js_state=text?>;
+
+var test = x // test
+ / <?state js_state=text?>;
+
+var test = x // test
+
+/ <?state js_state=text?>;
+
+/* Regexp with multi line comment before the the previous token. */
+var test =/* test *// <?state js_state=regexp?> /;
+var test = /* test *// <?state js_state=regexp?> /;
+var test = /* test *// <?state js_state=regexp?> /;
+var test = /* test */ / <?state js_state=regexp?> /;
+var test = /* test */
+/ <?state js_state=regexp?> /;
+
+var test = // test
+/ <?state js_state=regexp?> /;
+
+var test = // test
+ / <?state js_state=regexp?> /;
+
+var test = // test
+
+/ <?state js_state=regexp?> /;
+
+
+/* Semicolon insertion after a code block */
+function() {} / <?state js_state=regexp?>/
+
+/****************************************************************************
+  Tests that won't pass right now due to design or implementation choices.
+*/
+
+/* Division after a regular expression.
+
+var test = <?nopstate js_state=text?>
+/ <?nopstate js_state=regexp?>
+/ <?nopstate js_state=text?>
+/ <?nopstate js_state=text?>
+/ <?nopstate js_state=regexp?>
+/ <?nopstate js_state=text?>;
+
+*/
+
+/* Division of an object literal
+
+{
+ a: 1,
+ b : 2
+} / <?nopstate js_state=text?>/
+
+*/
+
+/* Unary increment and decrement of regular expressions.
+
+var w = ++/ <?nopstate js_state=regexp?>/i;
+var x = --/ <?nopstate js_state=regexp?>/i
+
+*/
+
+
+</script>
+
+<script>
+
+/ <?state js_state=regexp?> /;
+
+</script>
+
+</body>
+</html>

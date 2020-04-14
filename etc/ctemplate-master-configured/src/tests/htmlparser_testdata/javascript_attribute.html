@@ -1,0 +1,27 @@
+<html>
+<body>
+
+<a onclick="alert(&#39;<?state state=value, tag=a, attr=onclick, attr_type=js,
+in_js=true, js_quoted=true?> x&#x27;) &; &a; &x;/*blah <?state state=value,
+tag=a, attr=onclick, attr_type=js, in_js=true ?> */ "></a>
+
+<?state state=text, in_js=false ?>
+
+<a onmouseover='alert(document.domain<?state state=value, tag=a,
+attr=onmouseover, attr_type=js, in_js=true ?>)'>test</a>
+
+<?state state=text, in_js=false ?>
+
+<a onmouseover="">test</a>
+
+<?state state=text, in_js=false ?>
+
+<a onclick="<?state in_js=true, js_quoted=false?>">test</a>
+<?state state=text, in_js=false ?>
+
+<a onclick="'<?state in_js=true, js_quoted=true?>">test</a>
+<?state state=text, in_js=false ?>
+
+</body>
+</html>
+<?state state=text ?><?state state=text ?>

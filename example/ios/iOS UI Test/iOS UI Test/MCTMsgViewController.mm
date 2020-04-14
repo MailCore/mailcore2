@@ -39,6 +39,7 @@
 }
 
 - (void)viewDidLoad {
+
     _messageView = [[MCOMessageView alloc] initWithFrame:self.view.bounds];
     _messageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:_messageView];

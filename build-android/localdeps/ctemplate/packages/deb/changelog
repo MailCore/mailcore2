@@ -1,0 +1,161 @@
+ctemplate (2.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Olaf van der Spek <olafvdspek@gmail.com>  Thu, 22 Mar 2012 00:29:09 +0100
+
+ctemplate (2.0-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Google Inc. and others <google-ctemplate@googlegroups.com>  Tue, 24 Jan 2012 16:00:51 -0800
+
+ctemplate (1.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Google Inc. <opensource@google.com>  Thu, 22 Dec 2011 14:03:27 -0800
+
+ctemplate (1.0-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Google Inc. <opensource@google.com>  Fri, 26 Aug 2011 13:10:46 -0700
+
+ctemplate (1.0rc2-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Google Inc. <opensource@google.com>  Fri, 29 Jul 2011 12:19:50 -0700
+
+ctemplate (1.0rc1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Google Inc. <opensource@google.com>  Fri, 22 Jul 2011 15:31:05 -0700
+
+ctemplate (0.99-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Google Inc. <opensource@google.com>  Mon, 24 Jan 2011 15:38:31 -0800
+
+ctemplate (0.98-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Google Inc. <opensource@google.com>  Fri, 24 Sep 2010 11:38:27 -0700
+
+ctemplate (0.97-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Google Inc. <opensource@google.com>  Mon, 19 Apr 2010 15:55:23 -0700
+
+ctemplate (0.96-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Google Inc. <opensource@google.com>  Mon, 19 Oct 2009 11:42:57 -0700
+
+ctemplate (0.95-2) unstable; urgency=low
+
+  * Fix the include directory in the spec files: google -> ctemplate
+
+ -- Google Inc. <opensource@google.com>  Fri, 12 Jun 2009 08:13:35 -0700
+
+ctemplate (0.95-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Google Inc. <opensource@google.com>  Fri, 12 Jun 2009 08:13:35 -0700
+
+ctemplate (0.94-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Google Inc. <opensource@google.com>  Thu, 07 May 2009 11:27:28 -0700
+
+ctemplate (0.93-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Google Inc. <opensource@google.com>  Mon, 02 Feb 2009 13:51:33 -0800
+
+ctemplate (0.92-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Google Inc. <opensource@google.com>  Wed, 12 Nov 2008 11:24:33 -0800
+
+ctemplate (0.91-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Google Inc. <opensource@google.com>  Tue, 19 Aug 2008 16:20:27 -0700
+
+ctemplate (0.90-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Google Inc. <opensource@google.com>  Sun, 27 Apr 2008 15:06:15 -0700
+
+ctemplate (0.9-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Google Inc. <opensource@google.com>  Thu, 24 Jan 2008 16:09:43 -0800
+
+ctemplate (0.8-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Google Inc. <opensource@google.com>  Thu, 16 Aug 2007 21:42:55 -0700
+
+ctemplate (0.7-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Google Inc. <opensource@google.com>  Tue, 03 Jul 2007 12:46:59 -0700
+
+ctemplate (0.6.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Google Inc. <opensource@google.com>  Thu, 21 Jun 2007 14:02:32 -0700
+
+ctemplate (0.6-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Google Inc. <opensource@google.com>  Sat, 09 Jun 2007 22:34:52 -0700
+
+ctemplate (0.5-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Google Inc. <opensource@google.com>  Mon, 14 May 2007 17:27:10 -0700
+
+ctemplate (0.4-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Google Inc. <opensource@google.com>  Mon, 15 Jan 2007 14:10:42 -0800
+	
+ctemplate (0.3-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Google Inc. <opensource@google.com>  Mon, 21 Aug 2006 17:44:32 -0700
+
+ctemplate (0.2-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Google Inc. <opensource@google.com>  Wed, 14 Jun 2006 14:56:04 -0700
+
+ctemplate (0.1-1) unstable; urgency=low
+
+  * Initial release.
+
+ -- Google Inc. <opensource@google.com>  Mon, 13 Mar 2006 22:17:14 -0800

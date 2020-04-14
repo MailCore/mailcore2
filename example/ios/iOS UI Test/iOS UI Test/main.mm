@@ -11,7 +11,14 @@
 #import "AppDelegate.h"
 #import <MailCore/MailCore.h>
 
-int main(int argc, char *argv[]) {
+extern "C"
+{
+    void LocalDebuggableBuildTest();
+}
+
+int main(int argc, char *argv[])
+{
+    LocalDebuggableBuildTest();
 	MCLogEnabled = 1;
 	return UIApplicationMain(argc, argv, nil, @"AppDelegate");
 }

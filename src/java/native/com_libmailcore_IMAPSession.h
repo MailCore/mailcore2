@@ -9,6 +9,10 @@ extern "C" {
 #endif
 #undef com_libmailcore_IMAPSession_serialVersionUID
 #define com_libmailcore_IMAPSession_serialVersionUID 1LL
+
+JNIEXPORT void JNICALL Java_com_libmailcore_IMAPSession_addPinningForHost(JNIEnv *, jobject, jstring, jbyte*);
+JNIEXPORT void JNICALL Java_com_libmailcore_IMAPSession_setClientCertificate(JNIEnv *, jobject, jbyte*, jstring);
+
 /*
  * Class:     com_libmailcore_IMAPSession
  * Method:    setHostname

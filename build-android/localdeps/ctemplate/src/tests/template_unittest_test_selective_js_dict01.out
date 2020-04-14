@@ -1,0 +1,1 @@
+var msg_text1 = 'your text here';var msg_text2 = 'your text\x27is clever\x27thanks';var msg_text3 = null;var msg_text4 = 'your text\x26#39;is clever\x26#39;thanks';

@@ -1,0 +1,45 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
+    //buildToolsVersion "21.1.1"
+
+    defaultConfig {
+        applicationId "com.libmailcore.androidexample"
+        minSdkVersion 23
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+
+        ndk {
+            abiFilters 'x86_64', 'arm64-v8a', 'armeabi-v7a', 'x86'
+        }
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation(name: 'mailcore2-android-5', ext: 'aar')
+    implementation 'com.android.support:support-v4:21.0.2'
+    implementation 'com.google.android.gms:play-services:6.5.87'
+    implementation 'com.android.support:appcompat-v7:21.0.2'
+}

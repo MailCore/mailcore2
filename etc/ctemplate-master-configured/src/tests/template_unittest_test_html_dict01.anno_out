@@ -1,0 +1,66 @@
+{{#FILE=template_unittest_test_html.in}}{{#SEC=__{{MAIN}}__}}<html>
+<head>
+<script>{{#VAR=BI_NEWLINE}}
+{{/VAR}}
+  <!--{{#VAR=BI_NEWLINE}}
+{{/VAR}}
+{{#SEC=MOUSEOVER_FUNCTIONS}}    
+{{#INC=MOUSEOVER_JAVASCRIPT}}{{MISSING_FILE=not_a_template}}{{/INC}}    
+    ss = _ss;
+{{/SEC}}</script>{{#VAR=BI_NEWLINE}}
+{{/VAR}}
+</head>
+<html>
+<a id="aw" onMouseOver="return ss('{{#VAR=GOTO_MESSAGE}}print \x22Go home\x22{{/VAR}}')"{{#VAR=TARGET}}{{/VAR}}>
+<b>{{#VAR=TAG_LINE}}{{/VAR}}</b>
+</a>
+{{#SEC=UPDATE_SECTION}}Last updated: {{#VAR=UPDATE}}monday &amp; tuesday{{/VAR}}<br>{{/SEC}}
+{{#SEC=RESULTS}}<table cellspacing=0 cellpadding=0{{#VAR=TABLE_WIDTH}}{{/VAR}} align={{#VAR=ALIGNMENT}}"right"{{/VAR}}{{#VAR=BI_SPACE}} {{/VAR}}
+     {{#SEC=WHITE_BG}}bgColor=#ffffff {{/SEC}}border=0>
+  <tr>
+    <td>
+      <ol>
+        <li> Result: {{#VAR=RESULT}}<&>"result" #0'&'{{/VAR}}
+        <li> Goodness of result: {{#VAR=GOODNESS}}5{{/VAR}}
+        <li> xml-safe result: {{#VAR=XML_RESULT}}&lt;&amp;&gt;&quot;result&quot; #0&#39;&amp;&#39;{{/VAR}}
+      </ol>
+    </td>
+  </tr>
+</table>
+{{/SEC}}{{#SEC=RESULTS}}<table cellspacing=0 cellpadding=0{{#VAR=TABLE_WIDTH}}{{/VAR}} align={{#VAR=ALIGNMENT}}"right"{{/VAR}}{{#VAR=BI_SPACE}} {{/VAR}}
+     border=0>
+  <tr>
+    <td>
+      <ol>
+        <li> Result: {{#VAR=RESULT}}<&>"result" #1'&'{{/VAR}}
+        <li> Goodness of result: {{#VAR=GOODNESS}}6{{/VAR}}
+        <li> xml-safe result: {{#VAR=XML_RESULT}}&lt;&amp;&gt;&quot;result&quot; #1&#39;&amp;&#39;{{/VAR}}
+      </ol>
+    </td>
+  </tr>
+</table>
+{{/SEC}}{{#SEC=RESULTS}}<table cellspacing=0 cellpadding=0{{#VAR=TABLE_WIDTH}}{{/VAR}} align={{#VAR=ALIGNMENT}}"right"{{/VAR}}{{#VAR=BI_SPACE}} {{/VAR}}
+     {{#SEC=WHITE_BG}}bgColor=#ffffff {{/SEC}}border=0>
+  <tr>
+    <td>
+      <ol>
+        <li> Result: {{#VAR=RESULT}}<&>"result" #2'&'{{/VAR}}
+        <li> Goodness of result: {{#VAR=GOODNESS}}7{{/VAR}}
+        <li> xml-safe result: {{#VAR=XML_RESULT}}&lt;&amp;&gt;&quot;result&quot; #2&#39;&amp;&#39;{{/VAR}}
+      </ol>
+    </td>
+  </tr>
+</table>
+{{/SEC}}{{#INC=FOOTER}}{{#FILE=template_unittest_test_footer.in}}{{#SEC=__{{MAIN}}__}}<center><p><hr class=z>
+    <table width=100% cellpadding=2 cellspacing=0 border=0>
+        <tr>
+        <td align=center{{#VAR=FOOTER_BAR_ATTRIBUTES}}{{/VAR}}><font size=-1>
+                </font>
+    </table>
+    <br>
+    <font size=-1 class=p>
+    {{#VAR=MODIFIED_BY_GOOGLE}}{{/VAR}}{{#VAR=MSG_copyright}}{{/VAR}}
+    </font>
+</center>
+{{/SEC}}{{/FILE}}{{/INC}}</html>
+</body>{{/SEC}}{{/FILE}}

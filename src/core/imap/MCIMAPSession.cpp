@@ -413,6 +413,11 @@ void IMAPSession::init()
     mLoginResponse = NULL;
     mGmailUserDisplayName = NULL;
     mUnparsedResponseData = NULL;
+
+    mClientCertificate = NULL;
+    mClientCertificatePassword = NULL;
+    mPinningHosts = new Array();
+    mPinningCerts = new Array();
 }
 
 IMAPSession::IMAPSession()
@@ -436,6 +441,11 @@ IMAPSession::~IMAPSession()
     MC_SAFE_RELEASE(mCurrentFolder);
     pthread_mutex_destroy(&mIdleLock);
     pthread_mutex_destroy(&mConnectionLoggerLock);
+
+    MC_SAFE_RELEASE(mClientCertificate);
+    MC_SAFE_RELEASE(mClientCertificatePassword);
+    MC_SAFE_RELEASE(mPinningHosts);
+    MC_SAFE_RELEASE(mPinningCerts);
 }
 
 void IMAPSession::setHostname(String * hostname)
@@ -554,13 +564,22 @@ static bool hasError(int errorCode)
             (errorCode != MAILIMAP_NO_ERROR_NON_AUTHENTICATED));
 }
 
+bool IMAPSession::checkClientCertificate()
+{
+    return true;
+}
+
+bool IMAPSession::checkPinning()
+{
+    return true;
+}
+
 bool IMAPSession::checkCertificate()
 {
     if (!isCheckCertificateEnabled())
         return true;
-    return mailcore::checkCertificate(mImap->imap_stream, hostname());
+    return mailcore::checkCertificate(mImap->imap_stream, hostname(), mClientCertificate, mClientCertificatePassword,  mPinningHosts, mPinningCerts);
 }
-
 void IMAPSession::body_progress(size_t current, size_t maximum, void * context)
 {
     IMAPSession * session;
@@ -615,6 +634,9 @@ void IMAPSession::setup()
     mailimap_set_timeout(mImap, timeout());
     mailimap_set_progress_callback(mImap, body_progress, IMAPSession::items_progress, this);
     mailimap_set_logger(mImap, logger, this);
+    
+    if(mClientCertificate && mClientCertificatePassword)
+        mailimap_set_client_cert(mImap, (unsigned char*)mClientCertificate->bytes(), (size_t)mClientCertificate->length(), mClientCertificatePassword->UTF8Characters());
 }
 
 void IMAPSession::unsetup()
@@ -653,7 +675,7 @@ void IMAPSession::connect(ErrorCode * pError)
         * pError = ErrorConnection;
         goto close;
     }
-
+    
     switch (mConnectionType) {
         case ConnectionTypeStartTLS:
         MCLog("STARTTLS connect");
@@ -684,7 +706,6 @@ void IMAPSession::connect(ErrorCode * pError)
             * pError = ErrorCertificate;
             goto close;
         }
-
         break;
 
         default:
@@ -4521,3 +4542,20 @@ String * IMAPSession::gmailUserDisplayName()
 {
     return mGmailUserDisplayName;
 }
+
+#if defined(ANDROID) || defined(__ANDROID__)
+#include "../../android_log.h"
+#endif
+
+void IMAPSession::addPinningForHost(String * host, Data * data)
+{
+    mPinningHosts->addObject(host);
+    mPinningCerts->addObject(data);
+}
+
+void IMAPSession::setClientCertificate(Data * data, String* password)
+{
+    MC_SAFE_REPLACE_COPY(Data, mClientCertificate, data);
+    MC_SAFE_REPLACE_COPY(String, mClientCertificatePassword, password);
+}
+

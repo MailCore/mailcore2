@@ -1,0 +1,50 @@
+<html>
+<body>
+
+<script>
+
+x < 1;
+
+<?state state=text, tag=script, in_js=true ?>
+
+</script>
+
+<?state state=text?>
+
+<script>
+//<!--
+var x = 1;
+<?state state=text, tag=script, in_js=true ?>
+//--> </script>
+
+<?state state=text?>
+
+<script> //<!--
+var x = 1;
+<?state state=text, tag=script, in_js=true ?>
+</script>
+<?state state=text, tag=script, in_js=true ?>
+//--> </script>
+
+<?state state=text?>
+
+<script>
+<!--
+var x = 1;
+<?state state=text, tag=script, in_js=true ?>
+</script>
+<?state state=text, tag=script, in_js=true ?>
+-->
+</script>
+
+<?state state=text?>
+
+<script><?state tag=script, in_js=true?> </script><?state in_js=false?>
+<script><?state tag=script, in_js=true, js_quoted=false?></script><?state in_js=false?>
+<script>'<?state tag=script, in_js=true, js_quoted=true?></script><?state in_js=false?>
+<script>"<?state tag=script, in_js=true, js_quoted=true?></script><?state in_js=false?>
+
+</body>
+</html>
+<?state state=text ?>
+<?state state=text ?>

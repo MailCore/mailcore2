@@ -1,0 +1,15 @@
+{{%AUTOESCAPE context="CSS"}}
+
+P.abstract {
+  margin-{{AE_START_EDGE}}:0;
+  text-align:{{AE_END_EDGE}};
+  font-size:{{AE_FONT_SIZE_PC}};
+}
+.italic {font-style:{{AE_ITALIC}}}
+
+H1 {
+  font-size:{{AE_FONT_SIZE_PT}};
+  color:{{AE_MAUVE_RGB}};
+}
+
+BODY {background:transparent url('{{AE_URL_GOOD}}');}

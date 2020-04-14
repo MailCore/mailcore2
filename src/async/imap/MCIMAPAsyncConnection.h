@@ -128,6 +128,10 @@ namespace mailcore {
         
         virtual bool isQueueRunning();
         virtual void setQueueRunning(bool running);
+
+    public:
+        virtual void addPinningForHost(String * host, Data * certData);
+        virtual void setClientCertificate(Data * clientCertificate, String * password);
     };
     
 }

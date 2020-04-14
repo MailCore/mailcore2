@@ -14,6 +14,9 @@ public class SMTPSession extends NativeObject {
         super.finalize();
     }
     
+    public native void addPinningForHost(String hostname, byte[] data);
+    public native void setClientCertificate(byte[] data, String password);
+
     /** Sets the SMTP server hostname. */
     public native void setHostname(String hostname);
     /** Returns the SMTP server hostname. */

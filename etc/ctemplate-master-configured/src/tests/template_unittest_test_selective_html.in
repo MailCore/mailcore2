@@ -1,0 +1,15 @@
+{{%AUTOESCAPE context="HTML"}}
+{{!Is a copy of template_unittest_test_autoescape_simple.in}}
+<h1>{{AE_TITLE_GOOD}}</h1>
+<h1>{{AE_TITLE_BAD}}</h1>
+<img src="{{AE_URL_GOOD}}">
+<img src="{{AE_URL_BAD}}">
+<div style="background:{{AE_BG_COLOR_GOOD}}">
+<div style="background:{{AE_BG_COLOR_BAD}}">
+</div>
+<script>
+  var msg_text = '{{AE_JS_GOOD}}';
+  var msg_text = '{{AE_JS_BAD}}';
+</script>
+Goodbye {{AE_USERNAME_GOOD}}!
+Goodbye {{AE_USERNAME_BAD}}!

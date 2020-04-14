@@ -1,0 +1,79 @@
+<!-- Tests for CopyFrom() -->
+<html>
+  <body>
+    <?state save_context=body?>
+    <?state tag=body?>
+    <h1>
+      <?state save_context=h1?>
+      <?state tag=h1?>
+      <?state load_context=body?>
+    <?state tag=body?>
+
+    <a href="http://www.google.com<?state save_context=href?>"></a>
+
+    <script>
+      <?state save_context=js?>
+      var x ='<?state save_context=js_str_literal?>
+      <?state load_context=href?><?state state=value,
+                                         tag=a,
+                                         attr=href,
+                                         in_js=false,
+                                         value=http://www.google.com?>
+    <?state load_context=js_str_literal?>
+    <?state state=text,
+            tag=script,
+            in_js=true,
+            js_quoted=true?>';
+
+    // Regexp handling
+    var expression = 10 / <?state save_context=js_expression?> / <?state save_context=js_regexp?> /;
+
+    <?state load_context=js_expression?><?state js_state=text?>
+    <?state load_context=js_regexp?><?state js_state=regexp?> /;
+    <?state js_state=text?>
+
+  </script>
+  <?state in_js=false?>
+  <?state load_context=js?>
+  <?state tag=script, js_state=text, in_js=true?>
+  </script>
+
+  <!-- html encoded script attribute -->
+  <a onclick="alert(&#39;<?state save_context=onclick_str_literal?>'"></a>
+  <?state in_js=false?>
+  <?state load_context=onclick_str_literal?><?state state=value,
+                                                    tag=a,
+                                                    attr=onclick,
+                                                    attr_type=js,
+                                                    in_js=true,
+                                                    js_quoted=true?>'">
+    <?state state=text, tag=a?>
+  </a>
+
+<!-- ResetMode() tests -->
+
+<?state reset_mode=css?>
+<?state in_css=true?>
+<?state state=css_file?>
+<?state save_context=mode_css?>
+
+<?state reset_mode=html?>
+<?state state=text?>
+<?state in_css=false?>
+<?state load_context=mode_css?>
+<?state in_css=true?>
+<?state state=css_file?>
+
+<?state reset_mode=html_in_tag?>blah=<?state save_context=in_tag?>
+<?state load_context=onclick_str_literal?><?state state=value,
+                                                  tag=a,
+                                                  attr=onclick,
+                                                  attr_type=js,
+                                                  in_js=true,
+                                                  js_quoted=true?>'">
+<?state load_context=in_tag?>
+<?state attr=blah?>xpto<?state value=xpto?>
+
+
+  </body>
+</html>

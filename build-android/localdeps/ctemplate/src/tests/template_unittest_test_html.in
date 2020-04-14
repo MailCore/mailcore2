@@ -1,0 +1,65 @@
+<html>
+<head>
+<script>{{BI_NEWLINE}}
+  <!--{{BI_NEWLINE}}
+
+  {{! Include the JS code to do query tracking. }}
+  {{! javascript_query_tracking_post*.tpl }}
+  {{>JAVASCRIPT_QUERY_TRACKING_FUNCTION}}
+
+  {{! netscape requires "window.status"; IE allows just "status" here }}
+  {{! must return true when mousing over a link; not necessary when over }}
+  {{! the table cell in general }}
+
+  {{! The "id" parameter here refers to the value of the id attribute     }}
+  {{! of the anchor element for the ad (of the form "aw[POS]").         }}
+  {{! This is used by some spam-protection JavaScript to modify         }}
+  {{! parameters in the URL of the link.                        }}
+
+  {{#NO_MOUSEOVER_FUNCTIONS}}
+  function ss(w,id){
+    window.status=w;
+    return true;
+  }{{BI_NEWLINE}}
+  {{/NO_MOUSEOVER_FUNCTIONS}}
+
+  {{#MOUSEOVER_FUNCTIONS}}
+    {{! If any ads are mouseover ads, this is used to import
+      increment_mouseover_js.tpl, which redefines function ss to count
+      mouseovers.  Otherwise it produces no output. }}
+    {{>MOUSEOVER_JAVASCRIPT}}
+    {{! Since JSCompiler renames all functions/variables not beginning with an
+      underscore, we use _ss as our compiled function name,
+      then set ss to _ss }}
+    ss = _ss;
+  {{/MOUSEOVER_FUNCTIONS}}
+</script>{{BI_NEWLINE}}
+</head>
+
+<html>
+
+<a id="aw" onMouseOver="return ss('{{GOTO_MESSAGE}}')"{{TARGET}}>
+<b>{{TAG_LINE}}</b>
+</a>
+
+{{#UPDATE_SECTION}}Last updated: {{UPDATE}}<br>{{/UPDATE_SECTION}}
+
+{{#RESULTS}}
+<table cellspacing=0 cellpadding=0{{TABLE_WIDTH}} align={{ALIGNMENT}}{{BI_SPACE}}
+     {{#WHITE_BG}}bgColor=#ffffff {{/WHITE_BG}}border=0>
+  <tr>
+    <td>
+      <ol>
+        <li> Result: {{RESULT}}
+        <li> Goodness of result: {{GOODNESS}}
+        <li> xml-safe result: {{XML_RESULT}}
+      </ol>
+    </td>
+  </tr>
+</table>
+{{/RESULTS}}
+
+{{>FOOTER}}
+
+</html>
+</body>

@@ -1,0 +1,8 @@
+<html>
+<head>
+  {{HEAD}}
+</head>
+<body>
+  {{BODY}}
+</body>
+</html>{{BI_NEWLINE}}

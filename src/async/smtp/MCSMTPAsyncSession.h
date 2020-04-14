@@ -92,6 +92,14 @@ namespace mailcore {
         OperationQueueCallback * mOperationQueueCallback;
         
         virtual void tryAutomaticDisconnectAfterDelay(void * context);
+    
+    private:
+        Array * mPinningHosts;
+        Array * mPinningCerts;
+        Data * mClientCertificate;
+    public:
+        virtual void addPinningForHost(String * host, Data * certData);
+        virtual void setClientCertificate(Data * clientCertificate, String* password);
     };
 	
 }

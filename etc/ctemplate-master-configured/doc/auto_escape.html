@@ -1,0 +1,424 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <title>Guide to using Auto Escape</title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link href="designstyle.css" type="text/css" rel="stylesheet">
+  <style type="text/css">
+  ol.bluelist li {
+    color: #3366ff;
+    font-family: sans-serif;
+  }
+  ol.bluelist li p {
+    color: #000;
+    font-family: "Times Roman", times, serif;
+  }
+  ul.blacklist li {
+    color: #000;
+    font-family: "Times Roman", times, serif;
+  }
+  </style>
+</head>
+<body>
+
+<h1><a name="Guide_Auto_Escape"></a>Guide to using Auto Escape</h1>
+
+<h2>Introduction</h2>
+
+<p>Auto Escape is an optional mode of execution in the Template System
+developed to provide a better defense against cross-site scripting (XSS)
+in web applications. In this mode, the Template System assumes
+responsibility for applying the proper escaping modifiers for each
+variable in your template (and templates it may include). As such, the
+template developer no longer needs to manually apply escaping modifiers
+to each variable, a process which is repetitive and error-prone
+particularly in larger and more complex applications.</p>
+
+<p>In order for the Template System to properly determine the escaping
+modifiers to apply to variables, it activates a built-in HTML-aware
+parser during template initialization. The parser scans the template
+to determines the context in which each variable is being emitted.
+The scanning is performed at initialization-time only hence does not
+contribute to processing costs at template expansion time.</p>
+
+<p>Refer to <a href="guide.html#security">Security Considerations</a>
+for additional security information on escaping directives and their
+use according to the context in which content is being expanded.</p>
+
+<h2>Current Status</h2>
+
+<p>Auto Escape currently supports well <code>HTML</code> and
+<code>Javascript</code> templates. It also provides very basic support
+for <code>CSS</code>, <code>JSON</code> and <code>XML</code> templates
+where it applies the corresponding escaping modifier but without
+utilizing a parser. We may in the future provide parsers specific
+to these contexts and modifiers for them that are finer-grained.</p>
+
+<h2>Overview</h2>
+
+This section provides more background on Auto Escape.
+Refer to <a href="guide.html#auto_escape">How to Auto Escape</a>
+for information on how to leverage this mode in your application.
+
+<h3>Using template modifiers</h3>
+
+<p>In the simplest case, where you only want to use template-modifiers
+to achieve html-safety (that is, you only use
+<code>html_escape</code>, <code>url_query_escape</code>, and so
+forth), you can stop specifying template-modifiers in your template at
+all. The Auto Escape mode will generate the modifiers on its own and
+perform the correct escaping.</p>
+
+<p>If you need other types of modifiers, including your own custom
+modifiers, you can still specify them in your template and they will
+continue to work just the same. The Auto Escape mode will simply apply
+the appropriate escaping modifiers after your own.</p>
+
+<p>Other reasons for manually specifying variable modifiers include:</p>
+<ol>
+  <li> To indicate a variable is safe.  You may add the
+       <code>:none</code> modifier as the last modifier for a given
+       variable, in which case the Auto Escape mode will leave it
+       untouched and not apply escaping directives to it.  Use only
+       when you are sure the variable is trusted to be safe from XSS.
+  </li>
+
+  <li> To select a different escaping modifier from a list of
+       equivalent modifiers.  Certain modifiers are equivalent from
+       an escaping point of view in that they would all ensure given
+       content is safe when escaped in a specific context.  The
+       Auto Escape mode choses the most common escaping modifier for
+       that use but allows you to indicate a different choice as shown
+       below:
+
+       <table border="1" cellpadding="3" summary="Alternatives to modifiers">
+       <tr><th>TemplateContext</th><th>Primary Modifier</th>
+           <th>Accepted alternatives</th></tr>
+
+       <tr>
+       <td><code>TC_HTML</code></td>
+       <td><code>:html_escape</code></td>
+       <td><ul>
+               <li><code>:pre_escape</code></li>
+               <li><code>:html_escape_with_arg=snippet</code></li>
+               <li><code>:html_escape_with_arg=attribute</code></li>
+               <li><code>:html_escape_with_arg=url</code></li>
+               <li><code>:url_query_escape</code></li>
+               <li><code>:url_escape_with_arg=html</code></li>
+               <li><code>:img_src_url_escape_with_arg=html</code></li>
+       </ul></td>
+       </tr>
+
+       <tr>
+       <td><code>TC_HTML</code> and <code>TC_CSS</code></td>
+       <td><code>:cleanse_css</code></td>
+       <td><ul>
+               <li><code>:url_escape_with_arg=css</code></li>
+               <li><code>:img_src_url_escape_with_arg=css</code></li>
+       </ul></td>
+       </tr>
+
+       <tr>
+       <td><code>TC_XML</code></td>
+       <td><code>:xml_escape</code></td>
+       <td><ul>
+               <li><code>:html_escape</code></li>
+               <li><code>:html_escape_with_arg=attribute</code></li>
+       </ul></td>
+       </tr>
+
+       <tr>
+       <td><code>TC_JS</code></td>
+       <td><code>:javascript_escape</code></td>
+       <td><ul>
+               <li><code>:url_escape_with_arg=javascript</code></li>
+               <li><code>:img_src_url_escape_with_arg=javascript</code></li>
+       </ul></td>
+       </tr>
+
+       <tr>
+       <td><code>TC_JSON</code></td>
+       <td><code>:javascript_escape</code></td>
+       <td><ul>
+               <li><code>:json_escape</code></li>
+       </ul></td>
+       </tr>
+
+       </table></li>
+
+    <li> To add additional escaping modifiers.  The Template System will
+        never remove escaping directives you explicitly specify. </li>
+</ol>
+
+<h3><A name="EscapeContext">Escaping Contexts</A>
+</h3>
+
+
+<p>The table belows indicates which modifier Auto-Escape selects to
+escape a given variable, based on the context of the variable being
+inserted and, possibly, on more specific information such as whether
+the variable is inside quotation marks. The table only applies for
+the well-supported TemplateContext values (currently
+<code>TC_HTML</code> and <code>TC_JS</code>).</p>
+
+<p>In a few cases, we do not have
+a modifier that is both safe against XSS and respecting of
+the semantics of the variable therefore we fail the template
+initialization. An error is logged indicating the cause of
+the failure.</p>
+
+<table border="1" cellpadding="3" summary="Contexts for using modifiers">
+<tr bgcolor="#4169E1">
+  <th>Context</th><th>HTML Quoted?</th>
+  <th>Examples</th><th>Action Performed</th>
+</tr>
+
+<tr bgcolor="#F0F8FF">
+  <td>Regular HTML Body and HTML comments</td><td>Any</td>
+  <td><pre>&lt;p&gt;Hello {{USER}}&lt;/p&gt;
+      </pre></td>
+  <td>Escape <code>USER</code> using
+      <code>:html_escape</code></td>
+</tr>
+
+<tr bgcolor="#FAEBD7">
+  <td>In URL attribute: Starts at pos 0</td><td>Yes</td>
+  <td><pre>&lt;a href="{{URL}}"&gt;;</pre></td>
+  <td>Escape <code>URL</code> using
+      <code>:url_escape_with_arg=html</code></td>
+</tr>
+
+<tr bgcolor="#FAEBD7">
+  <td>In URL attribute: Other</td><td>Yes</td>
+  <td><pre>&lt;a href="/foo?q={{QUERY}}"&gt;</pre></td>
+  <td>Escape <code>QUERY</code> using
+      <code>:html_escape</code></td>
+</tr>
+
+<tr bgcolor="#FAEBD7">
+  <td>In URL attribute: Starting at pos 0</td><td>No</td>
+  <td><pre>&lt;form action={{URL}}&gt;</pre></td>
+  <td><em>Fail template initialization</em></td>
+</tr>
+
+<tr bgcolor="#FAEBD7">
+  <td>In URL attribute: Other</td><td>No</td>
+  <td><pre>&lt;a href=/foo?q={{QUERY}}&gt;My Link&lt;/a&gt;</pre></td>
+  <td>Escape <code>QUERY</code> using
+      <code>:url_query_escape</code></td>
+</tr>
+
+<tr bgcolor="#F0F8FF">
+  <td>In STYLE attribute</td><td>Yes</td>
+  <td><pre>&lt;div style="color:{{COLOR}};"&gt;</pre></td>
+  <td>Escape <code>COLOR</code> using
+      <code>:cleanse_css</code></td>
+</tr>
+
+<tr bgcolor="#F0F8FF">
+  <td>In STYLE attribute</td><td>No</td>
+  <td><pre>&lt;div style=color:{{COLOR}};&gt;</pre></td>
+  <td><em>Fail template initialization</em></td>
+</tr>
+
+<tr bgcolor="#FAEBD7">
+  <td>In Javascript attribute: String literal</td><td>Yes</td>
+  <td><pre>&lt;a href="url" onclick="doFoo('{{ARG}}');"&gt;</pre></td>
+  <td>Escape <code>ARG</code> using
+      <code>:javascript_escape</code></td>
+</tr>
+
+<tr bgcolor="#FAEBD7">
+  <td>In Javascript attribute: Non-string literal</td><td>Yes</td>
+  <td><pre>&lt;a href="url" onclick="doFoo({{ARG}});"&gt;</pre></td>
+  <td>Escape <code>ARG</code> using
+      <code>:javascript_escape_with_arg=number</code></td>
+</tr>
+
+<tr bgcolor="#FAEBD7">
+  <td>In Javascript attribute: Any</td><td>No</td>
+  <td><pre>&lt;a href="url" onclick=doFoo('{{ARG}}');&gt;</pre></td>
+  <td><em>Fail template initialization.</em></td>
+</tr>
+
+<tr bgcolor="#F0F8FF">
+  <td>In all other attributes</td><td>Yes</td>
+  <td><pre>&lt;b class="{{CLASS}}"&gt;</pre></td>
+  <td>Escape <code>CLASS</code> using
+      <code>:html_escape</code></td>
+</tr>
+
+<tr bgcolor="#F0F8FF">
+  <td>In all other attributes</td><td>No</td>
+  <td><pre>&lt;table border={{BORDER}}&gt;</pre></td>
+  <td>Escape <code>BORDER</code> using
+      <code>:html_escape_with_arg=attribute</code></td>
+</tr>
+
+<tr bgcolor="#FAEBD7">
+  <td>In Javascript code: In a string literal</td><td>Any</td>
+  <td><pre>&lt;script&gt;var a = '{{VALUE}}';&lt;/script&gt;</pre></td>
+  <td>Escape <code>VALUE</code> using
+      <code>:javascript_escape</code></td>
+</tr>
+
+<tr bgcolor="#FAEBD7">
+  <td>In Javascript code: Non-string literal</td><td>Any</td>
+  <td><pre>&lt;script&gt;var a = {{VALUE}};&lt;/script&gt;</pre></td>
+  <td>Escape <code>VALUE</code> using
+      <code>:javascript_escape_with_arg=number</code></td>
+</tr>
+
+<tr bgcolor="#F0F8FF">
+  <td>In a &lt;style&gt; tag</td><td>Any</td>
+  <td><pre>&lt;style&gt;font-size={{FONTSIZE}};&lt;/style&gt;</pre></td>
+  <td>Escape <code>FONTSIZE</code> using
+      <code>:cleanse_css</code></td>
+</tr>
+
+</table>
+
+<h4>Comments:</h4>
+<ul>
+    <li>For values of URL-accepting attributes, we apply a different
+        modifier if the variable is at the beginning of the attribute
+        value or not because in the former case we consider the
+        variable to represent a complete URL and hence also check
+        that its scheme is safe (<code>HTTP</code> or
+        <code>HTTPS</code>).</li>
+    <li>We recommend that you enclose attribute values in quotes
+        in particular:
+        <ol>
+            <li>Under some conditions outlined in the table above, when
+                variables are present in attribute values that are not
+                enclosed in quotes, we may fail template initialization
+                because we do not have escaping modifiers that are safe to
+                use.</li>
+            <li>Also the determination of which escaping modifier
+                to apply for unquoted attribute values specifically
+                is likely to change in the future.</li>
+        </ol>
+</ul>
+
+<p>The Auto Escape mode is designed to be simple to use and to produce
+correct correct escaping with minimal input.  It does however come with
+restrictions governing the use of this template system.</p>
+
+<h3><a name="Limitations">Limitations</a></h3>
+
+<ul>
+  <li> <p>Templates may only be included in regular HTML
+       text.  Including a template within HTML comments or inside an
+       HTML tag is currently not supported.  In the example below,
+       <code>HEADER</code> and <code>FOOTER</code> are properly
+       included but <code>TAG</code> and <code>COMMENT</code> are
+       not.</p>
+       <pre>
+          &lt;html&gt;&lt;head&gt;{{&gt;HEADER}}&lt;/head&gt;&lt;body&gt;
+          &lt;{{&gt;TAG}}&gt;
+          &lt;p&gt;
+          &lt;!-- {{&gt;COMMENT}} --&gt;
+          &lt;p&gt;{{&gt;FOOTER}}
+          &lt;/body&gt;&lt;/html&gt;
+       </pre>
+       <p>If the template system detects that you are including a
+       template in another HTML context, it will log a warning.</p></li>
+
+  <li> <p>Included templates may not cross HTML boundaries. They
+       cannot start with one <code>TemplateContext</code> and end in
+       another.  For example, the template below crosses boundaries --
+       it starts in HTML and ends in Javascript -- and is therefore
+       not a valid included template for auto-escaping.</p>
+       <pre>
+        &lt;html&gt;
+          &lt;head&gt;
+          &lt;/head&gt;
+          &lt;body&gt;
+            Hello USER.
+              &lt;script&gt;
+                 var a = 'not a nice template';
+       </pre>
+       <p>To rectify this violation, continue the template by
+       completing the javascript code and terminating it with a
+       <code>&lt;/script&gt;</code> tag.</p> </li>
+
+  <li> <p>Error reporting.  We currently report errors by logging
+       a warning or an error during initial template
+       initialization and parsing if we suspect something is
+       incorrect. Please check for them, as they indicate an error
+       that may cause auto-escaping to work improperly.</p> </li>
+
+  <li> <p>Beware of double escaping.  When you use the Auto Escape mode,
+       you surrender all variable escaping to the template system.
+       If you also perform your own escaping in your source code, you may
+       face situations where content was escaped multiple times.</p>
+       <p>In particular, do not use any of the legacy methods below or
+       others that perform variable escaping.</p>
+       <ul>
+         <li> <code>SetEscapedValue</code> </li>
+         <li> <code>SetEscapedFormatttedValue</code> </li>
+         <li> <code>SetEscapedValueAndShowSection</code> </li>
+       </ul>
+       </li>
+
+  <li> <p>Supported HTML contexts. HTML (<code>TC_HTML</code>) and
+        Javascript (<code>TC_JS</code>) templates are well supported.
+        Other template contexts have only basic support.
+        For these contexts, variables are escaped as follows:</p>
+        <table border="1" cellpadding="3" summary="HTML contexts for modifiers">
+        <tr><th>TemplateContext</th><th>Escaping Applied</th></tr>
+        <tr><td>TC_JSON</td>
+            <td><code>:javascript_escape</code></td></tr>
+        <tr><td>TC_XML</td>
+            <td><code>:xml_escape</code></td></tr>
+        <tr><td>TC_CSS</td>
+            <td><code>:cleanse_css</code></td></tr>
+        </table></li>
+
+  <li> <p>New restrictions on the use of <code>BI_SPACE</code> and
+       <code>BI_NEWLINE</code>.  These system variables may not be
+       re-assigned to a semantically different value via
+       <code>dict->SetValue</code> or related methods, and they may
+       not have modifiers attached to them in templates.  For
+       instance: it's ok to redefine <code>BI_NEWLINE</code> from
+       <code>\n</code> to <code>\r\n</code>, since html treats them
+       identically.  But changing it to <code>hello, world!</code> is
+       not allowed.</p> </li>
+</ul>
+
+<h4> A new filename convention </h4>
+
+<p>The Auto Escape feature codifies simple conventions
+of  template filenames: </p>
+<ol>
+  <li> CSS templates optionally include, in their filename, the
+       keywords <code>style</code> or <code>stylesheet</code> or
+       <code>css</code>. </li>
+  <li> Javascript templates optionally include, in their filename, the
+       keywords <code>js</code> or <code>javascript</code>. </li>
+</ol>
+
+<p>If we find one of these keywords in the filename but
+it does not match the template type given, we log a warning.</p>
+
+<hr>
+<ul>
+  <li> <A HREF="guide.html">User's Guide</A> </li>
+  <li> <A HREF="reference.html">Reference Manual</A> </li>
+<!--
+  <li> <A HREF="auto_escape.html">Auto Escape</A> </li>
+-->
+  <li> <A HREF="tips.html">Tips</A> </li>
+  <li> <A HREF="example.html">Example</A> </li>
+</ul>
+
+
+
+<hr>
+<address>
+Jad Boutros<br>
+</address>
+
+</body>
+</html>

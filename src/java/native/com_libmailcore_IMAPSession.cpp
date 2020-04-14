@@ -7,6 +7,10 @@
 #include "JavaOperationQueueCallback.h"
 #include "JavaConnectionLogger.h"
 
+#if defined(ANDROID) || defined(__ANDROID__)
+#include "../../android_log.h"
+#endif
+
 using namespace mailcore;
 
 #define nativeType IMAPAsyncSession
@@ -24,6 +28,28 @@ MC_JAVA_SYNTHESIZE_SCALAR(jboolean, bool, setCheckCertificateEnabled, isCheckCer
 MC_JAVA_SYNTHESIZE(IMAPNamespace, setDefaultNamespace, defaultNamespace)
 MC_JAVA_SYNTHESIZE_SCALAR(jboolean, bool, setAllowsFolderConcurrentAccessEnabled, allowsFolderConcurrentAccessEnabled)
 MC_JAVA_SYNTHESIZE_SCALAR(jint, unsigned int, setMaximumConnections, maximumConnections)
+
+JNIEXPORT void JNICALL Java_com_libmailcore_IMAPSession_addPinningForHost(JNIEnv * env, jobject obj, jstring hostname, jbyte* data)
+{
+    MC_POOL_BEGIN;
+
+    String pinHostname = MC_FROM_JAVA(String, hostname);
+    Data pinData = MC_FROM_JAVA(Data, data);
+    MC_JAVA_NATIVE_INSTANCE->addPinningForHost(&pinHostname, &pinData);
+
+    MC_POOL_END;
+}
+
+JNIEXPORT void JNICALL Java_com_libmailcore_IMAPSession_setClientCertificate(JNIEnv * env, jobject obj, jbyte* data, jstring password)
+{
+    MC_POOL_BEGIN;
+
+    Data certData = MC_FROM_JAVA(Data, data);
+    String certPassword = MC_FROM_JAVA(String, password);
+    MC_JAVA_NATIVE_INSTANCE->setClientCertificate(&certData, &certPassword);
+
+    MC_POOL_END;
+}
 
 JNIEXPORT jboolean JNICALL Java_com_libmailcore_IMAPSession_isOperationQueueRunning
   (JNIEnv * env, jobject obj)

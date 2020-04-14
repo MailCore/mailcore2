@@ -17,10 +17,15 @@ class MainThreadUtils {
     // private constructor
     private MainThreadUtils() {
         System.loadLibrary("MailCore");
-        System.loadLibrary("gnustl_shared");
+	System.loadLibrary("c++_shared");
+    //    System.loadLibrary("gnustl_shared");
+
+    if(Looper.myLooper() != Looper.getMainLooper()) { Log.i("NATIVE", "Mailcore on bg thread"); } else { Log.i("NATIVE", "Mailcore on MAIN thread"); }
+
+        //handler = new Handler(Looper.myLooper());
         handler = new Handler(Looper.getMainLooper());
         setupNative();
-    }
+}
 
     private native void setupNative();
 

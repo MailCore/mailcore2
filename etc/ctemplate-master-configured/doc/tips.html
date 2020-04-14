@@ -1,0 +1,474 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>Tips and Guidelines for Using the Ctemplate System</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="designstyle.css" type="text/css" rel="stylesheet">
+<style type="text/css">
+  ol.bluelist li {
+    color: #3366ff;
+    font-family: sans-serif;
+  }
+  ol.bluelist li p {
+    color: #000;
+    font-family: "Times Roman", times, serif;
+  }
+  ul.blacklist li {
+    color: #000;
+    font-family: "Times Roman", times, serif;
+  }
+</style>
+</head>
+
+<body>
+
+<h1>Tips and Guidelines for Using the Ctemplate System</h1>
+<small>(as of 10 March 2010)</small>
+
+<br>
+
+<p>The <A HREF="guide.html">basic rules</A> of the template system are
+enough to use it, but over time, we at Google have developed some
+tips, guidelines, and best practices that make it easier to use
+templates effectively, and to avoid common template errors.</p>
+
+
+<h2> Program Design Considerations </h2>
+
+<h3> <a name=versioning>Template naming and versioning</a> </h3>
+
+<p> Early in Google's use of templates, we noticed a problem: if a
+binary that uses a template and its corresponding template were both
+modified, particularly if the change were such that the old binary
+could not work with the new template or the new binary could not work
+with the old template, then somehow they both had to be deployed at
+the same instant to not present errors to our users.  This was hard to
+do. The solution was to adopt a template naming and versioning
+convention.  The procedure to use it follows:</p>
+
+<ul>
+  <li> Each template name ends with <code>_postYYYYMMDD.tpl</code>,
+       where YYYMMDD is the date of this version's initial
+       creation. </li>
+
+  <li> Before making (non-backward-compatible) modifications to a
+       template, copy the template to a new name, incorporating a
+       later date than the original one being copied. </li>
+
+  <li> Edit the new file, and push it to the production server. </li>
+
+  <li> Finally, update the code to refer to the new template-name
+       (ideally, using the <A
+       HREF="guide.html#register"><code>RegisterTemplateFilename</code>
+       idiom</A>), and push the new executable to the production
+       server. </li>
+</ul>
+
+<p>When this convention is followed, the new template file does not
+overwrite the old one when it is deployed, because it is a new file
+with a new name.  The old template file is still there to be used as
+long as the old binary is still in production and the new template
+file just sits there being ignored.  Then when the new binary finally
+gets deployed, it immediately starts using the new template file,
+because it is coded (in <code>RegisterTemplateFilename</code>) to do
+so.  After that, it is the old template file that continues to sit
+there ignored.</p>
+
+<p>The <A
+HREF="reference.html#make_tpl_varnames_h"><code>make_tpl_varnames_h</code>
+utility</A> knows about the "_postYYYYMMDD" naming convention, so it
+is important that you use that convention exactly if you use the
+<code>make_tpl_varnames_h</code>.</p>
+
+
+<h3> Processing Phases </h3>
+
+<p>Typically a program using the Ctemplate System will
+perform the following phases, usually in this order:</p>
+
+<ol>
+  <li> Retrieve and prepare the data used to fill a dictionary. </li>
+
+  <li> Build the data dictionary, including all its
+       sub-dictionaries, that will supply the values to the
+       designated template object, its sections, and its
+       included templates. </li>
+
+  <li> Retrieve the top-level template object required to
+       format the data.  (This may or may
+       not involve reading and parsing a template file,
+       depending on whether the requested file has already
+       been read and parsed by the running program or
+       whether that file has been marked "reload if changed"
+       and was in fact changed.) </li>
+
+  <li> Expand the template object into an output buffer
+       using the completed data dictionary. </li>
+
+  <li> Output the buffer. </li>
+
+  <li> Clean up: Destroy the top-level data dictionary
+       whenever it is no longer needed. </li>
+
+  <li> Optionally, clear the cache at the end of program
+       execution. </li>
+</ol>
+
+
+<h3> <A NAME="oneone">One template / One procedure call</A> </h3>
+
+<p> Most of the code of the program will be in Phases 1 and
+2. Clearly, Phase 1 is outside the scope of the template system. But
+in designing the code for Phase 2 (building the data dictionary), it
+is wise to have the structure of the program reflect the structure of
+the templates being used. Specifically, there should be a single
+procedure call to build the dictionary for a single template. That
+procedure call should take parameters that include all the data
+required to populate the data dictionary for that template and all the
+templates it includes.  Following this "one template/one procedure
+call" guideline further, for each included template, another procedure
+should be called to populate the (or <i>each</i>) data dictionary for
+that included template. This maintains the "one template/one procedure
+call" principle in a nested fashion that reflects the nesting of the
+templates.</p>
+
+<p> This is not to imply that the "one procedure call" for a template
+should not be modularized into sub-procedures for readability and
+maintainability, or that it should not call other auxilliary
+procedures for such things as formatting the data and converting it to
+the appropriate strings, etc.  But it does mean that there should be
+one entry point for building the dictionary tree for one template and
+that entry point should show the data dependencies of that template
+through its parameter list. This code for populating the data
+dictionary should <i>NOT</i> be intermingled with data gathering code
+that should have been done in Phase 1.</p>
+
+<p>(Inside Google, the convention has been used to name the dictionary
+building procedure using the pattern <code>fill_..._dictionary</code>
+where the dots are related to the name of the template the data is
+being prepared for.  For instance, the data for the template named
+one_search_result.tpl might be placed in a dictionary via a function
+named <code>fill_one_search_result_dictionary</code>.)
+
+
+<h2> <A name=tips>Tips, Idioms, and Conventions</a> </h2>
+
+<ol class=bluelist>
+
+<li> Choose template names to create unique constant prefixes.
+
+     <p>Template names should contain <em>at least two words</em>
+     to avoid constant prefix clashes (e.g. <code>kxy_</code>
+     instead of <code>kx_</code> ) The name of a new template
+     should be checked against the existing names before
+     proceeding. If your new template name produces a prefix that
+     conflicts with an already existing template, you should change
+     the name of your new template, even though it may be the only
+     perfect name you can come up with. You'll have to use a less
+     than perfect name in that case. (See "Template Syntax Checker
+     and Header File Generator" below for more explanation about
+     constant prefixes.)</p> </li>
+
+<li> <a name="tip_setformattedvalue"></a>Use SetFormattedValue
+     discriminately.
+
+     <p> This method should never be used to sneak HTML into the
+     executable as in</p>
+
+     <pre>
+     dictionary->SetFormattedValue(kxy_VAR,
+                                   "&lt;b&gt;%s&lt;/b&gt;",
+                                   some_const_char_string);
+     </pre>
+
+     <p>In that case, the <code>&lt;b&gt;</code> and
+     <code>&lt;/b&gt;</code> should be moved into the template.</p>
+
+<li> Never have a section encompass an entire template.
+
+     <p>If the first line of a template is a start section marker
+     and the last line is its matching end section marker, then
+     those markers are unnecessary in almost all cases. They are
+     usually put there to allow the entire template to be hidden or
+     iterated, but since it encompasses the entire file, the
+     section may be hidden by not expanding the file (or by hiding
+     the template-include section that includes the file) and it
+     may be iterated by iterating the template-include marker of
+     the including template.  (The only exception might be if the
+     entire page is to be iterated, but this seems a bit of a
+     stretch.)</p> </li>
+
+<li> An included template is just a section whose contents are
+     located in a separate file.  You may iterate over it just
+     like you do sections.
+
+     <p>For example, if your template has the following
+     template-include marker:</p>
+     <pre>
+     {{>MY_INCLUDED_TEMPLATE}}
+     </pre>
+     <p>you may call</p>
+     <pre>
+     ctemplate::TemplateDictionary *child_dict =
+        dictionary->AddIncludeDictionary(kxy_MY_INCLUDED_TEMPLATE);
+     </pre>
+     <p>to iterate that section. (Note: Make sure you call
+     <code>child_dict->SetFilename()</code>!  If your included
+     template is not showing in the output, this is the first thing
+     you should check.)</p> </li>
+
+<li> The recommended idiom to fill an include-template dictionary is
+     like this:
+     <pre>
+        fill_include_template_dictionary(dict->AddIncludeDictionary(name), ...);
+     </pre>
+
+     <p>But what do you do if you decide, in
+     <code>fill_include_template_dictionary</code>, that you don't
+     want to display anything for this include-template after all?  It
+     seems like it's too late: you've already created the
+     sub-dictionary.  The solution is simple: just be sure that
+     <code>fill_include_template_dictionary()</code> doesn't call
+     <code>SetFilename()</code> in that case.</p>
+
+<li> Never have a section which only contains another section.
+     <p>For example, don't do this:</p>
+     <pre>
+     {{#OUTER_SECTION}}
+        {{#INNER_SECTION}}
+        section contents here
+        {{/INNER_SECTION}}
+     {{/OUTER_SECTION}}
+     </pre>
+     <p>or this equivalent template code (see the previous item):</p>
+     <pre>
+     {{#OUTER_SECTION}}
+        {{>INCLUDED_SECTION}}
+     {{/OUTER_SECTION}}
+     </pre>
+
+     <p>This is usually done because the developer thinks the outer
+     section must be used to hide the section when the inner
+     section, intended for iteration, has no iterations. In both
+     cases, you should only have one section (either
+     <code>INNER_SECTION</code> or <code>INCLUDED_SECTION</code> in
+     the examples) and iterate that section either 0 times or more
+     than 0 times. It's the wonder of the dual use of sections,
+     i.e. that they may be conditional or iterative or, in this case,
+     both.</p>
+
+     <p>A related suggestion: Do not have a section whose entire
+     contents is one variable marker with nothing else, unless you
+     need to iterate over that section with multiple values of that
+     variable. You don't need the surrounding section just to hide
+     the marker. A variable marker that is not set, does not
+     produce output. By convention, we set such variables to the
+     empty string. But in neither case do you need to hide it by
+     hiding a surrounding section that contains nothing else.</p>
+
+<li> Use this hide/show idiom for <code>if-else</code> blocks.
+
+     <p>Since sections are hidden by default, you can use represent
+     if-else logic in your code via <code>ShowSection</code>.  For
+     example:</p>
+
+     <pre>
+     if ( my_test ) {
+        dict->ShowSection(kxyz_TRUE_BLOCK);
+        [ more code to fill the values for that section]
+     } else {
+        dict->ShowSection(kxyz_FALSE_BLOCK);
+        [ more code to fill the values for that section]
+     }
+     </pre>
+
+<li> <code>Write...</code> vs. <code>Fill...Dictionary</code> methods
+     - Observe the proper division of labor, don't mix them.
+
+     <p>The output (or write) function should create the top level
+     template dictionary, call one or more fill-dictionary routines
+     with it, then get the template and expand it. It should not call
+     dictionary modifying methods, like <code>ShowSection</code>
+     and <code>SetValue</code>. By keeping these separated into
+     their own fill-dictionary routine, the code is more modular and
+     lends itself to template re-use. If you maintain the proper
+     division of labor, the template you are filling and outputting
+     may be filled and included in a larger template by someone
+     else.</p> </li>
+
+<li> Use <code>AddSectionDictionary</code> only when you want to
+     iterate over a section or, secondarily, if you need to avoid name
+     conflicts.
+
+     <p>Sometimes developers get the idea that every section requires
+     its own child dictionary created by an
+     <code>AddSectionDictionary</code> call.  Because of variable
+     inheritence, this isn't usually so.  The intended purpose of
+     <code>AddSectionDictionary</code> is to enable iteration over a
+     section.  Secondarily, if the section contains generic names that
+     may conflict with the same name in other parts of the template,
+     it may be safer to call <code>AddSectionDictionary</code> to
+     create a separate namespace.  In any case, do not assume you must
+     call <code>AddSectionDictionary</code> just because you are
+     working within a section. The main dictionary can be used for all
+     levels of conditional sections as long as you avoid name
+     conflicts by keeping the marker names unique.</p> </li>
+
+<li> Do not place <code>RegisterTemplateFilename</code>
+     statements in header (<code>.h</code>) files.
+
+     <p><code>RegisterTemplateFilename</code> is a macro that
+     instantiates a <code>TemplateNamelist</code> object. If you place
+     it in a header file, a different object will get created each time
+     it is included in another <code>.cc</code> file.
+
+     <p>The <code>RegisterTemplateFilename</code> statement and its
+     associated <code>#include</code> of the <code>varnames.h</code>
+     file should occur only in the <code>.cc</code> file that
+     implements the fill-dictionary routine for that template. You
+     should never have more than one
+     <code>RegisterTemplateFilename</code> for a single template and
+     you should try hard not to copy the <code>#include</code> file to
+     other files as well. The template versioning makes this more
+     important because a developer may not know that the template name
+     with included version number needs to be updated in more than one
+     file when versioning occurs. [Also see above for more information
+     about what routine uses the filename declared by the
+     <code>RegisterTemplateFilename</code> statement.]</p> </li>
+
+<li> Never reference more than one template in a
+     fill...dictionary method.
+
+     <p>Each template should have its own fill-dictionary
+     routine. That routine should only reference marker names defined
+     in that template. If this convention is followed, then all the
+     prefixes in a fill-dictionary routine will be the same. [Note
+     that an implication of this convention is that if the template
+     includes another template, via a template-include marker, then
+     containing template's fill-dictionary routine should call the
+     included template's fill-dictionary routine (being careful to
+     observe the convention described above). But
+     then, this is merely a restatement of <A HREF="#oneone">"One
+     template / One procedure call"</A>.]</p> </li>
+
+<li> Have fill...dictionary call <code>SetFilename</code> even if the
+     dictionary is never used for a template-include.
+
+     <p>SetFilename() is required when a dictionary is created via
+     <code>AddIncludeDictionary()</code>.  However, it's safe to set
+     all the time.  By setting it always, you make the code work
+     properly if this dictionary ever changes to be template-included
+     after all.  Even if not, by saying what template file the
+     dictionary is intended to go with, you are self-documenting your
+     code.</p> </li>
+
+<li> Do not call <code>c_str()</code> on strings to pass them to
+     <code>TemplateDictionary</code> methods.
+
+     <p>Note that all the TemplateDictionary methods are defined to
+     take <code>TemplateString</code> objects.  These are created
+     automatically from both strings and char*'s (and can be created
+     manually if you have a char* and a length).  So if you have a
+     string, it's safe and efficient to just pass it in directly; you
+     do not need to extract the const char * from your string object
+     to pass it to these methods.  For some reason, this is a common
+     error of novice template coders.</p>
+
+     <p>The one exception to this rule is when using the method
+     <code>SetFormattedValue</code>.  When calling that
+     method, you must call <code>c_str()</code> on strings that are to
+     be inserted
+     into the format string, just as you would when providing data for
+     any other printf format string.</p> </li>
+
+<li> Do not use <code>SetGlobalValue</code> when you could use
+     <code>SetValue</code> or <code>SetTemplateGlobalValue</code>.
+
+     <p><code>SetGlobalValue</code> should be used quite rarely, for
+     constants that really are consistent across all your templates.
+     It's slower to look up a value in the global dictionary than it
+     is in the template-specific dictionary.</p> </li>
+
+<li> Do not use <code>StringToTemplateCache</code> unless you have
+     a specific need for its non-file-based attributes.
+
+     <p><code>ctemplate::StringToTemplateCache</code> was created for
+     use in highly constrained cases where file I/O may be impaired or
+     undesirable, for instance to produce a server error message
+     where there may be disk problems or to produce formatted
+     output where there are processes that do not have a facility
+     for updating data files dynamically. It is not recommended for
+     ordinary use since it cannot be updated dynamically via a
+     data-push; changes always require a binary push.</p>
+     </ul>
+     </li>
+
+<li> Use <A HREF="auto_escape.html">auto-escaping</A> to prevent
+     Cross-Site-Scripting security vulnerabilities.
+
+     <p>Use <code>{{%AUTOESCAPE}}</code> consistently.  Use the
+     <code>:none</code> modifier to override autoesacping only in
+     those (usually rare) cases where there is a specific reason the
+     template variable should not be escaped, for example:
+     <ul class=blacklist>
+       <li>The template variable contains HTML markup that should be
+       interpreted by the browser.  In this case you must be very careful to
+       ensure that the variable can in no case contain "harmful" HTML.  Also,
+       keep in mind the <a href="#tip_setformattedvalue">above
+         recommendation</a> on the use of <code>SetFormattedValue</code> and
+       consider moving the HTML markup into the template.</li>
+
+       <li>The variable is known to be already escaped at the point it
+       is inserted into the template (for example, the value might be
+       kept in escaped form in a storage backend). Here, escaping again
+       via a variable-modifier would result in "double escaping".  You
+       must ensure that the variable comes escaped in the appropriate
+       context (that is, if you're inserting the variable into an html
+       document, it's html-escaped and not java-escaped).</li>
+     </ul>
+     </li>
+
+<li> Do not leave an extra space when using <code>{{BI_SPACE}}</code>
+
+     <p>The built-in template variable <code>BI_SPACE</code> is itself
+     replaced by a single space. It is used where you need to make
+     sure a space is preserved at the end of a line. It is a common
+     mistake to leave an extra space before this marker, which results
+     in not one, but two, spaces created in the document.</p>
+
+     <p>Incorrect:</p><pre>
+&lt;table border=0 {{BI_SPACE}}
+       align=center></pre>
+
+     <p>Correct:</p><pre>
+&lt;table border=0{{BI_SPACE}}
+       align=center></pre>
+
+     </li>
+
+</ol>
+
+<hr>
+<ul>
+  <li> <A HREF="guide.html">User's Guide</A> </li>
+  <li> <A HREF="reference.html">Reference Manual</A> </li>
+  <li> <A HREF="auto_escape.html">Auto Escape</A> </li>
+<!--
+  <li> <A HREF="tips.html">Tips</A> </li>
+-->
+  <li> <A HREF="example.html">Example</A> </li>
+</ul>
+
+<hr>
+<address>
+Craig Silverstein<br>
+<script type=text/javascript>
+  var lm = new Date(document.lastModified);
+  document.write(lm.toDateString());
+</script>
+</address>
+
+</body>
+</html>

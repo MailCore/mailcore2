@@ -1,0 +1,214 @@
+<html>
+
+<body blah='<?state state=value, tag=body, attr=blah, attr_type=regular,
+attr_quoted=true ?>'>
+
+<?state state=text, tag=body ?>
+<a href=<?state state=value, tag=a, attr=href, attr_type=uri ?>><?state state=text, tag=a ?></a>
+<a href=
+  "<?state state=value, tag=a, attr=href, attr_type=uri, attr_quoted=true ?>"></a>
+
+<a href=<?state state=value, tag=a, attr=href, attr_type=uri ?> blah=x></a>
+<a href=
+  "<?state state=value, tag=a, attr=href, attr_type=uri ?>" blah=x></a>
+
+<a href=
+  <?state state=value, tag=a, attr=href, attr_type=uri, attr_quoted=false ?> blah=x></a>
+
+<a href><?state state=text, tag=a ?></a>
+
+<a href=x<?state state=value, tag=a, attr=href, attr_type=uri ?> <?state state=tag, tag=a ?>></a>
+
+<a href =<?state state=value, tag=a, attr=href, attr_type=uri ?>></a>
+<a href
+=<?state state=value, tag=a, attr=href, attr_type=uri ?>></a>
+<a href
+  =<?state state=value, tag=a, attr=href, attr_type=uri ?>></a>
+
+<?state state=text?>
+
+<b font=<?state state=value, value_index=0?>></b>
+<b font=x<?state state=value, value_index=1?>></b>
+<b font='<?state state=value, value_index=0?>'></b>
+<b font='x<?state state=value, value_index=1?>'></b>
+
+<!-- XML Processing instruction -->
+
+<?example <?state state=text?> <a href=<?state state=text?>></a
+  <script>
+  <?state state=text, in_js=false?>
+  </script>
+?>
+
+<a href=http://www.google.com/<?state state=value, tag=a, attr=href, attr_type=uri ?>?q=tt<?state state=value, tag=a, attr=href, attr_type=uri ?>>test</a>
+
+<!-- Test javascript url handling -->
+<a href="test<?state value=test, in_js=false ?>">test</a>
+<a href="javascript<?state value=javascript, in_js=false ?>">test</a>
+<a href="javascript:<?state value=javascript:, in_js=false ?>">test</a>
+<a href="javascript:alert('<?state in_js=false ?>">test</a>
+<a href="http:<?state value=http:, in_js=false ?>">test</a>
+<a href="http://www.google.com"
+   alt="javascript:<?state value=javascript:, in_js=false ?>">test</a>
+
+<!-- Test calls to  TemplateDirective() -->
+<b font=<?state state=value?>
+   color<?state state=value?>></b>
+
+<b font=<?state state=value?><?state insert_text=true?>
+   color<?state state=attr?>></b>
+
+<b font="<?state state=value?><?state insert_text=true?>
+   color<?state state=value?>"></b>
+
+<a href=
+  <?state state=value?><?state insert_text=true?> alt<?state state=attr?>>
+  link
+</a>
+
+<b font=<?state state=value?>><?state state=text, tag=b?></b>
+
+<!-- Large invalid HTML entity -->
+<a onclick="&testtesttesttesttesttesttesttesttesttesttesttest;"
+   href="http://www.google.com/"></a>
+
+<!-- URI attributes.  The attribute list can be found in
+     htmlparser.c:is_uri_attribute() -->
+<a target="<?state attr_type=regular?>"></a>
+<!-- -->
+<form action="<?state attr_type=uri?>"></form>
+<applet archive="<?state attr_type=uri?>"></applet>
+<blockquote cite="<?state attr_type=uri?>"></blockquote>
+<object classid="<?state attr_type=uri?>"></object>
+<object codebase="<?state attr_type=uri?>"></object>
+<object data="<?state attr_type=uri?>"></object>
+<img dynsrc="<?state attr_type=uri?>"></img>
+<a href="<?state attr_type=uri?>"></a>
+<img longdesc="<?state attr_type=uri?>"></img>
+<img src="<?state attr_type=uri?>"></img>
+<img usemap="<?state attr_type=uri?>"></img>
+<!-- -->
+<form style="x" action="<?state attr_type=uri?>"></form>
+<applet style="x" archive="<?state attr_type=uri?>"></applet>
+<blockquote style="x" cite="<?state attr_type=uri?>"></blockquote>
+<object style="x" classid="<?state attr_type=uri?>"></object>
+<object style="x" codebase="<?state attr_type=uri?>"></object>
+<object style="x" data="<?state attr_type=uri?>"></object>
+<img style="x" dynsrc="<?state attr_type=uri?>"></img>
+<a style="x" href="<?state attr_type=uri?>"></a>
+<img style="x" longdesc="<?state attr_type=uri?>"></img>
+<img style="x" src="<?state attr_type=uri?>"></img>
+<img style="x" usemap="<?state attr_type=uri?>"></img>
+<!-- -->
+<img alt="<?state attr_type=regular?>"></a>
+
+
+<!-- Style attributes as returned by htmlparser.c:is_style_attribute() -->
+<a target="<?state attr_type=regular?>"></a>
+<!-- -->
+<b style="<?state attr_type=style?>"></b>
+<!-- -->
+<a target="<?state attr_type=regular?>"></a>
+
+<!-- Big attribute value. We can't do prefix checking right now so we can't
+     validate the contents of the value here, although statemachine_test.c has
+     a test for that. -->
+
+<a href="http://www.google.com/"
+   alt="01234567890123456789012345678901234567890123456789
+        01234567890123456789012345678901234567890123456789
+        01234567890123456789012345678901234567890123456789
+        01234567890123456789012345678901234567890123456789
+        01234567890123456789012345678901234567890123456789
+        01234567890123456789012345678901234567890123456789
+        01234567890123456789012345678901234567890123456789
+        01234567890123456789012345678901234567890123456789
+        01234567890123456789012345678901234567890123456789
+        01234567890123456789012345678901234567890123456789
+        <?state state=value, attr_quoted=true, tag=a, attr=alt?>"></a>
+
+<?state state=text?>
+
+<!-- is_url_start tests -->
+
+<a href="<?state is_url_start=true?>"></a>
+<a href="http://<?state is_url_start=false?>"></a>
+<a href="http://www.google.com?q=<?state is_url_start=false?>"></a>
+<b font="<?state is_url_start=false?>"></b>
+<b font="http://www.google.com?q=<?state is_url_start=false?>"></b>
+<?state is_url_start=false?>
+
+<!-- <?state is_url_start=false?> -->
+
+<!-- Tag opening tests -->
+
+<a <?state state=tag?>></a><?state state=text?>
+<br <?state state=tag?>></br><?state state=text?>
+< br <?state state=text?>></br><?state state=text?>
+<< <?state state=text?>><?state state=text?>
+<  <?state state=text?> alt="<?state state=text?>">
+</blah <?state state=tag?>><?state state=text?>
+<<i<?state state=tag?>><?state state=text?></i>
+
+
+<!-- We do allow numbers to open html tags, which is not how most browsers
+behave. We still test this anyway. -->
+<0 <?state state=tag?>><?state state=text?>
+<1 <?state state=tag?>><?state state=text?>
+
+<!-- meta redirect url tests. -->
+<meta http-equiv="refresh" content="5;URL=<?state attr_type=uri, is_url_start=true?>">
+<meta http-equiv="refresh" content="10;URL=<?state attr_type=uri, is_url_start=true?>">
+<meta http-equiv="refresh" content="5 ;URL=<?state attr_type=uri, is_url_start=true?>">
+<meta http-equiv="refresh" content=" 5 ;URL=<?state attr_type=uri, is_url_start=true?>">
+<?state attr_type=none, is_url_start=false?>
+<meta http-equiv="refresh" content=" 5 ;    url   =   <?state attr_type=uri, is_url_start=true?>">
+<meta http-equiv="refresh" content="5;Url=<?state attr_type=uri, is_url_start=true?>">
+<meta http-equiv="refresh" content="5;UrL=<?state attr_type=uri, is_url_start=true?>">
+<meta http-equiv="refresh" content="5;uRL=<?state attr_type=uri, is_url_start=true?>">
+<?state attr_type=none, is_url_start=false?>
+<meta http-equiv="refresh" content="5;uRL=http://<?state attr_type=uri, is_url_start=false?>">
+<meta http-equiv="refresh" content="5 ; URL=http://www.google.com/<?state attr_type=uri, is_url_start=false?>">
+<meta http-equiv="refresh" content="5;URL=/<?state attr_type=uri, is_url_start=false?>">
+<meta http-equiv="refresh" content="5;URL=../<?state attr_type=uri, is_url_start=false?>">
+<meta http-equiv="refresh" content="             123456789    ;    url    =  ../<?state attr_type=uri, is_url_start=false?>">
+
+<!-- Quoted url's -->
+<meta http-equiv="refresh" content="5;URL = '<?state attr_type=uri, is_url_start=true?>">
+<meta http-equiv="refresh" content='5;URL = "<?state attr_type=uri, is_url_start=true?>"'>
+<meta http-equiv="refresh" content="5;URL = ' <?state attr_type=uri, is_url_start=false?>">
+<meta http-equiv="refresh" content='5;URL = " <?state attr_type=uri, is_url_start=false?>"'>
+
+<?state attr_type=none, is_url_start=false?>
+
+<meta http-equiv="refresh" content="5x;URL=<?state attr_type=regular, is_url_start=false?>">
+<meta http-equiv="refresh" content="<?state attr_type=regular, is_url_start=false?>">
+<meta http-equiv="refresh" content="5<?state attr_type=regular, is_url_start=false?>">
+<meta http-equiv="refresh" content="5;<?state attr_type=regular, is_url_start=false?>">
+<?state attr_type=none, is_url_start=false?>
+<meta http-equiv="refresh" content="5;U<?state attr_type=regular, is_url_start=false?>">
+<meta http-equiv="refresh" content="5;UR<?state attr_type=regular, is_url_start=false?>">
+<meta http-equiv="refresh" content="5;URL<?state attr_type=regular, is_url_start=false?>">
+<meta http-equiv="refresh" content="5;URL <?state attr_type=regular, is_url_start=false?>">
+<?state attr_type=none, is_url_start=false?>
+<meta http-equiv="refresh" content="5x;URL= <?state attr_type=regular, is_url_start=false?>">
+<meta http-equiv="refresh" content="5;UR L <?state attr_type=regular, is_url_start=false?>">
+<meta http-equiv="refresh" content="URL = <?state attr_type=regular, is_url_start=false?>">
+
+<meta http-equiv="refresh" content="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA <?state attr_type=regular?>">
+
+<span a:type="<?state state=value, attr=a:type?>"
+  a:abc.abc="<?state state=value, attr=a:abc.abc?>"
+  b:a.b.c.d.e.f=<?state state=value, attr=b:a.b.c.d.e.f?>>
+
+<tag.test>
+<?state state=text, tag=tag.test?>
+</tag.test>
+
+<!-- Tests regarding our specific implementation -->
+<meta content="5;URL=<?state attr_type=uri, is_url_start=true?>">
+
+</body>
+
+</html>
+<?state state=text ?>

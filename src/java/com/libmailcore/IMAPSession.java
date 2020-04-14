@@ -15,6 +15,9 @@ public class IMAPSession extends NativeObject {
         finalizeNative();
         super.finalize();
     }
+
+    public native void addPinningForHost(String hostname, byte[] data);
+    public native void setClientCertificate(byte[] data, String password);
     
     /** Sets the IMAP server hostname. */
     public native void setHostname(String hostname);

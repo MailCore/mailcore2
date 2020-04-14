@@ -1,0 +1,7 @@
+{{%AUTOESCAPE context="JAVASCRIPT"}}
+  var msg_text1 = '{{AE_JS_GOOD}}';
+  var msg_text2 = '{{AE_JS_BAD}}';
+{{!Below variable is not quoted}}
+  var msg_text3 = {{AE_JS_BAD}};
+{{!Below variable ends up with :h:j}}
+  var msg_text4 = '{{AE_JS_BAD:h}}';

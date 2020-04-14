@@ -126,7 +126,16 @@ namespace mailcore {
         virtual bool isDisconnected();
         virtual void loginIfNeeded(ErrorCode * pError);
         virtual void saveLastResponse();
-    };
+    
+    private:
+        Array * mPinningHosts;
+        Array * mPinningCerts;
+        Data * mClientCertificate;
+        String * mClientCertificatePassword;
+    public:
+        virtual void addPinningForHost(String * host, Data * certData);
+        virtual void setClientCertificate(Data * clientCertificate, String * password);
+};
     
 }
 

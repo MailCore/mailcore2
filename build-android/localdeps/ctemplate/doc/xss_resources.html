@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <title>Cross-Site Scripting Resources</title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link href="designstyle.css" type="text/css" rel="stylesheet">
+  <style type="text/css">
+  <!--
+  ol.bluelist li {
+    color: #3366ff;
+    font-family: sans-serif;
+  }
+  ol.bluelist li p {
+    color: #000;
+    font-family: "Times Roman", times, serif;
+  }
+  ul.blacklist li {  
+    color: #000;
+    font-family: "Times Roman", times, serif;
+  }
+  //-->
+  </style>
+</head>
+<body>
+
+<h1> <a name="XSS_Resources"></a>Cross-Site Scripting Resources</h1>
+<center><strong>Status: Current</strong> &nbsp;
+<small>(as of 17 August 2006)</small></center>
+<br>
+
+<p>Cross-Site Scripting (commonly abbreviated as XSS) is a security
+issue that arises when an attacker can cause client-side script (such as
+JavaScript) of his or her choosing to execute within another user's
+browser in the context of a given web-site or web-application.  This may
+allow the attacker to steal that user's session cookies for the
+web-application in question, or otherwise manipulate that user's session
+context. 
+
+<p>XSS vulnerabilities most often arise if a web-application renders
+data that originated from an untrusted source (such as a query
+parameter) in a HTML document without carefully validating or escaping
+that data.
+
+<p>The following online resources provide further information on XSS
+vulnerabilities and how to avoid them:
+
+<ul>
+  <li>The Open Web Application Security Project (OWASP) has an
+  <a
+    href="http://www.owasp.org/index.php/Cross_Site_Scripting">introductory
+    article</a> on XSS.
+  </li>
+
+  <li>In addition, the OWASP's <a
+    href="http://www.owasp.org/index.php/Category:OWASP_Guide_Project">Guide to Building Secure Web
+    Applications and Web Services</a> and the <a
+    href="http://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project">"Top
+    Ten" Vulnerabilities</a> include sections on XSS.
+  </li>
+
+  <li>The CERT Coordination Center published <a
+    href="http://www.cert.org/tech_tips/malicious_code_mitigation.html">Understanding
+    Malicious Content Mitigation for Web Developers</a> and <a
+    href="http://www.cert.org/advisories/CA-2000-02.html">Advisory
+    CA-2000-02 Malicious HTML Tags Embedded in Client Web Requests</a>.
+
+  </li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,13 @@
+This directory contains an implementation of an html context scanner with no
+lookahead. Its purpose is to scan an html stream and provide context
+information at any point within the input stream. This is used in the
+auto escaping functionality of the templating system, which would require
+html context information at very specific points within the html stream. The
+implementation is based on a simplified state machine of HTML4.1.
+
+The implementation is written in C, with the idea of making is usable
+in other contexts besides this html paresr; however, we compile all
+the files as c++ files in order to be able to use a namespace (and
+avoid global namespace pollution).  There's also a c++ shim to give an
+object-oriented look at the html parser state, which is what the
+ctemplate system actually uses.

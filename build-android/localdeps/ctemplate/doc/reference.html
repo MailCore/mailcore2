@@ -1,0 +1,1707 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+<title>Ctemplate System Reference Guide</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="designstyle.css" type="text/css" rel="stylesheet">
+<style type="text/css">
+  ol.bluelist li {
+    color: #3366ff;
+    font-family: sans-serif;
+  }
+  ol.bluelist li p {
+    color: #000;
+    font-family: "Times Roman", times, serif;
+  }
+  ul.blacklist li {
+    color: #000;
+    font-family: "Times Roman", times, serif;
+  }
+</style>
+</head>
+
+<body>
+
+<h1>Ctemplate System Reference Guide</h1>
+<small>(as of
+<script type=text/javascript>
+  var lm = new Date(document.lastModified);
+  document.write(lm.toDateString());
+</script>)
+</small>
+<br>
+
+
+<h2> Overview </h2>
+
+<p>The main class used by the template system is
+<code>TemplateDictionary</code>, which is used to expand a template
+file.  It is used by the main functions for expanding a template,
+found in <code>template.h</code>.</p>
+
+<p><code>TemplateCache</code> is used to hold a collection of
+<code>Template</code> objects.  <code>TemplateNamelist</code> provides
+various introspection routines on collections of <code>Template</code>
+objects.</p>
+
+<p><code>TemplateModifier</code> and <code>PerExpandData</code> are
+used to modify the values of a <code>TemplateDictionary</code> at
+expand time.  <code>TemplateAnnotator</code> does too, but is intended
+for debugging purposes.  <code>TemplateDictionaryPeer</code> is used
+for testing template code.</p>
+
+<p><code>ExpandEmitter</code> provides the ability to emit an expanded
+template to an arbitrary output store.</p>
+
+<p><code>TemplateString</code> is a string-like class that is built to
+be very efficient when used with the template system.  For instance,
+tools are available to hash constant <code>TemplateString</code>
+objects at compile-time, speeding up their use at run-time.</p>
+
+<p>The rest of this document describes these classes and functions in
+more detail, as well as build tools and other mechanisms for handling
+templates.</p>
+
+<p>(Note: the code snippets below all assume the default configuration
+option is set, which puts template code in namespace
+<code>ctemplate</code>.)</p>
+
+<h2> <A NAME="template">Expanding Templates</A> </h2>
+
+
+<h3> The Template Language </h3>
+
+<p>Templates are strings that contain special formatting code called
+<em>template markers</em>.  In the Ctemplate System, template
+strings are usually read from a file.</p>
+
+<p>Anything found in a template of the form {{...}} is
+interpreted as a template marker.  All other text is considered
+formatting text and is output verbatim at template expansion time.
+Outside of the template markers, templates may contain any text
+whatsoever, including (single) curly braces and NUL characters.</p>
+
+<p>The template language has six types of markers:</p>
+<ol>
+  <li> <b>Variable</b> markers, which are replaced by text based on
+       dictionary values.  Variable markers look like this:
+       {{FOO}}</li>
+
+  <li> <b>Start section</b> and <b>end section</b> markers, which
+       delimit sections which may appear zero, one, or N times in
+       the output.  Section markers look like this:
+       <code>{{#FOO}}...{{/FOO}}</code></li>
+
+  <li> <b>Template-include</b> markers, which designate other
+       templates to be expanded and inserted at the location where the
+       marker appears.  These are treated much like sections -- one
+       may think of them as sections whose content is specified in a
+       different file instead of inline -- and just like sections, can
+       be expanded zero, one or N times in the output, each with a
+       different dictionary.  Template-include markers look like this:
+       <code>{{&gt;FOO}}</code></li>
+
+  <li> <b>Comment</b> markers, which may annotate the template
+       structure but drop completely out of the expanded
+       output.  Comment markers look like this:
+       <code>{{!&nbsp;comment&nbsp;lives&nbsp;here -- cool, no?}}</code></li>
+
+  <li> <b>Set-delimiter</b> markers, which change the marker
+       delimiters from <code>{{</code> and <code>}}</code> to custom
+       strings.  (The only requirement is that these strings not
+       contain whitespace or the equals sign.)  This is useful for
+       languages like TeX, where double-braces may occur in the text
+       and are awkward to use for markup.  Set-delimiter markers look
+       like this: <code>{{=&lt; &gt;=}} &lt;! Now markers are
+       delimited by braces &gt; &lt;=| |=&gt; |! And now markers are
+       delimited by bars! | </code></li>
+
+  <li> <b>Pragma</b> markers, which invoke additional built-in template
+       features when processing the template. Pragma markers look like
+       this: <code>{{%PRAGMA [name="value"...]}}</code>. Currently,
+       AUTOESCAPE is the only pragma defined.</li>
+</ol>
+
+<p>These marker types each have their own namespace.  For readability,
+however, it is best to not overuse a single name.</p>
+
+
+<h3> Modifiers </h3>
+
+<p>A variable and include-template can have one or more <A
+HREF="#template_modifier">modifiers</A> attached to them, like so:</p>
+<pre>
+   {{MYVAR:mod1:mod2:mod3=value:mod4=value with spaces:mod5}}
+</pre>
+
+<p>A modifier is a filter that's
+applied at template-expand time, that munges the value of the variable
+before it's output.  See the <A
+HREF="#template_modifier"><code>TemplateModifier</code></A> class for
+more details.</p>
+
+<p>When expanding a variable (or template-include) with a modifier,
+the modifiers are applied in order, left to right.  For a
+template-include, first the entire sub-template is expanded, as a
+single string, and then the modifiers are applied to that string.</p>
+
+<p>In general, using explicit modifiers does not turn off <A
+HREF="#auto_escape">auto-escaping</A> on a variable.  The explicit
+modifier <code>:none</code> does suppress auto-escaping.</p>
+
+
+<h3> <A NAME="special_markers">Special Markers</A> </h3>
+
+<p>Some marker names may have a special meaning in the template
+system.  Right now, there's one such name.</p>
+
+<h4><A NAME="separator">Separator Sections</A></h4>
+
+<p>If you have a section named FOO, you can define inside
+of it a section named FOO_separator, and the template
+system will automatically expand that section every time
+<code>FOO</code> is expanded, <i>except for the last</i>.  Thus, the
+contents of <code>FOO_separator</code> can be used to separate
+repeated values of a section.</p>
+
+<p>Here's an example:</p>
+<pre>
+   Here are the meeting attendees:
+   {{#ATTENDEES}}
+      {{NAME}}
+      {{#ATTENDEES_separator}}, {{/ATTENDEES_separator}}
+   {{/ATTENDEES}}
+   .
+</pre>
+
+<p>Here is a more convoluted example, to show the date:</p>
+<pre>
+   {{#DATE}}{{DATE_COMPONENT}}{{#DATE_separator}}{{DATE_SEP}}{{/DATE_separator}}{{/DATE}}
+</pre>
+
+<p>You'd set up a template dictionary to repeat <code>DATE</code>
+three times, with <code>DATE_COMPONENT</code> set to the month, day,
+and year (or day, month, and year, depending on your locale...), and
+<code>DATE_SEP</code> set to <code>/</code> or <code>-</code> or
+whatever date-separator is called for.</p>
+
+<p><code>SEP_separator</code> is always evaluated with the current
+dictionary.  Thus, in the date example, if you wanted a different
+separator each time, you could do so by setting <code>DATE_SEP</code>
+to a different value for each repetition of <code>DATE</code>.</p>
+
+<p>While <code>SEP_separator</code> is automatically expanded by the
+template system, it is otherwise a perfectly normal section.  You can
+even instantiate it yourself by calling
+<code>AddSectionDictionary("SEP_separator")</code>.  In that case, the
+section will be expanded both via the automatic expansion as a
+separator, and as a normal section via the section dictionary you
+added.  This is more confusing than helpful, and you should probably
+never do it.</p>
+
+<p>There can be at most one "separator" sub-section per section.  If
+there are more, only the last is automatically expanded.</p>
+
+
+<h3> <A NAME="strip">Specifying a template</A> </h3>
+
+<p>In the template system -- in functions like
+<code>ExpandTemplate()</code> -- a template is specified by a pair:
+filename + strip-mode.  The filename specifies the name of the
+template file on disk (but see below for string templates).  The strip
+mode specifies how this file should be parsed as it's read from disk,
+in particular, how whitespace should be handled.  It can take the
+following values:</p>
+
+<ul>
+  <li> <code>ctemplate::DO_NOT_STRIP</code>: do nothing.  This expands
+       the template file verbatim.
+
+  <li> <code>ctemplate::STRIP_BLANK_LINES</code>: remove all blank
+       lines.  This ignores any blank lines found in the template file
+       when parsing it.  When the template is html, this reduces the
+       size of the output text without requiring a sacrifice of
+       readability for the input file.
+
+  <li> <code>ctemplate::STRIP_WHITESPACE</code>: remove not only blank
+       lines when parsing, but also whitespace at the beginning and
+       end of each line.  It also removes any linefeed (possibly
+       following whitespace) that follows a closing <code>}}</code> of
+       any kind of template marker <i>except</i> a template variable.
+       (This means a linefeed may be removed anywhere by simply
+       placing a comment marker as the last element on the line.)
+       When the template is html, this reduces the size of the output
+       html without changing the way it renders (except in a few
+       special cases.)  When using this flag, the built-in template
+       variables <code>BI_NEWLINE</code> and <code>BI_SPACE</code> can
+       be useful to force a space or newline in a particular
+       situation.
+</ul>
+
+<p>The filename is where the template file lives on disk.  It can be
+either an absolute filename, or relative to a directory in the
+<A HREF="#search_path">template search path</A>.</p>
+
+<p>In addition to reading a template from disk, it is possible to read
+a template from a string, using <code>StringToTemplateCache()</code>.
+The first argument of <code>StringToTemplateCache()</code> is a "key"
+to use to refer to this string-based template.  This key takes the
+place of the filename, for any routine that asks for a
+filename + strip.</p>
+
+
+<h3> <A NAME="expand_template">ExpandTemplate()</A> </h3>
+
+<p>This is the main workhorse function of the template system.  It
+takes the filename of a template, a <A
+HREF="#template_dictionary">template dictionary</A>, and a string to
+emit to, and emits an "expanded" version of the template using the
+given template dictionary to fill in the template markers.</p>
+
+<p>If the template specified by the given filename is already found in
+an internal cache, the cached version of the template is used,
+otherwise the template is loaded from disk, parsed, and stored in the
+cache before expansion is performed.  As always, the "filename" can
+also be a <A HREF="#strip">key</A> to a string-based template,
+inserted directly into the cache via
+<code>StringToTemplateCache()</code>.</p>
+
+<p>There is an overloaded version of <code>Expand()</code> that takes
+an <A HREF="#expand_emitter"><code>ExpandEmitter</code></A> rather
+than a string, as the source to expand the template into.</p>
+
+<p>This function returns true if the template was successfully
+expanded into the output parameter.  It returns false if expansion
+failed or was only partially successful.  It might fail because the
+template file cannot be found on disk, or because the template has
+syntax errors and cannot be parsed, or because the template
+sub-includes another template, and that sub-template has errors.  To
+minimize the risk of errors at expand-time, you can call
+<code>LoadTemplate()</code> (below) first to load and parse the
+template into the cache.  This will catch all errors except for errors
+involving sub-templates.</p>
+
+<p>In the case of partial failures -- typically, failures resulting in
+an error in a sub-inclued template -- there may be partial data
+emitted to the output before the error was detected.  If
+<code>ExpandTemplate()</code> returns false, you should be careful to
+check for and remove this partial data, if desired.</p>
+
+
+<h3> <A NAME="expand_with_data">ExpandWithData()</A> </h3>
+
+<p><code>ExpandWithData()</code> is like
+<code>ExpandTemplate()</code>, with the addition that it allows you to
+pass in <A HREF="#per_expand_data">per-expand data</A>.  It's called
+like this:</p>
+<pre>
+   ctemplate::TemplateDictionary dict(...);
+   ctemplate::PerExpandData per_expand_data;
+   string output;
+   ctemplate::ExpandWithData(filename, strip_mode, &amp;output, &amp;dict,
+                             &amp;per_expand_data);
+</pre>
+
+<p>Per-expand data is applied to all templates that are seen while
+expanding: not only the template you called <code>Expand()</code> on,
+but also sub-templates that are brought in via template-includes
+(<code>{{&gt;INCLUDE}}</code>).  See the description of the <A
+HREF="#per_expand_data"><code>PerExpandData</code></A> class for more
+details about how expansion can be modified by per-expand data.</p>
+
+<p>The return value has the same meaning as for
+<code>ExpandTemplate()</code> In fact, if you pass in
+<code>NULL</code> as the <code>per_expand_data</code> argument, this
+function is exactly equivalent to <code>ExpandTemplate()</code>.</p>
+
+
+<h3> <A NAME="load_template">LoadTemplate()</A> </h3>
+
+<p>This function takes a filename and a strip-mode, and loads the file
+into the default template cache.  Future calls to
+<code>ExpandTemplate()</code> or <code>ExpandWithData()</code> will
+get the parsed template from the cache, without needing to go to
+disk.</p>
+
+<p>This function returns true if the template was successfully read
+from disk, parsed, and inserted into the cache.  It will also return
+true if the template is already in the cache (even if the file has
+changed on disk since the template was inserted into the cache).  It
+will return false if the file cannot be found on disk, or cannot be
+successfully parsed.  (Note that <code>LoadTemplate()</code> cannot
+detect errors in sub-included templates, since the identity of
+sub-included templates is specified in a
+<code>TemplateDictionary</code>, not in the template itself.)</p>
+
+
+<h3> <A NAME="string_to_template_cache">StringToTemplateCache()</A> </h3>
+
+<p>In addition to reading a template file from disk, it is also
+possible to read a template file from a string, using
+<code>StringToTemplateCache()</code>.  It takes the content
+as a string.  It also takes in a key and a <A HREF="#strip">strip</A>
+mode.  The given key and strip mode can be used as the filename/strip
+pair in calls to <code>ExpandTemplate()</code> and similar
+functions.  The key can also be used as the "filename" in calls to
+<code>ctemplate::TemplateDictionary::SetFilename()</code>, allowing
+this template to be included inside other templates.</p>
+
+<p><code>StringToTemplateCache()</code> returns true if the string is
+successfully inserted into the cache.  It returns false otherwise,
+probably because there is already a string or filename in the cache
+with the same key.</p>
+
+
+<h3> default_template_cache() and mutable_default_template_cache() </h3>
+
+<p>All the above routines -- <code>ExpandTemplate()</code>,
+<code>LoadTemplate()</code>, and the like -- read and write parsed
+templates to the default template cache.  This is just a static
+instance of the <A
+HREF="#template_cache"><code>TemplateCache</code></A> class.  It can
+be accessed via these two functions:
+<code>default_template_cache()</code> and, if you need a non-const
+version of the cache, <code>mutable_default_template_cache()</code>.
+These can be useful if you need the advanced features of template
+caches, such as <code>ReloadAllIfChanged()</code> or
+<code>ClearCache()</code>.</p>
+
+
+<h2> <A NAME="template_dictionary">The <code>TemplateDictionary</code>
+     Class</A> </h2>
+
+<p>The class <code>TemplateDictionary</code> is used for all template
+dictionary operations.  In general, an application will need to call a
+<code>TemplateDictionary</code> method for every marker in the
+associated template (the major exception: markers that evaluate to the
+empty string can be ignored).</p>
+
+<p>The appropriate function to call for a given template marker
+depends on its type.</p>
+
+
+<h3> Data Dictionaries </h3>
+
+<p>A data dictionary is a map from keys to values.  The keys are
+always strings, corresponding to the name of the associated template
+marker, so a section <code>{{#FOO}}</code> in the template text is
+matched to the key <code>FOO</code> in the dictionary, if it exists.
+Note the case must match as well.</p>
+
+<p>The value associated with a key differs according to key type.  The
+value associated with a <i>variable</i> is simple: it's the value for
+that variable.  Both keys and values can be any 8-bit
+character-string, and may include internal NULs (<code>\0</code>).</p>
+
+<p>The value associated with a <i>section</i> is a list of data
+dictionaries.  At template-expansion time, the section is expanded
+once for each dictionary in the list.  The first time, all
+variables/etc. in the section will be evaluated taking into account
+the first dictionary.  The second time, all variables/etc. will be
+evaluated taking into account the second dictionary.  (See <A
+HREF="#inheritance">below</A> for a definition of "taking into
+account.")</p>
+
+<p>The value associated with a <i>template-include</i> is also a list
+of data dictionaries.  Each data dictionary in this list must also
+have one other, mandatory associated piece of associated information:
+the filename of the template to include.  At expand-time, that
+filename is passed as-is to <code>ctemplate::ExpandTemplate()</code>
+(or, more exactly, the equivalent of <code>ExpandTemplate()</code> in
+the same <code>TemplateCache</code> that the parent template comes
+from).</p>
+
+
+<h3> <A NAME="inheritance">Details on Dictionary Lookup</A> </h3>
+
+<p>The dictionary structure is a tree: there's a 'main' dictionary,
+and then a list of sub-dictionaries for each section or
+include-template.  When looking up a marker -- be it a variable,
+section, or include-template marker -- the system looks in the
+currently applicable dictionary.  If it's found there, that value is
+used.  If not, and the parent dictionary is not an include-template,
+it continues the look in the parent dictionary, and possibly the
+grandparent, etc.  That is, lookup has <i>static scoping</i>: you look
+in your dictionary and any parent dictionary that is associated with
+the same template-file.  As soon as continuing the lookup would
+require you to jump to a new template-file (which is what
+include-template would do), we stop the lookup.</p>
+
+<p>If lookup fails in all dictionaries, the template system does a
+final lookup in the <b>global variable dictionary</b>.</p>
+
+<p>The system initializes the global dictionary with a few useful
+values for your convenience (the user can add more).  All system
+variables are prefixed with <code>BI</code>, to emphasize they are
+"built in" variables.</p>
+<ul>
+  <li> <code>BI_SPACE</code>, which has the value
+       <code>&lt;space&gt;</code>.  It is used to force a space
+       at the beginning or end of a line in the template,
+       where it would normally be suppressed.  (See below.) </li>
+
+  <li><code>BI_NEWLINE</code>, which has the value
+       <code>&lt;newline&gt;</code> It is used to force a
+       newline at the end of a line, where it would normally
+       be suppressed.  (See below.) </li>
+</ul>
+
+<p>Variable inheritance happens at expand time, not at
+dictionary-create time.  So if you create a section dictionary, and
+then afterwards set a variable in its parent dictionary (or in the
+global dictionary), the section <i>will</i> inherit that variable
+value, if it doesn't define the value itself.</p>
+
+
+<h3> SetValue() and variants </h3>
+
+<p>SetValue() is used to set the value for a variable
+marker in a dictionary.  It takes a string as input -- nominally a <A
+HREF="#template_string"><code>TemplateString</code></A>, though a C++
+string or C char* will be auto-converted -- for the variable name and
+its value.  The name is the same string as is used for the variable's
+template-marker inside the template this dictionary will be expanded
+with: if the template reads <code>Hello {{NAME}}</code> then the
+first argument to <code>SetValue()</code> must be <code>NAME</code>.
+Case matters.</p>
+
+<p><code>SetIntValue()</code> takes an integer as the value, rather
+than a string.  On all platforms, the integer may be up to 64
+bits.</p>
+
+<p><code>SetFormattedValue()</code> is a convenience routine.
+<code>SetFormattedValue(key, arg1, arg2, ...)</code> is logically
+equivalent to</p>
+<pre>
+   char buffer[A_BIG_ENOUGH_NUMBER];
+   sprintf(buffer, arg1, arg2, ...);
+   SetValue(key, buffer);
+</pre>
+<p>without having to worry about the size of <code>buffer</code>, or
+about stack overflow.</p>
+
+<p><code>SetValueWithoutCopy()</code> is provided to give an extra bit
+of efficiency when needed.  <code>SetValue()</code> will copy the key
+and value into an internal data structure used by the
+<code>TemplateDictionary</code>; this avoids dangling pointers if the
+arguments to <code>SetValue()</code> are temporaries, or otherwise
+have shorter lifetime than the <code>TemplateDictionary</code>.  But
+if you know that both the key and value strings have lifetime longer
+than the <code>TemplateDictionary</code> -- perhaps because they are
+global (static duration) <code>char*</code>'s -- you can call
+<code>SetValueWIthoutCopy()</code> to avoid the copy.  This yields a
+small time savings at the cost of significant code fragility, so
+should only be used when absolutely necessary.</p>
+
+
+<h3> SetGlobalValue() and SetTemplateGlobalValue() </h3>
+
+<p><code>SetGlobalValue()</code> is like <code>SetValue()</code> but
+works on the global dictionary.  Since the global dictionary is shared
+across all template dictionaries, this is a static method on
+<code>TemplateDictionary</code>.  It is thread-safe.  It is also
+relatively slow.</p>
+
+<p><code>SetTemplateGlobalValue()</code> is like
+<code>SetValue()</code>, but the values are preserved across
+template-includes.</p>
+
+<p>This example shows all three forms:</p>
+<pre>
+A.tpl:
+   {{NAME}} has won {{>PRIZE}}.  It is worth {{AMOUNT}}.
+B.tpl:
+   {{AMOUNT}} dollars!  And it's all yours, {{NAME}}
+C.tpl:
+   To: {{NAME}}.  Amount: {{AMOUNT}}.
+code:
+   ctemplate::TemplateDictionary dict("set_value_demo");
+   ctemplate::TemplateDictionary* subdict = dict.AddIncludeDictionary("PRIZE");
+   subdict->SetFilename("B.tpl");
+   dict->SetValue("NAME", "Jane McJane");
+   dict->SetTemplateGlobalValue("AMOUNT", "One Million");
+   ctemplate::TemplateDictionary::SetGlobalValue("NAME", "John Doe");
+   ctemplate::TemplateDictionary dict_c("set_value_demo, part 2");
+
+   ctemplate::ExpandTemplate("A.tpl", ..., &amp;dict);
+   ctemplate::ExpandTemplate("C.tpl", ..., &amp;dict_c);
+</pre>
+
+<p>The first expand yields this:</p>
+<pre>
+   Jane McJane has won One Million dollars!  And it's all yours, John Doe.  It is worth One Million.
+</pre>
+
+<p>The second expand yields this:</p>
+<pre>
+   To: John Doe.  Amount: .
+</pre>
+
+<p><code>NAME</code> was set via <code>SetValue()</code>, so its
+value was not propagated across the include-dict boundary; instead,
+the subdict (B.tpl) got its value for <code>NAME</code> from the
+global dictionary.  <code>AMOUNT</code>, on the other hand, was set
+via <code>SetTemplateGlobalValue()</code>, so its value was propagated
+across the boundary, and the subdict saw it.  However, the totally
+unrelated template, C.tpl, did not see either value, and only sees the
+values in the global dictionary.  (Of course, had we filled
+<code>dict_c</code> with some values, C.tpl would have had access to
+those.)</p>
+
+
+<h3> AddSectionDictionary(), ShowSection(),
+     and SetValueAndShowSection() </h3>
+
+<p><code>AddSectionDictionary(section_name)</code> returns a
+sub-dictionary associated with the given section_name (for instance,
+<code>dict.AddSectionDictionary("MYSECT")</code> for a template like
+<code>{{#MYSECT}}...{{/MYSECT}}</code>).  If called multiple times, it
+will return a new dictionary each time.  During <code>Expand()</code>,
+the section will be expanded once for each time
+<code>AddSectionDictionary()</code> was called; that is, the text
+inside the section delimiters will be repeated once for each
+<code>AddSectionDictionary()</code> call, and within a single
+repetition, the dictionary returned by
+<code>AddSectionDictionary()</code> will be used to populate the text
+inside the section delimiters.  (With the current dictionary as that
+dictionary's parent, for inheritance purposes.)</p>
+
+<p>This suggests that if <code>AddSectionDictionary()</code> is never
+called on a section, the text inside the section will be omitted
+entirely by <code>Expand()</code>.</p>
+
+<p><code>ShowSection()</code> is a convenience method used to show the
+text inside the section exactly once.  It is equivalent to calling
+<code>AddSectionDictionary()</code> once, and ignoring the returned
+sub-dictionary.  All variables in the section will depend on
+dictionary inheritence to get their values.</p>
+
+<p><code>SetValueAndShowSection()</code> is another convenience
+method,, used to show a section if and only if a related variable is
+set to a non-empty value.  <code>SetValueAndShowSection(name, value,
+section_name)</code> is equivalent to this: if value is empty do
+nothing, otherwise add a single dictionary to
+<code>section_name</code> and call <code>section_dict->AddValue(name,
+value)</code>.</p>
+
+<p>Example:</p>
+<pre>
+   ctemplate::TemplateDictionary* dict = new ctemplate::TemplateDictionary("section example");
+   const char* username = GetUsername();   // returns "" for no user
+   if (username[0] != '\0') {
+      ctemplate::TemplateDictionary* sub_dict = dict->AddSectionDictionary("CHANGE_USER");
+      sub_dict->SetValue("USERNAME", username);
+   } else {
+      // don't need to do anything; we want a hidden section, which is the default
+   }
+
+   // Instead of the above 'if' statement, we could have done this:
+   if (username[0] != '\0') {
+      dict->ShowSection("CHANGE_USER");       // adds a single, empty dictionary
+      dict->SetValue("USERNAME", username);   // take advantage of inheritance
+   } else {
+      // don't need to do anything; we want a hidden section, which is the default
+   }
+
+   // Or we could have done this:
+   dict->SetValueAndShowSection("USERNAME", username, "CHANGE_USER");
+
+   // Moving on...
+   GetPrevSearches(prev_searches, &amp;num_prev_searches);
+   if (num_prev_searches > 0) {
+      for (int i = 0; i < num_prev_searches; ++i) {
+         TemplateDictionary* sub_dict = dict->AddSectionDictionary("PREV_SEARCHES");
+         sub_dict->SetValue("PREV_SEARCH", prev_searches[i]);
+      }
+   }
+</pre>
+
+
+<h3> AddIncludeDictionary() and SetFilename() </h3>
+
+<p><code>AddIncludeDictionary(section_name)</code> returns a
+sub-dictionary associated with the given include_name (for instance,
+<code>dict.AddIncludeDictionary("MYTPL")</code> for a template like
+<code>{{>MYTPL}}</code>).  If called multiple times, it
+will return a new dictionary each time.  It is the responsibility of
+the caller to then call <code>SetFilename()</code> on the
+sub-dictionary returned.</p>
+
+<p>During <code>Expand()</code>,
+each dictionary returned by <code>AddIncludeDictionary</code> will be
+examined in turn.  For each dictionary for which
+<code>SetFilename()</code> is called, that filename will be read as a
+template (via <code>LoadTemplate()</code>, with the same
+"strip" value as the current template), and expanded using the
+dictionary.  (Note that the dictionary will not inherit
+<code>SetValue()</code> values from the parent dictionary, though it
+will inherit <code>SetTemplateGlobalValue()</code> values.)  This
+expanded template will then be emitted to the output.</p>
+
+<p>Note that if <code>AddIncludeDictionary()</code> is never called,
+the template-include will be a no-op during <code>Expand()</code>.
+Likewise, if it is called but <code>SetFilename()</code> is never
+called on the resulting sub-dictionary, the template-include will be a
+no-op.  On the other hand, if it is called multiple times, multiple
+templates -- possibly all from the same file, possibly not -- will be
+inserted at the point of the template-include.</p>
+
+<p>If a user has called <code>StringToTemplateCache(key, ...)</code>,
+then the user can call <code>SetFilename(key)</code> to include the
+contents of the string as the sub-template.</p>
+
+
+<h3> Dump() and DumpToString() </h3>
+
+<p>These routines dump the contents of a dictionary and its
+sub-dictionaries.  <code>Dump()</code> dumps to stdout,
+<code>DumpToString()</code> to a string.  They are intended for
+debugging.</p>
+
+
+<h2> <A NAME="template_cache">The <code>TemplateCache</code> Class</A> </h2>
+
+<p>This class holds a collection of templates.  It can be used to give
+you a coherent view of the template system: you load all the templates
+you are going to use into the cache, and then reload them from disk in
+one atomic operation.  You can have multiple
+<code>TemplateCache</code> objects in your executable, perhaps one for
+each service you provide, or perhaps one per thread (so as to avoid
+thread contention when loading templates).</p>
+
+<p>One intended use of the template cache is to make it safe to reload
+template files while serving user requests from a webserver.  The idea
+is that every user request, as it's created, is associated with the
+current template cache.  When you wish to reload, you
+<code>Clone()</code> the current cache, and then reload inside the
+cloned copy.  New requests will get the cloned cache, while old
+requests will continue to render using the old cache.
+<code>TemplateCache</code> is written to make this use-case efficient:
+templates are shared between caches when appropriate, with
+reference-counting to keep memory management easy.</p>
+
+
+<h3> The default template cache </h3>
+
+<p>The template system creates a default template cache, which is
+available via the functions <code>default_template_cache()</code> and
+<code>mutable_default_template_cache()</code>.</p>
+
+<p>For simple uses of the template system, using the default cache,
+via <code>ExpandTemplate()</code> and the like, may be perfectly
+adequate.  If you want more sophisticated features, such as the
+ability to have different versions of the same template file active at
+one time, or to change the template root-directory, you will have to
+use an explicit <code>TemplateCache</code>.</p>
+
+
+<h3> LoadTemplate() and StringToTemplateCache() </h3>
+
+<p>These two routines are how you explicitly insert data into the
+cache.  <code>LoadTemplate()</code> reads a template from disk, while
+<code>StringToTemplateCache()</code> takes the data from a
+user-specified string.  These work exactly the same as the global <A
+HREF="#load_template"><code>LoadTemplate()</code></A> and <A
+HREF="#string_to_template_cache"><code>StringToTemplateCache()</code></A>,
+except they insert into the given <code>TemplateCache</code>, rather
+than the global cache.</p>
+
+<p><code>LoadTemplate()</code> is not strictly necessary: if the cache
+cannot find a template it needs at <code>Expand*()</code> time, it will
+automatically try to fetch it from disk.  It is intended mostly for
+use with <A HREF="#freeze"><code>Freeze()</code></A>, which disables
+this auto-fetch behavior.</p>
+
+<p>Both of these routines take a <A HREF="#strip">strip</A> mode
+specifying how the template system should treat whitespace while
+parsing.</p>
+
+<p>If the template-cache is <A HREF="#freeze">frozen</A>,
+<code>LoadTemplate()</code> will only return true if the template is
+already stored in the cache, and will return false in every other
+case.  For a frozen cache, <code>StringToTemplateCache()</code> will
+always return false.</p>
+
+
+<h3> ExpandWithData() and ExpandFrozen() </h3>
+
+<p>These routines takes a string that represents either a template
+filename (for disk-based templates), or a key used in
+<code>StringToTemplateCache()</code> (for string-based templates), a <A
+HREF="#strip">strip</A> mode saying how to parse the template's
+whitespace, and <A HREF="#per_expand_data">per-expand data</A> (which
+can be NULL).  Overloads are provided to output the expanded template
+to either a string or to an arbitrary <A
+HREF="#expand_emitter"><code>ExpandEmitter</code></A>.</p>
+
+<p>Expand uses the filename + strip pair to fetch the template from
+the cache, if it's there.  If not, <code>ExpandWithData()</code> will
+fetch the template from disk and insert it into the cache.
+<code>ExpandFrozen()</code>, on the other hand, will just fail to
+expand, and return false.  This is the only difference in behavior
+between the two routines.  To reinforce this behavior,
+<code>ExpandFrozen()</code> will return false immediately if <A
+HREF="#freeze"><code>Freeze()</code></A> has not been called on the
+cache.
+
+<p>While expanding, the template system may come across template
+sub-includes (<code>{{>SUB_TEMPLATE}}</code>).  It will attempt to
+fetch these templates from the cache as well; failing that, it will
+try to load the template from disk (for <code>ExpandWithData()</code>)
+or else fail the expand and return false (for
+<code>ExpandFrozen()</code>).</p>
+
+<p>Because <code>ExpandFrozen()</code> never updates the cache, it is
+a const method, unlike <code>ExpandWithData()</code>.</p>
+
+<p>Note that <code>TemplateCache</code> does not provide the
+convenience <code>ExpandTemplate()</code> routine, as the analogue of
+the global <A
+HREF="#expand_template"><code>ExpandTemplate()</code></A>.  If you are
+not interested in the per-expand data, just call
+<code>ExpandWithData()</code> with the per-expand data set to NULL.</p>
+
+
+<h3> ReloadAllIfChanged() </h3>
+
+<p>For every file-based template in the cache (this method ignores
+string-based templates), <code>ReloadAllIfChanged()</code> checks the
+filesystem to see if the file has changed since it was loaded into the
+cache.  If so, the cache loads a new version of the file into the
+cache.  Note that at this point both the old and new versions of the
+file exist in the cache!  Only the new version is accessible via new
+calls to <code>Expand()</code>, but any expansions currently in flight
+during the <code>ReloadAllIfChanged()</code> call will continue to use
+the old version.</p>
+
+<p>NOTE: <code>ReloadAllIfChanged()</code> never modifies existing
+items in the cache in any way.  It only loads new entries into the
+cache.</p>
+
+<p><code>ReloadAllIfChanged()</code> comes in two flavors, controlled
+by the passed-in enum.  In "immediate" mode, it synchronously iterates
+through the cache and reloads all files that need it.  In "lazy" mode,
+it waits to reload a given template file until the next time it's
+actually used (in a call to <code>Expand*()</code>).  "Immediate" mode
+is safer in the case where templates depend on each other and the
+files change a lot, since all files are reloaded at about the same
+time.  "Lazy" mode avoids the latency spike of "immediate" mode, and
+is preferable in the (common) case that files on disk change only
+rarely.</p>
+
+
+<h3> <A NAME="search_path"> SetTemplateRootDirectory(),
+     AddAlternateTemplateRootDirectory(), and
+     template_root_directory() </A> </h3>
+
+<p>By default, filenames passed in to <code>Expand*()</code> are taken
+to be relative to the current working directory.  These functions
+change that behavior.  <code>SetTemplateRootDirectory()</code> resets
+the search path to be the single path passed in to this function.
+Every time <code>AddAlternateTemplateRootDirectory()</code> is called,
+it adds another directory to the end of the search path.  The template
+system will follow the search path, in order, when looking for a
+filename.</p>
+
+<p>Note that the template search path is only meaningful when the
+filename passed to <code>Expand*()</code> (or specified for a
+sub-include) is a relative filename.  If the filename is an absolute
+filename, starting with <code>/</code>, the search path is
+ignored.</p>
+
+<p><code>template_root_directory()</code> returns the first entry in
+the search path.  There is currently no way to access other entries in
+the search path.</p>
+
+
+<h3> FindTemplateFilename() </h3>
+
+<p><code>FindTemplateFilename()</code> does the work of finding a
+template file in the filesystem, using the current template search
+path.  It takes a relative pathname as input, and returns an absolute
+pathname as output, indicating where the template file lives on the
+filesystem.  If the template file is not found, this method returns
+the empty string.</p>
+
+
+<h3> <A NAME="freeze">Freeze()</A> </h3>
+
+<p><code>Freeze()</code> marks the template cache as immutable.  After
+this method is called, the cache can no longer be modified by loading
+new templates or reloading existing templates.  During expansion only
+cached included templates will be used; they won't be loaded
+on-demand.</p>
+
+<p>Before calling <code>Freeze()</code>, you should make sure your
+cache has all the templates it might need, using
+<code>LoadTemplate()</code> and <code>StringToTemplateCache()</code>.
+Otherwise, <code>ExpandWithData()</code> and
+<code>ExpandFrozen()</code> may fail.</p>
+
+<p>Once the cache is frozen, calls to
+<code>SetTemplateRootDirectory()</code>,
+<code>AddAlternateTemplateRootDirectory()</code>,
+<code>Delete()</code>, and <code>ReloadAllIfChanged()</code> will
+fail.</p>
+
+<p>After the cache is frozen, the <code>TemplateCache</code> object is
+effectively const.</p>
+
+
+<h3> Delete() </h3>
+
+<p>This method deletes an entry from the cache.  If the entry is in
+the cache multiple times (each with a different "strip" mode), this
+method deletes all of them.</p>
+
+
+<h3> ClearCache() </h3>
+
+<p>This method deletes all entries from the cache.  It can be called
+even on a frozen cache.</p>
+
+<p>Note: this method is not typically necessary unless you are testing
+for memory leaks.  It is intended to be called just before exiting the
+program, and after all template expansions are completed.  Using it in
+that way may prevent unnecessary reporting by the leak checker.</p>
+
+
+<h3> Clone() </h3>
+
+<p><code>Clone()</code> makes a shallow copy of the given
+<code>TemplateCache</code> object, and returns the copy.  The new copy
+and the old share the same template objects; since it's a shallow
+copy, they actually share pointers to the exact same object.  (Since
+the template cache never changes a template object once it's loaded
+into the cache, sharing the pointer isn't a risk.)</p>
+
+<p>The intended use of <code>Clone()</code>, as described above, is to
+allow fine control over "epochal" changes in templates.  One
+<code>TemplateCache</code> can hold all versions of the template files
+before the big update; after the update is done, you can clone the old
+cache and then call <code>ReloadAllIfChanged()</code> on the clone.
+This is a low-cost operation, since the two copies share most
+resources.  Smart pointers take care of most memory management
+issues.</p>
+
+<p>The caller is responsible for calling <code>delete</code> on the
+returned <code>TemplateCache</code> object.</p>
+
+
+
+<h2> <A NAME="template_namelist">The <code>TemplateNamelist</code> Class</A> </h2>
+
+<p>This class provides information about <A
+HREF="guide.html#register">registered</A> templates.  Or more
+precisely, all templates corresponding to registered filenames.</p>
+
+<p>All methods in this class are static.</p>
+
+
+<h3> RegisterTemplate() and
+     RegisterTemplateFilename() </h3>
+
+<p><code>TemplateNamelist::RegisterTemplate()</code> takes a filename
+and adds it to the static namelist used by
+<code>TemplateNamelist</code>.  All other methods of
+<code>TemplateNamelist</code> work only on registered filenames.</p>
+
+<p>It's fairly rare to call this method directly.  Instead, the more
+common use is to use the macro <code>RegisterTemplateFilename</code>
+somewhere in the global scope, like so:</p>
+<pre>
+RegisterTemplateFilename(EXAMPLE_FN, "example.tpl");
+</pre>
+
+<p>The reason to prefer the macro is it defines a global variable that
+you can use instead of the hard-coded template name.  This helps catch
+typos.  The <code>RegisterTemplateFilename()</code> example is
+functionally equivalent to:</p>
+<pre>
+#define EXAMPLE_FN "example.tpl"
+</pre>
+
+<p>It can be used like this:</p>
+<pre>
+   ctemplate::ExpandTemplate(EXAMPLE_FN, ctemplate::DO_NOT_STRIP, ...);
+</pre>
+
+
+<h3> GetMissingList() </h3>
+
+<p><code>TemplateNamelist::GetMissingList()</code> returns a list of
+all registered templates (or rather, all filenames) where the file
+could not be found on disk.</p>
+
+
+<h3> AllDoExist() </h3>
+
+<p>Returns true if and only if the missing-list is empty.</p>
+
+
+<h3> GetBadSyntax() </h3>
+
+<p>Returns a list of all registered templates where the template
+contains a syntax error, and thus cannot be used.</p>
+
+
+<h3> IsAllSyntaxOkay() </h3>
+
+<p>True if and only if the bad-syntax list is empty.</p>
+
+
+<h3> GetLastmodTime() </h3>
+
+<p>Returns the latest last-modified time for any registered
+template-file.</p>
+
+
+<h2> <A NAME="template_modifier">The TemplateModifier Class</A>
+     and Associated Functions</h2>
+
+<p>A modifier is a filter that's applied at template-expand time, that
+munges the value of the variable before it's output.  For instance,
+<code>&lt;html&gt;&lt;body&gt;{{NAME:html_escape}}&lt;/body&gt;&lt;/html&gt;</code>
+asks the template system to apply the built-in
+<code>html_escape</code> modifier when expanding
+<code>{{NAME}}</code>.  If you set <code>NAME</code> in your
+dictionary to be <code>Jim &amp; Bob</code>, what will actually be
+emitted in the template is <code>Jim &amp;amp; Bob</code>.</p>
+
+<p>You can chain modifiers together.  This template first html-escapes
+<code>NAME</code>, and then javascript-escapes that result:</p>
+<pre>
+   &lt;html&gt;&lt;body&gt;{{NAME:html_escape:javascript_escape}}&lt;/body&gt;&lt;/html&gt;
+</pre>
+
+<p>Modifiers typically have a long, descriptive name and also a
+one-letter abbreviation.  So this example is equivalent to the
+previous one:</p>
+<pre>
+   &lt;html&gt;&lt;body&gt;{{NAME:h:j}}&lt;/body&gt;&lt;/html&gt;
+</pre>
+
+<p>Some modifiers take an argument, specified after an equals
+sign:</p>
+<pre>
+   &lt;html&gt;&lt;body&gt;{{NAME:html_escape_with_arg=pre}}&lt;/body&gt;&lt;/html&gt;
+</pre>
+
+
+<h3> Built-in Modifiers </h3>
+
+<p>Here are the modifiers that are built in to the template system.
+They are all defined in template_modifiers.cc:</p>
+
+<table border="1" cellpadding="3" summary="List of built-in modifiers">
+<tr><th>long name</th><th>short name</th><th>description</th></tr>
+
+<tr><td><code>:cleanse_css</code></td><td><code>:c</code></td>
+    <td>Removes characters not safe for a CSS value. Safe characters
+      are alphanumeric, space, underscore, period, coma, exclamation
+      mark, pound, percent, and dash.</td>
+</tr>
+
+<tr><td><code>:html_escape</code></td><td><code>:h</code></td>
+    <td>html-escapes the variable before output
+        (eg <code>&amp;</code> -> <code>&amp;amp;</code>)</td>
+</tr>
+
+<tr><td><code>:html_escape_with_arg</code></td><td><code>:H</code></td>
+  <td>special purpose html escaping. See
+    <a href="#html_escape_args">:H Arguments</a>
+    below for details.</td>
+</tr>
+
+<tr><td><code>:img_src_url_escape_with_arg</code></td><td><code>:I</code></td>
+    <td>special purpose image url escaping. See
+      <a href="#url_escape_args">:I and :U Arguments</a>
+      below for details.</td>
+</tr>
+
+<tr><td><code>:javascript_escape</code></td><td><code>:j</code></td>
+    <td>javascript-escapes the variable before output (eg
+        <code>&quot;</code> -> <code>\x27</code> and
+        <code>&amp;</code> -> <code>\x26</code>)</td>
+</tr>
+
+<tr><td><code>:javascript_escape_with_arg</code></td><td><code>:J</code>
+    </td>
+    <td>special purpose javascript escaping. See
+      <a href="#javascript_escape_args">:J Arguments</a>
+      below for details.</td>
+</tr>
+
+<tr><td><code>:json_escape</code></td><td><code>:o</code></td>
+    <td>json-escapes a variable before output as a string in json;
+        HTML characters are escaped using Unicode escape sequences
+        (e.g <code>&amp;</code> -> <code>\u0026</code>) to comply with
+        <a href="http://www.ietf.org/rfc/rfc4627.txt">RFC 4627</a>.
+    </td>
+</tr>
+
+<tr><td><code>:none</code></td><td></td>
+    <td>leaves the variable as is (used to disable <A
+    HREF="#auto_escape">auto-escaping</A>)</td>
+</tr>
+
+<tr><td><code>:pre_escape</code></td><td><code>:p</code></td>
+    <td>pre-escapes the variable before output (same as html_escape but
+      whitespace is preserved; useful for &lt;pre&gt;...&lt;/pre&gt;)</td>
+</tr>
+
+<tr><td><code>:url_escape_with_arg</code></td><td><code>:U</code></td>
+    <td>special purpose url escaping. See
+      <a href="#url_escape_args">:I and :U Arguments</a>
+      below for details.</td>
+</tr>
+
+<tr><td><code>:url_query_escape</code></td><td><code>:u</code></td>
+    <td>performs URL escaping on the variable before output.
+        space is turned into +, and everything other than [0-9a-zA-Z.,_:*/~!()-], is
+        transformed into %-style escapes.  Use this when you are building
+        URLs with variables as parameters:
+        <pre>&lt;a href="http://google.com/search?q={{QUERY:u}}"&gt;{{QUERY:h}}&lt;/a&gt;</pre>
+    </td>
+</tr>
+
+<tr><td><code>:xml_escape</code></td><td></td>
+    <td>xml-escapes the variable before output
+        (the five characters <code>&lt;&gt;&amp;&quot;&#39;</code> become
+        <code>&amp;lt&amp;gt;&amp;amp;&amp;quot;&amp;#39;</code>)
+        suitable for content returned in raw XML. It is not intended
+        for escaping content within CDATA blocks.</td>
+</tr>
+
+</table>
+
+<p>The <code>*_with_arg</code> modifiers require an argument to
+specify the type of escaping to use. The following sections list
+the supported arguments for each of these modifiers.
+
+<h4 id="html_escape_args">:H Arguments</h4>
+<p>Here are the values that are supported by
+the <code>html_escape_with_arg</code> modifier:</p>
+<table border="1" cellpadding="3" summary="Arguments for :H modifier">
+<tr><th>value</th><th>description</th></tr>
+
+<tr><td><code>=snippet</code></td>
+    <td>like <code>html_escape</code>, but allows HTML entities and
+        some tags to pass through unchanged. The allowed tags
+        are <code>&lt;br></code>, <code>&lt;wbr></code>, <code>&lt;b></code>,
+        and <code>&lt;/b></code>.</td>
+</tr>
+
+<tr><td><code>=pre</code></td>
+    <td>same as <code>pre_escape</code></td>
+</tr>
+
+<tr><td><code>=url</code></td>
+    <td>same as <code>:U=html</code> below. For backwards compatibility.</td>
+</tr>
+
+<tr><td><code>=attribute</code></td>
+    <td>replaces characters not safe for an use in an unquoted
+        attribute with underscore. Safe characters are alphanumeric,
+        underscore, dash, period, and colon.</td>
+</tr>
+
+</table>
+
+<h4 id="url_escape_args">:I and :U Arguments</h4>
+<p>Here are the values that are supported by
+the <code>img_src_url_escape_with_arg</code> and
+<code>url_escape_with_arg</code> modifiers:</p>
+<table border="1" cellpadding="3" summary="Arguments for :I and :U modifiers">
+<tr><th>value</th><th>description</th></tr>
+
+<tr><td><code>=html</code></td>
+    <td>Ensures that a variable contains a safe URL. Safe means that
+        it is either a http or https URL, or else it has no protocol
+        specified.
+        <ul>
+          <li>If the URL is safe, the modifier HTML-escapes the URL.
+          <li>Otherwise, the modifier replaces the unsafe URL with one of the
+          following values:
+            <ul>
+              <li><code>/images/cleardot.gif</code> (the <code>:I</code>
+              modifier)
+              <li><code>#</code> (the <code>:U</code> modifier)
+            </ul>
+          </li>
+        </ul>
+        <b>Do not use <code>:U</code> for image URLs.</b> Use <code>:I</code>
+        instead.  <code>#</code> is not a safe replacement for an image URL.
+        <code>&lt;img src=#&gt;</code> can cause each browser to request the
+        entire page again.
+    </td>
+</tr>
+
+<tr><td><code>=javascript</code></td>
+    <td>Same as <code>=html</code>, but using javascript escaping
+    instead of html escaping.</td>
+</tr>
+
+<tr><td><code>=css</code></td>
+    <td>Same as <code>=html</code> but using CSS escaping instead
+    of html escaping so that the variable can be safely inserted
+    within a CSS <code>@import</code> statement or a CSS property.
+    The characters in [\r\n()&#39;&quot;&lt;&gt;*\] are transformed
+    into %-style escapes.</td>
+</tr>
+
+<tr><td><code>=query</code></td>
+  <td>(Supported for <code>:U</code> only) Same as
+    <code>url_query_escape</code>.</td>
+</tr>
+
+</table>
+
+<h4 id="javascript_escape_args">:J Arguments</h4>
+<p>Here are the values that are supported by
+the <code>javascript_escape_with_arg</code> modifier:</p>
+<table border="1" cellpadding="3" summary="Arguments for :J modifier">
+<tr><th>value</th><th>description</th></tr>
+
+<tr><td><code>=number</code></td>
+    <td>Ensures that the variable is a valid number or boolean
+        javascript literal. This includes booleans
+        <code>true</code> and <code>false</code>, decimal
+        numbers (e.g. <code>4.10</code> or <code>-5.01e+10</code>)
+        as well as hex numbers (e.g. <code>0x5FF</code>). This modifier
+        is intended to ensure the variable not enclosed in
+        quotes cannot contain javascript code that may execute. It does
+        not guarantee that the variable is syntactically well-formed.
+        If the variable is safe, it is returned
+        as-is, otherwise it is replaced with <code>null</code>.
+        In the future we may add more logic to support objects and
+        arrays.</td>
+</tr>
+</table>
+
+<h3> Custom Modifiers </h3>
+
+<p>In addition to the built-in modifiers, you can write your own
+modifier.  Custom modifiers must have a name starting with "x-", and
+the name can contain alphanumeric characters plus dashes and
+underscores.  Custom modifiers can also accept values with any
+character except for : and <code>}</code>.  For example
+this template could be a valid use of a custom modifier:</p>
+
+<pre>
+{{VAR:x-my_modifier:value1,value2,value3 has spaces,etc}}
+</pre>
+
+<p>See <code>&lt;template_modifiers.h&gt;</code> for details on how to
+write a modifier and how to register it.  In short, you write a
+modifier by subclassing <code>ctemplate::TemplateModifier</code> and
+overriding the <code>Modify</code> method, and you register it by
+calling <code>ctemplate::AddModifier()</code>  Here is an example of
+the code for a custom modifier:</p>
+<pre>
+   class StarEscape : public ctemplate::TemplateModifier {
+     void Modify(const char* in, size_t inlen,
+                 const ctemplate::PerExpandData* per_expand_data,
+                 ctemplate::ExpandEmitter* outbuf, const string&amp; arg) const {
+       outbuf->Emit(string("*") + string(in, inlen) + string("*"));
+     }
+   };
+</pre>
+
+
+<h3> Subclassing TemplateModifier </h3>
+
+<p>The minimum work to create a custom modifier is to subclass
+<code>TemplateModifier</code> and override the <code>Modify()</code>
+method.  <code>Modify()</code> takes as input the value of the text to
+be modified, as well as the <A HREF="#per_expand_data">per expand
+data</A> associated with this <code>Expand()</code> call.  The method
+may use this input, plus any other data it may have, to generate
+output, which it should write into the given
+<code>ExpandEmitter</code>.</p>
+
+<p>The subclass can also override <code>MightModify()</code>.  This is
+useful for modifiers that are typically a no-op (in which case the
+modifier is just doing busy-work, copying its input to the output
+<code>ExpandEmitter</code>).  If <code>MightModify()</code> returns
+false, the template system will avoid calling <code>Modify()</code> at
+all on that variable, avoiding the busy-work copy.</p>
+
+
+<h3> AddModifier() </h3>
+
+<p> AddModifier() is used to register a custom modifier,
+so the modifier can be used in templates.  The name of the modifier
+must start with <code>x-</code>. </p>
+
+
+<h3> AddXssSafeModifier() </h3>
+
+<p> <code>AddXssSafeModifier()</code> is used to register a custom
+modifier that can work well with the <A
+HREF="auto_escape.html">auto-escape system</A>.  It is used when the
+modifier produces output that is "safe" from cross-site scripting
+attacks in all contexts in which it might be used.  For instance, a
+modifier that only emits numbers is xss-safe if it's only used in html
+or javascript contexts.</p>
+
+
+<h3> <A NAME="auto_escape">Auto-escaping and Manual Escaping</A> </h3>
+
+<p>If the <A HREF="auto_escape.html">auto-escape pragma</A> is used
+in a document, then all variables will be auto-escaped, even if
+explicit modifiers are used on the variable.  The rules are a little
+complicated:</p>
+
+<ul>
+  <li> If the explicit modifier is a built-in modifier, and that
+       modifier is "compatible" with the modifier that auto-escape
+       would perform ("compatible" means it safely escapes in at least
+       as many contexts as the auto-escape modifier), then only the
+       explicit modifier is applied, and no further auto-escaping is
+       done. </li>
+
+  <li> If the explicit modifier is a custom modifier registered using
+       AddXssSafeModifier(), no further auto-escaping is
+       done. </li>
+
+  <li> If the explicit modifier is the :none modifier, no
+       further auto-escaping is done.  This is the mechanism for
+       manually turning off auto-escaping. </li>
+
+  <li> In all other situations, auto-escaping will be performed after
+       the explicit modifiers have all run. </li>
+</ul>
+
+
+<h2> <A NAME="per_expand_data">The <code>PerExpandData</code> Class</A> </h2>
+
+<p><code>ExpandWithData()</code> and
+<code>TemplateModifier::Modify()</code> both take a
+<code>PerExpandData</code> object.  Per-expand data is applied to all
+templates that are seen while expanding: not only the template you
+called <code>ExpandWithData()</code> on, but also sub-templates that
+are brought in via template-includes (<code>{{&gt;INCLUDE}}</code>).
+
+<p>There are several types of per-expand data you can set, by calling
+the appropriate method on a <code>PerExpandData</code> object.</p>
+
+
+<h3> SetAnnotateOutput() </h3>
+
+<p>This is a debugging function.  When expanding this template, it adds
+marker-strings to the output to indicate what template-substitutions
+the system made.  This takes a string argument which can be used to
+shorten the filenames printed in the annotations: if the filename
+contains the string you give, everything before that string is elided
+from the filename before printing.  (It's safe to just always pass in
+the empty string.)</p>
+
+
+<h3> SetAnnotator() </h3>
+
+<p>This overrides the default text-based annotation used by
+<code>SetAnnotateOutput()</code>.  If this is set and
+<code>SetAnnotateOutput()</code> is called, the per-expand data will
+use this <A
+HREF="#template_annotator"><code>TemplateAnnotator</code></A> instance
+to do the annotation, rather than the default instance.</p>
+
+
+<h3> InsertForModifiers() and LookupForModifiers() </h3>
+
+<p><code>InsertForModifiers()</code> stores an arbitrary key/value
+pair in the <code>PerExpandData</code> structure.  This is used with
+<A HREF="#template_modifier">template modifiers</A>: the
+<code>PerExpandData</code> object passed to
+<code>ExpandWithData()</code> is made available to every template
+modifier that is called during expand time (including any custom
+modifiers).  The intended use of this functionality is to allow a
+modifier to work one way when expanding a template with dictionary A,
+and another way when expanding a template with dictionary B.  For
+instance, a modifier might encrypt part of a webpage using a user's
+secret-key, which is of course different for every expansion of the
+webpage.</p>
+
+<p><code>LookupForModifiers()</code> can be used by a
+template-modifier to read the key/value pair inserted by
+<code>InsertForModifiers()</code>.
+<code>LookupForModifiersAsString()</code> is the same, but returns the
+value as a char* rather than a void*, for convenience.</p>
+
+
+<h3> SetTemplateExpansionModifier() </h3>
+
+<p>This is an advanced feature for those who need a custom hook into
+template expansion.  It will not be used by most programmers.  It
+takes a template-modifier as its argument, but this template modifier
+is treated specially: instead of applying when an appropriate magic
+string appears in the text of a template, it applies every time a
+template is expanded during a call to <code>ExpandWithData()</code>.
+Note this means that it's called not only after the top-level
+template, that <code>ExpandWithData()</code> is called on, is
+expanded, but also on every sub-template that is expanded due to a
+template-include.</p>
+
+<p>This unusual functionality has a few unusual properties.  Since the
+template expansion modifier is not called in normal fashion, the
+normal <code>arg</code> argument to the template modifier does not
+make sense.  Instead, the <code>arg</code> is set to the path of the
+template which is being expanded.  Also, template expansion modifiers
+can be expensive, since they are applied pretty indiscriminately, so
+it can be worth implementing the <code>MightModifiy()</code> predicate
+for the passed-in <code>TemplateModifier</code> to avoid unnecessary
+work.</p>
+
+
+<h2> <A NAME="template_annotator">The <code>TemplateAnnotator</code>
+     Class</A> </h2>
+
+<p>The <code>TemplateAnnotator</code> class is used to pass in to <A
+HREF="#per_expand_data"><code>PerExpandData::SetAnnotator()</code></A>,
+to control how expand-time annotation is done.  This is meant to be
+used as a debugging routine.</p>
+
+<p>This class is an abstract base class; <code>SetAnnotator()</code>
+takes a subclass that implements the various methods of the base
+class.  These methods control the action taken when various template
+markers are seen during template expansion.</p>
+
+<p><code>template_annotator.h</code> defines the abstract base class,
+and also a concrete subclass that is used by default for annotation if
+<code>SetAnnotator()</code> is not called.</p>
+
+
+<h2> <A NAME="template_dictionary_peer">The
+     <code>TemplateDictionaryPeer</code> Class</A> </h2>
+
+<p>By design, it is not possible to view the contents of a
+<code>TemplateDictionary</code>; we want to make sure the interface
+between the logic layer of the application and the presentation layer
+of the template goes in only one direction.  While generally this
+keeps programs as clean as possible, it presents problems in testing
+code, which may want to verify that a given
+<code>TemplateDictionary</code> has been filled properly.  The
+<code>TemplateDictionaryPeer</code> addresses this need.  It lives in
+<code>template_test_util.h</code>.</p>
+
+<p>Some of the methods of <code>TemplateDictionaryPeer</code> are
+useful for internal tests only.  Below are some of the methods that
+are most useful for user-level tests.</p>
+
+
+<h3> STS_INIT_FOR_TEST </h3>
+
+<p>This macro allows use of <code>STS_INIT</code> for testing, even
+when the input pointer is not guaranteed to be allocated for the
+entire length of the test (it must, of course, be allocated for the
+entire lifetime of the template being tested).  Since normally
+<code>STS_INIT</code> requires inputs to have static duration, this
+allows for more flexibility in tests, at the cost of worse memory
+management and decreased code safety (in that it's possible to
+accidentally violate the lifetime requirements).</p>
+
+
+<h3> GetSectionValue() </h3>
+
+<p>This returns the value for the named variable.  It uses normal
+template scoping rules to resolve the name.</p>
+
+
+<h3> IsHiddenSection() and IsHiddenTemplate() </h3>
+
+<p>Checks if a section or sub-template is "hidden" (that is, won't be
+displayed at all).</p>
+
+
+<h3> GetSectionDictionaries() and GetIncludeDictionaries() </h3>
+
+<p>Returns all the sub-dictionaries for a given section or
+template-include, in a vector.</>
+
+
+<h3> Other Testing Functions </h3>
+
+<p>template_test_util.h has other useful routines for
+testing, such as ExpandIs(), which tests whether a
+template + dictionary pair expands into an expected string.  See the
+header file for details.</p>
+
+
+<h2> <A NAME="expand_emitter">The <code>ExpandEmitter</code> Class</A> </h2>
+
+<p>There are two overloads of <A
+HREF="#expand_template"><code>ExpandTemplate()</code></A>: the first
+emits the expanded template to a C++ string, and the second emits to
+an <code>ExpandEmitter</code>: an abstract base class that serves as a
+data source.  It supports just one overloaded method,
+<code>Emit()</code>, that can take a char, a char*, or a C++ string as
+input.</p>
+
+<p>Using this class requires subclassing <code>ExpandEmitter</code>
+and providing the various definitions for <code>Emit()</code>.  For
+instance, a subclass might provide definitions of <code>Emit()</code>
+that send the input bytes out to a network socket.</p>
+
+<p>In addition to defining the abstract base class,
+<code>template_emitter.h</code> provides a sample concrete subclass
+implementation, for emitting to a string.</p>
+
+
+<h2> <A NAME="template_string">The <code>TemplateString</code> and
+     <code>StaticTemplateString</code> Classes</A> </h2>
+
+<p><code>TemplateString</code> is a string-like implementation.
+Ctemplate uses <code>TemplateString</code> almost exclusively,
+internally.  Many of the public API methods, such as
+<code>TemplateDictionary::SetValue()</code>, also take
+<code>TemplateString</code> as input.  <code>TemplateString</code>
+has implicit constructors for both C++ strings and char*'s, so every
+method that takes a <code>TemplateString</code> will also work if
+given a C++ string or a char*.  If you have a char* and know its
+length, you can save a bit of work by explicitly constructing a
+<code>TemplateString</code> with a char* + length, for instance:</p>
+<pre>
+   dict->SetValue(ctemplate::TemplateString("MYVAR", 5), value);
+</pre>
+
+<p>Some compile-time tools work with <code>TemplateString</code> to
+offload computation from runtime to compile-time.  This is possible
+because the Ctemplate code often stores a hash of a string
+rather than a string directly.  For static, immutable strings,
+<code>TemplateString</code> can store a pre-computed hash value.  This
+functionality is used by <A
+HREF="#make_tpl_varnames_h"><code>make_tpl_varnames_h</code></A>.  Thus,
+using this tool to create constants to use for <code>SetValue()</code>
+keys provides not only protection against typos, but a speed
+improvement as well.</p>
+
+<p>For immutable strings in your code, you can create efficient
+compile-time template-string objects of your own -- in this case of
+type <code>StaticTemplateString</code> -- by using the
+<code>STS_INIT</code> macro, like so:</p>
+<pre>
+static const StaticTemplateString kSectName =
+    STS_INIT(kSectName, "test_SetAddSectionDictionary");
+</pre>
+
+<p>The string variable's name, <code>kSectName</code> is repeated
+twice.  The variable's value is specified inside the macro.  Note that
+this macro should be used at the top level of a file, not inside
+functions (even when the variables are made static), and you should
+define the <code>StaticTemplateString</code> exactly as above:
+<code>static const StaticTemplateString</code>.  Otherwise, the
+undefined constructor/destructor order of C++ may result in surprising
+behavior, wherein the <code>StaticTemplateString</code> is not
+initialized when it ought to be.</p>
+
+
+<h2> The <code>Template</code> Class </h2>
+
+<p>In older version of ctemplate, the <code>Template</code> class,
+which holds parsed templates, was a major part of the template
+workflow: the common template use-case would be:</p>
+<pre>
+   Template* tpl = Template::GetTemplate(filename, strip_mode);
+   TemplateDictionary dict(name);
+   tpl->Expand(&amp;dict, &amp;outstring);
+</pre>
+
+<p>In current use, this model is deprecated in favor of the single
+<code>ExpandTemplate()</code> call; support for <code>Template</code>
+methods may be removed entirely in future versions of ctemplate.
+However, you may still find older code using this old formulation.</p>
+
+
+<h2> <A NAME="auto_escaping">Auto-Escaping</A> </h2>
+
+<p>The <a href="auto_escape.html">Guide to using Auto Escape</a> has
+an overview of Auto Escape as well as discussion of its limitations.
+<!-- TODO(csilvers): move that information here? -->
+To use it, put the following text at the top of the template:</p>
+<pre>
+  {{%AUTOESCAPE context="CONTEXT" [state="STATE"]}}
+</pre>
+
+<p>Description of the arguments:</p>
+<ul>
+  <li> The context attribute is one of <code>HTML</code>,
+       <code>JAVASCRIPT</code>, <code>CSS</code>,
+       <code>JSON</code> or <code>XML</code>. It must correspond
+       to the context in which the browser will interpret this
+       template. <b>Warning:</b> Setting the wrong context will
+       result in wrong escaping applied to all variables in
+       the given template. In particular, if the template starts with
+       a <code>&lt;script&gt;</code> tag, its context is
+       <code>HTML</code> and not <code>JAVASCRIPT</code>. Auto-Escape
+       will recognize the <code>&lt;script&gt;</code> tag and hence
+       properly Javascript-escape the variables within it. Similarly,
+       if the template starts with a <code>&lt;style&gt;</code> tag,
+       its context is <code>HTML</code> and not <code>CSS</code>.
+</li>
+  <li> The state attribute is commonly omitted.  It accepts the
+       value <code>IN_TAG</code> in the <code>HTML</code> context
+       to indicate that the template only contains (one or more)
+       HTML attribute name and value pairs that are part of an
+       HTML tag formed in a parent template.
+</ul>
+
+<p>This will auto-escape every variable in the template.  To turn off
+auto-escaping for a particular variable, you can apply the
+<code>none</code> modifier, like so: <code>{{MYVAR:none}}</code>.
+Here is an example of an autoescaped document:</p>
+
+<pre>
+  {{%AUTOESCAPE context="HTML"}}
+
+  &lt;body&gt;
+    &lt;p&gt;Hello {{USER}}&lt;/p&gt;
+    &lt;p&gt;&lt;a href="{{URL}}"&gt;Your Account&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Your identifier: {{ID:none}}{{! This is dangerous! }}&lt;/p&gt;
+  &lt;/body&gt;
+</pre>
+
+
+<h2> Development Tools </h2>
+
+<p>This package includes several tools to make it easier to use write
+and use templates.</p>
+
+
+<h3> <A name="make_tpl_varnames_h">make_tpl_varnames_h:
+     Template Syntax Checker and Header File Generator</A> </h3>
+
+<p><code>make_tpl_varnames_h</code> is a "lint" style syntax checker
+and header file generator.  It takes the names of template files as
+command line arguments and loads each file into a Template object by
+retrieving the file via the Template factory method.  The loading of
+the file does pure syntax checking and reports such errors as
+mis-matched section start/end markers, mis-matched open/close
+double-curly braces, such as <code>"{{VAR}"</code>, or invalid
+characters in template variables/names/comments.</p>
+
+<p>If the template passes the syntax check, by default the utility
+then creates a header file for use in the executable code that fills
+the dictionary for the template.  If the developer includes this
+header file, then constants in the header file may be referenced in
+the dictionary building function, rather than hard-coding strings as
+variable and section names.  By using these constants, the compiler
+can notify the developer of spelling errors and mismatched names.
+Here's an example of how this is used, and how it helps prevent
+errors:</p>
+
+<pre>
+   const char * const kosr_RESULT_NUMBER = "RESULT_NUMBER";  // script output
+   dict.SetValue("RESSULT_NUMBER", "4");    // typo is silently missed
+   dict.SetValue(kosr_RESSULT_NUMBER, "4");   // compiler catches typo
+</pre>
+
+<p>Each constant is named as follows:</p>
+
+<ul>
+  <li> The initial letter 'k', indicating a defined constant. </li>
+
+  <li> One or more prefix letters which are derived from the
+       template file name.  These prefix letters consist of the first
+       letter of the file name, followed by the first letter following
+       each underscore in the name, with the exception of the letter
+       'p' when it is followed by the letters "ost", as is a <A
+       HREF="tips.html#versioning">recommended convention</A> for
+       template versioning. For example, the prefix letters for the
+       file <code>one_search_result_post20020815.tpl</code> are
+       <code>osr</code>. </li>
+
+  <li> An underscore. </li>
+
+  <li> The variable or section name itself, same casing. </li>
+</ul>
+
+<p>As an example, the section name "RESULT_NUMBER" in the file
+one_search_result_post20020815.tpl would be given the constant name
+<code>kosr_RESULT_NUMBER</code> and would appear in the header file as
+<code>const char * const kosr_RESULT_NUMBER = "RESULT_NUMBER";</code>
+-- as in the example above.  (The variable is actually a
+<code>StaticTemplateString</code>, not a char*, but the basic idea
+holds.)</p>
+
+<p>
+An alternate output directory may be specified by the command line
+flag <code>--header_dir</code>.
+</p>
+
+<p>The name of the generated header file is the same as the name of
+the template file with an extension added to the name.  By default,
+that extension is <code>.varnames.h</code>.  In the above example, the
+header file containing the constant declarations would be named
+<code>one_search_result_post20020815.tpl.varnames.h</code>. An
+alternate extension may be provided via the command line flag
+<code>--outputfile_suffix</code>.</p>
+
+<p>Important command line flags:</p>
+
+<ul>
+  <li> <code>--noheader</code> -- Indicates that a header file
+       should not be generated; only syntax checking should be done. </li>
+
+  <li> <code>--header_dir</code> -- sets the directory where the header
+       is written.  Default: "./" </li>
+
+  <li> <code>--template_dir</code> -- sets the template root
+       directory.  Default: <code>./</code> which is the correct
+       specification when it is run from the directory where the templates
+       are located.  This is only used if the input template filenames
+       are specified as relative paths rather than absolute
+       paths. </li>
+
+  <li> <code>--outputfile_suffix</code> -- the extension added to the
+       name of the template file to create the name of the generated
+       header file.  Default: <code>.varnames.h</code>.
+</ul>
+
+<p>For a full list of command line flags, run
+<code>make_tpl_varnames_h --help</code>.</p>
+
+
+<h3> <A name="template_converter">template-converter: convert a
+     template to a C++ string</A> </h3>
+
+<p><code>StringToTemplateCache()</code> lets you load a template
+from a string instead of a file.  Applications may prefer this option
+to reduce the dependencies of the executable, or use it in
+environments where data files are not practical.  In such cases,
+<code>template-converter</code> can be used as a template "compiler",
+letting the developer write a template file as a data file in the
+normal way, and then "compiling" it to a C++ string to be included in
+the executable.</p>
+
+<p>Usage is <code>template-converter &lt;template filename&gt;</code>.
+C++ code is output is to stdout; it can be stored in a .h file or
+included directly into a C++ file.  Perl must be installed to use this
+script.</p>
+
+
+<hr>
+<ul>
+  <li> <A HREF="guide.html">User's Guide</A> </li>
+<!--
+  <li> <A HREF="reference.html">Reference Manual</A> </li>
+-->
+  <li> <A HREF="auto_escape.html">Auto Escape</A> </li>
+  <li> <A HREF="tips.html">Tips</A> </li>
+  <li> <A HREF="example.html">Example</A> </li>
+</ul>
+
+<hr>
+<address>
+Craig Silverstein<br>
+<script type=text/javascript>
+  var lm = new Date(document.lastModified);
+  document.write(lm.toDateString());
+</script>
+</address>
+
+</body>
+</html>
+

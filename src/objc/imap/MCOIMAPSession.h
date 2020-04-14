@@ -62,6 +62,9 @@
 /** This is the OAuth2 token. */
 @property (nonatomic, copy) NSString *OAuth2Token;
 
+- (void) addPinningForHost:(NSString *)hostName withCertificate:(NSData *)data;
+- (void) setClientCertificate:(NSData *)data withPassword:(NSString *)password;
+
 /**
  This is the authentication type to use to connect.
  `MCOAuthTypeSASLNone` means that it uses the clear-text is used (and is the default).

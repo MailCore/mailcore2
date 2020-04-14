@@ -1,0 +1,1 @@
+ %LocalAppData%\Android\Sdk\ndk-bundle\ndk-build.cmd -C . NDK_APPLICATION_MK=Application.mk NDK_DEBUG=0

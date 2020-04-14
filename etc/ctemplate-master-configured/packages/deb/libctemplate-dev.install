@@ -1,0 +1,12 @@
+usr/include/ctemplate/*
+usr/lib/lib*.so
+usr/lib/lib*.a
+usr/lib/lib*.la
+usr/bin/*
+usr/lib/pkgconfig/*
+debian/tmp/usr/include/ctemplate/*
+debian/tmp/usr/lib/lib*.so
+debian/tmp/usr/lib/lib*.a
+debian/tmp/usr/lib/lib*.la
+debian/tmp/usr/bin/*
+debian/tmp/usr/lib/pkgconfig/*

@@ -20,7 +20,7 @@
 		AB9EAE1A170368F000D750C7 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB9EAE19170368F000D750C7 /* Default@2x.png */; };
 		AB9EAE1C170368F000D750C7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB9EAE1B170368F000D750C7 /* Default-568h@2x.png */; };
 		AB9EAE1F170368F000D750C7 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB9EAE1D170368F000D750C7 /* MainStoryboard.storyboard */; };
-		AB9EAE22170368F000D750C7 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB9EAE21170368F000D750C7 /* MasterViewController.m */; };
+		AB9EAE22170368F000D750C7 /* MasterViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = AB9EAE21170368F000D750C7 /* MasterViewController.mm */; };
 		AB9EAE3617036FD700D750C7 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB9EAE3417036FD600D750C7 /* SettingsViewController.m */; };
 		AB9EAE3717036FD700D750C7 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB9EAE3517036FD700D750C7 /* SettingsViewController.xib */; };
 		AB9EAE40170374D900D750C7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB9EAE3F170374D900D750C7 /* Security.framework */; };
@@ -35,6 +35,7 @@
 		C6D71954178BB91E008ED15F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6D71953178BB91E008ED15F /* SystemConfiguration.framework */; };
 		C6ED6D2917A19F2700A4A14C /* MCOCIDURLProtocol.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6ED6D2817A19F1500A4A14C /* MCOCIDURLProtocol.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C6ED6D2A17A19F2B00A4A14C /* MCOMessageView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6ED6D2517A19EF800A4A14C /* MCOMessageView.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D619047222510714007C770B /* libetpan-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D61904642250FAA2007C770B /* libetpan-ios.a */; };
 		DA9AD477179331A600743873 /* MCTTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9AD476179331A600743873 /* MCTTableViewCell.m */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +103,34 @@
 			remoteGlobalIDString = C6B5AE0219F630B3001352A6;
 			remoteInfo = unittest;
 		};
+		D619045F2250FAA2007C770B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D61904572250FAA2007C770B /* libetpan.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = libetpan;
+		};
+		D61904612250FAA2007C770B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D61904572250FAA2007C770B /* libetpan.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C69AB10A10546FE500F32FBD;
+			remoteInfo = "static libetpan";
+		};
+		D61904632250FAA2007C770B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D61904572250FAA2007C770B /* libetpan.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C682E2C015B315EF00BE9DA7;
+			remoteInfo = "libetpan ios";
+		};
+		D61904702250FBEB007C770B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D61904572250FAA2007C770B /* libetpan.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C69AB10910546FE500F32FBD;
+			remoteInfo = "static libetpan";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -125,7 +154,7 @@
 		AB9EAE1B170368F000D750C7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		AB9EAE1E170368F000D750C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		AB9EAE20170368F000D750C7 /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
-		AB9EAE21170368F000D750C7 /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		AB9EAE21170368F000D750C7 /* MasterViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MasterViewController.mm; sourceTree = "<group>"; };
 		AB9EAE3317036FD600D750C7 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		AB9EAE3417036FD600D750C7 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		AB9EAE3517036FD700D750C7 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
@@ -149,6 +178,7 @@
 		C6ED6D2517A19EF800A4A14C /* MCOMessageView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOMessageView.mm; sourceTree = "<group>"; };
 		C6ED6D2717A19F1500A4A14C /* MCOCIDURLProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCOCIDURLProtocol.h; sourceTree = "<group>"; };
 		C6ED6D2817A19F1500A4A14C /* MCOCIDURLProtocol.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOCIDURLProtocol.mm; sourceTree = "<group>"; };
+		D61904572250FAA2007C770B /* libetpan.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libetpan.xcodeproj; path = "../../../../ExternalsSrc/libetpan/build-mac/libetpan.xcodeproj"; sourceTree = "<group>"; };
 		DA9AD475179331A600743873 /* MCTTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTTableViewCell.h; sourceTree = "<group>"; };
 		DA9AD476179331A600743873 /* MCTTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -158,8 +188,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6D71954178BB91E008ED15F /* SystemConfiguration.framework in Frameworks */,
+				D619047222510714007C770B /* libetpan-ios.a in Frameworks */,
 				AB7BA446171389CC00104953 /* libMailCore-ios.a in Frameworks */,
+				C6D71954178BB91E008ED15F /* SystemConfiguration.framework in Frameworks */,
 				ABE4026B173F3FCE007F1FB3 /* ImageIO.framework in Frameworks */,
 				AB9EAE40170374D900D750C7 /* Security.framework in Frameworks */,
 				AB9EAE06170368F000D750C7 /* UIKit.framework in Frameworks */,
@@ -232,13 +263,14 @@
 		AB9EAE0B170368F000D750C7 /* iOS UI Test */ = {
 			isa = PBXGroup;
 			children = (
+				D61904572250FAA2007C770B /* libetpan.xcodeproj */,
 				AB7BA4321713898B00104953 /* mailcore2.xcodeproj */,
 				AB9EAE11170368F000D750C7 /* main.mm */,
 				AB9EAE14170368F000D750C7 /* AppDelegate.h */,
 				AB9EAE15170368F000D750C7 /* AppDelegate.m */,
 				AB9EAE1D170368F000D750C7 /* MainStoryboard.storyboard */,
 				AB9EAE20170368F000D750C7 /* MasterViewController.h */,
-				AB9EAE21170368F000D750C7 /* MasterViewController.m */,
+				AB9EAE21170368F000D750C7 /* MasterViewController.mm */,
 				B12AAA3117322654003551C7 /* MCTMsgViewController.h */,
 				B12AAA3217322654003551C7 /* MCTMsgViewController.mm */,
 				AB9EAE3317036FD600D750C7 /* SettingsViewController.h */,
@@ -331,6 +363,16 @@
 			path = ../../../../src/ui/common;
 			sourceTree = "<group>";
 		};
+		D61904582250FAA2007C770B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D61904602250FAA2007C770B /* libetpan.framework */,
+				D61904622250FAA2007C770B /* libetpan.a */,
+				D61904642250FAA2007C770B /* libetpan-ios.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -345,6 +387,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D61904712250FBEB007C770B /* PBXTargetDependency */,
 				AB7BA445171389C200104953 /* PBXTargetDependency */,
 			);
 			name = "iOS UI Test";
@@ -372,6 +415,10 @@
 			productRefGroup = AB9EAE03170368F000D750C7 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = D61904582250FAA2007C770B /* Products */;
+					ProjectRef = D61904572250FAA2007C770B /* libetpan.xcodeproj */;
+				},
 				{
 					ProductGroup = AB7BA4331713898B00104953 /* Products */;
 					ProjectRef = AB7BA4321713898B00104953 /* mailcore2.xcodeproj */;
@@ -441,6 +488,27 @@
 			remoteRef = C6181D3019FDA8EA0088FBBC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		D61904602250FAA2007C770B /* libetpan.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = libetpan.framework;
+			remoteRef = D619045F2250FAA2007C770B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D61904622250FAA2007C770B /* libetpan.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libetpan.a;
+			remoteRef = D61904612250FAA2007C770B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D61904642250FAA2007C770B /* libetpan-ios.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libetpan-ios.a";
+			remoteRef = D61904632250FAA2007C770B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -468,7 +536,7 @@
 				AB9EAE12170368F000D750C7 /* main.mm in Sources */,
 				C6D7194E178BB8B4008ED15F /* GTMHTTPFetchHistory.m in Sources */,
 				AB9EAE16170368F000D750C7 /* AppDelegate.m in Sources */,
-				AB9EAE22170368F000D750C7 /* MasterViewController.m in Sources */,
+				AB9EAE22170368F000D750C7 /* MasterViewController.mm in Sources */,
 				AB9EAE3617036FD700D750C7 /* SettingsViewController.m in Sources */,
 				C6D7194D178BB8B4008ED15F /* GTMHTTPFetcher.m in Sources */,
 				C6ED6D2917A19F2700A4A14C /* MCOCIDURLProtocol.mm in Sources */,
@@ -489,6 +557,11 @@
 			isa = PBXTargetDependency;
 			name = "static mailcore2 ios";
 			targetProxy = AB7BA444171389C200104953 /* PBXContainerItemProxy */;
+		};
+		D61904712250FBEB007C770B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "static libetpan";
+			targetProxy = D61904702250FBEB007C770B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -576,7 +649,6 @@
 				INFOPLIST_FILE = "iOS UI Test/iOS UI Test-Info.plist";
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
-					"-letpan-ios",
 					"-lxml2",
 					"-lsasl2",
 					"-liconv",
@@ -600,7 +672,6 @@
 				INFOPLIST_FILE = "iOS UI Test/iOS UI Test-Info.plist";
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
-					"-letpan-ios",
 					"-lxml2",
 					"-lsasl2",
 					"-liconv",

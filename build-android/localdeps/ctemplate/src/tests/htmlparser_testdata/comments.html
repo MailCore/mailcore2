@@ -1,0 +1,61 @@
+<!-- Tests for HTML comments and cdata escaping text spans. -->
+<html>
+
+<body>
+
+<?state state=text, tag=body ?>
+
+<!-- HTML doctype declaration -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+<?state state=text, tag=body?>
+"http://www.w3.org/TR/html4/strict.dtd">
+<?state state=text, tag=body ?>
+
+<!-- Regular HTML comment -->
+<!-- <?state state=comment, tag=body ?> -->
+<?state state=text, tag=body ?>
+
+<!-- HTML comment with tags -->
+<!-- > -> </b> <a href="<?state state=comment, tag=body ?>"></a>-->
+<?state state=text, tag=body ?>
+
+<!-- Should not be interpreted as an SGML comment -->
+<?state state=text, tag=body ?>
+<!-- -- -->
+<?state state=text, tag=body ?>
+
+<!-- -- Sync back the SGML comment for editors who parse SGML comments
+(ie: vim) -->
+<?state state=text, tag=body ?>
+
+<!-- Multiple dashes at the end. -->
+<!----- <?state state=comment, tag=body ?> --><?state state=text, tag=body ?>
+<!----- <?state state=comment, tag=body ?> ---><?state state=text, tag=body ?>
+<!----- <?state state=comment, tag=body ?> ----><?state state=text, tag=body ?>
+<!----- <?state state=comment, tag=body ?> -----><?state state=text, tag=body ?>
+
+<!-- Some more misc tests -->
+<!-- test <?state state=comment?> --><?state state=text?> test test --><?state state=text?>
+<!-- test -> test test --><?state state=text?>
+<!-- test test='--><?state state=text?>'
+<!----><?state state=text?>
+<!-----><?state state=text?>
+
+<!-- Make sure the double dash sequence is not interpreted as an SGML comment
+by introducing a legit postfix decrement operator -->
+<?state state=text, in_js=false ?>
+<script>
+<!--
+<?state state=text, in_js=true ?>
+
+var x = 1;
+x--;
+<?state state=text, in_js=true ?>
+-->
+</script>
+<?state state=text, in_js=false ?>
+
+</body>
+
+</html>
+<?state state=text ?>

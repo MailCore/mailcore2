@@ -9,6 +9,10 @@ extern "C" {
 #endif
 #undef com_libmailcore_SMTPSession_serialVersionUID
 #define com_libmailcore_SMTPSession_serialVersionUID 1LL
+
+JNIEXPORT void JNICALL Java_com_libmailcore_SMTPSession_addPinningForHost(JNIEnv *, jobject, jstring, jbyte*);
+JNIEXPORT void JNICALL Java_com_libmailcore_SMTPSession_setClientCertificate(JNIEnv *, jobject, jbyte*, jstring);
+
 /*
  * Class:     com_libmailcore_SMTPSession
  * Method:    setHostname

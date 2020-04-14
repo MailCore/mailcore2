@@ -1,0 +1,11 @@
+{{#FILE=template_unittest_test_modifiers.in}}{{#SEC=__{{MAIN}}__}}<html>
+<body>
+{{#SEC=UPDATE_SECTION}}  {{#VAR=UPDATE}}monday &amp; tuesday{{/VAR}}
+  {{#VAR=UPDATE:html_escape}}monday &amp;amp; tuesday{{/VAR}}
+  {{#VAR=UPDATE:javascript_escape}}monday \x26amp; tuesday{{/VAR}}
+  {{#VAR=UPDATE:html_escape:url_query_escape}}monday+%26amp%3Bamp%3B+tuesday{{/VAR}}
+{{/SEC}}  <IMG src=foo.jpg align={{#VAR=ALIGNMENT}}"right"{{/VAR}}>
+  <IMG src="mouseover() {img=\'foo.jpg\' align={{#VAR=ALIGNMENT:javascript_escape}}\x22right\x22{{/VAR}}}">
+{{#INC=SIMPLE:html_escape}}{{#FILE=template_unittest_test_simple.in}}{{#SEC=__{{MAIN}}__}}&lt;html&gt; &lt;head&gt;   {{#VAR=HEAD}}{{/VAR}} &lt;/head&gt; &lt;body&gt;   {{#VAR=BODY}}{{/VAR}} &lt;/body&gt; &lt;/html&gt;{{#VAR=BI_NEWLINE}} {{/VAR}}{{/SEC}}{{/FILE}}{{/INC}}</body>
+</html>{{#VAR=BI_NEWLINE}}
+{{/VAR}}{{/SEC}}{{/FILE}}

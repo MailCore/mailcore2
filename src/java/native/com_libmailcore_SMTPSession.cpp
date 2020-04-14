@@ -7,6 +7,10 @@
 #include "JavaOperationQueueCallback.h"
 #include "JavaConnectionLogger.h"
 
+#if defined(ANDROID) || defined(__ANDROID__)
+#include "../../android_log.h"
+#endif
+
 using namespace mailcore;
 
 #define nativeType SMTPAsyncSession
@@ -22,6 +26,28 @@ MC_JAVA_SYNTHESIZE_SCALAR(jint, ConnectionType, setConnectionType, connectionTyp
 MC_JAVA_SYNTHESIZE_SCALAR(jlong, time_t, setTimeout, timeout)
 MC_JAVA_SYNTHESIZE_SCALAR(jboolean, bool, setCheckCertificateEnabled, isCheckCertificateEnabled)
 MC_JAVA_SYNTHESIZE_SCALAR(jboolean, bool, setUseHeloIPEnabled, useHeloIPEnabled)
+
+JNIEXPORT void JNICALL Java_com_libmailcore_SMTPSession_addPinningForHost(JNIEnv * env, jobject obj, jstring hostname, jbyte* data)
+{
+    MC_POOL_BEGIN;
+
+    String pinHostname = MC_FROM_JAVA(String, hostname);
+    Data pinData = MC_FROM_JAVA(Data, data);
+    MC_JAVA_NATIVE_INSTANCE->addPinningForHost(&pinHostname, &pinData);
+
+    MC_POOL_END;
+}
+
+JNIEXPORT void JNICALL Java_com_libmailcore_SMTPSession_setClientCertificate(JNIEnv * env, jobject obj, jbyte* data, jstring password)
+{
+    MC_POOL_BEGIN;
+
+    Data certData = MC_FROM_JAVA(Data, data);
+    String certPassword = MC_FROM_JAVA(String, password);
+    MC_JAVA_NATIVE_INSTANCE->setClientCertificate(&certData, &certPassword);
+
+    MC_POOL_END;
+}
 
 JNIEXPORT jboolean JNICALL Java_com_libmailcore_SMTPSession_isOperationQueueRunning
   (JNIEnv * env, jobject obj)

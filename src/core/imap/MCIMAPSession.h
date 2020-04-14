@@ -322,7 +322,20 @@ namespace mailcore {
                                       bool wholePart, uint32_t offset, uint32_t length,
                                       Encoding encoding, IMAPProgressCallback * progressCallback, ErrorCode * pError);
         void storeLabels(String * folder, bool identifier_is_uid, IndexSet * identifiers, IMAPStoreFlagsRequestKind kind, Array * labels, ErrorCode * pError);
-    };
+    
+    private:
+        bool checkClientCertificate();
+        bool checkPinning();
+
+    private:
+        Array * mPinningHosts;
+        Array * mPinningCerts;
+        Data * mClientCertificate;
+        String * mClientCertificatePassword;
+    public:
+        virtual void addPinningForHost(String * host, Data * certData);
+        virtual void setClientCertificate(Data * clientCertificate, String * password);
+};
 
 }
 

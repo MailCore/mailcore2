@@ -213,6 +213,18 @@ namespace mailcore {
         IMAPIdentity * mClientIdentity;
         bool mQueueRunning;
         OperationQueueCallback * mOperationQueueCallback;
+        
+    private:
+        Array * mPinningHosts;
+        Array * mPinningCerts;
+        Data * mClientCertificate;
+        String * mClientCertificatePassword;
+    public:
+        virtual void addPinningForHost(String * host, Data * certData);
+        virtual void setClientCertificate(Data * clientCertificate, String * password);
+
+    private:
+        
 #if __APPLE__
         dispatch_queue_t mDispatchQueue;
 #endif

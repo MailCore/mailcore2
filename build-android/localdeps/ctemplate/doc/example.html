@@ -1,0 +1,345 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>Template Examples</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="designstyle.css" type="text/css" rel="stylesheet">
+<style type="text/css">
+  ol.bluelist li {
+    color: #3366ff;
+    font-family: sans-serif;
+  }
+  ol.bluelist li p {
+    color: #000;
+    font-family: "Times Roman", times, serif;
+  }
+  ul.blacklist li {  
+    color: #000;
+    font-family: "Times Roman", times, serif;
+  }
+</style>
+</head>
+
+<body>
+
+<h1>Template Examples</h1>
+
+
+<h2> Simple Example </h2>
+
+<p>One reason this example is so simple is that it doesn't even
+require a separate template file, but instead uses
+<code>StringToTemplateCache()</code>.  It also doesn't use sections or
+template-includes.</p>
+
+<pre class=example>
+
+int main() {
+  static const char template_text[] =
+    "ERROR: {{FUNCTION}}({{ARGS}}) returned {{ERROR_CODE}}: {{ERROR_MESSAGE}}\n";
+  ctemplate::StringToTemplateCache("mytpl", template_text, ctemplate::DO_NOT_STRIP);
+  FILE* fp = fopen(argv[1], "r");
+  if (fp == NULL) {
+    int err_no = errno;   // squirrel this away
+    ctemplate::TemplateDictionary dict("error_msg: fopen()");
+    dict.SetValue("FUNCTION", "fopen");
+    dict.SetValue("ARGS", argv[1]);
+    dict.SetIntValue("ERROR_CODE", err_no);
+    dict.SetValue("ERROR_MESSAGE", strerror(err_no));
+
+    string error_text;
+    ctemplate::ExpandTemplate("mytpl", ctemplate::DO_NOT_STRIP, &dict, &error_text);
+    puts(error_text.c_str());
+  }
+}
+
+</pre>
+
+Note: If this template was intended to run in a web application, you can 
+leverage the functionality provided by the auto-escape mode. Simply add
+the AUTOESCAPE pragma directive at the top of the template text and your
+variables will be automatically escaped for the context you specify.
+
+For example, if your template is returned in an HTML context,
+change the <code>template_text</code> declaration as follows:
+
+<pre class=example>
+  static const char template_text[] =
+    "{{%AUTOESCAPE context=\"HTML\"}}"
+    "ERROR: {{FUNCTION}}({{ARGS}}) returned {{ERROR_CODE}}: {{ERROR_MESSAGE}}\n";
+</pre>
+
+<p>This example is only slightly more complicated: we only print the
+": &lt;error message&gt;" part when the error message isn't the empty
+string.</p>
+
+<pre class=example>
+
+int main() {
+  static const char template_text[] =
+     "ERROR: {{FUNCTION}}({{ARGS}}) returned {{ERROR_CODE}}"
+     "{{#MSG_SECTION}}: {{ERROR_MESSAGE}}{{/MSG_SECTION}}\n";
+  ctemplate::StringToTemplateCache("mytpl", template_text, ctemplate::DO_NOT_STRIP);
+  FILE* fp = fopen(argv[1], "r");
+  if (fp == NULL) {
+    int err_no = errno;   // squirrel this away
+    ctemplate::TemplateDictionary dict("file_error_message");
+    dict.SetValue("FUNCTION", "fopen");
+    dict.SetValue("ARGS", argv[1]);
+    dict.SetIntValue("ERROR_CODE", err_no);
+    if (err_no > 0)
+      dict.SetValueAndShowSection("ERROR_MESSAGE", strerror(err_no),
+                                  "MSG_SECTION");
+
+    string error_text;
+    ctemplate::ExpandTemplate("mytpl", ctemplate::DO_NOT_STRIP, &dict, &error_text);
+    puts(error_text.c_str());
+  }
+  delete tpl;
+}
+
+</pre>
+
+<p>This maybe-show-text functionality is one way the template
+machinery is more powerful than just using <code>printf</code>.
+Another nice property of templates is you can reuse the same variable
+multiple times in your template string.  You can also define the
+variable values in any order.</p>
+
+
+<h2> Search Results Page </h2>
+
+<p>Here is an example template that could be used to format a Google
+search results page:</p>
+
+<pre class=example>
+
+{{>HEADER}}
+&lt;body bgcolor=white>
+
+{{>PAGE_HEADING}}{{!The following div must be on the same line}}&lt;div>
+
+{{!The ONE_RESULT section displays a single search item}}
+{{#ONE_RESULT}}
+    {{! Note: there are two SUBITEM_SECTIONs. They both show or hide together}}
+    {{#SUBITEM_SECTION}}&lt;blockquote>{{/SUBITEM_SECTION}}
+    {{! LEAD_LINE is received HTML-escaped from the backend.}}
+    &lt;p>&lt;a href="{{JUMP_TO_URL:html_escape}}"  target=nw>{{LEAD_LINE}}&lt;/a>&lt;font size=-1>
+
+    {{! SNIPPET1, SNIPPET2 are HTML-escaped in the snippet generator.}}
+    {{#SNIPPET1_SECTION}}
+        &lt;br>{{SNIPPET1}}
+    {{/SNIPPET1_SECTION}}
+
+    {{#SNIPPET2_SECTION}}
+        &lt;br>{{SNIPPET2}}
+    {{/SNIPPET2_SECTION}}
+
+    {{#DESCRIPTION_SECTION}}
+        {{! DESC is received HTML-escaped from the backend.}}
+        &lt;br>&lt;span class=f>Description:&lt;/span> {{DESC}}
+    {{/DESCRIPTION_SECTION}}
+
+    {{#CATEGORY_SECTION}}
+        &lt;br>&lt;span class=f>Category:&lt;/span> &lt;a href="{{CAT_URL:html_escape}}" class=f>
+        {{CATEGORY:html_escape}}&lt;/a>
+    {{/CATEGORY_SECTION}}
+
+    {{#LASTLINE_SECTION}}
+        &lt;br>&lt;font color="{{ALT_TEXT_COLOR:h}}">{{URL:h}}
+        {{#KS_SECTION}}} - {{KSIZE:h}}{{/KS_SECTION}}}
+        {{#CACHE_SECTION}}} - &lt;a href="{{CACHE_URL:h}}" class=f>Cached&lt;/A>
+        {{/CACHE_SECTION}}}
+        {{#SIM_SECTION}}} - &lt;a href="{{SIM_PAGES_URL:h}}" class=f>Similar pages&lt;/A>
+        {{/SIM_SECTION}}}
+
+        {{#STOCK_SECTION}}
+             -  &lt;a href="{{STOCK_URL:h}}" class=f>Stock quotes: {{STOCK_SYMBOL:h}}&lt;/a>
+        {{/STOCK_SECTION}}
+        &lt;/font>
+    {{/LASTLINE_SECTION}}           
+
+    {{#MORE_SECTION}}
+        &lt;br>[ &lt;a href="{{MORE_URL:h}}" class=f>More results from {{MORE_LABEL:h}}&lt;/a> ]
+    {{/MORE_SECTION}}
+
+    &lt;/font>&lt;br>
+    {{! Note: there are two SUBITEM_SECTIONs. They both show or hide together}}
+    {{#SUBITEM_SECTION}}&lt;/blockquote>{{/SUBITEM_SECTION}}
+{{/ONE_RESULT}}
+&lt;/div> {{! this /div closes the div at the top of this file}}
+{{>PAGE_FOOTING}}
+
+</pre>
+
+<p> Here is a sample procedure that could populate a dictionary for
+expanding that template. The "one procedure" entry point is
+<code>fill_search_results_dictionary</code>.  The
+<code>SetTemplateValues</code> function is a separate entry point for
+initializing each top-level template with some standard values.</p>
+
+<pre class=example>
+#include "template.h"
+
+RegisterTemplateFilename(SEARCH_RESULTS_FN, "search_results.tpl");
+#include "search_results.tpl.varnames.h"  // defines ksr_HEADER, etc.
+
+using ctemplate::TemplateDictionary;
+using ctemplate::ExpandTemplate;
+using ctemplate::STRIP_WHITESPACE;
+
+// IsEmpty
+//    A simple utility function
+static bool IsEmpty(const string &amp;str) {
+  return str.empty();
+}
+
+// SetTemplateValues
+//   Use the TemplateDictionary object to set template-wide values that
+//   may be used in the top-level template and all its sub-sections
+//   and included templates. The template-wide values are all
+//   colors from the Palette object
+void SetTemplateValues(TemplateDictionary *dictionary, const Palette* colors) {
+  // better would be to use ksr_LINK_COLOR, etc, assuming those are
+  // defined in search_results.tpl.varnames.h.  But using literal
+  // text, as here, is legal as well.
+  dictionary->SetValue("LINK_COLOR", colors->link_color);
+  dictionary->SetValue("BAR_TEXT_COLOR", colors->bar_text_color);
+  dictionary->SetValue("TEXT_COLOR", colors->text_color);
+  dictionary->SetValue("FAINT_COLOR", colors->faint_color);
+  dictionary->SetValue("IMPORTANT_COLOR", colors->important_color);
+  dictionary->SetValue("BAR_COLOR", colors->bar_color);
+  dictionary->SetValue("ALT_TEXT_COLOR", colors->alt_text_color);
+  dictionary->SetValue("ALINK_COLOR", colors->alink_color);
+  dictionary->SetValue("VLINK_COLOR", colors->vlink_color);
+}
+
+// fill_search_results_dictionary
+//   Iterates through all the QueryResults contained in the Query object.
+//   For each one, it sets corresponding template dictionary values
+//   (or hides sections containing their variables, if appropriate) in
+//   a sub-dictionary and then adds that dictionary to the parent
+void fill_search_results_dictionary(TemplateDictionary *dictionary,
+                                    const Query *query) {
+  dictionary->SetFilename(SEARCH_RESULTS_FN);
+
+  // These two functions are defined elsewhere
+  fill_header_dictionary(dictionary->AddIncludeDictionary(ksr_HEADER));
+  fill_page_heading_dictionary(dictionary->AddIncludeDictionary(ksr_PAGE_HEADING),
+                               query);
+
+  ResultsList *results = query->GetResults();
+  int resCount = 0;
+
+  for (ResultsList::const_iterator iter = results->begin();
+       iter != results->end();
+       ++iter) {
+    QueryResult *qr = (*iter);
+
+    // Create a new sub-dictionary named "Result Dict &lt;n>" for this entry
+
+    ++resCount;
+
+    TemplateDictionary *result_dictionary =
+      dictionary->AddSectionDictionary(ksr_ONE_RESULT);
+
+    result_dictionary->SetValue(ksr_JUMP_TO_URL, qr->GetUrl());
+
+    if (qr->IsSubItem()) {
+      result_dictionary->ShowSection(ksr_SUBITEM_SECTION);
+    }
+
+    result_dictionary->SetValue(ksr_LEAD_LINE, qr->GetLeadLine());
+
+    result_dictionary->SetValueAndShowSection(ksr_SNIPPET1, qr->GetSnippet1(),
+                                              ksr_SNIPPET1_SECTION);
+    
+    result_dictionary->SetValueAndShowSection(ksr_SNIPPET2, qr->GetSnippet2(),
+                                              ksr_SNIPPET2_SECTION);
+    
+    result_dictionary->SetValueAndShowSection(ksr_DESC, qr->GetDescription(),
+                                              ksr_DESCRIPTION_SECTION);
+
+    result_dictionary->SetValueAndShowSection(ksr_CAT_URL, qr->GetCategoryUrl(),
+                                              ksr_CATEGORY_SECTION);
+
+    result_dictionary->SetValueAndShowSection("CATEGORY", qr->GetCategoryName(),
+                                              "CATEGORY_SECTION");
+
+
+    if (IsEmpty(qr->GetDisplayUrl()) &amp;&amp;
+        IsEmpty(qr->GetPageSize()) &amp;&amp;
+        IsEmpty(qr->GetCachedUrl()) &amp;&amp;
+        IsEmpty(qr->GetSimilarPagesUrl()) &amp;&amp;
+        (IsEmpty(qr->GetStockUrl()) ||
+         IsEmpty(qr->GetStockSymbol())) ) {
+      // there is nothing on the last line, so hide it altogether
+    } else {
+      result_dictionary->ShowSection("LASTLINE_SECTION");
+
+      result_dictionary->SetValue(ksr_URL, qr->GetDisplayUrl());
+
+      result_dictionary->SetValueAndShowSection(ksr_KSIZE, qr->GetPageSize(),
+                                                ksr_KS_SECTION);
+
+      result_dictionary->SetValueAndShowSection(ksr_CACHE_URL, qr->GetCachedUrl(),
+                                                ksr_CACHE_SECTION);
+
+      result_dictionary->SetValueAndShowSection(ksr_SIM_PAGES_URL,
+                                                qr->GetSimilarPagesUrl(),
+                                                ksr_SIM_SECTION);
+
+      result_dictionary->SetValueAndShowSection(ksr_STOCK_URL, qr->GetStockUrl(),
+                                                ksr_STOCK_SECTION);
+
+      result_dictionary->SetValueAndShowSection(ksr_STOCK_SYMBOL,
+                                                qr->GetStockSymbol(),
+                                                ksr_STOCK_SECTION);
+    }
+
+    result_dictionary->SetValueAndShowSection(ksr_MORE_URL, qr->GetMoreUrl(),
+                                              ksr_MORE_SECTION);
+
+    result_dictionary->SetValueAndShowSection(ksr_MORE_LABEL, qr->GetMoreLabel(),
+                                              ksr_MORE_SECTION);
+
+  }    
+
+  fill_page_footing_dictionary(dictionary->AddIncludeDictionary(ksr_PAGE_FOOTING),
+                               query);
+}        
+
+void output_page(const Query* query) {
+  TemplateDictionary dict("search-results dict");
+  string output;
+  fill_search_results_dictionary(&amp;dict, query);
+  ctemplate::ExpandTemplate(SEARCH_RESULTS_FN, STRIP_WHITESPACE, &amp;dict, &amp;output);
+  // output now holds the expanded template
+}
+
+</pre>
+
+
+<hr>
+<ul>
+  <li> <A HREF="guide.html">User's Guide</A> </li>
+  <li> <A HREF="reference.html">Reference Manual</A> </li>
+  <li> <A HREF="auto_escape.html">Auto Escape</A> </li>
+  <li> <A HREF="tips.html">Tips</A> </li>
+<!--
+  <li> <A HREF="example.html">Example</A> </li>
+-->
+</ul>
+
+<hr>
+<address>
+Craig Silverstein<br>
+<script type=text/javascript>
+  var lm = new Date(document.lastModified);
+  document.write(lm.toDateString());
+</script>
+</address>
+
+</body>
+</html>

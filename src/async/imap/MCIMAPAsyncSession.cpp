@@ -78,6 +78,11 @@ IMAPAsyncSession::IMAPAsyncSession()
     mGmailUserDisplayName = NULL;
     mQueueRunning = false;
     mIdleEnabled = false;
+    
+    mClientCertificate = NULL;
+    mClientCertificatePassword = NULL;
+    mPinningHosts = new Array();
+    mPinningCerts = new Array();
 }
 
 IMAPAsyncSession::~IMAPAsyncSession()
@@ -96,6 +101,26 @@ IMAPAsyncSession::~IMAPAsyncSession()
     MC_SAFE_RELEASE(mPassword);
     MC_SAFE_RELEASE(mOAuth2Token);
     MC_SAFE_RELEASE(mDefaultNamespace);
+    
+    MC_SAFE_RELEASE(mClientCertificate);
+    MC_SAFE_RELEASE(mClientCertificatePassword);
+    MC_SAFE_RELEASE(mPinningHosts);
+    MC_SAFE_RELEASE(mPinningCerts);
+}
+
+void IMAPAsyncSession::addPinningForHost(String * host, Data * data)
+{
+    String * hostCopy = String::stringWithUTF8Characters(host->UTF8Characters());
+    Data * dataCopy = Data::dataWithBytes(data->bytes(), data->length());
+
+    mPinningHosts->addObject(hostCopy);
+    mPinningCerts->addObject(dataCopy);
+}
+
+void IMAPAsyncSession::setClientCertificate(Data * clientCertificate, String * password)
+{
+    MC_SAFE_REPLACE_COPY(Data, mClientCertificate, clientCertificate);
+    MC_SAFE_REPLACE_COPY(String, mClientCertificatePassword, password);
 }
 
 void IMAPAsyncSession::setHostname(String * hostname)
@@ -253,12 +278,20 @@ bool IMAPAsyncSession::isIdleEnabled()
     return mIdleEnabled;
 }
 
+#if defined(ANDROID) || defined(__ANDROID__)
+#include "../../android_log.h"
+#endif
+
 IMAPAsyncConnection * IMAPAsyncSession::session()
 {
     IMAPAsyncConnection * session = new IMAPAsyncConnection();
     session->setConnectionLogger(mConnectionLogger);
     session->setOwner(this);
     session->autorelease();
+
+    session->setClientCertificate(mClientCertificate, mClientCertificatePassword);
+    for(unsigned int i = 0; i < mPinningHosts->count(); i++)
+        session->addPinningForHost((String*)mPinningHosts->objectAtIndex(i), (Data*)mPinningCerts->objectAtIndex(i));
 
     session->setHostname(mHostname);
     session->setPort(mPort);

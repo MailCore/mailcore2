@@ -61,6 +61,30 @@ namespace mailcore {
     
 }
 
+#if defined(ANDROID) || defined(__ANDROID__)
+#include "../../android_log.h"
+#endif
+
+void SMTPAsyncSession::addPinningForHost(String * host, Data * certData)
+{
+    String * hostCopy = String::stringWithUTF8Characters(host->UTF8Characters());
+    Data * dataCopy = Data::dataWithBytes(certData->bytes(), certData->length());
+
+    #if defined(ANDROID) || defined(__ANDROID__)
+    __android_log_print(ANDROID_LOG_INFO, "NATIVE", "SMTPAsyncSession host %s datalen %d", hostCopy->UTF8Characters(), dataCopy->length());
+    #endif
+
+    mSession->addPinningForHost(hostCopy, dataCopy);
+}
+
+void SMTPAsyncSession::setClientCertificate(Data * clientCertificate, String* password)
+{
+    Data * dataCopy = Data::dataWithBytes(clientCertificate->bytes(), clientCertificate->length());
+    String * pwdCopy = String::stringWithUTF8Characters(password->UTF8Characters());
+
+    mSession->setClientCertificate(dataCopy, pwdCopy);
+}
+
 SMTPAsyncSession::SMTPAsyncSession()
 {
     mSession = new SMTPSession();
@@ -72,6 +96,10 @@ SMTPAsyncSession::SMTPAsyncSession()
     mInternalLogger = new SMTPConnectionLogger(this);
     mSession->setConnectionLogger(mInternalLogger);
     mOperationQueueCallback = NULL;
+
+    mClientCertificate = NULL;
+    mPinningHosts = new Array();
+    mPinningCerts = new Array();
 }
 
 SMTPAsyncSession::~SMTPAsyncSession()

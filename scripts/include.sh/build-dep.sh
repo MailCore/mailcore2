@@ -155,7 +155,7 @@ build_git_ios()
 
 build_git_osx()
 {
-  sdk="`xcodebuild -showsdks 2>/dev/null | grep macosx | grep -v driverkit | sed 's/.*macosx\(.*\)/\1/'`"
+  sdk="`xcodebuild -showsdks 2>/dev/null | grep macosx | sed 's/.*macosx\(.*\)/\1/'`"
   archs="x86_64"
   sdkminversion="10.7"
   

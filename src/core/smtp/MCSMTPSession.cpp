@@ -55,6 +55,11 @@ void SMTPSession::init()
     pthread_mutex_init(&mCanCancelLock, NULL);
 
     mOutlookServer = false;
+    
+    mPinningHosts = new Array();
+    mPinningCerts = new Array();
+    mClientCertificate = new Data();
+    mClientCertificatePassword = new String();
 }
 
 SMTPSession::SMTPSession()
@@ -72,6 +77,11 @@ SMTPSession::~SMTPSession()
     MC_SAFE_RELEASE(mUsername);
     MC_SAFE_RELEASE(mPassword);
     MC_SAFE_RELEASE(mOAuth2Token);
+    
+    MC_SAFE_RELEASE(mClientCertificate);
+    MC_SAFE_RELEASE(mClientCertificatePassword);
+    MC_SAFE_RELEASE(mPinningHosts);
+    MC_SAFE_RELEASE(mPinningCerts);
 }
 
 void SMTPSession::setHostname(String * hostname)
@@ -175,7 +185,7 @@ bool SMTPSession::checkCertificate()
 {
     if (!isCheckCertificateEnabled())
         return true;
-    return mailcore::checkCertificate(mSmtp->stream, hostname());
+    return mailcore::checkCertificate(mSmtp->stream, hostname(), mClientCertificate, mClientCertificatePassword, mPinningHosts, mPinningCerts);
 }
 
 void SMTPSession::setSendingCancelled(bool isCancelled) {
@@ -257,6 +267,10 @@ void SMTPSession::setup()
     mailsmtp_set_timeout(mSmtp, timeout());
     mailsmtp_set_progress_callback(mSmtp, body_progress, this);
     mailsmtp_set_logger(mSmtp, logger, this);
+    
+    if(mClientCertificate->length())// && mClientCertificatePassword)
+        mailsmtp_set_client_cert(mSmtp, (unsigned char*)mClientCertificate->bytes(), (size_t)mClientCertificate->length(), mClientCertificatePassword->UTF8Characters());
+
 }
 
 void SMTPSession::unsetup()
@@ -1024,4 +1038,27 @@ ConnectionLogger * SMTPSession::connectionLogger()
 ConnectionLogger * SMTPSession::connectionLoggerNoLock()
 {
     return mConnectionLogger;
+}
+
+#if defined(ANDROID) || defined(__ANDROID__)
+#include "../../android_log.h"
+#endif
+
+void SMTPSession::addPinningForHost(String * host, Data * data)
+{
+    String * hostCopy = String::stringWithUTF8Characters(host->UTF8Characters());
+    Data * dataCopy = Data::dataWithBytes(data->bytes(), data->length());
+
+    #if defined(ANDROID) || defined(__ANDROID__)
+    __android_log_print(ANDROID_LOG_INFO, "NATIVE", "SMTPSession add pinning host %s datalen %d", hostCopy->UTF8Characters(), dataCopy->length());
+    #endif
+
+    mPinningHosts->addObject(host);
+    mPinningCerts->addObject(data);
+}
+
+void SMTPSession::setClientCertificate(Data * data, String* password)
+{
+    MC_SAFE_REPLACE_COPY(Data, mClientCertificate, data);
+    MC_SAFE_REPLACE_COPY(String, mClientCertificatePassword, password);
 }

@@ -1,0 +1,27 @@
+Source: ctemplate
+Section: libdevel
+Priority: optional
+Maintainer: Google Inc. and others <google-ctemplate@googlegroups.com>
+Build-Depends: debhelper (>= 4.0.0)
+Standards-Version: 3.6.1
+
+Package: libctemplate-dev
+Section: libdevel
+Architecture: any
+Depends: libctemplate0 (= ${Source-Version})
+Description: This package contains a library implementing a simple but
+  powerful template language for C++.  It emphasizes separating logic
+  from presentation: it is impossible to embed application logic in this
+  template language.  The devel package contains static and debug
+  libraries and header files for developing applications that use the
+  ctemplate package.
+
+Package: libctemplate0
+Section: libs
+Architecture: any
+Description: This package contains a library implementing a simple but
+  powerful template language for C++.  It emphasizes separating logic
+  from presentation: it is impossible to embed application logic in this
+  template language.  This limits the power of the template language
+  without limiting the power of the template *system*.  Indeed, Google's
+  "main" web search uses this system exclusively for formatting output.

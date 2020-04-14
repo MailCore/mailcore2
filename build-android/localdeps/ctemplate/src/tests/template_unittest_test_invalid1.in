@@ -1,0 +1,3 @@
+This is html
+{This is fine}
+{{This is not so fine}}   {{! Can't have spaces in a variable name!}}

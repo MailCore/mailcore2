@@ -131,6 +131,16 @@ IMAPAsyncConnection::~IMAPAsyncConnection()
     MC_SAFE_RELEASE(mSession);
 }
 
+void IMAPAsyncConnection::addPinningForHost(String * host, Data * certData)
+{
+    mSession->addPinningForHost(host, certData);
+}
+
+void IMAPAsyncConnection::setClientCertificate(Data * clientCertificate, String * password)
+{
+    mSession->setClientCertificate(clientCertificate, password);
+}
+
 void IMAPAsyncConnection::setHostname(String * hostname)
 {
     mSession->setHostname(hostname);
