@@ -10,6 +10,7 @@ Pod::Spec.new do |spec|
   spec.source       = { :http => "https://d.etpan.org/mailcore2-deps/mailcore2-osx/mailcore2-osx-12.zip", :flatten => true }
   spec.header_dir   = "MailCore"
   spec.requires_arc = false
+  spec.source_files = "cocoapods-build/include/MailCore/*.h"
   spec.public_header_files = "cocoapods-build/include/MailCore/*.h"
   spec.preserve_paths = "cocoapods-build/include/MailCore/*.h"
   spec.vendored_libraries = "cocoapods-build/lib/libMailCore.a"
