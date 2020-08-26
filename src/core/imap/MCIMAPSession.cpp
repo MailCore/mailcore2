@@ -3024,6 +3024,7 @@ void IMAPSession::fetchMessageAttachmentToFileByChunksByUID(String * folder, uin
         }
 
         if (data == NULL) {
+            pool->release();
             break;
         }
 
@@ -3153,6 +3154,11 @@ IndexSet * IMAPSession::search(String * folder, IMAPSearchKind kind, String * se
         case IMAPSearchKindContent:
         {
             expr = IMAPSearchExpression::searchContent(searchString);
+            break;
+        }
+        case IMAPSearchKindBody:
+        {
+            expr = IMAPSearchExpression::searchBody(searchString);
             break;
         }
         case IMAPSearchKindRead:
@@ -4206,6 +4212,15 @@ void IMAPSession::capabilitySetWithSessionState(IndexSet * capabilities)
     }
     if (mailimap_has_extension(mImap, (char *)"XYMHIGHESTMODSEQ")) {
         capabilities->addIndex(IMAPCapabilityXYMHighestModseq);
+    }
+    if (mailimap_has_uidplus(mImap)) {
+        capabilities->addIndex(IMAPCapabilityUIDPlus);
+    }
+    if (mailimap_has_acl(mImap)) {
+        capabilities->addIndex(IMAPCapabilityACL);
+    }
+    if (mailimap_has_enable(mImap)) {
+        capabilities->addIndex(IMAPCapabilityEnable);
     }
     applyCapabilities(capabilities);
 }

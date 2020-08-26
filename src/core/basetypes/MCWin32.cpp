@@ -3,7 +3,7 @@
 FILE * mailcore::win32_fopen(const char * filename, const char * mode)
 {
     FILE * f = NULL;
-    int r = fopen_s(&f, filename, "rb");
+    int r = fopen_s(&f, filename, mode);
     if (r != 0) {
         return NULL;
     }

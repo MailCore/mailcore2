@@ -44,6 +44,15 @@
     return [[[self alloc] initWithMCFolderStatus:status] autorelease];
 }
 
+- (instancetype) init
+{
+    mailcore::IMAPFolderStatus * folderStatus = new mailcore::IMAPFolderStatus();
+    self = [self initWithMCFolderStatus:folderStatus];
+    folderStatus->release();
+
+    return self;
+}
+
 - (mailcore::Object *) mco_mcObject
 {
     return _nativeStatus;

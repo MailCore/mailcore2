@@ -499,6 +499,7 @@ Data * NNTPSession::fetchArticleByMessageID(String * messageID, ErrorCode * pErr
     msgID = strdup(messageID->UTF8Characters());
     
     r = newsnntp_article_by_message_id(mNNTP, msgID, &content, &content_len);
+    free(msgID);
     if (r == NEWSNNTP_ERROR_STREAM) {
         * pError = ErrorConnection;
         return NULL;
@@ -840,6 +841,7 @@ static int xover_resp_to_fields(struct newsnntp_xover_resp_item * item, struct m
                     r = MAIL_ERROR_MEMORY;
                     goto free_list;
                 }
+                break;
 
             case MAILIMF_ERROR_PARSE:
                 break;

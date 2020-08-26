@@ -41,7 +41,7 @@ typedef void (^CompletionType)(NSError *error, NSArray * messages, MCOIndexSet *
     [super dealloc];
 }
 
-- (void) start:(void (^)(NSError *error, NSArray * messages, MCOIndexSet * vanishedMessages))completionBlock
+- (void) start:(void (^)(NSError *error, NSArray<MCOIMAPMessage *> * messages, MCOIndexSet * vanishedMessages))completionBlock
 {
     _completionBlock = [completionBlock copy];
     [self start];

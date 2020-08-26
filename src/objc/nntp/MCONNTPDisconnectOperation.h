@@ -14,7 +14,7 @@
 #import <MailCore/MCONNTPOperation.h>
 
 /* The class is used to perform a disconnect operation. */
-@interface MCONNTPDisconnectOperation : NSObject
+@interface MCONNTPDisconnectOperation : MCONNTPOperation
 
 @end
 

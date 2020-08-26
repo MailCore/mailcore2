@@ -30,6 +30,7 @@ namespace mailcore {
         
     private:
         MailProvidersManager();
+        ~MailProvidersManager();
         void registerProviders(HashMap * providers);
         
         HashMap * mProviders;

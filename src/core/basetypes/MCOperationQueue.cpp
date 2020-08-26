@@ -258,6 +258,7 @@ void OperationQueue::startThread()
     mQuitting = false;
     mStarted = true;
     pthread_create(&mThreadID, NULL, (void * (*)(void *)) OperationQueue::runOperationsOnThread, this);
+    pthread_detach(mThreadID);
     mailsem_down(mStartSem);
 }
 

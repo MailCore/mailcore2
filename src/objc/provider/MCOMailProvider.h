@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class MCONetService;
+
 /**
    Represents a email service provider, like for example Gmail, Yahoo, Fastmail.fm etc.
 */
@@ -22,19 +24,19 @@
    A list of ways that you can connect to the IMAP server
    @return An array of MCONetService
 */
-- (NSArray * /* MCONetService */) imapServices;
+- (NSArray<MCONetService *> *) imapServices;
 
 /**
    A list of ways that you can connect to the SMTP server
    @return An array of MCONetService
 */
-- (NSArray * /* MCONetService */) smtpServices;
+- (NSArray<MCONetService *> *) smtpServices;
 
 /**
    A list of ways that you can connect to the POP3 server
    @return An array of MCONetService
 */
-- (NSArray * /* MCONetService */) popServices;
+- (NSArray<MCONetService *> *) popServices;
 
 - (BOOL) matchEmail:(NSString *)email;
 - (BOOL) matchMX:(NSString *)hostname;
@@ -83,10 +85,7 @@
 */
 - (NSString *) importantFolderPath;
 
-@end
-
-@interface MCOMailProvider (MCOUnavailable)
-
+#pragma mark - Unavailable initializers
 /** Do not invoke this directly. */
 - (instancetype) init NS_UNAVAILABLE;
 /** Do not invoke this directly. */

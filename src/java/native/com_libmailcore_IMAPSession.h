@@ -331,6 +331,14 @@ JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPSession_copyMessagesOperation
 
 /*
  * Class:     com_libmailcore_IMAPSession
+ * Method:    moveMessagesOperation
+ * Signature: (Ljava/lang/String;Lcom/libmailcore/IndexSet;Ljava/lang/String;)Lcom/libmailcore/IMAPMoveMessagesOperation;
+ */
+JNIEXPORT jobject JNICALL Java_com_libmailcore_IMAPSession_moveMessagesOperation
+  (JNIEnv *, jobject, jstring, jobject, jstring);
+
+/*
+ * Class:     com_libmailcore_IMAPSession
  * Method:    expungeOperation
  * Signature: (Ljava/lang/String;)Lcom/libmailcore/IMAPOperation;
  */

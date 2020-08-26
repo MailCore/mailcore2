@@ -48,7 +48,7 @@ Download the latest [build for OS X](http://d.etpan.org/mailcore2-deps/mailcore2
         - Click the `+` icon and select `MailCore.framework`.
     * Mac static library
         - Go to Build Phases from your build target, and under 'Link Binary With Libraries', add `libMailCore.a` and `Security.framework`.
-        - Set 'Other Linker Flags' under Build Settings: `-lctemplate -letpan -lxml2 -lsasl2 -liconv -ltidy -lz` `-lc++ -stdlib=libc++ -ObjC -lcrypto -lssl -lresolv`
+        - Set 'Other Linker Flags' under Build Settings: `-lctemplate -letpan -lxml2 -lsasl2 -liconv -ltidy -lz` `-lc++ -stdlib=libc++ -ObjC -lresolv`
         - Make sure to use LLVM C++ standard library.  In Build Settings, locate 'C++ Standard Library', and select `libc++`.
         - In Build Phases, add a Target Dependency of `static mailcore2 osx`.
 5. **For iOS** - If you're targeting iOS, you have to link against MailCore 2 as a static library:

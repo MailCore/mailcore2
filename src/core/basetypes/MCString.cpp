@@ -1755,7 +1755,7 @@ static void returnToLineAtBeginningOfBlock(struct parserState * state)
 static Set * blockElements(void)
 {
     static Set * elements = NULL;
-    MC_LOCK_TYPE lock = MC_LOCK_INITIAL_VALUE;
+    static MC_LOCK_TYPE lock = MC_LOCK_INITIAL_VALUE;
     
     MC_LOCK(&lock);
     if (elements == NULL) {
