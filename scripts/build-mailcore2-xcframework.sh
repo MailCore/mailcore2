@@ -5,8 +5,7 @@ cd ../
 
 MAILCORE_DIR="`pwd`"
 BUILD_DIR="$MAILCORE_DIR/.build"
-DATE="`date +"%Y-%m-%d"`"
-FRAMEWORK_NAME="mailcore2-$DATE.xcframework"
+FRAMEWORK_NAME="MailCore2.xcframework"
 
 mkdir $BUILD_DIR
 

@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "mailcore2",
+    name: "MailCore2",
     platforms: [
         .iOS(.v8), .macOS(.v10_10)
     ],
@@ -15,7 +15,7 @@ let package = Package(
     ],
     targets: [
         .binaryTarget(name: "MailCore2",
-                      url: "https://downloads.maddux.cloud/mailcore2-apple-xcframework/mailcore2-latest.xcframework.zip",
-                      checksum: "73ad593ac65fa6717e914f3f53302bd9064ef027e168676ae52f8295a6057047")
+                      url: "https://downloads.maddux.cloud/mailcore2-apple-xcframework/MailCore2-latest.xcframework.zip",
+                      checksum: "9ac3688a216e9c38dac7f5ddbfa89d314674da7f7f390d366774d218e9955452")
     ]
 )
