@@ -12,7 +12,7 @@ let package = Package(
 //        .library(
 //            name: "MailCore2",
 //            targets: ["MailCore2"]),
-        .library(name: "MailCore2", type: .dynamic, targets: ["MailCore2"])
+        .library(name: "MailCore2", type: .static, targets: ["MailCore2"])
     ],
     targets: [
         .binaryTarget(name: "MailCore2",
