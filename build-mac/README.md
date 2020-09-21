@@ -12,7 +12,14 @@ MailCore 2 is available through [Swift Package Manager](https://swift.org/packag
 5. Click  `+` -> `New Copy Files Phase`, then change `Destination` to `Frameworks` in new build phase
 6. Click `+` -> `New Run Script Phase`, then paste the script box:
 ```
-/usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} --preserve-metadata=identifier,entitlements "$CODESIGNING_FOLDER_PATH"/Frameworks/MailCore.framework
+if [ "$PLATFORM_NAME" == "macosx" ]
+then
+    FRAMEWORK_PATH="$CODESIGNING_FOLDER_PATH"/Contents/Frameworks/MailCore.framework/Versions/A/MailCore
+else
+    FRAMEWORK_PATH="$CODESIGNING_FOLDER_PATH"/Frameworks/MailCore.framework
+fi
+echo "Signing framework at: $FRAMEWORK_PATH
+/usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} --preserve-metadata=identifier,entitlements "$FRAMEWORK_PATH"
 ```
 [![Swift Package Manger Compatible](https://img.shields.io/badge/SPM-compatible-4BC51D.svg?style=flat)](https://swift.org/package-manager/)
 
