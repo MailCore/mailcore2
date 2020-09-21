@@ -18,7 +18,7 @@ then
 else
     FRAMEWORK_PATH="$CODESIGNING_FOLDER_PATH"/Frameworks/MailCore.framework
 fi
-echo "Signing framework at: $FRAMEWORK_PATH
+echo "Signing framework at: $FRAMEWORK_PATH"
 /usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} --preserve-metadata=identifier,entitlements "$FRAMEWORK_PATH"
 ```
 [![Swift Package Manger Compatible](https://img.shields.io/badge/SPM-compatible-4BC51D.svg?style=flat)](https://swift.org/package-manager/)
