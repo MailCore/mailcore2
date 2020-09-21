@@ -12,6 +12,7 @@ FRAMEWORK_NAME="MailCore2.xcframework"
 ARCHIVE_NAME="MailCore2-$DATE.xcframework.zip"
 
 cd $BUILD_DIR
+rm "$BUILD_DIR/$ARCHIVE_NAME"
 
 # Prepare for Distribution
 zip -r -X "$ARCHIVE_NAME" "$FRAMEWORK_NAME"

@@ -8,6 +8,7 @@ BUILD_DIR="$MAILCORE_DIR/.build"
 FRAMEWORK_NAME="MailCore2.xcframework"
 
 mkdir $BUILD_DIR
+rm -rf "$BUILD_DIR/$FRAMEWORK_NAME"
 
 cd build-mac
 
