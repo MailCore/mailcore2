@@ -1,3 +1,21 @@
+### Swift Package Manager ###
+
+MailCore 2 is available through [Swift Package Manager](https://swift.org/package-manager/).
+
+1. In Xcode click `File` -> `Swift Packages` -> `Add Package Dependency...`
+2. Paste the following URL: `https://github.com/MailCore/mailcore2`
+3. Click `Next` -> `Next` -> `Finish`
+
+**The following steps are to resolve an issue with the current version of Xcode 12, once the issue is fixed they will be unnecessary and removed.**
+
+4. Select `<YOUR_PROJECT>` -> `<YOUR_TARGET>` -> `Build Phases` 
+5. Click  `+` -> `New Copy Files Phase`, then change `Destination` to `Frameworks` in new build phase
+6. Click `+` -> `New Run Script Phase`, then paste the script box:
+```
+/usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} --preserve-metadata=identifier,entitlements "$CODESIGNING_FOLDER_PATH"/Frameworks/MailCore.framework
+```
+[![Swift Package Manger Compatible](https://img.shields.io/badge/SPM-compatible-4BC51D.svg?style=flat)](https://swift.org/package-manager/)
+
 ### Carthage ###
 
 MailCore 2 is available through [Carthage](https://github.com/Carthage/Carthage).
@@ -24,6 +42,8 @@ pod 'mailcore2-ios'
 ```
 pod 'mailcore2-osx'
 ```
+
+[![CocoaPods Compatible](https://img.shields.io/badge/CocoaPods-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 ### Binary ###
 
