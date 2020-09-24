@@ -64,5 +64,3 @@ xcodebuild -create-xcframework \
 rm -rf "$BUILD_DIR/mailcore2.macOS.xcarchive"
 rm -rf "$BUILD_DIR/mailcore2.iOS-Simulator.xcarchive"
 rm -rf "$BUILD_DIR/mailcore2.iOS.xcarchive"
-
-echo "XCFramework exported to: $BUILD_DIR/$FRAMEWORK_NAME"
