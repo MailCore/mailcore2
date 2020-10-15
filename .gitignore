@@ -23,6 +23,8 @@ DerivedData
 *.hmap
 *.xcuserstate
 *.xccheckout
+.swiftpm/
+.build/
 
 #CocoaPods
 Pods
