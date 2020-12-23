@@ -28,13 +28,8 @@
 {
     [_msgViewController setFolder:FOLDER];
 
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"OAuth2Enabled"]) {
-        if (([login length] == 0) || ([oauth2Token length] == 0))
-            return;
-    }
-    else {
-        if (([login length] == 0) || ([password length] == 0))
-            return;
+    if (([login length] == 0) || ([password length] == 0)) {
+        return;
     }
     
 	self.loading = YES;

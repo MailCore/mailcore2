@@ -11,24 +11,32 @@
 #import <WebKit/WebKit.h>
 
 #import "MCOCIDURLProtocol.h"
+#import "MCOMessageViewWebDelegate.h"
 
 @interface MCOMessageView () <MCOHTMLRendererIMAPDelegate, WebResourceLoadDelegate>
+
+@property (nonatomic, weak) MCOMessageViewWebDelegate * webDelegate;
+@property (nonatomic, weak) NSOperationQueue * downloadQueue;
 
 @end
 
 @implementation MCOMessageView {
-    WebView * _webView;
+    WKWebView * _webView;
     NSString * _folder;
     MCOAbstractMessage * _message;
     id <MCOMessageViewDelegate> _delegate;
     BOOL _prefetchIMAPImagesEnabled;
     BOOL _prefetchIMAPAttachmentsEnabled;
+    MCOMessageViewWebDelegate * _webDelegate;
+    NSOperationQueue * _downloadQueue;
 }
 
 @synthesize folder = _folder;
 @synthesize delegate = _delegate;
 @synthesize prefetchIMAPImagesEnabled = _prefetchIMAPImagesEnabled;
 @synthesize prefetchIMAPAttachmentsEnabled = _prefetchIMAPAttachmentsEnabled;
+@synthesize webDelegate = _webDelegate;
+@synthesize downloadQueue = _downloadQueue;
 
 + (void) initialize
 {
@@ -38,22 +46,114 @@
 - (id)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
-    
-    _webView = [[WebView alloc] initWithFrame:[self bounds]];
+
+    NSString* path = [[NSBundle mainBundle] pathForResource:@"inject"
+                                                     ofType:@"js"];
+    NSString* script = [NSString stringWithContentsOfFile:path
+                                                  encoding:NSUTF8StringEncoding
+                                                     error:NULL];
+
+    WKUserScript * userScript = [[WKUserScript alloc] initWithSource:script
+            injectionTime:WKUserScriptInjectionTimeAtDocumentEnd
+                                                    forMainFrameOnly:YES];
+    WKUserContentController *contentController = [[WKUserContentController alloc] init];
+    [contentController addUserScript:userScript];
+
+    WKWebViewConfiguration * webViewConfiguration = [[WKWebViewConfiguration alloc] init];
+    webViewConfiguration.userContentController = contentController;
+
+    _webView = [[WKWebView alloc] initWithFrame:[self bounds] configuration:webViewConfiguration];
     [_webView setAutoresizingMask:NSViewHeightSizable | NSViewWidthSizable];
-    [_webView setResourceLoadDelegate:self];
+    [_webView setNavigationDelegate:self.webDelegate];
+    [_webView setUIDelegate:self.webDelegate];
     [self addSubview:_webView];
+
+    self.webDelegate.openInlineAttachments = ^void(NSArray *cids){
+        [self downloadInlineAttachments:cids];
+    };
     
     return self;
 }
+
+- (void)downloadInlineAttachments:(NSArray *)cids {
+    for (int i = 0; i < cids.count; ++i) {
+        [self.downloadQueue addOperationWithBlock:^{
+            NSDictionary *dict = cids[i];
+            NSString *cid = dict[@"url"];
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:cid]];
+            MCOAbstractPart * part = NULL;
+
+            if ([MCOCIDURLProtocol isCID:[request URL]]) {
+                part = [self _partForCIDURL:[request URL]];
+            }
+            else if ([MCOCIDURLProtocol isXMailcoreImage:[ request URL]]) {
+                NSString * specifier = [[request URL] resourceSpecifier];
+                NSString * partUniqueID = specifier;
+                part = [self _partForUniqueID:partUniqueID];
+            }
+
+            if (part != NULL) {
+                if ([_message isKindOfClass:[MCOIMAPMessage class]]) {
+                    NSMutableURLRequest * mutableRequest = [request mutableCopy];
+                    NSString * partUniqueID = [part uniqueID];
+                    NSData * data = [[self delegate] MCOMessageView:self dataForPartWithUniqueID:partUniqueID];
+                    if (data == NULL) {
+                        [[self delegate] MCOMessageView:self fetchDataForPartWithUniqueID:partUniqueID downloadedFinished:^(NSError * error) {
+                            NSData * downloadedData = [[self delegate] MCOMessageView:self dataForPartWithUniqueID:partUniqueID];
+                            NSData * previewData = [[self delegate] MCOMessageView:self previewForData:downloadedData isHTMLInlineImage:[MCOCIDURLProtocol isCID:[request URL]]];
+                            [MCOCIDURLProtocol partDownloadedMessage:_message partUniqueID:partUniqueID data:previewData];
+                            NSError *writeFileError;
+                            NSFileManager *manager = [NSFileManager defaultManager];
+                            NSURL *applicationSupport = [manager URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:false error:&error];
+                            NSString *identifier = [[NSBundle mainBundle] bundleIdentifier];
+                            NSURL *folder = [applicationSupport URLByAppendingPathComponent:identifier];
+                            [manager createDirectoryAtURL:folder withIntermediateDirectories:true attributes:nil error:&writeFileError];
+
+                            NSURL *fileURL = [folder URLByAppendingPathComponent:[NSString stringWithFormat:@"%@", part.filename]];
+
+                            [downloadedData writeToFile:[fileURL path] atomically:true];
+
+                            [self.webDelegate updateImageUrl:fileURL.path at:cid on:_webView];
+                        }];
+                    }
+                    [MCOCIDURLProtocol startLoadingWithMessage:_message
+                                                  partUniqueID:partUniqueID
+                                                          data:data
+                                                       request:mutableRequest];
+
+                }
+            }
+        }];
+    }
+}
+
 
 - (void) dealloc
 {
     [_message release];
     [_folder release];
     [_webView release];
+    [_downloadQueue cancelAllOperations];
+    [_downloadQueue release];
     
     [super dealloc];
+}
+
+- (MCOMessageViewWebDelegate *)webDelegate {
+    if (_webDelegate == nil) {
+        _webDelegate = [[MCOMessageViewWebDelegate alloc] init];
+    }
+
+    return _webDelegate;
+}
+
+- (NSOperationQueue *)downloadQueue {
+    if (_downloadQueue == nil) {
+        _downloadQueue = [[NSOperationQueue alloc] init];
+        _downloadQueue.maxConcurrentOperationCount = 1;
+    }
+
+    return _downloadQueue;
 }
 
 - (void) setMessage:(MCOAbstractMessage *)message
@@ -92,7 +192,17 @@
             MCAssert(0);
         }
     }
-    [[_webView mainFrame] loadHTMLString:content baseURL:nil];
+
+    NSError *error;
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSURL *applicationSupport = [manager URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:false error:&error];
+    NSString *identifier = [[NSBundle mainBundle] bundleIdentifier];
+    NSURL *folder = [applicationSupport URLByAppendingPathComponent:identifier];
+    [manager createDirectoryAtURL:folder withIntermediateDirectories:true attributes:nil error:&error];
+    NSURL *fileURL = [folder URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.html", _message.header.messageID]];
+
+    [content writeToFile:[fileURL path] atomically:true encoding:NSUTF8StringEncoding error:&error];
+    [_webView loadFileURL:fileURL allowingReadAccessToURL:folder];
 }
 
 - (MCOAbstractPart *) _partForCIDURL:(NSURL *)url
@@ -116,59 +226,6 @@
         }];
     }
     return data;
-}
-
-- (NSURLRequest *)webView:(WebView *)sender resource:(id)identifier willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse fromDataSource:(id)dataSource
-{
-    MCOAbstractPart * part = NULL;
-    
-    if ([MCOCIDURLProtocol isCID:[request URL]]) {
-        part = [self _partForCIDURL:[request URL]];
-    }
-	else if ([MCOCIDURLProtocol isXMailcoreImage:[ request URL]]) {
-        NSString * specifier = [[request URL] resourceSpecifier];
-        NSString * partUniqueID = specifier;
-        part = [self _partForUniqueID:partUniqueID];
-    }
-    
-    if (part != NULL) {
-        if ([_message isKindOfClass:[MCOIMAPMessage class]]) {
-            NSMutableURLRequest * mutableRequest = [request mutableCopy];
-            NSString * partUniqueID = [part uniqueID];
-            NSData * data = [[self delegate] MCOMessageView:self dataForPartWithUniqueID:partUniqueID];
-            if (data == NULL) {
-                [[self delegate] MCOMessageView:self fetchDataForPartWithUniqueID:partUniqueID downloadedFinished:^(NSError * error) {
-                    NSData * downloadedData = [[self delegate] MCOMessageView:self dataForPartWithUniqueID:partUniqueID];
-                    NSData * previewData = [[self delegate] MCOMessageView:self previewForData:downloadedData isHTMLInlineImage:[MCOCIDURLProtocol isCID:[request URL]]];
-                    [MCOCIDURLProtocol partDownloadedMessage:_message partUniqueID:partUniqueID data:previewData];
-                }];
-            }
-            [MCOCIDURLProtocol startLoadingWithMessage:_message
-                                          partUniqueID:partUniqueID
-                                                  data:data
-                                               request:mutableRequest];
-            
-            return [mutableRequest autorelease];
-        }
-        else if ([_message isKindOfClass:[MCOMessageParser class]]) {
-            NSMutableURLRequest * mutableRequest = [request mutableCopy];
-            NSString * partUniqueID = [part uniqueID];
-            NSData * data = [(MCOAttachment *) part data];
-            NSData * previewData = [[self delegate] MCOMessageView:self previewForData:data isHTMLInlineImage:[MCOCIDURLProtocol isCID:[request URL]]];
-            [MCOCIDURLProtocol startLoadingWithMessage:_message
-                                          partUniqueID:partUniqueID
-                                                  data:previewData
-                                               request:mutableRequest];
-            
-            return [mutableRequest autorelease];
-        }
-        else {
-            return request;
-        }
-    }
-    else {
-        return request;
-    }
 }
 
 - (BOOL) MCOAbstractMessage:(MCOAbstractMessage *)msg canPreviewPart:(MCOAbstractPart *)part

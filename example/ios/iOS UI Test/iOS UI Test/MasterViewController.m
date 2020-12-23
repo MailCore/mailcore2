@@ -10,7 +10,6 @@
 #import <MailCore/MailCore.h>
 #import "FXKeychain.h"
 #import "MCTMsgViewController.h"
-#import "GTMOAuth2ViewControllerTouch.h"
 #import "MCTTableViewCell.h"
 
 #define CLIENT_ID @"the-client-id"
@@ -50,12 +49,7 @@ static NSString *inboxInfoIdentifier = @"InboxStatusCell";
 	
 	[[NSUserDefaults standardUserDefaults] registerDefaults:@{ HostnameKey: @"imap.gmail.com" }];
 	
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"OAuth2Enabled"]) {
-        [self startOAuth2];
-    }
-    else {
-        [self startLogin];
-    }
+    [self startLogin];
 }
 
 - (void) startLogin
@@ -70,42 +64,6 @@ static NSString *inboxInfoIdentifier = @"InboxStatusCell";
     }
 
 	[self loadAccountWithUsername:username password:password hostname:hostname oauth2Token:nil];
-}
-
-- (void) startOAuth2
-{
-    GTMOAuth2Authentication * auth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:KEYCHAIN_ITEM_NAME
-                                                                                        clientID:CLIENT_ID
-                                                                                    clientSecret:CLIENT_SECRET];
-    
-    if ([auth refreshToken] == nil) {
-        MasterViewController * __weak weakSelf = self;
-        GTMOAuth2ViewControllerTouch *viewController = [GTMOAuth2ViewControllerTouch controllerWithScope:@"https://mail.google.com/"
-                                                                                               clientID:CLIENT_ID
-                                                                                           clientSecret:CLIENT_SECRET
-                                                                                       keychainItemName:KEYCHAIN_ITEM_NAME
-                                                                                       completionHandler:^(GTMOAuth2ViewControllerTouch *viewController, GTMOAuth2Authentication *retrievedAuth, NSError *error) {
-                                                                                           [weakSelf loadWithAuth:retrievedAuth];
-                                                                                       }];
-        [self.navigationController pushViewController:viewController
-                                             animated:YES];
-    }
-    else {
-        [auth beginTokenFetchWithDelegate:self
-                        didFinishSelector:@selector(auth:finishedRefreshWithFetcher:error:)];
-    }
-}
-
-- (void)auth:(GTMOAuth2Authentication *)auth
-finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
-       error:(NSError *)error {
-    [self loadWithAuth:auth];
-}
-
-- (void)loadWithAuth:(GTMOAuth2Authentication *)auth
-{
-	NSString *hostname = [[NSUserDefaults standardUserDefaults] objectForKey:HostnameKey];
-	[self loadAccountWithUsername:[auth userEmail] password:nil hostname:hostname oauth2Token:[auth accessToken]];
 }
 
 - (void)loadAccountWithUsername:(NSString *)username

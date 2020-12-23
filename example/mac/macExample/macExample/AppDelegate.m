@@ -7,11 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
 #import <MailCore/MailCore.h>
-#import "GTMOAuth2WindowController.h"
-#import "GTMOAuth2SignIn.h"
-
 #import "MCTMsgListViewController.h"
 #import "FXKeychain.h"
 
@@ -49,62 +45,9 @@
 	[[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"Hostname": @"imap.gmail.com" }];
 	self.hostname = [[NSUserDefaults standardUserDefaults] stringForKey:@"Hostname"];
     
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"OAuth2Enabled"]) {
-        [self startOAuth2];
-    }
-    else {
-        [self startLogin];
-    }
+    [self startLogin];
 }
 
-- (void) startOAuth2
-{
-    GTMOAuth2Authentication * auth = [GTMOAuth2WindowController authForGoogleFromKeychainForName:KEYCHAIN_ITEM_NAME
-                                                                                        clientID:CLIENT_ID
-                                                                                    clientSecret:CLIENT_SECRET];
-    
-    if ([auth refreshToken] == nil) {
-        GTMOAuth2WindowController *windowController = [[[GTMOAuth2WindowController alloc] initWithScope:@"https://mail.google.com/"
-                                                                                               clientID:CLIENT_ID
-                                                                                           clientSecret:CLIENT_SECRET
-                                                                                       keychainItemName:KEYCHAIN_ITEM_NAME
-                                                                                         resourceBundle:[NSBundle bundleForClass:[GTMOAuth2WindowController class]]] autorelease];
-        [windowController signInSheetModalForWindow:nil
-                                           delegate:self
-                                   finishedSelector:@selector(windowController:finishedWithAuth:error:)];
-    }
-    else {
-        [auth beginTokenFetchWithDelegate:self
-                        didFinishSelector:@selector(auth:finishedRefreshWithFetcher:error:)];
-    }
-}
-
-- (void)auth:(GTMOAuth2Authentication *)auth
-finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
-       error:(NSError *)error {
-    [self windowController:nil finishedWithAuth:auth error:error];
-}
-
-- (void)windowController:(GTMOAuth2WindowController *)viewController
-        finishedWithAuth:(GTMOAuth2Authentication *)auth
-                   error:(NSError *)error
-{
-    if (error != nil) {
-        NSLog(@"request failed");
-        // Authentication failed
-    } else {
-        // Authentication succeeded
-        [self loginWithAuth:auth];
-    }
-}
-
-- (void) loginWithAuth:(GTMOAuth2Authentication *)auth
-{
-    self.login = [auth userEmail];
-    self.oauth2Token = [auth accessToken];
-    
-    [self accountLogin:nil];
-}
 
 - (void) startLogin
 {

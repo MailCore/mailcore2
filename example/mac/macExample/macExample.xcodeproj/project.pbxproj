@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1929041918508C0B952F2B39 /* MCOMessageViewWebDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 19290F48AA7E97B20F0892F0 /* MCOMessageViewWebDelegate.mm */; };
+		1929079080D299575411FC40 /* inject.js in Sources */ = {isa = PBXBuildFile; fileRef = 19290DE8157428C4E19CFD1B /* inject.js */; };
+		276CAF4125907D1F00F52E67 /* inject.js in Resources */ = {isa = PBXBuildFile; fileRef = 19290DE8157428C4E19CFD1B /* inject.js */; };
 		AB666C5917484E6200545290 /* FXKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = AB666C5817484E6200545290 /* FXKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		AB666C5B1748558000545290 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB666C5A1748558000545290 /* Security.framework */; };
 		C64FF38416AF97F400F8C162 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = C64FF38316AF97F400F8C162 /* main.mm */; };
@@ -20,16 +23,31 @@
 		C6D42BEC16ACFE3F002BB4F9 /* MCTMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D42BEB16ACFE3F002BB4F9 /* MCTMsgViewController.m */; };
 		C6D718CC178B7160008ED15F /* MailCore.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6BD28B3170BDFE500A91AC1 /* MailCore.framework */; };
 		C6D71912178B7942008ED15F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6D71911178B7942008ED15F /* SystemConfiguration.framework */; };
-		C6D7192F178B7D65008ED15F /* GTMOAuth2Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D71924178B7D55008ED15F /* GTMOAuth2Authentication.m */; };
-		C6D71930178B7D67008ED15F /* GTMOAuth2SignIn.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D71926178B7D55008ED15F /* GTMOAuth2SignIn.m */; };
-		C6D71931178B7D6C008ED15F /* GTMHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D7191F178B7D55008ED15F /* GTMHTTPFetcher.m */; };
-		C6D71932178B7D6E008ED15F /* GTMHTTPFetchHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D71921178B7D55008ED15F /* GTMHTTPFetchHistory.m */; };
-		C6D71933178B7D72008ED15F /* GTMOAuth2Window.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D71928178B7D55008ED15F /* GTMOAuth2Window.xib */; };
-		C6D71934178B7D72008ED15F /* GTMOAuth2WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D7192A178B7D55008ED15F /* GTMOAuth2WindowController.m */; };
 		C6ED6CE817A0D06200A4A14C /* MCOCIDURLProtocol.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6ED6CE717A0D05300A4A14C /* MCOCIDURLProtocol.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		276CAF1F259049C300F52E67 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6BD2877170BC8ED00A91AC1 /* mailcore2.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 27780C3A19CF9CD100C77E44;
+			remoteInfo = "mailcore ios";
+		};
+		276CAF21259049C300F52E67 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6BD2877170BC8ED00A91AC1 /* mailcore2.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C6B5AE0219F630B3001352A6;
+			remoteInfo = unittest;
+		};
+		276CAF23259049C300F52E67 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6BD2877170BC8ED00A91AC1 /* mailcore2.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C600B6141A242C3F000728F1;
+			remoteInfo = unittestcpp;
+		};
 		C6AC12781717C54D00B715B7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C6BD2877170BC8ED00A91AC1 /* mailcore2.xcodeproj */;
@@ -88,6 +106,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		192901669BCFA26A095933D3 /* MCOMessageViewWebDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOMessageViewWebDelegate.h; sourceTree = "<group>"; };
+		19290DE8157428C4E19CFD1B /* inject.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = inject.js; sourceTree = "<group>"; };
+		19290F48AA7E97B20F0892F0 /* MCOMessageViewWebDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOMessageViewWebDelegate.mm; sourceTree = "<group>"; };
+		276CAF2925905E4E00F52E67 /* macExampleDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macExampleDebug.entitlements; sourceTree = "<group>"; };
 		AB666C5717484E6200545290 /* FXKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FXKeychain.h; path = ../../../common/FXKeychain.h; sourceTree = "<group>"; };
 		AB666C5817484E6200545290 /* FXKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FXKeychain.m; path = ../../../common/FXKeychain.m; sourceTree = "<group>"; };
 		AB666C5A1748558000545290 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -110,17 +132,6 @@
 		C6D42BEA16ACFE3F002BB4F9 /* MCTMsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTMsgViewController.h; sourceTree = "<group>"; };
 		C6D42BEB16ACFE3F002BB4F9 /* MCTMsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTMsgViewController.m; sourceTree = "<group>"; };
 		C6D71911178B7942008ED15F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		C6D7191E178B7D55008ED15F /* GTMHTTPFetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTMHTTPFetcher.h; sourceTree = "<group>"; };
-		C6D7191F178B7D55008ED15F /* GTMHTTPFetcher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTMHTTPFetcher.m; sourceTree = "<group>"; };
-		C6D71920178B7D55008ED15F /* GTMHTTPFetchHistory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTMHTTPFetchHistory.h; sourceTree = "<group>"; };
-		C6D71921178B7D55008ED15F /* GTMHTTPFetchHistory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTMHTTPFetchHistory.m; sourceTree = "<group>"; };
-		C6D71923178B7D55008ED15F /* GTMOAuth2Authentication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2Authentication.h; sourceTree = "<group>"; };
-		C6D71924178B7D55008ED15F /* GTMOAuth2Authentication.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2Authentication.m; sourceTree = "<group>"; };
-		C6D71925178B7D55008ED15F /* GTMOAuth2SignIn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2SignIn.h; sourceTree = "<group>"; };
-		C6D71926178B7D55008ED15F /* GTMOAuth2SignIn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2SignIn.m; sourceTree = "<group>"; };
-		C6D71928178B7D55008ED15F /* GTMOAuth2Window.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GTMOAuth2Window.xib; sourceTree = "<group>"; };
-		C6D71929178B7D55008ED15F /* GTMOAuth2WindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2WindowController.h; sourceTree = "<group>"; };
-		C6D7192A178B7D55008ED15F /* GTMOAuth2WindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2WindowController.m; sourceTree = "<group>"; };
 		C6ED6CE617A0D05300A4A14C /* MCOCIDURLProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCOCIDURLProtocol.h; sourceTree = "<group>"; };
 		C6ED6CE717A0D05300A4A14C /* MCOCIDURLProtocol.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOCIDURLProtocol.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -165,6 +176,9 @@
 			children = (
 				C6BD2871170BC5C500A91AC1 /* MCOMessageView.h */,
 				C6BD2872170BC5C500A91AC1 /* MCOMessageView.mm */,
+				19290F48AA7E97B20F0892F0 /* MCOMessageViewWebDelegate.mm */,
+				192901669BCFA26A095933D3 /* MCOMessageViewWebDelegate.h */,
+				19290DE8157428C4E19CFD1B /* inject.js */,
 			);
 			path = mac;
 			sourceTree = "<group>";
@@ -193,6 +207,9 @@
 				C6BD2883170BC8ED00A91AC1 /* tests */,
 				C6BD2885170BC8ED00A91AC1 /* test-ios.app */,
 				C6BD28B3170BDFE500A91AC1 /* MailCore.framework */,
+				276CAF20259049C300F52E67 /* MailCore.framework */,
+				276CAF22259049C300F52E67 /* unittest.xctest */,
+				276CAF24259049C300F52E67 /* unittestcpp */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -241,7 +258,7 @@
 		C6D42BBB16ABB39A002BB4F9 /* macExample */ = {
 			isa = PBXGroup;
 			children = (
-				C6D7191C178B7D55008ED15F /* gtm-oauth2 */,
+				276CAF2925905E4E00F52E67 /* macExampleDebug.entitlements */,
 				AB666C5217484E3100545290 /* External */,
 				C6D42BBC16ABB39A002BB4F9 /* Supporting Files */,
 				C6D42BC716ABB39A002BB4F9 /* AppDelegate.h */,
@@ -262,49 +279,6 @@
 				C6D42BBD16ABB39A002BB4F9 /* macExample-Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		C6D7191C178B7D55008ED15F /* gtm-oauth2 */ = {
-			isa = PBXGroup;
-			children = (
-				C6D7191D178B7D55008ED15F /* HTTPFetcher */,
-				C6D71922178B7D55008ED15F /* Source */,
-			);
-			name = "gtm-oauth2";
-			path = "../../../common/gtm-oauth2";
-			sourceTree = "<group>";
-		};
-		C6D7191D178B7D55008ED15F /* HTTPFetcher */ = {
-			isa = PBXGroup;
-			children = (
-				C6D7191E178B7D55008ED15F /* GTMHTTPFetcher.h */,
-				C6D7191F178B7D55008ED15F /* GTMHTTPFetcher.m */,
-				C6D71920178B7D55008ED15F /* GTMHTTPFetchHistory.h */,
-				C6D71921178B7D55008ED15F /* GTMHTTPFetchHistory.m */,
-			);
-			path = HTTPFetcher;
-			sourceTree = "<group>";
-		};
-		C6D71922178B7D55008ED15F /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				C6D71923178B7D55008ED15F /* GTMOAuth2Authentication.h */,
-				C6D71924178B7D55008ED15F /* GTMOAuth2Authentication.m */,
-				C6D71925178B7D55008ED15F /* GTMOAuth2SignIn.h */,
-				C6D71926178B7D55008ED15F /* GTMOAuth2SignIn.m */,
-				C6D71927178B7D55008ED15F /* Mac */,
-			);
-			path = Source;
-			sourceTree = "<group>";
-		};
-		C6D71927178B7D55008ED15F /* Mac */ = {
-			isa = PBXGroup;
-			children = (
-				C6D71928178B7D55008ED15F /* GTMOAuth2Window.xib */,
-				C6D71929178B7D55008ED15F /* GTMOAuth2WindowController.h */,
-				C6D7192A178B7D55008ED15F /* GTMOAuth2WindowController.m */,
-			);
-			path = Mac;
 			sourceTree = "<group>";
 		};
 		C6ED6CE517A0D05300A4A14C /* common */ = {
@@ -352,6 +326,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = C6D42BA616ABB39A002BB4F9;
@@ -371,6 +346,27 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		276CAF20259049C300F52E67 /* MailCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MailCore.framework;
+			remoteRef = 276CAF1F259049C300F52E67 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		276CAF22259049C300F52E67 /* unittest.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = unittest.xctest;
+			remoteRef = 276CAF21259049C300F52E67 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		276CAF24259049C300F52E67 /* unittestcpp */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = unittestcpp;
+			remoteRef = 276CAF23259049C300F52E67 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		C6BD287F170BC8ED00A91AC1 /* libMailCore.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -413,8 +409,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				276CAF4125907D1F00F52E67 /* inject.js in Resources */,
 				C6D42BCC16ABB39A002BB4F9 /* MainMenu.xib in Resources */,
-				C6D71933178B7D72008ED15F /* GTMOAuth2Window.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,16 +423,13 @@
 			files = (
 				C6ED6CE817A0D06200A4A14C /* MCOCIDURLProtocol.mm in Sources */,
 				C6D42BC916ABB39A002BB4F9 /* AppDelegate.m in Sources */,
-				C6D71930178B7D67008ED15F /* GTMOAuth2SignIn.m in Sources */,
 				C6D42BE916ACF711002BB4F9 /* MCTMsgListViewController.m in Sources */,
 				C6D42BEC16ACFE3F002BB4F9 /* MCTMsgViewController.m in Sources */,
-				C6D71931178B7D6C008ED15F /* GTMHTTPFetcher.m in Sources */,
-				C6D71934178B7D72008ED15F /* GTMOAuth2WindowController.m in Sources */,
 				C64FF38416AF97F400F8C162 /* main.mm in Sources */,
 				C6BD2874170BC5C500A91AC1 /* MCOMessageView.mm in Sources */,
 				AB666C5917484E6200545290 /* FXKeychain.m in Sources */,
-				C6D7192F178B7D65008ED15F /* GTMOAuth2Authentication.m in Sources */,
-				C6D71932178B7D6E008ED15F /* GTMHTTPFetchHistory.m in Sources */,
+				1929041918508C0B952F2B39 /* MCOMessageViewWebDelegate.mm in Sources */,
+				1929079080D299575411FC40 /* inject.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,7 +478,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -508,7 +501,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -517,6 +510,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_ENTITLEMENTS = macExample/macExampleDebug.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "macExample/macExample-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
