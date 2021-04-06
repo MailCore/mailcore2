@@ -4,7 +4,8 @@ MailCore 2 is available through [Swift Package Manager](https://swift.org/packag
 
 1. In Xcode click `File` -> `Swift Packages` -> `Add Package Dependency...`
 2. Paste the following URL: `https://github.com/MailCore/mailcore2`
-3. Click `Next` -> `Next` -> `Finish`
+3. On the `Choose Package Options` screen, under `Rules` switch from `Version` to `Branch` (`Branch: master`) will be the default
+4. Click `Next` -> `Next` -> `Finish`
 
 **The following steps are to resolve an issue with the current version of Xcode 12, once the issue is fixed they will be unnecessary and removed.**
 
