@@ -81,6 +81,7 @@ MCO_NATIVE_INSTANCE->setter((mcType) getter); \
 #define MCO_SYNTHESIZE_NSCODING \
 - (instancetype) initWithCoder:(NSCoder *)coder \
 { \
+  [self release]; \
   mailcore::HashMap * serializable = MCO_FROM_OBJC(mailcore::HashMap, [coder decodeObjectForKey:@"info"]); \
   self = MCO_TO_OBJC(mailcore::Object::objectWithSerializable(serializable)); \
   [self retain]; \
