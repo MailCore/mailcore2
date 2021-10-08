@@ -7,7 +7,7 @@ Download the latest [build for Android](http://d.etpan.org/mailcore2-deps/mailco
 The below instruction allows to build mailcore with its needed dependencies on macOS (when followed exactly in this order).
 
 ## Compile libetpan
-- Download https://github.com/dinhvh/libetpan/releases/tag/1.9.4 in version 1.9.4 (which fixes exception in QUOTA operation): Make sure in this libetpan path are not spaces, this causes random compile errors
+- Clone https://github.com/dinhvh/libetpan/releases/tag/1.9.4 in version 1.9.4 (which fixes exception in QUOTA operation): Make sure in this libetpan path are not spaces, this causes random compile errors. Folder should be named `libetpan-master` after cloning.
 - Download Android NDK 17
 - Download Android SDK 16 and SDK 21
 - Set ENV-vars to your NDK/SDK root folder
@@ -40,13 +40,21 @@ export ANDROID_SDK=/Users/xxx/Library/Android/sdk
   - `./build.sh`
 
 ## Compile libmailcore
-- Download https://github.com/MailCore/mailcore2 (commit fad23d736ed5a63cf8321469d3a98a583f55df97 works definitely with this instruction): Make sure in this mailcore2 path are not spaces, this causes random compile errors
+- Clone https://github.com/MailCore/mailcore2 (commit fad23d736ed5a63cf8321469d3a98a583f55df97 works definitely with this instruction): Make sure in this mailcore2 path are not spaces, this causes random compile errors. Folder should be named `libmailcore2-master` after cloning and should be next to the `libetpan-master` folder.
+- Insert in src/core/sercurity/MCCeritificateUtils.cpp before line `status = X509_verify_cert(storectx);` the following statement to ensure LetsEncrypt compatibiltiy: `X509_STORE_CTX_set_flags(storectx, X509_V_FLAG_TRUSTED_FIRST);`, see https://www.openssl.org/blog/blog/2021/09/13/LetsEncryptRootCertExpire/ and https://community.letsencrypt.org/t/openssl-client-compatibility-changes-for-let-s-encrypt-certificates/143816
 - `cd build-android`
 - build.sh: Change libetpan version to 7
 - build.sh: Change `-source 1.6 -target 1.6` to `-source 1.8 -target 1.8`
 - `mkdir third-party`
 - Copy libetpan-android-7.zip (from step "Compile libetpan") to third-party folder and extract it
+- `mkdir include/MailCore`
+- `cd ../src`
+- ``cp `find . -name '*.h'` ../build-android/include/MailCore/``
+- `cd ../../libetpan-master/build-android`
+- ``cp `find . -name '*.h'` ../../mailcore2-master/build-android/include/MailCore``
+- `cd ../../mailcore2-master/build-android`
 - `./build.sh`
+- Make sure that the above command does not contain any `error:` output
 
 ## Shrink mailcore (by removing unnecessary files to reduce 50% of file size)
 - cd to the directory where `mailcore2-android-4.aar` is located
@@ -67,6 +75,7 @@ rm -rf mailcore-unzipped
 - Copy shrinked `mailcore2-android-4.aar` to android project and test it on real devices
 
 ## Troubleshooting
+- Don't download libetpan / libmailcore as zip, but `git checkout` them. Then seeing all your modifications is way easier when opening both folders in CLion.
 - Openssl can't be downloaded: adapt letter in version based on latest release in https://ftp.openssl.org/source/ or https://ftp.openssl.org/source/old/1.0.2/
 - Compile openssl 1.0.2u with NDK 17 and libsasl 2.1.26
 - Compile openssl 1.1.1k with NDK 20 and libsasl 2.1.27
@@ -75,7 +84,7 @@ rm -rf mailcore-unzipped
 - "Missing archive cyrus-sasl-2.1.26": Make sure to run `prepare-cyrus-sasl.sh` first
 - Build scripts don't always exit on errors: Manually search for "error:" or other errors
 - Missing gnustl_shared: Install & use Android NDK 17 (version 18 removed some GCC stuff)
-- https://stackoverflow.com/a/31534327/3997741 (but with "include" instead of "includes") (and in build-android in libetpan: `cp `find . -name '*.h'`  ../../mailcore2-master/build-android/include/MailCore`
+- Error while building libmailcore that some header-files are not found: You forgot to copy libmailcore header files see https://stackoverflow.com/a/31534327/3997741 or libetpan header files (see cp commands above)
 - 'libetpan-config.h' file not found: Run `./autogen.sh && make` first
 - sasl/sasl.h not found: `cd build-mac/dependencies && ./prepare-cyrus-sasl.sh`
 - "Configuring OpenSSL version" missing: make sure to use current 1.1.1xxx/1.0.2xxx openssl version
@@ -86,7 +95,7 @@ rm -rf mailcore-unzipped
 
 ### Running example ###
 
-Copy the binary result of the build (mailcore2-android-*version*.aar) to `mailcore2/example/android/AndroidExample/app/libs`.
+Copy the binary result of the build (mailcore2-android-*version*.aar) to `mailcore2-master/example/android/AndroidExample/app/libs`.
 
 - Open the example in Android Studio
 - Tweaks the login and password in the class `MessagesSyncManager`
