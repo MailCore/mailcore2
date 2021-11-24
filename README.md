@@ -33,34 +33,35 @@ Read [instructions for Linux](https://github.com/MailCore/mailcore2/blob/master/
 
 Using MailCore 2 is just a little more complex conceptually than the original MailCore.  All fetch requests in MailCore 2 are made asynchronously through a queue.  What does this mean?  Well, let's take a look at a simple example:
 
-```objc
-    MCOIMAPSession *session = [[MCOIMAPSession alloc] init];
-    [session setHostname:@"imap.gmail.com"];
-    [session setPort:993];
-    [session setUsername:@"ADDRESS@gmail.com"];
-    [session setPassword:@"123456"];
-    [session setConnectionType:MCOConnectionTypeTLS];
-
-    MCOIMAPMessagesRequestKind requestKind = MCOIMAPMessagesRequestKindHeaders;
-    NSString *folder = @"INBOX";
-    MCOIndexSet *uids = [MCOIndexSet indexSetWithRange:MCORangeMake(1, UINT64_MAX)];
-
-    MCOIMAPFetchMessagesOperation *fetchOperation = [session fetchMessagesOperationWithFolder:folder requestKind:requestKind uids:uids];
-
-    [fetchOperation start:^(NSError * error, NSArray * fetchedMessages, MCOIndexSet * vanishedMessages) {
-        //We've finished downloading the messages!
-
-        //Let's check if there was an error:
-        if(error) {
-            NSLog(@"Error downloading message headers:%@", error);
-        }
-
-        //And, let's print out the messages...
-        NSLog(@"The post man delivereth:%@", fetchedMessages);
-    }];
+```swift
+  let session = MCOIMAPSession()
+  
+  session.hostname       = "imap.gmail.com"
+  session.port           = 993
+  session.username       = "ADDRESS@gmail.com"
+  session.password       = "123456"
+  session.connectionType = .TLS
+  
+  let folder = "INBOX"
+  let uids   = MCOIndexSet(range: MCORange(location: 1, length: UInt64.max))
+  
+  if let fetchOperation = session.fetchMessagesOperation(withFolder: folder, requestKind: .headers, uids: uids) {
+    fetchOperation.start { error, fetchedMessages, vanishedMessages in
+      // We've finished downloading the messages!
+      
+      // Let's check if there was an error
+      if let error = error {
+        print("Error downloading message headers: \(error.localizedDescription)")
+      }
+      
+      // And, let's print out the messages:
+      print("The post man delivereth: \(fetchedMessages.debugDescription)")
+    }
+  }
 ```
+(You can also read an [Objective-C Version](https://github.com/MailCore/mailcore2/wiki/IMAP-Examples))
 
-In this sample, we retrieved and printed a list of email headers from an IMAP server.  In order to execute the fetch, we request an asynchronous operation object from the `MCOIMAPSession` instance with our parameters (more on this later).  This operation object is able to initiate a connection to Gmail when we call the `start` method.  Now here's where things get a little tricky.  We call the `start` function with an Objective-C block, which is executed on the main thread when the fetch operation completes.  The actual fetching from IMAP is done on a **background thread**, leaving your UI and other processing **free to use the main thread**.
+In this sample, we retrieved and printed a list of email headers from an IMAP server.  In order to execute the fetch, we request an asynchronous operation object from the `MCOIMAPSession` instance with our parameters (more on this later).  This operation object is able to initiate a connection to Gmail when we call the `start` method.  Now here's where things get a little tricky.  We call the `start` function with a block, which is executed on the main thread when the fetch operation completes.  The actual fetching from IMAP is done on a **background thread**, leaving your UI and other processing **free to use the main thread**.
 
 ## Documentation ##
 
