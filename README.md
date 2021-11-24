@@ -70,3 +70,7 @@ In this sample, we retrieved and printed a list of email headers from an IMAP se
 ## License ##
 
 MailCore 2 is BSD-Licensed.
+
+## MailCore Supporters ##
+
+[<img src="https://triage.cc/triage-badge.png" width="180">](https://triage.cc?ref=mailcore)
