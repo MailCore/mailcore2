@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:../deps/tidy-html5/build-mac/Tidy.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../deps/libetpan/build-mac/libetpan.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../deps/ctemplate/build-mac/ctemplate.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:mailcore2.xcodeproj">
+   </FileRef>
+</Workspace>

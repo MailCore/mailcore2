@@ -1,0 +1,9 @@
+[submodule "deps/ctemplate"]
+	path = deps/ctemplate
+	url = https://github.com/dinhviethoa/ctemplate
+[submodule "deps/libetpan"]
+	path = deps/libetpan
+	url = https://github.com/dinhviethoa/libetpan.git
+[submodule "deps/tidy-html5"]
+	path = deps/tidy-html5
+	url = https://github.com/dinhvh/tidy-html5.git

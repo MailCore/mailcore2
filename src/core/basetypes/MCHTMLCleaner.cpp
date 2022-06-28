@@ -15,15 +15,20 @@
 typedef unsigned long ulong;
 #endif
 
-#include <tidy.h>
-#include <buffio.h>
-
-#include "MCUtils.h"
-#include "MCLog.h"
-
 #if __APPLE__
 #include <TargetConditionals.h>
 #endif
+
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+#include <tidy/tidy.h>
+#include <tidy/buffio.h>
+#else
+#include <tidy.h>
+#include <buffio.h>
+#endif
+
+#include "MCUtils.h"
+#include "MCLog.h"
 
 using namespace mailcore;
 
