@@ -2555,7 +2555,17 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
         struct mailimap_section * section;
         
         imap_hdrlist = mailimap_header_list_new(hdrlist);
-        section = mailimap_section_new_header_fields(imap_hdrlist);
+        
+        /*
+         * If the IMAPRequestKindFullHeaders is set then we have to fetch the full headers 
+         * otherwise only the specified list of headers 
+         */
+        if ((requestKind & IMAPMessagesRequestKindFullHeaders) != 0) {
+           section = mailimap_section_new_header();
+        } else {
+           section = mailimap_section_new_header_fields(imap_hdrlist);
+        }
+
         fetch_att = mailimap_fetch_att_new_body_peek_section(section);
         mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
         needsHeader = true;
