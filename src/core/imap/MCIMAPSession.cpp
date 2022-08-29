@@ -2560,7 +2560,7 @@ IMAPSyncResult * IMAPSession::fetchMessages(String * folder, IMAPMessagesRequest
          * If the IMAPRequestKindFullHeaders is set then we have to fetch the full headers 
          * otherwise only the specified list of headers 
          */
-        if ((requestKind & IMAPMessagesRequestKindFullHeaders) != 0) {
+        if ((requestKind & IMAPMessagesRequestKindAllHeaders) != 0) {
            section = mailimap_section_new_header();
         } else {
            section = mailimap_section_new_header_fields(imap_hdrlist);
