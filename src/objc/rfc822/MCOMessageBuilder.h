@@ -12,6 +12,7 @@
 
 #import <MailCore/MCOAbstractMessage.h>
 
+@class MCOAttachment;
 /**
  This class will allow you to build a RFC 822 formatted message.
  For example when you need to send a message using SMTP,
@@ -41,10 +42,10 @@
 @property (nonatomic, copy) NSString * textBody;
 
 /** List of file attachments.*/
-@property (nonatomic, copy) NSArray * /* MCOAttachment */ attachments;
+@property (nonatomic, copy) NSArray<MCOAttachment *> * attachments;
 
 /** List of related file attachments (included as cid: link in the HTML part).*/
-@property (nonatomic, copy) NSArray * /* MCOAttachment */ relatedAttachments;
+@property (nonatomic, copy) NSArray<MCOAttachment *> * relatedAttachments;
 
 /** Prefix for the boundary identifier. Default value is nil.*/
 @property (nonatomic, copy) NSString * boundaryPrefix;

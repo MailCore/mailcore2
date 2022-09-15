@@ -18,7 +18,7 @@
 
 using namespace mailcore;
 
-typedef void (^CompletionType)(NSError *error, NSArray *folder);
+typedef void (^CompletionType)(NSError *error, NSArray<MCOIMAPFolder *> *folder);
 
 @implementation MCOIMAPFetchFoldersOperation {
     CompletionType _completionBlock;

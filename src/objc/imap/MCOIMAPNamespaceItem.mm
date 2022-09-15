@@ -75,12 +75,12 @@
 MCO_OBJC_SYNTHESIZE_STRING(setPrefix, prefix)
 MCO_OBJC_SYNTHESIZE_SCALAR(char, char, setDelimiter, delimiter)
 
-- (NSString *) pathForComponents:(NSArray *)components
+- (NSString *) pathForComponents:(NSArray<NSString *> *)components
 {
     return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->pathForComponents(MCO_FROM_OBJC(mailcore::Array, components)));
 }
 
-- (NSArray *) componentsForPath:(NSString *)path
+- (NSArray<NSString *> *) componentsForPath:(NSString *)path
 {
     return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->componentsForPath([path mco_mcString]));
 }

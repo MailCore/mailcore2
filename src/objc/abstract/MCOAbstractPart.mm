@@ -103,7 +103,7 @@ MCO_OBJC_SYNTHESIZE_BOOL(setAttachment, isAttachment)
     MCO_NATIVE_INSTANCE->removeContentTypeParameter(MCO_FROM_OBJC(mailcore::String, name));
 }
 
-- (NSArray * /* NSString */) allContentTypeParametersNames
+- (NSArray<NSString *> *) allContentTypeParametersNames
 {
     return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->allContentTypeParametersNames());
 }

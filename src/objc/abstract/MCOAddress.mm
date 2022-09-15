@@ -97,12 +97,12 @@ MCO_SYNTHESIZE_NSCODING
     return result;
 }
 
-+ (NSArray *) addressesWithRFC822String:(NSString *)string
++ (NSArray<MCOAddress *> *) addressesWithRFC822String:(NSString *)string
 {
     return [NSArray mco_arrayWithMCArray:mailcore::Address::addressesWithRFC822String(string.mco_mcString)];
 }
 
-+ (NSArray *) addressesWithNonEncodedRFC822String:(NSString *)string
++ (NSArray<MCOAddress *> *) addressesWithNonEncodedRFC822String:(NSString *)string
 {
     return [NSArray mco_arrayWithMCArray:mailcore::Address::addressesWithNonEncodedRFC822String(string.mco_mcString)];
 }

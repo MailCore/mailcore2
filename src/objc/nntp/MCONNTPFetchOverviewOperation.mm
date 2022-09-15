@@ -12,8 +12,9 @@
 
 #import "MCOUtils.h"
 #import "MCOOperation+Private.h"
+#import "MCOMessageHeader.h"
 
-typedef void (^CompletionType)(NSError *error, NSArray * groups);
+typedef void (^CompletionType)(NSError *error, NSArray<MCOMessageHeader *> * groups);
 
 @implementation MCONNTPFetchOverviewOperation {
     CompletionType _completionBlock;
@@ -38,7 +39,7 @@ typedef void (^CompletionType)(NSError *error, NSArray * groups);
     [super dealloc];
 }
 
-- (void) start:(void (^)(NSError *error, NSArray * groups))completionBlock
+- (void) start:(void (^)(NSError *error, NSArray<MCOMessageHeader *> * groups))completionBlock
 {
     _completionBlock = [completionBlock copy];
     [self start];

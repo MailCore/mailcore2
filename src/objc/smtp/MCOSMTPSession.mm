@@ -161,7 +161,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
 
 - (MCOSMTPSendOperation *) sendOperationWithData:(NSData *)messageData
                                             from:(MCOAddress *)from
-                                      recipients:(NSArray *)recipients
+                                      recipients:(NSArray<MCOAddress *> *)recipients
 {
     mailcore::SMTPOperation * coreOp =
     MCO_NATIVE_INSTANCE->sendMessageOperation(MCO_FROM_OBJC(Address, from),
@@ -174,7 +174,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
 
 - (MCOSMTPSendOperation *) sendOperationWithContentsOfFile:(NSString *)path
                                                       from:(MCOAddress *)from
-                                                recipients:(NSArray *)recipients
+                                                recipients:(NSArray<MCOAddress *> *)recipients
 {
     mailcore::SMTPOperation * coreOp =
     MCO_NATIVE_INSTANCE->sendMessageOperation(MCO_FROM_OBJC(Address, from),

@@ -13,7 +13,7 @@
 #import "MCOOperation+Private.h"
 #import "MCOUtils.h"
 
-typedef void (^CompletionType)(NSError *error, NSArray * messages);
+typedef void (^CompletionType)(NSError *error, NSArray<MCOPOPMessageInfo *> * messages);
 
 @implementation MCOPOPFetchMessagesOperation {
     CompletionType _completionBlock;
@@ -38,7 +38,7 @@ typedef void (^CompletionType)(NSError *error, NSArray * messages);
     [super dealloc];
 }
 
-- (void) start:(void (^)(NSError *error, NSArray * messages))completionBlock
+- (void) start:(void (^)(NSError *error, NSArray<MCOPOPMessageInfo *> * messages))completionBlock
 {
     _completionBlock = [completionBlock copy];
     [self start];

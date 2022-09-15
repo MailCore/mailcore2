@@ -152,7 +152,7 @@
  */
 - (MCOSMTPSendOperation *) sendOperationWithData:(NSData *)messageData
                                             from:(MCOAddress *)from
-                                      recipients:(NSArray *)recipients;
+                                      recipients:(NSArray<MCOAddress *> *)recipients;
 
 
 /**
@@ -170,7 +170,7 @@
  */
 - (MCOSMTPSendOperation *) sendOperationWithContentsOfFile:(NSString *)path
                                                       from:(MCOAddress *)from
-                                                recipients:(NSArray *)recipients;
+                                                recipients:(NSArray<MCOAddress *> *)recipients;
 
 /**
  Returns an operation that will check whether the SMTP account is valid.
