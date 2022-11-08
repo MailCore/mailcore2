@@ -13,7 +13,7 @@
 #import "MCOOperation+Private.h"
 #import "MCOUtils.h"
 
-typedef void (^CompletionType)(NSError *error, NSArray * messages, MCOIndexSet * vanishedMessages);
+typedef void (^CompletionType)(NSError *error, NSArray<MCOIMAPMessage *> * messages, MCOIndexSet * vanishedMessages);
 
 @implementation MCOIMAPFetchMessagesOperation {
     CompletionType _completionBlock;

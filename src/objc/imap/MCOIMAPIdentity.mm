@@ -76,7 +76,7 @@ MCO_OBJC_SYNTHESIZE_STRING(setVendor, vendor)
 MCO_OBJC_SYNTHESIZE_STRING(setName, name)
 MCO_OBJC_SYNTHESIZE_STRING(setVersion, version)
 
-- (NSArray *) allInfoKeys
+- (NSArray<NSString *> *) allInfoKeys
 {
     return MCO_OBJC_BRIDGE_GET(allInfoKeys);
 }

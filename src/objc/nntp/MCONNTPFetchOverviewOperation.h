@@ -13,6 +13,7 @@
 #import <Foundation/Foundation.h>
 #import <MailCore/MCONNTPOperation.h>
 
+@class MCOMessageHeader;
 
 NS_ASSUME_NONNULL_BEGIN
 @interface MCONNTPFetchOverviewOperation : MCONNTPOperation
@@ -27,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
  - On failure, `error` will be set with `MCOErrorDomain` as domain and an 
  error code available in MCOConstants.h, `messages` will be null
  */
-- (void) start:(void (^)(NSError * __nullable error, NSArray * /* MCOMessageHeader */__nullable messages))completionBlock;
+- (void) start:(void (^)(NSError * __nullable error, NSArray<MCOMessageHeader *> * __nullable messages))completionBlock;
 
 @end
 NS_ASSUME_NONNULL_END

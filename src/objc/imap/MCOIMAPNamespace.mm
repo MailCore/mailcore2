@@ -87,24 +87,24 @@
     return MCO_NATIVE_INSTANCE->mainDelimiter();
 }
 
-- (NSArray *) prefixes
+- (NSArray<NSString *> *) prefixes
 {
     return MCO_OBJC_BRIDGE_GET(prefixes);
 }
 
-- (NSString *) pathForComponents:(NSArray *)components
+- (NSString *) pathForComponents:(NSArray<NSString *> *)components
 {
     mailcore::Array * mcComponents = MCO_FROM_OBJC(mailcore::Array, components);
     return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->pathForComponents(mcComponents));
 }
 
-- (NSString *) pathForComponents:(NSArray *)components prefix:(NSString *)prefix
+- (NSString *) pathForComponents:(NSArray<NSString *> *)components prefix:(NSString *)prefix
 {
     mailcore::Array * mcComponents = MCO_FROM_OBJC(mailcore::Array, components);
     return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->pathForComponentsAndPrefix(mcComponents, [prefix mco_mcString]));
 }
 
-- (NSArray *) componentsFromPath:(NSString *)path
+- (NSArray<NSString *> *) componentsFromPath:(NSString *)path
 {
     return MCO_TO_OBJC(MCO_NATIVE_INSTANCE->componentsFromPath([path mco_mcString]));
 }

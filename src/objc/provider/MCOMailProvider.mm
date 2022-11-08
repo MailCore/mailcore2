@@ -61,17 +61,17 @@
 
 MCO_OBJC_SYNTHESIZE_STRING(setIdentifier, identifier);
 
-- (NSArray *) imapServices
+- (NSArray<MCONetService *> *) imapServices
 {
     return MCO_OBJC_BRIDGE_GET(imapServices);
 }
 
-- (NSArray *) smtpServices
+- (NSArray<MCONetService *> *) smtpServices
 {
     return MCO_OBJC_BRIDGE_GET(smtpServices);
 }
 
-- (NSArray *) popServices
+- (NSArray<MCONetService *> *) popServices
 {
     return MCO_OBJC_BRIDGE_GET(popServices);
 }

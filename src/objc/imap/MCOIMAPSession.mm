@@ -267,7 +267,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
 - (MCOIMAPAppendMessageOperation *)appendMessageOperationWithFolder:(NSString *)folder
                                                         messageData:(NSData *)messageData
                                                               flags:(MCOMessageFlag)flags
-                                                        customFlags:(NSArray *)customFlags
+                                                        customFlags:(NSArray<NSString *> *)customFlags
 {
     IMAPAppendMessageOperation * coreOp = MCO_NATIVE_INSTANCE->appendMessageOperation([folder mco_mcString],
                                                                                       [messageData mco_mcData],
@@ -279,7 +279,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
 - (MCOIMAPAppendMessageOperation *)appendMessageOperationWithFolder:(NSString *)folder
                                                      contentsAtPath:(NSString *)path
                                                               flags:(MCOMessageFlag)flags
-                                                        customFlags:(NSArray *)customFlags
+                                                        customFlags:(NSArray<NSString *> *)customFlags
 {
     IMAPAppendMessageOperation * coreOp = MCO_NATIVE_INSTANCE->appendMessageOperation([folder mco_mcString],
                                                                                       MCO_FROM_OBJC(String, path),
@@ -531,7 +531,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
                                                 uids:(MCOIndexSet *)uids
                                                 kind:(MCOIMAPStoreFlagsRequestKind)kind
                                                flags:(MCOMessageFlag)flags
-                                         customFlags:(NSArray *)customFlags
+                                         customFlags:(NSArray<NSString *> *)customFlags
 {
     IMAPOperation * coreOp = MCO_NATIVE_INSTANCE->storeFlagsByUIDOperation([folder mco_mcString],
                                                                            MCO_FROM_OBJC(IndexSet, uids),
@@ -553,7 +553,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
                                              numbers:(MCOIndexSet *)numbers
                                                 kind:(MCOIMAPStoreFlagsRequestKind)kind
                                                flags:(MCOMessageFlag)flags
-                                         customFlags:(NSArray *)customFlags
+                                         customFlags:(NSArray<NSString *> *)customFlags
 {
     IMAPOperation * coreOp = MCO_NATIVE_INSTANCE->storeFlagsByNumberOperation([folder mco_mcString],
                                                                               MCO_FROM_OBJC(IndexSet, numbers),
@@ -566,7 +566,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
 - (MCOIMAPOperation *) storeLabelsOperationWithFolder:(NSString *)folder
                                                  uids:(MCOIndexSet *)uids
                                                  kind:(MCOIMAPStoreFlagsRequestKind)kind
-                                               labels:(NSArray *)labels
+                                               labels:(NSArray<NSString *> *)labels
 {
     IMAPOperation * coreOp = MCO_NATIVE_INSTANCE->storeLabelsByUIDOperation([folder mco_mcString],
                                                                             MCO_FROM_OBJC(IndexSet, uids),
@@ -578,7 +578,7 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
 - (MCOIMAPOperation *) storeLabelsOperationWithFolder:(NSString *)folder
                                               numbers:(MCOIndexSet *)numbers
                                                  kind:(MCOIMAPStoreFlagsRequestKind)kind
-                                               labels:(NSArray *)labels
+                                               labels:(NSArray<NSString *> *)labels
 {
     IMAPOperation * coreOp = MCO_NATIVE_INSTANCE->storeLabelsByNumberOperation([folder mco_mcString],
                                                                                MCO_FROM_OBJC(IndexSet, numbers),
