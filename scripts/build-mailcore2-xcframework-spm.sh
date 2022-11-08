@@ -12,14 +12,14 @@ DATE="`date +"%Y-%m-%d"`"
 FRAMEWORK_NAME="MailCore2.xcframework"
 ARCHIVE_NAME="MailCore2-$DATE.xcframework.zip"
 MANIFEST_PATH="$MAILCORE_DIR/Package.swift"
-BASE_URL="https://downloads.maddux.cloud/mailcore2-apple-xcframework"
+BASE_URL="https://github.com/MailCore/mailcore2/raw/master/bin"
 FULL_URL="$BASE_URL/$ARCHIVE_NAME"
 SUCCESS_MESSAGE="
 -------------------
 File saved at: $BUILD_DIR/$ARCHIVE_NAME
 SPM Update Instructions:
 1. Upload new file to $FULL_URL
-2. Commit & Push changes to Package.swift
+2. Update Package.swift with new URL and checksum
 3. Create new release
 -------------------"
 
@@ -41,3 +41,5 @@ if [[ -d "$BUILD_DIR/$FRAMEWORK_NAME" ]]; then
     
     echo "$SUCCESS_MESSAGE"
 fi
+
+
