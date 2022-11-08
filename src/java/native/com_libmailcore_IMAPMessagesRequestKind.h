@@ -31,6 +31,8 @@ extern "C" {
 #define com_libmailcore_IMAPMessagesRequestKind_IMAPMessagesRequestKindExtraHeaders 512L
 #undef com_libmailcore_IMAPMessagesRequestKind_IMAPMessagesRequestKindSize
 #define com_libmailcore_IMAPMessagesRequestKind_IMAPMessagesRequestKindSize 1024L
+#undef com_libmailcore_IMAPMessagesRequestKind_IMAPMessagesRequestKindAllHeaders
+#define com_libmailcore_IMAPMessagesRequestKind_IMAPMessagesRequestKindAllHeaders 2048L
 #ifdef __cplusplus
 }
 #endif

@@ -149,6 +149,8 @@ typedef NS_OPTIONS(NSInteger, MCOIMAPMessagesRequestKind) {
     MCOIMAPMessagesRequestKindExtraHeaders   = 1 << 9,
     /* Request size of message */
     MCOIMAPMessagesRequestKindSize           = 1 << 10,
+    /* Unlike Full headers this will fetch all the non-parsed headers */
+    MCOIMAPMessagesRequestKindAllHeaders           = 1 << 11,
 
 };
 

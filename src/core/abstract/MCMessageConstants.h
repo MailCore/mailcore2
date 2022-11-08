@@ -70,13 +70,14 @@ namespace mailcore {
         IMAPMessagesRequestKindHeaders       = 1 << 1,
         IMAPMessagesRequestKindStructure     = 1 << 2,
         IMAPMessagesRequestKindInternalDate  = 1 << 3,
-        IMAPMessagesRequestKindFullHeaders   = 1 << 4,
+        IMAPMessagesRequestKindFullHeaders   = 1 << 4, //Fetches the non-parsed list of a limited set of headers.
         IMAPMessagesRequestKindHeaderSubject = 1 << 5,
         IMAPMessagesRequestKindGmailLabels   = 1 << 6,
         IMAPMessagesRequestKindGmailMessageID = 1 << 7,
         IMAPMessagesRequestKindGmailThreadID  = 1 << 8,
         IMAPMessagesRequestKindExtraHeaders  = 1 << 9,
         IMAPMessagesRequestKindSize          = 1 << 10,
+        IMAPMessagesRequestKindAllHeaders    = 1 << 11, // Unlike Full headers this will fetch all the non-parsed headers
     };
     
     enum IMAPFetchRequestType {
