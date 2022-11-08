@@ -335,6 +335,7 @@ static void testMUTF7(void)
 
 int main(int argc, char ** argv)
 {
+    setenv("TZ", "EST8EDT", 1);
     tzset();
 
     if (argc < 2) {
