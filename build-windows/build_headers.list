@@ -86,7 +86,9 @@ src\async\imap\MCIMAPAsyncSession.h
 src\async\imap\MCIMAPOperation.h
 src\async\imap\MCIMAPFetchFoldersOperation.h
 src\async\imap\MCIMAPAppendMessageOperation.h
+src\async\imap\MCIMAPCheckAccountOperation.h
 src\async\imap\MCIMAPCopyMessagesOperation.h
+src\async\imap\MCIMAPCustomCommandOperation.h
 src\async\imap\MCIMAPMoveMessagesOperation.h
 src\async\imap\MCIMAPFetchMessagesOperation.h
 src\async\imap\MCIMAPFetchContentOperation.h

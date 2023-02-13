@@ -3,7 +3,9 @@
 #include <libetpan/libetpan.h>
 
 #include <string.h>
+#if !defined(_WIN32)
 #include <strings.h>
+#endif
 
 namespace mailcore {
 

@@ -7,7 +7,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
+
+#if defined(_MSC_VER)
+#include "MmanWin32.h"
+#include "MmanWin32.c"
+#else
 #include <sys/mman.h>
+#endif
+
 #include <pthread.h>
 #if USE_UCHARDET
 #include <uchardet/uchardet.h>
