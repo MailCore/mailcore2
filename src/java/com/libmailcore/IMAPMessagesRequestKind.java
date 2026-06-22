@@ -35,5 +35,5 @@ public class IMAPMessagesRequestKind {
     /** Requests the size of the messages. */
     public final static int IMAPMessagesRequestKindSize = 1 << 10;
     /** Unlike Full headers this will fetch all the non-parsed headers */
-    public final static int IMAPMessagesRequestKindSize = 1 << 11;
+    public final static int IMAPMessagesRequestKindAllHeaders = 1 << 11;
 }

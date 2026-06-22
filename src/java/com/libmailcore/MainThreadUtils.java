@@ -16,8 +16,9 @@ class MainThreadUtils {
 
     // private constructor
     private MainThreadUtils() {
+        // libMailCore.so statically links libc++ (APP_STL := c++_static), so it is
+        // self-contained — no separate STL .so to load (was gnustl_shared / libc++_shared).
         System.loadLibrary("MailCore");
-        System.loadLibrary("gnustl_shared");
         handler = new Handler(Looper.getMainLooper());
         setupNative();
     }

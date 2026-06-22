@@ -16,7 +16,10 @@
 
 #include "ioapi.h"
 
-#if defined(__APPLE__) || defined(ANDROID) || defined(__ANDROID__)
+// On Android, ftello/fseeko are only declared at API >= 24. When USE_FILE32API is set
+// (see Android.mk) we rely on ioapi.h's 32-bit ftell/fseek mapping instead, so the build
+// works at android-21.
+#if (defined(__APPLE__) || defined(ANDROID) || defined(__ANDROID__)) && !defined(USE_FILE32API)
 #define off64_t off_t
 #define fopen64 fopen
 #define ftello64 ftello
