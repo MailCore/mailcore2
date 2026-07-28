@@ -13,5 +13,6 @@
 #include <MailCore/MailCore.h>
 
 extern void testAll();
+extern void testIMAPIdleStress();
 
 #endif

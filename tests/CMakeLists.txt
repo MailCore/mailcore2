@@ -12,7 +12,7 @@ IF(APPLE)
     set(mac_libraries iconv)
 ENDIF()
 
-add_executable (tests main.cpp test-all.cpp ${test_mac_files})
+add_executable (tests main.cpp test-all.cpp test-imap-idle.cpp ${test_mac_files})
 target_link_libraries (
     tests MailCore
     ${ZLIB_LIBRARY} ${LIBETPAN_LIBRARY} ${LIBXML_LIBRARY} ${UCHARDET_LIBRARY} sasl2

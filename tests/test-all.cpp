@@ -514,6 +514,7 @@ void testAll()
     //testAsyncPOP();
     //testAddresses();
     //testAttachments();
+    testIMAPIdleStress();
 
     pool->release();
 }
