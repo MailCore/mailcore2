@@ -39,16 +39,16 @@ uint32_t IMAPIdleOperation::lastKnownUID()
 void IMAPIdleOperation::prepare(void * data)
 {
     if (isInterrupted()) {
-        mSetupSuccess = false;
+        setSetupSuccess(false);
         return;
     }
 
-    mSetupSuccess = session()->session()->setupIdle();
+    setSetupSuccess(session()->session()->setupIdle());
 }
 
 void IMAPIdleOperation::unprepare(void * data)
 {
-    if (mSetupSuccess) {
+    if (setupSuccess()) {
         session()->session()->unsetupIdle();
     }
 }
@@ -59,6 +59,22 @@ bool IMAPIdleOperation::isInterrupted() {
     pthread_mutex_unlock(&mLock);
     
     return interrupted;
+}
+
+void IMAPIdleOperation::setSetupSuccess(bool setupSuccess)
+{
+    pthread_mutex_lock(&mLock);
+    mSetupSuccess = setupSuccess;
+    pthread_mutex_unlock(&mLock);
+}
+
+bool IMAPIdleOperation::setupSuccess()
+{
+    pthread_mutex_lock(&mLock);
+    bool setupSuccess = mSetupSuccess;
+    pthread_mutex_unlock(&mLock);
+
+    return setupSuccess;
 }
 
 void IMAPIdleOperation::main()
@@ -76,7 +92,7 @@ void IMAPIdleOperation::main()
     
     performMethodOnCallbackThread((Object::Method) &IMAPIdleOperation::prepare, NULL, true);
     
-    if (!mSetupSuccess) {
+    if (!setupSuccess()) {
         return;
     }
     
@@ -86,13 +102,21 @@ void IMAPIdleOperation::main()
     performMethodOnCallbackThread((Object::Method) &IMAPIdleOperation::unprepare, NULL, true);
 }
 
+void IMAPIdleOperation::cancel()
+{
+    IMAPOperation::cancel();
+    interruptIdle();
+}
+
 void IMAPIdleOperation::interruptIdle()
 {
+    bool setupSuccess;
+
     pthread_mutex_lock(&mLock);
     mInterrupted = true;
+    setupSuccess = mSetupSuccess;
     pthread_mutex_unlock(&mLock);
-    if (mSetupSuccess) {
+    if (setupSuccess && session() != NULL) {
         session()->session()->interruptIdle();
     }
 }
-

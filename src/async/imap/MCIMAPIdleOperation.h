@@ -24,6 +24,7 @@ namespace mailcore {
         virtual void setLastKnownUID(uint32_t uid);
         virtual uint32_t lastKnownUID();
         
+        virtual void cancel();
         virtual void interruptIdle();
         
     public: // subclass behavior
@@ -37,6 +38,8 @@ namespace mailcore {
         void prepare(void * data);
         void unprepare(void * data);
         bool isInterrupted();
+        void setSetupSuccess(bool setupSuccess);
+        bool setupSuccess();
     };
     
 }

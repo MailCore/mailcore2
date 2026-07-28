@@ -277,6 +277,8 @@ namespace mailcore {
         unsigned int mLastFetchedSequenceNumber;
         String * mCurrentFolder;
         pthread_mutex_t mIdleLock;
+        pthread_cond_t mIdleCond;
+        bool mIdleInProgress;
         int mState;
         mailimap * mImap;
         IMAPProgressCallback * mProgressCallback;

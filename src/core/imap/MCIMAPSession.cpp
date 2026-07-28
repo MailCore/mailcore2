@@ -401,6 +401,8 @@ void IMAPSession::init()
     mLastFetchedSequenceNumber = 0;
     mCurrentFolder = NULL;
     pthread_mutex_init(&mIdleLock, NULL);
+    pthread_cond_init(&mIdleCond, NULL);
+    mIdleInProgress = false;
     mState = STATE_DISCONNECTED;
     mImap = NULL;
     mProgressCallback = NULL;
@@ -434,6 +436,7 @@ IMAPSession::~IMAPSession()
     MC_SAFE_RELEASE(mWelcomeString);
     MC_SAFE_RELEASE(mDefaultNamespace);
     MC_SAFE_RELEASE(mCurrentFolder);
+    pthread_cond_destroy(&mIdleCond);
     pthread_mutex_destroy(&mIdleLock);
     pthread_mutex_destroy(&mConnectionLoggerLock);
 }
@@ -622,6 +625,13 @@ void IMAPSession::unsetup()
     mailimap * imap;
     
     LOCK();
+    while (mIdleInProgress) {
+        if (mImap != NULL && mImap->imap_stream != NULL) {
+            mailstream_interrupt_idle(mImap->imap_stream);
+            mailstream_cancel(mImap->imap_stream);
+        }
+        pthread_cond_wait(&mIdleCond, &mIdleLock);
+    }
     imap = mImap;
     mImap = NULL;
     mIdleEnabled = false;
@@ -3561,9 +3571,9 @@ bool IMAPSession::setupIdle()
 {
     // main thread
     LOCK();
-    bool canIdle = mIdleEnabled;
-    if (mIdleEnabled) {
-        mailstream_setup_idle(mImap->imap_stream);
+    bool canIdle = mIdleEnabled && mImap != NULL && mImap->imap_stream != NULL && !mIdleInProgress;
+    if (canIdle) {
+        canIdle = mailstream_setup_idle(mImap->imap_stream) == 0;
     }
     UNLOCK();
     return canIdle;
@@ -3572,6 +3582,7 @@ bool IMAPSession::setupIdle()
 void IMAPSession::idle(String * folder, uint32_t lastKnownUID, ErrorCode * pError)
 {
     int r;
+    mailimap * imap;
     
     // connection thread
     selectIfNeeded(folder, pError);
@@ -3596,25 +3607,35 @@ void IMAPSession::idle(String * folder, uint32_t lastKnownUID, ErrorCode * pErro
         }
     }
     
-    r = mailimap_idle(mImap);
+    LOCK();
+    if (mImap == NULL || mImap->imap_stream == NULL || mIdleInProgress) {
+        UNLOCK();
+        * pError = ErrorIdle;
+        return;
+    }
+    imap = mImap;
+    mIdleInProgress = true;
+    UNLOCK();
+
+    r = mailimap_idle(imap);
     if (r == MAILIMAP_ERROR_STREAM) {
         mShouldDisconnect = true;
         * pError = ErrorConnection;
-        return;
+        goto cleanup;
     }
     else if (r == MAILIMAP_ERROR_PARSE) {
         mShouldDisconnect = true;
         * pError = ErrorParse;
-        return;
+        goto cleanup;
     }
     else if (hasError(r)) {
         * pError = ErrorIdle;
-        return;
+        goto cleanup;
     }
     
-    if (!mImap->imap_selection_info->sel_has_exists && !mImap->imap_selection_info->sel_has_recent) {
+    if (!imap->imap_selection_info->sel_has_exists && !imap->imap_selection_info->sel_has_recent) {
         int r;
-        r = mailstream_wait_idle(mImap->imap_stream, MAX_IDLE_DELAY);
+        r = mailstream_wait_idle(imap->imap_stream, MAX_IDLE_DELAY);
         switch (r) {
             case MAILSTREAM_IDLE_ERROR:
             case MAILSTREAM_IDLE_CANCELLED:
@@ -3622,7 +3643,7 @@ void IMAPSession::idle(String * folder, uint32_t lastKnownUID, ErrorCode * pErro
                 mShouldDisconnect = true;
                 * pError = ErrorConnection;
                 MCLog("error or cancelled");
-                return;
+                goto cleanup;
             }
             case MAILSTREAM_IDLE_INTERRUPTED:
                 MCLog("interrupted by user");
@@ -3639,29 +3660,35 @@ void IMAPSession::idle(String * folder, uint32_t lastKnownUID, ErrorCode * pErro
         MCLog("found info before idling");
     }
     
-    r = mailimap_idle_done(mImap);
+    r = mailimap_idle_done(imap);
     if (r == MAILIMAP_ERROR_STREAM) {
         mShouldDisconnect = true;
         * pError = ErrorConnection;
-        return;
+        goto cleanup;
     }
     else if (r == MAILIMAP_ERROR_PARSE) {
         mShouldDisconnect = true;
         * pError = ErrorParse;
-        return;
+        goto cleanup;
     }
     else if (hasError(r)) {
         * pError = ErrorIdle;
-        return;
+        goto cleanup;
     }
     * pError = ErrorNone;
+
+cleanup:
+    LOCK();
+    mIdleInProgress = false;
+    pthread_cond_broadcast(&mIdleCond);
+    UNLOCK();
 }
 
 void IMAPSession::interruptIdle()
 {
     // main thread
     LOCK();
-    if (mIdleEnabled) {
+    if (mIdleEnabled && mImap != NULL && mImap->imap_stream != NULL) {
         mailstream_interrupt_idle(mImap->imap_stream);
     }
     UNLOCK();
@@ -3671,7 +3698,13 @@ void IMAPSession::unsetupIdle()
 {
     // main thread
     LOCK();
-    if (mIdleEnabled) {
+    while (mIdleInProgress) {
+        if (mImap != NULL && mImap->imap_stream != NULL) {
+            mailstream_interrupt_idle(mImap->imap_stream);
+        }
+        pthread_cond_wait(&mIdleCond, &mIdleLock);
+    }
+    if (mIdleEnabled && mImap != NULL && mImap->imap_stream != NULL) {
         mailstream_unsetup_idle(mImap->imap_stream);
     }
     UNLOCK();
