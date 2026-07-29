@@ -58,7 +58,7 @@ namespace mailcore {
 @property (nonatomic, assign) MCOPartType partType;
 
 /** Returns filename of the part.*/
-@property (nonatomic, copy) NSString * _Nullable filename;
+@property (nonatomic, copy) NSString * filename;
 
 /** Returns MIME type of the part. For example application/data.*/
 @property (nonatomic, copy) NSString * mimeType;
