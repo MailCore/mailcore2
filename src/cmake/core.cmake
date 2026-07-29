@@ -109,6 +109,23 @@ set(imap_files
   core/imap/MCIMAPSyncResult.cpp
 )
 
+set(activesync_files
+  core/activesync/MCActiveSyncAttachment.cpp
+  core/activesync/MCActiveSyncBody.cpp
+  core/activesync/MCActiveSyncFolder.cpp
+  core/activesync/MCActiveSyncFolderSyncResult.cpp
+  core/activesync/MCActiveSyncItemEstimateResult.cpp
+  core/activesync/MCActiveSyncMessage.cpp
+  core/activesync/MCActiveSyncMove.cpp
+  core/activesync/MCActiveSyncOptions.cpp
+  core/activesync/MCActiveSyncPingResult.cpp
+  core/activesync/MCActiveSyncProvisionResult.cpp
+  core/activesync/MCActiveSyncSession.cpp
+  core/activesync/MCActiveSyncSettingsResult.cpp
+  core/activesync/MCActiveSyncSyncRequest.cpp
+  core/activesync/MCActiveSyncSyncResult.cpp
+)
+
 set(pop_files
   core/pop/MCPOPMessageInfo.cpp
   core/pop/MCPOPSession.cpp
@@ -166,6 +183,7 @@ set(core_files
   ${basetypes_files}
   ${icu_ucsdet_files}
   ${abstract_files}
+  ${activesync_files}
   ${imap_files}
   ${pop_files}
   ${nntp_files}
@@ -183,6 +201,7 @@ set(core_includes
   "${CMAKE_CURRENT_SOURCE_DIR}/core/abstract"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/basetypes"
   ${core_includes_apple}
+  "${CMAKE_CURRENT_SOURCE_DIR}/core/activesync"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/imap"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/pop"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/nntp"

@@ -1,0 +1,10 @@
+#import "MCOActiveSyncPrivate.h"
+
+#define nativeType mailcore::ActiveSyncItemEstimateResult
+MCO_DEFINE_ACTIVE_SYNC_WRAPPER(MCOActiveSyncItemEstimateResult, mailcore::ActiveSyncItemEstimateResult)
+MCO_OBJC_SYNTHESIZE_SCALAR(MCOActiveSyncItemEstimateStatus, mailcore::ActiveSyncItemEstimateStatus, setStatus, status)
+MCO_OBJC_SYNTHESIZE_SCALAR(MCOActiveSyncItemEstimateStatus, mailcore::ActiveSyncItemEstimateStatus, setCollectionStatus, collectionStatus)
+MCO_OBJC_SYNTHESIZE_SCALAR(uint32_t, uint32_t, setEstimate, estimate)
+MCO_OBJC_SYNTHESIZE_BOOL(setEmptyResponse, emptyResponse)
+MCO_END_ACTIVE_SYNC_WRAPPER
+#undef nativeType

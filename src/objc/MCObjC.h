@@ -14,6 +14,7 @@
 
 #import <MailCore/MCOUtils.h>
 #import <MailCore/MCOAbstract.h>
+#import <MailCore/MCOActiveSync.h>
 #import <MailCore/MCOIMAP.h>
 #import <MailCore/MCORFC822.h>
 #import <MailCore/MCOPOP.h>

@@ -1,0 +1,8 @@
+#import "MCOActiveSyncPrivate.h"
+
+#define nativeType mailcore::ActiveSyncSettingsResult
+MCO_DEFINE_ACTIVE_SYNC_WRAPPER(MCOActiveSyncSettingsResult, mailcore::ActiveSyncSettingsResult)
+MCO_OBJC_SYNTHESIZE_SCALAR(MCOActiveSyncSettingsStatus, mailcore::ActiveSyncSettingsStatus, setStatus, status)
+MCO_OBJC_SYNTHESIZE_SCALAR(MCOActiveSyncSettingsDeviceInformationStatus, mailcore::ActiveSyncSettingsDeviceInformationStatus, setDeviceInformationStatus, deviceInformationStatus)
+MCO_END_ACTIVE_SYNC_WRAPPER
+#undef nativeType

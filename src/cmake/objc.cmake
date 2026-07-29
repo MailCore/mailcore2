@@ -48,6 +48,22 @@ set(objc_imap_files
   objc/imap/MCOIMAPSession.mm
 )
 
+set(objc_activesync_files
+  objc/activesync/MCOActiveSyncAttachment.mm
+  objc/activesync/MCOActiveSyncBody.mm
+  objc/activesync/MCOActiveSyncFolder.mm
+  objc/activesync/MCOActiveSyncFolderSyncResult.mm
+  objc/activesync/MCOActiveSyncItemEstimateResult.mm
+  objc/activesync/MCOActiveSyncMessage.mm
+  objc/activesync/MCOActiveSyncOptions.mm
+  objc/activesync/MCOActiveSyncPingResult.mm
+  objc/activesync/MCOActiveSyncProvisionResult.mm
+  objc/activesync/MCOActiveSyncSession.mm
+  objc/activesync/MCOActiveSyncSettingsResult.mm
+  objc/activesync/MCOActiveSyncSyncRequest.mm
+  objc/activesync/MCOActiveSyncSyncResult.mm
+)
+
 set(objc_pop_files
   objc/pop/MCOPOPFetchHeaderOperation.mm
   objc/pop/MCOPOPFetchMessageOperation.mm
@@ -113,6 +129,7 @@ set(objc_utils_files
 IF(APPLE)
 set(objc_files
   ${objc_abstract_files}
+  ${objc_activesync_files}
   ${objc_imap_files}
   ${objc_pop_files}
   ${objc_provider_files}
@@ -128,6 +145,7 @@ ENDIF()
 set(objc_includes
   "${CMAKE_CURRENT_SOURCE_DIR}/objc"
   "${CMAKE_CURRENT_SOURCE_DIR}/objc/abstract"
+  "${CMAKE_CURRENT_SOURCE_DIR}/objc/activesync"
   "${CMAKE_CURRENT_SOURCE_DIR}/objc/imap"
   "${CMAKE_CURRENT_SOURCE_DIR}/objc/pop"
   "${CMAKE_CURRENT_SOURCE_DIR}/objc/provider"
