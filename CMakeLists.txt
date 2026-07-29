@@ -25,14 +25,14 @@ IF(APPLE)
   set(mac_libraries iconv)
   
 ELSEIF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-  set(CMAKE_CXX_FLAGS "-std=gnu++0x")
+  set(CMAKE_CXX_FLAGS "-std=gnu++17")
   
   set(additional_includes
     /usr/include/tidy
     /usr/include/libxml2
   )
   
-  set(icu_libraries icudata icui18n icuio icule iculx icutest icutu icuuc)
+  set(icu_libraries icudata icui18n icuio icuuc)
   set(linux_libraries ${icu_libraries} pthread uuid)
 ENDIF()
 
@@ -57,7 +57,7 @@ if(NOT APPLE)
     PATHS ${additional_includes}
   )
   find_library(ICU4C_LIBRARY
-    NAMES icudata icui18n icuio icule iculx icutest icutu icuuc
+    NAMES icuuc
     PATHS ${additional_lib_searchpath}
   )
 
@@ -181,4 +181,3 @@ ENDIF() # Android platform
 add_subdirectory (src)
 add_subdirectory (tests)
 add_subdirectory (unittest)
-

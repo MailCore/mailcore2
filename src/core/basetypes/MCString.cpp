@@ -1689,7 +1689,7 @@ static void charactersParsed(void * context,
 
 /* GCS: custom error function to ignore errors */
 static void structuredError(void * userData,
-                            xmlErrorPtr error)
+                            const xmlError * error)
 {
     /* ignore all errors */
     (void)userData;
