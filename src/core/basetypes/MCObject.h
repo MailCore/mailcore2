@@ -57,11 +57,7 @@ namespace mailcore {
     public: // private
         
     private:
-#if __APPLE__
-        OSSpinLock mLock;
-#else
         pthread_mutex_t mLock;
-#endif
         int mCounter;
         void init();
         static void initObjectConstructors();
