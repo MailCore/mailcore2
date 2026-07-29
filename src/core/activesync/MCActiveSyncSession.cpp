@@ -1,10 +1,12 @@
 #include "MCActiveSync.h"
 
 #include "MCActiveSyncPrivate.h"
+#include "MCActiveSyncTypesPrivate.h"
 
 #include <libetpan/clist.h>
 #include <libetpan/mailactivesync.h>
 
+#include "MCMD5.h"
 #include "MCMessageHeader.h"
 
 #include <stdlib.h>
@@ -33,6 +35,27 @@ static const char * cString(String * value)
     return value->UTF8Characters();
 }
 
+static String * defaultDeviceID(String * serverURL, String * username)
+{
+    String * seed = String::stringWithUTF8Format("MailCore ActiveSync:%s:%s", MCUTF8(serverURL), MCUTF8(username));
+    return md5String(Data::dataWithBytes(seed->UTF8Characters(), (unsigned int) strlen(seed->UTF8Characters())));
+}
+
+static bool isMailFolderType(uint32_t type)
+{
+    switch ((ActiveSyncFolderType) type) {
+        case ActiveSyncFolderTypeDefaultInbox:
+        case ActiveSyncFolderTypeDefaultDrafts:
+        case ActiveSyncFolderTypeDefaultDeletedItems:
+        case ActiveSyncFolderTypeDefaultSentItems:
+        case ActiveSyncFolderTypeDefaultOutbox:
+        case ActiveSyncFolderTypeUserCreatedMail:
+            return true;
+        default:
+            return false;
+    }
+}
+
 static void appendHeaderField(Data * data, const char * name, const char * value)
 {
     if (value == NULL)
@@ -46,9 +69,9 @@ static void appendHeaderField(Data * data, const char * name, const char * value
 static void importActiveSyncMessageHeader(ActiveSyncMessage * message,
     struct mailactivesync_message * native)
 {
-    Data * MIMEData = message->MIMEData();
-    if (MIMEData != NULL && MIMEData->length() > 0) {
-        message->header()->importHeadersData(MIMEData);
+    Data * messageData = message->messageData();
+    if (messageData != NULL && messageData->length() > 0) {
+        message->header()->importHeadersData(messageData);
         return;
     }
 
@@ -162,7 +185,7 @@ static ActiveSyncMessage * messageFromNative(struct mailactivesync_message * nat
     result->setEstimatedSize(native->estimated_size);
     result->setRead(native->read != 0);
     result->setFlagged(native->flagged != 0);
-    result->setMIMEData(dataFromBytes(native->mime, native->mime_len));
+    result->setMessageData(dataFromBytes(native->mime, native->mime_len));
     result->setBody(bodyFromNative(native->body));
     importActiveSyncMessageHeader(result, native);
     return (ActiveSyncMessage *) result->autorelease();
@@ -175,10 +198,10 @@ static ActiveSyncMessage * messageFromNativeItem(struct mailactivesync_item * na
 
     ActiveSyncMessage * result = new ActiveSyncMessage();
     result->setServerID(stringFromCString(native->server_id));
-    result->setMIMEData(dataFromBytes(native->mime, native->mime_len));
+    result->setMessageData(dataFromBytes(native->mime, native->mime_len));
     result->setBody(bodyFromNative(native->body));
-    if (result->MIMEData() != NULL && result->MIMEData()->length() > 0)
-        result->header()->importHeadersData(result->MIMEData());
+    if (result->messageData() != NULL && result->messageData()->length() > 0)
+        result->header()->importHeadersData(result->messageData());
     return (ActiveSyncMessage *) result->autorelease();
 }
 
@@ -186,12 +209,13 @@ static ActiveSyncFolder * folderFromNative(struct mailactivesync_folder * native
 {
     if (native == NULL)
         return NULL;
+    if (!isMailFolderType(native->type))
+        return NULL;
 
     ActiveSyncFolder * result = new ActiveSyncFolder();
     result->setServerID(stringFromCString(native->server_id));
     result->setParentID(stringFromCString(native->parent_id));
     result->setDisplayName(stringFromCString(native->display_name));
-    result->setType((ActiveSyncFolderType) native->type);
     return (ActiveSyncFolder *) result->autorelease();
 }
 
@@ -224,12 +248,9 @@ void ActiveSyncSession::init()
     mPassword = NULL;
     mOAuth2Token = NULL;
     mDeviceID = NULL;
-    mDeviceType = NULL;
     mProtocolVersion = NULL;
     mPolicyKey = NULL;
     mUserAgent = NULL;
-    mCached = false;
-    mCacheDirectory = NULL;
     mSession = NULL;
 }
 
@@ -247,11 +268,9 @@ ActiveSyncSession::~ActiveSyncSession()
     MC_SAFE_RELEASE(mPassword);
     MC_SAFE_RELEASE(mOAuth2Token);
     MC_SAFE_RELEASE(mDeviceID);
-    MC_SAFE_RELEASE(mDeviceType);
     MC_SAFE_RELEASE(mProtocolVersion);
     MC_SAFE_RELEASE(mPolicyKey);
     MC_SAFE_RELEASE(mUserAgent);
-    MC_SAFE_RELEASE(mCacheDirectory);
 }
 
 void ActiveSyncSession::setServerURL(String * value)
@@ -304,70 +323,15 @@ String * ActiveSyncSession::deviceID()
     MC_GET_STRING_FIELD(mDeviceID);
 }
 
-void ActiveSyncSession::setDeviceType(String * value)
-{
-    MC_SET_STRING_FIELD(mDeviceType, value);
-}
-
-String * ActiveSyncSession::deviceType()
-{
-    MC_GET_STRING_FIELD(mDeviceType);
-}
-
-void ActiveSyncSession::setProtocolVersion(String * value)
-{
-    MC_SET_STRING_FIELD(mProtocolVersion, value);
-}
-
-String * ActiveSyncSession::protocolVersion()
-{
-    MC_GET_STRING_FIELD(mProtocolVersion);
-}
-
-void ActiveSyncSession::setPolicyKey(String * value)
-{
-    MC_SET_STRING_FIELD(mPolicyKey, value);
-}
-
-String * ActiveSyncSession::policyKey()
-{
-    MC_GET_STRING_FIELD(mPolicyKey);
-}
-
-void ActiveSyncSession::setUserAgent(String * value)
-{
-    MC_SET_STRING_FIELD(mUserAgent, value);
-}
-
-String * ActiveSyncSession::userAgent()
-{
-    MC_GET_STRING_FIELD(mUserAgent);
-}
-
-void ActiveSyncSession::setCached(bool value)
-{
-    mCached = value;
-}
-
-bool ActiveSyncSession::isCached()
-{
-    return mCached;
-}
-
-void ActiveSyncSession::setCacheDirectory(String * value)
-{
-    MC_SET_STRING_FIELD(mCacheDirectory, value);
-}
-
-String * ActiveSyncSession::cacheDirectory()
-{
-    MC_GET_STRING_FIELD(mCacheDirectory);
-}
-
 void ActiveSyncSession::ensureSession()
 {
-    if (mSession == NULL)
-        mSession = mailactivesync_new(mCached ? 1 : 0, cString(mCacheDirectory));
+    if (mSession == NULL) {
+#ifdef MAILCORE_LIBETPAN_ACTIVESYNC_NEW_NO_ARGS
+        mSession = mailactivesync_new();
+#else
+        mSession = mailactivesync_new(0, NULL);
+#endif
+    }
 }
 
 void ActiveSyncSession::configureSession(ErrorCode * pError)
@@ -380,8 +344,8 @@ void ActiveSyncSession::configureSession(ErrorCode * pError)
     }
 
     int result = MAILACTIVESYNC_NO_ERROR;
-    if (mDeviceID != NULL || mDeviceType != NULL)
-        result = mailactivesync_set_device(mSession, cString(mDeviceID), cString(mDeviceType));
+    String * resolvedDeviceID = mDeviceID != NULL ? mDeviceID : defaultDeviceID(mServerURL, mUsername);
+    result = mailactivesync_set_device(mSession, cString(resolvedDeviceID), "MailCore");
     if (result == MAILACTIVESYNC_NO_ERROR && mProtocolVersion != NULL)
         result = mailactivesync_set_protocol_version(mSession, cString(mProtocolVersion));
     if (result == MAILACTIVESYNC_NO_ERROR && mPolicyKey != NULL)
@@ -539,6 +503,17 @@ ActiveSyncSyncResult * ActiveSyncSession::sync(ActiveSyncSyncRequest * request, 
     return (ActiveSyncSyncResult *) result->autorelease();
 }
 
+ActiveSyncSyncResult * ActiveSyncSession::syncMessages(String * folderID, String * syncKey, ErrorCode * pError)
+{
+    ActiveSyncSyncRequest * request = new ActiveSyncSyncRequest();
+    request->setCollectionID(folderID);
+    request->setSyncKey(syncKey);
+    request->setCollectionClass(MCSTR("Email"));
+    ActiveSyncSyncResult * result = sync(request, pError);
+    request->release();
+    return result;
+}
+
 ActiveSyncProvisionResult * ActiveSyncSession::provision(ErrorCode * pError)
 {
     ensureSession();
@@ -560,39 +535,6 @@ ActiveSyncProvisionResult * ActiveSyncSession::provision(ErrorCode * pError)
     result->setPolicyKey(stringFromCString(native->policy_key));
     mailactivesync_provision_result_free(native);
     return (ActiveSyncProvisionResult *) result->autorelease();
-}
-
-ActiveSyncSettingsResult * ActiveSyncSession::setDeviceInformation(HashMap * /* String -> String */ deviceInformation, ErrorCode * pError)
-{
-    ensureSession();
-    if (mSession == NULL) {
-        if (pError != NULL)
-            * pError = ErrorStorageLimit;
-        return NULL;
-    }
-
-    struct mailactivesync_device_information info;
-    memset(&info, 0, sizeof(info));
-    info.model = cString((String *) deviceInformation->objectForKey(MCSTR("model")));
-    info.imei = cString((String *) deviceInformation->objectForKey(MCSTR("imei")));
-    info.friendly_name = cString((String *) deviceInformation->objectForKey(MCSTR("friendlyName")));
-    info.os = cString((String *) deviceInformation->objectForKey(MCSTR("os")));
-    info.os_language = cString((String *) deviceInformation->objectForKey(MCSTR("osLanguage")));
-    info.phone_number = cString((String *) deviceInformation->objectForKey(MCSTR("phoneNumber")));
-    info.user_agent = cString((String *) deviceInformation->objectForKey(MCSTR("userAgent")));
-    info.mobile_operator = cString((String *) deviceInformation->objectForKey(MCSTR("mobileOperator")));
-
-    struct mailactivesync_settings_result * native = NULL;
-    int resultCode = mailactivesync_settings_set_device_information(mSession, &info, &native);
-    setError(pError, resultCode);
-    if (resultCode != MAILACTIVESYNC_NO_ERROR)
-        return NULL;
-
-    ActiveSyncSettingsResult * result = new ActiveSyncSettingsResult();
-    result->setStatus((ActiveSyncSettingsStatus) native->status);
-    result->setDeviceInformationStatus((ActiveSyncSettingsDeviceInformationStatus) native->device_information_status);
-    mailactivesync_settings_result_free(native);
-    return (ActiveSyncSettingsResult *) result->autorelease();
 }
 
 ActiveSyncItemEstimateResult * ActiveSyncSession::itemEstimate(String * collectionID, String * syncKey, ErrorCode * pError)
@@ -619,7 +561,7 @@ ActiveSyncItemEstimateResult * ActiveSyncSession::itemEstimate(String * collecti
     return (ActiveSyncItemEstimateResult *) result->autorelease();
 }
 
-ActiveSyncMessage * ActiveSyncSession::fetchItem(String * collectionID, String * serverID, ErrorCode * pError)
+ActiveSyncMessage * ActiveSyncSession::fetchMessage(String * folderID, String * messageID, ErrorCode * pError)
 {
     ensureSession();
     if (mSession == NULL) {
@@ -629,7 +571,7 @@ ActiveSyncMessage * ActiveSyncSession::fetchItem(String * collectionID, String *
     }
 
     struct mailactivesync_item * native = NULL;
-    int resultCode = mailactivesync_item_operations_fetch(mSession, cString(collectionID), cString(serverID), &native);
+    int resultCode = mailactivesync_item_operations_fetch(mSession, cString(folderID), cString(messageID), &native);
     setError(pError, resultCode);
     if (resultCode != MAILACTIVESYNC_NO_ERROR)
         return NULL;
@@ -639,7 +581,7 @@ ActiveSyncMessage * ActiveSyncSession::fetchItem(String * collectionID, String *
     return result;
 }
 
-void ActiveSyncSession::sendMail(Data * MIMEData, bool saveInSent, ErrorCode * pError)
+void ActiveSyncSession::sendMessage(Data * messageData, bool saveInSent, ErrorCode * pError)
 {
     ensureSession();
     if (mSession == NULL) {
@@ -648,10 +590,10 @@ void ActiveSyncSession::sendMail(Data * MIMEData, bool saveInSent, ErrorCode * p
         return;
     }
 
-    setError(pError, mailactivesync_send_mail(mSession, MIMEData->bytes(), MIMEData->length(), saveInSent ? 1 : 0));
+    setError(pError, mailactivesync_send_mail(mSession, messageData->bytes(), messageData->length(), saveInSent ? 1 : 0));
 }
 
-void ActiveSyncSession::smartReply(String * collectionID, String * serverID, Data * MIMEData, bool saveInSent, ErrorCode * pError)
+void ActiveSyncSession::smartReply(String * folderID, String * messageID, Data * messageData, bool saveInSent, ErrorCode * pError)
 {
     ensureSession();
     if (mSession == NULL) {
@@ -660,10 +602,10 @@ void ActiveSyncSession::smartReply(String * collectionID, String * serverID, Dat
         return;
     }
 
-    setError(pError, mailactivesync_smart_reply(mSession, cString(collectionID), cString(serverID), MIMEData->bytes(), MIMEData->length(), saveInSent ? 1 : 0));
+    setError(pError, mailactivesync_smart_reply(mSession, cString(folderID), cString(messageID), messageData->bytes(), messageData->length(), saveInSent ? 1 : 0));
 }
 
-void ActiveSyncSession::smartForward(String * collectionID, String * serverID, Data * MIMEData, bool saveInSent, ErrorCode * pError)
+void ActiveSyncSession::smartForward(String * folderID, String * messageID, Data * messageData, bool saveInSent, ErrorCode * pError)
 {
     ensureSession();
     if (mSession == NULL) {
@@ -672,7 +614,7 @@ void ActiveSyncSession::smartForward(String * collectionID, String * serverID, D
         return;
     }
 
-    setError(pError, mailactivesync_smart_forward(mSession, cString(collectionID), cString(serverID), MIMEData->bytes(), MIMEData->length(), saveInSent ? 1 : 0));
+    setError(pError, mailactivesync_smart_forward(mSession, cString(folderID), cString(messageID), messageData->bytes(), messageData->length(), saveInSent ? 1 : 0));
 }
 
 ActiveSyncPingResult * ActiveSyncSession::ping(Array * /* String */ collectionIDs, uint32_t heartbeatInterval, ErrorCode * pError)

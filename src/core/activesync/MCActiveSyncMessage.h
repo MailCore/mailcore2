@@ -24,8 +24,8 @@ namespace mailcore {
         virtual bool isRead();
         virtual void setFlagged(bool flagged);
         virtual bool isFlagged();
-        virtual void setMIMEData(Data * MIMEData);
-        virtual Data * MIMEData();
+        virtual void setMessageData(Data * messageData);
+        virtual Data * messageData();
         virtual void setBody(ActiveSyncBody * body);
         virtual ActiveSyncBody * body();
         virtual Array * /* AbstractPart */ attachments();
@@ -42,7 +42,7 @@ namespace mailcore {
         uint32_t mEstimatedSize;
         bool mRead;
         bool mFlagged;
-        Data * mMIMEData;
+        Data * mMessageData;
         ActiveSyncBody * mBody;
         void init();
     };

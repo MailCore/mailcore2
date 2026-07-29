@@ -108,6 +108,20 @@ else()
   message(STATUS "Found libetpan")
 endif()
 
+include(CheckCXXSourceCompiles)
+set(CMAKE_REQUIRED_INCLUDES ${LIBETPAN_INCLUDE_DIR})
+check_cxx_source_compiles("
+#include <libetpan/mailactivesync.h>
+int main() {
+  (void) sizeof(mailactivesync_new());
+  return 0;
+}
+" MAILCORE_LIBETPAN_ACTIVESYNC_NEW_NO_ARGS)
+unset(CMAKE_REQUIRED_INCLUDES)
+if(MAILCORE_LIBETPAN_ACTIVESYNC_NEW_NO_ARGS)
+  add_definitions(-DMAILCORE_LIBETPAN_ACTIVESYNC_NEW_NO_ARGS)
+endif()
+
 
 # detect tidy
 

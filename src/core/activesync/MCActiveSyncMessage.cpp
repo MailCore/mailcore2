@@ -13,7 +13,7 @@ void ActiveSyncMessage::init()
     mEstimatedSize = 0;
     mRead = false;
     mFlagged = false;
-    mMIMEData = NULL;
+    mMessageData = NULL;
     mBody = NULL;
 }
 
@@ -26,7 +26,7 @@ ActiveSyncMessage::~ActiveSyncMessage()
 {
     MC_SAFE_RELEASE(mServerID);
     MC_SAFE_RELEASE(mMessageClass);
-    MC_SAFE_RELEASE(mMIMEData);
+    MC_SAFE_RELEASE(mMessageData);
     MC_SAFE_RELEASE(mBody);
 }
 
@@ -80,14 +80,14 @@ bool ActiveSyncMessage::isFlagged()
     return mFlagged;
 }
 
-void ActiveSyncMessage::setMIMEData(Data * value)
+void ActiveSyncMessage::setMessageData(Data * value)
 {
-    MC_SET_OBJECT_FIELD(Data, mMIMEData, value);
+    MC_SET_OBJECT_FIELD(Data, mMessageData, value);
 }
 
-Data * ActiveSyncMessage::MIMEData()
+Data * ActiveSyncMessage::messageData()
 {
-    MC_GET_OBJECT_FIELD(mMIMEData);
+    MC_GET_OBJECT_FIELD(mMessageData);
 }
 
 void ActiveSyncMessage::setBody(ActiveSyncBody * value)
@@ -167,7 +167,7 @@ Object * ActiveSyncMessage::copy()
     result->setEstimatedSize(estimatedSize());
     result->setRead(isRead());
     result->setFlagged(isFlagged());
-    result->setMIMEData(MIMEData());
+    result->setMessageData(messageData());
     result->setBody(body());
     return result;
 }

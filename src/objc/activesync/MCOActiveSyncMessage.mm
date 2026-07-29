@@ -35,7 +35,7 @@ MCO_OBJC_SYNTHESIZE_STRING(setMessageClass, messageClass)
 MCO_OBJC_SYNTHESIZE_SCALAR(uint32_t, uint32_t, setEstimatedSize, estimatedSize)
 MCO_OBJC_SYNTHESIZE_BOOL(setRead, isRead)
 MCO_OBJC_SYNTHESIZE_BOOL(setFlagged, isFlagged)
-MCO_OBJC_SYNTHESIZE_DATA(setMIMEData, MIMEData)
+MCO_OBJC_SYNTHESIZE_DATA(setMessageData, messageData)
 MCO_OBJC_SYNTHESIZE(ActiveSyncBody, setBody, body)
 
 @end

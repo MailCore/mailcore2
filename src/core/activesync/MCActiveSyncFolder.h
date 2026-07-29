@@ -3,7 +3,6 @@
 #define MAILCORE_MCACTIVESYNCFOLDER_H
 
 #include <MailCore/MCBaseTypes.h>
-#include <MailCore/MCActiveSyncTypes.h>
 
 #ifdef __cplusplus
 
@@ -20,8 +19,6 @@ namespace mailcore {
         virtual String * parentID();
         virtual void setDisplayName(String * displayName);
         virtual String * displayName();
-        virtual void setType(ActiveSyncFolderType type);
-        virtual ActiveSyncFolderType type();
 
         virtual Object * copy();
         virtual String * description();
@@ -30,7 +27,6 @@ namespace mailcore {
         String * mServerID;
         String * mParentID;
         String * mDisplayName;
-        ActiveSyncFolderType mType;
         void init();
     };
 

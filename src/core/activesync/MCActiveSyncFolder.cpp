@@ -9,7 +9,6 @@ void ActiveSyncFolder::init()
     mServerID = NULL;
     mParentID = NULL;
     mDisplayName = NULL;
-    mType = ActiveSyncFolderTypeUnknown;
 }
 
 ActiveSyncFolder::ActiveSyncFolder()
@@ -54,23 +53,12 @@ String * ActiveSyncFolder::displayName()
     MC_GET_STRING_FIELD(mDisplayName);
 }
 
-void ActiveSyncFolder::setType(ActiveSyncFolderType value)
-{
-    mType = value;
-}
-
-ActiveSyncFolderType ActiveSyncFolder::type()
-{
-    return mType;
-}
-
 Object * ActiveSyncFolder::copy()
 {
     ActiveSyncFolder * result = new ActiveSyncFolder();
     result->setServerID(serverID());
     result->setParentID(parentID());
     result->setDisplayName(displayName());
-    result->setType(type());
     return result;
 }
 

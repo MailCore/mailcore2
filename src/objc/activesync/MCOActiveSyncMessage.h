@@ -11,7 +11,7 @@
 @property (nonatomic, assign) uint32_t estimatedSize;
 @property (nonatomic, assign, getter=isRead) BOOL read;
 @property (nonatomic, assign, getter=isFlagged) BOOL flagged;
-@property (nonatomic, copy) NSData * MIMEData;
+@property (nonatomic, copy) NSData * messageData;
 @property (nonatomic, retain) MCOActiveSyncBody * body;
 @end
 

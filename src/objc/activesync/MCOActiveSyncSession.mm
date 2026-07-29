@@ -36,12 +36,6 @@ MCO_OBJC_SYNTHESIZE_STRING(setUsername, username)
 MCO_OBJC_SYNTHESIZE_STRING(setPassword, password)
 MCO_OBJC_SYNTHESIZE_STRING(setOAuth2Token, OAuth2Token)
 MCO_OBJC_SYNTHESIZE_STRING(setDeviceID, deviceID)
-MCO_OBJC_SYNTHESIZE_STRING(setDeviceType, deviceType)
-MCO_OBJC_SYNTHESIZE_STRING(setProtocolVersion, protocolVersion)
-MCO_OBJC_SYNTHESIZE_STRING(setPolicyKey, policyKey)
-MCO_OBJC_SYNTHESIZE_STRING(setUserAgent, userAgent)
-MCO_OBJC_SYNTHESIZE_BOOL(setCached, isCached)
-MCO_OBJC_SYNTHESIZE_STRING(setCacheDirectory, cacheDirectory)
 
 - (NSString *) lastRedirectURL
 {
@@ -105,20 +99,20 @@ MCO_OBJC_SYNTHESIZE_STRING(setCacheDirectory, cacheDirectory)
     return (MCOActiveSyncSyncResult *) MCO_TO_OBJC(result);
 }
 
+- (MCOActiveSyncSyncResult *) syncMessagesInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey error:(NSError **)error
+{
+    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
+    mailcore::ActiveSyncSyncResult * result = _session->syncMessages([folderID mco_mcString], [syncKey mco_mcString], &errorCode);
+    MCOSetError(error, errorCode);
+    return (MCOActiveSyncSyncResult *) MCO_TO_OBJC(result);
+}
+
 - (MCOActiveSyncProvisionResult *) provisionWithError:(NSError **)error
 {
     mailcore::ErrorCode errorCode = mailcore::ErrorNone;
     mailcore::ActiveSyncProvisionResult * result = _session->provision(&errorCode);
     MCOSetError(error, errorCode);
     return (MCOActiveSyncProvisionResult *) MCO_TO_OBJC(result);
-}
-
-- (MCOActiveSyncSettingsResult *) setDeviceInformation:(NSDictionary *)deviceInformation error:(NSError **)error
-{
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    mailcore::ActiveSyncSettingsResult * result = _session->setDeviceInformation((mailcore::HashMap *) [deviceInformation mco_mcObject], &errorCode);
-    MCOSetError(error, errorCode);
-    return (MCOActiveSyncSettingsResult *) MCO_TO_OBJC(result);
 }
 
 - (MCOActiveSyncItemEstimateResult *) itemEstimateForCollectionID:(NSString *)collectionID syncKey:(NSString *)syncKey error:(NSError **)error
@@ -129,32 +123,32 @@ MCO_OBJC_SYNTHESIZE_STRING(setCacheDirectory, cacheDirectory)
     return (MCOActiveSyncItemEstimateResult *) MCO_TO_OBJC(result);
 }
 
-- (MCOActiveSyncMessage *) fetchItemInCollectionID:(NSString *)collectionID serverID:(NSString *)serverID error:(NSError **)error
+- (MCOActiveSyncMessage *) fetchMessageInFolderID:(NSString *)folderID messageID:(NSString *)messageID error:(NSError **)error
 {
     mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    mailcore::ActiveSyncMessage * result = _session->fetchItem([collectionID mco_mcString], [serverID mco_mcString], &errorCode);
+    mailcore::ActiveSyncMessage * result = _session->fetchMessage([folderID mco_mcString], [messageID mco_mcString], &errorCode);
     MCOSetError(error, errorCode);
     return (MCOActiveSyncMessage *) MCO_TO_OBJC(result);
 }
 
-- (BOOL) sendMailWithMIMEData:(NSData *)MIMEData saveInSent:(BOOL)saveInSent error:(NSError **)error
+- (BOOL) sendMessageWithData:(NSData *)messageData saveInSent:(BOOL)saveInSent error:(NSError **)error
 {
     mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    _session->sendMail([MIMEData mco_mcData], saveInSent, &errorCode);
+    _session->sendMessage([messageData mco_mcData], saveInSent, &errorCode);
     return MCOSetError(error, errorCode);
 }
 
-- (BOOL) smartReplyInCollectionID:(NSString *)collectionID serverID:(NSString *)serverID MIMEData:(NSData *)MIMEData saveInSent:(BOOL)saveInSent error:(NSError **)error
+- (BOOL) smartReplyInFolderID:(NSString *)folderID messageID:(NSString *)messageID messageData:(NSData *)messageData saveInSent:(BOOL)saveInSent error:(NSError **)error
 {
     mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    _session->smartReply([collectionID mco_mcString], [serverID mco_mcString], [MIMEData mco_mcData], saveInSent, &errorCode);
+    _session->smartReply([folderID mco_mcString], [messageID mco_mcString], [messageData mco_mcData], saveInSent, &errorCode);
     return MCOSetError(error, errorCode);
 }
 
-- (BOOL) smartForwardInCollectionID:(NSString *)collectionID serverID:(NSString *)serverID MIMEData:(NSData *)MIMEData saveInSent:(BOOL)saveInSent error:(NSError **)error
+- (BOOL) smartForwardInFolderID:(NSString *)folderID messageID:(NSString *)messageID messageData:(NSData *)messageData saveInSent:(BOOL)saveInSent error:(NSError **)error
 {
     mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    _session->smartForward([collectionID mco_mcString], [serverID mco_mcString], [MIMEData mco_mcData], saveInSent, &errorCode);
+    _session->smartForward([folderID mco_mcString], [messageID mco_mcString], [messageData mco_mcData], saveInSent, &errorCode);
     return MCOSetError(error, errorCode);
 }
 
