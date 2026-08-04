@@ -28,11 +28,8 @@ includes = \
     $(LIBXML2_PATH)/include \
     $(TIDY_HTML5_PATH)/include \
     $(OPENSSL_PATH)/include \
-    $(ANDROID_NDK)/sources/cxx-stl/gnu-libstdc++/4.9/include \
-    $(ANDROID_NDK)/sources/cxx-stl/gnu-libstdc++/4.9/libs/$(TARGET_ARCH_ABI)/include \
 	$(addprefix $(src_dir)/, $(subdirs))
-#     $(ANDROID_NDK)/sources/cxx-stl/llvm-libc++/libcxx/include
-# $(ANDROID_NDK)/sources/cxx-stl/llvm-libc++abi/libcxxabi/include
+# libc++ headers are added automatically by ndk-build via APP_STL := c++_shared (see Application.mk)
 
 core_excludes = MCWin32.cpp MCStringWin32.cpp MCMainThreadWin32.cpp MCMainThreadGTK.cpp
 core_src_files := $(filter-out \
@@ -81,6 +78,11 @@ LOCAL_SRC_FILES := $(OPENSSL_PATH)/libs/$(TARGET_ARCH_ABI)/libcrypto.a
 include $(PREBUILT_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
+LOCAL_MODULE    := iconv
+LOCAL_SRC_FILES := $(LIBICONV_PATH)/libs/$(TARGET_ARCH_ABI)/libiconv.a
+include $(PREBUILT_STATIC_LIBRARY)
+
+include $(CLEAR_VARS)
 LOCAL_MODULE    := ssl
 LOCAL_SRC_FILES := $(OPENSSL_PATH)/libs/$(TARGET_ARCH_ABI)/libssl.a
 include $(PREBUILT_STATIC_LIBRARY)
@@ -120,11 +122,12 @@ LOCAL_SRC_FILES := \
 	$(security_src_files) $(smtp_src_files) $(zip_src_files) $(minizip_src_files) \
 	$(async_imap_src_files) $(async_nntp_src_files) $(async_pop_src_files) $(async_smtp_src_files)
 LOCAL_CPPFLAGS := -frtti
-LOCAL_CFLAGS := -DNOCRYPT
-# LOCAL_LDLIBS := -lz -llog \
-#      -lc++_shared -L$(ANDROID_NDK)/sources/cxx-stl/llvm-libc++/libs/$(TARGET_ARCH_ABI)
-LOCAL_LDLIBS := -lz -llog \
-	 -lgnustl_shared -L$(ANDROID_NDK)/sources/cxx-stl/gnu-libstdc++/4.9/libs/$(TARGET_ARCH_ABI)
+# USE_FILE32API: MiniZip ioapi.c calls ftello64/fseeko64, which Bionic only declares at
+# API >= 24; this maps them to 32-bit ftell/fseek so the build works at android-21.
+LOCAL_CFLAGS := -DNOCRYPT -DUSE_FILE32API
+# With APP_STL := c++_shared, ndk-build links libc++_shared automatically; just link system libs.
+LOCAL_LDLIBS := -lz -llog
 LOCAL_DISABLE_FATAL_LINKER_WARNINGS := true
-LOCAL_STATIC_LIBRARIES := etpan sasl2 ssl crypto icu4c xml2 tidy ctemplate
+# Order matters (ndk-build links left-to-right): etpan needs ssl/crypto/iconv.
+LOCAL_STATIC_LIBRARIES := etpan sasl2 ssl crypto iconv icu4c xml2 tidy ctemplate
 include $(BUILD_SHARED_LIBRARY)
