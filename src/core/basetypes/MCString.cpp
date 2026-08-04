@@ -575,7 +575,7 @@ static inline int skip_subj_refwd(char * subj, size_t * begin,
     
     if (!has_suffix) {
         if (length - cur_token >= 3) {
-            if (strncasecmp(subj + cur_token, "：", 3) == 0) {
+            if (strncasecmp(subj + cur_token, ":", 3) == 0) {
                 cur_token += 3;
                 has_suffix = 1;
             }

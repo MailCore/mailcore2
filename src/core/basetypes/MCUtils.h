@@ -79,7 +79,12 @@ extern unsigned long long wcstoull(const wchar_t*, wchar_t**, int);
 
 #endif
 
-#ifndef DEPRECATED_ATTRIBUTE
+#ifdef _MSC_VER
+// for now we just omit it. Modify usages to put macro at start of
+// declaration, compatible with both gcc and msvc.
+// #define DEPRECATED_ATTRIBUTE __declspec(deprecated)
+#define DEPRECATED_ATTRIBUTE
+#else
 #define DEPRECATED_ATTRIBUTE        __attribute__((deprecated))
 #endif
 
