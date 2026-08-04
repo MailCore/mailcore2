@@ -1,0 +1,1 @@
+../../src/objc/imap/MCOIMAPNamespaceItem.h
