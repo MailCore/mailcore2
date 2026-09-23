@@ -78,12 +78,26 @@ set(async_activesync_files
   async/activesync/MCActiveSyncOperations.cpp
 )
 
+set(async_gmail_files
+  async/gmail/MCGmailAsyncSession.cpp
+  async/gmail/MCGmailOperation.cpp
+  async/gmail/MCGmailProfileOperation.cpp
+  async/gmail/MCGmailLabelsOperation.cpp
+  async/gmail/MCGmailLabelOperation.cpp
+  async/gmail/MCGmailMessagesOperation.cpp
+  async/gmail/MCGmailMessageOperation.cpp
+  async/gmail/MCGmailMessageDataOperation.cpp
+  async/gmail/MCGmailAttachmentDataOperation.cpp
+  async/gmail/MCGmailMessagePartDataOperation.cpp
+)
+
 set(async_files
   ${async_imap_files}
   ${async_pop_files}
   ${async_smtp_files}
   ${async_nntp_files}
   ${async_activesync_files}
+  ${async_gmail_files}
 )
 
 # Includes for build
@@ -95,4 +109,5 @@ set(async_includes
   "${CMAKE_CURRENT_SOURCE_DIR}/async/smtp"
   "${CMAKE_CURRENT_SOURCE_DIR}/async/nntp"
   "${CMAKE_CURRENT_SOURCE_DIR}/async/activesync"
+  "${CMAKE_CURRENT_SOURCE_DIR}/async/gmail"
 )
