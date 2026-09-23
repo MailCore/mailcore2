@@ -8,8 +8,6 @@
 
 namespace mailcore {
 
-    class GmailMessagePart;
-
     class MAILCORE_EXPORT GmailMessage : public AbstractMessage {
     public:
         GmailMessage();
@@ -39,8 +37,8 @@ namespace mailcore {
         virtual Data * RFC822Data();
         virtual void setRFC822Data(Data * RFC822Data);
 
-        virtual GmailMessagePart * payload();
-        virtual void setPayload(GmailMessagePart * payload);
+        virtual AbstractPart * payload();
+        virtual void setPayload(AbstractPart * payload);
 
         virtual AbstractMessage * parsedMessage(ErrorCode * pError);
         virtual AbstractPart * partForPartID(String * partID);
@@ -56,7 +54,7 @@ namespace mailcore {
         String * mInternalDate;
         uint32_t mSizeEstimate;
         Data * mRFC822Data;
-        GmailMessagePart * mPayload;
+        AbstractPart * mPayload;
 
         void init();
     };

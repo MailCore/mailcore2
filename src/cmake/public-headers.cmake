@@ -66,8 +66,9 @@ core/gmail/MCGmailLabel.h
 core/gmail/MCGmailMessageList.h
 core/gmail/MCGmailMessageSummary.h
 core/gmail/MCGmailMessage.h
+core/gmail/MCGmailPart.h
+core/gmail/MCGmailMultipart.h
 core/gmail/MCGmailMessagePart.h
-core/gmail/MCGmailMessageHeader.h
 core/imap/MCIMAP.h
 core/imap/MCIMAPFolder.h
 core/imap/MCIMAPMessage.h
@@ -120,7 +121,7 @@ async/gmail/MCGmailMessagesOperation.h
 async/gmail/MCGmailMessageOperation.h
 async/gmail/MCGmailMessageDataOperation.h
 async/gmail/MCGmailAttachmentDataOperation.h
-async/gmail/MCGmailMessagePartDataOperation.h
+async/gmail/MCGmailPartDataOperation.h
 async/smtp/MCAsyncSMTP.h
 async/smtp/MCSMTPAsyncSession.h
 async/smtp/MCSMTPOperation.h

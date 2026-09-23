@@ -9,7 +9,8 @@
 #include <MailCore/MCGmailMessageList.h>
 #include <MailCore/MCGmailMessageSummary.h>
 #include <MailCore/MCGmailMessage.h>
+#include <MailCore/MCGmailPart.h>
+#include <MailCore/MCGmailMultipart.h>
 #include <MailCore/MCGmailMessagePart.h>
-#include <MailCore/MCGmailMessageHeader.h>
 
 #endif

@@ -247,12 +247,12 @@ GmailAttachmentDataOperation * GmailAsyncSession::attachmentDataOperation(String
     return (GmailAttachmentDataOperation *) op->autorelease();
 }
 
-GmailMessagePartDataOperation * GmailAsyncSession::dataForMessagePartOperation(String * messageID,
-                                                                               GmailMessagePart * part)
+GmailPartDataOperation * GmailAsyncSession::dataForPartOperation(String * messageID,
+                                                                 AbstractPart * part)
 {
-    GmailMessagePartDataOperation * op = new GmailMessagePartDataOperation();
+    GmailPartDataOperation * op = new GmailPartDataOperation();
     op->setSession(this);
     op->setMessageID(messageID);
     op->setPart(part);
-    return (GmailMessagePartDataOperation *) op->autorelease();
+    return (GmailPartDataOperation *) op->autorelease();
 }

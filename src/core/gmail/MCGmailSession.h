@@ -17,6 +17,7 @@ namespace mailcore {
     class GmailMessageList;
     class GmailMessage;
     class GmailMessagePart;
+    class AbstractPart;
 
     class MAILCORE_EXPORT GmailSession : public Object {
     public:
@@ -52,8 +53,8 @@ namespace mailcore {
 
         virtual Data * attachmentData(String * messageID, String * attachmentID,
                                       ErrorCode * pError);
-        virtual Data * dataForMessagePart(String * messageID, GmailMessagePart * part,
-                                          ErrorCode * pError);
+        virtual Data * dataForPart(String * messageID, AbstractPart * part,
+                                   ErrorCode * pError);
 
         virtual int lastHTTPStatus();
         virtual String * lastErrorMessage();

@@ -88,7 +88,7 @@ set(async_gmail_files
   async/gmail/MCGmailMessageOperation.cpp
   async/gmail/MCGmailMessageDataOperation.cpp
   async/gmail/MCGmailAttachmentDataOperation.cpp
-  async/gmail/MCGmailMessagePartDataOperation.cpp
+  async/gmail/MCGmailPartDataOperation.cpp
 )
 
 set(async_files

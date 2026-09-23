@@ -1,5 +1,7 @@
 #include "MCGmailMessage.h"
 
+#include "MCGmailPart.h"
+#include "MCGmailMultipart.h"
 #include "MCGmailMessagePart.h"
 #include "MCMessageParser.h"
 
@@ -115,14 +117,14 @@ void GmailMessage::setRFC822Data(Data * RFC822Data)
     MC_SAFE_REPLACE_RETAIN(Data, mRFC822Data, RFC822Data);
 }
 
-GmailMessagePart * GmailMessage::payload()
+AbstractPart * GmailMessage::payload()
 {
     return mPayload;
 }
 
-void GmailMessage::setPayload(GmailMessagePart * payload)
+void GmailMessage::setPayload(AbstractPart * payload)
 {
-    MC_SAFE_REPLACE_RETAIN(GmailMessagePart, mPayload, payload);
+    MC_SAFE_REPLACE_RETAIN(AbstractPart, mPayload, payload);
 }
 
 AbstractMessage * GmailMessage::parsedMessage(ErrorCode * pError)
@@ -141,22 +143,32 @@ static AbstractPart * partForPartIDInPart(AbstractPart * part, String * partID)
     if (part == NULL)
         return NULL;
 
-    GmailMessagePart * gmailPart = dynamic_cast<GmailMessagePart *>(part);
-    if (gmailPart != NULL) {
-        if ((gmailPart->partID() != NULL) && gmailPart->partID()->isEqual(partID)) {
-            return gmailPart;
+    GmailPart * gmailPart = dynamic_cast<GmailPart *>(part);
+    if ((gmailPart != NULL) && (gmailPart->partID() != NULL) && gmailPart->partID()->isEqual(partID)) {
+        return gmailPart;
+    }
+
+    GmailMultipart * gmailMultipart = dynamic_cast<GmailMultipart *>(part);
+    if (gmailMultipart != NULL) {
+        if ((gmailMultipart->partID() != NULL) && gmailMultipart->partID()->isEqual(partID)) {
+            return gmailMultipart;
         }
-        if (gmailPart->parts() != NULL) {
-            for (unsigned int i = 0; i < gmailPart->parts()->count(); i ++) {
-                AbstractPart * result = partForPartIDInPart((AbstractPart *) gmailPart->parts()->objectAtIndex(i),
+        if (gmailMultipart->parts() != NULL) {
+            for (unsigned int i = 0; i < gmailMultipart->parts()->count(); i ++) {
+                AbstractPart * result = partForPartIDInPart((AbstractPart *) gmailMultipart->parts()->objectAtIndex(i),
                                                             partID);
                 if (result != NULL)
                     return result;
             }
         }
-        if (gmailPart->mainPart() != NULL) {
-            return partForPartIDInPart(gmailPart->mainPart(), partID);
+    }
+
+    GmailMessagePart * gmailMessagePart = dynamic_cast<GmailMessagePart *>(part);
+    if (gmailMessagePart != NULL) {
+        if ((gmailMessagePart->partID() != NULL) && gmailMessagePart->partID()->isEqual(partID)) {
+            return gmailMessagePart;
         }
+        return partForPartIDInPart(gmailMessagePart->mainPart(), partID);
     }
 
     return NULL;

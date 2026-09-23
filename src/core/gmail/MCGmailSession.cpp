@@ -2,16 +2,19 @@
 
 #include <libetpan/mailgmail.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "MCGmailLabel.h"
 #include "MCGmailMessage.h"
 #include "MCGmailMessageGetRequestPrivate.h"
-#include "MCGmailMessageHeader.h"
 #include "MCGmailMessageList.h"
 #include "MCGmailMessageListRequestPrivate.h"
+#include "MCGmailMultipart.h"
+#include "MCGmailPart.h"
 #include "MCGmailMessagePart.h"
 #include "MCGmailMessageSummary.h"
 #include "MCGmailProfile.h"
+#include "MCMessageHeader.h"
 
 using namespace mailcore;
 
@@ -172,54 +175,233 @@ static GmailMessageList * messageListFromLibetpan(struct mailgmail_message_list 
     return result;
 }
 
-static GmailMessageHeader * headerFromLibetpan(struct mailgmail_message_header * header)
+static void importGmailMessageHeaders(MessageHeader * header, clist * headers)
 {
-    GmailMessageHeader * result = new GmailMessageHeader();
-    result->autorelease();
-    result->setName(stringFromNullableCString(header->name));
-    result->setValue(stringFromNullableCString(header->value));
+    if ((header == NULL) || (headers == NULL))
+        return;
+
+    String * headersString = String::string();
+    for (clistiter * cur = clist_begin(headers); cur != NULL; cur = clist_next(cur)) {
+        struct mailgmail_message_header * gmailHeader =
+            (struct mailgmail_message_header *) clist_content(cur);
+        if ((gmailHeader->name != NULL) && (gmailHeader->value != NULL)) {
+            headersString->appendUTF8Format("%s: %s\r\n", gmailHeader->name, gmailHeader->value);
+        }
+    }
+    headersString->appendUTF8Characters("\r\n");
+
+    Data * data = headersString->dataUsingEncoding("utf-8");
+    if (data != NULL) {
+        header->importHeadersData(data);
+    }
+}
+
+static char * copyTrimmedCString(const char * value, size_t length)
+{
+    while ((length > 0) && ((* value == ' ') || (* value == '\t'))) {
+        value ++;
+        length --;
+    }
+    while ((length > 0) && ((value[length - 1] == ' ') || (value[length - 1] == '\t'))) {
+        length --;
+    }
+    if ((length >= 2) && (value[0] == '"') && (value[length - 1] == '"')) {
+        value ++;
+        length -= 2;
+    }
+
+    char * result = (char *) malloc(length + 1);
+    if (result == NULL)
+        return NULL;
+    memcpy(result, value, length);
+    result[length] = '\0';
     return result;
 }
 
-static GmailMessagePart * partFromLibetpan(struct mailgmail_message_part * part,
-                                           ErrorCode * pError)
+static void importGmailContentTypeHeader(AbstractPart * part, const char * value)
+{
+    const char * cur = value;
+    const char * semi = strchr(cur, ';');
+    size_t mimeLength = semi != NULL ? (size_t)(semi - cur) : strlen(cur);
+    char * mimeType = copyTrimmedCString(cur, mimeLength);
+    if (mimeType != NULL) {
+        part->setMimeType(String::stringWithUTF8Characters(mimeType));
+        free(mimeType);
+    }
+
+    cur = semi;
+    while (cur != NULL) {
+        cur ++;
+        const char * next = strchr(cur, ';');
+        size_t length = next != NULL ? (size_t)(next - cur) : strlen(cur);
+        const char * equals = (const char *) memchr(cur, '=', length);
+        if (equals != NULL) {
+            char * name = copyTrimmedCString(cur, (size_t)(equals - cur));
+            char * paramValue = copyTrimmedCString(equals + 1, length - (size_t)(equals - cur) - 1);
+            if ((name != NULL) && (paramValue != NULL)) {
+                if (strcasecmp(name, "charset") == 0) {
+                    part->setCharset(String::stringByDecodingMIMEHeaderValue(paramValue));
+                }
+                else if (strcasecmp(name, "name") == 0) {
+                    part->setFilename(String::stringByDecodingMIMEHeaderValue(paramValue));
+                }
+                else {
+                    part->setContentTypeParameter(String::stringWithUTF8Characters(name),
+                                                  String::stringWithUTF8Characters(paramValue));
+                }
+            }
+            if (name != NULL)
+                free(name);
+            if (paramValue != NULL)
+                free(paramValue);
+        }
+        cur = next;
+    }
+}
+
+static void importGmailContentDispositionHeader(AbstractPart * part, const char * value)
+{
+    const char * cur = value;
+    const char * semi = strchr(cur, ';');
+    size_t dispositionLength = semi != NULL ? (size_t)(semi - cur) : strlen(cur);
+    char * disposition = copyTrimmedCString(cur, dispositionLength);
+    if (disposition != NULL) {
+        if (strcasecmp(disposition, "inline") == 0) {
+            part->setInlineAttachment(true);
+        }
+        else if (strcasecmp(disposition, "attachment") == 0) {
+            part->setAttachment(true);
+        }
+        free(disposition);
+    }
+
+    cur = semi;
+    while (cur != NULL) {
+        cur ++;
+        const char * next = strchr(cur, ';');
+        size_t length = next != NULL ? (size_t)(next - cur) : strlen(cur);
+        const char * equals = (const char *) memchr(cur, '=', length);
+        if (equals != NULL) {
+            char * name = copyTrimmedCString(cur, (size_t)(equals - cur));
+            char * paramValue = copyTrimmedCString(equals + 1, length - (size_t)(equals - cur) - 1);
+            if ((name != NULL) && (paramValue != NULL) && (strcasecmp(name, "filename") == 0)) {
+                part->setFilename(String::stringByDecodingMIMEHeaderValue(paramValue));
+            }
+            if (name != NULL)
+                free(name);
+            if (paramValue != NULL)
+                free(paramValue);
+        }
+        cur = next;
+    }
+}
+
+static void importGmailMIMEHeaders(AbstractPart * part, clist * headers)
+{
+    if ((part == NULL) || (headers == NULL))
+        return;
+
+    for (clistiter * cur = clist_begin(headers); cur != NULL; cur = clist_next(cur)) {
+        struct mailgmail_message_header * header =
+            (struct mailgmail_message_header *) clist_content(cur);
+        if ((header->name == NULL) || (header->value == NULL))
+            continue;
+
+        if (strcasecmp(header->name, "Content-Type") == 0) {
+            importGmailContentTypeHeader(part, header->value);
+        }
+        else if (strcasecmp(header->name, "Content-Disposition") == 0) {
+            importGmailContentDispositionHeader(part, header->value);
+        }
+        else if (strcasecmp(header->name, "Content-ID") == 0) {
+            part->setContentID(String::stringWithUTF8Characters(header->value));
+        }
+        else if (strcasecmp(header->name, "Content-Description") == 0) {
+            part->setContentDescription(String::stringWithUTF8Characters(header->value));
+        }
+        else if (strcasecmp(header->name, "Content-Location") == 0) {
+            part->setContentLocation(String::stringWithUTF8Characters(header->value));
+        }
+    }
+}
+
+static bool cStringHasPrefixCaseInsensitive(const char * value, const char * prefix)
+{
+    return strncasecmp(value, prefix, strlen(prefix)) == 0;
+}
+
+static PartType partTypeForGmailMultipart(const char * mimeType)
+{
+    if (strcasecmp(mimeType, "multipart/alternative") == 0)
+        return PartTypeMultipartAlternative;
+    if (strcasecmp(mimeType, "multipart/related") == 0)
+        return PartTypeMultipartRelated;
+    if (strcasecmp(mimeType, "multipart/signed") == 0)
+        return PartTypeMultipartSigned;
+    return PartTypeMultipartMixed;
+}
+
+static AbstractPart * partFromLibetpan(struct mailgmail_message_part * part,
+                                       ErrorCode * pError)
 {
     if (part == NULL)
         return NULL;
 
-    GmailMessagePart * result = new GmailMessagePart();
+    const char * mimeType = part->mime_type != NULL ? part->mime_type : "application/octet-stream";
+    if (cStringHasPrefixCaseInsensitive(mimeType, "multipart/")) {
+        GmailMultipart * result = new GmailMultipart();
+        result->autorelease();
+        result->setPartID(stringFromNullableCString(part->part_id));
+        result->setMimeType(stringFromNullableCString(mimeType));
+        result->setFilename(stringFromNullableCString(part->filename));
+        result->setPartType(partTypeForGmailMultipart(mimeType));
+        importGmailMIMEHeaders(result, part->headers);
+
+        Array * parts = Array::array();
+        if (part->parts != NULL) {
+            for (clistiter * cur = clist_begin(part->parts); cur != NULL; cur = clist_next(cur)) {
+                struct mailgmail_message_part * child =
+                    (struct mailgmail_message_part *) clist_content(cur);
+                AbstractPart * converted = partFromLibetpan(child, pError);
+                if (converted != NULL) {
+                    parts->addObject(converted);
+                }
+            }
+        }
+        result->setParts(parts);
+        return result;
+    }
+
+    if (strcasecmp(mimeType, "message/rfc822") == 0) {
+        GmailMessagePart * result = new GmailMessagePart();
+        result->autorelease();
+        result->setPartID(stringFromNullableCString(part->part_id));
+        result->setMimeType(stringFromNullableCString(mimeType));
+        result->setFilename(stringFromNullableCString(part->filename));
+        result->setPartType(PartTypeMessage);
+        importGmailMessageHeaders(result->header(), part->headers);
+        importGmailMIMEHeaders(result, part->headers);
+
+        if ((part->parts != NULL) && (clist_begin(part->parts) != NULL)) {
+            struct mailgmail_message_part * child =
+                (struct mailgmail_message_part *) clist_content(clist_begin(part->parts));
+            result->setMainPart(partFromLibetpan(child, pError));
+        }
+        return result;
+    }
+
+    GmailPart * result = new GmailPart();
     result->autorelease();
     result->setPartID(stringFromNullableCString(part->part_id));
-    result->setMimeType(stringFromNullableCString(part->mime_type));
+    result->setMimeType(stringFromNullableCString(mimeType));
     result->setFilename(stringFromNullableCString(part->filename));
-
-    Array * headers = Array::array();
-    if (part->headers != NULL) {
-        for (clistiter * cur = clist_begin(part->headers); cur != NULL; cur = clist_next(cur)) {
-            struct mailgmail_message_header * header =
-                (struct mailgmail_message_header *) clist_content(cur);
-            headers->addObject(headerFromLibetpan(header));
-        }
-    }
-    result->setHeaders(headers);
+    result->setPartType(PartTypeSingle);
+    importGmailMIMEHeaders(result, part->headers);
     if (part->body != NULL) {
         result->setAttachmentID(stringFromNullableCString(part->body->attachment_id));
         result->setSize(part->body->size);
         result->setData(decodedBase64URLDataFromNullableCString(part->body->data, pError));
     }
-
-    Array * parts = Array::array();
-    if (part->parts != NULL) {
-        for (clistiter * cur = clist_begin(part->parts); cur != NULL; cur = clist_next(cur)) {
-            struct mailgmail_message_part * child =
-                (struct mailgmail_message_part *) clist_content(cur);
-            GmailMessagePart * converted = partFromLibetpan(child, pError);
-            if (converted != NULL) {
-                parts->addObject(converted);
-            }
-        }
-    }
-    result->setParts(parts);
     return result;
 }
 
@@ -237,6 +419,12 @@ static GmailMessage * messageFromLibetpan(struct mailgmail_message * message,
     result->setSizeEstimate(message->size_estimate);
     result->setRFC822Data(decodedBase64URLDataFromNullableCString(message->raw, pError));
     result->setPayload(partFromLibetpan(message->payload, pError));
+    if (message->payload != NULL) {
+        importGmailMessageHeaders(result->header(), message->payload->headers);
+    }
+    if (result->payload() != NULL) {
+        result->payload()->applyUniquePartID();
+    }
     return result;
 }
 
@@ -693,18 +881,24 @@ Data * GmailSession::attachmentData(String * messageID, String * attachmentID,
     return result;
 }
 
-Data * GmailSession::dataForMessagePart(String * messageID, GmailMessagePart * part,
-                                        ErrorCode * pError)
+Data * GmailSession::dataForPart(String * messageID, AbstractPart * part,
+                                 ErrorCode * pError)
 {
-    if (part->data() != NULL) {
-        Data * result = part->data();
+    GmailPart * gmailPart = dynamic_cast<GmailPart *>(part);
+    if (gmailPart == NULL) {
+        * pError = ErrorFetch;
+        return NULL;
+    }
+
+    if (gmailPart->data() != NULL) {
+        Data * result = gmailPart->data();
         result->retain()->autorelease();
         * pError = ErrorNone;
         return result;
     }
 
-    if (part->attachmentID() != NULL) {
-        return attachmentData(messageID, part->attachmentID(), pError);
+    if (gmailPart->attachmentID() != NULL) {
+        return attachmentData(messageID, gmailPart->attachmentID(), pError);
     }
 
     * pError = ErrorFetch;

@@ -9,6 +9,6 @@
 #include <MailCore/MCGmailMessageOperation.h>
 #include <MailCore/MCGmailMessageDataOperation.h>
 #include <MailCore/MCGmailAttachmentDataOperation.h>
-#include <MailCore/MCGmailMessagePartDataOperation.h>
+#include <MailCore/MCGmailPartDataOperation.h>
 
 #endif

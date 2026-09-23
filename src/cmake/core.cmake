@@ -113,11 +113,12 @@ set(gmail_files
   core/gmail/MCGmailLabel.cpp
   core/gmail/MCGmailMessage.cpp
   core/gmail/MCGmailMessageGetRequestPrivate.cpp
-  core/gmail/MCGmailMessageHeader.cpp
   core/gmail/MCGmailMessageList.cpp
   core/gmail/MCGmailMessageListRequestPrivate.cpp
   core/gmail/MCGmailMessagePart.cpp
   core/gmail/MCGmailMessageSummary.cpp
+  core/gmail/MCGmailMultipart.cpp
+  core/gmail/MCGmailPart.cpp
   core/gmail/MCGmailProfile.cpp
   core/gmail/MCGmailSession.cpp
 )
