@@ -145,6 +145,10 @@ async/nntp/MCNNTPFetchOverviewOperation.h
 async/nntp/MCNNTPFetchServerTimeOperation.h
 async/nntp/MCNNTPPostOperation.h
 async/nntp/MCNNTPOperationCallback.h
+async/activesync/MCAsyncActiveSync.h
+async/activesync/MCActiveSyncAsyncSession.h
+async/activesync/MCActiveSyncOperation.h
+async/activesync/MCActiveSyncOperations.h
 objc/MCObjC.h
 objc/utils/MCOUtils.h
 objc/utils/MCOObjectWrapper.h

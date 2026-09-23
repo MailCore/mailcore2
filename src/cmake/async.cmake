@@ -72,11 +72,18 @@ set(async_nntp_files
   async/nntp/MCNNTPOperation.cpp
 )
 
+set(async_activesync_files
+  async/activesync/MCActiveSyncAsyncSession.cpp
+  async/activesync/MCActiveSyncOperation.cpp
+  async/activesync/MCActiveSyncOperations.cpp
+)
+
 set(async_files
   ${async_imap_files}
   ${async_pop_files}
   ${async_smtp_files}
   ${async_nntp_files}
+  ${async_activesync_files}
 )
 
 # Includes for build
@@ -87,4 +94,5 @@ set(async_includes
   "${CMAKE_CURRENT_SOURCE_DIR}/async/pop"
   "${CMAKE_CURRENT_SOURCE_DIR}/async/smtp"
   "${CMAKE_CURRENT_SOURCE_DIR}/async/nntp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/async/activesync"
 )
