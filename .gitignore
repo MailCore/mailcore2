@@ -20,6 +20,10 @@ profile
 *.moved-aside
 DerivedData
 .idea/
+
+/tests/activesync-ms-oauth.local.json
+/tests/activesync-token.local.json
+/tests/activesync-state.local.txt
 *.hmap
 *.xcuserstate
 *.xccheckout
