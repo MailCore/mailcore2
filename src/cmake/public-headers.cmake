@@ -203,6 +203,7 @@ objc/activesync/MCOActiveSyncProvisionResult.h
 objc/activesync/MCOActiveSyncSettingsResult.h
 objc/activesync/MCOActiveSyncItemEstimateResult.h
 objc/activesync/MCOActiveSyncPingResult.h
+objc/activesync/MCOActiveSyncOperation.h
 objc/activesync/MCOActiveSyncSession.h
 objc/imap/MCOIMAP.h
 objc/imap/MCOIMAPSession.h

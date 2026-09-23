@@ -3,19 +3,14 @@
 #define MAILCORE_MCOACTIVESYNCSESSION_H
 
 #import <Foundation/Foundation.h>
-#import <MailCore/MCOActiveSyncOptions.h>
-#import <MailCore/MCOActiveSyncFolderSyncResult.h>
-#import <MailCore/MCOActiveSyncFolderMutationResult.h>
-#import <MailCore/MCOActiveSyncSyncRequest.h>
-#import <MailCore/MCOActiveSyncSyncResult.h>
-#import <MailCore/MCOActiveSyncProvisionResult.h>
-#import <MailCore/MCOActiveSyncItemEstimateResult.h>
-#import <MailCore/MCOActiveSyncMessage.h>
-#import <MailCore/MCOActiveSyncMoveResult.h>
-#import <MailCore/MCOActiveSyncAttachmentData.h>
-#import <MailCore/MCOActiveSyncPingResult.h>
+#import <MailCore/MCOConstants.h>
+#import <MailCore/MCOActiveSyncTypes.h>
+#import <MailCore/MCOActiveSyncOperation.h>
+
+@class MCOActiveSyncSyncRequest;
 
 @interface MCOActiveSyncSession : NSObject
+
 @property (nonatomic, copy) NSString * serverURL;
 @property (nonatomic, copy) NSString * username;
 @property (nonatomic, copy) NSString * password;
@@ -24,34 +19,46 @@
 @property (nonatomic, readonly) NSString * lastRedirectURL;
 @property (nonatomic, readonly) NSString * lastAuthenticateHeader;
 
-- (BOOL) connectWithError:(NSError **)error;
-- (BOOL) loginWithError:(NSError **)error;
-- (BOOL) loginOAuth2WithError:(NSError **)error;
-- (BOOL) setOAuth2TokenOnConnectionWithError:(NSError **)error;
-- (MCOActiveSyncOptions *) optionsWithError:(NSError **)error;
-- (MCOActiveSyncFolderSyncResult *) folderSyncWithSyncKey:(NSString *)syncKey error:(NSError **)error;
-- (MCOActiveSyncFolderSyncResult *) folderResyncWithError:(NSError **)error;
-- (MCOActiveSyncFolderMutationResult *) folderCreateWithSyncKey:(NSString *)syncKey parentID:(NSString *)parentID displayName:(NSString *)displayName error:(NSError **)error;
-- (MCOActiveSyncFolderMutationResult *) folderUpdateWithSyncKey:(NSString *)syncKey folderID:(NSString *)folderID parentID:(NSString *)parentID displayName:(NSString *)displayName error:(NSError **)error;
-- (MCOActiveSyncFolderMutationResult *) folderDeleteWithSyncKey:(NSString *)syncKey folderID:(NSString *)folderID error:(NSError **)error;
-- (MCOActiveSyncSyncResult *) syncWithRequest:(MCOActiveSyncSyncRequest *)request error:(NSError **)error;
-- (MCOActiveSyncSyncResult *) syncMessagesInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey error:(NSError **)error;
-- (MCOActiveSyncSyncResult *) markMessagesReadInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageIDs:(NSArray *)messageIDs read:(BOOL)read error:(NSError **)error;
-- (MCOActiveSyncSyncResult *) setMessagesFlaggedInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageIDs:(NSArray *)messageIDs flagged:(BOOL)flagged error:(NSError **)error;
-- (MCOActiveSyncSyncResult *) deleteMessagesInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageIDs:(NSArray *)messageIDs deletesAsMoves:(BOOL)deletesAsMoves error:(NSError **)error;
-- (MCOActiveSyncSyncResult *) markMessageReadInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageID:(NSString *)messageID read:(BOOL)read error:(NSError **)error;
-- (MCOActiveSyncSyncResult *) setMessageFlaggedInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageID:(NSString *)messageID flagged:(BOOL)flagged error:(NSError **)error;
-- (MCOActiveSyncSyncResult *) deleteMessageInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageID:(NSString *)messageID deletesAsMoves:(BOOL)deletesAsMoves error:(NSError **)error;
-- (MCOActiveSyncMoveResult *) moveMessages:(NSArray *)moves error:(NSError **)error;
-- (MCOActiveSyncProvisionResult *) provisionWithError:(NSError **)error;
-- (MCOActiveSyncItemEstimateResult *) itemEstimateForCollectionID:(NSString *)collectionID syncKey:(NSString *)syncKey error:(NSError **)error;
-- (MCOActiveSyncMessage *) fetchMessageInFolderID:(NSString *)folderID messageID:(NSString *)messageID error:(NSError **)error;
-- (MCOActiveSyncMessage *) fetchMessageBodyPartInFolderID:(NSString *)folderID messageID:(NSString *)messageID bodyType:(MCOActiveSyncBodyType)bodyType truncationSize:(uint32_t)truncationSize error:(NSError **)error;
-- (MCOActiveSyncAttachmentData *) fetchAttachmentWithFileReference:(NSString *)fileReference range:(NSString *)range error:(NSError **)error;
-- (BOOL) sendMessageWithData:(NSData *)messageData saveInSent:(BOOL)saveInSent error:(NSError **)error;
-- (BOOL) smartReplyInFolderID:(NSString *)folderID messageID:(NSString *)messageID messageData:(NSData *)messageData saveInSent:(BOOL)saveInSent error:(NSError **)error;
-- (BOOL) smartForwardInFolderID:(NSString *)folderID messageID:(NSString *)messageID messageData:(NSData *)messageData saveInSent:(BOOL)saveInSent error:(NSError **)error;
-- (MCOActiveSyncPingResult *) pingCollectionIDs:(NSArray *)collectionIDs heartbeatInterval:(uint32_t)heartbeatInterval error:(NSError **)error;
+#if OS_OBJECT_USE_OBJC
+@property (nonatomic, retain) dispatch_queue_t dispatchQueue;
+#else
+@property (nonatomic, assign) dispatch_queue_t dispatchQueue;
+#endif
+
+@property (nonatomic, assign, readonly, getter=isOperationQueueRunning) BOOL operationQueueRunning;
+@property (nonatomic, copy) MCOOperationQueueRunningChangeBlock operationQueueRunningChangeBlock;
+
+- (void) cancelAllOperations;
+
+- (MCOActiveSyncOperation *) connectOperation;
+- (MCOActiveSyncOperation *) loginOperation;
+- (MCOActiveSyncOperation *) loginOAuth2Operation;
+- (MCOActiveSyncOperation *) setOAuth2TokenOnConnectionOperation;
+- (MCOActiveSyncOptionsOperation *) optionsOperation;
+- (MCOActiveSyncFolderSyncOperation *) folderSyncOperationWithSyncKey:(NSString *)syncKey;
+- (MCOActiveSyncFolderSyncOperation *) folderResyncOperation;
+- (MCOActiveSyncProvisionOperation *) provisionOperation;
+- (MCOActiveSyncItemEstimateOperation *) itemEstimateOperationForCollectionID:(NSString *)collectionID syncKey:(NSString *)syncKey;
+- (MCOActiveSyncFolderMutationOperation *) folderCreateOperationWithSyncKey:(NSString *)syncKey parentID:(NSString *)parentID displayName:(NSString *)displayName;
+- (MCOActiveSyncFolderMutationOperation *) folderUpdateOperationWithSyncKey:(NSString *)syncKey folderID:(NSString *)folderID parentID:(NSString *)parentID displayName:(NSString *)displayName;
+- (MCOActiveSyncFolderMutationOperation *) folderDeleteOperationWithSyncKey:(NSString *)syncKey folderID:(NSString *)folderID;
+- (MCOActiveSyncSyncOperation *) syncOperationWithRequest:(MCOActiveSyncSyncRequest *)request;
+- (MCOActiveSyncSyncOperation *) syncMessagesOperationInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey;
+- (MCOActiveSyncSyncOperation *) markMessagesReadOperationInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageIDs:(NSArray *)messageIDs read:(BOOL)read;
+- (MCOActiveSyncSyncOperation *) setMessagesFlaggedOperationInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageIDs:(NSArray *)messageIDs flagged:(BOOL)flagged;
+- (MCOActiveSyncSyncOperation *) deleteMessagesOperationInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageIDs:(NSArray *)messageIDs deletesAsMoves:(BOOL)deletesAsMoves;
+- (MCOActiveSyncSyncOperation *) markMessageReadOperationInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageID:(NSString *)messageID read:(BOOL)read;
+- (MCOActiveSyncSyncOperation *) setMessageFlaggedOperationInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageID:(NSString *)messageID flagged:(BOOL)flagged;
+- (MCOActiveSyncSyncOperation *) deleteMessageOperationInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageID:(NSString *)messageID deletesAsMoves:(BOOL)deletesAsMoves;
+- (MCOActiveSyncMoveOperation *) moveMessagesOperation:(NSArray *)moves;
+- (MCOActiveSyncFetchMessageOperation *) fetchMessageOperationInFolderID:(NSString *)folderID messageID:(NSString *)messageID;
+- (MCOActiveSyncFetchMessageOperation *) fetchMessageBodyPartOperationInFolderID:(NSString *)folderID messageID:(NSString *)messageID bodyType:(MCOActiveSyncBodyType)bodyType truncationSize:(uint32_t)truncationSize;
+- (MCOActiveSyncFetchAttachmentOperation *) fetchAttachmentOperationWithFileReference:(NSString *)fileReference range:(NSString *)range;
+- (MCOActiveSyncOperation *) sendMessageOperationWithData:(NSData *)messageData saveInSent:(BOOL)saveInSent;
+- (MCOActiveSyncOperation *) smartReplyOperationInFolderID:(NSString *)folderID messageID:(NSString *)messageID messageData:(NSData *)messageData saveInSent:(BOOL)saveInSent;
+- (MCOActiveSyncOperation *) smartForwardOperationInFolderID:(NSString *)folderID messageID:(NSString *)messageID messageData:(NSData *)messageData saveInSent:(BOOL)saveInSent;
+- (MCOActiveSyncPingOperation *) pingOperationWithCollectionIDs:(NSArray *)collectionIDs heartbeatInterval:(uint32_t)heartbeatInterval;
+
 @end
 
 #endif

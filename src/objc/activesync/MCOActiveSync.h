@@ -21,6 +21,7 @@
 #import <MailCore/MCOActiveSyncSettingsResult.h>
 #import <MailCore/MCOActiveSyncItemEstimateResult.h>
 #import <MailCore/MCOActiveSyncPingResult.h>
+#import <MailCore/MCOActiveSyncOperation.h>
 #import <MailCore/MCOActiveSyncSession.h>
 
 #endif

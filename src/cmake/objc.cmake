@@ -61,6 +61,7 @@ set(objc_activesync_files
   objc/activesync/MCOActiveSyncMove.mm
   objc/activesync/MCOActiveSyncMoveResponse.mm
   objc/activesync/MCOActiveSyncMoveResult.mm
+  objc/activesync/MCOActiveSyncOperation.mm
   objc/activesync/MCOActiveSyncOptions.mm
   objc/activesync/MCOActiveSyncPingResult.mm
   objc/activesync/MCOActiveSyncProvisionResult.mm

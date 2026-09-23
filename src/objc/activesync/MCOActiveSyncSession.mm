@@ -1,27 +1,57 @@
 #import "MCOActiveSyncPrivate.h"
+#import "MCOActiveSyncOperation+Private.h"
 
-static BOOL MCOSetError(NSError ** error, mailcore::ErrorCode errorCode)
-{
-    if (error != NULL)
-        * error = [NSError mco_errorWithErrorCode:errorCode];
-    return errorCode == mailcore::ErrorNone;
-}
+#include "MCAsyncActiveSync.h"
+#include "MCOperationQueueCallback.h"
+
+using namespace mailcore;
+
+@interface MCOActiveSyncSession ()
+- (void) _queueRunningChanged;
+@end
+
+class MCOActiveSyncCallbackBridge : public Object, public OperationQueueCallback {
+public:
+    MCOActiveSyncCallbackBridge(MCOActiveSyncSession * session)
+    {
+        mSession = session;
+    }
+
+    virtual void queueStartRunning()
+    {
+        [mSession _queueRunningChanged];
+    }
+
+    virtual void queueStoppedRunning()
+    {
+        [mSession _queueRunningChanged];
+    }
+
+private:
+    MCOActiveSyncSession * mSession;
+};
 
 @implementation MCOActiveSyncSession {
-    mailcore::ActiveSyncSession * _session;
+    mailcore::ActiveSyncAsyncSession * _session;
+    MCOActiveSyncCallbackBridge * _callbackBridge;
+    MCOOperationQueueRunningChangeBlock _operationQueueRunningChangeBlock;
 }
 
-#define nativeType mailcore::ActiveSyncSession
+#define nativeType mailcore::ActiveSyncAsyncSession
 
 - (instancetype) init
 {
     self = [super init];
-    _session = new mailcore::ActiveSyncSession();
+    _session = new mailcore::ActiveSyncAsyncSession();
+    _callbackBridge = new MCOActiveSyncCallbackBridge(self);
     return self;
 }
 
 - (void) dealloc
 {
+    [_operationQueueRunningChangeBlock release];
+    _session->setOperationQueueCallback(NULL);
+    MC_SAFE_RELEASE(_callbackBridge);
     MC_SAFE_RELEASE(_session);
     [super dealloc];
 }
@@ -36,6 +66,7 @@ MCO_OBJC_SYNTHESIZE_STRING(setUsername, username)
 MCO_OBJC_SYNTHESIZE_STRING(setPassword, password)
 MCO_OBJC_SYNTHESIZE_STRING(setOAuth2Token, OAuth2Token)
 MCO_OBJC_SYNTHESIZE_STRING(setDeviceID, deviceID)
+MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue, dispatchQueue)
 
 - (NSString *) lastRedirectURL
 {
@@ -47,221 +78,196 @@ MCO_OBJC_SYNTHESIZE_STRING(setDeviceID, deviceID)
     return MCO_OBJC_BRIDGE_GET(lastAuthenticateHeader);
 }
 
-- (BOOL) connectWithError:(NSError **)error
+- (void) setOperationQueueRunningChangeBlock:(MCOOperationQueueRunningChangeBlock)operationQueueRunningChangeBlock
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    _session->connect(&errorCode);
-    return MCOSetError(error, errorCode);
+    [_operationQueueRunningChangeBlock release];
+    _operationQueueRunningChangeBlock = [operationQueueRunningChangeBlock copy];
+
+    if (_operationQueueRunningChangeBlock != nil) {
+        _session->setOperationQueueCallback(_callbackBridge);
+    }
+    else {
+        _session->setOperationQueueCallback(NULL);
+    }
 }
 
-- (BOOL) loginWithError:(NSError **)error
+- (MCOOperationQueueRunningChangeBlock) operationQueueRunningChangeBlock
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    _session->login(&errorCode);
-    return MCOSetError(error, errorCode);
+    return _operationQueueRunningChangeBlock;
 }
 
-- (BOOL) loginOAuth2WithError:(NSError **)error
+- (BOOL) isOperationQueueRunning
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    _session->loginOAuth2(&errorCode);
-    return MCOSetError(error, errorCode);
+    return _session->isOperationQueueRunning();
 }
 
-- (BOOL) setOAuth2TokenOnConnectionWithError:(NSError **)error
+- (void) cancelAllOperations
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    _session->setOAuth2TokenOnConnection(&errorCode);
-    return MCOSetError(error, errorCode);
+    _session->cancelAllOperations();
 }
 
-- (MCOActiveSyncOptions *) optionsWithError:(NSError **)error
+- (void) _queueRunningChanged
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    mailcore::ActiveSyncOptions * result = _session->options(&errorCode);
-    MCOSetError(error, errorCode);
-    return (MCOActiveSyncOptions *) MCO_TO_OBJC(result);
+    if (_operationQueueRunningChangeBlock == NULL)
+        return;
+
+    _operationQueueRunningChangeBlock();
 }
 
-- (MCOActiveSyncFolderSyncResult *) folderSyncWithSyncKey:(NSString *)syncKey error:(NSError **)error
+#pragma mark - Operations
+
+- (id) _objcOperationFromNativeOp:(mailcore::ActiveSyncOperation *)op
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    mailcore::ActiveSyncFolderSyncResult * result = _session->folderSync([syncKey mco_mcString], &errorCode);
-    MCOSetError(error, errorCode);
-    return (MCOActiveSyncFolderSyncResult *) MCO_TO_OBJC(result);
+    MCOActiveSyncOperation * result = MCO_TO_OBJC(op);
+    [result setSession:self];
+    return result;
 }
 
-- (MCOActiveSyncFolderSyncResult *) folderResyncWithError:(NSError **)error
+- (id) _objcOpaqueOperationFromNativeOp:(mailcore::ActiveSyncOperation *)op
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    mailcore::ActiveSyncFolderSyncResult * result = _session->folderResync(&errorCode);
-    MCOSetError(error, errorCode);
-    return (MCOActiveSyncFolderSyncResult *) MCO_TO_OBJC(result);
+    MCOActiveSyncOperation * result = [[[MCOActiveSyncOperation alloc] initWithMCOperation:op] autorelease];
+    [result setSession:self];
+    return result;
 }
 
-- (MCOActiveSyncFolderMutationResult *) folderCreateWithSyncKey:(NSString *)syncKey parentID:(NSString *)parentID displayName:(NSString *)displayName error:(NSError **)error
+- (MCOActiveSyncOperation *) connectOperation
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    mailcore::ActiveSyncFolderMutationResult * result = _session->folderCreate([syncKey mco_mcString], [parentID mco_mcString], [displayName mco_mcString], &errorCode);
-    MCOSetError(error, errorCode);
-    return (MCOActiveSyncFolderMutationResult *) MCO_TO_OBJC(result);
+    return [self _objcOpaqueOperationFromNativeOp:_session->connectOperation()];
 }
 
-- (MCOActiveSyncFolderMutationResult *) folderUpdateWithSyncKey:(NSString *)syncKey folderID:(NSString *)folderID parentID:(NSString *)parentID displayName:(NSString *)displayName error:(NSError **)error
+- (MCOActiveSyncOperation *) loginOperation
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    mailcore::ActiveSyncFolderMutationResult * result = _session->folderUpdate([syncKey mco_mcString], [folderID mco_mcString], [parentID mco_mcString], [displayName mco_mcString], &errorCode);
-    MCOSetError(error, errorCode);
-    return (MCOActiveSyncFolderMutationResult *) MCO_TO_OBJC(result);
+    return [self _objcOpaqueOperationFromNativeOp:_session->loginOperation()];
 }
 
-- (MCOActiveSyncFolderMutationResult *) folderDeleteWithSyncKey:(NSString *)syncKey folderID:(NSString *)folderID error:(NSError **)error
+- (MCOActiveSyncOperation *) loginOAuth2Operation
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    mailcore::ActiveSyncFolderMutationResult * result = _session->folderDelete([syncKey mco_mcString], [folderID mco_mcString], &errorCode);
-    MCOSetError(error, errorCode);
-    return (MCOActiveSyncFolderMutationResult *) MCO_TO_OBJC(result);
+    return [self _objcOpaqueOperationFromNativeOp:_session->loginOAuth2Operation()];
 }
 
-- (MCOActiveSyncSyncResult *) syncWithRequest:(MCOActiveSyncSyncRequest *)request error:(NSError **)error
+- (MCOActiveSyncOperation *) setOAuth2TokenOnConnectionOperation
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    mailcore::ActiveSyncSyncResult * result = _session->sync((mailcore::ActiveSyncSyncRequest *) [request mco_mcObject], &errorCode);
-    MCOSetError(error, errorCode);
-    return (MCOActiveSyncSyncResult *) MCO_TO_OBJC(result);
+    return [self _objcOpaqueOperationFromNativeOp:_session->setOAuth2TokenOnConnectionOperation()];
 }
 
-- (MCOActiveSyncSyncResult *) syncMessagesInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey error:(NSError **)error
+- (MCOActiveSyncOptionsOperation *) optionsOperation
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    mailcore::ActiveSyncSyncResult * result = _session->syncMessages([folderID mco_mcString], [syncKey mco_mcString], &errorCode);
-    MCOSetError(error, errorCode);
-    return (MCOActiveSyncSyncResult *) MCO_TO_OBJC(result);
+    return [self _objcOperationFromNativeOp:_session->optionsOperation()];
 }
 
-- (MCOActiveSyncSyncResult *) markMessagesReadInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageIDs:(NSArray *)messageIDs read:(BOOL)read error:(NSError **)error
+- (MCOActiveSyncFolderSyncOperation *) folderSyncOperationWithSyncKey:(NSString *)syncKey
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    mailcore::ActiveSyncSyncResult * result = _session->markMessagesRead([folderID mco_mcString], [syncKey mco_mcString], (mailcore::Array *) [messageIDs mco_mcObject], read, &errorCode);
-    MCOSetError(error, errorCode);
-    return (MCOActiveSyncSyncResult *) MCO_TO_OBJC(result);
+    return [self _objcOperationFromNativeOp:_session->folderSyncOperation([syncKey mco_mcString])];
 }
 
-- (MCOActiveSyncSyncResult *) setMessagesFlaggedInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageIDs:(NSArray *)messageIDs flagged:(BOOL)flagged error:(NSError **)error
+- (MCOActiveSyncFolderSyncOperation *) folderResyncOperation
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    mailcore::ActiveSyncSyncResult * result = _session->setMessagesFlagged([folderID mco_mcString], [syncKey mco_mcString], (mailcore::Array *) [messageIDs mco_mcObject], flagged, &errorCode);
-    MCOSetError(error, errorCode);
-    return (MCOActiveSyncSyncResult *) MCO_TO_OBJC(result);
+    return [self _objcOperationFromNativeOp:_session->folderResyncOperation()];
 }
 
-- (MCOActiveSyncSyncResult *) deleteMessagesInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageIDs:(NSArray *)messageIDs deletesAsMoves:(BOOL)deletesAsMoves error:(NSError **)error
+- (MCOActiveSyncProvisionOperation *) provisionOperation
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    mailcore::ActiveSyncSyncResult * result = _session->deleteMessages([folderID mco_mcString], [syncKey mco_mcString], (mailcore::Array *) [messageIDs mco_mcObject], deletesAsMoves, &errorCode);
-    MCOSetError(error, errorCode);
-    return (MCOActiveSyncSyncResult *) MCO_TO_OBJC(result);
+    return [self _objcOperationFromNativeOp:_session->provisionOperation()];
 }
 
-- (MCOActiveSyncSyncResult *) markMessageReadInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageID:(NSString *)messageID read:(BOOL)read error:(NSError **)error
+- (MCOActiveSyncItemEstimateOperation *) itemEstimateOperationForCollectionID:(NSString *)collectionID syncKey:(NSString *)syncKey
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    mailcore::ActiveSyncSyncResult * result = _session->markMessageRead([folderID mco_mcString], [syncKey mco_mcString], [messageID mco_mcString], read, &errorCode);
-    MCOSetError(error, errorCode);
-    return (MCOActiveSyncSyncResult *) MCO_TO_OBJC(result);
+    return [self _objcOperationFromNativeOp:_session->itemEstimateOperation([collectionID mco_mcString], [syncKey mco_mcString])];
 }
 
-- (MCOActiveSyncSyncResult *) setMessageFlaggedInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageID:(NSString *)messageID flagged:(BOOL)flagged error:(NSError **)error
+- (MCOActiveSyncFolderMutationOperation *) folderCreateOperationWithSyncKey:(NSString *)syncKey parentID:(NSString *)parentID displayName:(NSString *)displayName
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    mailcore::ActiveSyncSyncResult * result = _session->setMessageFlagged([folderID mco_mcString], [syncKey mco_mcString], [messageID mco_mcString], flagged, &errorCode);
-    MCOSetError(error, errorCode);
-    return (MCOActiveSyncSyncResult *) MCO_TO_OBJC(result);
+    return [self _objcOperationFromNativeOp:_session->folderCreateOperation([syncKey mco_mcString], [parentID mco_mcString], [displayName mco_mcString])];
 }
 
-- (MCOActiveSyncSyncResult *) deleteMessageInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageID:(NSString *)messageID deletesAsMoves:(BOOL)deletesAsMoves error:(NSError **)error
+- (MCOActiveSyncFolderMutationOperation *) folderUpdateOperationWithSyncKey:(NSString *)syncKey folderID:(NSString *)folderID parentID:(NSString *)parentID displayName:(NSString *)displayName
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    mailcore::ActiveSyncSyncResult * result = _session->deleteMessage([folderID mco_mcString], [syncKey mco_mcString], [messageID mco_mcString], deletesAsMoves, &errorCode);
-    MCOSetError(error, errorCode);
-    return (MCOActiveSyncSyncResult *) MCO_TO_OBJC(result);
+    return [self _objcOperationFromNativeOp:_session->folderUpdateOperation([syncKey mco_mcString], [folderID mco_mcString], [parentID mco_mcString], [displayName mco_mcString])];
 }
 
-- (MCOActiveSyncMoveResult *) moveMessages:(NSArray *)moves error:(NSError **)error
+- (MCOActiveSyncFolderMutationOperation *) folderDeleteOperationWithSyncKey:(NSString *)syncKey folderID:(NSString *)folderID
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    mailcore::ActiveSyncMoveResult * result = _session->moveMessages((mailcore::Array *) [moves mco_mcObject], &errorCode);
-    MCOSetError(error, errorCode);
-    return (MCOActiveSyncMoveResult *) MCO_TO_OBJC(result);
+    return [self _objcOperationFromNativeOp:_session->folderDeleteOperation([syncKey mco_mcString], [folderID mco_mcString])];
 }
 
-- (MCOActiveSyncProvisionResult *) provisionWithError:(NSError **)error
+- (MCOActiveSyncSyncOperation *) syncOperationWithRequest:(MCOActiveSyncSyncRequest *)request
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    mailcore::ActiveSyncProvisionResult * result = _session->provision(&errorCode);
-    MCOSetError(error, errorCode);
-    return (MCOActiveSyncProvisionResult *) MCO_TO_OBJC(result);
+    return [self _objcOperationFromNativeOp:_session->syncOperation((mailcore::ActiveSyncSyncRequest *) [request mco_mcObject])];
 }
 
-- (MCOActiveSyncItemEstimateResult *) itemEstimateForCollectionID:(NSString *)collectionID syncKey:(NSString *)syncKey error:(NSError **)error
+- (MCOActiveSyncSyncOperation *) syncMessagesOperationInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    mailcore::ActiveSyncItemEstimateResult * result = _session->itemEstimate([collectionID mco_mcString], [syncKey mco_mcString], &errorCode);
-    MCOSetError(error, errorCode);
-    return (MCOActiveSyncItemEstimateResult *) MCO_TO_OBJC(result);
+    return [self _objcOperationFromNativeOp:_session->syncMessagesOperation([folderID mco_mcString], [syncKey mco_mcString])];
 }
 
-- (MCOActiveSyncMessage *) fetchMessageInFolderID:(NSString *)folderID messageID:(NSString *)messageID error:(NSError **)error
+- (MCOActiveSyncSyncOperation *) markMessagesReadOperationInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageIDs:(NSArray *)messageIDs read:(BOOL)read
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    mailcore::ActiveSyncMessage * result = _session->fetchMessage([folderID mco_mcString], [messageID mco_mcString], &errorCode);
-    MCOSetError(error, errorCode);
-    return (MCOActiveSyncMessage *) MCO_TO_OBJC(result);
+    return [self _objcOperationFromNativeOp:_session->markMessagesReadOperation([folderID mco_mcString], [syncKey mco_mcString], (mailcore::Array *) [messageIDs mco_mcObject], read)];
 }
 
-- (MCOActiveSyncMessage *) fetchMessageBodyPartInFolderID:(NSString *)folderID messageID:(NSString *)messageID bodyType:(MCOActiveSyncBodyType)bodyType truncationSize:(uint32_t)truncationSize error:(NSError **)error
+- (MCOActiveSyncSyncOperation *) setMessagesFlaggedOperationInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageIDs:(NSArray *)messageIDs flagged:(BOOL)flagged
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    mailcore::ActiveSyncMessage * result = _session->fetchMessageBodyPart([folderID mco_mcString], [messageID mco_mcString], (mailcore::ActiveSyncBodyType) bodyType, truncationSize, &errorCode);
-    MCOSetError(error, errorCode);
-    return (MCOActiveSyncMessage *) MCO_TO_OBJC(result);
+    return [self _objcOperationFromNativeOp:_session->setMessagesFlaggedOperation([folderID mco_mcString], [syncKey mco_mcString], (mailcore::Array *) [messageIDs mco_mcObject], flagged)];
 }
 
-- (MCOActiveSyncAttachmentData *) fetchAttachmentWithFileReference:(NSString *)fileReference range:(NSString *)range error:(NSError **)error
+- (MCOActiveSyncSyncOperation *) deleteMessagesOperationInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageIDs:(NSArray *)messageIDs deletesAsMoves:(BOOL)deletesAsMoves
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    mailcore::ActiveSyncAttachmentData * result = _session->fetchAttachment([fileReference mco_mcString], [range mco_mcString], &errorCode);
-    MCOSetError(error, errorCode);
-    return (MCOActiveSyncAttachmentData *) MCO_TO_OBJC(result);
+    return [self _objcOperationFromNativeOp:_session->deleteMessagesOperation([folderID mco_mcString], [syncKey mco_mcString], (mailcore::Array *) [messageIDs mco_mcObject], deletesAsMoves)];
 }
 
-- (BOOL) sendMessageWithData:(NSData *)messageData saveInSent:(BOOL)saveInSent error:(NSError **)error
+- (MCOActiveSyncSyncOperation *) markMessageReadOperationInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageID:(NSString *)messageID read:(BOOL)read
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    _session->sendMessage([messageData mco_mcData], saveInSent, &errorCode);
-    return MCOSetError(error, errorCode);
+    return [self _objcOperationFromNativeOp:_session->markMessageReadOperation([folderID mco_mcString], [syncKey mco_mcString], [messageID mco_mcString], read)];
 }
 
-- (BOOL) smartReplyInFolderID:(NSString *)folderID messageID:(NSString *)messageID messageData:(NSData *)messageData saveInSent:(BOOL)saveInSent error:(NSError **)error
+- (MCOActiveSyncSyncOperation *) setMessageFlaggedOperationInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageID:(NSString *)messageID flagged:(BOOL)flagged
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    _session->smartReply([folderID mco_mcString], [messageID mco_mcString], [messageData mco_mcData], saveInSent, &errorCode);
-    return MCOSetError(error, errorCode);
+    return [self _objcOperationFromNativeOp:_session->setMessageFlaggedOperation([folderID mco_mcString], [syncKey mco_mcString], [messageID mco_mcString], flagged)];
 }
 
-- (BOOL) smartForwardInFolderID:(NSString *)folderID messageID:(NSString *)messageID messageData:(NSData *)messageData saveInSent:(BOOL)saveInSent error:(NSError **)error
+- (MCOActiveSyncSyncOperation *) deleteMessageOperationInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageID:(NSString *)messageID deletesAsMoves:(BOOL)deletesAsMoves
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    _session->smartForward([folderID mco_mcString], [messageID mco_mcString], [messageData mco_mcData], saveInSent, &errorCode);
-    return MCOSetError(error, errorCode);
+    return [self _objcOperationFromNativeOp:_session->deleteMessageOperation([folderID mco_mcString], [syncKey mco_mcString], [messageID mco_mcString], deletesAsMoves)];
 }
 
-- (MCOActiveSyncPingResult *) pingCollectionIDs:(NSArray *)collectionIDs heartbeatInterval:(uint32_t)heartbeatInterval error:(NSError **)error
+- (MCOActiveSyncMoveOperation *) moveMessagesOperation:(NSArray *)moves
 {
-    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
-    mailcore::ActiveSyncPingResult * result = _session->ping((mailcore::Array *) [collectionIDs mco_mcObject], heartbeatInterval, &errorCode);
-    MCOSetError(error, errorCode);
-    return (MCOActiveSyncPingResult *) MCO_TO_OBJC(result);
+    return [self _objcOperationFromNativeOp:_session->moveMessagesOperation((mailcore::Array *) [moves mco_mcObject])];
+}
+
+- (MCOActiveSyncFetchMessageOperation *) fetchMessageOperationInFolderID:(NSString *)folderID messageID:(NSString *)messageID
+{
+    return [self _objcOperationFromNativeOp:_session->fetchMessageOperation([folderID mco_mcString], [messageID mco_mcString])];
+}
+
+- (MCOActiveSyncFetchMessageOperation *) fetchMessageBodyPartOperationInFolderID:(NSString *)folderID messageID:(NSString *)messageID bodyType:(MCOActiveSyncBodyType)bodyType truncationSize:(uint32_t)truncationSize
+{
+    return [self _objcOperationFromNativeOp:_session->fetchMessageBodyPartOperation([folderID mco_mcString], [messageID mco_mcString], (mailcore::ActiveSyncBodyType) bodyType, truncationSize)];
+}
+
+- (MCOActiveSyncFetchAttachmentOperation *) fetchAttachmentOperationWithFileReference:(NSString *)fileReference range:(NSString *)range
+{
+    return [self _objcOperationFromNativeOp:_session->fetchAttachmentOperation([fileReference mco_mcString], [range mco_mcString])];
+}
+
+- (MCOActiveSyncOperation *) sendMessageOperationWithData:(NSData *)messageData saveInSent:(BOOL)saveInSent
+{
+    return [self _objcOpaqueOperationFromNativeOp:_session->sendMessageOperation([messageData mco_mcData], saveInSent)];
+}
+
+- (MCOActiveSyncOperation *) smartReplyOperationInFolderID:(NSString *)folderID messageID:(NSString *)messageID messageData:(NSData *)messageData saveInSent:(BOOL)saveInSent
+{
+    return [self _objcOpaqueOperationFromNativeOp:_session->smartReplyOperation([folderID mco_mcString], [messageID mco_mcString], [messageData mco_mcData], saveInSent)];
+}
+
+- (MCOActiveSyncOperation *) smartForwardOperationInFolderID:(NSString *)folderID messageID:(NSString *)messageID messageData:(NSData *)messageData saveInSent:(BOOL)saveInSent
+{
+    return [self _objcOpaqueOperationFromNativeOp:_session->smartForwardOperation([folderID mco_mcString], [messageID mco_mcString], [messageData mco_mcData], saveInSent)];
+}
+
+- (MCOActiveSyncPingOperation *) pingOperationWithCollectionIDs:(NSArray *)collectionIDs heartbeatInterval:(uint32_t)heartbeatInterval
+{
+    return [self _objcOperationFromNativeOp:_session->pingOperation((mailcore::Array *) [collectionIDs mco_mcObject], heartbeatInterval)];
 }
 
 @end
