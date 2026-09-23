@@ -13,6 +13,7 @@
 #include <MailCore/MCAbstract.h>
 #include <MailCore/MCBaseTypes.h>
 #include <MailCore/MCActiveSync.h>
+#include <MailCore/MCGmail.h>
 #include <MailCore/MCIMAP.h>
 #include <MailCore/MCPOP.h>
 #include <MailCore/MCNNTP.h>

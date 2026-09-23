@@ -109,6 +109,19 @@ set(imap_files
   core/imap/MCIMAPSyncResult.cpp
 )
 
+set(gmail_files
+  core/gmail/MCGmailLabel.cpp
+  core/gmail/MCGmailMessage.cpp
+  core/gmail/MCGmailMessageGetRequestPrivate.cpp
+  core/gmail/MCGmailMessageHeader.cpp
+  core/gmail/MCGmailMessageList.cpp
+  core/gmail/MCGmailMessageListRequestPrivate.cpp
+  core/gmail/MCGmailMessagePart.cpp
+  core/gmail/MCGmailMessageSummary.cpp
+  core/gmail/MCGmailProfile.cpp
+  core/gmail/MCGmailSession.cpp
+)
+
 set(activesync_files
   core/activesync/MCActiveSyncAttachment.cpp
   core/activesync/MCActiveSyncAttachmentData.cpp
@@ -189,6 +202,7 @@ set(core_files
   ${icu_ucsdet_files}
   ${abstract_files}
   ${activesync_files}
+  ${gmail_files}
   ${imap_files}
   ${pop_files}
   ${nntp_files}
@@ -207,6 +221,7 @@ set(core_includes
   "${CMAKE_CURRENT_SOURCE_DIR}/core/basetypes"
   ${core_includes_apple}
   "${CMAKE_CURRENT_SOURCE_DIR}/core/activesync"
+  "${CMAKE_CURRENT_SOURCE_DIR}/core/gmail"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/imap"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/pop"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/nntp"

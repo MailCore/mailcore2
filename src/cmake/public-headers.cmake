@@ -58,6 +58,16 @@ core/activesync/MCActiveSyncSettingsResult.h
 core/activesync/MCActiveSyncItemEstimateResult.h
 core/activesync/MCActiveSyncPingResult.h
 core/activesync/MCActiveSyncSession.h
+core/gmail/MCGmail.h
+core/gmail/MCGmailTypes.h
+core/gmail/MCGmailSession.h
+core/gmail/MCGmailProfile.h
+core/gmail/MCGmailLabel.h
+core/gmail/MCGmailMessageList.h
+core/gmail/MCGmailMessageSummary.h
+core/gmail/MCGmailMessage.h
+core/gmail/MCGmailMessagePart.h
+core/gmail/MCGmailMessageHeader.h
 core/imap/MCIMAP.h
 core/imap/MCIMAPFolder.h
 core/imap/MCIMAPMessage.h
