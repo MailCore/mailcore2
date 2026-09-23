@@ -4,6 +4,7 @@
 
 #import <MailCore/MCOAbstractMessage.h>
 #import <MailCore/MCOActiveSyncBody.h>
+#import <MailCore/MCOActiveSyncBodyPart.h>
 
 @interface MCOActiveSyncMessage : MCOAbstractMessage
 @property (nonatomic, copy) NSString * serverID;
@@ -13,6 +14,7 @@
 @property (nonatomic, assign, getter=isFlagged) BOOL flagged;
 @property (nonatomic, copy) NSData * messageData;
 @property (nonatomic, retain) MCOActiveSyncBody * body;
+@property (nonatomic, copy) NSArray * bodyParts;
 @end
 
 #endif

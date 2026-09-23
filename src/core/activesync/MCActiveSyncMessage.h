@@ -4,6 +4,7 @@
 
 #include <MailCore/MCAbstractMessage.h>
 #include <MailCore/MCActiveSyncBody.h>
+#include <MailCore/MCActiveSyncBodyPart.h>
 
 #ifdef __cplusplus
 
@@ -28,6 +29,8 @@ namespace mailcore {
         virtual Data * messageData();
         virtual void setBody(ActiveSyncBody * body);
         virtual ActiveSyncBody * body();
+        virtual void setBodyParts(Array * /* ActiveSyncBodyPart */ bodyParts);
+        virtual Array * /* ActiveSyncBodyPart */ bodyParts();
         virtual Array * /* AbstractPart */ attachments();
         virtual Array * /* AbstractPart */ htmlInlineAttachments();
         virtual AbstractPart * partForContentID(String * contentID);
@@ -44,6 +47,7 @@ namespace mailcore {
         bool mFlagged;
         Data * mMessageData;
         ActiveSyncBody * mBody;
+        Array * /* ActiveSyncBodyPart */ mBodyParts;
         void init();
     };
 

@@ -1,0 +1,9 @@
+#import "MCOActiveSyncPrivate.h"
+
+#define nativeType mailcore::ActiveSyncFolderMutationResult
+MCO_DEFINE_ACTIVE_SYNC_WRAPPER(MCOActiveSyncFolderMutationResult, mailcore::ActiveSyncFolderMutationResult)
+MCO_OBJC_SYNTHESIZE_STRING(setSyncKey, syncKey)
+MCO_OBJC_SYNTHESIZE_STRING(setServerID, serverID)
+MCO_OBJC_SYNTHESIZE_SCALAR(MCOActiveSyncFolderMutationStatus, mailcore::ActiveSyncFolderMutationStatus, setStatus, status)
+MCO_END_ACTIVE_SYNC_WRAPPER
+#undef nativeType

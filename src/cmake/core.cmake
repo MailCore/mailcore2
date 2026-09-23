@@ -111,12 +111,17 @@ set(imap_files
 
 set(activesync_files
   core/activesync/MCActiveSyncAttachment.cpp
+  core/activesync/MCActiveSyncAttachmentData.cpp
   core/activesync/MCActiveSyncBody.cpp
+  core/activesync/MCActiveSyncBodyPart.cpp
   core/activesync/MCActiveSyncFolder.cpp
+  core/activesync/MCActiveSyncFolderMutationResult.cpp
   core/activesync/MCActiveSyncFolderSyncResult.cpp
   core/activesync/MCActiveSyncItemEstimateResult.cpp
   core/activesync/MCActiveSyncMessage.cpp
   core/activesync/MCActiveSyncMove.cpp
+  core/activesync/MCActiveSyncMoveResponse.cpp
+  core/activesync/MCActiveSyncMoveResult.cpp
   core/activesync/MCActiveSyncOptions.cpp
   core/activesync/MCActiveSyncPingResult.cpp
   core/activesync/MCActiveSyncProvisionResult.cpp

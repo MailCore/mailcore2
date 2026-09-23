@@ -37,6 +37,7 @@ MCO_OBJC_SYNTHESIZE_BOOL(setRead, isRead)
 MCO_OBJC_SYNTHESIZE_BOOL(setFlagged, isFlagged)
 MCO_OBJC_SYNTHESIZE_DATA(setMessageData, messageData)
 MCO_OBJC_SYNTHESIZE(ActiveSyncBody, setBody, body)
+MCO_OBJC_SYNTHESIZE_ARRAY(setBodyParts, bodyParts)
 
 @end
 

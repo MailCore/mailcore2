@@ -43,6 +43,14 @@ namespace mailcore {
         ActiveSyncFolderSyncStatusCodeUnknown = 12,
     };
 
+    enum ActiveSyncFolderMutationStatus {
+        ActiveSyncFolderMutationStatusUnknown = 0,
+        ActiveSyncFolderMutationStatusSuccess = 1,
+        ActiveSyncFolderMutationStatusServerError = 6,
+        ActiveSyncFolderMutationStatusInvalidSyncKey = 9,
+        ActiveSyncFolderMutationStatusMalformedRequest = 10,
+    };
+
     enum ActiveSyncSyncStatus {
         ActiveSyncSyncStatusUnknown = 0,
         ActiveSyncSyncStatusSuccess = 1,
@@ -102,6 +110,12 @@ namespace mailcore {
         ActiveSyncItemEstimateStatusInvalidSyncKey = 4,
     };
 
+    enum ActiveSyncItemOperationsStatus {
+        ActiveSyncItemOperationsStatusUnknown = 0,
+        ActiveSyncItemOperationsStatusSuccess = 1,
+        ActiveSyncItemOperationsStatusPartial = 17,
+    };
+
     enum ActiveSyncPingStatus {
         ActiveSyncPingStatusUnknown = 0,
         ActiveSyncPingStatusExpired = 1,
@@ -112,6 +126,16 @@ namespace mailcore {
         ActiveSyncPingStatusTooManyFolders = 6,
         ActiveSyncPingStatusFolderSyncRequired = 7,
         ActiveSyncPingStatusServerError = 8,
+    };
+
+    enum ActiveSyncMoveStatus {
+        ActiveSyncMoveStatusUnknown = 0,
+        ActiveSyncMoveStatusSourceFolderSyncRequired = 1,
+        ActiveSyncMoveStatusDestinationFolderSyncRequired = 2,
+        ActiveSyncMoveStatusSuccess = 3,
+        ActiveSyncMoveStatusSameSourceAndDestination = 4,
+        ActiveSyncMoveStatusServerError = 5,
+        ActiveSyncMoveStatusLocked = 7,
     };
 
 }

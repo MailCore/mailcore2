@@ -124,6 +124,9 @@ static void setError(ErrorCode * pError, int activeSyncError)
 static Array * /* String */ stringArrayFromClist(clist * list)
 {
     Array * /* String */ result = Array::array();
+    if (list == NULL)
+        return result;
+
     for (clistiter * cur = clist_begin(list); cur != NULL; cur = clist_next(cur)) {
         String * value = stringFromCString((char *) clist_content(cur));
         if (value != NULL)
@@ -165,13 +168,44 @@ static ActiveSyncBody * bodyFromNative(struct mailactivesync_airsyncbase_body * 
     result->setPreview(stringFromCString(native->preview));
 
     Array * /* ActiveSyncAttachment */ attachments = Array::array();
-    for (clistiter * cur = clist_begin(native->attachments); cur != NULL; cur = clist_next(cur)) {
-        ActiveSyncAttachment * attachment = attachmentFromNative((struct mailactivesync_attachment *) clist_content(cur));
-        if (attachment != NULL)
-            attachments->addObject(attachment);
+    if (native->attachments != NULL) {
+        for (clistiter * cur = clist_begin(native->attachments); cur != NULL; cur = clist_next(cur)) {
+            ActiveSyncAttachment * attachment = attachmentFromNative((struct mailactivesync_attachment *) clist_content(cur));
+            if (attachment != NULL)
+                attachments->addObject(attachment);
+        }
     }
     result->setAttachments(attachments);
     return (ActiveSyncBody *) result->autorelease();
+}
+
+static ActiveSyncBodyPart * bodyPartFromNative(struct mailactivesync_body_part * native)
+{
+    if (native == NULL)
+        return NULL;
+
+    ActiveSyncBodyPart * result = new ActiveSyncBodyPart();
+    result->setStatus((ActiveSyncItemOperationsStatus) native->status);
+    result->setType((ActiveSyncBodyType) native->type);
+    result->setData(dataFromBytes(native->data, native->data_len));
+    result->setEstimatedDataSize(native->estimated_data_size);
+    result->setTruncated(native->truncated != 0);
+    result->setPreview(stringFromCString(native->preview));
+    return (ActiveSyncBodyPart *) result->autorelease();
+}
+
+static Array * /* ActiveSyncBodyPart */ bodyPartArrayFromClist(clist * list)
+{
+    Array * /* ActiveSyncBodyPart */ result = Array::array();
+    if (list == NULL)
+        return result;
+
+    for (clistiter * cur = clist_begin(list); cur != NULL; cur = clist_next(cur)) {
+        ActiveSyncBodyPart * bodyPart = bodyPartFromNative((struct mailactivesync_body_part *) clist_content(cur));
+        if (bodyPart != NULL)
+            result->addObject(bodyPart);
+    }
+    return result;
 }
 
 static ActiveSyncMessage * messageFromNative(struct mailactivesync_message * native)
@@ -187,6 +221,7 @@ static ActiveSyncMessage * messageFromNative(struct mailactivesync_message * nat
     result->setFlagged(native->flagged != 0);
     result->setMessageData(dataFromBytes(native->mime, native->mime_len));
     result->setBody(bodyFromNative(native->body));
+    result->setBodyParts(bodyPartArrayFromClist(native->body_parts));
     importActiveSyncMessageHeader(result, native);
     return (ActiveSyncMessage *) result->autorelease();
 }
@@ -200,6 +235,7 @@ static ActiveSyncMessage * messageFromNativeItem(struct mailactivesync_item * na
     result->setServerID(stringFromCString(native->server_id));
     result->setMessageData(dataFromBytes(native->mime, native->mime_len));
     result->setBody(bodyFromNative(native->body));
+    result->setBodyParts(bodyPartArrayFromClist(native->body_parts));
     if (result->messageData() != NULL && result->messageData()->length() > 0)
         result->header()->importHeadersData(result->messageData());
     return (ActiveSyncMessage *) result->autorelease();
@@ -222,6 +258,9 @@ static ActiveSyncFolder * folderFromNative(struct mailactivesync_folder * native
 static Array * /* ActiveSyncFolder */ folderArrayFromClist(clist * list)
 {
     Array * /* ActiveSyncFolder */ result = Array::array();
+    if (list == NULL)
+        return result;
+
     for (clistiter * cur = clist_begin(list); cur != NULL; cur = clist_next(cur)) {
         ActiveSyncFolder * folder = folderFromNative((struct mailactivesync_folder *) clist_content(cur));
         if (folder != NULL)
@@ -233,12 +272,194 @@ static Array * /* ActiveSyncFolder */ folderArrayFromClist(clist * list)
 static Array * /* ActiveSyncMessage */ messageArrayFromClist(clist * list)
 {
     Array * /* ActiveSyncMessage */ result = Array::array();
+    if (list == NULL)
+        return result;
+
     for (clistiter * cur = clist_begin(list); cur != NULL; cur = clist_next(cur)) {
         ActiveSyncMessage * message = messageFromNative((struct mailactivesync_message *) clist_content(cur));
         if (message != NULL)
             result->addObject(message);
     }
     return result;
+}
+
+static ActiveSyncFolderSyncResult * folderSyncResultFromNative(struct mailactivesync_folder_sync_result * native)
+{
+    if (native == NULL)
+        return NULL;
+
+    ActiveSyncFolderSyncResult * result = new ActiveSyncFolderSyncResult();
+    result->setSyncKey(stringFromCString(native->sync_key));
+    result->setStatus((ActiveSyncFolderSyncStatus) native->status);
+    result->setAdded(folderArrayFromClist(native->added));
+    result->setUpdated(folderArrayFromClist(native->updated));
+    result->setDeleted(stringArrayFromClist(native->deleted));
+    return (ActiveSyncFolderSyncResult *) result->autorelease();
+}
+
+static ActiveSyncFolderMutationResult * folderMutationResultFromNative(struct mailactivesync_folder_mutation_result * native)
+{
+    if (native == NULL)
+        return NULL;
+
+    ActiveSyncFolderMutationResult * result = new ActiveSyncFolderMutationResult();
+    result->setSyncKey(stringFromCString(native->sync_key));
+    result->setServerID(stringFromCString(native->server_id));
+    result->setStatus((ActiveSyncFolderMutationStatus) native->status);
+    return (ActiveSyncFolderMutationResult *) result->autorelease();
+}
+
+static ActiveSyncSyncResult * syncResultFromNative(struct mailactivesync_sync_result * native)
+{
+    if (native == NULL)
+        return NULL;
+
+    ActiveSyncSyncResult * result = new ActiveSyncSyncResult();
+    result->setSyncKey(stringFromCString(native->sync_key));
+    result->setStatus((ActiveSyncSyncStatus) native->status);
+    result->setMoreAvailable(native->more_available != 0);
+    result->setEmptyResponse(native->empty_response != 0);
+    result->setSyncKeyFromResponse(native->sync_key_from_response != 0);
+    result->setAdded(messageArrayFromClist(native->added));
+    result->setChanged(messageArrayFromClist(native->changed));
+    result->setDeleted(stringArrayFromClist(native->deleted));
+    return (ActiveSyncSyncResult *) result->autorelease();
+}
+
+static ActiveSyncMoveResponse * moveResponseFromNative(struct mailactivesync_move_response * native)
+{
+    if (native == NULL)
+        return NULL;
+
+    ActiveSyncMoveResponse * result = new ActiveSyncMoveResponse();
+    result->setSourceMessageID(stringFromCString(native->src_msg_id));
+    result->setSourceFolderID(stringFromCString(native->src_folder_id));
+    result->setDestinationFolderID(stringFromCString(native->dst_folder_id));
+    result->setDestinationMessageID(stringFromCString(native->dst_msg_id));
+    result->setStatus((ActiveSyncMoveStatus) native->status);
+    return (ActiveSyncMoveResponse *) result->autorelease();
+}
+
+static Array * /* ActiveSyncMoveResponse */ moveResponseArrayFromClist(clist * list)
+{
+    Array * /* ActiveSyncMoveResponse */ result = Array::array();
+    if (list == NULL)
+        return result;
+
+    for (clistiter * cur = clist_begin(list); cur != NULL; cur = clist_next(cur)) {
+        ActiveSyncMoveResponse * response = moveResponseFromNative((struct mailactivesync_move_response *) clist_content(cur));
+        if (response != NULL)
+            result->addObject(response);
+    }
+    return result;
+}
+
+static ActiveSyncMoveResult * moveResultFromNative(struct mailactivesync_move_items_result * native)
+{
+    if (native == NULL)
+        return NULL;
+
+    ActiveSyncMoveResult * result = new ActiveSyncMoveResult();
+    result->setStatus((ActiveSyncMoveStatus) native->status);
+    result->setResponses(moveResponseArrayFromClist(native->responses));
+    return (ActiveSyncMoveResult *) result->autorelease();
+}
+
+static ActiveSyncAttachmentData * attachmentDataFromNative(struct mailactivesync_attachment_data * native)
+{
+    if (native == NULL)
+        return NULL;
+
+    ActiveSyncAttachmentData * result = new ActiveSyncAttachmentData();
+    result->setStatus((ActiveSyncItemOperationsStatus) native->status);
+    result->setFileReference(stringFromCString(native->file_reference));
+    result->setRange(stringFromCString(native->range));
+    result->setTotal(native->total);
+    result->setData(dataFromBytes(native->data, native->data_len));
+    return (ActiveSyncAttachmentData *) result->autorelease();
+}
+
+static void freeStringListItem(void * value, void * data)
+{
+    (void) data;
+    free(value);
+}
+
+static clist * stringListFromArray(Array * values)
+{
+    if (values == NULL)
+        return NULL;
+
+    clist * result = clist_new();
+    if (result == NULL)
+        return NULL;
+
+    for (unsigned int i = 0; i < values->count(); i++) {
+        String * value = (String *) values->objectAtIndex(i);
+        const char * valueString = cString(value);
+        if (valueString == NULL)
+            goto err;
+
+        char * native = strdup(valueString);
+        if (native == NULL)
+            goto err;
+        if (clist_append(result, native) < 0) {
+            free(native);
+            goto err;
+        }
+    }
+    return result;
+
+err:
+    clist_foreach(result, freeStringListItem, NULL);
+    clist_free(result);
+    return NULL;
+}
+
+static void freeMoveRequest(void * value, void * data)
+{
+    (void) data;
+    struct mailactivesync_move * move = (struct mailactivesync_move *) value;
+    if (move == NULL)
+        return;
+    free(move->src_msg_id);
+    free(move->src_folder_id);
+    free(move->dst_folder_id);
+    free(move);
+}
+
+static clist * moveListFromArray(Array * moves)
+{
+    clist * result = clist_new();
+    if (result == NULL)
+        return NULL;
+
+    for (unsigned int i = 0; i < moves->count(); i++) {
+        ActiveSyncMove * move = (ActiveSyncMove *) moves->objectAtIndex(i);
+        const char * sourceMessageID = cString(move->sourceMessageID());
+        const char * sourceFolderID = cString(move->sourceFolderID());
+        const char * destinationFolderID = cString(move->destinationFolderID());
+        if ((sourceMessageID == NULL) || (sourceFolderID == NULL) || (destinationFolderID == NULL))
+            goto err;
+
+        struct mailactivesync_move * native = (struct mailactivesync_move *) calloc(1, sizeof(struct mailactivesync_move));
+        if (native == NULL)
+            goto err;
+        native->src_msg_id = strdup(sourceMessageID);
+        native->src_folder_id = strdup(sourceFolderID);
+        native->dst_folder_id = strdup(destinationFolderID);
+        if ((native->src_msg_id == NULL) || (native->src_folder_id == NULL) || (native->dst_folder_id == NULL) ||
+            (clist_append(result, native) < 0)) {
+            freeMoveRequest(native, NULL);
+            goto err;
+        }
+    }
+    return result;
+
+err:
+    clist_foreach(result, freeMoveRequest, NULL);
+    clist_free(result);
+    return NULL;
 }
 
 void ActiveSyncSession::init()
@@ -326,11 +547,7 @@ String * ActiveSyncSession::deviceID()
 void ActiveSyncSession::ensureSession()
 {
     if (mSession == NULL) {
-#ifdef MAILCORE_LIBETPAN_ACTIVESYNC_NEW_NO_ARGS
         mSession = mailactivesync_new();
-#else
-        mSession = mailactivesync_new(0, NULL);
-#endif
     }
 }
 
@@ -444,14 +661,89 @@ ActiveSyncFolderSyncResult * ActiveSyncSession::folderSync(String * syncKey, Err
     if (resultCode != MAILACTIVESYNC_NO_ERROR)
         return NULL;
 
-    ActiveSyncFolderSyncResult * result = new ActiveSyncFolderSyncResult();
-    result->setSyncKey(stringFromCString(native->sync_key));
-    result->setStatus((ActiveSyncFolderSyncStatus) native->status);
-    result->setAdded(folderArrayFromClist(native->added));
-    result->setUpdated(folderArrayFromClist(native->updated));
-    result->setDeleted(stringArrayFromClist(native->deleted));
+    ActiveSyncFolderSyncResult * result = folderSyncResultFromNative(native);
     mailactivesync_folder_sync_result_free(native);
-    return (ActiveSyncFolderSyncResult *) result->autorelease();
+    return result;
+}
+
+ActiveSyncFolderSyncResult * ActiveSyncSession::folderResync(ErrorCode * pError)
+{
+    ensureSession();
+    if (mSession == NULL) {
+        if (pError != NULL)
+            * pError = ErrorStorageLimit;
+        return NULL;
+    }
+
+    struct mailactivesync_folder_sync_result * native = NULL;
+    int resultCode = mailactivesync_folder_resync(mSession, &native);
+    setError(pError, resultCode);
+    if (resultCode != MAILACTIVESYNC_NO_ERROR)
+        return NULL;
+
+    ActiveSyncFolderSyncResult * result = folderSyncResultFromNative(native);
+    mailactivesync_folder_sync_result_free(native);
+    return result;
+}
+
+ActiveSyncFolderMutationResult * ActiveSyncSession::folderCreate(String * syncKey, String * parentID, String * displayName, ErrorCode * pError)
+{
+    ensureSession();
+    if (mSession == NULL) {
+        if (pError != NULL)
+            * pError = ErrorStorageLimit;
+        return NULL;
+    }
+
+    struct mailactivesync_folder_mutation_result * native = NULL;
+    int resultCode = mailactivesync_folder_create(mSession, cString(syncKey), cString(parentID), cString(displayName), ActiveSyncFolderTypeUserCreatedMail, &native);
+    setError(pError, resultCode);
+    if (resultCode != MAILACTIVESYNC_NO_ERROR)
+        return NULL;
+
+    ActiveSyncFolderMutationResult * result = folderMutationResultFromNative(native);
+    mailactivesync_folder_mutation_result_free(native);
+    return result;
+}
+
+ActiveSyncFolderMutationResult * ActiveSyncSession::folderUpdate(String * syncKey, String * folderID, String * parentID, String * displayName, ErrorCode * pError)
+{
+    ensureSession();
+    if (mSession == NULL) {
+        if (pError != NULL)
+            * pError = ErrorStorageLimit;
+        return NULL;
+    }
+
+    struct mailactivesync_folder_mutation_result * native = NULL;
+    int resultCode = mailactivesync_folder_update(mSession, cString(syncKey), cString(folderID), cString(parentID), cString(displayName), &native);
+    setError(pError, resultCode);
+    if (resultCode != MAILACTIVESYNC_NO_ERROR)
+        return NULL;
+
+    ActiveSyncFolderMutationResult * result = folderMutationResultFromNative(native);
+    mailactivesync_folder_mutation_result_free(native);
+    return result;
+}
+
+ActiveSyncFolderMutationResult * ActiveSyncSession::folderDelete(String * syncKey, String * folderID, ErrorCode * pError)
+{
+    ensureSession();
+    if (mSession == NULL) {
+        if (pError != NULL)
+            * pError = ErrorStorageLimit;
+        return NULL;
+    }
+
+    struct mailactivesync_folder_mutation_result * native = NULL;
+    int resultCode = mailactivesync_folder_delete(mSession, cString(syncKey), cString(folderID), &native);
+    setError(pError, resultCode);
+    if (resultCode != MAILACTIVESYNC_NO_ERROR)
+        return NULL;
+
+    ActiveSyncFolderMutationResult * result = folderMutationResultFromNative(native);
+    mailactivesync_folder_mutation_result_free(native);
+    return result;
 }
 
 ActiveSyncSyncResult * ActiveSyncSession::sync(ActiveSyncSyncRequest * request, ErrorCode * pError)
@@ -490,17 +782,9 @@ ActiveSyncSyncResult * ActiveSyncSession::sync(ActiveSyncSyncRequest * request, 
     if (resultCode != MAILACTIVESYNC_NO_ERROR)
         return NULL;
 
-    ActiveSyncSyncResult * result = new ActiveSyncSyncResult();
-    result->setSyncKey(stringFromCString(native->sync_key));
-    result->setStatus((ActiveSyncSyncStatus) native->status);
-    result->setMoreAvailable(native->more_available != 0);
-    result->setEmptyResponse(native->empty_response != 0);
-    result->setSyncKeyFromResponse(native->sync_key_from_response != 0);
-    result->setAdded(messageArrayFromClist(native->added));
-    result->setChanged(messageArrayFromClist(native->changed));
-    result->setDeleted(stringArrayFromClist(native->deleted));
+    ActiveSyncSyncResult * result = syncResultFromNative(native);
     mailactivesync_sync_result_free(native);
-    return (ActiveSyncSyncResult *) result->autorelease();
+    return result;
 }
 
 ActiveSyncSyncResult * ActiveSyncSession::syncMessages(String * folderID, String * syncKey, ErrorCode * pError)
@@ -511,6 +795,137 @@ ActiveSyncSyncResult * ActiveSyncSession::syncMessages(String * folderID, String
     request->setCollectionClass(MCSTR("Email"));
     ActiveSyncSyncResult * result = sync(request, pError);
     request->release();
+    return result;
+}
+
+ActiveSyncSyncResult * ActiveSyncSession::markMessagesRead(String * folderID, String * syncKey, Array * /* String */ messageIDs, bool read, ErrorCode * pError)
+{
+    ensureSession();
+    if (mSession == NULL) {
+        if (pError != NULL)
+            * pError = ErrorStorageLimit;
+        return NULL;
+    }
+
+    clist * nativeMessageIDs = stringListFromArray(messageIDs);
+    if (nativeMessageIDs == NULL) {
+        if (pError != NULL)
+            * pError = ErrorStorageLimit;
+        return NULL;
+    }
+
+    struct mailactivesync_sync_result * native = NULL;
+    int resultCode = mailactivesync_mark_messages_read(mSession, cString(folderID), cString(syncKey), nativeMessageIDs, read ? 1 : 0, &native);
+    clist_foreach(nativeMessageIDs, freeStringListItem, NULL);
+    clist_free(nativeMessageIDs);
+    setError(pError, resultCode);
+    if (resultCode != MAILACTIVESYNC_NO_ERROR)
+        return NULL;
+
+    ActiveSyncSyncResult * result = syncResultFromNative(native);
+    mailactivesync_sync_result_free(native);
+    return result;
+}
+
+ActiveSyncSyncResult * ActiveSyncSession::setMessagesFlagged(String * folderID, String * syncKey, Array * /* String */ messageIDs, bool flagged, ErrorCode * pError)
+{
+    ensureSession();
+    if (mSession == NULL) {
+        if (pError != NULL)
+            * pError = ErrorStorageLimit;
+        return NULL;
+    }
+
+    clist * nativeMessageIDs = stringListFromArray(messageIDs);
+    if (nativeMessageIDs == NULL) {
+        if (pError != NULL)
+            * pError = ErrorStorageLimit;
+        return NULL;
+    }
+
+    struct mailactivesync_sync_result * native = NULL;
+    int resultCode = mailactivesync_set_messages_flagged(mSession, cString(folderID), cString(syncKey), nativeMessageIDs, flagged ? 1 : 0, &native);
+    clist_foreach(nativeMessageIDs, freeStringListItem, NULL);
+    clist_free(nativeMessageIDs);
+    setError(pError, resultCode);
+    if (resultCode != MAILACTIVESYNC_NO_ERROR)
+        return NULL;
+
+    ActiveSyncSyncResult * result = syncResultFromNative(native);
+    mailactivesync_sync_result_free(native);
+    return result;
+}
+
+ActiveSyncSyncResult * ActiveSyncSession::deleteMessages(String * folderID, String * syncKey, Array * /* String */ messageIDs, bool deletesAsMoves, ErrorCode * pError)
+{
+    ensureSession();
+    if (mSession == NULL) {
+        if (pError != NULL)
+            * pError = ErrorStorageLimit;
+        return NULL;
+    }
+
+    clist * nativeMessageIDs = stringListFromArray(messageIDs);
+    if (nativeMessageIDs == NULL) {
+        if (pError != NULL)
+            * pError = ErrorStorageLimit;
+        return NULL;
+    }
+
+    struct mailactivesync_sync_result * native = NULL;
+    int resultCode = mailactivesync_delete_messages(mSession, cString(folderID), cString(syncKey), nativeMessageIDs, deletesAsMoves ? 1 : 0, &native);
+    clist_foreach(nativeMessageIDs, freeStringListItem, NULL);
+    clist_free(nativeMessageIDs);
+    setError(pError, resultCode);
+    if (resultCode != MAILACTIVESYNC_NO_ERROR)
+        return NULL;
+
+    ActiveSyncSyncResult * result = syncResultFromNative(native);
+    mailactivesync_sync_result_free(native);
+    return result;
+}
+
+ActiveSyncSyncResult * ActiveSyncSession::markMessageRead(String * folderID, String * syncKey, String * messageID, bool read, ErrorCode * pError)
+{
+    return markMessagesRead(folderID, syncKey, Array::arrayWithObject(messageID), read, pError);
+}
+
+ActiveSyncSyncResult * ActiveSyncSession::setMessageFlagged(String * folderID, String * syncKey, String * messageID, bool flagged, ErrorCode * pError)
+{
+    return setMessagesFlagged(folderID, syncKey, Array::arrayWithObject(messageID), flagged, pError);
+}
+
+ActiveSyncSyncResult * ActiveSyncSession::deleteMessage(String * folderID, String * syncKey, String * messageID, bool deletesAsMoves, ErrorCode * pError)
+{
+    return deleteMessages(folderID, syncKey, Array::arrayWithObject(messageID), deletesAsMoves, pError);
+}
+
+ActiveSyncMoveResult * ActiveSyncSession::moveMessages(Array * moves, ErrorCode * pError)
+{
+    ensureSession();
+    if (mSession == NULL) {
+        if (pError != NULL)
+            * pError = ErrorStorageLimit;
+        return NULL;
+    }
+
+    clist * nativeMoves = moveListFromArray(moves);
+    if (nativeMoves == NULL) {
+        if (pError != NULL)
+            * pError = ErrorStorageLimit;
+        return NULL;
+    }
+
+    struct mailactivesync_move_items_result * native = NULL;
+    int resultCode = mailactivesync_move_items(mSession, nativeMoves, &native);
+    clist_foreach(nativeMoves, freeMoveRequest, NULL);
+    clist_free(nativeMoves);
+    setError(pError, resultCode);
+    if (resultCode != MAILACTIVESYNC_NO_ERROR)
+        return NULL;
+
+    ActiveSyncMoveResult * result = moveResultFromNative(native);
+    mailactivesync_move_items_result_free(native);
     return result;
 }
 
@@ -578,6 +993,46 @@ ActiveSyncMessage * ActiveSyncSession::fetchMessage(String * folderID, String * 
 
     ActiveSyncMessage * result = messageFromNativeItem(native);
     mailactivesync_item_free(native);
+    return result;
+}
+
+ActiveSyncMessage * ActiveSyncSession::fetchMessageBodyPart(String * folderID, String * messageID, ActiveSyncBodyType bodyType, uint32_t truncationSize, ErrorCode * pError)
+{
+    ensureSession();
+    if (mSession == NULL) {
+        if (pError != NULL)
+            * pError = ErrorStorageLimit;
+        return NULL;
+    }
+
+    struct mailactivesync_item * native = NULL;
+    int resultCode = mailactivesync_item_operations_fetch_body_part(mSession, cString(folderID), cString(messageID), bodyType, truncationSize, &native);
+    setError(pError, resultCode);
+    if (resultCode != MAILACTIVESYNC_NO_ERROR)
+        return NULL;
+
+    ActiveSyncMessage * result = messageFromNativeItem(native);
+    mailactivesync_item_free(native);
+    return result;
+}
+
+ActiveSyncAttachmentData * ActiveSyncSession::fetchAttachment(String * fileReference, String * range, ErrorCode * pError)
+{
+    ensureSession();
+    if (mSession == NULL) {
+        if (pError != NULL)
+            * pError = ErrorStorageLimit;
+        return NULL;
+    }
+
+    struct mailactivesync_attachment_data * native = NULL;
+    int resultCode = mailactivesync_item_operations_fetch_attachment(mSession, cString(fileReference), cString(range), &native);
+    setError(pError, resultCode);
+    if (resultCode != MAILACTIVESYNC_NO_ERROR)
+        return NULL;
+
+    ActiveSyncAttachmentData * result = attachmentDataFromNative(native);
+    mailactivesync_attachment_data_free(native);
     return result;
 }
 

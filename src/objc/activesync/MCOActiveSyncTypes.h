@@ -41,6 +41,14 @@ typedef NS_ENUM(NSInteger, MCOActiveSyncFolderSyncStatus) {
     MCOActiveSyncFolderSyncStatusCodeUnknown = 12,
 };
 
+typedef NS_ENUM(NSInteger, MCOActiveSyncFolderMutationStatus) {
+    MCOActiveSyncFolderMutationStatusUnknown = 0,
+    MCOActiveSyncFolderMutationStatusSuccess = 1,
+    MCOActiveSyncFolderMutationStatusServerError = 6,
+    MCOActiveSyncFolderMutationStatusInvalidSyncKey = 9,
+    MCOActiveSyncFolderMutationStatusMalformedRequest = 10,
+};
+
 typedef NS_ENUM(NSInteger, MCOActiveSyncSyncStatus) {
     MCOActiveSyncSyncStatusUnknown = 0,
     MCOActiveSyncSyncStatusSuccess = 1,
@@ -100,6 +108,12 @@ typedef NS_ENUM(NSInteger, MCOActiveSyncItemEstimateStatus) {
     MCOActiveSyncItemEstimateStatusInvalidSyncKey = 4,
 };
 
+typedef NS_ENUM(NSInteger, MCOActiveSyncItemOperationsStatus) {
+    MCOActiveSyncItemOperationsStatusUnknown = 0,
+    MCOActiveSyncItemOperationsStatusSuccess = 1,
+    MCOActiveSyncItemOperationsStatusPartial = 17,
+};
+
 typedef NS_ENUM(NSInteger, MCOActiveSyncPingStatus) {
     MCOActiveSyncPingStatusUnknown = 0,
     MCOActiveSyncPingStatusExpired = 1,
@@ -110,6 +124,16 @@ typedef NS_ENUM(NSInteger, MCOActiveSyncPingStatus) {
     MCOActiveSyncPingStatusTooManyFolders = 6,
     MCOActiveSyncPingStatusFolderSyncRequired = 7,
     MCOActiveSyncPingStatusServerError = 8,
+};
+
+typedef NS_ENUM(NSInteger, MCOActiveSyncMoveStatus) {
+    MCOActiveSyncMoveStatusUnknown = 0,
+    MCOActiveSyncMoveStatusSourceFolderSyncRequired = 1,
+    MCOActiveSyncMoveStatusDestinationFolderSyncRequired = 2,
+    MCOActiveSyncMoveStatusSuccess = 3,
+    MCOActiveSyncMoveStatusSameSourceAndDestination = 4,
+    MCOActiveSyncMoveStatusServerError = 5,
+    MCOActiveSyncMoveStatusLocked = 7,
 };
 
 #endif

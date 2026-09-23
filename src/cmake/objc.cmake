@@ -50,11 +50,17 @@ set(objc_imap_files
 
 set(objc_activesync_files
   objc/activesync/MCOActiveSyncAttachment.mm
+  objc/activesync/MCOActiveSyncAttachmentData.mm
   objc/activesync/MCOActiveSyncBody.mm
+  objc/activesync/MCOActiveSyncBodyPart.mm
   objc/activesync/MCOActiveSyncFolder.mm
+  objc/activesync/MCOActiveSyncFolderMutationResult.mm
   objc/activesync/MCOActiveSyncFolderSyncResult.mm
   objc/activesync/MCOActiveSyncItemEstimateResult.mm
   objc/activesync/MCOActiveSyncMessage.mm
+  objc/activesync/MCOActiveSyncMove.mm
+  objc/activesync/MCOActiveSyncMoveResponse.mm
+  objc/activesync/MCOActiveSyncMoveResult.mm
   objc/activesync/MCOActiveSyncOptions.mm
   objc/activesync/MCOActiveSyncPingResult.mm
   objc/activesync/MCOActiveSyncProvisionResult.mm

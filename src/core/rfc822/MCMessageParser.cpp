@@ -1,6 +1,7 @@
 #include "MCMessageParser.h"
 
 #include <libetpan/libetpan.h>
+#include <libetpan/data_message_driver.h>
 #if __APPLE__
 #include <CoreFoundation/CoreFoundation.h>
 #endif

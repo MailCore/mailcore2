@@ -108,20 +108,16 @@ else()
   message(STATUS "Found libetpan")
 endif()
 
-include(CheckCXXSourceCompiles)
-set(CMAKE_REQUIRED_INCLUDES ${LIBETPAN_INCLUDE_DIR})
-check_cxx_source_compiles("
-#include <libetpan/mailactivesync.h>
-int main() {
-  (void) sizeof(mailactivesync_new());
-  return 0;
-}
-" MAILCORE_LIBETPAN_ACTIVESYNC_NEW_NO_ARGS)
-unset(CMAKE_REQUIRED_INCLUDES)
-if(MAILCORE_LIBETPAN_ACTIVESYNC_NEW_NO_ARGS)
-  add_definitions(-DMAILCORE_LIBETPAN_ACTIVESYNC_NEW_NO_ARGS)
-endif()
+find_path(LIBETPAN_DATA_MESSAGE_INCLUDE_DIR
+  NAMES libetpan/data_message_driver.h
+  PATHS
+    "${LIBETPAN_INCLUDE_DIR}"
+  NO_DEFAULT_PATH
+)
 
+if(NOT LIBETPAN_DATA_MESSAGE_INCLUDE_DIR)
+  message(FATAL_ERROR "ERROR: Could not find libetpan/data_message_driver.h")
+endif()
 
 # detect tidy
 

@@ -91,6 +91,38 @@ MCO_OBJC_SYNTHESIZE_STRING(setDeviceID, deviceID)
     return (MCOActiveSyncFolderSyncResult *) MCO_TO_OBJC(result);
 }
 
+- (MCOActiveSyncFolderSyncResult *) folderResyncWithError:(NSError **)error
+{
+    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
+    mailcore::ActiveSyncFolderSyncResult * result = _session->folderResync(&errorCode);
+    MCOSetError(error, errorCode);
+    return (MCOActiveSyncFolderSyncResult *) MCO_TO_OBJC(result);
+}
+
+- (MCOActiveSyncFolderMutationResult *) folderCreateWithSyncKey:(NSString *)syncKey parentID:(NSString *)parentID displayName:(NSString *)displayName error:(NSError **)error
+{
+    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
+    mailcore::ActiveSyncFolderMutationResult * result = _session->folderCreate([syncKey mco_mcString], [parentID mco_mcString], [displayName mco_mcString], &errorCode);
+    MCOSetError(error, errorCode);
+    return (MCOActiveSyncFolderMutationResult *) MCO_TO_OBJC(result);
+}
+
+- (MCOActiveSyncFolderMutationResult *) folderUpdateWithSyncKey:(NSString *)syncKey folderID:(NSString *)folderID parentID:(NSString *)parentID displayName:(NSString *)displayName error:(NSError **)error
+{
+    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
+    mailcore::ActiveSyncFolderMutationResult * result = _session->folderUpdate([syncKey mco_mcString], [folderID mco_mcString], [parentID mco_mcString], [displayName mco_mcString], &errorCode);
+    MCOSetError(error, errorCode);
+    return (MCOActiveSyncFolderMutationResult *) MCO_TO_OBJC(result);
+}
+
+- (MCOActiveSyncFolderMutationResult *) folderDeleteWithSyncKey:(NSString *)syncKey folderID:(NSString *)folderID error:(NSError **)error
+{
+    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
+    mailcore::ActiveSyncFolderMutationResult * result = _session->folderDelete([syncKey mco_mcString], [folderID mco_mcString], &errorCode);
+    MCOSetError(error, errorCode);
+    return (MCOActiveSyncFolderMutationResult *) MCO_TO_OBJC(result);
+}
+
 - (MCOActiveSyncSyncResult *) syncWithRequest:(MCOActiveSyncSyncRequest *)request error:(NSError **)error
 {
     mailcore::ErrorCode errorCode = mailcore::ErrorNone;
@@ -105,6 +137,62 @@ MCO_OBJC_SYNTHESIZE_STRING(setDeviceID, deviceID)
     mailcore::ActiveSyncSyncResult * result = _session->syncMessages([folderID mco_mcString], [syncKey mco_mcString], &errorCode);
     MCOSetError(error, errorCode);
     return (MCOActiveSyncSyncResult *) MCO_TO_OBJC(result);
+}
+
+- (MCOActiveSyncSyncResult *) markMessagesReadInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageIDs:(NSArray *)messageIDs read:(BOOL)read error:(NSError **)error
+{
+    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
+    mailcore::ActiveSyncSyncResult * result = _session->markMessagesRead([folderID mco_mcString], [syncKey mco_mcString], (mailcore::Array *) [messageIDs mco_mcObject], read, &errorCode);
+    MCOSetError(error, errorCode);
+    return (MCOActiveSyncSyncResult *) MCO_TO_OBJC(result);
+}
+
+- (MCOActiveSyncSyncResult *) setMessagesFlaggedInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageIDs:(NSArray *)messageIDs flagged:(BOOL)flagged error:(NSError **)error
+{
+    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
+    mailcore::ActiveSyncSyncResult * result = _session->setMessagesFlagged([folderID mco_mcString], [syncKey mco_mcString], (mailcore::Array *) [messageIDs mco_mcObject], flagged, &errorCode);
+    MCOSetError(error, errorCode);
+    return (MCOActiveSyncSyncResult *) MCO_TO_OBJC(result);
+}
+
+- (MCOActiveSyncSyncResult *) deleteMessagesInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageIDs:(NSArray *)messageIDs deletesAsMoves:(BOOL)deletesAsMoves error:(NSError **)error
+{
+    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
+    mailcore::ActiveSyncSyncResult * result = _session->deleteMessages([folderID mco_mcString], [syncKey mco_mcString], (mailcore::Array *) [messageIDs mco_mcObject], deletesAsMoves, &errorCode);
+    MCOSetError(error, errorCode);
+    return (MCOActiveSyncSyncResult *) MCO_TO_OBJC(result);
+}
+
+- (MCOActiveSyncSyncResult *) markMessageReadInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageID:(NSString *)messageID read:(BOOL)read error:(NSError **)error
+{
+    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
+    mailcore::ActiveSyncSyncResult * result = _session->markMessageRead([folderID mco_mcString], [syncKey mco_mcString], [messageID mco_mcString], read, &errorCode);
+    MCOSetError(error, errorCode);
+    return (MCOActiveSyncSyncResult *) MCO_TO_OBJC(result);
+}
+
+- (MCOActiveSyncSyncResult *) setMessageFlaggedInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageID:(NSString *)messageID flagged:(BOOL)flagged error:(NSError **)error
+{
+    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
+    mailcore::ActiveSyncSyncResult * result = _session->setMessageFlagged([folderID mco_mcString], [syncKey mco_mcString], [messageID mco_mcString], flagged, &errorCode);
+    MCOSetError(error, errorCode);
+    return (MCOActiveSyncSyncResult *) MCO_TO_OBJC(result);
+}
+
+- (MCOActiveSyncSyncResult *) deleteMessageInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageID:(NSString *)messageID deletesAsMoves:(BOOL)deletesAsMoves error:(NSError **)error
+{
+    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
+    mailcore::ActiveSyncSyncResult * result = _session->deleteMessage([folderID mco_mcString], [syncKey mco_mcString], [messageID mco_mcString], deletesAsMoves, &errorCode);
+    MCOSetError(error, errorCode);
+    return (MCOActiveSyncSyncResult *) MCO_TO_OBJC(result);
+}
+
+- (MCOActiveSyncMoveResult *) moveMessages:(NSArray *)moves error:(NSError **)error
+{
+    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
+    mailcore::ActiveSyncMoveResult * result = _session->moveMessages((mailcore::Array *) [moves mco_mcObject], &errorCode);
+    MCOSetError(error, errorCode);
+    return (MCOActiveSyncMoveResult *) MCO_TO_OBJC(result);
 }
 
 - (MCOActiveSyncProvisionResult *) provisionWithError:(NSError **)error
@@ -129,6 +217,22 @@ MCO_OBJC_SYNTHESIZE_STRING(setDeviceID, deviceID)
     mailcore::ActiveSyncMessage * result = _session->fetchMessage([folderID mco_mcString], [messageID mco_mcString], &errorCode);
     MCOSetError(error, errorCode);
     return (MCOActiveSyncMessage *) MCO_TO_OBJC(result);
+}
+
+- (MCOActiveSyncMessage *) fetchMessageBodyPartInFolderID:(NSString *)folderID messageID:(NSString *)messageID bodyType:(MCOActiveSyncBodyType)bodyType truncationSize:(uint32_t)truncationSize error:(NSError **)error
+{
+    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
+    mailcore::ActiveSyncMessage * result = _session->fetchMessageBodyPart([folderID mco_mcString], [messageID mco_mcString], (mailcore::ActiveSyncBodyType) bodyType, truncationSize, &errorCode);
+    MCOSetError(error, errorCode);
+    return (MCOActiveSyncMessage *) MCO_TO_OBJC(result);
+}
+
+- (MCOActiveSyncAttachmentData *) fetchAttachmentWithFileReference:(NSString *)fileReference range:(NSString *)range error:(NSError **)error
+{
+    mailcore::ErrorCode errorCode = mailcore::ErrorNone;
+    mailcore::ActiveSyncAttachmentData * result = _session->fetchAttachment([fileReference mco_mcString], [range mco_mcString], &errorCode);
+    MCOSetError(error, errorCode);
+    return (MCOActiveSyncAttachmentData *) MCO_TO_OBJC(result);
 }
 
 - (BOOL) sendMessageWithData:(NSData *)messageData saveInSent:(BOOL)saveInSent error:(NSError **)error

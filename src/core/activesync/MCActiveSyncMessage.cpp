@@ -15,6 +15,7 @@ void ActiveSyncMessage::init()
     mFlagged = false;
     mMessageData = NULL;
     mBody = NULL;
+    mBodyParts = NULL;
 }
 
 ActiveSyncMessage::ActiveSyncMessage()
@@ -28,6 +29,7 @@ ActiveSyncMessage::~ActiveSyncMessage()
     MC_SAFE_RELEASE(mMessageClass);
     MC_SAFE_RELEASE(mMessageData);
     MC_SAFE_RELEASE(mBody);
+    MC_SAFE_RELEASE(mBodyParts);
 }
 
 void ActiveSyncMessage::setServerID(String * value)
@@ -100,6 +102,16 @@ ActiveSyncBody * ActiveSyncMessage::body()
     MC_GET_OBJECT_FIELD(mBody);
 }
 
+void ActiveSyncMessage::setBodyParts(Array * /* ActiveSyncBodyPart */ value)
+{
+    MC_SET_OBJECT_FIELD(Array, mBodyParts, value);
+}
+
+Array * /* ActiveSyncBodyPart */ ActiveSyncMessage::bodyParts()
+{
+    MC_GET_OBJECT_FIELD(mBodyParts);
+}
+
 Array * /* AbstractPart */ ActiveSyncMessage::attachments()
 {
     Array * /* AbstractPart */ result = Array::array();
@@ -169,6 +181,7 @@ Object * ActiveSyncMessage::copy()
     result->setFlagged(isFlagged());
     result->setMessageData(messageData());
     result->setBody(body());
+    result->setBodyParts(bodyParts());
     return result;
 }
 

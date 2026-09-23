@@ -1,0 +1,11 @@
+#import "MCOActiveSyncPrivate.h"
+
+#define nativeType mailcore::ActiveSyncMoveResponse
+MCO_DEFINE_ACTIVE_SYNC_WRAPPER(MCOActiveSyncMoveResponse, mailcore::ActiveSyncMoveResponse)
+MCO_OBJC_SYNTHESIZE_STRING(setSourceMessageID, sourceMessageID)
+MCO_OBJC_SYNTHESIZE_STRING(setSourceFolderID, sourceFolderID)
+MCO_OBJC_SYNTHESIZE_STRING(setDestinationFolderID, destinationFolderID)
+MCO_OBJC_SYNTHESIZE_STRING(setDestinationMessageID, destinationMessageID)
+MCO_OBJC_SYNTHESIZE_SCALAR(MCOActiveSyncMoveStatus, mailcore::ActiveSyncMoveStatus, setStatus, status)
+MCO_END_ACTIVE_SYNC_WRAPPER
+#undef nativeType
