@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string name="app_name">AndroidExample</string>
-    <string name="title_messageview_list">MessagesViews</string>
-    <string name="title_messageview_detail">MessageView Detail</string>
-
-</resources>

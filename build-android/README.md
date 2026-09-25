@@ -1,93 +1,124 @@
-# Binary
+# Building MailCore2 for Android
 
-Download the latest [build for Android](http://d.etpan.org/mailcore2-deps/mailcore2-android/) from 2016. Or build mailcore on Android:
+This builds MailCore2 into `mailcore2-android-4.aar` for **NDK 26 / libc++**
+(the original 2016 gnustl/NDK-17 chain is gone). The result is a single
+self-contained, 16 KB-page-aligned `libMailCore.so` per ABI plus the Java
+`com.libmailcore` API.
 
-# Build for Android
+There is no maintained prebuilt to download — build your own as below.
 
-The below instruction allows to build mailcore with its needed dependencies on macOS (when followed exactly in this order).
+## Prerequisites
 
-## Compile libetpan
-- Download https://github.com/dinhvh/libetpan/releases/tag/1.9.4 in version 1.9.4 (which fixes exception in QUOTA operation): Make sure in this libetpan path are not spaces, this causes random compile errors
-- Download Android NDK 17
-- Download Android SDK 16 and SDK 21
-- Set ENV-vars to your NDK/SDK root folder
-- Set ENV-vars to your NDK/SDK root folder
+- **Android NDK r26.3+** (r23+ is required on Apple-Silicon Mac hosts). Tested
+  with `26.3.11579264`. Set `ANDROID_NDK` to it.
+- **Android SDK** with platform **android-16** (used only by the `javac`
+  classpath step) and build-tools. Set `ANDROID_SDK`.
+- **CMake** (generates the `MailCore/*.h` umbrella headers) and **JDK 17**.
+- For the ctemplate build (step 1b): **Python 3** (with `2to3`) and `curl`.
+
+```sh
+export ANDROID_NDK=$HOME/Library/Android/sdk/ndk/26.3.11579264
+export ANDROID_SDK=$HOME/Library/Android/sdk
 ```
-export ANDROID_NDK=/Users/xxx/Library/Android/sdk/ndk/17.2.4988734
-export ANDROID_SDK=/Users/xxx/Library/Android/sdk
+
+## Step 1 — build the native dependencies
+
+MailCore links eight native libraries. Five must be **rebuilt** so they match
+NDK 26 / libc++ / OpenSSL 1.1.x; three legacy C libraries are still fetched from
+`d.etpan.org` automatically and link fine as-is.
+
+**1a. From the libetpan repo** — `libetpan` plus the deps it links. Build them
+once in the [libetpan `build-android`](https://github.com/dinhvh/libetpan)
+(see its README); reusing libetpan's exact OpenSSL/SASL/iconv keeps the ABI
+consistent:
+
+| Zip | Version | Built by |
+|-----|---------|----------|
+| `libetpan-android-7.zip`     | 1.9.x          | `libetpan/build-android/build.sh` |
+| `openssl-android-3.zip`      | OpenSSL 1.1.1w | ↑ (same run) |
+| `cyrus-sasl-android-4.zip`   | 2.1.28         | ↑ (same run) |
+| `iconv-android-1.zip`        | libiconv 1.15  | ↑ (same run) |
+
+**1b. ctemplate — built here** (it is a MailCore-only dependency; libetpan does
+not use it):
+
+```sh
+export ANDROID_NDK=$HOME/Library/Android/sdk/ndk/26.3.11579264
+cd build-android/dependencies/ctemplate
+./build.sh        # → ctemplate-android-3.zip   (needs Python 3 for the fsm headers)
 ```
 
-1. Compile openssl:
-  - `cd build-android/dependencies/openssl`
-  - build.sh: Change version in line 4 to most recent 1.0.2xxx, see https://ftp.openssl.org/source/old/1.0.2/. e.g. "1.0.2u"
-  - `./build.sh` (Ignore that we get several errors regarding "cryptlib.h:62:21: fatal error: stdlib.h: No such file or directory" / "cp: libcrypto.a: No such file or directory" / "cp: libssl.a: No such file or directory". If the generated openssl-android-3.zip has e.g. 408KB and contains some h-files (but no so files), we are fine.)
+> The `d.etpan.org` copies of `ctemplate`, `openssl`, `cyrus-sasl` and
+> `libetpan` are the **old gnustl / OpenSSL-1.0.2 builds and will not link** — you
+> must supply the rebuilt zips above. `icu4c-android-3`, `libxml2-android-3` and
+> `tidy-html5-android-3` are plain C/C++ libs that still work and are downloaded
+> for you.
 
-2. Compile iconv (probably not needed when removing "-DHAVE_ICONV=1" later)
-  - `cd build-android/dependencies/iconv`
-  - `./build.sh`
+## Step 2 — stage the dependencies
 
-3. Compile cyrus-sasl
-  - cd build-mac/dependencies
-  - prepare-cyrus-sasl.sh: Change version in line 5 to version=2.1.26 (to match version with build-android/dependencies/cyrus-sasl/build.sh)
-  - `./prepare-cyrus-sasl.sh` (can be quitted after "building tools" is printed)
-  - `cd build-android/dependencies/cyrus-sasl`
-  - `./build.sh`
+Put all five rebuilt zips into `build-android/third-party/` and unzip them (so
+the extracted directories exist before the build runs) — the four from libetpan
+plus the `ctemplate-android-3.zip` produced in step 1b:
 
-4. Compile libetpan
-  - `./autogen && make` to generate libetpan-config.h (Ignore that we error at make, we just need the libetpan-config.h file)
-  - `cd build-android`
-  - jni/Android.mk: Remove "-DHAVE_ICONV=1" in LOCAL_CFLAGS (line 131) (don't set it to 0 but remove it altogether) to build without iconv
-  - `./build.sh`
-
-## Compile libmailcore
-- Download https://github.com/MailCore/mailcore2 (commit fad23d736ed5a63cf8321469d3a98a583f55df97 works definitely with this instruction): Make sure in this mailcore2 path are not spaces, this causes random compile errors
-- `cd build-android`
-- build.sh: Change libetpan version to 7
-- build.sh: Change `-source 1.6 -target 1.6` to `-source 1.8 -target 1.8`
-- `mkdir third-party`
-- Copy libetpan-android-7.zip (from step "Compile libetpan") to third-party folder and extract it
-- `./build.sh`
-
-## Shrink mailcore (by removing unnecessary files to reduce 50% of file size)
-- cd to the directory where `mailcore2-android-4.aar` is located
-- Execute
+```sh
+cd build-android
+mkdir -p third-party
+cp dependencies/ctemplate/ctemplate-android-3.zip third-party/
+cp /path/to/libetpan/build-android/{libetpan-android-7,\
+openssl-android-3,cyrus-sasl-android-4}.zip third-party/
+cp /path/to/libetpan/build-android/dependencies/iconv/iconv-android-1.zip third-party/
+cd third-party && for z in *.zip ; do unzip -oq "$z" ; done && cd ..
 ```
-unzip mailcore2-android-4.aar -d mailcore-unzipped
-rm mailcore2-android-4.aar
-cd mailcore-unzipped
-unzip classes.jar -d classes-unzipped
-rm -rf classes-unzipped/jni
-rm classes.jar
-jar cvf classes.jar -C classes-unzipped/ .
-rm -rf classes-unzipped
-cd ..
-jar cvf mailcore2-android-4.aar -C mailcore-unzipped/ .
-rm -rf mailcore-unzipped
+
+`build.sh` skips any dependency whose directory already exists, so it will only
+download the three legacy C libs (`icu4c`, `libxml2`, `tidy`).
+
+## Step 3 — build the AAR
+
+```sh
+cd build-android
+./build.sh
 ```
-- Copy shrinked `mailcore2-android-4.aar` to android project and test it on real devices
 
-## Troubleshooting
-- Openssl can't be downloaded: adapt letter in version based on latest release in https://ftp.openssl.org/source/ or https://ftp.openssl.org/source/old/1.0.2/
-- Compile openssl 1.0.2u with NDK 17 and libsasl 2.1.26
-- Compile openssl 1.1.1k with NDK 20 and libsasl 2.1.27
-- openssl compile error "aarch64-linux-android-gcc: No such file or directory": Make sure to use correct NDK
-- Android Looper/Handler or `android.os` package not found: Make sure to install all needed Android SDK versions in Android Studio
-- "Missing archive cyrus-sasl-2.1.26": Make sure to run `prepare-cyrus-sasl.sh` first
-- Build scripts don't always exit on errors: Manually search for "error:" or other errors
-- Missing gnustl_shared: Install & use Android NDK 17 (version 18 removed some GCC stuff)
-- https://stackoverflow.com/a/31534327/3997741 (but with "include" instead of "includes") (and in build-android in libetpan: `cp `find . -name '*.h'`  ../../mailcore2-master/build-android/include/MailCore`
-- 'libetpan-config.h' file not found: Run `./autogen.sh && make` first
-- sasl/sasl.h not found: `cd build-mac/dependencies && ./prepare-cyrus-sasl.sh`
-- "Configuring OpenSSL version" missing: make sure to use current 1.1.1xxx/1.0.2xxx openssl version
-- "no sysroot" while building openssl: use Android NDK 20 instead of 17
-- error: variable has incomplete type 'HMAC_CTX' (aka 'struct hmac_ctx_st'): use sasl 2.1.27 instead of 2.1.26 in build-mac/dependencies/prepare-cyrus-sasl.sh and build-android/dependencies/cyrus-sasl/build.sh
-- Buildscripts can't run: Call them with `bash build.sh` (even when starting with "#! /bin/sh")
-- iconv stuff not found when linking: you missed the step to remove "-DHAVE_ICONV=1"
+Output: `build-android/mailcore2-android-4.aar`, containing
+`libMailCore.so` for **armeabi-v7a, arm64-v8a, x86**.
 
-### Running example ###
+Key build settings (`jni/Application.mk`):
+- `APP_STL := c++_static` — libc++ is linked into `libMailCore.so`; there is no
+  separate `libc++_shared.so`.
+- `APP_PLATFORM := android-23` — the rebuilt deps reference Bionic's API-23
+  symbols, so **minSdk 23 is the floor**.
+- `-Wl,-z,max-page-size=16384` — 16 KB-page alignment (Pixel 8/9 / Android 15+,
+  and a Google Play requirement from Nov 2025).
 
-Copy the binary result of the build (mailcore2-android-*version*.aar) to `mailcore2/example/android/AndroidExample/app/libs`.
+## Using the AAR
 
-- Open the example in Android Studio
-- Tweaks the login and password in the class `MessagesSyncManager`
-- Then, run it.
+Drop it into an app module and depend on it directly:
+
+```kotlin
+// app/build.gradle.kts
+android { defaultConfig { minSdk = 23 } }   // >= 23
+dependencies { implementation(files("libs/mailcore2-android-4.aar")) }
+```
+
+A complete, runnable Kotlin sample (IMAP connect / login / list folders +
+recent messages) is in [`../example/android/AndroidExample`](../example/android/AndroidExample).
+
+### Optional: shrink the AAR
+
+The `.aar` bundles the JNI `.so` per ABI. To strip the Java-side `jni/` copy and
+keep only what an app needs:
+
+```sh
+unzip mailcore2-android-4.aar -d unzipped && rm mailcore2-android-4.aar
+cd unzipped && unzip classes.jar -d classes && rm -rf classes/jni classes.jar
+jar cf classes.jar -C classes . && rm -rf classes && cd ..
+jar cf mailcore2-android-4.aar -C unzipped . && rm -rf unzipped
+```
+
+## Notes
+
+- **OpenSSL 1.1.1w is end-of-life (since Sept 2023).** Fine for internal use;
+  plan an OpenSSL 3.x dependency rebuild before depending on this long-term.
+- `IMAPSession.setConnectionLogger()` is broken in the Android binding (native
+  reads the `connectionLogger` field as a `long`, but it is an object) — avoid it.

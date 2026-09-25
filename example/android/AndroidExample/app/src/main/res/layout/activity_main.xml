@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/hostField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="IMAP host"
+        android:inputType="textUri"
+        android:text="imap.gmail.com" />
+
+    <EditText
+        android:id="@+id/portField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Port"
+        android:inputType="number"
+        android:text="993" />
+
+    <EditText
+        android:id="@+id/userField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Username"
+        android:inputType="textEmailAddress"
+        android:text="" />
+
+    <EditText
+        android:id="@+id/passField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:text="" />
+
+    <Button
+        android:id="@+id/connectButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Connect &amp; sync" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/outputView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:paddingTop="12dp"
+            android:textIsSelectable="true"
+            android:textSize="13sp" />
+    </ScrollView>
+
+</LinearLayout>
