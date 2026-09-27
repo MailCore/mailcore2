@@ -34,6 +34,7 @@ file(COPY
 include_directories("${CMAKE_CURRENT_BINARY_DIR}/include"
   ${LIBETPAN_INCLUDE_DIR}
   ${LIBETPAN_DATA_MESSAGE_INCLUDE_DIR}
+  ${LIBETPAN_JMAP_INCLUDE_DIR}
   ${async_includes}
   ${core_includes}
   ${objc_includes}

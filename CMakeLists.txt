@@ -1,6 +1,8 @@
 cmake_minimum_required (VERSION 3.10)
 project (mailcore2) 
 
+enable_testing()
+
 IF(APPLE)
   set(CMAKE_CXX__FLAGS "-std=c++11 -stdlib=libc++")
   set(CMAKE_EXE_LINKER_FLAGS "-lc++ -stdlib=libc++")
@@ -26,6 +28,10 @@ IF(APPLE)
   
 ELSEIF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
   set(CMAKE_CXX_FLAGS "-std=gnu++17")
+
+  set(additional_lib_searchpath
+    "${CMAKE_CURRENT_SOURCE_DIR}/../libetpan/src/.libs"
+  )
   
   set(additional_includes
     /usr/include/tidy
@@ -93,14 +99,24 @@ endif()
 
 # detect libetpan
 
+find_library(LIBETPAN_LOCAL_LIBRARY
+  NAMES etpan
+  PATHS ${additional_lib_searchpath}
+  NO_DEFAULT_PATH
+)
+
 find_path(LIBETPAN_INCLUDE_DIR
   NAMES libetpan/libetpan.h
   PATHS ${additional_includes}
 )
-find_library(LIBETPAN_LIBRARY
-  NAMES etpan
-  PATHS ${additional_lib_searchpath}
-)
+if(LIBETPAN_LOCAL_LIBRARY)
+  set(LIBETPAN_LIBRARY "${LIBETPAN_LOCAL_LIBRARY}")
+else()
+  find_library(LIBETPAN_LIBRARY
+    NAMES etpan
+    PATHS ${additional_lib_searchpath}
+  )
+endif()
 
 if(NOT LIBETPAN_INCLUDE_DIR OR NOT LIBETPAN_LIBRARY)
   message(FATAL_ERROR "ERROR: Could not find libetpan")
@@ -117,6 +133,18 @@ find_path(LIBETPAN_DATA_MESSAGE_INCLUDE_DIR
 
 if(NOT LIBETPAN_DATA_MESSAGE_INCLUDE_DIR)
   message(FATAL_ERROR "ERROR: Could not find libetpan/data_message_driver.h")
+endif()
+
+find_path(LIBETPAN_JMAP_INCLUDE_DIR
+  NAMES libetpan/mailjmap.h
+  PATHS
+    "${LIBETPAN_INCLUDE_DIR}"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../libetpan/include"
+  NO_DEFAULT_PATH
+)
+
+if(NOT LIBETPAN_JMAP_INCLUDE_DIR)
+  message(FATAL_ERROR "ERROR: Could not find libetpan/mailjmap.h")
 endif()
 
 # detect tidy

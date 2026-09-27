@@ -27,3 +27,13 @@ target_link_libraries (
     ${TIDY_LIBRARY} ${CTEMPLATE_LIBRARY} ssl crypto ${linux_libraries} ${mac_libraries}
     ${GLIB2_LIBRARIES} ${FOUNDATIONFRAMEWORK} ${SECURITYFRAMEWORK} ${CORESERVICESFRAMEWORK}
 )
+
+add_executable (tests-jmap-link test-jmap-link.cpp)
+target_link_libraries (
+    tests-jmap-link MailCore
+    ${ZLIB_LIBRARY} ${LIBETPAN_LIBRARY} ${LIBXML_LIBRARY} ${UCHARDET_LIBRARY} sasl2
+    ${TIDY_LIBRARY} ${CTEMPLATE_LIBRARY} ssl crypto ${linux_libraries} ${mac_libraries}
+    ${GLIB2_LIBRARIES} ${FOUNDATIONFRAMEWORK} ${SECURITYFRAMEWORK} ${CORESERVICESFRAMEWORK}
+)
+
+add_test(NAME tests-jmap-link COMMAND tests-jmap-link)

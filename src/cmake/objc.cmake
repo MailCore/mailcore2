@@ -48,6 +48,19 @@ set(objc_imap_files
   objc/imap/MCOIMAPSession.mm
 )
 
+set(objc_jmap_files
+  objc/jmap/MCOJMAPBlobUpload.mm
+  objc/jmap/MCOJMAPMailbox.mm
+  objc/jmap/MCOJMAPMessage.mm
+  objc/jmap/MCOJMAPMessagePart.mm
+  objc/jmap/MCOJMAPMultipart.mm
+  objc/jmap/MCOJMAPOperation.mm
+  objc/jmap/MCOJMAPOperations.mm
+  objc/jmap/MCOJMAPPart.mm
+  objc/jmap/MCOJMAPSession.mm
+  objc/jmap/MCOJMAPSubmission.mm
+)
+
 set(objc_activesync_files
   objc/activesync/MCOActiveSyncAttachment.mm
   objc/activesync/MCOActiveSyncAttachmentData.mm
@@ -138,6 +151,7 @@ set(objc_files
   ${objc_abstract_files}
   ${objc_activesync_files}
   ${objc_imap_files}
+  ${objc_jmap_files}
   ${objc_pop_files}
   ${objc_provider_files}
   ${objc_nntp_files}
@@ -154,6 +168,7 @@ set(objc_includes
   "${CMAKE_CURRENT_SOURCE_DIR}/objc/abstract"
   "${CMAKE_CURRENT_SOURCE_DIR}/objc/activesync"
   "${CMAKE_CURRENT_SOURCE_DIR}/objc/imap"
+  "${CMAKE_CURRENT_SOURCE_DIR}/objc/jmap"
   "${CMAKE_CURRENT_SOURCE_DIR}/objc/pop"
   "${CMAKE_CURRENT_SOURCE_DIR}/objc/provider"
   "${CMAKE_CURRENT_SOURCE_DIR}/objc/nntp"

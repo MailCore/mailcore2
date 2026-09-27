@@ -123,6 +123,17 @@ set(gmail_files
   core/gmail/MCGmailSession.cpp
 )
 
+set(jmap_files
+  core/jmap/MCJMAPBlobUpload.cpp
+  core/jmap/MCJMAPMailbox.cpp
+  core/jmap/MCJMAPMessage.cpp
+  core/jmap/MCJMAPMessagePart.cpp
+  core/jmap/MCJMAPMultipart.cpp
+  core/jmap/MCJMAPPart.cpp
+  core/jmap/MCJMAPSession.cpp
+  core/jmap/MCJMAPSubmission.cpp
+)
+
 set(activesync_files
   core/activesync/MCActiveSyncAttachment.cpp
   core/activesync/MCActiveSyncAttachmentData.cpp
@@ -204,6 +215,7 @@ set(core_files
   ${abstract_files}
   ${activesync_files}
   ${gmail_files}
+  ${jmap_files}
   ${imap_files}
   ${pop_files}
   ${nntp_files}
@@ -223,6 +235,7 @@ set(core_includes
   ${core_includes_apple}
   "${CMAKE_CURRENT_SOURCE_DIR}/core/activesync"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/gmail"
+  "${CMAKE_CURRENT_SOURCE_DIR}/core/jmap"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/imap"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/pop"
   "${CMAKE_CURRENT_SOURCE_DIR}/core/nntp"

@@ -976,6 +976,96 @@
 		F38221A81C7B63E500E00721 /* MCONNTPPostOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F38221A11C7AAD8100E00721 /* MCONNTPPostOperation.h */; };
 		F87F190C16BB62B00012652F /* MCOIMAPFetchFoldersOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = F87F190B16BB62B00012652F /* MCOIMAPFetchFoldersOperation.mm */; };
 		F8EA941716BB1C9D0011AC6F /* MCOIMAPSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F8EA941416BAED6E0011AC6F /* MCOIMAPSession.h */; };
+		E5A1E40190C36F18C79CA1F1 /* MCJMAP.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2AE8CF5E3FC2418770DCB153 /* MCJMAP.h */; };
+		68C159F9C5ADB709EE1D2851 /* MCJMAP.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2AE8CF5E3FC2418770DCB153 /* MCJMAP.h */; };
+		53BDAD051C3A935385572B1A /* MCJMAPBlobUpload.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF65D02F1AF291B163361DB4 /* MCJMAPBlobUpload.cpp */; };
+		03DE626BB5802A9C8E1B564C /* MCJMAPBlobUpload.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF65D02F1AF291B163361DB4 /* MCJMAPBlobUpload.cpp */; };
+		AE79F5595D70F0C57F6DB72F /* MCJMAPBlobUpload.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B77F5A5777552428CC27CCFC /* MCJMAPBlobUpload.h */; };
+		16B683590DB99B5884CAD157 /* MCJMAPBlobUpload.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B77F5A5777552428CC27CCFC /* MCJMAPBlobUpload.h */; };
+		E690E07B52E4604F9850ED36 /* MCJMAPMailbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34015ADAFB81E013319C919D /* MCJMAPMailbox.cpp */; };
+		278EF9B9DC59BE2300AEFB7F /* MCJMAPMailbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34015ADAFB81E013319C919D /* MCJMAPMailbox.cpp */; };
+		B8937730A739174A0E7E2F56 /* MCJMAPMailbox.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2A40E9EEFDD39597AD5950F0 /* MCJMAPMailbox.h */; };
+		BE5484EB6952E633C60AD553 /* MCJMAPMailbox.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2A40E9EEFDD39597AD5950F0 /* MCJMAPMailbox.h */; };
+		59B19403A5847119B8928339 /* MCJMAPMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCA3A6A801CFA5AAAF708A95 /* MCJMAPMessage.cpp */; };
+		B0D6E3EDCCE4E03D8312431B /* MCJMAPMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCA3A6A801CFA5AAAF708A95 /* MCJMAPMessage.cpp */; };
+		31985344AC9E8122B44F5778 /* MCJMAPMessage.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA86D4E98ABF7A08BBFC9586 /* MCJMAPMessage.h */; };
+		C7B9B2B1844B41658DB8242E /* MCJMAPMessage.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA86D4E98ABF7A08BBFC9586 /* MCJMAPMessage.h */; };
+		3ED9456671B137B4EEF306A6 /* MCJMAPMessagePart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63EDE0F849D93FD2C6CC99E4 /* MCJMAPMessagePart.cpp */; };
+		FDA2A2EEFC3B188825B5F75C /* MCJMAPMessagePart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63EDE0F849D93FD2C6CC99E4 /* MCJMAPMessagePart.cpp */; };
+		06AC36929F63FD2C2C75CDED /* MCJMAPMessagePart.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B94618B26FE48CF153433D73 /* MCJMAPMessagePart.h */; };
+		18E8618B3A3C92BB9F494BD9 /* MCJMAPMessagePart.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B94618B26FE48CF153433D73 /* MCJMAPMessagePart.h */; };
+		34A3CD8150F95A5CE6BB8524 /* MCJMAPMultipart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 90615943BD8D6831484F642D /* MCJMAPMultipart.cpp */; };
+		7B17724ACB0E5AD1EC52CD75 /* MCJMAPMultipart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 90615943BD8D6831484F642D /* MCJMAPMultipart.cpp */; };
+		1BD495D4A047BB0CF9443F3B /* MCJMAPMultipart.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85EE94D4A5C6EEC81AF0F220 /* MCJMAPMultipart.h */; };
+		BCBCFEE4E6ABA392192088EA /* MCJMAPMultipart.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85EE94D4A5C6EEC81AF0F220 /* MCJMAPMultipart.h */; };
+		A6F62886435131C2802C9874 /* MCJMAPPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27B8747D072BFAE71C2C7D8E /* MCJMAPPart.cpp */; };
+		21E6608E863A73DC50433B88 /* MCJMAPPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27B8747D072BFAE71C2C7D8E /* MCJMAPPart.cpp */; };
+		174478B9E8CD0B4622F65E6F /* MCJMAPPart.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5503DFB68980FF9E6389019A /* MCJMAPPart.h */; };
+		C829308D61D658003C4C997D /* MCJMAPPart.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5503DFB68980FF9E6389019A /* MCJMAPPart.h */; };
+		9DF98BE2032F02F627D3F47A /* MCJMAPSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DA20FDC657D7F636E3E63F6 /* MCJMAPSession.cpp */; };
+		8A9A59821CA174E7C930B905 /* MCJMAPSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DA20FDC657D7F636E3E63F6 /* MCJMAPSession.cpp */; };
+		D50CB58D777837D1E3FE024E /* MCJMAPSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B030A482F585294197FF114B /* MCJMAPSession.h */; };
+		98BF49FB78793A76043D6C01 /* MCJMAPSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B030A482F585294197FF114B /* MCJMAPSession.h */; };
+		B304ACA38DF7C77F77CEEA63 /* MCJMAPSubmission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B314DFFCC7B890605BA3C11 /* MCJMAPSubmission.cpp */; };
+		608A4EE65CB443AEEEDCB389 /* MCJMAPSubmission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B314DFFCC7B890605BA3C11 /* MCJMAPSubmission.cpp */; };
+		71E74BD1B6C74DCD06A9CDC3 /* MCJMAPSubmission.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFC9E0DEE7D2EE80D410EA13 /* MCJMAPSubmission.h */; };
+		C0C6D309C2BB62E1CBA62B55 /* MCJMAPSubmission.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFC9E0DEE7D2EE80D410EA13 /* MCJMAPSubmission.h */; };
+		A5C5A8ED47128311E3CC1DE3 /* MCAsyncJMAP.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9BAA21287206166989928AF2 /* MCAsyncJMAP.h */; };
+		E6A5BF6F93C1581D273719C4 /* MCAsyncJMAP.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9BAA21287206166989928AF2 /* MCAsyncJMAP.h */; };
+		D723A35F3FD4445D6FC4BA36 /* MCJMAPAsyncSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F7E8278D21C0493D66ADCC8B /* MCJMAPAsyncSession.cpp */; };
+		8BE3893B429CFA22DDE1C025 /* MCJMAPAsyncSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F7E8278D21C0493D66ADCC8B /* MCJMAPAsyncSession.cpp */; };
+		79F6587332B02CC48877774B /* MCJMAPAsyncSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B46A01F82D00FA24A1C73428 /* MCJMAPAsyncSession.h */; };
+		ECB3FA156ACEB1C5859506B8 /* MCJMAPAsyncSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B46A01F82D00FA24A1C73428 /* MCJMAPAsyncSession.h */; };
+		B0C5C3250340557BDB919312 /* MCJMAPOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D03EBC8A3BAC4F0240EE1D9 /* MCJMAPOperation.cpp */; };
+		D2C06FB97DB52E1F3104166C /* MCJMAPOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D03EBC8A3BAC4F0240EE1D9 /* MCJMAPOperation.cpp */; };
+		EF8EAEFCE7A8AF7BA6378C09 /* MCJMAPOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 620EA6D61CFDDE07FFC8BEEB /* MCJMAPOperation.h */; };
+		5E5A8EA1A5034295A6330F15 /* MCJMAPOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 620EA6D61CFDDE07FFC8BEEB /* MCJMAPOperation.h */; };
+		ACD1765FC2E89D4A712F013B /* MCJMAPOperations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2DB9F8EB6B08686BCE3AF713 /* MCJMAPOperations.cpp */; };
+		90C58B790B791FE8A53DA0DE /* MCJMAPOperations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2DB9F8EB6B08686BCE3AF713 /* MCJMAPOperations.cpp */; };
+		157FDDA9F040403F61F850DB /* MCJMAPOperations.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D101857BF9C2FE6E9EA6178 /* MCJMAPOperations.h */; };
+		462AF756DF2513156A3A563C /* MCJMAPOperations.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D101857BF9C2FE6E9EA6178 /* MCJMAPOperations.h */; };
+		0A90622ACB6B05C721944E27 /* MCOJMAP.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1D718A2FA2B943B436332D56 /* MCOJMAP.h */; };
+		D2DF59CB7EC525FAB8A8801D /* MCOJMAP.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1D718A2FA2B943B436332D56 /* MCOJMAP.h */; };
+		4CDDBEF90D239522B38649CC /* MCOJMAPBlobUpload.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F8314094E776A9AA752CE0AF /* MCOJMAPBlobUpload.h */; };
+		5FB97419201AF1C1CF210FE1 /* MCOJMAPBlobUpload.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F8314094E776A9AA752CE0AF /* MCOJMAPBlobUpload.h */; };
+		FBEA860B20697E0E23032D20 /* MCOJMAPBlobUpload.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10E6617009DF793B33B3B186 /* MCOJMAPBlobUpload.mm */; };
+		3F9CF17923394440A50974A0 /* MCOJMAPBlobUpload.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10E6617009DF793B33B3B186 /* MCOJMAPBlobUpload.mm */; };
+		CCC45AE25042E163CA8DB7CD /* MCOJMAPMailbox.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4FF10BD3FD9F407B2876D3E7 /* MCOJMAPMailbox.h */; };
+		5A0F354EB849B48E08FBE30F /* MCOJMAPMailbox.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4FF10BD3FD9F407B2876D3E7 /* MCOJMAPMailbox.h */; };
+		04AB1F13C280A339AD54E1A8 /* MCOJMAPMailbox.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F7D8AE5A1E843C25640EAE3 /* MCOJMAPMailbox.mm */; };
+		AC8116CAC0401742AEE78BBD /* MCOJMAPMailbox.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F7D8AE5A1E843C25640EAE3 /* MCOJMAPMailbox.mm */; };
+		E9622925F6F068CD6C5BE332 /* MCOJMAPMessage.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 16AAEED1951BC9DB27A0128D /* MCOJMAPMessage.h */; };
+		88E304ACF1E54AA8CAE206D2 /* MCOJMAPMessage.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 16AAEED1951BC9DB27A0128D /* MCOJMAPMessage.h */; };
+		E1475F447074ACCD04226013 /* MCOJMAPMessage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1D4EAB553C67DE248EBD8EF7 /* MCOJMAPMessage.mm */; };
+		E3AAD006664E10072030707E /* MCOJMAPMessage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1D4EAB553C67DE248EBD8EF7 /* MCOJMAPMessage.mm */; };
+		64186841178792F36DE1A55E /* MCOJMAPMessagePart.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 47F7E8949F09CD4626D844CE /* MCOJMAPMessagePart.h */; };
+		315314BEB39A53ED30A89E81 /* MCOJMAPMessagePart.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 47F7E8949F09CD4626D844CE /* MCOJMAPMessagePart.h */; };
+		12CF273FAA118DF5382488FA /* MCOJMAPMessagePart.mm in Sources */ = {isa = PBXBuildFile; fileRef = AD31AD60D4DB9A2A98B56B06 /* MCOJMAPMessagePart.mm */; };
+		70EF4C815267CFD57852D417 /* MCOJMAPMessagePart.mm in Sources */ = {isa = PBXBuildFile; fileRef = AD31AD60D4DB9A2A98B56B06 /* MCOJMAPMessagePart.mm */; };
+		984C5AE808DCDE09B6FB2DAB /* MCOJMAPMultipart.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C8BF5268C17C2D896FCE58B1 /* MCOJMAPMultipart.h */; };
+		97FCFC84EB3A825273E4756F /* MCOJMAPMultipart.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C8BF5268C17C2D896FCE58B1 /* MCOJMAPMultipart.h */; };
+		F5424E7390AB8A5EDF949A50 /* MCOJMAPMultipart.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6290149268E70B93BBD5DF50 /* MCOJMAPMultipart.mm */; };
+		47F30EE576BCB3321B8AA7BB /* MCOJMAPMultipart.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6290149268E70B93BBD5DF50 /* MCOJMAPMultipart.mm */; };
+		244825A462AC38C6A5004352 /* MCOJMAPOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A4AA7D14A7514FA609A98D18 /* MCOJMAPOperation.h */; };
+		318255E4FBFAA1BB7B86F543 /* MCOJMAPOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A4AA7D14A7514FA609A98D18 /* MCOJMAPOperation.h */; };
+		57F7AB8E6E711D54CCC7D53E /* MCOJMAPOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = BD8067F4B6E40D7B8218F1F7 /* MCOJMAPOperation.mm */; };
+		A9CC39AB0D7580A97F28BA67 /* MCOJMAPOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = BD8067F4B6E40D7B8218F1F7 /* MCOJMAPOperation.mm */; };
+		0FE814D66205A24A15DFF8AE /* MCOJMAPOperations.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6CE5F7A884A95C705AF02C48 /* MCOJMAPOperations.h */; };
+		41AA5628A26C7D819C129B3C /* MCOJMAPOperations.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6CE5F7A884A95C705AF02C48 /* MCOJMAPOperations.h */; };
+		B750A893369BAD799622FB97 /* MCOJMAPOperations.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2503841966379406115C9AF6 /* MCOJMAPOperations.mm */; };
+		565A5047DDD62AD97B68D678 /* MCOJMAPOperations.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2503841966379406115C9AF6 /* MCOJMAPOperations.mm */; };
+		E1D782AE8AC2787CCD3E92E5 /* MCOJMAPPart.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D160F5D628339D0DF89B6F5D /* MCOJMAPPart.h */; };
+		21C9FB8BEDD6FB553CD07C96 /* MCOJMAPPart.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D160F5D628339D0DF89B6F5D /* MCOJMAPPart.h */; };
+		D4AFBE421ECE421F4B8A044E /* MCOJMAPPart.mm in Sources */ = {isa = PBXBuildFile; fileRef = CBB0E551AD50BEBF7918064E /* MCOJMAPPart.mm */; };
+		3CC827B687F0E6B96B7A6AED /* MCOJMAPPart.mm in Sources */ = {isa = PBXBuildFile; fileRef = CBB0E551AD50BEBF7918064E /* MCOJMAPPart.mm */; };
+		ACF6A7A997F7CE6597F56A28 /* MCOJMAPSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1D78A78C0BC71456019680AD /* MCOJMAPSession.h */; };
+		ACDA8CABE127F74C63099966 /* MCOJMAPSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1D78A78C0BC71456019680AD /* MCOJMAPSession.h */; };
+		FD4E730E30CD482BB9A79877 /* MCOJMAPSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4EB749EF41893F55A00354EB /* MCOJMAPSession.mm */; };
+		888796F5005F23E5C92D5204 /* MCOJMAPSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4EB749EF41893F55A00354EB /* MCOJMAPSession.mm */; };
+		B4D471F25D07EBDCF1B0D305 /* MCOJMAPSubmission.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FF81287F8F3AC40B5E355E4B /* MCOJMAPSubmission.h */; };
+		8530F7C507184A5B0CB7235F /* MCOJMAPSubmission.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FF81287F8F3AC40B5E355E4B /* MCOJMAPSubmission.h */; };
+		38C11B83788856EC470589B6 /* MCOJMAPSubmission.mm in Sources */ = {isa = PBXBuildFile; fileRef = AC508DDB27F51C196474EB46 /* MCOJMAPSubmission.mm */; };
+		0E33E82E66797B1525B00831 /* MCOJMAPSubmission.mm in Sources */ = {isa = PBXBuildFile; fileRef = AC508DDB27F51C196474EB46 /* MCOJMAPSubmission.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1039,6 +1129,30 @@
 			dstPath = include/MailCore;
 			dstSubfolderSpec = 16;
 			files = (
+				E5A1E40190C36F18C79CA1F1 /* MCJMAP.h in CopyFiles */,
+				AE79F5595D70F0C57F6DB72F /* MCJMAPBlobUpload.h in CopyFiles */,
+				B8937730A739174A0E7E2F56 /* MCJMAPMailbox.h in CopyFiles */,
+				31985344AC9E8122B44F5778 /* MCJMAPMessage.h in CopyFiles */,
+				06AC36929F63FD2C2C75CDED /* MCJMAPMessagePart.h in CopyFiles */,
+				1BD495D4A047BB0CF9443F3B /* MCJMAPMultipart.h in CopyFiles */,
+				174478B9E8CD0B4622F65E6F /* MCJMAPPart.h in CopyFiles */,
+				D50CB58D777837D1E3FE024E /* MCJMAPSession.h in CopyFiles */,
+				71E74BD1B6C74DCD06A9CDC3 /* MCJMAPSubmission.h in CopyFiles */,
+				A5C5A8ED47128311E3CC1DE3 /* MCAsyncJMAP.h in CopyFiles */,
+				79F6587332B02CC48877774B /* MCJMAPAsyncSession.h in CopyFiles */,
+				EF8EAEFCE7A8AF7BA6378C09 /* MCJMAPOperation.h in CopyFiles */,
+				157FDDA9F040403F61F850DB /* MCJMAPOperations.h in CopyFiles */,
+				0A90622ACB6B05C721944E27 /* MCOJMAP.h in CopyFiles */,
+				4CDDBEF90D239522B38649CC /* MCOJMAPBlobUpload.h in CopyFiles */,
+				CCC45AE25042E163CA8DB7CD /* MCOJMAPMailbox.h in CopyFiles */,
+				E9622925F6F068CD6C5BE332 /* MCOJMAPMessage.h in CopyFiles */,
+				64186841178792F36DE1A55E /* MCOJMAPMessagePart.h in CopyFiles */,
+				984C5AE808DCDE09B6FB2DAB /* MCOJMAPMultipart.h in CopyFiles */,
+				244825A462AC38C6A5004352 /* MCOJMAPOperation.h in CopyFiles */,
+				0FE814D66205A24A15DFF8AE /* MCOJMAPOperations.h in CopyFiles */,
+				E1D782AE8AC2787CCD3E92E5 /* MCOJMAPPart.h in CopyFiles */,
+				ACF6A7A997F7CE6597F56A28 /* MCOJMAPSession.h in CopyFiles */,
+				B4D471F25D07EBDCF1B0D305 /* MCOJMAPSubmission.h in CopyFiles */,
 				F38221A81C7B63E500E00721 /* MCONNTPPostOperation.h in CopyFiles */,
 				F38221A71C7B638200E00721 /* MCNNTPPostOperation.h in CopyFiles */,
 				817FA5291C69037B006146BD /* MCOIMAPFetchContentToFileOperation.h in CopyFiles */,
@@ -1280,6 +1394,30 @@
 			dstPath = include/MailCore;
 			dstSubfolderSpec = 16;
 			files = (
+				68C159F9C5ADB709EE1D2851 /* MCJMAP.h in CopyFiles */,
+				16B683590DB99B5884CAD157 /* MCJMAPBlobUpload.h in CopyFiles */,
+				BE5484EB6952E633C60AD553 /* MCJMAPMailbox.h in CopyFiles */,
+				C7B9B2B1844B41658DB8242E /* MCJMAPMessage.h in CopyFiles */,
+				18E8618B3A3C92BB9F494BD9 /* MCJMAPMessagePart.h in CopyFiles */,
+				BCBCFEE4E6ABA392192088EA /* MCJMAPMultipart.h in CopyFiles */,
+				C829308D61D658003C4C997D /* MCJMAPPart.h in CopyFiles */,
+				98BF49FB78793A76043D6C01 /* MCJMAPSession.h in CopyFiles */,
+				C0C6D309C2BB62E1CBA62B55 /* MCJMAPSubmission.h in CopyFiles */,
+				E6A5BF6F93C1581D273719C4 /* MCAsyncJMAP.h in CopyFiles */,
+				ECB3FA156ACEB1C5859506B8 /* MCJMAPAsyncSession.h in CopyFiles */,
+				5E5A8EA1A5034295A6330F15 /* MCJMAPOperation.h in CopyFiles */,
+				462AF756DF2513156A3A563C /* MCJMAPOperations.h in CopyFiles */,
+				D2DF59CB7EC525FAB8A8801D /* MCOJMAP.h in CopyFiles */,
+				5FB97419201AF1C1CF210FE1 /* MCOJMAPBlobUpload.h in CopyFiles */,
+				5A0F354EB849B48E08FBE30F /* MCOJMAPMailbox.h in CopyFiles */,
+				88E304ACF1E54AA8CAE206D2 /* MCOJMAPMessage.h in CopyFiles */,
+				315314BEB39A53ED30A89E81 /* MCOJMAPMessagePart.h in CopyFiles */,
+				97FCFC84EB3A825273E4756F /* MCOJMAPMultipart.h in CopyFiles */,
+				318255E4FBFAA1BB7B86F543 /* MCOJMAPOperation.h in CopyFiles */,
+				41AA5628A26C7D819C129B3C /* MCOJMAPOperations.h in CopyFiles */,
+				21C9FB8BEDD6FB553CD07C96 /* MCOJMAPPart.h in CopyFiles */,
+				ACDA8CABE127F74C63099966 /* MCOJMAPSession.h in CopyFiles */,
+				8530F7C507184A5B0CB7235F /* MCOJMAPSubmission.h in CopyFiles */,
 				F38221A61C7B62E900E00721 /* MCONNTPPostOperation.h in CopyFiles */,
 				F38221A51C7B629B00E00721 /* MCNNTPPostOperation.h in CopyFiles */,
 				817FA52A1C69038F006146BD /* MCOIMAPFetchContentToFileOperation.h in CopyFiles */,
@@ -2134,6 +2272,51 @@
 		F87F190816BB62690012652F /* MCOIMAPFetchFoldersOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPFetchFoldersOperation.h; sourceTree = "<group>"; };
 		F87F190B16BB62B00012652F /* MCOIMAPFetchFoldersOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCOIMAPFetchFoldersOperation.mm; sourceTree = "<group>"; };
 		F8EA941416BAED6E0011AC6F /* MCOIMAPSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOIMAPSession.h; sourceTree = "<group>"; };
+		2AE8CF5E3FC2418770DCB153 /* MCJMAP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCJMAP.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		EF65D02F1AF291B163361DB4 /* MCJMAPBlobUpload.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = MCJMAPBlobUpload.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		B77F5A5777552428CC27CCFC /* MCJMAPBlobUpload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCJMAPBlobUpload.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		34015ADAFB81E013319C919D /* MCJMAPMailbox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = MCJMAPMailbox.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		2A40E9EEFDD39597AD5950F0 /* MCJMAPMailbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCJMAPMailbox.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		CCA3A6A801CFA5AAAF708A95 /* MCJMAPMessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = MCJMAPMessage.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		FA86D4E98ABF7A08BBFC9586 /* MCJMAPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCJMAPMessage.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63EDE0F849D93FD2C6CC99E4 /* MCJMAPMessagePart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = MCJMAPMessagePart.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		B94618B26FE48CF153433D73 /* MCJMAPMessagePart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCJMAPMessagePart.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		90615943BD8D6831484F642D /* MCJMAPMultipart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = MCJMAPMultipart.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		85EE94D4A5C6EEC81AF0F220 /* MCJMAPMultipart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCJMAPMultipart.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		27B8747D072BFAE71C2C7D8E /* MCJMAPPart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = MCJMAPPart.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		5503DFB68980FF9E6389019A /* MCJMAPPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCJMAPPart.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		9DA20FDC657D7F636E3E63F6 /* MCJMAPSession.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = MCJMAPSession.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		B030A482F585294197FF114B /* MCJMAPSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCJMAPSession.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		2B314DFFCC7B890605BA3C11 /* MCJMAPSubmission.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = MCJMAPSubmission.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		DFC9E0DEE7D2EE80D410EA13 /* MCJMAPSubmission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCJMAPSubmission.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		9BAA21287206166989928AF2 /* MCAsyncJMAP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCAsyncJMAP.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		F7E8278D21C0493D66ADCC8B /* MCJMAPAsyncSession.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = MCJMAPAsyncSession.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		B46A01F82D00FA24A1C73428 /* MCJMAPAsyncSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCJMAPAsyncSession.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		8D03EBC8A3BAC4F0240EE1D9 /* MCJMAPOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = MCJMAPOperation.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		620EA6D61CFDDE07FFC8BEEB /* MCJMAPOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCJMAPOperation.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		2DB9F8EB6B08686BCE3AF713 /* MCJMAPOperations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = MCJMAPOperations.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		9D101857BF9C2FE6E9EA6178 /* MCJMAPOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCJMAPOperations.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		1D718A2FA2B943B436332D56 /* MCOJMAP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCOJMAP.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		F8314094E776A9AA752CE0AF /* MCOJMAPBlobUpload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCOJMAPBlobUpload.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		10E6617009DF793B33B3B186 /* MCOJMAPBlobUpload.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = MCOJMAPBlobUpload.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		4FF10BD3FD9F407B2876D3E7 /* MCOJMAPMailbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCOJMAPMailbox.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		4F7D8AE5A1E843C25640EAE3 /* MCOJMAPMailbox.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = MCOJMAPMailbox.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		16AAEED1951BC9DB27A0128D /* MCOJMAPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCOJMAPMessage.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		1D4EAB553C67DE248EBD8EF7 /* MCOJMAPMessage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = MCOJMAPMessage.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		47F7E8949F09CD4626D844CE /* MCOJMAPMessagePart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCOJMAPMessagePart.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AD31AD60D4DB9A2A98B56B06 /* MCOJMAPMessagePart.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = MCOJMAPMessagePart.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		C8BF5268C17C2D896FCE58B1 /* MCOJMAPMultipart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCOJMAPMultipart.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		6290149268E70B93BBD5DF50 /* MCOJMAPMultipart.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = MCOJMAPMultipart.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		A4AA7D14A7514FA609A98D18 /* MCOJMAPOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCOJMAPOperation.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		BD8067F4B6E40D7B8218F1F7 /* MCOJMAPOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = MCOJMAPOperation.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		6CE5F7A884A95C705AF02C48 /* MCOJMAPOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCOJMAPOperations.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		2503841966379406115C9AF6 /* MCOJMAPOperations.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = MCOJMAPOperations.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		D160F5D628339D0DF89B6F5D /* MCOJMAPPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCOJMAPPart.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		CBB0E551AD50BEBF7918064E /* MCOJMAPPart.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = MCOJMAPPart.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		1D78A78C0BC71456019680AD /* MCOJMAPSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCOJMAPSession.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		4EB749EF41893F55A00354EB /* MCOJMAPSession.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = MCOJMAPSession.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		FF81287F8F3AC40B5E355E4B /* MCOJMAPSubmission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCOJMAPSubmission.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AC508DDB27F51C196474EB46 /* MCOJMAPSubmission.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = MCOJMAPSubmission.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2550,6 +2733,7 @@
 		C64EA68A169E847800778456 /* async */ = {
 			isa = PBXGroup;
 			children = (
+				431200C2B16856707594EA90 /* jmap */,
 				C64EA68B169E847800778456 /* imap */,
 				C64EA68D169E847800778456 /* pop */,
 				84D73728199BF61B005124E5 /* nntp */,
@@ -2687,6 +2871,7 @@
 		C64EA691169E847800778456 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				56C12C83B2129F0E920BEFBB /* jmap */,
 				C6F7B19C17A1C11F00BE78BB /* security */,
 				C6E665A91796500B0063F2CF /* zip */,
 				C64EA692169E847800778456 /* abstract */,
@@ -2970,6 +3155,7 @@
 		C6D42C0016ADF5AF002BB4F9 /* objc */ = {
 			isa = PBXGroup;
 			children = (
+				C1405B9E8EBB9C872F628840 /* jmap */,
 				C6F61F771701420A0073032E /* pop */,
 				C6F61F781701420A0073032E /* smtp */,
 				84D73760199BFF6A005124E5 /* nntp */,
@@ -3172,6 +3358,72 @@
 				C6F49A921C8EA1450087F4B7 /* MCOIMAPCheckAccountOperation.mm */,
 			);
 			path = imap;
+			sourceTree = "<group>";
+		};
+		56C12C83B2129F0E920BEFBB /* jmap */ = {
+			isa = PBXGroup;
+			children = (
+				2AE8CF5E3FC2418770DCB153 /* MCJMAP.h */,
+				EF65D02F1AF291B163361DB4 /* MCJMAPBlobUpload.cpp */,
+				B77F5A5777552428CC27CCFC /* MCJMAPBlobUpload.h */,
+				34015ADAFB81E013319C919D /* MCJMAPMailbox.cpp */,
+				2A40E9EEFDD39597AD5950F0 /* MCJMAPMailbox.h */,
+				CCA3A6A801CFA5AAAF708A95 /* MCJMAPMessage.cpp */,
+				FA86D4E98ABF7A08BBFC9586 /* MCJMAPMessage.h */,
+				63EDE0F849D93FD2C6CC99E4 /* MCJMAPMessagePart.cpp */,
+				B94618B26FE48CF153433D73 /* MCJMAPMessagePart.h */,
+				90615943BD8D6831484F642D /* MCJMAPMultipart.cpp */,
+				85EE94D4A5C6EEC81AF0F220 /* MCJMAPMultipart.h */,
+				27B8747D072BFAE71C2C7D8E /* MCJMAPPart.cpp */,
+				5503DFB68980FF9E6389019A /* MCJMAPPart.h */,
+				9DA20FDC657D7F636E3E63F6 /* MCJMAPSession.cpp */,
+				B030A482F585294197FF114B /* MCJMAPSession.h */,
+				2B314DFFCC7B890605BA3C11 /* MCJMAPSubmission.cpp */,
+				DFC9E0DEE7D2EE80D410EA13 /* MCJMAPSubmission.h */,
+			);
+			path = jmap;
+			sourceTree = "<group>";
+		};
+		431200C2B16856707594EA90 /* jmap */ = {
+			isa = PBXGroup;
+			children = (
+				9BAA21287206166989928AF2 /* MCAsyncJMAP.h */,
+				F7E8278D21C0493D66ADCC8B /* MCJMAPAsyncSession.cpp */,
+				B46A01F82D00FA24A1C73428 /* MCJMAPAsyncSession.h */,
+				8D03EBC8A3BAC4F0240EE1D9 /* MCJMAPOperation.cpp */,
+				620EA6D61CFDDE07FFC8BEEB /* MCJMAPOperation.h */,
+				2DB9F8EB6B08686BCE3AF713 /* MCJMAPOperations.cpp */,
+				9D101857BF9C2FE6E9EA6178 /* MCJMAPOperations.h */,
+			);
+			path = jmap;
+			sourceTree = "<group>";
+		};
+		C1405B9E8EBB9C872F628840 /* jmap */ = {
+			isa = PBXGroup;
+			children = (
+				1D718A2FA2B943B436332D56 /* MCOJMAP.h */,
+				F8314094E776A9AA752CE0AF /* MCOJMAPBlobUpload.h */,
+				10E6617009DF793B33B3B186 /* MCOJMAPBlobUpload.mm */,
+				4FF10BD3FD9F407B2876D3E7 /* MCOJMAPMailbox.h */,
+				4F7D8AE5A1E843C25640EAE3 /* MCOJMAPMailbox.mm */,
+				16AAEED1951BC9DB27A0128D /* MCOJMAPMessage.h */,
+				1D4EAB553C67DE248EBD8EF7 /* MCOJMAPMessage.mm */,
+				47F7E8949F09CD4626D844CE /* MCOJMAPMessagePart.h */,
+				AD31AD60D4DB9A2A98B56B06 /* MCOJMAPMessagePart.mm */,
+				C8BF5268C17C2D896FCE58B1 /* MCOJMAPMultipart.h */,
+				6290149268E70B93BBD5DF50 /* MCOJMAPMultipart.mm */,
+				A4AA7D14A7514FA609A98D18 /* MCOJMAPOperation.h */,
+				BD8067F4B6E40D7B8218F1F7 /* MCOJMAPOperation.mm */,
+				6CE5F7A884A95C705AF02C48 /* MCOJMAPOperations.h */,
+				2503841966379406115C9AF6 /* MCOJMAPOperations.mm */,
+				D160F5D628339D0DF89B6F5D /* MCOJMAPPart.h */,
+				CBB0E551AD50BEBF7918064E /* MCOJMAPPart.mm */,
+				1D78A78C0BC71456019680AD /* MCOJMAPSession.h */,
+				4EB749EF41893F55A00354EB /* MCOJMAPSession.mm */,
+				FF81287F8F3AC40B5E355E4B /* MCOJMAPSubmission.h */,
+				AC508DDB27F51C196474EB46 /* MCOJMAPSubmission.mm */,
+			);
+			path = jmap;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3514,6 +3766,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53BDAD051C3A935385572B1A /* MCJMAPBlobUpload.cpp in Sources */,
+				E690E07B52E4604F9850ED36 /* MCJMAPMailbox.cpp in Sources */,
+				59B19403A5847119B8928339 /* MCJMAPMessage.cpp in Sources */,
+				3ED9456671B137B4EEF306A6 /* MCJMAPMessagePart.cpp in Sources */,
+				34A3CD8150F95A5CE6BB8524 /* MCJMAPMultipart.cpp in Sources */,
+				A6F62886435131C2802C9874 /* MCJMAPPart.cpp in Sources */,
+				9DF98BE2032F02F627D3F47A /* MCJMAPSession.cpp in Sources */,
+				B304ACA38DF7C77F77CEEA63 /* MCJMAPSubmission.cpp in Sources */,
+				D723A35F3FD4445D6FC4BA36 /* MCJMAPAsyncSession.cpp in Sources */,
+				B0C5C3250340557BDB919312 /* MCJMAPOperation.cpp in Sources */,
+				ACD1765FC2E89D4A712F013B /* MCJMAPOperations.cpp in Sources */,
+				FBEA860B20697E0E23032D20 /* MCOJMAPBlobUpload.mm in Sources */,
+				04AB1F13C280A339AD54E1A8 /* MCOJMAPMailbox.mm in Sources */,
+				E1475F447074ACCD04226013 /* MCOJMAPMessage.mm in Sources */,
+				12CF273FAA118DF5382488FA /* MCOJMAPMessagePart.mm in Sources */,
+				F5424E7390AB8A5EDF949A50 /* MCOJMAPMultipart.mm in Sources */,
+				57F7AB8E6E711D54CCC7D53E /* MCOJMAPOperation.mm in Sources */,
+				B750A893369BAD799622FB97 /* MCOJMAPOperations.mm in Sources */,
+				D4AFBE421ECE421F4B8A044E /* MCOJMAPPart.mm in Sources */,
+				FD4E730E30CD482BB9A79877 /* MCOJMAPSession.mm in Sources */,
+				38C11B83788856EC470589B6 /* MCOJMAPSubmission.mm in Sources */,
 				84D7373D199BF83B005124E5 /* MCNNTPFetchArticleOperation.cpp in Sources */,
 				C64EA6F4169E847800778456 /* MCAbstractMessage.cpp in Sources */,
 				C64EA6F6169E847800778456 /* MCAbstractMessagePart.cpp in Sources */,
@@ -3797,6 +4070,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03DE626BB5802A9C8E1B564C /* MCJMAPBlobUpload.cpp in Sources */,
+				278EF9B9DC59BE2300AEFB7F /* MCJMAPMailbox.cpp in Sources */,
+				B0D6E3EDCCE4E03D8312431B /* MCJMAPMessage.cpp in Sources */,
+				FDA2A2EEFC3B188825B5F75C /* MCJMAPMessagePart.cpp in Sources */,
+				7B17724ACB0E5AD1EC52CD75 /* MCJMAPMultipart.cpp in Sources */,
+				21E6608E863A73DC50433B88 /* MCJMAPPart.cpp in Sources */,
+				8A9A59821CA174E7C930B905 /* MCJMAPSession.cpp in Sources */,
+				608A4EE65CB443AEEEDCB389 /* MCJMAPSubmission.cpp in Sources */,
+				8BE3893B429CFA22DDE1C025 /* MCJMAPAsyncSession.cpp in Sources */,
+				D2C06FB97DB52E1F3104166C /* MCJMAPOperation.cpp in Sources */,
+				90C58B790B791FE8A53DA0DE /* MCJMAPOperations.cpp in Sources */,
+				3F9CF17923394440A50974A0 /* MCOJMAPBlobUpload.mm in Sources */,
+				AC8116CAC0401742AEE78BBD /* MCOJMAPMailbox.mm in Sources */,
+				E3AAD006664E10072030707E /* MCOJMAPMessage.mm in Sources */,
+				70EF4C815267CFD57852D417 /* MCOJMAPMessagePart.mm in Sources */,
+				47F30EE576BCB3321B8AA7BB /* MCOJMAPMultipart.mm in Sources */,
+				A9CC39AB0D7580A97F28BA67 /* MCOJMAPOperation.mm in Sources */,
+				565A5047DDD62AD97B68D678 /* MCOJMAPOperations.mm in Sources */,
+				3CC827B687F0E6B96B7A6AED /* MCOJMAPPart.mm in Sources */,
+				888796F5005F23E5C92D5204 /* MCOJMAPSession.mm in Sources */,
+				0E33E82E66797B1525B00831 /* MCOJMAPSubmission.mm in Sources */,
 				84D7373E199BF83B005124E5 /* MCNNTPFetchArticleOperation.cpp in Sources */,
 				C6BA2B991705F4E6003F0E9E /* MCAbstractMessage.cpp in Sources */,
 				C6BA2B9A1705F4E6003F0E9E /* MCAbstractMessagePart.cpp in Sources */,

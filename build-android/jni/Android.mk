@@ -6,6 +6,7 @@ subdirs = \
 	core/basetypes \
 	core/abstract \
 	core/imap \
+	core/jmap \
 	core/nntp \
 	core/pop \
 	core/provider \
@@ -16,6 +17,7 @@ subdirs = \
 	core/zip \
 	core/zip/MiniZip \
 	async/imap \
+	async/jmap \
 	async/nntp \
 	async/pop \
 	async/smtp \
@@ -41,6 +43,7 @@ core_src_files := $(filter-out \
 
 abstract_src_files := $(wildcard $(src_dir)/core/abstract/*.cpp)
 imap_src_files := $(wildcard $(src_dir)/core/imap/*.cpp)
+jmap_src_files := $(wildcard $(src_dir)/core/jmap/*.cpp)
 nntp_src_files := $(wildcard $(src_dir)/core/nntp/*.cpp)
 pop_src_files := $(wildcard $(src_dir)/core/pop/*.cpp)
 provider_src_files := $(wildcard $(src_dir)/core/provider/*.cpp)
@@ -54,6 +57,7 @@ minizip_src_files := \
 	$(src_dir)/core/zip/MiniZip/unzip.c \
 	$(src_dir)/core/zip/MiniZip/zip.c
 async_imap_src_files := $(wildcard $(src_dir)/async/imap/*.cpp)
+async_jmap_src_files := $(wildcard $(src_dir)/async/jmap/*.cpp)
 async_nntp_src_files := $(wildcard $(src_dir)/async/nntp/*.cpp)
 async_pop_src_files := $(wildcard $(src_dir)/async/pop/*.cpp)
 async_smtp_src_files := $(wildcard $(src_dir)/async/smtp/*.cpp)
@@ -65,7 +69,8 @@ jni_src_files := $(wildcard $(src_dir)/java/native/*.cpp) $(wildcard $(src_dir)/
 # LOCAL_SRC_FILES := $(core_src_files) $(abstract_src_files) $(imap_src_files) $(nntp_src_files) \
 # 	$(pop_src_files) $(provider_src_files) $(renderer_src_files) $(rfc822_src_files) \
 # 	$(security_src_files) $(smtp_src_files) $(zip_src_files) $(minizip_src_files) \
-# 	$(async_imap_src_files) $(async_nntp_src_files) $(async_pop_src_files) $(async_smtp_src_files)
+# 	$(jmap_src_files) $(async_imap_src_files) $(async_jmap_src_files) \
+# 	$(async_nntp_src_files) $(async_pop_src_files) $(async_smtp_src_files)
 # LOCAL_CPPFLAGS := -frtti
 # LOCAL_CFLAGS := -DNOCRYPT
 # include $(BUILD_STATIC_LIBRARY)
@@ -118,7 +123,8 @@ LOCAL_SRC_FILES := \
 	$(core_src_files) $(abstract_src_files) $(imap_src_files) $(nntp_src_files) \
 	$(pop_src_files) $(provider_src_files) $(renderer_src_files) $(rfc822_src_files) \
 	$(security_src_files) $(smtp_src_files) $(zip_src_files) $(minizip_src_files) \
-	$(async_imap_src_files) $(async_nntp_src_files) $(async_pop_src_files) $(async_smtp_src_files)
+	$(jmap_src_files) $(async_imap_src_files) $(async_jmap_src_files) \
+	$(async_nntp_src_files) $(async_pop_src_files) $(async_smtp_src_files)
 LOCAL_CPPFLAGS := -frtti
 LOCAL_CFLAGS := -DNOCRYPT
 # LOCAL_LDLIBS := -lz -llog \

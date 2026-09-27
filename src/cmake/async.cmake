@@ -91,6 +91,12 @@ set(async_gmail_files
   async/gmail/MCGmailPartDataOperation.cpp
 )
 
+set(async_jmap_files
+  async/jmap/MCJMAPAsyncSession.cpp
+  async/jmap/MCJMAPOperation.cpp
+  async/jmap/MCJMAPOperations.cpp
+)
+
 set(async_files
   ${async_imap_files}
   ${async_pop_files}
@@ -98,6 +104,7 @@ set(async_files
   ${async_nntp_files}
   ${async_activesync_files}
   ${async_gmail_files}
+  ${async_jmap_files}
 )
 
 # Includes for build
@@ -110,4 +117,5 @@ set(async_includes
   "${CMAKE_CURRENT_SOURCE_DIR}/async/nntp"
   "${CMAKE_CURRENT_SOURCE_DIR}/async/activesync"
   "${CMAKE_CURRENT_SOURCE_DIR}/async/gmail"
+  "${CMAKE_CURRENT_SOURCE_DIR}/async/jmap"
 )

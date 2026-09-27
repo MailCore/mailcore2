@@ -16,5 +16,6 @@
 #include <MailCore/MCAsyncNNTP.h>
 #include <MailCore/MCAsyncActiveSync.h>
 #include <MailCore/MCAsyncGmail.h>
+#include <MailCore/MCAsyncJMAP.h>
 
 #endif
