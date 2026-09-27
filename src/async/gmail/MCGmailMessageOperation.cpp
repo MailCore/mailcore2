@@ -26,7 +26,7 @@ void GmailMessageOperation::setKind(GmailMessageOperationKind kind)
     mKind = kind;
 }
 
-GmailMessageOperationKind GmailMessageOperation::kind()
+GmailMessageOperation::GmailMessageOperationKind GmailMessageOperation::kind()
 {
     return mKind;
 }
@@ -73,13 +73,13 @@ void GmailMessageOperation::main()
 
     switch (mKind) {
         case GmailMessageOperationKindDefault:
-            message = session()->session()->message(mMessageID, &error);
+            message = syncSession()->message(mMessageID, &error);
             break;
         case GmailMessageOperationKindFormat:
-            message = session()->session()->messageWithFormat(mMessageID, mFormat, &error);
+            message = syncSession()->messageWithFormat(mMessageID, mFormat, &error);
             break;
         case GmailMessageOperationKindMetadataHeaders:
-            message = session()->session()->messageWithMetadataHeaders(mMessageID, mMetadataHeaders, &error);
+            message = syncSession()->messageWithMetadataHeaders(mMessageID, mMetadataHeaders, &error);
             break;
     }
 

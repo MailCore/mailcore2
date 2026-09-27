@@ -23,7 +23,7 @@ Array * GmailLabelsOperation::labels()
 void GmailLabelsOperation::main()
 {
     ErrorCode error;
-    Array * labels = session()->session()->labels(&error);
+    Array * labels = syncSession()->labels(&error);
     MC_SAFE_REPLACE_RETAIN(Array, mLabels, labels);
     setError(error);
 }

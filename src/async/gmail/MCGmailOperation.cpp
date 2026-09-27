@@ -35,6 +35,11 @@ GmailAsyncSession * GmailOperation::session()
     return mSession;
 }
 
+GmailSession * GmailOperation::syncSession()
+{
+    return mSession->session();
+}
+
 void GmailOperation::setError(ErrorCode error)
 {
     mError = error;

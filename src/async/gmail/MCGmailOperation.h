@@ -9,21 +9,27 @@
 namespace mailcore {
 
     class GmailAsyncSession;
+    class GmailSession;
 
     class MAILCORE_EXPORT GmailOperation : public Operation {
+        friend class GmailAsyncSession;
+
     public:
         GmailOperation();
         virtual ~GmailOperation();
 
-        virtual void setSession(GmailAsyncSession * session);
-        virtual GmailAsyncSession * session();
-
-        virtual void setError(ErrorCode error);
         virtual ErrorCode error();
 
         virtual void start();
 
+    protected:
+        virtual GmailAsyncSession * session();
+        virtual GmailSession * syncSession();
+        virtual void setError(ErrorCode error);
+
     private:
+        virtual void setSession(GmailAsyncSession * session);
+
         GmailAsyncSession * mSession;
         ErrorCode mError;
     };

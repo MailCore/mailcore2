@@ -25,7 +25,7 @@ void GmailMessagesOperation::setKind(GmailMessagesOperationKind kind)
     mKind = kind;
 }
 
-GmailMessagesOperationKind GmailMessagesOperation::kind()
+GmailMessagesOperation::GmailMessagesOperationKind GmailMessagesOperation::kind()
 {
     return mKind;
 }
@@ -62,13 +62,13 @@ void GmailMessagesOperation::main()
 
     switch (mKind) {
         case GmailMessagesOperationKindDefault:
-            messages = session()->session()->messages(&error);
+            messages = syncSession()->messages(&error);
             break;
         case GmailMessagesOperationKindQuery:
-            messages = session()->session()->messagesWithQuery(mQuery, &error);
+            messages = syncSession()->messagesWithQuery(mQuery, &error);
             break;
         case GmailMessagesOperationKindLabel:
-            messages = session()->session()->messagesWithLabel(mLabelID, &error);
+            messages = syncSession()->messagesWithLabel(mLabelID, &error);
             break;
     }
 

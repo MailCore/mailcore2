@@ -59,12 +59,11 @@ namespace mailcore {
         virtual int lastHTTPStatus();
         virtual String * lastErrorMessage();
 
-    public: // private
+    private:
         virtual void setup(ErrorCode * pError);
         virtual void unsetup();
         virtual bool isSetup();
 
-    private:
         String * mUserID;
         String * mOAuth2Token;
         String * mUserAgent;

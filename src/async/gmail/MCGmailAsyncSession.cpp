@@ -176,7 +176,7 @@ GmailMessagesOperation * GmailAsyncSession::messagesOperation()
 {
     GmailMessagesOperation * op = new GmailMessagesOperation();
     op->setSession(this);
-    op->setKind(GmailMessagesOperationKindDefault);
+    op->setKind(GmailMessagesOperation::GmailMessagesOperationKindDefault);
     return (GmailMessagesOperation *) op->autorelease();
 }
 
@@ -184,7 +184,7 @@ GmailMessagesOperation * GmailAsyncSession::messagesWithQueryOperation(String * 
 {
     GmailMessagesOperation * op = new GmailMessagesOperation();
     op->setSession(this);
-    op->setKind(GmailMessagesOperationKindQuery);
+    op->setKind(GmailMessagesOperation::GmailMessagesOperationKindQuery);
     op->setQuery(query);
     return (GmailMessagesOperation *) op->autorelease();
 }
@@ -193,7 +193,7 @@ GmailMessagesOperation * GmailAsyncSession::messagesWithLabelOperation(String * 
 {
     GmailMessagesOperation * op = new GmailMessagesOperation();
     op->setSession(this);
-    op->setKind(GmailMessagesOperationKindLabel);
+    op->setKind(GmailMessagesOperation::GmailMessagesOperationKindLabel);
     op->setLabelID(labelID);
     return (GmailMessagesOperation *) op->autorelease();
 }
@@ -202,7 +202,7 @@ GmailMessageOperation * GmailAsyncSession::messageOperation(String * messageID)
 {
     GmailMessageOperation * op = new GmailMessageOperation();
     op->setSession(this);
-    op->setKind(GmailMessageOperationKindDefault);
+    op->setKind(GmailMessageOperation::GmailMessageOperationKindDefault);
     op->setMessageID(messageID);
     return (GmailMessageOperation *) op->autorelease();
 }
@@ -212,7 +212,7 @@ GmailMessageOperation * GmailAsyncSession::messageWithFormatOperation(String * m
 {
     GmailMessageOperation * op = new GmailMessageOperation();
     op->setSession(this);
-    op->setKind(GmailMessageOperationKindFormat);
+    op->setKind(GmailMessageOperation::GmailMessageOperationKindFormat);
     op->setMessageID(messageID);
     op->setFormat(format);
     return (GmailMessageOperation *) op->autorelease();
@@ -223,7 +223,7 @@ GmailMessageOperation * GmailAsyncSession::messageWithMetadataHeadersOperation(S
 {
     GmailMessageOperation * op = new GmailMessageOperation();
     op->setSession(this);
-    op->setKind(GmailMessageOperationKindMetadataHeaders);
+    op->setKind(GmailMessageOperation::GmailMessageOperationKindMetadataHeaders);
     op->setMessageID(messageID);
     op->setMetadataHeaders(headers);
     return (GmailMessageOperation *) op->autorelease();

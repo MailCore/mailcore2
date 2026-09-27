@@ -9,16 +9,19 @@
 namespace mailcore {
 
     class MAILCORE_EXPORT GmailMessageDataOperation : public GmailOperation {
+        friend class GmailAsyncSession;
+
     public:
         GmailMessageDataOperation();
         virtual ~GmailMessageDataOperation();
 
-        virtual void setMessageID(String * messageID);
         virtual String * messageID();
         virtual Data * data();
         virtual void main();
 
     private:
+        virtual void setMessageID(String * messageID);
+
         String * mMessageID;
         Data * mData;
     };

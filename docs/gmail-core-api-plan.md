@@ -2,6 +2,10 @@
 
 Date: 2026-09-23
 
+Update 2026-09-26: the implemented API now keeps the lazy session lifecycle
+hooks internal. `setup()`, `unsetup()`, and `isSetup()` are implementation
+details, not public caller API.
+
 ## Goal
 
 Create a simple C++ Gmail API in `src/core/gmail` on top of libetpan's
@@ -234,12 +238,11 @@ public:
     virtual int lastHTTPStatus();
     virtual String * lastErrorMessage();
 
-public: // private
+private:
     virtual void setup(ErrorCode * pError);
     virtual void unsetup();
     virtual bool isSetup();
 
-private:
     String * mUserID;
     String * mOAuth2Token;
     String * mUserAgent;

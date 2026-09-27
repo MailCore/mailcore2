@@ -24,6 +24,8 @@ namespace mailcore {
     class GmailOperationQueueCallback;
 
     class MAILCORE_EXPORT GmailAsyncSession : public Object {
+        friend class GmailOperation;
+
     public:
         GmailAsyncSession();
         virtual ~GmailAsyncSession();
@@ -73,11 +75,10 @@ namespace mailcore {
         virtual GmailPartDataOperation * dataForPartOperation(String * messageID,
                                                               AbstractPart * part);
 
-    public: // private
+    private:
         virtual void runOperation(GmailOperation * operation);
         virtual GmailSession * session();
 
-    private:
         GmailSession * mSession;
         OperationQueue * mQueue;
         GmailOperationQueueCallback * mQueueCallback;

@@ -23,7 +23,7 @@ GmailProfile * GmailProfileOperation::profile()
 void GmailProfileOperation::main()
 {
     ErrorCode error;
-    GmailProfile * profile = session()->session()->profile(&error);
+    GmailProfile * profile = syncSession()->profile(&error);
     MC_SAFE_REPLACE_RETAIN(GmailProfile, mProfile, profile);
     setError(error);
 }

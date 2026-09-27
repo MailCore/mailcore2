@@ -35,7 +35,7 @@ GmailLabel * GmailLabelOperation::label()
 void GmailLabelOperation::main()
 {
     ErrorCode error;
-    GmailLabel * label = session()->session()->label(mLabelID, &error);
+    GmailLabel * label = syncSession()->label(mLabelID, &error);
     MC_SAFE_REPLACE_RETAIN(GmailLabel, mLabel, label);
     setError(error);
 }

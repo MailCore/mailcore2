@@ -4,6 +4,12 @@ Date: 2026-09-23
 
 Status: implemented in `src/async/gmail`.
 
+Update 2026-09-26: the implemented API now keeps operation queue wiring and
+operation configuration internal. Callers should obtain configured operations
+from `GmailAsyncSession` factory methods, start them, and inspect result/error
+accessors. `GmailAsyncSession::runOperation()`, `GmailAsyncSession::session()`,
+operation input setters, and operation kind enums are not public caller API.
+
 ## Goal
 
 Add an async C++ Gmail API on top of the synchronous Gmail API in
@@ -42,8 +48,8 @@ POP and ActiveSync are better templates:
 
 - async session owns one synchronous session
 - async session owns an `OperationQueue`
-- operation `start()` calls `session()->runOperation(this)`
-- operation `main()` calls a sync method
+- operation `start()` enqueues through internal async-session wiring
+- operation `main()` calls a sync method through a protected operation helper
 - operation stores an `ErrorCode` and typed result
 
 Use this pattern for Gmail.
@@ -178,11 +184,10 @@ public:
     virtual GmailMessagePartDataOperation * dataForMessagePartOperation(String * messageID,
                                                                         GmailMessagePart * part);
 
-public: // private
+private:
     virtual void runOperation(GmailOperation * operation);
     virtual GmailSession * session();
 
-private:
     GmailSession * mSession;
     OperationQueue * mQueue;
     OperationQueueCallback * mOperationQueueCallback;
@@ -199,7 +204,7 @@ Implementation notes:
 - `lastHTTPStatus()` and `lastErrorMessage()` delegate to `mSession`.
 - Operation factory methods allocate the operation, set its async session, set
   inputs, autorelease, and return it.
-- `runOperation()` adds the operation to the queue.
+- `runOperation()` adds the operation to the queue and is internal-only.
 - `cancelAllOperations()` cancels the queue.
 - `isOperationQueueRunning()` mirrors POP/ActiveSync behavior.
 - On Apple, operation callback dispatch queue should be passed through in
@@ -213,21 +218,27 @@ Add `src/async/gmail/MCGmailOperation.h`.
 namespace mailcore {
 
 class GmailAsyncSession;
+class GmailSession;
 
 class MAILCORE_EXPORT GmailOperation : public Operation {
+    friend class GmailAsyncSession;
+
 public:
     GmailOperation();
     virtual ~GmailOperation();
 
-    virtual void setSession(GmailAsyncSession * session);
-    virtual GmailAsyncSession * session();
-
-    virtual void setError(ErrorCode error);
     virtual ErrorCode error();
 
     virtual void start();
 
+protected:
+    virtual GmailAsyncSession * session();
+    virtual GmailSession * syncSession();
+    virtual void setError(ErrorCode error);
+
 private:
+    virtual void setSession(GmailAsyncSession * session);
+
     GmailAsyncSession * mSession;
     ErrorCode mError;
 };
@@ -239,7 +250,9 @@ Implementation should mirror `ActiveSyncOperation`:
 
 - Retain/release async session.
 - Store `ErrorCode`.
-- `start()` calls `mSession->runOperation(this)`.
+- `start()` calls the internal async-session queue hook.
+- Operation subclasses call synchronous Gmail methods through `syncSession()`,
+  not through a public `GmailAsyncSession::session()` accessor.
 - On Apple, set callback dispatch queue from `GmailAsyncSession`.
 
 No progress callback is needed in the first pass.
@@ -301,7 +314,7 @@ GmailLabel * label();
 
 Use one operation class for all list-message variants.
 
-Inputs:
+Internal inputs:
 
 ```cpp
 enum GmailMessagesOperationKind {
@@ -328,11 +341,16 @@ Result:
 GmailMessageList * messages();
 ```
 
+The kind enum and input setters are internal. Public callers use
+`GmailAsyncSession::messagesOperation()`,
+`GmailAsyncSession::messagesWithQueryOperation()`, and
+`GmailAsyncSession::messagesWithLabelOperation()`.
+
 ### GmailMessageOperation
 
 Use one operation class for all message-get variants.
 
-Inputs:
+Internal inputs:
 
 ```cpp
 enum GmailMessageOperationKind {
@@ -345,6 +363,11 @@ String * messageID;
 GmailMessageFormat format;
 Array * /* String */ metadataHeaders;
 ```
+
+The kind enum and input setters are internal. Public callers use
+`GmailAsyncSession::messageOperation()`,
+`GmailAsyncSession::messageWithFormatOperation()`, and
+`GmailAsyncSession::messageWithMetadataHeadersOperation()`.
 
 Sync calls:
 

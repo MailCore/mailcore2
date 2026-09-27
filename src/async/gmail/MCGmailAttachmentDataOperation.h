@@ -9,18 +9,21 @@
 namespace mailcore {
 
     class MAILCORE_EXPORT GmailAttachmentDataOperation : public GmailOperation {
+        friend class GmailAsyncSession;
+
     public:
         GmailAttachmentDataOperation();
         virtual ~GmailAttachmentDataOperation();
 
-        virtual void setMessageID(String * messageID);
         virtual String * messageID();
-        virtual void setAttachmentID(String * attachmentID);
         virtual String * attachmentID();
         virtual Data * data();
         virtual void main();
 
     private:
+        virtual void setMessageID(String * messageID);
+        virtual void setAttachmentID(String * attachmentID);
+
         String * mMessageID;
         String * mAttachmentID;
         Data * mData;

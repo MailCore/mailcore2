@@ -11,16 +11,19 @@ namespace mailcore {
     class GmailLabel;
 
     class MAILCORE_EXPORT GmailLabelOperation : public GmailOperation {
+        friend class GmailAsyncSession;
+
     public:
         GmailLabelOperation();
         virtual ~GmailLabelOperation();
 
-        virtual void setLabelID(String * labelID);
         virtual String * labelID();
         virtual GmailLabel * label();
         virtual void main();
 
     private:
+        virtual void setLabelID(String * labelID);
+
         String * mLabelID;
         GmailLabel * mLabel;
     };

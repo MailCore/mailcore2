@@ -47,7 +47,7 @@ Data * GmailAttachmentDataOperation::data()
 void GmailAttachmentDataOperation::main()
 {
     ErrorCode error;
-    Data * data = session()->session()->attachmentData(mMessageID, mAttachmentID, &error);
+    Data * data = syncSession()->attachmentData(mMessageID, mAttachmentID, &error);
     MC_SAFE_REPLACE_RETAIN(Data, mData, data);
     setError(error);
 }

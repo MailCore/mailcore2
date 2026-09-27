@@ -47,7 +47,7 @@ Data * GmailPartDataOperation::data()
 void GmailPartDataOperation::main()
 {
     ErrorCode error;
-    Data * data = session()->session()->dataForPart(mMessageID, mPart, &error);
+    Data * data = syncSession()->dataForPart(mMessageID, mPart, &error);
     MC_SAFE_REPLACE_RETAIN(Data, mData, data);
     setError(error);
 }
