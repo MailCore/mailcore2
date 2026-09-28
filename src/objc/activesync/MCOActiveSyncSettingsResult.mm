@@ -1,4 +1,5 @@
 #import "MCOActiveSyncPrivate.h"
+#import "MCOActiveSyncSettingsResult.h"
 
 #define nativeType mailcore::ActiveSyncSettingsResult
 MCO_DEFINE_ACTIVE_SYNC_WRAPPER(MCOActiveSyncSettingsResult, mailcore::ActiveSyncSettingsResult)

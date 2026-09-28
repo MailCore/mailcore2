@@ -6,6 +6,7 @@
 
 @interface MCOActiveSyncFolder : NSObject <NSCopying>
 @property (nonatomic, copy) NSString * serverID;
+@property (nonatomic, copy) NSString * folderID;
 @property (nonatomic, copy) NSString * parentID;
 @property (nonatomic, copy) NSString * displayName;
 @end

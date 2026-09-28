@@ -31,6 +31,7 @@
 }
 
 MCO_OBJC_SYNTHESIZE_STRING(setServerID, serverID)
+MCO_OBJC_SYNTHESIZE_STRING(setMessageID, messageID)
 MCO_OBJC_SYNTHESIZE_STRING(setMessageClass, messageClass)
 MCO_OBJC_SYNTHESIZE_SCALAR(uint32_t, uint32_t, setEstimatedSize, estimatedSize)
 MCO_OBJC_SYNTHESIZE_BOOL(setRead, isRead)

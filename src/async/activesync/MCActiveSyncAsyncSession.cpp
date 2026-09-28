@@ -226,6 +226,11 @@ ActiveSyncItemEstimateOperation * ActiveSyncAsyncSession::itemEstimateOperation(
     return (ActiveSyncItemEstimateOperation *) op->autorelease();
 }
 
+ActiveSyncItemEstimateOperation * ActiveSyncAsyncSession::itemEstimateOperationForFolderID(String * folderID, String * syncKey)
+{
+    return itemEstimateOperation(folderID, syncKey);
+}
+
 ActiveSyncFolderCreateOperation * ActiveSyncAsyncSession::folderCreateOperation(String * syncKey, String * parentID, String * displayName)
 {
     ActiveSyncFolderCreateOperation * op = new ActiveSyncFolderCreateOperation();
@@ -254,14 +259,6 @@ ActiveSyncFolderDeleteOperation * ActiveSyncAsyncSession::folderDeleteOperation(
     op->setSyncKey(syncKey);
     op->setFolderID(folderID);
     return (ActiveSyncFolderDeleteOperation *) op->autorelease();
-}
-
-ActiveSyncSyncOperation * ActiveSyncAsyncSession::syncOperation(ActiveSyncSyncRequest * request)
-{
-    ActiveSyncSyncOperation * op = new ActiveSyncSyncOperation();
-    op->setSession(this);
-    op->setRequest(request);
-    return (ActiveSyncSyncOperation *) op->autorelease();
 }
 
 ActiveSyncSyncMessagesOperation * ActiveSyncAsyncSession::syncMessagesOperation(String * folderID, String * syncKey)
@@ -414,4 +411,9 @@ ActiveSyncPingOperation * ActiveSyncAsyncSession::pingOperation(Array * collecti
     op->setCollectionIDs(collectionIDs);
     op->setHeartbeatInterval(heartbeatInterval);
     return (ActiveSyncPingOperation *) op->autorelease();
+}
+
+ActiveSyncPingOperation * ActiveSyncAsyncSession::pingOperationWithFolderIDs(Array * folderIDs, uint32_t heartbeatInterval)
+{
+    return pingOperation(folderIDs, heartbeatInterval);
 }

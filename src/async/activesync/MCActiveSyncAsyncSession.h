@@ -23,7 +23,6 @@ namespace mailcore {
     class ActiveSyncFolderCreateOperation;
     class ActiveSyncFolderUpdateOperation;
     class ActiveSyncFolderDeleteOperation;
-    class ActiveSyncSyncOperation;
     class ActiveSyncSyncMessagesOperation;
     class ActiveSyncMarkMessagesReadOperation;
     class ActiveSyncSetMessagesFlaggedOperation;
@@ -39,7 +38,6 @@ namespace mailcore {
     class ActiveSyncSmartReplyOperation;
     class ActiveSyncSmartForwardOperation;
     class ActiveSyncPingOperation;
-    class ActiveSyncSyncRequest;
     class ActiveSyncOperationQueueCallback;
     class Array;
     class Data;
@@ -82,10 +80,10 @@ namespace mailcore {
         virtual ActiveSyncFolderResyncOperation * folderResyncOperation();
         virtual ActiveSyncProvisionOperation * provisionOperation();
         virtual ActiveSyncItemEstimateOperation * itemEstimateOperation(String * collectionID, String * syncKey);
+        virtual ActiveSyncItemEstimateOperation * itemEstimateOperationForFolderID(String * folderID, String * syncKey);
         virtual ActiveSyncFolderCreateOperation * folderCreateOperation(String * syncKey, String * parentID, String * displayName);
         virtual ActiveSyncFolderUpdateOperation * folderUpdateOperation(String * syncKey, String * folderID, String * parentID, String * displayName);
         virtual ActiveSyncFolderDeleteOperation * folderDeleteOperation(String * syncKey, String * folderID);
-        virtual ActiveSyncSyncOperation * syncOperation(ActiveSyncSyncRequest * request);
         virtual ActiveSyncSyncMessagesOperation * syncMessagesOperation(String * folderID, String * syncKey);
         virtual ActiveSyncMarkMessagesReadOperation * markMessagesReadOperation(String * folderID, String * syncKey, Array * messageIDs, bool read);
         virtual ActiveSyncSetMessagesFlaggedOperation * setMessagesFlaggedOperation(String * folderID, String * syncKey, Array * messageIDs, bool flagged);
@@ -101,6 +99,7 @@ namespace mailcore {
         virtual ActiveSyncSmartReplyOperation * smartReplyOperation(String * folderID, String * messageID, Data * messageData, bool saveInSent);
         virtual ActiveSyncSmartForwardOperation * smartForwardOperation(String * folderID, String * messageID, Data * messageData, bool saveInSent);
         virtual ActiveSyncPingOperation * pingOperation(Array * collectionIDs, uint32_t heartbeatInterval);
+        virtual ActiveSyncPingOperation * pingOperationWithFolderIDs(Array * folderIDs, uint32_t heartbeatInterval);
 
     public:
         virtual void runOperation(ActiveSyncOperation * operation);

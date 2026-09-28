@@ -1,6 +1,7 @@
 #include "MCActiveSync.h"
 
 #include "MCActiveSyncPrivate.h"
+#include "MCActiveSyncSyncRequest.h"
 #include "MCActiveSyncTypesPrivate.h"
 
 #include <libetpan/clist.h>
@@ -746,10 +747,9 @@ ActiveSyncFolderMutationResult * ActiveSyncSession::folderDelete(String * syncKe
     return result;
 }
 
-ActiveSyncSyncResult * ActiveSyncSession::sync(ActiveSyncSyncRequest * request, ErrorCode * pError)
+static ActiveSyncSyncResult * syncWithRequest(mailactivesync * session, ActiveSyncSyncRequest * request, ErrorCode * pError)
 {
-    ensureSession();
-    if (mSession == NULL) {
+    if (session == NULL) {
         if (pError != NULL)
             * pError = ErrorStorageLimit;
         return NULL;
@@ -776,7 +776,7 @@ ActiveSyncSyncResult * ActiveSyncSession::sync(ActiveSyncSyncRequest * request, 
         mailactivesync_sync_request_set_body_preference(nativeRequest, request->bodyPreferenceType(), request->bodyPreferenceTruncationSize());
 
     struct mailactivesync_sync_result * native = NULL;
-    int resultCode = mailactivesync_sync(mSession, nativeRequest, &native);
+    int resultCode = mailactivesync_sync(session, nativeRequest, &native);
     mailactivesync_sync_request_free(nativeRequest);
     setError(pError, resultCode);
     if (resultCode != MAILACTIVESYNC_NO_ERROR)
@@ -789,11 +789,12 @@ ActiveSyncSyncResult * ActiveSyncSession::sync(ActiveSyncSyncRequest * request, 
 
 ActiveSyncSyncResult * ActiveSyncSession::syncMessages(String * folderID, String * syncKey, ErrorCode * pError)
 {
+    ensureSession();
     ActiveSyncSyncRequest * request = new ActiveSyncSyncRequest();
     request->setCollectionID(folderID);
     request->setSyncKey(syncKey);
     request->setCollectionClass(MCSTR("Email"));
-    ActiveSyncSyncResult * result = sync(request, pError);
+    ActiveSyncSyncResult * result = syncWithRequest(mSession, request, pError);
     request->release();
     return result;
 }
@@ -976,6 +977,11 @@ ActiveSyncItemEstimateResult * ActiveSyncSession::itemEstimate(String * collecti
     return (ActiveSyncItemEstimateResult *) result->autorelease();
 }
 
+ActiveSyncItemEstimateResult * ActiveSyncSession::itemEstimateForFolderID(String * folderID, String * syncKey, ErrorCode * pError)
+{
+    return itemEstimate(folderID, syncKey, pError);
+}
+
 ActiveSyncMessage * ActiveSyncSession::fetchMessage(String * folderID, String * messageID, ErrorCode * pError)
 {
     ensureSession();
@@ -1103,4 +1109,9 @@ ActiveSyncPingResult * ActiveSyncSession::ping(Array * /* String */ collectionID
     result->setChangedCollectionIDs(stringArrayFromClist(native->changed_collection_ids));
     mailactivesync_ping_result_free(native);
     return (ActiveSyncPingResult *) result->autorelease();
+}
+
+ActiveSyncPingResult * ActiveSyncSession::pingFolders(Array * /* String */ folderIDs, uint32_t heartbeatInterval, ErrorCode * pError)
+{
+    return ping(folderIDs, heartbeatInterval, pError);
 }

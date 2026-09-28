@@ -18,6 +18,8 @@ namespace mailcore {
         virtual String * syncKey();
         virtual void setServerID(String * serverID);
         virtual String * serverID();
+        virtual void setFolderID(String * folderID);
+        virtual String * folderID();
         virtual void setStatus(ActiveSyncFolderMutationStatus status);
         virtual ActiveSyncFolderMutationStatus status();
 

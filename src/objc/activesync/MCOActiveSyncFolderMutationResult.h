@@ -8,6 +8,7 @@
 @interface MCOActiveSyncFolderMutationResult : NSObject <NSCopying>
 @property (nonatomic, copy) NSString * syncKey;
 @property (nonatomic, copy) NSString * serverID;
+@property (nonatomic, copy) NSString * folderID;
 @property (nonatomic, assign) MCOActiveSyncFolderMutationStatus status;
 @end
 

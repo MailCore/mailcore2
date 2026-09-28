@@ -175,6 +175,11 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
     return [self _objcOperationFromNativeOp:_session->itemEstimateOperation([collectionID mco_mcString], [syncKey mco_mcString])];
 }
 
+- (MCOActiveSyncItemEstimateOperation *) itemEstimateOperationForFolderID:(NSString *)folderID syncKey:(NSString *)syncKey
+{
+    return [self _objcOperationFromNativeOp:_session->itemEstimateOperationForFolderID([folderID mco_mcString], [syncKey mco_mcString])];
+}
+
 - (MCOActiveSyncFolderMutationOperation *) folderCreateOperationWithSyncKey:(NSString *)syncKey parentID:(NSString *)parentID displayName:(NSString *)displayName
 {
     return [self _objcOperationFromNativeOp:_session->folderCreateOperation([syncKey mco_mcString], [parentID mco_mcString], [displayName mco_mcString])];
@@ -188,11 +193,6 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
 - (MCOActiveSyncFolderMutationOperation *) folderDeleteOperationWithSyncKey:(NSString *)syncKey folderID:(NSString *)folderID
 {
     return [self _objcOperationFromNativeOp:_session->folderDeleteOperation([syncKey mco_mcString], [folderID mco_mcString])];
-}
-
-- (MCOActiveSyncSyncOperation *) syncOperationWithRequest:(MCOActiveSyncSyncRequest *)request
-{
-    return [self _objcOperationFromNativeOp:_session->syncOperation((mailcore::ActiveSyncSyncRequest *) [request mco_mcObject])];
 }
 
 - (MCOActiveSyncSyncOperation *) syncMessagesOperationInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey
@@ -268,6 +268,11 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
 - (MCOActiveSyncPingOperation *) pingOperationWithCollectionIDs:(NSArray *)collectionIDs heartbeatInterval:(uint32_t)heartbeatInterval
 {
     return [self _objcOperationFromNativeOp:_session->pingOperation((mailcore::Array *) [collectionIDs mco_mcObject], heartbeatInterval)];
+}
+
+- (MCOActiveSyncPingOperation *) pingOperationWithFolderIDs:(NSArray *)folderIDs heartbeatInterval:(uint32_t)heartbeatInterval
+{
+    return [self _objcOperationFromNativeOp:_session->pingOperationWithFolderIDs((mailcore::Array *) [folderIDs mco_mcObject], heartbeatInterval)];
 }
 
 @end

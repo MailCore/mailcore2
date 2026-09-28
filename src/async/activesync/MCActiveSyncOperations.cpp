@@ -316,41 +316,6 @@ void ActiveSyncFolderDeleteOperation::main()
     setError(error);
 }
 
-ActiveSyncSyncOperation::ActiveSyncSyncOperation()
-{
-    mRequest = NULL;
-    mResult = NULL;
-}
-
-ActiveSyncSyncOperation::~ActiveSyncSyncOperation()
-{
-    MC_SAFE_RELEASE(mRequest);
-    MC_SAFE_RELEASE(mResult);
-}
-
-void ActiveSyncSyncOperation::setRequest(ActiveSyncSyncRequest * request)
-{
-    MC_SAFE_REPLACE_RETAIN(ActiveSyncSyncRequest, mRequest, request);
-}
-
-ActiveSyncSyncRequest * ActiveSyncSyncOperation::request()
-{
-    return mRequest;
-}
-
-ActiveSyncSyncResult * ActiveSyncSyncOperation::result()
-{
-    return mResult;
-}
-
-void ActiveSyncSyncOperation::main()
-{
-    ErrorCode error;
-    mResult = session()->session()->sync(mRequest, &error);
-    MC_SAFE_RETAIN(mResult);
-    setError(error);
-}
-
 ActiveSyncSyncMessagesOperation::ActiveSyncSyncMessagesOperation()
 {
     mFolderID = NULL;

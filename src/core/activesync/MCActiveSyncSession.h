@@ -6,7 +6,6 @@
 #include <MailCore/MCActiveSyncOptions.h>
 #include <MailCore/MCActiveSyncFolderSyncResult.h>
 #include <MailCore/MCActiveSyncFolderMutationResult.h>
-#include <MailCore/MCActiveSyncSyncRequest.h>
 #include <MailCore/MCActiveSyncSyncResult.h>
 #include <MailCore/MCActiveSyncProvisionResult.h>
 #include <MailCore/MCActiveSyncItemEstimateResult.h>
@@ -50,7 +49,6 @@ namespace mailcore {
         virtual ActiveSyncFolderMutationResult * folderCreate(String * syncKey, String * parentID, String * displayName, ErrorCode * pError);
         virtual ActiveSyncFolderMutationResult * folderUpdate(String * syncKey, String * folderID, String * parentID, String * displayName, ErrorCode * pError);
         virtual ActiveSyncFolderMutationResult * folderDelete(String * syncKey, String * folderID, ErrorCode * pError);
-        virtual ActiveSyncSyncResult * sync(ActiveSyncSyncRequest * request, ErrorCode * pError);
         virtual ActiveSyncSyncResult * syncMessages(String * folderID, String * syncKey, ErrorCode * pError);
         virtual ActiveSyncSyncResult * markMessagesRead(String * folderID, String * syncKey, Array * /* String */ messageIDs, bool read, ErrorCode * pError);
         virtual ActiveSyncSyncResult * setMessagesFlagged(String * folderID, String * syncKey, Array * /* String */ messageIDs, bool flagged, ErrorCode * pError);
@@ -61,6 +59,7 @@ namespace mailcore {
         virtual ActiveSyncMoveResult * moveMessages(Array * /* ActiveSyncMove */ moves, ErrorCode * pError);
         virtual ActiveSyncProvisionResult * provision(ErrorCode * pError);
         virtual ActiveSyncItemEstimateResult * itemEstimate(String * collectionID, String * syncKey, ErrorCode * pError);
+        virtual ActiveSyncItemEstimateResult * itemEstimateForFolderID(String * folderID, String * syncKey, ErrorCode * pError);
         virtual ActiveSyncMessage * fetchMessage(String * folderID, String * messageID, ErrorCode * pError);
         virtual ActiveSyncMessage * fetchMessageBodyPart(String * folderID, String * messageID, ActiveSyncBodyType bodyType, uint32_t truncationSize, ErrorCode * pError);
         virtual ActiveSyncAttachmentData * fetchAttachment(String * fileReference, String * range, ErrorCode * pError);
@@ -68,6 +67,7 @@ namespace mailcore {
         virtual void smartReply(String * folderID, String * messageID, Data * messageData, bool saveInSent, ErrorCode * pError);
         virtual void smartForward(String * folderID, String * messageID, Data * messageData, bool saveInSent, ErrorCode * pError);
         virtual ActiveSyncPingResult * ping(Array * /* String */ collectionIDs, uint32_t heartbeatInterval, ErrorCode * pError);
+        virtual ActiveSyncPingResult * pingFolders(Array * /* String */ folderIDs, uint32_t heartbeatInterval, ErrorCode * pError);
 
     private:
         String * mServerURL;

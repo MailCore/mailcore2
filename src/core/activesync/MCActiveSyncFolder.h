@@ -15,6 +15,8 @@ namespace mailcore {
 
         virtual void setServerID(String * serverID);
         virtual String * serverID();
+        virtual void setFolderID(String * folderID);
+        virtual String * folderID();
         virtual void setParentID(String * parentID);
         virtual String * parentID();
         virtual void setDisplayName(String * displayName);

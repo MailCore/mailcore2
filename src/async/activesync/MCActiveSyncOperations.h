@@ -12,7 +12,6 @@ namespace mailcore {
     class ActiveSyncOptions;
     class ActiveSyncFolderSyncResult;
     class ActiveSyncFolderMutationResult;
-    class ActiveSyncSyncRequest;
     class ActiveSyncSyncResult;
     class ActiveSyncProvisionResult;
     class ActiveSyncItemEstimateResult;
@@ -181,23 +180,6 @@ namespace mailcore {
         String * mSyncKey;
         String * mFolderID;
         ActiveSyncFolderMutationResult * mResult;
-    };
-
-    class MAILCORE_EXPORT ActiveSyncSyncOperation : public ActiveSyncOperation {
-    public:
-        ActiveSyncSyncOperation();
-        virtual ~ActiveSyncSyncOperation();
-
-        virtual void setRequest(ActiveSyncSyncRequest * request);
-        virtual ActiveSyncSyncRequest * request();
-        virtual ActiveSyncSyncResult * result();
-
-    public:
-        virtual void main();
-
-    private:
-        ActiveSyncSyncRequest * mRequest;
-        ActiveSyncSyncResult * mResult;
     };
 
     class MAILCORE_EXPORT ActiveSyncSyncMessagesOperation : public ActiveSyncOperation {

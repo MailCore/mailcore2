@@ -42,6 +42,16 @@ String * ActiveSyncMessage::serverID()
     MC_GET_STRING_FIELD(mServerID);
 }
 
+void ActiveSyncMessage::setMessageID(String * value)
+{
+    setServerID(value);
+}
+
+String * ActiveSyncMessage::messageID()
+{
+    return serverID();
+}
+
 void ActiveSyncMessage::setMessageClass(String * value)
 {
     MC_SET_STRING_FIELD(mMessageClass, value);

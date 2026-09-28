@@ -17,6 +17,8 @@ namespace mailcore {
 
         virtual void setServerID(String * serverID);
         virtual String * serverID();
+        virtual void setMessageID(String * messageID);
+        virtual String * messageID();
         virtual void setMessageClass(String * messageClass);
         virtual String * messageClass();
         virtual void setEstimatedSize(uint32_t estimatedSize);

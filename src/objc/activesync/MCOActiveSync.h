@@ -12,13 +12,11 @@
 #import <MailCore/MCOActiveSyncMessage.h>
 #import <MailCore/MCOActiveSyncFolderSyncResult.h>
 #import <MailCore/MCOActiveSyncFolderMutationResult.h>
-#import <MailCore/MCOActiveSyncSyncRequest.h>
 #import <MailCore/MCOActiveSyncSyncResult.h>
 #import <MailCore/MCOActiveSyncMove.h>
 #import <MailCore/MCOActiveSyncMoveResponse.h>
 #import <MailCore/MCOActiveSyncMoveResult.h>
 #import <MailCore/MCOActiveSyncProvisionResult.h>
-#import <MailCore/MCOActiveSyncSettingsResult.h>
 #import <MailCore/MCOActiveSyncItemEstimateResult.h>
 #import <MailCore/MCOActiveSyncPingResult.h>
 #import <MailCore/MCOActiveSyncOperation.h>

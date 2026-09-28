@@ -17,6 +17,8 @@ namespace mailcore {
         virtual ActiveSyncPingStatus status();
         virtual void setChangedCollectionIDs(Array * /* String */ changedCollectionIDs);
         virtual Array * /* String */ changedCollectionIDs();
+        virtual void setChangedFolderIDs(Array * /* String */ changedFolderIDs);
+        virtual Array * /* String */ changedFolderIDs();
         virtual Object * copy();
     private:
         ActiveSyncPingStatus mStatus;

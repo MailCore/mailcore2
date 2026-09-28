@@ -12,13 +12,11 @@
 #include <MailCore/MCActiveSyncMessage.h>
 #include <MailCore/MCActiveSyncFolderSyncResult.h>
 #include <MailCore/MCActiveSyncFolderMutationResult.h>
-#include <MailCore/MCActiveSyncSyncRequest.h>
 #include <MailCore/MCActiveSyncSyncResult.h>
 #include <MailCore/MCActiveSyncMove.h>
 #include <MailCore/MCActiveSyncMoveResponse.h>
 #include <MailCore/MCActiveSyncMoveResult.h>
 #include <MailCore/MCActiveSyncProvisionResult.h>
-#include <MailCore/MCActiveSyncSettingsResult.h>
 #include <MailCore/MCActiveSyncItemEstimateResult.h>
 #include <MailCore/MCActiveSyncPingResult.h>
 #include <MailCore/MCActiveSyncSession.h>

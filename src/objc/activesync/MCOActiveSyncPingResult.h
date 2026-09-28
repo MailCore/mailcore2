@@ -8,6 +8,7 @@
 @interface MCOActiveSyncPingResult : NSObject <NSCopying>
 @property (nonatomic, assign) MCOActiveSyncPingStatus status;
 @property (nonatomic, copy) NSArray * changedCollectionIDs;
+@property (nonatomic, copy) NSArray * changedFolderIDs;
 @end
 
 #endif

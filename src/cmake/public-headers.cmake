@@ -48,13 +48,11 @@ core/activesync/MCActiveSyncBodyPart.h
 core/activesync/MCActiveSyncMessage.h
 core/activesync/MCActiveSyncFolderMutationResult.h
 core/activesync/MCActiveSyncFolderSyncResult.h
-core/activesync/MCActiveSyncSyncRequest.h
 core/activesync/MCActiveSyncSyncResult.h
 core/activesync/MCActiveSyncMove.h
 core/activesync/MCActiveSyncMoveResponse.h
 core/activesync/MCActiveSyncMoveResult.h
 core/activesync/MCActiveSyncProvisionResult.h
-core/activesync/MCActiveSyncSettingsResult.h
 core/activesync/MCActiveSyncItemEstimateResult.h
 core/activesync/MCActiveSyncPingResult.h
 core/activesync/MCActiveSyncSession.h
@@ -220,13 +218,11 @@ objc/activesync/MCOActiveSyncBodyPart.h
 objc/activesync/MCOActiveSyncMessage.h
 objc/activesync/MCOActiveSyncFolderMutationResult.h
 objc/activesync/MCOActiveSyncFolderSyncResult.h
-objc/activesync/MCOActiveSyncSyncRequest.h
 objc/activesync/MCOActiveSyncSyncResult.h
 objc/activesync/MCOActiveSyncMove.h
 objc/activesync/MCOActiveSyncMoveResponse.h
 objc/activesync/MCOActiveSyncMoveResult.h
 objc/activesync/MCOActiveSyncProvisionResult.h
-objc/activesync/MCOActiveSyncSettingsResult.h
 objc/activesync/MCOActiveSyncItemEstimateResult.h
 objc/activesync/MCOActiveSyncPingResult.h
 objc/activesync/MCOActiveSyncOperation.h

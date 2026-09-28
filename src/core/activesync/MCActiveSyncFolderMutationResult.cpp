@@ -42,6 +42,16 @@ String * ActiveSyncFolderMutationResult::serverID()
     MC_GET_STRING_FIELD(mServerID);
 }
 
+void ActiveSyncFolderMutationResult::setFolderID(String * value)
+{
+    setServerID(value);
+}
+
+String * ActiveSyncFolderMutationResult::folderID()
+{
+    return serverID();
+}
+
 void ActiveSyncFolderMutationResult::setStatus(ActiveSyncFolderMutationStatus value)
 {
     mStatus = value;

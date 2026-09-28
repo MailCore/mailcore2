@@ -35,6 +35,16 @@ Array * /* String */ ActiveSyncPingResult::changedCollectionIDs()
     return mChangedCollectionIDs;
 }
 
+void ActiveSyncPingResult::setChangedFolderIDs(Array * /* String */ value)
+{
+    setChangedCollectionIDs(value);
+}
+
+Array * /* String */ ActiveSyncPingResult::changedFolderIDs()
+{
+    return changedCollectionIDs();
+}
+
 Object * ActiveSyncPingResult::copy()
 {
     ActiveSyncPingResult * result = new ActiveSyncPingResult();

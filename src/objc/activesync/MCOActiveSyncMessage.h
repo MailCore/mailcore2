@@ -8,6 +8,7 @@
 
 @interface MCOActiveSyncMessage : MCOAbstractMessage
 @property (nonatomic, copy) NSString * serverID;
+@property (nonatomic, copy) NSString * messageID;
 @property (nonatomic, copy) NSString * messageClass;
 @property (nonatomic, assign) uint32_t estimatedSize;
 @property (nonatomic, assign, getter=isRead) BOOL read;

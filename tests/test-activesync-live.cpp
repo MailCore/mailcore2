@@ -84,7 +84,7 @@ static String * findInboxID(Array * folders)
     for (unsigned int i = 0; i < folders->count(); i++) {
         ActiveSyncFolder * folder = (ActiveSyncFolder *) folders->objectAtIndex(i);
         if (stringEquals(folder->displayName(), "Inbox"))
-            return folder->serverID();
+            return folder->folderID();
     }
     return NULL;
 }
@@ -208,15 +208,8 @@ int main(int argc, char ** argv)
 
     const char * inboxSyncKey = stateValue(state, "sync.Inbox", "0");
     if (strcmp(inboxSyncKey, "0") == 0 || inboxSyncKey[0] == '\0') {
-        ActiveSyncSyncRequest * initialRequest = new ActiveSyncSyncRequest();
-        initialRequest->setCollectionID(mcString(state["folder.Inbox"].c_str()));
-        initialRequest->setSyncKey(MCSTR("0"));
-        initialRequest->setCollectionClass(MCSTR("Email"));
-        initialRequest->setGetChanges(false);
-
         printf("requesting initial sync sync_key=0\n");
-        ActiveSyncSyncResult * initialSync = session->sync(initialRequest, &error);
-        initialRequest->release();
+        ActiveSyncSyncResult * initialSync = session->syncMessages(mcString(state["folder.Inbox"].c_str()), MCSTR("0"), &error);
         if (error != ErrorNone || initialSync == NULL)
             return fail("initial sync", error);
         if (initialSync->status() != ActiveSyncSyncStatusSuccess)
@@ -236,7 +229,7 @@ int main(int argc, char ** argv)
     }
 
     printf("requesting itemEstimate sync_key=%s\n", inboxSyncKey);
-    ActiveSyncItemEstimateResult * estimate = session->itemEstimate(
+    ActiveSyncItemEstimateResult * estimate = session->itemEstimateForFolderID(
         mcString(state["folder.Inbox"].c_str()), mcString(inboxSyncKey), &error);
     if (error != ErrorNone || estimate == NULL)
         return fail("itemEstimate", error);
@@ -251,19 +244,10 @@ int main(int argc, char ** argv)
     int pageCount = 0;
 
     do {
-        ActiveSyncSyncRequest * syncRequest = new ActiveSyncSyncRequest();
         inboxSyncKey = stateValue(state, "sync.Inbox", "0");
-        syncRequest->setCollectionID(mcString(state["folder.Inbox"].c_str()));
-        syncRequest->setSyncKey(mcString(inboxSyncKey));
-        syncRequest->setCollectionClass(MCSTR("Email"));
-        syncRequest->setGetChanges(true);
-        syncRequest->setDeletesAsMoves(false);
-        syncRequest->setWindowSize(5);
-        syncRequest->setBodyPreference(ActiveSyncBodyTypePlainText, 0);
 
         printf("requesting sync page=%d sync_key=%s\n", pageCount + 1, inboxSyncKey);
-        ActiveSyncSyncResult * syncResult = session->sync(syncRequest, &error);
-        syncRequest->release();
+        ActiveSyncSyncResult * syncResult = session->syncMessages(mcString(state["folder.Inbox"].c_str()), mcString(inboxSyncKey), &error);
         if (error != ErrorNone || syncResult == NULL)
             return fail("sync", error);
         if (syncResult->status() != ActiveSyncSyncStatusSuccess)

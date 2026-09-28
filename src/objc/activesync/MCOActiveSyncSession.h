@@ -7,8 +7,6 @@
 #import <MailCore/MCOActiveSyncTypes.h>
 #import <MailCore/MCOActiveSyncOperation.h>
 
-@class MCOActiveSyncSyncRequest;
-
 @interface MCOActiveSyncSession : NSObject
 
 @property (nonatomic, copy) NSString * serverURL;
@@ -39,10 +37,10 @@
 - (MCOActiveSyncFolderSyncOperation *) folderResyncOperation;
 - (MCOActiveSyncProvisionOperation *) provisionOperation;
 - (MCOActiveSyncItemEstimateOperation *) itemEstimateOperationForCollectionID:(NSString *)collectionID syncKey:(NSString *)syncKey;
+- (MCOActiveSyncItemEstimateOperation *) itemEstimateOperationForFolderID:(NSString *)folderID syncKey:(NSString *)syncKey;
 - (MCOActiveSyncFolderMutationOperation *) folderCreateOperationWithSyncKey:(NSString *)syncKey parentID:(NSString *)parentID displayName:(NSString *)displayName;
 - (MCOActiveSyncFolderMutationOperation *) folderUpdateOperationWithSyncKey:(NSString *)syncKey folderID:(NSString *)folderID parentID:(NSString *)parentID displayName:(NSString *)displayName;
 - (MCOActiveSyncFolderMutationOperation *) folderDeleteOperationWithSyncKey:(NSString *)syncKey folderID:(NSString *)folderID;
-- (MCOActiveSyncSyncOperation *) syncOperationWithRequest:(MCOActiveSyncSyncRequest *)request;
 - (MCOActiveSyncSyncOperation *) syncMessagesOperationInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey;
 - (MCOActiveSyncSyncOperation *) markMessagesReadOperationInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageIDs:(NSArray *)messageIDs read:(BOOL)read;
 - (MCOActiveSyncSyncOperation *) setMessagesFlaggedOperationInFolderID:(NSString *)folderID syncKey:(NSString *)syncKey messageIDs:(NSArray *)messageIDs flagged:(BOOL)flagged;
@@ -58,6 +56,7 @@
 - (MCOActiveSyncOperation *) smartReplyOperationInFolderID:(NSString *)folderID messageID:(NSString *)messageID messageData:(NSData *)messageData saveInSent:(BOOL)saveInSent;
 - (MCOActiveSyncOperation *) smartForwardOperationInFolderID:(NSString *)folderID messageID:(NSString *)messageID messageData:(NSData *)messageData saveInSent:(BOOL)saveInSent;
 - (MCOActiveSyncPingOperation *) pingOperationWithCollectionIDs:(NSArray *)collectionIDs heartbeatInterval:(uint32_t)heartbeatInterval;
+- (MCOActiveSyncPingOperation *) pingOperationWithFolderIDs:(NSArray *)folderIDs heartbeatInterval:(uint32_t)heartbeatInterval;
 
 @end
 

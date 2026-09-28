@@ -33,6 +33,16 @@ String * ActiveSyncFolder::serverID()
     MC_GET_STRING_FIELD(mServerID);
 }
 
+void ActiveSyncFolder::setFolderID(String * value)
+{
+    setServerID(value);
+}
+
+String * ActiveSyncFolder::folderID()
+{
+    return serverID();
+}
+
 void ActiveSyncFolder::setParentID(String * value)
 {
     MC_SET_STRING_FIELD(mParentID, value);
