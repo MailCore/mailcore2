@@ -19,7 +19,7 @@ typedef unsigned long ulong;
 #include <TargetConditionals.h>
 #endif
 
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR) && __has_include(<tidy/tidy.h>)
 #include <tidy/tidy.h>
 #include <tidy/buffio.h>
 #else

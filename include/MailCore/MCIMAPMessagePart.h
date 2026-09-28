@@ -1,0 +1,1 @@
+../../src/core/imap/MCIMAPMessagePart.h

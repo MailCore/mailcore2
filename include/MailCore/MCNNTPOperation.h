@@ -1,0 +1,1 @@
+../../src/async/nntp/MCNNTPOperation.h
