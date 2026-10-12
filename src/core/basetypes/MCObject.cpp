@@ -33,18 +33,12 @@ Object::Object()
 
 Object::~Object()
 {
-#ifndef __APPLE__
     pthread_mutex_destroy(&mLock);
-#endif
 }
 
 void Object::init()
 {
-#if __APPLE__
-    mLock = OS_SPINLOCK_INIT;
-#else
     pthread_mutex_init(&mLock, NULL);
-#endif
     mCounter = 1;
 }
 
