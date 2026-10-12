@@ -5,7 +5,8 @@ package_name=mailcore2-android
 ctemplate_build_version=3
 cyrus_sasl_build_version=4
 icu4c_build_version=3
-libetpan_build_version=6
+libetpan_build_version=7
+iconv_build_version=1
 libxml2_build_version=3
 tidy_html5_build_version=3
 openssl_build_version=3
@@ -26,12 +27,15 @@ function download_dep {
     name="$1"
     version="$2"
     if test ! -f "$current_dir/third-party/$name-$version.zip" ; then
-        if curl -f -O "http://d.etpan.org/mailcore2-deps/$name/$name-$version.zip" ; then
-            unzip "$name-$version.zip"
-        else
+        if ! curl -f -O "http://d.etpan.org/mailcore2-deps/$name/$name-$version.zip" ; then
             echo Could not download $name-$version.zip
             exit 1
         fi
+    fi
+    # Always ensure the zip is extracted — covers zips dropped in manually
+    # (e.g. locally rebuilt deps) that were never unpacked.
+    if test ! -d "$current_dir/third-party/$name-$version" ; then
+        unzip -q "$current_dir/third-party/$name-$version.zip"
     fi
 }
 
@@ -39,11 +43,11 @@ function build {
     rm -rf "$current_dir/obj"
   
     cd "$current_dir/jni"
-    $ANDROID_NDK/ndk-build TARGET_PLATFORM=$ANDROID_PLATFORM TARGET_ARCH_ABI=$TARGET_ARCH_ABI \
-        NDK_TOOLCHAIN_VERSION=4.9 \
+    $ANDROID_NDK/ndk-build APP_ABI=$TARGET_ARCH_ABI APP_PLATFORM=$ANDROID_PLATFORM \
         CTEMPLATE_PATH=$current_dir/third-party/ctemplate-android-$ctemplate_build_version \
         ICU4C_PATH=$current_dir/third-party/icu4c-android-$icu4c_build_version \
         LIBETPAN_PATH=$current_dir/third-party/libetpan-android-$libetpan_build_version \
+        LIBICONV_PATH=$current_dir/third-party/iconv-android-$iconv_build_version \
         LIBXML2_PATH=$current_dir/third-party/libxml2-android-$libxml2_build_version \
         TIDY_HTML5_PATH=$current_dir/third-party/tidy-html5-android-$tidy_html5_build_version \
         OPENSSL_PATH=$current_dir/third-party/openssl-android-$openssl_build_version \
@@ -51,15 +55,15 @@ function build {
 
     mkdir -p "$current_dir/bin/jni/$TARGET_ARCH_ABI"
     cp "$current_dir/libs/$TARGET_ARCH_ABI/libMailCore.so" "$current_dir/bin/jni/$TARGET_ARCH_ABI"
-    # cp "$ANDROID_NDK/sources/cxx-stl/llvm-libc++/libs/$TARGET_ARCH_ABI/libc++_shared.so" "$current_dir/bin/jni/$TARGET_ARCH_ABI"
-    cp "$ANDROID_NDK/sources/cxx-stl/gnu-libstdc++/4.9/libs/$TARGET_ARCH_ABI/libgnustl_shared.so" "$current_dir/bin/jni/$TARGET_ARCH_ABI"
+    # With APP_STL := c++_static, libc++ is linked into libMailCore.so — there is no
+    # separate libc++_shared.so to bundle.
     rm -rf "$current_dir/obj"
     rm -rf "$current_dir/libs"
 }
 
 mkdir -p "$current_dir/cmake-build"
 cd "$current_dir/cmake-build"
-cmake -D ANDROID=1 ../..
+cmake -D ANDROID=1 -DCMAKE_POLICY_VERSION_MINIMUM=3.5 ../..
 
 mkdir -p "$current_dir/include"
 cp -R "$current_dir/cmake-build/src/include/MailCore" "$current_dir/include"
@@ -75,14 +79,12 @@ download_dep "openssl-android" $openssl_build_version
 download_dep "cyrus-sasl-android" $cyrus_sasl_build_version
 
 # Start building.
-ANDROID_PLATFORM=android-16
-archs="armeabi armeabi-v7a x86"
-for arch in $archs ; do
-  TARGET_ARCH_ABI=$arch
-  build
-done
-ANDROID_PLATFORM=android-21
-archs="arm64-v8a"
+# NDK r18+ dropped the armeabi (ARMv5) ABI. Use android-23 to match the prebuilt deps
+# (built at API 23 — they reference Bionic's API-23 stdin/stderr symbols).
+# x86_64 is omitted: the mailcore-only deps (icu4c/xml2/tidy/ctemplate) only ship
+# armeabi-v7a / arm64-v8a / x86.
+ANDROID_PLATFORM=android-23
+archs="armeabi-v7a arm64-v8a x86"
 for arch in $archs ; do
   TARGET_ARCH_ABI=$arch
   build
@@ -91,12 +93,14 @@ done
 ANDROID_PLATFORM=android-16
 cd "$current_dir/../src/java"
 mkdir -p "$current_dir/bin"
-javac -d "$current_dir/bin" -source 1.6 -target 1.6 -classpath $ANDROID_SDK/platforms/$ANDROID_PLATFORM/android.jar com/libmailcore/*.java
+javac -d "$current_dir/bin" -source 1.8 -target 1.8 -classpath $ANDROID_SDK/platforms/$ANDROID_PLATFORM/android.jar com/libmailcore/*.java
 cd "$current_dir/bin"
 jar cf classes.jar .
 rm -rf "$current_dir/bin/com"
 mkdir -p res
 sed -e "s/android:versionCode=\"1\"/android:versionCode=\"$build_version\"/" "$current_dir/AndroidManifest.xml" > "$current_dir/bin/AndroidManifest.xml"
+# Remove any previous aar first — zip appends, which would leave stale .so from old builds.
+rm -f "$current_dir/$package_name-$build_version.aar"
 zip -qry "$current_dir/$package_name-$build_version.aar" .
 
 rm -rf "$current_dir/bin"
