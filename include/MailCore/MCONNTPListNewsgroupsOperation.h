@@ -1,0 +1,1 @@
+../../src/objc/nntp/MCONNTPListNewsgroupsOperation.h

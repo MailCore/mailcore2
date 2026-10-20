@@ -1,0 +1,1 @@
+../../src/objc/imap/MCOIMAPFolderStatus.h
